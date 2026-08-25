@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riftbound Collection — Jay Egger</title>
+<meta name="description" content="A personal Riftbound TCG collection manager: owned counts by finish, set completion, trade haves and wants, and deck lists checked against the collection.">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111822'/%3E%3Cpath d='M16 4l9 6v12l-9 6-9-6V10z' fill='none' stroke='%233caea3' stroke-width='2.5'/%3E%3C/svg%3E">
+
+<style>
+@font-face{font-family:'Press Start 2P';src:url('fonts/press-start-2p.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Syne Mono';src:url('fonts/syne-mono.woff2') format('woff2');font-display:swap}
+
+:root{
+  --bg:#111822; --bg2:#0c121a; --panel:#18212e; --panel2:#1e2937;
+  --line:#2a3646; --line2:#374556;
+  --ink:#e8edf4; --dim:#93a1b3; --dimmer:#6a7787;
+  --cream:#f6f0e9; --burnt:#bf5700; --teal:#3caea3; --maize:#f7c948;
+  --good:#4ade80; --warn:#fcd34d; --bad:#f87171;
+  --fury:#e5484d; --calm:#48c78e; --mind:#4cb3e5;
+  --body:#d9a05b; --chaos:#a87fe0; --order:#f7c948; --colorless:#8a93a0;
+  --pixel:'Press Start 2P',monospace; --head:'Syne Mono',monospace;
+  --sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer}
+input,select{font-family:inherit;font-size:inherit;color:inherit}
+a{color:var(--teal)}
+
+.wrap{max-width:1400px;margin:0 auto;padding:0 16px 80px}
+
+/* ── masthead ─────────────────────────────────────────── */
+.mast{padding:26px 0 14px;border-bottom:1px solid var(--line)}
+.mast-top{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between}
+h1{font-family:var(--pixel);font-size:15px;line-height:1.6;margin:0;color:var(--cream)}
+h1 .rb{color:var(--teal)}
+.sub{font-family:var(--head);color:var(--dim);font-size:13px;margin:6px 0 0}
+.mast-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sync{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);font-family:var(--head)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--dimmer);flex:none}
+
+.ghost{background:transparent;border:1px solid var(--line2);color:var(--dim);border-radius:6px;padding:5px 10px;font-size:12px;font-family:var(--head)}
+.ghost:hover{border-color:var(--teal);color:var(--teal)}
+.ghost.on{border-color:var(--teal);color:var(--bg);background:var(--teal)}
+
+/* ── tabs ─────────────────────────────────────────────── */
+.tabs{display:flex;gap:2px;margin:16px 0 0;flex-wrap:wrap}
+.tab{background:transparent;border:1px solid var(--line);border-bottom:none;border-radius:6px 6px 0 0;
+  padding:8px 16px;font-family:var(--pixel);font-size:10px;color:var(--dim);position:relative;top:1px}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected=true]{background:var(--panel);color:var(--maize);border-color:var(--line2)}
+.tab .n{color:var(--dimmer);font-size:9px;margin-left:6px}
+
+/* ── filter bar ───────────────────────────────────────── */
+.bar{background:var(--panel);border:1px solid var(--line2);border-top:none;border-radius:0 0 8px 8px;
+  padding:12px;display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.bar-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:200px;background:var(--bg2);border:1px solid var(--line2);border-radius:6px;padding:8px 11px}
+.search:focus{outline:none;border-color:var(--teal)}
+select{background:var(--bg2);border:1px solid var(--line2);border-radius:6px;padding:7px 9px;font-size:13px}
+select:focus{outline:none;border-color:var(--teal)}
+.lbl{font-family:var(--head);font-size:11px;color:var(--dimmer);text-transform:uppercase;letter-spacing:.08em}
+
+.chip{background:var(--bg2);border:1px solid var(--line2);border-radius:20px;padding:4px 11px;font-size:12px;color:var(--dim)}
+.chip:hover{border-color:var(--dim);color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--panel2);color:var(--ink);border-color:currentColor}
+.chip.d-fury[aria-pressed=true]{color:var(--fury)} .chip.d-calm[aria-pressed=true]{color:var(--calm)}
+.chip.d-mind[aria-pressed=true]{color:var(--mind)} .chip.d-body[aria-pressed=true]{color:var(--body)}
+.chip.d-chaos[aria-pressed=true]{color:var(--chaos)} .chip.d-order[aria-pressed=true]{color:var(--order)}
+.chip.d-colorless[aria-pressed=true]{color:var(--colorless)}
+
+.count-line{font-family:var(--head);font-size:12px;color:var(--dim)}
+.count-line b{color:var(--maize);font-weight:normal}
+
+/* ── card grid ────────────────────────────────────────── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;overflow:hidden;
+  display:flex;flex-direction:column;transition:border-color .12s}
+.card.has{border-color:#2f5c56}
+.card.want{box-shadow:inset 3px 0 0 var(--maize)}
+.card-img{position:relative;aspect-ratio:744/1039;background:var(--bg2);cursor:zoom-in}
+.card-img.land{aspect-ratio:1039/744}
+.card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;top:5px;right:5px;background:rgba(8,12,18,.9);color:var(--teal);
+  border:1px solid var(--teal);border-radius:11px;font-family:var(--head);font-size:11px;padding:1px 7px}
+.vtag{display:inline-block;border-radius:4px;font-family:var(--head);font-size:9px;
+  padding:1px 5px;text-transform:uppercase;letter-spacing:.06em;background:rgba(8,12,18,.9);border:1px solid;
+  white-space:nowrap;vertical-align:1px}
+.card-img .vtag{position:absolute;top:5px;left:5px}
+.v-alt{color:var(--mind);border-color:var(--mind)} .v-sig{color:var(--maize);border-color:var(--maize)}
+.v-over{color:var(--burnt);border-color:var(--burnt)} .v-token,.v-rune,.v-promo{color:var(--dim);border-color:var(--line2)}
+.card-body{padding:7px 8px 8px;display:flex;flex-direction:column;gap:5px;flex:1}
+.card-name{font-family:var(--head);font-size:12.5px;line-height:1.25;color:var(--cream);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-meta{font-size:10px;color:var(--dimmer);font-family:var(--head);display:flex;gap:5px;flex-wrap:wrap}
+.dchip{width:9px;height:9px;border-radius:2px;display:inline-block;vertical-align:-1px}
+
+/* steppers */
+.qs{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:auto}
+.q{display:flex;flex-direction:column;align-items:center;gap:1px}
+.q span{font-family:var(--head);font-size:8.5px;color:var(--dimmer);text-transform:uppercase}
+.q input{width:100%;text-align:center;background:var(--bg2);border:1px solid var(--line);
+  border-radius:4px;padding:3px 1px;font-size:12px;font-family:var(--head);-moz-appearance:textfield}
+.q input::-webkit-outer-spin-button,.q input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.q input:focus{outline:none;border-color:var(--teal)}
+.q input.set{border-color:var(--teal);color:var(--teal)}
+.q.w input.set{border-color:var(--maize);color:var(--maize)}
+.q.t input.set{border-color:var(--burnt);color:#e58a3c}
+
+/* ── table view ───────────────────────────────────────── */
+.tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:760px}
+th{background:var(--panel2);font-family:var(--head);font-size:11px;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--dim);text-align:left;padding:8px 9px;position:sticky;top:0;z-index:2}
+td{padding:5px 9px;border-top:1px solid var(--line)}
+tbody tr:hover{background:var(--panel)}
+td.num{text-align:center;width:56px}
+td .qi{width:46px;text-align:center;background:var(--bg2);border:1px solid var(--line);
+  border-radius:4px;padding:3px;font-family:var(--head);-moz-appearance:textfield}
+td .qi::-webkit-outer-spin-button,td .qi::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+td .qi:focus{outline:none;border-color:var(--teal)}
+td .qi.set{border-color:var(--teal);color:var(--teal)}
+.code{font-family:var(--head);font-size:11.5px;color:var(--dimmer);white-space:nowrap}
+.thumb{width:30px;height:42px;object-fit:cover;border-radius:3px;background:var(--bg2);cursor:zoom-in;display:block}
+
+/* ── panels / meters ──────────────────────────────────── */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:16px;margin-bottom:14px}
+.panel h2{font-family:var(--pixel);font-size:11px;margin:0 0 12px;color:var(--maize);line-height:1.6}
+.panel h3{font-family:var(--head);font-size:14px;margin:0 0 8px;color:var(--cream)}
+.cols{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+
+.meter{margin-bottom:14px}
+.meter-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:5px}
+.meter-name{font-family:var(--head);font-size:13px;color:var(--cream)}
+.meter-val{font-family:var(--head);font-size:12px;color:var(--dim)}
+.meter-val b{color:var(--teal);font-weight:normal}
+.track{height:8px;background:var(--bg2);border-radius:5px;overflow:hidden;border:1px solid var(--line)}
+.fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--maize));border-radius:5px;transition:width .3s}
+.meter-sub{display:flex;gap:12px;flex-wrap:wrap;margin-top:5px;font-family:var(--head);font-size:10.5px;color:var(--dimmer)}
+.meter-sub b{color:var(--dim);font-weight:normal}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:11px 13px}
+.stat .v{font-family:var(--pixel);font-size:16px;color:var(--teal);line-height:1.4}
+.stat .k{font-family:var(--head);font-size:10.5px;color:var(--dimmer);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+
+/* ── lists (trade / decks) ────────────────────────────── */
+.rows{display:flex;flex-direction:column}
+.row{display:flex;gap:9px;align-items:center;padding:6px 0;border-top:1px solid var(--line);font-size:13px}
+.row:first-child{border-top:none}
+.row .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .qty{font-family:var(--head);color:var(--teal);white-space:nowrap}
+.row .qty.need{color:var(--maize)}
+.empty{color:var(--dimmer);font-size:13px;font-style:italic;padding:8px 0}
+.setgroup{font-family:var(--head);font-size:11px;color:var(--burnt);text-transform:uppercase;
+  letter-spacing:.08em;margin:14px 0 2px;padding-bottom:3px;border-bottom:1px solid var(--line2)}
+.setgroup:first-child{margin-top:0}
+
+.deck-list{display:flex;flex-direction:column;gap:8px}
+.deck-item{display:flex;gap:9px;align-items:center;background:var(--bg2);border:1px solid var(--line);
+  border-radius:7px;padding:9px 11px}
+.deck-item.sel{border-color:var(--teal)}
+.deck-item .dn{flex:1;font-family:var(--head);font-size:13.5px;color:var(--cream);cursor:pointer;min-width:0}
+.deck-item .dm{font-family:var(--head);font-size:11px;color:var(--dimmer)}
+.txt{width:100%;background:var(--bg2);border:1px solid var(--line2);border-radius:6px;padding:8px 10px;
+  font-family:var(--head);font-size:12.5px;color:var(--ink);resize:vertical;min-height:64px}
+.pre{background:var(--bg2);border:1px solid var(--line);border-radius:7px;padding:11px;
+  font-family:var(--head);font-size:12px;white-space:pre-wrap;color:var(--dim);max-height:340px;overflow:auto}
+
+.ac{position:relative}
+.ac-out{position:absolute;left:0;right:0;top:calc(100% + 3px);background:var(--panel2);border:1px solid var(--line2);
+  border-radius:7px;z-index:30;max-height:280px;overflow:auto;box-shadow:0 10px 26px rgba(0,0,0,.5)}
+.ac-item{display:flex;gap:8px;align-items:center;padding:6px 9px;cursor:pointer;border-top:1px solid var(--line)}
+.ac-item:first-child{border-top:none}
+.ac-item:hover,.ac-item.cur{background:var(--panel)}
+.ac-item .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
+
+/* ── lightbox ─────────────────────────────────────────── */
+.lb{position:fixed;inset:0;background:rgba(6,9,13,.93);display:flex;align-items:center;justify-content:center;
+  z-index:100;padding:22px;cursor:zoom-out}
+.lb img{max-width:min(94vw,560px);max-height:92vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.7)}
+.lb-info{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-family:var(--head);
+  font-size:12px;color:var(--dim);padding:0 20px}
+
+.sentinel{height:1px}
+.loading{padding:70px 0;text-align:center;font-family:var(--head);color:var(--dim)}
+.note{font-size:12px;color:var(--dimmer);font-family:var(--head);line-height:1.6}
+.hide{display:none !important}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:16px 0;font-family:var(--head);
+  font-size:11px;color:var(--dimmer);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+
+@media(max-width:600px){
+  .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+  h1{font-size:12px}
+  .tab{padding:7px 11px;font-size:9px}
+  .wrap{padding:0 11px 70px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <div class="mast-top">
+      <div>
+        <h1><span class="rb">RIFTBOUND</span> COLLECTION</h1>
+        <p class="sub" id="sub">loading catalog…</p>
+      </div>
+      <div class="mast-tools">
+        <span class="sync"><span class="dot" id="dot"></span><span id="sync-txt">local</span></span>
+        <button class="ghost" id="btn-export">Backup</button>
+        <button class="ghost" id="btn-import">Restore</button>
+      </div>
+    </div>
+
+    <nav class="tabs" id="tabs" role="tablist">
+      <button class="tab" role="tab" data-tab="collection" aria-selected="true">Collection</button>
+      <button class="tab" role="tab" data-tab="sets" aria-selected="false">Sets</button>
+      <button class="tab" role="tab" data-tab="trade" aria-selected="false">Trade<span class="n" id="tn-trade"></span></button>
+      <button class="tab" role="tab" data-tab="decks" aria-selected="false">Decks<span class="n" id="tn-decks"></span></button>
+    </nav>
+  </header>
+
+  <!-- ══ COLLECTION ══════════════════════════════════ -->
+  <section id="v-collection">
+    <div class="bar">
+      <div class="bar-row">
+        <input class="search" id="q" type="search" placeholder="Search name, code, ability text, tag, artist…" autocomplete="off">
+        <select id="f-set"></select>
+        <select id="f-type"></select>
+        <select id="f-rarity"></select>
+        <select id="f-sort">
+          <option value="setnum">Set &amp; number</option>
+          <option value="name">Name</option>
+          <option value="energy">Energy</option>
+          <option value="might">Might</option>
+          <option value="owned">Most owned</option>
+        </select>
+        <button class="ghost" id="f-view">Table view</button>
+      </div>
+      <div class="bar-row">
+        <span class="lbl">Domain</span>
+        <span id="f-domain"></span>
+        <span class="lbl" style="margin-left:6px">Printing</span>
+        <span id="f-variant"></span>
+      </div>
+      <div class="bar-row">
+        <span class="lbl">Show</span>
+        <span id="f-have"></span>
+        <span style="flex:1"></span>
+        <span class="count-line" id="shown"></span>
+        <button class="ghost" id="f-clear">Clear filters</button>
+      </div>
+    </div>
+    <div id="cards"><div class="loading">loading catalog…</div></div>
+    <div class="sentinel" id="sentinel"></div>
+  </section>
+
+  <!-- ══ SETS ════════════════════════════════════════ -->
+  <section id="v-sets" class="hide"></section>
+
+  <!-- ══ TRADE ═══════════════════════════════════════ -->
+  <section id="v-trade" class="hide"></section>
+
+  <!-- ══ DECKS ═══════════════════════════════════════ -->
+  <section id="v-decks" class="hide"></section>
+
+  <footer>
+    <span id="foot-src">card data from Riot's public gallery feed</span>
+    <span>not affiliated with Riot Games</span>
+  </footer>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   CONFIG
+   ══════════════════════════════════════════════════════════════════════════ */
+// Same Supabase project as the LSAT + reading trackers, its own table.
+// The publishable key is meant to be public; row-level security is what guards
+// writes. See schema.sql for the table and policies.
+const SUPA_URL   = 'https://gnujcqoyjovhqkquwapd.supabase.co';
+const SUPA_KEY   = 'sb_publishable_U9pC2YEA9YB2KxPog6t3SA_T03Jid1g';
+const SUPA_TABLE = 'riftbound';
+const SUPA_ID    = 'jay';
+
+const DOMAINS  = ['Fury','Calm','Mind','Body','Chaos','Order','Colorless'];
+const VARIANTS = [['','Base'],['alt','Alt art'],['sig','Signature'],['over','Overnumber'],
+                  ['token','Token'],['rune','Basic rune'],['promo','Promo']];
+const TYPES    = ['Legend','Unit','Spell','Gear','Battlefield','Rune'];
+const RARITIES = ['Common','Uncommon','Rare','Epic','Showcase'];
+
+/* ══════════════════════════════════════════════════════════════════════════
+   STATE
+   ══════════════════════════════════════════════════════════════════════════ */
+// Read-only share mode: riftbound.jayegger.com/?view=trade
+const READONLY = new URLSearchParams(location.search).get('view') === 'trade';
+
+let CAT = null;            // { generatedAt, imagePrefix, sets[], cards[] }
+let BY  = {};              // publicCode -> card
+let TAB = READONLY ? 'trade' : 'collection';
+
+// Synced state. inv: code -> { n:normal owned, f:foil owned, w:wanted, t:for trade }
+const S = {
+  inv: {},
+  decks: [],
+  playset: 3,             // copies of one card a deck may run; drives "playset done"
+};
+
+// Local-only UI state.
+const F = {
+  q:'', set:'', type:'', rarity:'', sort:'setnum',
+  domain:[], variant:[], have:'', view:'grid',
+};
+
+const lsGet = (k,d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } };
+const lsSet = (k,v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+
+function loadLocal(){
+  Object.assign(S, lsGet('rb_state', {}) || {});
+  S.inv   = S.inv   || {};
+  S.decks = S.decks || [];
+  S.playset = S.playset || 3;
+  Object.assign(F, lsGet('rb_ui', {}) || {});
+}
+// Saving must not blow away the collection stream: typing counts into 1189 cards
+// would reset scroll and focus on every keystroke. Views that show derived totals
+// re-render; the collection view patches the one card that changed instead.
+function persist(opts){
+  lsSet('rb_state', S);
+  syncPush();
+  if (!opts || opts.render !== false) render();
+}
+function persistUI(){ lsSet('rb_ui', F); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SUPABASE SYNC  (same single-row pattern as lsat.jayegger.com)
+   ══════════════════════════════════════════════════════════════════════════ */
+function setDot(state, msg){
+  const d = document.getElementById('dot'), t = document.getElementById('sync-txt');
+  const c = { syncing:'var(--warn)', ok:'var(--good)', err:'var(--bad)', off:'var(--dimmer)' };
+  d.style.background = c[state] || c.off;
+  t.textContent = msg || ({ syncing:'syncing', ok:'synced', err:'local only', off:'local' })[state];
+  d.title = state === 'err' ? 'Could not reach Supabase. Changes are saved in this browser.' : t.textContent;
+}
+const SUPA_HEAD = { apikey:SUPA_KEY, Authorization:`Bearer ${SUPA_KEY}`, 'Content-Type':'application/json' };
+
+let pushTimer = null;
+function syncPush(){
+  if (READONLY) return;
+  clearTimeout(pushTimer);
+  setDot('syncing');
+  // Debounce: typing "12" in a qty field is two keystrokes, not two round trips.
+  pushTimer = setTimeout(async () => {
+    try {
+      const r = await fetch(`${SUPA_URL}/rest/v1/${SUPA_TABLE}`, {
+        method:'POST',
+        headers:{ ...SUPA_HEAD, Prefer:'resolution=merge-duplicates' },
+        body: JSON.stringify({ id:SUPA_ID, data:{ inv:S.inv, decks:S.decks, playset:S.playset } }),
+      });
+      setDot(r.ok ? 'ok' : 'err');
+    } catch { setDot('err'); }
+  }, 700);
+}
+async function syncPull(){
+  setDot('syncing');
+  try {
+    const r = await fetch(`${SUPA_URL}/rest/v1/${SUPA_TABLE}?id=eq.${SUPA_ID}&select=data`, { headers:SUPA_HEAD });
+    if (!r.ok) throw new Error(r.status);
+    const rows = await r.json();
+    const d = rows[0] && rows[0].data;
+    if (d){
+      if (d.inv)   S.inv = d.inv;
+      if (d.decks) S.decks = d.decks;
+      if (d.playset) S.playset = d.playset;
+      lsSet('rb_state', S);
+    }
+    setDot('ok');
+    return true;
+  } catch { setDot('err'); return false; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   HELPERS
+   ══════════════════════════════════════════════════════════════════════════ */
+const esc = (s) => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;')
+  .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+const inv   = (code) => S.inv[code] || {};
+const owned = (code) => { const e = inv(code); return (e.n||0) + (e.f||0); };
+const want  = (code) => inv(code).w || 0;
+const forTrade = (code) => inv(code).t || 0;
+const need  = (code) => Math.max(0, want(code) - owned(code));
+
+function setQty(code, field, val){
+  setQtyQuiet(code, field, val);
+  persist({ render:false });
+}
+
+// Repaint one grid card's derived bits (owned badge, owned/wanted borders) after an edit.
+function patchCard(el, code){
+  const art = el.closest('.card');
+  if (!art) return;
+  const o = owned(code);
+  art.classList.toggle('has', !!o);
+  art.classList.toggle('want', !!need(code));
+  const img = art.querySelector('.card-img');
+  let b = img && img.querySelector('.badge');
+  if (o){
+    if (!b){ b = document.createElement('span'); b.className = 'badge'; img.appendChild(b); }
+    b.textContent = o;
+  } else if (b) b.remove();
+}
+
+function imgURL(card, w){
+  if (!card.i) return '';
+  if (/^https?:/.test(card.i)) return card.i;
+  return `${CAT.imagePrefix}${card.i}?w=${w}&fm=webp&accountingTag=RB`;
+}
+const setName = (id) => (CAT.sets.find(s => s.id === id) || {}).name || id;
+const vLabel  = (v) => (VARIANTS.find(x => x[0] === (v || '')) || ['','Base'])[1];
+
+function dchips(card){
+  return (card.d || []).map(d =>
+    `<span class="dchip" style="background:var(--${d.toLowerCase()})" title="${esc(d)}"></span>`).join('');
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FILTERING
+   ══════════════════════════════════════════════════════════════════════════ */
+function matches(c){
+  if (F.set    && c.s !== F.set) return false;
+  if (F.type   && c.t !== F.type) return false;
+  if (F.rarity && c.r !== F.rarity) return false;
+  if (F.domain.length && !(c.d || []).some(d => F.domain.includes(d))) return false;
+  if (F.variant.length && !F.variant.includes(c.v || '')) return false;
+
+  const o = owned(c.c);
+  if (F.have === 'own'     && !o) return false;
+  if (F.have === 'missing' && o) return false;
+  if (F.have === 'want'    && !need(c.c)) return false;
+  if (F.have === 'trade'   && !forTrade(c.c)) return false;
+  if (F.have === 'foil'    && !inv(c.c).f) return false;
+
+  if (F.q){
+    const q = F.q.toLowerCase();
+    const hay = [c.n, c.c, c.x, (c.g||[]).join(' '), (c.a||[]).join(' '), c.t, c.r]
+      .filter(Boolean).join(' ').toLowerCase();
+    if (!hay.includes(q)) return false;
+  }
+  return true;
+}
+
+const RARITY_ORD = Object.fromEntries(RARITIES.map((r,i) => [r,i]));
+function sortCards(list){
+  const by = {
+    setnum: (a,b) => a.s.localeCompare(b.s) || (a.no - b.no) || a.c.localeCompare(b.c),
+    name:   (a,b) => a.n.localeCompare(b.n) || a.c.localeCompare(b.c),
+    energy: (a,b) => (a.e ?? 99) - (b.e ?? 99) || a.n.localeCompare(b.n),
+    might:  (a,b) => (b.m ?? -1) - (a.m ?? -1) || a.n.localeCompare(b.n),
+    owned:  (a,b) => owned(b.c) - owned(a.c) || a.n.localeCompare(b.n),
+  };
+  return list.slice().sort(by[F.sort] || by.setnum);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RENDER: collection
+   ══════════════════════════════════════════════════════════════════════════ */
+const CHUNK = 120;
+let filtered = [], drawn = 0;
+
+function renderCollection(reset){
+  if (reset){ filtered = sortCards(CAT.cards.filter(matches)); drawn = 0; }
+
+  const host = document.getElementById('cards');
+  const total = CAT.cards.length;
+  document.getElementById('shown').innerHTML =
+    `<b>${filtered.length}</b> of ${total} printings`;
+
+  if (reset){
+    host.innerHTML = filtered.length
+      ? (F.view === 'grid'
+          ? '<div class="grid" id="stream"></div>'
+          : '<div class="tbl-scroll"><table><thead><tr>' +
+            '<th></th><th>Card</th><th>Code</th><th>Type</th><th>Rarity</th>' +
+            '<th class="num">Norm</th><th class="num">Foil</th><th class="num">Want</th><th class="num">Trade</th>' +
+            '</tr></thead><tbody id="stream"></tbody></table></div>')
+      : '<div class="loading">No printings match these filters.</div>';
+  }
+  drawMore();
+}
+
+function drawMore(){
+  const stream = document.getElementById('stream');
+  if (!stream || drawn >= filtered.length) return;
+  const slice = filtered.slice(drawn, drawn + CHUNK);
+  stream.insertAdjacentHTML('beforeend',
+    slice.map(F.view === 'grid' ? cardHTML : rowHTML).join(''));
+  drawn += slice.length;
+
+  // IntersectionObserver only fires on a change in intersection, so if the sentinel
+  // is still on screen after this chunk it would never fire again. Keep going here.
+  if (drawn < filtered.length){
+    const r = document.getElementById('sentinel').getBoundingClientRect();
+    if (r.top < window.innerHeight + 600) requestAnimationFrame(drawMore);
+  }
+}
+
+function qbox(code, field, cls, label){
+  const v = inv(code)[field] || '';
+  return `<label class="q ${cls}"><span>${label}</span>` +
+    `<input type="number" min="0" max="999" inputmode="numeric" value="${v}" ` +
+    `class="${v ? 'set' : ''}" data-code="${esc(code)}" data-f="${field}" ${READONLY ? 'disabled' : ''}></label>`;
+}
+
+function cardHTML(c){
+  const o = owned(c.c), n = need(c.c);
+  return `<article class="card ${o ? 'has' : ''} ${n ? 'want' : ''}">
+    <div class="card-img ${c.o === 'landscape' ? 'land' : ''}" data-zoom="${esc(c.c)}">
+      ${c.i ? `<img loading="lazy" src="${imgURL(c,240)}" alt="${esc(c.n)}">` : ''}
+      ${o ? `<span class="badge">${o}</span>` : ''}
+      ${c.v ? `<span class="vtag v-${c.v}">${esc(vLabel(c.v))}</span>` : ''}
+    </div>
+    <div class="card-body">
+      <div class="card-name" title="${esc(c.n)}">${esc(c.n)}</div>
+      <div class="card-meta">${dchips(c)}<span>${esc(c.c)}</span>
+        ${c.e != null ? `<span>${c.e}e</span>` : ''}${c.m != null ? `<span>${c.m}m</span>` : ''}</div>
+      <div class="qs">
+        ${qbox(c.c,'n','n','Norm')}${qbox(c.c,'f','f','Foil')}
+        ${qbox(c.c,'w','w','Want')}${qbox(c.c,'t','t','Trade')}
+      </div>
+    </div>
+  </article>`;
+}
+
+function tq(code, field){
+  const v = inv(code)[field] || '';
+  return `<td class="num"><input type="number" min="0" max="999" inputmode="numeric" value="${v}" ` +
+    `class="qi ${v ? 'set' : ''}" data-code="${esc(code)}" data-f="${field}" ${READONLY ? 'disabled' : ''}></td>`;
+}
+function rowHTML(c){
+  return `<tr>
+    <td>${c.i ? `<img class="thumb" loading="lazy" src="${imgURL(c,60)}" alt="" data-zoom="${esc(c.c)}">` : ''}</td>
+    <td>${dchips(c)} ${esc(c.n)}${c.v ? ` <span class="vtag v-${c.v}">${esc(vLabel(c.v))}</span>` : ''}</td>
+    <td class="code">${esc(c.c)}</td>
+    <td class="code">${esc(c.t || '—')}</td>
+    <td class="code">${esc(c.r || '')}</td>
+    ${tq(c.c,'n')}${tq(c.c,'f')}${tq(c.c,'w')}${tq(c.c,'t')}
+  </tr>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RENDER: sets
+   ══════════════════════════════════════════════════════════════════════════ */
+function renderSets(){
+  const totals = { printings:0, cards:0, copies:0, foils:0 };
+  for (const c of CAT.cards){
+    const e = inv(c.c), o = (e.n||0) + (e.f||0);
+    if (o){ totals.printings++; totals.copies += o; totals.foils += (e.f||0); }
+  }
+  const distinctNames = new Set(CAT.cards.filter(c => owned(c.c)).map(c => c.n)).size;
+
+  let html = `<div class="panel">
+    <h2>WHERE THE COLLECTION STANDS</h2>
+    <div class="stats">
+      <div class="stat"><div class="v">${totals.copies}</div><div class="k">cards held</div></div>
+      <div class="stat"><div class="v">${totals.printings}</div><div class="k">distinct printings</div></div>
+      <div class="stat"><div class="v">${distinctNames}</div><div class="k">unique names</div></div>
+      <div class="stat"><div class="v">${totals.foils}</div><div class="k">foils</div></div>
+    </div>
+    <p class="note">Base-set completion counts only the numbered cards in each set, so alt arts,
+    signatures, overnumbers, tokens and basic runes never inflate the denominator. A printing counts
+    as owned at one copy in any finish. Playset target is
+    <input type="number" min="1" max="9" value="${S.playset}" id="playset"
+      style="width:44px;text-align:center;background:var(--bg2);border:1px solid var(--line2);border-radius:4px;padding:2px"
+      ${READONLY ? 'disabled' : ''}> copies.</p>
+  </div>`;
+
+  for (const s of CAT.sets){
+    const mine = CAT.cards.filter(c => c.s === s.id);
+    const base = mine.filter(c => !c.v);
+    const baseHave = base.filter(c => owned(c.c)).length;
+    const playHave = base.filter(c => owned(c.c) >= S.playset).length;
+    const pct = base.length ? (baseHave / base.length * 100) : 0;
+
+    const byR = RARITIES.map(r => {
+      const g = base.filter(c => c.r === r);
+      return g.length ? `<span><b>${g.filter(c => owned(c.c)).length}/${g.length}</b> ${r.toLowerCase()}</span>` : '';
+    }).filter(Boolean).join('');
+
+    const byV = VARIANTS.slice(1).map(([v,lab]) => {
+      const g = mine.filter(c => (c.v||'') === v);
+      return g.length ? `<span><b>${g.filter(c => owned(c.c)).length}/${g.length}</b> ${lab.toLowerCase()}</span>` : '';
+    }).filter(Boolean).join('');
+
+    html += `<div class="panel">
+      <div class="meter" style="margin:0">
+        <div class="meter-top">
+          <span class="meter-name">${esc(s.name)} <span class="code">${esc(s.id)}</span></span>
+          <span class="meter-val"><b>${baseHave}</b> / ${base.length} base &nbsp;·&nbsp; ${pct.toFixed(1)}%</span>
+        </div>
+        <div class="track"><div class="fill" style="width:${pct}%"></div></div>
+        <div class="meter-sub">${byR}</div>
+        <div class="meter-sub"><span><b>${playHave}/${base.length}</b> at ${S.playset}-of playset</span>${byV}</div>
+      </div>
+    </div>`;
+  }
+  document.getElementById('v-sets').innerHTML = html;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RENDER: trade
+   ══════════════════════════════════════════════════════════════════════════ */
+function tradeLists(){
+  const haves = [], wants = [];
+  for (const code in S.inv){
+    const c = BY[code];
+    if (!c) continue;                       // printing left the feed; ignore quietly
+    if (forTrade(code)) haves.push({ c, q: forTrade(code) });
+    const d = need(code);
+    if (d) wants.push({ c, q: d });
+  }
+  const ord = (a,b) => a.c.s.localeCompare(b.c.s) || a.c.no - b.c.no;
+  return { haves: haves.sort(ord), wants: wants.sort(ord) };
+}
+
+function groupBySet(items){
+  if (!items.length) return '<p class="empty">Nothing here yet.</p>';
+  let out = '', cur = '';
+  for (const it of items){
+    if (it.c.s !== cur){ cur = it.c.s; out += `<div class="setgroup">${esc(setName(cur))}</div>`; }
+    out += `<div class="row">
+      ${it.c.i ? `<img class="thumb" loading="lazy" src="${imgURL(it.c,60)}" alt="" data-zoom="${esc(it.c.c)}">` : ''}
+      <span class="nm">${dchips(it.c)} ${esc(it.c.n)}
+        ${it.c.v ? `<span class="vtag v-${it.c.v}">${esc(vLabel(it.c.v))}</span>` : ''}
+        <span class="code">${esc(it.c.c)}</span></span>
+      <span class="qty">x${it.q}</span>
+    </div>`;
+  }
+  return out;
+}
+
+function tradeText(){
+  const { haves, wants } = tradeLists();
+  const fmt = (it) => `${it.c.c}  ${it.c.n}${it.c.v ? ` (${vLabel(it.c.v)})` : ''}  x${it.q}`;
+  const lines = ['HAVE FOR TRADE', ...(haves.length ? haves.map(fmt) : ['(nothing listed)']),
+                 '', 'LOOKING FOR', ...(wants.length ? wants.map(fmt) : ['(nothing listed)'])];
+  return lines.join('\n');
+}
+
+function renderTrade(){
+  const { haves, wants } = tradeLists();
+  document.getElementById('tn-trade').textContent = haves.length || wants.length
+    ? `${haves.length}/${wants.length}` : '';
+
+  document.getElementById('v-trade').innerHTML = `
+    ${READONLY ? `<div class="panel"><h2>JAY'S TRADE LIST</h2>
+      <p class="note">A read-only snapshot. Haves are surplus copies I can trade away, wants are
+      cards I am short of. Mail me at <a href="mailto:jcegger@gmail.com">jcegger@gmail.com</a>.</p></div>` : ''}
+    <div class="cols">
+      <div class="panel">
+        <h2>HAVE FOR TRADE <span class="code">${haves.length}</span></h2>
+        <div class="rows">${groupBySet(haves)}</div>
+      </div>
+      <div class="panel">
+        <h2>LOOKING FOR <span class="code">${wants.length}</span></h2>
+        <div class="rows">${groupBySet(wants)}</div>
+      </div>
+    </div>
+    ${READONLY ? '' : `<div class="panel">
+      <h2>SHARE IT</h2>
+      <p class="note">Set a card's <b>Trade</b> count to list surplus, and its <b>Want</b> count to
+      list what you are chasing. Wants show the shortfall against what you already own, so a want of
+      3 with 1 owned lists as x2.</p>
+      <div class="bar-row" style="margin:12px 0">
+        <button class="ghost" id="btn-trade-copy">Copy as text</button>
+        <button class="ghost" id="btn-trade-link">Copy share link</button>
+      </div>
+      <div class="pre" id="trade-pre">${esc(tradeText())}</div>
+    </div>`}`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RENDER: decks
+   ══════════════════════════════════════════════════════════════════════════ */
+let selDeck = null;
+let deckQuery = '';
+
+function drawDeckAC(){
+  const out = document.getElementById('deck-ac');
+  if (!out) return;
+  const s = deckQuery.trim().toLowerCase();
+  if (s.length < 2){ out.innerHTML = ''; return; }
+  const hits = CAT.cards
+    .filter(c => c.n.toLowerCase().includes(s) || c.c.toLowerCase().includes(s))
+    .slice(0, 10);
+  out.innerHTML = hits.length ? `<div class="ac-out">${hits.map(c =>
+    `<div class="ac-item" data-add="${esc(c.c)}">
+      ${c.i ? `<img class="thumb" src="${imgURL(c,60)}" alt="">` : ''}
+      <span class="nm">${dchips(c)} ${esc(c.n)}</span>
+      <span class="code">${esc(c.c)} · ${esc(c.t||'')} · ${owned(c.c)} owned</span>
+    </div>`).join('')}</div>` : '';
+}
+
+const deckCards = (d) => Object.entries(d.cards || {})
+  .map(([code,q]) => ({ c: BY[code], q }))
+  .filter(x => x.c)
+  .sort((a,b) => (TYPES.indexOf(a.c.t) - TYPES.indexOf(b.c.t)) || a.c.n.localeCompare(b.c.n));
+
+function deckStats(d){
+  const items = deckCards(d);
+  let copies = 0, missing = 0;
+  for (const it of items){ copies += it.q; missing += Math.max(0, it.q - owned(it.c.c)); }
+  return { items, copies, missing, distinct: items.length };
+}
+
+function renderDecks(){
+  document.getElementById('tn-decks').textContent = S.decks.length || '';
+  const host = document.getElementById('v-decks');
+
+  let html = `<div class="panel">
+    <h2>DECKS</h2>
+    <div class="deck-list" id="deck-list">
+      ${S.decks.length ? S.decks.map(d => {
+        const st = deckStats(d);
+        return `<div class="deck-item ${selDeck === d.id ? 'sel' : ''}">
+          <span class="dn" data-deck="${esc(d.id)}">${esc(d.name)}</span>
+          <span class="dm">${st.copies} cards${st.missing ? ` · ${st.missing} to get` : ' · complete'}</span>
+          ${READONLY ? '' : `<button class="ghost" data-deck-del="${esc(d.id)}">Delete</button>`}
+        </div>`;
+      }).join('') : '<p class="empty">No decks yet.</p>'}
+    </div>
+    ${READONLY ? '' : `<div class="bar-row" style="margin-top:12px">
+      <input class="search" id="deck-new" placeholder="New deck name…" autocomplete="off">
+      <button class="ghost" id="btn-deck-add">Add deck</button>
+    </div>`}
+  </div>`;
+
+  const d = S.decks.find(x => x.id === selDeck);
+  if (d){
+    const st = deckStats(d);
+    const byType = TYPES.map(t => {
+      const n = st.items.filter(i => i.c.t === t).reduce((a,i) => a + i.q, 0);
+      return n ? `<span><b>${n}</b> ${t.toLowerCase()}</span>` : '';
+    }).filter(Boolean).join('');
+
+    html += `<div class="panel">
+      <h2>${esc(d.name)}</h2>
+      <div class="stats">
+        <div class="stat"><div class="v">${st.copies}</div><div class="k">cards</div></div>
+        <div class="stat"><div class="v">${st.distinct}</div><div class="k">distinct</div></div>
+        <div class="stat"><div class="v" style="color:${st.missing ? 'var(--maize)' : 'var(--good)'}">${st.missing}</div><div class="k">still to get</div></div>
+      </div>
+      <div class="meter-sub" style="margin-bottom:14px">${byType || '<span>empty deck</span>'}</div>
+
+      ${READONLY ? '' : `<div class="ac" style="margin-bottom:14px">
+        <input class="search" id="deck-search" placeholder="Add a card by name or code…" autocomplete="off" style="width:100%">
+        <div id="deck-ac"></div>
+      </div>`}
+
+      <div class="rows">
+        ${st.items.length ? st.items.map(it => {
+          const short = Math.max(0, it.q - owned(it.c.c));
+          return `<div class="row">
+            ${it.c.i ? `<img class="thumb" loading="lazy" src="${imgURL(it.c,60)}" alt="" data-zoom="${esc(it.c.c)}">` : ''}
+            <span class="nm">${dchips(it.c)} ${esc(it.c.n)} <span class="code">${esc(it.c.c)} · ${esc(it.c.t||'')}</span></span>
+            <span class="qty ${short ? 'need' : ''}">${it.q} in deck · ${owned(it.c.c)} owned${short ? ` · need ${short}` : ''}</span>
+            ${READONLY ? '' : `<input type="number" min="0" max="9" value="${it.q}" class="qi"
+              data-deck-qty="${esc(d.id)}" data-code="${esc(it.c.c)}" style="width:46px;text-align:center;background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:3px">`}
+          </div>`;
+        }).join('') : '<p class="empty">Nothing in this deck yet.</p>'}
+      </div>
+
+      ${READONLY ? '' : `<div class="bar-row" style="margin-top:14px">
+        <button class="ghost" id="btn-deck-copy">Copy deck list</button>
+        <button class="ghost" id="btn-deck-wants">Add shortfall to wants</button>
+      </div>
+      <p class="note" style="margin-top:8px">“Add shortfall to wants” raises each card's Want count to
+      the number this deck needs, so the missing cards show up on the trade list.</p>`}
+    </div>`;
+  }
+  host.innerHTML = html;
+}
+
+function deckText(d){
+  const st = deckStats(d);
+  const out = [d.name, ''];
+  for (const t of TYPES){
+    const g = st.items.filter(i => i.c.t === t);
+    if (!g.length) continue;
+    out.push(`${t.toUpperCase()} (${g.reduce((a,i) => a + i.q, 0)})`);
+    for (const i of g) out.push(`  ${i.q}x ${i.c.n}  ${i.c.c}`);
+    out.push('');
+  }
+  return out.join('\n').trim();
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RENDER: dispatch
+   ══════════════════════════════════════════════════════════════════════════ */
+function render(){
+  for (const t of ['collection','sets','trade','decks'])
+    document.getElementById('v-' + t).classList.toggle('hide', TAB !== t);
+  for (const b of document.querySelectorAll('.tab'))
+    b.setAttribute('aria-selected', String(b.dataset.tab === TAB));
+
+  if (TAB === 'collection') renderCollection(true);
+  if (TAB === 'sets')  renderSets();
+  if (TAB === 'trade') renderTrade();
+  if (TAB === 'decks') renderDecks();
+
+  // keep the badges honest even when their tab is closed
+  if (TAB !== 'trade') renderTradeBadge();
+  if (TAB !== 'decks') document.getElementById('tn-decks').textContent = S.decks.length || '';
+}
+function renderTradeBadge(){
+  const { haves, wants } = tradeLists();
+  document.getElementById('tn-trade').textContent = (haves.length || wants.length)
+    ? `${haves.length}/${wants.length}` : '';
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FILTER UI
+   ══════════════════════════════════════════════════════════════════════════ */
+function buildFilterUI(){
+  const opt = (v,l,sel) => `<option value="${esc(v)}" ${sel === v ? 'selected' : ''}>${esc(l)}</option>`;
+
+  document.getElementById('f-set').innerHTML =
+    opt('','All sets',F.set) + CAT.sets.map(s => opt(s.id, s.name, F.set)).join('');
+  document.getElementById('f-type').innerHTML =
+    opt('','All types',F.type) + TYPES.map(t => opt(t,t,F.type)).join('');
+  document.getElementById('f-rarity').innerHTML =
+    opt('','All rarities',F.rarity) + RARITIES.map(r => opt(r,r,F.rarity)).join('');
+  document.getElementById('f-sort').value = F.sort;
+  document.getElementById('q').value = F.q;
+
+  document.getElementById('f-domain').innerHTML = DOMAINS.map(d =>
+    `<button class="chip d-${d.toLowerCase()}" data-dom="${d}" aria-pressed="${F.domain.includes(d)}">${d}</button>`
+  ).join(' ');
+
+  document.getElementById('f-variant').innerHTML = VARIANTS.map(([v,l]) =>
+    `<button class="chip" data-var="${v}" aria-pressed="${F.variant.includes(v)}">${l}</button>`
+  ).join(' ');
+
+  document.getElementById('f-have').innerHTML = [
+    ['','Everything'],['own','Owned'],['missing','Missing'],['want','Wanted'],
+    ['trade','For trade'],['foil','Foils'],
+  ].map(([v,l]) => `<button class="chip" data-have="${v}" aria-pressed="${F.have === v}">${l}</button>`).join(' ');
+
+  document.getElementById('f-view').textContent = F.view === 'grid' ? 'Table view' : 'Grid view';
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   EVENTS
+   ══════════════════════════════════════════════════════════════════════════ */
+function toast(msg){
+  const t = document.getElementById('sync-txt');
+  const old = t.textContent;
+  t.textContent = msg;
+  setTimeout(() => { t.textContent = old; }, 1600);
+}
+async function copy(text, msg){
+  try { await navigator.clipboard.writeText(text); toast(msg || 'copied'); }
+  catch { toast('copy blocked'); }
+}
+
+function wire(){
+  // tabs
+  document.getElementById('tabs').addEventListener('click', (e) => {
+    const b = e.target.closest('.tab'); if (!b) return;
+    TAB = b.dataset.tab; render();
+  });
+
+  // filters
+  const q = document.getElementById('q');
+  let qt = null;
+  q.addEventListener('input', () => {
+    clearTimeout(qt);
+    qt = setTimeout(() => { F.q = q.value.trim(); persistUI(); renderCollection(true); }, 180);
+  });
+  for (const [id,key] of [['f-set','set'],['f-type','type'],['f-rarity','rarity'],['f-sort','sort']]){
+    document.getElementById(id).addEventListener('change', (e) => {
+      F[key] = e.target.value; persistUI(); renderCollection(true);
+    });
+  }
+  document.getElementById('f-view').addEventListener('click', () => {
+    F.view = F.view === 'grid' ? 'table' : 'grid';
+    document.getElementById('f-view').textContent = F.view === 'grid' ? 'Table view' : 'Grid view';
+    persistUI(); renderCollection(true);
+  });
+  document.getElementById('f-clear').addEventListener('click', () => {
+    Object.assign(F, { q:'', set:'', type:'', rarity:'', domain:[], variant:[], have:'' });
+    persistUI(); buildFilterUI(); renderCollection(true);
+  });
+
+  const toggleIn = (arr, v) => {
+    const i = arr.indexOf(v);
+    if (i < 0) arr.push(v); else arr.splice(i, 1);
+  };
+  document.getElementById('f-domain').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-dom]'); if (!b) return;
+    toggleIn(F.domain, b.dataset.dom); persistUI(); buildFilterUI(); renderCollection(true);
+  });
+  document.getElementById('f-variant').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-var]'); if (!b) return;
+    toggleIn(F.variant, b.dataset.var); persistUI(); buildFilterUI(); renderCollection(true);
+  });
+  document.getElementById('f-have').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-have]'); if (!b) return;
+    F.have = F.have === b.dataset.have ? '' : b.dataset.have;
+    persistUI(); buildFilterUI(); renderCollection(true);
+  });
+
+  // quantity edits, anywhere (delegated: 1189 rows means no per-input listeners)
+  document.body.addEventListener('change', (e) => {
+    const el = e.target;
+    if (el.dataset.code && el.dataset.f){
+      setQty(el.dataset.code, el.dataset.f, el.value);
+      patchCard(el, el.dataset.code);
+      renderTradeBadge();
+      return;
+    }
+    if (el.dataset.deckQty){
+      const d = S.decks.find(x => x.id === el.dataset.deckQty);
+      if (!d) return;
+      d.cards = d.cards || {};
+      const n = Math.max(0, Math.min(9, Math.floor(Number(el.value) || 0)));
+      if (n) d.cards[el.dataset.code] = n; else delete d.cards[el.dataset.code];
+      persist();
+      return;
+    }
+    if (el.id === 'playset'){
+      S.playset = Math.max(1, Math.min(9, Number(el.value) || 3));
+      persist();
+    }
+  });
+
+  // Re-render on qty change is heavy in the collection view, so patch in place instead.
+  document.body.addEventListener('input', (e) => {
+    const el = e.target;
+    if (el.dataset.code && el.dataset.f) el.classList.toggle('set', !!Number(el.value));
+  });
+
+  // lightbox
+  document.body.addEventListener('click', (e) => {
+    const z = e.target.closest('[data-zoom]'); if (!z) return;
+    const c = BY[z.dataset.zoom]; if (!c) return;
+    const lb = document.createElement('div');
+    lb.className = 'lb';
+    lb.innerHTML = `<img src="${imgURL(c,744)}" alt="${esc(c.n)}">
+      <div class="lb-info">${esc(c.n)} · ${esc(c.c)} · ${esc(c.r||'')} ${c.v ? '· ' + esc(vLabel(c.v)) : ''}
+      ${c.x ? '<br>' + esc(c.x).replace(/\n/g,' / ') : ''}</div>`;
+    lb.addEventListener('click', () => lb.remove());
+    document.body.appendChild(lb);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') document.querySelectorAll('.lb').forEach(n => n.remove());
+  });
+
+  // backup / restore
+  document.getElementById('btn-export').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify({ inv:S.inv, decks:S.decks, playset:S.playset }, null, 2)],
+      { type:'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `riftbound-collection-${new Date().toISOString().slice(0,10)}.json`;
+    a.click(); URL.revokeObjectURL(a.href);
+  });
+  document.getElementById('btn-import').addEventListener('click', () => {
+    const f = document.createElement('input');
+    f.type = 'file'; f.accept = 'application/json';
+    f.onchange = async () => {
+      try {
+        const d = JSON.parse(await f.files[0].text());
+        if (!confirm('Replace the current collection with this backup?')) return;
+        S.inv = d.inv || {}; S.decks = d.decks || []; S.playset = d.playset || 3;
+        persist(); toast('restored');
+      } catch { alert('That file is not a collection backup.'); }
+    };
+    f.click();
+  });
+
+  // per-view buttons (delegated, since these views re-render)
+  document.body.addEventListener('click', (e) => {
+    const t = e.target;
+
+    if (t.id === 'btn-trade-copy') copy(tradeText(), 'list copied');
+    if (t.id === 'btn-trade-link') copy(location.origin + location.pathname + '?view=trade', 'link copied');
+
+    if (t.id === 'btn-deck-add'){
+      const el = document.getElementById('deck-new');
+      const name = el.value.trim(); if (!name) return;
+      const id = 'd' + Date.now().toString(36);
+      S.decks.push({ id, name, cards:{} });
+      selDeck = id; persist();
+    }
+    const dn = t.closest('[data-deck]');
+    if (dn){ selDeck = selDeck === dn.dataset.deck ? null : dn.dataset.deck; renderDecks(); }
+
+    const del = t.closest('[data-deck-del]');
+    if (del){
+      const d = S.decks.find(x => x.id === del.dataset.deckDel);
+      if (d && confirm(`Delete "${d.name}"?`)){
+        S.decks = S.decks.filter(x => x.id !== d.id);
+        if (selDeck === d.id) selDeck = null;
+        persist();
+      }
+    }
+
+    if (t.id === 'btn-deck-copy'){
+      const d = S.decks.find(x => x.id === selDeck);
+      if (d) copy(deckText(d), 'deck copied');
+    }
+    if (t.id === 'btn-deck-wants'){
+      const d = S.decks.find(x => x.id === selDeck); if (!d) return;
+      let n = 0;
+      for (const [code,qty] of Object.entries(d.cards)){
+        if (qty > want(code)){ setQtyQuiet(code, 'w', qty); n++; }
+      }
+      persist(); toast(n ? `${n} wants set` : 'nothing to add');
+    }
+  });
+
+  // deck card autocomplete
+  document.body.addEventListener('input', (e) => {
+    if (e.target.id !== 'deck-search') return;
+    deckQuery = e.target.value;
+    drawDeckAC();
+  });
+  document.body.addEventListener('click', (e) => {
+    const it = e.target.closest('[data-add]'); if (!it) return;
+    const d = S.decks.find(x => x.id === selDeck); if (!d) return;
+    const code = it.dataset.add;
+    d.cards = d.cards || {};
+    d.cards[code] = Math.min(9, (d.cards[code] || 0) + 1);
+    persist();
+    // renderDecks() rebuilt the search box, so put the query back and keep the
+    // dropdown open: adding a whole deck means adding many cards in a row.
+    const box = document.getElementById('deck-search');
+    if (box){ box.value = deckQuery; box.focus(); drawDeckAC(); }
+  });
+
+  // infinite scroll
+  new IntersectionObserver((ents) => {
+    if (ents.some(x => x.isIntersecting)) drawMore();
+  }, { rootMargin:'600px' }).observe(document.getElementById('sentinel'));
+}
+
+// like setQty but without the persist/render churn, for bulk edits
+function setQtyQuiet(code, field, val){
+  const v = Math.max(0, Math.min(999, Math.floor(Number(val) || 0)));
+  const e = { ...(S.inv[code] || {}) };
+  if (v) e[field] = v; else delete e[field];
+  if (Object.keys(e).length) S.inv[code] = e; else delete S.inv[code];
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   BOOT
+   ══════════════════════════════════════════════════════════════════════════ */
+async function boot(){
+  loadLocal();
+  setDot('off');
+
+  try {
+    const r = await fetch('data/cards.json', { cache:'no-cache' });
+    if (!r.ok) throw new Error(r.status);
+    CAT = await r.json();
+  } catch {
+    document.getElementById('cards').innerHTML =
+      '<div class="loading">Could not load data/cards.json. Run <code>node scripts/build-catalog.mjs</code>.</div>';
+    return;
+  }
+  BY = Object.fromEntries(CAT.cards.map(c => [c.c, c]));
+
+  const baseTotal = CAT.cards.filter(c => !c.v).length;
+  document.getElementById('sub').textContent =
+    `${CAT.cards.length} printings across ${CAT.sets.length} sets · ${baseTotal} numbered base cards`;
+  document.getElementById('foot-src').textContent =
+    `card data from Riot's public gallery feed · catalog built ${CAT.generatedAt}`;
+
+  if (READONLY){
+    document.getElementById('tabs').classList.add('hide');
+    document.getElementById('v-collection').classList.add('hide');
+    for (const id of ['btn-export','btn-import']) document.getElementById(id).classList.add('hide');
+  }
+
+  buildFilterUI();
+  wire();
+  render();
+
+  // Remote wins on load, the same way the LSAT tracker behaves.
+  if (await syncPull()) render();
+}
+boot();
+</script>
+</body>
+</html>
