@@ -14,6 +14,7 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `data/cards.json` - the card catalog, generated and committed. Loaded at boot.
 - `scripts/build-catalog.mjs` - regenerates the catalog from Riot's gallery feed.
 - `schema.sql` - the Supabase table and its policies.
+- `worker/` - the Cloudflare Worker that proxies the riftbound.gg export.
 - `fonts/` - Press Start 2P and Syne Mono, self-hosted to match jayegger.com.
 
 ## The four views
@@ -33,6 +34,35 @@ the target. Copy it as text for a Discord post, or share the read-only view.
 
 **Decks** builds lists against the collection and reports what you are short.
 "Add shortfall to wants" pushes the gap onto the trade list.
+
+**Import** pulls the collection in from riftbound.gg, which is where cards
+actually get entered because its scanner beats typing.
+
+## Import
+
+riftbound.gg is the source of truth for what I own. This tool mirrors it and adds
+what it does not do. Every import replaces the owned counts, so a correction over
+there lands here too, while Want and Trade are left alone because they exist only
+in this tool. Re-importing the same file is a no-op.
+
+Three ways in, in order of how little work they are:
+
+1. **Automatic.** Deploy `worker/` and paste its URL into the Import tab. Turn on
+   "Pull on every load" and the collection refreshes every time the page opens.
+   See `worker/README.md` for why a proxy is needed at all.
+2. **A CSV file.** Export from riftbound.gg and pick the file.
+3. **Paste.** Drop CSV text straight into the Import tab.
+
+Matching tries the most specific key it can, in this order: a card id, then set
+plus collector number, then a bare name. Zero-padding, letter suffixes and stars
+all normalize, so `OGN-066a/298`, `ogn-066a-298` and `OGN` + `066a` all land on
+the same printing. A bare name resolves only to base printings, so a plain
+"Fury Rune" never silently becomes the alt art.
+
+Rows that match nothing are listed rather than dropped. The expected cause is a
+card the catalog cannot know about: the **Arcane Box Set**, or a set Riot has
+announced but not released. riftbound.gg's catalog is larger than Riot's gallery
+for exactly that reason.
 
 ## Card data
 

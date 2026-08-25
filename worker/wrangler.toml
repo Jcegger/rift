@@ -1,0 +1,11 @@
+name = "riftbound-sync"
+main = "worker.js"
+compatibility_date = "2026-08-01"
+
+[vars]
+# Origins allowed to read the proxied CSV. First entry is the fallback.
+ALLOW_ORIGIN = "https://riftbound.jayegger.com,http://localhost:8791"
+DOTGG_GAME = "riftbound"
+
+# DOTGG_TOKEN is a secret, never a var. Set it with:
+#   wrangler secret put DOTGG_TOKEN

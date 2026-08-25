@@ -222,6 +222,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:16px 0;font-fami
       <button class="tab" role="tab" data-tab="sets" aria-selected="false">Sets</button>
       <button class="tab" role="tab" data-tab="trade" aria-selected="false">Trade<span class="n" id="tn-trade"></span></button>
       <button class="tab" role="tab" data-tab="decks" aria-selected="false">Decks<span class="n" id="tn-decks"></span></button>
+      <button class="tab" role="tab" data-tab="sync" aria-selected="false">Import<span class="n" id="tn-sync"></span></button>
     </nav>
   </header>
 
@@ -268,6 +269,9 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:16px 0;font-fami
 
   <!-- ══ DECKS ═══════════════════════════════════════ -->
   <section id="v-decks" class="hide"></section>
+
+  <!-- ══ IMPORT / SYNC ═══════════════════════════════ -->
+  <section id="v-sync" class="hide"></section>
 
   <footer>
     <span id="foot-src">card data from Riot's public gallery feed</span>
@@ -799,10 +803,289 @@ function deckText(d){
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   IMPORT from riftbound.gg
+   ══════════════════════════════════════════════════════════════════════════
+   riftbound.gg is where cards get entered, because its scanner beats typing.
+   This pulls that collection in and mirrors it: owned counts are replaced from
+   the file so a correction over there propagates here, while Want and Trade are
+   left alone because they only exist in this tool.
+
+   Their export is CSV. Column names vary by source, so match on whatever the
+   file actually carries, most specific key first, and report what did not land
+   rather than silently dropping it.                                           */
+
+// Minimal RFC4180 parser: quoted fields, escaped quotes, CRLF, trailing newline.
+function parseCSV(text){
+  const rows = [];
+  let row = [], field = '', q = false;
+  const s = text.replace(/^﻿/, '');           // strip BOM
+  for (let i = 0; i < s.length; i++){
+    const ch = s[i];
+    if (q){
+      if (ch === '"'){
+        if (s[i+1] === '"'){ field += '"'; i++; }
+        else q = false;
+      } else field += ch;
+    } else if (ch === '"') q = true;
+    else if (ch === ','){ row.push(field); field = ''; }
+    else if (ch === '\n'){ row.push(field); rows.push(row); row = []; field = ''; }
+    else if (ch !== '\r') field += ch;
+  }
+  if (field !== '' || row.length) { row.push(field); rows.push(row); }
+  return rows.filter(r => r.some(c => c.trim() !== ''));
+}
+
+// The same column aliases riftbound.gg's own importer accepts, plus the ones its
+// export and a TCGplayer export use.
+const COLS = {
+  id:     ['cardid','card id','id','card','id_normal','idnormal'],
+  name:   ['name','cardname','card name','productname','product name'],
+  set:    ['set','setid','set id','setcode','set code','edition'],
+  number: ['number','cardnumber','card number','collectornumber','collector number','no','#'],
+  normal: ['normal','standard','count','qty','quantity','amount','owned','nonfoil','non-foil'],
+  foil:   ['foil','foils','foilqty','foil quantity'],
+};
+function mapHeader(header){
+  const norm = header.map(h => h.trim().toLowerCase().replace(/^"|"$/g, ''));
+  const out = {};
+  for (const key in COLS){
+    const i = norm.findIndex(h => COLS[key].includes(h));
+    if (i >= 0) out[key] = i;
+  }
+  return out;
+}
+
+// Normalize a collector reference to "SET|NUM|SUFFIX" so "OGN-066a/298", "066a",
+// "66a" and "OGN 66 a" all collapse to the same key.
+function collKey(setId, number){
+  if (!setId || number == null) return null;
+  const m = /^0*(\d+)\s*([a-z]*)\s*(\*|star)?$/i.exec(String(number).trim());
+  if (!m) return null;
+  const suffix = (m[2] || '').toLowerCase() + (m[3] ? '*' : '');
+  return `${String(setId).toUpperCase()}|${Number(m[1])}|${suffix}`;
+}
+// Pull set + number out of a full code like "OGN-066a/298" or "ogn-066a-298".
+function keyFromCode(code){
+  const m = /^([A-Za-z]+)[-\s]+0*(\d+)([a-z]*)(?:[-\s]*star)?(?:\*)?/.exec(String(code).trim());
+  if (!m) return null;
+  const star = /star|\*/i.test(String(code));
+  return `${m[1].toUpperCase()}|${Number(m[2])}|${(m[3] || '').toLowerCase()}${star ? '*' : ''}`;
+}
+
+let MATCH = null;
+function buildMatchIndex(){
+  MATCH = { byId: new Map(), byCode: new Map(), byColl: new Map(), byName: new Map() };
+  for (const c of CAT.cards){
+    if (c.ri) MATCH.byId.set(c.ri.toLowerCase(), c);
+    MATCH.byCode.set(c.c.toLowerCase(), c);
+    const k = keyFromCode(c.c);
+    if (k && !MATCH.byColl.has(k)) MATCH.byColl.set(k, c);
+    // Name maps to base printings only, so a bare name never resolves to a chase card.
+    const nk = c.n.toLowerCase();
+    if (!c.v && !MATCH.byName.has(nk)) MATCH.byName.set(nk, c);
+  }
+}
+
+function matchRow(r){
+  if (r.id){
+    const id = r.id.toLowerCase().trim();
+    const hit = MATCH.byId.get(id) || MATCH.byCode.get(id);
+    if (hit) return hit;
+    const k = keyFromCode(r.id);
+    if (k && MATCH.byColl.has(k)) return MATCH.byColl.get(k);
+  }
+  if (r.set && r.number){
+    const k = collKey(r.set, r.number);
+    if (k && MATCH.byColl.has(k)) return MATCH.byColl.get(k);
+  }
+  if (r.number){
+    const k = keyFromCode(r.number);
+    if (k && MATCH.byColl.has(k)) return MATCH.byColl.get(k);
+  }
+  if (r.name){
+    const hit = MATCH.byName.get(r.name.toLowerCase().trim());
+    if (hit) return hit;
+  }
+  return null;
+}
+
+// Read a CSV into {rows, cols} of normalized records.
+function readCollectionCSV(text){
+  const grid = parseCSV(text);
+  if (!grid.length) throw new Error('That file has no rows in it.');
+  const cols = mapHeader(grid[0]);
+  // Compare against null, not truthiness: column index 0 is a perfectly good match
+  // and "cardid" being the first column is the likely case.
+  if (cols.id == null && cols.name == null && cols.number == null)
+    throw new Error('No card column found. Expected one of: cardid, name, or number.');
+  const num = (v) => {
+    const n = Math.floor(Number(String(v ?? '').trim()));
+    return Number.isFinite(n) && n > 0 ? Math.min(999, n) : 0;
+  };
+  const rows = grid.slice(1).map((cells) => ({
+    id:     cols.id     != null ? cells[cols.id]     : '',
+    name:   cols.name   != null ? cells[cols.name]   : '',
+    set:    cols.set    != null ? cells[cols.set]    : '',
+    number: cols.number != null ? cells[cols.number] : '',
+    n:      cols.normal != null ? num(cells[cols.normal]) : 0,
+    f:      cols.foil   != null ? num(cells[cols.foil])   : 0,
+    // A file with no quantity column at all means one copy per listed row.
+    bare:   cols.normal == null && cols.foil == null,
+  }));
+  return { rows, cols };
+}
+
+// Mirror owned counts from an import. Want and Trade survive untouched.
+function applyImport(text){
+  if (!MATCH) buildMatchIndex();
+  const { rows, cols } = readCollectionCSV(text);
+
+  const owned = new Map();   // code -> {n, f}
+  const unmatched = [];
+  for (const r of rows){
+    const card = matchRow(r);
+    if (!card){
+      const label = [r.name, r.id, r.set && r.number ? `${r.set} ${r.number}` : r.number]
+        .filter(Boolean).join(' · ');
+      if (label) unmatched.push(label);
+      continue;
+    }
+    const prev = owned.get(card.c) || { n:0, f:0 };
+    // Duplicate rows for one printing (one per finish, say) add up rather than clobber.
+    owned.set(card.c, { n: prev.n + (r.bare ? 1 : r.n), f: prev.f + r.f });
+  }
+
+  let added = 0, changed = 0, cleared = 0;
+  const before = new Map(Object.keys(S.inv).map(c => [c, owned0(c)]));
+
+  // A full-catalog export lists every card including the ones held at zero, so a
+  // matched row is not the same thing as an owned printing. Fold the zero rows in
+  // with the cards the file omits entirely: both mean "no longer owned".
+  const zeroed = new Set();
+  for (const [code, q] of owned) if (!q.n && !q.f) zeroed.add(code);
+
+  const drop = (code) => {
+    const e = S.inv[code];
+    if (!e) return;
+    if (e.n || e.f) cleared++;
+    delete e.n; delete e.f;
+    if (!Object.keys(e).length) delete S.inv[code];
+  };
+
+  // Replace every owned count, so a card removed on riftbound.gg drops to zero here.
+  for (const code of Object.keys(S.inv)) if (!owned.has(code) || zeroed.has(code)) drop(code);
+
+  for (const [code, q] of owned){
+    if (zeroed.has(code)) continue;
+    const had = before.get(code);
+    const e = { ...(S.inv[code] || {}) };
+    e.n = q.n; e.f = q.f;
+    if (!e.n) delete e.n;
+    if (!e.f) delete e.f;
+    if (Object.keys(e).length) S.inv[code] = e; else delete S.inv[code];
+    // An entry that existed only to hold a Want counts as newly owned, not changed.
+    if (!had || (!had.n && !had.f)) added++;
+    else if (had.n !== q.n || had.f !== q.f) changed++;
+  }
+
+  const copies = [...owned.values()].reduce((a, q) => a + q.n + q.f, 0);
+  return { rows: rows.length, matched: owned.size - zeroed.size, copies,
+           added, changed, cleared, unmatched, cols: Object.keys(cols) };
+}
+function owned0(code){ const e = S.inv[code] || {}; return { n: e.n || 0, f: e.f || 0 }; }
+
+let lastImport = null;
+
+// Pull through the proxy Worker. Direct fetch cannot work: api.dotgg.gg echoes
+// Access-Control-Allow-Origin only for riftbound.gg, so the browser blocks us.
+// See worker/README.md.
+async function syncFromDotgg(quiet){
+  if (!S.syncUrl) return false;
+  try {
+    const r = await fetch(S.syncUrl, { cache:'no-store' });
+    const body = await r.text();
+    if (!r.ok) throw new Error(body.trim().slice(0, 200) || `HTTP ${r.status}`);
+    lastImport = { ...applyImport(body), at: new Date().toISOString().slice(0, 16).replace('T', ' '),
+                   via: 'riftbound.gg' };
+    S.lastSyncAt = lastImport.at;
+    persist();
+    if (!quiet) toast(`imported ${lastImport.copies} cards`);
+    return true;
+  } catch (e) {
+    // Deliberately does not touch the sync dot: that reports Supabase, and a failed
+    // import must not read as "your edits are not saving". The Import tab owns this.
+    lastImport = { error: e.message, via: 'riftbound.gg' };
+    renderImportBadge();
+    if (!quiet){ toast('import failed'); render(); }
+    return false;
+  }
+}
+
+function renderSync(){
+  const L = lastImport;
+  const report = !L ? '' : L.error
+    ? `<p class="note" style="color:var(--bad)">Import failed: ${esc(L.error)}</p>`
+    : `<div class="stats" style="margin-top:12px">
+        <div class="stat"><div class="v">${L.copies}</div><div class="k">cards imported</div></div>
+        <div class="stat"><div class="v">${L.matched}</div><div class="k">printings matched</div></div>
+        <div class="stat"><div class="v" style="color:${L.unmatched.length ? 'var(--warn)' : 'var(--good)'}">${L.unmatched.length}</div><div class="k">rows unmatched</div></div>
+        <div class="stat"><div class="v">${L.cleared}</div><div class="k">dropped to zero</div></div>
+       </div>
+       <p class="note">${L.rows} rows read from ${esc(L.via)}, columns used:
+         ${esc((L.cols || []).join(', ') || 'none')}. Want and Trade counts were left untouched.</p>
+       ${L.unmatched.length ? `<h3 style="margin-top:14px">Not in the catalog</h3>
+         <p class="note">These rows had no matching printing. Cards from the Arcane Box Set or
+         from sets Riot has not released yet are the expected cause, since the catalog is built
+         from Riot's official gallery.</p>
+         <div class="pre" style="margin-top:8px">${esc(L.unmatched.slice(0, 200).join('\n'))}${
+           L.unmatched.length > 200 ? `\n… and ${L.unmatched.length - 200} more` : ''}</div>` : ''}`;
+
+  document.getElementById('v-sync').innerHTML = `
+    <div class="panel">
+      <h2>IMPORT FROM RIFTBOUND.GG</h2>
+      <p class="note">riftbound.gg stays where cards get entered, because its scanner beats typing.
+      This mirrors that collection: owned counts are replaced on every import, so a correction over
+      there lands here too, while Want and Trade counts stay yours.</p>
+      <div class="bar-row" style="margin:14px 0 6px">
+        <button class="ghost" id="btn-imp-file">Import a CSV file</button>
+        <button class="ghost" id="btn-imp-paste">Paste CSV</button>
+        ${S.syncUrl ? '<button class="ghost" id="btn-imp-now">Pull from riftbound.gg now</button>' : ''}
+      </div>
+      ${report}
+    </div>
+
+    <div class="panel">
+      <h2>AUTOMATIC PULL</h2>
+      <p class="note">riftbound.gg mints a permanent export link under
+      <b>Settings &gt; Collection</b>: a URL that always returns your current collection. It cannot be
+      fetched from this page directly, because api.dotgg.gg only allows requests from its own origin,
+      so a small Cloudflare Worker sits in front of it and keeps the token off this page. Deploy the
+      one in <b>worker/</b>, then paste the Worker URL here.</p>
+      <div class="bar-row" style="margin-top:12px">
+        <input class="search" id="sync-url" placeholder="https://riftbound-sync.….workers.dev"
+          value="${esc(S.syncUrl || '')}" autocomplete="off" style="flex:1">
+        <button class="ghost" id="btn-sync-save">Save</button>
+      </div>
+      <div class="bar-row" style="margin-top:10px">
+        <button class="chip" id="btn-autosync" aria-pressed="${!!S.autoSync}">Pull on every load</button>
+        <span class="note">${S.lastSyncAt ? 'last pull ' + esc(S.lastSyncAt) : 'never pulled'}</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>PASTE</h2>
+      <p class="note">Or drop the contents of a CSV in here and import it directly.</p>
+      <textarea class="txt" id="paste-box" style="margin-top:10px;min-height:120px"
+        placeholder="cardid,name,normal,foil&#10;OGN-001/298,Blazing Scorcher,3,1"></textarea>
+      <div class="bar-row" style="margin-top:10px"><button class="ghost" id="btn-paste-go">Import pasted CSV</button></div>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    RENDER: dispatch
    ══════════════════════════════════════════════════════════════════════════ */
 function render(){
-  for (const t of ['collection','sets','trade','decks'])
+  for (const t of ['collection','sets','trade','decks','sync'])
     document.getElementById('v-' + t).classList.toggle('hide', TAB !== t);
   for (const b of document.querySelectorAll('.tab'))
     b.setAttribute('aria-selected', String(b.dataset.tab === TAB));
@@ -811,10 +1094,20 @@ function render(){
   if (TAB === 'sets')  renderSets();
   if (TAB === 'trade') renderTrade();
   if (TAB === 'decks') renderDecks();
+  if (TAB === 'sync')  renderSync();
 
   // keep the badges honest even when their tab is closed
   if (TAB !== 'trade') renderTradeBadge();
   if (TAB !== 'decks') document.getElementById('tn-decks').textContent = S.decks.length || '';
+  renderImportBadge();
+}
+function renderImportBadge(){
+  const el = document.getElementById('tn-sync');
+  if (!el) return;
+  const bad = lastImport && lastImport.error;
+  el.textContent = bad ? '!' : '';
+  el.style.color = bad ? 'var(--bad)' : '';
+  el.title = bad ? 'Last import failed: ' + lastImport.error : '';
 }
 function renderTradeBadge(){
   const { haves, wants } = tradeLists();
@@ -987,6 +1280,42 @@ function wire(){
   document.body.addEventListener('click', (e) => {
     const t = e.target;
 
+    // ── import / sync ────────────────────────────────────────────────
+    if (t.id === 'btn-imp-file'){
+      const f = document.createElement('input');
+      f.type = 'file'; f.accept = '.csv,text/csv,text/plain';
+      f.onchange = async () => {
+        try {
+          lastImport = { ...applyImport(await f.files[0].text()),
+                         at: new Date().toISOString().slice(0,16).replace('T',' '),
+                         via: f.files[0].name };
+          S.lastSyncAt = lastImport.at;
+          persist();
+        } catch (err){ lastImport = { error: err.message, via: f.files[0].name }; render(); }
+      };
+      f.click();
+    }
+    if (t.id === 'btn-imp-paste'){
+      document.getElementById('paste-box').focus();
+      document.getElementById('paste-box').scrollIntoView({ behavior:'smooth', block:'center' });
+    }
+    if (t.id === 'btn-paste-go'){
+      const txt = document.getElementById('paste-box').value;
+      if (!txt.trim()) return toast('nothing pasted');
+      try {
+        lastImport = { ...applyImport(txt),
+                       at: new Date().toISOString().slice(0,16).replace('T',' '), via: 'pasted CSV' };
+        S.lastSyncAt = lastImport.at;
+        persist();
+      } catch (err){ lastImport = { error: err.message, via: 'pasted CSV' }; render(); }
+    }
+    if (t.id === 'btn-imp-now') syncFromDotgg();
+    if (t.id === 'btn-sync-save'){
+      S.syncUrl = document.getElementById('sync-url').value.trim();
+      persist(); toast(S.syncUrl ? 'link saved' : 'link cleared');
+    }
+    if (t.id === 'btn-autosync'){ S.autoSync = !S.autoSync; persist(); }
+
     if (t.id === 'btn-trade-copy') copy(tradeText(), 'list copied');
     if (t.id === 'btn-trade-link') copy(location.origin + location.pathname + '?view=trade', 'link copied');
 
@@ -1093,6 +1422,10 @@ async function boot(){
 
   // Remote wins on load, the same way the LSAT tracker behaves.
   if (await syncPull()) render();
+
+  // Then riftbound.gg wins over that for owned counts, since it is where cards
+  // get entered. Quiet on load: a failed pull must not clobber a working session.
+  if (!READONLY && S.autoSync && S.syncUrl) await syncFromDotgg(true);
 }
 boot();
 </script>

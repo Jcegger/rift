@@ -124,6 +124,7 @@ const main = async () => {
       const setId = c.set?.value?.id ?? null;
       const card = {
         c: c.publicCode,
+        ri: c.id, // Riot's own id ("ogn-066a-298"), kept so imports can match on it
         n: c.name,
         s: setId,
         no: c.collectorNumber,
