@@ -1,10 +1,10 @@
 /**
- * riftbound-sync: a one-endpoint proxy in front of riftbound.gg's public profile data.
+ * rift-sync: a one-endpoint proxy in front of riftbound.gg's public profile data.
  *
  * Why this exists. A public riftbound.gg profile (riftbound.gg/u/<name>/collection)
  * is backed by api.dotgg.gg/cgfw/getuserdata, which needs no auth and returns the
  * whole collection: standard and foil counts, trade and wishlist counts, and the
- * custom tags. The page at riftbound.jayegger.com still cannot call it directly,
+ * custom tags. The page at rift.jayegger.com still cannot call it directly,
  * because that host echoes Access-Control-Allow-Origin only for riftbound.gg and
  * sets Allow-Credentials: true, so it can never wildcard and the browser drops the
  * response. CORS is a browser rule rather than a server one, so a fetch from here
@@ -55,7 +55,7 @@ export default {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "User-Agent": "riftbound.jayegger.com sync",
+          "User-Agent": "rift.jayegger.com sync",
           // Their API only answers CORS for its own site; send it as the origin so
           // nothing about this request looks unusual to them.
           "Origin": "https://riftbound.gg",

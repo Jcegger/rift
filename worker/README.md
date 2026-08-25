@@ -1,4 +1,4 @@
-# riftbound-sync worker
+# rift-sync worker
 
 Proxies a public riftbound.gg profile so the tracker can pull the collection
 automatically.
@@ -34,13 +34,13 @@ npx wrangler deploy
 ```
 
 `DOTGG_USER` in `wrangler.toml` sets whose profile is read. Then take the printed
-`https://riftbound-sync.<subdomain>.workers.dev` URL, open the tracker's
+`https://rift-sync.<subdomain>.workers.dev` URL, open the tracker's
 **Import** tab, paste it in, hit Save, and turn on "Pull on every load".
 
 Check it first if you like. This should return JSON with a `collection` array:
 
 ```
-curl -H "Origin: https://riftbound.jayegger.com" https://riftbound-sync.<subdomain>.workers.dev
+curl -H "Origin: https://rift.jayegger.com" https://rift-sync.<subdomain>.workers.dev
 ```
 
 ## Notes

@@ -1,4 +1,4 @@
--- riftbound.jayegger.com state table.
+-- rift.jayegger.com state table.
 -- Run once in the Supabase SQL editor for the project whose URL and publishable
 -- key are set at the top of the script in index.html.
 --

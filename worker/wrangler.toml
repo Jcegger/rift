@@ -1,10 +1,10 @@
-name = "riftbound-sync"
+name = "rift-sync"
 main = "worker.js"
 compatibility_date = "2026-08-01"
 
 [vars]
 # Origins allowed to read the proxied JSON. First entry is the fallback.
-ALLOW_ORIGIN = "https://riftbound.jayegger.com,http://localhost:8791"
+ALLOW_ORIGIN = "https://rift.jayegger.com,http://localhost:8791"
 DOTGG_GAME = "riftbound"
 # The riftbound.gg profile to read. Public data, so no secret is involved.
 DOTGG_USER = "skrtseason"

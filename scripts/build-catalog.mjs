@@ -15,7 +15,7 @@ const PAGE = 200;
 const IMG_PREFIX = "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data_live/";
 
 async function getJSON(url) {
-  const r = await fetch(url, { headers: { "User-Agent": "riftbound.jayegger.com catalog builder" } });
+  const r = await fetch(url, { headers: { "User-Agent": "rift.jayegger.com catalog builder" } });
   if (!r.ok) throw new Error(`${r.status} ${r.statusText} for ${url}`);
   return r.json();
 }

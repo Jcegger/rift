@@ -1,4 +1,4 @@
-# riftbound.jayegger.com
+# rift.jayegger.com
 
 A personal Riftbound TCG collection manager: owned counts by finish, base-set
 completion, a shareable trade list, and deck lists checked against what I
@@ -129,7 +129,7 @@ is a vandalized card list restorable from a backup. Use the Backup button.
 ## Hosting
 
 GitHub Pages serves the repo root. `CNAME` claims the subdomain, which needs a
-Cloudflare DNS record: `CNAME riftbound -> jcegger.github.io`, DNS only, not
+Cloudflare DNS record: `CNAME rift -> jcegger.github.io`, DNS only, not
 proxied, so Pages can issue the certificate.
 
 Not affiliated with or endorsed by Riot Games. Card galleries and deck builders

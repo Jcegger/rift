@@ -303,7 +303,7 @@ const RARITIES = ['Common','Uncommon','Rare','Epic','Showcase'];
 /* ══════════════════════════════════════════════════════════════════════════
    STATE
    ══════════════════════════════════════════════════════════════════════════ */
-// Read-only share mode: riftbound.jayegger.com/?view=trade
+// Read-only share mode: rift.jayegger.com/?view=trade
 const READONLY = new URLSearchParams(location.search).get('view') === 'trade';
 
 let CAT = null;            // { generatedAt, imagePrefix, sets[], cards[] }
@@ -1162,7 +1162,7 @@ function renderSync(){
       CORS only for its own origin, so a small Cloudflare Worker sits in front of it. Deploy the one
       in <b>worker/</b>, then paste its URL here.</p>
       <div class="bar-row" style="margin-top:12px">
-        <input class="search" id="sync-url" placeholder="https://riftbound-sync.….workers.dev"
+        <input class="search" id="sync-url" placeholder="https://rift-sync.….workers.dev"
           value="${esc(S.syncUrl || '')}" autocomplete="off" style="flex:1">
         <button class="ghost" id="btn-sync-save">Save</button>
       </div>
