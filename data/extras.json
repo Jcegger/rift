@@ -1,0 +1,117 @@
+{
+ "note": "Printings that exist in the game but that Riot's public card gallery does not serve, so scripts/build-catalog.mjs cannot find them. Merged into the catalog at load, and skipped automatically if a future Riot release starts publishing them. All are tokens or basic runes, so none of them affect base-set completion. Names, types and art confirmed against riftbound.gg card pages; the absolute image URLs point at dotgg's CDN because Riot has none for these.",
+ "cards": [
+  {
+   "c": "SFD-R01",
+   "s": "SFD",
+   "no": 1,
+   "v": "rune",
+   "t": "Rune",
+   "r": "Common",
+   "n": "Fury Rune",
+   "d": [
+    "Fury"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/SFD-R01.webp"
+  },
+  {
+   "c": "SFD-R02",
+   "s": "SFD",
+   "no": 2,
+   "v": "rune",
+   "t": "Rune",
+   "r": "Common",
+   "n": "Calm Rune",
+   "d": [
+    "Calm"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/SFD-R02.webp"
+  },
+  {
+   "c": "SFD-T02",
+   "s": "SFD",
+   "no": 2,
+   "v": "token",
+   "r": "Common",
+   "n": "Sand Soldier // Buff",
+   "d": [
+    "Colorless"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/SFD-T02.webp"
+  },
+  {
+   "c": "UNL-R01",
+   "s": "UNL",
+   "no": 1,
+   "v": "rune",
+   "t": "Rune",
+   "r": "Common",
+   "n": "Fury Rune",
+   "d": [
+    "Fury"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/UNL-R01.webp"
+  },
+  {
+   "c": "UNL-R02",
+   "s": "UNL",
+   "no": 2,
+   "v": "rune",
+   "t": "Rune",
+   "r": "Common",
+   "n": "Calm Rune",
+   "d": [
+    "Calm"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/UNL-R02.webp"
+  },
+  {
+   "c": "UNL-R06",
+   "s": "UNL",
+   "no": 6,
+   "v": "rune",
+   "t": "Rune",
+   "r": "Common",
+   "n": "Order Rune",
+   "d": [
+    "Order"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/UNL-R06.webp"
+  },
+  {
+   "c": "VEN-T01",
+   "s": "VEN",
+   "no": 1,
+   "v": "token",
+   "r": "Common",
+   "n": "Empowered // Gold",
+   "d": [
+    "Colorless"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/VEN-T01.webp"
+  },
+  {
+   "c": "VEN-T03",
+   "s": "VEN",
+   "no": 3,
+   "v": "token",
+   "t": "Unit",
+   "r": "Common",
+   "n": "Mech // Recruit (NX)",
+   "d": [
+    "Colorless"
+   ],
+   "m": 3,
+   "e": 0,
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/VEN-T03.webp"
+  }
+ ]
+}
