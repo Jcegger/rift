@@ -29,9 +29,12 @@ is set private, this stops working and the export-link route is the alternative
 
 ```
 cd worker
-npx wrangler login
-npx wrangler deploy
+npx wrangler@3 login
+npx wrangler@3 deploy
 ```
+
+Pinned to wrangler 3 on purpose: wrangler 4 needs Node 20 and this machine runs
+Node 18, where it exits on a version check before doing anything.
 
 `DOTGG_USER` in `wrangler.toml` sets whose profile is read. Then take the printed
 `https://rift-sync.<subdomain>.workers.dev` URL, open the tracker's
