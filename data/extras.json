@@ -1,6 +1,102 @@
 {
- "note": "Printings that exist in the game but that Riot's public card gallery does not serve, so scripts/build-catalog.mjs cannot find them. Merged into the catalog at load, and skipped automatically if a future Riot release starts publishing them. All are tokens or basic runes, so none of them affect base-set completion. Names, types and art confirmed against riftbound.gg card pages; the absolute image URLs point at dotgg's CDN because Riot has none for these.",
+ "note": "Printings that exist in the game but that Riot's public card gallery does not serve, so scripts/build-catalog.mjs cannot find them. Merged into the catalog at load, and skipped automatically if a future Riot release starts publishing them. Most are tokens or basic runes; so none of them affect base-set completion. Names, types and art confirmed against riftbound.gg card pages; the absolute image URLs point at dotgg's CDN because Riot has none for these. Also includes the Arcane Box Set (ARC) and Secret Garden Set (SGN) promos, which Riot's gallery omits entirely but which appear in real collections and decklists; their details come from riftbound.gg's card database.",
  "cards": [
+  {
+   "c": "ARC-001",
+   "s": "ARC",
+   "no": 1,
+   "v": "promo",
+   "t": "Unit",
+   "r": "Showcase",
+   "n": "Vi - Destructive",
+   "d": [
+    "Fury"
+   ],
+   "e": 2,
+   "m": 3,
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/ARC-001.webp"
+  },
+  {
+   "c": "ARC-002",
+   "s": "ARC",
+   "no": 2,
+   "v": "promo",
+   "t": "Unit",
+   "r": "Showcase",
+   "n": "Caitlyn - Patrolling",
+   "d": [
+    "Calm"
+   ],
+   "e": 3,
+   "m": 3,
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/ARC-002.webp"
+  },
+  {
+   "c": "ARC-003",
+   "s": "ARC",
+   "no": 3,
+   "v": "promo",
+   "t": "Unit",
+   "r": "Showcase",
+   "n": "Heimerdinger - Inventor",
+   "d": [
+    "Mind"
+   ],
+   "e": 3,
+   "m": 3,
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/ARC-003.webp"
+  },
+  {
+   "c": "ARC-004",
+   "s": "ARC",
+   "no": 4,
+   "v": "promo",
+   "t": "Unit",
+   "r": "Showcase",
+   "n": "Warwick - Hunter",
+   "d": [
+    "Body"
+   ],
+   "e": 6,
+   "m": 5,
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/ARC-004.webp"
+  },
+  {
+   "c": "ARC-005",
+   "s": "ARC",
+   "no": 5,
+   "v": "promo",
+   "t": "Unit",
+   "r": "Showcase",
+   "n": "Jinx - Rebel",
+   "d": [
+    "Chaos"
+   ],
+   "e": 5,
+   "m": 5,
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/ARC-005.webp"
+  },
+  {
+   "c": "ARC-006",
+   "s": "ARC",
+   "no": 6,
+   "v": "promo",
+   "t": "Unit",
+   "r": "Showcase",
+   "n": "Viktor - Leader",
+   "d": [
+    "Order"
+   ],
+   "e": 4,
+   "m": 4,
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/ARC-006.webp"
+  },
   {
    "c": "SFD-R01",
    "s": "SFD",
@@ -97,6 +193,52 @@
    ],
    "ex": 1,
    "i": "https://static.dotgg.gg/riftbound/cards/SFD-T02.webp"
+  },
+  {
+   "c": "SGN-001/003-P",
+   "s": "SGN",
+   "no": 1003,
+   "v": "promo",
+   "t": "Legend",
+   "r": "Showcase",
+   "n": "Lillia - Bashful Bloom",
+   "d": [
+    "Calm",
+    "Mind"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/SGN%20-%20001/003%20-%20P.webp"
+  },
+  {
+   "c": "SGN-002/003-P",
+   "s": "SGN",
+   "no": 2003,
+   "v": "promo",
+   "t": "Legend",
+   "r": "Showcase",
+   "n": "Ivern - Green Father",
+   "d": [
+    "Calm",
+    "Order"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/SGN-002/003-P.webp"
+  },
+  {
+   "c": "SGN-003/003-P",
+   "s": "SGN",
+   "no": 3003,
+   "v": "promo",
+   "t": "Unit",
+   "r": "Common",
+   "n": "Ultrasoft Poro",
+   "d": [
+    "Order"
+   ],
+   "e": 5,
+   "m": 5,
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/SGN%20-%20003/003%20-%20P.webp"
   },
   {
    "c": "UNL-R01",

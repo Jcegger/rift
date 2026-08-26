@@ -13,9 +13,11 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `index.html` - the whole app. Vanilla JS, no dependencies, no bundler.
 - `data/cards.json` - the card catalog, generated and committed. Loaded at boot.
 - `data/extras.json` - printings Riot does not publish, merged in at load.
-- `data/decks.json` - recent tournament decklists, the meta snapshot.
+- `data/decks.json` - recent decklists, the meta snapshot.
+- `data/banned.json` - cards banned from sanctioned Constructed play.
 - `scripts/build-catalog.mjs` - regenerates the catalog from Riot's gallery feed.
-- `scripts/build-decks.mjs` - regenerates the tournament deck snapshot.
+- `scripts/build-decks.mjs` - regenerates the deck snapshot.
+- `scripts/build-banned.mjs` - regenerates the ban list.
 - `schema.sql` - the Supabase table and its policies.
 - `worker/` - the Cloudflare Worker that proxies the riftbound.gg profile.
 - `fonts/` - Press Start 2P and Syne Mono, self-hosted to match jayegger.com.
@@ -145,14 +147,50 @@ card the catalog cannot know about: the **Arcane Box Set**, or a set Riot has
 announced but not released. riftbound.gg's catalog is larger than Riot's gallery
 for exactly that reason.
 
+## Bans
+
+Riot's gallery carries no legality data at all, so the ban list comes from
+riftbound.gg's card database, which has a `banned` flag per printing:
+
+```
+node scripts/build-banned.mjs
+```
+
+That flag is keyed by the exact code form deck lists use, so no name matching is
+involved, which matters because the ban page writes `Draven - Vanquisher` where
+the card is actually `Draven, Vanquisher`. Riot bans outright rather than
+restricting, so there is no restricted list, and a ban covers the card, meaning
+every printing of it including alt arts.
+
+One entry cannot come from the flag. **Master Yi - Wuju Bladesman - Starter** is
+banned in 2v2 Constructed only, and their database marks it legal because it is
+legal in 1v1. It is recorded as a separate format in `banned.json`, taken from
+the ban page, and the app labels it as format-specific rather than lumping it in.
+
+This is not cosmetic. 65 of the ~490 snapshot lists run a banned card, and 42 of
+those are dated *after* the ban, so filtering by date does not work. The Meta tab
+therefore shows sanctioned-legal lists by default, with a toggle to include the
+rest, and flags any deck with exactly which banned cards it runs. Bans also show
+on the card in the Collection tab, which has a Banned filter, and on saved decks.
+
+The honest consequence: the collection's one buildable meta deck, Loose Cannon,
+runs 3x Fight or Flight, 3x Scrapheap and 1x Reaver's Row. It is fine at a
+kitchen table and not legal at an event, and the app now says so instead of
+calling it ready.
+
 ### The catalog gap
 
 Riot's gallery quietly omits some real printings. It reports 1,197 cards and
 serves 1,189, and repeated passes never produce the rest, so this is not a
-pagination race. Eight of the missing ones are tokens and basic runes that turned
-up in a real collection, so they live in `data/extras.json`, which is merged at
-load and drops any entry Riot later starts publishing. Their art is hot-linked
-from dotgg's CDN, since Riot has none.
+pagination race. What it misses turned up in a real collection and in real
+decklists: tokens, basic runes, and two whole products, the **Arcane Box Set**
+(ARC) and the **Secret Garden Set** (SGN). All 25 live in `data/extras.json`,
+merged at load, dropping any entry Riot later starts publishing. Names, types and
+art come from riftbound.gg's card database rather than being guessed at.
+
+The Secret Garden legends mattered more than their count suggests: they are the
+Legends of several decks, and without them those decks had no identifiable
+archetype at all.
 
 ## Card data
 

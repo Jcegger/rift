@@ -1,0 +1,122 @@
+{
+ "generatedAt": "2026-08-26",
+ "source": "api.dotgg.gg/cgfw/getcards (banned flag) + riftbound.gg/rules/banned-cards for format-specific bans",
+ "note": "Riot bans outright; there is no restricted list. A ban covers the card, so every printing of it is banned.",
+ "constructed": [
+  {
+   "key": "OGN|276",
+   "name": "Aspirant's Climb",
+   "type": "Battlefield",
+   "code": "OGN-276/298",
+   "printings": [
+    "OGN-276",
+    "OGN-276a"
+   ],
+   "inCatalog": true
+  },
+  {
+   "key": "OGN|284",
+   "name": "Obelisk of Power",
+   "type": "Battlefield",
+   "code": "OGN-284/298",
+   "printings": [
+    "OGN-284"
+   ],
+   "inCatalog": true
+  },
+  {
+   "key": "OGN|285",
+   "name": "Reaver's Row",
+   "type": "Battlefield",
+   "code": "OGN-285/298",
+   "printings": [
+    "OGN-285"
+   ],
+   "inCatalog": true
+  },
+  {
+   "key": "OGN|290",
+   "name": "The Arena's Greatest",
+   "type": "Battlefield",
+   "code": "OGN-290/298",
+   "printings": [
+    "OGN-290"
+   ],
+   "inCatalog": true
+  },
+  {
+   "key": "OGN|292",
+   "name": "The Dreaming Tree",
+   "type": "Battlefield",
+   "code": "OGN-292/298",
+   "printings": [
+    "OGN-292"
+   ],
+   "inCatalog": true
+  },
+  {
+   "key": "OGN|182",
+   "name": "Scrapheap",
+   "type": "Gear",
+   "code": "OGN-182/298",
+   "printings": [
+    "OGN-182"
+   ],
+   "inCatalog": true
+  },
+  {
+   "key": "SFD|122",
+   "name": "Called Shot",
+   "type": "Spell",
+   "code": "SFD-122/221",
+   "printings": [
+    "SFD-122"
+   ],
+   "inCatalog": true
+  },
+  {
+   "key": "OGN|168",
+   "name": "Fight or Flight",
+   "type": "Spell",
+   "code": "OGN-168/298",
+   "printings": [
+    "OGN-168"
+   ],
+   "inCatalog": true
+  },
+  {
+   "key": "SFD|20",
+   "name": "Draven, Vanquisher",
+   "type": "Unit",
+   "code": "SFD-020/221",
+   "printings": [
+    "SFD-020",
+    "SFD-020A"
+   ],
+   "inCatalog": true
+  },
+  {
+   "key": "OGN|177",
+   "name": "Stealthy Pursuer",
+   "type": "Unit",
+   "code": "OGN-177/298",
+   "printings": [
+    "OGN-177",
+    "OGN-177-P"
+   ],
+   "inCatalog": true
+  }
+ ],
+ "byFormat": {
+  "2v2": [
+   {
+    "key": "OGS|19",
+    "name": "Wuju Bladesman - Starter",
+    "type": "Legend",
+    "code": "OGS-019/024",
+    "note": "banned 2026-07-24 for overshadowing every other 2v2 Legend option",
+    "inCatalog": true
+   }
+  ]
+ }
+}
