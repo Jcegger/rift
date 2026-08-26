@@ -13,12 +13,14 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `index.html` - the whole app. Vanilla JS, no dependencies, no bundler.
 - `data/cards.json` - the card catalog, generated and committed. Loaded at boot.
 - `data/extras.json` - printings Riot does not publish, merged in at load.
+- `data/decks.json` - recent tournament decklists, the meta snapshot.
 - `scripts/build-catalog.mjs` - regenerates the catalog from Riot's gallery feed.
+- `scripts/build-decks.mjs` - regenerates the tournament deck snapshot.
 - `schema.sql` - the Supabase table and its policies.
 - `worker/` - the Cloudflare Worker that proxies the riftbound.gg profile.
 - `fonts/` - Press Start 2P and Syne Mono, self-hosted to match jayegger.com.
 
-## The four views
+## The views
 
 **Collection** filters all 1,197 printings by set, type, rarity, domain, printing
 class, imported tag, and free text over names, codes, ability text, tags, and artists. Each
@@ -36,8 +38,39 @@ the target. Copy it as text for a Discord post, or share the read-only view.
 **Decks** builds lists against the collection and reports what you are short.
 "Add shortfall to wants" pushes the gap onto the trade list.
 
+**Meta** ranks tournament decks against the collection, in three sections:
+**Ready** decks with every card already owned, **Close** decks within a tunable
+number of cards, and **Ideal** decks, the meta ranked by tournament share
+regardless of what is owned. Each one can be copied, saved into Decks, or have
+its gap pushed onto the wants list.
+
 **Import** pulls the collection in from riftbound.gg, which is where cards
 actually get entered because its scanner beats typing.
+
+## The meta
+
+`data/decks.json` is a snapshot of recent tournament entries from riftbound.gg's
+public deck API, each carrying its event and the player's finish, so meta share
+is counted from real results rather than guessed at. Refresh it whenever:
+
+```
+node scripts/build-decks.mjs [--limit 250]
+```
+
+Decks are grouped into archetypes by their Legend, and each archetype is shown as
+whichever of its lists you are closest to finishing. Two details matter and are
+easy to get wrong:
+
+- **Buildability goes by card, not printing.** An alt art, signature or
+  overnumber satisfies a slot calling for the base card, so a list citing
+  `UNL-113A` is covered by owning `UNL-113`.
+- **Basic runes count by name.** Fury Rune is Fury Rune whether it came from
+  Origins, Unleashed or Vendetta. Tournament lists lean on this: nine copies of a
+  single rune is normal, and matching runes by printing would report every deck
+  as impossible.
+
+When nothing is within the threshold, Close shows the five shortest paths anyway
+and says so, because an empty section teaches nothing.
 
 ## Import
 

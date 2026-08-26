@@ -224,6 +224,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:16px 0;font-fami
       <button class="tab" role="tab" data-tab="sets" aria-selected="false">Sets</button>
       <button class="tab" role="tab" data-tab="trade" aria-selected="false">Trade<span class="n" id="tn-trade"></span></button>
       <button class="tab" role="tab" data-tab="decks" aria-selected="false">Decks<span class="n" id="tn-decks"></span></button>
+      <button class="tab" role="tab" data-tab="meta" aria-selected="false">Meta<span class="n" id="tn-meta"></span></button>
       <button class="tab" role="tab" data-tab="sync" aria-selected="false">Import<span class="n" id="tn-sync"></span></button>
     </nav>
   </header>
@@ -273,6 +274,9 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:16px 0;font-fami
   <!-- ══ DECKS ═══════════════════════════════════════ -->
   <section id="v-decks" class="hide"></section>
 
+  <!-- ══ META ════════════════════════════════════════ -->
+  <section id="v-meta" class="hide"></section>
+
   <!-- ══ IMPORT / SYNC ═══════════════════════════════ -->
   <section id="v-sync" class="hide"></section>
 
@@ -294,6 +298,10 @@ const SUPA_KEY   = 'sb_publishable_U9pC2YEA9YB2KxPog6t3SA_T03Jid1g';
 const SUPA_TABLE = 'riftbound';
 const SUPA_ID    = 'jay';
 
+// The deployed proxy in front of the public riftbound.gg profile. Preconfigured so a
+// fresh device pulls the collection with nothing to paste in. Overridable in Import.
+const DEFAULT_SYNC_URL = 'https://rift-sync.jcegger.workers.dev';
+
 const DOMAINS  = ['Fury','Calm','Mind','Body','Chaos','Order','Colorless'];
 const VARIANTS = [['','Base'],['alt','Alt art'],['sig','Signature'],['over','Overnumber'],
                   ['token','Token'],['rune','Basic rune'],['promo','Promo']];
@@ -307,6 +315,8 @@ const RARITIES = ['Common','Uncommon','Rare','Epic','Showcase'];
 const READONLY = new URLSearchParams(location.search).get('view') === 'trade';
 
 let CAT = null;            // { generatedAt, imagePrefix, sets[], cards[] }
+let DECKS = null;          // tournament decklists from data/decks.json
+let DECKS_AT = null;       // when that snapshot was taken
 let BY  = {};              // publicCode -> card
 let TAB = READONLY ? 'trade' : 'collection';
 
@@ -332,10 +342,12 @@ function loadLocal(){
   S.decks = S.decks || [];
   S.tags  = S.tags  || {};
   S.playset = S.playset || 3;
+  if (S.syncUrl === undefined) S.syncUrl = DEFAULT_SYNC_URL;
+  if (S.autoSync === undefined) S.autoSync = true;
   Object.assign(F, lsGet('rb_ui', {}) || {});
 }
 // Everything that belongs on every device, which is all of it apart from filters.
-const SYNCED = ['inv','decks','tags','playset','syncUrl','autoSync','mirrorTradeWish','lastSyncAt'];
+const SYNCED = ['inv','decks','tags','playset','closeThreshold','syncUrl','autoSync','mirrorTradeWish','lastSyncAt'];
 // Saving must not blow away the collection stream: typing counts into 1189 cards
 // would reset scroll and focus on every keystroke. Views that show derived totals
 // re-render; the collection view patches the one card that changed instead.
@@ -673,6 +685,110 @@ function tradeText(){
   return lines.join('\n');
 }
 
+function cardRow(card, right, cls){
+  return `<div class="row">
+    ${card.i ? `<img class="thumb" loading="lazy" src="${imgURL(card, 60)}" alt="" data-zoom="${esc(card.c)}">` : ''}
+    <span class="nm">${dchips(card)} ${esc(card.n)}
+      ${card.v ? `<span class="vtag v-${card.v}">${esc(vLabel(card.v))}</span>` : ''}
+      <span class="code">${esc(card.c)}</span></span>
+    <span class="qty ${cls || ''}">${right}</span>
+  </div>`;
+}
+
+function renderSpares(){
+  const sp = spares();
+  const keep = S.playset || 3;
+  const copies = sp.reduce((a, s) => a + s.surplus, 0);
+  return `<div class="panel">
+    <h2>YOUR SPARES <span class="code">${sp.length}</span></h2>
+    <p class="note">Everything you hold beyond ${keep} copies, which is what you can trade away
+    without breaking a deck. Computed from the collection, so it stays right without setting a
+    single Trade count by hand. Basic runes are left out, since lists happily run nine of one.</p>
+    ${sp.length ? `<div class="bar-row" style="margin:12px 0">
+        <button class="ghost" id="btn-spares-copy">Copy spares list</button>
+        <button class="ghost" id="btn-spares-mark">Mark all as for trade</button>
+        <span class="note">${copies} spare card${copies === 1 ? '' : 's'}</span>
+      </div>
+      <div class="rows">${sp.slice(0, 80).map(s =>
+        cardRow(s.card, `${s.surplus} spare · own ${s.copies}`)).join('')}</div>
+      ${sp.length > 80 ? `<p class="note" style="margin-top:8px">Showing 80 of ${sp.length}.</p>` : ''}`
+      : `<p class="empty">Nothing past ${keep} copies yet.</p>`}
+  </div>`;
+}
+
+function renderPartner(){
+  const m = tradeMatch();
+  const rows = (list, dir) => list.length
+    ? `<div class="rows">${list.map(x => cardRow(x.card,
+        dir === 'in' ? `take ${x.qty}${x.why && x.why !== 'want' ? ` · for ${esc(x.why)}` : ''}`
+                     : `give ${x.qty}`,
+        dir === 'in' ? 'need' : '')).join('')}</div>`
+    : `<p class="empty">Nothing on this side.</p>`;
+
+  return `<div class="panel">
+    <h2>TRADE OPPORTUNITIES</h2>
+    <p class="note">Any public riftbound.gg profile can be read the same way yours is, so put in a
+    trade partner's username and this works out both directions at once: their spares you need, and
+    your spares they want. If they never filled in a trade list, their surplus past ${S.playset || 3}
+    copies is used instead.</p>
+    <div class="bar-row" style="margin:12px 0">
+      <input class="search" id="partner-user" placeholder="their riftbound.gg username"
+        value="${esc(PARTNER ? PARTNER.user : '')}" autocomplete="off" style="flex:1;min-width:180px">
+      <button class="ghost" id="btn-partner-scan">Scan</button>
+      ${PARTNER ? '<button class="ghost" id="btn-partner-clear">Clear</button>' : ''}
+    </div>
+    ${PARTNER_ERR ? `<p class="note" style="color:var(--bad)">${esc(PARTNER_ERR)}</p>` : ''}
+    ${!PARTNER || !m ? `<p class="note">Nothing scanned yet.</p>` : `
+      <div class="stats" style="margin-bottom:6px">
+        <div class="stat"><div class="v" style="color:var(--good)">${m.theyGive.length}</div><div class="k">they can give you</div></div>
+        <div class="stat"><div class="v" style="color:var(--maize)">${m.youGive.length}</div><div class="k">you can give them</div></div>
+        <div class="stat"><div class="v">${PARTNER.offers.size}</div><div class="k">their spares</div></div>
+        <div class="stat"><div class="v">${PARTNER.wants.size}</div><div class="k">their wants</div></div>
+      </div>
+      <p class="note">${esc(PARTNER.user)} · ${PARTNER.rows} rows read · scanned ${esc(PARTNER.at)}
+        ${m.theyGive.length && m.youGive.length ? '· a two-way trade is on'
+          : m.theyGive.length ? '· one direction only, they have things you need'
+          : m.youGive.length ? '· one direction only, you have things they want'
+          : '· no overlap either way'}</p>
+      <div class="cols" style="margin-top:12px">
+        <div>
+          <h3 style="color:var(--good)">You take ${m.theyGive.length ? `(${m.theyGive.length})` : ''}</h3>
+          <p class="note" style="margin-bottom:8px">Their spares that fill your wants or your
+          closest deck gaps.</p>
+          ${rows(m.theyGive, 'in')}
+        </div>
+        <div>
+          <h3 style="color:var(--maize)">You give ${m.youGive.length ? `(${m.youGive.length})` : ''}</h3>
+          <p class="note" style="margin-bottom:8px">Your spares that are on their wishlist.</p>
+          ${rows(m.youGive, 'out')}
+        </div>
+      </div>
+      <div class="bar-row" style="margin-top:12px">
+        <button class="ghost" id="btn-partner-copy">Copy the trade</button>
+      </div>`}
+  </div>`;
+}
+
+function spareText(){
+  const sp = spares();
+  return ['SPARES FOR TRADE', ...(sp.length
+    ? sp.map(s => `${s.card.c}  ${s.card.n}  x${s.surplus}`)
+    : ['(nothing spare)'])].join('\n');
+}
+function tradeMatchText(){
+  const m = tradeMatch();
+  if (!m) return '';
+  const fmt = (x, verb) => `  ${verb} ${x.qty}x ${x.card.n}  ${x.card.c}`;
+  return [`TRADE WITH ${PARTNER.user.toUpperCase()}`, '',
+    `YOU TAKE (${m.theyGive.length})`,
+    ...(m.theyGive.length ? m.theyGive.map(x => fmt(x, 'take')) : ['  (nothing)']),
+    '', `YOU GIVE (${m.youGive.length})`,
+    ...(m.youGive.length ? m.youGive.map(x => fmt(x, 'give')) : ['  (nothing)']),
+  ].join('\n');
+}
+
+let PARTNER_ERR = '';
+
 function renderTrade(){
   const { haves, wants } = tradeLists();
   document.getElementById('tn-trade').textContent = haves.length || wants.length
@@ -692,7 +808,7 @@ function renderTrade(){
         <div class="rows">${groupBySet(wants)}</div>
       </div>
     </div>
-    ${READONLY ? '' : `<div class="panel">
+    ${READONLY ? '' : renderSpares() + renderPartner() + `<div class="panel">
       <h2>SHARE IT</h2>
       <p class="note">Set a card's <b>Trade</b> count to list surplus, and its <b>Want</b> count to
       list what you are chasing. Wants show the shortfall against what you already own, so a want of
@@ -936,6 +1052,9 @@ function buildMatchIndex(){
 // gallery and the copies were attributed to the base printing instead, which is
 // reported rather than hidden.
 function matchRow(r){
+  // Built lazily: the meta view resolves deck codes through here too, and it can be
+  // the first thing opened, before any import has run.
+  if (!MATCH) buildMatchIndex();
   const keys = [];
   if (r.id){
     const id = String(r.id).toLowerCase().trim();
@@ -1187,10 +1306,397 @@ function renderSync(){
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   SPARES AND TRADE MATCHING
+   ══════════════════════════════════════════════════════════════════════════
+   Built for standing in a shop. Two questions matter there: what can I give
+   away without breaking a deck, and is a trade with this person worth doing.
+
+   Everything works on card identity rather than printing, the same rule the
+   meta view uses, so alt arts count as the base card and any Fury Rune is a
+   Fury Rune.                                                                 */
+
+// identity -> { card: representative printing, copies, codes: {code: n} }
+function identityIndex(){
+  const out = new Map();
+  for (const code in S.inv){
+    const n = owned(code);
+    if (!n) continue;
+    const card = BY[code];
+    const id = identityOf(card);
+    if (!id) continue;
+    const e = out.get(id) || { card, copies:0, codes:{} };
+    e.copies += n;
+    e.codes[code] = n;
+    // Prefer a base printing as the label; a spare is described by the card, not the art.
+    if (card && !card.v && e.card && e.card.v) e.card = card;
+    out.set(id, e);
+  }
+  return out;
+}
+
+// Copies past the playset target: tradeable without breaking anything.
+// Runes are excluded, because lists routinely run nine of one and a "spare" rune
+// is usually not spare at all.
+function spares(){
+  const idx = identityIndex();
+  const keep = S.playset || 3;
+  const out = [];
+  for (const [id, e] of idx){
+    if (e.card && (e.card.t === 'Rune' || e.card.v === 'rune')) continue;
+    const surplus = e.copies - keep;
+    if (surplus > 0) out.push({ id, card: e.card, copies: e.copies, surplus });
+  }
+  return out.sort((a, b) => b.surplus - a.surplus || a.card.n.localeCompare(b.card.n));
+}
+
+// What you are short of. Explicit wants first, then the gap in the archetypes you
+// are closest to, so this is useful before any want has been typed in.
+function myNeeds(){
+  const need = new Map();
+  const bump = (card, qty, why) => {
+    const id = identityOf(card);
+    if (!id) return;
+    const e = need.get(id);
+    if (!e || qty > e.qty) need.set(id, { card, qty, why });
+  };
+  for (const code in S.inv){
+    const short = need0(code);
+    if (short > 0) bump(BY[code], short, 'want');
+  }
+  if (DECKS){
+    const have = ownedIdentities();
+    const arch = metaArchetypes()
+      .filter(g => g.best.ev.missingCopies > 0)
+      .sort((a, b) => a.best.ev.missingCopies - b.best.ev.missingCopies)
+      .slice(0, 5);
+    for (const g of arch)
+      for (const m of g.best.ev.missing) bump(m.card, m.short, g.name);
+  }
+  return need;
+}
+function need0(code){ return Math.max(0, want(code) - owned(code)); }
+
+// A partner's public riftbound.gg profile, reduced to identities.
+let PARTNER = null;   // { user, at, offers: Map, wants: Map, raw }
+function readPartner(user, payload){
+  const list = (payload && payload.collection) || [];
+  const keep = S.playset || 3;
+  const byId = new Map();
+  const int = (v) => { const n = Math.floor(Number(String(v ?? '').trim())); return Number.isFinite(n) && n > 0 ? n : 0; };
+  for (const x of list){
+    const hit = matchRow({ id: x.card ?? x.cardid ?? x.id ?? '' });
+    if (!hit) continue;
+    const id = identityOf(hit.card);
+    const e = byId.get(id) || { card: hit.card, copies:0, trade:0, wish:0 };
+    e.copies += int(x.standard ?? x.normal) + int(x.foil);
+    e.trade  += int(x.trade) + int(x.trade_foil);
+    e.wish   += int(x.wish) + int(x.wish_foil);
+    if (hit.card && !hit.card.v && e.card && e.card.v) e.card = hit.card;
+    byId.set(id, e);
+  }
+  const offers = new Map(), wants = new Map();
+  for (const [id, e] of byId){
+    // Most people never fill in a trade list, so fall back to their surplus.
+    const isRune = e.card && (e.card.t === 'Rune' || e.card.v === 'rune');
+    const give = e.trade || (isRune ? 0 : Math.max(0, e.copies - keep));
+    if (give > 0) offers.set(id, { card: e.card, qty: give, explicit: !!e.trade, copies: e.copies });
+    if (e.wish > 0) wants.set(id, { card: e.card, qty: e.wish, explicit: true });
+  }
+  return { user, at: new Date().toISOString().slice(0, 16).replace('T', ' '),
+           offers, wants, rows: list.length };
+}
+
+// The two directions of a trade.
+function tradeMatch(){
+  if (!PARTNER) return null;
+  const mine = myNeeds();
+  const mySpares = new Map(spares().map(s => [s.id, s]));
+
+  const theyGive = [];
+  for (const [id, o] of PARTNER.offers){
+    const n = mine.get(id);
+    if (!n) continue;
+    theyGive.push({ card: o.card, qty: Math.min(o.qty, n.qty), theirs: o.qty,
+                    youNeed: n.qty, why: n.why, explicit: o.explicit });
+  }
+  const youGive = [];
+  for (const [id, w] of PARTNER.wants){
+    const s = mySpares.get(id);
+    if (!s) continue;
+    youGive.push({ card: s.card, qty: Math.min(w.qty, s.surplus), theirs: w.qty,
+                   yourSpare: s.surplus });
+  }
+  const sort = (a, b) => b.qty - a.qty || a.card.n.localeCompare(b.card.n);
+  return { theyGive: theyGive.sort(sort), youGive: youGive.sort(sort) };
+}
+
+async function scanPartner(user){
+  const base = S.syncUrl || DEFAULT_SYNC_URL;
+  if (!base) throw new Error('No sync URL configured, so there is nothing to ask.');
+  const url = `${base}${base.includes('?') ? '&' : '?'}user=${encodeURIComponent(user)}`;
+  const r = await fetch(url, { cache:'no-store' });
+  const txt = await r.text();
+  if (!r.ok) throw new Error(txt.trim().slice(0, 200) || `HTTP ${r.status}`);
+  let payload;
+  try { payload = JSON.parse(txt); } catch { throw new Error('That did not come back as JSON.'); }
+  // An unknown name comes back as a normal-looking payload with user_id 0 and an
+  // empty collection. Say so plainly, rather than showing "no trades" and letting a
+  // typo look like a real answer.
+  if (!payload.user || !Number(payload.user.user_id))
+    throw new Error(`No public profile called "${user}". Check the spelling on their riftbound.gg page.`);
+  if (!Array.isArray(payload.collection) || !payload.collection.length)
+    throw new Error(`${payload.user.nickname || user} has no public collection to compare against.`);
+  PARTNER = readPartner(user, payload);
+  return PARTNER;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   META: tournament decks, and what you can actually build
+   ══════════════════════════════════════════════════════════════════════════
+   data/decks.json is a snapshot of recent tournament entries from riftbound.gg,
+   each with its event and the player's finish. Refresh with
+   scripts/build-decks.mjs.
+
+   Buildability is judged by card identity, not by printing, because a deck does
+   not care which printing you own:
+     - Alt arts, signatures and overnumbers all count as the base card, so a
+       list citing UNL-113A is satisfied by owning UNL-113.
+     - Basic runes count by name, since Fury Rune is Fury Rune whether it came
+       from Origins, Unleashed or Vendetta. Tournament lists lean on this
+       heavily: nine copies of one rune is normal.                             */
+
+function identityOf(card){
+  if (!card) return null;
+  if (card.t === 'Rune' || card.v === 'rune') return 'rune:' + card.n;
+  const p = splitCode(card.c);
+  if (!p) return 'code:' + card.c;
+  const coll = normColl(p.seg);
+  return `${p.set}|${baseColl(coll) || coll}`;
+}
+
+// identity -> copies owned, summed across every printing of that card.
+function ownedIdentities(){
+  const out = new Map();
+  for (const code in S.inv){
+    const n = owned(code);
+    if (!n) continue;
+    const id = identityOf(BY[code]);
+    if (id) out.set(id, (out.get(id) || 0) + n);
+  }
+  return out;
+}
+
+// What a deck needs, and what you are short.
+function evalDeck(deck, have){
+  const needById = new Map();     // identity -> {qty, card}
+  const unknown = [];
+  for (const [code, qty] of Object.entries(deck.cards || {})){
+    const hit = matchRow({ id: code });
+    if (!hit){ unknown.push(code); continue; }
+    const id = identityOf(hit.card);
+    const prev = needById.get(id);
+    if (prev) prev.qty += qty;
+    else needById.set(id, { qty, card: hit.card });
+  }
+  const missing = [];
+  let missingCopies = 0;
+  for (const [id, need] of needById){
+    const short = need.qty - (have.get(id) || 0);
+    if (short > 0){
+      missing.push({ card: need.card, need: need.qty, own: have.get(id) || 0, short });
+      missingCopies += short;
+    }
+  }
+  missing.sort((a, b) => b.short - a.short || a.card.n.localeCompare(b.card.n));
+  return { missing, missingCopies, distinctMissing: missing.length, unknown,
+           distinct: needById.size, needById };
+}
+
+// One entry per archetype, represented by whichever of its lists you are closest
+// to finishing. 250 lists collapse into ~34 rows, which is the difference between
+// a page you can read and a wall.
+function metaArchetypes(){
+  const have = ownedIdentities();
+  const groups = new Map();
+  for (const d of (DECKS || [])){
+    const key = d.ln || 'Unidentified';
+    const ev = evalDeck(d, have);
+    const row = { deck: d, ev };
+    const g = groups.get(key);
+    if (!g){
+      groups.set(key, { name: key, legend: d.lg, lists: 1, best: row,
+                        bestPlace: d.pl ?? null, events: new Set([d.ev]) });
+    } else {
+      g.lists++;
+      g.events.add(d.ev);
+      if (d.pl != null && (g.bestPlace == null || d.pl < g.bestPlace)) g.bestPlace = d.pl;
+      // "closest" beats "highest placing" here: this view is about what you can build.
+      if (ev.missingCopies < g.best.ev.missingCopies) g.best = row;
+    }
+  }
+  const total = (DECKS || []).length || 1;
+  return [...groups.values()].map((g) => ({ ...g, share: g.lists / total * 100 }));
+}
+
+function deckCardsToLocal(deck){
+  const out = {};
+  for (const [code, qty] of Object.entries(deck.cards || {})){
+    const hit = matchRow({ id: code });
+    if (hit) out[hit.card.c] = (out[hit.card.c] || 0) + qty;
+  }
+  return out;
+}
+function metaDeckText(deck){
+  const have = ownedIdentities();
+  const ev = evalDeck(deck, have);
+  const lines = [deck.h, deck.ev ? `${deck.ev}${deck.pl ? ` · finished #${deck.pl}` : ''}` : '', ''];
+  const byType = {};
+  for (const [, need] of ev.needById){
+    const t = need.card.t || 'Other';
+    (byType[t] ??= []).push(need);
+  }
+  for (const t of TYPES.concat(['Other'])){
+    const g = byType[t];
+    if (!g) continue;
+    lines.push(`${t.toUpperCase()} (${g.reduce((a, x) => a + x.qty, 0)})`);
+    for (const x of g.sort((a, b) => a.card.n.localeCompare(b.card.n)))
+      lines.push(`  ${x.qty}x ${x.card.n}  ${x.card.c}`);
+    lines.push('');
+  }
+  if (ev.missing.length){
+    lines.push(`STILL NEED (${ev.missingCopies})`);
+    for (const m of ev.missing) lines.push(`  ${m.short}x ${m.card.n}  ${m.card.c}`);
+  }
+  return lines.join('\n').trim();
+}
+
+function missingBlock(ev){
+  if (!ev.missing.length) return '';
+  return `<div class="rows" style="margin-top:8px">${ev.missing.map(m => `
+    <div class="row">
+      ${m.card.i ? `<img class="thumb" loading="lazy" src="${imgURL(m.card, 60)}" alt="" data-zoom="${esc(m.card.c)}">` : ''}
+      <span class="nm">${dchips(m.card)} ${esc(m.card.n)}
+        <span class="code">${esc(m.card.c)} · ${esc(m.card.t || '')}</span></span>
+      <span class="qty need">need ${m.short} of ${m.need}${m.own ? ` · own ${m.own}` : ''}</span>
+    </div>`).join('')}</div>`;
+}
+
+function deckPanel(g, opts){
+  const d = g.best.deck, ev = g.best.ev;
+  const done = ev.missingCopies === 0;
+  return `<div class="panel" style="margin-bottom:12px">
+    <div class="meter-top">
+      <span class="meter-name">${esc(g.name)}
+        ${g.lists > 1 ? `<span class="code">${g.lists} lists</span>` : ''}</span>
+      <span class="meter-val" style="color:${done ? 'var(--good)' : 'var(--maize)'}">
+        ${done ? 'complete' : `${ev.missingCopies} card${ev.missingCopies === 1 ? '' : 's'} short`}</span>
+    </div>
+    <div class="meter-sub">
+      ${g.share ? `<span><b>${g.share.toFixed(1)}%</b> of tournament lists</span>` : ''}
+      ${g.bestPlace != null ? `<span>best finish <b>#${g.bestPlace}</b></span>` : ''}
+      ${d.ev ? `<span>${esc(d.ev)}</span>` : ''}
+      ${d.pl != null ? `<span>this list <b>#${d.pl}</b></span>` : ''}
+      <span><b>${d.sz}</b> cards</span>
+      ${d.pr ? `<span>~$${d.pr}</span>` : ''}
+      ${!done ? `<span><b>${ev.distinctMissing}</b> distinct missing</span>` : ''}
+    </div>
+    ${opts && opts.showMissing ? missingBlock(ev) : ''}
+    <div class="bar-row" style="margin-top:10px">
+      <button class="ghost" data-meta-copy="${esc(d.s)}">Copy list</button>
+      <button class="ghost" data-meta-save="${esc(d.s)}">Save as my deck</button>
+      ${done ? '' : `<button class="ghost" data-meta-want="${esc(d.s)}">Add missing to wants</button>`}
+      <a class="ghost" style="text-decoration:none" target="_blank" rel="noopener"
+         href="https://riftbound.gg/decks/${esc(d.s)}">View on riftbound.gg</a>
+    </div>
+  </div>`;
+}
+
+function renderMeta(){
+  const host = document.getElementById('v-meta');
+  if (!DECKS){
+    host.innerHTML = `<div class="panel"><h2>META</h2><p class="note">No deck snapshot yet.
+      Run <code>node scripts/build-decks.mjs</code> to pull recent tournament lists.</p></div>`;
+    return;
+  }
+  const arch = metaArchetypes();
+  const near = S.closeThreshold ?? 5;
+
+  const byGap = (a, b) => a.best.ev.missingCopies - b.best.ev.missingCopies || b.share - a.share;
+  const ready = arch.filter(g => g.best.ev.missingCopies === 0)
+                    .sort((a, b) => b.share - a.share);
+  const within = arch.filter(g => g.best.ev.missingCopies > 0 && g.best.ev.missingCopies <= near)
+                     .sort(byGap);
+  // An empty section teaches nothing. When the collection is not close to anything
+  // yet, show the shortest paths anyway and say plainly that they are over the line.
+  const fellShort = within.length === 0;
+  const close = fellShort
+    ? arch.filter(g => g.best.ev.missingCopies > 0).sort(byGap).slice(0, 5)
+    : within;
+
+  const IDEAL_SHOWN = 12;
+  const idealAll = arch.slice().sort((a, b) => b.share - a.share ||
+                    (a.bestPlace ?? 999) - (b.bestPlace ?? 999));
+  const ideal = idealAll.slice(0, IDEAL_SHOWN);
+
+  const events = new Set(DECKS.map(d => d.ev).filter(Boolean)).size;
+
+  host.innerHTML = `
+    <div class="panel">
+      <h2>THE META</h2>
+      <p class="note">${DECKS.length} tournament decklists across ${events} events, pulled from
+      riftbound.gg and grouped into ${arch.length} archetypes by Legend. Snapshot taken
+      ${esc(DECKS_AT || 'unknown')}. Each archetype below is represented by whichever of its
+      lists you are closest to finishing.</p>
+      <p class="note" style="margin-top:8px">Buildability goes by card, not printing: an alt art,
+      signature or overnumber counts as the base card, and any Fury Rune is a Fury Rune whatever
+      set it came from. Close means within
+      <input type="number" min="1" max="60" value="${near}" id="close-threshold"
+        style="width:48px;text-align:center;background:var(--bg2);border:1px solid var(--line2);border-radius:4px;padding:2px">
+      cards.</p>
+      <div class="stats" style="margin-top:14px">
+        <div class="stat"><div class="v" style="color:var(--good)">${ready.length}</div><div class="k">ready to build</div></div>
+        <div class="stat"><div class="v" style="color:var(--maize)">${close.length}</div><div class="k">close</div></div>
+        <div class="stat"><div class="v">${arch.length}</div><div class="k">archetypes seen</div></div>
+        <div class="stat"><div class="v">${DECKS.length}</div><div class="k">lists</div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>READY DECKS <span class="code">${ready.length}</span></h2>
+      <p class="note">Every card already in the collection. Buildable tonight.</p>
+    </div>
+    ${ready.length ? ready.map(g => deckPanel(g, { showMissing:false })).join('')
+      : `<div class="panel"><p class="empty">Nothing buildable yet. The Close list below is the
+         shortest path there.</p></div>`}
+
+    <div class="panel">
+      <h2>CLOSE DECKS <span class="code">${close.length}</span></h2>
+      ${fellShort
+        ? `<p class="note">Nothing is within ${near} cards yet, so these are the five shortest
+           paths instead, closest first. The gap is real: a tournament list runs three copies of
+           most cards, and a collection spread thin across sets will be a long way from any of
+           them. "Add missing to wants" pushes a deck's gap onto the trade list.</p>`
+        : `<p class="note">Within ${near} cards. The gap is listed per deck, and
+           "Add missing to wants" pushes it onto the trade list.</p>`}
+    </div>
+    ${close.map(g => deckPanel(g, { showMissing:true })).join('')}
+
+    <div class="panel">
+      <h2>IDEAL DECKS <span class="code">${idealAll.length}</span></h2>
+      <p class="note">The meta ranked by how often each archetype shows up in tournament lists,
+      best finish as the tiebreak, regardless of what you own. This is the target list rather than
+      the shopping list.${idealAll.length > IDEAL_SHOWN
+        ? ` Showing the top ${IDEAL_SHOWN}; the remaining ${idealAll.length - IDEAL_SHOWN}
+            archetypes appeared in only a handful of lists each.` : ''}</p>
+    </div>
+    ${ideal.map(g => deckPanel(g, { showMissing:false })).join('')}`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    RENDER: dispatch
    ══════════════════════════════════════════════════════════════════════════ */
 function render(){
-  for (const t of ['collection','sets','trade','decks','sync'])
+  for (const t of ['collection','sets','trade','decks','meta','sync'])
     document.getElementById('v-' + t).classList.toggle('hide', TAB !== t);
   for (const b of document.querySelectorAll('.tab'))
     b.setAttribute('aria-selected', String(b.dataset.tab === TAB));
@@ -1199,12 +1705,19 @@ function render(){
   if (TAB === 'sets')  renderSets();
   if (TAB === 'trade') renderTrade();
   if (TAB === 'decks') renderDecks();
+  if (TAB === 'meta')  renderMeta();
   if (TAB === 'sync')  renderSync();
 
   // keep the badges honest even when their tab is closed
   if (TAB !== 'trade') renderTradeBadge();
   if (TAB !== 'decks') document.getElementById('tn-decks').textContent = S.decks.length || '';
   renderImportBadge();
+  const mb = document.getElementById('tn-meta');
+  if (mb && DECKS){
+    const ready = metaArchetypes().filter(g => g.best.ev.missingCopies === 0).length;
+    mb.textContent = ready || '';
+    mb.style.color = ready ? 'var(--good)' : '';
+  }
 }
 function renderImportBadge(){
   const el = document.getElementById('tn-sync');
@@ -1342,6 +1855,10 @@ function wire(){
       S.playset = Math.max(1, Math.min(9, Number(el.value) || 3));
       persist();
     }
+    if (el.id === 'close-threshold'){
+      S.closeThreshold = Math.max(1, Math.min(60, Number(el.value) || 5));
+      persist();
+    }
   });
 
   // Re-render on qty change is heavy in the collection view, so patch in place instead.
@@ -1392,6 +1909,71 @@ function wire(){
   // per-view buttons (delegated, since these views re-render)
   document.body.addEventListener('click', (e) => {
     const t = e.target;
+
+    // ── spares and trade matching ────────────────────────────────────
+    if (t.id === 'btn-spares-copy') copy(spareText(), 'spares copied');
+    if (t.id === 'btn-spares-mark'){
+      let n = 0;
+      for (const s of spares()){
+        // Attribute the surplus to the printings actually held, duplicates first.
+        let left = s.surplus;
+        const held = Object.entries(S.inv)
+          .filter(([code]) => BY[code] && identityOf(BY[code]) === s.id)
+          .sort((a, b) => owned(b[0]) - owned(a[0]));
+        for (const [code] of held){
+          if (left <= 0) break;
+          const give = Math.min(left, owned(code));
+          if (give > 0 && forTrade(code) !== give){ setQtyQuiet(code, 't', give); n++; }
+          left -= give;
+        }
+      }
+      persist();
+      toast(n ? `${n} marked for trade` : 'already marked');
+    }
+    if (t.id === 'btn-partner-scan'){
+      const u = (document.getElementById('partner-user').value || '').trim();
+      if (!u) return toast('need a username');
+      PARTNER_ERR = '';
+      toast('scanning…');
+      scanPartner(u).then(() => { PARTNER_ERR = ''; render(); })
+                    .catch(e => { PARTNER = null; PARTNER_ERR = e.message; render(); });
+    }
+    if (t.id === 'btn-partner-clear'){ PARTNER = null; PARTNER_ERR = ''; render(); }
+    if (t.id === 'btn-partner-copy') copy(tradeMatchText(), 'trade copied');
+
+    // ── meta ─────────────────────────────────────────────────────────
+    const mc = t.closest('[data-meta-copy]');
+    if (mc){
+      const d = (DECKS || []).find(x => x.s === mc.dataset.metaCopy);
+      if (d) copy(metaDeckText(d), 'list copied');
+    }
+    const ms = t.closest('[data-meta-save]');
+    if (ms){
+      const d = (DECKS || []).find(x => x.s === ms.dataset.metaSave);
+      if (d){
+        const id = 'd' + Date.now().toString(36);
+        S.decks.push({ id, name: d.ln ? `${d.ln} (meta)` : d.h.slice(0, 40), cards: deckCardsToLocal(d) });
+        selDeck = id;
+        persist();
+        toast('saved to Decks');
+      }
+    }
+    const mw = t.closest('[data-meta-want]');
+    if (mw){
+      const d = (DECKS || []).find(x => x.s === mw.dataset.metaWant);
+      if (d){
+        const ev = evalDeck(d, ownedIdentities());
+        let n = 0;
+        for (const m of ev.missing){
+          // Want the full playset the list runs, not just the shortfall, so the
+          // number still reads correctly once some copies arrive.
+          if (m.need > want(m.card.c)){ setQtyQuiet(m.card.c, 'w', m.need); n++; }
+        }
+        persist();
+        toast(n ? `${n} wants set` : 'nothing to add');
+      }
+    }
+    if (t.id === 'meta-refresh-help') toast('run: node scripts/build-decks.mjs');
 
     // ── import / sync ────────────────────────────────────────────────
     if (t.id === 'btn-imp-file'){
@@ -1529,6 +2111,16 @@ async function boot(){
       cat.extras = add.length;
     }
   } catch { /* the catalog is still usable without them */ }
+
+  // Tournament decklists are optional: the app is fully usable without them.
+  try {
+    const dr = await fetch('data/decks.json', { cache:'no-cache' });
+    if (dr.ok){
+      const dd = await dr.json();
+      DECKS = dd.decks || null;
+      DECKS_AT = dd.generatedAt || null;
+    }
+  } catch { /* no meta snapshot */ }
 
   // Publish the catalog only once it is whole, so nothing can read a half-built one.
   CAT = cat;
