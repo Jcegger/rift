@@ -173,24 +173,20 @@ is a vandalized card list restorable from a backup. Use the Backup button.
 
 ## Hosting
 
-GitHub Pages serves the repo root, currently at
-**https://jcegger.github.io/rift/**.
+GitHub Pages serves the repo root at **https://rift.jayegger.com**, with
+`jcegger.github.io/rift` still serving the same build.
 
-The custom domain is parked. `rift.jayegger.com` returns Cloudflare **error
-1016**, an origin DNS failure, which means the proxied record exists (the name
-resolves to a Cloudflare IP) but its target cannot be resolved from Cloudflare's
-side. Every plausible target does resolve on its own, so the record's content
-field is the thing to look at, most likely self-referential. It is not a
-propagation delay and not a GitHub problem: `reading.jayegger.com` is proxied the
-same way and serves fine.
-
-To finish it: fix the record so it reads `CNAME rift -> jcegger.github.io`, then
-rename `CNAME.pending` back to `CNAME` and push. Pages picks the domain back up
-from the file. Either proxy setting works, matching `lsat` (DNS only) or `reading`
-(proxied); if proxied, keep Cloudflare SSL on Full so the redirect does not loop.
+The Cloudflare record is `CNAME rift -> jcegger.github.io`, proxied. If it ever
+returns Cloudflare **error 1016**, the target is unresolvable: that happened once
+because the target was missing a dot, and 1016 is exactly what Cloudflare reports
+when it resolves the record but not what the record points at. Both proxy settings
+work, matching `lsat` (DNS only) and `reading` (proxied); proxied needs Cloudflare
+SSL on **Full** or the redirect loops.
 
 `.nojekyll` is present because the site is plain static files, and building it as
-a Jekyll site only added ways to fail.
+a Jekyll site only added ways to fail. Pages builds here also fail intermittently
+with an empty error message; requesting another build
+(`gh api repos/Jcegger/rift/pages/builds -X POST`) has cleared it every time.
 
 Not affiliated with or endorsed by Riot Games. Card galleries and deck builders
 are permitted under Riot's policy on fan projects; automated gameplay tools are
