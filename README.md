@@ -61,17 +61,41 @@ actually get entered because its scanner beats typing.
 
 ## The meta
 
-`data/decks.json` is a snapshot of recent tournament entries from riftbound.gg's
-public deck API, each carrying its event and the player's finish, so meta share
-is counted from real results rather than guessed at. Refresh it whenever:
+`data/decks.json` is a snapshot of what people are playing right now, from
+riftbound.gg's public deck API. Refresh it whenever:
 
 ```
-node scripts/build-decks.mjs [--limit 250]
+node scripts/build-decks.mjs [--days 60] [--max 700]
 ```
+
+It draws on two sources deliberately, because neither is enough alone.
+
+**Popularity comes from recent public decks.** There are hundreds from the last
+few weeks and three quarters of them play Vendetta.
+
+**Credibility comes from tournament entries**, which carry an event and a
+finishing place, the only hard evidence a list is good. They lag badly: the whole
+tournament archive is 452 decks and 329 of them come from one event in May,
+before Vendetta existed. Building the meta from tournament data alone produced a
+snapshot where Vendetta appeared in 10% of decks, which is what prompted the
+rewrite. The script now warns if the newest set is under-represented, since that
+is the shape of the mistake.
+
+Two filters earn their keep. Clones: 248 of 450 public decks were named
+"... - copy" and 450 lists collapsed to 303 distinct fingerprints, so counting
+them raw measures copying rather than play. And size, because a half-built brew
+is not a deck.
 
 Decks are grouped into archetypes by their Legend, and each archetype is shown as
-whichever of its lists you are closest to finishing. Two details matter and are
+whichever of its lists you are closest to finishing. Three details matter and are
 easy to get wrong:
+
+- **Deck lists use code forms the gallery does not.** `OGN-202-P` is a promo
+  printing, `UNL-230-STAR` a signature spelled out, `OGN-263-a` a hyphenated
+  variant suffix, and `OGN-166` omits the denominator entirely. All fold to the
+  base card. The parser is duplicated in `scripts/build-decks.mjs` and must stay
+  identical to the one in `index.html`, or the snapshot resolves cards the app
+  cannot.
 
 - **Buildability goes by card, not printing.** An alt art, signature or
   overnumber satisfies a slot calling for the base card, so a list citing

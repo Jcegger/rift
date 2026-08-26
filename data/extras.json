@@ -30,6 +30,62 @@
    "i": "https://static.dotgg.gg/riftbound/cards/SFD-R02.webp"
   },
   {
+   "c": "SFD-R03",
+   "s": "SFD",
+   "no": 3,
+   "v": "rune",
+   "t": "Rune",
+   "r": "Common",
+   "n": "Mind Rune",
+   "d": [
+    "Mind"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/SFD-R03.webp"
+  },
+  {
+   "c": "SFD-R04",
+   "s": "SFD",
+   "no": 4,
+   "v": "rune",
+   "t": "Rune",
+   "r": "Common",
+   "n": "Body Rune",
+   "d": [
+    "Body"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/SFD-R04.webp"
+  },
+  {
+   "c": "SFD-R05",
+   "s": "SFD",
+   "no": 5,
+   "v": "rune",
+   "t": "Rune",
+   "r": "Common",
+   "n": "Chaos Rune",
+   "d": [
+    "Chaos"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/SFD-R05.webp"
+  },
+  {
+   "c": "SFD-R06",
+   "s": "SFD",
+   "no": 6,
+   "v": "rune",
+   "t": "Rune",
+   "r": "Common",
+   "n": "Order Rune",
+   "d": [
+    "Order"
+   ],
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/SFD-R06.webp"
+  },
+  {
    "c": "SFD-T02",
    "s": "SFD",
    "no": 2,
@@ -154,6 +210,22 @@
    "e": 0,
    "ex": 1,
    "i": "https://static.dotgg.gg/riftbound/cards/VEN-T03.webp"
+  },
+  {
+   "c": "VEN-T05",
+   "s": "VEN",
+   "no": 5,
+   "v": "token",
+   "t": "Unit",
+   "r": "Common",
+   "n": "Shadow Clone // Tentacle",
+   "d": [
+    "Colorless"
+   ],
+   "m": 0,
+   "e": 0,
+   "ex": 1,
+   "i": "https://static.dotgg.gg/riftbound/cards/VEN-T05.webp"
   }
  ]
 }

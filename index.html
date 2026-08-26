@@ -346,6 +346,7 @@ const READONLY = new URLSearchParams(location.search).get('view') === 'trade';
 let CAT = null;            // { generatedAt, imagePrefix, sets[], cards[] }
 let DECKS = null;          // tournament decklists from data/decks.json
 let DECKS_AT = null;       // when that snapshot was taken
+let DECKS_WINDOW = null;   // { from, to, days } the snapshot covers
 let BY  = {};              // publicCode -> card
 let TAB = READONLY ? 'trade' : 'collection';
 
@@ -1028,8 +1029,14 @@ function mapHeader(header){
 function normColl(seg){
   let s = String(seg ?? '').replace(/\s+/g, '');
   if (!s) return null;
+  // Deck lists carry printing markers the gallery does not: "-P" for a promo
+  // printing and "-STAR" spelled out for a signature. A promo Annie is still
+  // Annie, so the marker is dropped and the card resolves to its base printing.
+  s = s.replace(/[-_]P$/i, '');
+  s = s.replace(/\/\d+$/, '');
   const star = /\*/.test(s) || /star$/i.test(s);
   s = s.replace(/\*/g, '').replace(/[-_]?star$/i, '');
+  s = s.replace(/[-_]/g, '');   // "263-a" is just "263a"
   const m = /^([A-Za-z]*)0*(\d+)([A-Za-z]*)$/.exec(s);
   if (!m) return null;
   return `${m[1].toUpperCase()}${Number(m[2])}${m[3].toUpperCase()}${star ? '*' : ''}`;
@@ -1553,10 +1560,11 @@ function metaArchetypes(){
     const row = { deck: d, ev };
     const g = groups.get(key);
     if (!g){
-      groups.set(key, { name: key, legend: d.lg, lists: 1, best: row,
-                        bestPlace: d.pl ?? null, events: new Set([d.ev]) });
+      groups.set(key, { name: key, legend: d.lg, lists: 1, tourLists: d.tour ? 1 : 0,
+                        best: row, bestPlace: d.pl ?? null, events: new Set([d.ev]) });
     } else {
       g.lists++;
+      if (d.tour) g.tourLists++;
       g.events.add(d.ev);
       if (d.pl != null && (g.bestPlace == null || d.pl < g.bestPlace)) g.bestPlace = d.pl;
       // "closest" beats "highest placing" here: this view is about what you can build.
@@ -1621,7 +1629,8 @@ function deckPanel(g, opts){
         ${done ? 'complete' : `${ev.missingCopies} card${ev.missingCopies === 1 ? '' : 's'} short`}</span>
     </div>
     <div class="meter-sub">
-      ${g.share ? `<span><b>${g.share.toFixed(1)}%</b> of tournament lists</span>` : ''}
+      ${g.share ? `<span><b>${g.share.toFixed(1)}%</b> of recent lists</span>` : ''}
+      ${g.tourLists ? `<span><b>${g.tourLists}</b> tournament</span>` : ''}
       ${g.bestPlace != null ? `<span>best finish <b>#${g.bestPlace}</b></span>` : ''}
       ${d.ev ? `<span>${esc(d.ev)}</span>` : ''}
       ${d.pl != null ? `<span>this list <b>#${d.pl}</b></span>` : ''}
@@ -1672,10 +1681,13 @@ function renderMeta(){
   host.innerHTML = `
     <div class="panel">
       <h2>THE META</h2>
-      <p class="note">${DECKS.length} tournament decklists across ${events} events, pulled from
-      riftbound.gg and grouped into ${arch.length} archetypes by Legend. Snapshot taken
-      ${esc(DECKS_AT || 'unknown')}. Each archetype below is represented by whichever of its
-      lists you are closest to finishing.</p>
+      <p class="note">${DECKS.length} decks from the last ${DECKS_WINDOW ? DECKS_WINDOW.days : 60}
+      days, grouped into ${arch.length} archetypes by Legend. Popularity comes from recent public
+      lists on riftbound.gg; the ${DECKS.filter(d => d.tour).length} tournament entries among them
+      also carry an event and a finishing place, which is the only hard evidence a list is good.
+      ${DECKS_WINDOW ? `Covers ${esc(DECKS_WINDOW.from)} to ${esc(DECKS_WINDOW.to)}.` : ''}
+      Snapshot taken ${esc(DECKS_AT || 'unknown')}. Each archetype below is represented by whichever
+      of its lists you are closest to finishing.</p>
       <p class="note" style="margin-top:8px">Buildability goes by card, not printing: an alt art,
       signature or overnumber counts as the base card, and any Fury Rune is a Fury Rune whatever
       set it came from. Close means within
@@ -1712,9 +1724,9 @@ function renderMeta(){
 
     <div class="panel">
       <h2>IDEAL DECKS <span class="code">${idealAll.length}</span></h2>
-      <p class="note">The meta ranked by how often each archetype shows up in tournament lists,
-      best finish as the tiebreak, regardless of what you own. This is the target list rather than
-      the shopping list.${idealAll.length > IDEAL_SHOWN
+      <p class="note">The meta ranked by how often each archetype shows up in recent lists, best
+      tournament finish as the tiebreak, regardless of what you own. This is the target list rather
+      than the shopping list.${idealAll.length > IDEAL_SHOWN
         ? ` Showing the top ${IDEAL_SHOWN}; the remaining ${idealAll.length - IDEAL_SHOWN}
             archetypes appeared in only a handful of lists each.` : ''}</p>
     </div>
@@ -2148,6 +2160,7 @@ async function boot(){
       const dd = await dr.json();
       DECKS = dd.decks || null;
       DECKS_AT = dd.generatedAt || null;
+      DECKS_WINDOW = dd.window || null;
     }
   } catch { /* no meta snapshot */ }
 
