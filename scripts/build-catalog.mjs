@@ -11,6 +11,13 @@
 import { writeFile } from "node:fs/promises";
 
 const CHANNEL = "https://content.publishing.riotgames.com/publishing-content/v2.0/public/channel/riftbound_website/list";
+// Riot does not publish finishes, because a foil is a print treatment rather than a
+// separate card, so which printings exist in which finish has to come from elsewhere.
+// riftbound.gg's card database carries hasNormal and hasFoil per printing, and it
+// matters: 835 of their 1,422 printings are foil-only, so a Normal count on one of
+// those is a data-entry mistake rather than a card. Optional — a failure here costs the
+// flags and nothing else.
+const FINISHES = "https://api.dotgg.gg/cgfw/getcards?game=riftbound";
 const PAGE = 200;
 const IMG_PREFIX = "https://cmsassets.rgpub.io/sanity/images/dsfx7636/game_data_live/";
 
@@ -119,6 +126,43 @@ const main = async () => {
 
   const baseSize = Object.fromEntries(sets.map((s) => [s.id, s.base]));
 
+  // ── finishes, from riftbound.gg ────────────────────────────────────────────
+  // Keyed by their id form ("OGN-066a"), which is the collector code without the
+  // denominator, so it is matched on the way in rather than guessed at later.
+  const finishes = new Map();
+  try {
+    process.stdout.write("fetching finishes… ");
+    const r = await fetch(FINISHES, {
+      headers: { "User-Agent": "rift.jayegger.com catalog builder", Origin: "https://riftbound.gg" },
+    });
+    if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+    const rows = await r.json();
+    if (!Array.isArray(rows)) throw new Error("unexpected payload shape");
+    for (const x of rows) {
+      const hasNormal = String(x.hasNormal) === "1";
+      const hasFoil = String(x.hasFoil) === "1";
+      // Their own price data contradicts the flag on a few dozen promos, which is the
+      // difference between "this finish does not exist" and "we have no listing for
+      // it". Only an unambiguous case is recorded, so nothing downstream calls a real
+      // card a mistake.
+      const normalPrice = Number(x.price) || 0;
+      const foilPrice = Number(x.foilPrice) || 0;
+      const sure = !hasNormal && hasFoil && normalPrice === 0;
+      // What this printing costs in the cheapest finish it actually comes in. A
+      // foil-only printing is priced as a foil because that is the only way to own it.
+      const cost = hasNormal && normalPrice > 0 ? normalPrice : foilPrice;
+      finishes.set(x.id, { hasNormal, hasFoil, foilOnly: sure, cost });
+    }
+    console.log(`${rows.length} rows, ${[...finishes.values()].filter((f) => f.foilOnly).length} unambiguously foil-only`);
+  } catch (e) {
+    console.log(`could not read finishes (${e.message}); the catalog will carry none`);
+  }
+  const finishOf = (publicCode) => {
+    // "OGN-066a/298" -> "OGN-066a"; runes, tokens and promos have no denominator.
+    const id = String(publicCode || "").split("/")[0];
+    return finishes.get(id) || finishes.get(publicCode) || null;
+  };
+
   const cards = raw
     .map((c) => {
       const setId = c.set?.value?.id ?? null;
@@ -142,6 +186,16 @@ const main = async () => {
         x: plain(c.text?.richText?.body) || plain(c.effect?.richText?.body),
         i: imageRef(c),
       };
+      // Only the unambiguous foil-only case is recorded, and only as a flag, so the
+      // absence of it never implies anything. Written as 1 rather than true because the
+      // empty-key pass below then drops it from every card it does not apply to.
+      const fin = finishOf(c.publicCode);
+      if (fin && fin.foilOnly) card.fo = 1;
+      // Rounded to cents. Their foil listings carry obvious junk — a Calm Rune priced at
+      // $8,888 — but the app costs a card by the cheapest of its printings, and a
+      // nonsense high price can never win a minimum, so it is left in rather than
+      // second-guessed with a threshold.
+      if (fin && fin.cost > 0) card.mp = Math.round(fin.cost * 100) / 100;
       // drop empty keys so the committed JSON stays small
       for (const k of Object.keys(card)) {
         const v = card[k];
@@ -153,7 +207,8 @@ const main = async () => {
 
   const out = {
     generatedAt: new Date().toISOString().slice(0, 10),
-    source: "content.publishing.riotgames.com / riftbound_gallery_cards",
+    source: "content.publishing.riotgames.com / riftbound_gallery_cards" +
+            (finishes.size ? " + api.dotgg.gg/cgfw/getcards for finishes" : ""),
     imagePrefix: IMG_PREFIX,
     sets,
     cards,
@@ -176,6 +231,20 @@ const main = async () => {
   console.log(`\n${cards.length} printings, ${codeClashes} duplicate codes, ${new Set(cards.map((c) => c.n)).size} distinct names`);
   const missingImg = cards.filter((c) => !c.i).length;
   if (missingImg) console.log(`WARNING: ${missingImg} cards have no image`);
+  if (finishes.size){
+    const fo = cards.filter((c) => c.fo).length;
+    const unknown = cards.filter((c) => !finishOf(c.c)).length;
+    const priced = cards.filter((c) => c.mp);
+    console.log(`\n${fo} printings are foil-only, so a Normal count on one is a mistake`);
+    if (unknown) console.log(`  ${unknown} printings are not in their database, so carry no finish flag`);
+    const ps = priced.map((c) => c.mp).sort((a, b) => a - b);
+    console.log(`  ${priced.length} printings carry a price, $${ps[0]} to $${ps[ps.length - 1]}, ` +
+      `median $${ps[Math.floor(ps.length / 2)].toFixed(2)}`);
+    const unpriced = cards.length - priced.length;
+    if (unpriced) console.log(`  ${unpriced} carry none, so a gap containing them is quoted as a floor`);
+  } else {
+    console.log("\nNOTE: no finish flags this run, so the app cannot flag foil-only mistakes");
+  }
 };
 
 main().catch((e) => {

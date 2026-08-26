@@ -1,0 +1,298 @@
+{
+ "generatedAt": "2026-08-26",
+ "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg)",
+ "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them.",
+ "coverage": {
+  "events": 30,
+  "eventsWithDecks": 12,
+  "players": 2615,
+  "playersWithDecks": 1567,
+  "unresolvedDeckEvents": [],
+  "decksByEvent": {
+   "Riftbound: PPG Qualifier - Weatherford": 11,
+   "Pittsburgh 2026 - Riftbound Showdown $10k-$25,000": 6,
+   "Riftbound Showdown Series $25,000 Cash Tournament @ Pro-Play Summit: Dallas": 4,
+   "CCS $25,000 Riftbound Invitational Qualifier #4": 3,
+   "CCS Sunday $5,000 Riftbound Event #4": 3,
+   "RiftAtlas Convergence #1": 3,
+   "The Magma Chamber Presents: Dual Queue": 2,
+   "Riftbound $5,000 Cash Tournament @ Pro-Play Summit: Dallas": 2,
+   "Breach the Bay 2 Riftbound 15k Team Trios": 1,
+   "Valley Forge 2026 - Riftbound $10k-$25,000": 1,
+   "Columbus 2026 - Riftbound Main Event": 1,
+   "Pittsburgh 2026 - Riftbound Last Chance Trial 5": 1
+  }
+ },
+ "events": [
+  {
+   "name": "Haven Online Challenger Series #3 - August 23rd 2026",
+   "dt": "2026-08-23",
+   "players": 49,
+   "format": "Constructed",
+   "winner": "ioi0071",
+   "country": null,
+   "slug": "haven-online-challenger-series-3-august-23rd-2026"
+  },
+  {
+   "name": "Breach the Bay 2 Riftbound 15k Team Trios",
+   "dt": "2026-08-22",
+   "players": 120,
+   "format": "Constructed",
+   "winner": "Alexis sanchez",
+   "country": null,
+   "slug": "breach-the-bay-2-riftbound-15k-team-trios"
+  },
+  {
+   "name": "Valley Forge 2026 - Sunday Riftbound Super Scrubby Rebound",
+   "dt": "2026-08-16",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "Cruz Marin",
+   "country": null,
+   "slug": "valley-forge-2026-sunday-riftbound-super-scrubby-rebound"
+  },
+  {
+   "name": "Convergence #2",
+   "dt": "2026-08-15",
+   "players": 257,
+   "format": "Constructed",
+   "winner": "Christian Gharibeh",
+   "country": null,
+   "slug": "convergence-2"
+  },
+  {
+   "name": "Valley Forge 2026 - Riftbound $10k-$25,000",
+   "dt": "2026-08-15",
+   "players": 67,
+   "format": "Constructed",
+   "winner": "Brandon Chiu",
+   "country": null,
+   "slug": "valley-forge-2026-riftbound-10k-25000"
+  },
+  {
+   "name": "The Magma Chamber Presents: Dual Queue",
+   "dt": "2026-08-09",
+   "players": 40,
+   "format": "2v2",
+   "winner": "Andy Wagner",
+   "country": null,
+   "slug": "the-magma-chamber-presents-dual-queue"
+  },
+  {
+   "name": "I Micelion Cup",
+   "dt": "2026-08-09",
+   "players": 59,
+   "format": "Constructed",
+   "winner": "MAAAAAAAAAAAAA",
+   "country": null,
+   "slug": "i-micelion-cup"
+  },
+  {
+   "name": "Haven Online Challenger Series - August 2nd 2026",
+   "dt": "2026-08-02",
+   "players": 30,
+   "format": "Constructed",
+   "winner": "Jakob Fröhlich",
+   "country": null,
+   "slug": "haven-online-challenger-series-august-2nd-2026"
+  },
+  {
+   "name": "NovaRiftbound's TCGArena Online $2K Showdown #3",
+   "dt": "2026-07-26",
+   "players": 109,
+   "format": "Constructed",
+   "winner": "Kacper Wasiak",
+   "country": null,
+   "slug": "novariftbounds-tcgarena-online-2k-showdown-3"
+  },
+  {
+   "name": "Columbus 2026 - Riftbound Main Event",
+   "dt": "2026-07-25",
+   "players": 36,
+   "format": "Constructed",
+   "winner": "Won Hyuk Do",
+   "country": null,
+   "slug": "columbus-2026-riftbound-main-event"
+  },
+  {
+   "name": "RiftAtlas Convergence #1",
+   "dt": "2026-07-19",
+   "players": 128,
+   "format": "Constructed",
+   "winner": "Kankrit M",
+   "country": null,
+   "slug": "riftatlas-convergence-1"
+  },
+  {
+   "name": "CCS Sunday $5,000 Riftbound Event #4",
+   "dt": "2026-07-19",
+   "players": 82,
+   "format": "Constructed",
+   "winner": "Drowsy",
+   "country": null,
+   "slug": "ccs-sunday-5000-riftbound-event-4"
+  },
+  {
+   "name": "Nor'Easter Throwdown - Riftbound Throwdown 3",
+   "dt": "2026-07-19",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "Poppy",
+   "country": null,
+   "slug": "noreaster-throwdown-riftbound-throwdown-3"
+  },
+  {
+   "name": "Merlion Anniversary Riftbound Team Trios",
+   "dt": "2026-07-18",
+   "players": 36,
+   "format": "Constructed",
+   "winner": "jason",
+   "country": null,
+   "slug": "merlion-anniversary-riftbound-team-trios"
+  },
+  {
+   "name": "CCS $25,000 Riftbound Invitational Qualifier #4",
+   "dt": "2026-07-18",
+   "players": 160,
+   "format": "Constructed",
+   "winner": "OaT LagTap",
+   "country": null,
+   "slug": "ccs-25000-riftbound-invitational-qualifier-4"
+  },
+  {
+   "name": "Nor'Easter Throwdown - Riftbound Throwdown 1",
+   "dt": "2026-07-17",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Sean Calkin",
+   "country": null,
+   "slug": "noreaster-throwdown-riftbound-throwdown-1"
+  },
+  {
+   "name": "Oklahoma Triple Origins Box 2v2 Showdown July 12th",
+   "dt": "2026-07-12",
+   "players": 14,
+   "format": "2v2",
+   "winner": "Vijay Panthayi",
+   "country": null,
+   "slug": "oklahoma-triple-origins-box-2v2-showdown-july-12th"
+  },
+  {
+   "name": "Sideways Showdown - CN vs World Qualifiers ",
+   "dt": "2026-07-11",
+   "players": 86,
+   "format": "Constructed",
+   "winner": "Haunted",
+   "country": null,
+   "slug": "sideways-showdown-cn-vs-world-qualifiers"
+  },
+  {
+   "name": "Pittsburgh 2026 - Riftbound Showdown $10k-$25,000",
+   "dt": "2026-07-11",
+   "players": 365,
+   "format": "Constructed",
+   "winner": "Vincent Scharf",
+   "country": null,
+   "slug": "pittsburgh-2026-riftbound-showdown-10k-25000"
+  },
+  {
+   "name": "Pittsburgh 2026 - Riftbound Last Chance Trial 5",
+   "dt": "2026-07-10",
+   "players": 25,
+   "format": "Constructed",
+   "winner": "[LPW] David Wilson",
+   "country": null,
+   "slug": "pittsburgh-2026-riftbound-last-chance-trial-5"
+  },
+  {
+   "name": "Pittsburgh 2026 - Riftbound Last Chance Trial 4",
+   "dt": "2026-07-10",
+   "players": 15,
+   "format": "Constructed",
+   "winner": "Ren Adair",
+   "country": null,
+   "slug": "pittsburgh-2026-riftbound-last-chance-trial-4"
+  },
+  {
+   "name": "Pittsburgh 2026 - Riftbound Last Chance Trial 3",
+   "dt": "2026-07-10",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "frog Keebs",
+   "country": null,
+   "slug": "pittsburgh-2026-riftbound-last-chance-trial-3"
+  },
+  {
+   "name": "Pittsburgh 2026 - Riftbound Last Chance Trial 2",
+   "dt": "2026-07-10",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "Damian Peters",
+   "country": null,
+   "slug": "pittsburgh-2026-riftbound-last-chance-trial-2"
+  },
+  {
+   "name": "Riftbound $5,000 Cash Tournament @ Pro-Play Summit: Dallas",
+   "dt": "2026-07-05",
+   "players": 97,
+   "format": "Constructed",
+   "winner": "Christian Gharibeh",
+   "country": null,
+   "slug": "riftbound-5000-cash-tournament-pro-play-summit-dallas"
+  },
+  {
+   "name": "Riftbound Showdown Series $25,000 Cash Tournament @ Pro-Play Summit: Dallas",
+   "dt": "2026-07-04",
+   "players": 433,
+   "format": "Constructed",
+   "winner": "Michael \"Swiift\" Orr",
+   "country": null,
+   "slug": "riftbound-showdown-series-25000-cash-tournament-pro-play-summit-dallas"
+  },
+  {
+   "name": "Riftbound: PPG Qualifier - Weatherford",
+   "dt": "2026-06-28",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "Christopher Lang",
+   "country": null,
+   "slug": "riftbound-ppg-qualifier-weatherford"
+  },
+  {
+   "name": "RiftBound - $1,000 Prize Pool",
+   "dt": "2026-06-14",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "Michael Byars",
+   "country": null,
+   "slug": "riftbound-1000-prize-pool"
+  },
+  {
+   "name": "Weekly Riftbound CR - UNL",
+   "dt": "2026-06-04",
+   "players": 4,
+   "format": "Constructed",
+   "winner": "ToF Toshiro Rose",
+   "country": null,
+   "slug": "weekly-riftbound-cr-unl-1988"
+  },
+  {
+   "name": "CCS Sunday $5,000 Riftbound Event #3",
+   "dt": "2026-05-24",
+   "players": 85,
+   "format": "Constructed",
+   "winner": "Dong Yoo",
+   "country": null,
+   "slug": "ccs-sunday-5000-riftbound-event-3"
+  },
+  {
+   "name": "CCS $25,000 Riftbound Invitational Qualifier #3",
+   "dt": "2026-05-23",
+   "players": 243,
+   "format": "Constructed",
+   "winner": "Keenan Xiong",
+   "country": null,
+   "slug": "ccs-25000-riftbound-invitational-qualifier-3"
+  }
+ ]
+}

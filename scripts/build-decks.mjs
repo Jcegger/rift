@@ -109,6 +109,17 @@ const main = async () => {
   const max = arg("max", 700);
 
   const cat = JSON.parse(await readFile(new URL("../data/cards.json", import.meta.url), "utf8"));
+
+  // Event sizes, so a tournament deck can carry how big its event was. Optional: the
+  // snapshot is still usable without it, the decks just lose their credibility weight.
+  // The join is by exact event name, which holds today and is reported on if it stops.
+  let eventByName = new Map();
+  try {
+    const ev = JSON.parse(await readFile(new URL("../data/events.json", import.meta.url), "utf8"));
+    eventByName = new Map((ev.events || []).map((e) => [e.name, e]));
+  } catch {
+    console.log("  (no data/events.json yet; run build-events.mjs for credibility weights)");
+  }
   let extra = [];
   try {
     extra = JSON.parse(await readFile(new URL("../data/extras.json", import.meta.url), "utf8")).cards || [];
@@ -194,6 +205,9 @@ const main = async () => {
       ln: legend ? legend.n : null,
       ev: t.tournament_name || null,
       pl: t.place ?? null,
+      // How many players the event drew. A 9-player local and a 433-player major used
+      // to weigh the same, which is the whole reason this is carried through.
+      ec: (eventByName.get(t.tournament_name || "") || {}).players || null,
       dt: deckDate(d),
       vw: Number(d.views) || 0,
       pr: Math.round(Number(d.price) || 0),
@@ -252,6 +266,27 @@ const main = async () => {
     console.log(`  ${name.padEnd(30)} ${String(v.n).padStart(3)} decks  ` +
       `${(v.n / decks.length * 100).toFixed(1).padStart(5)}%` +
       (v.tour ? `  ${v.tour} tourn` : "") + (v.best < 999 ? `  best #${v.best}` : ""));
+
+  // How much of the tournament scene the snapshot can actually see. The point is not
+  // the number, it is that the number is small and the app should say so rather than
+  // implying its meta reading rests on every event that happened.
+  const tourDecks = decks.filter((d) => d.tour);
+  if (tourDecks.length){
+    const sized = tourDecks.filter((d) => d.ec);
+    const evs = new Set(tourDecks.map((d) => d.ev).filter(Boolean));
+    console.log(`\n${tourDecks.length} tournament decks across ${evs.size} events` +
+      `${eventByName.size ? `, ${sized.length} with an event size attached` : ""}`);
+    if (eventByName.size && sized.length < tourDecks.length)
+      console.log(`  WARNING: ${tourDecks.length - sized.length} tournament decks name an event ` +
+        `that data/events.json does not list, so they carry no credibility weight`);
+    if (eventByName.size){
+      const missing = [...eventByName.values()].filter((e) => !evs.has(e.name));
+      const biggest = missing.sort((a, b) => b.players - a.players).slice(0, 3);
+      if (biggest.length)
+        console.log(`  ${missing.length} of ${eventByName.size} known events contributed no lists; ` +
+          `biggest: ${biggest.map((e) => `${e.name} (${e.players}p)`).join(", ")}`);
+    }
+  }
 
   // The guard for the mistake that prompted this rewrite: if the newest set is
   // barely present, the window or the source is wrong.
