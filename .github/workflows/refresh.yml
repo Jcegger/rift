@@ -1,0 +1,129 @@
+# Refreshes the committed data files from their upstream sources, daily.
+#
+# GitHub Pages serves this repo directly, so a commit here IS a deploy — there is no
+# build step and no other infrastructure involved. That is the whole reason this works
+# as a cron: regenerate, verify, commit, done.
+#
+# The verify step is not ceremony. Every one of these sources is a public endpoint that
+# can change shape without warning, and the app's correctness rests on things like the
+# card-identity fold and the exact-name join between decks and events. The build scripts
+# already flag their own upstream surprises (build-catalog warns when a set's base count
+# stops matching what Riot declares; build-decks warns when the newest set is
+# under-represented, which is the shape of a mistake that shipped once already), and
+# scripts/check.mjs asserts the engine's invariants. If any of that fails, this job
+# fails and commits nothing. Stale data that works beats fresh data that lies.
+#
+# If a run succeeds but the site does not update, the Pages build is the usual suspect:
+# builds here fail intermittently with an empty error message, and re-requesting one has
+# always cleared it:
+#   gh api repos/Jcegger/rift/pages/builds -X POST
+
+name: refresh data
+
+on:
+  schedule:
+    # 11:00 UTC daily. riftbound.gg publishes its meta report weekly, so daily is
+    # comfortably ahead of the thing being tracked.
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Deck window in days'
+        required: false
+        default: '60'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Order matters. The catalog is what every other script resolves card codes
+      # against, events supply the sizes that build-decks attaches to tournament decks,
+      # and the ban list and the deck snapshot both read the catalog.
+      - name: Rebuild the card catalog
+        run: node scripts/build-catalog.mjs
+
+      - name: Rebuild the ban list
+        run: node scripts/build-banned.mjs
+
+      - name: Rebuild the event archive
+        run: node scripts/build-events.mjs
+
+      - name: Rebuild the deck snapshot
+        run: node scripts/build-decks.mjs --days ${{ github.event.inputs.days || '60' }}
+
+      - name: Rebuild the news feed
+        run: node scripts/build-news.mjs
+
+      # Events again: build-decks changes which events have lists, and the coverage
+      # figures the Meta tab quotes are computed here. Cheap, one request.
+      - name: Recompute event coverage
+        run: node scripts/build-events.mjs
+
+      - name: Verify
+        run: node scripts/check.mjs
+
+      - name: Commit if anything changed
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Stage first, then ask the index what moved. `git diff` alone ignores
+          # untracked files, so a data file appearing for the first time would look
+          # like "no changes" and never get committed.
+          git add -A data/
+          if git diff --cached --quiet -- data/; then
+            echo "No upstream changes today; nothing to commit."
+            exit 0
+          fi
+          # A one-line summary of what actually moved, so the history is readable
+          # rather than 365 identical "refresh data" commits.
+          summary=$(node -e '
+            const fs = require("fs");
+            const { execSync } = require("child_process");
+            const changed = execSync("git diff --cached --name-only -- data/", { encoding: "utf8" })
+              .split("\n").filter(Boolean);
+            const bits = [];
+            const read = (f) => JSON.parse(fs.readFileSync(f, "utf8"));
+            // Throws for a file that is new in this commit, which the caller catches.
+            // stderr is muted so a first-time file does not litter the log with fatal:.
+            const was = (f) => JSON.parse(execSync(`git show HEAD:${f}`,
+              { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }));
+            for (const f of changed) {
+              try {
+                if (f.endsWith("decks.json")) {
+                  const d = read(f).decks.length, o = was(f).decks.length;
+                  bits.push(`${d} decks${d === o ? "" : ` (${d > o ? "+" : ""}${d - o})`}`);
+                } else if (f.endsWith("cards.json")) {
+                  const d = read(f).cards.length, o = was(f).cards.length;
+                  if (d !== o) bits.push(`${d - o > 0 ? "+" : ""}${d - o} printings`);
+                } else if (f.endsWith("news.json")) {
+                  const d = read(f).posts.length, o = was(f).posts.length;
+                  if (d !== o) bits.push(`${d - o > 0 ? "+" : ""}${d - o} posts`);
+                } else if (f.endsWith("banned.json")) {
+                  const d = read(f).constructed.length, o = was(f).constructed.length;
+                  if (d !== o) bits.push(`ban list ${o} -> ${d}`);
+                } else if (f.endsWith("events.json")) {
+                  const d = read(f).events.length, o = was(f).events.length;
+                  if (d !== o) bits.push(`${d - o > 0 ? "+" : ""}${d - o} events`);
+                }
+              } catch { /* first run, or a shape change; the file list still tells the story */ }
+            }
+            process.stdout.write(bits.join(", ") || changed.map((f) => f.replace("data/", "")).join(", "));
+          ')
+          git commit -m "chore(data): ${summary}"
+          git push
+          echo "Committed: ${summary}"
