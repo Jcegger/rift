@@ -1841,7 +1841,10 @@ function render(){
   renderImportBadge();
   const mb = document.getElementById('tn-meta');
   if (mb && DECKS){
-    const ready = metaArchetypes().filter(g => g.best.ev.missingCopies === 0).length;
+    // Same pool the Meta tab uses, or the badge would promise a buildable deck the
+    // tab then refuses to show because it is banned.
+    const pool = S.showIllegal === true ? DECKS : DECKS.filter(deckLegalForConstructed);
+    const ready = metaArchetypes(pool).filter(g => g.best.ev.missingCopies === 0).length;
     mb.textContent = ready || '';
     mb.style.color = ready ? 'var(--good)' : '';
   }
