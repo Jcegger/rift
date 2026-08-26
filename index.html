@@ -243,6 +243,7 @@ body{overflow-x:hidden}
         <p class="sub" id="sub">loading catalog…</p>
       </div>
       <div class="mast-tools">
+        <span class="sync" id="fresh" title=""><span class="dot" id="fresh-dot"></span><span id="fresh-txt"></span></span>
         <span class="sync"><span class="dot" id="dot"></span><span id="sync-txt">local</span></span>
         <button class="ghost" id="btn-export">Backup</button>
         <button class="ghost" id="btn-import">Restore</button>
@@ -255,6 +256,9 @@ body{overflow-x:hidden}
       <button class="tab" role="tab" data-tab="trade" aria-selected="false">Trade<span class="n" id="tn-trade"></span></button>
       <button class="tab" role="tab" data-tab="decks" aria-selected="false">Decks<span class="n" id="tn-decks"></span></button>
       <button class="tab" role="tab" data-tab="meta" aria-selected="false">Meta<span class="n" id="tn-meta"></span></button>
+      <button class="tab" role="tab" data-tab="next" aria-selected="false">Next<span class="n" id="tn-next"></span></button>
+      <button class="tab" role="tab" data-tab="legends" aria-selected="false">Legends<span class="n" id="tn-legends"></span></button>
+      <button class="tab" role="tab" data-tab="news" aria-selected="false">News<span class="n" id="tn-news"></span></button>
       <button class="tab" role="tab" data-tab="sync" aria-selected="false">Import<span class="n" id="tn-sync"></span></button>
     </nav>
   </header>
@@ -290,6 +294,7 @@ body{overflow-x:hidden}
         <span class="count-line" id="shown"></span>
         <button class="ghost" id="f-clear">Clear filters</button>
       </div>
+      <div class="bar-row hide" id="mirror-note"></div>
     </div>
     <div id="cards"><div class="loading">loading catalog…</div></div>
     <div class="sentinel" id="sentinel"></div>
@@ -306,6 +311,15 @@ body{overflow-x:hidden}
 
   <!-- ══ META ════════════════════════════════════════ -->
   <section id="v-meta" class="hide"></section>
+
+  <!-- ══ NEXT ════════════════════════════════════════ -->
+  <section id="v-next" class="hide"></section>
+
+  <!-- ══ LEGENDS ═════════════════════════════════════ -->
+  <section id="v-legends" class="hide"></section>
+
+  <!-- ══ NEWS ════════════════════════════════════════ -->
+  <section id="v-news" class="hide"></section>
 
   <!-- ══ IMPORT / SYNC ═══════════════════════════════ -->
   <section id="v-sync" class="hide"></section>
@@ -348,14 +362,24 @@ let CAT = null;            // { generatedAt, imagePrefix, sets[], cards[] }
 let DECKS = null;          // tournament decklists from data/decks.json
 let DECKS_AT = null;       // when that snapshot was taken
 let DECKS_WINDOW = null;   // { from, to, days } the snapshot covers
+let NEWS = null;           // riftbound.gg posts from data/news.json
+let NEWS_AT = null;
+let EVENTS = null;         // the tournament archive from data/events.json
+let EVENTS_AT = null;
+let EVENTS_COVER = null;   // how much of that archive the deck snapshot can see
 let BY  = {};              // publicCode -> card
-let TAB = READONLY ? 'trade' : 'collection';
+// Opens on Next, not Collection. The collection is a mirror of riftbound.gg and
+// browsing it is the one thing that site already does better; what it cannot do is
+// tell you what to acquire, so that is what the app should say first.
+let TAB = READONLY ? 'trade' : 'next';
 
 // Synced state. inv: code -> { n:normal owned, f:foil owned, w:wanted, t:for trade }
 const S = {
   inv: {},
   decks: [],
   playset: 3,             // copies of one card a deck may run; drives "playset done"
+  planBy: 'cost',         // 'cost' = cheapest gap first, 'cards' = fewest cards first
+  nearSpend: 25,          // dollars: what counts as "within reach" on the Next tab
 };
 
 // Local-only UI state.
@@ -378,7 +402,10 @@ function loadLocal(){
   Object.assign(F, lsGet('rb_ui', {}) || {});
 }
 // Everything that belongs on every device, which is all of it apart from filters.
-const SYNCED = ['inv','decks','tags','playset','closeThreshold','showIllegal','syncUrl','autoSync','mirrorTradeWish','lastSyncAt'];
+// closeThreshold is deliberately absent: it held a card count for "close decks", which is
+// now a dollar figure under a new name. Reinterpreting a stored 5 as $5 would silently
+// select almost nothing, so the old value is left behind rather than migrated.
+const SYNCED = ['inv','decks','tags','playset','nearSpend','showIllegal','planBy','syncUrl','autoSync','mirrorTradeWish','lastSyncAt'];
 // Saving must not blow away the collection stream: typing counts into 1189 cards
 // would reset scroll and focus on every keystroke. Views that show derived totals
 // re-render; the collection view patches the one card that changed instead.
@@ -399,6 +426,99 @@ function setDot(state, msg){
   t.textContent = msg || ({ syncing:'syncing', ok:'synced', err:'local only', off:'local' })[state];
   d.title = state === 'err' ? 'Could not reach Supabase. Changes are saved in this browser.' : t.textContent;
 }
+/* ══════════════════════════════════════════════════════════════════════════
+   FRESHNESS
+   ══════════════════════════════════════════════════════════════════════════
+   Every recommendation this app makes is a claim about the current meta, and it is
+   only as good as the snapshot behind it. That snapshot used to be regenerated by
+   hand, and the app printed the date it was taken without ever working out how long
+   ago that was. A three-month-old file recommended a dead meta with total confidence.
+   A daily workflow now refreshes the data, which makes this more important rather
+   than less: a cron that quietly stops is worse than no cron, because nothing on the
+   page would look any different.
+
+   Thresholds are keyed to how fast each thing actually moves. riftbound.gg publishes
+   a meta tier list weekly, so the deck snapshot's shelf life is days: warn past ten,
+   shout past twenty-one. The card catalog only changes when a set drops, so it gets a
+   much longer leash and would otherwise cry wolf every fortnight.                  */
+
+const FRESH_LIMITS = {
+  decks:   { warn: 10, bad: 21, label: 'deck snapshot' },
+  banned:  { warn: 30, bad: 60, label: 'ban list' },
+  news:    { warn: 14, bad: 30, label: 'news' },
+  events:  { warn: 21, bad: 45, label: 'event list' },
+  catalog: { warn: 60, bad: 120, label: 'card catalog' },
+};
+
+// Whole days between an ISO date and today. Returns null for anything unparseable, so
+// a missing or malformed generatedAt reads as "unknown" rather than as day zero.
+function daysSince(iso){
+  if (!iso) return null;
+  const t = Date.parse(String(iso).slice(0, 10));
+  if (!Number.isFinite(t)) return null;
+  const d = Math.floor((Date.now() - t) / 86400000);
+  return d < 0 ? 0 : d;     // a clock skewed behind the build must not read as stale
+}
+
+// One row per data file: how old it is and whether that is a problem yet.
+function dataAge(){
+  const src = {
+    decks:   DECKS_AT,
+    banned:  BANNED_AT,
+    news:    NEWS_AT,
+    events:  EVENTS_AT,
+    catalog: CAT && CAT.generatedAt,
+  };
+  const out = [];
+  for (const [key, limits] of Object.entries(FRESH_LIMITS)){
+    const at = src[key] || null;
+    const days = daysSince(at);
+    const state = days == null ? 'unknown'
+      : days >= limits.bad ? 'bad'
+      : days >= limits.warn ? 'warn' : 'ok';
+    out.push({ key, at, days, state, ...limits });
+  }
+  return out;
+}
+
+const AGE_COLOUR = { ok:'var(--good)', warn:'var(--warn)', bad:'var(--bad)', unknown:'var(--dimmer)' };
+const ageOf = (key) => dataAge().find(a => a.key === key) || null;
+const agePhrase = (a) => !a ? 'age unknown'
+  : a.days == null ? 'age unknown'
+  : a.days === 0 ? 'built today'
+  : a.days === 1 ? 'built yesterday'
+  : `${a.days} days old`;
+
+// The masthead indicator reports the worst of them, because one stale file is enough
+// to make the answers wrong and burying it behind an average would hide exactly that.
+function renderFreshness(){
+  const host = document.getElementById('fresh');
+  if (!host) return;
+  const ages = dataAge().filter(a => a.key !== 'catalog' || a.at);
+  const rank = { ok:0, unknown:1, warn:2, bad:3 };
+  const worst = ages.slice().sort((x, y) => rank[y.state] - rank[x.state] ||
+                                            (y.days ?? -1) - (x.days ?? -1))[0];
+  if (!worst){ host.classList.add('hide'); return; }
+  host.classList.remove('hide');
+  document.getElementById('fresh-dot').style.background = AGE_COLOUR[worst.state];
+  document.getElementById('fresh-txt').textContent =
+    worst.state === 'ok' ? 'data current' : `${worst.label} ${agePhrase(worst)}`;
+  host.title = dataAge().map(a => `${a.label}: ${a.at || 'missing'} (${agePhrase(a)})`).join('\n') +
+    (worst.state === 'ok' ? '' : '\n\nRefresh with the scripts in scripts/, or check the daily workflow.');
+}
+
+// A line for the tabs whose output is worthless when the snapshot is old. Returns ''
+// while everything is current, so it costs nothing to call.
+function staleNote(key, what){
+  const a = ageOf(key);
+  if (!a || a.state === 'ok') return '';
+  const colour = AGE_COLOUR[a.state];
+  return `<p class="note" style="margin-top:8px;color:${colour}">The ${a.label} is
+    ${agePhrase(a)}${a.at ? ` (${esc(a.at)})` : ''}, and ${what} is computed entirely from it. The meta
+    moves weekly, so treat this as history rather than advice until it refreshes${
+    a.state === 'bad' ? '. Run <code>node scripts/build-decks.mjs</code>, or check that the daily workflow is still running' : ''}.</p>`;
+}
+
 const SUPA_HEAD = { apikey:SUPA_KEY, Authorization:`Bearer ${SUPA_KEY}`, 'Content-Type':'application/json' };
 
 let pushTimer = null;
@@ -754,9 +874,13 @@ function renderPartner(){
   const m = tradeMatch();
   const rows = (list, dir) => list.length
     ? `<div class="rows">${list.map(x => cardRow(x.card,
-        dir === 'in' ? `take ${x.qty}${x.why && x.why !== 'want' ? ` · for ${esc(x.why)}` : ''}`
-                     : `give ${x.qty}`,
-        dir === 'in' ? 'need' : '')).join('')}</div>`
+        dir === 'in'
+          ? `take ${x.qty}${x.unlocks && x.unlocks.length
+              ? ` · finishes ${esc(x.unlocks[0])}`
+              : x.reach ? ` · ${x.reach.toFixed(1)}% of the meta` : ''}${
+              x.why && x.why !== 'want' ? ` · ${esc(x.why)}` : ''}`
+          : `give ${x.qty}`,
+        dir === 'in' ? (x.unlocks && x.unlocks.length ? '' : 'need') : '')).join('')}</div>`
     : `<p class="empty">Nothing on this side.</p>`;
 
   return `<div class="panel">
@@ -787,8 +911,9 @@ function renderPartner(){
       <div class="cols" style="margin-top:12px">
         <div>
           <h3 style="color:var(--good)">You take ${m.theyGive.length ? `(${m.theyGive.length})` : ''}</h3>
-          <p class="note" style="margin-bottom:8px">Their spares that fill your wants or your
-          closest deck gaps.</p>
+          <p class="note" style="margin-bottom:8px">Their spares worth something to you, best first:
+          cards that finish an archetype outright, then cards by the share of the meta they unblock,
+          then your explicit wants.</p>
           ${rows(m.theyGive, 'in')}
         </div>
         <div>
@@ -1281,8 +1406,69 @@ async function syncFromDotgg(quiet){
   }
 }
 
+/* ── foil-only printings ───────────────────────────────────────────────────
+   Riot does not publish finishes, so the catalog carries `fo` on printings that
+   riftbound.gg's database says come in foil and only foil, and only where their own
+   price data agrees. 512 of 1,189 printings qualify, which is most of the interesting
+   half of the game: champion cards, signatures, showcases and alt arts.
+
+   A Normal count on one of those is not a card, it is a typo, and it comes in through
+   the import because that is where owned counts come from. Nothing is corrected
+   automatically: import replaces owned counts on every pull, so a local fix would be
+   silently undone on the next one and the app would quietly disagree with its own
+   source forever. The honest move is to name the rows so they can be fixed at
+   riftbound.gg, and offer a local correction that holds until the next pull.         */
+function foilOnlyProblems(){
+  const out = [];
+  for (const code in S.inv){
+    const card = BY[code];
+    if (!card || !card.fo) continue;
+    const e = S.inv[code] || {};
+    const n = e.n || 0;
+    if (n > 0) out.push({ code, card, normal: n, foil: e.f || 0 });
+  }
+  return out.sort((a, b) => b.normal - a.normal || a.card.n.localeCompare(b.card.n));
+}
+
+function foilOnlyText(list){
+  return ['FOIL-ONLY PRINTINGS RECORDED AS NORMAL', '',
+    'Fix these on riftbound.gg; they come back on every import until you do.', '',
+    ...list.map(p => `${p.code}  ${p.card.n}  normal ${p.normal}${p.foil ? `, foil ${p.foil}` : ''}`),
+  ].join('\n');
+}
+
+function renderFoilOnly(){
+  if (!CAT) return '';
+  const flagged = CAT.cards.filter(c => c.fo).length;
+  if (!flagged) return '';        // no finish data this catalog build; claim nothing
+  const bad = foilOnlyProblems();
+  if (!bad.length) return '';
+  const copies = bad.reduce((a, p) => a + p.normal, 0);
+  return `<div class="panel" style="border-color:var(--warn)">
+    <h2 style="color:var(--warn)">RECORDED IN A FINISH THAT DOES NOT EXIST <span class="code">${bad.length}</span></h2>
+    <p class="note">${bad.length} printing${bad.length === 1 ? '' : 's'} hold${bad.length === 1 ? 's' : ''}
+    ${copies} cop${copies === 1 ? 'y' : 'ies'} marked Normal, but ${bad.length === 1 ? 'it comes' : 'they come'}
+    only in foil. Almost always a quick-add on riftbound.gg that defaulted to Normal.</p>
+    <p class="note" style="margin-top:6px">Fix them over there rather than here: every import replaces
+    owned counts, so a correction made in this app is undone on the next pull. "Record as foil" is
+    available anyway, for when you want the numbers right in the meantime.</p>
+    <div class="rows" style="margin-top:8px">${bad.map(p => `
+      <div class="row">
+        ${p.card.i ? `<img class="thumb" loading="lazy" src="${imgURL(p.card, 60)}" alt="" data-zoom="${esc(p.card.c)}">` : ''}
+        <span class="nm">${dchips(p.card)} ${esc(p.card.n)}
+          <span class="code">${esc(p.code)}${p.card.v ? ` · ${esc(vLabel(p.card.v))}` : ''}</span></span>
+        <span class="qty need">${p.normal} normal${p.foil ? ` · ${p.foil} foil` : ''}</span>
+      </div>`).join('')}</div>
+    <div class="bar-row" style="margin-top:12px">
+      <button class="ghost" id="btn-foil-copy">Copy the list</button>
+      <button class="ghost" id="btn-foil-fix">Record ${copies} as foil</button>
+    </div>
+  </div>`;
+}
+
 function renderSync(){
   const L = lastImport;
+  const foilPanel = renderFoilOnly();
   const report = !L ? '' : L.error
     ? `<p class="note" style="color:var(--bad)">Import failed: ${esc(L.error)}</p>`
     : `<div class="stats" style="margin-top:12px">
@@ -1307,6 +1493,7 @@ function renderSync(){
            L.unmatched.length > 200 ? `\n… and ${L.unmatched.length - 200} more` : ''}</div>` : ''}`;
 
   document.getElementById('v-sync').innerHTML = `
+    ${foilPanel}
     <div class="panel">
       <h2>IMPORT FROM RIFTBOUND.GG</h2>
       <p class="note">riftbound.gg stays where cards get entered, because its scanner beats typing.
@@ -1389,6 +1576,12 @@ function spares(){
   const out = [];
   for (const [id, e] of idx){
     if (e.card && (e.card.t === 'Rune' || e.card.v === 'rune')) continue;
+    // Legends are left out for the same reason runes are, from the other direction. A
+    // deck runs exactly one, so every copy past the first looks spare, and now that
+    // printings fold, holding the base plus a signature plus an overnumber reads as
+    // three copies of one card. Those extras are chase printings, not trade filler,
+    // so offering them up automatically would be wrong.
+    if (e.card && e.card.t === 'Legend') continue;
     const surplus = e.copies - keep;
     if (surplus > 0) out.push({ id, card: e.card, copies: e.copies, surplus });
   }
@@ -1453,17 +1646,30 @@ function readPartner(user, payload){
 }
 
 // The two directions of a trade.
+//
+// "What of theirs do I need" used to mean my explicit wants plus the gaps in the
+// five archetypes I was closest to. That undersells the scan badly: a card they are
+// giving away can be the last piece of the sixth-closest deck, or sit in four
+// shortfalls at once, and neither showed up. So the whole meta's leverage counts
+// here, by the same measure the Next tab uses, and rows are ranked by what they
+// unblock rather than by how many spare copies the partner happens to hold.
 function tradeMatch(){
   if (!PARTNER) return null;
   const mine = myNeeds();
   const mySpares = new Map(spares().map(s => [s.id, s]));
+  const lev = new Map();
+  if (DECKS) for (const c of cardLeverage(metaArchetypes(metaPool()))) lev.set(c.id, c);
 
   const theyGive = [];
   for (const [id, o] of PARTNER.offers){
     const n = mine.get(id);
-    if (!n) continue;
-    theyGive.push({ card: o.card, qty: Math.min(o.qty, n.qty), theirs: o.qty,
-                    youNeed: n.qty, why: n.why, explicit: o.explicit });
+    const v = lev.get(id);
+    if (!n && !v) continue;
+    const youNeed = n ? n.qty : v.copies;
+    theyGive.push({ card: o.card, qty: Math.min(o.qty, youNeed), theirs: o.qty,
+                    youNeed, explicit: o.explicit,
+                    why: n ? n.why : `${v.blocks.length} meta deck${v.blocks.length === 1 ? '' : 's'}`,
+                    unlocks: v ? v.unlocks : [], reach: v ? v.reach : 0 });
   }
   const youGive = [];
   for (const [id, w] of PARTNER.wants){
@@ -1472,8 +1678,9 @@ function tradeMatch(){
     youGive.push({ card: s.card, qty: Math.min(w.qty, s.surplus), theirs: w.qty,
                    yourSpare: s.surplus });
   }
-  const sort = (a, b) => b.qty - a.qty || a.card.n.localeCompare(b.card.n);
-  return { theyGive: theyGive.sort(sort), youGive: youGive.sort(sort) };
+  const byQty = (a, b) => b.qty - a.qty || a.card.n.localeCompare(b.card.n);
+  const byValue = (a, b) => b.unlocks.length - a.unlocks.length || b.reach - a.reach || byQty(a, b);
+  return { theyGive: theyGive.sort(byValue), youGive: youGive.sort(byQty) };
 }
 
 async function scanPartner(user){
@@ -1521,6 +1728,8 @@ let BANNED_AT = null;
 
 function loadBans(payload){
   BANNED = new Map();
+  // Cached legality is keyed off this list, so it cannot outlive a reload of it.
+  forgetDeckCaches();
   const add = (entry, format) => {
     const hit = matchRow({ id: entry.code });
     const id = hit ? identityOf(hit.card) : entry.key;
@@ -1562,11 +1771,107 @@ function deckBans(deck){
   return out.sort((a, b) => b.qty - a.qty);
 }
 const deckLegalForConstructed = (deck) =>
-  !deckBans(deck).some((x) => x.ban.formats.includes('constructed'));
+  !deckBansCached(deck).some((x) => x.ban.formats.includes('constructed'));
+
+// A deck's archetype, which is its Legend's name folded through the dash naming. The
+// Secret Garden promos are base-set legends under riftbound.gg's `Champion - Epithet`
+// spelling, so without this fold Bashful Bloom and Lillia - Bashful Bloom are one
+// legend counted as two archetypes, competing against each other for the same slot.
+// metaArchetypes and scorePool must both group through this or they disagree.
+function archetypeName(deck){
+  const raw = deck.ln || '';
+  if (!raw) return 'Unidentified';
+  if (raw.includes(' - ')){
+    const hit = matchRow({ id: deck.lg });
+    if (hit && hit.card.t === 'Legend') return gameName(hit.card);
+    const comma = raw.replace(' - ', ', ');
+    if (NAMES.has(comma)) return comma;
+    const tail = raw.slice(raw.indexOf(' - ') + 3);
+    if (NAMES.has(tail)) return tail;
+  }
+  return raw;
+}
+
+// The pool every recommendation is drawn from. Sanctioned-legal by default, because
+// recommending a deck that cannot be played is worse than recommending fewer. Meta
+// and Next both read this, so the ban toggle can never mean two different things.
+function metaPool(){
+  return S.showIllegal === true ? (DECKS || []) : (DECKS || []).filter(deckLegalForConstructed);
+}
+
+/* ── the dash naming ───────────────────────────────────────────────────────
+   riftbound.gg writes `Champion - Epithet` where Riot's gallery writes the two
+   differently, and the same card therefore reaches this app under two names. The
+   ban page already showed this — it writes `Draven - Vanquisher` where the card is
+   `Draven, Vanquisher` — and the products Riot does not publish bring it into the
+   catalog itself: all six Arcane Box Set units are cards that already exist under a
+   comma name, and both Secret Garden legends are base-set legends with the champion
+   prepended.
+
+   Guessing from the shape of the name is not safe, because the same separator marks
+   something else entirely. `Wuju Bladesman - Starter` is a real, distinct legend and
+   a 3.9%-share archetype; stripping its prefix would delete it. So the fold is
+   data-driven: try both readings and accept one only if it names a card that really
+   exists. Verified over every dash-named card in the catalog, this merges exactly
+   the eight it should and leaves all four `- Starter` legends alone.               */
+let NAMES = new Set();          // every name in the catalog, for the fold below
+let CANON = new Map();          // "type|foldedName" -> the card that name really means
+let CHAMPS = new Set();         // every name a card is named after, to spot champion tags
+function gameName(card){
+  const n = card && card.n;
+  if (!n || !n.includes(' - ')) return n || '';
+  const comma = n.replace(' - ', ', ');     // Vi - Destructive -> Vi, Destructive
+  if (NAMES.has(comma)) return comma;
+  const tail = n.slice(n.indexOf(' - ') + 3);   // Lillia - Bashful Bloom -> Bashful Bloom
+  if (NAMES.has(tail)) return tail;
+  return n;
+}
+
+// Base printings win, so a folded name resolves to the real card rather than to
+// whichever printing happened to be first.
+// Rebuilt whenever the catalog is published, and the place every catalog-derived cache
+// is dropped. Putting the invalidation here rather than at the call site means a future
+// caller that republishes the catalog cannot forget to do it — which is exactly what
+// went wrong first time round, when only boot() knew to clear them.
+function buildNameIndex(){
+  NAMES = new Set();
+  CANON = new Map();
+  CHAMPS = new Set();
+  CHAMP_INDEX = null;
+  COST_BY_ID = null;
+  forgetDeckCaches();
+  if (!CAT) return;
+  for (const c of CAT.cards) NAMES.add(c.n);
+  for (const c of CAT.cards){
+    const k = c.t + '|' + c.n;
+    const prev = CANON.get(k);
+    if (!prev || (prev.v && !c.v)) CANON.set(k, c);
+    // A champion is a name that cards are named *after*: "Jinx, Rebel" makes Jinx one,
+    // while "Zaun" and "Yordle" never appear before a comma and so never qualify. Only
+    // the prefix counts, not the whole name — a token is named plainly "Bird", and
+    // admitting bare names let Bird pose as the champion of every Shurima bird unit.
+    const m = /^(.+?)(?:,| - )/.exec(c.n || '');
+    if (m) CHAMPS.add(m[1].trim());
+  }
+}
 
 function identityOf(card){
   if (!card) return null;
   if (card.t === 'Rune' || card.v === 'rune') return 'rune:' + card.n;
+  // Legends fold by name rather than by collector number. Alt arts sit next to their
+  // base printing (066a beside 066) so the numeric fold reaches them, but a legend's
+  // signature and overnumber are printed at a different number entirely — UNL-189 is
+  // base Bashful Bloom and UNL-230* is its signature — so nothing numeric can join
+  // them. Left unfolded, owning a legend failed to satisfy a deck citing another of
+  // its printings, which inflated 74 of 490 decks by the one card a legend costs.
+  if (card.t === 'Legend') return 'legend:' + gameName(card);
+  // Anything else reaching us under the dash name is the comma-named card. CANON is
+  // prebuilt so this stays a map lookup: identityOf runs per card per deck.
+  const canon = gameName(card);
+  if (canon !== card.n){
+    const twin = CANON.get(card.t + '|' + canon);
+    if (twin && twin.c !== card.c) return identityOf(twin);
+  }
   const p = splitCode(card.c);
   if (!p) return 'code:' + card.c;
   const coll = normColl(p.seg);
@@ -1586,17 +1891,53 @@ function ownedIdentities(){
 }
 
 // What a deck needs, and what you are short.
-function evalDeck(deck, have){
+/* What a deck asks for, resolved to card identities. This depends only on the deck and
+   the catalog, never on what is owned, so it is computed once per deck and kept.
+
+   That caching is the difference between the Meta tab costing 121ms and costing a
+   handful. Resolving a list means a matchRow call per card, and evalDeck was doing that
+   afresh for all ~480 decks on every render of Meta and Next — and the cost grows
+   linearly with the archive, so it was the thing that would eventually make the app
+   unusable rather than merely slow. Measured at four times the current archive it was
+   856ms a render.
+
+   The cache is dropped whenever the catalog or the ban list is published, which are the
+   only two things that can change the answer. */
+let DECK_REQ = new Map();     // deck slug -> { needById, unknown }
+function deckRequirements(deck){
+  const key = deck && deck.s;
+  const hit = key && DECK_REQ.get(key);
+  if (hit) return hit;
   const needById = new Map();     // identity -> {qty, card}
   const unknown = [];
   for (const [code, qty] of Object.entries(deck.cards || {})){
-    const hit = matchRow({ id: code });
-    if (!hit){ unknown.push(code); continue; }
-    const id = identityOf(hit.card);
+    const row = matchRow({ id: code });
+    if (!row){ unknown.push(code); continue; }
+    const id = identityOf(row.card);
     const prev = needById.get(id);
     if (prev) prev.qty += qty;
-    else needById.set(id, { qty, card: hit.card });
+    else needById.set(id, { qty, card: row.card });
   }
+  const out = { needById, unknown };
+  if (key) DECK_REQ.set(key, out);
+  return out;
+}
+
+// Which banned cards a deck runs. Also collection-independent, so also kept.
+let DECK_BANS = new Map();
+function deckBansCached(deck){
+  const key = deck && deck.s;
+  const hit = key && DECK_BANS.get(key);
+  if (hit) return hit;
+  const out = deckBans(deck);
+  if (key) DECK_BANS.set(key, out);
+  return out;
+}
+
+function forgetDeckCaches(){ DECK_REQ = new Map(); DECK_BANS = new Map(); }
+
+function evalDeck(deck, have){
+  const { needById, unknown } = deckRequirements(deck);
   const missing = [];
   let missingCopies = 0;
   for (const [id, need] of needById){
@@ -1618,30 +1959,66 @@ function metaArchetypes(pool){
   const have = ownedIdentities();
   const groups = new Map();
   for (const d of (pool || DECKS || [])){
-    const key = d.ln || 'Unidentified';
+    const key = archetypeName(d);
     const ev = evalDeck(d, have);
-    const bans = deckBans(d);
+    const bans = deckBansCached(d);
     const illegal = bans.some((x) => x.ban.formats.includes('constructed'));
     const row = { deck: d, ev, bans, illegal };
     const g = groups.get(key);
     if (!g){
       groups.set(key, { name: key, legend: d.lg, lists: 1, tourLists: d.tour ? 1 : 0,
-                        illegalLists: illegal ? 1 : 0,
+                        illegalLists: illegal ? 1 : 0, rows: [row],
                         best: row, bestPlace: d.pl ?? null, events: new Set([d.ev]) });
     } else {
       g.lists++;
+      g.rows.push(row);
       if (d.tour) g.tourLists++;
       if (illegal) g.illegalLists++;
       g.events.add(d.ev);
       if (d.pl != null && (g.bestPlace == null || d.pl < g.bestPlace)) g.bestPlace = d.pl;
-      // Closest wins: this view is about what you can build. Legality is handled by
-      // filtering the pool before it gets here, so that the "include banned" toggle
-      // actually surfaces those lists instead of being quietly outranked.
-      if (row.ev.missingCopies < g.best.ev.missingCopies) g.best = row;
+      // Closest wins, then cheapest: this view is about what you can build, and among
+      // lists you are equally close to, the one that costs less is the one to build.
+      // That tie is common and the spread inside it is large — the same archetype can
+      // be represented by a $210 list or a $3,586 one at an identical card gap — so
+      // this must match the tie-break in scorePool or the two views quote different
+      // prices for the same deck. Legality is handled by filtering the pool before it
+      // gets here, so the "include banned" toggle surfaces those lists instead of
+      // having them quietly outranked.
+      if (row.ev.missingCopies < g.best.ev.missingCopies ||
+          (row.ev.missingCopies === g.best.ev.missingCopies &&
+           (d.pr ?? Infinity) < (g.best.deck.pr ?? Infinity))) g.best = row;
     }
   }
   const total = (DECKS || []).length || 1;
-  return [...groups.values()].map((g) => ({ ...g, share: g.lists / total * 100 }));
+  return [...groups.values()].map((g) => ({ ...g, share: g.lists / total * 100, ...credibility(g) }));
+}
+
+/* ── credibility ───────────────────────────────────────────────────────────
+   A binary "was this a tournament deck" treated a 9-player local and a 433-player
+   major as the same evidence, which is most of why the README calls the tournament
+   half weak. Event sizes now ride on each deck as `ec`, so this can do better.
+
+   Deliberately not a score. A weighted number would need a made-up exchange rate
+   between players and recency, and an uninterpretable figure is worse than a crude
+   one you can argue with — the same reason there is no per-card price anywhere in
+   this app. Instead: how many distinct events the archetype turned up at, how many
+   players sat behind them, and when the most recent was. Three numbers you can read.
+
+   Players are summed over distinct events, not over decks. Three lists out of one
+   433-player event are one event's worth of evidence, and summing per deck would
+   claim 1,299 players of support for it.                                          */
+function credibility(g){
+  const byEvent = new Map();
+  let newest = null;
+  for (const row of (g.rows || [])){
+    const d = row.deck;
+    if (!d.tour || !d.ev) continue;
+    if (!byEvent.has(d.ev)) byEvent.set(d.ev, Number(d.ec) || 0);
+    if (d.dt && (!newest || d.dt > newest)) newest = d.dt;
+  }
+  let players = 0;
+  for (const n of byEvent.values()) players += n;
+  return { evCount: byEvent.size, evPlayers: players, evNewest: newest };
 }
 
 function deckCardsToLocal(deck){
@@ -1676,15 +2053,20 @@ function metaDeckText(deck){
   return lines.join('\n').trim();
 }
 
+const MISSING_SHOWN = 12;
 function missingBlock(ev){
   if (!ev.missing.length) return '';
-  return `<div class="rows" style="margin-top:8px">${ev.missing.map(m => `
+  const shown = ev.missing.slice(0, MISSING_SHOWN);
+  const rest = ev.missing.length - shown.length;
+  return `<div class="rows" style="margin-top:8px">${shown.map(m => `
     <div class="row">
       ${m.card.i ? `<img class="thumb" loading="lazy" src="${imgURL(m.card, 60)}" alt="" data-zoom="${esc(m.card.c)}">` : ''}
       <span class="nm">${dchips(m.card)} ${esc(m.card.n)}
         <span class="code">${esc(m.card.c)} · ${esc(m.card.t || '')}</span></span>
       <span class="qty need">need ${m.short} of ${m.need}${m.own ? ` · own ${m.own}` : ''}</span>
-    </div>`).join('')}</div>`;
+    </div>`).join('')}</div>${rest > 0 ? `<p class="note" style="margin-top:6px">and ${rest} more
+    distinct card${rest === 1 ? '' : 's'}; "Copy list" and "Add missing to wants" cover the whole
+    gap.</p>` : ''}`;
 }
 
 function deckPanel(g, opts){
@@ -1695,11 +2077,15 @@ function deckPanel(g, opts){
       <span class="meter-name">${esc(g.name)}
         ${g.lists > 1 ? `<span class="code">${g.lists} lists</span>` : ''}</span>
       <span class="meter-val" style="color:${done ? 'var(--good)' : 'var(--maize)'}">
-        ${done ? 'complete' : `${ev.missingCopies} card${ev.missingCopies === 1 ? '' : 's'} short`}</span>
+        ${done ? 'complete' : `${cost((opts && opts.gap) || gapCost(ev.missing))} · ${
+          ev.missingCopies} card${ev.missingCopies === 1 ? '' : 's'} short`}</span>
     </div>
     <div class="meter-sub">
       ${g.share ? `<span><b>${g.share.toFixed(1)}%</b> of recent lists</span>` : ''}
       ${g.tourLists ? `<span><b>${g.tourLists}</b> tournament</span>` : ''}
+      ${g.evCount ? `<span title="How big a field this archetype has been played in, summed over the distinct events it turned up at. This is the size of the test, not how well it did — that is the finish beside it."><b>${
+        g.evPlayers.toLocaleString('en-US')}</b>-player field${g.evCount > 1 ? ` over ${g.evCount} events` : ''}</span>` : ''}
+      ${g.evNewest ? `<span>last seen <b>${esc(g.evNewest)}</b></span>` : ''}
       ${g.bestPlace != null ? `<span>best finish <b>#${g.bestPlace}</b></span>` : ''}
       ${d.ev ? `<span>${esc(d.ev)}</span>` : ''}
       ${d.pl != null ? `<span>this list <b>#${d.pl}</b></span>` : ''}
@@ -1736,28 +2122,17 @@ function renderMeta(){
   // are pre-ban, and plenty of post-ban brews run banned cards anyway.
   const hideIllegal = S.showIllegal !== true;
   const illegalCount = (DECKS || []).filter(d => !deckLegalForConstructed(d)).length;
-  const pool = hideIllegal ? (DECKS || []).filter(deckLegalForConstructed) : (DECKS || []);
+  const pool = metaPool();
   const arch = metaArchetypes(pool);
-  const near = S.closeThreshold ?? 5;
 
-  const byGap = (a, b) => a.best.ev.missingCopies - b.best.ev.missingCopies || b.share - a.share;
-  const ready = arch.filter(g => g.best.ev.missingCopies === 0)
-                    .sort((a, b) => b.share - a.share);
-  const within = arch.filter(g => g.best.ev.missingCopies > 0 && g.best.ev.missingCopies <= near)
-                     .sort(byGap);
-  // An empty section teaches nothing. When the collection is not close to anything
-  // yet, show the shortest paths anyway and say plainly that they are over the line.
-  const fellShort = within.length === 0;
-  const close = fellShort
-    ? arch.filter(g => g.best.ev.missingCopies > 0).sort(byGap).slice(0, 5)
-    : within;
-
-  const IDEAL_SHOWN = 12;
-  const idealAll = arch.slice().sort((a, b) => b.share - a.share ||
-                    (a.bestPlace ?? 999) - (b.bestPlace ?? 999));
-  const ideal = idealAll.slice(0, IDEAL_SHOWN);
-
+  // Nothing here is collection-relative any more. What you can build, what is within
+  // reach and what to buy all live on Next, which is the only tab that should be
+  // answering those. This one describes the field and how far to trust the snapshot.
   const events = new Set(DECKS.map(d => d.ev).filter(Boolean)).size;
+  const POP_SHOWN = 20;
+  const popular = arch.slice().sort((a, b) => b.lists - a.lists ||
+                    (a.bestPlace ?? 999) - (b.bestPlace ?? 999) || a.name.localeCompare(b.name));
+  const withEvidence = arch.filter(g => g.evCount).length;
 
   host.innerHTML = `
     <div class="panel">
@@ -1767,63 +2142,1115 @@ function renderMeta(){
       lists on riftbound.gg; the ${DECKS.filter(d => d.tour).length} tournament entries among them
       also carry an event and a finishing place, which is the only hard evidence a list is good.
       ${DECKS_WINDOW ? `Covers ${esc(DECKS_WINDOW.from)} to ${esc(DECKS_WINDOW.to)}.` : ''}
-      Snapshot taken ${esc(DECKS_AT || 'unknown')}. Each archetype below is represented by whichever
-      of its lists you are closest to finishing.</p>
-      <p class="note" style="margin-top:8px">Buildability goes by card, not printing: an alt art,
-      signature or overnumber counts as the base card, and any Fury Rune is a Fury Rune whatever
-      set it came from. Close means within
-      <input type="number" min="1" max="60" value="${near}" id="close-threshold"
-        style="width:48px;text-align:center;background:var(--bg2);border:1px solid var(--line2);border-radius:4px;padding:2px">
-      cards.</p>
+      Snapshot taken ${esc(DECKS_AT || 'unknown')}.</p>
+      <p class="note" style="margin-top:8px">This is the reference view: what is being played, and
+      how much of it is evidence rather than noise. What <em>you</em> can build, what is within reach
+      and what to buy are all on the <b>Next</b> tab, which is the only place that compares any of this
+      to your collection.</p>
+      ${staleNote('decks', 'everything on this tab')}
+      ${EVENTS_COVER ? `<p class="note" style="margin-top:8px">What the tournament half of this rests on,
+        plainly: the archive lists <b>${EVENTS_COVER.events}</b> events and the snapshot has lists for
+        <b>${EVENTS_COVER.eventsWithDecks}</b> of them, covering
+        <b>${EVENTS_COVER.playersWithDecks}</b> of ${EVENTS_COVER.players} players
+        (${Math.round(EVENTS_COVER.playersWithDecks / (EVENTS_COVER.players || 1) * 100)}%).
+        ${(() => {
+          const seen = EVENTS_COVER.decksByEvent || {};
+          const absent = (EVENTS || []).filter(e => !(e.name in seen))
+                                       .sort((a, b) => b.players - a.players).slice(0, 3);
+          return absent.length ? `The biggest events with no lists at all are ${absent
+            .map(e => `${esc(e.name)} (${e.players}p)`).join(', ')}.` : '';
+        })()}
+        That gap is upstream and cannot be closed here, so it is stated rather than implied away.</p>
+        <p class="note" style="margin-top:6px">Only <b>${arch.filter(g => g.evCount).length}</b> of
+        ${arch.length} archetypes have any tournament evidence at all; the rest are ranked on public-deck
+        popularity alone. Where a field size is shown, it is how big a room the archetype was played in,
+        not how well it did — one entry in a 433-player event finished #158.</p>` : ''}
       <div class="bar-row" style="margin-top:12px">
         <button class="chip" id="btn-show-illegal" aria-pressed="${!hideIllegal}">Include lists with banned cards</button>
         <span class="note">${illegalCount} of ${(DECKS || []).length} lists run a banned card${
           hideIllegal ? ' and are hidden' : ''}${BANNED.size ? `; ban list from ${esc(BANNED_AT || '?')}` : ''}</span>
       </div>
       <div class="stats" style="margin-top:14px">
-        <div class="stat"><div class="v" style="color:var(--good)">${ready.length}</div><div class="k">ready to build</div></div>
-        <div class="stat"><div class="v" style="color:var(--maize)">${close.length}</div><div class="k">close</div></div>
         <div class="stat"><div class="v">${arch.length}</div><div class="k">archetypes seen</div></div>
         <div class="stat"><div class="v">${DECKS.length}</div><div class="k">lists</div></div>
+        <div class="stat"><div class="v" style="color:${withEvidence ? 'var(--teal)' : 'var(--dimmer)'}">${withEvidence}</div><div class="k">with tournament evidence</div></div>
+        <div class="stat"><div class="v">${EVENTS_COVER ? `${EVENTS_COVER.eventsWithDecks}/${EVENTS_COVER.events}` : events}</div><div class="k">events with lists</div></div>
       </div>
     </div>
 
-    <div class="panel">
-      <h2>READY DECKS <span class="code">${ready.length}</span></h2>
-      <p class="note">Every card already in the collection. Buildable tonight.</p>
-    </div>
-    ${ready.length ? ready.map(g => deckPanel(g, { showMissing:false })).join('')
-      : `<div class="panel"><p class="empty">Nothing buildable yet. The Close list below is the
-         shortest path there.</p></div>`}
+    ${newsBlock(['Metagame','Events'], 4) ? `<div class="panel">
+      <h2>WHAT THEY'RE SAYING</h2>
+      <p class="note">riftbound.gg's own metagame and event write-ups. An outside reading to check the
+      one above against, since this tab infers the meta from deck lists while they watch the events.</p>
+      ${newsBlock(['Metagame','Events'], 4)}
+    </div>` : ''}
 
     <div class="panel">
-      <h2>CLOSE DECKS <span class="code">${close.length}</span></h2>
-      ${fellShort
-        ? `<p class="note">Nothing is within ${near} cards yet, so these are the five shortest
-           paths instead, closest first. The gap is real: a tournament list runs three copies of
-           most cards, and a collection spread thin across sets will be a long way from any of
-           them. "Add missing to wants" pushes a deck's gap onto the trade list.</p>`
-        : `<p class="note">Within ${near} cards. The gap is listed per deck, and
-           "Add missing to wants" pushes it onto the trade list.</p>`}
+      <h2>WHAT IS BEING PLAYED <span class="code">${arch.length}</span></h2>
+      <p class="note">Ranked by how many lists play each archetype. The columns to the right are the
+      evidence: tournament lists, the size of field it was played in, when it last turned up and its
+      best finish. Read the blanks — most archetypes have no tournament record at all, so their
+      standing here rests entirely on people posting brews.${
+        popular.length > POP_SHOWN ? ` Showing the top ${POP_SHOWN} of ${popular.length}.` : ''}</p>
+      <div class="rows" style="margin-top:8px">${popular.slice(0, POP_SHOWN).map(g => `
+        <div class="row">
+          <span class="nm">${esc(g.name)}
+            <span class="code">${g.lists} list${g.lists === 1 ? '' : 's'} · ${g.share.toFixed(1)}%${
+              g.tourLists ? ` · ${g.tourLists} tournament` : ''}</span></span>
+          <span class="qty${g.evCount ? '' : ' need'}">${g.evCount
+            ? `${g.evPlayers.toLocaleString('en-US')}-player field<span class="code"> · last ${
+                esc(g.evNewest)}${g.bestPlace != null ? ` · best #${g.bestPlace}` : ''}</span>`
+            : 'no tournament record'}</span>
+        </div>`).join('')}</div>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   NEXT: what to acquire, and in what order
+   ══════════════════════════════════════════════════════════════════════════
+   The Meta tab answers "what can I build?". This answers "what do I do next?",
+   which is the question riftbound.gg structurally cannot: it knows the cards and
+   it knows the decks, but not both at once.
+
+   Everything here turns on overlap. The naive shopping list is the shortfall of
+   the single closest deck, which is what the Close section already shows. It is
+   usually the wrong list, because a card sitting in six archetypes' shortfalls is
+   worth more than a card sitting in one, even when that one deck is closer. So the
+   unit of value is not "cards I am missing" but "meta share this card stands in
+   front of".                                                                    */
+
+// A deck's requirements do not depend on what you own, so resolve each list once
+// and score it against a hypothetical collection as often as the search needs.
+// Without this cache the greedy path below re-parses 450 lists on every step.
+function reqOf(d){ return deckRequirements(d).needById; }
+
+// Archetypes scored against a hypothetical collection. Same rules as
+// metaArchetypes: grouped by Legend, represented by whichever list is closest to
+// done. Cheap enough to call once per search step, which metaArchetypes is not.
+function scorePool(pool, have){
+  const groups = new Map();
+  for (const d of pool){
+    const key = archetypeName(d);
+    let short = 0, distinct = 0, spend = 0, unpriced = 0;
+    const costs = costIndex();
+    for (const [id, need] of reqOf(d)){
+      const s = need.qty - (have.get(id) || 0);
+      if (s > 0){
+        short += s; distinct++;
+        const each = costs.get(id);
+        if (each === undefined) unpriced += s; else spend += each * s;
+      }
+    }
+    const g = groups.get(key);
+    if (!g) groups.set(key, { name:key, lists:1, short, distinct, deck:d, spend, unpriced });
+    else {
+      g.lists++;
+      // Closest wins, and among equally close lists the cheaper one, since they are
+      // interchangeable to the collection but not to the wallet.
+      if (short < g.short || (short === g.short && (d.pr ?? Infinity) < (g.deck.pr ?? Infinity))){
+        g.short = short; g.distinct = distinct; g.deck = d; g.spend = spend; g.unpriced = unpriced;
+      }
+    }
+  }
+  const total = (DECKS || []).length || 1;
+  return [...groups.values()].map(g => ({ ...g, share: g.lists / total * 100 }));
+}
+
+/* ── what a card costs ─────────────────────────────────────────────────────
+   The catalog carries `mp` per printing: what that printing costs in the cheapest
+   finish it comes in. Buildability goes by card rather than by printing, though — a
+   deck asking for Blade Dancer is satisfied by any printing of it — so the price of a
+   *card* is the cheapest of its printings. Which is also the honest answer to "what
+   will this cost me", since that is the one you would buy.
+
+   Taking a minimum has a useful side effect. Their foil listings contain obvious junk,
+   a Calm Rune priced at $8,888 among it, and a nonsense high price can never win a
+   minimum. So no threshold is needed to keep bad data out of the total.
+
+   124 of 1,189 printings carry no price at all. A total covering one of those is a
+   floor rather than an estimate, and anything quoting a total says which it is.        */
+let COST_BY_ID = null;
+function costIndex(){
+  if (COST_BY_ID) return COST_BY_ID;
+  COST_BY_ID = new Map();
+  if (!CAT) return COST_BY_ID;
+  for (const c of CAT.cards){
+    if (!(c.mp > 0)) continue;
+    const id = identityOf(c);
+    if (!id) continue;
+    const prev = COST_BY_ID.get(id);
+    if (prev === undefined || c.mp < prev) COST_BY_ID.set(id, c.mp);
+  }
+  return COST_BY_ID;
+}
+
+const cardCost = (card) => { const id = identityOf(card); return id ? costIndex().get(id) : undefined; };
+
+// The cost of a shortfall, and how much of it is actually priced. Callers need both:
+// a total is only as good as its coverage, and saying "$34" while silently skipping
+// four unpriced cards would be the kind of confident wrongness this app tries to avoid.
+function gapCost(missing){
+  let total = 0, priced = 0, unpriced = 0;
+  for (const m of (missing || [])){
+    const each = cardCost(m.card);
+    const n = m.short ?? m.copies ?? 0;
+    if (each === undefined){ unpriced += n; continue; }
+    total += each * n;
+    priced += n;
+  }
+  return { total, priced, unpriced, complete: unpriced === 0 };
+}
+
+// "$34" or "$34+" when part of the gap has no listing, so the plus sign carries the
+// caveat instead of a footnote nobody reads.
+const cost = (g) => g.priced === 0 && g.unpriced > 0 ? 'no prices'
+  : `$${g.total < 10 ? g.total.toFixed(2) : Math.round(g.total).toLocaleString('en-US')}${g.complete ? '' : '+'}`;
+
+const readyShareOf = (scored) => scored.reduce((a, g) => a + (g.short === 0 ? g.share : 0), 0);
+
+/* Which deck to go after next, and there is no single right answer.
+
+   For a long time this was fewest-cards-short first, with the price of the whole list
+   as a tie-break. That was the best available: cards short was the only real quantity,
+   and list price stood in for what the gap would cost. Per-card prices exist now, so
+   the gap can be costed directly, and the substitution changed the answer — badly. On
+   one collection the old ordering picked a nine-card gap costing $55 over a fourteen-card
+   gap costing $4. Five more cards for fifty-one fewer dollars.
+
+   So neither axis dominates: money is the real constraint, but fifty-six cards is
+   fifty-six things to find even if they are commons, and there is no honest exchange
+   rate between dollars and that friction. Rather than invent one, both orderings are
+   offered and both numbers are always on screen. Cheapest is the default because it is
+   the axis you cannot argue with. */
+const byTarget = (a, b) => (S.planBy === 'cards' ? byCards(a, b) : byCost(a, b));
+
+const gapSpend = (x) => x.spend ?? (x.gap ? x.gap.total : 0);
+// An unpriced card sorts last within its own bracket rather than counting as free.
+const gapUnpriced = (x) => x.unpriced ?? (x.gap ? x.gap.unpriced : 0);
+
+const byCost = (a, b) =>
+  gapSpend(a) - gapSpend(b) ||
+  gapUnpriced(a) - gapUnpriced(b) ||
+  a.short - b.short ||
+  b.share - a.share ||
+  a.name.localeCompare(b.name);
+
+const byCards = (a, b) =>
+  a.short - b.short ||
+  gapSpend(a) - gapSpend(b) ||
+  b.share - a.share ||
+  a.distinct - b.distinct ||
+  a.name.localeCompare(b.name);
+const money = (n) => n == null ? 'price unknown' : '$' + n.toLocaleString('en-US');
+
+// Every card standing between the collection and a deck, with what it costs and
+// what it is in the way of. `copies` is the most any one archetype is short, since
+// buying that many satisfies all of them at once.
+function cardLeverage(arch){
+  const out = new Map();
+  for (const g of arch){
+    if (g.best.ev.missingCopies === 0) continue;
+    const sole = g.best.ev.distinctMissing === 1;   // this card is all that is left
+    for (const m of g.best.ev.missing){
+      const id = identityOf(m.card);
+      if (!id) continue;
+      const e = out.get(id) || { id, card:m.card, blocks:[], copies:0, reach:0, unlocks:[] };
+      e.blocks.push({ name:g.name, share:g.share, short:m.short, gap:g.best.ev.missingCopies });
+      e.copies = Math.max(e.copies, m.short);
+      e.reach += g.share;
+      if (sole) e.unlocks.push(g.name);
+      out.set(id, e);
+    }
+  }
+  // Finishing a deck outright ranks first. After that it is how many archetypes are
+  // short of the card, not the share they represent: in a meta this flat, "wanted by
+  // nine decks" is a real signal and "wanted by 4.3% instead of 3.3%" is noise.
+  return [...out.values()].sort((a, b) =>
+    b.unlocks.length - a.unlocks.length ||
+    b.blocks.length - a.blocks.length ||
+    b.reach - a.reach ||
+    a.copies - b.copies ||
+    a.card.n.localeCompare(b.card.n));
+}
+
+// The order to buy in: pick a deck to finish, buy its shortfall, re-score, repeat.
+//
+// The obvious design is one greedy pass over cards, scoring each by the meta share
+// it unblocks. It does not work, and the way it fails is instructive. Any aggregate
+// score prefers breadth: a card wanted by eight half-built decks always outscores
+// the last card of one. Against the real snapshot that path spent 29 cards without
+// finishing a single deck, because "unblocks a deck outright" only becomes a nonzero
+// signal at the very last card, far too late to steer anything. Naming a target
+// first makes convergence structural rather than something to hope for.
+//
+// Targeting is by cards short, then by what the list costs, and only then by share.
+// Share is last because this meta is flat: 48 archetypes splitting 1-4% of lists
+// each, so "most played" separates almost nothing while "cards short" spans 10 to
+// 54. Price is second because ties on cards short are not rare, they are the normal
+// case, and within a tie price is the axis that actually differs. Against a
+// staples-only collection, 15 archetypes tied at exactly 38 cards short, spanning
+// $63 to $1352 while their shares spanned 0.4% to 3.9%. Ranking that tie by share
+// picked the most expensive deck in it. If a dominant deck ever emerges, share
+// becomes worth weighting again and this ranking should be revisited.
+//
+// What price cannot do is cost the gap itself, because there is no per-card price in
+// any of the feeds, only a total per list. Deriving one by decomposing 490 deck
+// totals over ~600 unknown cards would produce numbers with error bars far too wide
+// to spend money on, so the app quotes the whole list's price and says so. It is
+// still the right signal for a tie: an expensive list is expensive because of a few
+// chase rares, and those are exactly the cards a partial collection is missing.
+//
+// Overlap still pays, in the one place it can be spent honestly: within a target,
+// the cards that other open archetypes also want come first, so a plan abandoned
+// halfway leaves the collection better placed than a flat shortfall list would.
+function acquisitionPath(pool, maxDecks, maxSteps){
+  const have = new Map(ownedIdentities());
+  let scored = scorePool(pool, have);
+  let ready = new Set(scored.filter(g => g.short === 0).map(g => g.name));
+  const steps = [], targets = [];
+  const bought = new Set();     // a later target can want a copy beyond an earlier one
+  let cum = 0, truncated = false;
+
+  for (let round = 0; round < (maxDecks || 3); round++){
+    const open = scored.filter(g => g.short > 0);
+    if (!open.length) break;
+    const target = open.slice().sort(byTarget)[0];
+
+    const gap = [];
+    for (const [id, need] of reqOf(target.deck)){
+      const s = need.qty - (have.get(id) || 0);
+      if (s > 0) gap.push({ id, card:need.card, copies:s, reach:0, blocks:0 });
+    }
+    // How many other open archetypes are short of the same card.
+    for (const c of gap)
+      for (const g of open){
+        if (g === target) continue;
+        const n = reqOf(g.deck).get(c.id);
+        if (n && n.qty - (have.get(c.id) || 0) > 0){ c.reach += g.share; c.blocks++; }
+      }
+    gap.sort((a, b) => b.blocks - a.blocks || b.reach - a.reach || b.copies - a.copies ||
+                       a.card.n.localeCompare(b.card.n));
+
+    targets.push({ name:target.name, share:target.share, lists:target.lists,
+                   short:target.short, distinct:target.distinct, deck:target.deck,
+                   price:target.deck.pr ?? null, steps:gap.length });
+
+    for (const c of gap){
+      if (steps.length >= (maxSteps || 24)){ truncated = true; break; }
+      // The total that list wants, not just the shortfall, so "add to wants" still
+      // reads correctly once some of the copies arrive.
+      const need = (have.get(c.id) || 0) + c.copies;
+      have.set(c.id, need);
+      cum += c.copies;
+      scored = scorePool(pool, have);
+      const now = new Set(scored.filter(g => g.short === 0).map(g => g.name));
+      const gained = [...now].filter(n => !ready.has(n));
+      steps.push({ id:c.id, card:c.card, copies:c.copies, need, cum, target:target.name,
+                   each: cardCost(c.card),
+                   again: bought.has(c.id), blocks:c.blocks, reach:c.reach, unlocked:gained,
+                   readyShare: readyShareOf(scored) });
+      bought.add(c.id);
+      ready = now;
+    }
+    if (truncated) break;
+  }
+  return { steps, targets, truncated };
+}
+
+// The union of what a set of archetypes is short, which is the number that matters
+// when deciding how far three decks really are: their shortfalls overlap heavily,
+// so summing them badly overstates the cost.
+function unionGap(archs){
+  const need = new Map();
+  for (const g of archs)
+    for (const m of g.best.ev.missing){
+      const id = identityOf(m.card);
+      if (id) need.set(id, Math.max(need.get(id) || 0, m.short));
+    }
+  let copies = 0;
+  for (const n of need.values()) copies += n;
+  return { copies, distinct: need.size, need };
+}
+
+function pathText(steps){
+  if (!steps || !steps.length) return 'ACQUISITION PLAN\n\n(nothing to buy)';
+  const lines = ['ACQUISITION PLAN', ''];
+  let target = null;
+  for (const s of steps){
+    if (s.target !== target){
+      target = s.target;
+      const t = NEXT_PLAN_TARGETS.find(x => x.name === target);
+      lines.push(`── toward ${target}${t ? `  (${t.short} cards short, ${money(t.price)} list)` : ''}`);
+    }
+    lines.push(`  ${s.copies}x ${s.again ? 'more ' : ''}${s.card.n}  ${s.card.c}` +
+               (s.each !== undefined ? `   $${(s.each * s.copies).toFixed(2)}` : '   (no price)') +
+               (s.again ? `   (${s.need} in total)` : '') +
+               (s.blocks ? `   (${s.blocks} other deck${s.blocks === 1 ? ' wants' : 's want'} it)` : ''));
+    if (s.unlocked.length) lines.push(`     -> completes ${s.unlocked.join(', ')}`);
+  }
+  const g = gapCost(steps.map(x => ({ card: x.card, short: x.copies })));
+  lines.push('', `${steps[steps.length - 1].cum} cards, ${cost(g)} in total` +
+    (g.complete ? '.' : `, plus ${g.unpriced} card${g.unpriced === 1 ? '' : 's'} with no listing.`));
+  return lines.join('\n');
+}
+
+// The last plan rendered, so the buttons under it act on exactly what is on screen.
+let NEXT_PLAN = [], NEXT_PLAN_TARGETS = [];
+
+function renderNext(){
+  const host = document.getElementById('v-next');
+  if (!DECKS){
+    host.innerHTML = `<div class="panel"><h2>NEXT</h2><p class="note">No deck snapshot yet, so there is
+      nothing to plan against. Run <code>node scripts/build-decks.mjs</code>.</p></div>`;
+    return;
+  }
+  const pool = metaPool();
+  const arch = metaArchetypes(pool);
+  // Flattened to the shape the planner ranks, so this table and the plan's auto-pick
+  // cannot disagree about what "closest" means.
+  const cand = arch.filter(g => g.best.ev.missingCopies > 0).map(g => ({
+    name:g.name, short:g.best.ev.missingCopies, distinct:g.best.ev.distinctMissing,
+    share:g.share, lists:g.lists, deck:g.best.deck, gap:gapCost(g.best.ev.missing),
+  })).sort(byTarget);
+  const nextDeck = cand[0] || null;
+
+  // A deck a card or two further out can cost a fraction of the closest one. That is
+  // a real choice rather than a rounding error, so it gets said out loud instead of
+  // being settled silently by the sort.
+  // Three brackets, and every open archetype lands in exactly one of them. The split is
+  // by money because that is the axis you cannot argue with: a dollar threshold spreads
+  // this set out where a card threshold compresses it, and the panels below are detailed
+  // for what is inside and one row each for what is not, so nothing appears twice.
+  const nearSpend = S.nearSpend ?? 25;
+  const inReach = cand.filter(c => c.gap.unpriced === 0 && c.gap.total <= nearSpend);
+  // An empty section teaches nothing. When nothing is inside the threshold, show the
+  // cheapest few anyway and say plainly that they are over the line.
+  const reachFellShort = inReach.length === 0;
+  const reachAll = reachFellShort ? cand.slice(0, 3) : inReach;
+  // Only the cheapest few get a full panel. A generous threshold can put twenty
+  // archetypes in reach, and twenty panels each carrying its own shortfall is a wall
+  // rather than an answer — the same mistake the Legends tab made first time round.
+  // The remainder drop into the ranked list below, so nothing is detailed twice and
+  // nothing disappears.
+  const REACH_DETAIL = 6;
+  const reach = reachAll.slice(0, REACH_DETAIL);
+  const reachNames = new Set(reach.map(c => c.name));
+  const beyond = cand.filter(c => !reachNames.has(c.name));
+  const reachOverflow = reachAll.length - reach.length;
+  const buildableAll = arch.filter(g => g.best.ev.missingCopies === 0)
+                           .sort((a, b) => b.lists - a.lists || a.name.localeCompare(b.name));
+  const BUILDABLE_DETAIL = 6;
+  const buildable = buildableAll.slice(0, BUILDABLE_DETAIL);
+  const buildableRest = buildableAll.slice(BUILDABLE_DETAIL);
+  const archByName = new Map(arch.map(g => [g.name, g]));
+
+  // The live tie and the live card count, so both claims describe this collection
+  // rather than a remembered measurement.
+  const tie = nextDeck ? cand.filter(c => c.short === nextDeck.short) : [];
+  const tiePrices = tie.map(c => c.deck.pr).filter(x => x != null).sort((a, b) => a - b);
+  const poolIds = new Set();
+  for (const d of pool) for (const id of reqOf(d).keys()) poolIds.add(id);
+  const poolCards = poolIds.size;
+
+  const near = nextDeck ? cand.filter(c => c.short <= nextDeck.short + 3) : [];
+  const cheapest = near.slice().sort((a, b) => (a.deck.pr ?? Infinity) - (b.deck.pr ?? Infinity))[0];
+  const bargain = cheapest && nextDeck && cheapest.name !== nextDeck.name &&
+                  (nextDeck.deck.pr ?? Infinity) > (cheapest.deck.pr ?? 0) * 2 ? cheapest : null;
+  const lev = cardLeverage(arch);
+  const plan = acquisitionPath(pool, 3, 24);
+  const steps = plan.steps;
+  NEXT_PLAN = steps;
+  NEXT_PLAN_TARGETS = plan.targets;
+
+  // What the plan's own targets cost together, once shared cards are counted once
+  // rather than twice. This is the number that justifies planning three decks at a
+  // time instead of one, so it has to be the plan's targets and not an arbitrary
+  // top three.
+  const planned = plan.targets.map(t => arch.find(g => g.name === t.name)).filter(Boolean);
+  const cover = unionGap(planned);
+  const sumGaps = planned.reduce((a, g) => a + g.best.ev.missingCopies, 0);
+
+  const LEV_SHOWN = 14;
+  const levShown = lev.slice(0, LEV_SHOWN);
+
+  // With a partner loaded, the plan splits into what is gettable in trade and what
+  // has to be bought. Without one it cannot: nobody's surplus is known.
+  const offers = PARTNER ? PARTNER.offers : null;
+  const gettable = offers ? steps.filter(s => offers.has(s.id)) : [];
+  const mustBuy  = offers ? steps.filter(s => !offers.has(s.id)) : [];
+
+  const levRow = (c) => `
+    <div class="row">
+      ${c.card.i ? `<img class="thumb" loading="lazy" src="${imgURL(c.card, 60)}" alt="" data-zoom="${esc(c.card.c)}">` : ''}
+      <span class="nm">${dchips(c.card)} ${esc(c.card.n)}
+        <span class="code">${esc(c.card.c)} · need ${c.copies}</span>
+        ${c.unlocks.length ? `<span class="code" style="color:var(--good)">
+          finishes ${esc(c.unlocks.slice(0, 2).join(', '))}${c.unlocks.length > 2 ? ` +${c.unlocks.length - 2}` : ''}</span>` : ''}
+        ${offers && offers.has(c.id) ? `<span class="code" style="color:var(--teal)">${esc(PARTNER.user)} has ${offers.get(c.id).qty}</span>` : ''}
+      </span>
+      <span class="qty${c.unlocks.length ? '' : ' need'}">${
+        cardCost(c.card) !== undefined ? `$${(cardCost(c.card) * c.copies).toFixed(2)}` : 'no price'
+      }<span class="code"> · ${c.blocks.length} deck${c.blocks.length === 1 ? '' : 's'}</span></span>
+    </div>`;
+
+  const stepRow = (s, i) => `
+    <div class="row">
+      <span class="code" style="width:22px;flex:none;text-align:right">${i + 1}</span>
+      ${s.card.i ? `<img class="thumb" loading="lazy" src="${imgURL(s.card, 60)}" alt="" data-zoom="${esc(s.card.c)}">` : ''}
+      <span class="nm">${dchips(s.card)} <b>${s.copies}x</b>${s.again ? ' more' : ''} ${esc(s.card.n)}
+        <span class="code">${esc(s.card.c)}${s.again ? ` · ${s.need} in total` : ''}</span>
+        ${s.unlocked.length
+          ? `<span class="code" style="color:var(--good)">completes ${esc(s.unlocked.join(', '))}</span>`
+          : s.blocks ? `<span class="code">${s.blocks} other deck${s.blocks === 1 ? ' wants' : 's want'} it</span>`
+          : `<span class="code">this deck only</span>`}
+        ${offers && offers.has(s.id) ? `<span class="code" style="color:var(--teal)">tradeable from ${esc(PARTNER.user)}</span>` : ''}
+      </span>
+      <span class="qty${s.unlocked.length ? '' : ' need'}">${
+        s.each !== undefined ? `$${(s.each * s.copies).toFixed(2)}` : 'no price'}<span class="code"> · ${
+        s.cum} cards in</span></span>
+    </div>`;
+
+  host.innerHTML = `
+    <div class="panel">
+      <h2>WHAT TO DO NEXT</h2>
+      <p class="note">${arch.length} archetypes from ${pool.length} sanctioned-legal lists, ranked not by
+      how good they are but by what they cost <em>you</em>. The plan below names a deck to finish and
+      then buys toward it, ordering the shortfall so the cards other decks also want come first.
+      Change the ban toggle on the Meta tab and this changes with it.</p>
+      <div class="stats" style="margin-top:14px">
+        <div class="stat"><div class="v" style="color:var(--good)">${buildableAll.length}</div><div class="k">archetypes buildable</div></div>
+        <div class="stat"><div class="v" style="color:var(--maize)">${nextDeck ? nextDeck.short : '—'}</div><div class="k">cards to the next deck</div></div>
+        <div class="stat"><div class="v">${nextDeck ? cost(nextDeck.gap) : '—'}</div><div class="k">to close that gap</div></div>
+        <div class="stat"><div class="v">${lev.length}</div><div class="k">cards in the way</div></div>
+      </div>
+      ${nextDeck ? `<p class="note" style="margin-top:12px">The closest archetype is
+        <b style="color:var(--cream)">${esc(nextDeck.name)}</b>: ${nextDeck.short}
+        card${nextDeck.short === 1 ? '' : 's'} short across
+        ${nextDeck.distinct} distinct card${nextDeck.distinct === 1 ? '' : 's'} costing
+        <b style="color:var(--cream)">${cost(nextDeck.gap)}</b>, and ${nextDeck.lists} of the
+        ${(DECKS || []).length} lists in the snapshot play it. The whole list runs
+        ${money(nextDeck.deck.pr)}, so most of it is already in hand.</p>`
+        : `<p class="note" style="margin-top:12px">Every archetype in the pool is already buildable.</p>`}
+      ${buildableAll.length ? `<p class="note" style="margin-top:6px;color:var(--good)">${
+        buildableAll.length} archetype${buildableAll.length === 1 ? ' is' : 's are'} buildable from the
+        collection as it stands: ${buildableAll.slice(0, 6).map(g => esc(g.name)).join(', ')}${
+        buildableAll.length > 6 ? `, and ${buildableAll.length - 6} more` : ''}.</p>` : ''}
+      ${bargain ? `<p class="note" style="margin-top:6px;color:var(--maize)">Worth a look before you
+        commit: <b style="color:var(--cream)">${esc(bargain.name)}</b> is
+        ${bargain.short - nextDeck.short} card${bargain.short - nextDeck.short === 1 ? '' : 's'} further
+        out but runs ${money(bargain.deck.pr)} against ${money(nextDeck.deck.pr)}.</p>` : ''}
+      ${planned.length > 1 ? `<p class="note" style="margin-top:6px">The ${planned.length} decks this plan
+        targets are ${sumGaps} cards short between them, but only
+        <b style="color:var(--cream)">${cover.copies}</b> once shared cards are counted once:
+        ${sumGaps - cover.copies} of those cards do double duty.</p>` : ''}
+      ${staleNote('decks', 'the plan below')}
+      <div class="bar-row" style="margin-top:12px">
+        <span class="lbl">Go after</span>
+        <button class="chip" data-plan-by="cost" aria-pressed="${S.planBy !== 'cards'}">the cheapest gap</button>
+        <button class="chip" data-plan-by="cards" aria-pressed="${S.planBy === 'cards'}">the fewest cards</button>
+      </div>
+      <p class="note" style="margin-top:8px">Both axes are real and they disagree, so this is a choice
+      rather than a calculation. Money is the constraint you cannot argue with, but a cheap gap can be
+      fifty-six separate cards to track down, and there is no honest rate of exchange between dollars
+      and that hunting. Whichever you pick, both numbers stay on screen.
+      ${(() => {
+        const other = S.planBy === 'cards' ? byCost : byCards;
+        const alt = cand.slice().sort(other)[0];
+        return alt && nextDeck && alt.name !== nextDeck.name
+          ? `By the other measure it would be <b style="color:var(--cream)">${esc(alt.name)}</b>:
+             ${alt.short} cards, ${cost(alt.gap)}.` : '';
+      })()}</p>
+      <p class="note" style="margin-top:6px">Popularity breaks ties and no more, because it is a weak
+      signal here: ${arch.length} archetypes split the lists between them and the most-played takes
+      ${Math.max(...arch.map(g => g.share)).toFixed(1)}%.</p>
     </div>
-    ${close.map(g => deckPanel(g, { showMissing:true })).join('')}
+
+    ${buildableAll.length ? `<div class="panel">
+      <h2 style="color:var(--good)">BUILDABLE NOW <span class="code">${buildableAll.length}</span></h2>
+      <p class="note">Every card already in the collection. These need nothing.${
+        buildableRest.length ? ` The ${buildable.length} most-played are detailed below; the other ${
+          buildableRest.length} are ${buildableRest.map(g => esc(g.name)).join(', ')}.` : ''}</p>
+    </div>
+    ${buildable.map(g => deckPanel(g, { showMissing:false })).join('')}` : ''}
 
     <div class="panel">
-      <h2>IDEAL DECKS <span class="code">${idealAll.length}</span></h2>
-      <p class="note">The meta ranked by how often each archetype shows up in recent lists, best
-      tournament finish as the tiebreak, regardless of what you own. This is the target list rather
-      than the shopping list.${idealAll.length > IDEAL_SHOWN
-        ? ` Showing the top ${IDEAL_SHOWN}; the remaining ${idealAll.length - IDEAL_SHOWN}
-            archetypes appeared in only a handful of lists each.` : ''}</p>
+      <h2>WITHIN REACH <span class="code">${reach.length}</span></h2>
+      <p class="note">${reachFellShort
+        ? `Nothing is under $${nearSpend} yet, so these are the three cheapest gaps instead. The
+           distance is real: a tournament list runs three copies of most cards, and a collection
+           spread thin across sets will be a long way from any of them.`
+        : `Gaps costing under $${nearSpend}, cheapest first. Each card is priced at its cheapest
+           printing, and the shortfall is listed per deck.`}
+        "Add missing to wants" pushes a deck's gap onto the trade list.</p>
+      <div class="bar-row" style="margin-top:10px">
+        <span class="lbl">Within reach means under $</span>
+        <input type="number" min="1" max="2000" step="5" value="${nearSpend}" id="near-spend"
+          style="width:64px;text-align:center;background:var(--bg2);border:1px solid var(--line2);border-radius:4px;padding:2px">
+        <span class="note">${inReach.length} of ${cand.length} open archetypes qualify${
+          reachOverflow > 0 ? `; the cheapest ${reach.length} are detailed here and the other ${
+            reachOverflow} are in the ranked list below` : ''}</span>
+      </div>
     </div>
-    ${ideal.map(g => deckPanel(g, { showMissing:false })).join('')}`;
+    ${reach.map(c => {
+      const g = archByName.get(c.name);
+      return g ? deckPanel(g, { showMissing:true, gap:c.gap }) : '';
+    }).join('')}
+
+    ${beyond.length ? `<div class="panel">
+      <h2>EVERYTHING ELSE, RANKED <span class="code">${beyond.length}</span></h2>
+      <p class="note">The archetypes that fall outside the threshold above, cheapest first, one row
+      each. Nothing here also appears under Within reach — the two brackets are exclusive, so a deck is
+      either detailed above or listed here.${tie.length > 1
+        ? ` Ties on cards short are the normal case rather than the exception, which is why money
+           decides them: right now ${tie.length} archetypes are tied at ${nextDeck.short} cards short,
+           their whole lists spanning ${money(tiePrices[0])} to ${money(tiePrices[tiePrices.length - 1])}.` : ''}</p>
+      <p class="note" style="margin-top:6px">Two prices per row, and the difference matters. <b>Gap</b>
+      is what the cards you are missing cost, each priced by its cheapest printing — that is the number
+      to decide on. <b>List</b> is the whole deck's market price, which is context: it tells you what
+      the archetype costs to hold outright, and a cheap gap into an expensive list means the chase cards
+      are still ahead of you. A <b>+</b> on a gap means part of it has no listing, so the figure is a
+      floor.</p>
+      <div class="rows" style="margin-top:8px">${beyond.slice(0, 12).map(c => `
+        <div class="row">
+          <span class="nm">${c.name === nextDeck.name
+              ? '<b style="color:var(--good)">&#9656;</b> '
+              : '<span style="display:inline-block;width:0.9em"></span>'}${esc(c.name)}
+            <span class="code">${c.short} short over ${c.distinct} distinct · ${c.lists} list${
+              c.lists === 1 ? '' : 's'} · ${c.share.toFixed(1)}%</span>
+            ${plan.targets.some(t => t.name === c.name) && c.name !== nextDeck.name
+              ? '<span class="code" style="color:var(--teal)">also targeted</span>' : ''}</span>
+          <span class="qty${bargain && c.name === bargain.name ? '' : ' need'}"
+            title="Gap: the ${c.short} cards you are missing, each at its cheapest printing. List: the whole deck."
+            >${cost(c.gap)} gap<span class="code"> · ${money(c.deck.pr)} list</span></span>
+        </div>`).join('')}</div>
+      ${beyond.length > 12 ? `<p class="note" style="margin-top:8px">${beyond.length - 12} further
+        archetype${beyond.length - 12 === 1 ? ' costs' : 's cost'} more again.</p>` : ''}
+    </div>` : ''}
+
+    <div class="panel">
+      <h2>BEST CARDS TO GET <span class="code">${lev.length}</span></h2>
+      <p class="note">Ranked by how many archetypes are short of each card, so a common wanted by nine
+      decks outranks the last card of one. "Finishes" means it is the only thing still missing from that
+      archetype. This is the buy-anyway list: it ignores which deck you are building.${
+        lev.length > LEV_SHOWN ? ` Showing the top ${LEV_SHOWN}.` : ''}</p>
+      ${levShown.length ? `<div class="rows" style="margin-top:8px">${levShown.map(levRow).join('')}</div>`
+        : `<p class="empty">Nothing is in the way.</p>`}
+    </div>
+
+    <div class="panel">
+      <h2>THE PLAN <span class="code">${steps.length} buys</span></h2>
+      <p class="note">One target deck at a time, closest first. Within a target the cards other open
+      archetypes are also short of come first, so stopping halfway still leaves you better placed than
+      buying the list top to bottom.${steps.length ? ` The whole plan is
+      <b style="color:var(--cream)">${cost(gapCost(steps.map(x => ({ card: x.card, short: x.copies }))))}</b>
+      for ${steps[steps.length - 1].cum} cards.` : ''}${plan.truncated
+        ? ` Cut off at ${steps.length} lines; finishing all ${plan.targets.length} targets takes more.` : ''}</p>
+      ${steps.length ? plan.targets.map(t => {
+        const mine = steps.filter(s => s.target === t.name);
+        if (!mine.length) return '';
+        const done = mine.length === t.steps;
+        return `<h3 style="margin-top:14px">${esc(t.name)}
+          <span class="code">${t.short} cards over ${t.distinct} distinct · ${
+            cost(gapCost(mine.map(x => ({ card: x.card, short: x.copies }))))}${done ? '' : ' so far'} · ${
+            money(t.price)} list${
+            done ? '' : ` · ${mine.length} of ${t.steps} shown`}</span></h3>
+          <div class="rows">${mine.map((s, i) => stepRow(s, i)).join('')}</div>`;
+      }).join('') + `
+        <div class="bar-row" style="margin-top:12px">
+          <button class="ghost" id="btn-next-copy">Copy the plan</button>
+          <button class="ghost" id="btn-next-wants">Add the plan to wants</button>
+        </div>` : `<p class="empty">Nothing left to buy.</p>`}
+    </div>
+
+    <div class="panel">
+      <h2>TRADE OR BUY</h2>
+      ${offers ? `
+        <p class="note">Splitting the plan against ${esc(PARTNER.user)}'s surplus, scanned ${esc(PARTNER.at)}.</p>
+        <div class="stats" style="margin-top:12px">
+          <div class="stat"><div class="v" style="color:var(--good)">${gettable.reduce((a, s) => a + s.copies, 0)}</div><div class="k">cards gettable in trade</div></div>
+          <div class="stat"><div class="v" style="color:var(--maize)">${mustBuy.reduce((a, s) => a + s.copies, 0)}</div><div class="k">have to be bought</div></div>
+        </div>
+        ${gettable.length ? `<h3 style="margin-top:14px">Ask ${esc(PARTNER.user)} for</h3>
+          <div class="rows">${gettable.map((s, i) => stepRow(s, i)).join('')}</div>` : ''}
+        ${mustBuy.length ? `<h3 style="margin-top:14px">Nobody scanned has these</h3>
+          <div class="rows">${mustBuy.map((s, i) => stepRow(s, i)).join('')}</div>` : ''}`
+      : `<p class="note">Scan a partner on the Trade tab and this splits the plan in two: what their
+         surplus already covers, and what actually has to be bought. Until then every line above is
+         priced as a purchase.</p>`}
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LEGENDS: the roster, and whether you can actually field one
+   ══════════════════════════════════════════════════════════════════════════
+   A deck is built around one Legend, and a Legend needs a champion unit to work —
+   the game has a Chosen Champion and a Champion Zone, and cards like Hallowed Tomb
+   reference them. So "do I have this legend" is two questions, not one: the legend
+   itself, and at least one unit of its champion.
+
+   The first thing to check was whether any legend simply has no champion unit
+   printed, and none does: every one of the 49 has between two and four, and all of
+   them sit inside the legend's own domain identity, so none is unplayable on paper.
+   That is why this view is about what is owned. The printed-pool count is still shown
+   per legend, so if a future set ever ships a legend without one, it appears here
+   instead of the check silently continuing to pass.                                */
+
+// The champion a card is named after. Legends carry it as a tag, but the tag list
+// mixes champions with regions and races — Heart of the Tempest is tagged both Yordle
+// and Kennen — so the tag has to be the one that some card is actually named after.
+// Cards from products Riot does not publish carry no tags at all, hence the fallback
+// to the card's own name; with it, nothing in the catalog is left unresolved.
+function championOf(card){
+  if (!card) return null;
+  for (const t of (card.g || [])) if (CHAMPS.has(t)) return t;
+  const m = /^(.+?)(?:,| - )/.exec(card.n || '');
+  return m ? m[1].trim() : null;
+}
+
+const VORDER = ['', 'alt', 'sig', 'over', 'promo'];
+
+// One row per legend, folded across printings, with its champion units resolved and
+// counted. Everything downstream of this is presentation.
+function legendRoster(){
+  if (!CAT) return [];
+  const byLegend = new Map();
+  for (const c of CAT.cards){
+    if (c.t !== 'Legend') continue;
+    const key = gameName(c);
+    if (!byLegend.has(key)) byLegend.set(key, []);
+    byLegend.get(key).push(c);
+  }
+
+  // Champion -> its distinct units, one entry per card rather than per printing so the
+  // Arcane Box Set reprints do not appear as extra units.
+  //
+  // A unit is filed under every champion it is tagged with, not under one picked from
+  // the list. Tag order carries no meaning: Azir, Ascendant is tagged Bird, Azir,
+  // Shurima, so asking a unit "who is your champion" and taking the first answer filed
+  // both Azir units under Bird and left the Emperor of the Sands looking like a legend
+  // with no champion unit in the game. Membership is the question, not extraction.
+  const unitsByChamp = new Map();
+  const seenUnit = new Set();
+  const file = (champ, card) => {
+    if (!champ) return;
+    if (!unitsByChamp.has(champ)) unitsByChamp.set(champ, []);
+    unitsByChamp.get(champ).push(card);
+  };
+  for (const c of CAT.cards){
+    if (c.t !== 'Unit' || c.v) continue;
+    const id = identityOf(c);
+    if (seenUnit.has(id)) continue;
+    seenUnit.add(id);
+    const tagged = (c.g || []).filter(t => CHAMPS.has(t));
+    if (tagged.length) for (const t of tagged) file(t, c);
+    else file(championOf(c), c);   // products Riot does not publish carry no tags
+  }
+
+  const have = ownedIdentities();
+  const lists = new Map();
+  for (const d of (DECKS || [])){
+    const n = archetypeName(d);
+    lists.set(n, (lists.get(n) || 0) + 1);
+  }
+
+  const out = [];
+  for (const [name, printings] of byLegend){
+    printings.sort((a, b) => VORDER.indexOf(a.v || '') - VORDER.indexOf(b.v || '') ||
+                             a.c.localeCompare(b.c));
+    const rep = printings.find(x => !x.v) || printings[0];
+    const champ = championOf(rep);
+    const copies = have.get(identityOf(rep)) || 0;
+    const units = (unitsByChamp.get(champ) || []).map(u => {
+      const n = have.get(identityOf(u)) || 0;
+      return { card: u, owned: n };
+    }).sort((a, b) => b.owned - a.owned || a.card.n.localeCompare(b.card.n));
+    const unitsOwned = units.filter(u => u.owned > 0).length;
+    out.push({
+      name, champ, rep, printings, copies, units, unitsOwned,
+      // A legend is held at one copy of any printing: a deck runs exactly one, so the
+      // three-copy playset target the rest of the app uses does not apply.
+      held: copies > 0,
+      fieldable: copies > 0 && unitsOwned > 0,
+      blocked: copies > 0 && unitsOwned === 0,
+      printingsOwned: printings.filter(x => owned(x.c) > 0).length,
+      lists: lists.get(name) || 0,
+    });
+  }
+  return out.sort((a, b) => b.lists - a.lists || a.name.localeCompare(b.name));
+}
+
+/* ── the champion is the unit of thought ───────────────────────────────────
+   The legend-level roster above is what the printings checklist needs, but it is not
+   how you decide anything. You do not set out to play Loose Cannon, you set out to
+   play Jinx, and what stops you is missing either half of the pair. So the roster is
+   regrouped by champion and every row carries the same verdict.
+
+   It is nearly one legend per champion — 49 legends over 48 champions — with a single
+   exception that the grouping has to survive: Master Yi has two, Wuju Bladesman -
+   Starter and Wuju Master, and they share all four of his champion units. Holding
+   either legend makes him playable, so the champion is the row and both epithets sit
+   on it.
+
+   The 48 champions with units but no legend at all are left out. Nothing about them
+   can ever become playable, so a verdict column would read the same forever.        */
+
+// One champion unit is all playability needs, so the counts on the right are collection
+// depth rather than a threshold. The blurbs have to say that, or a row reading "1/4
+// units" under NEED THE LEGEND looks like it contradicts the heading above it.
+const CH_STATES = [
+  ['playable',   'PLAYABLE',         'The legend and at least one of its champion units, both in hand.', 'var(--good)'],
+  ['needUnit',   'NEED A UNIT',      'The legend is in hand but none of its champion units. Any single one listed makes it playable.', 'var(--bad)'],
+  ['needLegend', 'NEED THE LEGEND',  'A champion unit is already in hand, which is all that is needed, so the legend is the only thing left. The fraction is how deep the collection goes, not a bar to clear.', 'var(--maize)'],
+  ['needBoth',   'NEED BOTH',        'Neither half yet.', 'var(--dimmer)'],
+];
+
+function championRoster(legends){
+  const byChamp = new Map();
+  for (const l of (legends || legendRoster())){
+    if (!l.champ) continue;
+    const e = byChamp.get(l.champ) || { champ: l.champ, legends: [], units: l.units, lists: 0 };
+    e.legends.push(l);
+    e.lists += l.lists;
+    // Every legend of a champion resolves the same unit set, so keep the fuller one
+    // rather than assuming they match.
+    if (l.units.length > e.units.length) e.units = l.units;
+    byChamp.set(l.champ, e);
+  }
+
+  const out = [];
+  for (const e of byChamp.values()){
+    e.legends.sort((a, b) => b.lists - a.lists || a.name.localeCompare(b.name));
+    const heldLegend = e.legends.some(l => l.held);
+    const unitsOwned = e.units.filter(u => u.owned > 0).length;
+    const state = heldLegend
+      ? (unitsOwned ? 'playable' : 'needUnit')
+      : (unitsOwned ? 'needLegend' : 'needBoth');
+    out.push({
+      ...e,
+      rep: (e.legends.find(l => l.held) || e.legends[0]).rep,
+      epithets: e.legends.map(l => l.name),
+      heldLegend, unitsOwned, state,
+      playable: state === 'playable',
+      // The cheapest legend printing to go and get, when the legend is what is missing.
+      legendToGet: heldLegend ? null : e.legends[0],
+      missingUnits: e.units.filter(u => !u.owned),
+    });
+  }
+  const order = CH_STATES.map(x => x[0]);
+  return out.sort((a, b) => order.indexOf(a.state) - order.indexOf(b.state) ||
+                            b.lists - a.lists || a.champ.localeCompare(b.champ));
+}
+
+// Champions who have units but no legend, and so can never be a deck identity. Counted
+// rather than written down, because the number moves every time a set ships.
+function legendlessChampions(){
+  if (!CAT) return [];
+  const withLegend = new Set();
+  for (const c of CAT.cards) if (c.t === 'Legend') withLegend.add(championOf(c));
+  const out = new Set();
+  for (const c of CAT.cards){
+    if (c.t !== 'Unit' || c.v) continue;
+    const tagged = (c.g || []).filter(t => CHAMPS.has(t));
+    for (const t of (tagged.length ? tagged : [championOf(c)]))
+      if (t && !withLegend.has(t)) out.add(t);
+  }
+  return [...out].sort();
+}
+
+function legendText(roster){
+  const champs = championRoster(roster);
+  const lines = ['CHAMPIONS', ''];
+  for (const [key, label] of CH_STATES){
+    const g = champs.filter(c => c.state === key);
+    if (!g.length) continue;
+    lines.push(`${label} (${g.length})`);
+    for (const c of g){
+      lines.push(`  ${c.champ} — ${c.epithets.join(' / ')}` +
+                 `   ${c.unitsOwned}/${c.units.length} units` +
+                 `${c.lists ? `, ${c.lists} list${c.lists === 1 ? '' : 's'}` : ''}`);
+      if (key === 'needUnit')
+        lines.push(`      any of: ${c.units.map(u => `${u.card.n} ${u.card.c}`).join(' · ')}`);
+      if (key === 'needLegend' && c.legendToGet)
+        lines.push(`      legend: ${c.legendToGet.rep.c}`);
+    }
+    lines.push('');
+  }
+  return lines.join('\n').trim();
+}
+
+let CH_NEED_UNIT = [];        // what the two wants buttons act on
+let CH_NEED_LEGEND = [];
+
+function renderLegends(){
+  const host = document.getElementById('v-legends');
+  if (!CAT){ host.innerHTML = ''; return; }
+  const roster = legendRoster();
+  const champs = championRoster(roster);
+  const legendless = legendlessChampions();
+  const bucket = (k) => champs.filter(c => c.state === k);
+  CH_NEED_UNIT   = bucket('needUnit');
+  CH_NEED_LEGEND = bucket('needLegend');
+
+  const printTotal = roster.reduce((a, l) => a + l.printings.length, 0);
+  const printHave  = roster.reduce((a, l) => a + l.printingsOwned, 0);
+
+  // The champion is the heading, the epithet is the cross-reference: Meta and Next
+  // name archetypes by epithet, so a row that said only "Irelia" would leave you
+  // unable to connect the two.
+  // riftbound.gg writes a guide per champion, and a guide is only useful next to the
+  // champion it is about, so it rides on the row rather than living in the feed.
+  const guides = guideByChampion();
+
+  const row = (c, right) => {
+    const g = guides.get(c.champ);
+    return `
+    <div class="row"${right.detail ? ' style="align-items:flex-start"' : ''}>
+      ${c.rep.i ? `<img class="thumb" loading="lazy" src="${imgURL(c.rep, 60)}" alt="" data-zoom="${esc(c.rep.c)}">` : ''}
+      <span class="nm"${right.detail ? ' style="white-space:normal"' : ''}>${dchips(c.rep)}
+        <b style="color:var(--cream)">${esc(c.champ)}</b>
+        <span class="code">${esc(c.epithets.join(' / '))}${
+          c.rep.d ? ' · ' + esc(c.rep.d.join('/')) : ''}${
+          c.lists ? ` · ${c.lists} list${c.lists === 1 ? '' : 's'}` : ''}</span>
+        ${g ? `<a class="code" style="color:var(--teal)" target="_blank" rel="noopener"
+           href="${esc(g.url)}" title="${esc(g.title)}">guide · ${esc(g.dt)}</a>` : ''}
+        ${right.detail ? `<div class="note" style="margin-top:3px">${right.detail}</div>` : ''}</span>
+      <span class="qty${right.warn ? ' need' : ''}">${right.text}</span>
+    </div>`;
+  };
+
+  // A champion in NEED A UNIT owns none of them by definition, so a per-unit owned
+  // column would mark every row the same. The names are the actionable part.
+  //
+  // Each one is a chip rather than an item in a separated list, because champion unit
+  // names contain commas — "Master Yi, Tempered" — and any punctuation separator makes
+  // four units read as eight. A bounded box cannot be misread that way.
+  const anyOf = (c) => 'any of: ' + c.units.map(u =>
+    `<span class="chip" style="cursor:default" title="${esc(u.card.c)}">${esc(u.card.n)}
+      <span class="code">${esc(u.card.c)}</span></span>`).join(' ');
+
+  const chips = (l) => l.printings.map(x => {
+    const n = owned(x.c);
+    return `<span class="chip" aria-pressed="${n > 0}" title="${esc(x.c)}" style="cursor:default">${
+      esc(vLabel(x.v))}${n ? ` ${n}` : ''}</span>`;
+  }).join(' ');
+
+  const right = (c) => {
+    if (c.state === 'playable')   return { text: `${c.unitsOwned}/${c.units.length} units` };
+    if (c.state === 'needUnit')   return { text: `0/${c.units.length} units`, warn: true, detail: anyOf(c) };
+    if (c.state === 'needLegend') return { text: `${c.unitsOwned}/${c.units.length} units`, warn: true,
+      detail: `legend: ${c.legendToGet ? `${esc(c.legendToGet.name)} <span class="code">${esc(c.legendToGet.rep.c)}</span>` : '?'}` };
+    return { text: `${c.unitsOwned}/${c.units.length} units`, warn: true };
+  };
+
+  host.innerHTML = `
+    <div class="panel">
+      <h2>CHAMPIONS <span class="code">${champs.length}</span></h2>
+      <p class="note">A champion is playable when you hold both halves: the legend, at one copy of any
+      printing since a deck runs exactly one, and at least one unit of that champion for the Champion
+      Zone. Grouped below by which half is missing, most-played first.${
+        guides.size ? ` ${guides.size} have a guide on riftbound.gg, linked from the row.` : ''}</p>
+      <div class="stats" style="margin-top:14px">
+        ${CH_STATES.map(([k, label, , colour]) => `
+          <div class="stat"><div class="v" style="color:${colour}">${bucket(k).length}</div>
+            <div class="k">${label.toLowerCase()}</div></div>`).join('')}
+      </div>
+      <div class="bar-row" style="margin-top:12px">
+        <button class="ghost" id="btn-legend-copy">Copy the gaps</button>
+        ${CH_NEED_UNIT.length ? '<button class="ghost" id="btn-legend-wants">Add missing units to wants</button>' : ''}
+        ${CH_NEED_LEGEND.length ? '<button class="ghost" id="btn-legend-wants-legends">Add missing legends to wants</button>' : ''}
+      </div>
+      ${legendless.length ? `<p class="note" style="margin-top:10px">${legendless.length} further
+        champion${legendless.length === 1 ? ' has' : 's have'} units but no legend printed, so
+        ${legendless.length === 1 ? 'it' : 'they'} can never be a deck identity and
+        ${legendless.length === 1 ? 'is' : 'are'} left out.</p>` : ''}
+    </div>
+
+    ${CH_STATES.map(([k, label, blurb, colour]) => {
+      const g = bucket(k);
+      return `<div class="panel">
+        <h2 style="color:${colour}">${label} <span class="code">${g.length}</span></h2>
+        <p class="note">${blurb}</p>
+        ${g.length ? `<div class="rows" style="margin-top:8px">${g.map(c => row(c, right(c))).join('')}</div>`
+          : `<p class="empty">None.</p>`}
+      </div>`;
+    }).join('')}
+
+    <div class="panel">
+      <h2>LEGEND PRINTINGS <span class="code">${printHave}/${printTotal}</span></h2>
+      <p class="note">Lit chips are what you hold, per legend rather than per champion. The classes
+      shown are the ones that exist: most legends have a base, a signature and an overnumber, four only
+      a base, and two also have a Secret Garden promo.</p>
+      <div class="rows">${roster.map(l => `
+        <div class="row">
+          <span class="nm">${dchips(l.rep)} <b style="color:var(--cream)">${esc(l.champ || '?')}</b>
+            <span class="code">${esc(l.name)}</span></span>
+          <span class="qty" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end">${chips(l)}</span>
+        </div>`).join('')}</div>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   NEWS
+   ══════════════════════════════════════════════════════════════════════════
+   data/news.json is riftbound.gg's own posts: a title, a date, a tag and a link. The
+   endpoint carries no body text, so this links out rather than reproducing anything.
+
+   The valuable part is not the feed, it is the join. A post tagged Legends is a guide
+   to one champion, so it belongs on that champion's row rather than in a list you have
+   to remember to read. Two tags mean our own data is about to be wrong — a new set, or
+   a rules change — so those get said loudly instead of scrolling past.
+
+   The matching is done here rather than in the build script on purpose. It needs the
+   same name fold the rest of the app uses, and a second copy of that would drift, the
+   way the deck parser nearly did.                                                   */
+
+// Titles come in two shapes, both real:
+//   "Jayce, Defender of Tomorrow - Best Decks & Synergies"   champion, legend
+//   "Vex - Gloomist Guide - Best Decks & Cards"              champion - legend
+// so take the head, drop the marketing tail, then try the pair before the champion.
+const NEWS_TAIL = /\s+(?:guide|best decks?(?:\s*(?:&|and)\s*(?:synergies|cards))?|deck guide|synergies)\s*$/i;
+
+// The lookup a title is matched against: "champion, legend" and bare champion, both
+// lowercased. Built from the catalog, which does not change after boot, so unlike the
+// champion roster this has nothing to do with what is owned and can be built once.
+//
+// It matters that this is not championRoster(). Matching used to call that per post,
+// which rebuilt the whole 48-champion roster 94 times and made rendering the news feed
+// the slowest thing in the app at 294ms. The names never move; the ownership does.
+let CHAMP_INDEX = null;
+function championIndex(){
+  if (CHAMP_INDEX) return CHAMP_INDEX;
+  CHAMP_INDEX = new Map();
+  if (!CAT) return CHAMP_INDEX;
+  const legends = CAT.cards.filter(c => c.t === 'Legend');
+  const seen = new Set();
+  for (const l of legends){
+    const name = gameName(l);
+    if (seen.has(name)) continue;
+    seen.add(name);
+    const rep = legends.find(x => gameName(x) === name && !x.v) || l;
+    const champ = championOf(rep);
+    if (!champ) continue;
+    CHAMP_INDEX.set(`${champ}, ${name}`.toLowerCase(), champ);
+    if (!CHAMP_INDEX.has(champ.toLowerCase())) CHAMP_INDEX.set(champ.toLowerCase(), champ);
+  }
+  return CHAMP_INDEX;
+}
+
+function newsChampion(title){
+  if (!CAT) return null;
+  let head = String(title || '').split(' - ')[0].trim();
+  for (let i = 0; i < 3 && NEWS_TAIL.test(head); i++) head = head.replace(NEWS_TAIL, '').trim();
+  if (!head) return null;
+  const idx = championIndex();
+  // champion + legend, e.g. "Diana, Scorn of the Moon", before champion alone, e.g.
+  // "Pyke" or the head of "Pyke - Bloodharbor Ripper".
+  return idx.get(head.toLowerCase()) ||
+         idx.get(head.split(',')[0].trim().toLowerCase()) || null;
+}
+
+const newsTag = (p) => (p.tags && p.tags[0]) || 'Untagged';
+const newsByTag = (tag) => (NEWS || []).filter(p => (p.tags || []).includes(tag));
+
+// Champion -> its most recent guide, so a Legends row can link to it.
+let NEWS_GUIDES = null;
+function guideByChampion(){
+  if (NEWS_GUIDES) return NEWS_GUIDES;
+  NEWS_GUIDES = new Map();
+  for (const p of (NEWS || [])){
+    if (!(p.tags || []).includes('Legends')) continue;
+    const champ = newsChampion(p.title);
+    if (!champ) continue;
+    const prev = NEWS_GUIDES.get(champ);
+    if (!prev || p.dt > prev.dt) NEWS_GUIDES.set(champ, p);
+  }
+  return NEWS_GUIDES;
+}
+
+// A new set or a rules change means the catalog and the ban list are about to be
+// wrong, which is worth interrupting for. Anything older than a month is history.
+function dataAlerts(){
+  const out = [];
+  for (const p of (NEWS || [])){
+    const tags = p.tags || [];
+    if (!tags.includes('Sets') && !tags.includes('Rules')) continue;
+    const age = daysSince(p.dt);
+    if (age == null || age > 30) continue;
+    out.push({ ...p, age });
+  }
+  return out.sort((a, b) => b.dt.localeCompare(a.dt));
+}
+
+function newsRow(p, opts){
+  const champ = (opts && opts.champ) !== false ? newsChampion(p.title) : null;
+  return `<div class="row">
+    <span class="nm" style="white-space:normal">${esc(p.title)}
+      <span class="code">${esc(p.dt)} · ${esc(newsTag(p))}${p.author ? ` · ${esc(p.author)}` : ''}${
+        champ ? ` · ${esc(champ)}` : ''}</span></span>
+    <a class="ghost" style="text-decoration:none;white-space:nowrap" target="_blank" rel="noopener"
+       href="${esc(p.url)}">Read</a>
+  </div>`;
+}
+
+// A compact block of the latest posts under given tags, for the Meta tab.
+function newsBlock(tags, n){
+  const picks = (NEWS || []).filter(p => (p.tags || []).some(t => tags.includes(t)))
+                            .slice(0, n || 4);
+  if (!picks.length) return '';
+  return `<div class="rows" style="margin-top:8px">${picks.map(p => newsRow(p, { champ:false })).join('')}</div>`;
+}
+
+let NEWS_TAG = '';        // the active tag filter
+
+function renderNews(){
+  const host = document.getElementById('v-news');
+  if (!NEWS || !NEWS.length){
+    host.innerHTML = `<div class="panel"><h2>NEWS</h2><p class="note">No news snapshot yet.
+      Run <code>node scripts/build-news.mjs</code>.</p></div>`;
+    return;
+  }
+  const counts = {};
+  for (const p of NEWS) counts[newsTag(p)] = (counts[newsTag(p)] || 0) + 1;
+  const tags = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  const shown = NEWS_TAG ? newsByTag(NEWS_TAG) : NEWS;
+  const alerts = dataAlerts();
+  const guides = guideByChampion();
+
+  host.innerHTML = `
+    <div class="panel">
+      <h2>NEWS <span class="code">${NEWS.length}</span></h2>
+      <p class="note">riftbound.gg's own posts, ${esc(NEWS[NEWS.length - 1].dt)} to
+      ${esc(NEWS[0].dt)}. Titles and links only: the feed they publish carries no body text, so these
+      open on their site. ${guides.size} of the ${championRoster().length} champions have a guide, linked
+      from their row on the Legends tab.</p>
+      ${staleNote('news', 'this feed')}
+      <div class="bar-row" style="margin-top:12px">
+        <button class="chip" data-news-tag="" aria-pressed="${!NEWS_TAG}">All ${NEWS.length}</button>
+        ${tags.map(([t, n]) => `<button class="chip" data-news-tag="${esc(t)}"
+          aria-pressed="${NEWS_TAG === t}">${esc(t)} ${n}</button>`).join(' ')}
+      </div>
+    </div>
+
+    ${alerts.length ? `<div class="panel" style="border-color:var(--maize)">
+      <h2 style="color:var(--maize)">WORTH KNOWING <span class="code">${alerts.length}</span></h2>
+      <p class="note">Set and rules posts from the last month. These are the two kinds that make this
+      app's own data wrong, so a new set means the catalog needs rebuilding and a rules post may mean
+      the ban list has moved.</p>
+      <div class="rows" style="margin-top:8px">${alerts.map(p => newsRow(p, { champ:false })).join('')}</div>
+    </div>` : ''}
+
+    <div class="panel">
+      <h2>${NEWS_TAG ? esc(NEWS_TAG.toUpperCase()) : 'EVERYTHING'} <span class="code">${shown.length}</span></h2>
+      ${shown.length ? `<div class="rows">${shown.map(p => newsRow(p)).join('')}</div>`
+        : `<p class="empty">Nothing tagged ${esc(NEWS_TAG)}.</p>`}
+    </div>`;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
    RENDER: dispatch
    ══════════════════════════════════════════════════════════════════════════ */
 function render(){
-  for (const t of ['collection','sets','trade','decks','meta','sync'])
+  for (const t of ['collection','sets','trade','decks','meta','next','legends','news','sync'])
     document.getElementById('v-' + t).classList.toggle('hide', TAB !== t);
   for (const b of document.querySelectorAll('.tab'))
     b.setAttribute('aria-selected', String(b.dataset.tab === TAB));
@@ -1833,22 +3260,83 @@ function render(){
   if (TAB === 'trade') renderTrade();
   if (TAB === 'decks') renderDecks();
   if (TAB === 'meta')  renderMeta();
+  if (TAB === 'next')  renderNext();
+  if (TAB === 'legends') renderLegends();
+  if (TAB === 'news')  renderNews();
   if (TAB === 'sync')  renderSync();
 
   // keep the badges honest even when their tab is closed
   if (TAB !== 'trade') renderTradeBadge();
   if (TAB !== 'decks') document.getElementById('tn-decks').textContent = S.decks.length || '';
   renderImportBadge();
-  const mb = document.getElementById('tn-meta');
-  if (mb && DECKS){
-    // Same pool the Meta tab uses, or the badge would promise a buildable deck the
-    // tab then refuses to show because it is banned.
-    const pool = S.showIllegal === true ? DECKS : DECKS.filter(deckLegalForConstructed);
-    const ready = metaArchetypes(pool).filter(g => g.best.ev.missingCopies === 0).length;
-    mb.textContent = ready || '';
-    mb.style.color = ready ? 'var(--good)' : '';
+  renderMirrorNote();
+  renderFreshness();
+  const nwb = document.getElementById('tn-news');
+  if (nwb){
+    // The badge counts only the posts that mean this app's own data is going stale —
+    // a new set or a rules change — rather than every headline, which would sit there
+    // permanently and stop meaning anything.
+    const n = dataAlerts().length;
+    nwb.textContent = n || '';
+    nwb.style.color = n ? 'var(--maize)' : '';
+  }
+  const lb = document.getElementById('tn-legends');
+  if (lb && CAT){
+    // The badge counts champions whose legend is in hand but who have no unit to field
+    // it, since that is the only state here that is quietly wrong rather than merely
+    // incomplete: you own the card and cannot use it.
+    const stuck = championRoster().filter(c => c.state === 'needUnit').length;
+    lb.textContent = stuck || '';
+    lb.style.color = stuck ? 'var(--bad)' : '';
+  }
+  // Meta carries no badge. It used to show a buildable-deck count, which measured across
+  // five collection sizes is zero unless you own literally every printing — a permanent
+  // untruth in the tab bar. Meta is a reference view now and has nothing to nag about.
+  const nb = document.getElementById('tn-next');
+  if (nb && DECKS){
+    // Same pool the tabs use, or the badge would price a deck the tab refuses to show
+    // because it is banned.
+    //
+    // scorePool rather than metaArchetypes, which is what the tabs call. Both agree on
+    // every archetype's gap — the checks assert exactly that — but metaArchetypes also
+    // evaluates bans and builds a representative row per list, and badges are refreshed
+    // even when their own tab is shut, so this is deliberately the cheap path.
+    const scored = scorePool(metaPool(), ownedIdentities());
+    // The cheapest gap, not the fewest cards. Money is the default axis now, and "$1"
+    // says more about whether to act than "+9" does. Unpriced gaps are skipped rather
+    // than counted as free.
+    const spends = scored.filter(g => g.short > 0 && g.unpriced === 0).map(g => g.spend);
+    if (spends.length){
+      const min = Math.min(...spends);
+      nb.textContent = min < 1 ? `$${min.toFixed(2)}` : `$${Math.round(min)}`;
+    } else {
+      const gaps = scored.filter(g => g.short > 0).map(g => g.short);
+      nb.textContent = gaps.length ? '+' + Math.min(...gaps) : '';
+    }
+    nb.style.color = '';
   }
 }
+// Normal and Foil are a mirror of riftbound.gg: every import replaces them, so a
+// correction typed here is lost on the next pull, while Want and Trade exist only in
+// this app and survive. That asymmetry is invisible in a row of four identical boxes,
+// and it is only a trap for someone who actually imports, so the warning appears only
+// once importing is in play rather than nagging a hand-entered collection.
+function renderMirrorNote(){
+  const el = document.getElementById('mirror-note');
+  if (!el) return;
+  const mirrored = !!(S.lastSyncAt || S.autoSync);
+  el.classList.toggle('hide', !mirrored);
+  if (!mirrored){ el.innerHTML = ''; return; }
+  el.innerHTML = `<span class="note">Normal and Foil mirror riftbound.gg and are replaced on every
+    import${S.lastSyncAt ? `, last pulled ${esc(String(S.lastSyncAt).slice(0, 16).replace('T', ' '))}` : ''};
+    correct them there, not here. Want and Trade are only kept in this app${
+    S.mirrorTradeWish ? ' but "Mirror trade and wishlist" is on, so they are overwritten too' : ''}.${(() => {
+      const bad = foilOnlyProblems().length;
+      return bad ? ` <b style="color:var(--warn)">${bad} printing${bad === 1 ? '' : 's'} hold a Normal
+        count that cannot exist; see the Import tab.</b>` : '';
+    })()}</span>`;
+}
+
 function renderImportBadge(){
   const el = document.getElementById('tn-sync');
   if (!el) return;
@@ -1985,8 +3473,8 @@ function wire(){
       S.playset = Math.max(1, Math.min(9, Number(el.value) || 3));
       persist();
     }
-    if (el.id === 'close-threshold'){
-      S.closeThreshold = Math.max(1, Math.min(60, Number(el.value) || 5));
+    if (el.id === 'near-spend'){
+      S.nearSpend = Math.max(1, Math.min(2000, Number(el.value) || 25));
       persist();
     }
   });
@@ -2143,6 +3631,63 @@ function wire(){
     if (t.id === 'btn-mirror'){ S.mirrorTradeWish = !S.mirrorTradeWish; persist(); }
     if (t.id === 'btn-show-illegal'){ S.showIllegal = !S.showIllegal; persist(); }
 
+    const pby = t.closest('[data-plan-by]');
+    if (pby){ S.planBy = pby.dataset.planBy; persist(); }
+
+    const ntag = t.closest('[data-news-tag]');
+    if (ntag){ NEWS_TAG = ntag.dataset.newsTag || ''; renderNews(); }
+
+    if (t.id === 'btn-foil-copy') copy(foilOnlyText(foilOnlyProblems()), 'list copied');
+    if (t.id === 'btn-foil-fix'){
+      // Move the impossible Normal count onto Foil rather than choosing a new total:
+      // the copies exist, only the finish was wrong, and inventing a number would be a
+      // guess about cards this app cannot see.
+      const bad = foilOnlyProblems();
+      let moved = 0;
+      for (const p of bad){
+        const e = { ...(S.inv[p.code] || {}) };
+        const f = (e.f || 0) + p.normal;
+        delete e.n;
+        e.f = f;
+        S.inv[p.code] = e;
+        moved += p.normal;
+      }
+      persist();
+      toast(moved ? `${moved} moved to foil` : 'nothing to fix');
+    }
+
+    if (t.id === 'btn-legend-copy') copy(legendText(legendRoster()), 'champion gaps copied');
+    if (t.id === 'btn-legend-wants'){
+      // The champions whose legend is in hand and whose units are not. A full playset
+      // each, since a deck running the champion runs copies rather than a single card.
+      let n = 0;
+      for (const c of CH_NEED_UNIT)
+        for (const u of c.units)
+          if ((S.playset || 3) > want(u.card.c)){ setQtyQuiet(u.card.c, 'w', S.playset || 3); n++; }
+      persist();
+      toast(n ? `${n} unit wants set` : 'nothing to add');
+    }
+    if (t.id === 'btn-legend-wants-legends'){
+      // The other half: units already in hand, only the legend missing. One copy, not a
+      // playset, because a deck runs exactly one legend.
+      let n = 0;
+      for (const c of CH_NEED_LEGEND){
+        const code = c.legendToGet && c.legendToGet.rep.c;
+        if (code && want(code) < 1){ setQtyQuiet(code, 'w', 1); n++; }
+      }
+      persist();
+      toast(n ? `${n} legend wants set` : 'nothing to add');
+    }
+
+    if (t.id === 'btn-next-copy') copy(pathText(NEXT_PLAN), 'plan copied');
+    if (t.id === 'btn-next-wants'){
+      let n = 0;
+      for (const s of NEXT_PLAN)
+        if (s.need > want(s.card.c)){ setQtyQuiet(s.card.c, 'w', s.need); n++; }
+      persist();
+      toast(n ? `${n} wants set` : 'nothing to add');
+    }
+
     if (t.id === 'btn-trade-copy') copy(tradeText(), 'list copied');
     if (t.id === 'btn-trade-link') copy(location.origin + location.pathname + '?view=trade', 'link copied');
 
@@ -2254,10 +3799,31 @@ async function boot(){
     }
   } catch { /* no meta snapshot */ }
 
+  // News and the event archive, both optional in the same way. A missing file costs a
+  // panel, never a working app.
+  try {
+    const nr = await fetch('data/news.json', { cache:'no-cache' });
+    if (nr.ok){
+      const nd = await nr.json();
+      NEWS = Array.isArray(nd.posts) ? nd.posts : null;
+      NEWS_AT = nd.generatedAt || null;
+    }
+  } catch { /* no news */ }
+  try {
+    const er2 = await fetch('data/events.json', { cache:'no-cache' });
+    if (er2.ok){
+      const ed = await er2.json();
+      EVENTS = Array.isArray(ed.events) ? ed.events : null;
+      EVENTS_AT = ed.generatedAt || null;
+      EVENTS_COVER = ed.coverage || null;
+    }
+  } catch { /* no event archive */ }
+
   // Publish the catalog only once it is whole, so nothing can read a half-built one.
   CAT = cat;
   BY = Object.fromEntries(CAT.cards.map(c => [c.c, c]));
   MATCH = null;
+  buildNameIndex();        // also drops every catalog-derived cache
 
   const baseTotal = CAT.cards.filter(c => !c.v).length;
   document.getElementById('sub').textContent =
