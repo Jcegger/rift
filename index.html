@@ -195,11 +195,40 @@ td .qi.set{border-color:var(--teal);color:var(--teal)}
 footer{border-top:1px solid var(--line);margin-top:30px;padding:16px 0;font-family:var(--head);
   font-size:11px;color:var(--dimmer);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
 
-@media(max-width:600px){
-  .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
-  h1{font-size:12px}
-  .tab{padding:7px 11px;font-size:9px}
-  .wrap{padding:0 11px 70px}
+/* Nothing may push the page wider than the phone it is being read on. The filter
+   row is the usual offender: a search input with a min-width plus four selects
+   that refuse to shrink. */
+body{overflow-x:hidden}
+@media(max-width:640px){
+  .wrap{padding:0 10px 70px}
+  h1{font-size:11px;letter-spacing:-.02em}
+  .sub{font-size:11.5px}
+  .tab{padding:7px 9px;font-size:9px}
+  .tabs{gap:1px}
+
+  .grid{grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:9px}
+  .panel{padding:12px}
+  .bar{padding:10px;gap:8px}
+  .bar-row{gap:6px}
+  .search{min-width:0;flex:1 1 100%}
+  select{flex:1 1 44%;min-width:0;font-size:12.5px}
+  #f-view{flex:1 1 100%}
+  .count-line{flex:1 1 auto}
+
+  .cols{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:7px}
+  .stat{padding:9px 10px}
+  .stat .v{font-size:13px}
+  .stat .k{font-size:9.5px}
+
+  .qs{gap:2px}
+  .q span{font-size:7.5px}
+  .q input{font-size:13px;padding:4px 1px}   /* stays tappable */
+  .row{padding:7px 0}
+  .row .qty{font-size:11.5px;text-align:right}
+  .meter-sub{gap:8px;font-size:10px}
+  table{min-width:560px}
+  .pre{font-size:11px}
 }
 </style>
 </head>

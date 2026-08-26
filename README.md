@@ -35,6 +35,18 @@ toward a playset of every card and how many variants of each class you hold.
 wants list, where a want shows the shortfall against what you own rather than
 the target. Copy it as text for a Discord post, or share the read-only view.
 
+It also computes two things without being told anything. **Spares** is everything
+held past the playset target, which is what can be traded away without breaking a
+deck, derived from the collection so it stays right without setting a single Trade
+count by hand. Basic runes are excluded, since lists happily run nine of one.
+
+**Trade opportunities** reads any public riftbound.gg profile the same way it
+reads mine, so a partner's username works out both directions at once: their
+spares that fill my gaps, and my spares on their wishlist. Most people never fill
+in a trade list, so their surplus past a playset stands in for it. My side of
+"what I need" is explicit wants first, then the gap in the archetypes I am closest
+to, which makes it useful before a single want has been typed in.
+
 **Decks** builds lists against the collection and reports what you are short.
 "Add shortfall to wants" pushes the gap onto the trade list.
 
@@ -161,9 +173,24 @@ is a vandalized card list restorable from a backup. Use the Backup button.
 
 ## Hosting
 
-GitHub Pages serves the repo root. `CNAME` claims the subdomain, which needs a
-Cloudflare DNS record: `CNAME rift -> jcegger.github.io`, DNS only, not
-proxied, so Pages can issue the certificate.
+GitHub Pages serves the repo root, currently at
+**https://jcegger.github.io/rift/**.
+
+The custom domain is parked. `rift.jayegger.com` returns Cloudflare **error
+1016**, an origin DNS failure, which means the proxied record exists (the name
+resolves to a Cloudflare IP) but its target cannot be resolved from Cloudflare's
+side. Every plausible target does resolve on its own, so the record's content
+field is the thing to look at, most likely self-referential. It is not a
+propagation delay and not a GitHub problem: `reading.jayegger.com` is proxied the
+same way and serves fine.
+
+To finish it: fix the record so it reads `CNAME rift -> jcegger.github.io`, then
+rename `CNAME.pending` back to `CNAME` and push. Pages picks the domain back up
+from the file. Either proxy setting works, matching `lsat` (DNS only) or `reading`
+(proxied); if proxied, keep Cloudflare SSL on Full so the redirect does not loop.
+
+`.nojekyll` is present because the site is plain static files, and building it as
+a Jekyll site only added ways to fail.
 
 Not affiliated with or endorsed by Riot Games. Card galleries and deck builders
 are permitted under Riot's policy on fan projects; automated gameplay tools are
