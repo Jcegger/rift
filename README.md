@@ -579,9 +579,15 @@ every source is a public endpoint that can change shape without warning, and sta
 data that works beats fresh data that lies. Anything that does go red opens a single
 tracking issue, and the next clean run closes it.
 
-Two smaller things the cron needed. The schedule is `17 11 * * *` rather than the
-top of the hour, because GitHub queues every `:00` cron on the platform at once and
-drops the overflow. And GitHub disables a scheduled workflow after 60 days of
+Two smaller things the cron needed. **It runs twice a day, at `17 11` and `47 19`,**
+because a single daily slot is not a schedule you can rely on: GitHub's cron is
+best-effort, delaying runs under load and dropping them silently, and the first slot
+this workflow ever had came and went without firing. Two attempts eight hours apart
+turn a missed day into a late morning. The odd minutes matter for the same reason —
+every `:00` cron on the platform is queued at once and the overflow is shed. The second
+run cannot double-post: the commit step only commits when a file actually changed and
+`generatedAt` is date-only, so a same-day rerun either picks up decks posted since the
+morning or reports nothing to commit. And GitHub disables a scheduled workflow after 60 days of
 repository inactivity while pushes made with `GITHUB_TOKEN` do not count as activity,
 so this cron cannot keep itself alive; setting a `REFRESH_PAT` secret attributes the
 daily push to a user, which does. Unset, it behaves as before.

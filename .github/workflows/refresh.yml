@@ -36,11 +36,20 @@ name: refresh data
 
 on:
   schedule:
-    # 11:17 UTC daily. riftbound.gg publishes its meta report weekly, so daily is
-    # comfortably ahead of the thing being tracked. The odd minute is deliberate:
-    # GitHub queues every top-of-the-hour cron on the platform at once and drops the
-    # overflow, so :00 is the least reliable minute in the hour to ask for.
+    # Twice, because one daily slot is not a schedule you can rely on. GitHub's cron is
+    # best-effort: it delays runs under load and drops them silently, and the first
+    # slot this workflow ever had came and went without firing at all. Two attempts
+    # eight hours apart turn a missed run into a late one.
+    #
+    # The odd minutes are deliberate too — GitHub queues every top-of-the-hour cron on
+    # the platform at once and sheds the overflow, so :00 is the least reliable minute
+    # in the hour to ask for.
+    #
+    # The second run is close to free and cannot double-post: the commit step only
+    # commits when a file actually changed, and generatedAt is date-only, so a same-day
+    # rerun either finds decks posted since the morning or says nothing to commit.
     - cron: '17 11 * * *'
+    - cron: '47 19 * * *'
   workflow_dispatch:
     inputs:
       days:
