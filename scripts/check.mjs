@@ -604,11 +604,22 @@ if (!tiers) {
   ok('most of the tier list resolves to a played archetype', map.size >= 25,
      `${map.size} of ${T.length} entries joined`);
 
-  // Master Yi has two legends; only Wuju Bladesman is played, and it is Tier 1.
+  // Master Yi has two legends sitting in two different tiers, which is the whole case
+  // the epithet parsed from each guide slug exists to separate. This used to assert that
+  // exactly one of them was played and that it was Tier 1; both of those are facts about
+  // last week's data rather than about the join, and both have since stopped being true.
+  // So assert the mechanism instead: every played Wuju archetype lands on the tier of the
+  // entry whose epithet names its legend, whichever ones people are playing and wherever
+  // riftbound.gg moves them.
   const yi = [...map.entries()].filter(([n]) => /wuju/i.test(n));
-  ok('the played Master Yi archetype resolves, at its best tier',
-     yi.length === 1 && yi[0][1].tier === 1,
-     yi.map(([n, v]) => `${n}=T${v.tier}`).join(', ') || 'none');
+  const epithetTier = (name) => {
+    const hits = T.filter((r) => r.epithet &&
+      new RegExp(r.epithet.replace(/[^A-Za-z]+/g, '[^A-Za-z]*'), 'i').test(name));
+    return hits.length === 1 ? hits[0].tier : null;
+  };
+  ok('each played Master Yi archetype lands on its own legend\'s tier',
+     yi.length >= 1 && yi.every(([n, v]) => v.tier === epithetTier(n)),
+     yi.map(([n, v]) => `${n}=T${v.tier}, epithet says T${epithetTier(n)}`).join('; ') || 'none');
 
   // Meta renders the raw list; Next renders it crossed with the collection, tier-first.
   A.S.inv = collections['deep'];
