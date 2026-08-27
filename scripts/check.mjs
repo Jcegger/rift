@@ -52,6 +52,7 @@ const NAMED = [
   'foilOnlyProblems', 'foilOnlyText', 'renderFoilOnly', 'championIndex',
   'deckLegalForConstructed', 'cardCost', 'gapCost', 'cost', 'costIndex',
   'daysSince', 'dataAge', 'staleNote', 'newsChampion', 'guideByChampion', 'dataAlerts',
+  'claimedResults', 'claimText',
   'historyDays', 'historyNames', 'sharesOn', 'movementPair', 'metaMovement', 'movementFor',
   'tierMovement', 'movementPending', 'moveChip',
   'renderNews', 'credibility',
@@ -679,6 +680,60 @@ if (!tiers) {
 
   // Freshness knows about it.
   ok('dataAge tracks the tier list', A.dataAge().some((a) => a.key === 'tiers'));
+}
+
+/* ══ claimed results ═════════════════════════════════════════════════════
+   Upstream flags 38 of 475 lists and every one of them is July, pre-ban. Forty-nine
+   more announce a result in their own title and none is flagged, so a real Top 8 read
+   as an anonymous brew. Those claims are now parsed, and the only thing that matters
+   here is that they stay a separate and weaker class: never counted as a tournament
+   record, never given a field size, never silently upgraded. */
+section('Claimed results');
+{
+  const claimed = A.DECKS.filter((d) => d.cp != null || d.ce);
+  // A snapshot built before the parser existed has no `cp` key at all, which is a stale
+  // checkout rather than a regression; a snapshot that has the key and found nothing is
+  // the parser having stopped reading, which is worth failing over.
+  const parsed = A.DECKS.some((d) => 'cp' in d);
+  ok('the snapshot carries claimed results', !parsed || claimed.length > 0,
+     parsed ? `${claimed.length} of ${A.DECKS.length} lists, against ${A.DECKS.filter((d) => d.tour).length} flagged`
+            : 'snapshot predates the title parser — run build-decks.mjs');
+  ok('a claim and a record are never on the same list',
+     claimed.every((d) => !d.tour));
+  ok('a claimed placing is a sane finish',
+     claimed.every((d) => d.cp == null || (Number.isInteger(d.cp) && d.cp >= 1 && d.cp <= 999)),
+     claimed.filter((d) => d.cp != null).length + ' with a placing');
+  ok('a claim never carries a field size, since its event is not in the archive',
+     claimed.every((d) => !d.ec));
+  // The parser reads titles, so a rename upstream silently empties it. Assert the yield.
+  ok('the title parser still reads a useful share of the field', !parsed || claimed.length >= 20,
+     `${claimed.length} parsed`);
+  ok('no claim was read out of a word that merely contains one',
+     claimed.every((d) => /\b(top\s*\d|wins?\b|winner|\d(st|nd|rd|th)\s+place|undefeated|x-0)/i.test(d.h || '')),
+     claimed.filter((d) => !/\b(top\s*\d|wins?\b|winner|\d(st|nd|rd|th)\s+place|undefeated|x-0)/i.test(d.h || ''))
+            .slice(0, 3).map((d) => d.h).join('; ') || 'all sound');
+
+  A.S.inv = {};
+  const groups = A.metaArchetypes(A.metaPool());
+  ok('every archetype carries a claim summary', groups.every((g) => g.claim && Array.isArray(g.claim.events)));
+  ok('claimed lists are counted apart from tournament lists',
+     groups.every((g) => g.claim.lists + g.tourLists <= g.lists));
+  ok('an archetype with a claim but no record still reads as having no record',
+     groups.every((g) => !(g.claim.lists && !g.evCount) || (g.evPlayers === 0 && g.evCount === 0)));
+  const withClaim = groups.filter((g) => g.claim.lists);
+  ok('some archetype gained a claim it had no record for',
+     !parsed || withClaim.some((g) => !g.evCount), `${withClaim.filter((g) => !g.evCount).length} archetypes`);
+  ok('the claim phrase always says it is unverified',
+     withClaim.length > 0 && withClaim.every((g) => /unverified$/.test(A.claimText(g.claim))) || !parsed,
+     A.claimText(withClaim[0] && withClaim[0].claim).slice(0, 70));
+
+  // The rendered surfaces must mark it, never imply a record.
+  A.S.inv = collections['deep'];
+  A.renderMeta();
+  const m = els.get('v-meta').innerHTML;
+  const flat = m.replace(/\s+/g, ' ');
+  ok('Meta marks a claim as a claim and explains it',
+     /never counted as a tournament record/.test(flat) && (!parsed || flat.includes('claims')));
 }
 
 /* ══ movement ════════════════════════════════════════════════════════════

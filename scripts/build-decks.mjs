@@ -43,6 +43,52 @@ const FILTERS = (tournament) => ({
   legalonly: 1, priceMin: "", priceMax: "", placement: "", leader: "",
 });
 
+/* ── results the flag does not carry ──────────────────────────────────────────
+   Upstream's is_tournament flag covers 38 of 475 lists and every one of them is from
+   July, before the Aspirant's Climb ban. Meanwhile fifty lists announce a result in
+   their own title — "Ornn Wins Barcelona RQ", "Sivir Top 8 S4 Beijing City Challenge",
+   "Renata Glasc Top 128 Nanjing Regional" — and not one of them is flagged. The deck
+   that made this obvious is a genuine Top 8 that riftbound.gg serves with
+   is_tournament: "0", no event and no placement, so the app read a placing deck as an
+   anonymous brew.
+
+   What is parsed here is therefore a *claim by the deck's author*, not a record. It is
+   kept in its own fields and never written to `tour`, `ev`, `pl` or `ec`, because those
+   mean "upstream says so" and this does not. It also never gets a player count: the
+   events these name are mostly absent from the tournament archive, and a field size
+   invented to fill the column would be exactly the made-up number this project refuses
+   to produce elsewhere. */
+
+// Ordered: the most specific pattern that matches wins, so "Top 8" is not read as 8th.
+// Ordered: the most specific pattern that matches wins, so "Top 8" is not read as 8th.
+const PLACE_PATTERNS = [
+  [/\bundefeated\b|\bx-0\b/i, () => null],          // a result, but not a placing
+  [/\bwins?\b|\bwinner\b|\b1st\s+place\b/i, () => 1],
+  [/\btop\s*(\d{1,3})\b/i, (m) => Number(m[1])],
+  [/\b(\d{1,3})(?:st|nd|rd|th)\s+place\b/i, (m) => Number(m[1])],
+];
+
+// "Sivir Top 8 S4 Beijing City Challenge - copy" -> { place: 8, event: "S4 Beijing City Challenge" }
+// Returns null when the title claims nothing, which is the common case.
+const claimFromTitle = (title) => {
+  const raw = String(title || "").replace(/\s*-\s*copy(\s*\d+)?\s*$/i, "").trim();
+  if (!raw) return null;
+  for (const [re, read] of PLACE_PATTERNS) {
+    const m = raw.match(re);
+    if (!m) continue;
+    // Everything after the result phrase is the event, minus a leading "at"/"of"/"@".
+    let event = raw.slice(m.index + m[0].length)
+                   .replace(/^\s*(?:at|in|of|@|-|–|,)\s*/i, "")
+                   .replace(/\s*\([^)]*\)\s*$/, "")
+                   .trim();
+    // A bare "Top 8" names no event, and a single word is usually the rest of a deck
+    // name rather than a tournament.
+    if (event.length < 4 || !/\s/.test(event)) event = null;
+    return { place: read(m), event };
+  }
+  return null;
+};
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // Their API rate limits, and a full run is dozens of requests, so pace it and back
@@ -198,6 +244,9 @@ const main = async () => {
       if (hit) legend = cat.cards.find((c) => c.t === "Legend" && c.n === hit);
     }
     const t = d.tournament || {};
+    // Only for lists upstream did not flag: a deck cannot carry both a record and a
+    // claim, so the two can never be double-counted downstream.
+    const claim = isTour ? null : claimFromTitle(d.humanname);
     return {
       s: d.slug,
       h: (d.humanname || "").trim(),
@@ -213,6 +262,11 @@ const main = async () => {
       pr: Math.round(Number(d.price) || 0),
       sz: size,
       tour: isTour ? 1 : 0,
+      // A placing the author claims in the title, never a record. No player count:
+      // these events are mostly absent from the archive and an invented field size
+      // would be the made-up number this project refuses to produce.
+      cp: claim ? claim.place : null,
+      ce: claim ? claim.event : null,
       cards,
       _unknown: unknown,
     };
@@ -223,6 +277,7 @@ const main = async () => {
     ...[...bestOf.values()].map((d) => shape(d, false)),
   ].filter((d) => d.sz > 0);
 
+  const claimed = decks.filter((d) => d.cp != null || d.ce);
   const unknown = new Map();
   for (const d of decks){
     for (const c of d._unknown) unknown.set(c, (unknown.get(c) || 0) + 1);
@@ -271,6 +326,24 @@ const main = async () => {
   // the number, it is that the number is small and the app should say so rather than
   // implying its meta reading rests on every event that happened.
   const tourDecks = decks.filter((d) => d.tour);
+  // The claims, reported apart from the records because that is what they are. If this
+  // number ever collapses, the titles changed shape and the parser stopped reading them.
+  if (claimed.length){
+    const placed = claimed.filter((d) => d.cp != null);
+    const named = claimed.filter((d) => d.ce);
+    console.log(`\n${claimed.length} lists claim a result in their own title ` +
+      `(${placed.length} with a placing, ${named.length} naming an event), ` +
+      `against ${tourDecks.length} upstream actually flags`);
+    for (const d of claimed.slice().sort((a, b) => (a.cp ?? 999) - (b.cp ?? 999)).slice(0, 5))
+      console.log(`  ${d.cp != null ? `#${String(d.cp).padStart(3)}` : "  -"}  ${d.ln || "?"} — ${(d.ce || "no event named").slice(0, 44)}`);
+    const knownEvent = named.filter((d) => eventByName.has(d.ce)).length;
+    console.log(`  ${knownEvent} of ${named.length} claimed events match a row in data/events.json, ` +
+      `so the rest carry no field size and are never given one`);
+  } else {
+    console.log(`\nWARNING: no list claims a result in its title — the title parser reads nothing, ` +
+      `which previously matched 50 of 475 lists and is the shape of an upstream rename`);
+  }
+
   if (tourDecks.length){
     const sized = tourDecks.filter((d) => d.ec);
     const evs = new Set(tourDecks.map((d) => d.ev).filter(Boolean));

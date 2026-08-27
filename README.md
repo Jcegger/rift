@@ -659,6 +659,41 @@ are tournament-flagged**, covering **12 of 30 events** — 1,567 of 2,615 player
 only **9 of 47 archetypes** have any tournament evidence whatsoever. That gap is upstream
 and cannot be closed here, so Meta states it rather than implying it away.
 
+### Results the flag does not carry
+
+Upstream's `is_tournament` flag covers 38 of 481 lists, and **every one of them is from
+July**, before the Aspirant's Climb ban. Meanwhile **49 lists announce a result in their
+own title** — "Ornn Wins Barcelona RQ", "Sivir Top 8 S4 Beijing City Challenge", "Renata
+Glasc Top 128 Nanjing Regional" — and *not one of them is flagged*. So the app read a
+genuine Top 8 as an anonymous brew, and 15 archetypes that had "no tournament record"
+had in fact placed.
+
+`build-decks.mjs` now parses those titles into `cp` (claimed place) and `ce` (claimed
+event). **It is a second and weaker class of evidence, never merged into the first**, and
+the checks enforce every part of that:
+
+- A list can carry a record or a claim, never both — the parser only runs on lists
+  upstream did not flag.
+- A claim **never gets a player count**. Zero of the 47 events named this way appear in
+  `events.json`, and inventing a field size to fill the column would be exactly the
+  made-up number the credibility figures refuse to be.
+- It is labelled a claim everywhere it is shown. Meta reads `claims top 16 · unverified`
+  in amber where it used to read `no tournament record`; Find my deck marks a row
+  `claims top 8` only when there is no verified finish to show instead.
+- The parser is boundary-anchored, so "Twinstoke" and "Winston Control" are not read as
+  wins, and the checks assert both the yield (a collapse to zero means upstream renamed
+  something) and that every parsed claim is traceable to a result phrase in its title.
+
+What this buys is one distinction: the difference between *no evidence* and *says it
+Top 8'd, unverified*. That is the difference between a deck the ranking ignores and one
+it merely cannot rank — and it does **not** feed target selection, for the same reason
+credibility does not.
+
+One honest limit. The deck snapshot is a date-ordered window, so a list posted at event
+time falls out as newer brews are published; the Sivir list that prompted this was in the
+snapshot one morning and past the edge by the afternoon. Claims are captured while a list
+is in the window, and the archive in `history.json` is what will eventually remember them.
+
 Credibility is deliberately **not a score**. A weighted number would need a made-up
 exchange rate between players and recency, and an uninterpretable figure is worse than a
 crude one you can argue with — the same reason there is no per-card price anywhere in this

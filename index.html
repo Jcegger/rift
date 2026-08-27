@@ -2150,7 +2150,7 @@ function metaArchetypes(pool){
     }
   }
   const total = (DECKS || []).length || 1;
-  return [...groups.values()].map((g) => ({ ...g, share: g.lists / total * 100, ...credibility(g) }));
+  return [...groups.values()].map((g) => ({ ...g, share: g.lists / total * 100, ...credibility(g), claim: claimedResults(g) }));
 }
 
 /* ── credibility ───────────────────────────────────────────────────────────
@@ -2179,6 +2179,42 @@ function credibility(g){
   let players = 0;
   for (const n of byEvent.values()) players += n;
   return { evCount: byEvent.size, evPlayers: players, evNewest: newest };
+}
+
+/* ── results the flag does not carry ──────────────────────────────────────
+   Upstream's tournament flag covers 38 of 475 lists and every one is from July, before
+   the Aspirant's Climb ban. Forty-nine more announce a result in their own title —
+   "Ornn Wins Barcelona RQ", "Sivir Top 8 S4 Beijing City Challenge" — and not one is
+   flagged, so a genuine Top 8 read here as an anonymous brew.
+
+   This is deliberately a second, weaker class and never merged into the first. A claim
+   is the author's word, so it is counted separately, labelled as a claim wherever it is
+   shown, and given no player count: none of the 47 events named this way appear in the
+   tournament archive, and inventing a field size to fill the column is exactly the
+   made-up number the credibility figures above refuse to be. It buys one thing — the
+   difference between "no evidence" and "says it Top 8'd, unverified" — which is the
+   difference between a deck the ranking ignores and one it merely cannot rank. */
+function claimedResults(g){
+  const events = new Set();
+  let best = null, newest = null, lists = 0;
+  for (const row of (g.rows || [])){
+    const d = row.deck;
+    if (d.tour || (d.cp == null && !d.ce)) continue;
+    lists++;
+    if (d.ce) events.add(d.ce);
+    if (d.cp != null && (best == null || d.cp < best)) best = d.cp;
+    if (d.dt && (!newest || d.dt > newest)) newest = d.dt;
+  }
+  return { lists, best, newest, events: [...events] };
+}
+
+// One phrase, so every surface says it the same way and none of them imply a record.
+function claimText(c){
+  if (!c || !c.lists) return '';
+  const what = c.best === 1 ? 'a win' : c.best != null ? `top ${c.best}` : 'a result';
+  return `${c.lists} list${c.lists === 1 ? '' : 's'} claim${c.lists === 1 ? 's' : ''} ${what}` +
+         `${c.events.length ? ` at ${c.events.slice(0, 2).map(esc).join(', ')}${
+           c.events.length > 2 ? ` +${c.events.length - 2}` : ''}` : ''}, unverified`;
 }
 
 /* ── the tier list join ───────────────────────────────────────────────────
@@ -2458,17 +2494,24 @@ function renderMeta(){
       <p class="note">Ranked by how many lists play each archetype. The columns to the right are the
       evidence: tournament lists, the size of field it was played in, when it last turned up and its
       best finish. Read the blanks — most archetypes have no tournament record at all, so their
-      standing here rests entirely on people posting brews.${
+      standing here rests entirely on people posting brews. Where a row reads
+      <span style="color:var(--maize)">claims top N</span> the flag is absent but the list's own title
+      announces a result; that is the author's word, carries no field size, and is never counted as a
+      tournament record.${
         popular.length > POP_SHOWN ? ` Showing the top ${POP_SHOWN} of ${popular.length}.` : ''}</p>
       <div class="rows" style="margin-top:8px">${popular.slice(0, POP_SHOWN).map(g => `
         <div class="row">
           <span class="nm">${esc(g.name)}
             <span class="code">${g.lists} list${g.lists === 1 ? '' : 's'} · ${g.share.toFixed(1)}%${
               g.tourLists ? ` · ${g.tourLists} tournament` : ''}</span></span>
-          <span class="qty${g.evCount ? '' : ' need'}">${g.evCount
+          <span class="qty${g.evCount || g.claim.lists ? '' : ' need'}">${g.evCount
             ? `${g.evPlayers.toLocaleString('en-US')}-player field<span class="code"> · last ${
                 esc(g.evNewest)}${g.bestPlace != null ? ` · best #${g.bestPlace}` : ''}</span>`
-            : 'no tournament record'}</span>
+            : g.claim.lists
+              ? `<span style="color:var(--maize)">${g.claim.best === 1 ? 'claims a win'
+                  : g.claim.best != null ? `claims top ${g.claim.best}` : 'claims a result'}</span><span class="code"> · unverified${
+                  g.claim.newest ? ` · last ${esc(g.claim.newest)}` : ''}</span>`
+              : 'no tournament record'}</span>
         </div>`).join('')}</div>
     </div>`;
 }
@@ -2985,7 +3028,7 @@ function renderNext(){
       gap, short: gap.short, buildable: gap.short === 0 && gap.unpriced === 0,
       breakdown: gapBreak(ev.missing), shape: compTag(g.best.deck),
       ownLegend: heldLegends.has(g.name), listPrice: g.best.deck.pr ?? null,
-      bestPlace: g.bestPlace, evPlayers: g.evPlayers,
+      bestPlace: g.bestPlace, evPlayers: g.evPlayers, claim: g.claim,
       fits: !budget || (gap.unpriced === 0 && gap.total <= budget) || gap.short === 0,
     };
   });
@@ -3186,7 +3229,10 @@ function renderNext(){
           <span class="nm">${t.ownLegend ? '<b style="color:var(--good)">●</b> ' : ''}${tierBadge(t.tier)}
             <b style="color:var(--cream)">${esc(t.champion)}</b>${moveChip(t.name)}
             <span class="code">${esc(t.name)}${t.shape ? ` · ${t.shape}` : ''}${
-              t.bestPlace != null ? ` · best #${t.bestPlace}` : ''}</span>
+              t.bestPlace != null ? ` · best #${t.bestPlace}` : ''}</span>${
+              t.bestPlace == null && t.claim && t.claim.best != null
+                ? ` <span class="code" style="color:var(--maize)" title="${esc(claimText(t.claim))}">claims ${
+                    t.claim.best === 1 ? 'a win' : `top ${t.claim.best}`}</span>` : ''}
             ${t.buildable ? '' : `<span class="code">${t.breakdown}</span>`}
             ${t.guide ? `<a href="${esc(t.guide)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">build ↗</a>` : ''}</span>
           <span class="qty${t.buildable ? '' : ' need'}">${t.buildable
