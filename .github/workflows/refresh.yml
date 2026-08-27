@@ -68,6 +68,12 @@ jobs:
       - name: Rebuild the news feed
         run: node scripts/build-news.mjs
 
+      # A scrape of riftbound.gg's tier-list page, so more brittle than the others.
+      # build-tiers.mjs exits non-zero and writes nothing if the parse comes up short,
+      # which fails this job rather than shipping a thin list.
+      - name: Rebuild the tier list
+        run: node scripts/build-tiers.mjs
+
       # Events again: build-decks changes which events have lists, and the coverage
       # figures the Meta tab quotes are computed here. Cheap, one request.
       - name: Recompute event coverage
@@ -119,6 +125,10 @@ jobs:
                 } else if (f.endsWith("events.json")) {
                   const d = read(f).events.length, o = was(f).events.length;
                   if (d !== o) bits.push(`${d - o > 0 ? "+" : ""}${d - o} events`);
+                } else if (f.endsWith("tiers.json")) {
+                  const d = read(f), o = was(f);
+                  if (d.week !== o.week) bits.push(`tier list wk ${o.week} -> ${d.week}`);
+                  else if (JSON.stringify(d.tiers) !== JSON.stringify(o.tiers)) bits.push("tier list moved");
                 }
               } catch { /* first run, or a shape change; the file list still tells the story */ }
             }
