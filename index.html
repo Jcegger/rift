@@ -1922,8 +1922,12 @@ function deckRequirements(deck){
     if (!row){ unknown.push(code); continue; }
     const id = identityOf(row.card);
     const prev = needById.get(id);
-    if (prev) prev.qty += qty;
-    else needById.set(id, { qty, card: row.card });
+    // A deck runs exactly one Legend, so two printings of it are one slot expressed
+    // twice, not two copies to go and buy. Summing them told a list that names both
+    // the base and the alt art that it needed two Blade Dancers.
+    const one = row.card.t === 'Legend';
+    if (prev) prev.qty = one ? Math.max(prev.qty, qty) : prev.qty + qty;
+    else needById.set(id, { qty: one ? Math.min(qty, 1) : qty, card: row.card });
   }
   const out = { needById, unknown };
   if (key) DECK_REQ.set(key, out);
