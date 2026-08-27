@@ -420,6 +420,31 @@ for (const [label0, inv] of Object.entries(collections)){
      `, overlap ${sum}->${union.copies}`);
 }
 
+/* ══ the age of the committed data ═══════════════════════════════════════
+   Everything else in this file tests the engine against whatever data happens to be
+   checked out, which means a pipeline that died three weeks ago passes all of it. The
+   section below is the only one that asks whether the files are actually current.
+
+   It runs first, deliberately: the Freshness section that follows mutates DECKS_AT to
+   drive dataAge() through its bands, and reading the real ages before any of that
+   removes the ordering coupling entirely.
+
+   Behind --max-age because a stale local checkout is normal and should not fail the
+   everyday run. The daily workflow passes the flag after it has committed, so a source
+   past its shelf life turns the job red without holding up the data that did refresh.
+   The thresholds are the app's own FRESH_LIMITS rather than a second set invented for
+   CI: 'bad' is the exact line at which the page stops calling its own output advice. */
+{
+  const gate = process.argv.includes('--max-age');
+  section(gate ? 'The age of the committed data' : 'The age of the committed data (reporting only, pass --max-age to enforce)');
+  for (const a of A.dataAge()){
+    const detail = `${a.at || 'missing'}, ${a.days == null ? 'age unknown' : `${a.days}d`}` +
+                   ` (warns at ${a.warn}, bad at ${a.bad})`;
+    if (gate) ok(`${a.label} is inside its shelf life`, a.state !== 'bad', detail);
+    else console.log(`  --   ${a.label}: ${detail} — ${a.state}`);
+  }
+}
+
 /* ══ freshness ═══════════════════════════════════════════════════════════ */
 section('Freshness');
 {
@@ -444,6 +469,13 @@ section('Freshness');
      loud.includes('365 days old') && loud.includes('build-decks'), `${loud.length} chars`);
   ok('a current snapshot produces no warning at all',
      (A.DECKS_AT = iso(0), A.staleNote('decks', 'x')) === '');
+
+  // The --max-age gate above is itself a guard nothing else would notice going wrong,
+  // which is the exact shape of bug this file exists for. Its rule is one line, so
+  // assert that line against the same synthetic dates rather than the real files.
+  const gated = (days) => { A.DECKS_AT = iso(days); return A.dataAge().some((a) => a.state === 'bad'); };
+  ok('the age gate fires on a snapshot past its shelf life', gated(365) === true);
+  ok('the age gate passes on a fresh snapshot', gated(0) === false);
   A.DECKS_AT = keep;
 }
 

@@ -21,7 +21,9 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 
 - `index.html` - the whole app. Vanilla JS, no dependencies, no bundler.
 - `data/cards.json` - the card catalog, generated and committed. Loaded at boot.
-- `data/extras.json` - printings Riot does not publish, merged in at load.
+- `data/extras.json` - printings Riot does not publish, merged in at load. The one
+  hand-maintained file, and the only one carrying no `generatedAt`, so it sits outside
+  the freshness system on purpose: nothing upstream refreshes it.
 - `data/decks.json` - recent decklists, the meta snapshot.
 - `data/banned.json` - cards banned from sanctioned Constructed play.
 - `data/events.json` - the tournament archive, with player counts and coverage.
@@ -451,12 +453,23 @@ optimising.
 ## Checks
 
 ```
-node scripts/check.mjs
+node scripts/check.mjs            # the engine
+node scripts/check.mjs --max-age  # ...and whether the data is still current
 ```
 
 Runs `index.html`'s script in node with the DOM stubbed out and asserts against the
 real catalog and the real deck snapshot. No dependencies and no build step, same as
 the rest of `scripts/`.
+
+`--max-age` is the one assertion that is about the files rather than the code. Every
+other check passes just as happily against a snapshot from three weeks ago, which is
+precisely the state a dead cron leaves behind, so the flag measures each committed
+`generatedAt` against the app's own `FRESH_LIMITS` and fails on anything past `bad`.
+It reuses those thresholds rather than inventing a second set for CI, because `bad` is
+already the line at which the page stops calling its own output advice. It is opt-in
+so that a stale local checkout does not fail the everyday run; the daily workflow
+passes it *after* committing, so a source that has been rotting for a month raises the
+alarm without holding back the data that did refresh.
 
 It exists because the bugs in this app have not been the kind you spot by reading. An
 acquisition path that looked perfectly reasonable spent 29 cards without finishing a
@@ -537,11 +550,41 @@ meta with total confidence.
 
 `.github/workflows/refresh.yml` now rebuilds all six data files daily and commits
 them. Pages serves this repo directly, so the commit *is* the deploy — no build step
-and no other infrastructure. It runs `scripts/check.mjs` before committing and fails
-without committing if anything is wrong: every source is a public endpoint that can
-change shape without warning, and stale data that works beats fresh data that lies.
-Commits carry a one-line summary of what moved, so the history reads as a changelog
-rather than 365 identical entries.
+and no other infrastructure. Commits carry a one-line summary of what moved, so the
+history reads as a changelog rather than 365 identical entries.
+
+**Each source builds independently, and one of them breaking does not cost the other
+five.** Every builder writes its file in a single `writeFile` at the end of `main()`,
+so a failure anywhere before that leaves the previous copy byte-identical — which
+means the job can keep the last-good file and commit everything that did refresh. It
+did not always work that way: the tier-list scrape ran before the verify step, so a
+redesign of a WordPress page would have aborted the run and frozen the deck snapshot
+along with it.
+
+Failures are graded, because they are not the same failure.
+
+| | commits | job | issue |
+|---|---|---|---|
+| a source fails | the rest | green, warned in the summary | — |
+| a source is past its shelf life | yes | **red** | opened |
+| `check.mjs` fails | **nothing** | red | opened |
+| every source fails | nothing to commit | red | opened |
+
+A single broken source stays green on purpose. The last-good file keeps its old
+`generatedAt`, so the age indicator below goes amber at ten days and red at
+twenty-one on its own — ten days of runway before anything is actually wrong. Going
+red on every transient 5xx from a public API would only train me to ignore the
+alarm. `check.mjs` failing is the opposite case and still commits nothing at all:
+every source is a public endpoint that can change shape without warning, and stale
+data that works beats fresh data that lies. Anything that does go red opens a single
+tracking issue, and the next clean run closes it.
+
+Two smaller things the cron needed. The schedule is `17 11 * * *` rather than the
+top of the hour, because GitHub queues every `:00` cron on the platform at once and
+drops the overflow. And GitHub disables a scheduled workflow after 60 days of
+repository inactivity while pushes made with `GITHUB_TOKEN` do not count as activity,
+so this cron cannot keep itself alive; setting a `REFRESH_PAT` secret attributes the
+daily push to a user, which does. Unset, it behaves as before.
 
 Automation makes surfacing the age *more* important, not less, because a cron that
 quietly stops looks exactly like one that is working. So `dataAge()` computes the age
@@ -639,8 +682,15 @@ node scripts/build-tiers.mjs
 page with no API. The parse keys on two shapes in the markup: `<strong>Tier N</strong>`
 markers and `<figcaption class="wp-element-caption">` blocks, one per Legend in rank
 order. If the fetch fails or fewer than 20 legends come back, the script writes nothing
-and exits non-zero, so a redesign of their page fails the daily job instead of shipping
-a half-read list. `check.mjs` asserts the shape and the join.
+and exits non-zero instead of shipping a half-read list. `check.mjs` asserts the shape
+and the join.
+
+Writing nothing is what makes this survivable. The daily job treats each source
+separately, so a redesign of their page costs the tier list and only the tier list:
+`tiers.json` keeps its last-good copy, the other five files still refresh and commit,
+and the age indicator turns amber after ten days without the deck snapshot going down
+with it. This is the most brittle input in the project, and it is no longer the one
+that can stop everything else.
 
 **The join is by champion.** riftbound.gg names Legends plainly — Kennen, Master Yi,
 Kai'Sa, Rek'Sai — which is how the Legends tab names them too, so `tierByArchetype()`

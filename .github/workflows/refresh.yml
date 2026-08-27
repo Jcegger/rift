@@ -4,14 +4,28 @@
 # build step and no other infrastructure involved. That is the whole reason this works
 # as a cron: regenerate, verify, commit, done.
 #
-# The verify step is not ceremony. Every one of these sources is a public endpoint that
-# can change shape without warning, and the app's correctness rests on things like the
-# card-identity fold and the exact-name join between decks and events. The build scripts
-# already flag their own upstream surprises (build-catalog warns when a set's base count
-# stops matching what Riot declares; build-decks warns when the newest set is
-# under-represented, which is the shape of a mistake that shipped once already), and
-# scripts/check.mjs asserts the engine's invariants. If any of that fails, this job
-# fails and commits nothing. Stale data that works beats fresh data that lies.
+# Failures are graded, because they are not all the same failure. Each source builds
+# independently and a broken one keeps its last-good file while the others still ship:
+# every builder writes its output in a single writeFile at the end of main(), so a
+# failure anywhere before that leaves the previous file byte-identical. That matters
+# because the most brittle input here is a scrape of a WordPress page, and a redesign
+# there used to abort the job and freeze the deck snapshot along with it.
+#
+#   one source fails          -> commit the rest, job green, logged in the summary.
+#                                The app's own age dot goes amber at ten days and red
+#                                at twenty-one, which is ten days of runway; going red
+#                                on every transient 5xx would only teach us to ignore it.
+#   a source is past its
+#   shelf life                -> commit, then FAIL. `check.mjs --max-age` measures the
+#                                committed generatedAt against the app's FRESH_LIMITS.
+#                                Past 'bad', "transient" has stopped being credible.
+#   check.mjs fails           -> commit NOTHING and fail. Every source is a public
+#                                endpoint that can change shape without warning, and
+#                                stale data that works beats fresh data that lies.
+#   every source fails        -> fail. Nothing changed, so nothing would have committed
+#                                anyway; the point is to not report that as a success.
+#
+# Any failure opens (or updates) a tracking issue, and the next clean run closes it.
 #
 # If a run succeeds but the site does not update, the Pages build is the usual suspect:
 # builds here fail intermittently with an empty error message, and re-requesting one has
@@ -22,22 +36,35 @@ name: refresh data
 
 on:
   schedule:
-    # 11:00 UTC daily. riftbound.gg publishes its meta report weekly, so daily is
-    # comfortably ahead of the thing being tracked.
-    - cron: '0 11 * * *'
+    # 11:17 UTC daily. riftbound.gg publishes its meta report weekly, so daily is
+    # comfortably ahead of the thing being tracked. The odd minute is deliberate:
+    # GitHub queues every top-of-the-hour cron on the platform at once and drops the
+    # overflow, so :00 is the least reliable minute in the hour to ask for.
+    - cron: '17 11 * * *'
   workflow_dispatch:
     inputs:
       days:
         description: 'Deck window in days'
         required: false
         default: '60'
+      simulate_failure:
+        description: 'Comma-separated sources to force-fail (catalog,banned,events,decks,news,tiers)'
+        required: false
+        default: ''
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: refresh-data
   cancel-in-progress: false
+
+env:
+  # Interpolated into shell below, so they go through the environment rather than
+  # through ${{ }} splicing.
+  DAYS: ${{ github.event.inputs.days || '60' }}
+  SIMULATE: ${{ github.event.inputs.simulate_failure || '' }}
 
 jobs:
   refresh:
@@ -45,6 +72,14 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          # GitHub disables a scheduled workflow after 60 days of repository inactivity,
+          # and pushes made with GITHUB_TOKEN do not count as activity — so this cron
+          # cannot keep itself alive. Set REFRESH_PAT to a fine-grained token with
+          # contents:write and the daily push is attributed to a user, which does. Unset,
+          # this behaves exactly as before and the 60-day clock is real but slow, and
+          # GitHub emails before it fires.
+          token: ${{ secrets.REFRESH_PAT || github.token }}
 
       - uses: actions/setup-node@v4
         with:
@@ -52,37 +87,115 @@ jobs:
 
       # Order matters. The catalog is what every other script resolves card codes
       # against, events supply the sizes that build-decks attaches to tournament decks,
-      # and the ban list and the deck snapshot both read the catalog.
+      # and the ban list and the deck snapshot both read the catalog. A source that
+      # failed leaves its previous file in place, so the ones downstream of it build
+      # against yesterday's copy rather than against nothing — which is the intent.
       - name: Rebuild the card catalog
-        run: node scripts/build-catalog.mjs
+        id: catalog
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,catalog,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-catalog.mjs
 
       - name: Rebuild the ban list
-        run: node scripts/build-banned.mjs
+        id: banned
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,banned,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-banned.mjs
 
       - name: Rebuild the event archive
-        run: node scripts/build-events.mjs
+        id: events
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,events,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-events.mjs
 
       - name: Rebuild the deck snapshot
-        run: node scripts/build-decks.mjs --days ${{ github.event.inputs.days || '60' }}
+        id: decks
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,decks,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-decks.mjs --days "$DAYS"
 
       - name: Rebuild the news feed
-        run: node scripts/build-news.mjs
+        id: news
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,news,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-news.mjs
 
       # A scrape of riftbound.gg's tier-list page, so more brittle than the others.
       # build-tiers.mjs exits non-zero and writes nothing if the parse comes up short,
-      # which fails this job rather than shipping a thin list.
+      # which now costs the tier list alone rather than the whole day's data.
       - name: Rebuild the tier list
-        run: node scripts/build-tiers.mjs
+        id: tiers
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,tiers,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-tiers.mjs
 
       # Events again: build-decks changes which events have lists, and the coverage
-      # figures the Meta tab quotes are computed here. Cheap, one request.
+      # figures the Meta tab quotes are computed here. Cheap, one request. This pass
+      # rewrites events.json wholesale, so its outcome is the one that counts.
       - name: Recompute event coverage
-        run: node scripts/build-events.mjs
+        id: events2
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,events,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-events.mjs
+
+      - name: Source report
+        id: sources
+        run: |
+          set -euo pipefail
+          declare -A outcome=(
+            [catalog]='${{ steps.catalog.outcome }}'
+            [banned]='${{ steps.banned.outcome }}'
+            [events]='${{ steps.events2.outcome }}'
+            [decks]='${{ steps.decks.outcome }}'
+            [news]='${{ steps.news.outcome }}'
+            [tiers]='${{ steps.tiers.outcome }}'
+          )
+          failed=""; ok_count=0
+          {
+            echo "| source | result | file |"
+            echo "|---|---|---|"
+          } >> "$GITHUB_STEP_SUMMARY"
+          for s in catalog banned events decks news tiers; do
+            case "$s" in
+              catalog) f=data/cards.json;; banned) f=data/banned.json;;
+              events)  f=data/events.json;; decks) f=data/decks.json;;
+              news)    f=data/news.json;;  tiers) f=data/tiers.json;;
+            esac
+            at=$(node -e 'process.stdout.write(String(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).generatedAt||"?"))' "$f" 2>/dev/null || echo '?')
+            if [ "${outcome[$s]}" = "success" ]; then
+              ok_count=$((ok_count + 1))
+              echo "| $s | ok | rebuilt, $at |" >> "$GITHUB_STEP_SUMMARY"
+            else
+              failed="${failed:+$failed,}$s"
+              echo "| $s | **FAILED** | kept $at |" >> "$GITHUB_STEP_SUMMARY"
+              echo "::warning title=$s did not rebuild::Keeping the last-good $f from $at. The other sources still ship."
+            fi
+          done
+          echo "failed=$failed"     >> "$GITHUB_OUTPUT"
+          echo "ok_count=$ok_count" >> "$GITHUB_OUTPUT"
+          echo "Sources rebuilt: $ok_count of 6${failed:+ (failed: $failed)}"
+
+      # Nothing changed and nothing can be salvaged. Reporting that as a green run is
+      # the exact failure mode this whole file is trying to close.
+      - name: Fail if every source broke
+        if: steps.sources.outputs.ok_count == '0'
+        run: |
+          echo "::error title=No source rebuilt::All six builders failed — the data is entirely unchanged."
+          exit 1
 
       - name: Verify
         run: node scripts/check.mjs
 
       - name: Commit if anything changed
+        env:
+          FAILED_SOURCES: ${{ steps.sources.outputs.failed }}
         run: |
           set -euo pipefail
           git config user.name  "github-actions[bot]"
@@ -134,6 +247,68 @@ jobs:
             }
             process.stdout.write(bits.join(", ") || changed.map((f) => f.replace("data/", "")).join(", "));
           ')
+          # Name the sources that did not rebuild, so a run that half-worked says so in
+          # the history rather than only in a log that expires.
+          if [ -n "$FAILED_SOURCES" ]; then
+            summary="${summary} · kept ${FAILED_SOURCES//,/, }"
+          fi
           git commit -m "chore(data): ${summary}"
           git push
           echo "Committed: ${summary}"
+
+      # After the commit, deliberately: whatever did refresh should reach the site even
+      # on the day we notice that something else has been rotting for three weeks.
+      - name: Fail if any source is past its shelf life
+        run: node scripts/check.mjs --max-age
+
+      - name: Open or update the tracking issue
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = 'Data refresh is failing';
+            const run = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const failed = '${{ steps.sources.outputs.failed }}' || 'none — the failure was downstream of the builders';
+            const body = [
+              `The daily data refresh failed.`,
+              ``,
+              `- **Sources that did not rebuild:** ${failed}`,
+              `- **Sources rebuilt:** ${{ steps.sources.outputs.ok_count || 0 }} of 6`,
+              `- **Run:** ${run}`,
+              ``,
+              `A single failing source does not reach here — it keeps its last-good file and the`,
+              `run stays green. This means either \`check.mjs\` failed, every source failed, or a`,
+              `file is past the shelf life in \`FRESH_LIMITS\`.`,
+            ].join('\n');
+            const { data: open } = await github.rest.issues.listForRepo({
+              ...context.repo, state: 'open', per_page: 100,
+            });
+            const existing = open.find((i) => i.title === title && !i.pull_request);
+            if (existing) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: existing.number, body });
+              core.notice(`Updated issue #${existing.number}`);
+            } else {
+              const { data: made } = await github.rest.issues.create({ ...context.repo, title, body });
+              core.notice(`Opened issue #${made.number}`);
+            }
+
+      # The recovery signal matters as much as the alarm; an issue left open after the
+      # thing fixed itself only teaches us to stop reading them.
+      - name: Close the tracking issue on recovery
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = 'Data refresh is failing';
+            const run = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const { data: open } = await github.rest.issues.listForRepo({
+              ...context.repo, state: 'open', per_page: 100,
+            });
+            const existing = open.find((i) => i.title === title && !i.pull_request);
+            if (!existing) return;
+            await github.rest.issues.createComment({
+              ...context.repo, issue_number: existing.number,
+              body: `Recovered — a clean refresh completed. ${run}`,
+            });
+            await github.rest.issues.update({ ...context.repo, issue_number: existing.number, state: 'closed' });
+            core.notice(`Closed issue #${existing.number}`);
