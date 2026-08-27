@@ -1990,7 +1990,14 @@ function metaArchetypes(pool){
     }
   }
   const total = (DECKS || []).length || 1;
-  return [...groups.values()].map((g) => ({ ...g, share: g.lists / total * 100, ...credibility(g) }));
+  return [...groups.values()].map((g) => ({
+    ...g,
+    share: g.lists / total * 100,
+    // Newest list of any kind in the archetype, tournament or not — what the blended
+    // target score reads for freshness. credibility's evNewest is tournament-only.
+    lastSeen: g.rows.reduce((m, r) => (r.deck.dt && (!m || r.deck.dt > m) ? r.deck.dt : m), null),
+    ...credibility(g),
+  }));
 }
 
 /* ── credibility ───────────────────────────────────────────────────────────
@@ -2321,8 +2328,15 @@ const readyShareOf = (scored) => scored.reduce((a, g) => a + (g.short === 0 ? g.
    fifty-six things to find even if they are commons, and there is no honest exchange
    rate between dollars and that friction. Rather than invent one, both orderings are
    offered and both numbers are always on screen. Cheapest is the default because it is
-   the axis you cannot argue with. */
-const byTarget = (a, b) => (S.planBy === 'cards' ? byCards(a, b) : byCost(a, b));
+   the axis you cannot argue with.
+
+   'score' is a third mode, and it is the one the rest of this file argues against:
+   a single blended number. See annotateTargetScores for what it does and does not
+   claim. It is opt-in, never the default, and every part of it stays on the row. */
+const byTarget = (a, b) =>
+  S.planBy === 'cards' ? byCards(a, b)
+  : S.planBy === 'score' ? byScore(a, b)
+  : byCost(a, b);
 
 const gapSpend = (x) => x.spend ?? (x.gap ? x.gap.total : 0);
 // An unpriced card sorts last within its own bracket rather than counting as free.
@@ -2341,6 +2355,109 @@ const byCards = (a, b) =>
   b.share - a.share ||
   a.distinct - b.distinct ||
   a.name.localeCompare(b.name);
+
+/* ── the blended target score ──────────────────────────────────────────────
+   Every other ranking in this app refuses a single composite number on purpose:
+   credibility is "deliberately not a score", per-card money was preferred over a
+   made-up index, and byTarget offers two honest axes rather than averaging them,
+   because there is no real exchange rate between dollars, card-hunting friction,
+   tournament players and recency.
+
+   This mode accepts that and produces one number anyway, for when you just want the
+   list ordered top to bottom and will argue with the result rather than tune four
+   columns. Three guards keep it from being the confident-wrong figure the app avoids:
+
+   1. Every component is normalised 0..1 across the open archetypes *on screen right
+      now*. A score means "relative to your current options", never an absolute grade,
+      so it moves as the collection does and cannot be quoted out of context.
+   2. All three parts — close, meta, strong — stay visible on every row, so the
+      ordering can be checked against them by eye.
+   3. An archetype with no tournament record scores the median 'strong' of the ones
+      that have a record, not zero. Zero would just re-sort the list by "did anyone
+      enter this at an event", which 38 of 482 decks did.
+
+   close  = how little stands between you and the list: cards short and gap dollars,
+            each normalised and inverted, averaged. An unpriced gap scores 0 on the
+            dollar half, matching how byCost brackets it.
+   meta   = 0.6 share + 0.4 freshness of the newest list in the archetype. Popularity
+            is a weak signal here (top archetype ~4%), hence the small weight.
+   strong = 0.40 distinct events + 0.35 log(players) + 0.25 best finish, or the
+            median of that over rated archetypes when there is no record.
+   score  = 0.5 close + 0.2 meta + 0.3 strong. Close-weighted because money is still
+            the constraint you cannot argue with. */
+const SCORE_W = { close: 0.5, meta: 0.2, strong: 0.3 };
+const NORM = (v, lo, hi) => (hi > lo ? (v - lo) / (hi - lo) : 0.5);
+
+// 1.0 for a list seen in the last fortnight, easing to 0 by 60 days. riftbound.gg
+// publishes a tier list weekly, so a month-old archetype is already half-discounted.
+function freshness01(dt){
+  const days = daysSince(dt);
+  if (days == null) return 0;
+  if (days <= 14) return 1;
+  if (days >= 60) return 0;
+  return 1 - (days - 14) / 46;
+}
+
+// Writes .score, .sClose, .sMeta, .sStrong onto each candidate, in place. `cands`
+// carry short/share and a gap (renderNext) or spend (the planner); strength comes
+// from `strengthByName` when given — the planner's rows have none — or from the row
+// itself, which is how renderNext's candidates already arrive.
+function annotateTargetScores(cands, strengthByName){
+  if (!cands.length) return cands;
+  const info = cands.map((c) => {
+    const s = strengthByName ? (strengthByName.get(c.name) || {}) : c;
+    return {
+      c,
+      spend: gapSpend(c),
+      unpriced: gapUnpriced(c),
+      evCount: s.evCount || 0,
+      logPlayers: Math.log1p(s.evPlayers || 0),
+      bestPlace: s.bestPlace ?? null,
+      lastSeen: s.lastSeen ?? s.evNewest ?? null,
+    };
+  });
+  const spanOf = (sel, rows = info) => {
+    const xs = rows.map(sel);
+    return xs.length ? [Math.min(...xs), Math.max(...xs)] : [0, 0];
+  };
+  const [shLo, shHi]     = spanOf((x) => x.c.short);
+  const priced           = info.filter((x) => x.unpriced === 0);
+  const [coLo, coHi]     = spanOf((x) => x.spend, priced);
+  const [wLo, wHi]       = spanOf((x) => x.c.share);
+  const [evLo, evHi]     = spanOf((x) => x.evCount);
+  const [plLo, plHi]     = spanOf((x) => x.logPlayers);
+  const placed           = info.filter((x) => x.bestPlace != null);
+  const [bpLo, bpHi]     = spanOf((x) => x.bestPlace, placed);
+
+  for (const x of info){
+    const closeShort = 1 - NORM(x.c.short, shLo, shHi);
+    const closeCost  = x.unpriced > 0 ? 0 : 1 - NORM(x.spend, coLo, coHi);
+    x.sClose = (closeShort + closeCost) / 2;
+    x.sMeta  = 0.6 * NORM(x.c.share, wLo, wHi) + 0.4 * freshness01(x.lastSeen);
+    if (x.evCount > 0){
+      const bpN = x.bestPlace != null ? 1 - NORM(x.bestPlace, bpLo, bpHi) : 0.5;
+      x.sStrongRaw = 0.40 * NORM(x.evCount, evLo, evHi)
+                   + 0.35 * NORM(x.logPlayers, plLo, plHi)
+                   + 0.25 * bpN;
+    }
+  }
+  const rated = info.filter((x) => x.sStrongRaw != null).map((x) => x.sStrongRaw).sort((a, b) => a - b);
+  const medianStrong = rated.length ? rated[Math.floor((rated.length - 1) / 2)] : 0.5;
+  for (const x of info){
+    x.c.sClose  = x.sClose;
+    x.c.sMeta   = x.sMeta;
+    x.c.sStrong = x.sStrongRaw != null ? x.sStrongRaw : medianStrong;
+    x.c.score   = SCORE_W.close * x.c.sClose + SCORE_W.meta * x.c.sMeta + SCORE_W.strong * x.c.sStrong;
+  }
+  return cands;
+}
+
+// Highest blended score first. Falls back to byCost whenever a score is absent, so
+// the comparator is still total in contexts that never annotated (checks, safety).
+const byScore = (a, b) =>
+  (b.score == null || a.score == null ? 0 : b.score - a.score) ||
+  byCost(a, b);
+
 const money = (n) => n == null ? 'price unknown' : '$' + n.toLocaleString('en-US');
 
 // Every card standing between the collection and a deck, with what it costs and
@@ -2410,10 +2527,17 @@ function acquisitionPath(pool, maxDecks, maxSteps){
   const steps = [], targets = [];
   const bought = new Set();     // a later target can want a copy beyond an earlier one
   let cum = 0, truncated = false;
+  // scorePool's rows carry no tournament evidence or list dates, and the blended
+  // ordering needs both. metaArchetypes has them; join by name. Only paid for when
+  // that ordering is actually selected — 'cost' and 'cards' never touch it.
+  const strengthByName = S.planBy === 'score'
+    ? new Map(metaArchetypes(pool).map(g => [g.name, g]))
+    : null;
 
   for (let round = 0; round < (maxDecks || 3); round++){
     const open = scored.filter(g => g.short > 0);
     if (!open.length) break;
+    if (strengthByName) annotateTargetScores(open, strengthByName);
     const target = open.slice().sort(byTarget)[0];
 
     const gap = [];
@@ -2511,8 +2635,15 @@ function renderNext(){
   const cand = arch.filter(g => g.best.ev.missingCopies > 0).map(g => ({
     name:g.name, short:g.best.ev.missingCopies, distinct:g.best.ev.distinctMissing,
     share:g.share, lists:g.lists, deck:g.best.deck, gap:gapCost(g.best.ev.missing),
-  })).sort(byTarget);
+    evCount:g.evCount, evPlayers:g.evPlayers, bestPlace:g.bestPlace, lastSeen:g.lastSeen,
+  }));
+  const blended = S.planBy === 'score';
+  if (blended) annotateTargetScores(cand, null);
+  cand.sort(byTarget);
   const nextDeck = cand[0] || null;
+  const pct = (x) => Math.round((x ?? 0) * 100);
+  const blendBits = (c) => c.score == null ? '' :
+    `blend ${pct(c.score)} · close ${pct(c.sClose)} · meta ${pct(c.sMeta)} · strong ${pct(c.sStrong)}`;
 
   // A deck a card or two further out can cost a fraction of the closest one. That is
   // a real choice rather than a rounding error, so it gets said out loud instead of
@@ -2552,7 +2683,10 @@ function renderNext(){
   for (const d of pool) for (const id of reqOf(d).keys()) poolIds.add(id);
   const poolCards = poolIds.size;
 
-  const near = nextDeck ? cand.filter(c => c.short <= nextDeck.short + 3) : [];
+  // The "worth a look, it is cheaper" nudge only makes sense when the ordering is not
+  // already pricing that in. Under the blend it is, and nextDeck is not the fewest-short
+  // deck, so the "cards further out" phrasing could go negative too.
+  const near = nextDeck && !blended ? cand.filter(c => c.short <= nextDeck.short + 3) : [];
   const cheapest = near.slice().sort((a, b) => (a.deck.pr ?? Infinity) - (b.deck.pr ?? Infinity))[0];
   const bargain = cheapest && nextDeck && cheapest.name !== nextDeck.name &&
                   (nextDeck.deck.pr ?? Infinity) > (cheapest.deck.pr ?? 0) * 2 ? cheapest : null;
@@ -2613,23 +2747,26 @@ function renderNext(){
   host.innerHTML = `
     <div class="panel">
       <h2>WHAT TO DO NEXT</h2>
-      <p class="note">${arch.length} archetypes from ${pool.length} sanctioned-legal lists, ranked not by
-      how good they are but by what they cost <em>you</em>. The plan below names a deck to finish and
-      then buys toward it, ordering the shortfall so the cards other decks also want come first.
-      Change the ban toggle on the Meta tab and this changes with it.</p>
+      <p class="note">${arch.length} archetypes from ${pool.length} sanctioned-legal lists, ${blended
+        ? `ranked by a blend of how close, how played and how proven each one is — the sub-scores are on
+           every row so you can see where a ranking comes from`
+        : `ranked not by how good they are but by what they cost <em>you</em>`}. The plan below names a
+      deck to finish and then buys toward it, ordering the shortfall so the cards other decks also want
+      come first. Change the ban toggle on the Meta tab and this changes with it.</p>
       <div class="stats" style="margin-top:14px">
         <div class="stat"><div class="v" style="color:var(--good)">${buildableAll.length}</div><div class="k">archetypes buildable</div></div>
         <div class="stat"><div class="v" style="color:var(--maize)">${nextDeck ? nextDeck.short : '—'}</div><div class="k">cards to the next deck</div></div>
         <div class="stat"><div class="v">${nextDeck ? cost(nextDeck.gap) : '—'}</div><div class="k">to close that gap</div></div>
         <div class="stat"><div class="v">${lev.length}</div><div class="k">cards in the way</div></div>
       </div>
-      ${nextDeck ? `<p class="note" style="margin-top:12px">The closest archetype is
+      ${nextDeck ? `<p class="note" style="margin-top:12px">The ${blended ? 'top-ranked' : 'closest'} archetype is
         <b style="color:var(--cream)">${esc(nextDeck.name)}</b>: ${nextDeck.short}
         card${nextDeck.short === 1 ? '' : 's'} short across
         ${nextDeck.distinct} distinct card${nextDeck.distinct === 1 ? '' : 's'} costing
         <b style="color:var(--cream)">${cost(nextDeck.gap)}</b>, and ${nextDeck.lists} of the
         ${(DECKS || []).length} lists in the snapshot play it. The whole list runs
-        ${money(nextDeck.deck.pr)}, so most of it is already in hand.</p>`
+        ${money(nextDeck.deck.pr)}, so most of it is already in hand.${blended
+          ? ` <span class="code">${blendBits(nextDeck)}</span>` : ''}</p>`
         : `<p class="note" style="margin-top:12px">Every archetype in the pool is already buildable.</p>`}
       ${buildableAll.length ? `<p class="note" style="margin-top:6px;color:var(--good)">${
         buildableAll.length} archetype${buildableAll.length === 1 ? ' is' : 's are'} buildable from the
@@ -2646,10 +2783,25 @@ function renderNext(){
       ${staleNote('decks', 'the plan below')}
       <div class="bar-row" style="margin-top:12px">
         <span class="lbl">Go after</span>
-        <button class="chip" data-plan-by="cost" aria-pressed="${S.planBy !== 'cards'}">the cheapest gap</button>
+        <button class="chip" data-plan-by="cost" aria-pressed="${S.planBy === 'cost'}">the cheapest gap</button>
         <button class="chip" data-plan-by="cards" aria-pressed="${S.planBy === 'cards'}">the fewest cards</button>
+        <button class="chip" data-plan-by="score" aria-pressed="${blended}">the strongest blend</button>
       </div>
-      <p class="note" style="margin-top:8px">Both axes are real and they disagree, so this is a choice
+      ${blended ? (nextDeck ? `<p class="note" style="margin-top:8px">One number, so the list is simply ordered top to
+      bottom: <b>score = 0.5&thinsp;close + 0.2&thinsp;meta + 0.3&thinsp;strong</b>. <b>Close</b> is cards
+      short and gap dollars; <b>meta</b> is share and how recently the list was seen; <b>strong</b> is
+      distinct events, field size and best finish, or the median of that for the ${cand.filter(c => !c.evCount).length}
+      archetypes with no tournament record. Each part is scaled against the other open archetypes here,
+      so a score is relative to your current options, not a grade. The other two orderings would go after
+      ${(() => {
+        const pick = (cmp) => cand.slice().sort(cmp)[0];
+        const c = pick(byCost), f = pick(byCards);
+        const bits = [];
+        if (c && (!nextDeck || c.name !== nextDeck.name)) bits.push(`<b style="color:var(--cream)">${esc(c.name)}</b> (cheapest, ${cost(c.gap)})`);
+        if (f && (!nextDeck || f.name !== nextDeck.name) && (!c || f.name !== c.name)) bits.push(`<b style="color:var(--cream)">${esc(f.name)}</b> (fewest, ${f.short} cards)`);
+        return bits.length ? bits.join(' and ') : 'the same deck';
+      })()}.</p>` : '')
+      : `<p class="note" style="margin-top:8px">Both axes are real and they disagree, so this is a choice
       rather than a calculation. Money is the constraint you cannot argue with, but a cheap gap can be
       fifty-six separate cards to track down, and there is no honest rate of exchange between dollars
       and that hunting. Whichever you pick, both numbers stay on screen.
@@ -2659,8 +2811,8 @@ function renderNext(){
         return alt && nextDeck && alt.name !== nextDeck.name
           ? `By the other measure it would be <b style="color:var(--cream)">${esc(alt.name)}</b>:
              ${alt.short} cards, ${cost(alt.gap)}.` : '';
-      })()}</p>
-      <p class="note" style="margin-top:6px">Popularity breaks ties and no more, because it is a weak
+      })()}</p>`}
+      <p class="note" style="margin-top:6px">Popularity ${blended ? 'is one input and a small one' : 'breaks ties and no more'}, because it is a weak
       signal here: ${arch.length} archetypes split the lists between them and the most-played takes
       ${Math.max(...arch.map(g => g.share)).toFixed(1)}%.</p>
     </div>
@@ -2698,9 +2850,10 @@ function renderNext(){
 
     ${beyond.length ? `<div class="panel">
       <h2>EVERYTHING ELSE, RANKED <span class="code">${beyond.length}</span></h2>
-      <p class="note">The archetypes that fall outside the threshold above, cheapest first, one row
+      <p class="note">The archetypes that fall outside the threshold above, ${blended
+        ? 'highest blended score first' : 'cheapest first'}, one row
       each. Nothing here also appears under Within reach — the two brackets are exclusive, so a deck is
-      either detailed above or listed here.${tie.length > 1
+      either detailed above or listed here.${tie.length > 1 && !blended
         ? ` Ties on cards short are the normal case rather than the exception, which is why money
            decides them: right now ${tie.length} archetypes are tied at ${nextDeck.short} cards short,
            their whole lists spanning ${money(tiePrices[0])} to ${money(tiePrices[tiePrices.length - 1])}.` : ''}</p>
@@ -2717,6 +2870,7 @@ function renderNext(){
               : '<span style="display:inline-block;width:0.9em"></span>'}${esc(c.name)}
             <span class="code">${c.short} short over ${c.distinct} distinct · ${c.lists} list${
               c.lists === 1 ? '' : 's'} · ${c.share.toFixed(1)}%</span>
+            ${blended && c.score != null ? `<span class="code">${blendBits(c)}</span>` : ''}
             ${plan.targets.some(t => t.name === c.name) && c.name !== nextDeck.name
               ? '<span class="code" style="color:var(--teal)">also targeted</span>' : ''}</span>
           <span class="qty${bargain && c.name === bargain.name ? '' : ' need'}"
@@ -2739,7 +2893,7 @@ function renderNext(){
 
     <div class="panel">
       <h2>THE PLAN <span class="code">${steps.length} buys</span></h2>
-      <p class="note">One target deck at a time, closest first. Within a target the cards other open
+      <p class="note">One target deck at a time, ${blended ? 'highest blended score first' : 'closest first'}. Within a target the cards other open
       archetypes are also short of come first, so stopping halfway still leaves you better placed than
       buying the list top to bottom.${steps.length ? ` The whole plan is
       <b style="color:var(--cream)">${cost(gapCost(steps.map(x => ({ card: x.card, short: x.copies }))))}</b>

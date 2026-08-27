@@ -56,6 +56,7 @@ const NAMED = [
   'archetypeName', 'metaPool', 'metaArchetypes', 'scorePool', 'cardLeverage', 'loadBans',
   'acquisitionPath', 'unionGap', 'pathText', 'ownedIdentities', 'evalDeck', 'matchRow',
   'spares', 'tradeMatch', 'readPartner', 'readyShareOf', 'owned', 'byTarget',
+  'annotateTargetScores', 'byScore', 'freshness01',
   'render', 'renderLegends', 'renderNext', 'renderMeta', 'renderTrade', 'renderSets',
 ];
 const A = new Function(`${js}
@@ -806,6 +807,104 @@ section('Target ordering');
   A.S.planBy = 'cost';
 }
 
+/* ══ the blended ordering ═══════════════════════════════════════════════════
+   The one composite score in the app. It does not have to pick the cheapest or the
+   closest target — that is the point of it — so it is held to weaker invariants than
+   the other two: every component in range, the neutral-median substitution actually
+   happening, the plan still structurally sound, and the blend not silently collapsing
+   onto one of the axes it is supposed to combine.                                    */
+section('The blended ordering');
+{
+  // freshness01 is a plain decay and easy to assert end to end.
+  const today = new Date().toISOString().slice(0, 10);
+  const old = new Date(Date.now() - 90 * 864e5).toISOString().slice(0, 10);
+  const mid = new Date(Date.now() - 37 * 864e5).toISOString().slice(0, 10);
+  ok('freshness01 is 1 for a fresh list, 0 for a stale one, between for the middle',
+     A.freshness01(today) === 1 && A.freshness01(old) === 0 &&
+     A.freshness01(mid) > 0 && A.freshness01(mid) < 1,
+     `today ${A.freshness01(today)}, 37d ${A.freshness01(mid).toFixed(2)}, 90d ${A.freshness01(old)}`);
+  ok('freshness01 reads an absent date as stale, not as day zero', A.freshness01(null) === 0);
+
+  for (const [label, inv] of Object.entries(collections)){
+    A.S.inv = inv;
+    A.S.planBy = 'score';
+    const pool = A.metaPool();
+    const arch = A.metaArchetypes(pool);
+    const open = arch.filter((g) => g.best.ev.missingCopies > 0).map((g) => ({
+      name: g.name, short: g.best.ev.missingCopies, distinct: g.best.ev.distinctMissing,
+      share: g.share, lists: g.lists, deck: g.best.deck, gap: A.gapCost(g.best.ev.missing),
+      evCount: g.evCount, evPlayers: g.evPlayers, bestPlace: g.bestPlace, lastSeen: g.lastSeen,
+    }));
+    if (open.length < 2){ ok(`[${label}] too few open archetypes to blend`, true, `${open.length} open`); continue; }
+    A.annotateTargetScores(open, null);
+
+    const bad = [];
+    for (const c of open){
+      for (const k of ['score', 'sClose', 'sMeta', 'sStrong'])
+        if (!(c[k] >= -1e-9 && c[k] <= 1 + 1e-9)) bad.push(`${c.name} ${k}=${c[k]}`);
+    }
+    // The neutral-median rule: a no-record archetype must not just score 0 on strong.
+    const rated = open.filter((c) => c.evCount > 0);
+    const unrated = open.filter((c) => !c.evCount);
+    if (rated.length && unrated.length){
+      const med = rated.map((c) => c.sStrong).sort((a, b) => a - b)[Math.floor((rated.length - 1) / 2)];
+      if (unrated.some((c) => Math.abs(c.sStrong - med) > 1e-9))
+        bad.push('a no-record archetype did not take the rated median');
+      if (unrated.every((c) => c.sStrong === 0))
+        bad.push('no-record archetypes all scored zero on strong');
+    }
+    ok(`[${label}] the blend components are all in range and the median rule holds`, bad.length === 0,
+       bad.slice(0, 2).join('; ') || `${open.length} open, ${rated.length} with a record`);
+
+    // The plan still has to hold together under this ordering.
+    const plan = A.acquisitionPath(pool, 3, 24);
+    const steps = plan.steps;
+    const pbad = [];
+    if (open.length && !steps.length) pbad.push('open decks but empty plan');
+    if (steps.some((s, i) => i && s.cum <= steps[i - 1].cum)) pbad.push('cumulative not increasing');
+    if (steps.some((s) => s.copies <= 0)) pbad.push('a step buys nothing');
+    const ownedNow = A.ownedIdentities();
+    for (const s of steps) if (s.need <= (ownedNow.get(s.id) || 0)) pbad.push(`${s.card.n} already owned`);
+    const declared = new Set(plan.targets.map((t) => t.name));
+    if (steps.some((s) => !declared.has(s.target))) pbad.push('a step belongs to no declared target');
+    const first = steps.findIndex((s) => s.unlocked.length > 0);
+    if (open.length && first < 0 && !plan.truncated) pbad.push('the plan never completes a deck');
+    ok(`[${label}] the plan holds together under the blend`, pbad.length === 0,
+       pbad.slice(0, 2).join('; ') || `${steps.length} buys, ${plan.targets.length} targets`);
+  }
+
+  // The blend must actually do something: across the collections it should not pick
+  // the exact same target as 'cost' every single time, or it is just byCost in a hat.
+  let sameAsCost = 0, total = 0;
+  for (const [label, inv] of Object.entries(collections)){
+    if (label === 'everything') continue;
+    A.S.inv = inv;
+    const pool = A.metaPool();
+    A.S.planBy = 'cost';
+    const c = A.acquisitionPath(pool, 1, 24).targets[0];
+    A.S.planBy = 'score';
+    const s = A.acquisitionPath(pool, 1, 24).targets[0];
+    if (!c || !s) continue;
+    total++;
+    if (c.name === s.name) sameAsCost++;
+  }
+  ok('the blend is not just the cheapest gap wearing a hat', sameAsCost < total,
+     `${sameAsCost} of ${total} collections pick the same target as by-cost`);
+
+  // With open decks on the tab, the blend spells out its own formula and puts the
+  // three sub-scores on the top row rather than hiding behind one number.
+  A.S.inv = collections['deep'];
+  A.S.planBy = 'score';
+  A.renderNext();
+  const h = els.get('v-next').innerHTML;
+  ok('the blend shows its formula and its parts on screen',
+     h.includes('score = 0.5') && /blend \d+ · close \d+ · meta \d+ · strong \d+/.test(h),
+     h.includes('score = 0.5') ? 'formula and sub-scores present' : 'formula missing');
+
+  A.S.planBy = 'cost';
+  A.S.inv = collections['deep'];
+}
+
 /* ══ the views render ════════════════════════════════════════════════════ */
 section('Rendering');
 {
@@ -831,6 +930,10 @@ section('Rendering');
           ['CHAMPIONS', 'PLAYABLE', 'NEED A UNIT', 'NEED THE LEGEND', 'NEED BOTH',
            'LEGEND PRINTINGS']);
     check(`[${label}] Next renders`, 'v-next', () => A.renderNext(), ['WHAT TO DO NEXT', 'THE PLAN']);
+    A.S.planBy = 'score';
+    check(`[${label}] Next renders under the blend`, 'v-next', () => A.renderNext(),
+          ['WHAT TO DO NEXT', 'THE PLAN', 'strongest blend']);
+    A.S.planBy = 'cost';
     check(`[${label}] Meta renders`, 'v-meta', () => A.renderMeta(), ['THE META']);
     check(`[${label}] Sets renders`, 'v-sets', () => A.renderSets(), []);
     check(`[${label}] News renders`, 'v-news', () => A.renderNews(), ['NEWS']);

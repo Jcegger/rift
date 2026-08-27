@@ -136,6 +136,31 @@ fabricated credibility score. So both orderings are offered, `S.planBy` picks be
 them, cheapest is the default, and both numbers stay on screen with a line naming what
 the other measure would have chosen.
 
+**There is now a third mode, `score`, and it is the blended number this section spent
+three paragraphs refusing.** It exists because sometimes you want the list ordered top to
+bottom and will argue with the result rather than weigh four columns by hand. It is
+opt-in, never the default, and built so it cannot be quoted out of context:
+
+    score = 0.5 · close  +  0.2 · meta  +  0.3 · strong
+
+- **close** — cards short and gap dollars, each normalised and inverted, averaged. An
+  unpriced gap scores zero on the dollar half, the way `byCost` already brackets it.
+- **meta** — `0.6 · share + 0.4 · freshness` of the archetype's newest list. Small weight,
+  because popularity is still a weak signal here.
+- **strong** — `0.40 · events + 0.35 · log(players) + 0.25 · best finish`, from the
+  tournament evidence the Meta tab shows. An archetype with **no** tournament record takes
+  the median `strong` of the ones that have a record, not zero — zero would just re-sort
+  the list by "did anyone enter this at an event", which 38 of 482 decks did.
+
+Every component is normalised 0–1 **across the open archetypes on screen right now**, so a
+score means "relative to your current options" and moves with the collection. All three
+parts stay visible on every candidate row (`blend 71 · close 88 · meta 40 · strong 55`),
+which is the concession to the objection that an uninterpretable index is worse than a
+crude number you can argue with. The weights live in `SCORE_W`, the maths in
+`annotateTargetScores`, and `scripts/check.mjs` holds it to: components in range, the
+median substitution actually happening, the plan still converging, and the blend not
+collapsing onto `byCost`.
+
 **The history, since the reasoning still holds for ties.**
 Against a staples-only collection, 13 archetypes tie at exactly 38 cards short.
 Their shares span 0.6% to 4.0%, which is noise; the price of the list each one would
@@ -396,6 +421,11 @@ collections — including one that owns every legend and no units, which is the 
 way to reach the need-a-unit state the Legends tab exists to report, and one that
 owns every unit and no legend, which is the only way to reach its mirror.
 
+The blended `score` ordering has its own block: every sub-score in range, the
+no-record archetypes actually taking the rated median rather than a zero, the plan
+still converging under it, the blend not collapsing onto `byCost`, and the tab
+rendering its formula and per-row sub-scores rather than a bare number.
+
 Several of the assertions are about layout rather than correctness, because the first
 Legends tab was unreadable: it rendered a full-height card per legend, 51 of them and
 970 lines of text, to convey an answer that was two rows long, and it listed the same
@@ -532,9 +562,11 @@ and summing per deck would claim 1,299 players of support.
 
 Two honest limits on that number. It measures the size of the room, not how well the deck
 did — one entry in a 433-player event finished #158, so the finish is shown beside it. And
-it does **not** feed target selection: `byTarget` stays cards short, then list price, then
-share, because that ordering was measured and validated. Credibility is displayed, not
-weighted in. Changing the primary ordering is separate work with its own measurement.
+it does not feed the two default target orderings: `byTarget` under `cost` or `cards` stays
+cards short, then list price, then share, because that ordering was measured and validated.
+Credibility is displayed there, not weighted in. The one place it does feed selection is
+the opt-in `score` mode (see *Next: what to acquire*), where it is the `strong` term —
+still displayed in full beside the blended number, never folded away.
 
 ## The meta
 
