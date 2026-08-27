@@ -36,6 +36,7 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `scripts/check.mjs` - the regression checks; run it after touching the engine.
 - `.github/workflows/refresh.yml` - rebuilds all of the above daily and commits.
 - `schema.sql` - the Supabase table and its policies.
+- `docs/picking-a-deck.md` - how to drive the Next tab's Find my deck panel.
 - `worker/` - the Cloudflare Worker that proxies the riftbound.gg profile.
 - `fonts/` - Press Start 2P and Syne Mono, self-hosted to match jayegger.com.
 
@@ -118,6 +119,9 @@ something two tiers cheaper sits under $15, that gets named as a low-risk first 
 **Every open deck, by cost** is the same archetypes ranked the other way — cheapest gap
 first, one row each. Where it disagrees with Find my deck is the point: the cheapest
 thing to finish is rarely the best deck.
+
+`docs/picking-a-deck.md` is the walkthrough: how the ranking is ordered, what each
+constraint does, and how to read a row.
 
 **Best cards to get** ranks every card standing between the collection and any
 archetype by how many archetypes are short of it. A common wanted by nine decks
