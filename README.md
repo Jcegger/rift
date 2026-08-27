@@ -29,12 +29,14 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `data/events.json` - the tournament archive, with player counts and coverage.
 - `data/news.json` - riftbound.gg's posts: title, date, tag, link.
 - `data/tiers.json` - riftbound.gg's weekly Tier 1-5 list, per Legend, scraped.
+- `data/history.json` - the daily archive: deck counts per legend, and tier lists.
 - `scripts/build-catalog.mjs` - regenerates the catalog from Riot's gallery feed.
 - `scripts/build-decks.mjs` - regenerates the deck snapshot.
 - `scripts/build-banned.mjs` - regenerates the ban list.
 - `scripts/build-events.mjs` - regenerates the tournament archive and its coverage.
 - `scripts/build-news.mjs` - regenerates the news feed.
 - `scripts/build-tiers.mjs` - scrapes the meta tier list off riftbound.gg's page.
+- `scripts/build-history.mjs` - appends today's row to the archive. Fetches nothing.
 - `scripts/check.mjs` - the regression checks; run it after touching the engine.
 - `.github/workflows/refresh.yml` - rebuilds all of the above daily and commits.
 - `schema.sql` - the Supabase table and its policies.
@@ -717,6 +719,59 @@ never surfaces as a next step, but it is the deck you might actually be saving t
 
 Freshness: tier lists move weekly, so `tiers.json` warns past 10 days and shouts past
 21, the same as the deck snapshot.
+
+## Movement
+
+Every other view answers "right now", which was the honest thing to do while the data
+was refreshed by hand and might be three months old. The daily workflow changed that:
+it writes a dated snapshot every morning and nothing read yesterday's. So Find my deck
+could rank a Tier 1 deck three hundred dollars away and say nothing about whether it
+was climbing or dying, which is half of the decision to start saving for it.
+
+```
+node scripts/build-history.mjs
+```
+
+`data/history.json` is the archive, appended at the end of the daily job. It fetches
+nothing — it derives today's row from `decks.json` and `tiers.json` and is idempotent by
+date, so the evening run corrects the morning's row rather than sitting beside it.
+
+**Mining the answer back out of git does not work, and that is the whole reason this
+file exists.** The oldest deck snapshot in the archive holds 250 decks against today's
+475, and it predates the Vendetta-aware rewrite of `build-decks`. Diffing the two says
+Blade Dancer fell from 13.6% to 2.9%, which is not a fact about Blade Dancer — it is the
+sample doubling and the method changing underneath. History has to be captured
+deliberately, with the method recorded beside the numbers, or it measures its own
+construction.
+
+Two rules follow, and both are asserted:
+
+- **Store inputs, not conclusions.** Rows hold legend codes and deck counts, never
+  archetype names or shares. Folding a legend to an archetype needs the catalog and the
+  name index, and that fold has changed twice; a row storing the output would have
+  frozen whichever version was current the day it was written. The app folds at render
+  time, so history follows the code. All 93 recorded legends currently resolve.
+- **Record the window.** Every row carries the `days` figure `build-decks` ran with, and
+  rows whose windows differ are never compared. A changed window moves every share at
+  once and would read as the entire meta shifting.
+
+Comparisons are in **shares, not counts**, for the same reason: the snapshot size moves
+on its own. The checks assert this directly — a synthetic pair whose counts double while
+shares hold still must report nothing moved. Two days must also be at least
+`MOVE_MIN_DAYS` apart, because a snapshot samples what people happened to post and
+yesterday-to-today is noise.
+
+Legend codes are interned into a shared array with rows positional against it, which
+keeps a year of daily rows near 90KB rather than 365KB. Tier lists move weekly, so they
+are appended only when they actually change.
+
+Two placements, matching the Meta/Next split. **Meta** gets a MOVEMENT panel: rising and
+falling archetypes between the two compared days, and tier changes week over week, each
+column capped at six rows so the panel stays fixed by the layout. **Next** gets an inline
+chip beside each archetype on Find my deck — a trend earns a marker inside an existing
+row, never a row of its own. Until the archive is long enough the panel says how many
+days it has rather than rendering empty, because a recorder that has not yet earned a
+conclusion should say so.
 
 ## The meta
 

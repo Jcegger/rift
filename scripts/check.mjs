@@ -52,6 +52,8 @@ const NAMED = [
   'foilOnlyProblems', 'foilOnlyText', 'renderFoilOnly', 'championIndex',
   'deckLegalForConstructed', 'cardCost', 'gapCost', 'cost', 'costIndex',
   'daysSince', 'dataAge', 'staleNote', 'newsChampion', 'guideByChampion', 'dataAlerts',
+  'historyDays', 'historyNames', 'sharesOn', 'movementPair', 'metaMovement', 'movementFor',
+  'tierMovement', 'movementPending', 'moveChip',
   'renderNews', 'credibility',
   'archetypeName', 'metaPool', 'metaArchetypes', 'scorePool', 'cardLeverage', 'loadBans',
   'acquisitionPath', 'unionGap', 'pathText', 'ownedIdentities', 'evalDeck', 'matchRow',
@@ -79,7 +81,9 @@ const A = new Function(`${js}
     set EVENTS_AT(v){EVENTS_AT=v}, set EVENTS_COVER(v){EVENTS_COVER=v},
     set TIERS(v){TIERS=v}, get TIERS(){return TIERS},
     set TIERS_AT(v){TIERS_AT=v}, set TIERS_INFO(v){TIERS_INFO=v},
-    set NEWS_GUIDES(v){NEWS_GUIDES=v} };
+    set NEWS_GUIDES(v){NEWS_GUIDES=v},
+    get HIST(){return HIST}, set HIST(v){HIST=v},
+    MOVE_MIN_DAYS, MOVE_MIN_PP, MOVE_SHOWN };
 `)();
 
 /* ── the real data, in the order boot() loads it ────────────────────────── */
@@ -96,7 +100,7 @@ A.DECKS = snap.decks;
 A.DECKS_AT = snap.generatedAt;
 A.DECKS_WINDOW = snap.window;
 A.loadBans(read('data/banned.json'));
-let news = null, events = null, tiers = null;
+let news = null, events = null, tiers = null, history = null;
 try {
   news = read('data/news.json');
   A.NEWS = news.posts;
@@ -113,6 +117,10 @@ try {
   A.TIERS = Array.isArray(tiers.tiers) && tiers.tiers.length ? tiers.tiers : null;
   A.TIERS_AT = tiers.generatedAt;
   A.TIERS_INFO = A.TIERS ? { set: tiers.set, report: tiers.report, week: tiers.week, source: tiers.source } : null;
+} catch { /* optional */ }
+try {
+  history = read('data/history.json');
+  A.HIST = Array.isArray(history.days) && history.days.length ? history : null;
 } catch { /* optional */ }
 
 let failures = 0;
@@ -673,6 +681,103 @@ if (!tiers) {
   ok('dataAge tracks the tier list', A.dataAge().some((a) => a.key === 'tiers'));
 }
 
+/* ══ movement ════════════════════════════════════════════════════════════
+   The archive is the only file that remembers, and the one mistake it exists to avoid
+   is measuring its own construction: the oldest snapshot in git holds 250 decks against
+   today's 475 and predates a rewrite of build-decks, so diffing across that reports a
+   ten-point collapse that never happened. Both guards against it are asserted here on
+   synthetic rows, because the real archive is one day long and will be for a week. */
+section('Movement');
+{
+  const keep = A.HIST;
+  ok('history.json is present', !!history, 'run scripts/build-history.mjs');
+  if (history){
+    ok('the archive interns legend codes and keeps them positional',
+       Array.isArray(history.legends) && history.days.every((r) => r.c.length <= history.legends.length),
+       `${history.legends.length} legends, ${history.days.length} days`);
+    ok('every day is dated, windowed and counted',
+       history.days.every((r) => /^\d{4}-\d{2}-\d{2}$/.test(r.d) && Number.isFinite(r.n) && r.n > 0));
+    const ds = history.days.map((r) => r.d);
+    ok('days are unique and in order', new Set(ds).size === ds.length &&
+       ds.every((d, i) => i === 0 || ds[i - 1] < d), ds.slice(-3).join(' -> '));
+    ok('the recorded legends still fold to played archetypes',
+       A.historyNames().filter(Boolean).length >= Math.min(20, history.legends.length),
+       `${A.historyNames().filter(Boolean).length} of ${history.legends.length} resolve`);
+  }
+
+  // Synthetic rows, so the logic is testable long before the archive is long enough.
+  const codes = (history && history.legends.slice(0, 3)) || [];
+  const iso = (d) => new Date(Date.now() - d * 86400000).toISOString().slice(0, 10);
+  const hist = (days, weeks) => ({ legends: codes, days, weeks: weeks || [] });
+  const row = (d, n, c, w = 60) => ({ d: iso(d), n, w, u: 0, c });
+
+  if (codes.length === 3){
+    // 10% -> 20% on the first legend, 20% -> 10% on the second.
+    A.HIST = hist([row(7, 100, [10, 20, 5]), row(0, 100, [20, 10, 5])]);
+    A.forgetDeckCaches();
+    const m = A.metaMovement();
+    ok('a week apart produces movement', !!m && m.gap === 7, m ? `${m.gap} days` : 'none');
+    ok('rising and falling are split and sorted',
+       m && m.rising[0].delta > 0 && m.falling[0].delta < 0 &&
+       Math.abs(m.rising[0].delta - 10) < 0.01 && Math.abs(m.falling[0].delta + 10) < 0.01,
+       m ? `+${m.rising[0].delta.toFixed(1)} / ${m.falling[0].delta.toFixed(1)}` : 'none');
+
+    // The whole point. Counts double, shares do not move, so nothing moved.
+    A.HIST = hist([row(7, 100, [10, 20, 5]), row(0, 200, [20, 40, 10])]);
+    A.forgetDeckCaches();
+    const grown = A.metaMovement();
+    ok('a snapshot that merely doubled reports no movement',
+       grown && grown.rising.length === 0 && grown.falling.length === 0,
+       grown ? `${grown.rising.length} up, ${grown.falling.length} down` : 'none');
+
+    // A changed window changes every share at once; refusing is the only honest answer.
+    A.HIST = hist([{ ...row(7, 250, [50, 20, 5]), w: 30 }, row(0, 475, [20, 10, 5])]);
+    A.forgetDeckCaches();
+    ok('rows built with a different window are never compared', A.metaMovement() === null);
+
+    A.HIST = hist([row(2, 100, [10, 20, 5]), row(0, 100, [30, 5, 5])]);
+    A.forgetDeckCaches();
+    ok(`two days ${A.MOVE_MIN_DAYS - 3} apart are the same week, not a trend`,
+       A.metaMovement() === null);
+
+    A.HIST = hist([row(0, 100, [10, 20, 5])]);
+    A.forgetDeckCaches();
+    ok('one day alone says so rather than inventing a baseline',
+       A.metaMovement() === null && /Recording since/.test(A.movementPending()));
+
+    // Tier moves come from the weeks list, which only grows when the list changes.
+    A.HIST = hist([row(7, 100, [10, 20, 5]), row(0, 100, [20, 10, 5])], [
+      { d: iso(7), week: 3, tiers: [['Kennen', 'Heart Of The Tempest', 2], ['Ahri', null, 3]] },
+      { d: iso(0), week: 4, tiers: [['Kennen', 'Heart Of The Tempest', 1], ['Ahri', null, 3]] },
+    ]);
+    A.forgetDeckCaches();
+    const tm = A.tierMovement();
+    ok('a tier change is reported once, climbers first',
+       tm && tm.moves.length === 1 && tm.moves[0].champion === 'Kennen' &&
+       tm.moves[0].from === 2 && tm.moves[0].to === 1,
+       tm ? `${tm.moves.length} move(s)` : 'none');
+    ok('an unchanged tier list reports nothing',
+       (A.HIST = hist([row(7, 100, [10, 20, 5]), row(0, 100, [20, 10, 5])],
+          [{ d: iso(7), week: 3, tiers: [['Ahri', null, 3]] }]),
+        A.forgetDeckCaches(), A.tierMovement()) === null);
+
+    // The rendered panel, and the inline chip that must not become a row of its own.
+    A.HIST = hist([row(7, 100, [10, 20, 5]), row(0, 100, [20, 10, 5])]);
+    A.forgetDeckCaches();
+    A.S.inv = collections['deep'];
+    A.renderMeta();
+    const mv = els.get('v-meta').innerHTML;
+    ok('Meta renders the movement panel with both directions and its dates',
+       mv.includes('MOVEMENT') && mv.includes('RISING') && mv.includes('FALLING') && mv.includes(iso(7)));
+    const chip = A.moveChip(A.historyNames()[0]);
+    ok('the movement chip is inline markup, not a row',
+       chip.includes('↑') && !chip.includes('class="row"'), chip.trim().slice(0, 60));
+    ok('an archetype with no recorded movement gets no chip', A.moveChip('Not A Real Archetype') === '');
+  }
+  A.HIST = keep;
+  A.forgetDeckCaches();
+}
+
 /* ══ finishes ════════════════════════════════════════════════════════════ */
 section('Finishes');
 {
@@ -894,11 +999,12 @@ section('Layout');
     A.S.nearSpend = 25;
     A.renderMeta();
     const m = els.get('v-meta').innerHTML;
-    // Five fixed panels now: the overview, the tier list, the news block, what is being
-    // played, and (only when the news block is empty) nothing in its place. Still fixed
-    // by the layout, not growing with the archetype count.
+    // Six fixed panels now: the overview, movement, the tier list, the news block, what
+    // is being played, and (only when the news block is empty) nothing in its place.
+    // Movement is the sixth and is capped internally at MOVE_SHOWN rows per direction,
+    // so this stays fixed by the layout rather than growing with the archetype count.
     ok(`[${label}] Meta stays a reference page`,
-       (m.match(/class="panel"/g) || []).length <= 5 && lines(m) <= 260,
+       (m.match(/class="panel"/g) || []).length <= 6 && lines(m) <= 300,
        `${(m.match(/class="panel"/g) || []).length} panels, ${lines(m)} text lines`);
   }
 }

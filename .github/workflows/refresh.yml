@@ -154,6 +154,14 @@ jobs:
           case ",$SIMULATE," in *,events,*) echo "simulated failure"; exit 1;; esac
           node scripts/build-events.mjs
 
+      # The recorder, not a builder: it fetches nothing and derives today's row from the
+      # two files above. It runs after them and outside the fail-soft set on purpose — a
+      # row is only worth writing once the snapshot it describes is the real one, and if
+      # it cannot be written the job should say so rather than leave a hole in the
+      # archive that no later run will ever fill.
+      - name: Record today in the archive
+        run: node scripts/build-history.mjs
+
       - name: Source report
         id: sources
         run: |
