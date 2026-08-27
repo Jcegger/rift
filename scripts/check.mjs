@@ -56,7 +56,7 @@ const NAMED = [
   'archetypeName', 'metaPool', 'metaArchetypes', 'scorePool', 'cardLeverage', 'loadBans',
   'acquisitionPath', 'unionGap', 'pathText', 'ownedIdentities', 'evalDeck', 'matchRow',
   'spares', 'tradeMatch', 'readPartner', 'readyShareOf', 'owned', 'byTarget',
-  'annotateTargetScores', 'byScore', 'freshness01',
+  'annotateCompounding', 'establishedArchetypes', 'isEstablished', 'byCost', 'byCards',
   'render', 'renderLegends', 'renderNext', 'renderMeta', 'renderTrade', 'renderSets',
 ];
 const A = new Function(`${js}
@@ -363,27 +363,39 @@ for (const [label0, inv] of Object.entries(collections)){
   // The failure this file was written for: a plan that never finishes anything.
   if (open.length && first < 0 && !plan.truncated) bad.push('the plan never completes a deck');
   if (first >= 0 && steps[first].cum < minGap) bad.push('completed a deck for less than its gap');
-  // The target must be optimal on whichever axis is selected, and the two axes really do
-  // disagree, so each is checked against its own definition rather than a shared one.
+  // The target must be optimal on whichever axis is selected, against the same
+  // established-first, then non-redundant, then compounding rule acquisitionPath uses.
   if (plan.targets.length){
     const t = plan.targets[0];
-    const gapOf = (g) => A.gapCost(g.best.ev.missing).total;
-    if (A.S.planBy === 'cards'){
-      if (t.short !== minGap) bad.push(`target is ${t.short} short, minimum is ${minGap}`);
-      const tied = open.filter((g) => g.best.ev.missingCopies === minGap);
-      const cheapest = Math.min(...tied.map(gapOf));
-      const picked = open.find((g) => g.name === t.name);
-      if (picked && Math.abs(gapOf(picked) - cheapest) > 0.005)
-        bad.push(`target gap $${gapOf(picked).toFixed(2)}, cheapest tied $${cheapest.toFixed(2)}`);
+    const have = A.ownedIdentities();
+    const built = arch.filter((g) => g.best.ev.missingCopies === 0).map((g) => ({ name: g.name, deck: g.best.deck }));
+    const estOpen = open.filter((g) => A.isEstablished(g.name));
+    const rows = (estOpen.length ? estOpen : open).map((g) => ({
+      name: g.name, short: g.best.ev.missingCopies, distinct: g.best.ev.distinctMissing,
+      share: g.share, deck: g.best.deck, gap: A.gapCost(g.best.ev.missing),
+    }));
+    A.annotateCompounding(rows, have, built);
+    const picked = rows.find((g) => g.name === t.name);
+    if (!picked){
+      bad.push(`target ${t.name} is outside the ${estOpen.length ? 'established' : 'open'} pool`);
+    } else if (mode === 'cards'){
+      const minShort = Math.min(...rows.map((g) => g.short));
+      if (picked.short !== minShort) bad.push(`target ${picked.short} short, pool min ${minShort}`);
+      const tied = rows.filter((g) => g.short === minShort);
+      const nonRed = tied.filter((g) => !g.redundantOf);
+      if (picked.redundantOf && nonRed.length) bad.push('redundant target over a non-redundant one at min short');
+      const best = Math.max(...(nonRed.length ? nonRed : tied).map((g) => g.overlapCredit));
+      if (picked.overlapCredit + 1e-6 < best)
+        bad.push(`target credit ${picked.overlapCredit.toFixed(2)}, best tied ${best.toFixed(2)}`);
     } else {
-      // Cheapest first. Anything with an unpriced card in its gap is excluded from the
-      // comparison, since those sort into a later bracket by design.
-      const priceable = open.filter((g) => A.gapCost(g.best.ev.missing).unpriced === 0);
-      const picked = open.find((g) => g.name === t.name);
-      const cheapest = priceable.length ? Math.min(...priceable.map(gapOf)) : null;
-      if (picked && cheapest !== null && A.gapCost(picked.best.ev.missing).unpriced === 0 &&
-          Math.abs(gapOf(picked) - cheapest) > 0.005)
-        bad.push(`target gap $${gapOf(picked).toFixed(2)}, cheapest anywhere $${cheapest.toFixed(2)}`);
+      const minBucket = Math.min(...rows.map((g) => g.costBucket));
+      if (picked.costBucket !== minBucket) bad.push(`target bucket ${picked.costBucket}, pool min ${minBucket}`);
+      const inBucket = rows.filter((g) => g.costBucket === minBucket);
+      const nonRed = inBucket.filter((g) => !g.redundantOf);
+      if (picked.redundantOf && nonRed.length) bad.push('redundant target over a non-redundant one in the cheapest bucket');
+      const best = Math.max(...(nonRed.length ? nonRed : inBucket).map((g) => g.overlapCredit));
+      if (picked.overlapCredit + 1e-6 < best)
+        bad.push(`target credit ${picked.overlapCredit.toFixed(2)}, best in bucket ${best.toFixed(2)}`);
     }
   }
   // Overlap can never make a set of decks cost more than the sum of their gaps.
@@ -807,102 +819,96 @@ section('Target ordering');
   A.S.planBy = 'cost';
 }
 
-/* ══ the blended ordering ═══════════════════════════════════════════════════
-   The one composite score in the app. It does not have to pick the cheapest or the
-   closest target — that is the point of it — so it is held to weaker invariants than
-   the other two: every component in range, the neutral-median substitution actually
-   happening, the plan still structurally sound, and the blend not silently collapsing
-   onto one of the axes it is supposed to combine.                                    */
-section('The blended ordering');
+/* ══ compounding, redundancy and the fringe gate ═══════════════════════════
+   The three refinements that sit inside cost and cards. None is a fabricated index:
+   the compounding credit is the price of cards you would buy anyway, the fringe gate
+   is a list-count threshold, and redundancy is a card-overlap fraction. Each is held
+   to a definition here.                                                              */
+section('Compounding and the fringe gate');
 {
-  // freshness01 is a plain decay and easy to assert end to end.
-  const today = new Date().toISOString().slice(0, 10);
-  const old = new Date(Date.now() - 90 * 864e5).toISOString().slice(0, 10);
-  const mid = new Date(Date.now() - 37 * 864e5).toISOString().slice(0, 10);
-  ok('freshness01 is 1 for a fresh list, 0 for a stale one, between for the middle',
-     A.freshness01(today) === 1 && A.freshness01(old) === 0 &&
-     A.freshness01(mid) > 0 && A.freshness01(mid) < 1,
-     `today ${A.freshness01(today)}, 37d ${A.freshness01(mid).toFixed(2)}, 90d ${A.freshness01(old)}`);
-  ok('freshness01 reads an absent date as stale, not as day zero', A.freshness01(null) === 0);
+  // The gate splits the roster and matches its own rule exactly.
+  const est = A.establishedArchetypes();
+  const rawLists = new Map(), rawTour = new Map();
+  for (const d of A.DECKS){
+    const k = A.archetypeName(d);
+    rawLists.set(k, (rawLists.get(k) || 0) + 1);
+    if (d.tour) rawTour.set(k, (rawTour.get(k) || 0) + 1);
+  }
+  const wantEst = new Set([...rawLists].filter(([k, n]) => n >= 4 || rawTour.get(k)).map(([k]) => k));
+  ok('the fringe gate matches its rule', est.size === wantEst.size && [...est].every((k) => wantEst.has(k)),
+     `${est.size} established`);
+  ok('the gate actually splits the roster', est.size > 5 && est.size < rawLists.size,
+     `${est.size} of ${rawLists.size} established`);
 
-  for (const [label, inv] of Object.entries(collections)){
-    A.S.inv = inv;
-    A.S.planBy = 'score';
-    const pool = A.metaPool();
-    const arch = A.metaArchetypes(pool);
-    const open = arch.filter((g) => g.best.ev.missingCopies > 0).map((g) => ({
-      name: g.name, short: g.best.ev.missingCopies, distinct: g.best.ev.distinctMissing,
-      share: g.share, lists: g.lists, deck: g.best.deck, gap: A.gapCost(g.best.ev.missing),
-      evCount: g.evCount, evPlayers: g.evPlayers, bestPlace: g.bestPlace, lastSeen: g.lastSeen,
-    }));
-    if (open.length < 2){ ok(`[${label}] too few open archetypes to blend`, true, `${open.length} open`); continue; }
-    A.annotateTargetScores(open, null);
-
-    const bad = [];
-    for (const c of open){
-      for (const k of ['score', 'sClose', 'sMeta', 'sStrong'])
-        if (!(c[k] >= -1e-9 && c[k] <= 1 + 1e-9)) bad.push(`${c.name} ${k}=${c[k]}`);
-    }
-    // The neutral-median rule: a no-record archetype must not just score 0 on strong.
-    const rated = open.filter((c) => c.evCount > 0);
-    const unrated = open.filter((c) => !c.evCount);
-    if (rated.length && unrated.length){
-      const med = rated.map((c) => c.sStrong).sort((a, b) => a - b)[Math.floor((rated.length - 1) / 2)];
-      if (unrated.some((c) => Math.abs(c.sStrong - med) > 1e-9))
-        bad.push('a no-record archetype did not take the rated median');
-      if (unrated.every((c) => c.sStrong === 0))
-        bad.push('no-record archetypes all scored zero on strong');
-    }
-    ok(`[${label}] the blend components are all in range and the median rule holds`, bad.length === 0,
-       bad.slice(0, 2).join('; ') || `${open.length} open, ${rated.length} with a record`);
-
-    // The plan still has to hold together under this ordering.
-    const plan = A.acquisitionPath(pool, 3, 24);
-    const steps = plan.steps;
-    const pbad = [];
-    if (open.length && !steps.length) pbad.push('open decks but empty plan');
-    if (steps.some((s, i) => i && s.cum <= steps[i - 1].cum)) pbad.push('cumulative not increasing');
-    if (steps.some((s) => s.copies <= 0)) pbad.push('a step buys nothing');
-    const ownedNow = A.ownedIdentities();
-    for (const s of steps) if (s.need <= (ownedNow.get(s.id) || 0)) pbad.push(`${s.card.n} already owned`);
-    const declared = new Set(plan.targets.map((t) => t.name));
-    if (steps.some((s) => !declared.has(s.target))) pbad.push('a step belongs to no declared target');
-    const first = steps.findIndex((s) => s.unlocked.length > 0);
-    if (open.length && first < 0 && !plan.truncated) pbad.push('the plan never completes a deck');
-    ok(`[${label}] the plan holds together under the blend`, pbad.length === 0,
-       pbad.slice(0, 2).join('; ') || `${steps.length} buys, ${plan.targets.length} targets`);
+  // Overlap credit: synthetic candidates that share exactly one priced card.
+  const priced = A.DECKS.find((d) => Object.keys(d.cards).some((c) => {
+    const hit = A.matchRow({ id: c }); return hit && A.cardCost(hit.card) != null;
+  }));
+  {
+    const have = new Map();
+    const solo = [{ name: 'solo', deck: priced }];
+    A.annotateCompounding(solo, have, []);
+    ok('a gap no other candidate shares earns no compounding credit', solo[0].overlapCredit === 0,
+       `credit ${solo[0].overlapCredit}`);
+    const pair = [{ name: 'a', deck: priced }, { name: 'b', deck: priced }];
+    A.annotateCompounding(pair, have, []);
+    ok('two candidates short of the same cards credit the shared value',
+       pair[0].overlapCredit > 0 && pair[0].overlapCredit === pair[1].overlapCredit);
+    const fullGap = A.gapCost([...A.deckRequirements(priced).needById.values()]
+      .map((n) => ({ card: n.card, short: n.qty }))).total;
+    ok('the credit never exceeds the priced gap', pair[0].overlapCredit <= fullGap + 1e-6,
+       `credit ${pair[0].overlapCredit.toFixed(2)} vs gap ${fullGap.toFixed(2)}`);
+    // Redundancy: same list on both sides is a full reprint; a different list is not.
+    const other = A.DECKS.find((d) => d !== priced && A.archetypeName(d) !== A.archetypeName(priced));
+    const red = [{ name: 'x', deck: priced }];
+    A.annotateCompounding(red, have, [{ name: 'B', deck: priced }]);
+    ok('a deck that reprints a buildable one is flagged redundant',
+       red[0].redundantOf === 'B' && red[0].redundantFrac === 1);
+    const notRed = [{ name: 'y', deck: priced }];
+    A.annotateCompounding(notRed, have, [{ name: 'C', deck: other }]);
+    ok('a deck that shares little with the buildable set is not flagged',
+       notRed[0].redundantOf === null);
   }
 
-  // The blend must actually do something: across the collections it should not pick
-  // the exact same target as 'cost' every single time, or it is just byCost in a hat.
-  let sameAsCost = 0, total = 0;
+  // byCost ordering: bucket first, then non-redundant, then more overlap.
   for (const [label, inv] of Object.entries(collections)){
     if (label === 'everything') continue;
     A.S.inv = inv;
-    const pool = A.metaPool();
     A.S.planBy = 'cost';
-    const c = A.acquisitionPath(pool, 1, 24).targets[0];
-    A.S.planBy = 'score';
-    const s = A.acquisitionPath(pool, 1, 24).targets[0];
-    if (!c || !s) continue;
-    total++;
-    if (c.name === s.name) sameAsCost++;
+    const pool = A.metaPool();
+    const arch = A.metaArchetypes(pool);
+    const have = A.ownedIdentities();
+    const built = arch.filter((g) => g.best.ev.missingCopies === 0).map((g) => ({ name: g.name, deck: g.best.deck }));
+    const cand = arch.filter((g) => g.best.ev.missingCopies > 0).map((g) => ({
+      name: g.name, short: g.best.ev.missingCopies, distinct: g.best.ev.distinctMissing,
+      share: g.share, lists: g.lists, deck: g.best.deck, gap: A.gapCost(g.best.ev.missing),
+    }));
+    if (cand.length < 3){ ok(`[${label}] too few open archetypes to order`, true, `${cand.length}`); continue; }
+    A.annotateCompounding(cand, have, built);
+    const sorted = cand.slice().sort(A.byCost);
+    const bad = [];
+    for (let i = 1; i < sorted.length; i++){
+      const p = sorted[i - 1], q = sorted[i];
+      if (p.costBucket > q.costBucket) bad.push(`bucket ${p.costBucket} before ${q.costBucket}`);
+      if (p.costBucket === q.costBucket){
+        const pr = p.redundantOf ? 1 : 0, qr = q.redundantOf ? 1 : 0;
+        if (pr > qr) bad.push(`redundant ${p.name} before non-redundant ${q.name}`);
+        if (pr === qr && p.overlapCredit + 1e-6 < q.overlapCredit)
+          bad.push(`${p.name} (credit ${p.overlapCredit.toFixed(2)}) before ${q.name} (${q.overlapCredit.toFixed(2)})`);
+      }
+    }
+    ok(`[${label}] byCost is bucket, then non-redundant, then compounding`, bad.length === 0,
+       bad.slice(0, 2).join('; ') || `${sorted.length} ordered`);
   }
-  ok('the blend is not just the cheapest gap wearing a hat', sameAsCost < total,
-     `${sameAsCost} of ${total} collections pick the same target as by-cost`);
 
-  // With open decks on the tab, the blend spells out its own formula and puts the
-  // three sub-scores on the top row rather than hiding behind one number.
+  // The renderNext copy explains the two tie-breakers and no longer offers a score mode.
   A.S.inv = collections['deep'];
-  A.S.planBy = 'score';
+  A.S.planBy = 'cost';
   A.renderNext();
   const h = els.get('v-next').innerHTML;
-  ok('the blend shows its formula and its parts on screen',
-     h.includes('score = 0.5') && /blend \d+ · close \d+ · meta \d+ · strong \d+/.test(h),
-     h.includes('score = 0.5') ? 'formula and sub-scores present' : 'formula missing');
-
-  A.S.planBy = 'cost';
-  A.S.inv = collections['deep'];
+  ok('Next explains compounding and redundancy',
+     /[Cc]ompounding:/.test(h) && /[Rr]edundancy:/.test(h) && !h.includes('data-plan-by="score"'),
+     'copy present, no score chip');
 }
 
 /* ══ the views render ════════════════════════════════════════════════════ */
@@ -929,10 +935,10 @@ section('Rendering');
     check(`[${label}] Legends renders`, 'v-legends', () => A.renderLegends(),
           ['CHAMPIONS', 'PLAYABLE', 'NEED A UNIT', 'NEED THE LEGEND', 'NEED BOTH',
            'LEGEND PRINTINGS']);
-    check(`[${label}] Next renders`, 'v-next', () => A.renderNext(), ['WHAT TO DO NEXT', 'THE PLAN']);
-    A.S.planBy = 'score';
-    check(`[${label}] Next renders under the blend`, 'v-next', () => A.renderNext(),
-          ['WHAT TO DO NEXT', 'THE PLAN', 'strongest blend']);
+    A.S.planBy = 'cost';
+    check(`[${label}] Next renders (by cost)`, 'v-next', () => A.renderNext(), ['WHAT TO DO NEXT', 'THE PLAN']);
+    A.S.planBy = 'cards';
+    check(`[${label}] Next renders (by cards)`, 'v-next', () => A.renderNext(), ['WHAT TO DO NEXT', 'THE PLAN']);
     A.S.planBy = 'cost';
     check(`[${label}] Meta renders`, 'v-meta', () => A.renderMeta(), ['THE META']);
     check(`[${label}] Sets renders`, 'v-sets', () => A.renderSets(), []);

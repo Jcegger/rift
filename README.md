@@ -113,9 +113,10 @@ so a card wanted by eight half-built decks always outscores the last card of one
 and "unblocks a deck outright" is a signal that only appears at the final card,
 far too late to steer anything. Measured against the real snapshot, that version
 spent 29 cards without finishing a single deck. Naming a target first makes
-convergence structural. The check in `acquisitionPath` is that the plan completes
-its first deck in exactly the minimum number of cards, which it now does from an
-empty collection, a staples-only collection and a deep one.
+convergence structural. The check in `acquisitionPath` is that the plan finishes a
+deck at all — never spending its whole budget without a completion — and that the
+target it names is the optimal one under the selected ordering, from an empty
+collection, a staples-only collection and a deep one.
 
 **Popularity is a weak signal in this meta, and is treated as one.** 47
 archetypes split the snapshot between them and the most-played takes 4.4%, so
@@ -136,41 +137,46 @@ fabricated credibility score. So both orderings are offered, `S.planBy` picks be
 them, cheapest is the default, and both numbers stay on screen with a line naming what
 the other measure would have chosen.
 
-**There is now a third mode, `score`, and it is the blended number this section spent
-three paragraphs refusing.** It exists because sometimes you want the list ordered top to
-bottom and will argue with the result rather than weigh four columns by hand. It is
-opt-in, never the default, and built so it cannot be quoted out of context:
+**Building a stable of decks is a sequence, so two refinements sit inside both
+orderings.** Neither is a fabricated index — that door stays shut. A blended `score`
+mode was tried and pulled: it turned strength into a smooth dial when for an
+acquisition decision strength is a threshold, and it put weight on metashare, which is
+worth roughly nothing to a collector.
 
-    score = 0.5 · close  +  0.2 · meta  +  0.3 · strong
+- **Compounding.** A gap made mostly of cards other open archetypes also need is worth
+  more than an equally cheap gap of cards unique to one deck, because that money does
+  double duty. So within a `COST_BRACKET`-wide price band ($14 vs $16 is a tie) the
+  archetype whose missing cards do the most double duty comes first. The credit is a
+  real dollar figure — the price of cards you were going to buy anyway — not a made-up
+  weight. It self-scales by phase: early, when the shared cards are staples, it pushes
+  staples first on its own; late, when gaps are archetype-specific, it fades to nothing.
+- **Redundancy.** A deck whose list mostly reprints (≥ `REDUNDANT_FRAC` of its distinct
+  cards) one you can already build is a poor use of money however cheap it is, so it
+  sinks within its bracket and is labelled `mostly reprints X`.
 
-- **close** — cards short and gap dollars, each normalised and inverted, averaged. An
-  unpriced gap scores zero on the dollar half, the way `byCost` already brackets it.
-- **meta** — `0.6 · share + 0.4 · freshness` of the archetype's newest list. Small weight,
-  because popularity is still a weak signal here.
-- **strong** — `0.40 · events + 0.35 · log(players) + 0.25 · best finish`, from the
-  tournament evidence the Meta tab shows. An archetype with **no** tournament record takes
-  the median `strong` of the ones that have a record, not zero — zero would just re-sort
-  the list by "did anyone enter this at an event", which 38 of 482 decks did.
+Both live in `annotateCompounding` and are read by `byCost` and `byCards` as bucket →
+non-redundant → compounding → exact price. `scripts/check.mjs` holds the ordering to
+exactly that.
 
-Every component is normalised 0–1 **across the open archetypes on screen right now**, so a
-score means "relative to your current options" and moves with the collection. All three
-parts stay visible on every candidate row (`blend 71 · close 88 · meta 40 · strong 55`),
-which is the concession to the objection that an uninterpretable index is worse than a
-crude number you can argue with. The weights live in `SCORE_W`, the maths in
-`annotateTargetScores`, and `scripts/check.mjs` holds it to: components in range, the
-median substitution actually happening, the plan still converging, and the blend not
-collapsing onto `byCost`.
+**The plan will not name a fringe brew.** `establishedArchetypes` marks an archetype
+established at four or more distinct lists in the snapshot, or any tournament entry;
+`acquisitionPath` targets only those, lifting the gate only if nothing established is
+open so the plan is never empty when a deck could be built. Recency would have been the
+natural gate, but the snapshot is a rolling 60-day window rebuilt daily, so every
+archetype in it reads as "seen yesterday" — list count is what actually separates a
+known deck from one person's experiment. 42 of 47 clear the bar; the 5 that do not are
+starter decks and one-offs.
 
 **The history, since the reasoning still holds for ties.**
 Against a staples-only collection, 13 archetypes tie at exactly 38 cards short.
 Their shares span 0.6% to 4.0%, which is noise; the price of the list each one would
 build spans $45 to $301, which is not — and before the representative list was
 itself chosen on price, that same tie spanned $63 to $1352. Ranking it by share
-picked the most expensive deck in it. Targets are now chosen by cards short, then
-by list price, then by share, and the tie is displayed rather than settled
-silently: **Candidate targets** lists the ten closest archetypes with gap, cost
-and share side by side, and the summary calls out a deck a card or two further
-out that costs less than half as much.
+picked the most expensive deck in it. Targets are chosen by cards short (or gap
+price), then the compounding and redundancy tie-breaks, then share, and the tie is
+displayed rather than settled silently: **Everything else, ranked** lists the closest
+archetypes with gap, list price and share side by side, and the summary calls out a
+deck a card or two further out that costs less than half as much.
 
 Fixing this exposed a second bug worth recording. `scorePool` (the planner) and
 `metaArchetypes` (the Meta tab) both pick a representative list per archetype, and
@@ -421,10 +427,11 @@ collections — including one that owns every legend and no units, which is the 
 way to reach the need-a-unit state the Legends tab exists to report, and one that
 owns every unit and no legend, which is the only way to reach its mirror.
 
-The blended `score` ordering has its own block: every sub-score in range, the
-no-record archetypes actually taking the rated median rather than a zero, the plan
-still converging under it, the blend not collapsing onto `byCost`, and the tab
-rendering its formula and per-row sub-scores rather than a bare number.
+Compounding and the fringe gate have their own block: the gate matches its list-count
+rule and genuinely splits the roster, the compounding credit is zero for a gap nothing
+else shares and never exceeds the priced gap, redundancy flags a full reprint and not a
+different list, and `byCost` orders bucket → non-redundant → compounding on every
+synthetic collection.
 
 Several of the assertions are about layout rather than correctness, because the first
 Legends tab was unreadable: it rendered a full-height card per legend, 51 of them and
@@ -562,11 +569,11 @@ and summing per deck would claim 1,299 players of support.
 
 Two honest limits on that number. It measures the size of the room, not how well the deck
 did — one entry in a 433-player event finished #158, so the finish is shown beside it. And
-it does not feed the two default target orderings: `byTarget` under `cost` or `cards` stays
-cards short, then list price, then share, because that ordering was measured and validated.
-Credibility is displayed there, not weighted in. The one place it does feed selection is
-the opt-in `score` mode (see *Next: what to acquire*), where it is the `strong` term —
-still displayed in full beside the blended number, never folded away.
+it does **not** feed target selection: `byTarget` stays cards short (or gap price), then
+the compounding and redundancy tie-breaks, then share. Any tournament entry does lift an
+archetype past the fringe gate in `acquisitionPath`, but that is a yes/no on "is this a
+real deck", not a weighting of how well it did. Changing the primary ordering to weight
+performance is separate work with its own measurement.
 
 ## The meta
 
