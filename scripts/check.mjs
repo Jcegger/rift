@@ -56,7 +56,7 @@ const NAMED = [
   'archetypeName', 'metaPool', 'metaArchetypes', 'scorePool', 'cardLeverage', 'loadBans',
   'acquisitionPath', 'unionGap', 'pathText', 'ownedIdentities', 'evalDeck', 'matchRow',
   'spares', 'tradeMatch', 'readPartner', 'readyShareOf', 'owned', 'byTarget',
-  'annotateCompounding', 'establishedArchetypes', 'isEstablished', 'byCost', 'byCards',
+  'annotateCompounding', 'establishedArchetypes', 'isEstablished', 'byCost', 'byCards', 'byPlanTarget',
   'render', 'renderLegends', 'renderNext', 'renderMeta', 'renderTrade', 'renderSets',
 ];
 const A = new Function(`${js}
@@ -870,11 +870,12 @@ section('Compounding and the fringe gate');
        notRed[0].redundantOf === null);
   }
 
-  // byCost ordering: bucket first, then non-redundant, then more overlap.
+  // byCost / byCards stay pure: this is what "within reach for $X" reads, so it must be
+  // strictly cheapest (or fewest) first, with compounding nowhere in it. byPlanTarget
+  // is the one that buckets and then breaks ties on redundancy and compounding.
   for (const [label, inv] of Object.entries(collections)){
     if (label === 'everything') continue;
     A.S.inv = inv;
-    A.S.planBy = 'cost';
     const pool = A.metaPool();
     const arch = A.metaArchetypes(pool);
     const have = A.ownedIdentities();
@@ -885,10 +886,26 @@ section('Compounding and the fringe gate');
     }));
     if (cand.length < 3){ ok(`[${label}] too few open archetypes to order`, true, `${cand.length}`); continue; }
     A.annotateCompounding(cand, have, built);
-    const sorted = cand.slice().sort(A.byCost);
+
+    A.S.planBy = 'cost';
+    const byPrice = cand.slice().sort(A.byCost);
+    const pricedRun = byPrice.filter((c) => c.gap.unpriced === 0);
+    const priceBad = pricedRun.findIndex((c, i) => i && c.gap.total + 1e-6 < pricedRun[i - 1].gap.total);
+    ok(`[${label}] byCost is strictly cheapest-gap first`, priceBad < 0,
+       priceBad < 0 ? `${pricedRun.length} priced, monotone`
+         : `${pricedRun[priceBad].name} $${pricedRun[priceBad].gap.total} after $${pricedRun[priceBad - 1].gap.total}`);
+
+    A.S.planBy = 'cards';
+    const byFew = cand.slice().sort(A.byCards);
+    const fewBad = byFew.findIndex((c, i) => i && c.short < byFew[i - 1].short);
+    ok(`[${label}] byCards is strictly fewest-cards first`, fewBad < 0, `${byFew.length} ordered`);
+
+    // byPlanTarget: cost bucket first, then non-redundant, then more overlap credit.
+    A.S.planBy = 'cost';
+    const byPlan = cand.slice().sort(A.byPlanTarget);
     const bad = [];
-    for (let i = 1; i < sorted.length; i++){
-      const p = sorted[i - 1], q = sorted[i];
+    for (let i = 1; i < byPlan.length; i++){
+      const p = byPlan[i - 1], q = byPlan[i];
       if (p.costBucket > q.costBucket) bad.push(`bucket ${p.costBucket} before ${q.costBucket}`);
       if (p.costBucket === q.costBucket){
         const pr = p.redundantOf ? 1 : 0, qr = q.redundantOf ? 1 : 0;
@@ -897,8 +914,31 @@ section('Compounding and the fringe gate');
           bad.push(`${p.name} (credit ${p.overlapCredit.toFixed(2)}) before ${q.name} (${q.overlapCredit.toFixed(2)})`);
       }
     }
-    ok(`[${label}] byCost is bucket, then non-redundant, then compounding`, bad.length === 0,
-       bad.slice(0, 2).join('; ') || `${sorted.length} ordered`);
+    ok(`[${label}] byPlanTarget is bucket, then non-redundant, then compounding`, bad.length === 0,
+       bad.slice(0, 2).join('; ') || `${byPlan.length} ordered`);
+  }
+
+  // renderNext: the within-reach / ranked lists are cheapest-first, and the headline
+  // target is the deck the plan actually commits to — the two must agree.
+  for (const label of ['empty', 'staples only', 'deep']){
+    A.S.inv = collections[label];
+    A.S.planBy = 'cost';
+    A.renderNext();
+    const html = els.get('v-next').innerHTML;
+    const rankedStart = html.indexOf('EVERYTHING ELSE');
+    const rankedEnd = html.indexOf('BEST CARDS TO GET', rankedStart);
+    const ranked = rankedStart > -1 ? html.slice(rankedStart, rankedEnd > -1 ? rankedEnd : undefined) : '';
+    const gaps = [...ranked.matchAll(/>\s*\$([\d,]+(?:\.\d+)?)\+? gap</g)].map((m) => Number(m[1].replace(/,/g, '')));
+    const monotone = gaps.every((g, i) => !i || g + 0.001 >= gaps[i - 1]);
+    ok(`[${label}] the ranked list on Next is cheapest-gap first`, gaps.length > 1 && monotone,
+       monotone ? `${gaps.length} rows` : `gaps ${gaps.slice(0, 8).join(', ')}`);
+    const plan = A.acquisitionPath(A.metaPool(), 3, 24);
+    if (plan.targets[0]){
+      const headline = html.match(/best next target is\s*<b[^>]*>([^<]+)<\/b>/);
+      ok(`[${label}] the headline target is the plan's first target`,
+         headline && headline[1].trim() === plan.targets[0].name,
+         headline ? `"${headline[1].trim()}" vs "${plan.targets[0].name}"` : 'no headline match');
+    }
   }
 
   // The renderNext copy explains the two tie-breakers and no longer offers a score mode.

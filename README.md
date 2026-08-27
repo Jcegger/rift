@@ -137,26 +137,33 @@ fabricated credibility score. So both orderings are offered, `S.planBy` picks be
 them, cheapest is the default, and both numbers stay on screen with a line naming what
 the other measure would have chosen.
 
-**Building a stable of decks is a sequence, so two refinements sit inside both
-orderings.** Neither is a fabricated index — that door stays shut. A blended `score`
-mode was tried and pulled: it turned strength into a smooth dial when for an
-acquisition decision strength is a threshold, and it put weight on metashare, which is
+**`byCost` and `byCards` stay pure.** Cheapest gap first, or fewest cards first, full
+stop — because that ordering is also what the *Within reach* list and the ranked list
+read, and "within reach for the price I put in" has to mean exactly that. A blended
+`score` mode was tried here and pulled: it turned strength into a smooth dial when for
+an acquisition decision strength is a threshold, and it weighted metashare, which is
 worth roughly nothing to a collector.
+
+**Building a stable of decks is a sequence, though, so the *plan* — `byPlanTarget`, and
+nothing else — bends near-ties.** Neither adjustment is a fabricated index:
 
 - **Compounding.** A gap made mostly of cards other open archetypes also need is worth
   more than an equally cheap gap of cards unique to one deck, because that money does
-  double duty. So within a `COST_BRACKET`-wide price band ($14 vs $16 is a tie) the
-  archetype whose missing cards do the most double duty comes first. The credit is a
-  real dollar figure — the price of cards you were going to buy anyway — not a made-up
-  weight. It self-scales by phase: early, when the shared cards are staples, it pushes
-  staples first on its own; late, when gaps are archetype-specific, it fades to nothing.
+  double duty. So within a `COST_BRACKET`-wide price band ($14 vs $16 is a tie, in
+  `cards` mode an exact card count) the archetype whose missing cards do the most double
+  duty is committed to first. The credit is a real dollar figure — the price of cards
+  you were going to buy anyway. It self-scales by phase: early, when the shared cards
+  are staples, it pushes staples first on its own; late, when gaps are archetype-
+  specific, it fades to nothing.
 - **Redundancy.** A deck whose list mostly reprints (≥ `REDUNDANT_FRAC` of its distinct
-  cards) one you can already build is a poor use of money however cheap it is, so it
-  sinks within its bracket and is labelled `mostly reprints X`.
+  cards) one you can already build is a poor use of money however cheap it is, so the
+  plan skips it. It is labelled `mostly reprints X` on the list either way.
 
-Both live in `annotateCompounding` and are read by `byCost` and `byCards` as bucket →
-non-redundant → compounding → exact price. `scripts/check.mjs` holds the ordering to
-exactly that.
+Both live in `annotateCompounding`; `byPlanTarget` reads them as bucket → non-redundant
+→ compounding → `byCost`/`byCards`. `scripts/check.mjs` holds `byCost` to strictly
+cheapest-first, `byPlanTarget` to that fuller rule, and the two together: the headline
+"best next target" is whatever the plan commits to, so it never contradicts the list
+under it.
 
 **The plan will not name a fringe brew.** `establishedArchetypes` marks an archetype
 established at four or more distinct lists in the snapshot, or any tournament entry;
@@ -430,8 +437,10 @@ owns every unit and no legend, which is the only way to reach its mirror.
 Compounding and the fringe gate have their own block: the gate matches its list-count
 rule and genuinely splits the roster, the compounding credit is zero for a gap nothing
 else shares and never exceeds the priced gap, redundancy flags a full reprint and not a
-different list, and `byCost` orders bucket → non-redundant → compounding on every
-synthetic collection.
+different list, `byCost` is strictly cheapest-gap first and `byCards` strictly
+fewest-cards first, `byPlanTarget` adds the bucket → non-redundant → compounding rule,
+and on Next the ranked list is cheapest-first while the headline target equals the
+plan's first target.
 
 Several of the assertions are about layout rather than correctness, because the first
 Legends tab was unreadable: it rendered a full-height card per legend, 51 of them and

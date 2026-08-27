@@ -2323,38 +2323,18 @@ const readyShareOf = (scored) => scored.reduce((a, g) => a + (g.short === 0 ? g.
    offered and both numbers are always on screen. Cheapest is the default because it is
    the axis you cannot argue with.
 
-   Two refinements sit inside both orderings, because building a stable of decks is a
-   sequence and every buy should either finish a deck or advance two:
-
-   - Compounding. A gap made mostly of cards other open archetypes also need is worth
-     more than an equally cheap gap of cards unique to one deck. So within a price
-     bracket (COST_BRACKET dollars wide, since $14 vs $16 is a tie) the archetype whose
-     missing cards do the most double duty comes first. This is not a fabricated number:
-     it is the dollar value of cards you were going to buy anyway. Early on, when the
-     shared cards are staples, this pushes staples first on its own; late, when gaps are
-     archetype-specific, it fades to nothing — which is the right shape.
-   - Redundancy. A deck that is mostly a reprint of one you can already build is a poor
-     use of money however cheap it is, so it sinks within its bracket and is labelled.
-
-   And a gate, in acquisitionPath rather than here: the plan will not name a fringe brew
-   as a target. See establishedArchetypes. */
+   byCost and byCards stay honest: cheapest gap first, or fewest cards first, full stop.
+   That is what "within reach for the price I put in" has to mean. The compounding and
+   redundancy tie-breaks and the fringe gate live in byPlanTarget, which only the plan
+   uses — steering which deck to *commit* to is a different question from listing what a
+   budget can afford. */
 const byTarget = (a, b) => (S.planBy === 'cards' ? byCards(a, b) : byCost(a, b));
 
 const gapSpend = (x) => x.spend ?? (x.gap ? x.gap.total : 0);
 // An unpriced card sorts last within its own bracket rather than counting as free.
 const gapUnpriced = (x) => x.unpriced ?? (x.gap ? x.gap.unpriced : 0);
 
-// Near-ties on gap price are broken by compounding, not by a dollar or two. A bracket
-// this wide means "costs about the same"; unpriced gaps are their own last bracket.
-const COST_BRACKET = 5;
-const costBucketOf = (x) => x.costBucket ?? (gapUnpriced(x) > 0 ? Infinity : Math.round(gapSpend(x) / COST_BRACKET));
-const overlapCreditOf = (x) => x.overlapCredit ?? 0;
-const isRedundant = (x) => (x.redundantOf ? 1 : 0);
-
 const byCost = (a, b) =>
-  costBucketOf(a) - costBucketOf(b) ||
-  isRedundant(a) - isRedundant(b) ||
-  overlapCreditOf(b) - overlapCreditOf(a) ||
   gapSpend(a) - gapSpend(b) ||
   gapUnpriced(a) - gapUnpriced(b) ||
   a.short - b.short ||
@@ -2363,12 +2343,30 @@ const byCost = (a, b) =>
 
 const byCards = (a, b) =>
   a.short - b.short ||
-  isRedundant(a) - isRedundant(b) ||
-  overlapCreditOf(b) - overlapCreditOf(a) ||
   gapSpend(a) - gapSpend(b) ||
   b.share - a.share ||
   a.distinct - b.distinct ||
   a.name.localeCompare(b.name);
+
+// The plan's target order, and only the plan's. Near-ties on the chosen axis are broken
+// by compounding, not by a dollar or two: within a COST_BRACKET-wide price band (or, in
+// cards mode, an exact card count) the archetype whose missing cards other open decks
+// also need comes first, since that money does double duty. A deck that mostly reprints
+// one you can already build sinks. Everything falls back to byCost / byCards.
+const COST_BRACKET = 5;
+const costBucketOf = (x) => x.costBucket ?? (gapUnpriced(x) > 0 ? Infinity : Math.round(gapSpend(x) / COST_BRACKET));
+const overlapCreditOf = (x) => x.overlapCredit ?? 0;
+const isRedundant = (x) => (x.redundantOf ? 1 : 0);
+
+const byPlanTarget = (a, b) => {
+  const tier = S.planBy === 'cards'
+    ? a.short - b.short
+    : costBucketOf(a) - costBucketOf(b);
+  return tier ||
+    isRedundant(a) - isRedundant(b) ||
+    overlapCreditOf(b) - overlapCreditOf(a) ||
+    (S.planBy === 'cards' ? byCards(a, b) : byCost(a, b));
+};
 
 /* ── established vs fringe ─────────────────────────────────────────────────
    The plan is prescriptive — it tells you to spend money completing a named deck — so
@@ -2547,7 +2545,7 @@ function acquisitionPath(pool, maxDecks, maxSteps){
     const establishedOpen = allOpen.filter(g => isEstablished(g.name));
     const open = establishedOpen.length ? establishedOpen : allOpen;
     annotateCompounding(open, have, built);
-    const target = open.slice().sort(byTarget)[0];
+    const target = open.slice().sort(byPlanTarget)[0];
 
     const gap = [];
     for (const [id, need] of reqOf(target.deck)){
@@ -2643,17 +2641,24 @@ function renderNext(){
   const buildableAll = arch.filter(g => g.best.ev.missingCopies === 0)
                            .sort((a, b) => b.lists - a.lists || a.name.localeCompare(b.name));
   // Flattened to the shape the planner ranks, so this table and the plan's auto-pick
-  // cannot disagree about what "closest" means. annotateCompounding then adds the
-  // price bucket, the double-duty credit and the "reprints a deck you can build" flag
-  // that byCost and byCards read.
+  // cannot disagree about a deck's gap. annotateCompounding adds the price bucket, the
+  // double-duty credit and the "reprints a deck you can build" flag — shown as labels
+  // here, and the keys byPlanTarget sorts the plan on.
   const cand = arch.filter(g => g.best.ev.missingCopies > 0).map(g => ({
     name:g.name, short:g.best.ev.missingCopies, distinct:g.best.ev.distinctMissing,
     share:g.share, lists:g.lists, deck:g.best.deck, gap:gapCost(g.best.ev.missing),
     established: isEstablished(g.name),
   }));
   annotateCompounding(cand, have, buildableAll.map(g => ({ name: g.name, deck: g.best.deck })));
+  // The list stays honest: cheapest gap (or fewest cards) first, so "within reach for $X"
+  // means exactly that. The headline target, though, is the deck the plan commits to,
+  // which is compounding-aware and skips fringe brews — so the two never contradict.
   cand.sort(byTarget);
-  const nextDeck = cand[0] || null;
+  const plan = acquisitionPath(pool, 3, 24);
+  const steps = plan.steps;
+  NEXT_PLAN = steps;
+  NEXT_PLAN_TARGETS = plan.targets;
+  const nextDeck = (plan.targets[0] && cand.find(c => c.name === plan.targets[0].name)) || cand[0] || null;
   const compoundBits = (c) =>
     (c.overlapCredit > 0 ? `${money(Math.round(c.overlapCredit))} of the gap also builds other decks` : '') +
     (c.redundantOf ? `${c.overlapCredit > 0 ? ' · ' : ''}mostly reprints ${esc(c.redundantOf)}` : '');
@@ -2701,10 +2706,6 @@ function renderNext(){
   const bargain = cheapest && nextDeck && cheapest.name !== nextDeck.name &&
                   (nextDeck.deck.pr ?? Infinity) > (cheapest.deck.pr ?? 0) * 2 ? cheapest : null;
   const lev = cardLeverage(arch);
-  const plan = acquisitionPath(pool, 3, 24);
-  const steps = plan.steps;
-  NEXT_PLAN = steps;
-  NEXT_PLAN_TARGETS = plan.targets;
 
   // What the plan's own targets cost together, once shared cards are counted once
   // rather than twice. This is the number that justifies planning three decks at a
@@ -2757,11 +2758,12 @@ function renderNext(){
   host.innerHTML = `
     <div class="panel">
       <h2>WHAT TO DO NEXT</h2>
-      <p class="note">${arch.length} archetypes from ${pool.length} sanctioned-legal lists, ranked not by
-      how good they are but by what they cost <em>you</em> — with two near-ties broken toward the deck
-      whose missing cards also build others, and away from a deck that mostly reprints one you already
-      have. The plan below names a deck to finish and buys toward it; it will not name a fringe brew.
-      Change the ban toggle on the Meta tab and this changes with it.</p>
+      <p class="note">${arch.length} archetypes from ${pool.length} sanctioned-legal lists. The lists
+      below are ranked purely by what they cost <em>you</em> — cheapest gap first — so "within reach for
+      $X" means exactly that. The <em>plan</em> is where judgement comes in: it names a deck to commit
+      to, breaks near-ties toward one whose cards also build others, skips a deck that mostly reprints
+      what you can already play, and never targets a fringe brew. Change the ban toggle on the Meta tab
+      and this changes with it.</p>
       <div class="stats" style="margin-top:14px">
         <div class="stat"><div class="v" style="color:var(--good)">${buildableAll.length}</div><div class="k">archetypes buildable</div></div>
         <div class="stat"><div class="v" style="color:var(--maize)">${nextDeck ? nextDeck.short : '—'}</div><div class="k">cards to the next deck</div></div>
@@ -2806,10 +2808,11 @@ function renderNext(){
           ? `By the other measure it would be <b style="color:var(--cream)">${esc(alt.name)}</b>:
              ${alt.short} cards, ${cost(alt.gap)}.` : '';
       })()}</p>
-      <p class="note" style="margin-top:6px">Two things bend a near-tie. <b>Compounding:</b> among gaps
-      that cost about the same, the one whose missing cards other open decks also need comes first, so the
-      money does double duty — early on that is your staples, later it fades to nothing. <b>Redundancy:</b>
-      a deck that mostly reprints one you can already build drops down the list and is labelled.</p>
+      <p class="note" style="margin-top:6px">Two things bend the <em>plan's</em> pick on a near-tie, and
+      are labelled on every row so the list still reads straight. <b>Compounding:</b> among gaps that cost
+      about the same, the one whose missing cards other open decks also need does more with the money —
+      early on that is your staples, later it fades to nothing. <b>Redundancy:</b> a deck that mostly
+      reprints one you can already build is a weak buy however cheap, so the plan skips it.</p>
       <p class="note" style="margin-top:6px">Popularity breaks ties and no more, because it is a weak
       signal here: ${arch.length} archetypes split the lists between them and the most-played takes
       ${Math.max(...arch.map(g => g.share)).toFixed(1)}%.</p>
