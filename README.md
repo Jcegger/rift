@@ -74,9 +74,10 @@ is banned, riftbound.gg's weekly **tier list**, and what they are writing about 
 compares nothing to the collection — that all lives on Next.
 
 **Next** is the tab the app opens on, the only one that answers a question rather than
-displaying a state, and the only one that compares anything to the collection: the best
-decks by tier and what each would cost you, then what is buildable, what is within
-reach, and what to buy and in what order. See below.
+displaying a state, and the only one that compares anything to the collection: **Find my
+deck** ranks the meta by tier and prices each gap against a budget and a "won't buy"
+list, then the same set cost-ranked, then the buy-anyway card list, then a step-by-step
+plan. See below.
 
 **Legends** is the champion roster: which champions you can actually play, and for
 the rest, whether you are missing the legend, a champion unit, or both. See below.
@@ -90,7 +91,33 @@ actually get entered because its scanner beats typing.
 ## Next: what to acquire
 
 Meta answers "what can I build?". Next answers "what do I do next?", and it is
-three panels.
+four panels.
+
+**Find my deck** is the one to read. It takes riftbound.gg's tier list, crosses it
+with the collection, and ranks **tier first** — a stronger deck beats a cheaper one,
+because cheaper is not better — then by what the gap costs *you*. Three optional
+constraints shape the answer without a form to fill in:
+
+- **A soft budget.** Set a dollar figure and it does not hide what is over — the best
+  deck is often more than you want to spend right now — it greys the rows that do not
+  fit and names the best pick that does, plus one line: "$98 more unlocks Kennen." Blank
+  or 0 means no budget: pure tier order. Reuses the `nearSpend` key.
+- **Only legends I own.** Owning the legend is usually the single biggest cost, already
+  paid; this narrows to archetypes where it is in hand, marked with a `●`.
+- **A "won't buy" list.** Click a chase card in any gap — Dazzling Aurora, a $60 legend
+  — and the tool stops costing decks as if you would buy it, forever, synced across
+  devices. `S.noBuy`, undone from the chip it leaves behind.
+
+Every row shows **where the money is**: not a flat missing-card list but "$28 in 16
+cheap cards + Rengar, Trophy Hunter ×3 @ $33", so a $76 gap that is $68 of one card
+reads as exactly that. And a composition tag computed from the list's own card types —
+`unit midrange` / `spell combo-tempo` / `gear engine` — answers "is this an engine?"
+without a human in the loop. When the best pick is a real investment (> $50) and
+something two tiers cheaper sits under $15, that gets named as a low-risk first buy.
+
+**Every open deck, by cost** is the same archetypes ranked the other way — cheapest gap
+first, one row each. Where it disagrees with Find my deck is the point: the cheapest
+thing to finish is rarely the best deck.
 
 **Best cards to get** ranks every card standing between the collection and any
 archetype by how many archetypes are short of it. A common wanted by nine decks
@@ -141,11 +168,12 @@ them, cheapest is the default, and both numbers stay on screen with a line namin
 the other measure would have chosen.
 
 **`byCost` and `byCards` stay pure.** Cheapest gap first, or fewest cards first, full
-stop — because that ordering is also what the *Within reach* list and the ranked list
-read, and "within reach for the price I put in" has to mean exactly that. A blended
-`score` mode was tried here and pulled: it turned strength into a smooth dial when for
-an acquisition decision strength is a threshold, and it weighted metashare, which is
-worth roughly nothing to a collector.
+stop — because that ordering is also what *Every open deck, by cost* reads, and a
+cost-sorted list has to actually be cost-sorted. A blended `score` mode was tried here
+and pulled: it turned strength into a smooth dial when for an acquisition decision
+strength is a threshold, and it weighted metashare, which is worth roughly nothing to a
+collector. Strength now enters through *Find my deck*, which ranks by riftbound.gg's
+tier outright.
 
 **Building a stable of decks is a sequence, though, so the *plan* — `byPlanTarget`, and
 nothing else — bends near-ties.** Neither adjustment is a fabricated index:
@@ -478,23 +506,23 @@ never reacted to the collection at all — the same list forever.
 
 So Ideal is gone, replaced by a collection-independent popularity table that reads
 honestly: only 3 of the top 12 archetypes have any tournament record, and among those the
-field sizes run 14, 50, 151, 216. Ready and Close moved to Next as **Buildable now** and
-**Within reach**, and Next's candidate table now covers only what falls outside the
-threshold, so no archetype is detailed in one place and listed in another. The tab badge
-Meta used to carry is gone too: it showed a buildable count that is zero at every
-realistic collection size, which is a permanent untruth in the tab bar.
+field sizes run 14, 50, 151, 216. The collection-relative sections moved to Next, where
+they have since collapsed into **Find my deck** (tier-ranked, budget-lensed) and **Every
+open deck, by cost** (the same set, cost-ranked). The tab badge Meta used to carry is
+gone too: it showed a buildable count that is zero at every realistic collection size,
+which is a permanent untruth in the tab bar.
 
-**"Within reach" is measured in dollars**, because a card threshold compresses this set
-and money spreads it out: at a mid-sized collection *within $25* selects 9 archetypes
-where *within 20 cards* selects 20. It uses a new `nearSpend` key rather than repurposing
-the old `closeThreshold`, since a stored `5` reinterpreted as `$5` would silently select
-almost nothing.
+The budget on Find my deck is measured in dollars, because a card threshold compresses
+this set and money spreads it out. It uses a `nearSpend` key rather than the old
+`closeThreshold`, since a stored `5` reinterpreted as `$5` would silently select almost
+nothing — and unlike the old threshold it is *soft*: it greys what is over, never hides
+it.
 
-Two panels are capped at six detailed entries, with the remainder listed compactly.
-That is not cosmetic: a generous threshold put twenty full panels on Next, and owning
-every card put fifty-three, which is the wall the Legends tab already had to be rescued
-from once. The checks now hold both tabs to it — Next to 16 panels and Meta to 4 — so
-panel count is fixed by the layout rather than growing with the archetype count.
+Panel count is held down deliberately: a generous threshold once put twenty full panels
+on Next and owning every card put fifty-three, the wall the Legends tab had to be rescued
+from. The checks cap Next at 16 panels and Meta at 5, so it is fixed by the layout rather
+than growing with the archetype count. The consolidation into Find my deck took Next from
+thirteen panels to six at a normal collection.
 
 ## Freshness
 
@@ -621,13 +649,11 @@ current data 44 of 46 resolve.
 
 **Two placements, matching the Meta/Next split.** Meta shows the raw list, grouped by
 tier, each champion linking to its riftbound.gg guide, cited and compared to nothing.
-Next has **Best decks to build toward**: the same list crossed with the collection and
-sorted tier first, then buildable, then by gap cost — so it reads top-down as the
-strongest decks with the cheapest ones to reach floated up inside each tier. This is the
-thing the cheapest-gap plan structurally cannot show: a Tier 1 deck twenty cards and
-$300 out never surfaces as a next step, but it is the deck you might actually be saving
-toward. Each row carries the gap cost, cards short, list price, the best tournament
-finish on record, and a link to that Legend's guide and decklists.
+Next crosses it with the collection in **Find my deck** (see *Next: what to acquire*):
+sorted tier first, then buildable, then by gap cost, with a soft budget, an "only
+legends I own" filter and a "won't buy" list layered on. This is the thing the
+cheapest-gap plan structurally cannot show — a Tier 1 deck twenty cards and $300 out
+never surfaces as a next step, but it is the deck you might actually be saving toward.
 
 Freshness: tier lists move weekly, so `tiers.json` warns past 10 days and shouts past
 21, the same as the deck snapshot.

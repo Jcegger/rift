@@ -587,16 +587,44 @@ if (!tiers) {
      'panel present');
 
   A.S.planBy = 'cost';
+  A.S.nearSpend = 0;             // no budget: pure tier ranking
+  A.S.ownLegendOnly = false;
+  A.S.noBuy = [];
+  A.S.inv = collections['empty'];   // nothing buildable, so tier order is global
   A.renderNext();
   const next = els.get('v-next').innerHTML;
-  const panelStart = next.indexOf('BEST DECKS TO BUILD TOWARD');
-  ok('Next shows the tier-crossed panel', panelStart > -1, 'panel present');
-  const panelEnd = next.indexOf('</div>\n\n    ', panelStart);
-  const seg = panelStart > -1 ? next.slice(panelStart, panelEnd > -1 ? panelEnd : panelStart + 6000) : '';
-  const tierNums = [...seg.matchAll(/>Tier (\d)</g)].map((m) => Number(m[1]));
-  ok('the tier-crossed rows are ordered best tier first',
-     tierNums.length > 1 && tierNums.every((n, i) => !i || n >= tierNums[i - 1]),
-     tierNums.join(','));
+  const panelStart = next.indexOf('FIND MY DECK');
+  ok('Next shows the Find my deck panel', panelStart > -1, 'panel present');
+  const panelEnd = next.indexOf('EVERY OPEN DECK', panelStart);
+  const seg = panelStart > -1 ? next.slice(panelStart, panelEnd > -1 ? panelEnd : panelStart + 9000) : '';
+  const rowTiers = [...seg.matchAll(/>Tier (\d)</g)].map((m) => Number(m[1]));
+  ok('Find my deck rows are ordered best tier first (no budget, nothing buildable)',
+     rowTiers.length > 1 && rowTiers.every((n, i) => !i || n >= rowTiers[i - 1]), rowTiers.join(','));
+
+  // The three constraints actually do something.
+  A.S.noBuy = ['Baron Nashor'];
+  A.renderNext();
+  ok('a "won\'t buy" entry is shown as a removable chip',
+     els.get('v-next').innerHTML.includes('data-unban-card="Baron Nashor"'));
+  A.S.noBuy = [];
+  // Own the legend for exactly two tiered archetypes, then restrict to owned legends.
+  A.S.inv = {};
+  const tieredNames = new Set([...A.tierByArchetype().keys()]);
+  const pick = A.legendRoster().filter((l) => tieredNames.has(l.name)).slice(0, 2);
+  A.S.inv = Object.fromEntries(pick.map((l) => [l.rep.c, { n: 1 }]));
+  A.S.ownLegendOnly = false;
+  A.renderNext();
+  const allRows = (els.get('v-next').innerHTML.match(/build ↗/g) || []).length;
+  A.S.ownLegendOnly = true;
+  A.renderNext();
+  const h = els.get('v-next').innerHTML;
+  const ownRows = (h.match(/build ↗/g) || []).length;
+  ok('"only legends I own" narrows to legends you hold',
+     h.includes('FIND MY DECK') && ownRows > 0 && ownRows <= 2 && ownRows < allRows &&
+     pick.every((l) => h.includes(l.name)),
+     `${ownRows} of ${allRows} rows, owning ${pick.map((l) => l.name).join(' + ')}`);
+  A.S.ownLegendOnly = false;
+  A.S.inv = collections['deep'];
 
   // Freshness knows about it.
   ok('dataAge tracks the tier list', A.dataAge().some((a) => a.key === 'tiers'));
@@ -758,63 +786,47 @@ section('Caches');
      `${cold.length} archetypes identical`);
 }
 
-/* ══ the reach brackets ══════════════════════════════════════════════════ */
-section('Within reach');
+/* ══ Find my deck: the budget is a soft lens ═══════════════════════════════
+   A budget must not hide what is over it — the whole point is that the best deck is
+   often more than you want to spend right now. So a tight budget marks rows, it does
+   not drop them, and widening it only ever moves rows from "over" to "fits".            */
+section('Find my deck constraints');
 {
-  // The point of the restructure: an archetype is either detailed under Within reach or
-  // listed once under Everything else, never both. That duplication between Meta's Close
-  // and Next's candidate table is what the move was for.
-  for (const [label, inv] of Object.entries(collections)){
-    A.S.inv = inv;
-    A.S.planBy = 'cost';
-    A.renderNext();
-    const h = els.get('v-next').innerHTML;
-    const reachStart = h.indexOf('WITHIN REACH');
-    const elseStart = h.indexOf('EVERYTHING ELSE');
-    const arch = A.metaArchetypes(A.metaPool());
-    const open = arch.filter((g) => g.best.ev.missingCopies > 0);
-    if (!open.length){
-      ok(`[${label}] nothing open, so no brackets to keep apart`, true, 'all buildable');
-      continue;
-    }
-    const reachHtml = elseStart > reachStart ? h.slice(reachStart, elseStart) : h.slice(reachStart);
-    const elseHtml = elseStart > -1 ? h.slice(elseStart, h.indexOf('BEST CARDS TO GET', elseStart)) : '';
-    // Read the labels each section actually renders rather than searching for the name
-    // anywhere in the slice. Archetype names are legend card names too, so they turn up
-    // inside other decks' missing-card lists and a substring probe finds them there.
-    const labels = (html, cls) =>
-      new Set([...html.matchAll(new RegExp('class="' + cls + '"[^>]*>([\\s\\S]*?)<span class="code"', 'g'))]
-        .map((m) => m[1].replace(/<[^>]*>/g, '').replace(/&#\d+;|&nbsp;/g, ' ').trim())
-        .filter(Boolean));
-    const detailed = labels(reachHtml, 'meter-name');
-    const listed = labels(elseHtml, 'nm');
-    const dupes = [...detailed].filter((n) => listed.has(n));
-    ok(`[${label}] no archetype is both within reach and beyond it`, dupes.length === 0,
-       dupes.slice(0, 2).join(', ') ||
-       `${detailed.size} detailed + ${listed.size} listed, ${open.length} open`);
-  }
-
-  // The threshold has to mean what it says, and widening it can only ever add.
   A.S.inv = collections['deep'];
-  const arch = A.metaArchetypes(A.metaPool());
-  const gaps = arch.filter((g) => g.best.ev.missingCopies > 0)
-                   .map((g) => ({ name: g.name, g: A.gapCost(g.best.ev.missing) }));
-  const inside = (limit) => gaps.filter((x) => x.g.unpriced === 0 && x.g.total <= limit).map((x) => x.name);
-  for (const limit of [5, 25, 100]){
-    const set = inside(limit);
-    ok(`[deep] everything inside $${limit} really costs at most $${limit}`,
-       set.every((n) => gaps.find((x) => x.name === n).g.total <= limit), `${set.length} archetypes`);
-  }
-  const small = new Set(inside(10));
-  ok('[deep] raising the threshold never drops an archetype',
-     inside(100).length >= small.size && [...small].every((n) => inside(100).includes(n)),
-     `${small.size} inside $10, ${inside(100).length} inside $100`);
-  // A threshold nothing satisfies must still show the cheapest few rather than nothing.
+  A.S.planBy = 'cost';
+  A.S.ownLegendOnly = false;
+  A.S.noBuy = [];
+
+  A.S.nearSpend = 0;
+  A.renderNext();
+  const all = (els.get('v-next').innerHTML.match(/build ↗/g) || []).length;
   A.S.nearSpend = 1;
   A.renderNext();
   const tight = els.get('v-next').innerHTML;
-  ok('a threshold nothing meets still shows the cheapest gaps', /cheapest gaps instead/.test(tight),
-     'falls back rather than rendering empty');
+  const stillAll = (tight.match(/build ↗/g) || []).length;
+  ok('a tight budget hides nothing, only greys it', stillAll === all && /opacity:\.5/.test(tight),
+     `${all} rows at $0, ${stillAll} at $1`);
+
+  const overAt = (b) => { A.S.nearSpend = b; A.renderNext();
+    return (els.get('v-next').innerHTML.match(/opacity:\.5/g) || []).length; };
+  const o10 = overAt(10), o1000 = overAt(1000);
+  ok('raising the budget only ever un-greys rows', o1000 <= o10, `${o10} over at $10, ${o1000} at $1000`);
+
+  // "won't buy" actually cuts a card out of the gap math.
+  A.S.nearSpend = 0;
+  const arch = A.metaArchetypes(A.metaPool());
+  const withGap = arch.filter((g) => g.best.ev.missingCopies > 0 && A.gapCost(g.best.ev.missing).unpriced === 0);
+  const target = withGap.map((g) => ({ g, m: g.best.ev.missing.slice().sort((a, b) =>
+      (A.cardCost(b.card) || 0) - (A.cardCost(a.card) || 0)) }))
+    .find((x) => x.m[0] && A.cardCost(x.m[0].card) > 1);
+  if (target){
+    const before = A.gapCost(target.g.best.ev.missing).total;
+    A.S.noBuy = [target.m[0].card.n];
+    const after = A.gapCost(target.g.best.ev.missing.filter((x) => x.card.n !== target.m[0].card.n)).total;
+    ok('a "won\'t buy" card drops out of the gap cost', after < before - 0.5,
+       `${target.g.name}: $${before.toFixed(0)} -> $${after.toFixed(0)} without ${target.m[0].card.n}`);
+    A.S.noBuy = [];
+  }
   A.S.nearSpend = 25;
 }
 
@@ -862,7 +874,7 @@ section('The move');
      ['THE META', 'WHAT IS BEING PLAYED'].every((x) => meta.includes(x)));
   ok('Meta points at Next for anything collection-relative', /<b>Next<\/b>/.test(meta));
   ok('Next owns the collection-relative sections',
-     next.includes('WITHIN REACH') && next.includes('WHAT TO DO NEXT'));
+     next.includes('FIND MY DECK') && next.includes('WHAT TO DO NEXT'));
   // The moved panels carry delegated-handler buttons; the markup has to come with them.
   A.S.inv = collections['everything'];
   A.renderNext();
@@ -996,14 +1008,14 @@ section('Compounding and the fringe gate');
        bad.slice(0, 2).join('; ') || `${byPlan.length} ordered`);
   }
 
-  // renderNext: the within-reach / ranked lists are cheapest-first, and the headline
-  // target is the deck the plan actually commits to — the two must agree.
+  // renderNext: the by-cost list is cheapest-first, and the headline target is the deck
+  // the plan actually commits to — the two must agree.
   for (const label of ['empty', 'staples only', 'deep']){
     A.S.inv = collections[label];
     A.S.planBy = 'cost';
     A.renderNext();
     const html = els.get('v-next').innerHTML;
-    const rankedStart = html.indexOf('EVERYTHING ELSE');
+    const rankedStart = html.indexOf('EVERY OPEN DECK, BY COST');
     const rankedEnd = html.indexOf('BEST CARDS TO GET', rankedStart);
     const ranked = rankedStart > -1 ? html.slice(rankedStart, rankedEnd > -1 ? rankedEnd : undefined) : '';
     const gaps = [...ranked.matchAll(/>\s*\$([\d,]+(?:\.\d+)?)\+? gap</g)].map((m) => Number(m[1].replace(/,/g, '')));

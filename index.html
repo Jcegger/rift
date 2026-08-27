@@ -382,7 +382,9 @@ const S = {
   decks: [],
   playset: 3,             // copies of one card a deck may run; drives "playset done"
   planBy: 'cost',         // 'cost' = cheapest gap first, 'cards' = fewest cards first
-  nearSpend: 25,          // dollars: what counts as "within reach" on the Next tab
+  nearSpend: 25,          // dollars: soft budget on Next's "Find my deck". 0/blank = no budget
+  ownLegendOnly: false,   // Find my deck: restrict to archetypes whose legend you hold
+  noBuy: [],              // card names the tool must never recommend a deck for
 };
 
 // Local-only UI state.
@@ -408,7 +410,7 @@ function loadLocal(){
 // closeThreshold is deliberately absent: it held a card count for "close decks", which is
 // now a dollar figure under a new name. Reinterpreting a stored 5 as $5 would silently
 // select almost nothing, so the old value is left behind rather than migrated.
-const SYNCED = ['inv','decks','tags','playset','nearSpend','showIllegal','planBy','syncUrl','autoSync','mirrorTradeWish','lastSyncAt'];
+const SYNCED = ['inv','decks','tags','playset','nearSpend','ownLegendOnly','noBuy','showIllegal','planBy','syncUrl','autoSync','mirrorTradeWish','lastSyncAt'];
 // Saving must not blow away the collection stream: typing counts into 1189 cards
 // would reset scroll and focus on every keystroke. Views that show derived totals
 // re-render; the collection view patches the one card that changed instead.
@@ -2737,46 +2739,89 @@ function renderNext(){
   // cheapest-gap plan above does not answer — a Tier 1 deck twenty cards out never shows
   // there. Unpriced gaps sort last within a tier; buildable ones sort first.
   const tierMap = tierByArchetype();
-  const tiered = arch.filter(g => tierMap.has(g.name)).map(g => {
+  // "Find my deck": the tier list crossed with the collection and three constraints —
+  // a soft budget (shape the answer around it, do not hide what is over), "only legends
+  // I own" (owning the legend is the biggest single cost, already paid), and a "won't
+  // buy" list (a chase card or one you do not want to be the person playing). Ranked
+  // tier first, then by what it costs you: cheaper is not better, a Tier 2 deck beats a
+  // Tier 3 one at any price, but within a tier the closest-to-done comes first.
+  const noBuy = new Set(S.noBuy || []);
+  const heldLegends = new Set(legendRoster().filter(l => l.held).map(l => l.name));
+  const budget = Number(S.nearSpend) > 0 ? Number(S.nearSpend) : null;
+  const keptMissing = (missing) => (missing || []).filter(m => !noBuy.has(m.card.n));
+  const gapExcl = (missing) => {
+    const kept = keptMissing(missing);
+    const g = gapCost(kept);
+    return { ...g, short: kept.reduce((a, m) => a + (m.short ?? m.copies ?? 0), 0),
+             cut: (missing || []).length - kept.length };
+  };
+  // Where the money is: a handful of cheap cards plus the price spikes, so a $150 gap
+  // that is $130 of one card reads as exactly that.
+  const gapBreak = (missing) => {
+    const kept = keptMissing(missing).map(m => ({ n: m.card.n, q: m.short ?? m.copies ?? 0, p: cardCost(m.card) }))
+      .filter(x => x.q > 0);
+    const spikes = kept.filter(x => x.p != null && x.p >= 8).sort((a, b) => b.p * b.q - a.p * a.q);
+    const rest = kept.filter(x => !(x.p != null && x.p >= 8));
+    const restCost = rest.reduce((a, x) => a + (x.p || 0) * x.q, 0);
+    const restUnpriced = rest.reduce((a, x) => a + (x.p == null ? x.q : 0), 0);
+    const bits = [];
+    if (rest.length) bits.push(`${money(Math.round(restCost))}${restUnpriced ? '+' : ''} in ${rest.length} cheap card${rest.length === 1 ? '' : 's'}`);
+    for (const s of spikes.slice(0, 3))
+      bits.push(`<span data-nobuy-card="${esc(s.n)}" style="cursor:pointer;text-decoration:underline dotted" title="never recommend a deck needing this">${esc(s.n)}${s.q > 1 ? ` ×${s.q}` : ''} @ ${money(Math.round(s.p))}</span>`);
+    return bits.join(' + ');
+  };
+  const compTag = (deck) => {
+    const by = { Unit: 0, Spell: 0, Gear: 0 }; let n = 0;
+    for (const [, need] of reqOf(deck)){ if (need.card.t in by){ by[need.card.t] += need.qty; n += need.qty; } }
+    if (!n) return '';
+    if (by.Gear / n >= 0.22) return 'gear engine';
+    if (by.Spell / n >= 0.45) return 'spell combo-tempo';
+    if (by.Unit / n >= 0.55) return 'unit midrange';
+    return 'mixed';
+  };
+
+  let tiered = arch.filter(g => tierMap.has(g.name)).map(g => {
     const t = tierMap.get(g.name), ev = g.best.ev;
-    return { name: g.name, champion: t.champion, tier: t.tier, rank: t.rank, guide: t.guide,
-             short: ev.missingCopies, gap: gapCost(ev.missing), buildable: ev.missingCopies === 0,
-             listPrice: g.best.deck.pr ?? null, bestPlace: g.bestPlace, evPlayers: g.evPlayers };
-  }).sort((a, b) =>
-    a.tier - b.tier ||
+    const gap = gapExcl(ev.missing);
+    return {
+      name: g.name, champion: t.champion, tier: t.tier, rank: t.rank, guide: t.guide,
+      gap, short: gap.short, buildable: gap.short === 0 && gap.unpriced === 0,
+      breakdown: gapBreak(ev.missing), shape: compTag(g.best.deck),
+      ownLegend: heldLegends.has(g.name), listPrice: g.best.deck.pr ?? null,
+      bestPlace: g.bestPlace, evPlayers: g.evPlayers,
+      fits: !budget || (gap.unpriced === 0 && gap.total <= budget) || gap.short === 0,
+    };
+  });
+  if (S.ownLegendOnly) tiered = tiered.filter(t => t.ownLegend);
+  tiered.sort((a, b) =>
     (a.buildable ? 0 : 1) - (b.buildable ? 0 : 1) ||
+    (a.fits ? 0 : 1) - (b.fits ? 0 : 1) ||
+    a.tier - b.tier ||
     a.gap.unpriced - b.gap.unpriced ||
     a.gap.total - b.gap.total ||
     a.rank - b.rank ||
     a.name.localeCompare(b.name));
-  const TIER_SHOWN = 10;
+  const TIER_SHOWN = 12;
   const tieredShown = tiered.slice(0, TIER_SHOWN);
   const tieredRest = tiered.slice(TIER_SHOWN);
+  const bestPick = tiered.find(t => t.fits && !t.buildable) || tiered.find(t => !t.buildable) || null;
+  // The best deck a little more money would unlock: better tier than the best pick, or
+  // same tier but currently over budget, and not absurdly far.
+  const stretch = budget && bestPick
+    ? tiered.filter(t => !t.buildable && !t.fits && t.gap.unpriced === 0 &&
+                         (t.tier < bestPick.tier || t.gap.total <= budget * 2.5))
+            .sort((a, b) => a.tier - b.tier || a.gap.total - b.gap.total)[0]
+    : null;
+  // A cheap deck a tier or two down, worth naming as a low-risk first buy when the best
+  // pick is a real investment.
+  const starter = bestPick && bestPick.gap.total > 50
+    ? tiered.find(t => !t.buildable && t.gap.unpriced === 0 && t.gap.total <= 15 && t.tier <= bestPick.tier + 2 && t.name !== bestPick.name)
+    : null;
   const offTier = TIERS ? arch.filter(g => !tierMap.has(g.name)).length : 0;
 
-  // A deck a card or two further out can cost a fraction of the closest one. That is
-  // a real choice rather than a rounding error, so it gets said out loud instead of
-  // being settled silently by the sort.
-  // Three brackets, and every open archetype lands in exactly one of them. The split is
-  // by money because that is the axis you cannot argue with: a dollar threshold spreads
-  // this set out where a card threshold compresses it, and the panels below are detailed
-  // for what is inside and one row each for what is not, so nothing appears twice.
-  const nearSpend = S.nearSpend ?? 25;
-  const inReach = cand.filter(c => c.gap.unpriced === 0 && c.gap.total <= nearSpend);
-  // An empty section teaches nothing. When nothing is inside the threshold, show the
-  // cheapest few anyway and say plainly that they are over the line.
-  const reachFellShort = inReach.length === 0;
-  const reachAll = reachFellShort ? cand.slice(0, 3) : inReach;
-  // Only the cheapest few get a full panel. A generous threshold can put twenty
-  // archetypes in reach, and twenty panels each carrying its own shortfall is a wall
-  // rather than an answer — the same mistake the Legends tab made first time round.
-  // The remainder drop into the ranked list below, so nothing is detailed twice and
-  // nothing disappears.
-  const REACH_DETAIL = 6;
-  const reach = reachAll.slice(0, REACH_DETAIL);
-  const reachNames = new Set(reach.map(c => c.name));
-  const beyond = cand.filter(c => !reachNames.has(c.name));
-  const reachOverflow = reachAll.length - reach.length;
+  // The full cost-sorted table, every open archetype, one row each. Find my deck ranks
+  // by tier; this ranks by what it costs you, which is the other question.
+  const beyond = cand;
   const BUILDABLE_DETAIL = 6;
   const buildable = buildableAll.slice(0, BUILDABLE_DETAIL);
   const buildableRest = buildableAll.slice(BUILDABLE_DETAIL);
@@ -2850,13 +2895,11 @@ function renderNext(){
     <div class="panel">
       <h2>WHAT TO DO NEXT</h2>
       <p class="note">${arch.length} archetypes from ${pool.length} sanctioned-legal lists.${TIERS
-        ? ` <b>Best decks to build toward</b> below ranks the good ones by riftbound.gg's tier list and
-          shows what each would cost you — that is the deck to save toward.` : ''} Everything under it is
-      ranked purely by what it costs <em>you</em>, cheapest gap first, so "within reach for $X" means
-      exactly that. The <em>plan</em> is where judgement comes in: it names a deck to commit to, breaks
-      near-ties toward one whose cards also build others, skips a deck that mostly reprints what you can
-      already play, and never targets a fringe brew. Change the ban toggle on the Meta tab and this
-      changes with it.</p>
+        ? ` <b>Find my deck</b> below is the one to read: riftbound.gg's tier list crossed with your
+          collection, ranked best-deck-first, filtered by a budget and a "won't buy" list if you set
+          them.` : ''} Under it, the same decks ranked by <em>cost to you</em> instead of tier, then the
+      buy-anyway card list, then a step-by-step <em>plan</em> that names one deck to commit to and orders
+      its shortfall. Change the ban toggle on the Meta tab and all of it changes with it.</p>
       <div class="stats" style="margin-top:14px">
         <div class="stat"><div class="v" style="color:var(--good)">${buildableAll.length}</div><div class="k">archetypes buildable</div></div>
         <div class="stat"><div class="v" style="color:var(--maize)">${nextDeck ? nextDeck.short : '—'}</div><div class="k">cards to the next deck</div></div>
@@ -2912,27 +2955,49 @@ function renderNext(){
     </div>
 
     ${TIERS && tiered.length ? `<div class="panel">
-      <h2>BEST DECKS TO BUILD TOWARD <span class="code">${tiered.length}</span></h2>
+      <h2>FIND MY DECK <span class="code">${tiered.length}</span></h2>
       <p class="note">riftbound.gg's tier list${TIERS_INFO && TIERS_INFO.set ? ` for ${esc(TIERS_INFO.set)}` : ''}
-      crossed with your collection: the strongest decks, and within each tier the ones you are closest to
-      building. Tier 1 is best. <b>Gap</b> is what your missing cards cost; <b>build ↗</b> is that legend's
-      guide and decklists on riftbound.gg. This answers a question the plan above does not — a Tier 1 deck
-      twenty cards out never surfaces as a cheap next step.${offTier
-        ? ` ${offTier} archetype${offTier === 1 ? ' is' : 's are'} off the current tier list.` : ''}</p>
-      ${staleNote('tiers', 'the ranking below')}
+      crossed with your collection. Ranked <b>tier first</b> — a stronger deck beats a cheaper one — then
+      by what it costs <em>you</em>. <b>●</b> means you already own the legend. Click a card in a gap to
+      stop the tool ever recommending a deck that needs it.${offTier
+        ? ` ${offTier} played archetype${offTier === 1 ? ' is' : 's are'} off the tier list and not shown.` : ''}</p>
+      ${staleNote('tiers', 'this ranking')}
+      <div class="bar-row" style="margin-top:10px">
+        <span class="lbl">Budget $</span>
+        <input type="number" min="0" max="5000" step="10" value="${budget ?? ''}" id="near-spend" placeholder="none"
+          style="width:70px;text-align:center;background:var(--bg2);border:1px solid var(--line2);border-radius:4px;padding:2px">
+        <button class="chip" id="btn-own-legend" aria-pressed="${!!S.ownLegendOnly}">only legends I own</button>
+        <span class="note">${budget ? `${tiered.filter(t => t.fits && !t.buildable).length} fit; the rest stay listed, greyed` : 'no budget set — showing all'}</span>
+      </div>
+      ${noBuy.size ? `<div class="bar-row" style="margin-top:6px">
+        <span class="lbl">Won't buy</span>
+        ${[...noBuy].map(n => `<button class="chip" data-unban-card="${esc(n)}" aria-pressed="true">${esc(n)} ✕</button>`).join('')}
+      </div>` : ''}
+      ${bestPick ? `<p class="note" style="margin-top:10px">Best pick${budget ? ' within budget' : ''}:
+        ${tierBadge(bestPick.tier)} <b style="color:var(--cream)">${esc(bestPick.champion)} — ${esc(bestPick.name)}</b>,
+        ${cost(bestPick.gap)} for ${bestPick.short} card${bestPick.short === 1 ? '' : 's'}${
+        bestPick.ownLegend ? ', legend already in hand' : ''}. ${bestPick.breakdown}.</p>` : ''}
+      ${stretch ? `<p class="note" style="margin-top:6px;color:var(--maize)">${
+        money(Math.round(stretch.gap.total - budget))} more unlocks ${tierBadge(stretch.tier)}
+        <b style="color:var(--cream)">${esc(stretch.champion)} — ${esc(stretch.name)}</b> (${cost(stretch.gap)}).</p>` : ''}
+      ${starter ? `<p class="note" style="margin-top:6px">Low-risk first buy while you learn:
+        <b style="color:var(--cream)">${esc(starter.champion)} — ${esc(starter.name)}</b>
+        (Tier ${starter.tier}, ${cost(starter.gap)}). Cheaper isn't better, but it costs less than lunch to
+        find out if you like the game.</p>` : ''}
       <div class="rows" style="margin-top:8px">${tieredShown.map(t => `
-        <div class="row">
-          <span class="nm">${tierBadge(t.tier)} <b style="color:var(--cream)">${esc(t.champion)}</b>
-            <span class="code">${esc(t.name)}${t.bestPlace != null
-              ? ` · best #${t.bestPlace} of a ${t.evPlayers.toLocaleString('en-US')}-player field`
-              : ' · no tournament record'}</span>
+        <div class="row" style="${t.fits ? '' : 'opacity:.5'}">
+          <span class="nm">${t.ownLegend ? '<b style="color:var(--good)">●</b> ' : ''}${tierBadge(t.tier)}
+            <b style="color:var(--cream)">${esc(t.champion)}</b>
+            <span class="code">${esc(t.name)}${t.shape ? ` · ${t.shape}` : ''}${
+              t.bestPlace != null ? ` · best #${t.bestPlace}` : ''}</span>
+            ${t.buildable ? '' : `<span class="code">${t.breakdown}</span>`}
             ${t.guide ? `<a href="${esc(t.guide)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">build ↗</a>` : ''}</span>
           <span class="qty${t.buildable ? '' : ' need'}">${t.buildable
             ? 'buildable now'
-            : `${cost(t.gap)} gap<span class="code"> · ${t.short} short · ${money(t.listPrice)} list</span>`}</span>
+            : `${cost(t.gap)}<span class="code"> · ${t.short} short${t.gap.cut ? ` · ${t.gap.cut} cut` : ''}</span>`}</span>
         </div>`).join('')}</div>
-      ${tieredRest.length ? `<p class="note" style="margin-top:8px">${tieredRest.length} further down the
-        list: ${tieredRest.map(t => `${esc(t.champion)} <span class="code">T${t.tier}, ${cost(t.gap)}</span>`).join(' · ')}.</p>` : ''}
+      ${tieredRest.length ? `<p class="note" style="margin-top:8px">${tieredRest.length} more: ${
+        tieredRest.map(t => `${t.ownLegend ? '● ' : ''}${esc(t.champion)} <span class="code">T${t.tier}, ${cost(t.gap)}</span>`).join(' · ')}.</p>` : ''}
     </div>` : ''}
 
     ${buildableAll.length ? `<div class="panel">
@@ -2943,36 +3008,12 @@ function renderNext(){
     </div>
     ${buildable.map(g => deckPanel(g, { showMissing:false })).join('')}` : ''}
 
-    <div class="panel">
-      <h2>WITHIN REACH <span class="code">${reach.length}</span></h2>
-      <p class="note">${reachFellShort
-        ? `Nothing is under $${nearSpend} yet, so these are the three cheapest gaps instead. The
-           distance is real: a tournament list runs three copies of most cards, and a collection
-           spread thin across sets will be a long way from any of them.`
-        : `Gaps costing under $${nearSpend}, cheapest first. Each card is priced at its cheapest
-           printing, and the shortfall is listed per deck.`}
-        "Add missing to wants" pushes a deck's gap onto the trade list.</p>
-      <div class="bar-row" style="margin-top:10px">
-        <span class="lbl">Within reach means under $</span>
-        <input type="number" min="1" max="2000" step="5" value="${nearSpend}" id="near-spend"
-          style="width:64px;text-align:center;background:var(--bg2);border:1px solid var(--line2);border-radius:4px;padding:2px">
-        <span class="note">${inReach.length} of ${cand.length} open archetypes qualify${
-          reachOverflow > 0 ? `; the cheapest ${reach.length} are detailed here and the other ${
-            reachOverflow} are in the ranked list below` : ''}</span>
-      </div>
-    </div>
-    ${reach.map(c => {
-      const g = archByName.get(c.name);
-      return g ? deckPanel(g, { showMissing:true, gap:c.gap }) : '';
-    }).join('')}
-
     ${beyond.length ? `<div class="panel">
-      <h2>EVERYTHING ELSE, RANKED <span class="code">${beyond.length}</span></h2>
-      <p class="note">The archetypes that fall outside the threshold above, cheapest first, one row
-      each. Nothing here also appears under Within reach — the two brackets are exclusive, so a deck is
-      either detailed above or listed here.${tie.length > 1
-        ? ` Ties on cards short are the normal case rather than the exception, which is why money
-           decides them: right now ${tie.length} archetypes are tied at ${nextDeck.short} cards short,
+      <h2>EVERY OPEN DECK, BY COST <span class="code">${beyond.length}</span></h2>
+      <p class="note">The same archetypes as Find my deck, this time ranked by what the gap costs
+      <em>you</em> rather than by tier — cheapest first, one row each. Where the two orderings disagree is
+      the whole point: the cheapest thing to finish is rarely the best deck.${tie.length > 1
+        ? ` ${tie.length} archetypes are tied at ${nextDeck.short} cards short right now,
            their whole lists spanning ${money(tiePrices[0])} to ${money(tiePrices[tiePrices.length - 1])}.` : ''}</p>
       <p class="note" style="margin-top:6px">Two prices per row, and the difference matters. <b>Gap</b>
       is what the cards you are missing cost, each priced by its cheapest printing — that is the number
@@ -3745,9 +3786,14 @@ function wire(){
       persist();
     }
     if (el.id === 'near-spend'){
-      S.nearSpend = Math.max(1, Math.min(2000, Number(el.value) || 25));
-      persist();
+      // Blank or 0 means "no budget" on Find my deck: show everything, rank by tier.
+      // Persist quietly so the field keeps focus while typing; the panel redraws on commit.
+      S.nearSpend = el.value.trim() === '' ? 0 : Math.max(0, Math.min(5000, Number(el.value) || 0));
+      persist({ render: false });
     }
+  });
+  document.body.addEventListener('change', (e) => {
+    if (e.target.id === 'near-spend' && TAB === 'next') renderNext();
   });
 
   // Re-render on qty change is heavy in the collection view, so patch in place instead.
@@ -3901,6 +3947,20 @@ function wire(){
     if (t.id === 'btn-autosync'){ S.autoSync = !S.autoSync; persist(); }
     if (t.id === 'btn-mirror'){ S.mirrorTradeWish = !S.mirrorTradeWish; persist(); }
     if (t.id === 'btn-show-illegal'){ S.showIllegal = !S.showIllegal; persist(); }
+    if (t.id === 'btn-own-legend'){ S.ownLegendOnly = !S.ownLegendOnly; persist(); }
+
+    // Find my deck: click a chase card in a gap to blacklist it, click its chip to undo.
+    const nb = t.closest('[data-nobuy-card]');
+    if (nb){
+      const name = nb.dataset.nobuyCard;
+      S.noBuy = [...new Set([...(S.noBuy || []), name])];
+      persist(); toast(`won't recommend decks needing ${name}`);
+    }
+    const ub = t.closest('[data-unban-card]');
+    if (ub){
+      S.noBuy = (S.noBuy || []).filter(n => n !== ub.dataset.unbanCard);
+      persist();
+    }
 
     const pby = t.closest('[data-plan-by]');
     if (pby){ S.planBy = pby.dataset.planBy; persist(); }
