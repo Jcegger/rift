@@ -367,6 +367,9 @@ let NEWS_AT = null;
 let EVENTS = null;         // the tournament archive from data/events.json
 let EVENTS_AT = null;
 let EVENTS_COVER = null;   // how much of that archive the deck snapshot can see
+let TIERS = null;          // riftbound.gg's weekly tier list from data/tiers.json: [{champion,tier,rank,guide,epithet}]
+let TIERS_AT = null;
+let TIERS_INFO = null;     // { set, report, week, source }
 let BY  = {};              // publicCode -> card
 // Opens on Next, not Collection. The collection is a mirror of riftbound.gg and
 // browsing it is the one thing that site already does better; what it cannot do is
@@ -444,6 +447,7 @@ function setDot(state, msg){
 
 const FRESH_LIMITS = {
   decks:   { warn: 10, bad: 21, label: 'deck snapshot' },
+  tiers:   { warn: 10, bad: 21, label: 'tier list' },
   banned:  { warn: 30, bad: 60, label: 'ban list' },
   news:    { warn: 14, bad: 30, label: 'news' },
   events:  { warn: 21, bad: 45, label: 'event list' },
@@ -464,6 +468,7 @@ function daysSince(iso){
 function dataAge(){
   const src = {
     decks:   DECKS_AT,
+    tiers:   TIERS_AT,
     banned:  BANNED_AT,
     news:    NEWS_AT,
     events:  EVENTS_AT,
@@ -2021,6 +2026,50 @@ function credibility(g){
   return { evCount: byEvent.size, evPlayers: players, evNewest: newest };
 }
 
+/* ── the tier list join ───────────────────────────────────────────────────
+   data/tiers.json is riftbound.gg's curated weekly Tier 1-5 list, named by champion.
+   This app names archetypes by epithet, so the join is champion -> archetype via the
+   legend roster. Master Yi has two legends in two different tiers; the epithet parsed
+   from the tier entry's guide slug picks the right one.
+
+   Champion names are matched on their letters alone (Kai'Sa, Rek'Sai, Lee Sin), so a
+   stray apostrophe or space in either source does not drop a row. Anything that still
+   fails to resolve simply has no tier here — it is not an error, and the Meta tab
+   shows the raw list regardless. */
+const champKey = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+
+function tierByArchetype(){
+  const out = new Map();
+  if (!TIERS || !CAT) return out;
+  // Only legends someone is actually playing: the tier list ranks ~46 legends and a
+  // dozen of them have no list in the snapshot at all, so mapping those would put a
+  // key on the result that no consumer can use.
+  const played = new Set((DECKS || []).map(archetypeName));
+  const byChamp = new Map();                 // champKey -> [archetype name]
+  for (const l of legendRoster()){
+    if (!l.champ || !played.has(l.name)) continue;
+    const k = champKey(l.champ);
+    if (!byChamp.has(k)) byChamp.set(k, []);
+    if (!byChamp.get(k).includes(l.name)) byChamp.get(k).push(l.name);
+  }
+  for (const t of TIERS){
+    const names = byChamp.get(champKey(t.champion)) || [];
+    let name = names[0] || null;
+    if (names.length > 1 && t.epithet){
+      const hint = t.epithet.toLowerCase();
+      name = names.find(n => n.toLowerCase().includes(hint)) || name;
+    }
+    if (!name) continue;
+    const prev = out.get(name);
+    if (!prev || t.tier < prev.tier)
+      out.set(name, { tier: t.tier, rank: t.rank, guide: t.guide || null, champion: t.champion });
+  }
+  return out;
+}
+
+const TIER_COLOUR = ['', 'var(--good)', 'var(--teal)', 'var(--maize)', 'var(--dimmer)', 'var(--dimmer)'];
+const tierBadge = (n) => `<b style="color:${TIER_COLOUR[n] || 'var(--dimmer)'}">Tier ${n}</b>`;
+
 function deckCardsToLocal(deck){
   const out = {};
   for (const [code, qty] of Object.entries(deck.cards || {})){
@@ -2177,6 +2226,26 @@ function renderMeta(){
         <div class="stat"><div class="v">${EVENTS_COVER ? `${EVENTS_COVER.eventsWithDecks}/${EVENTS_COVER.events}` : events}</div><div class="k">events with lists</div></div>
       </div>
     </div>
+
+    ${TIERS ? `<div class="panel">
+      <h2>TIER LIST <span class="code">${TIERS.length} legends</span></h2>
+      <p class="note">riftbound.gg's curated weekly tier list${TIERS_INFO && TIERS_INFO.set
+        ? ` for ${esc(TIERS_INFO.set)}${TIERS_INFO.week != null ? `, week ${TIERS_INFO.week}` : ''}` : ''}.
+        Tier 1 is best; the order within a tier is theirs. This is their read of what is good, not this
+        tab's — the <b>Next</b> tab crosses it with your collection and prices the gap.${
+        TIERS_INFO && TIERS_INFO.report
+          ? ` <a href="${esc(TIERS_INFO.report)}" target="_blank" rel="noopener">full report ↗</a>` : ''}</p>
+      ${staleNote('tiers', 'the tier list below')}
+      <div class="rows" style="margin-top:8px">
+        ${[...new Set(TIERS.map(t => t.tier))].sort((a, b) => a - b).map(tn => `
+        <div class="row" style="align-items:flex-start">
+          <span class="nm" style="flex:none;width:70px">${tierBadge(tn)}</span>
+          <span style="display:flex;flex-wrap:wrap;gap:4px 12px">${TIERS.filter(t => t.tier === tn).map(t => t.guide
+            ? `<a href="${esc(t.guide)}" target="_blank" rel="noopener" class="code" style="color:var(--cream)">${esc(t.champion)}</a>`
+            : `<span class="code">${esc(t.champion)}</span>`).join('')}</span>
+        </div>`).join('')}
+      </div>
+    </div>` : ''}
 
     ${newsBlock(['Metagame','Events'], 4) ? `<div class="panel">
       <h2>WHAT THEY'RE SAYING</h2>
@@ -2663,6 +2732,28 @@ function renderNext(){
     (c.overlapCredit > 0 ? `${money(Math.round(c.overlapCredit))} of the gap also builds other decks` : '') +
     (c.redundantOf ? `${c.overlapCredit > 0 ? ' · ' : ''}mostly reprints ${esc(c.redundantOf)}` : '');
 
+  // The best decks, per riftbound.gg's tier list, sorted by tier and then by how close
+  // the collection is to building each. This is "the best deck I can afford", which the
+  // cheapest-gap plan above does not answer — a Tier 1 deck twenty cards out never shows
+  // there. Unpriced gaps sort last within a tier; buildable ones sort first.
+  const tierMap = tierByArchetype();
+  const tiered = arch.filter(g => tierMap.has(g.name)).map(g => {
+    const t = tierMap.get(g.name), ev = g.best.ev;
+    return { name: g.name, champion: t.champion, tier: t.tier, rank: t.rank, guide: t.guide,
+             short: ev.missingCopies, gap: gapCost(ev.missing), buildable: ev.missingCopies === 0,
+             listPrice: g.best.deck.pr ?? null, bestPlace: g.bestPlace, evPlayers: g.evPlayers };
+  }).sort((a, b) =>
+    a.tier - b.tier ||
+    (a.buildable ? 0 : 1) - (b.buildable ? 0 : 1) ||
+    a.gap.unpriced - b.gap.unpriced ||
+    a.gap.total - b.gap.total ||
+    a.rank - b.rank ||
+    a.name.localeCompare(b.name));
+  const TIER_SHOWN = 10;
+  const tieredShown = tiered.slice(0, TIER_SHOWN);
+  const tieredRest = tiered.slice(TIER_SHOWN);
+  const offTier = TIERS ? arch.filter(g => !tierMap.has(g.name)).length : 0;
+
   // A deck a card or two further out can cost a fraction of the closest one. That is
   // a real choice rather than a rounding error, so it gets said out loud instead of
   // being settled silently by the sort.
@@ -2758,12 +2849,14 @@ function renderNext(){
   host.innerHTML = `
     <div class="panel">
       <h2>WHAT TO DO NEXT</h2>
-      <p class="note">${arch.length} archetypes from ${pool.length} sanctioned-legal lists. The lists
-      below are ranked purely by what they cost <em>you</em> — cheapest gap first — so "within reach for
-      $X" means exactly that. The <em>plan</em> is where judgement comes in: it names a deck to commit
-      to, breaks near-ties toward one whose cards also build others, skips a deck that mostly reprints
-      what you can already play, and never targets a fringe brew. Change the ban toggle on the Meta tab
-      and this changes with it.</p>
+      <p class="note">${arch.length} archetypes from ${pool.length} sanctioned-legal lists.${TIERS
+        ? ` <b>Best decks to build toward</b> below ranks the good ones by riftbound.gg's tier list and
+          shows what each would cost you — that is the deck to save toward.` : ''} Everything under it is
+      ranked purely by what it costs <em>you</em>, cheapest gap first, so "within reach for $X" means
+      exactly that. The <em>plan</em> is where judgement comes in: it names a deck to commit to, breaks
+      near-ties toward one whose cards also build others, skips a deck that mostly reprints what you can
+      already play, and never targets a fringe brew. Change the ban toggle on the Meta tab and this
+      changes with it.</p>
       <div class="stats" style="margin-top:14px">
         <div class="stat"><div class="v" style="color:var(--good)">${buildableAll.length}</div><div class="k">archetypes buildable</div></div>
         <div class="stat"><div class="v" style="color:var(--maize)">${nextDeck ? nextDeck.short : '—'}</div><div class="k">cards to the next deck</div></div>
@@ -2817,6 +2910,30 @@ function renderNext(){
       signal here: ${arch.length} archetypes split the lists between them and the most-played takes
       ${Math.max(...arch.map(g => g.share)).toFixed(1)}%.</p>
     </div>
+
+    ${TIERS && tiered.length ? `<div class="panel">
+      <h2>BEST DECKS TO BUILD TOWARD <span class="code">${tiered.length}</span></h2>
+      <p class="note">riftbound.gg's tier list${TIERS_INFO && TIERS_INFO.set ? ` for ${esc(TIERS_INFO.set)}` : ''}
+      crossed with your collection: the strongest decks, and within each tier the ones you are closest to
+      building. Tier 1 is best. <b>Gap</b> is what your missing cards cost; <b>build ↗</b> is that legend's
+      guide and decklists on riftbound.gg. This answers a question the plan above does not — a Tier 1 deck
+      twenty cards out never surfaces as a cheap next step.${offTier
+        ? ` ${offTier} archetype${offTier === 1 ? ' is' : 's are'} off the current tier list.` : ''}</p>
+      ${staleNote('tiers', 'the ranking below')}
+      <div class="rows" style="margin-top:8px">${tieredShown.map(t => `
+        <div class="row">
+          <span class="nm">${tierBadge(t.tier)} <b style="color:var(--cream)">${esc(t.champion)}</b>
+            <span class="code">${esc(t.name)}${t.bestPlace != null
+              ? ` · best #${t.bestPlace} of a ${t.evPlayers.toLocaleString('en-US')}-player field`
+              : ' · no tournament record'}</span>
+            ${t.guide ? `<a href="${esc(t.guide)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">build ↗</a>` : ''}</span>
+          <span class="qty${t.buildable ? '' : ' need'}">${t.buildable
+            ? 'buildable now'
+            : `${cost(t.gap)} gap<span class="code"> · ${t.short} short · ${money(t.listPrice)} list</span>`}</span>
+        </div>`).join('')}</div>
+      ${tieredRest.length ? `<p class="note" style="margin-top:8px">${tieredRest.length} further down the
+        list: ${tieredRest.map(t => `${esc(t.champion)} <span class="code">T${t.tier}, ${cost(t.gap)}</span>`).join(' · ')}.</p>` : ''}
+    </div>` : ''}
 
     ${buildableAll.length ? `<div class="panel">
       <h2 style="color:var(--good)">BUILDABLE NOW <span class="code">${buildableAll.length}</span></h2>
@@ -3972,6 +4089,15 @@ async function boot(){
       EVENTS_COVER = ed.coverage || null;
     }
   } catch { /* no event archive */ }
+  try {
+    const tr = await fetch('data/tiers.json', { cache:'no-cache' });
+    if (tr.ok){
+      const td = await tr.json();
+      TIERS = Array.isArray(td.tiers) && td.tiers.length ? td.tiers : null;
+      TIERS_AT = td.generatedAt || null;
+      TIERS_INFO = TIERS ? { set: td.set || null, report: td.report || null, week: td.week ?? null, source: td.source || null } : null;
+    }
+  } catch { /* no tier list */ }
 
   // Publish the catalog only once it is whole, so nothing can read a half-built one.
   CAT = cat;

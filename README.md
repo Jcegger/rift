@@ -26,11 +26,13 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `data/banned.json` - cards banned from sanctioned Constructed play.
 - `data/events.json` - the tournament archive, with player counts and coverage.
 - `data/news.json` - riftbound.gg's posts: title, date, tag, link.
+- `data/tiers.json` - riftbound.gg's weekly Tier 1-5 list, per Legend, scraped.
 - `scripts/build-catalog.mjs` - regenerates the catalog from Riot's gallery feed.
 - `scripts/build-decks.mjs` - regenerates the deck snapshot.
 - `scripts/build-banned.mjs` - regenerates the ban list.
 - `scripts/build-events.mjs` - regenerates the tournament archive and its coverage.
 - `scripts/build-news.mjs` - regenerates the news feed.
+- `scripts/build-tiers.mjs` - scrapes the meta tier list off riftbound.gg's page.
 - `scripts/check.mjs` - the regression checks; run it after touching the engine.
 - `.github/workflows/refresh.yml` - rebuilds all of the above daily and commits.
 - `schema.sql` - the Supabase table and its policies.
@@ -68,12 +70,13 @@ to, which makes it useful before a single want has been typed in.
 "Add shortfall to wants" pushes the gap onto the trade list.
 
 **Meta** is the reference view: what is being played, how much of it is evidence, what
-is banned, and what riftbound.gg is writing about it. It compares nothing to the
-collection — that all lives on Next.
+is banned, riftbound.gg's weekly **tier list**, and what they are writing about it. It
+compares nothing to the collection — that all lives on Next.
 
 **Next** is the tab the app opens on, the only one that answers a question rather than
-displaying a state, and the only one that compares anything to the collection: what is
-buildable, what is within reach, what to buy and in what order. See below.
+displaying a state, and the only one that compares anything to the collection: the best
+decks by tier and what each would cost you, then what is buildable, what is within
+reach, and what to buy and in what order. See below.
 
 **Legends** is the champion roster: which champions you can actually play, and for
 the rest, whether you are missing the legend, a champion unit, or both. See below.
@@ -442,6 +445,11 @@ fewest-cards first, `byPlanTarget` adds the bucket → non-redundant → compoun
 and on Next the ranked list is cheapest-first while the headline target equals the
 plan's first target.
 
+The tier list has its own block: `tiers.json` is well-formed and tiers and ranks run
+1..N with no gaps, the champion join lands only on played archetypes and resolves most
+of the list, Master Yi's played legend comes back at Tier 1, Meta renders the raw list
+with its report link, and the Next panel's rows are ordered best-tier-first.
+
 Several of the assertions are about layout rather than correctness, because the first
 Legends tab was unreadable: it rendered a full-height card per legend, 51 of them and
 970 lines of text, to convey an answer that was two rows long, and it listed the same
@@ -495,7 +503,7 @@ the snapshot behind it. The app used to print the date the snapshot was taken an
 work out how long ago that was, which meant a three-month-old file recommended a dead
 meta with total confidence.
 
-`.github/workflows/refresh.yml` now rebuilds all five data files daily and commits
+`.github/workflows/refresh.yml` now rebuilds all six data files daily and commits
 them. Pages serves this repo directly, so the commit *is* the deploy — no build step
 and no other infrastructure. It runs `scripts/check.mjs` before committing and fails
 without committing if anything is wrong: every source is a public endpoint that can
@@ -510,9 +518,9 @@ red as things rot. Meta and Next each say so above their output, since those are
 two tabs whose answers are worthless when the snapshot is old.
 
 Thresholds are keyed to how fast each thing actually moves. riftbound.gg publishes a
-meta tier list weekly, so the deck snapshot warns past 10 days and shouts past 21. The
-card catalog only changes when a set drops, so it gets 60, or it would cry wolf every
-fortnight.
+meta tier list weekly, so the deck snapshot and `tiers.json` both warn past 10 days and
+shout past 21. The card catalog only changes when a set drops, so it gets 60, or it
+would cry wolf every fortnight.
 
 ## News
 
@@ -583,6 +591,46 @@ the compounding and redundancy tie-breaks, then share. Any tournament entry does
 archetype past the fringe gate in `acquisitionPath`, but that is a yes/no on "is this a
 real deck", not a weighting of how well it did. Changing the primary ordering to weight
 performance is separate work with its own measurement.
+
+## Tiers
+
+The deck snapshot answers "what is being played" and the plan answers "what is the
+cheapest next step", but neither answers "which decks are actually good" — and this app
+refuses to invent a strength score for that. So it borrows one. riftbound.gg publishes a
+**curated Tier 1-5 list, per Legend, weekly**, and `data/tiers.json` is that list.
+
+```
+node scripts/build-tiers.mjs
+```
+
+**It is a scrape**, and the most brittle input here — their tier list is a WordPress
+page with no API. The parse keys on two shapes in the markup: `<strong>Tier N</strong>`
+markers and `<figcaption class="wp-element-caption">` blocks, one per Legend in rank
+order. If the fetch fails or fewer than 20 legends come back, the script writes nothing
+and exits non-zero, so a redesign of their page fails the daily job instead of shipping
+a half-read list. `check.mjs` asserts the shape and the join.
+
+**The join is by champion.** riftbound.gg names Legends plainly — Kennen, Master Yi,
+Kai'Sa, Rek'Sai — which is how the Legends tab names them too, so `tierByArchetype()`
+maps champion to archetype through the legend roster, matching on letters only so a
+stray apostrophe does not drop a row. Master Yi has two legends in two different tiers
+(Wuju Bladesman is Tier 1, Wuju Master is Tier 4); the epithet parsed from each tier
+entry's guide-page slug picks the right one. Only legends someone is actually playing
+are mapped — ~46 are ranked and a dozen have no list in the snapshot at all. In the
+current data 44 of 46 resolve.
+
+**Two placements, matching the Meta/Next split.** Meta shows the raw list, grouped by
+tier, each champion linking to its riftbound.gg guide, cited and compared to nothing.
+Next has **Best decks to build toward**: the same list crossed with the collection and
+sorted tier first, then buildable, then by gap cost — so it reads top-down as the
+strongest decks with the cheapest ones to reach floated up inside each tier. This is the
+thing the cheapest-gap plan structurally cannot show: a Tier 1 deck twenty cards and
+$300 out never surfaces as a next step, but it is the deck you might actually be saving
+toward. Each row carries the gap cost, cards short, list price, the best tournament
+finish on record, and a link to that Legend's guide and decklists.
+
+Freshness: tier lists move weekly, so `tiers.json` warns past 10 days and shouts past
+21, the same as the deck snapshot.
 
 ## The meta
 

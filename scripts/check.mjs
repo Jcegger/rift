@@ -57,6 +57,7 @@ const NAMED = [
   'acquisitionPath', 'unionGap', 'pathText', 'ownedIdentities', 'evalDeck', 'matchRow',
   'spares', 'tradeMatch', 'readPartner', 'readyShareOf', 'owned', 'byTarget',
   'annotateCompounding', 'establishedArchetypes', 'isEstablished', 'byCost', 'byCards', 'byPlanTarget',
+  'tierByArchetype',
   'render', 'renderLegends', 'renderNext', 'renderMeta', 'renderTrade', 'renderSets',
 ];
 const A = new Function(`${js}
@@ -76,6 +77,8 @@ const A = new Function(`${js}
     set BANNED_AT(v){BANNED_AT=v},
     set EVENTS(v){EVENTS=v}, get EVENTS(){return EVENTS},
     set EVENTS_AT(v){EVENTS_AT=v}, set EVENTS_COVER(v){EVENTS_COVER=v},
+    set TIERS(v){TIERS=v}, get TIERS(){return TIERS},
+    set TIERS_AT(v){TIERS_AT=v}, set TIERS_INFO(v){TIERS_INFO=v},
     set NEWS_GUIDES(v){NEWS_GUIDES=v} };
 `)();
 
@@ -93,7 +96,7 @@ A.DECKS = snap.decks;
 A.DECKS_AT = snap.generatedAt;
 A.DECKS_WINDOW = snap.window;
 A.loadBans(read('data/banned.json'));
-let news = null, events = null;
+let news = null, events = null, tiers = null;
 try {
   news = read('data/news.json');
   A.NEWS = news.posts;
@@ -104,6 +107,12 @@ try {
   A.EVENTS = events.events;
   A.EVENTS_AT = events.generatedAt;
   A.EVENTS_COVER = events.coverage;
+} catch { /* optional */ }
+try {
+  tiers = read('data/tiers.json');
+  A.TIERS = Array.isArray(tiers.tiers) && tiers.tiers.length ? tiers.tiers : null;
+  A.TIERS_AT = tiers.generatedAt;
+  A.TIERS_INFO = A.TIERS ? { set: tiers.set, report: tiers.report, week: tiers.week, source: tiers.source } : null;
 } catch { /* optional */ }
 
 let failures = 0;
@@ -527,6 +536,72 @@ else {
      arch.filter((g) => !g.tourLists).every((g) => !g.evCount && !g.evPlayers && !g.evNewest));
 }
 
+/* ══ the tier list ══════════════════════════════════════════════════════════
+   data/tiers.json is scraped from riftbound.gg's tier-list page, so the shape is
+   asserted here and the join is measured: a redesign of their page that broke the
+   parse would otherwise ship a thin or mis-joined list quietly.                     */
+section('The tier list');
+if (!tiers) {
+  ok('tier list present', false, 'data/tiers.json missing — run build-tiers.mjs');
+} else {
+  const T = tiers.tiers;
+  ok('every tier entry has a champion, a tier and a rank',
+     Array.isArray(T) && T.length >= 20 &&
+     T.every((t) => t.champion && Number.isInteger(t.tier) && t.tier >= 1 && Number.isInteger(t.rank) && t.rank >= 1),
+     `${T.length} legends`);
+  ok('tiers run 1..N with no gaps',
+     (() => { const ns = [...new Set(T.map((t) => t.tier))].sort((a, b) => a - b);
+              return ns[0] === 1 && ns.every((n, i) => n === i + 1); })(),
+     [...new Set(T.map((t) => t.tier))].sort((a, b) => a - b).join(','));
+  ok('ranks within a tier are 1..k with no gaps',
+     [...new Set(T.map((t) => t.tier))].every((tn) => {
+       const rs = T.filter((t) => t.tier === tn).map((t) => t.rank).sort((a, b) => a - b);
+       return rs.every((r, i) => r === i + 1);
+     }));
+  ok('tiers.json names the set and links the report',
+     typeof tiers.set === 'string' && /^https:\/\/riftbound\.gg\//.test(tiers.report || ''),
+     `${tiers.set} — ${tiers.report}`);
+
+  // The join. Champions come from riftbound.gg named plainly; the app maps them to
+  // archetypes through the legend roster, and only to legends someone is playing.
+  A.S.inv = {};
+  const map = A.tierByArchetype();
+  const played = new Set(A.DECKS.map(A.archetypeName));
+  ok('every joined tier lands on a played archetype', [...map.keys()].every((n) => played.has(n)),
+     [...map.keys()].filter((n) => !played.has(n)).slice(0, 3).join(', ') || `${map.size} joined`);
+  ok('most of the tier list resolves to a played archetype', map.size >= 25,
+     `${map.size} of ${T.length} entries joined`);
+
+  // Master Yi has two legends; only Wuju Bladesman is played, and it is Tier 1.
+  const yi = [...map.entries()].filter(([n]) => /wuju/i.test(n));
+  ok('the played Master Yi archetype resolves, at its best tier',
+     yi.length === 1 && yi[0][1].tier === 1,
+     yi.map(([n, v]) => `${n}=T${v.tier}`).join(', ') || 'none');
+
+  // Meta renders the raw list; Next renders it crossed with the collection, tier-first.
+  A.S.inv = collections['deep'];
+  A.renderMeta();
+  const meta = els.get('v-meta').innerHTML;
+  ok('Meta shows the tier list with the report link',
+     meta.includes('TIER LIST') && /Tier 1/.test(meta) && meta.includes(tiers.report),
+     'panel present');
+
+  A.S.planBy = 'cost';
+  A.renderNext();
+  const next = els.get('v-next').innerHTML;
+  const panelStart = next.indexOf('BEST DECKS TO BUILD TOWARD');
+  ok('Next shows the tier-crossed panel', panelStart > -1, 'panel present');
+  const panelEnd = next.indexOf('</div>\n\n    ', panelStart);
+  const seg = panelStart > -1 ? next.slice(panelStart, panelEnd > -1 ? panelEnd : panelStart + 6000) : '';
+  const tierNums = [...seg.matchAll(/>Tier (\d)</g)].map((m) => Number(m[1]));
+  ok('the tier-crossed rows are ordered best tier first',
+     tierNums.length > 1 && tierNums.every((n, i) => !i || n >= tierNums[i - 1]),
+     tierNums.join(','));
+
+  // Freshness knows about it.
+  ok('dataAge tracks the tier list', A.dataAge().some((a) => a.key === 'tiers'));
+}
+
 /* ══ finishes ════════════════════════════════════════════════════════════ */
 section('Finishes');
 {
@@ -764,8 +839,11 @@ section('Layout');
     A.S.nearSpend = 25;
     A.renderMeta();
     const m = els.get('v-meta').innerHTML;
+    // Five fixed panels now: the overview, the tier list, the news block, what is being
+    // played, and (only when the news block is empty) nothing in its place. Still fixed
+    // by the layout, not growing with the archetype count.
     ok(`[${label}] Meta stays a reference page`,
-       (m.match(/class="panel"/g) || []).length <= 4 && lines(m) <= 200,
+       (m.match(/class="panel"/g) || []).length <= 5 && lines(m) <= 260,
        `${(m.match(/class="panel"/g) || []).length} panels, ${lines(m)} text lines`);
   }
 }

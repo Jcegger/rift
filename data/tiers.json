@@ -1,0 +1,332 @@
+{
+ "generatedAt": "2026-08-27",
+ "source": "https://riftbound.gg/tier-list/",
+ "set": "Vendetta",
+ "report": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-week-4-report/",
+ "week": 4,
+ "note": "riftbound.gg's curated weekly tier list, scraped from the page HTML. Tier 1 is best. Ranks are within a tier. The app joins these to archetypes by champion; Master Yi has two legends and is split by the epithet in its guide slug.",
+ "tiers": [
+  {
+   "champion": "Kennen",
+   "tier": 1,
+   "rank": 1,
+   "guide": "https://riftbound.gg/kennen-heart-of-the-tempest-guide/",
+   "epithet": "Heart Of The Tempest"
+  },
+  {
+   "champion": "Master Yi",
+   "tier": 1,
+   "rank": 2,
+   "guide": "https://riftbound.gg/master-yi-wuju-bladesman-guide/",
+   "epithet": "Wuju Bladesman"
+  },
+  {
+   "champion": "Irelia",
+   "tier": 2,
+   "rank": 1,
+   "guide": "https://riftbound.gg/irelia-best-decks-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Kai'Sa",
+   "tier": 2,
+   "rank": 2,
+   "guide": "https://riftbound.gg/kaisa-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Rengar",
+   "tier": 2,
+   "rank": 3,
+   "guide": "https://riftbound.gg/rengar-pridestalker-guide/",
+   "epithet": "Pridestalker"
+  },
+  {
+   "champion": "Diana",
+   "tier": 2,
+   "rank": 4,
+   "guide": "https://riftbound.gg/diana-scorn-of-the-moon-guide/",
+   "epithet": "Scorn Of The Moon"
+  },
+  {
+   "champion": "Nasus",
+   "tier": 2,
+   "rank": 5,
+   "guide": "https://riftbound.gg/nasus-curator-of-the-sands-guide/",
+   "epithet": "Curator Of The Sands"
+  },
+  {
+   "champion": "Azir",
+   "tier": 2,
+   "rank": 6,
+   "guide": "https://riftbound.gg/azir-best-decks-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Rek'Sai",
+   "tier": 2,
+   "rank": 7,
+   "guide": "https://riftbound.gg/reksai-best-decks-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Ezreal",
+   "tier": 2,
+   "rank": 8,
+   "guide": "https://riftbound.gg/ezreal-best-decks-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Draven",
+   "tier": 3,
+   "rank": 1,
+   "guide": "https://riftbound.gg/draven-best-decks-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Viktor",
+   "tier": 3,
+   "rank": 2,
+   "guide": "https://riftbound.gg/viktor-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Fiora",
+   "tier": 3,
+   "rank": 3,
+   "guide": "https://riftbound.gg/fiora-best-decks-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "LeBlanc",
+   "tier": 3,
+   "rank": 4,
+   "guide": "https://riftbound.gg/leblanc-deceiver-guide/",
+   "epithet": "Deceiver"
+  },
+  {
+   "champion": "Jayce",
+   "tier": 3,
+   "rank": 5,
+   "guide": "https://riftbound.gg/jayce-defender-of-tomorrow-guide/",
+   "epithet": "Defender Of Tomorrow"
+  },
+  {
+   "champion": "Lillia",
+   "tier": 4,
+   "rank": 1,
+   "guide": "https://riftbound.gg/lillia-bashful-bloom-guide/",
+   "epithet": "Bashful Bloom"
+  },
+  {
+   "champion": "Mel",
+   "tier": 4,
+   "rank": 2,
+   "guide": "https://riftbound.gg/mel-souls-reflection-guide/",
+   "epithet": "Souls Reflection"
+  },
+  {
+   "champion": "Kha'Zix",
+   "tier": 4,
+   "rank": 3,
+   "guide": "https://riftbound.gg/khazix-voidreaver-guide/",
+   "epithet": null
+  },
+  {
+   "champion": "Lux",
+   "tier": 4,
+   "rank": 4,
+   "guide": "https://riftbound.gg/lux-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Ornn",
+   "tier": 4,
+   "rank": 5,
+   "guide": "https://riftbound.gg/ornn-best-decks-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Sivir",
+   "tier": 4,
+   "rank": 6,
+   "guide": "https://riftbound.gg/sivir-best-decks-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Lucian",
+   "tier": 4,
+   "rank": 7,
+   "guide": "https://riftbound.gg/lucian-purifier-guide/",
+   "epithet": "Purifier"
+  },
+  {
+   "champion": "Vex",
+   "tier": 4,
+   "rank": 8,
+   "guide": "https://riftbound.gg/vex-gloomist-guide/",
+   "epithet": "Gloomist"
+  },
+  {
+   "champion": "Volibear",
+   "tier": 4,
+   "rank": 9,
+   "guide": "https://riftbound.gg/volibear-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Ambessa",
+   "tier": 4,
+   "rank": 10,
+   "guide": "https://riftbound.gg/ambessa-matriarch-of-war-guide/",
+   "epithet": "Matriarch Of War"
+  },
+  {
+   "champion": "Annie",
+   "tier": 4,
+   "rank": 11,
+   "guide": "https://riftbound.gg/annie-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Master Yi",
+   "tier": 4,
+   "rank": 12,
+   "guide": "https://riftbound.gg/master-yi-wuju-master-guide/",
+   "epithet": "Wuju Master"
+  },
+  {
+   "champion": "Akali",
+   "tier": 5,
+   "rank": 1,
+   "guide": "https://riftbound.gg/akali-rogue-assassin-guide/",
+   "epithet": "Rogue Assassin"
+  },
+  {
+   "champion": "Miss Fortune",
+   "tier": 5,
+   "rank": 2,
+   "guide": "https://riftbound.gg/miss-fortune-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Darius",
+   "tier": 5,
+   "rank": 3,
+   "guide": "https://riftbound.gg/darius-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Sett",
+   "tier": 5,
+   "rank": 4,
+   "guide": "https://riftbound.gg/sett-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Pyke",
+   "tier": 5,
+   "rank": 5,
+   "guide": "https://riftbound.gg/pyke-bloodharbor-ripper-guide/",
+   "epithet": "Bloodharbor Ripper"
+  },
+  {
+   "champion": "Teemo",
+   "tier": 5,
+   "rank": 6,
+   "guide": "https://riftbound.gg/teemo-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Garen",
+   "tier": 5,
+   "rank": 7,
+   "guide": "https://riftbound.gg/garen-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Poppy",
+   "tier": 5,
+   "rank": 8,
+   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-unleashed-heading-into-regional-qualifiers/#Poppy",
+   "epithet": null
+  },
+  {
+   "champion": "Ahri",
+   "tier": 5,
+   "rank": 9,
+   "guide": "https://riftbound.gg/ahri-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Jax",
+   "tier": 5,
+   "rank": 10,
+   "guide": "https://riftbound.gg/jax-best-decks-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Jhin",
+   "tier": 5,
+   "rank": 11,
+   "guide": "https://riftbound.gg/jhin-virtuoso-guide/",
+   "epithet": "Virtuoso"
+  },
+  {
+   "champion": "Vi",
+   "tier": 5,
+   "rank": 12,
+   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-unleashed-heading-into-regional-qualifiers/#Vi",
+   "epithet": null
+  },
+  {
+   "champion": "Yasuo",
+   "tier": 5,
+   "rank": 13,
+   "guide": "https://riftbound.gg/yasuo-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Lee Sin",
+   "tier": 5,
+   "rank": 14,
+   "guide": "https://riftbound.gg/lee-sin-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Leona",
+   "tier": 5,
+   "rank": 15,
+   "guide": "https://riftbound.gg/leona-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Jinx",
+   "tier": 5,
+   "rank": 16,
+   "guide": "https://riftbound.gg/jinx-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Ivern",
+   "tier": 5,
+   "rank": 17,
+   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-unleashed-heading-into-regional-qualifiers/#Ivern",
+   "epithet": null
+  },
+  {
+   "champion": "Renata Glasc",
+   "tier": 5,
+   "rank": 18,
+   "guide": "https://riftbound.gg/renata-glasc-best-decks-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Rumble",
+   "tier": 5,
+   "rank": 19,
+   "guide": "https://riftbound.gg/rumble-best-decks-cards/",
+   "epithet": null
+  }
+ ]
+}
