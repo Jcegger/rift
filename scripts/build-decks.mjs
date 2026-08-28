@@ -60,7 +60,6 @@ const FILTERS = (tournament) => ({
    to produce elsewhere. */
 
 // Ordered: the most specific pattern that matches wins, so "Top 8" is not read as 8th.
-// Ordered: the most specific pattern that matches wins, so "Top 8" is not read as 8th.
 const PLACE_PATTERNS = [
   [/\bundefeated\b|\bx-0\b/i, () => null],          // a result, but not a placing
   [/\bwins?\b|\bwinner\b|\b1st\s+place\b/i, () => 1],
@@ -87,6 +86,98 @@ const claimFromTitle = (title) => {
     return { place: read(m), event };
   }
   return null;
+};
+
+/* ── where a claimed event happened ───────────────────────────────────────────
+   data/events.json is 30 events and every one is North American or online: Pittsburgh,
+   Dallas, Columbus, Weatherford, the CCS rooms. The events these titles claim are
+   somewhere else entirely — nine Chinese City Challenges, Utrecht, Barcelona, Dinan,
+   Sydney, Nanjing, Chengdu. Not one of the 25 claimed names matches a registry row,
+   and upstream's tournament API returns those 30 rows unpaginated, so the
+   international circuit is not a page away, it is absent.
+
+   That leaves the city in the event's own name as the only thing saying where a list
+   came from. This is a lookup and not an inference: a name with no city in the table
+   returns null and the deck carries no country, because a guessed country would be
+   the same invented number the rest of this file refuses to produce. */
+const COUNTRY = {
+  // The City Challenge and Regional circuit, which is where most claimed results come
+  // from and where the registry reaches not at all.
+  Beijing: "CN", Shanghai: "CN", Guangzhou: "CN", Shenzhen: "CN", Wuhan: "CN",
+  Tianjin: "CN", Suzhou: "CN", Nanjing: "CN", Chengdu: "CN", Changsha: "CN",
+  Hangzhou: "CN", Chongqing: "CN", Shenyang: "CN", Qingdao: "CN",
+  Utrecht: "NL", Amsterdam: "NL", Barcelona: "ES", Madrid: "ES",
+  Dinan: "FR", Paris: "FR", Lyon: "FR", London: "GB", Berlin: "DE", Milan: "IT",
+  Sydney: "AU", Melbourne: "AU", Brisbane: "AU", Perth: "AU", Auckland: "NZ",
+  Vancouver: "CA", Toronto: "CA", Ottawa: "CA", Montreal: "CA", Calgary: "CA",
+  Hartford: "US", Seattle: "US", Chicago: "US", Boston: "US", Atlanta: "US",
+  Pittsburgh: "US", Columbus: "US", Dallas: "US", Weatherford: "US",
+  Tokyo: "JP", Osaka: "JP", Seoul: "KR", Singapore: "SG", Taipei: "TW",
+};
+const REGION = {
+  CN: "Asia", JP: "Asia", KR: "Asia", SG: "Asia", TW: "Asia",
+  NL: "Europe", ES: "Europe", FR: "Europe", GB: "Europe", DE: "Europe", IT: "Europe",
+  AU: "Oceania", NZ: "Oceania", US: "North America", CA: "North America",
+};
+// Compiled once: a bare indexOf would read "Chengdu" out of a player's handle and
+// "Milan" out of a surname, so each city has to match as a whole word.
+const PLACES = Object.entries(COUNTRY).map(([city, cc]) => [new RegExp(`\\b${city}\\b`, "i"), cc]);
+
+// "S4 Guangzhou City Challenge" -> { cc: "CN", rg: "Asia" }. Null when the name carries
+// no city this knows, which is most of the online events and every generic series name.
+const placeOf = (event) => {
+  const s = String(event || "");
+  if (!s) return null;
+  // A few titles say the country outright — "36P in China" names no city at all.
+  if (/\bchina\b/i.test(s)) return { cc: "CN", rg: "Asia" };
+  for (const [re, cc] of PLACES) if (re.test(s)) return { cc, rg: REGION[cc] };
+  return null;
+};
+
+/* ── the same event under two names ───────────────────────────────────────────
+   Upstream is inconsistent about organizer prefixes on its own series: the archive
+   carries "RiftAtlas Convergence #1" with the prefix and "Convergence #2" without,
+   for two runnings of one event by one organizer. So a deck claiming "RiftAtlas
+   Convergence #2" names a 257-player tournament that is sitting right there in
+   data/events.json and misses it on an exact-name join.
+
+   Matching event names loosely is how a list ends up credited to the wrong
+   tournament, so this is deliberately the narrowest rule that catches it: one name
+   must be the other plus a leading prefix of at most three words, the remainder they
+   share has to be substantial rather than a fragment like "RQ", the deck must be
+   dated on or after the event it claims, and if two archive rows both match it
+   resolves to neither. Across the whole snapshot that fires exactly once.
+
+   What it produces is a cross-reference and not a promotion. The match is recorded in
+   its own field and `ev`, `pl` and `ec` are left alone, because "the archive has a row
+   for the event this author named" is a different statement from "upstream says this
+   deck placed there", and only the second one is evidence. */
+const CLAIM_WINDOW = 45;   // days after an event that a list may still be posted claiming it
+
+const norm = (s) => String(s || "").toLowerCase().replace(/\s+/g, " ").trim();
+
+// One name is the other plus a short leading prefix — in either direction, since the
+// archive is the inconsistent one and the claim may be the longer or the shorter form.
+const prefixMatch = (a, b) => {
+  const [long, short] = a.length >= b.length ? [a, b] : [b, a];
+  if (!long.endsWith(short)) return false;
+  const prefix = long.slice(0, long.length - short.length).trim();
+  if (!prefix || prefix.split(" ").length > 3) return false;
+  // A shared tail of "RQ" or "Regional" would match half the archive.
+  return short.length >= 8 && /\s/.test(short);
+};
+
+const resolveClaim = (event, deckDate, eventByName) => {
+  if (!event) return null;
+  if (eventByName.has(event)) return event;          // exact, and always preferred
+  const c = norm(event);
+  const hits = [...eventByName.values()].filter((e) => {
+    if (!prefixMatch(c, norm(e.name))) return false;
+    if (!deckDate || !e.dt) return false;
+    const gap = (Date.parse(deckDate) - Date.parse(e.dt)) / 86400000;
+    return gap >= 0 && gap <= CLAIM_WINDOW;          // a result cannot be claimed early
+  });
+  return hits.length === 1 ? hits[0].name : null;    // ambiguous resolves to nothing
 };
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -247,6 +338,12 @@ const main = async () => {
     // Only for lists upstream did not flag: a deck cannot carry both a record and a
     // claim, so the two can never be double-counted downstream.
     const claim = isTour ? null : claimFromTitle(d.humanname);
+    // Read off whichever event the deck actually names — the record for a flagged list,
+    // the claim for the rest — so the field means the same thing on both.
+    const where = placeOf(claim ? claim.event : t.tournament_name);
+    // Which archive row the claimed event corresponds to, if any. A cross-reference:
+    // it never becomes ev/pl/ec, because those mean upstream vouched for the result.
+    const cm = claim ? resolveClaim(claim.event, deckDate(d), eventByName) : null;
     return {
       s: d.slug,
       h: (d.humanname || "").trim(),
@@ -267,6 +364,13 @@ const main = async () => {
       // would be the made-up number this project refuses to produce.
       cp: claim ? claim.place : null,
       ce: claim ? claim.event : null,
+      // Where the event was, read out of its name. Null unless the city is known, which
+      // is the difference between "we do not know" and a country picked to fill a column.
+      cc: where ? where.cc : null,
+      rg: where ? where.rg : null,
+      // The archive event this claim names, under whichever spelling. Null when the
+      // archive has never carried it, which is 22 of the 23 claimed events.
+      cm,
       cards,
       _unknown: unknown,
     };
@@ -336,9 +440,23 @@ const main = async () => {
       `against ${tourDecks.length} upstream actually flags`);
     for (const d of claimed.slice().sort((a, b) => (a.cp ?? 999) - (b.cp ?? 999)).slice(0, 5))
       console.log(`  ${d.cp != null ? `#${String(d.cp).padStart(3)}` : "  -"}  ${d.ln || "?"} — ${(d.ce || "no event named").slice(0, 44)}`);
-    const knownEvent = named.filter((d) => eventByName.has(d.ce)).length;
+    const knownEvent = named.filter((d) => d.cm).length;
+    const viaPrefix = named.filter((d) => d.cm && d.cm !== d.ce);
     console.log(`  ${knownEvent} of ${named.length} claimed events match a row in data/events.json, ` +
       `so the rest carry no field size and are never given one`);
+    for (const d of viaPrefix)
+      console.log(`    "${d.ce}" is the archive's "${d.cm}" under another name`);
+    // Which scene the unmatched claims come from. The registry is North America and
+    // online; if this prints mostly Asia then the gap is a circuit, not a parse bug,
+    // and no amount of name-matching against the current archive will close it.
+    const reg = {};
+    for (const d of claimed) reg[d.rg || "unknown"] = (reg[d.rg || "unknown"] || 0) + 1;
+    // North America first, matching the app: it is the scene the archive covers, so a
+    // claim from there is the one that could have been verified and was not.
+    console.log(`  claimed results by region: ` +
+      Object.entries(reg).sort((a, b) =>
+        (b[0] === "North America") - (a[0] === "North America") || b[1] - a[1])
+        .map(([k, n]) => `${k} ${n}`).join(", "));
   } else {
     console.log(`\nWARNING: no list claims a result in its title — the title parser reads nothing, ` +
       `which previously matched 50 of 475 lists and is the shape of an upstream rename`);

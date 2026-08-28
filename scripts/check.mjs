@@ -575,6 +575,36 @@ else {
      }));
   ok('an archetype with no tournament lists claims no evidence',
      arch.filter((g) => !g.tourLists).every((g) => !g.evCount && !g.evPlayers && !g.evNewest));
+
+  /* The blind spot, asserted rather than assumed. The archive is North American and
+     online; ~50 lists claim results from Chinese City Challenges and European RQs that
+     it has never carried. coverage must keep saying so — an empty claims block used to
+     read as a clean bill of health when it only meant nobody had counted. */
+  ok('coverage counts the events only a deck title names',
+     Number.isFinite(events.coverage?.claimedEvents),
+     `${events.coverage?.claimedEvents ?? 0} claimed events, ` +
+     `${events.coverage?.claimedEventsUnmatched ?? 0} with no row here`);
+  // If the city table ever stops matching, every claim silently becomes locationless.
+  const claims = A.DECKS.filter((d) => d.ce);
+  ok('claimed events still resolve to a region',
+     !claims.length || claims.filter((d) => d.rg).length >= claims.length * 0.7,
+     `${claims.filter((d) => d.rg).length} of ${claims.length} located`);
+  // Null means unknown. A region without a country, or either on a deck that names no
+  // event at all, would be a location this project made up.
+  ok('a region is never invented',
+     A.DECKS.every((d) => (!d.rg || d.cc) && (!d.cc || d.ce || d.ev)),
+     `${A.DECKS.filter((d) => d.cc).length} decks carry a country`);
+
+  /* Resolving a claimed event name to an archive row says the tournament exists, not
+     that upstream vouched for the placing. The moment cm starts implying evidence, a
+     deck whose author typed "Wins Barcelona" gets counted as a record. */
+  const matchedClaims = A.DECKS.filter((d) => d.cm);
+  ok('a resolved claim names a real archive event',
+     matchedClaims.every((d) => byName.has(d.cm)),
+     `${matchedClaims.length} claims resolve to a row`);
+  ok('resolving a claim never turns it into evidence',
+     matchedClaims.every((d) => !d.tour && d.ev == null && d.pl == null && d.ec == null),
+     'cm is a cross-reference, never a record');
 }
 
 /* ══ the tier list ══════════════════════════════════════════════════════════
@@ -734,6 +764,7 @@ section('Claimed results');
   const flat = m.replace(/\s+/g, ' ');
   ok('Meta marks a claim as a claim and explains it',
      /never counted as a tournament record/.test(flat) && (!parsed || flat.includes('claims')));
+
 }
 
 /* ══ movement ════════════════════════════════════════════════════════════

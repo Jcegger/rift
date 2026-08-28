@@ -1,13 +1,52 @@
 {
  "generatedAt": "2026-08-28",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg)",
- "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them.",
+ "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
   "events": 30,
   "eventsWithDecks": 12,
-  "players": 2615,
+  "players": 2390,
   "playersWithDecks": 1567,
   "unresolvedDeckEvents": [],
+  "claimedEvents": 22,
+  "claimedEventsUnmatched": 21,
+  "claimedEventAliases": {
+   "RiftAtlas Convergence #2": "Convergence #2"
+  },
+  "claimedDecksByRegion": {
+   "Europe": 17,
+   "North America": 8,
+   "Asia": 21,
+   "unknown": 1,
+   "Oceania": 1
+  },
+  "registryEventsByRegion": {
+   "unknown": 24,
+   "North America": 6
+  },
+  "unresolvedClaimEvents": [
+   "36P in China",
+   "Barcelona RQ",
+   "Changsha Open",
+   "Chengdu Regional",
+   "Dinan Regional",
+   "Hartford RQ",
+   "Nanjing Regional",
+   "S3 Suzhou City Challenge",
+   "S4 Beijing City Challenge",
+   "S4 Guangzhou City Challenge",
+   "S4 Qingdao City Challenge",
+   "S4 Shanghai City Challenge",
+   "S4 Shenzhen City Challenge",
+   "S4 Suzhou City Challenge",
+   "S4 Tianjin City Challenge",
+   "S4 Wuhan City Challenge",
+   "Sydney Regional Qualifier",
+   "Tianjin Regional",
+   "Utrecht RQ",
+   "Utrecht Regional",
+   "Vancouver RQ"
+  ],
   "decksByEvent": {
    "Riftbound: PPG Qualifier - Weatherford": 11,
    "Pittsburgh 2026 - Riftbound Showdown $10k-$25,000": 6,
@@ -24,6 +63,15 @@
   }
  },
  "events": [
+  {
+   "name": "Club9 Riftbound Clash #2",
+   "dt": "2026-08-28",
+   "players": 18,
+   "format": "Constructed",
+   "winner": "KappaOne",
+   "country": null,
+   "slug": "club9-riftbound-clash-2"
+  },
   {
    "name": "Haven Online Challenger Series #3 - August 23rd 2026",
    "dt": "2026-08-23",
@@ -284,15 +332,6 @@
    "winner": "Dong Yoo",
    "country": null,
    "slug": "ccs-sunday-5000-riftbound-event-3"
-  },
-  {
-   "name": "CCS $25,000 Riftbound Invitational Qualifier #3",
-   "dt": "2026-05-23",
-   "players": 243,
-   "format": "Constructed",
-   "winner": "Keenan Xiong",
-   "country": null,
-   "slug": "ccs-25000-riftbound-invitational-qualifier-3"
   }
  ]
 }

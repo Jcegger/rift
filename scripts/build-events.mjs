@@ -64,12 +64,47 @@ const main = async () => {
     const matched = [...named.keys()].filter((n) => byName.has(n));
     const players = events.reduce((a, e) => a + e.players, 0);
     const seen = events.filter((e) => named.has(e.name)).reduce((a, e) => a + e.players, 0);
+
+    /* ── the blind spot ────────────────────────────────────────────────────────
+       unresolvedDeckEvents only ever looked at `ev`, the event upstream vouches for,
+       and every one of those resolves by construction — so it wrote [] and read as a
+       clean bill of health. The decks that name an event nobody here has heard of use
+       `ce`, the claim, and there are 25 of those against 30 registry rows with zero
+       overlap: the registry is Pittsburgh, Dallas and the CCS rooms, the claims are
+       Guangzhou, Utrecht, Barcelona and Sydney. Counting them here is the difference
+       between a file that says it covers the scene and one that says which scene. */
+    const claimedBy = new Map();
+    const resolved = new Map();
+    for (const d of snap.decks || []) if (d.ce) {
+      claimedBy.set(d.ce, (claimedBy.get(d.ce) || 0) + 1);
+      // build-decks resolves the claim, including across upstream's own prefix
+      // inconsistency, so an exact-name test here would undercount what is actually known.
+      if (d.cm) resolved.set(d.ce, d.cm);
+    }
+    const unmatchedClaims = [...claimedBy.keys()].filter((n) => !resolved.has(n));
+    const claimsByRegion = {};
+    for (const d of snap.decks || [])
+      if (d.ce) claimsByRegion[d.rg || "unknown"] = (claimsByRegion[d.rg || "unknown"] || 0) + 1;
+    const regions = {};
+    for (const e of events) {
+      const r = (snap.decks || []).find((d) => d.ev === e.name && d.rg)?.rg || "unknown";
+      regions[r] = (regions[r] || 0) + 1;
+    }
+
     coverage = {
       events: events.length,
       eventsWithDecks: matched.length,
       players,
       playersWithDecks: seen,
       unresolvedDeckEvents: [...named.keys()].filter((n) => !byName.has(n)),
+      // Events named only by a deck's own title, which the registry does not carry.
+      claimedEvents: claimedBy.size,
+      claimedEventsUnmatched: unmatchedClaims.length,
+      // Claimed name -> the archive row it turned out to be, where they differ.
+      claimedEventAliases: Object.fromEntries([...resolved].filter(([c, r]) => c !== r)),
+      claimedDecksByRegion: claimsByRegion,
+      registryEventsByRegion: regions,
+      unresolvedClaimEvents: unmatchedClaims.sort(),
       decksByEvent: Object.fromEntries([...named].sort((a, b) => b[1] - a[1])),
     };
   } catch { /* no snapshot yet; the file is still worth writing */ }
@@ -77,7 +112,7 @@ const main = async () => {
   const out = {
     generatedAt: new Date().toISOString().slice(0, 10),
     source: "api.dotgg.gg/cgfw/gettournaments (riftbound.gg)",
-    note: "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them.",
+    note: "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
     coverage,
     events,
   };
@@ -99,6 +134,18 @@ const main = async () => {
       console.log("biggest events with no lists at all:");
       for (const e of absent) console.log(`  ${String(e.players).padStart(4)}p  ${e.dt}  ${e.name.slice(0, 58)}`);
     }
+    if (coverage.claimedEvents) {
+      const reg = Object.entries(coverage.claimedDecksByRegion).sort((a, b) =>
+        (b[0] === "North America") - (a[0] === "North America") || b[1] - a[1]);
+      const claimDecks = reg.reduce((a, [, n]) => a + n, 0);
+      console.log(`\n${coverage.claimedEventsUnmatched} of ${coverage.claimedEvents} events named ` +
+                  `only by a deck's own title have no row here; the ${claimDecks} decks claiming them: ` +
+                  reg.map(([k, n]) => `${k} ${n}`).join(", "));
+      for (const n of coverage.unresolvedClaimEvents.slice(0, 8)) console.log(`  ${n}`);
+      if (coverage.unresolvedClaimEvents.length > 8)
+        console.log(`  …and ${coverage.unresolvedClaimEvents.length - 8} more`);
+    }
+
     if (coverage.unresolvedDeckEvents.length) {
       // The join is by exact name. If it ever stops holding, the weighting silently
       // loses those decks, so say so rather than letting it pass.
