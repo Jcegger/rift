@@ -1,0 +1,18 @@
+#!/bin/sh
+# Launcher for the command-line collection tools. This box has no `node` on PATH,
+# so fall back to the Node runtime Playwright bundles.
+#
+#   scripts/rift                 # collection + deck summary
+#   scripts/rift deck sivir      # one deck vs. the collection
+#   scripts/rift card body rune  # catalog lookup with owned/want/trade
+#   scripts/rift want | trade | sets | raw
+#
+# See scripts/state.mjs for the full command list and data sources.
+
+DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+NODE=$(command -v node 2>/dev/null)
+[ -z "$NODE" ] && NODE=$(ls "$HOME"/anaconda3/lib/python*/site-packages/playwright/driver/node 2>/dev/null | head -1)
+[ -z "$NODE" ] && { echo "rift: no node runtime found (looked on PATH and in Playwright's driver)" >&2; exit 127; }
+
+exec "$NODE" "$DIR/state.mjs" "$@"
