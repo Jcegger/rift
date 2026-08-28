@@ -8,16 +8,16 @@
   "players": 2390,
   "playersWithDecks": 1567,
   "unresolvedDeckEvents": [],
-  "claimedEvents": 22,
-  "claimedEventsUnmatched": 21,
+  "claimedEvents": 23,
+  "claimedEventsUnmatched": 22,
   "claimedEventAliases": {
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
+   "unknown": 2,
    "Europe": 17,
    "North America": 8,
    "Asia": 21,
-   "unknown": 1,
    "Oceania": 1
   },
   "registryEventsByRegion": {
@@ -43,6 +43,7 @@
    "S4 Wuhan City Challenge",
    "Sydney Regional Qualifier",
    "Tianjin Regional",
+   "Top Shelf Masters Tournament",
    "Utrecht RQ",
    "Utrecht Regional",
    "Vancouver RQ"

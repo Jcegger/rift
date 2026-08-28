@@ -175,13 +175,6 @@
    "epithet": null
   },
   {
-   "champion": "Volibear",
-   "tier": 4,
-   "rank": 4,
-   "guide": "https://riftbound.gg/volibear-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
-  },
-  {
    "champion": "Annie",
    "tier": 5,
    "rank": 1,
@@ -189,10 +182,10 @@
    "epithet": null
   },
   {
-   "champion": "Miss Fortune",
+   "champion": "Zed",
    "tier": 5,
    "rank": 2,
-   "guide": "https://riftbound.gg/miss-fortune-champion-spotlight-overview-strategy-and-cards/",
+   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-post-barcelona-rq/#Zed",
    "epithet": null
   },
   {
@@ -203,10 +196,10 @@
    "epithet": null
   },
   {
-   "champion": "Sett",
+   "champion": "Reneton",
    "tier": 5,
    "rank": 4,
-   "guide": "https://riftbound.gg/sett-champion-spotlight-overview-strategy-and-cards/",
+   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-post-barcelona-rq/#Renekton",
    "epithet": null
   },
   {
@@ -259,10 +252,10 @@
    "epithet": null
   },
   {
-   "champion": "Renata Glasc",
+   "champion": "Shen",
    "tier": 5,
    "rank": 12,
-   "guide": "https://riftbound.gg/renata-glasc-best-decks-cards/",
+   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-post-barcelona-rq/#Shen",
    "epithet": null
   },
   {
@@ -280,59 +273,80 @@
    "epithet": null
   },
   {
-   "champion": "Leona",
-   "tier": 5,
-   "rank": 15,
-   "guide": "https://riftbound.gg/leona-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
-  },
-  {
-   "champion": "Jinx",
-   "tier": 5,
-   "rank": 16,
-   "guide": "https://riftbound.gg/jinx-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
-  },
-  {
-   "champion": "Yasuo",
-   "tier": 5,
-   "rank": 17,
-   "guide": "https://riftbound.gg/yasuo-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
-  },
-  {
-   "champion": "Lee Sin",
-   "tier": 5,
-   "rank": 18,
-   "guide": "https://riftbound.gg/lee-sin-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
-  },
-  {
    "champion": "Ahri",
    "tier": 5,
-   "rank": 19,
+   "rank": 15,
    "guide": "https://riftbound.gg/ahri-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
-  },
-  {
-   "champion": "Teemo",
-   "tier": 5,
-   "rank": 20,
-   "guide": "https://riftbound.gg/teemo-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
-  },
-  {
-   "champion": "Garen",
-   "tier": 5,
-   "rank": 21,
-   "guide": "https://riftbound.gg/garen-champion-spotlight-overview-strategy-and-cards/",
    "epithet": null
   },
   {
    "champion": "Darius",
    "tier": 5,
-   "rank": 22,
+   "rank": 16,
    "guide": "https://riftbound.gg/darius-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Garen",
+   "tier": 5,
+   "rank": 17,
+   "guide": "https://riftbound.gg/garen-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Jinx",
+   "tier": 5,
+   "rank": 18,
+   "guide": "https://riftbound.gg/jinx-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Lee Sin",
+   "tier": 5,
+   "rank": 19,
+   "guide": "https://riftbound.gg/lee-sin-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Leona",
+   "tier": 5,
+   "rank": 20,
+   "guide": "https://riftbound.gg/leona-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Miss Fortune",
+   "tier": 5,
+   "rank": 21,
+   "guide": "https://riftbound.gg/miss-fortune-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Sett",
+   "tier": 5,
+   "rank": 22,
+   "guide": "https://riftbound.gg/sett-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Teemo",
+   "tier": 5,
+   "rank": 23,
+   "guide": "https://riftbound.gg/teemo-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Volibear",
+   "tier": 5,
+   "rank": 24,
+   "guide": "https://riftbound.gg/volibear-champion-spotlight-overview-strategy-and-cards/",
+   "epithet": null
+  },
+  {
+   "champion": "Yasuo",
+   "tier": 5,
+   "rank": 25,
+   "guide": "https://riftbound.gg/yasuo-champion-spotlight-overview-strategy-and-cards/",
    "epithet": null
   }
  ]
