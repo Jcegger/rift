@@ -2821,6 +2821,70 @@ function cardLeverage(arch){
     a.card.n.localeCompare(b.card.n));
 }
 
+/* ── the hunt list ────────────────────────────────────────────────────────
+   A different question from "what do I buy next", and it wants a different shape.
+   Standing over a bulk box you are not choosing what to acquire, you are looking a
+   card up: this one is in my hand, is it on the list. Same when someone posts a
+   sale in Discord. That reverses the ordering — leverage is the right rank for a
+   shopping list and the wrong one for a lookup, because you cannot scan for a name
+   in a list sorted by how many decks want it.
+
+   So: banded by price, alphabetical inside each band. The bands are the useful cut
+   because they map onto where a card is actually found. A bulk box is full of the
+   under-a-dollar band and will never contain the $20-plus one, so knowing which
+   band a name sits in tells you whether to keep looking.
+
+   Everything the collection is short of appears, not the top N. The screen caps each
+   band because a phone cannot show four hundred rows, but the copy export does not:
+   that is the artefact you paste into Discord or read off in a shop.               */
+const HUNT_BANDS = [
+  { k: 'bulk', label: 'Under $1',   lo: 0,  hi: 1,        hint: 'what bulk boxes are full of' },
+  { k: 'low',  label: '$1 to $5',   lo: 1,  hi: 5,        hint: 'cheap singles' },
+  { k: 'mid',  label: '$5 to $20',  lo: 5,  hi: 20,       hint: 'worth asking after' },
+  { k: 'high', label: '$20 and up', lo: 20, hi: Infinity, hint: 'chase cards, not bulk' },
+  { k: 'none', label: 'No listing', lo: null, hi: null,   hint: 'no market price to compare against' },
+];
+
+// cardLeverage ranked by leverage; this re-cuts the same rows by price and name.
+function huntList(lev){
+  const bands = HUNT_BANDS.map(b => ({ ...b, rows: [], copies: 0, total: 0, unpriced: 0 }));
+  const byKey = Object.fromEntries(bands.map(b => [b.k, b]));
+  for (const c of lev || []){
+    const each = cardCost(c.card);
+    const band = each === undefined ? byKey.none
+      : byKey[(HUNT_BANDS.find(b => b.lo !== null && each >= b.lo && each < b.hi) || HUNT_BANDS[3]).k];
+    band.rows.push({ ...c, each });
+    band.copies += c.copies;
+    if (each === undefined) band.unpriced += c.copies; else band.total += each * c.copies;
+  }
+  // Alphabetical, because the lookup is by name. Copies break a tie only so the order
+  // is stable between renders.
+  for (const b of bands)
+    b.rows.sort((x, y) => x.card.n.localeCompare(y.card.n) || y.copies - x.copies);
+  return bands.filter(b => b.rows.length);
+}
+
+// The artefact you actually take shopping: every card, no screen cap, plain text.
+function huntText(bands){
+  if (!bands || !bands.length) return 'CARDS TO GET\n\n(nothing missing)';
+  const lines = ['CARDS TO GET', ''];
+  for (const b of bands){
+    lines.push(`── ${b.label.toUpperCase()}  (${b.rows.length} card${b.rows.length === 1 ? '' : 's'}, ${
+      b.copies} cop${b.copies === 1 ? 'y' : 'ies'}${b.total ? `, ${cost({ total: b.total, priced: 1, unpriced: b.unpriced, complete: !b.unpriced })}` : ''})`);
+    for (const r of b.rows)
+      lines.push(`  ${String(r.copies)}x ${r.card.n}  ${r.card.c}` +
+                 (r.each !== undefined ? `   $${(r.each * r.copies).toFixed(2)}` : '   (no price)') +
+                 (r.blocks.length > 1 ? `   (${r.blocks.length} decks)` : ''));
+    lines.push('');
+  }
+  const copies = bands.reduce((a, b) => a + b.copies, 0);
+  const total = bands.reduce((a, b) => a + b.total, 0);
+  const unpriced = bands.reduce((a, b) => a + b.unpriced, 0);
+  lines.push(`${copies} copies across ${bands.reduce((a, b) => a + b.rows.length, 0)} distinct cards, ` +
+             `$${total.toFixed(2)}${unpriced ? ` plus ${unpriced} with no listing` : ''}.`);
+  return lines.join('\n');
+}
+
 // The order to buy in: pick a deck to finish, buy its shortfall, re-score, repeat.
 //
 // The obvious design is one greedy pass over cards, scoring each by the meta share
@@ -2958,6 +3022,7 @@ function pathText(steps){
 
 // The last plan rendered, so the buttons under it act on exactly what is on screen.
 let NEXT_PLAN = [], NEXT_PLAN_TARGETS = [];
+let HUNT_BANDS_NOW = null;
 
 /* ══════════════════════════════════════════════════════════════════════════
    NEXT: pick a deck, then buy for it
@@ -3102,7 +3167,10 @@ function renderNext(){
   const shown = rows.slice(0, ROWS_SHOWN);
   const rest = rows.slice(ROWS_SHOWN);
 
-  const buyFor = S.buyFor === 'anyway' ? 'anyway' : 'deck';
+  const buyFor = ['anyway', 'hunt'].includes(S.buyFor) ? S.buyFor : 'deck';
+  const hunt = buyFor === 'hunt' ? huntList(lev) : null;
+  HUNT_BANDS_NOW = hunt;
+  const HUNT_PER_BAND = 10;
   const mySteps = target ? steps.filter(s => s.target === target.name) : [];
   const offers = PARTNER ? PARTNER.offers : null;
   const gettable = offers ? steps.filter(s => offers.has(s.id)) : [];
@@ -3225,11 +3293,14 @@ function renderNext(){
     </div>
 
     <div class="panel">
-      <h2>WHAT TO BUY <span class="code">${buyFor === 'deck' ? `${mySteps.length} buys` : lev.length}</span></h2>
+      <h2>WHAT TO BUY <span class="code">${buyFor === 'deck' ? `${mySteps.length} buys`
+        : buyFor === 'hunt' ? `${lev.reduce((a, c) => a + c.copies, 0)} copies` : lev.length}</span></h2>
       <div class="bar-row" style="margin-top:2px">
         ${target ? `<button class="chip" data-buy-for="deck" aria-pressed="${buyFor === 'deck'}">for ${
           esc(target.champion || target.name)}</button>` : ''}
         <button class="chip" data-buy-for="anyway" aria-pressed="${buyFor === 'anyway'}">buy anyway</button>
+        <button class="chip" data-buy-for="hunt" aria-pressed="${buyFor === 'hunt'}"
+          title="Every card the collection is short of, banded by price and alphabetical inside each band — for looking a card up rather than choosing one">by price, to hunt</button>
       </div>
       ${buyFor === 'deck' ? `
         <p class="note" style="margin-top:8px">In order: the cards other open decks also want come first, so
@@ -3241,6 +3312,40 @@ function renderNext(){
             <button class="ghost" id="btn-next-wants">Add the plan to wants</button>
           </div>`
           : `<p class="empty">${target && target.buildable ? 'Nothing to buy — this deck is ready.' : 'Nothing left to buy.'}</p>`}`
+      : buyFor === 'hunt' ? `
+        ${hunt && hunt.length ? `<p class="note" style="margin-top:8px">${(() => {
+          const b = hunt[0], all = hunt.reduce((a, x) => a + x.rows.length, 0);
+          return b.k === 'bulk'
+            ? `<b style="color:var(--good)">${b.rows.length} of ${all}</b> cards you need are under a dollar —
+               ${money(Math.round(b.total))} of the whole list. That is what a bulk box can actually give you.`
+            : `${all} distinct cards missing.`;
+        })()} Alphabetical inside each band: here you look a card <em>up</em>, not choose one.</p>` : ''}
+        ${hunt && hunt.length ? hunt.map(b => `
+          <h3 style="margin-top:14px">${esc(b.label)}
+            <span class="code">${b.rows.length} card${b.rows.length === 1 ? '' : 's'} · ${b.copies} cop${
+              b.copies === 1 ? 'y' : 'ies'}${b.total ? ` · ${money(Math.round(b.total))}` : ''}${
+              b.unpriced ? ` · ${b.unpriced} unpriced` : ''} · ${esc(b.hint)}</span></h3>
+          <div class="rows">${b.rows.slice(0, HUNT_PER_BAND).map(r => `
+            <div class="row">
+              ${r.card.i ? `<img class="thumb" loading="lazy" src="${imgURL(r.card, 60)}" alt="" data-zoom="${esc(r.card.c)}">` : ''}
+              <span class="nm">${dchips(r.card)} <b>${r.copies}x</b> ${esc(r.card.n)}
+                <span class="code">${esc(r.card.c)}</span>
+                ${r.unlocks.length ? `<span class="code" style="color:var(--good)">finishes ${
+                  esc(r.unlocks.slice(0, 2).join(', '))}${r.unlocks.length > 2 ? ` +${r.unlocks.length - 2}` : ''}</span>`
+                  : r.blocks.length > 1 ? `<span class="code">${r.blocks.length} decks want it</span>` : ''}
+                ${offers && offers.has(r.id) ? `<span class="code" style="color:var(--teal)">${esc(PARTNER.user)} has ${offers.get(r.id).qty}</span>` : ''}
+              </span>
+              <span class="qty${r.blocks.length > 1 ? '' : ' need'}">${r.each !== undefined
+                ? `$${(r.each * r.copies).toFixed(2)}<span class="code"> · $${r.each.toFixed(2)} ea</span>`
+                : 'no price'}</span>
+            </div>`).join('')}</div>
+          ${b.rows.length > HUNT_PER_BAND ? `<p class="note" style="margin-top:4px">and ${
+            b.rows.length - HUNT_PER_BAND} more in this band.</p>` : ''}`).join('') + `
+          <div class="bar-row" style="margin-top:12px">
+            <button class="ghost" id="btn-hunt-copy">Copy the whole list</button>
+            <button class="ghost" id="btn-hunt-wants">Add it all to wants</button>
+          </div>`
+        : `<p class="empty">Nothing is missing.</p>`}`
       : `
         <p class="note" style="margin-top:8px">Ranked by how many archetypes are short of each card, so a common
         wanted by nine decks outranks the last card of one. This ignores which deck you are building.${
@@ -4201,6 +4306,19 @@ function wire(){
     }
 
     if (t.id === 'btn-next-copy') copy(pathText(NEXT_PLAN), 'plan copied');
+    if (t.id === 'btn-hunt-copy') copy(huntText(HUNT_BANDS_NOW), 'list copied');
+    if (t.id === 'btn-hunt-wants'){
+      // The whole shortfall, not the plan's first few targets: this list exists to be
+      // carried around, so the wants it sets should match what it shows.
+      let n = 0;
+      for (const b of (HUNT_BANDS_NOW || []))
+        for (const r of b.rows){
+          const need = (owned(r.card.c) || 0) + r.copies;
+          if (need > want(r.card.c)){ setQtyQuiet(r.card.c, 'w', need); n++; }
+        }
+      persist();
+      toast(n ? `${n} wants set` : 'nothing to add');
+    }
     if (t.id === 'btn-next-wants'){
       let n = 0;
       for (const s of NEXT_PLAN)

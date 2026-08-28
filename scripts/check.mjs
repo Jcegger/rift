@@ -57,7 +57,7 @@ const NAMED = [
   'tierMovement', 'movementPending', 'moveChip',
   'renderNews', 'credibility',
   'archetypeName', 'metaPool', 'metaArchetypes', 'scorePool', 'cardLeverage', 'loadBans',
-  'acquisitionPath', 'unionGap', 'pathText', 'ownedIdentities', 'evalDeck', 'matchRow',
+  'acquisitionPath', 'unionGap', 'pathText', 'huntList', 'huntText', 'HUNT_BANDS', 'ownedIdentities', 'evalDeck', 'matchRow',
   'spares', 'tradeMatch', 'readPartner', 'readyShareOf', 'owned', 'byTarget',
   'annotateCompounding', 'establishedArchetypes', 'isEstablished', 'byCost', 'byCards', 'byPlanTarget',
   'tierByArchetype',
@@ -1097,6 +1097,53 @@ section('Find my deck constraints');
     A.S.noBuy = [];
   }
   A.S.nearSpend = 25;
+}
+
+/* ══ the hunt list ═══════════════════════════════════════════════════════
+   A shopping list is ranked by leverage; a lookup list is ranked by name. This is the
+   second one — you are holding a card out of a bulk box and asking whether it is on
+   the list — so the guarantees are that the bands mean what they say, that the order
+   inside them is alphabetical, and that the copy export leaves nothing out. The screen
+   caps each band; the artefact you carry into a shop must not.                        */
+section('The hunt list');
+{
+  A.S.inv = collections['deep'];
+  const bands = A.huntList(A.cardLeverage(A.metaArchetypes(A.metaPool())));
+  ok('the hunt list bands the whole shortfall', bands.length > 1,
+     bands.map((b) => `${b.label} ${b.rows.length}`).join(', '));
+
+  // A card is in the band its price actually falls in, or in the unpriced one.
+  const misplaced = [];
+  for (const b of bands)
+    for (const r of b.rows){
+      const ok_ = b.k === 'none' ? r.each === undefined
+                : r.each !== undefined && r.each >= b.lo && r.each < b.hi;
+      if (!ok_) misplaced.push(`${r.card.n} $${r.each} in ${b.label}`);
+    }
+  ok('every card sits in the band its price falls in', misplaced.length === 0,
+     misplaced.slice(0, 3).join('; ') || `${bands.reduce((a, b) => a + b.rows.length, 0)} cards placed`);
+
+  ok('each band is alphabetical, because the lookup is by name',
+     bands.every((b) => b.rows.every((r, i) => !i || r.card.n.localeCompare(b.rows[i - 1].card.n) >= 0)),
+     'sorted for looking a card up');
+
+  // The screen caps a band at ten. The thing you carry into a shop cannot be capped.
+  const lev = A.cardLeverage(A.metaArchetypes(A.metaPool()));
+  const txt = A.huntText(bands);
+  const missing = lev.filter((c) => !txt.includes(c.card.n));
+  ok('the copy export leaves nothing out', missing.length === 0,
+     missing.slice(0, 3).map((c) => c.card.n).join(', ') || `all ${lev.length} distinct cards`);
+  ok('the export totals what it lists',
+     new RegExp(`${lev.reduce((a, c) => a + c.copies, 0)} copies across ${lev.length} distinct cards`).test(txt),
+     txt.split('\n').pop());
+
+  A.S.buyFor = 'hunt';
+  A.renderNext();
+  const h = els.get('v-next').innerHTML;
+  ok('the hunt mode renders its bands and its export button',
+     h.includes('btn-hunt-copy') && bands.every((b) => h.includes(b.label)),
+     `${bands.length} bands on screen`);
+  A.S.buyFor = 'deck';
 }
 
 /* ══ layout bounds ══════════════════════════════════════════════════════ */
