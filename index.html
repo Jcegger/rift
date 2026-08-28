@@ -2407,52 +2407,33 @@ function renderMeta(){
   host.innerHTML = `
     <div class="panel">
       <h2>THE META</h2>
-      <p class="note">${DECKS.length} decks from the last ${DECKS_WINDOW ? DECKS_WINDOW.days : 60}
-      days, grouped into ${arch.length} archetypes by Legend. Popularity comes from recent public
-      lists on riftbound.gg; the ${DECKS.filter(d => d.tour).length} tournament entries among them
-      also carry an event and a finishing place, which is the only hard evidence a list is good.
-      ${DECKS_WINDOW ? `Covers ${esc(DECKS_WINDOW.from)} to ${esc(DECKS_WINDOW.to)}.` : ''}
-      Snapshot taken ${esc(DECKS_AT || 'unknown')}.</p>
-      <p class="note" style="margin-top:8px">This is the reference view: what is being played, and
-      how much of it is evidence rather than noise. What <em>you</em> can build, what is within reach
-      and what to buy are all on the <b>Next</b> tab, which is the only place that compares any of this
-      to your collection.</p>
+      <p class="note">${DECKS.length} lists from the last ${DECKS_WINDOW ? DECKS_WINDOW.days : 60} days${
+        DECKS_WINDOW ? `, ${esc(DECKS_WINDOW.from)} to ${esc(DECKS_WINDOW.to)}` : ''}, grouped into
+      ${arch.length} archetypes by Legend. Snapshot ${esc(DECKS_AT || 'unknown')}. What <em>you</em> can
+      build and what to buy are on the <b>Next</b> tab; this one only describes the field.</p>
       ${staleNote('decks', 'everything on this tab')}
-      ${EVENTS_COVER ? `<p class="note" style="margin-top:8px">What the tournament half of this rests on,
-        plainly: the archive lists <b>${EVENTS_COVER.events}</b> events and the snapshot has lists for
-        <b>${EVENTS_COVER.eventsWithDecks}</b> of them, covering
-        <b>${EVENTS_COVER.playersWithDecks}</b> of ${EVENTS_COVER.players} players
-        (${Math.round(EVENTS_COVER.playersWithDecks / (EVENTS_COVER.players || 1) * 100)}%).
-        ${(() => {
-          const seen = EVENTS_COVER.decksByEvent || {};
-          const absent = (EVENTS || []).filter(e => !(e.name in seen))
-                                       .sort((a, b) => b.players - a.players).slice(0, 3);
-          return absent.length ? `The biggest events with no lists at all are ${absent
-            .map(e => `${esc(e.name)} (${e.players}p)`).join(', ')}.` : '';
-        })()}
-        That gap is upstream and cannot be closed here, so it is stated rather than implied away.${
-          EVENTS_COVER.claimedEventsUnmatched ? ` The archive is also North American and online almost
-          without exception, while <b>${EVENTS_COVER.claimedEventsUnmatched}</b> events named by a
-          list's own title have never appeared in it${(() => {
-            const r = Object.entries(EVENTS_COVER.claimedDecksByRegion || {})
-              .filter(([k]) => k !== 'unknown').sort(byRegionWeight);
-            return r.length ? ` — ${r.map(([k, n]) => `${esc(k)} ${n}`).join(', ')}` : '';
-          })()}. Those results are real events this app simply cannot see, which is why they are
-          counted as claims and never as evidence.` : ''}</p>
-        <p class="note" style="margin-top:6px">Only <b>${arch.filter(g => g.evCount).length}</b> of
-        ${arch.length} archetypes have any tournament evidence at all; the rest are ranked on public-deck
-        popularity alone. Where a field size is shown, it is how big a room the archetype was played in,
-        not how well it did — one entry in a 433-player event finished #158.</p>` : ''}
+      <div class="stats" style="margin-top:14px">
+        <div class="stat" title="Every distinct Legend played in the window. Popularity is a count of public lists, which is a weak signal on its own — the most-played archetype takes only a few percent."><div class="v">${arch.length}</div><div class="k">archetypes</div></div>
+        <div class="stat" title="Recent public lists from riftbound.gg. These carry no result, so they measure what people post rather than what wins."><div class="v">${DECKS.length}</div><div class="k">lists</div></div>
+        <div class="stat" title="Archetypes with any tournament record at all. The rest are ranked on public-deck popularity alone, which is why most rows below read 'no tournament record' rather than being quietly ranked as if they had one."
+          ><div class="v" style="color:${withEvidence ? 'var(--teal)' : 'var(--bad)'}">${withEvidence}<span class="code" style="color:var(--dimmer)">/${arch.length}</span></div><div class="k">have evidence</div></div>
+        ${EVENTS_COVER ? `<div class="stat" title="Events in the archive that the snapshot actually has lists for. The gap is upstream and cannot be closed here, so it is stated rather than implied away."><div class="v">${
+          EVENTS_COVER.eventsWithDecks}<span class="code" style="color:var(--dimmer)">/${EVENTS_COVER.events}</span></div><div class="k">events with lists</div></div>
+        <div class="stat" title="Share of all players at archived events who are represented by at least one list here. A field size shown on a row is how big a room the archetype was played in, not how well it did — one entry in a 433-player event finished #158."><div class="v">${
+          Math.round(EVENTS_COVER.playersWithDecks / (EVENTS_COVER.players || 1) * 100)}%</div><div class="k">of players seen</div></div>
+        ${EVENTS_COVER.claimedEventsUnmatched ? `<div class="stat" title="Events named by a list's own title that the archive has never carried. Real tournaments this app cannot see, which is why their results are counted as claims and never as evidence."><div class="v" style="color:var(--maize)">${
+          EVENTS_COVER.claimedEventsUnmatched}</div><div class="k">events unseen</div></div>` : ''}` : ''}
+      </div>
+      ${EVENTS_COVER && EVENTS_COVER.claimedEventsUnmatched ? `<p class="note" style="margin-top:10px">The
+        archive is <b>North American and online</b> almost without exception${(() => {
+          const r = Object.entries(EVENTS_COVER.claimedDecksByRegion || {})
+            .filter(([k]) => k !== 'unknown').sort(byRegionWeight);
+          return r.length ? `, while the results lists claim are ${r.map(([k, n]) => `${esc(k)} ${n}`).join(', ')}` : '';
+        })()}. Those are real events, so they are counted as claims and never as evidence.</p>` : ''}
       <div class="bar-row" style="margin-top:12px">
         <button class="chip" id="btn-show-illegal" aria-pressed="${!hideIllegal}">Include lists with banned cards</button>
         <span class="note">${illegalCount} of ${(DECKS || []).length} lists run a banned card${
           hideIllegal ? ' and are hidden' : ''}${BANNED.size ? `; ban list from ${esc(BANNED_AT || '?')}` : ''}</span>
-      </div>
-      <div class="stats" style="margin-top:14px">
-        <div class="stat"><div class="v">${arch.length}</div><div class="k">archetypes seen</div></div>
-        <div class="stat"><div class="v">${DECKS.length}</div><div class="k">lists</div></div>
-        <div class="stat"><div class="v" style="color:${withEvidence ? 'var(--teal)' : 'var(--dimmer)'}">${withEvidence}</div><div class="k">with tournament evidence</div></div>
-        <div class="stat"><div class="v">${EVENTS_COVER ? `${EVENTS_COVER.eventsWithDecks}/${EVENTS_COVER.events}` : events}</div><div class="k">events with lists</div></div>
       </div>
     </div>
 
@@ -2478,10 +2459,9 @@ function renderMeta(){
         </div>`;
       return `<div class="panel">
         <h2>MOVEMENT ${m ? `<span class="code">${m.gap} days</span>` : ''}</h2>
-        ${m ? `<p class="note">How the field moved between ${esc(m.from)} and ${esc(m.to)}, ${m.gap} days
-          apart. Shares are of that day's snapshot — ${m.fromN} lists then, ${m.toN} now — and only days
-          the snapshot was built the same way are compared, since a changed window moves every share at
-          once and would read as the whole meta shifting.</p>
+        ${m ? `<p class="note" title="Only days whose snapshot was built the same way are compared: a changed window moves every share at once and would read as the whole meta shifting.">How
+          the field moved between ${esc(m.from)} and ${esc(m.to)}, ${m.gap} days apart — ${m.fromN} lists
+          then, ${m.toN} now.</p>
         <div style="display:flex;flex-wrap:wrap;gap:20px;margin-top:10px">
           ${col('RISING', m.rising, true)}
           ${col('FALLING', m.falling, false)}
@@ -2504,8 +2484,8 @@ function renderMeta(){
       <h2>TIER LIST <span class="code">${TIERS.length} legends</span></h2>
       <p class="note">riftbound.gg's curated weekly tier list${TIERS_INFO && TIERS_INFO.set
         ? ` for ${esc(TIERS_INFO.set)}${TIERS_INFO.week != null ? `, week ${TIERS_INFO.week}` : ''}` : ''}.
-        Tier 1 is best; the order within a tier is theirs. This is their read of what is good, not this
-        tab's — the <b>Next</b> tab crosses it with your collection and prices the gap.${
+        Tier 1 is best, and the order within a tier is theirs. <b>Next</b> prices it against your
+        collection.${
         TIERS_INFO && TIERS_INFO.report
           ? ` <a href="${esc(TIERS_INFO.report)}" target="_blank" rel="noopener">full report ↗</a>` : ''}</p>
       ${staleNote('tiers', 'the tier list below')}
@@ -2522,21 +2502,18 @@ function renderMeta(){
 
     ${newsBlock(['Metagame','Events'], 4) ? `<div class="panel">
       <h2>WHAT THEY'RE SAYING</h2>
-      <p class="note">riftbound.gg's own metagame and event write-ups. An outside reading to check the
-      one above against, since this tab infers the meta from deck lists while they watch the events.</p>
+      <p class="note" title="This tab infers the meta from deck lists; they watch the events. Two different readings of the same field.">riftbound.gg's
+      own metagame and event write-ups — an outside reading to check the one above against.</p>
       ${newsBlock(['Metagame','Events'], 4)}
     </div>` : ''}
 
     <div class="panel">
       <h2>WHAT IS BEING PLAYED <span class="code">${arch.length}</span></h2>
-      <p class="note">Ranked by how many lists play each archetype. The columns to the right are the
-      evidence: tournament lists, the size of field it was played in, when it last turned up and its
-      best finish. Read the blanks — most archetypes have no tournament record at all, so their
-      standing here rests entirely on people posting brews. Where a row reads
-      <span style="color:var(--maize)">claims top N</span> the flag is absent but the list's own title
-      announces a result; that is the author's word, carries no field size, and is never counted as a
-      tournament record.${
-        popular.length > POP_SHOWN ? ` Showing the top ${POP_SHOWN} of ${popular.length}.` : ''}</p>
+      <p class="note">Ranked by lists played. Read the blanks: most archetypes have no tournament record
+      at all, so their standing rests on people posting brews.
+      <span title="The field size summed over the distinct events the archetype turned up at, then when it last appeared and its best finish. The size of the test, not how well it did.">Right-hand column is the evidence</span>;
+      <span style="color:var(--maize)" title="Upstream did not flag these, but the list's own title announces a result. That is the author's word: it carries no field size and is never counted as a tournament record.">maize is a claim, unverified</span>.${
+        popular.length > POP_SHOWN ? ` Top ${POP_SHOWN} of ${popular.length}.` : ''}</p>
       <div class="rows" style="margin-top:8px">${popular.slice(0, POP_SHOWN).map(g => `
         <div class="row">
           <span class="nm">${esc(g.name)}

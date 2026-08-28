@@ -1126,6 +1126,18 @@ section('Layout');
     A.S.nearSpend = 25;
     A.renderMeta();
     const m = els.get('v-meta').innerHTML;
+    /* Prose creep is the failure both these tabs actually had, and a line count does not
+       catch it: Next passed a 900-line bound while carrying 894 words of explanation for
+       62 rows, and Meta carried 478 for 35. Legends does 97 rows in 185 words, which is
+       what the reader deserves. Explanation is not the enemy — this app earns its keep by
+       stating what it cannot see — but it belongs in a tooltip or a labelled number, not
+       in a fourth paragraph. Word budgets, so an essay has to displace something. */
+    const prose = (h) => [...h.matchAll(/<p class="note"[^>]*>([\s\S]*?)<\/p>/g)]
+      .reduce((a, x) => a + x[1].replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean).length, 0);
+    ok(`[${label}] Meta explains itself in labels, not paragraphs`, prose(m) <= 260, `${prose(m)} words of prose`);
+    A.renderNext();
+    ok(`[${label}] Next explains itself in labels, not paragraphs`,
+       prose(els.get('v-next').innerHTML) <= 300, `${prose(els.get('v-next').innerHTML)} words of prose`);
     // Six fixed panels now: the overview, movement, the tier list, the news block, what
     // is being played, and (only when the news block is empty) nothing in its place.
     // Movement is the sixth and is capped internally at MOVE_SHOWN rows per direction,
