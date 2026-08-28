@@ -675,12 +675,12 @@ if (!tiers) {
   A.S.inv = collections['empty'];   // nothing buildable, so tier order is global
   A.renderNext();
   const next = els.get('v-next').innerHTML;
-  const panelStart = next.indexOf('FIND MY DECK');
-  ok('Next shows the Find my deck panel', panelStart > -1, 'panel present');
-  const panelEnd = next.indexOf('EVERY OPEN DECK', panelStart);
+  const panelStart = next.indexOf('PICK A DECK');
+  ok('Next shows the deck table', panelStart > -1, 'panel present');
+  const panelEnd = next.indexOf('WHAT TO BUY', panelStart);
   const seg = panelStart > -1 ? next.slice(panelStart, panelEnd > -1 ? panelEnd : panelStart + 9000) : '';
   const rowTiers = [...seg.matchAll(/>Tier (\d)</g)].map((m) => Number(m[1]));
-  ok('Find my deck rows are ordered best tier first (no budget, nothing buildable)',
+  ok('ranked by best deck, the table is best tier first (no budget, nothing buildable)',
      rowTiers.length > 1 && rowTiers.every((n, i) => !i || n >= rowTiers[i - 1]), rowTiers.join(','));
 
   // The three constraints actually do something.
@@ -702,7 +702,7 @@ if (!tiers) {
   const h = els.get('v-next').innerHTML;
   const ownRows = (h.match(/build ↗/g) || []).length;
   ok('"only legends I own" narrows to legends you hold',
-     h.includes('FIND MY DECK') && ownRows > 0 && ownRows <= 2 && ownRows < allRows &&
+     h.includes('PICK A DECK') && ownRows > 0 && ownRows <= 2 && ownRows < allRows &&
      pick.every((l) => h.includes(l.name)),
      `${ownRows} of ${allRows} rows, owning ${pick.map((l) => l.name).join(' + ')}`);
   A.S.ownLegendOnly = false;
@@ -1102,9 +1102,15 @@ section('Find my deck constraints');
 /* ══ layout bounds ══════════════════════════════════════════════════════ */
 section('Layout');
 {
-  // Same rule the Legends tab is held to, for the same reason: a generous threshold put
-  // twenty full panels on Next and 1,015 lines of text to convey an answer a few rows
-  // long. Panel count must be fixed by the layout, not grow with the archetype count.
+  /* Same rule the Legends tab is held to, for the same reason: a generous threshold put
+     twenty full panels on Next and 1,015 lines of text to convey an answer a few rows
+     long. Panel count must be fixed by the layout, not grow with the archetype count.
+
+     The generous threshold was the problem. At 16 panels and 900 lines Next could carry
+     four rankings of one list and 894 words of prose explaining why they disagreed, and
+     still pass. It is five fixed panels now and runs under 500 lines on every
+     collection, so the bound is set where the rewrite actually sits: enough headroom to
+     add a row, not enough to add another ranking. */
   const lines = (h) => h.replace(/<[^>]+>/g, '\n').replace(/&#?\w+;/g, '')
                         .split('\n').map((x) => x.trim()).filter(Boolean).length;
   for (const [label, inv] of Object.entries(collections)){
@@ -1114,7 +1120,7 @@ section('Layout');
       A.renderNext();
       const h = els.get('v-next').innerHTML;
       const panels = (h.match(/class="panel"/g) || []).length;
-      ok(`[${label} · $${spend}] Next stays bounded`, panels <= 16 && lines(h) <= 900,
+      ok(`[${label} · $${spend}] Next stays bounded`, panels <= 8 && lines(h) <= 600,
          `${panels} panels, ${lines(h)} text lines`);
     }
     A.S.nearSpend = 25;
@@ -1144,13 +1150,14 @@ section('The move');
      ['THE META', 'WHAT IS BEING PLAYED'].every((x) => meta.includes(x)));
   ok('Meta points at Next for anything collection-relative', /<b>Next<\/b>/.test(meta));
   ok('Next owns the collection-relative sections',
-     next.includes('FIND MY DECK') && next.includes('WHAT TO DO NEXT'));
+     next.includes('PICK A DECK') && next.includes('BUILD NEXT'));
   // The moved panels carry delegated-handler buttons; the markup has to come with them.
   A.S.inv = collections['everything'];
   A.renderNext();
   const owned = els.get('v-next').innerHTML;
+  // They were a panel; they are a row state now, which is the point of the rewrite.
   ok('buildable archetypes appear on Next once everything is owned',
-     owned.includes('BUILDABLE NOW'), 'panel present');
+     owned.includes('ready now'), 'shown as ready in the deck table');
   ok('the moved panels keep their actions',
      owned.includes('data-meta-copy') && owned.includes('data-meta-save'));
   A.S.inv = collections['deep'];
@@ -1283,21 +1290,27 @@ section('Compounding and the fringe gate');
   for (const label of ['empty', 'staples only', 'deep']){
     A.S.inv = collections[label];
     A.S.planBy = 'cost';
+    A.S.pick = null;
+    A.S.deckSort = 'cost';
     A.renderNext();
     const html = els.get('v-next').innerHTML;
-    const rankedStart = html.indexOf('EVERY OPEN DECK, BY COST');
-    const rankedEnd = html.indexOf('BEST CARDS TO GET', rankedStart);
+    const rankedStart = html.indexOf('PICK A DECK');
+    const rankedEnd = html.indexOf('WHAT TO BUY', rankedStart);
     const ranked = rankedStart > -1 ? html.slice(rankedStart, rankedEnd > -1 ? rankedEnd : undefined) : '';
-    const gaps = [...ranked.matchAll(/>\s*\$([\d,]+(?:\.\d+)?)\+? gap</g)].map((m) => Number(m[1].replace(/,/g, '')));
+    // The gap is the qty cell's leading figure; a row that is ready has no figure at all
+    // and drops out, which is right — $0 is not a cheaper gap, it is no gap.
+    const gaps = [...ranked.matchAll(/class="qty need"[^>]*>\$([\d,]+(?:\.\d+)?)\+?</g)]
+      .map((m) => Number(m[1].replace(/,/g, '')));
     const monotone = gaps.every((g, i) => !i || g + 0.001 >= gaps[i - 1]);
-    ok(`[${label}] the ranked list on Next is cheapest-gap first`, gaps.length > 1 && monotone,
+    ok(`[${label}] ranked by cheapest gap, the deck table is cheapest first`, gaps.length > 1 && monotone,
        monotone ? `${gaps.length} rows` : `gaps ${gaps.slice(0, 8).join(', ')}`);
+    A.S.deckSort = 'tier';
     const plan = A.acquisitionPath(A.metaPool(), 3, 24);
     if (plan.targets[0]){
-      const headline = html.match(/best next target is\s*<b[^>]*>([^<]+)<\/b>/);
-      ok(`[${label}] the headline target is the plan's first target`,
+      const headline = html.match(/data-target="([^"]+)"/);
+      ok(`[${label}] with nothing pinned, the tab is about the plan's first target`,
          headline && headline[1].trim() === plan.targets[0].name,
-         headline ? `"${headline[1].trim()}" vs "${plan.targets[0].name}"` : 'no headline match');
+         headline ? `"${headline[1].trim()}" vs "${plan.targets[0].name}"` : 'no target hook');
     }
   }
 
@@ -1309,6 +1322,13 @@ section('Compounding and the fringe gate');
   ok('Next explains compounding and redundancy',
      /[Cc]ompounding:/.test(h) && /[Rr]edundancy:/.test(h) && !h.includes('data-plan-by="score"'),
      'copy present, no score chip');
+  /* The rewrite's own contract: one deck table, not four rankings of it. If a future
+     change reintroduces a second archetype list the reader has to reconcile, this is
+     the check that should stop it. */
+  ok('one deck table, not four rankings of it',
+     !h.includes('FIND MY DECK') && !h.includes('EVERY OPEN DECK') && !h.includes('BUILDABLE NOW') &&
+     (h.match(/data-deck-sort=/g) || []).length === 4,
+     'the four orderings are sorts of one table');
 }
 
 /* ══ the views render ════════════════════════════════════════════════════ */
@@ -1336,9 +1356,9 @@ section('Rendering');
           ['CHAMPIONS', 'PLAYABLE', 'NEED A UNIT', 'NEED THE LEGEND', 'NEED BOTH',
            'LEGEND PRINTINGS']);
     A.S.planBy = 'cost';
-    check(`[${label}] Next renders (by cost)`, 'v-next', () => A.renderNext(), ['WHAT TO DO NEXT', 'THE PLAN']);
+    check(`[${label}] Next renders (by cost)`, 'v-next', () => A.renderNext(), ['BUILD NEXT', 'WHAT TO BUY']);
     A.S.planBy = 'cards';
-    check(`[${label}] Next renders (by cards)`, 'v-next', () => A.renderNext(), ['WHAT TO DO NEXT', 'THE PLAN']);
+    check(`[${label}] Next renders (by cards)`, 'v-next', () => A.renderNext(), ['BUILD NEXT', 'WHAT TO BUY']);
     A.S.planBy = 'cost';
     check(`[${label}] Meta renders`, 'v-meta', () => A.renderMeta(), ['THE META']);
     check(`[${label}] Sets renders`, 'v-sets', () => A.renderSets(), []);
