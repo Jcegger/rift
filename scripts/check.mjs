@@ -52,7 +52,7 @@ const NAMED = [
   'foilOnlyProblems', 'foilOnlyText', 'renderFoilOnly', 'championIndex',
   'deckLegalForConstructed', 'cardCost', 'gapCost', 'cost', 'costIndex',
   'daysSince', 'dataAge', 'staleNote', 'newsChampion', 'guideByChampion', 'dataAlerts',
-  'claimedResults', 'claimText',
+  'claimedResults', 'claimText', 'claimWhere',
   'historyDays', 'historyNames', 'sharesOn', 'movementPair', 'metaMovement', 'movementFor',
   'tierMovement', 'movementPending', 'moveChip',
   'renderNews', 'credibility',
@@ -765,6 +765,41 @@ section('Claimed results');
   ok('Meta marks a claim as a claim and explains it',
      /never counted as a tournament record/.test(flat) && (!parsed || flat.includes('claims')));
 
+  /* Where a claim came from, on the surface that shows it. The archive is North
+     American and online, so an archetype claiming results in Asia is the one thing
+     this app can say about a scene it otherwise cannot see at all. It has to stay
+     attached to the claim wording — a region rendered as a bare fact would read like
+     a record of where the archetype placed. */
+  const located = withClaim.filter((g) => g.claim.located);
+  const anyRegion = new RegExp(`unverified · (?:${
+    [...new Set(located.flatMap((g) => Object.keys(g.claim.regions)))].join('|') || 'x'})`);
+  ok('an archetype with located claims says where they came from',
+     !parsed || !located.length || anyRegion.test(flat),
+     `${located.length} archetypes have a claim with a region`);
+  // The region rides on the claim wording. Rendered as a bare fact it would read like a
+  // record of where the archetype placed, which is the one thing it is not.
+  ok('the region never appears without the claim wording',
+     !anyRegion.test(flat) || /unverified/.test(flat),
+     'region is attached to the claim, not stated as a record');
+  /* North America leads wherever a region is printed. It is the scene the archive
+     covers, so a claim from there is the one that could have been checked and was not —
+     and it is the scene the reader is most likely to be playing in. Sorting by count
+     alone buried it third behind Asia and Europe. */
+  const mixed = located.filter((g) => g.claim.regions['North America'] &&
+                                      Object.keys(g.claim.regions).length > 1);
+  ok('North America leads the region list wherever it appears',
+     !parsed || !mixed.length || mixed.every((g) => /^North America /.test(A.claimWhere(g.claim))),
+     `${mixed.length} archetypes claim results in more than one region`);
+  // Today no archetype claims in North America and somewhere else at once, so the check
+  // above is true for the wrong reason. Asserted on a synthetic claim as well, the way
+  // Movement does it, so the ordering is pinned before the data ever exercises it.
+  ok('North America leads even when another region outweighs it',
+     A.claimWhere({ located: 12, regions: { Asia: 9, 'North America': 2, Europe: 1 } })
+       === 'North America 2, Asia 9, Europe 1');
+
+  ok('the Meta blind spot names the scene the archive misses',
+     !events?.coverage?.claimedEventsUnmatched || /North American and online/.test(flat),
+     `${events?.coverage?.claimedEventsUnmatched ?? 0} events the archive has never carried`);
 }
 
 /* ══ movement ════════════════════════════════════════════════════════════

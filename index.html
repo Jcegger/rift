@@ -2196,25 +2196,53 @@ function credibility(g){
    difference between a deck the ranking ignores and one it merely cannot rank. */
 function claimedResults(g){
   const events = new Set();
-  let best = null, newest = null, lists = 0;
+  // Where the claims came from, read off the city in the event's own name. The archive
+  // is North American and online, so an archetype claiming results in Asia and Europe
+  // is winning somewhere this app can see nothing else about — which is worth saying
+  // out loud, and is the whole reason the region is carried onto the deck at all.
+  const regions = {};
+  let best = null, newest = null, lists = 0, located = 0;
   for (const row of (g.rows || [])){
     const d = row.deck;
     if (d.tour || (d.cp == null && !d.ce)) continue;
     lists++;
     if (d.ce) events.add(d.ce);
+    if (d.rg){ regions[d.rg] = (regions[d.rg] || 0) + 1; located++; }
     if (d.cp != null && (best == null || d.cp < best)) best = d.cp;
     if (d.dt && (!newest || d.dt > newest)) newest = d.dt;
   }
-  return { lists, best, newest, events: [...events] };
+  return { lists, best, newest, events: [...events], regions, located };
+}
+
+/* North America first, then commonest. Not the raw ranking, deliberately: the archive
+   this app can actually verify against is North American, so that is both the scene the
+   reader is most likely to be playing in and the only one where a claim could have been
+   checked and wasn't. The rest follow by weight. One comparator, used by every surface
+   that prints a region, so the Meta note and the archetype rows can never disagree
+   about the order. (North America here is the US and Canada — Vancouver and Ottawa both
+   land in it.) */
+const REGION_FIRST = 'North America';
+const byRegionWeight = (a, b) =>
+  (b[0] === REGION_FIRST) - (a[0] === REGION_FIRST) || b[1] - a[1];
+
+// "North America 8, Asia 4". Empty when no claim named a place this knows, which is the
+// online events and the bare series names.
+function claimWhere(c){
+  if (!c || !c.located) return '';
+  return Object.entries(c.regions).sort(byRegionWeight).map(([r, n]) => `${r} ${n}`).join(', ');
 }
 
 // One phrase, so every surface says it the same way and none of them imply a record.
 function claimText(c){
   if (!c || !c.lists) return '';
   const what = c.best === 1 ? 'a win' : c.best != null ? `top ${c.best}` : 'a result';
+  // The region goes before the caveat, never after: check.mjs asserts this phrase ends
+  // in "unverified" so nothing can trail off and soften it.
+  const where = claimWhere(c);
   return `${c.lists} list${c.lists === 1 ? '' : 's'} claim${c.lists === 1 ? 's' : ''} ${what}` +
          `${c.events.length ? ` at ${c.events.slice(0, 2).map(esc).join(', ')}${
-           c.events.length > 2 ? ` +${c.events.length - 2}` : ''}` : ''}, unverified`;
+           c.events.length > 2 ? ` +${c.events.length - 2}` : ''}` : ''}` +
+         `${where ? ` (${where})` : ''}, unverified`;
 }
 
 /* ── the tier list join ───────────────────────────────────────────────────
@@ -2327,6 +2355,8 @@ function deckPanel(g, opts){
         g.evPlayers.toLocaleString('en-US')}</b>-player field${g.evCount > 1 ? ` over ${g.evCount} events` : ''}</span>` : ''}
       ${g.evNewest ? `<span>last seen <b>${esc(g.evNewest)}</b></span>` : ''}
       ${g.bestPlace != null ? `<span>best finish <b>#${g.bestPlace}</b></span>` : ''}
+      ${g.claim && g.claim.located ? `<span style="color:var(--maize)" title="${esc(claimText(g.claim))}">claimed in <b>${
+        esc(claimWhere(g.claim))}</b></span>` : ''}
       ${d.ev ? `<span>${esc(d.ev)}</span>` : ''}
       ${d.pl != null ? `<span>this list <b>#${d.pl}</b></span>` : ''}
       <span><b>${d.sz}</b> cards</span>
@@ -2400,7 +2430,15 @@ function renderMeta(){
           return absent.length ? `The biggest events with no lists at all are ${absent
             .map(e => `${esc(e.name)} (${e.players}p)`).join(', ')}.` : '';
         })()}
-        That gap is upstream and cannot be closed here, so it is stated rather than implied away.</p>
+        That gap is upstream and cannot be closed here, so it is stated rather than implied away.${
+          EVENTS_COVER.claimedEventsUnmatched ? ` The archive is also North American and online almost
+          without exception, while <b>${EVENTS_COVER.claimedEventsUnmatched}</b> events named by a
+          list's own title have never appeared in it${(() => {
+            const r = Object.entries(EVENTS_COVER.claimedDecksByRegion || {})
+              .filter(([k]) => k !== 'unknown').sort(byRegionWeight);
+            return r.length ? ` — ${r.map(([k, n]) => `${esc(k)} ${n}`).join(', ')}` : '';
+          })()}. Those results are real events this app simply cannot see, which is why they are
+          counted as claims and never as evidence.` : ''}</p>
         <p class="note" style="margin-top:6px">Only <b>${arch.filter(g => g.evCount).length}</b> of
         ${arch.length} archetypes have any tournament evidence at all; the rest are ranked on public-deck
         popularity alone. Where a field size is shown, it is how big a room the archetype was played in,
@@ -2510,6 +2548,7 @@ function renderMeta(){
             : g.claim.lists
               ? `<span style="color:var(--maize)">${g.claim.best === 1 ? 'claims a win'
                   : g.claim.best != null ? `claims top ${g.claim.best}` : 'claims a result'}</span><span class="code"> · unverified${
+                  claimWhere(g.claim) ? ` · ${esc(claimWhere(g.claim))}` : ''}${
                   g.claim.newest ? ` · last ${esc(g.claim.newest)}` : ''}</span>`
               : 'no tournament record'}</span>
         </div>`).join('')}</div>
