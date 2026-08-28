@@ -8,17 +8,16 @@
   "players": 2390,
   "playersWithDecks": 1567,
   "unresolvedDeckEvents": [],
-  "claimedEvents": 23,
-  "claimedEventsUnmatched": 22,
+  "claimedEvents": 19,
+  "claimedEventsUnmatched": 18,
   "claimedEventAliases": {
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
-   "unknown": 2,
-   "Europe": 17,
-   "North America": 8,
-   "Asia": 21,
-   "Oceania": 1
+   "North America": 10,
+   "Asia": 17,
+   "Europe": 20,
+   "unknown": 2
   },
   "registryEventsByRegion": {
    "unknown": 24,
@@ -31,17 +30,13 @@
    "Chengdu Regional",
    "Dinan Regional",
    "Hartford RQ",
-   "Nanjing Regional",
    "S3 Suzhou City Challenge",
    "S4 Beijing City Challenge",
    "S4 Guangzhou City Challenge",
-   "S4 Qingdao City Challenge",
+   "S4 Nanjing City Challenge",
    "S4 Shanghai City Challenge",
    "S4 Shenzhen City Challenge",
-   "S4 Suzhou City Challenge",
    "S4 Tianjin City Challenge",
-   "S4 Wuhan City Challenge",
-   "Sydney Regional Qualifier",
    "Tianjin Regional",
    "Top Shelf Masters Tournament",
    "Utrecht RQ",
