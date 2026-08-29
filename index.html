@@ -2175,7 +2175,9 @@ function metaArchetypes(pool){
    The budget lens is the cheapest priced list *among the more-viewed half* — cutting
    at the median rather than an absolute view count so it scales with a niche legend
    as well as a popular one. Without it, "budget" landed on things like a 7-view
-   Rengar brew: cheap, but nobody's word behind it.
+   Rengar brew: cheap, but nobody's word behind it. It only shows when it is at least
+   15% under the most-played list; otherwise "budget" is a second row for a deck that
+   costs the same.
 
    Legal lists win the shortlist; if the ban filter leaves none, fall back to all so
    the expansion is never empty. */
@@ -2193,14 +2195,17 @@ function legendPicks(g){
   };
   const views = pool.map((x) => x.deck.vw || 0).sort((a, b) => a - b);
   const medianVw = views.length ? views[Math.floor((views.length - 1) / 2)] : 0;
-  add(pool.slice().sort(byV)[0], 'most played');
+  const mostPlayed = pool.slice().sort(byV)[0];
+  add(mostPlayed, 'most played');
   const placed = pool.filter((x) => x.deck.tour || x.deck.pl != null)
                      .sort((a, b) => (a.deck.pl ?? 99) - (b.deck.pl ?? 99) || byV(a, b))[0];
   if (placed) add(placed, 'tournament');
   else add(pool.filter((x) => x.deck.cp != null || x.deck.ce)
                .sort((a, b) => (a.deck.cp ?? 99) - (b.deck.cp ?? 99) || byV(a, b))[0], 'claimed result');
-  add(pool.filter((x) => x.deck.pr > 0 && (x.deck.vw || 0) >= medianVw)
-          .sort((a, b) => a.deck.pr - b.deck.pr || byV(a, b))[0], 'budget');
+  const budget = pool.filter((x) => x.deck.pr > 0 && (x.deck.vw || 0) >= medianVw)
+                     .sort((a, b) => a.deck.pr - b.deck.pr || byV(a, b))[0];
+  const mpPr = mostPlayed && mostPlayed.deck.pr;
+  if (budget && (!(mpPr > 0) || budget.deck.pr <= 0.85 * mpPr)) add(budget, 'budget');
   return [...out.values()];
 }
 
@@ -3299,11 +3304,16 @@ function renderNext(){
   const EXP_CAP = 12, EXP_CAP_ALL = 6;
   const expanded = (name) => !!S.expandAll || (S.expand || []).includes(name);
 
+  // A deck someone re-entered from another player's list — the slug carries the "copy"
+  // dotgg stamps on it. riftbound.gg often has no public page for these, so the link
+  // is flagged rather than trusted.
+  const fanCopy = (s) => /-copy(-|$)/.test(s || '');
+
   // One line for a list inside an expansion — used for the named picks and for the
   // full roll below them. `label` set marks it a pick; unset, it is a roll row and
   // gets the "default" marker if it is the archetype's representative.
   const listLine = (x, best, pinSlug, label) => {
-    const d = x.deck, isPin = d.s === pinSlug;
+    const d = x.deck, isPin = d.s === pinSlug, copy = fanCopy(d.s);
     return `<div class="row" style="${isPin ? 'background:var(--panel2);' : ''}">
       <span class="nm">${label ? `<b style="color:var(--maize)">${label}</b> ` : ''}${esc(d.h || d.s)}
         <span class="code">${d.vw || 0} view${d.vw === 1 ? '' : 's'} · ${
@@ -3311,8 +3321,10 @@ function renderNext(){
             ? '<b style="color:var(--good)">ready</b>' : `${x.ev.missingCopies} short`}${
           d.pl != null ? ` · #${d.pl}` : d.cp != null ? ` · top ${d.cp} claimed` : ''}${
           !label && d.s === best ? ' · default' : ''}${
+          copy ? ' · <span title="re-entered from another player\'s list; riftbound.gg may have no page for it">fan copy</span>' : ''}${
           x.illegal ? ' · <span style="color:var(--bad)">not legal</span>' : ''}</span>
-        <a href="https://riftbound.gg/decks/${esc(d.s)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">list ↗</a>
+        <a href="https://riftbound.gg/decks/${esc(d.s)}" target="_blank" rel="noopener" class="code" style="color:${
+          copy ? 'var(--dim)' : 'var(--teal)'}">list ↗</a>
       </span>
       <span class="qty"><button class="chip" data-pick-list="${esc(d.s)}" aria-pressed="${isPin}">${
         isPin ? 'pinned ✕' : 'pin'}</button></span>

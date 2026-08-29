@@ -1551,6 +1551,14 @@ section('Deck options');
      `views ${vws.slice(0, 8).join(', ')}`);
   ok('the roll marks the representative as the default',
      roll.includes('· default'), 'a row carries "default"');
+  // A re-entered copy is flagged rather than linked as canonical.
+  const copySlugs = multi.rows.filter((x) => /-copy(-|$)/.test(x.deck.s)).map((x) => x.deck.s);
+  ok('a fan-copy list in the roll is flagged as such',
+     copySlugs.length === 0 || copySlugs.some((s) => {
+       const i = roll.indexOf(`data-pick-list="${s}"`);
+       return i > -1 && roll.lastIndexOf('fan copy', i) > roll.lastIndexOf('</div>', i);
+     }),
+     `${copySlugs.length} copy slugs in ${multi.name}`);
 
   // 3. Pinning a non-default list drives the panel and the plan.
   const def = multi.best.deck.s;
@@ -1665,13 +1673,15 @@ section('Deck options');
 
       const vwSorted = pool.map((x) => x.deck.vw || 0).sort((a, b) => a - b);
       const medianVw = vwSorted.length ? vwSorted[Math.floor((vwSorted.length - 1) / 2)] : 0;
-      const priced = pool.filter((x) => x.deck.pr > 0 && (x.deck.vw || 0) >= medianVw);
+      const priced = pool.filter((x) => x.deck.pr > 0 && (x.deck.vw || 0) >= medianVw)
+                         .sort((a, b) => a.deck.pr - b.deck.pr);
+      const mpPr = mostPlayed && mostPlayed.row.deck.pr;
+      const wantBudget = priced[0] && (!(mpPr > 0) || priced[0].deck.pr <= 0.85 * mpPr) ? priced[0] : null;
       const budgetPick = picks.find((p) => p.lenses.includes('budget'));
-      if (priced.length && budgetPick &&
-          budgetPick.row.deck.pr !== Math.min(...priced.map((x) => x.deck.pr)))
-        bad.push(`${g.name}: budget lens not cheapest priced among the more-viewed half`);
-      if (budgetPick && (budgetPick.row.deck.vw || 0) < medianVw)
-        bad.push(`${g.name}: budget lens is a below-median-views list`);
+      if (!!budgetPick !== !!wantBudget)
+        bad.push(`${g.name}: budget lens ${budgetPick ? 'shown' : 'absent'}, expected ${wantBudget ? 'shown' : 'absent'}`);
+      if (budgetPick && wantBudget && budgetPick.row !== wantBudget)
+        bad.push(`${g.name}: budget lens is not the cheapest well-viewed, meaningfully-cheaper list`);
     }
     ok(`[${label}] legendPicks: 1-3 deduped lens picks per legend, each a real list`,
        bad.length === 0, bad.slice(0, 3).join('; ') || `${groups.length} legends`);
