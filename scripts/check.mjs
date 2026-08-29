@@ -1618,7 +1618,7 @@ section('Deck options');
   A.S.pickList = null;
 
   // 7. legendPicks: the three lenses over a legend's lists.
-  const LENSES = ['most played', 'tournament', 'budget'];
+  const LENSES = ['most played', 'tournament', 'claimed result', 'budget'];
   let multiSeen = 0, singleSeen = 0;
   for (const [label, inv] of Object.entries(collections)){
     A.S.inv = inv;
@@ -1643,11 +1643,25 @@ section('Deck options');
       else if ((mostPlayed.row.deck.vw || 0) !== Math.max(...pool.map((x) => x.deck.vw || 0)))
         bad.push(`${g.name}: most-played not max views`);
 
-      const tourRows = pool.filter((x) => x.deck.tour || x.deck.cp != null || x.deck.ce);
+      // Competitive lens: a verified place/flag wins it and is labelled "tournament";
+      // failing that a title claim takes it, labelled "claimed result". Never both,
+      // and a verified place is never beaten by a claim.
+      const placedRows = pool.filter((x) => x.deck.tour || x.deck.pl != null);
+      const claimRows = pool.filter((x) => x.deck.cp != null || x.deck.ce);
       const tourPick = picks.find((p) => p.lenses.includes('tournament'));
-      if (tourRows.length && !tourPick) bad.push(`${g.name}: has tournament lists but no lens`);
-      if (tourPick && !tourRows.includes(tourPick.row)) bad.push(`${g.name}: tournament lens on a non-tournament list`);
-      if (!tourRows.length && tourPick) bad.push(`${g.name}: tournament lens with no tournament lists`);
+      const claimPick = picks.find((p) => p.lenses.includes('claimed result'));
+      if (tourPick && claimPick) bad.push(`${g.name}: both tournament and claimed-result lenses`);
+      if (placedRows.length){
+        if (!tourPick) bad.push(`${g.name}: placed lists but no tournament lens`);
+        else if (!placedRows.includes(tourPick.row)) bad.push(`${g.name}: tournament lens on an unplaced list`);
+        else if ((tourPick.row.deck.pl ?? 99) !== Math.min(...placedRows.map((x) => x.deck.pl ?? 99)))
+          bad.push(`${g.name}: tournament lens not the best placement`);
+      } else {
+        if (tourPick) bad.push(`${g.name}: tournament lens with no placed lists`);
+        if (claimRows.length && !claimPick) bad.push(`${g.name}: claim lists but no claimed-result lens`);
+        if (claimPick && !claimRows.includes(claimPick.row)) bad.push(`${g.name}: claimed-result lens on a non-claim list`);
+        if (!claimRows.length && claimPick) bad.push(`${g.name}: claimed-result lens with no claims`);
+      }
 
       const vwSorted = pool.map((x) => x.deck.vw || 0).sort((a, b) => a - b);
       const medianVw = vwSorted.length ? vwSorted[Math.floor((vwSorted.length - 1) / 2)] : 0;

@@ -2160,10 +2160,17 @@ function metaArchetypes(pool){
    Card-similarity clustering was tried and does not produce "tourney / midrange /
    budget" — most legends are one big blob plus a scatter of one-offs. So this is
    three fixed lenses over the legend's lists, deduped by slug: the one people look
-   at most, the one with a placing or a claimed result, and the cheapest one that
-   is not a list nobody has looked at.
+   at most, the best competitive finish, and the cheapest one that is not a list
+   nobody has looked at.
    A legend with a single real build (or where all three land on it) returns one
    entry, and the caller shows the plain list instead.
+
+   The competitive lens keeps the app's line between a record and a claim. A list
+   upstream flagged or gave a place to wins the slot outright, ranked by that place;
+   only if none exists does a title claim take it, and then the lens is labelled
+   "claimed result", not "tournament", and ranked by the claimed place. A verified
+   #28 therefore beats a claimed #1 — 20 of 24 of these are claims, and most name
+   events this app's archive has never seen.
 
    The budget lens is the cheapest priced list *among the more-viewed half* — cutting
    at the median rather than an absolute view count so it scales with a niche legend
@@ -2187,9 +2194,11 @@ function legendPicks(g){
   const views = pool.map((x) => x.deck.vw || 0).sort((a, b) => a - b);
   const medianVw = views.length ? views[Math.floor((views.length - 1) / 2)] : 0;
   add(pool.slice().sort(byV)[0], 'most played');
-  add(pool.filter((x) => x.deck.tour || x.deck.cp != null || x.deck.ce)
-          .sort((a, b) => (a.deck.pl ?? a.deck.cp ?? 99) - (b.deck.pl ?? b.deck.cp ?? 99) || byV(a, b))[0],
-      'tournament');
+  const placed = pool.filter((x) => x.deck.tour || x.deck.pl != null)
+                     .sort((a, b) => (a.deck.pl ?? 99) - (b.deck.pl ?? 99) || byV(a, b))[0];
+  if (placed) add(placed, 'tournament');
+  else add(pool.filter((x) => x.deck.cp != null || x.deck.ce)
+               .sort((a, b) => (a.deck.cp ?? 99) - (b.deck.cp ?? 99) || byV(a, b))[0], 'claimed result');
   add(pool.filter((x) => x.deck.pr > 0 && (x.deck.vw || 0) >= medianVw)
           .sort((a, b) => a.deck.pr - b.deck.pr || byV(a, b))[0], 'budget');
   return [...out.values()];
