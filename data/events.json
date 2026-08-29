@@ -1,27 +1,27 @@
 {
- "generatedAt": "2026-08-28",
+ "generatedAt": "2026-08-29",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg)",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
   "events": 30,
-  "eventsWithDecks": 12,
+  "eventsWithDecks": 11,
   "players": 2390,
-  "playersWithDecks": 1567,
+  "playersWithDecks": 1553,
   "unresolvedDeckEvents": [],
-  "claimedEvents": 19,
-  "claimedEventsUnmatched": 18,
+  "claimedEvents": 20,
+  "claimedEventsUnmatched": 19,
   "claimedEventAliases": {
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
-   "North America": 10,
-   "Asia": 17,
    "Europe": 20,
-   "unknown": 2
+   "Asia": 15,
+   "unknown": 3,
+   "North America": 8
   },
   "registryEventsByRegion": {
-   "unknown": 24,
-   "North America": 6
+   "unknown": 25,
+   "North America": 5
   },
   "unresolvedClaimEvents": [
    "36P in China",
@@ -30,11 +30,12 @@
    "Chengdu Regional",
    "Dinan Regional",
    "Hartford RQ",
+   "Nanjing Regional",
+   "S3 Foshan City Challenge",
    "S3 Suzhou City Challenge",
    "S4 Beijing City Challenge",
    "S4 Guangzhou City Challenge",
    "S4 Nanjing City Challenge",
-   "S4 Shanghai City Challenge",
    "S4 Shenzhen City Challenge",
    "S4 Tianjin City Challenge",
    "Tianjin Regional",
@@ -44,7 +45,6 @@
    "Vancouver RQ"
   ],
   "decksByEvent": {
-   "Riftbound: PPG Qualifier - Weatherford": 11,
    "Pittsburgh 2026 - Riftbound Showdown $10k-$25,000": 6,
    "Riftbound Showdown Series $25,000 Cash Tournament @ Pro-Play Summit: Dallas": 4,
    "CCS $25,000 Riftbound Invitational Qualifier #4": 3,
