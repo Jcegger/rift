@@ -7,7 +7,7 @@
  "tags": {
   "Metagame": 18,
   "Events": 19,
-  "News": 30,
+  "News": 29,
   "Legends": 15,
   "Sets": 2,
   "Guides": 4,
@@ -814,15 +814,6 @@
     "Metagame"
    ],
    "author": "Den"
-  },
-  {
-   "title": "State of the Game - February 2026",
-   "dt": "2026-02-10",
-   "url": "https://riftbound.gg/state-of-the-game-february-2026",
-   "tags": [
-    "News"
-   ],
-   "author": "Riftbound.gg"
   }
  ]
 }

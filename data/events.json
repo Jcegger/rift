@@ -8,16 +8,16 @@
   "players": 2390,
   "playersWithDecks": 1553,
   "unresolvedDeckEvents": [],
-  "claimedEvents": 18,
-  "claimedEventsUnmatched": 17,
+  "claimedEvents": 20,
+  "claimedEventsUnmatched": 19,
   "claimedEventAliases": {
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
-   "Asia": 16,
-   "Oceania": 1,
-   "Europe": 18,
+   "Europe": 16,
+   "Asia": 17,
    "North America": 7,
+   "Oceania": 1,
    "unknown": 3
   },
   "registryEventsByRegion": {
@@ -32,7 +32,9 @@
    "Chengdu Regional",
    "Hartford RQ",
    "Nanjing Regional",
+   "S3 Beijing City Challenge",
    "S3 Foshan City Challenge",
+   "S3 Shanghai City Challenge",
    "S3 Suzhou City Challenge",
    "S4 Beijing City Challenge",
    "S4 Nanjing City Challenge",
