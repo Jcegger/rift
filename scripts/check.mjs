@@ -1390,6 +1390,85 @@ section('Compounding and the fringe gate');
      'the four orderings are sorts of one table');
 }
 
+/* ══ the deck row carries its own provenance ══════════════════════════════
+   Two things every "PICK A DECK" row now says about the one list its gap, price and
+   shape are read off: a link to that list, and — when it has neither a tournament
+   record nor a result claimed in its title — that it has no tournament record, the
+   same thing the Meta tab prints as "unverified". esc() only touches & < > ", none
+   of which appear in a legend name, so the data-pick attribute is the name verbatim. */
+section('Deck row provenance');
+{
+  A.S.inv = collections['deep'];
+  A.S.planBy = 'cost';
+  A.S.pick = null;
+  A.S.ownLegendOnly = false;
+  A.S.noBuy = [];
+  A.S.nearSpend = 0;
+
+  const rowChunks = () => {
+    const html = els.get('v-next').innerHTML;
+    const start = html.indexOf('PICK A DECK'), end = html.indexOf('WHAT TO BUY', start);
+    const table = html.slice(start, end > -1 ? end : undefined);
+    // One chunk per rendered row, keyed by the archetype it is for, ending at the row's
+    // own closing tag (rows nest only <span>, so the first </div> is the row's).
+    const out = {};
+    const parts = table.split('data-pick="');
+    for (let i = 1; i < parts.length; i++){
+      const nm = parts[i].slice(0, parts[i].indexOf('"'));
+      const cut = parts[i].indexOf('</div>');
+      out[nm] = cut > -1 ? parts[i].slice(0, cut) : parts[i];
+    }
+    return out;
+  };
+
+  const tiered = new Set([...A.tierByArchetype().keys()]);
+  const byName = new Map(A.metaArchetypes(A.metaPool()).map((g) => [g.name, g]));
+
+  // "tier" surfaces the ranked decks, "closest" ranks by card gap instead — the row
+  // template has to behave the same for both, and "list ↗" is emitted unconditionally
+  // so it does not matter whether a row is tiered.
+  let sawNoRecord = false, sawRecord = false;
+  for (const srt of ['tier', 'closest']){
+    A.S.deckSort = srt;
+    A.renderNext();
+    const chunks = rowChunks();
+    const shown = Object.keys(chunks);
+    ok(`[${srt}] the deck table renders rows to inspect`, shown.length >= 10, `${shown.length} rows`);
+
+    // Every row links the actual list its numbers describe.
+    const linked = shown.filter((nm) =>
+      /href="https:\/\/riftbound\.gg\/decks\/[^"]+"[^>]*>list ↗</.test(chunks[nm]));
+    ok(`[${srt}] every deck row links its representative list on riftbound.gg`,
+       linked.length === shown.length, `${linked.length} of ${shown.length} rows carry "list ↗"`);
+
+    // The champion guide link is untouched: still only the tiered rows carry "build ↗".
+    const guideBad = shown.filter((nm) => chunks[nm].includes('build ↗') !== tiered.has(nm));
+    ok(`[${srt}] the guide link still tracks the tier list, not every row`,
+       guideBad.length === 0,
+       guideBad.slice(0, 3).join(', ') ||
+         `${shown.filter((nm) => chunks[nm].includes('build ↗')).length} tiered rows`);
+
+    // "no tournament record" appears on exactly the rows with no event and no claim.
+    const evBad = [];
+    for (const nm of shown){
+      const g = byName.get(nm);
+      if (!g) continue;
+      const marked = chunks[nm].includes('no tournament record');
+      if (marked) sawNoRecord = true; else sawRecord = true;
+      const want = !g.evCount && !(g.claim && g.claim.best != null);
+      if (marked !== want)
+        evBad.push(`${nm}: shown=${marked} want=${want} (ev ${g.evCount || 0}, claim ${g.claim && g.claim.best})`);
+    }
+    ok(`[${srt}] "no tournament record" marks exactly the rows with no evidence and no claim`,
+       evBad.length === 0, evBad.slice(0, 3).join('; ') || `${shown.length} rows agree`);
+  }
+
+  ok('the no-record marker distinguishes something', sawNoRecord && sawRecord,
+     'the table shows rows both with and without a tournament record');
+
+  A.S.deckSort = 'tier';
+}
+
 /* ══ the views render ════════════════════════════════════════════════════ */
 section('Rendering');
 {

@@ -3219,14 +3219,16 @@ function renderNext(){
         <b style="color:var(--cream)">${esc(r.champion || r.name)}</b>${moveChip(r.name)}
         <span class="code">${r.champion ? `${esc(r.name)} · ` : ''}${r.shape}${
           r.bestPlace != null ? ` · best #${r.bestPlace}` : ''} · ${r.lists} list${r.lists === 1 ? '' : 's'}${
-          r.established ? '' : ' · fringe'}</span>${
+          r.established ? '' : ' · fringe'}${
+          !r.g.evCount && !(r.claim && r.claim.best != null) ? ' · no tournament record' : ''}</span>${
         r.bestPlace == null && r.claim && r.claim.best != null
           ? ` <span class="code" style="color:var(--maize)" title="${esc(claimText(r.claim))}">claims ${
               r.claim.best === 1 ? 'a win' : `top ${r.claim.best}`}</span>` : ''}
         ${r.buildable ? '' : `<span class="code">${r.breakdown}</span>`}
         ${r.redundantOf ? `<span class="code" style="color:var(--maize)" title="a deck that mostly reprints one you can already build is a weak buy however cheap">mostly reprints ${esc(r.redundantOf)}</span>`
           : r.overlapCredit > 0 ? `<span class="code" title="part of this gap is cards other open decks also need">${money(Math.round(r.overlapCredit))} does double duty</span>` : ''}
-        ${r.guide ? `<a href="${esc(r.guide)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">build ↗</a>` : ''}</span>
+        <a href="https://riftbound.gg/decks/${esc(r.deck.s)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">list ↗</a>${
+        r.guide ? ` <a href="${esc(r.guide)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">build ↗</a>` : ''}</span>
       <span class="qty${r.buildable ? '' : ' need'}" title="Gap: the cards you are missing, each at its cheapest printing. List: what the whole deck costs to hold outright.">${
         r.buildable ? 'ready now'
         : `${cost(r.gap)}<span class="code"> · ${r.short} short${r.gap.cut ? ` · ${r.gap.cut} cut` : ''} · ${
