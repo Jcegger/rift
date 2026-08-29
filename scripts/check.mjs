@@ -1649,11 +1649,15 @@ section('Deck options');
       if (tourPick && !tourRows.includes(tourPick.row)) bad.push(`${g.name}: tournament lens on a non-tournament list`);
       if (!tourRows.length && tourPick) bad.push(`${g.name}: tournament lens with no tournament lists`);
 
-      const priced = pool.filter((x) => x.deck.pr > 0);
+      const vwSorted = pool.map((x) => x.deck.vw || 0).sort((a, b) => a - b);
+      const medianVw = vwSorted.length ? vwSorted[Math.floor((vwSorted.length - 1) / 2)] : 0;
+      const priced = pool.filter((x) => x.deck.pr > 0 && (x.deck.vw || 0) >= medianVw);
       const budgetPick = picks.find((p) => p.lenses.includes('budget'));
       if (priced.length && budgetPick &&
           budgetPick.row.deck.pr !== Math.min(...priced.map((x) => x.deck.pr)))
-        bad.push(`${g.name}: budget lens not cheapest priced`);
+        bad.push(`${g.name}: budget lens not cheapest priced among the more-viewed half`);
+      if (budgetPick && (budgetPick.row.deck.vw || 0) < medianVw)
+        bad.push(`${g.name}: budget lens is a below-median-views list`);
     }
     ok(`[${label}] legendPicks: 1-3 deduped lens picks per legend, each a real list`,
        bad.length === 0, bad.slice(0, 3).join('; ') || `${groups.length} legends`);
