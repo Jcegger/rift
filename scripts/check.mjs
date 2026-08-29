@@ -1469,6 +1469,146 @@ section('Deck row provenance');
   A.S.deckSort = 'tier';
 }
 
+/* ══ Deck options: the view-weighted pick, expansion, and pinning a list ═══
+   The row folds every list of a legend into one. Its representative is now the
+   most-viewed of the lists you are equally close to (cheapest broke the tie before
+   and kept landing on budget brews); expanding the row shows the rest; pinning one
+   retargets the deck panel and the buy plan to that exact list. */
+section('Deck options');
+{
+  A.S.planBy = 'cost';
+  A.S.pick = null;
+  A.S.pickList = null;
+  A.S.expand = [];
+  A.S.expandAll = false;
+  A.S.deckSort = 'tier';
+  A.S.ownLegendOnly = false;
+  A.S.noBuy = [];
+  A.S.nearSpend = 0;
+
+  // 1. The representative minimises (gap, then -views, then price): among the lists
+  //    tied at the smallest gap it is the most-viewed, and cheapest of those.
+  for (const [label, inv] of Object.entries(collections)){
+    A.S.inv = inv;
+    const arch = A.metaArchetypes(A.metaPool());
+    const bad = [];
+    for (const g of arch){
+      const min = Math.min(...g.rows.map((r) => r.ev.missingCopies));
+      const tied = g.rows.filter((r) => r.ev.missingCopies === min);
+      const maxVw = Math.max(...tied.map((r) => r.deck.vw || 0));
+      if ((g.best.deck.vw || 0) !== maxVw){
+        bad.push(`${g.name}: rep ${g.best.deck.vw || 0} views, ${maxVw} available`);
+        continue;
+      }
+      const minPr = Math.min(...tied.filter((r) => (r.deck.vw || 0) === maxVw)
+                                   .map((r) => r.deck.pr ?? Infinity));
+      if ((g.best.deck.pr ?? Infinity) !== minPr)
+        bad.push(`${g.name}: rep $${g.best.deck.pr} vs $${minPr} at equal views`);
+    }
+    ok(`[${label}] the representative is the most-viewed list at the smallest gap, then cheapest`,
+       bad.length === 0, bad.slice(0, 3).join('; ') || `${arch.length} archetypes`);
+  }
+
+  A.S.inv = collections['deep'];
+  const arch = A.metaArchetypes(A.metaPool());
+  // A tiered, multi-list archetype: tiered so it stays inside ROWS_SHOWN whatever a
+  // pin does to its gap, multi-list so there is something to expand.
+  const tiered = A.tierByArchetype();
+  const multi = arch.filter((g) => tiered.has(g.name) && g.rows.length >= 4)
+                    .sort((a, b) => (tiered.get(a.name).tier - tiered.get(b.name).tier) ||
+                                    (b.rows.length - a.rows.length))[0];
+  ok('there is a tiered multi-list archetype to exercise expansion on', !!multi,
+     multi ? `${multi.name}, ${multi.rows.length} lists` : 'none found');
+
+  // 2. Expanding the row renders its lists, most-viewed first, each pinnable and linked.
+  A.S.expand = [multi.name];
+  A.renderNext();
+  let html = els.get('v-next').innerHTML;
+  const bStart = html.indexOf(`data-expand-for="${multi.name}"`);
+  const bEnd = html.indexOf('data-pick="', bStart);
+  const block = html.slice(bStart, bEnd > -1 ? bEnd : html.indexOf('WHAT TO BUY', bStart));
+  const EXP_CAP = 12;
+  const pinBtns = (block.match(/data-pick-list="/g) || []).length;
+  ok('the expansion lists the archetype\'s builds (capped)',
+     pinBtns === Math.min(multi.rows.length, EXP_CAP),
+     `${pinBtns} of ${multi.rows.length} lists shown`);
+  ok('every expanded list has a riftbound.gg link',
+     (block.match(/href="https:\/\/riftbound\.gg\/decks\/[^"]+"/g) || []).length >= pinBtns,
+     `${(block.match(/riftbound\.gg\/decks\//g) || []).length} links`);
+  const vws = [...block.matchAll(/>(\d+) views?/g)].map((m) => Number(m[1]));
+  ok('the expansion is ordered most-viewed first',
+     vws.length > 1 && vws.every((v, i) => !i || v <= vws[i - 1]),
+     `views ${vws.slice(0, 8).join(', ')}`);
+  ok('the expansion marks the representative as the default',
+     block.includes('· default'), 'a row carries "default"');
+
+  // 3. Pinning a non-default list drives the panel and the plan.
+  const def = multi.best.deck.s;
+  const cand = multi.rows.map((r) => r.deck).sort((a, b) => (b.vw || 0) - (a.vw || 0))
+                         .find((d) => d.s !== def);
+  A.S.pick = multi.name;
+  A.S.pickList = cand.s;
+  A.renderNext();
+  html = els.get('v-next').innerHTML;
+  ok('pinning a list retargets the deck panel to it',
+     html.includes(`data-meta-copy="${cand.s}"`) && !html.includes(`data-meta-copy="${def}"`),
+     `panel on ${cand.s}, not ${def}`);
+  {
+    const rs = html.indexOf(`data-pick="${multi.name}"`);
+    const rowHtml = html.slice(rs, html.indexOf('<span class="qty', rs));
+    ok('the pinned archetype row is marked', rowHtml.includes('list pinned'),
+       'row shows "list pinned"');
+  }
+  const pinnedPlan = A.acquisitionPath(A.metaPool(), 3, 24, multi.name, cand);
+  ok('the buy plan targets the exact pinned list',
+     pinnedPlan.targets[0] && pinnedPlan.targets[0].deck.s === cand.s,
+     pinnedPlan.targets[0] ? pinnedPlan.targets[0].deck.s : 'no target');
+
+  // 4. Clearing the list pin restores the representative.
+  A.S.pickList = null;
+  A.renderNext();
+  html = els.get('v-next').innerHTML;
+  ok('clearing the list pin restores the representative',
+     html.includes(`data-meta-copy="${def}"`) && !html.includes('list pinned'),
+     `panel back on ${def}`);
+
+  // 5. A buildable pinned list is not something the plan can target — and nothing throws.
+  A.S.inv = collections['everything'];
+  const gE = A.metaArchetypes(A.metaPool()).find((g) => g.rows.length >= 2);
+  let threw = false;
+  try { A.S.pick = gE.name; A.S.pickList = gE.rows[0].deck.s; A.renderNext(); }
+  catch { threw = true; }
+  ok('pinning a buildable list renders without throwing', !threw, threw ? 'threw' : 'ok');
+  const buildablePlan = A.acquisitionPath(A.metaPool(), 3, 24, gE.name, gE.rows[0].deck);
+  ok('the plan does not target a buildable pinned list', buildablePlan.targets.length === 0,
+     `${buildablePlan.targets.length} targets`);
+
+  // 6. Expand-all opens every shown row at once. It is opt-in, so it gets its own
+  //    higher bound rather than the collapsed layout guard.
+  A.S.pick = null;
+  A.S.pickList = null;
+  A.S.expand = [];
+  A.S.expandAll = true;
+  A.S.nearSpend = 25;
+  for (const [label, inv] of Object.entries(collections)){
+    A.S.inv = inv;
+    A.renderNext();
+    const h = els.get('v-next').innerHTML;
+    const panels = (h.match(/class="panel"/g) || []).length;
+    const lines = h.replace(/<[^>]+>/g, '\n').replace(/&#?\w+;/g, '')
+                   .split('\n').map((x) => x.trim()).filter(Boolean).length;
+    ok(`[${label}] expand-all stays bounded`,
+       panels <= 8 && lines <= 1400 && !/undefined|NaN|\[object Object\]/.test(h),
+       `${panels} panels, ${lines} lines`);
+  }
+
+  A.S.expandAll = false;
+  A.S.expand = [];
+  A.S.pick = null;
+  A.S.pickList = null;
+  A.S.inv = collections['deep'];
+}
+
 /* ══ the views render ════════════════════════════════════════════════════ */
 section('Rendering');
 {

@@ -2136,17 +2136,20 @@ function metaArchetypes(pool){
       if (illegal) g.illegalLists++;
       g.events.add(d.ev);
       if (d.pl != null && (g.bestPlace == null || d.pl < g.bestPlace)) g.bestPlace = d.pl;
-      // Closest wins, then cheapest: this view is about what you can build, and among
-      // lists you are equally close to, the one that costs less is the one to build.
-      // That tie is common and the spread inside it is large — the same archetype can
-      // be represented by a $210 list or a $3,586 one at an identical card gap — so
+      // Closest wins, then the list more people looked at, then the cheaper one. This
+      // view is about what you can build, so among lists you are equally close to the
+      // representative should be the one others actually play — cheapest alone picked
+      // the budget brew (Tier 1 Rengar stood for by a $204/7-view list over a
+      // $268/100-view one). That tie is common and the spread inside it is large, so
       // this must match the tie-break in scorePool or the two views quote different
-      // prices for the same deck. Legality is handled by filtering the pool before it
-      // gets here, so the "include banned" toggle surfaces those lists instead of
+      // decks for the same archetype. Legality is handled by filtering the pool before
+      // it gets here, so the "include banned" toggle surfaces those lists instead of
       // having them quietly outranked.
       if (row.ev.missingCopies < g.best.ev.missingCopies ||
-          (row.ev.missingCopies === g.best.ev.missingCopies &&
-           (d.pr ?? Infinity) < (g.best.deck.pr ?? Infinity))) g.best = row;
+          (row.ev.missingCopies === g.best.ev.missingCopies && (
+            (d.vw || 0) > (g.best.deck.vw || 0) ||
+            ((d.vw || 0) === (g.best.deck.vw || 0) &&
+             (d.pr ?? Infinity) < (g.best.deck.pr ?? Infinity))))) g.best = row;
     }
   }
   const total = (DECKS || []).length || 1;
@@ -2338,7 +2341,11 @@ function missingBlock(ev){
 }
 
 function deckPanel(g, opts){
-  const d = g.best.deck, ev = g.best.ev;
+  // A pinned list overrides the archetype's representative for everything this panel
+  // shows: its cards, its gap, its legality.
+  const d = (opts && opts.deck) || g.best.deck;
+  const ev = (opts && opts.ev) || g.best.ev;
+  const bans = (opts && opts.deck) ? deckBansCached(opts.deck) : g.best.bans;
   const done = ev.missingCopies === 0;
   return `<div class="panel" style="margin-bottom:12px">
     <div class="meter-top">
@@ -2363,11 +2370,11 @@ function deckPanel(g, opts){
       ${d.pr ? `<span>~$${d.pr}</span>` : ''}
       ${!done ? `<span><b>${ev.distinctMissing}</b> distinct missing</span>` : ''}
     </div>
-    ${g.best.bans.length ? `<p class="note" style="color:var(--bad);margin-top:8px">
-        Not legal in sanctioned Constructed: runs ${g.best.bans.filter(x => x.ban.formats.includes('constructed'))
+    ${bans.length ? `<p class="note" style="color:var(--bad);margin-top:8px">
+        Not legal in sanctioned Constructed: runs ${bans.filter(x => x.ban.formats.includes('constructed'))
           .map(x => `${x.qty}x ${esc(x.card.n)}`).join(', ')}.
-        ${g.best.bans.some(x => !x.ban.formats.includes('constructed'))
-          ? `Also ${g.best.bans.filter(x => !x.ban.formats.includes('constructed'))
+        ${bans.some(x => !x.ban.formats.includes('constructed'))
+          ? `Also ${bans.filter(x => !x.ban.formats.includes('constructed'))
               .map(x => `${esc(x.card.n)} (${x.ban.formats.join('/')})`).join(', ')}.` : ''}</p>` : ''}
     ${opts && opts.showMissing ? missingBlock(ev) : ''}
     <div class="bar-row" style="margin-top:10px">
@@ -2572,9 +2579,12 @@ function scorePool(pool, have){
     if (!g) groups.set(key, { name:key, lists:1, short, distinct, deck:d, spend, unpriced });
     else {
       g.lists++;
-      // Closest wins, and among equally close lists the cheaper one, since they are
-      // interchangeable to the collection but not to the wallet.
-      if (short < g.short || (short === g.short && (d.pr ?? Infinity) < (g.deck.pr ?? Infinity))){
+      // Closest wins, then the more-viewed list, then the cheaper one. Kept identical
+      // to metaArchetypes' tie-break: the two must pick the same list per archetype or
+      // the Next badge (from here) and the tab (from there) disagree.
+      if (short < g.short || (short === g.short && (
+            (d.vw || 0) > (g.deck.vw || 0) ||
+            ((d.vw || 0) === (g.deck.vw || 0) && (d.pr ?? Infinity) < (g.deck.pr ?? Infinity))))){
         g.short = short; g.distinct = distinct; g.deck = d; g.spend = spend; g.unpriced = unpriced;
       }
     }
@@ -2922,9 +2932,11 @@ function huntText(bands){
 // gate only lifts if nothing established is open, so the plan is never empty when a
 // deck could be built.
 // `pin` names an archetype the reader chose on the Decks table; it leads the plan and
-// the planner picks the rounds after it. Without one nothing changes, which is what
-// every other caller relies on.
-function acquisitionPath(pool, maxDecks, maxSteps, pin){
+// the planner picks the rounds after it. `pinDeck` goes one finer — a specific list the
+// reader pinned from an archetype's expanded options — and leads round one against that
+// exact list's gap rather than the archetype's representative. Without either nothing
+// changes, which is what every other caller relies on.
+function acquisitionPath(pool, maxDecks, maxSteps, pin, pinDeck){
   const have = new Map(ownedIdentities());
   let scored = scorePool(pool, have);
   let ready = new Set(scored.filter(g => g.short === 0).map(g => g.name));
@@ -2939,8 +2951,25 @@ function acquisitionPath(pool, maxDecks, maxSteps, pin){
     const establishedOpen = allOpen.filter(g => isEstablished(g.name));
     const open = establishedOpen.length ? establishedOpen : allOpen;
     annotateCompounding(open, have, built);
-    const target = (round === 0 && pin && open.find(g => g.name === pin)) ||
-                   open.slice().sort(byPlanTarget)[0];
+    // A pinned list leads round one against its own gap. Built as a target-shaped
+    // object rather than one of `open`'s groups, so the identity checks below fall
+    // back to a name match.
+    let target;
+    if (round === 0 && pinDeck){
+      let short = 0, distinct = 0;
+      for (const [id, need] of reqOf(pinDeck)){
+        const s = need.qty - (have.get(id) || 0);
+        if (s > 0){ short += s; distinct++; }
+      }
+      const nm = archetypeName(pinDeck);
+      const g0 = scored.find(g => g.name === nm);
+      target = { name: nm, deck: pinDeck, short, distinct,
+                 share: g0 ? g0.share : 0, lists: g0 ? g0.lists : 1 };
+    } else {
+      target = (round === 0 && pin && open.find(g => g.name === pin)) ||
+               open.slice().sort(byPlanTarget)[0];
+    }
+    if (!target || !target.short) break;
 
     const gap = [];
     for (const [id, need] of reqOf(target.deck)){
@@ -2950,7 +2979,7 @@ function acquisitionPath(pool, maxDecks, maxSteps, pin){
     // How many other open archetypes are short of the same card.
     for (const c of gap)
       for (const g of open){
-        if (g === target) continue;
+        if (g === target || g.name === target.name) continue;
         const n = reqOf(g.deck).get(c.id);
         if (n && n.qty - (have.get(c.id) || 0) > 0){ c.reach += g.share; c.blocks++; }
       }
@@ -3095,16 +3124,22 @@ function renderNext(){
      "everything else" was two tables for one question. An archetype nobody has
      ranked still has a gap and a price, and hiding it behind a sentence at the
      bottom of a panel made it invisible rather than deprioritised.                  */
+  const pickList = S.pickList || null;
   let rows = arch.map(g => {
-    const t = tierMap.get(g.name) || null, ev = g.best.ev;
+    const t = tierMap.get(g.name) || null;
+    // A list pinned from this archetype's expanded options overrides its representative
+    // for the whole row — the gap, the price, the shape, the buy plan below.
+    const chosen = (pickList && g.rows.find(x => x.deck.s === pickList)) || g.best;
+    const ev = chosen.ev;
     const gap = gapExcl(ev.missing);
     return {
-      g, name: g.name, deck: g.best.deck,
+      g, name: g.name, deck: chosen.deck, chosenEv: ev,
+      pinnedList: chosen !== g.best ? chosen.deck.s : null,
       champion: t ? t.champion : null, tier: t ? t.tier : null,
       rank: t ? t.rank : 99, guide: t ? t.guide : null,
       gap, short: gap.short, buildable: gap.short === 0 && gap.unpriced === 0,
-      distinct: ev.distinctMissing, breakdown: gapBreak(ev.missing), shape: compTag(g.best.deck),
-      ownLegend: heldLegends.has(g.name), listPrice: g.best.deck.pr ?? null,
+      distinct: ev.distinctMissing, breakdown: gapBreak(ev.missing), shape: compTag(chosen.deck),
+      ownLegend: heldLegends.has(g.name), listPrice: chosen.deck.pr ?? null,
       bestPlace: g.bestPlace, claim: g.claim, lists: g.lists, share: g.share,
       established: isEstablished(g.name),
       fits: !budget || (gap.unpriced === 0 && gap.total <= budget) || gap.short === 0,
@@ -3116,7 +3151,7 @@ function renderNext(){
   // mapped back on, so a row can say a gap does double duty without a second table.
   const openCand = rows.filter(r => r.short > 0).map(r => ({
     name: r.name, short: r.short, distinct: r.distinct, share: r.share, lists: r.lists,
-    deck: r.deck, gap: gapCost(r.g.best.ev.missing), established: r.established,
+    deck: r.deck, gap: gapCost(r.chosenEv.missing), established: r.established,
   }));
   annotateCompounding(openCand, have, rows.filter(r => r.buildable).map(r => ({ name: r.name, deck: r.deck })));
   const compBy = new Map(openCand.map(c => [c.name, c]));
@@ -3148,8 +3183,11 @@ function renderNext(){
      The reader's pick if they made one, otherwise the planner's. Pinning it into
      acquisitionPath is what makes the buy list below belong to this deck rather than
      to whichever deck the planner would have chosen on its own.                      */
-  const pickedRow = (S.pick && rows.find(r => r.name === S.pick)) || null;
-  const plan = acquisitionPath(pool, 3, 24, pickedRow && !pickedRow.buildable ? pickedRow.name : null);
+  const pickedRow = (pickList && rows.find(r => r.pinnedList === pickList))
+                 || (S.pick && rows.find(r => r.name === S.pick)) || null;
+  const plan = acquisitionPath(pool, 3, 24,
+    pickedRow && !pickedRow.buildable ? pickedRow.name : null,
+    pickedRow && pickedRow.pinnedList && !pickedRow.buildable ? pickedRow.deck : null);
   const steps = plan.steps;
   NEXT_PLAN = steps;
   NEXT_PLAN_TARGETS = plan.targets;
@@ -3207,6 +3245,41 @@ function renderNext(){
         s.cum} cards in</span></span>
     </div>`;
 
+  // How many of a legend's lists an expansion shows. A row opened on its own shows the
+  // lot (capped); "expand all" opens every row at once, so it shows fewer each to keep
+  // the page from becoming a wall.
+  const EXP_CAP = 12, EXP_CAP_ALL = 6;
+  const expanded = (name) => !!S.expandAll || (S.expand || []).includes(name);
+
+  // One archetype's individual lists, most-viewed first — the builds its single row
+  // folds together. Same tie-break as the representative pick, so "default" lands on
+  // the row that leads.
+  const listBlock = (r) => {
+    const cap = S.expandAll ? EXP_CAP_ALL : EXP_CAP;
+    const lists = r.g.rows.slice().sort((a, b) => (b.deck.vw || 0) - (a.deck.vw || 0) ||
+      (a.deck.pr ?? Infinity) - (b.deck.pr ?? Infinity) || (a.deck.s || '').localeCompare(b.deck.s || ''));
+    const pin = S.pickList || '';
+    return `<div data-expand-for="${esc(r.name)}" class="rows"
+        style="margin:1px 0 8px 20px;border-left:2px solid var(--line2);padding-left:10px">
+      ${lists.slice(0, cap).map(x => {
+        const d = x.deck, isDef = d.s === r.g.best.deck.s, isPin = d.s === pin;
+        return `<div class="row" style="${isPin ? 'background:var(--panel2);' : ''}">
+          <span class="nm">${esc(d.h || d.s)}
+            <span class="code">${d.vw || 0} view${d.vw === 1 ? '' : 's'} · ${
+              d.pr ? money(d.pr) : 'no price'} · ${x.ev.missingCopies === 0
+                ? '<b style="color:var(--good)">ready</b>' : `${x.ev.missingCopies} short`}${
+              isDef ? ' · default' : ''}${x.illegal ? ' · <span style="color:var(--bad)">not legal</span>' : ''}</span>
+            <a href="https://riftbound.gg/decks/${esc(d.s)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">list ↗</a>
+          </span>
+          <span class="qty"><button class="chip" data-pick-list="${esc(d.s)}" aria-pressed="${isPin}">${
+            isPin ? 'pinned ✕' : 'pin'}</button></span>
+        </div>`;
+      }).join('')}
+      ${lists.length > cap ? `<p class="note" style="margin:4px 0 0">+${lists.length - cap} more,
+        fewer views — <a href="https://riftbound.gg/decks/" target="_blank" rel="noopener" style="color:var(--teal)">browse on riftbound.gg</a></p>` : ''}
+    </div>`;
+  };
+
   // One row per archetype. Everything that used to be a sentence under a panel is a
   // column or a tooltip here, so the table carries the detail without the prose.
   const deckRow = (r) => `
@@ -3218,9 +3291,12 @@ function renderNext(){
         r.tier ? tierBadge(r.tier) : '<span class="code" title="not on the tier list">untiered</span>'}
         <b style="color:var(--cream)">${esc(r.champion || r.name)}</b>${moveChip(r.name)}
         <span class="code">${r.champion ? `${esc(r.name)} · ` : ''}${r.shape}${
-          r.bestPlace != null ? ` · best #${r.bestPlace}` : ''} · ${r.lists} list${r.lists === 1 ? '' : 's'}${
+          r.bestPlace != null ? ` · best #${r.bestPlace}` : ''} · <span data-expand="${esc(r.name)}"
+            style="cursor:pointer;text-decoration:underline dotted" title="show every list for this legend">${
+            r.lists} list${r.lists === 1 ? '' : 's'} ${expanded(r.name) ? '▾' : '▸'}</span>${
           r.established ? '' : ' · fringe'}${
-          !r.g.evCount && !(r.claim && r.claim.best != null) ? ' · no tournament record' : ''}</span>${
+          !r.g.evCount && !(r.claim && r.claim.best != null) ? ' · no tournament record' : ''}${
+          r.pinnedList ? ' · <span style="color:var(--good)">list pinned</span>' : ''}</span>${
         r.bestPlace == null && r.claim && r.claim.best != null
           ? ` <span class="code" style="color:var(--maize)" title="${esc(claimText(r.claim))}">claims ${
               r.claim.best === 1 ? 'a win' : `top ${r.claim.best}`}</span>` : ''}
@@ -3260,7 +3336,7 @@ function renderNext(){
           style="width:70px;text-align:center;background:var(--bg2);border:1px solid var(--line2);border-radius:4px;padding:2px">
         <button class="chip" id="btn-own-legend" aria-pressed="${!!S.ownLegendOnly}">only legends I own</button>
         ${pickedRow ? `<button class="chip" id="btn-pick-clear" aria-pressed="true">pinned to ${
-          esc(pickedRow.champion || pickedRow.name)} ✕</button>` : ''}
+          esc(pickedRow.champion || pickedRow.name)}${pickedRow.pinnedList ? ' (one list)' : ''} ✕</button>` : ''}
         <span class="note">${budget ? `${rows.filter(r => r.fits && !r.buildable).length} fit the budget; the rest stay listed, greyed`
           : 'no budget set'}</span>
       </div>
@@ -3271,7 +3347,9 @@ function renderNext(){
       ${staleNote('decks', 'everything on this tab')}
     </div>
 
-    ${target ? deckPanel(target.g, { showMissing: !target.buildable, gap: target.gap }) : ''}
+    ${target ? deckPanel(target.g, { showMissing: !target.buildable, gap: target.gap,
+        deck: target.pinnedList ? target.deck : undefined,
+        ev: target.pinnedList ? target.chosenEv : undefined }) : ''}
 
     <div class="panel">
       <h2>PICK A DECK <span class="code">${rows.length}</span></h2>
@@ -3279,16 +3357,19 @@ function renderNext(){
         <span class="lbl">Rank by</span>
         ${Object.keys(SORTS).map(k => `<button class="chip" data-deck-sort="${k}" aria-pressed="${
           k === sortKey}">${SORT_LABEL[k]}</button>`).join('')}
+        <button class="chip" id="btn-expand-all" aria-pressed="${!!S.expandAll}" style="margin-left:auto"
+          title="open every row's individual lists at once">${S.expandAll ? 'collapse all' : 'expand all'}</button>
       </div>
-      <p class="note" style="margin-top:8px">One row per archetype; click one to pin it and the buy list below
-      follows. The four orderings genuinely disagree — the cheapest deck to finish is rarely the best one — so
-      this is a choice, not a calculation. <b>●</b> marks a legend you already own; click a chase card in a gap
-      to stop the tool ever recommending a deck that needs it.</p>
+      <p class="note" style="margin-top:8px">One row per archetype; click it to pin it and the buy list
+      follows. Open <b>N lists ▸</b> for every build folded into that row, most-viewed first — <b>pin</b>
+      one and the panel and plan retarget to it. The four orderings disagree; the cheapest deck to finish is
+      rarely the best. <b>●</b> marks a legend you own; click a chase card in a gap to bar decks needing it.</p>
       <p class="note" style="margin-top:6px">Two labels bend a near-tie and are printed on the rows rather than
       applied silently. <b>Compounding:</b> among gaps costing about the same, the one whose missing cards other
       open decks also need does more with the money. <b>Redundancy:</b> a deck that mostly reprints one you can
       already build is a weak buy however cheap.</p>
-      <div class="rows" style="margin-top:8px">${shown.map(deckRow).join('')}</div>
+      <div class="rows" style="margin-top:8px">${
+        shown.map(r => deckRow(r) + (expanded(r.name) ? listBlock(r) : '')).join('')}</div>
       ${rest.length ? `<p class="note" style="margin-top:8px">${rest.length} further down this order, starting
         ${rest.slice(0, 8).map(r => esc(r.champion || r.name)).join(', ')}${rest.length > 8 ? '…' : ''}
         — re-rank above to bring them up.</p>` : ''}
@@ -4253,12 +4334,36 @@ function wire(){
     if (dsort){ S.deckSort = dsort.dataset.deckSort; persist(); }
     const bfor = t.closest('[data-buy-for]');
     if (bfor){ S.buyFor = bfor.dataset.buyFor; persist(); }
-    if (t.id === 'btn-pick-clear'){ S.pick = null; persist(); }
+    if (t.id === 'btn-pick-clear'){ S.pick = null; S.pickList = null; persist(); }
+    if (t.id === 'btn-expand-all'){ S.expandAll = !S.expandAll; persist(); }
+
+    // Open/close one archetype's list of individual builds.
+    const exp = t.closest('[data-expand]');
+    if (exp){
+      const n = exp.dataset.expand;
+      const set = new Set(S.expand || []);
+      set.has(n) ? set.delete(n) : set.add(n);
+      S.expand = [...set];
+      persist();
+    }
+    // Pin one specific list from an expanded archetype. It also pins the archetype, so
+    // the plan and the deck panel both follow.
+    const plist = t.closest('[data-pick-list]');
+    if (plist){
+      const slug = plist.dataset.pickList;
+      const d = DECKS.find(x => x.s === slug);
+      S.pickList = S.pickList === slug ? null : slug;
+      if (S.pickList && d) S.pick = archetypeName(d);
+      persist();
+    }
+
     const pick = t.closest('[data-pick]');
-    // Not when the click was really meant for something inside the row — a guide link,
-    // or a chase card being blacklisted.
-    if (pick && !t.closest('a') && !t.closest('[data-nobuy-card]')){
+    // Not when the click was really meant for something inside the row — a link, a
+    // chase card being blacklisted, the expand toggle, or a per-list pin button.
+    if (pick && !t.closest('a') && !t.closest('[data-nobuy-card]') &&
+        !t.closest('[data-expand]') && !t.closest('[data-pick-list]')){
       S.pick = S.pick === pick.dataset.pick ? null : pick.dataset.pick;
+      S.pickList = null;   // a row-level pick uses the representative, dropping any list pin
       persist();
     }
 
