@@ -8,35 +8,34 @@
   "players": 2390,
   "playersWithDecks": 1553,
   "unresolvedDeckEvents": [],
-  "claimedEvents": 20,
-  "claimedEventsUnmatched": 19,
+  "claimedEvents": 18,
+  "claimedEventsUnmatched": 17,
   "claimedEventAliases": {
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
-   "Europe": 20,
-   "Asia": 15,
-   "unknown": 3,
-   "North America": 8
+   "Asia": 16,
+   "Oceania": 1,
+   "Europe": 18,
+   "North America": 7,
+   "unknown": 3
   },
   "registryEventsByRegion": {
    "unknown": 25,
    "North America": 5
   },
   "unresolvedClaimEvents": [
+   "10K Showdown - Auckland Card Show",
    "36P in China",
    "Barcelona RQ",
    "Changsha Open",
    "Chengdu Regional",
-   "Dinan Regional",
    "Hartford RQ",
    "Nanjing Regional",
    "S3 Foshan City Challenge",
    "S3 Suzhou City Challenge",
    "S4 Beijing City Challenge",
-   "S4 Guangzhou City Challenge",
    "S4 Nanjing City Challenge",
-   "S4 Shenzhen City Challenge",
    "S4 Tianjin City Challenge",
    "Tianjin Regional",
    "Top Shelf Masters Tournament",

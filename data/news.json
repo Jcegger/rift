@@ -6,8 +6,8 @@
  "postsSeen": 1600,
  "tags": {
   "Metagame": 18,
-  "Events": 20,
-  "News": 31,
+  "Events": 19,
+  "News": 30,
   "Legends": 15,
   "Sets": 2,
   "Guides": 4,
@@ -816,15 +816,6 @@
    "author": "Den"
   },
   {
-   "title": "Roadmap - 2026",
-   "dt": "2026-02-10",
-   "url": "https://riftbound.gg/roadmap-2026",
-   "tags": [
-    "News"
-   ],
-   "author": "Riftbound.gg"
-  },
-  {
    "title": "State of the Game - February 2026",
    "dt": "2026-02-10",
    "url": "https://riftbound.gg/state-of-the-game-february-2026",
@@ -832,15 +823,6 @@
     "News"
    ],
    "author": "Riftbound.gg"
-  },
-  {
-   "title": "Nanjing Regional Open Results – Popularity, Conversion Rate & Best Deck for Every Legend!",
-   "dt": "2026-02-09",
-   "url": "https://riftbound.gg/nanjing-regional-open-results-popularity-conversion-rate-best-deck-for-every-legend",
-   "tags": [
-    "Events"
-   ],
-   "author": "Den"
   }
  ]
 }
