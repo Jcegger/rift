@@ -2156,6 +2156,36 @@ function metaArchetypes(pool){
   return [...groups.values()].map((g) => ({ ...g, share: g.lists / total * 100, ...credibility(g), claim: claimedResults(g) }));
 }
 
+/* ── a legend's best builds, by lens ──────────────────────────────────────
+   Card-similarity clustering was tried and does not produce "tourney / midrange /
+   budget" — most legends are one big blob plus a scatter of one-offs. So this is
+   three fixed lenses over the legend's lists, deduped by slug: the one people look
+   at most, the one with a placing or a claimed result, and the cheapest priced one.
+   A legend with a single real build (or where all three land on it) returns one
+   entry, and the caller shows the plain list instead.
+
+   Legal lists win the shortlist; if the ban filter leaves none, fall back to all so
+   the expansion is never empty. */
+function legendPicks(g){
+  const legal = (g.rows || []).filter((x) => !x.illegal);
+  const pool = legal.length ? legal : (g.rows || []);
+  const byV = (a, b) => (b.deck.vw || 0) - (a.deck.vw || 0) ||
+                        (a.deck.pr ?? Infinity) - (b.deck.pr ?? Infinity);
+  const out = new Map();     // slug -> { row, lenses: [] }
+  const add = (x, lens) => {
+    if (!x) return;
+    const e = out.get(x.deck.s) || { row: x, lenses: [] };
+    e.lenses.push(lens);
+    out.set(x.deck.s, e);
+  };
+  add(pool.slice().sort(byV)[0], 'most played');
+  add(pool.filter((x) => x.deck.tour || x.deck.cp != null || x.deck.ce)
+          .sort((a, b) => (a.deck.pl ?? a.deck.cp ?? 99) - (b.deck.pl ?? b.deck.cp ?? 99) || byV(a, b))[0],
+      'tournament');
+  add(pool.filter((x) => x.deck.pr > 0).sort((a, b) => a.deck.pr - b.deck.pr || byV(a, b))[0], 'budget');
+  return [...out.values()];
+}
+
 /* ── credibility ───────────────────────────────────────────────────────────
    A binary "was this a tournament deck" treated a 9-player local and a 433-player
    major as the same evidence, which is most of why the README calls the tournament
@@ -3251,30 +3281,37 @@ function renderNext(){
   const EXP_CAP = 12, EXP_CAP_ALL = 6;
   const expanded = (name) => !!S.expandAll || (S.expand || []).includes(name);
 
-  // One archetype's individual lists, most-viewed first — the builds its single row
-  // folds together. Same tie-break as the representative pick, so "default" lands on
-  // the row that leads.
+  // One line for a list inside an expansion — used for the named picks and for the
+  // full roll below them. `label` set marks it a pick; unset, it is a roll row and
+  // gets the "default" marker if it is the archetype's representative.
+  const listLine = (x, best, pinSlug, label) => {
+    const d = x.deck, isPin = d.s === pinSlug;
+    return `<div class="row" style="${isPin ? 'background:var(--panel2);' : ''}">
+      <span class="nm">${label ? `<b style="color:var(--maize)">${label}</b> ` : ''}${esc(d.h || d.s)}
+        <span class="code">${d.vw || 0} view${d.vw === 1 ? '' : 's'} · ${
+          d.pr ? money(d.pr) : 'no price'} · ${x.ev.missingCopies === 0
+            ? '<b style="color:var(--good)">ready</b>' : `${x.ev.missingCopies} short`}${
+          d.pl != null ? ` · #${d.pl}` : d.cp != null ? ` · top ${d.cp} claimed` : ''}${
+          !label && d.s === best ? ' · default' : ''}${
+          x.illegal ? ' · <span style="color:var(--bad)">not legal</span>' : ''}</span>
+        <a href="https://riftbound.gg/decks/${esc(d.s)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">list ↗</a>
+      </span>
+      <span class="qty"><button class="chip" data-pick-list="${esc(d.s)}" aria-pressed="${isPin}">${
+        isPin ? 'pinned ✕' : 'pin'}</button></span>
+    </div>`;
+  };
+
   const listBlock = (r) => {
     const cap = S.expandAll ? EXP_CAP_ALL : EXP_CAP;
+    const best = r.g.best.deck.s, pin = S.pickList || '';
+    const picks = legendPicks(r.g);
     const lists = r.g.rows.slice().sort((a, b) => (b.deck.vw || 0) - (a.deck.vw || 0) ||
       (a.deck.pr ?? Infinity) - (b.deck.pr ?? Infinity) || (a.deck.s || '').localeCompare(b.deck.s || ''));
-    const pin = S.pickList || '';
     return `<div data-expand-for="${esc(r.name)}" class="rows"
         style="margin:1px 0 8px 20px;border-left:2px solid var(--line2);padding-left:10px">
-      ${lists.slice(0, cap).map(x => {
-        const d = x.deck, isDef = d.s === r.g.best.deck.s, isPin = d.s === pin;
-        return `<div class="row" style="${isPin ? 'background:var(--panel2);' : ''}">
-          <span class="nm">${esc(d.h || d.s)}
-            <span class="code">${d.vw || 0} view${d.vw === 1 ? '' : 's'} · ${
-              d.pr ? money(d.pr) : 'no price'} · ${x.ev.missingCopies === 0
-                ? '<b style="color:var(--good)">ready</b>' : `${x.ev.missingCopies} short`}${
-              isDef ? ' · default' : ''}${x.illegal ? ' · <span style="color:var(--bad)">not legal</span>' : ''}</span>
-            <a href="https://riftbound.gg/decks/${esc(d.s)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">list ↗</a>
-          </span>
-          <span class="qty"><button class="chip" data-pick-list="${esc(d.s)}" aria-pressed="${isPin}">${
-            isPin ? 'pinned ✕' : 'pin'}</button></span>
-        </div>`;
-      }).join('')}
+      ${picks.length > 1 ? picks.map(p => listLine(p.row, best, pin, p.lenses.join(' · '))).join('')
+        + `<p class="note" style="margin:3px 0">— every list, most viewed first —</p>` : ''}
+      ${lists.slice(0, cap).map(x => listLine(x, best, pin, null)).join('')}
       ${lists.length > cap ? `<p class="note" style="margin:4px 0 0">+${lists.length - cap} more,
         fewer views — <a href="https://riftbound.gg/decks/" target="_blank" rel="noopener" style="color:var(--teal)">browse on riftbound.gg</a></p>` : ''}
     </div>`;
@@ -3292,8 +3329,10 @@ function renderNext(){
         <b style="color:var(--cream)">${esc(r.champion || r.name)}</b>${moveChip(r.name)}
         <span class="code">${r.champion ? `${esc(r.name)} · ` : ''}${r.shape}${
           r.bestPlace != null ? ` · best #${r.bestPlace}` : ''} · <span data-expand="${esc(r.name)}"
-            style="cursor:pointer;text-decoration:underline dotted" title="show every list for this legend">${
-            r.lists} list${r.lists === 1 ? '' : 's'} ${expanded(r.name) ? '▾' : '▸'}</span>${
+            style="cursor:pointer;text-decoration:underline dotted" title="most-played, tournament and budget builds, then every list">${
+            (() => { const p = legendPicks(r.g).length;
+              return p > 1 ? `${p} picks in ${r.lists} lists` : `${r.lists} list${r.lists === 1 ? '' : 's'}`; })()
+            } ${expanded(r.name) ? '▾' : '▸'}</span>${
           r.established ? '' : ' · fringe'}${
           !r.g.evCount && !(r.claim && r.claim.best != null) ? ' · no tournament record' : ''}${
           r.pinnedList ? ' · <span style="color:var(--good)">list pinned</span>' : ''}</span>${

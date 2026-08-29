@@ -56,7 +56,7 @@ const NAMED = [
   'historyDays', 'historyNames', 'sharesOn', 'movementPair', 'metaMovement', 'movementFor',
   'tierMovement', 'movementPending', 'moveChip',
   'renderNews', 'credibility',
-  'archetypeName', 'metaPool', 'metaArchetypes', 'scorePool', 'cardLeverage', 'loadBans',
+  'archetypeName', 'metaPool', 'metaArchetypes', 'legendPicks', 'scorePool', 'cardLeverage', 'loadBans',
   'acquisitionPath', 'unionGap', 'pathText', 'huntList', 'huntText', 'HUNT_BANDS', 'ownedIdentities', 'evalDeck', 'matchRow',
   'spares', 'tradeMatch', 'readPartner', 'readyShareOf', 'owned', 'byTarget',
   'annotateCompounding', 'establishedArchetypes', 'isEstablished', 'byCost', 'byCards', 'byPlanTarget',
@@ -1520,7 +1520,8 @@ section('Deck options');
   ok('there is a tiered multi-list archetype to exercise expansion on', !!multi,
      multi ? `${multi.name}, ${multi.rows.length} lists` : 'none found');
 
-  // 2. Expanding the row renders its lists, most-viewed first, each pinnable and linked.
+  // 2. Expanding the row: named picks first, then every list most-viewed first,
+  //    each pinnable and linked.
   A.S.expand = [multi.name];
   A.renderNext();
   let html = els.get('v-next').innerHTML;
@@ -1528,19 +1529,28 @@ section('Deck options');
   const bEnd = html.indexOf('data-pick="', bStart);
   const block = html.slice(bStart, bEnd > -1 ? bEnd : html.indexOf('WHAT TO BUY', bStart));
   const EXP_CAP = 12;
-  const pinBtns = (block.match(/data-pick-list="/g) || []).length;
-  ok('the expansion lists the archetype\'s builds (capped)',
-     pinBtns === Math.min(multi.rows.length, EXP_CAP),
-     `${pinBtns} of ${multi.rows.length} lists shown`);
+  const picks = A.legendPicks(multi);
+  const divider = '— every list, most viewed first —';
+  const rollStart = block.indexOf(divider);
+  const roll = rollStart > -1 ? block.slice(rollStart) : block;
+  const rollPins = (roll.match(/data-pick-list="/g) || []).length;
+  ok('the full roll lists every build, capped',
+     rollPins === Math.min(multi.rows.length, EXP_CAP),
+     `${rollPins} of ${multi.rows.length} lists`);
+  ok('the picks lead the roll when a legend has more than one',
+     picks.length < 2 || (rollStart > -1 &&
+       picks.every((p) => block.indexOf(`data-pick-list="${p.row.deck.s}"`) < rollStart)),
+     `${picks.length} picks, divider at ${rollStart}`);
   ok('every expanded list has a riftbound.gg link',
-     (block.match(/href="https:\/\/riftbound\.gg\/decks\/[^"]+"/g) || []).length >= pinBtns,
+     (block.match(/href="https:\/\/riftbound\.gg\/decks\/[^"]+"/g) || []).length >=
+       (block.match(/data-pick-list="/g) || []).length,
      `${(block.match(/riftbound\.gg\/decks\//g) || []).length} links`);
-  const vws = [...block.matchAll(/>(\d+) views?/g)].map((m) => Number(m[1]));
-  ok('the expansion is ordered most-viewed first',
+  const vws = [...roll.matchAll(/>(\d+) views?/g)].map((m) => Number(m[1]));
+  ok('the full roll is ordered most-viewed first',
      vws.length > 1 && vws.every((v, i) => !i || v <= vws[i - 1]),
      `views ${vws.slice(0, 8).join(', ')}`);
-  ok('the expansion marks the representative as the default',
-     block.includes('· default'), 'a row carries "default"');
+  ok('the roll marks the representative as the default',
+     roll.includes('· default'), 'a row carries "default"');
 
   // 3. Pinning a non-default list drives the panel and the plan.
   const def = multi.best.deck.s;
@@ -1603,6 +1613,72 @@ section('Deck options');
   }
 
   A.S.expandAll = false;
+  A.S.expand = [];
+  A.S.pick = null;
+  A.S.pickList = null;
+
+  // 7. legendPicks: the three lenses over a legend's lists.
+  const LENSES = ['most played', 'tournament', 'budget'];
+  let multiSeen = 0, singleSeen = 0;
+  for (const [label, inv] of Object.entries(collections)){
+    A.S.inv = inv;
+    const groups = A.metaArchetypes(A.metaPool());
+    const bad = [];
+    for (const g of groups){
+      const picks = A.legendPicks(g);
+      if (picks.length < 1 || picks.length > 3){ bad.push(`${g.name}: ${picks.length} picks`); continue; }
+      picks.length > 1 ? multiSeen++ : singleSeen++;
+      const slugs = picks.map((p) => p.row.deck.s);
+      if (new Set(slugs).size !== slugs.length) bad.push(`${g.name}: duplicate slug`);
+      if (!picks.every((p) => g.rows.includes(p.row))) bad.push(`${g.name}: pick not in g.rows`);
+      // every lens is one of the three, and the first entry always carries "most played".
+      if (!picks.flatMap((p) => p.lenses).every((l) => LENSES.includes(l)))
+        bad.push(`${g.name}: unknown lens in ${picks.flatMap((p) => p.lenses).join(',')}`);
+      if (!picks[0].lenses.includes('most played')) bad.push(`${g.name}: first pick is not "most played"`);
+
+      const legal = g.rows.filter((x) => !x.illegal);
+      const pool = legal.length ? legal : g.rows;
+      const mostPlayed = picks.find((p) => p.lenses.includes('most played'));
+      if (!mostPlayed) bad.push(`${g.name}: no "most played"`);
+      else if ((mostPlayed.row.deck.vw || 0) !== Math.max(...pool.map((x) => x.deck.vw || 0)))
+        bad.push(`${g.name}: most-played not max views`);
+
+      const tourRows = pool.filter((x) => x.deck.tour || x.deck.cp != null || x.deck.ce);
+      const tourPick = picks.find((p) => p.lenses.includes('tournament'));
+      if (tourRows.length && !tourPick) bad.push(`${g.name}: has tournament lists but no lens`);
+      if (tourPick && !tourRows.includes(tourPick.row)) bad.push(`${g.name}: tournament lens on a non-tournament list`);
+      if (!tourRows.length && tourPick) bad.push(`${g.name}: tournament lens with no tournament lists`);
+
+      const priced = pool.filter((x) => x.deck.pr > 0);
+      const budgetPick = picks.find((p) => p.lenses.includes('budget'));
+      if (priced.length && budgetPick &&
+          budgetPick.row.deck.pr !== Math.min(...priced.map((x) => x.deck.pr)))
+        bad.push(`${g.name}: budget lens not cheapest priced`);
+    }
+    ok(`[${label}] legendPicks: 1-3 deduped lens picks per legend, each a real list`,
+       bad.length === 0, bad.slice(0, 3).join('; ') || `${groups.length} legends`);
+  }
+  ok('the snapshot has both multi-pick and single-pick legends',
+     multiSeen > 0 && singleSeen > 0, `${multiSeen} multi, ${singleSeen} single (summed over fixtures)`);
+
+  // 8. A single-pick legend's expansion has no picks header.
+  A.S.inv = collections['deep'];
+  const single = A.metaArchetypes(A.metaPool())
+    .find((g) => A.legendPicks(g).length === 1 && g.rows.length >= 2 && A.tierByArchetype().has(g.name));
+  if (single){
+    A.S.expand = [single.name];
+    A.renderNext();
+    const h = els.get('v-next').innerHTML;
+    const bs = h.indexOf(`data-expand-for="${single.name}"`);
+    const be = h.indexOf('data-pick="', bs);
+    const blk = h.slice(bs, be > -1 ? be : h.indexOf('WHAT TO BUY', bs));
+    ok('a single-pick legend shows no picks header and no divider',
+       !blk.includes('— every list, most viewed first —'),
+       `${single.name}: ${(blk.match(/data-pick-list="/g) || []).length} rows, no divider`);
+  } else {
+    ok('a single-pick legend shows no picks header and no divider', true, 'none shown to test');
+  }
+
   A.S.expand = [];
   A.S.pick = null;
   A.S.pickList = null;
