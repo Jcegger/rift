@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-29",
+ "generatedAt": "2026-08-30",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,

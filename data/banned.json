@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-29",
+ "generatedAt": "2026-08-30",
  "source": "api.dotgg.gg/cgfw/getcards (banned flag) + riftbound.gg/rules/banned-cards for format-specific bans",
  "note": "Riot bans outright; there is no restricted list. A ban covers the card, so every printing of it is banned.",
  "constructed": [

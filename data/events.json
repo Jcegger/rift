@@ -1,24 +1,24 @@
 {
- "generatedAt": "2026-08-29",
+ "generatedAt": "2026-08-30",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg)",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
   "events": 30,
   "eventsWithDecks": 11,
-  "players": 2390,
+  "players": 2313,
   "playersWithDecks": 1553,
   "unresolvedDeckEvents": [],
-  "claimedEvents": 20,
-  "claimedEventsUnmatched": 19,
+  "claimedEvents": 24,
+  "claimedEventsUnmatched": 23,
   "claimedEventAliases": {
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
-   "Europe": 16,
-   "Asia": 17,
-   "North America": 7,
-   "Oceania": 1,
-   "unknown": 3
+   "Europe": 9,
+   "unknown": 6,
+   "Asia": 18,
+   "North America": 6,
+   "Oceania": 3
   },
   "registryEventsByRegion": {
    "unknown": 25,
@@ -26,24 +26,28 @@
   },
   "unresolvedClaimEvents": [
    "10K Showdown - Auckland Card Show",
-   "36P in China",
+   "64P France",
+   "96P in Italy",
    "Barcelona RQ",
    "Changsha Open",
+   "Changsha RQ",
    "Chengdu Regional",
    "Hartford RQ",
-   "Nanjing Regional",
+   "Hartord RQ",
    "S3 Beijing City Challenge",
-   "S3 Foshan City Challenge",
+   "S3 Guangzhou City Challenge",
    "S3 Shanghai City Challenge",
    "S3 Suzhou City Challenge",
    "S4 Beijing City Challenge",
    "S4 Nanjing City Challenge",
    "S4 Tianjin City Challenge",
+   "Sydney Regional Qualifier",
    "Tianjin Regional",
    "Top Shelf Masters Tournament",
    "Utrecht RQ",
    "Utrecht Regional",
-   "Vancouver RQ"
+   "Vancouver RQ",
+   "a tournament"
   ],
   "decksByEvent": {
    "Pittsburgh 2026 - Riftbound Showdown $10k-$25,000": 6,
@@ -60,6 +64,24 @@
   }
  },
  "events": [
+  {
+   "name": "The Picnic - Riftbound 5k+",
+   "dt": "2026-08-29",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "[LPW] David Wilson",
+   "country": null,
+   "slug": "the-picnic-riftbound-5k"
+  },
+  {
+   "name": "Re-Skirmish Warm Up",
+   "dt": "2026-08-28",
+   "players": 4,
+   "format": "Constructed",
+   "winner": "[LPW] David Wilson",
+   "country": null,
+   "slug": "re-skirmish-warm-up"
+  },
   {
    "name": "Club9 Riftbound Clash #2",
    "dt": "2026-08-28",
@@ -311,24 +333,6 @@
    "winner": "Michael Byars",
    "country": null,
    "slug": "riftbound-1000-prize-pool"
-  },
-  {
-   "name": "Weekly Riftbound CR - UNL",
-   "dt": "2026-06-04",
-   "players": 4,
-   "format": "Constructed",
-   "winner": "ToF Toshiro Rose",
-   "country": null,
-   "slug": "weekly-riftbound-cr-unl-1988"
-  },
-  {
-   "name": "CCS Sunday $5,000 Riftbound Event #3",
-   "dt": "2026-05-24",
-   "players": 85,
-   "format": "Constructed",
-   "winner": "Dong Yoo",
-   "country": null,
-   "slug": "ccs-sunday-5000-riftbound-event-3"
   }
  ]
 }
