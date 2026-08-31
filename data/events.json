@@ -14,11 +14,11 @@
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
-   "Europe": 9,
+   "Europe": 10,
+   "Asia": 48,
+   "Oceania": 3,
    "unknown": 7,
-   "Asia": 49,
-   "Oceania": 2,
-   "North America": 5
+   "North America": 4
   },
   "registryEventsByRegion": {
    "unknown": 25,
@@ -48,7 +48,7 @@
    "Vancouver RQ",
    "Wuhan Regional Open",
    "Wuhan Regional open",
-   "a tournament"
+   "Xi'an Regional"
   ],
   "decksByEvent": {
    "Pittsburgh 2026 - Riftbound Showdown $10k-$25,000": 6,
