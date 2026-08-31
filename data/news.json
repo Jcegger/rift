@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-08-30",
+ "generatedAt": "2026-08-31",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "tags": {
+  "Events": 20,
   "Metagame": 18,
-  "Events": 19,
   "News": 29,
   "Legends": 15,
   "Sets": 2,
@@ -14,6 +14,15 @@
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Wuhan Regional Qualifier Results – Top 8, Best-of Decks, Metagame, Popularity & Conversion Rates!",
+   "dt": "2026-08-30",
+   "url": "https://riftbound.gg/wuhan-regional-qualifier",
+   "tags": [
+    "Events"
+   ],
+   "author": "Den"
+  },
   {
    "title": "Riftbound Meta Tier List - Best Decks for Vendetta - Post Barcelona RQ",
    "dt": "2026-08-28",

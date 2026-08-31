@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-30",
+ "generatedAt": "2026-08-31",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg)",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -8,17 +8,17 @@
   "players": 2313,
   "playersWithDecks": 1553,
   "unresolvedDeckEvents": [],
-  "claimedEvents": 27,
-  "claimedEventsUnmatched": 26,
+  "claimedEvents": 25,
+  "claimedEventsUnmatched": 24,
   "claimedEventAliases": {
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
-   "Asia": 21,
-   "Europe": 10,
-   "North America": 8,
+   "Europe": 9,
    "unknown": 7,
-   "Oceania": 3
+   "Asia": 49,
+   "Oceania": 2,
+   "North America": 5
   },
   "registryEventsByRegion": {
    "unknown": 25,
@@ -27,20 +27,17 @@
   "unresolvedClaimEvents": [
    "10K Showdown - Auckland Card Show",
    "64P France",
-   "96P in Italy",
    "Barcelona RQ",
    "Changsha Open",
    "Changsha RQ",
-   "Chengdu Regional",
    "Hartford RQ",
-   "Hartord RQ",
+   "Riftbound Championship Series - RCS Hobby Con",
    "Riftbound Showdown Series Germany",
-   "S3 Beijing City Challenge",
    "S3 Guangzhou City Challenge",
-   "S3 Shanghai City Challenge",
-   "S3 Suzhou City Challenge",
+   "S3 Zhongshan City Challenge",
    "S4 Beijing City Challenge",
-   "S4 Nanjing City Challenge",
+   "S4 Qingdao City Challenge",
+   "S4 Shenzhen City Challenge",
    "S4 Tianjin City Challenge",
    "S4 Wuhan Regional Open",
    "Sydney Regional Qualifier",
@@ -50,6 +47,7 @@
    "Utrecht Regional",
    "Vancouver RQ",
    "Wuhan Regional Open",
+   "Wuhan Regional open",
    "a tournament"
   ],
   "decksByEvent": {
