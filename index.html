@@ -17,7 +17,7 @@
   --bg:#111822; --bg2:#0c121a; --panel:#18212e; --panel2:#1e2937;
   --line:#2a3646; --line2:#374556;
   --ink:#e8edf4; --dim:#93a1b3; --dimmer:#6a7787;
-  --cream:#f6f0e9; --burnt:#bf5700; --teal:#3caea3; --maize:#f7c948;
+  --cream:#f6f0e9; --burnt:#bf5700; --teal:#3caea3; --maize:#f7c948; --inflight:#a78bfa;
   --good:#4ade80; --warn:#fcd34d; --bad:#f87171;
   --fury:#e5484d; --calm:#48c78e; --mind:#4cb3e5;
   --body:#d9a05b; --chaos:#a87fe0; --order:#f7c948; --colorless:#8a93a0;
@@ -103,7 +103,7 @@ select:focus{outline:none;border-color:var(--teal)}
 .dchip{width:9px;height:9px;border-radius:2px;display:inline-block;vertical-align:-1px}
 
 /* steppers */
-.qs{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:auto}
+.qs{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:auto}
 .q{display:flex;flex-direction:column;align-items:center;gap:1px}
 .q span{font-family:var(--head);font-size:8.5px;color:var(--dimmer);text-transform:uppercase}
 .q input{width:100%;text-align:center;background:var(--bg2);border:1px solid var(--line);
@@ -113,6 +113,14 @@ select:focus{outline:none;border-color:var(--teal)}
 .q input.set{border-color:var(--teal);color:var(--teal)}
 .q.w input.set{border-color:var(--maize);color:var(--maize)}
 .q.t input.set{border-color:var(--burnt);color:#e58a3c}
+.q.o input.set{border-color:var(--inflight);color:var(--inflight)}
+.row input.src{width:118px;background:var(--bg2);border:1px solid var(--line);border-radius:4px;
+  padding:3px 6px;font-family:var(--head);font-size:10.5px;color:var(--ink)}
+.row input.src:focus{outline:none;border-color:var(--inflight)}
+.row input.src::placeholder{color:var(--dimmer)}
+.row .qty.way{color:var(--inflight)}
+.row.covered{opacity:.55}
+.row.covered .nm{text-decoration:line-through}
 
 /* ── table view ───────────────────────────────────────── */
 .tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
@@ -725,6 +733,36 @@ const want  = (code) => inv(code).w || 0;
 const forTrade = (code) => inv(code).t || 0;
 const need  = (code) => Math.max(0, want(code) - owned(code));
 
+/* ── on the way ───────────────────────────────────────────────────────────
+   Copies already paid for or agreed to, but not yet in hand: a TCGplayer order,
+   a trade someone has posted, a preorder.
+
+   Local state, and it has to be. riftbound.gg has no notion of it, and import
+   replaces owned counts on every pull, so this lives beside Want and Trade —
+   the two fields a pull deliberately leaves alone — rather than anywhere near
+   `n` and `f`. It rides Supabase sync because `inv` already does.
+
+   The source label is free text and is never parsed. It groups the panel and
+   nothing else, so no format has to be taught and a blank one still works.     */
+const coming     = (code) => inv(code).o  || 0;
+const comingFrom = (code) => inv(code).os || '';
+
+// Recorded per printing; the deck maths and the hunt list work by card identity,
+// so fold printings the same way ownedIdentities does. Uncached for the same
+// reason that one is: it is cheap, and a stale copy would quietly overstate what
+// is covered right after an edit.
+function comingIdentities(){
+  const out = new Map();
+  for (const code in S.inv){
+    const q = coming(code);
+    if (!q) continue;
+    const id = identityOf(BY[code]);
+    if (id) out.set(id, (out.get(id) || 0) + q);
+  }
+  return out;
+}
+const comingFor = (id) => comingIdentities().get(id) || 0;
+
 function setQty(code, field, val){
   setQtyQuiet(code, field, val);
   persist({ render:false });
@@ -783,6 +821,7 @@ function matches(c){
   if (F.have === 'missing' && o) return false;
   if (F.have === 'want'    && !need(c.c)) return false;
   if (F.have === 'trade'   && !forTrade(c.c)) return false;
+  if (F.have === 'coming'  && !coming(c.c)) return false;
   if (F.have === 'foil'    && !inv(c.c).f) return false;
   if (F.have === 'banned'  && !banOf(c)) return false;
 
@@ -828,6 +867,7 @@ function renderCollection(reset){
           : '<div class="tbl-scroll"><table><thead><tr>' +
             '<th></th><th>Card</th><th>Code</th><th>Type</th><th>Rarity</th>' +
             '<th class="num">Norm</th><th class="num">Foil</th><th class="num">Want</th><th class="num">Trade</th>' +
+            '<th class="num">Way</th>' +
             '</tr></thead><tbody id="stream"></tbody></table></div>')
       : '<div class="loading">No printings match these filters.</div>';
   }
@@ -873,7 +913,7 @@ function cardHTML(c){
         ${ttags(c.c)}</div>
       <div class="qs">
         ${qbox(c.c,'n','n','Norm')}${qbox(c.c,'f','f','Foil')}
-        ${qbox(c.c,'w','w','Want')}${qbox(c.c,'t','t','Trade')}
+        ${qbox(c.c,'w','w','Want')}${qbox(c.c,'t','t','Trade')}${qbox(c.c,'o','o','Way')}
       </div>
     </div>
   </article>`;
@@ -892,7 +932,7 @@ function rowHTML(c){
     <td class="code">${esc(c.c)}</td>
     <td class="code">${esc(c.t || '—')}</td>
     <td class="code">${esc(c.r || '')}</td>
-    ${tq(c.c,'n')}${tq(c.c,'f')}${tq(c.c,'w')}${tq(c.c,'t')}
+    ${tq(c.c,'n')}${tq(c.c,'f')}${tq(c.c,'w')}${tq(c.c,'t')}${tq(c.c,'o')}
   </tr>`;
 }
 
@@ -1528,9 +1568,28 @@ function applyImport(text){
     else if (had.n !== q.n || had.f !== q.f) changed++;
   }
 
+  // Copies that have landed. Owned counts are authoritative and were just replaced, so
+  // a rise against `before` is something arriving, and the inbound record retires
+  // itself by that much. This is what keeps "on the way" from being a list that only
+  // ever grows: nothing here is ticked off by hand, and a card bought outside the app
+  // still clears once riftbound.gg knows about it.
+  let arrived = 0;
+  for (const code of Object.keys(S.inv)){
+    const e = S.inv[code];
+    const q = e.o || 0;
+    if (!q) continue;
+    const had = before.get(code);
+    const rise = ((e.n || 0) + (e.f || 0)) - (had ? had.n + had.f : 0);
+    if (rise <= 0) continue;
+    const left = Math.max(0, q - rise);
+    arrived += q - left;
+    if (left) e.o = left; else { delete e.o; delete e.os; }
+    if (!Object.keys(e).length) delete S.inv[code];
+  }
+
   const copies = [...owned.values()].reduce((a, q) => a + q.n + q.f, 0);
   return { rows: rows.length, matched: owned.size - zeroed.size, copies, mirror,
-           added, changed, cleared, unmatched, approx,
+           added, changed, cleared, unmatched, approx, arrived,
            cols: Array.isArray(cols) ? cols : Object.keys(cols) };
 }
 function owned0(code){ const e = S.inv[code] || {}; return { n: e.n || 0, f: e.f || 0 }; }
@@ -1636,7 +1695,9 @@ function renderSync(){
        <p class="note">${L.rows} rows read from ${esc(L.via)}, fields used:
          ${esc((L.cols || []).join(', ') || 'none')}.
          ${L.mirror ? 'Trade and wishlist counts were mirrored too.'
-                    : 'Want and Trade counts were left untouched.'}</p>
+                    : 'Want and Trade counts were left untouched.'}${L.arrived
+           ? ` <b style="color:var(--good)">${L.arrived} cop${L.arrived === 1 ? 'y' : 'ies'} that
+             ${L.arrived === 1 ? 'was' : 'were'} on the way arrived and cleared.</b>` : ''}</p>
        ${L.approx && L.approx.length ? `<h3 style="margin-top:14px">Matched to the base printing</h3>
          <p class="note">Riot's gallery does not publish these exact printings, so the copies were
          attributed to the same-numbered base card.</p>
@@ -2884,6 +2945,118 @@ function cardLeverage(arch){
     a.card.n.localeCompare(b.card.n));
 }
 
+/* ── what is already on the way ───────────────────────────────────────────
+   The panel form of the same idea, grouped by where a card is coming from. Reads
+   against the leverage index so a row can say what it lands, which is the whole
+   reason to look at this list rather than at an order confirmation email.       */
+function comingList(lev){
+  const groups = new Map();
+  for (const code in S.inv){
+    const q = coming(code);
+    if (!q) continue;
+    const card = BY[code];
+    if (!card) continue;                    // printing left the feed; ignore quietly
+    const key = comingFrom(code);
+    const g = groups.get(key) || { source: key, rows: [], copies: 0, total: 0, unpriced: 0 };
+    const each = cardCost(card);
+    const id = identityOf(card);
+    const v = lev && id ? lev.get(id) : null;
+    g.rows.push({ code, card, qty: q, each,
+                  unlocks: v ? v.unlocks : [], blocks: v ? v.blocks : [] });
+    g.copies += q;
+    if (each === undefined) g.unpriced += q; else g.total += each * q;
+    groups.set(key, g);
+  }
+  for (const g of groups.values())
+    g.rows.sort((a, b) => a.card.n.localeCompare(b.card.n) || a.code.localeCompare(b.code));
+  // Named sources alphabetically, the unlabelled group last: it is the one you have
+  // not got round to naming, so it reads as the loose pile it is.
+  return [...groups.values()].sort((a, b) =>
+    (a.source ? 0 : 1) - (b.source ? 0 : 1) || a.source.localeCompare(b.source));
+}
+
+function comingText(groups){
+  if (!groups || !groups.length) return 'ON THE WAY\n\n(nothing on the way)';
+  const lines = ['ON THE WAY', ''];
+  for (const g of groups){
+    lines.push(`── ${(g.source || 'NO SOURCE GIVEN').toUpperCase()}  (${g.rows.length} card${
+      g.rows.length === 1 ? '' : 's'}, ${g.copies} cop${g.copies === 1 ? 'y' : 'ies'}${
+      g.total ? `, $${g.total.toFixed(2)}${g.unpriced ? '+' : ''}` : ''})`);
+    for (const r of g.rows)
+      lines.push(`  ${r.qty}x ${r.card.n}  ${r.card.c}` +
+                 (r.each !== undefined ? `   $${(r.each * r.qty).toFixed(2)}` : '   (no price)') +
+                 (r.unlocks.length ? `   (finishes ${r.unlocks.join(', ')})`
+                   : r.blocks.length > 1 ? `   (${r.blocks.length} decks)` : ''));
+    lines.push('');
+  }
+  const copies = groups.reduce((a, g) => a + g.copies, 0);
+  const total = groups.reduce((a, g) => a + g.total, 0);
+  const unpriced = groups.reduce((a, g) => a + g.unpriced, 0);
+  lines.push(`${copies} cop${copies === 1 ? 'y' : 'ies'} across ${
+    groups.reduce((a, g) => a + g.rows.length, 0)} distinct cards, $${total.toFixed(2)}${
+    unpriced ? ` plus ${unpriced} with no listing` : ''}.`);
+  return lines.join('\n');
+}
+
+// The screen is not the artefact, the same split the hunt list makes: a phone cannot
+// show forty rows across a dozen orders, and "Copy the list" carries every one of them.
+// Both caps are layout constants, so this panel's height is fixed by the design rather
+// than by how big the parcel was. Overflow is reported as a label in the heading, never
+// as another paragraph — the tab is held to a word budget and counts belong in labels.
+const COMING_SOURCES_SHOWN = 6;
+const COMING_ROWS_SHOWN = 10;
+
+let COMING_NOW = null;
+function renderComing(levArr){
+  const lev = new Map();
+  for (const c of levArr || []) lev.set(c.id, c);
+  const groups = comingList(lev);
+  COMING_NOW = groups;
+  if (!groups.length) return '';
+  const copies = groups.reduce((a, g) => a + g.copies, 0);
+  const cards = groups.reduce((a, g) => a + g.rows.length, 0);
+  const total = groups.reduce((a, g) => a + g.total, 0);
+  const unpriced = groups.reduce((a, g) => a + g.unpriced, 0);
+  const finishes = [...new Set(groups.flatMap(g => g.rows.flatMap(r => r.unlocks)))];
+  return `<div class="panel">
+    <h2>ON THE WAY <span class="code">${copies} cop${copies === 1 ? 'y' : 'ies'} · ${
+      cards} card${cards === 1 ? '' : 's'} · ${groups.length} source${groups.length === 1 ? '' : 's'}${
+      groups.length > COMING_SOURCES_SHOWN ? ` · ${groups.length - COMING_SOURCES_SHOWN} not listed` : ''}</span></h2>
+    <p class="note">Already paid for or agreed to, and cleared automatically when an import
+      shows them as owned.${total || unpriced ? ` ${cost({ total, priced: copies - unpriced,
+        unpriced, complete: !unpriced })} in transit.` : ''}${
+      finishes.length ? ` <b style="color:var(--good)">Lands ${esc(finishes.slice(0, 3).join(', '))}${
+        finishes.length > 3 ? ` +${finishes.length - 3}` : ''}</b>.` : ''}</p>
+    ${(() => { let budget = COMING_ROWS_SHOWN;
+      return groups.slice(0, COMING_SOURCES_SHOWN).map(g => {
+      const show = g.rows.slice(0, Math.max(0, budget));
+      budget -= show.length;
+      return `
+      <h3 style="margin-top:14px">${g.source ? esc(g.source) : 'No source given'}
+        <span class="code">${g.rows.length} card${g.rows.length === 1 ? '' : 's'} · ${g.copies} cop${
+          g.copies === 1 ? 'y' : 'ies'}${g.total || g.unpriced ? ` · ${cost({ total: g.total,
+          priced: g.copies - g.unpriced, unpriced: g.unpriced, complete: !g.unpriced })}` : ''}${
+          g.rows.length > show.length ? ` · ${g.rows.length - show.length} not listed` : ''}</span></h3>
+      <div class="rows">${show.map(r => `
+        <div class="row">
+          ${r.card.i ? `<img class="thumb" loading="lazy" src="${imgURL(r.card, 60)}" alt="" data-zoom="${esc(r.code)}">` : ''}
+          <span class="nm">${dchips(r.card)} <b>${r.qty}x</b> ${esc(r.card.n)}
+            <span class="code">${esc(r.code)}</span>
+            ${r.unlocks.length ? `<span class="code" style="color:var(--good)">finishes ${
+              esc(r.unlocks.slice(0, 2).join(', '))}${r.unlocks.length > 2 ? ` +${r.unlocks.length - 2}` : ''}</span>`
+              : r.blocks.length > 1 ? `<span class="code">${r.blocks.length} decks want it</span>` : ''}
+          </span>
+          <input class="src" value="${esc(comingFrom(r.code))}" placeholder="source"
+            maxlength="40" data-src="${esc(r.code)}"${READONLY ? ' disabled' : ''}>
+          <span class="qty way">${r.each !== undefined
+            ? `$${(r.each * r.qty).toFixed(2)}` : 'no price'}</span>
+        </div>`).join('')}</div>`; }).join(''); })()}
+    <div class="bar-row" style="margin-top:12px">
+      <button class="ghost" id="btn-coming-copy">Copy the list</button>
+    </div>
+  </div>`;
+}
+
 /* ── the hunt list ────────────────────────────────────────────────────────
    A different question from "what do I buy next", and it wants a different shape.
    Standing over a bulk box you are not choosing what to acquire, you are looking a
@@ -2916,9 +3089,16 @@ function huntList(lev){
     const each = cardCost(c.card);
     const band = each === undefined ? byKey.none
       : byKey[(HUNT_BANDS.find(b => b.lo !== null && each >= b.lo && each < b.hi) || HUNT_BANDS[3]).k];
-    band.rows.push({ ...c, each });
-    band.copies += c.copies;
-    if (each === undefined) band.unpriced += c.copies; else band.total += each * c.copies;
+    // Copies already on the way are not shopping. The row stays visible, because
+    // seeing "2 on the way" against a name is exactly what stops you buying it twice,
+    // but it does not count towards the band's copies or its total, and a row fully
+    // covered never reaches the copy export.
+    const inflight = Math.min(comingFor(c.id), c.copies);
+    const buy = c.copies - inflight;
+    band.rows.push({ ...c, each, inflight, buy, covered: buy === 0 });
+    band.copies += buy;
+    band.coming = (band.coming || 0) + inflight;
+    if (each === undefined) band.unpriced += buy; else band.total += each * buy;
   }
   // Alphabetical, because the lookup is by name. Copies break a tie only so the order
   // is stable between renders.
@@ -2929,22 +3109,30 @@ function huntList(lev){
 
 // The artefact you actually take shopping: every card, no screen cap, plain text.
 function huntText(bands){
-  if (!bands || !bands.length) return 'CARDS TO GET\n\n(nothing missing)';
+  // This is the artefact you read in a shop, so anything already on the way is left
+  // off it entirely rather than listed with a note nobody reads standing over a
+  // bulk box. The tally at the end says how many were held back.
+  const live = (bands || []).map(b => ({ ...b, rows: b.rows.filter(r => !r.covered) }))
+                            .filter(b => b.rows.length);
+  const held = (bands || []).reduce((a, b) => a + b.rows.filter(r => r.covered).length, 0);
+  if (!live.length) return `CARDS TO GET\n\n(${held
+    ? 'everything missing is already on the way' : 'nothing missing'})`;
   const lines = ['CARDS TO GET', ''];
-  for (const b of bands){
+  for (const b of live){
     lines.push(`── ${b.label.toUpperCase()}  (${b.rows.length} card${b.rows.length === 1 ? '' : 's'}, ${
       b.copies} cop${b.copies === 1 ? 'y' : 'ies'}${b.total ? `, ${cost({ total: b.total, priced: 1, unpriced: b.unpriced, complete: !b.unpriced })}` : ''})`);
     for (const r of b.rows)
-      lines.push(`  ${String(r.copies)}x ${r.card.n}  ${r.card.c}` +
-                 (r.each !== undefined ? `   $${(r.each * r.copies).toFixed(2)}` : '   (no price)') +
+      lines.push(`  ${String(r.buy)}x ${r.card.n}  ${r.card.c}` +
+                 (r.each !== undefined ? `   $${(r.each * r.buy).toFixed(2)}` : '   (no price)') +
                  (r.blocks.length > 1 ? `   (${r.blocks.length} decks)` : ''));
     lines.push('');
   }
-  const copies = bands.reduce((a, b) => a + b.copies, 0);
-  const total = bands.reduce((a, b) => a + b.total, 0);
-  const unpriced = bands.reduce((a, b) => a + b.unpriced, 0);
-  lines.push(`${copies} copies across ${bands.reduce((a, b) => a + b.rows.length, 0)} distinct cards, ` +
+  const copies = live.reduce((a, b) => a + b.copies, 0);
+  const total = live.reduce((a, b) => a + b.total, 0);
+  const unpriced = live.reduce((a, b) => a + b.unpriced, 0);
+  lines.push(`${copies} copies across ${live.reduce((a, b) => a + b.rows.length, 0)} distinct cards, ` +
              `$${total.toFixed(2)}${unpriced ? ` plus ${unpriced} with no listing` : ''}.`);
+  if (held) lines.push(`${held} more already on the way, left off this list.`);
   return lines.join('\n');
 }
 
@@ -3397,7 +3585,7 @@ function renderNext(){
         <div class="stat"><div class="v" style="color:var(--good)">${buildableAll.length}</div><div class="k">ready now</div></div>
         <div class="stat"><div class="v" style="color:var(--maize)">${target && !target.buildable ? target.short : '—'}</div><div class="k">cards to this deck</div></div>
         <div class="stat"><div class="v">${target && !target.buildable ? cost(target.gap) : '—'}</div><div class="k">to close that gap</div></div>
-        <div class="stat"><div class="v">${lev.length}</div><div class="k">cards in the way</div></div>
+        <div class="stat"><div class="v">${lev.length}</div><div class="k">cards blocking decks</div></div>
       </div>
       <div class="bar-row" style="margin-top:12px">
         <span class="lbl">Budget $</span>
@@ -3444,6 +3632,8 @@ function renderNext(){
         — re-rank above to bring them up.</p>` : ''}
     </div>
 
+    ${renderComing(lev)}
+
     <div class="panel">
       <h2>WHAT TO BUY <span class="code">${buyFor === 'deck' ? `${mySteps.length} buys`
         : buyFor === 'hunt' ? `${lev.reduce((a, c) => a + c.copies, 0)} copies` : lev.length}</span></h2>
@@ -3475,20 +3665,24 @@ function renderNext(){
         ${hunt && hunt.length ? hunt.map(b => `
           <h3 style="margin-top:14px">${esc(b.label)}
             <span class="code">${b.rows.length} card${b.rows.length === 1 ? '' : 's'} · ${b.copies} cop${
-              b.copies === 1 ? 'y' : 'ies'}${b.total ? ` · ${money(Math.round(b.total))}` : ''}${
-              b.unpriced ? ` · ${b.unpriced} unpriced` : ''} · ${esc(b.hint)}</span></h3>
+              b.copies === 1 ? 'y' : 'ies'} to buy${b.total ? ` · ${money(Math.round(b.total))}` : ''}${
+              b.unpriced ? ` · ${b.unpriced} unpriced` : ''}${
+              b.coming ? ` · ${b.coming} on the way` : ''} · ${esc(b.hint)}</span></h3>
           <div class="rows">${b.rows.slice(0, HUNT_PER_BAND).map(r => `
-            <div class="row">
+            <div class="row${r.covered ? ' covered' : ''}">
               ${r.card.i ? `<img class="thumb" loading="lazy" src="${imgURL(r.card, 60)}" alt="" data-zoom="${esc(r.card.c)}">` : ''}
               <span class="nm">${dchips(r.card)} <b>${r.copies}x</b> ${esc(r.card.n)}
                 <span class="code">${esc(r.card.c)}</span>
+                ${r.inflight ? `<span class="code" style="color:var(--inflight)">${r.inflight} on the way</span>` : ''}
                 ${r.unlocks.length ? `<span class="code" style="color:var(--good)">finishes ${
                   esc(r.unlocks.slice(0, 2).join(', '))}${r.unlocks.length > 2 ? ` +${r.unlocks.length - 2}` : ''}</span>`
                   : r.blocks.length > 1 ? `<span class="code">${r.blocks.length} decks want it</span>` : ''}
                 ${offers && offers.has(r.id) ? `<span class="code" style="color:var(--teal)">${esc(PARTNER.user)} has ${offers.get(r.id).qty}</span>` : ''}
               </span>
-              <span class="qty${r.blocks.length > 1 ? '' : ' need'}">${r.each !== undefined
-                ? `$${(r.each * r.copies).toFixed(2)}<span class="code"> · $${r.each.toFixed(2)} ea</span>`
+              <span class="qty${r.covered ? ' way' : r.blocks.length > 1 ? '' : ' need'}">${r.covered
+                ? 'covered'
+                : r.each !== undefined
+                ? `$${(r.each * r.buy).toFixed(2)}<span class="code"> · $${r.each.toFixed(2)} ea</span>`
                 : 'no price'}</span>
             </div>`).join('')}</div>
           ${b.rows.length > HUNT_PER_BAND ? `<p class="note" style="margin-top:4px">and ${
@@ -3503,7 +3697,7 @@ function renderNext(){
         wanted by nine decks outranks the last card of one. This ignores which deck you are building.${
           lev.length > LEV_SHOWN ? ` Showing the top ${LEV_SHOWN}.` : ''}</p>
         ${lev.length ? `<div class="rows" style="margin-top:8px">${lev.slice(0, LEV_SHOWN).map(levRow).join('')}</div>`
-          : `<p class="empty">Nothing is in the way.</p>`}`}
+          : `<p class="empty">Nothing is blocking a deck.</p>`}`}
     </div>
 
     <div class="panel">
@@ -4073,7 +4267,7 @@ function renderMirrorNote(){
   if (!mirrored){ el.innerHTML = ''; return; }
   el.innerHTML = `<span class="note">Normal and Foil mirror riftbound.gg and are replaced on every
     import${S.lastSyncAt ? `, last pulled ${esc(String(S.lastSyncAt).slice(0, 16).replace('T', ' '))}` : ''};
-    correct them there, not here. Want and Trade are only kept in this app${
+    correct them there, not here. Want, Trade and On the way are only kept in this app${
     S.mirrorTradeWish ? ' but "Mirror trade and wishlist" is on, so they are overwritten too' : ''}.${(() => {
       const bad = foilOnlyProblems().length;
       return bad ? ` <b style="color:var(--warn)">${bad} printing${bad === 1 ? '' : 's'} hold a Normal
@@ -4127,7 +4321,7 @@ function buildFilterUI(){
 
   document.getElementById('f-have').innerHTML = [
     ['','Everything'],['own','Owned'],['missing','Missing'],['want','Wanted'],
-    ['trade','For trade'],['foil','Foils'],['banned','Banned'],
+    ['trade','For trade'],['coming','On the way'],['foil','Foils'],['banned','Banned'],
   ].map(([v,l]) => `<button class="chip" data-have="${v}" aria-pressed="${F.have === v}">${l}</button>`).join(' ');
 
   document.getElementById('f-view').textContent = F.view === 'grid' ? 'Table view' : 'Grid view';
@@ -4202,6 +4396,12 @@ function wire(){
       setQty(el.dataset.code, el.dataset.f, el.value);
       patchCard(el, el.dataset.code);
       renderTradeBadge();
+      return;
+    }
+    // Source labels regroup the panel they live in, so this one does redraw.
+    if (el.dataset.src){
+      setSource(el.dataset.src, el.value);
+      if (TAB === 'next') renderNext();
       return;
     }
     if (el.dataset.deckQty){
@@ -4483,13 +4683,15 @@ function wire(){
 
     if (t.id === 'btn-next-copy') copy(pathText(NEXT_PLAN), 'plan copied');
     if (t.id === 'btn-hunt-copy') copy(huntText(HUNT_BANDS_NOW), 'list copied');
+    if (t.id === 'btn-coming-copy') copy(comingText(COMING_NOW), 'list copied');
     if (t.id === 'btn-hunt-wants'){
       // The whole shortfall, not the plan's first few targets: this list exists to be
       // carried around, so the wants it sets should match what it shows.
       let n = 0;
       for (const b of (HUNT_BANDS_NOW || []))
         for (const r of b.rows){
-          const need = (owned(r.card.c) || 0) + r.copies;
+          if (r.covered) continue;          // already on the way; wanting it again is noise
+          const need = (owned(r.card.c) || 0) + r.buy;
           if (need > want(r.card.c)){ setQtyQuiet(r.card.c, 'w', need); n++; }
         }
       persist();
@@ -4570,7 +4772,21 @@ function setQtyQuiet(code, field, val){
   const v = Math.max(0, Math.min(999, Math.floor(Number(val) || 0)));
   const e = { ...(S.inv[code] || {}) };
   if (v) e[field] = v; else delete e[field];
+  // A source label with nothing on the way is an orphan, and the panel would render
+  // it as an empty group, so the two clear together.
+  if (field === 'o' && !v) delete e.os;
   if (Object.keys(e).length) S.inv[code] = e; else delete S.inv[code];
+}
+
+// The label is a string rather than a count, so it needs its own setter; setQtyQuiet
+// clamps to a number. Refuses to attach to a card with nothing inbound, which keeps
+// comingList's grouping honest.
+function setSource(code, label){
+  const s = String(label || '').trim().slice(0, 40);
+  const e = { ...(S.inv[code] || {}) };
+  if (s && (e.o || 0) > 0) e.os = s; else delete e.os;
+  if (Object.keys(e).length) S.inv[code] = e; else delete S.inv[code];
+  persist({ render:false });
 }
 
 /* ══════════════════════════════════════════════════════════════════════════

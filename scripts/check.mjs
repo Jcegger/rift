@@ -59,6 +59,8 @@ const NAMED = [
   'archetypeName', 'metaPool', 'metaArchetypes', 'legendPicks', 'scorePool', 'cardLeverage', 'loadBans',
   'acquisitionPath', 'unionGap', 'pathText', 'huntList', 'huntText', 'HUNT_BANDS', 'ownedIdentities', 'evalDeck', 'matchRow',
   'spares', 'tradeMatch', 'readPartner', 'readyShareOf', 'owned', 'byTarget',
+  'coming', 'comingFrom', 'comingFor', 'comingIdentities', 'comingList', 'comingText',
+  'renderComing', 'setQtyQuiet', 'setSource', 'applyImport',
   'annotateCompounding', 'establishedArchetypes', 'isEstablished', 'byCost', 'byCards', 'byPlanTarget',
   'tierByArchetype',
   'render', 'renderLegends', 'renderNext', 'renderMeta', 'renderTrade', 'renderSets',
@@ -1155,9 +1157,15 @@ section('Layout');
 
      The generous threshold was the problem. At 16 panels and 900 lines Next could carry
      four rankings of one list and 894 words of prose explaining why they disagreed, and
-     still pass. It is five fixed panels now and runs under 500 lines on every
-     collection, so the bound is set where the rewrite actually sits: enough headroom to
-     add a row, not enough to add another ranking. */
+     still pass. It is five fixed panels now, six when something is on the way, and the
+     bound is set where the rewrite actually sits: enough headroom to add a row, not
+     enough to add another ranking.
+
+     660 rather than 600 because On the way is a sixth fixed panel and costs 57 lines at
+     its caps — COMING_SOURCES_SHOWN sources and COMING_ROWS_SHOWN rows, whatever is in
+     the post. It was 180 lines before those caps existed, which is what this bound is
+     for: the failure it caught was a panel whose height grew with the parcel. */
+  const NEXT_MAX_LINES = 660;
   const lines = (h) => h.replace(/<[^>]+>/g, '\n').replace(/&#?\w+;/g, '')
                         .split('\n').map((x) => x.trim()).filter(Boolean).length;
   for (const [label, inv] of Object.entries(collections)){
@@ -1167,7 +1175,7 @@ section('Layout');
       A.renderNext();
       const h = els.get('v-next').innerHTML;
       const panels = (h.match(/class="panel"/g) || []).length;
-      ok(`[${label} · $${spend}] Next stays bounded`, panels <= 8 && lines(h) <= 600,
+      ok(`[${label} · $${spend}] Next stays bounded`, panels <= 8 && lines(h) <= NEXT_MAX_LINES,
          `${panels} panels, ${lines(h)} text lines`);
     }
     A.S.nearSpend = 25;
@@ -1185,6 +1193,21 @@ section('Layout');
     A.renderNext();
     ok(`[${label}] Next explains itself in labels, not paragraphs`,
        prose(els.get('v-next').innerHTML) <= 300, `${prose(els.get('v-next').innerHTML)} words of prose`);
+
+    /* The same bounds with something on the way, because the panel that draws it is
+       hidden when nothing is — so every bound above passes for the wrong reason on a
+       fixture that has never seen an inbound card. Seeded wide, forty sources deep, to
+       catch the row growth as well as the prose. */
+    A.S.inv = Object.fromEntries(Object.entries(inv).map(([code, e], i) =>
+      [code, i < 40 ? { ...e, o: 2, os: `order ${i % 7}` } : e]));
+    A.renderNext();
+    const wh = els.get('v-next').innerHTML;
+    ok(`[${label}] Next stays bounded with cards on the way`,
+       (wh.match(/class="panel"/g) || []).length <= 8 && lines(wh) <= NEXT_MAX_LINES,
+       `${(wh.match(/class="panel"/g) || []).length} panels, ${lines(wh)} text lines`);
+    ok(`[${label}] the inbound panel does not blow the prose budget`,
+       prose(wh) <= 300, `${prose(wh)} words of prose`);
+    A.S.inv = inv;
     // Six fixed panels now: the overview, movement, the tier list, the news block, what
     // is being played, and (only when the news block is empty) nothing in its place.
     // Movement is the sixth and is capped internally at MOVE_SHOWN rows per direction,
@@ -1873,6 +1896,127 @@ section('Rendering');
   ok('the copied champion gaps are clean', !junk.test(txt), `${txt.split('\n').length} lines`);
   ok('the copied text is champion-first', /^CHAMPIONS/.test(txt));
   ok('an empty plan copies without throwing', /nothing to buy/.test(A.pathText([])));
+}
+
+/* ── on the way ───────────────────────────────────────────────────────────
+   Inbound copies are the one part of the inventory riftbound.gg knows nothing
+   about, which makes the import boundary the whole risk: a pull that erased them,
+   or one that left a landed order sitting on the list forever, would both be
+   silent. Both directions are asserted here.
+
+   setSource persists, and persist debounces a real Supabase write, so the network
+   and the timer are stubbed for the duration rather than left to fire with a test
+   fixture loaded.                                                              */
+section('ON THE WAY');
+{
+  const realFetch = globalThis.fetch, realTimeout = globalThis.setTimeout;
+  globalThis.fetch = async () => ({ ok: true, text: async () => '', json: async () => ({}) });
+  globalThis.setTimeout = () => 0;
+
+  const [p1, p2, p3] = cat.cards.filter((c) => c.mp > 0).slice(0, 3);
+  const imp = (code, standard) =>
+    A.applyImport(JSON.stringify({ collection: [{ card: code, standard }] }));
+
+  // ── an import must not touch it ──
+  A.S.inv = { [p1.c]: { n: 1, o: 2, os: 'TCG 9/2' }, [p2.c]: { o: 1, os: 'trade: sam' } };
+  let r = imp(p1.c, 1);
+  ok('the import fixture actually matched a printing', r.matched === 1, `matched ${r.matched}`);
+  ok('an import leaves inbound copies alone',
+     A.coming(p1.c) === 2 && A.comingFrom(p1.c) === 'TCG 9/2',
+     `${A.coming(p1.c)} on the way from "${A.comingFrom(p1.c)}"`);
+  ok('a card held only as inbound survives an import that omits it', A.coming(p2.c) === 1);
+  ok('nothing is reported as arrived when owned did not move', r.arrived === 0);
+
+  // ── arriving retires it, by exactly what landed ──
+  A.S.inv = { [p1.c]: { n: 1, o: 2, os: 'TCG 9/2' } };
+  r = imp(p1.c, 2);
+  ok('one copy arriving retires one inbound copy', A.coming(p1.c) === 1, `${A.coming(p1.c)} left`);
+  ok('the import reports what arrived', r.arrived === 1, `arrived ${r.arrived}`);
+  ok('a partial arrival keeps the source label', A.comingFrom(p1.c) === 'TCG 9/2');
+
+  A.S.inv = { [p1.c]: { n: 1, o: 2, os: 'TCG 9/2' } };
+  r = imp(p1.c, 4);
+  ok('the whole order landing clears the record',
+     A.coming(p1.c) === 0 && A.comingFrom(p1.c) === '');
+  ok('arriving with more than was owed counts only what was owed', r.arrived === 2,
+     `arrived ${r.arrived}`);
+
+  // ── a label cannot outlive the count that justifies it ──
+  A.S.inv = { [p1.c]: { o: 2, os: 'TCG' } };
+  A.setQtyQuiet(p1.c, 'o', 0);
+  ok('clearing the count clears the source label and the entry', !A.S.inv[p1.c]);
+  A.S.inv = { [p1.c]: { n: 1 } };
+  A.setSource(p1.c, 'nowhere');
+  ok('a source will not attach to a card with nothing on the way', A.comingFrom(p1.c) === '');
+
+  // ── grouping, and the artefact ──
+  A.S.inv = { [p1.c]: { o: 1, os: 'TCG 9/2' }, [p2.c]: { o: 2, os: 'trade: sam' },
+              [p3.c]: { o: 1 } };
+  const groups = A.comingList(new Map());
+  ok('inbound groups by source', groups.length === 3, `${groups.length} groups`);
+  ok('the unlabelled group sorts last', groups[groups.length - 1].source === '');
+  ok('copies are totalled per source',
+     groups.find((g) => g.source === 'trade: sam').copies === 2);
+  const ctext = A.comingText(groups);
+  ok('the copied inbound list names every source',
+     ctext.includes('TCG 9/2') && ctext.includes('NO SOURCE GIVEN'));
+  ok('an empty inbound list copies without throwing',
+     /nothing on the way/.test(A.comingText([])));
+  A.S.inv = {};
+  ok('the panel renders nothing when nothing is inbound', A.renderComing([]) === '');
+
+  // ── the hunt list stops asking for what is already coming ──
+  A.S.inv = {};
+  A.forgetDeckCaches();
+  const lev0 = A.cardLeverage(A.metaArchetypes(A.metaPool()));
+  const pick = lev0.find((c) => c.copies > 0);
+  ok('there is a shortfall to cover in the first place', !!pick);
+  if (pick){
+    A.S.inv = { [pick.card.c]: { o: pick.copies, os: 'TCG' } };
+    A.forgetDeckCaches();
+    const bands = A.huntList(A.cardLeverage(A.metaArchetypes(A.metaPool())));
+    const row = bands.flatMap((b) => b.rows).find((x) => x.card.c === pick.card.c);
+    ok('a card fully on the way is marked covered',
+       !!row && row.covered && row.buy === 0 && row.inflight === pick.copies,
+       row ? `inflight ${row.inflight}, buy ${row.buy}` : 'row missing');
+    ok('band copies count only what is left to buy',
+       bands.every((b) => b.copies === b.rows.reduce((a, x) => a + x.buy, 0)));
+    ok('band totals price only what is left to buy',
+       bands.every((b) => Math.abs(b.total - b.rows.reduce((a, x) =>
+         a + (x.each === undefined ? 0 : x.each * x.buy), 0)) < 1e-6));
+    const htext = A.huntText(bands);
+    ok('a covered card is left off the shopping list', !htext.includes(pick.card.c));
+    ok('the shopping list says how many were held back',
+       /already on the way, left off this list/.test(htext));
+  }
+
+  // The panel itself, not just the data behind it: this is the path that touches esc,
+  // money and imgURL, and a throw here would take the whole Next tab down.
+  A.S.inv = { [p1.c]: { o: 2, os: 'TCG <9/2>' } };
+  A.forgetDeckCaches();
+  const html = A.renderComing(A.cardLeverage(A.metaArchetypes(A.metaPool())));
+  ok('the panel renders when something is inbound', /ON THE WAY/.test(html));
+  ok('the panel groups under its source label', html.includes('TCG &lt;9/2&gt;'),
+     'and escapes it');
+  ok('the panel offers the card back for editing',
+     html.includes(`data-src="${p1.c}"`));
+
+  // A single cheap card is the common case, and rounding it to whole dollars printed
+  // "$0 in transit" against a card with a price.
+  const cheap = cat.cards.find((c) => c.mp > 0 && c.mp < 1);
+  if (cheap){
+    A.S.inv = { [cheap.c]: { o: 1, os: 'bulk' } };
+    A.forgetDeckCaches();
+    const pennies = A.renderComing([]);
+    ok('a sub-dollar total is priced in cents, not rounded to nothing',
+       !/\$0 in transit/.test(pennies) && new RegExp(`\\$${cheap.mp.toFixed(2)}`).test(pennies),
+       `${cheap.c} at $${cheap.mp.toFixed(2)}`);
+  }
+
+  A.S.inv = {};
+  A.forgetDeckCaches();
+  globalThis.fetch = realFetch;
+  globalThis.setTimeout = realTimeout;
 }
 
 console.log(failures ? `\n${failures} FAILED` : '\nall checks pass');

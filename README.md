@@ -48,7 +48,7 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 
 **Collection** filters all 1,197 printings by set, type, rarity, domain, printing
 class, imported tag, and free text over names, codes, ability text, tags, and artists. Each
-card takes four counts: Normal, Foil, Want, Trade. Grid view is for identifying
+card takes five counts: Normal, Foil, Want, Trade, and On the way. Grid view is for identifying
 cards, table view is for bulk entry. Edits patch in place rather than
 re-rendering, so scroll position and focus survive typing.
 
@@ -96,7 +96,7 @@ actually get entered because its scanner beats typing.
 ## Next: what to acquire
 
 Meta answers "what can I build?". Next answers "what do I do next?", and it is
-four panels.
+five panels.
 
 **Find my deck** is the one to read. It takes riftbound.gg's tier list, crosses it
 with the collection, and ranks **tier first** — a stronger deck beats a cheaper one,
@@ -131,6 +131,14 @@ constraint does, and how to read a row.
 archetype by how many archetypes are short of it. A common wanted by nine decks
 outranks the last card of one. This is the buy-anyway list: it ignores which deck
 is being built, so it is the right thing to read at a store.
+
+**On the way** lists what has already been bought or agreed to but not yet arrived,
+grouped by where it is coming from — a TCGplayer order, a trade, a preorder. The source
+is free text and is never parsed; it groups the panel and nothing else. The panel only
+appears when something is inbound, and it earns its place by what it does to the panel
+below it: a card already in the mail is struck from the hunt list and left out of the
+copied shopping list entirely, which is the difference between a list you can read in a
+shop and one that makes you buy the same card twice.
 
 **The plan** names a deck to finish, buys its shortfall, re-scores, and repeats
 for up to three decks. Within a target, the cards other open archetypes also want
@@ -861,9 +869,15 @@ and says so, because an empty section teaches nothing.
 
 riftbound.gg is the source of truth for what I own, because its card scanner beats
 typing. This tool mirrors it and adds what it does not do. Every import replaces
-the owned counts, so a correction over there lands here too, while Want and Trade
-are left alone because they exist only in this tool. Re-importing the same data is
-a verified no-op.
+the owned counts, so a correction over there lands here too, while Want, Trade and
+On the way are left alone because they exist only in this tool. Re-importing the same
+data is a verified no-op.
+
+On the way is the one field an import does more than preserve: a rise in a card's owned
+count is a copy arriving, so the inbound record is reduced by exactly that much and the
+import reports what landed. That is the whole reason the field can be trusted — nothing
+on that list is ticked off by hand, and a card bought outside the app still clears itself
+once riftbound.gg knows about it.
 
 Three ways in, in order of how little work they are:
 
