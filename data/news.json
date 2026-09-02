@@ -1,19 +1,28 @@
 {
- "generatedAt": "2026-08-31",
+ "generatedAt": "2026-09-02",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "tags": {
+  "Guides": 5,
   "Events": 20,
   "Metagame": 18,
   "News": 29,
   "Legends": 15,
   "Sets": 2,
-  "Guides": 4,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "The Most Expensive Riftbound Vendetta Cards Right Now",
+   "dt": "2026-09-01",
+   "url": "https://riftbound.gg/most-expensive-riftbound-vendetta-cards",
+   "tags": [
+    "Guides"
+   ],
+   "author": "Theo-74825"
+  },
   {
    "title": "Wuhan Regional Qualifier Results – Top 8, Best-of Decks, Metagame, Popularity & Conversion Rates!",
    "dt": "2026-08-30",
