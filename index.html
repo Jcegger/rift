@@ -165,6 +165,13 @@ td .qi.set{border-color:var(--teal);color:var(--teal)}
 .row:first-child{border-top:none}
 .row .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .row .qty{font-family:var(--head);color:var(--teal);white-space:nowrap}
+/* The lists toggle sits outside .nm on purpose. Inside it, the ellipsis ate it on any
+   narrow screen and the control was unreachable on a phone — the row's own detail is
+   not something the row may truncate away. */
+.row .lists{flex:none;font-family:var(--head);font-size:11px;color:var(--dim);white-space:nowrap;
+  cursor:pointer;padding:3px 6px;border:1px solid var(--line2);border-radius:5px;user-select:none}
+.row .lists:hover{color:var(--ink);border-color:var(--teal)}
+.row .lists[aria-expanded="true"]{color:var(--teal);border-color:var(--teal)}
 .row .qty.need{color:var(--maize)}
 .empty{color:var(--dimmer);font-size:13px;font-style:italic;padding:8px 0}
 .setgroup{font-family:var(--head);font-size:11px;color:var(--burnt);text-transform:uppercase;
@@ -235,6 +242,7 @@ body{overflow-x:hidden}
   .q input{font-size:13px;padding:4px 1px}   /* stays tappable */
   .row{padding:7px 0}
   .row .qty{font-size:11.5px;text-align:right}
+  .row .lists{font-size:10px;padding:3px 5px}
   .meter-sub{gap:8px;font-size:10px}
   table{min-width:560px}
   .pre{font-size:11px}
@@ -3546,11 +3554,7 @@ function renderNext(){
         r.tier ? tierBadge(r.tier) : '<span class="code" title="not on the tier list">untiered</span>'}
         <b style="color:var(--cream)">${esc(r.champion || r.name)}</b>${moveChip(r.name)}
         <span class="code">${r.champion ? `${esc(r.name)} · ` : ''}${r.shape}${
-          r.bestPlace != null ? ` · best #${r.bestPlace}` : ''} · <span data-expand="${esc(r.name)}"
-            style="cursor:pointer;text-decoration:underline dotted" title="most-played, tournament and budget builds, then every list">${
-            (() => { const p = legendPicks(r.g).length;
-              return p > 1 ? `${p} picks in ${r.lists} lists` : `${r.lists} list${r.lists === 1 ? '' : 's'}`; })()
-            } ${expanded(r.name) ? '▾' : '▸'}</span>${
+          r.bestPlace != null ? ` · best #${r.bestPlace}` : ''}${
           r.established ? '' : ' · fringe'}${
           !r.g.evCount && !(r.claim && r.claim.best != null) ? ' · no tournament record' : ''}${
           r.pinnedList ? ' · <span style="color:var(--good)">list pinned</span>' : ''}</span>${
@@ -3562,6 +3566,14 @@ function renderNext(){
           : r.overlapCredit > 0 ? `<span class="code" title="part of this gap is cards other open decks also need">${money(Math.round(r.overlapCredit))} does double duty</span>` : ''}
         <a href="https://riftbound.gg/decks/${esc(r.deck.s)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">list ↗</a>${
         r.guide ? ` <a href="${esc(r.guide)}" target="_blank" rel="noopener" class="code" style="color:var(--teal)">build ↗</a>` : ''}</span>
+      <span class="lists" data-expand="${esc(r.name)}" role="button" tabindex="0"
+        aria-expanded="${expanded(r.name)}"
+        title="most-played, tournament and budget builds, then every list">${(() => {
+          // One text run, deliberately: the layout bounds count text fragments, and a
+          // nested span for responsive wording cost more than the wording was worth.
+          const p = legendPicks(r.g).length;
+          const label = p > 1 ? `${p} picks / ${r.lists}` : `${r.lists} list${r.lists === 1 ? '' : 's'}`;
+          return `${label} ${expanded(r.name) ? '▾' : '▸'}`; })()}</span>
       <span class="qty${r.buildable ? '' : ' need'}" title="Gap: the cards you are missing, each at its cheapest printing. List: what the whole deck costs to hold outright.">${
         r.buildable ? 'ready now'
         : `${cost(r.gap)}<span class="code"> · ${r.short} short${r.gap.cut ? ` · ${r.gap.cut} cut` : ''} · ${
@@ -4448,6 +4460,12 @@ function wire(){
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') document.querySelectorAll('.lb').forEach(n => n.remove());
+    // The lists toggle is a span carrying role="button", so it has to answer the keys a
+    // real button would. Delegated, because the rows are rebuilt on every render.
+    if (e.key === 'Enter' || e.key === ' '){
+      const el = e.target && e.target.closest && e.target.closest('.lists[data-expand]');
+      if (el){ e.preventDefault(); el.click(); }
+    }
   });
 
   // backup / restore
