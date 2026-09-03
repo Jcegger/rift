@@ -8,16 +8,16 @@
   "players": 2313,
   "playersWithDecks": 1553,
   "unresolvedDeckEvents": [],
-  "claimedEvents": 24,
-  "claimedEventsUnmatched": 23,
+  "claimedEvents": 23,
+  "claimedEventsUnmatched": 22,
   "claimedEventAliases": {
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
-   "Europe": 14,
-   "Asia": 24,
-   "unknown": 5,
-   "North America": 5,
+   "unknown": 8,
+   "Asia": 23,
+   "North America": 3,
+   "Europe": 13,
    "Oceania": 1
   },
   "registryEventsByRegion": {
@@ -25,7 +25,7 @@
    "North America": 5
   },
   "unresolvedClaimEvents": [
-   "36P in China",
+   "64P France",
    "Barcelona RQ",
    "Barcelona RQ -  arise exp",
    "Changsha RQ",
@@ -33,9 +33,9 @@
    "Dinan Regional",
    "Hartford RQ",
    "Nanjing Regional",
+   "Riftbound Championship Series",
    "Riftbound Showdown Ottawa",
    "S3 Shanghai City Challenge",
-   "S4 Nanjing City Challenge",
    "S4 Tianjin City Challenge",
    "S4 Wuhan City Challenge",
    "Sydney Regional Qualifier",
@@ -43,7 +43,6 @@
    "Top Shelf Masters Tournament",
    "Utrecht RQ",
    "Utrecht Regional",
-   "Vancouver RQ",
    "Wuhan RO",
    "Wuhan Regional Open",
    "Wuhan Regional open",
