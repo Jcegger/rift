@@ -1698,8 +1698,18 @@ section('Deck options');
       const medianVw = vwSorted.length ? vwSorted[Math.floor((vwSorted.length - 1) / 2)] : 0;
       const priced = pool.filter((x) => x.deck.pr > 0 && (x.deck.vw || 0) >= medianVw)
                          .sort((a, b) => a.deck.pr - b.deck.pr);
+      /* Ties on price go to the most-viewed list, which is what legendPicks does — every
+         lens there breaks a tie with `byV`. This re-derivation left that out and so
+         asserted whatever order the snapshot happened to arrive in, which agreed with the
+         app right up until it did not: on 2026-09-03 three of Viktor's lists sat at $25
+         with 9, 134 and 9 views, the app picked the 134 and the check demanded the first
+         of the nines. Twice-daily builds, so a tie that lasts a day fails the job twice
+         and looks like a source outage. Assert the rule, tie-break included. */
+      const cheapest = priced.length ? priced[0].deck.pr : null;
+      const best = priced.filter((x) => x.deck.pr === cheapest)
+                         .sort((a, b) => (b.deck.vw || 0) - (a.deck.vw || 0))[0];
       const mpPr = mostPlayed && mostPlayed.row.deck.pr;
-      const wantBudget = priced[0] && (!(mpPr > 0) || priced[0].deck.pr <= 0.85 * mpPr) ? priced[0] : null;
+      const wantBudget = best && (!(mpPr > 0) || best.deck.pr <= 0.85 * mpPr) ? best : null;
       const budgetPick = picks.find((p) => p.lenses.includes('budget'));
       if (!!budgetPick !== !!wantBudget)
         bad.push(`${g.name}: budget lens ${budgetPick ? 'shown' : 'absent'}, expected ${wantBudget ? 'shown' : 'absent'}`);
