@@ -58,8 +58,9 @@ deck that was $190 with the card shows its real price without it, and a deck tha
 
 ```
 ● Tier 2  Kai'Sa — Daughter of the Void · spell combo-tempo · best #2
-          $7 in 15 cheap cards + Kai'Sa, Survivor @ $68            build ↗
-          $76 · 23 short
+          $7 in 15 cheap cards + Kai'Sa, Survivor @ $68   [2 picks / 9 ▸]
+          $76 · 23 short · $140 list
+          played $210 · 31 short
 ```
 
 - **●** — you own the Legend.
@@ -73,6 +74,27 @@ deck that was $190 with the card shows its real price without it, and a deck tha
   `$7 + Kai'Sa, Survivor @ $68` is telling you the deck is basically $8 plus one chase
   card — click that card in the breakdown to exclude it and see the cheap build.
 - **build ↗** — that Legend's guide and decklists on riftbound.gg.
+- **[2 picks / 9 ▸]** — opens every individual build folded into the row: the
+  most-played one, the best tournament or claimed result, the cheapest well-viewed one,
+  then all nine most-viewed first. Pin any of them to make the whole tab follow it.
+- **played $210 · 31 short** — what the *most-played* build of this Legend costs you.
+
+### Why a row quotes two prices
+
+The main figure measures the list closest to your collection, which is usually the
+cheapest and often a precon. That number is true and misleading on its own: on one
+snapshot it read `$13 · 9 short` for Rengar, against a 14-view budget list, while the
+build people actually play was `$302 · 29 short`. Thirty-seven of forty-nine archetypes
+disagreed the same way, and one of the cheap anchors was a list called
+`Nasus - Default`.
+
+So the row carries both, and adds `· budget list` when the cheap figure it is quoting
+is the budget pick. **A row with no second line is the useful case** — it means the
+list nearest your collection *is* the one people play, so the price you are reading is
+the real deck.
+
+The second line is hidden while the archetype is expanded, since the picks underneath
+already break it down list by list.
 
 ## The helper lines above the list
 

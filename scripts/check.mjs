@@ -2029,5 +2029,51 @@ section('ON THE WAY');
   globalThis.setTimeout = realTimeout;
 }
 
+/* ── the played build, on the row ─────────────────────────────────────────
+   A row's gap is measured against the list closest to the collection, which is
+   usually the cheapest and often a precon — on the live snapshot 37 of 49
+   archetypes, including one called "Nasus - Default". Quoting only that number
+   tells you Rengar is $13 away when the build people play is $302, so the row
+   carries both. These hold the two rules that make it honest: it appears exactly
+   when the two lists differ, and it goes away while the archetype is expanded,
+   where the picks already break it down list by list.                          */
+section('The played build on a row');
+{
+  A.S.pick = null; A.S.pickList = null; A.S.expand = []; A.S.expandAll = false; A.S.nearSpend = 25;
+  let sawSome = 0;
+  for (const [label, inv] of Object.entries(collections)){
+    A.S.inv = inv;
+    const arch = A.metaArchetypes(A.metaPool());
+    let differ = 0;
+    for (const g of arch){
+      const mp = A.legendPicks(g).find((p) => p.lenses.includes('most played'));
+      if (mp && mp.row.deck.s !== g.best.deck.s) differ++;
+    }
+    A.renderNext();
+    const h = els.get('v-next').innerHTML;
+    const shown = (h.match(/class="played"/g) || []).length;
+    const budget = (h.match(/· budget list/g) || []).length;
+    sawSome += shown;
+    // Never on a row that is already quoting the played build, so it cannot exceed the
+    // number of archetypes whose two lists disagree.
+    ok(`[${label}] the played figure only appears where the lists disagree`,
+       shown <= differ, `${shown} rows carry it, ${differ} archetypes disagree`);
+    // The "budget list" marker explains a suspiciously cheap gap, so it never stands
+    // without the comparison that makes it mean something.
+    ok(`[${label}] the budget-list marker never stands alone`,
+       budget <= shown, `${budget} marked, ${shown} compared`);
+
+    A.S.expandAll = true;
+    A.renderNext();
+    ok(`[${label}] expanding the table drops the row summary`,
+       ((els.get('v-next').innerHTML.match(/class="played"/g) || []).length) === 0);
+    A.S.expandAll = false;
+  }
+  ok('the played figure actually renders on this snapshot', sawSome > 0,
+     `${sawSome} rows across the fixtures`);
+  A.S.inv = {};
+  A.forgetDeckCaches();
+}
+
 console.log(failures ? `\n${failures} FAILED` : '\nall checks pass');
 process.exit(failures ? 1 : 0);

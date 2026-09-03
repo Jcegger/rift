@@ -164,13 +164,18 @@ td .qi.set{border-color:var(--teal);color:var(--teal)}
 .row{display:flex;gap:9px;align-items:center;padding:6px 0;border-top:1px solid var(--line);font-size:13px}
 .row:first-child{border-top:none}
 .row .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.row .qty{font-family:var(--head);color:var(--teal);white-space:nowrap}
+/* flex:none, or the numbers lose. .qty is nowrap, so when the row runs out of room the
+   default flex-shrink squeezes its box under its text and the overflow spills past the
+   body's overflow-x:hidden — silently, off the right of a phone. The name is the part
+   that may give: it already ellipsises. */
+.row .qty{font-family:var(--head);color:var(--teal);white-space:nowrap;flex:none}
 /* The lists toggle sits outside .nm on purpose. Inside it, the ellipsis ate it on any
    narrow screen and the control was unreachable on a phone — the row's own detail is
    not something the row may truncate away. */
 .row .lists{flex:none;font-family:var(--head);font-size:11px;color:var(--dim);white-space:nowrap;
   cursor:pointer;padding:3px 6px;border:1px solid var(--line2);border-radius:5px;user-select:none}
 .row .lists:hover{color:var(--ink);border-color:var(--teal)}
+.row .qty .played{display:block;font-family:var(--head);font-size:10.5px;color:var(--dim);font-weight:normal}
 .row .lists[aria-expanded="true"]{color:var(--teal);border-color:var(--teal)}
 .row .qty.need{color:var(--maize)}
 .empty{color:var(--dimmer);font-size:13px;font-style:italic;padding:8px 0}
@@ -3545,7 +3550,30 @@ function renderNext(){
 
   // One row per archetype. Everything that used to be a sentence under a panel is a
   // column or a tooltip here, so the table carries the detail without the prose.
-  const deckRow = (r) => `
+  /* The row's gap is measured against whichever list is closest to the collection, and
+     that is usually the cheapest one — 37 of 49 archetypes today, and one of them is a
+     list literally called "Nasus - Default". The figure is true and misleading alone:
+     "$13 for Rengar" is a 14-view budget build while the deck people play is $302.
+
+     So a row carries both, and says when the cheap one it is quoting is the budget pick.
+     Not while the archetype is expanded: the picks below already break it down list by
+     list, and repeating it costs a line on every row of a fully expanded table. */
+  const anchorOf = (r) => {
+    const picks = legendPicks(r.g);
+    const mp = picks.find((x) => x.lenses.includes('most played'));
+    const bg = picks.find((x) => x.lenses.includes('budget'));
+    const played = mp && mp.row.deck.s !== r.deck.s ? mp.row : null;
+    return {
+      count: picks.length,
+      onBudget: !!(bg && bg.row.deck.s === r.deck.s),
+      played: played && !expanded(r.name)
+        ? { short: played.ev.missingCopies,
+            gap: gapCost(played.ev.missing.map((m) => ({ card: m.card, short: m.short }))) }
+        : null,
+    };
+  };
+
+  const deckRow = (r) => { const a = anchorOf(r); return `
     <div class="row" data-pick="${esc(r.name)}" style="cursor:pointer;${r.fits ? '' : 'opacity:.5;'}${
         target && r.name === target.name ? 'background:var(--panel2)' : ''}">
       <span class="nm">${target && r.name === target.name
@@ -3555,6 +3583,7 @@ function renderNext(){
         <b style="color:var(--cream)">${esc(r.champion || r.name)}</b>${moveChip(r.name)}
         <span class="code">${r.champion ? `${esc(r.name)} · ` : ''}${r.shape}${
           r.bestPlace != null ? ` · best #${r.bestPlace}` : ''}${
+          a.onBudget && a.played ? ' · budget list' : ''}${
           r.established ? '' : ' · fringe'}${
           !r.g.evCount && !(r.claim && r.claim.best != null) ? ' · no tournament record' : ''}${
           r.pinnedList ? ' · <span style="color:var(--good)">list pinned</span>' : ''}</span>${
@@ -3571,14 +3600,15 @@ function renderNext(){
         title="most-played, tournament and budget builds, then every list">${(() => {
           // One text run, deliberately: the layout bounds count text fragments, and a
           // nested span for responsive wording cost more than the wording was worth.
-          const p = legendPicks(r.g).length;
+          const p = a.count;
           const label = p > 1 ? `${p} picks / ${r.lists}` : `${r.lists} list${r.lists === 1 ? '' : 's'}`;
           return `${label} ${expanded(r.name) ? '▾' : '▸'}`; })()}</span>
       <span class="qty${r.buildable ? '' : ' need'}" title="Gap: the cards you are missing, each at its cheapest printing. List: what the whole deck costs to hold outright.">${
         r.buildable ? 'ready now'
         : `${cost(r.gap)}<span class="code"> · ${r.short} short${r.gap.cut ? ` · ${r.gap.cut} cut` : ''} · ${
-            money(r.listPrice)} list</span>`}</span>
-    </div>`;
+            money(r.listPrice)} list</span>`}${a.played ? `<span class="played" title="What the most-played build of this legend costs you, rather than whichever list your collection happens to be closest to">played ${
+            cost(a.played.gap)} · ${a.played.short} short</span>` : ''}</span>
+    </div>`; };
 
   host.innerHTML = `
     <div class="panel">
