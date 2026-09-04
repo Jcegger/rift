@@ -63,6 +63,7 @@ const NAMED = [
   'historyDays', 'historyNames', 'sharesOn', 'movementPair', 'metaMovement', 'movementFor',
   'tierMovement', 'movementPending', 'moveChip',
   'renderNews', 'credibility',
+  'newqRows', 'newqText', 'renderNewq', 'renderSync',
   'archetypeName', 'metaPool', 'metaArchetypes', 'legendPicks', 'scorePool', 'cardLeverage', 'loadBans',
   'acquisitionPath', 'unionGap', 'pathText', 'huntList', 'huntText', 'HUNT_BANDS', 'ownedIdentities', 'evalDeck', 'matchRow',
   'spares', 'tradeMatch', 'readPartner', 'readyShareOf', 'owned', 'byTarget',
@@ -2008,6 +2009,61 @@ section('Rendering');
    setSource persists, and persist debounces a real Supabase write, so the network
    and the timer are stubbed for the duration rather than left to fire with a test
    fixture loaded.                                                              */
+section('The Piltover worklist');
+{
+  const [p1, p2, p3] = cat.cards.slice(0, 3);
+  const csv = (rows) => 'cardid,name,normal,foil\n' +
+    rows.map(([c, n]) => `${c},x,${n},0`).join('\n');
+  const held = () => A.newqRows().reduce((a, r) => a + r.q, 0);
+
+  // A first pull has no previous collection to have gained anything against, and
+  // banking the whole of one would be a worklist nobody could ever clear honestly.
+  A.S.inv = {}; A.S.newq = {};
+  let r = A.applyImport(csv([[p1.c, 1], [p2.c, 2]]));
+  ok('the worklist fixture matched its printings', r.matched === 2, `matched ${r.matched}`);
+  ok('a first pull banks nothing', r.queued === 0 && A.newqRows().length === 0,
+     `${r.queued} queued`);
+
+  // Copies, not printings: a third copy of something held is as absent from Piltover
+  // as a printing never seen.
+  r = A.applyImport(csv([[p1.c, 1], [p2.c, 5], [p3.c, 3]]));
+  ok('a later pull banks the copies it gained', r.queued === 6 && held() === 6,
+     `${r.queued} queued, ${held()} on the list`);
+  ok('a printing that did not move is not on the list',
+     !A.newqRows().some((x) => x.code === p1.c), A.newqRows().map((x) => x.code).join(', '));
+
+  r = A.applyImport(csv([[p1.c, 1], [p2.c, 5], [p3.c, 4]]));
+  ok('the list accumulates across pulls rather than resetting', r.queued === 1 && held() === 7,
+     `${held()} after a second gain`);
+
+  // Clamped to what is held, so a correction over there walks the list back with no
+  // bookkeeping of its own — and a pull never ticks anything off by itself.
+  r = A.applyImport(csv([[p1.c, 1], [p2.c, 5], [p3.c, 1]]));
+  ok('a correction downward walks the list back',
+     r.queued === 0 && held() === 4 &&
+       A.newqRows().find((x) => x.code === p3.c).q === 1,
+     `${held()} left`);
+  r = A.applyImport(csv([[p1.c, 1], [p2.c, 5]]));
+  ok('a card removed over there drops off the list',
+     !A.newqRows().some((x) => x.code === p3.c) && held() === 3, `${held()} left`);
+
+  ok('the copy text names every row', A.newqText().split('\n').length === A.newqRows().length &&
+     A.newqText().includes(p2.c), A.newqText().split('\n')[0]);
+
+  A.renderSync();
+  let html = els.get('v-sync').innerHTML;
+  ok('the panel carries the outstanding count and both actions',
+     html.includes(`NOT YET IN PILTOVER <span class="code">${held()} copies</span>`) &&
+       html.includes('btn-newq-copy') && html.includes('btn-newq-clear'),
+     `${held()} copies`);
+
+  // Only when there is something to do: an empty worklist is not a panel.
+  A.S.newq = {};
+  A.renderSync();
+  ok('an empty worklist renders no panel at all',
+     A.renderNewq() === '' && !els.get('v-sync').innerHTML.includes('NOT YET IN PILTOVER'));
+}
+
 section('ON THE WAY');
 {
   const realFetch = globalThis.fetch, realTimeout = globalThis.setTimeout;

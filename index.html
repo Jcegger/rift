@@ -402,6 +402,7 @@ let TAB = READONLY ? 'trade' : 'next';
 const S = {
   inv: {},
   decks: [],
+  newq: {},               // code -> {q, at}: copies gained since the worklist was cleared
   playset: 3,             // copies of one card a deck may run; drives "playset done"
   planBy: 'cost',         // 'cost' = cheapest gap first, 'cards' = fewest cards first
   nearSpend: 25,          // dollars: soft budget on Next's "Find my deck". 0/blank = no budget
@@ -423,6 +424,7 @@ function loadLocal(){
   S.inv   = S.inv   || {};
   S.decks = S.decks || [];
   S.tags  = S.tags  || {};
+  S.newq  = S.newq  || {};
   S.playset = S.playset || 3;
   if (S.syncUrl === undefined) S.syncUrl = DEFAULT_SYNC_URL;
   if (S.autoSync === undefined) S.autoSync = true;
@@ -432,7 +434,7 @@ function loadLocal(){
 // closeThreshold is deliberately absent: it held a card count for "close decks", which is
 // now a dollar figure under a new name. Reinterpreting a stored 5 as $5 would silently
 // select almost nothing, so the old value is left behind rather than migrated.
-const SYNCED = ['inv','decks','tags','playset','nearSpend','ownLegendOnly','noBuy','showIllegal','planBy','syncUrl','autoSync','mirrorTradeWish','lastSyncAt'];
+const SYNCED = ['inv','decks','tags','playset','nearSpend','ownLegendOnly','noBuy','showIllegal','planBy','syncUrl','autoSync','mirrorTradeWish','lastSyncAt','newq'];
 // Saving must not blow away the collection stream: typing counts into 1189 cards
 // would reset scroll and focus on every keystroke. Views that show derived totals
 // re-render; the collection view patches the one card that changed instead.
@@ -727,6 +729,7 @@ async function syncPull(){
     if (d){
       for (const k of SYNCED) if (d[k] !== undefined) S[k] = d[k];
       S.inv = S.inv || {}; S.decks = S.decks || []; S.tags = S.tags || {};
+      S.newq = S.newq || {};
       lsSet('rb_state', S);
     }
     setDot('ok');
@@ -1555,8 +1558,26 @@ function applyImport(text){
   }
   S.tags = tags;
 
-  let added = 0, changed = 0, cleared = 0;
+  let added = 0, changed = 0, cleared = 0, queued = 0;
   const before = new Map(Object.keys(S.inv).map(c => [c, owned0(c)]));
+
+  // Copies this pull gained, banked as a worklist. riftbound.gg is where cards get
+  // entered — its rapid entry beats typing and carries no tags to mark them with — so
+  // anywhere else the collection is also kept has to be caught up by hand. Nothing can
+  // read Piltover, so this is the only thing that will ever say what it is missing.
+  //
+  // A first pull has nothing to have gained against, and banking a whole collection as
+  // "new" would be a worklist nobody could ever clear honestly. Held copies, not entry
+  // count: an entry can exist carrying only a Want.
+  const heldBefore = [...before.values()].reduce((a, x) => a + x.n + x.f, 0);
+  const today = new Date().toISOString().slice(0, 10);
+  const bank = (code, n) => {
+    if (!heldBefore) return;
+    const e = S.newq[code] || { q: 0 };
+    e.q = (e.q || 0) + n; e.at = today;
+    S.newq[code] = e;
+    queued += n;
+  };
 
   // A full-catalog export lists every card including the ones held at zero, so a
   // matched row is not the same thing as an owned printing. Fold the zero rows in
@@ -1587,6 +1608,10 @@ function applyImport(text){
     // An entry that existed only to hold a Want counts as newly owned, not changed.
     if (!had || (!had.n && !had.f)) added++;
     else if (had.n !== q.n || had.f !== q.f) changed++;
+    // A third copy of something already held is just as absent from Piltover as a
+    // printing never seen before, so the worklist counts copies rather than printings.
+    const rise = (q.n + q.f) - (had ? had.n + had.f : 0);
+    if (rise > 0) bank(code, rise);
   }
 
   // Copies that have landed. Owned counts are authoritative and were just replaced, so
@@ -1610,7 +1635,7 @@ function applyImport(text){
 
   const copies = [...owned.values()].reduce((a, q) => a + q.n + q.f, 0);
   return { rows: rows.length, matched: owned.size - zeroed.size, copies, mirror,
-           added, changed, cleared, unmatched, approx, arrived,
+           added, changed, cleared, queued, unmatched, approx, arrived,
            cols: Array.isArray(cols) ? cols : Object.keys(cols) };
 }
 function owned0(code){ const e = S.inv[code] || {}; return { n: e.n || 0, f: e.f || 0 }; }
@@ -1702,6 +1727,55 @@ function renderFoilOnly(){
   </div>`;
 }
 
+/* ── the Piltover worklist ─────────────────────────────────────────────────
+   Copies riftbound.gg has gained since this was last cleared. The counts are clamped
+   to what is currently held, so a correction over there — three entered, one kept —
+   walks the worklist back on the next pull without any bookkeeping of its own, and a
+   card removed outright drops off it. */
+const NEWQ_SHOWN = 12;
+function newqRows(){
+  return Object.entries(S.newq || {})
+    .map(([code, e]) => ({ code, card: BY[code], at: e.at || '',
+                           q: Math.min(e.q || 0, owned(code)) }))
+    .filter((r) => r.card && r.q > 0)
+    .sort((a, b) => b.at.localeCompare(a.at) || a.code.localeCompare(b.code));
+}
+function newqText(){
+  return newqRows().map((r) => `${r.q}x ${r.code} ${r.card.n}`).join('\n');
+}
+function renderNewq(){
+  const rows = newqRows();
+  if (!rows.length) return '';
+  const copies = rows.reduce((a, r) => a + r.q, 0);
+  // Grouped by the day they landed, so a box reads as one evening's work rather than
+  // as forty unrelated cards.
+  const days = [];
+  for (const r of rows.slice(0, NEWQ_SHOWN)){
+    if (!days.length || days[days.length - 1].at !== r.at) days.push({ at: r.at, rows: [] });
+    days[days.length - 1].rows.push(r);
+  }
+  const over = rows.length - Math.min(rows.length, NEWQ_SHOWN);
+  return `<div class="panel">
+    <h2>NOT YET IN PILTOVER <span class="code">${copies} cop${copies === 1 ? 'y' : 'ies'}</span></h2>
+    <p class="note">Copies riftbound.gg has gained since you last cleared this. Nothing can read
+    Piltover, so this is the only record of what it still owes. Cleared by hand: nothing here
+    expires on its own, and a pull does not tick anything off.</p>
+    <div class="bar-row" style="margin:12px 0 6px">
+      <button class="ghost" id="btn-newq-copy">Copy the list</button>
+      <button class="ghost" id="btn-newq-clear">Clear</button>
+    </div>
+    <div class="rows">${days.map((g) => `
+      <p class="note" style="margin:6px 0 2px">added ${esc(g.at || 'an earlier pull')}</p>
+      ${g.rows.map((r) => `<div class="row">
+        <span class="nm">${esc(r.card.n)}
+          <span class="code">${esc(r.code)}${r.card.v ? ` · ${esc(vLabel(r.card.v))}` : ''}</span></span>
+        <span class="qty">${r.q}</span>
+      </div>`).join('')}`).join('')}</div>
+    ${over ? `<p class="note" style="margin:8px 0 0">+${over} more printing${over === 1 ? '' : 's'};
+      "Copy the list" covers all ${rows.length}.</p>` : ''}
+  </div>`;
+}
+
 function renderSync(){
   const L = lastImport;
   const foilPanel = renderFoilOnly();
@@ -1731,6 +1805,7 @@ function renderSync(){
            L.unmatched.length > 200 ? `\n… and ${L.unmatched.length - 200} more` : ''}</div>` : ''}`;
 
   document.getElementById('v-sync').innerHTML = `
+    ${renderNewq()}
     ${foilPanel}
     <div class="panel">
       <h2>IMPORT FROM RIFTBOUND.GG</h2>
@@ -4545,6 +4620,16 @@ function wire(){
     const t = e.target;
 
     // ── spares and trade matching ────────────────────────────────────
+    if (t.id === 'btn-newq-copy') copy(newqText(), 'list copied');
+    if (t.id === 'btn-newq-clear'){
+      const n = newqRows().reduce((a, r) => a + r.q, 0);
+      // Unrecoverable: the delta only ever existed here, and riftbound.gg has no
+      // "what did I add on the 4th" view to rebuild it from.
+      if (confirm(`Clear all ${n} copies from the Piltover worklist?`)){
+        S.newq = {}; persist(); toast('worklist cleared');
+      }
+    }
+
     if (t.id === 'btn-spares-copy') copy(spareText(), 'spares copied');
     if (t.id === 'btn-spares-mark'){
       let n = 0;
