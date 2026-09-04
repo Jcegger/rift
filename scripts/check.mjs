@@ -54,6 +54,7 @@ const js = page.slice(page.indexOf('<script>') + 8, page.lastIndexOf('</script>'
                .replace(/\nboot\(\);\s*$/, '\n');
 const NAMED = [
   'gameName', 'buildNameIndex', 'identityOf', 'championOf', 'legendRoster', 'legendText',
+  'matches', 'tagsOf', 'allTags', 'buildFilterUI',
   'championRoster', 'CH_STATES', 'legendlessChampions',
   'foilOnlyProblems', 'foilOnlyText', 'renderFoilOnly', 'championIndex',
   'deckLegalForConstructed', 'cardCost', 'gapCost', 'cost', 'costIndex',
@@ -79,6 +80,7 @@ const A = new Function(`${js}
     get DECKS(){return DECKS}, set DECKS(v){DECKS=v},
     set DECKS_AT(v){DECKS_AT=v}, set DECKS_WINDOW(v){DECKS_WINDOW=v},
     get S(){return S}, set TAB(v){TAB=v},
+    get F(){return F},
     get PARTNER(){return PARTNER}, set PARTNER(v){PARTNER=v},
     forgetDeckCaches, deckRequirements, deckBansCached,
     get CHAMPS(){return CHAMPS}, get NAMES(){return NAMES},
@@ -908,6 +910,55 @@ section('Movement');
 }
 
 /* ══ finishes ════════════════════════════════════════════════════════════ */
+section('The tag filter');
+{
+  // Tags arrive from riftbound.gg on import and are the only handle this app has on
+  // "already dealt with elsewhere", so the inverse of a tag has to be askable too.
+  const codes = cat.cards.map((c) => c.c);
+  const tagged = new Set(codes.filter((_, i) => i % 3 === 0));
+  A.S.tags = Object.fromEntries([...tagged].map((c) => [c, ['piltover']]));
+  A.S.inv = {};
+  for (const c of codes) A.S.inv[c] = { n: 1 };
+
+  ok('a tag reaches the cards it is on', A.allTags().join(',') === 'piltover' &&
+     tagged.size > 0 && [...tagged].every((c) => A.tagsOf(c).includes('piltover')),
+     `${tagged.size} of ${codes.length} printings tagged`);
+
+  const keptBy = (sel) => {
+    A.F.tag = sel;
+    return new Set(cat.cards.filter((c) => A.matches(c)).map((c) => c.c));
+  };
+  const all = keptBy('');
+  const pos = keptBy('piltover');
+  const neg = keptBy('!piltover');
+  A.F.tag = '';
+
+  ok('the tag keeps exactly the tagged cards',
+     pos.size === [...all].filter((c) => tagged.has(c)).length &&
+       [...pos].every((c) => tagged.has(c)),
+     `${pos.size} kept, ${tagged.size} tagged`);
+  // The point of the pair: what a tag does not cover is the worklist, so the two halves
+  // must account for every card the rest of the filters let through and never overlap.
+  ok('the negation is exactly the complement, losing nothing',
+     pos.size + neg.size === all.size && ![...neg].some((c) => pos.has(c)),
+     `${pos.size} + ${neg.size} = ${all.size} unfiltered`);
+  ok('the negation keeps no tagged card', ![...neg].some((c) => tagged.has(c)),
+     `${neg.size} untagged of ${all.size}`);
+
+  // Implemented is not the same as reachable: the pair is only useful if the dropdown
+  // actually offers the inverse of every tag it offers.
+  A.S.tags = { [codes[0]]: ['piltover'], [codes[1]]: ['jinx starter'] };
+  A.buildFilterUI();
+  const sel = els.get('f-tag').innerHTML;
+  ok('the dropdown offers the inverse of every tag it offers',
+     A.allTags().every((t) => sel.includes(`value="${t}"`) &&
+       sel.includes(`value="!${t}"`) && sel.includes(`not: ${t}`)),
+     A.allTags().map((t) => `${t} / not: ${t}`).join(', '));
+
+  A.S.tags = {};
+  ok('no tags means the filter has nothing to offer', A.allTags().length === 0);
+}
+
 section('Finishes');
 {
   const flagged = cat.cards.filter((c) => c.fo);

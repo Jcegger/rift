@@ -827,7 +827,15 @@ function matches(c){
   if (F.rarity && c.r !== F.rarity) return false;
   if (F.domain.length && !(c.d || []).some(d => F.domain.includes(d))) return false;
   if (F.variant.length && !F.variant.includes(c.v || '')) return false;
-  if (F.tag && !tagsOf(c.c).includes(F.tag)) return false;
+  // A tag filter inverts with a "!" prefix, so one dropdown answers both "what carries
+  // this tag" and "what still does not" — the second being the useful one when the tag
+  // records what has already been entered somewhere this app cannot read. A riftbound.gg
+  // tag whose own name starts with "!" would read as the negation of the rest; it costs
+  // a wrong filter view, not data, and no tag here has ever been named that way.
+  if (F.tag){
+    const neg = F.tag[0] === '!';
+    if (tagsOf(c.c).includes(neg ? F.tag.slice(1) : F.tag) === neg) return false;
+  }
 
   const o = owned(c.c);
   if (F.have === 'own'     && !o) return false;
@@ -4360,8 +4368,9 @@ function buildFilterUI(){
   const tags = allTags();
   const tagSel = document.getElementById('f-tag');
   tagSel.classList.toggle('hide', !tags.length);
-  tagSel.innerHTML = opt('','Any tag',F.tag) + tags.map(t => opt(t, t, F.tag)).join('');
-  if (F.tag && !tags.includes(F.tag)) F.tag = '';
+  tagSel.innerHTML = opt('','Any tag',F.tag) + tags.map(t => opt(t, t, F.tag)).join('')
+    + tags.map(t => opt(`!${t}`, `not: ${t}`, F.tag)).join('');
+  if (F.tag && !tags.includes(F.tag.replace(/^!/, ''))) F.tag = '';
 
   document.getElementById('f-domain').innerHTML = DOMAINS.map(d =>
     `<button class="chip d-${d.toLowerCase()}" data-dom="${d}" aria-pressed="${F.domain.includes(d)}">${d}</button>`
