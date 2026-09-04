@@ -1545,13 +1545,22 @@ section('Deck options');
 
   // 2. Expanding the row: named picks first, then every list most-viewed first,
   //    each pinnable and linked.
+  // Only the first ROWS_SHOWN archetypes reach the table, so an expansion exists only
+  // for those; asking for any other name yields no block at all rather than an empty one.
   const expansionOf = (name) => {
     A.S.expand = [name];
     A.renderNext();
     const h = els.get('v-next').innerHTML;
     const a = h.indexOf(`data-expand-for="${name}"`);
+    if (a < 0) return null;
     const b = h.indexOf('data-pick="', a);
     return h.slice(a, b > -1 ? b : h.indexOf('WHAT TO BUY', a));
+  };
+  const tableRows = () => {
+    A.S.expand = [];
+    A.renderNext();
+    return new Set([...els.get('v-next').innerHTML.matchAll(/data-pick="([^"]+)"/g)]
+      .map((m) => m[1]));
   };
   const block = expansionOf(multi.name);
   const EXP_CAP = 12;
@@ -1586,15 +1595,17 @@ section('Deck options');
      roll.includes('· default'), 'a row carries "default"');
   // The fixture only exercises the interesting case on a day when its representative
   // happens to rank past EXP_CAP — which is how this went red in CI and green here on
-  // the same code. Assert it on whichever archetype is furthest past the cap today.
+  // the same code. Assert it on whichever archetype in the table is furthest past the
+  // cap today, so the day's snapshot decides nothing.
   {
-    const past = arch.filter((g) => repRank(g) >= EXP_CAP)
-                     .sort((a, b) => repRank(b) - repRank(a));
-    const worst = past[0];
+    const inTable = tableRows();
+    const worst = arch.filter((g) => inTable.has(g.name) && repRank(g) >= EXP_CAP)
+                      .sort((a, b) => repRank(b) - repRank(a))[0];
+    const bl = worst && expansionOf(worst.name);
     ok('a representative ranked past the cap is still shown as the default',
-       !worst || expansionOf(worst.name).includes('· default'),
+       !worst || (bl !== null && bl.includes('· default')),
        worst ? `${worst.name}, rep rank ${repRank(worst) + 1} of ${worst.rows.length}`
-             : 'no archetype ranks its representative past the cap today');
+             : 'no archetype in the table ranks its representative past the cap today');
     A.S.expand = [multi.name];   // section 3 pins against the fixture's expansion
   }
   // A re-entered copy is flagged rather than linked as canonical.
