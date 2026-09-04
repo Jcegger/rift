@@ -1545,21 +1545,31 @@ section('Deck options');
 
   // 2. Expanding the row: named picks first, then every list most-viewed first,
   //    each pinnable and linked.
-  A.S.expand = [multi.name];
-  A.renderNext();
-  let html = els.get('v-next').innerHTML;
-  const bStart = html.indexOf(`data-expand-for="${multi.name}"`);
-  const bEnd = html.indexOf('data-pick="', bStart);
-  const block = html.slice(bStart, bEnd > -1 ? bEnd : html.indexOf('WHAT TO BUY', bStart));
+  const expansionOf = (name) => {
+    A.S.expand = [name];
+    A.renderNext();
+    const h = els.get('v-next').innerHTML;
+    const a = h.indexOf(`data-expand-for="${name}"`);
+    const b = h.indexOf('data-pick="', a);
+    return h.slice(a, b > -1 ? b : h.indexOf('WHAT TO BUY', a));
+  };
+  const block = expansionOf(multi.name);
   const EXP_CAP = 12;
+  // The roll's own order, so a check can say where the representative lands in it.
+  const repRank = (g) => g.rows.slice()
+    .sort((a, b) => (b.deck.vw || 0) - (a.deck.vw || 0) ||
+      (a.deck.pr ?? Infinity) - (b.deck.pr ?? Infinity) ||
+      (a.deck.s || '').localeCompare(b.deck.s || ''))
+    .findIndex((x) => x.deck.s === g.best.deck.s);
   const picks = A.legendPicks(multi);
   const divider = '— every list, most viewed first —';
   const rollStart = block.indexOf(divider);
   const roll = rollStart > -1 ? block.slice(rollStart) : block;
   const rollPins = (roll.match(/data-pick-list="/g) || []).length;
+  const repOut = repRank(multi) >= EXP_CAP;
   ok('the full roll lists every build, capped',
-     rollPins === Math.min(multi.rows.length, EXP_CAP),
-     `${rollPins} of ${multi.rows.length} lists`);
+     rollPins === Math.min(multi.rows.length, EXP_CAP) + (repOut ? 1 : 0),
+     `${rollPins} of ${multi.rows.length} lists${repOut ? ', plus the representative from past the cap' : ''}`);
   ok('the picks lead the roll when a legend has more than one',
      picks.length < 2 || (rollStart > -1 &&
        picks.every((p) => block.indexOf(`data-pick-list="${p.row.deck.s}"`) < rollStart)),
@@ -1574,6 +1584,19 @@ section('Deck options');
      `views ${vws.slice(0, 8).join(', ')}`);
   ok('the roll marks the representative as the default',
      roll.includes('· default'), 'a row carries "default"');
+  // The fixture only exercises the interesting case on a day when its representative
+  // happens to rank past EXP_CAP — which is how this went red in CI and green here on
+  // the same code. Assert it on whichever archetype is furthest past the cap today.
+  {
+    const past = arch.filter((g) => repRank(g) >= EXP_CAP)
+                     .sort((a, b) => repRank(b) - repRank(a));
+    const worst = past[0];
+    ok('a representative ranked past the cap is still shown as the default',
+       !worst || expansionOf(worst.name).includes('· default'),
+       worst ? `${worst.name}, rep rank ${repRank(worst) + 1} of ${worst.rows.length}`
+             : 'no archetype ranks its representative past the cap today');
+    A.S.expand = [multi.name];   // section 3 pins against the fixture's expansion
+  }
   // A re-entered copy is flagged rather than linked as canonical.
   const copySlugs = multi.rows.filter((x) => /-copy(-|$)/.test(x.deck.s)).map((x) => x.deck.s);
   ok('a fan-copy list in the roll is flagged as such',
@@ -1590,7 +1613,7 @@ section('Deck options');
   A.S.pick = multi.name;
   A.S.pickList = cand.s;
   A.renderNext();
-  html = els.get('v-next').innerHTML;
+  let html = els.get('v-next').innerHTML;
   ok('pinning a list retargets the deck panel to it',
      html.includes(`data-meta-copy="${cand.s}"`) && !html.includes(`data-meta-copy="${def}"`),
      `panel on ${cand.s}, not ${def}`);

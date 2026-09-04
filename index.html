@@ -3538,12 +3538,22 @@ function renderNext(){
     const picks = legendPicks(r.g);
     const lists = r.g.rows.slice().sort((a, b) => (b.deck.vw || 0) - (a.deck.vw || 0) ||
       (a.deck.pr ?? Infinity) - (b.deck.pr ?? Infinity) || (a.deck.s || '').localeCompare(b.deck.s || ''));
+    // The roll is ordered by views, but the representative is chosen by gap — so on an
+    // archetype with a long tail of popular lists it can rank past the cap, and then the
+    // expansion showed no "default" at all while the panel and the buy plan still
+    // targeted it. Carry it in as one extra row rather than dropping a more-viewed list
+    // to make room; it has fewer views than everything above it, so the order holds.
+    const shown = lists.slice(0, cap);
+    if (!shown.some((x) => x.deck.s === best)){
+      const rep = lists.find((x) => x.deck.s === best);
+      if (rep) shown.push(rep);
+    }
     return `<div data-expand-for="${esc(r.name)}" class="rows"
         style="margin:1px 0 8px 20px;border-left:2px solid var(--line2);padding-left:10px">
       ${picks.length > 1 ? picks.map(p => listLine(p.row, best, pin, p.lenses.join(' · '))).join('')
         + `<p class="note" style="margin:3px 0">— every list, most viewed first —</p>` : ''}
-      ${lists.slice(0, cap).map(x => listLine(x, best, pin, null)).join('')}
-      ${lists.length > cap ? `<p class="note" style="margin:4px 0 0">+${lists.length - cap} more,
+      ${shown.map(x => listLine(x, best, pin, null)).join('')}
+      ${lists.length > shown.length ? `<p class="note" style="margin:4px 0 0">+${lists.length - shown.length} more,
         fewer views — <a href="https://riftbound.gg/decks/" target="_blank" rel="noopener" style="color:var(--teal)">browse on riftbound.gg</a></p>` : ''}
     </div>`;
   };
