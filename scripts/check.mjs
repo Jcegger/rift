@@ -29,16 +29,22 @@ const mkEl = (id) => ({
   addEventListener(){}, focus(){}, insertAdjacentHTML(){}, appendChild(){},
   remove(){}, getBoundingClientRect: () => ({}),
 });
-globalThis.location = { search: '', origin: 'https://x', pathname: '/' };
-globalThis.document = {
+// Node keeps adding these itself, and it adds them getter-only: `navigator` has been
+// one since 21, so a plain assignment throws rather than shadowing it. Define over
+// whatever is there, so the stub does not depend on which names this Node happens to
+// have claimed.
+const stub = (name, value) =>
+  Object.defineProperty(globalThis, name, { value, writable: true, configurable: true });
+stub('location', { search: '', origin: 'https://x', pathname: '/' });
+stub('document', {
   getElementById(id){ if (!els.has(id)) els.set(id, mkEl(id)); return els.get(id); },
   querySelectorAll: () => [], querySelector: () => null,
   body: { addEventListener(){} }, createElement: () => mkEl('new'), addEventListener(){},
-};
-globalThis.localStorage = { getItem: () => null, setItem(){}, removeItem(){} };
-globalThis.IntersectionObserver = class { observe(){} };
-globalThis.navigator = { clipboard: { writeText: async () => {} } };
-globalThis.window = { innerWidth: 1200, innerHeight: 900, addEventListener(){}, scrollTo(){} };
+});
+stub('localStorage', { getItem: () => null, setItem(){}, removeItem(){} });
+stub('IntersectionObserver', class { observe(){} });
+stub('navigator', { clipboard: { writeText: async () => {} } });
+stub('window', { innerWidth: 1200, innerHeight: 900, addEventListener(){}, scrollTo(){} });
 
 /* ── load the app, minus its boot call ──────────────────────────────────── */
 // The app is deliberately one scope with no module system, so re-exporting its
