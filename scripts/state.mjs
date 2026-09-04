@@ -10,6 +10,7 @@
 //   node scripts/state.mjs trade           # copies flagged for trade
 //   node scripts/state.mjs sets            # base-set completion
 //   node scripts/state.mjs raw             # the raw state JSON, pretty-printed
+//   node scripts/state.mjs piltover        # full Piltover Archive import CSV (Replace mode)
 //
 // Where the data comes from. The app keeps everything personal — owned counts,
 // decks, wants, tags, settings — in localStorage under `rb_state`, and mirrors it
@@ -212,6 +213,40 @@ function cmdTrade(S, cat, q) {
   console.log(`\n  ${rows.length} cards flagged`);
 }
 
+// Piltover Archive import CSV — a full carbon-copy snapshot of the collection.
+// Jay's Piltover binder is never edited directly, so re-importing with Piltover's
+// "Replace" mode (not "Merge") each time keeps it in sync with no drift to track.
+const PILTOVER_HEADER = "Variant Number,Card Name,Set,Set Prefix,Rarity,Variant Type,Variant Label,Foil,Quantity,Language,Condition,Grading Company,Grading Value,Grading Label,Notes";
+
+function csvEsc(s) {
+  if (s == null) return "";
+  const str = String(s);
+  return /[",\n]/.test(str) ? `"${str.replace(/"/g, '""')}"` : str;
+}
+
+function cmdPiltover(S, cat) {
+  const rows = [];
+  for (const [code, e] of Object.entries(S.inv || {})) {
+    let n = e.n || 0;
+    let f = e.f || 0;
+    if (n + f <= 0) continue;
+    const card = cat.BY.get(code);
+    if (!card) continue; // not in catalog — nothing to map to a Piltover variant
+    if (card.t === "Rune") continue;
+    if (/-T\d/.test(code)) continue;
+    if (card.fo && n > 0) { f += n; n = 0; } // foil-only printing recorded as Normal
+    const num = code.replace(/\/\d+$/, "");
+    if (n > 0) rows.push([num, card.n, false, n]);
+    if (f > 0) rows.push([num, card.n, true, f]);
+  }
+  rows.sort((a, b) => a[0].localeCompare(b[0], undefined, { numeric: true }));
+  const lines = [PILTOVER_HEADER];
+  for (const [num, name, foil, qty] of rows) {
+    lines.push([num, name, "", "", "", "", "", foil, qty, "English", "", "", "", "", ""].map(csvEsc).join(","));
+  }
+  process.stdout.write(lines.join("\r\n") + "\r\n");
+}
+
 function cmdSets(S, cat, q) {
   for (const set of cat.sets) {
     const base = cat.cards.filter((c) => c.s === set.id && c.no <= set.base);
@@ -236,6 +271,7 @@ async function main() {
     trade: () => cmdTrade(S, cat, q),
     sets: () => cmdSets(S, cat, q),
     raw: () => console.log(JSON.stringify(S, null, 2)),
+    piltover: () => cmdPiltover(S, cat),
   };
   const fn = table[cmd];
   if (!fn) { console.error(`unknown command "${cmd}" — try: ${Object.keys(table).join(", ")}`); process.exit(2); }
