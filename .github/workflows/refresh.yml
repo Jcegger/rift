@@ -80,7 +80,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # GitHub disables a scheduled workflow after 60 days of repository inactivity,
           # and pushes made with GITHUB_TOKEN do not count as activity — so this cron
@@ -90,9 +90,9 @@ jobs:
           # GitHub emails before it fires.
           token: ${{ secrets.REFRESH_PAT || github.token }}
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '24'
 
       # Order matters. The catalog is what every other script resolves card codes
       # against, events supply the sizes that build-decks attaches to tournament decks,
@@ -280,7 +280,7 @@ jobs:
 
       - name: Open or update the tracking issue
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const title = 'Data refresh is failing';
@@ -313,7 +313,7 @@ jobs:
       # thing fixed itself only teaches us to stop reading them.
       - name: Close the tracking issue on recovery
         if: success()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const title = 'Data refresh is failing';
