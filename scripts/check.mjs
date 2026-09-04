@@ -2055,49 +2055,59 @@ section('The Piltover worklist');
   // ── the merge file ──
   // Finishes are banked apart, because a file that says "3 copies" where one of them is
   // a foil is wrong wherever it lands.
-  const comma = cat.cards.find((c) => c.n.includes(','));
+  const comma = cat.cards.find((c) => c.n.includes(',')); // "Darius, Trifarian" — also fo:1
   const keptInv = A.S.inv, keptQ = A.S.newq;
   A.S.inv = {}; A.S.newq = {};
   A.applyImport(csvF([[p1.c, 1, 0]]));
-  A.applyImport(csvF([[p1.c, 1, 0], [comma.c, 2, 3]]));
-  const row = A.newqRows().find((x) => x.code === comma.c);
+  A.applyImport(csvF([[p1.c, 1, 0], [p2.c, 2, 3], [comma.c, 1, 0]]));
+  const row = A.newqRows().find((x) => x.code === p2.c);
   ok('normal and foil are banked apart', row && row.n === 2 && row.f === 3 && row.q === 5,
      row ? `${row.n} normal, ${row.f} foil` : 'no row');
 
   const lines = A.newqCSV().split('\n');
-  ok('the file leads with the ten Piltover columns, in their order',
+  ok('the file leads with the same fifteen Piltover columns state.mjs writes',
      lines[0] === 'Variant Number,Card Name,Set,Set Prefix,Rarity,Variant Type,' +
-                  'Variant Label,Quantity,Language,Condition', lines[0]);
-  // Variant Type is a column and Quantity is one number, so a printing held in both
-  // finishes is two rows rather than a lie in one.
-  const finishes = A.newqRows().reduce((a, r) => a + (r.n ? 1 : 0) + (r.f ? 1 : 0), 0);
+                  'Variant Label,Foil,Quantity,Language,Condition,Grading Company,' +
+                  'Grading Value,Grading Label,Notes', lines[0]);
+  // Foil is its own boolean column, not a Variant Type value, so a printing held in
+  // both finishes is two rows rather than a lie in one — except a foil-only printing,
+  // whose Normal count folds into its one Foil row (checked separately below).
+  const cols = (l) => l.replace(/"[^"]*"/g, 'x').split(',');
+  const finishes = A.newqRows().reduce((a, r) =>
+    a + (r.card.fo && r.n ? 1 : (r.n ? 1 : 0) + (r.f ? 1 : 0)), 0);
   ok('one row per printing and finish, never a finish folded away',
      lines.length === finishes + 1 &&
-       lines.filter((l) => l.includes(',Foil,')).length ===
-         A.newqRows().filter((r) => r.f).length,
+       lines.slice(1).filter((l) => cols(l)[0] === p2.c.replace(/\/\d+$/, '')).length === 2,
      `${lines.length - 1} rows for ${A.newqRows().length} printings`);
   // A name with a comma is what silently corrupts a CSV, and 297 cards here have one.
   ok('a comma in a name is quoted rather than splitting the row',
      lines.some((l) => l.includes(`"${comma.n}"`)) &&
-       lines.every((l) => l.replace(/"[^"]*"/g, 'x').split(',').length === 10),
+       lines.every((l) => cols(l).length === 15),
      comma.n);
   // Their identifier is ours without riftbound.gg's denominator, and nothing else.
   ok('the identifier is written the way Piltover writes it',
      lines.slice(1).every((l) => /^[A-Z]{3}-[A-Z]*[0-9]+[a-z*]?,/.test(l)) &&
        !lines.slice(1).some((l) => l.split(',')[0].includes('/')),
      lines[1].split(',')[0]);
+  // The same foil-only correction the full-export script applies: a printing that
+  // can only exist as foil never travels as a Normal count.
+  const commaNum = comma.c.replace(/\/\d+$/, '');
+  const commaLine = lines.find((l) => cols(l)[0] === commaNum);
+  ok('a foil-only printing recorded as Normal is corrected to Foil in the file',
+     commaLine && cols(commaLine)[7] === 'true' && cols(commaLine)[8] === '1',
+     commaLine);
 
   // The destination cannot be reached from here, so the strongest thing that can be
   // said is that the file is well-formed and resolves back to the printings it names.
-  // Finish does not survive the trip — this app reads Quantity, not Variant Type — so
-  // the claim is copies and printings, not finishes.
-  const stated = A.newqRows().length, copies = A.newqRows().find((x) => x.code === comma.c).q;
+  // Finish does not survive the trip — this app reads Quantity, not the Foil column —
+  // so the claim is copies and printings, not finishes.
+  const stated = A.newqRows().length, copies = row.q;
   const file = A.newqCSV();
   A.S.inv = {}; A.S.newq = {};
   const back = A.applyImport(file);
   ok('every row resolves to the printing it names, at the count it states',
-     back.matched === stated && A.owned(comma.c) === copies,
-     `${back.matched} of ${stated} printings, ${A.owned(comma.c)} copies of the comma card`);
+     back.matched === stated && A.owned(p2.c) === copies,
+     `${back.matched} of ${stated} printings, ${A.owned(p2.c)} copies`);
   A.S.inv = keptInv; A.S.newq = keptQ;
 
   A.renderSync();

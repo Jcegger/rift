@@ -1754,42 +1754,42 @@ function newqText(){
 
 /* A file to merge into Piltover Archive.
 
-   Their schema, as OpenRift documents it for interchange: ten columns, detected by
-   "Variant Number", separating finish, art variant and condition. Their own deck-code
-   repo pins the identifier — set, a zero-padded number that may carry an R/SP prefix,
-   an optional variant suffix, and both "s" and "*" valid for a signature. That is this
-   app's own code exactly, minus the "/298" denominator riftbound.gg appends, so the
-   whole conversion is dropping that.
+   Same fifteen-column header scripts/state.mjs's `piltover` full-export command
+   writes (verified against their own import parser, not guessed): Variant Number
+   and Quantity are all a row needs to resolve, so Set/Rarity/Variant Type/Variant
+   Label stay blank — the variant is already unambiguous in the Variant Number
+   suffix, and guessing their vocabulary for those columns only adds a way to be
+   wrong. Foil is its own boolean column, not a Variant Type value. Condition and
+   the grading columns are optional and this worklist doesn't track them, so they
+   stay blank too.
 
-   Quantities are what is outstanding rather than what is held, because a merge adds to
-   what is already there. One row per finish: Variant Type is a column and Quantity is a
-   single number, so two copies and three foils are two rows, not a lie in one.
+   riftbound.gg writes "OGN-007a/298"; Piltover writes "OGN-007a" — the only edit
+   the identifier gets is dropping that denominator.
 
-   THREE VALUES HERE ARE UNVERIFIED. Piltover's importer is behind a login and its
-   accepted vocabulary is not documented anywhere public, so the finish, language and
-   condition tokens below are the conventional spellings rather than known-good ones.
-   If an import bounces, they are the first thing to change and they are all in one
-   place. Variant Label is deliberately left empty: the variant is already unambiguous
-   in the Variant Number suffix, so guessing a second vocabulary only adds a way to be
-   wrong. */
-const PA_COLS = ['Variant Number', 'Card Name', 'Set', 'Set Prefix', 'Rarity',
-                 'Variant Type', 'Variant Label', 'Quantity', 'Language', 'Condition'];
-const PA_NORMAL = 'Normal', PA_FOIL = 'Foil';
-const PA_LANGUAGE = 'English', PA_CONDITION = 'Near Mint';
+   Runes and tokens aren't collectible on Piltover, so they're dropped rather than
+   sent as rows nothing there can resolve. A foil-only printing that got itself
+   recorded as a Normal copy (see foilOnlyProblems) is corrected here the same way
+   the full export corrects it: the count moves to Foil rather than travelling
+   as a lie. */
+const PA_HEADER = ['Variant Number', 'Card Name', 'Set', 'Set Prefix', 'Rarity',
+                   'Variant Type', 'Variant Label', 'Foil', 'Quantity', 'Language',
+                   'Condition', 'Grading Company', 'Grading Value', 'Grading Label', 'Notes'];
+const PA_LANGUAGE = 'English';
 
-// riftbound.gg writes "OGN-007a/298"; Piltover writes "OGN-007a". Tokens and runes
-// carry no denominator to begin with and pass through untouched.
 const paNumber = (code) => String(code || '').replace(/[/][0-9]+$/, '');
 const csvCell = (v) => /[",]|[\r]?[\n]/.test(String(v ?? ''))
   ? `"${String(v).replace(/"/g, '""')}"` : String(v ?? '');
 function newqCSV(){
-  const lines = [PA_COLS.join(',')];
+  const lines = [PA_HEADER.join(',')];
   for (const r of newqRows()){
-    for (const [finish, qty] of [[PA_NORMAL, r.n], [PA_FOIL, r.f]]){
+    const card = r.card;
+    if (card.t === 'Rune' || /-T\d/.test(r.code)) continue;
+    let n = r.n, f = r.f;
+    if (card.fo && n > 0){ f += n; n = 0; }
+    for (const [foil, qty] of [[false, n], [true, f]]){
       if (!qty) continue;
-      lines.push([paNumber(r.code), r.card.n, setName(r.card.s), r.card.s || '',
-                  r.card.r || '', finish, '', qty, PA_LANGUAGE, PA_CONDITION]
-                 .map(csvCell).join(','));
+      lines.push([paNumber(r.code), card.n, '', '', '', '', '', foil, qty, PA_LANGUAGE,
+                  '', '', '', '', ''].map(csvCell).join(','));
     }
   }
   return lines.join('\n');
@@ -1818,6 +1818,10 @@ function renderNewq(){
     <p class="note">Copies riftbound.gg has gained since you last cleared this. Nothing can read
     Piltover, so this is the only record of what it still owes. Cleared by hand: nothing here
     expires on its own, and a pull does not tick anything off.</p>
+    <p class="note">Download the file, then in Piltover Archive: Collection → Import →
+    upload it as a merge (adds to what's already there, doesn't replace it). Once it's in,
+    come back and hit Clear — nothing here does that for you. Only gains are tracked; a card
+    you no longer own has to be removed in Piltover by hand.</p>
     <div class="bar-row" style="margin:12px 0 6px">
       <button class="ghost" id="btn-newq-file">Download for Piltover</button>
       <button class="ghost" id="btn-newq-copy">Copy the list</button>
