@@ -1,25 +1,34 @@
 {
- "generatedAt": "2026-09-03",
+ "generatedAt": "2026-09-04",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "tags": {
-  "Guides": 5,
-  "Events": 20,
   "Metagame": 18,
-  "News": 29,
+  "News": 30,
+  "Events": 20,
   "Legends": 15,
   "Sets": 2,
+  "Guides": 4,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Riftbound Meta Tier List - Best Decks for Vendetta - Post Wuhan Regional Open",
+   "dt": "2026-09-03",
+   "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-post-wuhan-regional-open",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
   {
    "title": "The Most Expensive Riftbound Vendetta Cards Right Now",
    "dt": "2026-09-01",
    "url": "https://riftbound.gg/most-expensive-riftbound-vendetta-cards",
    "tags": [
-    "Guides"
+    "News"
    ],
    "author": "Theo-74825"
   },
@@ -821,15 +830,6 @@
    "url": "https://riftbound.gg/bologna-regional-qualifier",
    "tags": [
     "Events"
-   ],
-   "author": "Den"
-  },
-  {
-   "title": "Riftbound Meta Tier List – Best Decks for Spiritforged – Global Release & Post Chinese Regionals",
-   "dt": "2026-02-12",
-   "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-spiritforged-global-release-post-chinese-regionals",
-   "tags": [
-    "Metagame"
    ],
    "author": "Den"
   }

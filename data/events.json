@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-03",
+ "generatedAt": "2026-09-04",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg)",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -14,10 +14,10 @@
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
+   "Asia": 18,
+   "Europe": 12,
    "unknown": 8,
-   "Asia": 23,
-   "North America": 3,
-   "Europe": 13,
+   "North America": 4,
    "Oceania": 1
   },
   "registryEventsByRegion": {
@@ -28,14 +28,13 @@
    "64P France",
    "Barcelona RQ",
    "Barcelona RQ -  arise exp",
-   "Changsha RQ",
+   "Barcelona RQ - Modified",
    "Chengdu Regional",
    "Dinan Regional",
    "Hartford RQ",
    "Nanjing Regional",
    "Riftbound Championship Series",
    "Riftbound Showdown Ottawa",
-   "S3 Shanghai City Challenge",
    "S4 Tianjin City Challenge",
    "S4 Wuhan City Challenge",
    "Sydney Regional Qualifier",
@@ -43,6 +42,7 @@
    "Top Shelf Masters Tournament",
    "Utrecht RQ",
    "Utrecht Regional",
+   "Vancouver RQ",
    "Wuhan RO",
    "Wuhan Regional Open",
    "Wuhan Regional open",
