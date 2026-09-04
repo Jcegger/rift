@@ -1357,7 +1357,7 @@ function parseCSV(text){
 // The same column aliases riftbound.gg's own importer accepts, plus the ones its
 // export and a TCGplayer export use.
 const COLS = {
-  id:     ['cardid','card id','id','card','id_normal','idnormal'],
+  id:     ['cardid','card id','id','card','id_normal','idnormal','variant number'],
   name:   ['name','cardname','card name','productname','product name'],
   set:    ['set','setid','set id','setcode','set code','edition'],
   number: ['number','cardnumber','card number','collectornumber','collector number','no','#'],
@@ -1571,12 +1571,17 @@ function applyImport(text){
   // count: an entry can exist carrying only a Want.
   const heldBefore = [...before.values()].reduce((a, x) => a + x.n + x.f, 0);
   const today = new Date().toISOString().slice(0, 10);
-  const bank = (code, n) => {
-    if (!heldBefore) return;
-    const e = S.newq[code] || { q: 0 };
-    e.q = (e.q || 0) + n; e.at = today;
+  // Split by finish: a merge file for somewhere else has to say which copies, and a
+  // foil is not a spare normal. Entries banked before this carried a bare `q`, which
+  // still reads as normal copies.
+  const bank = (code, n, f) => {
+    if (!heldBefore || !(n > 0 || f > 0)) return;
+    const e = S.newq[code] || { q: 0, f: 0 };
+    if (n > 0) e.q = (e.q || 0) + n;
+    if (f > 0) e.f = (e.f || 0) + f;
+    e.at = today;
     S.newq[code] = e;
-    queued += n;
+    queued += Math.max(0, n) + Math.max(0, f);
   };
 
   // A full-catalog export lists every card including the ones held at zero, so a
@@ -1610,8 +1615,7 @@ function applyImport(text){
     else if (had.n !== q.n || had.f !== q.f) changed++;
     // A third copy of something already held is just as absent from Piltover as a
     // printing never seen before, so the worklist counts copies rather than printings.
-    const rise = (q.n + q.f) - (had ? had.n + had.f : 0);
-    if (rise > 0) bank(code, rise);
+    bank(code, q.n - (had ? had.n : 0), q.f - (had ? had.f : 0));
   }
 
   // Copies that have landed. Owned counts are authoritative and were just replaced, so
@@ -1735,13 +1739,67 @@ function renderFoilOnly(){
 const NEWQ_SHOWN = 12;
 function newqRows(){
   return Object.entries(S.newq || {})
-    .map(([code, e]) => ({ code, card: BY[code], at: e.at || '',
-                           q: Math.min(e.q || 0, owned(code)) }))
+    .map(([code, e]) => {
+      const held = inv(code);
+      const n = Math.min(e.q || 0, held.n || 0), f = Math.min(e.f || 0, held.f || 0);
+      return { code, card: BY[code], at: e.at || '', n, f, q: n + f };
+    })
     .filter((r) => r.card && r.q > 0)
     .sort((a, b) => b.at.localeCompare(a.at) || a.code.localeCompare(b.code));
 }
 function newqText(){
-  return newqRows().map((r) => `${r.q}x ${r.code} ${r.card.n}`).join('\n');
+  return newqRows().map((r) => `${r.q}x ${r.code} ${r.card.n}${
+    r.f ? ` (${r.f} foil)` : ''}`).join('\n');
+}
+
+/* A file to merge into Piltover Archive.
+
+   Their schema, as OpenRift documents it for interchange: ten columns, detected by
+   "Variant Number", separating finish, art variant and condition. Their own deck-code
+   repo pins the identifier — set, a zero-padded number that may carry an R/SP prefix,
+   an optional variant suffix, and both "s" and "*" valid for a signature. That is this
+   app's own code exactly, minus the "/298" denominator riftbound.gg appends, so the
+   whole conversion is dropping that.
+
+   Quantities are what is outstanding rather than what is held, because a merge adds to
+   what is already there. One row per finish: Variant Type is a column and Quantity is a
+   single number, so two copies and three foils are two rows, not a lie in one.
+
+   THREE VALUES HERE ARE UNVERIFIED. Piltover's importer is behind a login and its
+   accepted vocabulary is not documented anywhere public, so the finish, language and
+   condition tokens below are the conventional spellings rather than known-good ones.
+   If an import bounces, they are the first thing to change and they are all in one
+   place. Variant Label is deliberately left empty: the variant is already unambiguous
+   in the Variant Number suffix, so guessing a second vocabulary only adds a way to be
+   wrong. */
+const PA_COLS = ['Variant Number', 'Card Name', 'Set', 'Set Prefix', 'Rarity',
+                 'Variant Type', 'Variant Label', 'Quantity', 'Language', 'Condition'];
+const PA_NORMAL = 'Normal', PA_FOIL = 'Foil';
+const PA_LANGUAGE = 'English', PA_CONDITION = 'Near Mint';
+
+// riftbound.gg writes "OGN-007a/298"; Piltover writes "OGN-007a". Tokens and runes
+// carry no denominator to begin with and pass through untouched.
+const paNumber = (code) => String(code || '').replace(/[/][0-9]+$/, '');
+const csvCell = (v) => /[",]|[\r]?[\n]/.test(String(v ?? ''))
+  ? `"${String(v).replace(/"/g, '""')}"` : String(v ?? '');
+function newqCSV(){
+  const lines = [PA_COLS.join(',')];
+  for (const r of newqRows()){
+    for (const [finish, qty] of [[PA_NORMAL, r.n], [PA_FOIL, r.f]]){
+      if (!qty) continue;
+      lines.push([paNumber(r.code), r.card.n, setName(r.card.s), r.card.s || '',
+                  r.card.r || '', finish, '', qty, PA_LANGUAGE, PA_CONDITION]
+                 .map(csvCell).join(','));
+    }
+  }
+  return lines.join('\n');
+}
+function downloadNewq(){
+  const blob = new Blob([newqCSV()], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `piltover-merge-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click(); URL.revokeObjectURL(a.href);
 }
 function renderNewq(){
   const rows = newqRows();
@@ -1761,6 +1819,7 @@ function renderNewq(){
     Piltover, so this is the only record of what it still owes. Cleared by hand: nothing here
     expires on its own, and a pull does not tick anything off.</p>
     <div class="bar-row" style="margin:12px 0 6px">
+      <button class="ghost" id="btn-newq-file">Download for Piltover</button>
       <button class="ghost" id="btn-newq-copy">Copy the list</button>
       <button class="ghost" id="btn-newq-clear">Clear</button>
     </div>
@@ -1769,7 +1828,8 @@ function renderNewq(){
       ${g.rows.map((r) => `<div class="row">
         <span class="nm">${esc(r.card.n)}
           <span class="code">${esc(r.code)}${r.card.v ? ` · ${esc(vLabel(r.card.v))}` : ''}</span></span>
-        <span class="qty">${r.q}</span>
+        <span class="qty">${r.n ? r.n : ''}${r.n && r.f ? ' · ' : ''}${
+          r.f ? `${r.f} foil` : ''}</span>
       </div>`).join('')}`).join('')}</div>
     ${over ? `<p class="note" style="margin:8px 0 0">+${over} more printing${over === 1 ? '' : 's'};
       "Copy the list" covers all ${rows.length}.</p>` : ''}
@@ -4620,6 +4680,7 @@ function wire(){
     const t = e.target;
 
     // ── spares and trade matching ────────────────────────────────────
+    if (t.id === 'btn-newq-file') downloadNewq();
     if (t.id === 'btn-newq-copy') copy(newqText(), 'list copied');
     if (t.id === 'btn-newq-clear'){
       const n = newqRows().reduce((a, r) => a + r.q, 0);

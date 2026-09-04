@@ -63,7 +63,7 @@ const NAMED = [
   'historyDays', 'historyNames', 'sharesOn', 'movementPair', 'metaMovement', 'movementFor',
   'tierMovement', 'movementPending', 'moveChip',
   'renderNews', 'credibility',
-  'newqRows', 'newqText', 'renderNewq', 'renderSync',
+  'newqRows', 'newqText', 'newqCSV', 'renderNewq', 'renderSync',
   'archetypeName', 'metaPool', 'metaArchetypes', 'legendPicks', 'scorePool', 'cardLeverage', 'loadBans',
   'acquisitionPath', 'unionGap', 'pathText', 'huntList', 'huntText', 'HUNT_BANDS', 'ownedIdentities', 'evalDeck', 'matchRow',
   'spares', 'tradeMatch', 'readPartner', 'readyShareOf', 'owned', 'byTarget',
@@ -2014,6 +2014,8 @@ section('The Piltover worklist');
   const [p1, p2, p3] = cat.cards.slice(0, 3);
   const csv = (rows) => 'cardid,name,normal,foil\n' +
     rows.map(([c, n]) => `${c},x,${n},0`).join('\n');
+  const csvF = (rows) => 'cardid,name,normal,foil\n' +
+    rows.map(([c, n, f]) => `${c},x,${n},${f}`).join('\n');
   const held = () => A.newqRows().reduce((a, r) => a + r.q, 0);
 
   // A first pull has no previous collection to have gained anything against, and
@@ -2049,6 +2051,54 @@ section('The Piltover worklist');
 
   ok('the copy text names every row', A.newqText().split('\n').length === A.newqRows().length &&
      A.newqText().includes(p2.c), A.newqText().split('\n')[0]);
+
+  // ── the merge file ──
+  // Finishes are banked apart, because a file that says "3 copies" where one of them is
+  // a foil is wrong wherever it lands.
+  const comma = cat.cards.find((c) => c.n.includes(','));
+  const keptInv = A.S.inv, keptQ = A.S.newq;
+  A.S.inv = {}; A.S.newq = {};
+  A.applyImport(csvF([[p1.c, 1, 0]]));
+  A.applyImport(csvF([[p1.c, 1, 0], [comma.c, 2, 3]]));
+  const row = A.newqRows().find((x) => x.code === comma.c);
+  ok('normal and foil are banked apart', row && row.n === 2 && row.f === 3 && row.q === 5,
+     row ? `${row.n} normal, ${row.f} foil` : 'no row');
+
+  const lines = A.newqCSV().split('\n');
+  ok('the file leads with the ten Piltover columns, in their order',
+     lines[0] === 'Variant Number,Card Name,Set,Set Prefix,Rarity,Variant Type,' +
+                  'Variant Label,Quantity,Language,Condition', lines[0]);
+  // Variant Type is a column and Quantity is one number, so a printing held in both
+  // finishes is two rows rather than a lie in one.
+  const finishes = A.newqRows().reduce((a, r) => a + (r.n ? 1 : 0) + (r.f ? 1 : 0), 0);
+  ok('one row per printing and finish, never a finish folded away',
+     lines.length === finishes + 1 &&
+       lines.filter((l) => l.includes(',Foil,')).length ===
+         A.newqRows().filter((r) => r.f).length,
+     `${lines.length - 1} rows for ${A.newqRows().length} printings`);
+  // A name with a comma is what silently corrupts a CSV, and 297 cards here have one.
+  ok('a comma in a name is quoted rather than splitting the row',
+     lines.some((l) => l.includes(`"${comma.n}"`)) &&
+       lines.every((l) => l.replace(/"[^"]*"/g, 'x').split(',').length === 10),
+     comma.n);
+  // Their identifier is ours without riftbound.gg's denominator, and nothing else.
+  ok('the identifier is written the way Piltover writes it',
+     lines.slice(1).every((l) => /^[A-Z]{3}-[A-Z]*[0-9]+[a-z*]?,/.test(l)) &&
+       !lines.slice(1).some((l) => l.split(',')[0].includes('/')),
+     lines[1].split(',')[0]);
+
+  // The destination cannot be reached from here, so the strongest thing that can be
+  // said is that the file is well-formed and resolves back to the printings it names.
+  // Finish does not survive the trip — this app reads Quantity, not Variant Type — so
+  // the claim is copies and printings, not finishes.
+  const stated = A.newqRows().length, copies = A.newqRows().find((x) => x.code === comma.c).q;
+  const file = A.newqCSV();
+  A.S.inv = {}; A.S.newq = {};
+  const back = A.applyImport(file);
+  ok('every row resolves to the printing it names, at the count it states',
+     back.matched === stated && A.owned(comma.c) === copies,
+     `${back.matched} of ${stated} printings, ${A.owned(comma.c)} copies of the comma card`);
+  A.S.inv = keptInv; A.S.newq = keptQ;
 
   A.renderSync();
   let html = els.get('v-sync').innerHTML;
