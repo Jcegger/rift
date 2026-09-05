@@ -1,52 +1,43 @@
 {
- "generatedAt": "2026-09-04",
+ "generatedAt": "2026-09-05",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg)",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
   "events": 30,
-  "eventsWithDecks": 11,
+  "eventsWithDecks": 10,
   "players": 2313,
-  "playersWithDecks": 1553,
+  "playersWithDecks": 1456,
   "unresolvedDeckEvents": [],
-  "claimedEvents": 23,
-  "claimedEventsUnmatched": 22,
+  "claimedEvents": 14,
+  "claimedEventsUnmatched": 13,
   "claimedEventAliases": {
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
    "Asia": 20,
-   "Europe": 13,
-   "unknown": 8,
-   "North America": 3,
-   "Oceania": 1
+   "Europe": 11,
+   "Oceania": 2,
+   "unknown": 2,
+   "North America": 3
   },
   "registryEventsByRegion": {
-   "unknown": 25,
-   "North America": 5
+   "unknown": 26,
+   "North America": 4
   },
   "unresolvedClaimEvents": [
-   "64P France",
    "Barcelona RQ",
-   "Barcelona RQ -  arise exp",
    "Barcelona RQ - Modified",
-   "Chengdu Regional",
-   "Dinan Regional",
    "Hartford RQ",
    "Nanjing Regional",
-   "Riftbound Championship Series",
-   "Riftbound Showdown Ottawa",
-   "S4 Tianjin City Challenge",
+   "S4 Nanjing City Challenge",
    "S4 Wuhan City Challenge",
    "Sydney Regional Qualifier",
    "Tianjin Regional",
    "Top Shelf Masters Tournament",
    "Utrecht RQ",
-   "Utrecht Regional",
    "Vancouver RQ",
-   "Wuhan RO",
    "Wuhan Regional Open",
-   "Wuhan Regional open",
-   "Xi'an Regional"
+   "Wuhan Regional open"
   ],
   "decksByEvent": {
    "Pittsburgh 2026 - Riftbound Showdown $10k-$25,000": 6,
@@ -55,7 +46,6 @@
    "CCS Sunday $5,000 Riftbound Event #4": 3,
    "RiftAtlas Convergence #1": 3,
    "The Magma Chamber Presents: Dual Queue": 2,
-   "Riftbound $5,000 Cash Tournament @ Pro-Play Summit: Dallas": 2,
    "Breach the Bay 2 Riftbound 15k Team Trios": 1,
    "Valley Forge 2026 - Riftbound $10k-$25,000": 1,
    "Columbus 2026 - Riftbound Main Event": 1,
