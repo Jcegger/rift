@@ -14,26 +14,26 @@
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
-   "Asia": 20,
+   "Asia": 23,
    "Europe": 11,
+   "North America": 2,
    "Oceania": 2,
-   "unknown": 2,
-   "North America": 3
+   "unknown": 1
   },
   "registryEventsByRegion": {
    "unknown": 26,
    "North America": 4
   },
   "unresolvedClaimEvents": [
+   "41P China",
    "Barcelona RQ",
-   "Barcelona RQ - Modified",
+   "Changsha RQ",
    "Hartford RQ",
    "Nanjing Regional",
    "S4 Nanjing City Challenge",
-   "S4 Wuhan City Challenge",
+   "S4 Tianjin City Challenge",
    "Sydney Regional Qualifier",
    "Tianjin Regional",
-   "Top Shelf Masters Tournament",
    "Utrecht RQ",
    "Vancouver RQ",
    "Wuhan Regional Open",
