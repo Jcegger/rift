@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-07",
+ "generatedAt": "2026-09-08",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg)",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -8,16 +8,14 @@
   "players": 2313,
   "playersWithDecks": 1456,
   "unresolvedDeckEvents": [],
-  "claimedEvents": 29,
-  "claimedEventsUnmatched": 28,
-  "claimedEventAliases": {
-   "RiftAtlas Convergence #2": "Convergence #2"
-  },
+  "claimedEvents": 31,
+  "claimedEventsUnmatched": 31,
+  "claimedEventAliases": {},
   "claimedDecksByRegion": {
-   "Europe": 12,
-   "Asia": 27,
-   "unknown": 5,
-   "Oceania": 2,
+   "Asia": 34,
+   "Europe": 14,
+   "Oceania": 3,
+   "unknown": 7,
    "North America": 2
   },
   "registryEventsByRegion": {
@@ -27,15 +25,15 @@
   "unresolvedClaimEvents": [
    "10K Showdown - Auckland Card Show",
    "2nd at Sideways Showdown: CN vs World",
-   "41P China",
+   "48P Online",
    "Barcelona RQ",
    "Changsha RQ",
    "Chengdu Regional",
    "Dinan Regional",
    "Hartford RQ",
-   "S3 Beijing City Challenge",
-   "S3 Guangzhou City Challenge",
+   "Nanjing Regional",
    "S3 Shenzhen City Challenge",
+   "S3 Suzhou City Challenge",
    "S4 Beijing City Challenge",
    "S4 Nanjing City Challenge",
    "S4 Qingdao City Challenge",
@@ -43,13 +41,16 @@
    "S4 Shenzhen City Challenge",
    "S4 Tianjin City Challenge",
    "S4 Wuhan City Challenge",
+   "S4 Wuhan Regional Open",
+   "Sideways Showdown: CN vs World",
    "Singapore RQ",
-   "Singapore RQ + Side",
    "Sydney Regional Qualifier",
    "Tianjin Regional",
+   "Tianjing Regional",
    "Top Shelf Masters Tournament",
    "Utrecht RQ",
    "Utrecht Regional",
+   "Vancouver RQ",
    "Wuhan Regional Open",
    "Xi'an Regional",
    "a tournament"

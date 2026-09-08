@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-07",
+ "generatedAt": "2026-09-08",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
@@ -10,7 +10,7 @@
   "Metagame": 18,
   "Legends": 15,
   "Sets": 2,
-  "Guides": 4,
+  "Guides": 3,
   "Rules": 2
  },
  "posts": [
@@ -830,15 +830,6 @@
    "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-spiritforged-post-bologna-metagame",
    "tags": [
     "Metagame"
-   ],
-   "author": "Den"
-  },
-  {
-   "title": "Budget Riftbound Guide & Best Cheap Decks - Spiritforged",
-   "dt": "2026-02-25",
-   "url": "https://riftbound.gg/budget-guide-spiritforged",
-   "tags": [
-    "Guides"
    ],
    "author": "Den"
   }
