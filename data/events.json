@@ -8,14 +8,14 @@
   "players": 2313,
   "playersWithDecks": 1456,
   "unresolvedDeckEvents": [],
-  "claimedEvents": 31,
-  "claimedEventsUnmatched": 31,
+  "claimedEvents": 32,
+  "claimedEventsUnmatched": 32,
   "claimedEventAliases": {},
   "claimedDecksByRegion": {
-   "Asia": 34,
    "Europe": 14,
+   "Asia": 32,
+   "unknown": 8,
    "Oceania": 3,
-   "unknown": 7,
    "North America": 2
   },
   "registryEventsByRegion": {
@@ -44,6 +44,7 @@
    "S4 Wuhan Regional Open",
    "Sideways Showdown: CN vs World",
    "Singapore RQ",
+   "Singapore RQ + Side",
    "Sydney Regional Qualifier",
    "Tianjin Regional",
    "Tianjing Regional",
