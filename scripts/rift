@@ -3,7 +3,7 @@
 # so fall back to the Node runtime Playwright bundles.
 #
 #   scripts/rift                 # collection + deck summary
-#   scripts/rift deck sivir      # one deck vs. the collection
+#   scripts/rift deck sivir      # one deck (main + sideboard) vs. the collection
 #   scripts/rift card body rune  # catalog lookup with owned/want/trade
 #   scripts/rift want | trade | sets | raw
 #   scripts/rift piltover > collection-piltover.csv   # full Piltover import (Replace mode)

@@ -58,6 +58,7 @@ const NAMED = [
   'championRoster', 'CH_STATES', 'legendlessChampions',
   'foilOnlyProblems', 'foilOnlyText', 'renderFoilOnly', 'championIndex',
   'deckLegalForConstructed', 'cardCost', 'gapCost', 'cost', 'costIndex',
+  'deckList', 'deckStats', 'deckIssues', 'deckText', 'deckWants', 'SB_MAX', 'SB_BANNED_TYPES', 'MAX_COPIES',
   'daysSince', 'dataAge', 'staleNote', 'newsChampion', 'guideByChampion', 'dataAlerts',
   'claimedResults', 'claimText', 'claimWhere',
   'historyDays', 'historyNames', 'sharesOn', 'movementPair', 'metaMovement', 'movementFor',
@@ -71,7 +72,7 @@ const NAMED = [
   'renderComing', 'setQtyQuiet', 'setSource', 'applyImport',
   'annotateCompounding', 'establishedArchetypes', 'isEstablished', 'byCost', 'byCards', 'byPlanTarget',
   'tierByArchetype',
-  'render', 'renderLegends', 'renderNext', 'renderMeta', 'renderTrade', 'renderSets',
+  'render', 'renderDecks', 'renderLegends', 'renderNext', 'renderMeta', 'renderTrade', 'renderSets',
 ];
 const A = new Function(`${js}
   ;return { ${NAMED.join(', ')},
@@ -2278,6 +2279,92 @@ section('The played build on a row');
   }
   ok('the played figure actually renders on this snapshot', sawSome > 0,
      `${sawSome} rows across the fixtures`);
+  A.S.inv = {};
+  A.forgetDeckCaches();
+}
+
+
+/* ── the sideboard ────────────────────────────────────────────────────────
+   Two things here are easy to get wrong and both are silent. The copy limit
+   spans main deck and sideboard, so a check that reads one half passes a deck
+   that cannot be registered - and runes are exempt, so a check that forgets
+   that flags every legal manabase. And owned copies cannot be double-counted
+   across the halves, because at registration they are separate cards.       */
+section('The sideboard');
+{
+  const code = (n) => cat.cards.find((c) => c.n === n).c;
+  const falling = code('Falling Star'), blood = code('Blood Rush');
+  const cull = code('Cull the Weak'), fury = code('Fury Rune');
+  const legend = cat.cards.find((c) => c.t === 'Legend').c;
+  const field = cat.cards.find((c) => c.t === 'Battlefield').c;
+
+  ok('the cap is the July 2026 number, not the 8 it replaced', A.SB_MAX === 10, `SB_MAX ${A.SB_MAX}`);
+  ok('the copy limit is the rules figure, independent of the playset setting',
+     A.MAX_COPIES === 3 && A.S.playset !== undefined, `MAX_COPIES ${A.MAX_COPIES}`);
+
+  // a deck with no sideboard reads exactly as it did before the field existed
+  A.S.inv = { [blood]: { n: 3 } };
+  const plain = { id: 'x', name: 'no side', cards: { [blood]: 3 } };
+  let st = A.deckStats(plain);
+  ok('a deck with no sb key still totals', st.copies === 3 && st.missing === 0, `${st.copies} cards`);
+  ok('and reports no sideboard', st.sideCopies === 0 && st.side.length === 0);
+  ok('totalMissing equals missing when there is no sideboard', st.totalMissing === st.missing);
+  ok('and raises no rules issues', A.deckIssues(plain).length === 0);
+
+  // owned copies go to the main deck first: 3 owned, 3 in the main deck, 1 in the
+  // side is one card short, not zero.
+  const shared = { id: 'y', name: 'shared', cards: { [blood]: 3 }, sb: { [blood]: 1 } };
+  st = A.deckStats(shared);
+  ok('a main-deck 3-of does not satisfy a sideboard copy',
+     st.missing === 0 && st.sideMissing === 1, `main ${st.missing}, side ${st.sideMissing}`);
+  ok('the sideboard row reports spare, not owned', st.side[0].spare === 0 && st.side[0].short === 1);
+  ok('and the deck total counts it', st.totalMissing === 1);
+
+  // ...and it is over the copy limit, which is the thing you cannot see while typing
+  ok('4 copies across the halves is flagged',
+     A.deckIssues(shared).some((x) => /Over 3 copies/.test(x)),
+     A.deckIssues(shared).join(' | '));
+
+  // runes are exempt: 6 of one is a normal manabase, not an infraction
+  const manabase = { id: 'z', name: 'runes', cards: { [fury]: 6 } };
+  ok('six copies of a rune is not a copy-limit violation',
+     A.deckIssues(manabase).length === 0, A.deckIssues(manabase).join(' | '));
+
+  // the size rule is a ceiling, not an exact size
+  const seven = { id: 's7', name: 'seven', cards: {}, sb: { [blood]: 3, [cull]: 3, [falling]: 1 } };
+  ok('a 7-card sideboard is legal', !A.deckIssues(seven).some((x) => /limit/.test(x)),
+     A.deckIssues(seven).join(' | '));
+  const eleven = { id: 's11', name: 'eleven', cards: {}, sb: { [blood]: 3, [cull]: 3, [falling]: 3, [code('Cleave')]: 2 } };
+  ok('an 11-card sideboard is one over', A.deckIssues(eleven).some((x) => /1 over the 10-card limit/.test(x)),
+     A.deckIssues(eleven).join(' | '));
+
+  // main-deck card types only
+  const badTypes = { id: 'bt', name: 'bad', cards: {}, sb: { [legend]: 1, [field]: 1, [fury]: 1 } };
+  const issue = A.deckIssues(badTypes).find((x) => /Cannot be in a sideboard/.test(x)) || '';
+  ok('a legend, a battlefield and a rune are all refused from the sideboard',
+     /legend/.test(issue) && /battlefield/.test(issue) && /rune/.test(issue), issue);
+  ok('a unit is not refused', !/Cannot be in a sideboard/.test(A.deckIssues(seven).join(' | ')));
+
+  // the copied list carries the sideboard, so a paste into Discord is complete
+  const txt = A.deckText(shared);
+  ok('the copied deck list has a SIDEBOARD block', /SIDEBOARD \(1\)/.test(txt), txt.split('\n').pop());
+  ok('and a deck without one gets no empty block', !/SIDEBOARD/.test(A.deckText(plain)));
+
+  // the wants push: main deck alone, then both halves. The sideboard copy adds to
+  // the main-deck one rather than sharing it, so a card in both wants the sum.
+  const wMain = A.deckWants(shared, false), wBoth = A.deckWants(shared, true);
+  ok('the main-deck press ignores the sideboard', wMain.get(blood) === 3, `want ${wMain.get(blood)}`);
+  ok('the sideboard press adds on top of it', wBoth.get(blood) === 4, `want ${wBoth.get(blood)}`);
+  ok('a deck with no sideboard wants the same either way',
+     A.deckWants(plain, true).get(blood) === A.deckWants(plain, false).get(blood));
+
+  // and the panel renders: a template slip here throws rather than mis-paints
+  A.S.decks = [shared];
+  A.TAB = 'decks';
+  let threw = null;
+  try { A.renderDecks(); } catch (e) { threw = e.message; }
+  ok('the decks panel renders a deck with a sideboard', !threw, threw || '');
+  A.S.decks = [];
   A.S.inv = {};
   A.forgetDeckCaches();
 }

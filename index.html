@@ -1205,33 +1205,106 @@ function renderTrade(){
    ══════════════════════════════════════════════════════════════════════════ */
 let selDeck = null;
 let deckQuery = '';
+let sbQuery = '';
 
-function drawDeckAC(){
-  const out = document.getElementById('deck-ac');
+// Both add boxes share this, keyed by which half they fill. The sideboard drawer
+// hides the types §601.1.c.2 forbids rather than offering them and then scolding.
+function drawAC(where){
+  const sb = where === 'sb';
+  const out = document.getElementById(sb ? 'sb-ac' : 'deck-ac');
   if (!out) return;
-  const s = deckQuery.trim().toLowerCase();
+  const s = (sb ? sbQuery : deckQuery).trim().toLowerCase();
   if (s.length < 2){ out.innerHTML = ''; return; }
   const hits = CAT.cards
+    .filter(c => !(sb && SB_BANNED_TYPES.includes(c.t)))
     .filter(c => c.n.toLowerCase().includes(s) || c.c.toLowerCase().includes(s))
     .slice(0, 10);
+  const attr = sb ? 'data-add-sb' : 'data-add';
   out.innerHTML = hits.length ? `<div class="ac-out">${hits.map(c =>
-    `<div class="ac-item" data-add="${esc(c.c)}">
+    `<div class="ac-item" ${attr}="${esc(c.c)}">
       ${c.i ? `<img class="thumb" src="${imgURL(c,60)}" alt="">` : ''}
       <span class="nm">${dchips(c)} ${esc(c.n)}</span>
       <span class="code">${esc(c.c)} · ${esc(c.t||'')} · ${owned(c.c)} owned</span>
     </div>`).join('')}</div>` : '';
 }
+const drawDeckAC = () => drawAC('deck');
 
-const deckCards = (d) => Object.entries(d.cards || {})
+/* ── the sideboard ──────────────────────────────────────────────────────────
+   Tournament Rules §601.1.c. Three rules, and the one that bites is the third,
+   because it is invisible while you are typing: the copies-of-a-name limit spans
+   the main deck and the sideboard *together*, so 3 in the main deck means none in
+   the side. The size rule is a ceiling and not a fixed size - 0 and 7 are both
+   legal - and it was 8 until the July 2026 update raised it on 2026-07-24.      */
+const SB_MAX = 10;                                        // §601.1.c.1
+const SB_BANNED_TYPES = ['Legend','Rune','Battlefield'];   // §601.1.c.2, main-deck types only
+// §601.1.c.3. Deliberately not S.playset: that is a collection target the user
+// picks, this is the registration rule. Runes are exempt, since a manabase runs
+// six of one and the limit has never applied to them.
+const MAX_COPIES = 3;
+
+const deckList = (map) => Object.entries(map || {})
   .map(([code,q]) => ({ c: BY[code], q }))
   .filter(x => x.c)
   .sort((a,b) => (TYPES.indexOf(a.c.t) - TYPES.indexOf(b.c.t)) || a.c.n.localeCompare(b.c.n));
+const deckCards = (d) => deckList(d.cards);
 
+/* Owned copies are allocated to the main deck first, and only what is left over
+   covers the sideboard, because at registration the two halves are physically
+   separate cards - one copy cannot do both jobs. Without that, a 3-of in the main
+   deck would silently satisfy a sideboard copy you do not own.                  */
 function deckStats(d){
-  const items = deckCards(d);
-  let copies = 0, missing = 0;
-  for (const it of items){ copies += it.q; missing += Math.max(0, it.q - owned(it.c.c)); }
-  return { items, copies, missing, distinct: items.length };
+  const items = deckList(d.cards), side = deckList(d.sb);
+  let copies = 0, missing = 0, sideCopies = 0, sideMissing = 0;
+  const mainByCode = new Map();
+  for (const it of items){
+    it.short = Math.max(0, it.q - owned(it.c.c));
+    copies += it.q; missing += it.short;
+    mainByCode.set(it.c.c, (mainByCode.get(it.c.c) || 0) + it.q);
+  }
+  for (const it of side){
+    it.spare = Math.max(0, owned(it.c.c) - (mainByCode.get(it.c.c) || 0));
+    it.short = Math.max(0, it.q - it.spare);
+    sideCopies += it.q; sideMissing += it.short;
+  }
+  return { items, side, copies, missing, sideCopies, sideMissing,
+           distinct: items.length, sideDistinct: side.length,
+           totalMissing: missing + sideMissing };
+}
+
+/* What the Want counts have to say for this deck to be registerable. A want covers
+   every copy the deck needs, and main-deck and sideboard copies are separate cards,
+   so with the sideboard in they add rather than share. This is the one thing on the
+   Decks tab that writes to the collection, so it is a button and never a side
+   effect - and the main-deck press is kept separate because the deck you have to be
+   able to play comes before the ten cards you swap in between games.             */
+function deckWants(d, includeSide){
+  const need = new Map();
+  for (const [code,qty] of Object.entries(d.cards || {})) need.set(code, (need.get(code) || 0) + qty);
+  if (includeSide) for (const [code,qty] of Object.entries(d.sb || {})) need.set(code, (need.get(code) || 0) + qty);
+  return need;
+}
+
+/* Every way a saved deck can fail registration, as sentences. Bans stay in
+   deckBans because the Next tab prices decks through it; these are the rules a
+   hand-entered deck breaks, which the meta snapshot never could.                */
+function deckIssues(d){
+  const out = [];
+  const main = deckList(d.cards), side = deckList(d.sb);
+  const n = side.reduce((a,x) => a + x.q, 0);
+  if (n > SB_MAX) out.push(`Sideboard is ${n} cards — ${n - SB_MAX} over the ${SB_MAX}-card limit.`);
+  const badType = side.filter(x => SB_BANNED_TYPES.includes(x.c.t));
+  if (badType.length) out.push(`Cannot be in a sideboard: ${
+    badType.map(x => `${esc(x.c.n)} (${(x.c.t || '').toLowerCase()})`).join(', ')}.`);
+  const byName = new Map();
+  for (const x of main.concat(side)){
+    if (x.c.t === 'Rune') continue;
+    byName.set(x.c.n, (byName.get(x.c.n) || 0) + x.q);
+  }
+  const over = [...byName].filter(([,q]) => q > MAX_COPIES)
+    .sort((a,b) => b[1] - a[1]);
+  if (over.length) out.push(`Over ${MAX_COPIES} copies across main deck and sideboard: ${
+    over.map(([nm,q]) => `${q}x ${esc(nm)}`).join(', ')}.`);
+  return out;
 }
 
 function renderDecks(){
@@ -1245,7 +1318,8 @@ function renderDecks(){
         const st = deckStats(d);
         return `<div class="deck-item ${selDeck === d.id ? 'sel' : ''}">
           <span class="dn" data-deck="${esc(d.id)}">${esc(d.name)}</span>
-          <span class="dm">${st.copies} cards${st.missing ? ` · ${st.missing} to get` : ' · complete'}</span>
+          <span class="dm">${st.copies} cards${st.sideCopies ? ` +${st.sideCopies} sb` : ''}${
+            st.totalMissing ? ` · ${st.totalMissing} to get` : ' · complete'}</span>
           ${READONLY ? '' : `<button class="ghost" data-deck-del="${esc(d.id)}">Delete</button>`}
         </div>`;
       }).join('') : '<p class="empty">No decks yet.</p>'}
@@ -1269,14 +1343,20 @@ function renderDecks(){
       <div class="stats">
         <div class="stat"><div class="v">${st.copies}</div><div class="k">cards</div></div>
         <div class="stat"><div class="v">${st.distinct}</div><div class="k">distinct</div></div>
-        <div class="stat"><div class="v" style="color:${st.missing ? 'var(--maize)' : 'var(--good)'}">${st.missing}</div><div class="k">still to get</div></div>
+        <div class="stat"><div class="v" style="color:${st.totalMissing ? 'var(--maize)' : 'var(--good)'}">${st.totalMissing}</div><div class="k">still to get</div></div>
+        ${st.sideCopies ? `<div class="stat"><div class="v" style="color:${
+          st.sideCopies > SB_MAX ? 'var(--bad)' : 'inherit'}">${st.sideCopies}<span class="code" style="font-size:11px">/${SB_MAX}</span></div><div class="k">sideboard</div></div>` : ''}
       </div>
-      <div class="meter-sub" style="margin-bottom:14px">${byType || '<span>empty deck</span>'}</div>
+      <div class="meter-sub" style="margin-bottom:14px">${byType || '<span>empty deck</span>'}${
+        st.sideMissing ? `<span><b>${st.missing}</b> main + <b>${st.sideMissing}</b> sideboard to get</span>` : ''}</div>
       ${(() => {
-        const bans = deckBans({ cards: d.cards || {} });
-        if (!bans.length) return '';
-        return `<p class="note" style="color:var(--bad);margin:-6px 0 14px">Not legal in sanctioned
-          Constructed: ${bans.map(x => `${x.qty}x ${esc(x.card.n)}`).join(', ')}.</p>`;
+        // Bans read over both halves: a card is just as illegal from the sideboard.
+        const bans = deckBans({ cards: { ...(d.cards || {}), ...(d.sb || {}) } });
+        const lines = bans.length ? [`Not legal in sanctioned Constructed: ${
+          bans.map(x => `${x.qty}x ${esc(x.card.n)}`).join(', ')}.`] : [];
+        lines.push(...deckIssues(d));
+        if (!lines.length) return '';
+        return `<p class="note" style="color:var(--bad);margin:-6px 0 14px">${lines.join('<br>')}</p>`;
       })()}
 
       ${READONLY ? '' : `<div class="ac" style="margin-bottom:14px">
@@ -1297,12 +1377,37 @@ function renderDecks(){
         }).join('') : '<p class="empty">Nothing in this deck yet.</p>'}
       </div>
 
+      <h2 style="margin-top:22px">SIDEBOARD <span class="code">${st.sideCopies} of ${SB_MAX}</span></h2>
+      <p class="note" style="margin:-6px 0 12px">Up to ${SB_MAX} cards, swapped in between games of a
+      match. Units, spells and gear only — no legends, runes or battlefields — and 3 copies of a name
+      is the limit across <b>both</b> halves, so a 3-of in the main deck leaves none for here.</p>
+
+      ${READONLY ? '' : `<div class="ac" style="margin-bottom:14px">
+        <input class="search" id="sb-search" placeholder="Add a card to the sideboard…" autocomplete="off" style="width:100%">
+        <div id="sb-ac"></div>
+      </div>`}
+
+      <div class="rows">
+        ${st.side.length ? st.side.map(it => `<div class="row">
+            ${it.c.i ? `<img class="thumb" loading="lazy" src="${imgURL(it.c,60)}" alt="" data-zoom="${esc(it.c.c)}">` : ''}
+            <span class="nm">${dchips(it.c)} ${esc(it.c.n)} <span class="code">${esc(it.c.c)} · ${esc(it.c.t||'')}</span></span>
+            <span class="qty ${it.short ? 'need' : ''}">${it.q} in side · ${it.spare} spare${it.short ? ` · need ${it.short}` : ''}</span>
+            ${READONLY ? '' : `<input type="number" min="0" max="9" value="${it.q}" class="qi"
+              data-sb-qty="${esc(d.id)}" data-code="${esc(it.c.c)}" style="width:46px;text-align:center;background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:3px">`}
+          </div>`).join('') : '<p class="empty">No sideboard.</p>'}
+      </div>
+
       ${READONLY ? '' : `<div class="bar-row" style="margin-top:14px">
         <button class="ghost" id="btn-deck-copy">Copy deck list</button>
-        <button class="ghost" id="btn-deck-wants">Add shortfall to wants</button>
+        <button class="ghost" id="btn-deck-wants">Add main shortfall to wants</button>
+        ${st.sideCopies ? `<button class="ghost" id="btn-deck-sb-wants">Add sideboard shortfall too</button>` : ''}
       </div>
-      <p class="note" style="margin-top:8px">“Add shortfall to wants” raises each card's Want count to
-      the number this deck needs, so the missing cards show up on the trade list.</p>`}
+      <p class="note" style="margin-top:8px">Raises each card's Want count to the number this deck
+      needs, so the missing cards show up on the trade list. The two buttons are split because the
+      main deck is what you have to be able to play${st.sideCopies ? `, and the sideboard is event
+      prep — the second button covers both halves, counting a sideboard copy on top of the
+      main-deck ones rather than sharing them` : ''}. Nothing else on this tab writes to the
+      collection: a sideboard changes no number on Collection, Sets, Trade or Next.</p>`}
     </div>`;
   }
   host.innerHTML = html;
@@ -1316,6 +1421,11 @@ function deckText(d){
     if (!g.length) continue;
     out.push(`${t.toUpperCase()} (${g.reduce((a,i) => a + i.q, 0)})`);
     for (const i of g) out.push(`  ${i.q}x ${i.c.n}  ${i.c.c}`);
+    out.push('');
+  }
+  if (st.side.length){
+    out.push(`SIDEBOARD (${st.sideCopies})`);
+    for (const i of st.side) out.push(`  ${i.q}x ${i.c.n}  ${i.c.c}`);
     out.push('');
   }
   return out.join('\n').trim();
@@ -4613,6 +4723,18 @@ function wire(){
       persist();
       return;
     }
+    if (el.dataset.sbQty){
+      const d = S.decks.find(x => x.id === el.dataset.sbQty);
+      if (!d) return;
+      d.sb = d.sb || {};
+      const n = Math.max(0, Math.min(9, Math.floor(Number(el.value) || 0)));
+      if (n) d.sb[el.dataset.code] = n; else delete d.sb[el.dataset.code];
+      // An emptied sideboard drops the key, so a deck without one stays the shape
+      // it always was and the export/sync payload does not grow for nothing.
+      if (!Object.keys(d.sb).length) delete d.sb;
+      persist();
+      return;
+    }
     if (el.id === 'playset'){
       S.playset = Math.max(1, Math.min(9, Number(el.value) || 3));
       persist();
@@ -4949,33 +5071,37 @@ function wire(){
       const d = S.decks.find(x => x.id === selDeck);
       if (d) copy(deckText(d), 'deck copied');
     }
-    if (t.id === 'btn-deck-wants'){
+    if (t.id === 'btn-deck-wants' || t.id === 'btn-deck-sb-wants'){
       const d = S.decks.find(x => x.id === selDeck); if (!d) return;
+      const withSide = t.id === 'btn-deck-sb-wants';
       let n = 0;
-      for (const [code,qty] of Object.entries(d.cards)){
+      for (const [code,qty] of deckWants(d, withSide)){
         if (qty > want(code)){ setQtyQuiet(code, 'w', qty); n++; }
       }
-      persist(); toast(n ? `${n} wants set` : 'nothing to add');
+      persist();
+      toast(n ? `${n} want${n === 1 ? '' : 's'} set${withSide ? ', sideboard included' : ''}`
+              : 'nothing to add');
     }
   });
 
   // deck card autocomplete
   document.body.addEventListener('input', (e) => {
-    if (e.target.id !== 'deck-search') return;
-    deckQuery = e.target.value;
-    drawDeckAC();
+    if (e.target.id === 'deck-search'){ deckQuery = e.target.value; drawAC('deck'); }
+    if (e.target.id === 'sb-search'){ sbQuery = e.target.value; drawAC('sb'); }
   });
   document.body.addEventListener('click', (e) => {
-    const it = e.target.closest('[data-add]'); if (!it) return;
+    const it = e.target.closest('[data-add], [data-add-sb]'); if (!it) return;
     const d = S.decks.find(x => x.id === selDeck); if (!d) return;
-    const code = it.dataset.add;
-    d.cards = d.cards || {};
-    d.cards[code] = Math.min(9, (d.cards[code] || 0) + 1);
+    const sb = it.hasAttribute('data-add-sb');
+    const code = sb ? it.dataset.addSb : it.dataset.add;
+    const map = sb ? (d.sb = d.sb || {}) : (d.cards = d.cards || {});
+    map[code] = Math.min(9, (map[code] || 0) + 1);
     persist();
     // renderDecks() rebuilt the search box, so put the query back and keep the
     // dropdown open: adding a whole deck means adding many cards in a row.
-    const box = document.getElementById('deck-search');
-    if (box){ box.value = deckQuery; box.focus(); drawDeckAC(); }
+    const id = sb ? 'sb-search' : 'deck-search';
+    const box = document.getElementById(id);
+    if (box){ box.value = sb ? sbQuery : deckQuery; box.focus(); drawAC(sb ? 'sb' : 'deck'); }
   });
 
   // infinite scroll

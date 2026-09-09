@@ -4,7 +4,7 @@
 //
 //   node scripts/state.mjs                 # one-screen summary
 //   node scripts/state.mjs deck            # every saved deck, cards vs. still-to-get
-//   node scripts/state.mjs deck sivir      # one deck, full per-card breakdown
+//   node scripts/state.mjs deck sivir      # one deck, main + sideboard, per-card
 //   node scripts/state.mjs card body rune  # every catalog card matching the words, with owned/want/trade
 //   node scripts/state.mjs want            # outstanding wants (want > owned), with gap $
 //   node scripts/state.mjs trade           # copies flagged for trade
@@ -22,8 +22,17 @@
 //   RIFT_STATE=path/to/state.json node scripts/state.mjs …   # offline: read a saved copy instead
 //
 // The shape: state.inv is code -> { n, f, w, t } — normal owned, foil owned,
-// want, for-trade. owned = n + f. A deck is { id, name, cards: {code: qty} }.
-// "still to get" for a deck is the app's own math: sum of max(0, qty - owned).
+// want, for-trade. owned = n + f. A deck is { id, name, cards: {code: qty},
+// sb: {code: qty} }, where `sb` is the sideboard and is absent on decks that have
+// none. "still to get" for a deck is the app's own math: sum of max(0, qty - owned),
+// counted over both halves — owned copies go to the main deck first, because at
+// registration the sideboard is physically separate cards and cannot share them.
+//
+// Sideboard rules, Tournament Rules §601.1.c: at most 10 cards (a ceiling, not a
+// fixed size; it was 8 before the 2026-07-24 update), main-deck card types only,
+// and the 3-copies-of-a-name limit spans main deck and sideboard together. Runes
+// are exempt from that limit. This script reports all three, because a deck read
+// here without them looks legal when it is not.
 
 import { readFile } from "node:fs/promises";
 
@@ -38,6 +47,10 @@ const readJson = async (f) => JSON.parse(await readFile(f, "utf8"));
 // Type order the app sorts deck rows by; anything unknown sinks to the bottom.
 const TYPES = ["Legend", "Champion Unit", "Unit", "Spell", "Gear", "Rune", "Battlefield"];
 const typeRank = (t) => { const i = TYPES.indexOf(t); return i < 0 ? 99 : i; };
+
+const SB_MAX = 10;                                        // §601.1.c.1
+const SB_BANNED_TYPES = new Set(["Legend", "Rune", "Battlefield"]);  // §601.1.c.2
+const MAX_COPIES = 3;                                     // §601.1.c.3, runes exempt
 
 const money = (n) => (n == null ? "" : `$${n.toFixed(2)}`);
 const pad = (s, n) => String(s).padEnd(n);
@@ -86,19 +99,56 @@ function deckRows(deck, cat) {
 
 function deckStats(deck, cat, q) {
   const rows = deckRows(deck, cat);
+  const side = deckRows({ cards: deck.sb }, cat);
   let copies = 0, missing = 0, gap = 0, unknown = 0;
+  let sideCopies = 0, sideMissing = 0, sideGap = 0;
   const bans = [];
+  const mainByCode = new Map();
   for (const r of rows) {
     copies += r.qty;
     const have = r.card ? q.owned(r.code) : 0;
     const short = Math.max(0, r.qty - have);
     r.have = have; r.short = short;
     missing += short;
+    mainByCode.set(r.code, (mainByCode.get(r.code) || 0) + r.qty);
     if (!r.card) unknown++;
     if (r.card && short) gap += (r.card.mp || 0) * short;
     if (r.card && cat.bannedNames.has(r.card.n)) bans.push(r);
   }
-  return { rows, copies, distinct: rows.length, missing, gap, unknown, bans };
+  for (const r of side) {
+    sideCopies += r.qty;
+    const own = r.card ? q.owned(r.code) : 0;
+    r.have = Math.max(0, own - (mainByCode.get(r.code) || 0));   // spare after the main deck
+    r.short = Math.max(0, r.qty - r.have);
+    sideMissing += r.short;
+    if (!r.card) unknown++;
+    if (r.card && r.short) sideGap += (r.card.mp || 0) * r.short;
+    if (r.card && cat.bannedNames.has(r.card.n)) bans.push(r);
+  }
+  return { rows, side, copies, distinct: rows.length, missing, gap, unknown, bans,
+           sideCopies, sideDistinct: side.length, sideMissing, sideGap,
+           totalMissing: missing + sideMissing, totalGap: gap + sideGap,
+           issues: deckIssues(rows, side) };
+}
+
+// The rules a hand-entered deck breaks, as sentences. Kept separate from the ban
+// list because a ban is a property of a card and these are properties of the deck.
+function deckIssues(rows, side) {
+  const out = [];
+  const n = side.reduce((a, r) => a + r.qty, 0);
+  if (n > SB_MAX) out.push(`sideboard is ${n} cards, ${n - SB_MAX} over the ${SB_MAX}-card limit`);
+  const bad = side.filter((r) => r.card && SB_BANNED_TYPES.has(r.card.t));
+  if (bad.length) out.push(`cannot be in a sideboard: ${
+    bad.map((r) => `${r.card.n} (${r.card.t.toLowerCase()})`).join(", ")}`);
+  const byName = new Map();
+  for (const r of rows.concat(side)) {
+    if (!r.card || r.card.t === "Rune") continue;
+    byName.set(r.card.n, (byName.get(r.card.n) || 0) + r.qty);
+  }
+  const over = [...byName].filter(([, v]) => v > MAX_COPIES).sort((a, b) => b[1] - a[1]);
+  if (over.length) out.push(`over ${MAX_COPIES} copies across main deck and sideboard: ${
+    over.map(([nm, v]) => `${v}x ${nm}`).join(", ")}`);
+  return out;
 }
 
 function findDecks(S, needle) {
@@ -132,10 +182,12 @@ function cmdSummary(S, cat, q) {
   console.log(`DECKS (${decks.length})`);
   for (const d of decks) {
     const st = deckStats(d, cat, q);
-    console.log(`  ${pad(d.name, 30)} ${st.copies} cards · ` +
-      (st.missing ? `${st.missing} to get (${money(st.gap)})` : "complete") +
+    console.log(`  ${pad(d.name, 30)} ${st.copies} cards` +
+      (st.sideCopies ? ` +${st.sideCopies} sb` : "") + " · " +
+      (st.totalMissing ? `${st.totalMissing} to get (${money(st.totalGap)})` : "complete") +
       (st.unknown ? ` · ${st.unknown} unknown` : "") +
-      (st.bans.length ? ` · ${st.bans.length} BANNED` : ""));
+      (st.bans.length ? ` · ${st.bans.length} BANNED` : "") +
+      (st.issues.length ? ` · ${st.issues.length} RULES ISSUE${st.issues.length > 1 ? "S" : ""}` : ""));
   }
 }
 
@@ -146,24 +198,36 @@ function cmdDeck(S, cat, q, args) {
   if (!needle || decks.length > 1) {
     for (const d of decks) {
       const st = deckStats(d, cat, q);
-      console.log(`${pad(d.name, 30)} ${st.copies} cards · ${st.distinct} distinct · ` +
-        (st.missing ? `${st.missing} to get (${money(st.gap)})` : "complete"));
+      console.log(`${pad(d.name, 30)} ${st.copies} cards` +
+        (st.sideCopies ? ` +${st.sideCopies} sb` : "") + ` · ${st.distinct} distinct · ` +
+        (st.totalMissing ? `${st.totalMissing} to get (${money(st.totalGap)})` : "complete"));
     }
     if (decks.length > 1) console.log(`\n(${decks.length} decks matched — narrow the query for a full breakdown)`);
     return;
   }
   const d = decks[0];
   const st = deckStats(d, cat, q);
-  console.log(`${d.name}\n`);
-  for (const r of st.rows) {
+  const line = (r, ownLabel) => {
     const nm = r.card ? r.card.n : "??? NOT IN CATALOG";
     const ty = r.card?.t || "";
     console.log(`  ${r.qty}x  ${pad(nm, 30)} ${pad(r.code, 14)} ${pad(ty, 11)} ` +
-      `own ${r.have}${r.short ? `   NEED ${r.short}  ${money((r.card?.mp || 0) * r.short)}` : ""}`);
+      `${ownLabel} ${r.have}${r.short ? `   NEED ${r.short}  ${money((r.card?.mp || 0) * r.short)}` : ""}`);
+  };
+  console.log(`${d.name}\n`);
+  for (const r of st.rows) line(r, "own");
+  if (st.side.length) {
+    // "spare" rather than "own": what is left after the main deck takes its copies,
+    // which is the number that decides whether the sideboard is actually playable.
+    console.log(`\n  SIDEBOARD  ${st.sideCopies} of ${SB_MAX}\n`);
+    for (const r of st.side) line(r, "spare");
   }
-  console.log(`\n  ${st.copies} cards · ${st.distinct} distinct · ${st.missing} still to get · gap ${money(st.gap)}`);
+  console.log(`\n  ${st.copies} cards · ${st.distinct} distinct` +
+    (st.sideCopies ? ` · +${st.sideCopies} sideboard` : "") +
+    ` · ${st.totalMissing} still to get · gap ${money(st.totalGap)}`);
+  if (st.sideMissing) console.log(`  of that: ${st.missing} main + ${st.sideMissing} sideboard`);
   if (st.unknown) console.log(`  ${st.unknown} card(s) not in the catalog`);
   if (st.bans.length) console.log(`  NOT CONSTRUCTED-LEGAL: ${st.bans.map((r) => r.card.n).join(", ")}`);
+  for (const x of st.issues) console.log(`  RULES: ${x}`);
 }
 
 function cmdCard(S, cat, q, args) {

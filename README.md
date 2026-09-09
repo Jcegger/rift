@@ -71,8 +71,39 @@ in a trade list, so their surplus past a playset stands in for it. My side of
 "what I need" is explicit wants first, then the gap in the archetypes I am closest
 to, which makes it useful before a single want has been typed in.
 
-**Decks** builds lists against the collection and reports what you are short.
-"Add shortfall to wants" pushes the gap onto the trade list.
+**Decks** builds lists against the collection and reports what you are short,
+main deck and **sideboard** separately. Two buttons push the gap onto the trade
+list: the main deck alone, which is the deck you have to be able to play, or both
+halves, which is event prep.
+
+A sideboard changes no number anywhere else in the app, and that is structural
+rather than incidental. `sb` exists only on `S.decks`, and the acquisition engine
+reads requirements through `deckRequirements`, whose callers all operate on
+`DECKS` — the meta snapshot, which has no sideboards. `spares()` is pure
+collection and playset. So Collection, Sets, Trade and Next cannot see one. The
+only line where a sideboard reaches collection state is the wants push, which is
+a button and never a side effect; that is why the main-deck press is kept
+separate from the one that includes it.
+
+The sideboard is a hand-entered thing and always will be: riftbound.gg's scrape
+carries no sideboard field, so none of the 499 archived lists in `decks.json` has
+one. It lives on the deck as `sb`, absent entirely on decks without one, which is
+why the shape stays compatible with every deck saved before it existed.
+
+Owned copies are allocated to the main deck first, and only the remainder covers
+the sideboard, because at registration the two halves are physically separate
+cards. So the sideboard column reads *spare*, not *owned*: a card you hold one of
+and run one of shows `spare 0`, and asking for it in the side is a real shortfall.
+Getting this wrong is the whole reason it is written down — sharing the copies
+would report a deck as complete that cannot be registered.
+
+Three rules are checked, from Tournament Rules §601.1.c, and only the third is
+invisible while you type: at most **10 cards** (§601.1.c.1 — a ceiling, not a fixed
+size, and it was 8 until the 2026-07-24 update), main-deck card types only so no
+legends, runes or battlefields (§601.1.c.2), and **3 copies of a name across main
+deck and sideboard combined** (§601.1.c.3). Runes are exempt from that last one,
+since a manabase runs six of one. `MAX_COPIES` is deliberately not `S.playset`:
+that setting is a collection target the user picks, this is the registration rule.
 
 **Meta** is the reference view: what is being played, how much of it is evidence, what
 is banned, riftbound.gg's weekly **tier list**, and what they are writing about it. It
