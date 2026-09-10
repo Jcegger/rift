@@ -1,13 +1,13 @@
 {
- "generatedAt": "2026-09-08",
+ "generatedAt": "2026-09-10",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "tags": {
   "News": 31,
-  "Events": 20,
-  "Metagame": 18,
+  "Events": 19,
+  "Metagame": 17,
   "Legends": 15,
   "Sets": 2,
   "Guides": 3,
@@ -15,7 +15,7 @@
  },
  "posts": [
   {
-   "title": "All Best-of Legends Prizing Decks in Singapore RQ",
+   "title": "All Best-of Legends Prizing Decks in Singapore RQ (Updated)",
    "dt": "2026-09-07",
    "url": "https://riftbound.gg/best-of-legends-prizing-decks-singapore-rq",
    "tags": [
@@ -810,24 +810,6 @@
    "title": "Riftbound Meta Tier List – Best Decks for Spiritforged - Post-Vegas Metagame",
    "dt": "2026-03-06",
    "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-spiritforged-post-vegas-metagame",
-   "tags": [
-    "Metagame"
-   ],
-   "author": "Den"
-  },
-  {
-   "title": "Vegas Regional Qualifier Results – Top 8 Decks, Metagame, Popularity, Win Rate & Conversion Rate!",
-   "dt": "2026-03-02",
-   "url": "https://riftbound.gg/vegas-regional-qualifier",
-   "tags": [
-    "Events"
-   ],
-   "author": "Den"
-  },
-  {
-   "title": "Riftbound Meta Tier List – Best Decks for Spiritforged - Post-Bologna Metagame",
-   "dt": "2026-02-28",
-   "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-spiritforged-post-bologna-metagame",
    "tags": [
     "Metagame"
    ],
