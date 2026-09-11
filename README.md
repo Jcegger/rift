@@ -589,7 +589,7 @@ the snapshot behind it. The app used to print the date the snapshot was taken an
 work out how long ago that was, which meant a three-month-old file recommended a dead
 meta with total confidence.
 
-`.github/workflows/refresh.yml` now rebuilds all six data files daily and commits
+`.github/workflows/refresh.yml` now rebuilds all seven data files daily and commits
 them. Pages serves this repo directly, so the commit *is* the deploy — no build step
 and no other infrastructure. Commits carry a one-line summary of what moved, so the
 history reads as a changelog rather than 365 identical entries.
@@ -1011,6 +1011,202 @@ Two things it handles that matter for the completion math:
 Finishes are not in Riot's data, because a foil is a print treatment rather than
 a separate card. That is why Normal and Foil are separate counts on each
 printing, tracked on my side.
+
+## Rules
+
+Riot publishes the rules as two PDFs and nothing else: no API, no HTML edition, no
+plain text. 120 pages of Core Rules and 50 of Tournament Rules, 3,326 numbered rules
+between them, and they have moved four times in a year — Origins, Spiritforged,
+Unleashed, Vendetta.
+
+```
+node scripts/build-rules.mjs           # rebuild only if Riot's date moved
+node scripts/build-rules.mjs --force
+```
+
+It writes `docs/rules-full.md` — every rule, Riot's own wording, unedited — and
+`data/rules.json`, which carries the version stamp, a section index, and the map from
+every bracketed term a card can print to the rule that defines it.
+**`docs/rules.md` is hand-written**: the same rules in the order you need them, with
+every claim carrying its rule number. It does not rebuild itself, and the builder says
+so out loud when Riot's date moves.
+
+**The PDF URLs are content hashes.** Every revision is a new URL, which means a
+hardcoded link does not go stale — it goes *permanent*, silently serving the rules from
+a previous set forever. So the builder reads the Rules Hub page for both the current
+URLs and the dates Riot prints next to them, and those two facts have to come from the
+same place or the stamp is a guess.
+
+Reading PDFs in a repo with no dependencies sounds worse than it is, because these two
+files are a narrow case rather than the general one. Both are Google Docs exports: PDF
+1.4, classic xref tables, no object streams, FlateDecode only, every font Type0 with a
+ToUnicode CMap. Inflate the content stream, map glyph ids through ToUnicode, done. The
+only part that takes care is reading order — the text is laid out one glyph per `Td`
+inside per-word `BT` blocks and the page matrix flips the y axis, so the extractor
+composes the full CTM and groups glyphs by device position rather than by the order
+they appear in the stream. Verified against pypdf across both documents: identical text
+for all 3,326 rules, plus two that pypdf runs onto one line.
+
+It is deliberately not a PDF library and must not become one. If Riot changes
+publishing tools, the honest failure is this script reporting zero rules, which it
+does, rather than a dependency quietly half-reading the new shape.
+
+One edit is made to Riot's text: **fi/fl ligatures are folded back out.** They are
+single glyphs in the font, so the ToUnicode map hands back `Deﬂect` and `battleﬁeld` as
+one codepoint. That is a property of the typesetting and not of the wording, and
+leaving it in makes the file unsearchable for the words people actually type — the
+first run found zero matches for `Deflect` across 72 cards' worth of keyword.
+
+### What goes stale, and how it says so
+
+Five assertions in `check.mjs`, all offline, because the builder is the only thing
+that should be talking to Riot.
+
+**Every `§` cited in `docs/rules.md` has to exist in `docs/rules-full.md`, in the right
+book.** Prose that cites a rule number is a claim that rots in two directions — wrong on
+the day it was typed, or renumbered out from under a file nothing rebuilds — and both
+read exactly like correct text.
+
+The first version of this check merged both rulebooks into one set of numbers, which
+was wrong in a way worth recording: **the Core and Tournament rules number
+independently and collide on 146 numbers.** §402.1 is "you may decides whether to
+perform the triggered ability" in one book and "register a Main Deck of exactly 40
+cards" in the other. Thirteen citations sat on such a collision and the check called
+them fine. So the two are now kept apart, the handbook writes its tournament citations
+as `TR §402.1`, and a bare `§` must resolve in Core while a `TR §` must resolve in
+Tournament. 352 Core citations and 10 Tournament ones, checked on every run.
+
+What this still cannot do is tell you whether the *claim attached to* a citation is
+true. That limit is not theoretical: an audit of the handbook against the verbatim text
+found **59 defective claims out of ~357**, every one of them citing a rule that existed.
+The check catches invented numbers, not misreadings — only reading the rule does that.
+
+**Every bracketed term printed on a card has to resolve to a rule.** This is the one
+that catches a set landing: cards print `[Assault 2]` and `[Predict 2]` identically,
+but the first is a keyword from the glossary at 800 and the second is a game action
+from 412, and nothing on the card says which. When Vendetta's successor prints a
+keyword the rules index has never heard of, this is what goes red.
+
+**The 10-card sideboard limit still has to be what §601.1.c.1 says.** `state.mjs`
+enforces a number; the rule it cites has to still say that number. It was 8 before
+2026-07-24.
+
+**And `docs/rules.md` has to describe the rules that are actually committed.** This is
+the one that earns the builder its place in the cron, and it took a second pass to see
+why. The verbatim half rebuilds itself, correctly — it is a mechanical transcription.
+The hand-written half cannot. So on the day Riot ships the set after Vendetta the
+automation would quietly swap `rules-full.md` underneath prose that still confidently
+describes the old ruleset, with nearly every citation still resolving because most rule
+numbers do not move. That is not stale data, it is fresh data that lies, and none of
+the other three assertions would notice. Hence the visible dateline at the top of
+`rules.md`, which `check.mjs` parses and compares against `data/rules.json`.
+
+That last one is gated behind `--max-age`, like the shelf-life checks: the workflow
+runs the gate *after* committing, so a documentation lag turns the job red and opens an
+issue without holding back the deck snapshot that did refresh. The other three block
+the commit, because they mean the two rules files disagree with each other.
+
+The builder runs as the seventh source in the daily cron. It reads two index pages,
+pulls the 57MB of PDFs only when the date printed on them has moved, and otherwise
+exits having changed nothing. One wrinkle worth recording: it writes `docs/rules-full.md`
+and `docs/rules-faq.md` *and* `data/rules.json`, while the commit step stages `data/`
+only. Committing half of that set would have failed the *next* run's consistency
+assertion and blocked every other source, so the commit stages them together.
+
+### The tier of rules that isn't a PDF
+
+The first version of this watched the Rules Hub, and the Rules Hub links the two PDFs.
+That turned out to miss an entire class of binding rules.
+
+Riot also publishes a **rules FAQ per set**, and the Vendetta one states: *"In places
+where the FAQ differs from the Core Rules Document, the FAQ takes precedence. When a new
+Core Rules Document is released, it will take precedence over any points that differ
+from this document."* It is dated 2026-08-14 against the Core Rules' 2026-07-16 — so for
+now **the FAQ outranks the rulebook**, and it is not linked from the Rules Hub at all.
+Neither are the errata pages. They are news articles.
+
+So the builder reads the **Rules and Releases** index as well, which lists every FAQ,
+errata and patch-notes page, and discovers them by pattern so the next set's should
+appear on its own. Two details that cost a rewrite each. Dating from the index is wrong
+— its payload interleaves cards, and proximity matching handed the Unleashed FAQ the
+Vendetta FAQ's date — so each article is dated from its own page. And the thing actually
+compared between runs is a **hash of the extracted text**, not the date: a ruling edited
+in place keeps its publishDate, and a ruling that changes silently is the whole problem.
+
+The FAQs do not all carry the same authority — only Vendetta's claims precedence, only
+Origins' carries Riot's "may no longer reflect Riftbound's rules" banner — so
+`docs/rules-faq.md` reads that status out of each document rather than asserting one
+over all of them. `check.mjs` asserts the handbook links it, because a summary that
+quietly omits the document outranking it is worse than one merely out of date.
+
+**The scraper's worst bug is worth recording, because it looked like success.** The
+Origins FAQ is 97 collapsed question/answer pairs built from accordions, and in the
+served DOM the answer containers are *empty* — the answers exist only in the page's JSON
+payload. A DOM-only extractor produced a 16KB file of 97 question headings and no
+rulings: long, structured, and completely worthless. Nothing caught it, because nothing
+was looking for absence. The extractor now reads the payload and stitches answers back
+under their questions (that one page went from 16KB to 60KB), and `loadSupplement`
+refuses to write any document that is more than half headings — the shape of content it
+cannot see. Two smaller losses from the same pass: `<td>` was missing from the tag list,
+so 20 verbatim rule quotations inside the Unleashed FAQ's tables vanished, and stripping
+inner tags to nothing rather than to a space welded two bullets into one sentence.
+
+## Errata
+
+```
+node scripts/build-errata.mjs
+```
+
+Riot's card feed serves what was **printed**, not what is current. Errata are published
+separately and never flow back into it, so `data/cards.json` shows superseded text —
+**52 cards' worth** — with total confidence. Zhonya's Hourglass, in a quarter of
+tournament lists, reads "the next time a friendly unit would die… recall that unit
+exhausted" in the catalog and "**If** a friendly unit would die… heal that unit, exhaust
+it, and recall it" in reality. Reading a card here and reading it at a table gave
+different answers.
+
+`data/errata.json` carries the corrections and **both** consumers overlay them on load —
+`scripts/state.mjs` for the command line and `index.html` for the site, which marks
+corrected cards with an `errata` chip. Applying it in only one was the first cut, and it
+is worse than not applying it at all: the site and the command line then quote different
+text for the same card and both look authoritative.
+
+The overlay is applied **at read time, never baked into `data/cards.json`**. Keeping the
+catalog a faithful mirror of Riot's feed is what lets the builder prove an errata is
+still outstanding by matching its *old* text against it; rewriting the catalog would make
+every entry look already-applied and destroy the verification. The app's half is a named
+`applyErrata` function precisely so `check.mjs` can call it with a synthetic catalog and
+assert it really rewrites the text — the assertions it replaced were greps for a
+filename, which a commented-out overlay passes.
+
+What makes it trustworthy rather than a hopeful string replacement is that **every entry
+is verified against the catalog's own text.** The errata pages give the full old and new
+wording, so each entry must match the catalog on one side or the other: matching the old
+text proves the errata is real and the catalog stale; matching the new text means Riot
+folded it in already; matching neither means the parse drifted, and that is reported, not
+written. All 63 entries resolve.
+
+The comparison itself had to be loosened and then tightened again. Collapsing every
+power symbol into one token made a real errata — "[C]" to "[A]", pay your own domain
+versus pay any domain — compare *equal* to the printed text, so it was filed as "Riot
+already folded this in" and the correction never reached a card. Stripping punctuation
+did the same to a parenthesis-only errata, and one of those is live (Edge of Night). So
+the comparison now runs strict first, keeps punctuation, and holds `[A]` apart from a
+domain symbol — with a looser second pass only as a fallback, because Riot's own pages
+write `[C]` where a card prints the rainbow symbol. An entry whose halves differ *only*
+under the loose form is flagged rather than trusted.
+
+Three more things that took iterations. The pages come in **two shapes** — later ones label
+`[NEW TEXT]` / `[OLD TEXT]`, Origins and Spiritforged just run new-then-old with nothing
+marking the boundary — so for the unmarked ones the split is *resolved against the
+catalog* rather than guessed by counting paragraphs. The two sources write symbols in
+**different dialects**, `:rb_might:` against `[M]`, and errata use `[C]` where the card
+prints its actual domain symbol, so both sides collapse to a canonical form before
+comparison. And names disagree: `Emperor's Dais` against `Emperor’s Dais`,
+`Dark Child - Starter` against `Dark Child, Starter`, and legends stored under their
+epithet alone so the errata's `Leblanc, Deceiver` has to find `Deceiver`. Entries
+therefore record the **catalog's** spelling to join on — without it the overlay silently
+missed, which is exactly how it first shipped.
 
 ## Sync
 

@@ -1,0 +1,1631 @@
+{
+ "generatedAt": "2026-09-11",
+ "source": "https://playriftbound.com/en-us/rules-hub/",
+ "docs": {
+  "core": {
+   "title": "Core Rules",
+   "updated": "2026-07-16",
+   "url": "https://cmsassets.rgpub.io/sanity/files/dsfx7636/news_live/e9ac8e3d33e0f78cef296f5945aba7bc1313b086.pdf",
+   "pages": 120,
+   "rules": 2381
+  },
+  "tournament": {
+   "title": "Tournament Rules",
+   "updated": "2026-07-16",
+   "url": "https://cmsassets.rgpub.io/sanity/files/dsfx7636/news_live/503da65669ced10598d62925a6f6bc15111af726.pdf",
+   "pages": 50,
+   "rules": 945
+  }
+ },
+ "sections": [
+  {
+   "doc": "core",
+   "n": "000",
+   "title": "Golden and Silver Rules"
+  },
+  {
+   "doc": "core",
+   "n": "001",
+   "title": "Golden Rule"
+  },
+  {
+   "doc": "core",
+   "n": "050",
+   "title": "Silver Rule"
+  },
+  {
+   "doc": "core",
+   "n": "054",
+   "title": "“Can’t beats Can”"
+  },
+  {
+   "doc": "core",
+   "n": "100",
+   "title": "Game Concepts"
+  },
+  {
+   "doc": "core",
+   "n": "101",
+   "title": "Deck Construction"
+  },
+  {
+   "doc": "core",
+   "n": "103.3",
+   "title": "Rune Deck"
+  },
+  {
+   "doc": "core",
+   "n": "103.4",
+   "title": "Battlefields"
+  },
+  {
+   "doc": "core",
+   "n": "104",
+   "title": "Setup"
+  },
+  {
+   "doc": "core",
+   "n": "105",
+   "title": "Spaces"
+  },
+  {
+   "doc": "core",
+   "n": "107",
+   "title": "The Board"
+  },
+  {
+   "doc": "core",
+   "n": "107.1",
+   "title": "Bases"
+  },
+  {
+   "doc": "core",
+   "n": "107.2",
+   "title": "Battlefield Zone"
+  },
+  {
+   "doc": "core",
+   "n": "107.3",
+   "title": "Facedown Zones"
+  },
+  {
+   "doc": "core",
+   "n": "107.4",
+   "title": "Legend Zone"
+  },
+  {
+   "doc": "core",
+   "n": "108",
+   "title": "Non-Board Zones"
+  },
+  {
+   "doc": "core",
+   "n": "108.1",
+   "title": "The Chain"
+  },
+  {
+   "doc": "core",
+   "n": "108.2",
+   "title": "Trashes"
+  },
+  {
+   "doc": "core",
+   "n": "108.3",
+   "title": "Champion Zones"
+  },
+  {
+   "doc": "core",
+   "n": "108.4",
+   "title": "Main Deck Zones"
+  },
+  {
+   "doc": "core",
+   "n": "108.5",
+   "title": "Rune Deck Zones"
+  },
+  {
+   "doc": "core",
+   "n": "108.6",
+   "title": "Banishments"
+  },
+  {
+   "doc": "core",
+   "n": "108.7",
+   "title": "The Hand"
+  },
+  {
+   "doc": "core",
+   "n": "110",
+   "title": "Setup Process"
+  },
+  {
+   "doc": "core",
+   "n": "119",
+   "title": "Game Objects"
+  },
+  {
+   "doc": "core",
+   "n": "125",
+   "title": "Cards"
+  },
+  {
+   "doc": "core",
+   "n": "127",
+   "title": "Ownership"
+  },
+  {
+   "doc": "core",
+   "n": "128",
+   "title": "Privacy"
+  },
+  {
+   "doc": "core",
+   "n": "129",
+   "title": "Back Side"
+  },
+  {
+   "doc": "core",
+   "n": "130",
+   "title": "Front Side"
+  },
+  {
+   "doc": "core",
+   "n": "131",
+   "title": "Cost"
+  },
+  {
+   "doc": "core",
+   "n": "131.2",
+   "title": "Energy Cost"
+  },
+  {
+   "doc": "core",
+   "n": "131.3",
+   "title": "Power cost"
+  },
+  {
+   "doc": "core",
+   "n": "132",
+   "title": "Name"
+  },
+  {
+   "doc": "core",
+   "n": "133",
+   "title": "Category"
+  },
+  {
+   "doc": "core",
+   "n": "134",
+   "title": "Domain"
+  },
+  {
+   "doc": "core",
+   "n": "135",
+   "title": "Rules Text"
+  },
+  {
+   "doc": "core",
+   "n": "136",
+   "title": "Effect Text"
+  },
+  {
+   "doc": "core",
+   "n": "137",
+   "title": "Might Bonus"
+  },
+  {
+   "doc": "core",
+   "n": "138",
+   "title": "Flavor Text"
+  },
+  {
+   "doc": "core",
+   "n": "139",
+   "title": "Illustration"
+  },
+  {
+   "doc": "core",
+   "n": "140",
+   "title": "Units"
+  },
+  {
+   "doc": "core",
+   "n": "141.1",
+   "title": "A Game Object"
+  },
+  {
+   "doc": "core",
+   "n": "141.2",
+   "title": "A Card Type"
+  },
+  {
+   "doc": "core",
+   "n": "147",
+   "title": "Gear"
+  },
+  {
+   "doc": "core",
+   "n": "148.1",
+   "title": "A Game Object"
+  },
+  {
+   "doc": "core",
+   "n": "148.2",
+   "title": "A Card Type"
+  },
+  {
+   "doc": "core",
+   "n": "153",
+   "title": "Spells"
+  },
+  {
+   "doc": "core",
+   "n": "160",
+   "title": "Runes"
+  },
+  {
+   "doc": "core",
+   "n": "164",
+   "title": "Basic Runes"
+  },
+  {
+   "doc": "core",
+   "n": "165",
+   "title": "Rune Pools"
+  },
+  {
+   "doc": "core",
+   "n": "169",
+   "title": "Battlefields"
+  },
+  {
+   "doc": "core",
+   "n": "173",
+   "title": "Legends"
+  },
+  {
+   "doc": "core",
+   "n": "177",
+   "title": "Multiple Types"
+  },
+  {
+   "doc": "core",
+   "n": "179",
+   "title": "Tokens"
+  },
+  {
+   "doc": "core",
+   "n": "188",
+   "title": "Control"
+  },
+  {
+   "doc": "core",
+   "n": "190",
+   "title": "Battlefields"
+  },
+  {
+   "doc": "core",
+   "n": "191",
+   "title": "Everything Else"
+  },
+  {
+   "doc": "core",
+   "n": "193",
+   "title": "Winning"
+  },
+  {
+   "doc": "core",
+   "n": "197",
+   "title": "Locations"
+  },
+  {
+   "doc": "core",
+   "n": "201",
+   "title": "Costs"
+  },
+  {
+   "doc": "core",
+   "n": "301",
+   "title": "The Turn"
+  },
+  {
+   "doc": "core",
+   "n": "311",
+   "title": "Priority and Focus"
+  },
+  {
+   "doc": "core",
+   "n": "315",
+   "title": "Start of Turn"
+  },
+  {
+   "doc": "core",
+   "n": "315.1",
+   "title": "Awaken Phase"
+  },
+  {
+   "doc": "core",
+   "n": "315.2",
+   "title": "Beginning Phase"
+  },
+  {
+   "doc": "core",
+   "n": "315.3",
+   "title": "Channel Phase"
+  },
+  {
+   "doc": "core",
+   "n": "315.4",
+   "title": "Draw Phase"
+  },
+  {
+   "doc": "core",
+   "n": "316",
+   "title": "Main Phase"
+  },
+  {
+   "doc": "core",
+   "n": "316.7",
+   "title": "Combat"
+  },
+  {
+   "doc": "core",
+   "n": "316.8",
+   "title": "Showdowns"
+  },
+  {
+   "doc": "core",
+   "n": "317",
+   "title": "Ending Phase"
+  },
+  {
+   "doc": "core",
+   "n": "317.1",
+   "title": "Ending Step"
+  },
+  {
+   "doc": "core",
+   "n": "317.2",
+   "title": "Expiration Step"
+  },
+  {
+   "doc": "core",
+   "n": "318",
+   "title": "Cleanups"
+  },
+  {
+   "doc": "core",
+   "n": "325",
+   "title": "Chains and Showdowns"
+  },
+  {
+   "doc": "core",
+   "n": "327",
+   "title": "Chains"
+  },
+  {
+   "doc": "core",
+   "n": "332",
+   "title": "Handling Tasks and Resolving Chain Items"
+  },
+  {
+   "doc": "core",
+   "n": "341",
+   "title": "Showdowns"
+  },
+  {
+   "doc": "core",
+   "n": "349",
+   "title": "Playing Cards"
+  },
+  {
+   "doc": "core",
+   "n": "353",
+   "title": "The Process of Play"
+  },
+  {
+   "doc": "core",
+   "n": "355.6",
+   "title": "Targeting"
+  },
+  {
+   "doc": "core",
+   "n": "355.14",
+   "title": "Splitting"
+  },
+  {
+   "doc": "core",
+   "n": "360",
+   "title": "Abilities"
+  },
+  {
+   "doc": "core",
+   "n": "363",
+   "title": "Passive Abilities"
+  },
+  {
+   "doc": "core",
+   "n": "365",
+   "title": "Presence on Permanents"
+  },
+  {
+   "doc": "core",
+   "n": "367",
+   "title": "Replacement Effects"
+  },
+  {
+   "doc": "core",
+   "n": "376",
+   "title": "Activated Abilities"
+  },
+  {
+   "doc": "core",
+   "n": "382",
+   "title": "Triggered Abilities"
+  },
+  {
+   "doc": "core",
+   "n": "384",
+   "title": "Presence on Permanents"
+  },
+  {
+   "doc": "core",
+   "n": "386",
+   "title": "Reflexive Triggers"
+  },
+  {
+   "doc": "core",
+   "n": "389",
+   "title": "Delayed Abilities"
+  },
+  {
+   "doc": "core",
+   "n": "393",
+   "title": "Linked Abilities"
+  },
+  {
+   "doc": "core",
+   "n": "398",
+   "title": "Playing or Activating Abilities"
+  },
+  {
+   "doc": "core",
+   "n": "407",
+   "title": "Game Actions"
+  },
+  {
+   "doc": "core",
+   "n": "410.1",
+   "title": "Discretionary Actions"
+  },
+  {
+   "doc": "core",
+   "n": "410.2",
+   "title": "Limited Actions"
+  },
+  {
+   "doc": "core",
+   "n": "411",
+   "title": "Responsibility"
+  },
+  {
+   "doc": "core",
+   "n": "412",
+   "title": "Types of Actions"
+  },
+  {
+   "doc": "core",
+   "n": "413",
+   "title": "Draw"
+  },
+  {
+   "doc": "core",
+   "n": "414",
+   "title": "Exhaust"
+  },
+  {
+   "doc": "core",
+   "n": "415",
+   "title": "Ready"
+  },
+  {
+   "doc": "core",
+   "n": "416",
+   "title": "Recycle"
+  },
+  {
+   "doc": "core",
+   "n": "417",
+   "title": "Deal"
+  },
+  {
+   "doc": "core",
+   "n": "418",
+   "title": "Heal"
+  },
+  {
+   "doc": "core",
+   "n": "419",
+   "title": "Play"
+  },
+  {
+   "doc": "core",
+   "n": "420",
+   "title": "Move"
+  },
+  {
+   "doc": "core",
+   "n": "421",
+   "title": "Hide"
+  },
+  {
+   "doc": "core",
+   "n": "422",
+   "title": "Discard"
+  },
+  {
+   "doc": "core",
+   "n": "423",
+   "title": "Stun"
+  },
+  {
+   "doc": "core",
+   "n": "424",
+   "title": "Reveal"
+  },
+  {
+   "doc": "core",
+   "n": "425",
+   "title": "Counter"
+  },
+  {
+   "doc": "core",
+   "n": "426",
+   "title": "Buff"
+  },
+  {
+   "doc": "core",
+   "n": "427",
+   "title": "Banish"
+  },
+  {
+   "doc": "core",
+   "n": "428",
+   "title": "Kill"
+  },
+  {
+   "doc": "core",
+   "n": "429",
+   "title": "Add"
+  },
+  {
+   "doc": "core",
+   "n": "430",
+   "title": "Channel"
+  },
+  {
+   "doc": "core",
+   "n": "431",
+   "title": "Burn Out"
+  },
+  {
+   "doc": "core",
+   "n": "432",
+   "title": "Double"
+  },
+  {
+   "doc": "core",
+   "n": "433",
+   "title": "Swap"
+  },
+  {
+   "doc": "core",
+   "n": "434",
+   "title": "Attach"
+  },
+  {
+   "doc": "core",
+   "n": "435",
+   "title": "Detach"
+  },
+  {
+   "doc": "core",
+   "n": "436",
+   "title": "Predict"
+  },
+  {
+   "doc": "core",
+   "n": "437",
+   "title": "Prevent"
+  },
+  {
+   "doc": "core",
+   "n": "438",
+   "title": "Replace"
+  },
+  {
+   "doc": "core",
+   "n": "439",
+   "title": "Create"
+  },
+  {
+   "doc": "core",
+   "n": "440",
+   "title": "Burn"
+  },
+  {
+   "doc": "core",
+   "n": "441",
+   "title": "Empower"
+  },
+  {
+   "doc": "core",
+   "n": "442",
+   "title": "Disempower"
+  },
+  {
+   "doc": "core",
+   "n": "443",
+   "title": "Skip"
+  },
+  {
+   "doc": "core",
+   "n": "444",
+   "title": "Pay"
+  },
+  {
+   "doc": "core",
+   "n": "445",
+   "title": "Movement"
+  },
+  {
+   "doc": "core",
+   "n": "454",
+   "title": "Recalls"
+  },
+  {
+   "doc": "core",
+   "n": "459",
+   "title": "Combat"
+  },
+  {
+   "doc": "core",
+   "n": "463",
+   "title": "The Steps of Combat"
+  },
+  {
+   "doc": "core",
+   "n": "467",
+   "title": "Scoring"
+  },
+  {
+   "doc": "core",
+   "n": "473",
+   "title": "Layers"
+  },
+  {
+   "doc": "core",
+   "n": "481",
+   "title": "Modes of Play"
+  },
+  {
+   "doc": "core",
+   "n": "483.8",
+   "title": "Unique Rules"
+  },
+  {
+   "doc": "core",
+   "n": "484",
+   "title": "Sanctioned Modes"
+  },
+  {
+   "doc": "core",
+   "n": "489.8",
+   "title": "Unique Rules"
+  },
+  {
+   "doc": "core",
+   "n": "649",
+   "title": "Conceding"
+  },
+  {
+   "doc": "core",
+   "n": "700",
+   "title": "Additional Rules"
+  },
+  {
+   "doc": "core",
+   "n": "701",
+   "title": "Buffs"
+  },
+  {
+   "doc": "core",
+   "n": "706",
+   "title": "Mighty"
+  },
+  {
+   "doc": "core",
+   "n": "712",
+   "title": "Bonus Damage"
+  },
+  {
+   "doc": "core",
+   "n": "716",
+   "title": "Attachment"
+  },
+  {
+   "doc": "core",
+   "n": "720",
+   "title": "Inactive"
+  },
+  {
+   "doc": "core",
+   "n": "726",
+   "title": "Dependent Keywords"
+  },
+  {
+   "doc": "core",
+   "n": "728",
+   "title": "XP"
+  },
+  {
+   "doc": "core",
+   "n": "734",
+   "title": "Additional Turns"
+  },
+  {
+   "doc": "core",
+   "n": "739",
+   "title": "Special Terms"
+  },
+  {
+   "doc": "core",
+   "n": "741",
+   "title": "Counters"
+  },
+  {
+   "doc": "core",
+   "n": "750",
+   "title": "Making New Choices"
+  },
+  {
+   "doc": "core",
+   "n": "756",
+   "title": "Untargetability"
+  },
+  {
+   "doc": "core",
+   "n": "759",
+   "title": "Naming Cards, Types, and Tags"
+  },
+  {
+   "doc": "core",
+   "n": "764",
+   "title": "Ignoring Effects"
+  },
+  {
+   "doc": "core",
+   "n": "800",
+   "title": "Keywords"
+  },
+  {
+   "doc": "core",
+   "n": "804",
+   "title": "Keyword Glossary"
+  },
+  {
+   "doc": "core",
+   "n": "805",
+   "title": "Accelerate"
+  },
+  {
+   "doc": "core",
+   "n": "806",
+   "title": "Action"
+  },
+  {
+   "doc": "core",
+   "n": "807",
+   "title": "Assault"
+  },
+  {
+   "doc": "core",
+   "n": "808",
+   "title": "Deathknell"
+  },
+  {
+   "doc": "core",
+   "n": "809",
+   "title": "Deflect"
+  },
+  {
+   "doc": "core",
+   "n": "810",
+   "title": "Ganking"
+  },
+  {
+   "doc": "core",
+   "n": "811",
+   "title": "Hidden"
+  },
+  {
+   "doc": "core",
+   "n": "812",
+   "title": "Legion"
+  },
+  {
+   "doc": "core",
+   "n": "813",
+   "title": "Reaction"
+  },
+  {
+   "doc": "core",
+   "n": "814",
+   "title": "Shield"
+  },
+  {
+   "doc": "core",
+   "n": "815",
+   "title": "Tank"
+  },
+  {
+   "doc": "core",
+   "n": "816",
+   "title": "Temporary"
+  },
+  {
+   "doc": "core",
+   "n": "817",
+   "title": "Vision"
+  },
+  {
+   "doc": "core",
+   "n": "818",
+   "title": "Equip"
+  },
+  {
+   "doc": "core",
+   "n": "819",
+   "title": "Quick-Draw"
+  },
+  {
+   "doc": "core",
+   "n": "820",
+   "title": "Repeat"
+  },
+  {
+   "doc": "core",
+   "n": "821",
+   "title": "Weaponmaster"
+  },
+  {
+   "doc": "core",
+   "n": "822",
+   "title": "Ambush"
+  },
+  {
+   "doc": "core",
+   "n": "823",
+   "title": "Hunt"
+  },
+  {
+   "doc": "core",
+   "n": "824",
+   "title": "Level"
+  },
+  {
+   "doc": "core",
+   "n": "825",
+   "title": "Unique"
+  },
+  {
+   "doc": "core",
+   "n": "826",
+   "title": "Backline"
+  },
+  {
+   "doc": "core",
+   "n": "827",
+   "title": "Empower"
+  },
+  {
+   "doc": "core",
+   "n": "828",
+   "title": "Empowered"
+  },
+  {
+   "doc": "core",
+   "n": "829",
+   "title": "Flow"
+  },
+  {
+   "doc": "tournament",
+   "n": "000",
+   "title": "Golden Rule"
+  },
+  {
+   "doc": "tournament",
+   "n": "100",
+   "title": "Introduction"
+  },
+  {
+   "doc": "tournament",
+   "n": "200",
+   "title": "Definitions"
+  },
+  {
+   "doc": "tournament",
+   "n": "204.7",
+   "title": "Player"
+  },
+  {
+   "doc": "tournament",
+   "n": "204.8",
+   "title": "Spectator"
+  },
+  {
+   "doc": "tournament",
+   "n": "300",
+   "title": "Eligibility"
+  },
+  {
+   "doc": "tournament",
+   "n": "400",
+   "title": "Policies"
+  },
+  {
+   "doc": "tournament",
+   "n": "401",
+   "title": "Deck Registration"
+  },
+  {
+   "doc": "tournament",
+   "n": "402",
+   "title": "Deck Size"
+  },
+  {
+   "doc": "tournament",
+   "n": "403",
+   "title": "Sideboard"
+  },
+  {
+   "doc": "tournament",
+   "n": "404",
+   "title": "Match"
+  },
+  {
+   "doc": "tournament",
+   "n": "405",
+   "title": "Start of Match Procedure"
+  },
+  {
+   "doc": "tournament",
+   "n": "406",
+   "title": "Start of Game Procedure"
+  },
+  {
+   "doc": "tournament",
+   "n": "407",
+   "title": "Play First Rule"
+  },
+  {
+   "doc": "tournament",
+   "n": "408",
+   "title": "End of Match Procedure"
+  },
+  {
+   "doc": "tournament",
+   "n": "409",
+   "title": "Tiebreakers"
+  },
+  {
+   "doc": "tournament",
+   "n": "410",
+   "title": "Concessions and Intentional Draws"
+  },
+  {
+   "doc": "tournament",
+   "n": "411",
+   "title": "Deck Checks"
+  },
+  {
+   "doc": "tournament",
+   "n": "412",
+   "title": "Judge Calls"
+  },
+  {
+   "doc": "tournament",
+   "n": "413",
+   "title": "Appeals"
+  },
+  {
+   "doc": "tournament",
+   "n": "414",
+   "title": "Dropping"
+  },
+  {
+   "doc": "tournament",
+   "n": "415",
+   "title": "Tracking Score & Resources"
+  },
+  {
+   "doc": "tournament",
+   "n": "416",
+   "title": "Taking Notes"
+  },
+  {
+   "doc": "tournament",
+   "n": "417",
+   "title": "Electronic Devices"
+  },
+  {
+   "doc": "tournament",
+   "n": "418",
+   "title": "Coverage"
+  },
+  {
+   "doc": "tournament",
+   "n": "419",
+   "title": "Proxies and Alters"
+  },
+  {
+   "doc": "tournament",
+   "n": "420",
+   "title": "Card Language"
+  },
+  {
+   "doc": "tournament",
+   "n": "421",
+   "title": "Shuffling"
+  },
+  {
+   "doc": "tournament",
+   "n": "422",
+   "title": "Sleeves"
+  },
+  {
+   "doc": "tournament",
+   "n": "423",
+   "title": "Marked Cards"
+  },
+  {
+   "doc": "tournament",
+   "n": "424",
+   "title": "Display"
+  },
+  {
+   "doc": "tournament",
+   "n": "500",
+   "title": "Communication"
+  },
+  {
+   "doc": "tournament",
+   "n": "501",
+   "title": "Requirements"
+  },
+  {
+   "doc": "tournament",
+   "n": "502",
+   "title": "Information"
+  },
+  {
+   "doc": "tournament",
+   "n": "503",
+   "title": "Shortcuts"
+  },
+  {
+   "doc": "tournament",
+   "n": "504",
+   "title": "Sequencing"
+  },
+  {
+   "doc": "tournament",
+   "n": "505",
+   "title": "Loops"
+  },
+  {
+   "doc": "tournament",
+   "n": "506",
+   "title": "Triggered Abilities"
+  },
+  {
+   "doc": "tournament",
+   "n": "507",
+   "title": "Teams in Separate Matches"
+  },
+  {
+   "doc": "tournament",
+   "n": "508",
+   "title": "Layout"
+  },
+  {
+   "doc": "tournament",
+   "n": "509",
+   "title": "Gameplay Decisions"
+  },
+  {
+   "doc": "tournament",
+   "n": "600",
+   "title": "Competition Formats"
+  },
+  {
+   "doc": "tournament",
+   "n": "601",
+   "title": "Constructed"
+  },
+  {
+   "doc": "tournament",
+   "n": "601.1",
+   "title": "Deck Construction"
+  },
+  {
+   "doc": "tournament",
+   "n": "601.2",
+   "title": "Card Legality"
+  },
+  {
+   "doc": "tournament",
+   "n": "601.3",
+   "title": "Standard"
+  },
+  {
+   "doc": "tournament",
+   "n": "602",
+   "title": "Limited"
+  },
+  {
+   "doc": "tournament",
+   "n": "602.1",
+   "title": "Legality"
+  },
+  {
+   "doc": "tournament",
+   "n": "602.2",
+   "title": "Abnormal Product"
+  },
+  {
+   "doc": "tournament",
+   "n": "602.4",
+   "title": "Limited Formats"
+  },
+  {
+   "doc": "tournament",
+   "n": "604",
+   "title": "Event and Round Time Limits"
+  },
+  {
+   "doc": "tournament",
+   "n": "700",
+   "title": "Enforcement and Penalties"
+  },
+  {
+   "doc": "tournament",
+   "n": "701",
+   "title": "General"
+  },
+  {
+   "doc": "tournament",
+   "n": "701.1",
+   "title": "Philosophy"
+  },
+  {
+   "doc": "tournament",
+   "n": "701.2",
+   "title": "Definitions of Penalties"
+  },
+  {
+   "doc": "tournament",
+   "n": "701.3",
+   "title": "Applying Penalties"
+  },
+  {
+   "doc": "tournament",
+   "n": "701.4",
+   "title": "Shuffling"
+  },
+  {
+   "doc": "tournament",
+   "n": "701.5",
+   "title": "Rewinding"
+  },
+  {
+   "doc": "tournament",
+   "n": "701.6",
+   "title": "Investigations"
+  },
+  {
+   "doc": "tournament",
+   "n": "702",
+   "title": "Game Play Errors"
+  },
+  {
+   "doc": "tournament",
+   "n": "702.1",
+   "title": "Overview"
+  },
+  {
+   "doc": "tournament",
+   "n": "703",
+   "title": "Tournament Errors"
+  },
+  {
+   "doc": "tournament",
+   "n": "703.1",
+   "title": "Overview"
+  },
+  {
+   "doc": "tournament",
+   "n": "704",
+   "title": "Unsporting Conduct"
+  },
+  {
+   "doc": "tournament",
+   "n": "704.1",
+   "title": "Overview"
+  },
+  {
+   "doc": "tournament",
+   "n": "705",
+   "title": "Disciplinary Code"
+  },
+  {
+   "doc": "tournament",
+   "n": "705.1",
+   "title": "Overview"
+  },
+  {
+   "doc": "tournament",
+   "n": "705.2",
+   "title": "Investigations of Rule Violations and Consequences"
+  },
+  {
+   "doc": "tournament",
+   "n": "705.3",
+   "title": "Conduct Rules"
+  }
+ ],
+ "terms": {
+  "Accelerate": {
+   "rule": "805",
+   "kind": "keyword"
+  },
+  "Action": {
+   "rule": "806",
+   "kind": "keyword"
+  },
+  "Assault": {
+   "rule": "807",
+   "kind": "keyword"
+  },
+  "Deathknell": {
+   "rule": "808",
+   "kind": "keyword"
+  },
+  "Deflect": {
+   "rule": "809",
+   "kind": "keyword"
+  },
+  "Ganking": {
+   "rule": "810",
+   "kind": "keyword"
+  },
+  "Hidden": {
+   "rule": "811",
+   "kind": "keyword"
+  },
+  "Legion": {
+   "rule": "812",
+   "kind": "keyword"
+  },
+  "Reaction": {
+   "rule": "813",
+   "kind": "keyword"
+  },
+  "Shield": {
+   "rule": "814",
+   "kind": "keyword"
+  },
+  "Tank": {
+   "rule": "815",
+   "kind": "keyword"
+  },
+  "Temporary": {
+   "rule": "816",
+   "kind": "keyword"
+  },
+  "Vision": {
+   "rule": "817",
+   "kind": "keyword"
+  },
+  "Equip": {
+   "rule": "818",
+   "kind": "keyword"
+  },
+  "Quick-Draw": {
+   "rule": "819",
+   "kind": "keyword"
+  },
+  "Repeat": {
+   "rule": "820",
+   "kind": "keyword"
+  },
+  "Weaponmaster": {
+   "rule": "821",
+   "kind": "keyword"
+  },
+  "Ambush": {
+   "rule": "822",
+   "kind": "keyword"
+  },
+  "Hunt": {
+   "rule": "823",
+   "kind": "keyword"
+  },
+  "Level": {
+   "rule": "824",
+   "kind": "keyword"
+  },
+  "Unique": {
+   "rule": "825",
+   "kind": "keyword"
+  },
+  "Backline": {
+   "rule": "826",
+   "kind": "keyword"
+  },
+  "Empower": {
+   "rule": "827",
+   "kind": "keyword"
+  },
+  "Empowered": {
+   "rule": "828",
+   "kind": "keyword"
+  },
+  "Flow": {
+   "rule": "829",
+   "kind": "keyword"
+  },
+  "Draw": {
+   "rule": "413",
+   "kind": "action"
+  },
+  "Exhaust": {
+   "rule": "414",
+   "kind": "action"
+  },
+  "Ready": {
+   "rule": "415",
+   "kind": "action"
+  },
+  "Recycle": {
+   "rule": "416",
+   "kind": "action"
+  },
+  "Deal": {
+   "rule": "417",
+   "kind": "action"
+  },
+  "Heal": {
+   "rule": "418",
+   "kind": "action"
+  },
+  "Play": {
+   "rule": "419",
+   "kind": "action"
+  },
+  "Move": {
+   "rule": "420",
+   "kind": "action"
+  },
+  "Hide": {
+   "rule": "421",
+   "kind": "action"
+  },
+  "Discard": {
+   "rule": "422",
+   "kind": "action"
+  },
+  "Stun": {
+   "rule": "423",
+   "kind": "action"
+  },
+  "Reveal": {
+   "rule": "424",
+   "kind": "action"
+  },
+  "Counter": {
+   "rule": "425",
+   "kind": "action"
+  },
+  "Buff": {
+   "rule": "426",
+   "kind": "action"
+  },
+  "Banish": {
+   "rule": "427",
+   "kind": "action"
+  },
+  "Kill": {
+   "rule": "428",
+   "kind": "action"
+  },
+  "Add": {
+   "rule": "429",
+   "kind": "action"
+  },
+  "Channel": {
+   "rule": "430",
+   "kind": "action"
+  },
+  "Burn Out": {
+   "rule": "431",
+   "kind": "action"
+  },
+  "Double": {
+   "rule": "432",
+   "kind": "action"
+  },
+  "Swap": {
+   "rule": "433",
+   "kind": "action"
+  },
+  "Attach": {
+   "rule": "434",
+   "kind": "action"
+  },
+  "Detach": {
+   "rule": "435",
+   "kind": "action"
+  },
+  "Predict": {
+   "rule": "436",
+   "kind": "action"
+  },
+  "Prevent": {
+   "rule": "437",
+   "kind": "action"
+  },
+  "Replace": {
+   "rule": "438",
+   "kind": "action"
+  },
+  "Create": {
+   "rule": "439",
+   "kind": "action"
+  },
+  "Burn": {
+   "rule": "440",
+   "kind": "action"
+  },
+  "Disempower": {
+   "rule": "442",
+   "kind": "action"
+  },
+  "Skip": {
+   "rule": "443",
+   "kind": "action"
+  },
+  "Pay": {
+   "rule": "444",
+   "kind": "action"
+  },
+  "Movement": {
+   "rule": "445",
+   "kind": "action"
+  },
+  "Mighty": {
+   "rule": "706",
+   "kind": "other"
+  },
+  "Attachment": {
+   "rule": "716",
+   "kind": "other"
+  },
+  "Inactive": {
+   "rule": "720",
+   "kind": "other"
+  },
+  "XP": {
+   "rule": "728",
+   "kind": "other"
+  }
+ },
+ "supplements": [
+  {
+   "slug": "riftbound-origins-card-errata",
+   "kind": "errata",
+   "url": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata",
+   "published": "2025-10-28",
+   "chars": 11647,
+   "sha": "e3d621d234ee"
+  },
+  {
+   "slug": "riftbound-spiritforged-errata",
+   "kind": "errata",
+   "url": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-spiritforged-errata",
+   "published": "2026-01-14",
+   "chars": 6134,
+   "sha": "feba55c90b4f"
+  },
+  {
+   "slug": "unleashed-errata-updates",
+   "kind": "errata",
+   "url": "https://playriftbound.com/en-us/news/rules-and-releases/unleashed-errata-updates",
+   "published": "2026-04-03",
+   "chars": 3998,
+   "sha": "49e085e231b5"
+  },
+  {
+   "slug": "vendetta-errata-updates",
+   "kind": "errata",
+   "url": "https://playriftbound.com/en-us/news/announcements/vendetta-errata-updates",
+   "published": "2026-07-23",
+   "chars": 3945,
+   "sha": "3cfa4aff7ea1"
+  },
+  {
+   "slug": "riftbound-origins-faq",
+   "kind": "faq",
+   "url": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-faq",
+   "published": "2025-10-16",
+   "chars": 61320,
+   "sha": "883548607860"
+  },
+  {
+   "slug": "riftbound-spiritforged-faq",
+   "kind": "faq",
+   "url": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-spiritforged-faq",
+   "published": "2026-01-14",
+   "chars": 26159,
+   "sha": "ee3440cf177a"
+  },
+  {
+   "slug": "unleashed-rules-faq-and-clarifications",
+   "kind": "faq",
+   "url": "https://playriftbound.com/en-us/news/rules-and-releases/unleashed-rules-faq-and-clarifications",
+   "published": "2026-04-29",
+   "chars": 41143,
+   "sha": "947196fc9922"
+  },
+  {
+   "slug": "vendetta-rules-faq-and-clarifications",
+   "kind": "faq",
+   "url": "https://playriftbound.com/en-us/news/rules-and-releases/vendetta-rules-faq-and-clarifications",
+   "published": "2026-08-14",
+   "chars": 35317,
+   "sha": "b38543081f4c"
+  },
+  {
+   "slug": "core-rules-vendetta-patch-notes",
+   "kind": "patch-notes",
+   "url": "https://playriftbound.com/en-us/news/announcements/core-rules-vendetta-patch-notes",
+   "published": "2026-07-17",
+   "chars": 26506,
+   "sha": "2c269204feef"
+  },
+  {
+   "slug": "riftbound-core-rules-patch-notes",
+   "kind": "patch-notes",
+   "url": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-core-rules-patch-notes",
+   "published": "2025-10-24",
+   "chars": 21391,
+   "sha": "9be3251dd8eb"
+  },
+  {
+   "slug": "riftbound-core-rules-spiritforged-patch-notes",
+   "kind": "patch-notes",
+   "url": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-core-rules-spiritforged-patch-notes",
+   "published": "2025-12-05",
+   "chars": 12648,
+   "sha": "1d3a7af66661"
+  },
+  {
+   "slug": "riftbound-core-rules-unleashed-patch-notes",
+   "kind": "patch-notes",
+   "url": "https://playriftbound.com/en-us/news/rules-and-releases/riftbound-core-rules-unleashed-patch-notes",
+   "published": "2026-03-30",
+   "chars": 26517,
+   "sha": "27a5fb5ce213"
+  }
+ ]
+}

@@ -76,10 +76,26 @@ async function loadCatalog() {
   try { extras = await readJson(url("extras.json")); } catch { /* optional */ }
   let banned = { constructed: [] };
   try { banned = await readJson(url("banned.json")); } catch { /* optional */ }
+  // Riot's card feed serves PRINTED text, not current text — errata are published
+  // separately and never flow back into it, so cards.json confidently shows superseded
+  // wording on 52 cards. data/errata.json carries the corrections, each one verified by
+  // build-errata.mjs against the catalog's own text, so overlay them here: every reader
+  // of this script gets the card as it actually plays.
+  let errata = { cards: [] };
+  try { errata = await readJson(url("errata.json")); } catch { /* optional */ }
   const cards = [...(cat.cards || []), ...(extras.cards || [])];
+  const fix = new Map();
+  for (const e of errata.cards || [])
+    if (e.status === "catalog-stale" && e.name && e.new) fix.set(e.name, e.new);
+  let errataApplied = 0;
+  for (const c of cards) {
+    const t = fix.get(c.n);
+    if (t == null || c.x === t) continue;
+    c.x = t; c.errata = true; errataApplied++;
+  }
   const BY = new Map(cards.map((c) => [c.c, c]));
   const bannedNames = new Set((banned.constructed || []).map((b) => b.name));
-  return { cards, BY, sets: cat.sets || [], bannedNames };
+  return { cards, BY, sets: cat.sets || [], bannedNames, errataApplied, errataAt: errata.generatedAt };
 }
 
 const mk = (S) => {
@@ -249,6 +265,15 @@ function cmdCard(S, cat, q, args) {
     console.log(`  ${pad(c.n, 30)} ${pad(c.c, 14)} ${pad(c.t, 11)} ${pad(money(c.mp), 7)} ${bits.join(" · ") || "—"}`);
   }
   if (hits.length > 60) console.log(`  … and ${hits.length - 60} more`);
+  // One hit means the caller wanted that card, so print what it actually does. The
+  // text here is errata-corrected, which is the whole reason to read it from this
+  // script rather than from data/cards.json directly.
+  if (hits.length === 1 && hits[0].x) {
+    const c = hits[0];
+    console.log("");
+    for (const line of String(c.x).split("\n")) console.log(`    ${line}`);
+    if (c.errata) console.log(`    (errata-corrected; data/cards.json still shows the printed text)`);
+  }
 }
 
 function cmdWant(S, cat, q) {

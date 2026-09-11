@@ -57,7 +57,7 @@ on:
         required: false
         default: '60'
       simulate_failure:
-        description: 'Comma-separated sources to force-fail (catalog,banned,events,decks,news,tiers)'
+        description: 'Comma-separated sources to force-fail (catalog,banned,events,decks,news,tiers,rules,errata)'
         required: false
         default: ''
 
@@ -144,6 +144,32 @@ jobs:
           case ",$SIMULATE," in *,tiers,*) echo "simulated failure"; exit 1;; esac
           node scripts/build-tiers.mjs
 
+      # Cheap on every day but four a year. It reads Riot's Rules Hub page — one small
+      # request — and only downloads the two PDFs (57MB) when the date printed there has
+      # actually moved, so the steady state is a no-op that exits 0. Placed after the
+      # catalog because it cross-checks the fresh card pool: a set that prints a keyword
+      # the rules index has never heard of is the thing this is here to catch.
+      #
+      # It rebuilds the VERBATIM half only. docs/rules.md is hand-written, and the
+      # --max-age gate below is what notices that it has fallen a set behind.
+      - name: Refresh the rules
+        id: rules
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,rules,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-rules.mjs
+
+      # After the rules, because it reads the errata page list that build-rules.mjs
+      # discovers, and after the catalog, because every entry is verified against the
+      # catalog's own card text. Riot never folds errata back into the card feed, so
+      # without this the app quotes superseded wording on ~50 cards.
+      - name: Rebuild the errata overlay
+        id: errata
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,errata,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-errata.mjs
+
       # Events again: build-decks changes which events have lists, and the coverage
       # figures the Meta tab quotes are computed here. Cheap, one request. This pass
       # rewrites events.json wholesale, so its outcome is the one that counts.
@@ -173,17 +199,21 @@ jobs:
             [decks]='${{ steps.decks.outcome }}'
             [news]='${{ steps.news.outcome }}'
             [tiers]='${{ steps.tiers.outcome }}'
+            [rules]='${{ steps.rules.outcome }}'
+            [errata]='${{ steps.errata.outcome }}'
           )
           failed=""; ok_count=0
           {
             echo "| source | result | file |"
             echo "|---|---|---|"
           } >> "$GITHUB_STEP_SUMMARY"
-          for s in catalog banned events decks news tiers; do
+          for s in catalog banned events decks news tiers rules errata; do
             case "$s" in
               catalog) f=data/cards.json;; banned) f=data/banned.json;;
               events)  f=data/events.json;; decks) f=data/decks.json;;
               news)    f=data/news.json;;  tiers) f=data/tiers.json;;
+              rules)   f=data/rules.json;;
+              errata)  f=data/errata.json;;
             esac
             at=$(node -e 'process.stdout.write(String(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).generatedAt||"?"))' "$f" 2>/dev/null || echo '?')
             if [ "${outcome[$s]}" = "success" ]; then
@@ -197,14 +227,14 @@ jobs:
           done
           echo "failed=$failed"     >> "$GITHUB_OUTPUT"
           echo "ok_count=$ok_count" >> "$GITHUB_OUTPUT"
-          echo "Sources rebuilt: $ok_count of 6${failed:+ (failed: $failed)}"
+          echo "Sources rebuilt: $ok_count of 8${failed:+ (failed: $failed)}"
 
       # Nothing changed and nothing can be salvaged. Reporting that as a green run is
       # the exact failure mode this whole file is trying to close.
       - name: Fail if every source broke
         if: steps.sources.outputs.ok_count == '0'
         run: |
-          echo "::error title=No source rebuilt::All six builders failed — the data is entirely unchanged."
+          echo "::error title=No source rebuilt::All eight builders failed — the data is entirely unchanged."
           exit 1
 
       - name: Verify
@@ -220,8 +250,11 @@ jobs:
           # Stage first, then ask the index what moved. `git diff` alone ignores
           # untracked files, so a data file appearing for the first time would look
           # like "no changes" and never get committed.
-          git add -A data/
-          if git diff --cached --quiet -- data/; then
+          # docs/rules-full.md rides along with data/: build-rules.mjs writes it and
+          # data/rules.json together, and check.mjs asserts the two agree. Committing
+          # one without the other would fail the NEXT run and block every source.
+          git add -A data/ docs/rules-full.md docs/rules-faq.md
+          if git diff --cached --quiet -- data/ docs/rules-full.md docs/rules-faq.md; then
             echo "No upstream changes today; nothing to commit."
             exit 0
           fi
@@ -230,7 +263,7 @@ jobs:
           summary=$(node -e '
             const fs = require("fs");
             const { execSync } = require("child_process");
-            const changed = execSync("git diff --cached --name-only -- data/", { encoding: "utf8" })
+            const changed = execSync("git diff --cached --name-only -- data/ docs/rules-full.md docs/rules-faq.md", { encoding: "utf8" })
               .split("\n").filter(Boolean);
             const bits = [];
             const read = (f) => JSON.parse(fs.readFileSync(f, "utf8"));
@@ -255,6 +288,11 @@ jobs:
                 } else if (f.endsWith("events.json")) {
                   const d = read(f).events.length, o = was(f).events.length;
                   if (d !== o) bits.push(`${d - o > 0 ? "+" : ""}${d - o} events`);
+                } else if (f.endsWith("rules.json")) {
+                  const d = read(f).docs, o = was(f).docs;
+                  for (const k of Object.keys(d))
+                    if (d[k].updated !== (o[k] || {}).updated)
+                      bits.push(`${k} rules ${(o[k] || {}).updated || "new"} -> ${d[k].updated}`);
                 } else if (f.endsWith("tiers.json")) {
                   const d = read(f), o = was(f);
                   if (d.week !== o.week) bits.push(`tier list wk ${o.week} -> ${d.week}`);
@@ -290,7 +328,7 @@ jobs:
               `The daily data refresh failed.`,
               ``,
               `- **Sources that did not rebuild:** ${failed}`,
-              `- **Sources rebuilt:** ${{ steps.sources.outputs.ok_count || 0 }} of 6`,
+              `- **Sources rebuilt:** ${{ steps.sources.outputs.ok_count || 0 }} of 8`,
               `- **Run:** ${run}`,
               ``,
               `A single failing source does not reach here — it keeps its last-good file and the`,

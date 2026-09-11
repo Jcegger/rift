@@ -67,6 +67,10 @@ select:focus{outline:none;border-color:var(--teal)}
 
 .chip{background:var(--bg2);border:1px solid var(--line2);border-radius:20px;padding:4px 11px;font-size:12px;color:var(--dim)}
 .chip:hover{border-color:var(--dim);color:var(--ink)}
+/* Marks a card whose text this app corrected. Riot's feed still serves the printed
+   wording, so without the marker the difference between here and a Card Gallery tab
+   looks like a bug rather than the point. */
+.errata{font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line2);border-radius:3px;padding:0 4px;margin-left:4px;white-space:nowrap;cursor:help}
 .chip[aria-pressed=true]{background:var(--panel2);color:var(--ink);border-color:currentColor}
 .chip.d-fury[aria-pressed=true]{color:var(--fury)} .chip.d-calm[aria-pressed=true]{color:var(--calm)}
 .chip.d-mind[aria-pressed=true]{color:var(--mind)} .chip.d-body[aria-pressed=true]{color:var(--body)}
@@ -2212,6 +2216,28 @@ async function scanPartner(user){
    the two can never drift apart. Refresh with scripts/build-banned.mjs.        */
 let BANNED = new Map();      // identity -> { name, type, formats: [] }
 let BANNED_AT = null;
+
+// Overlays Riot's card errata onto the catalog in memory. Named and separated so
+// check.mjs can call it with a synthetic catalog and prove it actually rewrites text —
+// a grep for the filename cannot tell a working overlay from a commented-out one.
+//
+// Joined on `name`, the CATALOG's spelling, never the errata page's: the two disagree
+// about apostrophes ("Emperor's Dais" vs "Emperor\u2019s Dais") and joining on the wrong
+// one silently corrects nothing.
+function applyErrata(cat, ex){
+  const fix = new Map();
+  for (const e of ((ex && ex.cards) || []))
+    if (e.status === 'catalog-stale' && e.name && e.new) fix.set(e.name, e.new);
+  let n = 0;
+  for (const c of cat.cards){
+    const t = fix.get(c.n);
+    if (t == null || c.x === t) continue;
+    c.x = t; c.errata = true; n++;
+  }
+  cat.errata = n;
+  cat.errataAt = ex && ex.generatedAt;
+  return n;
+}
 
 function loadBans(payload){
   BANNED = new Map();
@@ -4764,7 +4790,7 @@ function wire(){
     lb.className = 'lb';
     lb.innerHTML = `<img src="${imgURL(c,744)}" alt="${esc(c.n)}">
       <div class="lb-info">${esc(c.n)} · ${esc(c.c)} · ${esc(c.r||'')} ${c.v ? '· ' + esc(vLabel(c.v)) : ''}
-      ${c.x ? '<br>' + esc(c.x).replace(/\n/g,' / ') : ''}</div>`;
+      ${c.x ? '<br>' + esc(c.x).replace(/\n/g,' / ') : ''}${c.errata ? ' <span class="errata" title="Errata-corrected. Riot\'s card feed still serves the printed text.">errata</span>' : ''}</div>`;
     lb.addEventListener('click', () => lb.remove());
     document.body.appendChild(lb);
   });
@@ -5161,6 +5187,24 @@ async function boot(){
       cat.extras = add.length;
     }
   } catch { /* the catalog is still usable without them */ }
+
+  // Riot's card feed serves PRINTED text, not current text: errata are published as
+  // separate news articles and never flow back into it, so cards.json is confidently
+  // wrong about ~50 cards. data/errata.json carries the corrections, each verified by
+  // build-errata.mjs against the catalog's own wording.
+  //
+  // The overlay is applied here at load rather than baked into cards.json on purpose.
+  // cards.json stays a faithful mirror of what Riot serves — which is what lets the
+  // builder detect that an errata is still outstanding by matching the OLD text against
+  // it. Rewriting the catalog in place would make every entry look already-applied and
+  // quietly destroy the check that proves the overlay is real.
+  //
+  // Joined on `name` (the catalog's own spelling), never on the errata page's, because
+  // the two disagree about apostrophes: "Emperor's Dais" against "Emperor’s Dais".
+  try {
+    const xr = await fetch('data/errata.json', { cache:'no-cache' });
+    if (xr.ok) applyErrata(cat, await xr.json());
+  } catch { /* printed text is still better than no text */ }
 
   // Tournament decklists are optional: the app is fully usable without them.
   try {

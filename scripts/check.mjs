@@ -65,7 +65,7 @@ const NAMED = [
   'tierMovement', 'movementPending', 'moveChip',
   'renderNews', 'credibility',
   'newqRows', 'newqText', 'newqCSV', 'renderNewq', 'renderSync',
-  'archetypeName', 'metaPool', 'metaArchetypes', 'legendPicks', 'scorePool', 'cardLeverage', 'loadBans',
+  'applyErrata', 'archetypeName', 'metaPool', 'metaArchetypes', 'legendPicks', 'scorePool', 'cardLeverage', 'loadBans',
   'acquisitionPath', 'unionGap', 'pathText', 'huntList', 'huntText', 'HUNT_BANDS', 'ownedIdentities', 'evalDeck', 'matchRow',
   'spares', 'tradeMatch', 'readPartner', 'readyShareOf', 'owned', 'byTarget',
   'coming', 'comingFrom', 'comingFor', 'comingIdentities', 'comingList', 'comingText',
@@ -2367,6 +2367,227 @@ section('The sideboard');
   A.S.decks = [];
   A.S.inv = {};
   A.forgetDeckCaches();
+}
+
+/* ══ the rules ═══════════════════════════════════════════════════════════
+   docs/rules.md is hand-written prose that cites rule numbers, and docs/rules-full.md
+   is machine-generated from Riot's PDFs. Prose that cites a rule number is a claim
+   that can rot in two directions: the number can be wrong on the day it is typed, and
+   a rules revision can renumber it out from under a file nothing rebuilds. Both read
+   exactly like correct text.
+
+   So the citations are checked rather than trusted. The catalog half matters for the
+   same reason in reverse: a new set can print a bracket the rules have no entry for,
+   which is the moment data/rules.json is stale and the handbook has a hole in it.
+
+   All offline — the builder is what talks to Riot. */
+section('The rules');
+{
+  let rules = null, full = '', book = '';
+  try { rules = read('data/rules.json'); } catch { /* reported below */ }
+  try { full = readFileSync(join(ROOT, 'docs/rules-full.md'), 'utf8'); } catch { /* ditto */ }
+  try { book = readFileSync(join(ROOT, 'docs/rules.md'), 'utf8'); } catch { /* ditto */ }
+
+  ok('data/rules.json is present', !!rules);
+  ok('docs/rules-full.md is present', full.length > 0, `${(full.length / 1024).toFixed(0)}KB`);
+  ok('docs/rules.md is present', book.length > 0, `${(book.length / 1024).toFixed(0)}KB`);
+
+  if (rules && full && book) {
+    // The stamp describes the file next to it, or one of the two was written by hand.
+    const counted = (full.match(/^\s*(?:- )?\*\*\d{3}[\d a-z.]*\.\*\*/gm) || []).length +
+                    (full.match(/^#{2,3} \d{3}[\d a-z.]*\. /gm) || []).length;
+    const stamped = Object.values(rules.docs || {}).reduce((a, d) => a + d.rules, 0);
+    ok('the verbatim file holds as many rules as the stamp claims', counted === stamped,
+       `${counted} in the file, ${stamped} stamped`);
+
+    for (const [k, d] of Object.entries(rules.docs || {}))
+      ok(`${d.title} records the date Riot printed on it`, /^\d{4}-\d{2}-\d{2}$/.test(d.updated || ''),
+         `${k}: ${d.updated}`);
+
+    /* Every § in the handbook must resolve — and to the RIGHT document.
+
+       The two rulebooks number independently and collide: 402.1 is "you may decides
+       whether to perform the triggered ability" in the Core Rules and "register a Main
+       Deck of exactly 40 cards" in the Tournament Rules. Thirteen of the handbook's
+       citations sat on such a collision, so a flat set-membership test pronounced them
+       fine while some pointed at a rule about something else entirely. That is the same
+       failure this whole section exists to prevent, one level up.
+
+       So the sets are kept apart and the handbook marks its tournament citations
+       `TR §402.1`. A bare § must be a Core rule; a TR § must be a Tournament rule. */
+    const split = full.indexOf('\n# Tournament Rules');
+    const idsIn = (text) => {
+      const out = new Set();
+      for (const m of text.matchAll(/^\s*(?:- )?\*\*(\d{3}(?:\.\d+|\.[a-z])*)\.\*\*/gm)) out.add(m[1]);
+      for (const m of text.matchAll(/^#{2,3} (\d{3}(?:\.\d+|\.[a-z])*)\. /gm)) out.add(m[1]);
+      return out;
+    };
+    ok('the verbatim file still carries both rulebooks', split > 0, split > 0 ? '' : 'no Tournament Rules heading');
+    const coreIds = idsIn(full.slice(0, split < 0 ? full.length : split));
+    const trIds = idsIn(split < 0 ? '' : full.slice(split));
+    const citedCore = new Set(), citedTr = new Set();
+    for (const m of book.matchAll(/(TR )?§(\d{3}(?:\.\d+|\.[a-z])*)/g))
+      (m[1] ? citedTr : citedCore).add(m[2]);
+    const badCore = [...citedCore].filter((n) => !coreIds.has(n)).sort();
+    const badTr = [...citedTr].filter((n) => !trIds.has(n)).sort();
+    ok('every bare § in docs/rules.md is a real Core rule', badCore.length === 0 && citedCore.size > 50,
+       badCore.length ? `${badCore.length} unresolved: ${badCore.slice(0, 8).join(', ')}`
+                      : `${citedCore.size} citations`);
+    ok('every TR § in docs/rules.md is a real Tournament rule', badTr.length === 0 && citedTr.size > 0,
+       badTr.length ? `${badTr.length} unresolved: ${badTr.slice(0, 8).join(', ')}`
+                    : `${citedTr.size} citations`);
+    // A bare § that happens to name a Tournament-only rule is the collision bug in
+    // reverse: it resolves against nothing in Core and would already have failed above,
+    // so the only thing left to say is how much overlap the two books actually have.
+    const overlap = [...coreIds].filter((n) => trIds.has(n)).length;
+    ok('the two rulebooks are checked separately, not merged',
+       coreIds.size > 0 && trIds.size > 0,
+       `${coreIds.size} core / ${trIds.size} tournament, ${overlap} numbers used by both`);
+
+    // A card printing a bracket the rules do not define means a set landed and the
+    // rules index did not. Failing here is the signal to rerun build-rules.mjs.
+    // ALL-CAPS brackets are the feed's placeholders, not game terms: the six Vendetta
+    // basic rune printings carry a literal [NO TEXT] where Riot's data has no rules
+    // text for them. The rules do define what a basic rune does (164.2) — the catalog
+    // just doesn't carry it. Same exclusion the builder applies.
+    const terms = new Map(Object.keys(rules.terms || {}).map((k) => [k.toLowerCase(), k]));
+    const printed = new Map();
+    for (const c of cat.cards)
+      for (const m of String(c.x || '').matchAll(/\[([A-Za-z][A-Za-z'\- ]*?)(?:\s+[0-9X]+)?\]/g)) {
+        const k = m[1].trim();
+        if (k === k.toUpperCase() && k.length > 3) continue;
+        printed.set(k.toLowerCase(), (printed.get(k.toLowerCase()) || 0) + 1);
+      }
+    const unknown = [...printed.keys()].filter((k) => !terms.has(k));
+    ok('every bracketed term printed on a card resolves to a rule', unknown.length === 0,
+       unknown.length ? unknown.join(', ') : `${printed.size} distinct terms`);
+
+    /* The FAQs. These are the tier of rules the first build missed entirely: binding
+       rulings that Riot publishes as news articles and does not link from the Rules
+       Hub, one of which says in as many words that it takes precedence over the Core
+       Rules. A handbook that quietly omits the document outranking it is worse than one
+       that is merely out of date, so the link is asserted rather than trusted. */
+    let faq = '';
+    try { faq = readFileSync(join(ROOT, 'docs/rules-faq.md'), 'utf8'); } catch { /* below */ }
+    const supp = rules.supplements || [];
+    ok('docs/rules-faq.md is present', faq.length > 1000, `${(faq.length / 1024).toFixed(0)}KB`);
+    ok('the stamp tracks every supplement Riot publishes',
+       supp.filter((d) => d.kind === 'faq').length >= 4 &&
+       supp.filter((d) => d.kind === 'errata').length >= 4 &&
+       supp.filter((d) => d.kind === 'patch-notes').length >= 4,
+       `${supp.filter((d) => d.kind === 'faq').length} FAQ, ` +
+       `${supp.filter((d) => d.kind === 'errata').length} errata, ` +
+       `${supp.filter((d) => d.kind === 'patch-notes').length} patch notes`);
+    // Hashes are what catch a ruling edited in place, so a stamp without them is not
+    // watching anything.
+    ok('every tracked supplement carries a content hash and a date',
+       supp.length > 0 && supp.every((d) => d.sha && d.url && /^\d{4}-\d{2}-\d{2}$/.test(d.published || '')),
+       supp.filter((d) => !d.sha || !/^\d{4}-\d{2}-\d{2}$/.test(d.published || ''))
+           .map((d) => d.slug).join(', ') || 'all hashed and dated');
+    const faqCount = (faq.match(/^# [a-z0-9-]+$/gm) || []).length;
+    ok('rules-faq.md holds every FAQ the stamp lists',
+       faqCount === supp.filter((d) => d.kind === 'faq').length,
+       `${faqCount} in the file, ${supp.filter((d) => d.kind === 'faq').length} stamped`);
+    ok('docs/rules.md points readers at the FAQ that outranks it',
+       /rules-faq\.md/.test(book), 'the handbook must link rules-faq.md');
+
+    /* Errata. Riot's card feed serves printed text, so the catalog is wrong about 52
+       cards and says so with complete confidence. build-errata.mjs resolves each entry
+       by matching one half against the catalog's own wording, which means an entry that
+       resolves is evidence and an entry that does not is a parse that drifted. Both
+       failure shapes are asserted, because a silently half-parsed errata file would
+       hand the app corrections for some cards and stale text for the rest. */
+    let errata = null;
+    try { errata = read('data/errata.json'); } catch { /* reported */ }
+    ok('data/errata.json is present', !!errata,
+       errata ? `${errata.cards.length} errata'd cards` : 'run build-errata.mjs');
+    if (errata) {
+      const byStatus = (st) => errata.cards.filter((c) => c.status === st);
+      ok('every errata names a card in the catalog', byStatus('no-such-card').length === 0,
+         byStatus('no-such-card').map((c) => c.card).join(', ') || 'all resolved');
+      ok('every errata resolves against the catalog text', byStatus('no-match').length === 0,
+         byStatus('no-match').map((c) => c.card).join(', ') || 'all matched');
+      ok('the errata overlay carries the catalog spelling to join on',
+         errata.cards.every((c) => c.status === 'no-such-card' || c.name),
+         'entries without `name` would silently miss in state.mjs');
+      const stale = byStatus('catalog-stale');
+      console.log(`  --   ${stale.length} cards where data/cards.json still shows printed text, ` +
+                  `corrected on read`);
+      /* Two consumers read the catalog — this app and scripts/state.mjs — and an overlay
+         applied in only one is worse than none: the site and the command line would
+         quote different text for the same card, both looking authoritative. The first
+         cut shipped exactly that way.
+
+         These used to be greps for the filename, which is not a test: a commented-out
+         overlay passes a grep. So the app's applyErrata is called for real, on a
+         synthetic catalog, and asserted to rewrite the text. */
+      const fake = { cards: [
+        { c: 'X-1', n: "Emperor's Dais", x: 'printed text' },
+        { c: 'X-2', n: 'Untouched Card',  x: 'printed text' },
+      ] };
+      const applied = A.applyErrata(fake, { generatedAt: '2026-01-01', cards: [
+        { card: 'Emperor\u2019s Dais', name: "Emperor's Dais", new: 'corrected text', status: 'catalog-stale' },
+        { card: 'Untouched Card', name: 'Untouched Card', new: 'should not apply', status: 'current' },
+      ] });
+      ok('the app rewrites card text from the errata overlay',
+         applied === 1 && fake.cards[0].x === 'corrected text' && fake.cards[0].errata === true,
+         `${applied} applied, first card reads "${fake.cards[0].x}"`);
+      ok('it leaves cards whose errata Riot already folded in alone',
+         fake.cards[1].x === 'printed text' && !fake.cards[1].errata);
+      // The join is on the CATALOG's spelling. The synthetic entry above deliberately
+      // carries a curly apostrophe in `card` and a straight one in `name`, which is the
+      // real shape of this data — joining on `card` scores 0 here.
+      ok('the join uses the catalog spelling, not the errata page spelling',
+         fake.cards[0].errata === true, 'a `card`-keyed join would have missed this');
+      const st = readFileSync(join(ROOT, 'scripts/state.mjs'), 'utf8');
+      ok('scripts/state.mjs applies the same overlay, keyed the same way',
+         /errata\.json/.test(st) && /catalog-stale/.test(st) && /fix\.set\(e\.name,/.test(st),
+         'state.mjs must key on e.name alone — an `e.name || e.card` fallback is the bug');
+
+      // Volume. Nothing else would notice the errata file quietly shrinking, which is
+      // exactly how a page that stopped parsing would hide.
+      const pageCounts = (errata.pages || []).filter((p) => !p.count);
+      ok('every errata page contributed cards', pageCounts.length === 0,
+         pageCounts.map((p) => p.slug).join(', ') || `${(errata.pages || []).length} pages, all non-empty`);
+      ok('the errata file has not quietly shrunk', errata.cards.length >= 40,
+         `${errata.cards.length} entries`);
+    }
+
+    // The two halves of the sideboard story have to agree: state.mjs enforces a
+    // number, and the rule it cites has to still say that number.
+    const sb = full.split('\n').find((l) => /\*\*601\.1\.c\.1\.\*\*/.test(l)) || '';
+    ok('the 10-card sideboard limit is still what 601.1.c.1 says', /10 or fewer cards/.test(sb),
+       sb.replace(/^\s*- \*\*[\d.a-z]+\*\* /, '').slice(0, 80) || 'rule 601.1.c.1 not found');
+
+    /* The one that matters once this is in the cron.
+
+       build-rules.mjs rebuilds the verbatim half on its own, which is right — it is a
+       mechanical transcription. docs/rules.md is written by hand and cannot rebuild
+       itself. So the day Riot ships the set after Vendetta, the automation quietly
+       replaces rules-full.md and leaves the prose confidently describing a superseded
+       ruleset, with every citation still resolving because most numbers do not move.
+       That is not stale data, it is fresh data that lies, and nothing else here would
+       notice it.
+
+       Hence the visible stamp at the top of rules.md and this comparison. It is gated
+       behind --max-age because it is the same class of problem as a snapshot going
+       off: the workflow runs the gate AFTER committing, so whatever did refresh still
+       reaches the site and the job still goes red and opens an issue. Blocking the
+       deck snapshot over a documentation lag would be the wrong trade. */
+    const gate = process.argv.includes('--max-age');
+    const claims = {
+      core: (/Core Rules (\d{4}-\d{2}-\d{2})/.exec(book) || [])[1],
+      tournament: (/Tournament Rules (\d{4}-\d{2}-\d{2})/.exec(book) || [])[1],
+    };
+    for (const [k, d] of Object.entries(rules.docs || {})) {
+      const said = claims[k], real = d.updated;
+      const detail = said ? `rules.md says ${said}, committed is ${real}` :
+        `rules.md no longer states a ${d.title} date — the stamp at the top is the contract`;
+      if (gate) ok(`docs/rules.md describes the committed ${d.title}`, said === real, detail);
+      else console.log(`  ${said === real ? 'ok  ' : '--  '} docs/rules.md describes the committed ${d.title}` +
+                       `${said === real ? '' : ` — ${detail} (enforced under --max-age)`}`);
+    }
+  }
 }
 
 console.log(failures ? `\n${failures} FAILED` : '\nall checks pass');
