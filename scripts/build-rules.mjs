@@ -397,10 +397,22 @@ function accordionAnswers(raw) {
 export function articleText(raw) {
   const html = unescapeHtml(raw);
   const answers = accordionAnswers(raw);
+  // Start at the article's rich-text container and run to the end of the document.
+  //
+  // This looks lazy and I tried to fix it twice; both attempts lost real content. The
+  // page's section headings and its appendix sit BETWEEN sections rather than inside the
+  // rich-text container, so bounding each container at its own </section> silently drops
+  // about sixty headings and relocates the appendix. Filtering to ArticleRichTextBlade
+  // sections does the same. Running to the end and stopping at furniture is what
+  // actually reproduces the page.
+  //
+  // The stop list below is therefore load-bearing, not a nicety: it is the only thing
+  // between this and the related-articles carousel at the foot of every page. Verified
+  // against all four live pages — no navigation, no carousel, no captions.
   const key = 'data-testid="rich-text-html"';
-  let i = html.indexOf(key);
-  // A pure accordion page has no rich-text body at all; its content is all payload.
+  const i = html.indexOf(key);
   if (i < 0) {
+    // A pure accordion page has no rich-text body at all; its content is all payload.
     if (!answers.size) return null;
     const only = [];
     for (const [q, body] of answers) only.push(`\n#### ${q}`, ...body);
@@ -428,8 +440,10 @@ export function articleText(raw) {
     // A collapsed question keeps its answer in the payload, not the DOM.
     const ans = answers.get(txt);
     if (ans) { out.push(...ans); answers.delete(txt); }
-    // Related-article furniture follows the body; stop once we reach it.
-    if (/^Related Articles$/i.test(txt)) { out.pop(); break; }
+    // Furniture follows the body; stop at the first sign of it. One exact string was
+    // too thin a net — it appears on none of the four pages today, so nothing was
+    // actually stopping the crawl but luck about which tags the footer uses.
+    if (FURNITURE.test(txt)) { out.pop(); break; }
   }
   // Anything the DOM never mentioned still has to reach the file.
   for (const [q, ans] of answers) out.push(`\n#### ${q}`, ...ans);
@@ -442,6 +456,9 @@ export function articleText(raw) {
 // "may no longer reflect Riftbound's rules" banner. So the status is read out of each
 // document rather than asserted over all of them, and a future set's FAQ will be
 // labelled by whatever it actually says.
+// Headings that mean the article is over and the page's chrome has begun.
+const FURNITURE = /^(Related Articles|More Articles|You might also like|Recommended|Read More|Latest News|Share this article|Sign Up|Newsletter)$/i;
+
 const SUPERSEDED = /may no longer reflect/i;
 const PRECEDENCE = /the FAQ takes precedence/i;
 const statusOf = (d) => SUPERSEDED.test(d.text) ? "superseded by Riot's own banner"
@@ -515,7 +532,6 @@ function index(docs) {
   // Recording which is which is the only way to answer "what does this bracket mean"
   // without a human knowing the answer already.
   const core = docs.find((d) => d.key === "core");
-  const at = (n) => core.rules.find((r) => r.n === n);
   const glossary = core.rules.findIndex((r) => /^Keyword Glossary$/i.test(r.text));
   if (glossary >= 0)
     for (const r of core.rules.slice(glossary + 1))
@@ -533,7 +549,7 @@ function index(docs) {
     if (depth(r.n) === 1 && isHeading(r) && !terms[r.text] && /^(Mighty|Buff|Attachment|Inactive|XP)$/.test(r.text))
       terms[r.text] = { rule: r.n, kind: "other" };
 
-  return { sections, terms, at };
+  return { sections, terms };
 }
 
 /* ── the report ──────────────────────────────────────────────────────────── */

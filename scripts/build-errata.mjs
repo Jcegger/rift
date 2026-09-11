@@ -218,6 +218,10 @@ const main = async () => {
   if (!pages.length) throw new Error(
     "data/rules.json tracks no errata pages — run build-rules.mjs first");
 
+  // Oldest page first, so that if a card is ever errata'd twice the newer correction is
+  // the one that survives a last-wins join downstream. Discovery order is alphabetical
+  // by slug, which is chronological today by luck and would not stay that way.
+  pages.sort((a, b) => String(a.published || "").localeCompare(String(b.published || "")));
   const entries = [];
   const counts = new Map();
   for (const pg of pages) {

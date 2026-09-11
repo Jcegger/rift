@@ -88,14 +88,16 @@ async function loadCatalog() {
   for (const e of errata.cards || [])
     if (e.status === "catalog-stale" && e.name && e.new) fix.set(e.name, e.new);
   let errataApplied = 0;
+  const errataNames = new Set();
   for (const c of cards) {
     const t = fix.get(c.n);
     if (t == null || c.x === t) continue;
-    c.x = t; c.errata = true; errataApplied++;
+    c.x = t; c.errata = true; errataApplied++; errataNames.add(c.n);
   }
   const BY = new Map(cards.map((c) => [c.c, c]));
   const bannedNames = new Set((banned.constructed || []).map((b) => b.name));
-  return { cards, BY, sets: cat.sets || [], bannedNames, errataApplied, errataAt: errata.generatedAt };
+  return { cards, BY, sets: cat.sets || [], bannedNames, errataApplied,
+           errataCards: errataNames.size, errataAt: errata.generatedAt };
 }
 
 const mk = (S) => {
@@ -192,6 +194,13 @@ function cmdSummary(S, cat, q) {
   console.log(`TRADE       ${trades.length} cards flagged for trade`);
   console.log(`SETTINGS    playset ${S.playset} · plan by ${S.planBy} · budget ${money(S.nearSpend)}` +
               `${S.noBuy?.length ? ` · noBuy ${S.noBuy.join(", ")}` : ""}`);
+  // Say that the card text here is not the card text Riot serves. The app shows this
+  // per card with a chip; on the command line it would otherwise be invisible.
+  // Printings, not cards: an errata applies to a name, and a name can have several
+  // printings (The Boss has three), so the two numbers differ and both are worth saying.
+  if (cat.errataApplied)
+    console.log(`ERRATA      ${cat.errataCards} cards corrected on read across ` +
+                `${cat.errataApplied} printings (data/errata.json, ${cat.errataAt})`);
   console.log("");
   const decks = S.decks || [];
   if (!decks.length) { console.log("DECKS       none saved"); return; }
