@@ -2,7 +2,7 @@
  "generatedAt": "2026-09-11",
  "source": "Riot's per-set errata pages, as tracked in data/rules.json",
  "note": "`new` is the current text and supersedes what data/cards.json carries for that card.",
- "catalogAt": "2026-09-08",
+ "catalogAt": "2026-09-10",
  "pages": [
   {
    "slug": "riftbound-origins-card-errata",
@@ -35,20 +35,24 @@
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Ava Achiever",
-   "new": "When I attack, you may pay [C] to play a card with [Hidden] from your hand, ignoring its cost. If it’s a unit, play it here.",
+   "new": "When I attack, you may pay :rb_rune_mind: to play a card with [Hidden] from your hand, ignoring its cost. If it’s a unit, play it here.",
+   "newAsPrinted": "When I attack, you may pay [C] to play a card with [Hidden] from your hand, ignoring its cost. If it’s a unit, play it here.",
    "old": "When I attack, you may pay [C] to play a card with [Hidden] from your hand here, ignoring its cost.",
    "code": "OGN-107/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Baited Hook",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Baited Hook",
-   "new": "[1][C], [E]: Kill a friendly unit. Look at the top 5 cards of your Main Deck. You may banish a unit from among them that has Might up to 1 more than the killed unit and play it, ignoring its cost. Then recycle the rest.",
+   "new": ":rb_energy_1::rb_rune_order:, :rb_exhaust:: Kill a friendly unit. Look at the top 5 cards of your Main Deck. You may banish a unit from among them that has Might up to 1 more than the killed unit and play it, ignoring its cost. Then recycle the rest.",
+   "newAsPrinted": "[1][C], [E]: Kill a friendly unit. Look at the top 5 cards of your Main Deck. You may banish a unit from among them that has Might up to 1 more than the killed unit and play it, ignoring its cost. Then recycle the rest.",
    "old": "[1][C], [E]: Kill a friendly unit. Look at the top 5 cards of your Main Deck. You may play a unit from among them that has Might up to 1 more than the killed unit, ignoring its cost. Then recycle the rest.",
    "code": "OGN-242/298",
-   "status": "current"
+   "status": "current",
+   "split": true
   },
   {
    "card": "Blind Fury",
@@ -56,19 +60,23 @@
    "source": "riftbound-origins-card-errata",
    "name": "Blind Fury",
    "new": "[Action] (Play on your turn or in showdowns.)\nEach opponent reveals the top card of their Main Deck. Choose one and banish it, then play it, ignoring its cost. Then recycle the rest.",
+   "newAsPrinted": "[Action] (Play on your turn or in showdowns.)\nEach opponent reveals the top card of their Main Deck. Choose one and banish it, then play it, ignoring its cost. Then recycle the rest.",
    "old": "[Action] (Play on your turn or in showdowns.)\nEach opponent reveals the top card of their Main Deck. Choose one and play it, ignoring its cost. Then recycle the rest.",
    "code": "OGN-025/298",
-   "status": "current"
+   "status": "current",
+   "split": true
   },
   {
    "card": "Clockwork Keeper",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Clockwork Keeper",
-   "new": "You may pay [C] as an additional cost to play me.\nWhen you play me, if you paid the additional cost, draw 1.",
+   "new": "You may pay :rb_rune_calm: as an additional cost to play me.\nWhen you play me, if you paid the additional cost, draw 1.",
+   "newAsPrinted": "You may pay [C] as an additional cost to play me.\nWhen you play me, if you paid the additional cost, draw 1.",
    "old": "As you play me, you may pay [C] as an additional cost. If you do, draw 1.",
    "code": "OGN-044/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Convergent Mutation",
@@ -76,9 +84,11 @@
    "source": "riftbound-origins-card-errata",
    "name": "Convergent Mutation",
    "new": "[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a friendly unit. This turn, increase its Might to the Might of another friendly unit.",
+   "newAsPrinted": "[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a friendly unit. This turn, increase its Might to the Might of another friendly unit.",
    "old": "[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a friendly unit. Increase its Might until it equals the Might of another friendly unit.",
    "code": "OGN-108/298",
-   "status": "current"
+   "status": "current",
+   "split": true
   },
   {
    "card": "Dark Child, Starter",
@@ -86,9 +96,11 @@
    "source": "riftbound-origins-card-errata",
    "name": "Dark Child - Starter",
    "new": "At the end of your turn, ready up to 2 runes.",
+   "newAsPrinted": "At the end of your turn, ready up to 2 runes.",
    "old": "At the end of your turn, ready 2 runes.",
    "code": "OGS-017/024",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Dazzling Aurora",
@@ -96,9 +108,11 @@
    "source": "riftbound-origins-card-errata",
    "name": "Dazzling Aurora",
    "new": "At the end of your turn, reveal cards from the top of your Main Deck until you reveal a unit and banish it. Play it, ignoring its cost, and recycle the rest.",
+   "newAsPrinted": "At the end of your turn, reveal cards from the top of your Main Deck until you reveal a unit and banish it. Play it, ignoring its cost, and recycle the rest.",
    "old": "At the end of your turn, reveal cards from the top of your Main Deck until you reveal a unit. Play it, ignoring its cost, and recycle the rest.",
    "code": "OGN-160/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Disintegrate",
@@ -106,9 +120,11 @@
    "source": "riftbound-origins-card-errata",
    "name": "Disintegrate",
    "new": "Action (Play on your turn or in showdowns.)\nDeal 3 to a unit at a battlefield. If this kills it, do this: draw 1.",
+   "newAsPrinted": "Action (Play on your turn or in showdowns.)\nDeal 3 to a unit at a battlefield. If this kills it, do this: draw 1.",
    "old": "[Action] (Play on your turn or in showdowns.)\nDeal 3 to a unit at a battlefield. If this kills it, draw 1.",
    "code": "OGN-005/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Dragon's Rage",
@@ -116,19 +132,23 @@
    "source": "riftbound-origins-card-errata",
    "name": "Dragon's Rage",
    "new": "Move an enemy unit. Then do this: Choose another enemy unit at its destination. They deal damage equal to their Mights to each other.",
+   "newAsPrinted": "Move an enemy unit. Then do this: Choose another enemy unit at its destination. They deal damage equal to their Mights to each other.",
    "old": "Move an enemy unit. Then choose another enemy unit at its destination. They deal damage equal to their Mights to each other.",
    "code": "OGN-258/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Dune Drake",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Dune Drake",
-   "new": "When I attack, give me +2 [M] this turn if there is a ready enemy unit here.",
+   "new": "When I attack, give me +2 :rb_might: this turn if there is a ready enemy unit here.",
+   "newAsPrinted": "When I attack, give me +2 [M] this turn if there is a ready enemy unit here.",
    "old": "When I attack, give me +2 [M] if there is a ready enemy unit here.",
    "code": "OGN-131/298",
-   "status": "current"
+   "status": "current",
+   "split": true
   },
   {
    "card": "Highlander",
@@ -136,49 +156,59 @@
    "source": "riftbound-origins-card-errata",
    "name": "Highlander",
    "new": "[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a friendly unit. The next time it would die this turn, heal it, exhaust it, and recall it instead. (Send it to base. This isn't a move.)",
+   "newAsPrinted": "[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a friendly unit. The next time it would die this turn, heal it, exhaust it, and recall it instead. (Send it to base. This isn't a move.)",
    "old": "[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a friendly unit. The next time it dies this turn, recall it exhausted instead. (Send it to base. This isn't a move.)",
    "code": "OGS-020/024",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Karma, Channeler",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Karma, Channeler",
-   "new": "[Vision] (When you play me, look at the top card of your Main Deck. You may recycle it.)\nWhen you recycle one or more cards to your Main Deck, buff a friendly unit. (If it doesn't have a buff, it gets a +1 [M] buff. Runes aren't cards.)",
+   "new": "[Vision] (When you play me, look at the top card of your Main Deck. You may recycle it.)\nWhen you recycle one or more cards to your Main Deck, buff a friendly unit. (If it doesn't have a buff, it gets a +1 :rb_might: buff. Runes aren't cards.)",
+   "newAsPrinted": "[Vision] (When you play me, look at the top card of your Main Deck. You may recycle it.)\nWhen you recycle one or more cards to your Main Deck, buff a friendly unit. (If it doesn't have a buff, it gets a +1 [M] buff. Runes aren't cards.)",
    "old": "[Vision] (When you play me, look at the top card of your Main Deck. You may recycle it.)\nWhen you recycle one or more cards, buff a friendly unit. (If it doesn't have a buff, it gets a +1 [M] buff. Runes aren't cards.)",
    "code": "OGN-235/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Kinkou Monk",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Kinkou Monk",
-   "new": "When you play me, buff up to two other friendly units. (Each one that doesn't have a buff gets a +1 [M] buff.)",
+   "new": "When you play me, buff up to two other friendly units. (Each one that doesn't have a buff gets a +1 :rb_might: buff.)",
+   "newAsPrinted": "When you play me, buff up to two other friendly units. (Each one that doesn't have a buff gets a +1 [M] buff.)",
    "old": "When you play me, buff two other friendly units. (Each one that doesn't have a buff gets a +1 [M] buff.)",
    "code": "OGN-141/298",
-   "status": "current"
+   "status": "current",
+   "split": true
   },
   {
    "card": "Nocturne, Horrifying",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Nocturne, Horrifying",
-   "new": "[Ganking] (I can move from battlefield to battlefield.)\nAs you look at or reveal me from the top of your deck, you may banish me. If you do, you may play me for [A].",
+   "new": "[Ganking] (I can move from battlefield to battlefield.)\nAs you look at or reveal me from the top of your deck, you may banish me. If you do, you may play me for :rb_rune_rainbow:.",
+   "newAsPrinted": "[Ganking] (I can move from battlefield to battlefield.)\nAs you look at or reveal me from the top of your deck, you may banish me. If you do, you may play me for [A].",
    "old": "[Ganking] (I can move from battlefield to battlefield.)\nWhen you look at cards from the top of your deck (and don't draw them) and see me, you may play me for [A].",
    "code": "OGN-194/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Pack of Wonders",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Pack of Wonders",
-   "new": "[E]: Return another friendly gear, unit, or facedown card to its owner's hand.",
+   "new": ":rb_exhaust:: Return another friendly gear, unit, or facedown card to its owner's hand.",
+   "newAsPrinted": "[E]: Return another friendly gear, unit, or facedown card to its owner's hand.",
    "old": "[E]: Return another friendly gear, unit, or [Hidden] card to its owner's hand.",
    "code": "OGN-181/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Portal Rescue",
@@ -186,9 +216,11 @@
    "source": "riftbound-origins-card-errata",
    "name": "Portal Rescue",
    "new": "[Action] (Play on your turn or in showdowns.)\nBanish a friendly unit, then its owner plays it to their base, ignoring its cost.",
+   "newAsPrinted": "[Action] (Play on your turn or in showdowns.)\nBanish a friendly unit, then its owner plays it to their base, ignoring its cost.",
    "old": "[Action] (Play on your turn or in showdowns.)\nBanish a friendly unit, then play it to base, ignoring its cost.",
    "code": "OGN-102/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Promising Future",
@@ -196,19 +228,23 @@
    "source": "riftbound-origins-card-errata",
    "name": "Promising Future",
    "new": "Each player looks at the top 5 cards of their Main Deck, banishes one of them, then recycles the rest. Starting with the next player, each player plays those cards, ignoring Energy costs. (They must still pay Power costs.)",
+   "newAsPrinted": "Each player looks at the top 5 cards of their Main Deck, banishes one of them, then recycles the rest. Starting with the next player, each player plays those cards, ignoring Energy costs. (They must still pay Power costs.)",
    "old": "Each player looks at the top 5 cards of their Main Deck, chooses one, then recycles the rest. Starting with the next player, each player plays those cards, ignoring Energy costs. (They must still pay Power costs.)",
    "code": "OGN-115/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Ravenborn Tome",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Ravenborn Tome",
-   "new": "[E]: The next spell you play this turn deals 1 Bonus Damage. (Each instance of damage the spell deals is increased by 1.)",
+   "new": ":rb_exhaust:: The next spell you play this turn deals 1 Bonus Damage. (Each instance of damage the spell deals is increased by 1.)",
+   "newAsPrinted": "[E]: The next spell you play this turn deals 1 Bonus Damage. (Each instance of damage the spell deals is increased by 1.)",
    "old": "[E]: The next spell you play deals 1 Bonus Damage. (Each instance of damage the spell deals is increased by 1.)",
    "code": "OGN-032/298",
-   "status": "current"
+   "status": "current",
+   "split": true
   },
   {
    "card": "Salvage",
@@ -216,9 +252,11 @@
    "source": "riftbound-origins-card-errata",
    "name": "Salvage",
    "new": "[Action] (Play on your turn or in showdowns.)\nYou may kill up to one gear. Draw 1.",
+   "newAsPrinted": "[Action] (Play on your turn or in showdowns.)\nYou may kill up to one gear. Draw 1.",
    "old": "[Action] (Play on your turn or in showdowns.)\nYou may kill a gear. Draw 1.",
    "code": "OGN-224/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Sigil of the Storm",
@@ -226,9 +264,11 @@
    "source": "riftbound-origins-card-errata",
    "name": "Sigil of the Storm",
    "new": "When you conquer here, you must recycle one of your runes. (This doesn’t choose anything.)",
+   "newAsPrinted": "When you conquer here, you must recycle one of your runes. (This doesn’t choose anything.)",
    "old": "When you conquer here, recycle one of your runes.",
    "code": "OGN-287/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Sona, Harmonious",
@@ -236,9 +276,11 @@
    "source": "riftbound-origins-card-errata",
    "name": "Sona, Harmonious",
    "new": "At the end of your turn, if I'm at a battlefield, ready up to 4 friendly runes.",
+   "newAsPrinted": "At the end of your turn, if I'm at a battlefield, ready up to 4 friendly runes.",
    "old": "While I'm at a battlefield, ready 4 friendly runes at the end of your turn.",
    "code": "OGN-073/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Targon's Peak",
@@ -246,29 +288,35 @@
    "source": "riftbound-origins-card-errata",
    "name": "Targon's Peak",
    "new": "When you conquer here, ready up to 2 runes at the end of this turn.",
+   "newAsPrinted": "When you conquer here, ready up to 2 runes at the end of this turn.",
    "old": "When you conquer here, ready 2 runes at the end of this turn.",
    "code": "OGN-289/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Teemo, Strategist",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Teemo, Strategist",
-   "new": "[Hidden] (Hide now for [A] to react with later for [0].)\nWhen I defend, choose an enemy unit here and reveal the top 5 cards of your Main Deck. Deal 1 to that unit for each card with [Hidden] revealed this way, then recycle the revealed cards.",
+   "new": "[Hidden] (Hide now for :rb_rune_rainbow: to react with later for :rb_energy_0:.)\nWhen I defend, choose an enemy unit here and reveal the top 5 cards of your Main Deck. Deal 1 to that unit for each card with [Hidden] revealed this way, then recycle the revealed cards.",
+   "newAsPrinted": "[Hidden] (Hide now for [A] to react with later for [0].)\nWhen I defend, choose an enemy unit here and reveal the top 5 cards of your Main Deck. Deal 1 to that unit for each card with [Hidden] revealed this way, then recycle the revealed cards.",
    "old": "[Hidden] (Hide now for [A] to react with later for [0].)\nWhen I defend or I'm played from [Hidden], reveal the top 5 cards of your Main Deck. Deal 1 to an enemy unit here for each card with [Hidden], then recycle them.",
    "code": "OGN-121/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "The Boss",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "The Boss",
-   "new": "If a buffed unit you control would die, you may pay [C], exhaust me, and spend its buff to heal it, exhaust it, and recall it instead. (Send it to base. This isn't a move.)\nWhen you conquer, ready me.",
+   "new": "If a buffed unit you control would die, you may pay :rb_rune_rainbow:, exhaust me, and spend its buff to heal it, exhaust it, and recall it instead. (Send it to base. This isn't a move.)\nWhen you conquer, ready me.",
+   "newAsPrinted": "If a buffed unit you control would die, you may pay [C], exhaust me, and spend its buff to heal it, exhaust it, and recall it instead. (Send it to base. This isn't a move.)\nWhen you conquer, ready me.",
    "old": "When a buffed unit you control would die, you may pay [C] and exhaust me to spend its buff and recall it exhausted instead. (Send it to base. This isn't a move.)\nWhen you conquer, ready me.",
    "code": "OGN-269/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "The Dreaming Tree",
@@ -276,49 +324,59 @@
    "source": "riftbound-origins-card-errata",
    "name": "The Dreaming Tree",
    "new": "When a player chooses a friendly unit here with a spell for the first time each turn, they draw 1.",
+   "newAsPrinted": "When a player chooses a friendly unit here with a spell for the first time each turn, they draw 1.",
    "old": "The first time you choose a friendly unit with a spell here each turn, draw 1.",
    "code": "OGN-292/298",
-   "status": "current"
+   "status": "current",
+   "split": true
   },
   {
    "card": "The Syren",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "The Syren",
-   "new": "[1], [E]: Move a friendly unit at a battlefield to its base.",
+   "new": ":rb_energy_1:, :rb_exhaust:: Move a friendly unit at a battlefield to its base.",
+   "newAsPrinted": "[1], [E]: Move a friendly unit at a battlefield to its base.",
    "old": "[1], [E]: Move a friendly unit at a battlefield to your base.",
    "code": "OGN-184/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Tideturner",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Tideturner",
-   "new": "[Hidden] (Hide now for [A] to react with later for [0].)\nWhen you play me, you may choose a unit you control at another location. Move me to its location and it to my original location.",
+   "new": "[Hidden] (Hide now for :rb_rune_rainbow: to react with later for :rb_energy_0:.)\nWhen you play me, you may choose a unit you control at another location. Move me to its location and it to my original location.",
+   "newAsPrinted": "[Hidden] (Hide now for [A] to react with later for [0].)\nWhen you play me, you may choose a unit you control at another location. Move me to its location and it to my original location.",
    "old": "[Hidden] (Hide now for [A] to react with later for [0].)\nWhen you play me, you may choose a friendly unit. Move me to its location and it to my original location.",
    "code": "OGN-199/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Unforgiven",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Unforgiven",
-   "new": "[2], [E]: Move a friendly unit to or from its base.",
+   "new": ":rb_energy_2:, :rb_exhaust:: Move a friendly unit to or from its base.",
+   "newAsPrinted": "[2], [E]: Move a friendly unit to or from its base.",
    "old": "[2], [E]: Move a friendly unit to or from your base.",
    "code": "OGN-259/298",
-   "status": "current"
+   "status": "current",
+   "split": true
   },
   {
    "card": "Unlicensed Armory",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Unlicensed Armory",
-   "new": "Discard 1, [E]: Choose a friendly unit. The next time it would die this turn, you may pay [C] to heal it, exhaust it, and recall it instead. (Send it to base. This isn't a move.)",
+   "new": "Discard 1, :rb_exhaust:: Choose a friendly unit. The next time it would die this turn, you may pay :rb_rune_fury: to heal it, exhaust it, and recall it instead. (Send it to base. This isn't a move.)",
+   "newAsPrinted": "Discard 1, [E]: Choose a friendly unit. The next time it would die this turn, you may pay [C] to heal it, exhaust it, and recall it instead. (Send it to base. This isn't a move.)",
    "old": "Discard 1, [E]: Choose a friendly unit. The next time it dies this turn, you may pay [C] to recall it exhausted instead. (Send it to base. This isn't a move.)",
    "code": "OGN-023/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Void Gate",
@@ -326,19 +384,23 @@
    "source": "riftbound-origins-card-errata",
    "name": "Void Gate",
    "new": "Spells and abilities deal 1 Bonus Damage to units here. (Each instance of damage the spell deals to a unit here is increased by 1.)",
+   "newAsPrinted": "Spells and abilities deal 1 Bonus Damage to units here. (Each instance of damage the spell deals to a unit here is increased by 1.)",
    "old": "Spells and abilities affecting units here each deal 1 Bonus Damage. (Each instance of damage the spell deals is increased by 1.)",
    "code": "OGN-296/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Zhonya's Hourglass",
    "set": null,
    "source": "riftbound-origins-card-errata",
    "name": "Zhonya's Hourglass",
-   "new": "[Hidden] (Hide now for [A] to react with later for [0].)\nIf a friendly unit would die, kill this instead. Heal that unit, exhaust it, and recall it. (Send it to base. This isn't a move.)",
+   "new": "[Hidden] (Hide now for :rb_rune_rainbow: to react with later for :rb_energy_0:.)\nIf a friendly unit would die, kill this instead. Heal that unit, exhaust it, and recall it. (Send it to base. This isn't a move.)",
+   "newAsPrinted": "[Hidden] (Hide now for [A] to react with later for [0].)\nIf a friendly unit would die, kill this instead. Heal that unit, exhaust it, and recall it. (Send it to base. This isn't a move.)",
    "old": "[Hidden] (Hide now for [A] to react with later for [0].)\nThe next time a friendly unit would die, kill this instead. Recall that unit exhausted. (Send it to base. This isn't a move.)",
    "code": "OGN-077/298",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Falling Star",
@@ -346,9 +408,11 @@
    "source": "riftbound-spiritforged-errata",
    "name": "Falling Star",
    "new": "Deal 3 to a unit.\nDeal 3 to a unit.",
+   "newAsPrinted": "Deal 3 to a unit.\nDeal 3 to a unit.",
    "old": "Do this twice:\nDeal 3 to a unit. (You can choose different units.)",
    "code": "OGN-029/298",
-   "status": "current"
+   "status": "current",
+   "split": true
   },
   {
    "card": "Icathian Rain",
@@ -356,59 +420,71 @@
    "source": "riftbound-spiritforged-errata",
    "name": "Icathian Rain",
    "new": "Deal 2 to a unit.\nDeal 2 to a unit.\nDeal 2 to a unit.\nDeal 2 to a unit.\nDeal 2 to a unit.\nDeal 2 to a unit.",
+   "newAsPrinted": "Deal 2 to a unit.\nDeal 2 to a unit.\nDeal 2 to a unit.\nDeal 2 to a unit.\nDeal 2 to a unit.\nDeal 2 to a unit.",
    "old": "Do this 6 times:\nDeal 2 to a unit. (You can choose different units.)",
    "code": "OGN-248/298",
-   "status": "current"
+   "status": "current",
+   "split": true
   },
   {
    "card": "Reinforce",
    "set": "Origins",
    "source": "riftbound-spiritforged-errata",
    "name": "Reinforce",
-   "new": "Look at the top 5 cards of your Main Deck. You may banish a unit from among them, then play it, reducing its cost by [5]. Recycle the remaining cards.",
+   "new": "Look at the top 5 cards of your Main Deck. You may banish a unit from among them, then play it, reducing its cost by :rb_energy_5:. Recycle the remaining cards.",
+   "newAsPrinted": "Look at the top 5 cards of your Main Deck. You may banish a unit from among them, then play it, reducing its cost by [5]. Recycle the remaining cards.",
    "old": "Look at the top 5 cards of your Main Deck. You may play a unit from among them. Its Energy cost is reduced by [5]. Then recycle the remaining cards.",
    "code": "OGN-062/298",
-   "status": "current"
+   "status": "current",
+   "split": true
   },
   {
    "card": "Arise!",
    "set": "Spiritforged",
    "source": "riftbound-spiritforged-errata",
    "name": "Arise!",
-   "new": "Play a 2 [M] Sand Soldier unit token for each Equipment you control. Then do this: Ready up to two of them.",
+   "new": "Play a 2 :rb_might: Sand Soldier unit token for each Equipment you control. Then do this: Ready up to two of them.",
+   "newAsPrinted": "Play a 2 [M] Sand Soldier unit token for each Equipment you control. Then do this: Ready up to two of them.",
    "old": "Play a 2 [M] Sand Soldier unit token for each Equipment you control. Then ready two of them.",
    "code": "SFD-198/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Blood Rush",
    "set": "Spiritforged",
    "source": "riftbound-spiritforged-errata",
    "name": "Blood Rush",
-   "new": "[Action] (Play on your turn or in showdowns.)\n[Repeat] [1] (You may pay the additional cost to repeat this spell's effect.)\nGive a unit [Assault 2] this turn. (+2 [M] while it's an attacker.)",
+   "new": "[Action] (Play on your turn or in showdowns.)\n[Repeat] :rb_energy_1: (You may pay the additional cost to repeat this spell's effect.)\nGive a unit [Assault 2] this turn. (+2 :rb_might: while it's an attacker.)",
+   "newAsPrinted": "[Action] (Play on your turn or in showdowns.)\n[Repeat] [1] (You may pay the additional cost to repeat this spell's effect.)\nGive a unit [Assault 2] this turn. (+2 [M] while it's an attacker.)",
    "old": "[Action] (Play on your turn or in showdowns.)\n[Repeat] [1] (You may pay the additional cost to repeat this spell's effect.)\nGive a unit [Assault 2]. (+2 [M] while it's an attacker.)",
    "code": "SFD-003/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Deathgrip",
    "set": "Spiritforged",
    "source": "riftbound-spiritforged-errata",
    "name": "Deathgrip",
-   "new": "[Reaction] (Play any time, even before spells and abilities resolve.)\nKill a friendly unit. If you do, give +[M] equal to its Might to another friendly unit this turn.\nDraw 1.",
+   "new": "[Reaction] (Play any time, even before spells and abilities resolve.)\nKill a friendly unit. If you do, give +:rb_might: equal to its Might to another friendly unit this turn.\nDraw 1.",
+   "newAsPrinted": "[Reaction] (Play any time, even before spells and abilities resolve.)\nKill a friendly unit. If you do, give +[M] equal to its Might to another friendly unit this turn.\nDraw 1.",
    "old": "[Reaction] (Play any time, even before spells and abilities resolve.)\nKill a friendly unit to give +[M] equal to its Might to another friendly unit this turn. Draw 1.",
    "code": "SFD-163/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Edge of Night",
    "set": "Spiritforged",
    "source": "riftbound-spiritforged-errata",
    "name": "Edge of Night",
-   "new": "[Hidden] (Hide now for [A] to react with later for [0].)\nWhen you play this from face down, attach it to a unit you control (here) .\n[Equip] [C] ([C]: Attach this to a unit you control.)",
+   "new": "[Hidden] (Hide now for :rb_rune_rainbow: to react with later for :rb_energy_0:.)\nWhen you play this from face down, attach it to a unit you control (here) .\n[Equip] :rb_rune_chaos: (:rb_rune_chaos:: Attach this to a unit you control.)",
+   "newAsPrinted": "[Hidden] (Hide now for [A] to react with later for [0].)\nWhen you play this from face down, attach it to a unit you control (here) .\n[Equip] [C] ([C]: Attach this to a unit you control.)",
    "old": "[Hidden] (Hide now for [A] to react with later for [0].)\nWhen you play this from face down, attach it to a unit you control here.\n[Equip] [C] ([C]: Attach this to a unit you control.)",
    "code": "SFD-139/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Janna, Savior",
@@ -416,29 +492,35 @@
    "source": "riftbound-spiritforged-errata",
    "name": "Janna, Savior",
    "new": "[Reaction] (Play any time, even before spells and abilities resolve, including to a battlefield you control.)\nWhen you play me, heal your units here, then move up to one enemy unit from here to its base.",
+   "newAsPrinted": "[Reaction] (Play any time, even before spells and abilities resolve, including to a battlefield you control.)\nWhen you play me, heal your units here, then move up to one enemy unit from here to its base.",
    "old": "[Reaction] (Play any time, even before spells and abilities resolve, including to a battlefield you control.)\nWhen you play me, heal your units here, then move an enemy unit from here to its base.",
    "code": "SFD-053/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Jax, Unmatched",
    "set": "Spiritforged",
    "source": "riftbound-spiritforged-errata",
    "name": "Jax, Unmatched",
-   "new": "[Deflect] (Opponents must pay [A] to choose me with a spell or ability.)\nYour Equipment everywhere have [Quick-Draw]. (Each gains [Reaction]. When you play it, attach it to a unit you control.)",
+   "new": "[Deflect] (Opponents must pay :rb_rune_rainbow: to choose me with a spell or ability.)\nYour Equipment everywhere have [Quick-Draw]. (Each gains [Reaction]. When you play it, attach it to a unit you control.)",
+   "newAsPrinted": "[Deflect] (Opponents must pay [A] to choose me with a spell or ability.)\nYour Equipment everywhere have [Quick-Draw]. (Each gains [Reaction]. When you play it, attach it to a unit you control.)",
    "old": "[Deflect] (Opponents must pay [A] to choose me with a spell or ability.)\nEach Equipment in your hand has [Quick-Draw]. (It gains [Reaction]. When you play it, attach it to a unit you control.)",
    "code": "SFD-054/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Kato the Arm",
    "set": "Spiritforged",
    "source": "riftbound-spiritforged-errata",
    "name": "Kato the Arm",
-   "new": "[Deflect] (Opponents must pay [A] to choose me with a spell or ability.)\nWhen I move to a battlefield, give another friendly unit my keywords and +[M] equal to my Might this turn.",
+   "new": "[Deflect] (Opponents must pay :rb_rune_rainbow: to choose me with a spell or ability.)\nWhen I move to a battlefield, give another friendly unit my keywords and +:rb_might: equal to my Might this turn.",
+   "newAsPrinted": "[Deflect] (Opponents must pay [A] to choose me with a spell or ability.)\nWhen I move to a battlefield, give another friendly unit my keywords and +[M] equal to my Might this turn.",
    "old": "[Deflect] (Opponents must pay [A] to choose me with a spell or ability.)\nWhen I move to a battlefield, give a friendly unit my keywords and +[M] equal to my Might this turn.",
    "code": "SFD-112/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Rek’Sai, Swarm Queen",
@@ -446,29 +528,35 @@
    "source": "riftbound-spiritforged-errata",
    "name": "Rek'Sai, Swarm Queen",
    "new": "When I attack, you may reveal the top 2 cards of your Main Deck. You may banish one, then play it. If it is a unit, you may play it here. Recycle the rest.",
+   "newAsPrinted": "When I attack, you may reveal the top 2 cards of your Main Deck. You may banish one, then play it. If it is a unit, you may play it here. Recycle the rest.",
    "old": "When I attack, you may reveal the top 2 cards of your Main Deck. You may play one. Then recycle the rest. If the played card is a unit, you may play it here.",
    "code": "SFD-170/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Rell, Magnetic",
    "set": "Spiritforged",
    "source": "riftbound-spiritforged-errata",
    "name": "Rell, Magnetic",
-   "new": "[Tank] (I must be assigned combat damage first.)\nWhen I attack, you may play an Equipment with Energy cost no more than [2], ignoring its cost. If you do, then do this: Attach it to me.",
+   "new": "[Tank] (I must be assigned combat damage first.)\nWhen I attack, you may play an Equipment with Energy cost no more than :rb_energy_2:, ignoring its cost. If you do, then do this: Attach it to me.",
+   "newAsPrinted": "[Tank] (I must be assigned combat damage first.)\nWhen I attack, you may play an Equipment with Energy cost no more than [2], ignoring its cost. If you do, then do this: Attach it to me.",
    "old": "[Tank] (I must be assigned combat damage first.)\nWhen I attack, you may play an Equipment with Energy cost no more than [2], ignoring its cost, and attach it to me.",
    "code": "SFD-024/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Tianna Crownguard",
    "set": "Spiritforged",
    "source": "riftbound-spiritforged-errata",
    "name": "Tianna Crownguard",
-   "new": "[Deflect] (Opponents must pay [A] to choose me with a spell or ability.)\nWhile I'm at a battlefield, opponents can't gain points.",
+   "new": "[Deflect] (Opponents must pay :rb_rune_rainbow: to choose me with a spell or ability.)\nWhile I'm at a battlefield, opponents can't gain points.",
+   "newAsPrinted": "[Deflect] (Opponents must pay [A] to choose me with a spell or ability.)\nWhile I'm at a battlefield, opponents can't gain points.",
    "old": "[Deflect] (Opponents must pay [A] to choose me with a spell or ability.)\nWhile I'm at a battlefield, opponents can't score points.",
    "code": "SFD-060/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Void Burrower",
@@ -476,39 +564,47 @@
    "source": "riftbound-spiritforged-errata",
    "name": "Void Burrower",
    "new": "When you conquer, you may exhaust me to reveal the top 2 cards of your Main Deck. You may banish one, then play it. Recycle the rest.",
+   "newAsPrinted": "When you conquer, you may exhaust me to reveal the top 2 cards of your Main Deck. You may banish one, then play it. Recycle the rest.",
    "old": "When you conquer, you may exhaust me to reveal the top 2 cards of your Main Deck. You may play one. Then recycle the rest.",
    "code": "SFD-187/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Void Rush",
    "set": "Spiritforged",
    "source": "riftbound-spiritforged-errata",
    "name": "Void Rush",
-   "new": "Reveal the top 2 cards of your Main Deck. You may banish one, then play it, reducing its cost by [2]. Draw any you didn't banish.",
+   "new": "Reveal the top 2 cards of your Main Deck. You may banish one, then play it, reducing its cost by :rb_energy_2:. Draw any you didn't banish.",
+   "newAsPrinted": "Reveal the top 2 cards of your Main Deck. You may banish one, then play it, reducing its cost by [2]. Draw any you didn't banish.",
    "old": "Reveal the top 2 cards of your Main Deck. You may play one of them, reducing its cost by [2]. Draw any you did not play this way.",
    "code": "SFD-188/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Yone, Blademaster",
    "set": "Spiritforged",
    "source": "riftbound-spiritforged-errata",
    "name": "Yone, Blademaster",
-   "new": "[Weaponmaster] (When you play me, you may [Equip] one of your Equipment to me for [A] less, even if it's already attached.)\nWhen I conquer a battlefield that was uncontrolled, deal damage equal to my Might to an enemy unit in a base.",
+   "new": "[Weaponmaster] (When you play me, you may [Equip] one of your Equipment to me for :rb_rune_rainbow: less, even if it's already attached.)\nWhen I conquer a battlefield that was uncontrolled, deal damage equal to my Might to an enemy unit in a base.",
+   "newAsPrinted": "[Weaponmaster] (When you play me, you may [Equip] one of your Equipment to me for [A] less, even if it's already attached.)\nWhen I conquer a battlefield that was uncontrolled, deal damage equal to my Might to an enemy unit in a base.",
    "old": "[Weaponmaster] (When you play me, you may [Equip] one of your Equipment to me for [A] less, even if it's already attached.)\nWhen I conquer an open battlefield, deal damage equal to my Might to an enemy unit in a base.",
    "code": "SFD-116/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Guards!",
    "set": "Spiritforged",
    "source": "unleashed-errata-updates",
-   "new": "[Hidden] (Hide now for [A] to react with later for [0].)\nPlay a 2 [M] Sand Soldier unit token. Then do this: You may pay [C] to ready it.",
+   "new": "[Hidden] (Hide now for :rb_rune_rainbow: to react with later for :rb_energy_0:.)\nPlay a 2 :rb_might: Sand Soldier unit token. Then do this: You may pay :rb_rune_order: to ready it.",
    "old": "[Hidden] (Hide now for [A] to react with later for [0].)\nPlay a 2 [M] Sand Soldier unit token. You may pay [C] to ready it.",
    "name": "Guards!",
+   "newAsPrinted": "[Hidden] (Hide now for [A] to react with later for [0].)\nPlay a 2 [M] Sand Soldier unit token. Then do this: You may pay [C] to ready it.",
    "code": "SFD-154/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Relentless Pursuit",
@@ -517,28 +613,34 @@
    "new": "[Action] (Play on your turn or in showdowns.)\nMove a friendly unit. You may attach up to one Equipment with the same controller to it. This turn, that unit has \"When I conquer, you may move me to my base.\"",
    "old": "[Action] (Play on your turn or in showdowns.)\nMove a friendly unit. You may attach an Equipment with the same controller to it. This turn, that unit has \"When I conquer, you may move me to my base.\"",
    "name": "Relentless Pursuit",
+   "newAsPrinted": "[Action] (Play on your turn or in showdowns.)\nMove a friendly unit. You may attach up to one Equipment with the same controller to it. This turn, that unit has \"When I conquer, you may move me to my base.\"",
    "code": "SFD-184/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Death from Below",
    "set": "Unleashed",
    "source": "unleashed-errata-updates",
-   "new": "Kill a unit at a battlefield. Then, if it had 3 [M] or less, do this: You may play this from your trash for [A].",
+   "new": "Kill a unit at a battlefield. Then, if it had 3 :rb_might: or less, do this: You may play this from your trash for :rb_rune_rainbow:.",
    "old": "Kill a unit at a battlefield. Then, if it had 3 [M] or less, you may play this from your trash for [A].",
    "name": "Death from Below",
+   "newAsPrinted": "Kill a unit at a battlefield. Then, if it had 3 [M] or less, do this: You may play this from your trash for [A].",
    "code": "UNL-186/219",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Bone Skewer",
    "set": "Unleashed",
    "source": "unleashed-errata-updates",
-   "new": "[Hidden] (Hide now for [A] to react with later for [0].)\nChoose a battlefield. An opponent reveals their hand. You may choose a unit from it. They play that unit to that battlefield, ignoring any and all costs. If they do, then do this: [Stun] it. (It doesn't deal combat damage this turn.)",
+   "new": "[Hidden] (Hide now for :rb_rune_rainbow: to react with later for :rb_energy_0:.)\nChoose a battlefield. An opponent reveals their hand. You may choose a unit from it. They play that unit to that battlefield, ignoring any and all costs. If they do, then do this: [Stun] it. (It doesn't deal combat damage this turn.)",
    "old": "[Hidden] (Hide now for [A] to react with later for [0].)\nChoose a battlefield. An opponent reveals their hand. You may choose a unit from it. They play that unit to that battlefield, ignoring any and all costs. When they do, [Stun] it. (It doesn't deal combat damage this turn.)",
    "name": "Bone Skewer",
+   "newAsPrinted": "[Hidden] (Hide now for [A] to react with later for [0].)\nChoose a battlefield. An opponent reveals their hand. You may choose a unit from it. They play that unit to that battlefield, ignoring any and all costs. If they do, then do this: [Stun] it. (It doesn't deal combat damage this turn.)",
    "code": "UNL-139/219",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Leblanc, Deceiver",
@@ -547,8 +649,10 @@
    "new": "When you conquer or hold, you may discard 1 and exhaust me to play a ready Reflection unit token there. Then do this: It becomes a copy of another unit there. Give it [Temporary].",
    "old": "When you conquer or hold, you may discard 1 and exhaust me to play a ready Reflection unit token there. It becomes a copy of another unit there. Give it [Temporary].",
    "name": "Deceiver",
+   "newAsPrinted": "When you conquer or hold, you may discard 1 and exhaust me to play a ready Reflection unit token there. Then do this: It becomes a copy of another unit there. Give it [Temporary].",
    "code": "UNL-199/219",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Mirror Image",
@@ -557,18 +661,22 @@
    "new": "Choose a unit. Play a ready Reflection unit token to your base. Then do this: It becomes a copy of that unit. Give it [Temporary]. (Kill it at the start of its controller's Beginning Phase, before scoring.)",
    "old": "Choose a unit. Play a ready Reflection unit token to your base. It becomes a copy of that unit. Give it [Temporary]. (Kill it at the start of its controller's Beginning Phase, before scoring.)",
    "name": "Mirror Image",
+   "newAsPrinted": "Choose a unit. Play a ready Reflection unit token to your base. Then do this: It becomes a copy of that unit. Give it [Temporary]. (Kill it at the start of its controller's Beginning Phase, before scoring.)",
    "code": "UNL-200/219",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Keeper of Masks",
    "set": "Unleashed",
    "source": "unleashed-errata-updates",
-   "new": "[Hidden] (Hide now for [A] to react with later for [0].)\n[Temporary] (Kill me at the start of my controller's Beginning Phase, before scoring.)\nWhen you play me, play two Reflection unit tokens here. Then do this: They become copies of me.",
+   "new": "[Hidden] (Hide now for :rb_rune_rainbow: to react with later for :rb_energy_0:.)\n[Temporary] (Kill me at the start of my controller's Beginning Phase, before scoring.)\nWhen you play me, play two Reflection unit tokens here. Then do this: They become copies of me.",
    "old": "[Hidden] (Hide now for [A] to react with later for [0].)\n[Temporary] (Kill me at the start of my controller's Beginning Phase, before scoring.)\nWhen you play me, play two Reflection unit tokens here. They become copies of me.",
    "name": "Keeper of Masks",
+   "newAsPrinted": "[Hidden] (Hide now for [A] to react with later for [0].)\n[Temporary] (Kill me at the start of my controller's Beginning Phase, before scoring.)\nWhen you play me, play two Reflection unit tokens here. Then do this: They become copies of me.",
    "code": "UNL-081/219",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Rengar, Trophy Hunter",
@@ -577,48 +685,58 @@
    "new": "[Ambush] (You may play me as a [Reaction] to a battlefield where you have units.)\nI can [Ambush] to a battlefield where there are enemy units, even if you don't have units there.",
    "old": "[Ambush] (You may play me as a [Reaction] to a battlefield where you have units.)\nI can be played to a battlefield where there are enemy units (even if you don't have units there).",
    "name": "Rengar, Trophy Hunter",
+   "newAsPrinted": "[Ambush] (You may play me as a [Reaction] to a battlefield where you have units.)\nI can [Ambush] to a battlefield where there are enemy units, even if you don't have units there.",
    "code": "UNL-120/219",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Draven, Vanquisher",
    "set": "Spiritforged",
    "source": "vendetta-errata-updates",
-   "new": "When I win a combat, play a Gold gear token exhausted.\nWhen I attack or defend, you may pay [C] to give me +2 [M] this turn.",
+   "new": "When I win a combat, play a Gold gear token exhausted.\nWhen I attack or defend, you may pay :rb_rune_fury: to give me +2 :rb_might: this turn.",
    "old": "When I win a combat, play a Gold gear token exhausted.\nWhen I attack or defend, you may pay [C]. If you do, give me +2 [M] this turn.",
    "name": "Draven, Vanquisher",
+   "newAsPrinted": "When I win a combat, play a Gold gear token exhausted.\nWhen I attack or defend, you may pay [C] to give me +2 [M] this turn.",
    "code": "SFD-020/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Emperor’s Dais",
    "set": "Spiritforged",
    "source": "vendetta-errata-updates",
-   "new": "When you conquer here, you may pay [1] and return a unit you control here to its owner's hand to play a 2 [M] Sand Soldier unit token here.",
+   "new": "When you conquer here, you may pay :rb_energy_1: and return a unit you control here to its owner's hand to play a 2 :rb_might: Sand Soldier unit token here.",
    "old": "When you conquer here, you may pay [1] and return a unit you control here to its owner's hand. If you do, play a 2 [M] Sand Soldier unit token here.",
    "name": "Emperor's Dais",
+   "newAsPrinted": "When you conquer here, you may pay [1] and return a unit you control here to its owner's hand to play a 2 [M] Sand Soldier unit token here.",
    "code": "SFD-207/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Fizz, Trickster",
    "set": "Spiritforged",
    "source": "vendetta-errata-updates",
-   "new": "When you play me, you may play a spell from your trash with Energy cost no more than [3], ignoring its Energy cost. Then recycle it. (You must still pay its Power cost.)",
+   "new": "When you play me, you may play a spell from your trash with Energy cost no more than :rb_energy_3:, ignoring its Energy cost. Then recycle it. (You must still pay its Power cost.)",
    "old": "When you play me, you may play a spell from your trash with Energy cost no more than [3], ignoring its Energy cost. Recycle that spell after you play it. (You must still pay its Power cost.)",
    "name": "Fizz, Trickster",
+   "newAsPrinted": "When you play me, you may play a spell from your trash with Energy cost no more than [3], ignoring its Energy cost. Then recycle it. (You must still pay its Power cost.)",
    "code": "SFD-140/221",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Diana, Lunari",
    "set": "Unleashed",
    "source": "vendetta-errata-updates",
-   "new": "When a showdown begins here, you may pay [1] to [Predict], then reveal the top card of your Main Deck. If it's a spell, draw it. (To Predict, look at the top card of your Main Deck. You may recycle it.)",
+   "new": "When a showdown begins here, you may pay :rb_energy_1: to [Predict], then reveal the top card of your Main Deck. If it's a spell, draw it. (To Predict, look at the top card of your Main Deck. You may recycle it.)",
    "old": "When a showdown begins here, you may pay [1]. If you do, [Predict], then reveal the top card of your Main Deck. If it's a spell, draw it. (To Predict, look at the top card of your Main Deck. You may recycle it.)",
    "name": "Diana, Lunari",
+   "newAsPrinted": "When a showdown begins here, you may pay [1] to [Predict], then reveal the top card of your Main Deck. If it's a spell, draw it. (To Predict, look at the top card of your Main Deck. You may recycle it.)",
    "code": "UNL-079/219",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Stalking Wolf",
@@ -627,38 +745,46 @@
    "new": "[Ambush] (You may play me as a [Reaction] to a battlefield where you have units.)\nAs an additional cost to play me, kill a Bird, Cat, Dog, or Poro you control. You may [Ambush] me to its battlefield, even if you don't have other units there.",
    "old": "[Ambush] (You may play me as a [Reaction] to a battlefield where you have units.)\nAs an additional cost to play me, kill a Bird, Cat, Dog, or Poro you control. You may play me to its battlefield (even if you don't have other units there).",
    "name": "Stalking Wolf",
+   "newAsPrinted": "[Ambush] (You may play me as a [Reaction] to a battlefield where you have units.)\nAs an additional cost to play me, kill a Bird, Cat, Dog, or Poro you control. You may [Ambush] me to its battlefield, even if you don't have other units there.",
    "code": "UNL-166/219",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Astral Heron",
    "set": "Vendetta",
    "source": "vendetta-errata-updates",
-   "new": "When you play your first card each turn, if I'm at a battlefield, the next card you play this turn costs [2][A][A] less.",
+   "new": "When you play your first card each turn, if I'm at a battlefield, the next card you play this turn costs :rb_energy_2::rb_rune_rainbow::rb_rune_rainbow: less.",
    "old": "When you play your first card each turn, if I'm at a battlefield, your next card costs [2][A][A] less.",
    "name": "Astral Heron",
+   "newAsPrinted": "When you play your first card each turn, if I'm at a battlefield, the next card you play this turn costs [2][A][A] less.",
    "code": "VEN-044/166",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Gangplank, Naval",
    "set": "Vendetta",
    "source": "vendetta-errata-updates",
-   "new": "[Empower] [C][C] ([C][C]: Empower me. Use only if not Empowered.)\n[Empowered][>] If a spell or ability that chooses me would stun me, give me -[M], or return me to hand, give me +3 [M] this turn instead.",
+   "new": "[Empower] :rb_rune_body::rb_rune_body: (:rb_rune_body::rb_rune_body:: Empower me. Use only if not Empowered.)\n[Empowered][>] If a spell or ability that chooses me would stun me, give me -:rb_might:, or return me to hand, give me +3 :rb_might: this turn instead.",
    "old": "[Empower] [C][C] ([C][C]: Empower me. Use only if not Empowered.)\n[Empowered][>] If a spell or ability that chooses me would stun me, give me -[M], or return me to hand, give me +3 [M] instead.",
    "name": "Gangplank, Naval",
+   "newAsPrinted": "[Empower] [C][C] ([C][C]: Empower me. Use only if not Empowered.)\n[Empowered][>] If a spell or ability that chooses me would stun me, give me -[M], or return me to hand, give me +3 [M] this turn instead.",
    "code": "VEN-086/166",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   },
   {
    "card": "Resonating Strike",
    "set": "Vendetta",
    "source": "vendetta-errata-updates",
-   "new": "[Hidden] (Hide now for [A] to react with later for [0].)\n[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a battlefield you control and a unit you control at a different location. Move that unit to that battlefield and give it +2 [S] this turn.",
+   "new": "[Hidden] (Hide now for :rb_rune_rainbow: to react with later for :rb_energy_0:.)\n[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a battlefield you control and a unit you control at a different location. Move that unit to that battlefield and give it +2 :rb_might: this turn.",
    "old": "[Hidden] (Hide now for [A] to react with later for [0].)\n[Reaction] (Play on your turn or in showdowns.)\nChoose a battlefield you control and a unit you control at a different location. Move that unit to that battlefield and give it +2 [S] this turn.",
    "name": "Resonating Strike",
+   "newAsPrinted": "[Hidden] (Hide now for [A] to react with later for [0].)\n[Reaction] (Play any time, even before spells and abilities resolve.)\nChoose a battlefield you control and a unit you control at a different location. Move that unit to that battlefield and give it +2 [S] this turn.",
    "code": "VEN-034/166",
-   "status": "catalog-stale"
+   "status": "catalog-stale",
+   "split": true
   }
  ]
 }

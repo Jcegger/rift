@@ -69,6 +69,62 @@ const canon = (t) => String(t || "")
 // runs — matching on the uppercase form finds nothing and the fallback never fires.
 const loose = (t) => canon(t).replace(/<any>/gi, "<p>");
 
+// Riot writes card text in two dialects. The card feed uses :rb_might: and
+// :rb_rune_chaos:; the errata pages use [M] and [C]. Overlaying the errata text raw
+// meant 32 corrected cards rendered in one notation while every card beside them
+// rendered in the other — visibly inconsistent in both the app and the CLI, and my
+// doing, so the text is translated into the catalog's dialect before it is written.
+//
+// [C] means "one power of this card's own domain", so it only has a concrete symbol
+// when the card has exactly one domain. On a multi-domain or domainless card it stays
+// as [C], because inventing a specific symbol there would be wrong.
+const DOMAIN_RUNE = { Fury: "fury", Calm: "calm", Mind: "mind", Body: "body",
+                      Chaos: "chaos", Order: "order" };
+const LETTER_RUNE = { R: "fury", G: "calm", B: "mind", O: "body", P: "chaos", Y: "order" };
+
+const SYMBOL = /\[(?:\d+|[A-Z])\]/g;          // the bracket dialect: [1] [M] [E] [C] [A] …
+const RBSYM = /:rb_[a-z_0-9]+:/g;             // the catalog dialect
+
+// The generic table, used when a symbol in the new text never appeared in the old.
+function genericSymbol(tok, card) {
+  const own = (card.d || []).length === 1 ? DOMAIN_RUNE[card.d[0]] : null;
+  const inner = tok.slice(1, -1);
+  if (/^\d+$/.test(inner)) return `:rb_energy_${inner}:`;
+  if (inner === "M" || inner === "S") return ":rb_might:";
+  if (inner === "E" || inner === "T") return ":rb_exhaust:";
+  if (inner === "A") return ":rb_rune_rainbow:";
+  if (LETTER_RUNE[inner]) return `:rb_rune_${LETTER_RUNE[inner]}:`;
+  if (inner === "C") return own ? `:rb_rune_${own}:` : tok;
+  return tok;
+}
+
+// Learn this card's mapping from its own text rather than assuming one.
+//
+// For a stale entry the old half IS the catalog text, written in the other dialect — so
+// stripping the symbols from both should leave identical prose, and the two symbol
+// sequences then correspond position by position. That gives an exact per-card table,
+// which matters because Riot's pages use [C] loosely: The Boss prints the rainbow
+// symbol and its errata still writes [C]. Assuming [C] meant the card's own domain
+// produced the wrong symbol there, and the self-test below caught it.
+function learnDialect(oldHalf, catalogText) {
+  const strip = (t, re) => String(t).replace(re, "\u0000").replace(/\s+/g, " ").trim();
+  if (strip(oldHalf, SYMBOL) !== strip(catalogText, RBSYM)) return null;
+  const from = String(oldHalf).match(SYMBOL) || [];
+  const to = String(catalogText).match(RBSYM) || [];
+  if (from.length !== to.length) return null;
+  const map = new Map();
+  for (let i = 0; i < from.length; i++) {
+    if (map.has(from[i]) && map.get(from[i]) !== to[i]) return null;  // inconsistent
+    map.set(from[i], to[i]);
+  }
+  return map;
+}
+
+function toCatalogDialect(text, card, learned) {
+  return String(text || "").replace(SYMBOL, (tok) =>
+    (learned && learned.get(tok)) || genericSymbol(tok, card));
+}
+
 /* ── parsing an errata page ──────────────────────────────────────────────── */
 
 // Two page shapes, because Riot changed format between sets.
@@ -134,15 +190,23 @@ function parseErrata(md, source) {
 function resolveSplit(entry, catalogText) {
   const now = canon(catalogText);
   const blocks = entry.blocks.filter((b) => !/^note:/i.test(b.trim()));
-  for (let k = blocks.length - 1; k >= 1; k--) {
-    const oldHalf = blocks.slice(k).join("\n"), newHalf = blocks.slice(0, k).join("\n");
-    if (canon(oldHalf) === now) return { new: newHalf, old: oldHalf, resolved: true };
-  }
-  for (let k = blocks.length - 1; k >= 1; k--) {
-    const oldHalf = blocks.slice(k).join("\n"), newHalf = blocks.slice(0, k).join("\n");
-    if (canon(newHalf) === now) return { new: newHalf, old: oldHalf, resolved: true };
-  }
-  const h = Math.ceil(blocks.length / 2);
+  // Four passes, strictest first. Strict old is the ordinary case; strict new covers
+  // the ones Riot already folded in. The loose passes exist because the errata pages
+  // write [C] where a card prints the rainbow symbol, which strict canon rightly
+  // distinguishes — without them The Boss fell through to the midpoint guess.
+  const looseNow = loose(catalogText);
+  const passes = [
+    (o, n) => canon(o) === now,
+    (o, n) => canon(n) === now,
+    (o, n) => loose(o) === looseNow,
+    (o, n) => loose(n) === looseNow,
+  ];
+  for (const hit of passes)
+    for (let k = blocks.length - 1; k >= 1; k--) {
+      const oldHalf = blocks.slice(k).join("\n"), newHalf = blocks.slice(0, k).join("\n");
+      if (hit(oldHalf, newHalf)) return { new: newHalf, old: oldHalf, resolved: true };
+    }
+  const h = Math.max(1, Math.ceil(blocks.length / 2));
   return { new: blocks.slice(0, h).join("\n"), old: blocks.slice(h).join("\n"), resolved: false };
 }
 
@@ -193,6 +257,7 @@ const main = async () => {
     if (c.t === "Legend" && !byTail.has(key(c.n))) byTail.set(key(c.n), c);
 
   let stale = 0, current = 0, unmatched = 0, missing = 0, noop = 0;
+  const dialectDrift = [], guessed = [];
   const cards = [];
   for (const e of entries) {
     // Split on the comma BEFORE key() flattens it, or a two-word champion name
@@ -219,7 +284,24 @@ const main = async () => {
     // `card` is Riot's spelling and `name` is the catalog's — they differ on
     // apostrophes and separators ("Emperor's Dais" vs "Emperor’s Dais"), and consumers
     // have to join on the catalog's spelling or the overlay silently misses.
-    cards.push({ ...rest, name: c.n, new: halves.new, old: halves.old, code: c.c, status });
+    // `card` is Riot's spelling and `name` is the catalog's — they differ on
+    // apostrophes and separators ("Emperor's Dais" vs "Emperor’s Dais"), and consumers
+    // have to join on the catalog's spelling or the overlay silently misses.
+    // A split that fell back to the midpoint is a GUESS, and a guessed boundary puts
+    // half the old text into the new — straight onto the card in the app. Record it so
+    // check.mjs can refuse to ship one, rather than letting it pass as data.
+    if (halves.resolved === false) guessed.push(c.n);
+    const learned = status === "catalog-stale" ? learnDialect(halves.old, c.x) : null;
+    const asCatalog = toCatalogDialect(halves.new, c, learned);
+    // Self-test: translating the OLD half has to reproduce the catalog byte for byte on
+    // a stale entry, since "stale" means the catalog still holds exactly that text. If
+    // it doesn't, the translation is lossy and the NEW half it produced is not
+    // trustworthy either — so report rather than quietly ship it.
+    if (status === "catalog-stale" &&
+        toCatalogDialect(halves.old, c, learned).trim() !== String(c.x).trim())
+      dialectDrift.push(c.n);
+    cards.push({ ...rest, name: c.n, new: asCatalog, newAsPrinted: halves.new,
+                 old: halves.old, code: c.c, status, split: halves.resolved !== false });
   }
 
   const out = {
@@ -239,6 +321,12 @@ const main = async () => {
   if (unmatched) console.log(`  ${unmatched} match neither old nor new — parse drift or a reworded card:\n` +
     cards.filter((c) => c.status === "no-match").map((c) => `      ${c.card}`).join("\n"));
   if (noop) console.log(`  ${noop} whose old and new text differ only in symbol notation — worth a look`);
+  if (guessed.length) console.log(
+    `  ${guessed.length} whose new/old boundary could not be resolved and was GUESSED:\n` +
+    `      ${guessed.join("\n      ")}`);
+  if (dialectDrift.length) console.log(
+    `  ${dialectDrift.length} where translating the old half did NOT reproduce the catalog ` +
+    `byte for byte, so the translation is lossy:\n      ${dialectDrift.join("\n      ")}`);
   if (missing) console.log(`  ${missing} name no card in the catalog:\n` +
     cards.filter((c) => c.status === "no-such-card").map((c) => `      ${c.card}`).join("\n"));
 };

@@ -34,7 +34,7 @@
 // Verified against pypdf over both documents: identical text for all 2,381 rules,
 // plus two rules pypdf ran onto one line that the geometry here separates correctly.
 
-import { writeFile, readFile } from "node:fs/promises";
+import { writeFile, readFile, rename } from "node:fs/promises";
 import { inflateSync } from "node:zlib";
 import { createHash } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -330,7 +330,7 @@ async function loadSupplement(doc) {
   const raw = await r.text();
   const html = unescapeHtml(raw);
   let published = null;
-  for (const m of html.matchAll(new RegExp(doc.slug.replace(/[-]/g, "\\-"), "g"))) {
+  for (const m of html.matchAll(new RegExp(doc.slug, "g"))) {
     // Forward only. A backward window can return the PRECEDING article's date, which
     // is exactly how the index-level dating went wrong before.
     const w = html.slice(m.index, m.index + 2000);
@@ -557,6 +557,24 @@ async function crossCheck(terms) {
   return { pool: seen, unknown, at: cards.generatedAt };
 }
 
+/* ── writing ─────────────────────────────────────────────────────────────── */
+
+// The house rule is that a builder writes its output in one go at the end, so a failure
+// leaves the previous file byte-identical. This one produces three files, and writeFile
+// truncates before it writes — so a crash mid-way would leave a truncated file, not the
+// old one. Writing to temporaries and renaming keeps that promise: rename is atomic, so
+// each file is either entirely the old one or entirely the new one, and the three swaps
+// happen after all the fetching, parsing and verification is done.
+async function writeAll(files) {
+  const staged = [];
+  for (const [path, body] of files) {
+    const tmp = `${path}.tmp`;
+    await writeFile(tmp, body);
+    staged.push([tmp, path]);
+  }
+  for (const [tmp, path] of staged) await rename(tmp, path);
+}
+
 /* ── main ────────────────────────────────────────────────────────────────── */
 
 const main = async () => {
@@ -628,8 +646,10 @@ const main = async () => {
   if (!moved && !force) {
     const stamp = { ...prev, generatedAt: new Date().toISOString().slice(0, 10),
                     supplements: supp.map(({ text, ...d }) => d) };
-    await writeFile(join(ROOT, "docs/rules-faq.md"), faqMarkdown(faqs));
-    await writeFile(join(ROOT, "data/rules.json"), JSON.stringify(stamp, null, 1) + "\n");
+    await writeAll([
+      [join(ROOT, "docs/rules-faq.md"), faqMarkdown(faqs)],
+      [join(ROOT, "data/rules.json"), JSON.stringify(stamp, null, 1) + "\n"],
+    ]);
     console.log(`\ndocs/rules-faq.md   ${faqs.length} FAQs, ${supp.length} supplements tracked`);
     console.log(`the PDFs did not move, so docs/rules-full.md is unchanged`);
     if (appeared.length || edited.length)
@@ -667,9 +687,11 @@ const main = async () => {
     supplements: supp.map(({ text, ...d }) => d),
   };
 
-  await writeFile(join(ROOT, "docs/rules-full.md"), markdown(docs));
-  await writeFile(join(ROOT, "docs/rules-faq.md"), faqMarkdown(faqs));
-  await writeFile(join(ROOT, "data/rules.json"), JSON.stringify(stamp, null, 1) + "\n");
+  await writeAll([
+    [join(ROOT, "docs/rules-full.md"), markdown(docs)],
+    [join(ROOT, "docs/rules-faq.md"), faqMarkdown(faqs)],
+    [join(ROOT, "data/rules.json"), JSON.stringify(stamp, null, 1) + "\n"],
+  ]);
 
   console.log(`\ndocs/rules-full.md  ${docs.reduce((a, d) => a + d.rules.length, 0)} rules, ${sections.length} sections`);
   console.log(`docs/rules-faq.md   ${faqs.length} FAQs, ${supp.length} supplements tracked`);

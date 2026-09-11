@@ -2449,7 +2449,8 @@ section('The rules');
     // ALL-CAPS brackets are the feed's placeholders, not game terms: the six Vendetta
     // basic rune printings carry a literal [NO TEXT] where Riot's data has no rules
     // text for them. The rules do define what a basic rune does (164.2) — the catalog
-    // just doesn't carry it. Same exclusion the builder applies.
+    // just doesn't carry it. The builder excludes all-caps outright; this keeps the
+    // length guard so a genuine one-or-two-letter symbol is still checked.
     const terms = new Map(Object.keys(rules.terms || {}).map((k) => [k.toLowerCase(), k]));
     const printed = new Map();
     for (const c of cat.cards)
@@ -2544,6 +2545,19 @@ section('The rules');
          /errata\.json/.test(st) && /catalog-stale/.test(st) && /fix\.set\(e\.name,/.test(st),
          'state.mjs must key on e.name alone — an `e.name || e.card` fallback is the bug');
 
+      // A boundary the builder could not resolve was guessed, which puts half the old
+      // text onto the card. Never ship one.
+      const guessed = errata.cards.filter((c) => c.split === false);
+      ok('every errata boundary was resolved against the catalog, not guessed',
+         guessed.length === 0, guessed.map((c) => c.name).join(', ') || 'all resolved');
+      // The corrections have to be written in the catalog's symbol dialect, or corrected
+      // cards render ":rb_might:" next to "[M]" and the difference looks like a bug.
+      const wrongDialect = errata.cards.filter(
+        (c) => c.status === 'catalog-stale' && /\[(?:\d+|[A-Z])\]/.test(c.new || ''));
+      ok('corrections are written in the catalog symbol dialect',
+         wrongDialect.length === 0,
+         wrongDialect.map((c) => c.name).join(', ') || 'no bracket symbols left');
+
       // Volume. Nothing else would notice the errata file quietly shrinking, which is
       // exactly how a page that stopped parsing would hide.
       const pageCounts = (errata.pages || []).filter((p) => !p.count);
@@ -2575,9 +2589,13 @@ section('The rules');
        reaches the site and the job still goes red and opens an issue. Blocking the
        deck snapshot over a documentation lag would be the wrong trade. */
     const gate = process.argv.includes('--max-age');
+    // Read the dateline only, not the whole handbook: taking the first "Core Rules
+    // <date>" anywhere in 50KB meant any prose mention placed above it would silently
+    // become the contract.
+    const dateline = (/^\*\*Describes .+$/m.exec(book) || [''])[0];
     const claims = {
-      core: (/Core Rules (\d{4}-\d{2}-\d{2})/.exec(book) || [])[1],
-      tournament: (/Tournament Rules (\d{4}-\d{2}-\d{2})/.exec(book) || [])[1],
+      core: (/Core Rules (\d{4}-\d{2}-\d{2})/.exec(dateline) || [])[1],
+      tournament: (/Tournament Rules (\d{4}-\d{2}-\d{2})/.exec(dateline) || [])[1],
     };
     for (const [k, d] of Object.entries(rules.docs || {})) {
       const said = claims[k], real = d.updated;
