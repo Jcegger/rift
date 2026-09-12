@@ -1,0 +1,34 @@
+{
+ "generatedAt": "2026-09-12",
+ "source": "guides/*.md in this repo",
+ "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
+ "guides": [
+  {
+   "slug": "sivir-anti-meta-midrange",
+   "file": "guides/sivir-anti-meta-midrange.md",
+   "title": "Anti-Meta Sivir Midrange — Deck Dossier",
+   "subtitle": "Riftbound, Vendetta season",
+   "date": "2026-09-12",
+   "legend": "Battle Mistress",
+   "champion": "Sivir, Mercenary",
+   "sections": [
+    "1. What this deck is",
+    "2. The engine, and the timing detail that matters",
+    "3. Rune math — read this before you plan a Baron turn",
+    "4. The forty",
+    "5. What each card is hunting for",
+    "6. What the format actually plays",
+    "7. Playing around the top four",
+    "8. Matchups",
+    "9. The *other* Battle Mistress deck",
+    "10. Mulligans",
+    "11. Sequencing",
+    "12. What I'd test next",
+    "13. Errata that change your cards",
+    "14. Sideboard",
+    "Sources and method"
+   ],
+   "words": 7818
+  }
+ ]
+}

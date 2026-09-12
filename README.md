@@ -30,6 +30,7 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `data/news.json` - riftbound.gg's posts: title, date, tag, link.
 - `data/tiers.json` - riftbound.gg's weekly Tier 1-5 list, per Legend, scraped.
 - `data/history.json` - the daily archive: deck counts per legend, and tier lists.
+- `data/guides.json` - the manifest of the dossiers in `guides/`. Not their text.
 - `scripts/build-catalog.mjs` - regenerates the catalog from Riot's gallery feed.
 - `scripts/build-decks.mjs` - regenerates the deck snapshot.
 - `scripts/build-banned.mjs` - regenerates the ban list.
@@ -37,10 +38,14 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `scripts/build-news.mjs` - regenerates the news feed.
 - `scripts/build-tiers.mjs` - scrapes the meta tier list off riftbound.gg's page.
 - `scripts/build-history.mjs` - appends today's row to the archive. Fetches nothing.
+- `scripts/build-guides.mjs` - regenerates the guide manifest. Fetches nothing.
+- `scripts/build-guide` - turns one guide into a Word doc with pandoc. No 's'.
 - `scripts/check.mjs` - the regression checks; run it after touching the engine.
 - `.github/workflows/refresh.yml` - rebuilds all of the above daily and commits.
 - `schema.sql` - the Supabase table and its policies.
 - `docs/picking-a-deck.md` - how to drive the Next tab's Find my deck panel.
+- `guides/` - the deck dossiers, in Markdown. The source of truth for the Guides
+  tab and for `guides/out/*.docx`, which is build output and gitignored.
 - `worker/` - the Cloudflare Worker that proxies the riftbound.gg profile.
 - `fonts/` - Press Start 2P and Syne Mono, self-hosted to match jayegger.com.
 
@@ -120,6 +125,14 @@ the rest, whether you are missing the legend, a champion unit, or both. See belo
 
 **News** is riftbound.gg's own posts, filterable by tag, with the set and rules posts
 pulled out separately because those are the two kinds that make this app's data wrong.
+
+**Guides** is the one tab that is written rather than computed: deck dossiers
+covering what a list is trying to do, what the format is actually playing against
+it, and the card-by-card reasoning. They live as Markdown in `guides/`, so the
+same file renders in the app and builds to a Word doc — `data/guides.json` is only
+a manifest and the app fetches the body when you open one. Everywhere else this
+app reports data; here it argues, and the sourcing at the foot of each dossier is
+there so the argument can be checked.
 
 **Import** pulls the collection in from riftbound.gg, which is where cards
 actually get entered because its scanner beats typing.

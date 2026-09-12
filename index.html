@@ -255,7 +255,66 @@ body{overflow-x:hidden}
   .meter-sub{gap:8px;font-size:10px}
   table{min-width:560px}
   .pre{font-size:11px}
+
+  .g-shelf{grid-template-columns:1fr}
+  .g-doc{padding:16px 14px}
+  .g-title{font-size:13px;line-height:1.7}
+  .g-body{font-size:14px}
+  .g-h2{font-size:11px}
+  .g-toc{columns:1}
+  .g-table{min-width:440px}
 }
+
+/* ── Guides ──────────────────────────────────────────────────────────────
+   Every other tab is a dashboard: dense, scannable, built for lookup. A
+   dossier is the opposite — it is read start to finish — so it gets a real
+   measure, real leading and a serif-ish rhythm, while keeping the same
+   palette and the pixel face on headings so it still reads as this site. */
+.g-shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.g-card{display:flex;flex-direction:column;gap:7px;text-align:left;cursor:pointer;
+  background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--maize);
+  border-radius:9px;padding:16px;color:var(--ink);font-family:inherit;transition:border-color .12s,transform .12s}
+.g-card:hover{border-color:var(--line2);border-left-color:var(--teal);transform:translateY(-1px)}
+.g-card-kicker{font-family:var(--head);font-size:11px;color:var(--teal);letter-spacing:.02em}
+.g-card-title{font-family:var(--pixel);font-size:11px;line-height:1.7;color:var(--cream)}
+.g-card-meta{font-family:var(--head);font-size:11px;color:var(--dimmer)}
+
+.g-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.g-doc{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:30px 34px;
+  max-width:74ch;margin:0 auto}
+.g-doc-head{border-bottom:1px solid var(--line2);padding-bottom:18px;margin-bottom:22px}
+.g-kicker{font-family:var(--head);font-size:12px;color:var(--teal);margin:0 0 8px}
+.g-title{font-family:var(--pixel);font-size:16px;line-height:1.8;color:var(--cream);margin:0}
+.g-sub{font-family:var(--head);font-size:12.5px;color:var(--dimmer);margin:10px 0 0}
+
+.g-toc{columns:2;column-gap:24px;font-family:var(--head);font-size:12px;
+  border-left:2px solid var(--line2);padding-left:14px;margin-bottom:26px}
+.g-toc a{display:block;padding:2.5px 0;color:var(--dim);text-decoration:none;break-inside:avoid}
+.g-toc a:hover{color:var(--maize)}
+
+.g-body{font-size:15.5px;line-height:1.72;color:var(--ink)}
+.g-body p{margin:0 0 15px}
+.g-h2{font-family:var(--pixel);font-size:12px;line-height:1.75;color:var(--maize);
+  margin:34px 0 14px;padding-top:20px;border-top:1px solid var(--line);scroll-margin-top:14px}
+.g-h3{font-family:var(--head);font-size:15px;color:var(--cream);margin:24px 0 10px;letter-spacing:.01em}
+.g-h4{font-family:var(--head);font-size:13.5px;color:var(--dim);margin:18px 0 8px}
+.g-body strong{color:var(--cream)}
+.g-body em{color:var(--dim);font-style:italic}
+.g-code{font-family:var(--head);font-size:.9em;color:var(--teal);
+  background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+.g-list{margin:0 0 15px;padding-left:20px}
+.g-list li{margin-bottom:8px}
+.g-list li::marker{color:var(--dimmer)}
+.g-quote{margin:18px 0;padding:12px 16px;border-left:3px solid var(--maize);
+  background:var(--bg2);border-radius:0 6px 6px 0;color:var(--cream);font-family:var(--head);font-size:14px}
+
+.g-tablewrap{overflow-x:auto;margin:0 0 18px}
+.g-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.g-table th{font-family:var(--head);font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;
+  color:var(--dimmer);text-align:left;padding:7px 11px 7px 0;border-bottom:1px solid var(--line2);white-space:nowrap}
+.g-table td{padding:8px 11px 8px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.g-table tr:last-child td{border-bottom:none}
+.g-table td:first-child{color:var(--cream)}
 </style>
 </head>
 <body>
@@ -284,6 +343,7 @@ body{overflow-x:hidden}
       <button class="tab" role="tab" data-tab="next" aria-selected="false">Next<span class="n" id="tn-next"></span></button>
       <button class="tab" role="tab" data-tab="legends" aria-selected="false">Legends<span class="n" id="tn-legends"></span></button>
       <button class="tab" role="tab" data-tab="news" aria-selected="false">News<span class="n" id="tn-news"></span></button>
+      <button class="tab" role="tab" data-tab="guides" aria-selected="false">Guides<span class="n" id="tn-guides"></span></button>
       <button class="tab" role="tab" data-tab="sync" aria-selected="false">Import<span class="n" id="tn-sync"></span></button>
     </nav>
   </header>
@@ -346,6 +406,9 @@ body{overflow-x:hidden}
   <!-- ══ NEWS ════════════════════════════════════════ -->
   <section id="v-news" class="hide"></section>
 
+  <!-- ══ GUIDES ══════════════════════════════════════ -->
+  <section id="v-guides" class="hide"></section>
+
   <!-- ══ IMPORT / SYNC ═══════════════════════════════ -->
   <section id="v-sync" class="hide"></section>
 
@@ -396,6 +459,9 @@ let TIERS = null;          // riftbound.gg's weekly tier list from data/tiers.js
 let TIERS_AT = null;
 let TIERS_INFO = null;     // { set, report, week, source }
 let HIST = null;           // the daily archive from data/history.json: { legends, days, weeks }
+let GUIDES = null;         // the deck dossiers listed in data/guides.json (manifest only)
+let GUIDES_AT = null;
+const GUIDE_BODY = {};     // slug -> markdown, fetched on demand and kept for the session
 let BY  = {};              // publicCode -> card
 // Opens on Next, not Collection. The collection is a mirror of riftbound.gg and
 // browsing it is the one thing that site already does better; what it cannot do is
@@ -4520,10 +4586,182 @@ function renderNews(){
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   RENDER: guides
+
+   data/guides.json is a manifest, not the guides: slug, title, the section
+   headings and where the file lives. The body is Markdown in guides/, fetched
+   the first time a dossier is opened and kept for the session. That keeps one
+   copy of the writing on disk — the same file scripts/build-guide turns into a
+   Word doc — instead of a second one pasted in here to drift out of sync.
+
+   The renderer below is a deliberate subset: the constructs these guides
+   actually use, and nothing else. It is not a Markdown implementation and
+   should not grow into one.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+let GUIDE_OPEN = null;     // slug of the dossier being read, or null for the shelf
+
+// Inline spans. Escape first, so the source can never inject markup, then let
+// the few formatting marks back in.
+function mdInline(src){
+  let h = esc(src);
+  h = h.replace(/`([^`]+)`/g, '<code class="g-code">$1</code>');
+  // Non-greedy, and tolerant of a single * inside: **bold with *italic* in it**
+  // is a construct these guides actually use, and [^*]+ cannot match it.
+  h = h.replace(/\*\*([^\n]+?)\*\*/g, '<strong>$1</strong>');
+  h = h.replace(/(^|[\s(—-])\*([^*\n]+)\*/g, '$1<em>$2</em>');
+  h = h.replace(/\[([^\]]+)\]\(([^)]+)\)/g,
+                (m, t, u) => /^https?:\/\//.test(u) ? `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>` : t);
+  return h;
+}
+
+const mdCells = (row) => row.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+
+function mdToHtml(src){
+  const lines = src.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '').split(/\r?\n/);
+  const out = [];
+  let i = 0, para = [], list = null;
+
+  const flushPara = () => {
+    if (para.length){ out.push(`<p>${mdInline(para.join(' '))}</p>`); para = []; }
+  };
+  const flushList = () => { if (list){ out.push(`</${list}>`); list = null; } };
+  const flush = () => { flushPara(); flushList(); };
+
+  while (i < lines.length){
+    const ln = lines[i];
+
+    if (!ln.trim()){ flush(); i++; continue; }
+
+    // Headings. h2 opens a numbered section, h3 a subsection.
+    const h = /^(#{2,4})\s+(.*)$/.exec(ln);
+    if (h){
+      flush();
+      const lvl = h[1].length;
+      out.push(`<h${lvl} class="g-h${lvl}">${mdInline(h[2])}</h${lvl}>`);
+      i++; continue;
+    }
+
+    // Tables: a header row, a dashed rule, then body rows.
+    if (ln.includes('|') && /^\s*\|?\s*:?-{2,}/.test(lines[i + 1] || '')){
+      flush();
+      const head = mdCells(ln);
+      i += 2;
+      const body = [];
+      while (i < lines.length && lines[i].includes('|')){ body.push(mdCells(lines[i])); i++; }
+      out.push(`<div class="g-tablewrap"><table class="g-table">
+        <thead><tr>${head.map(c => `<th>${mdInline(c)}</th>`).join('')}</tr></thead>
+        <tbody>${body.map(r => `<tr>${r.map(c => `<td>${mdInline(c)}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table></div>`);
+      continue;
+    }
+
+    // Blockquote — used in these guides for the one line you must not miss.
+    if (/^>\s?/.test(ln)){
+      flush();
+      const q = [];
+      while (i < lines.length && /^>\s?/.test(lines[i])){ q.push(lines[i].replace(/^>\s?/, '')); i++; }
+      out.push(`<blockquote class="g-quote">${mdInline(q.join(' '))}</blockquote>`);
+      continue;
+    }
+
+    // Lists. Continuation lines are indented, so fold them into the open item.
+    const li = /^(\s*)([-*]|\d+\.)\s+(.*)$/.exec(ln);
+    if (li){
+      flushPara();
+      const want = /^\d/.test(li[2]) ? 'ol' : 'ul';
+      if (list !== want){ flushList(); out.push(`<${want} class="g-list">`); list = want; }
+      const item = [li[3]];
+      i++;
+      while (i < lines.length && /^\s{2,}\S/.test(lines[i]) && !/^\s*([-*]|\d+\.)\s/.test(lines[i])){
+        item.push(lines[i].trim()); i++;
+      }
+      out.push(`<li>${mdInline(item.join(' '))}</li>`);
+      continue;
+    }
+
+    para.push(ln.trim());
+    i++;
+  }
+  flush();
+  return out.join('\n');
+}
+
+async function openGuide(slug){
+  GUIDE_OPEN = slug;
+  const g = (GUIDES || []).find(x => x.slug === slug);
+  if (g && GUIDE_BODY[slug] === undefined){
+    GUIDE_BODY[slug] = null;                      // null = tried, still loading or failed
+    try {
+      const r = await fetch(g.file, { cache:'no-cache' });
+      if (r.ok) GUIDE_BODY[slug] = await r.text();
+    } catch { /* offline: the shelf still renders, the body says so */ }
+  }
+  renderGuides();
+}
+
+function renderGuides(){
+  const host = document.getElementById('v-guides');
+
+  if (!GUIDES || !GUIDES.length){
+    host.innerHTML = `<div class="panel"><h2>GUIDES</h2><p class="note">No dossiers yet.
+      Write one in <code>guides/</code>, then run <code>node scripts/build-guides.mjs</code>.</p></div>`;
+    return;
+  }
+
+  // The shelf.
+  if (!GUIDE_OPEN){
+    host.innerHTML = `
+      <div class="panel">
+        <h2>GUIDES <span class="code">${GUIDES.length}</span></h2>
+        <p class="note">Deck dossiers: what the list is trying to do, what the format is
+        actually playing against it, and the card-by-card reasoning. Written here, in
+        <code>guides/</code>, rather than scraped — so unlike every other tab these are
+        opinions, not data. Each one also builds to a Word doc with
+        <code>scripts/build-guide</code>.</p>
+      </div>
+      <div class="g-shelf">
+        ${GUIDES.map(g => `
+          <button class="g-card" data-guide="${esc(g.slug)}">
+            <span class="g-card-kicker">${esc(g.legend || 'Dossier')}${g.champion ? ' · ' + esc(g.champion) : ''}</span>
+            <span class="g-card-title">${esc(g.title.replace(/\s*—\s*Deck Dossier$/, ''))}</span>
+            <span class="g-card-meta">${g.sections.length} sections · ${g.words.toLocaleString()} words${g.date ? ' · ' + esc(g.date) : ''}</span>
+          </button>`).join('')}
+      </div>`;
+    return;
+  }
+
+  const g = GUIDES.find(x => x.slug === GUIDE_OPEN);
+  const body = GUIDE_BODY[GUIDE_OPEN];
+
+  host.innerHTML = `
+    <div class="g-top">
+      <button class="ghost" id="g-back">← All guides</button>
+      <span class="code">${esc(g.file)}</span>
+    </div>
+    <article class="g-doc">
+      <header class="g-doc-head">
+        <p class="g-kicker">${esc(g.legend || '')}${g.champion ? ' · ' + esc(g.champion) : ''}</p>
+        <h1 class="g-title">${esc(g.title.replace(/\s*—\s*Deck Dossier$/, ''))}</h1>
+        ${g.subtitle ? `<p class="g-sub">${esc(g.subtitle)}${g.date ? ' · ' + esc(g.date) : ''}</p>` : ''}
+      </header>
+      ${body ? `<nav class="g-toc">${g.sections.map((sec, n) =>
+          `<a href="#g-s${n}">${esc(sec)}</a>`).join('')}</nav>
+        <div class="g-body">${mdToHtml(body)}</div>`
+        : `<p class="empty">Couldn't load ${esc(g.file)}. It ships with the site, so this
+           usually means the page is open from a file:// URL rather than the server.</p>`}
+    </article>`;
+
+  // Anchor the table of contents to the rendered headings, in document order.
+  const hs = host.querySelectorAll('.g-body .g-h2');
+  hs.forEach((el, n) => { el.id = 'g-s' + n; });
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    RENDER: dispatch
    ══════════════════════════════════════════════════════════════════════════ */
 function render(){
-  for (const t of ['collection','sets','trade','decks','meta','next','legends','news','sync'])
+  for (const t of ['collection','sets','trade','decks','meta','next','legends','news','guides','sync'])
     document.getElementById('v-' + t).classList.toggle('hide', TAB !== t);
   for (const b of document.querySelectorAll('.tab'))
     b.setAttribute('aria-selected', String(b.dataset.tab === TAB));
@@ -4536,6 +4774,7 @@ function render(){
   if (TAB === 'next')  renderNext();
   if (TAB === 'legends') renderLegends();
   if (TAB === 'news')  renderNews();
+  if (TAB === 'guides') renderGuides();
   if (TAB === 'sync')  renderSync();
 
   // keep the badges honest even when their tab is closed
@@ -4780,6 +5019,13 @@ function wire(){
   document.body.addEventListener('input', (e) => {
     const el = e.target;
     if (el.dataset.code && el.dataset.f) el.classList.toggle('set', !!Number(el.value));
+  });
+
+  // guides: the shelf opens a dossier, the dossier goes back to the shelf
+  document.getElementById('v-guides').addEventListener('click', (e) => {
+    if (e.target.closest('#g-back')){ GUIDE_OPEN = null; renderGuides(); window.scrollTo(0, 0); return; }
+    const card = e.target.closest('[data-guide]');
+    if (card){ openGuide(card.dataset.guide); window.scrollTo(0, 0); }
   });
 
   // lightbox
@@ -5245,6 +5491,17 @@ async function boot(){
       TIERS_INFO = TIERS ? { set: td.set || null, report: td.report || null, week: td.week ?? null, source: td.source || null } : null;
     }
   } catch { /* no tier list */ }
+  // The dossier manifest. Optional: without it the tab says so and nothing else
+  // changes, because no other view reads it.
+  try {
+    const gr = await fetch('data/guides.json', { cache:'no-cache' });
+    if (gr.ok){
+      const gd = await gr.json();
+      GUIDES = Array.isArray(gd.guides) && gd.guides.length ? gd.guides : null;
+      GUIDES_AT = gd.generatedAt || null;
+    }
+  } catch { /* no guides */ }
+
   // The archive. Optional like the rest: without it every tab still answers "right
   // now", which is what it did before there was a recorder at all.
   try {
