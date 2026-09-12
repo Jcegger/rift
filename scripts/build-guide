@@ -1,0 +1,56 @@
+#!/bin/sh
+# Turns a Markdown guide in guides/ into a Word doc in guides/out/.
+#
+#   scripts/build-guide                    # list available guides
+#   scripts/build-guide sivir-anti-meta-midrange
+#   scripts/build-guide guides/sivir-anti-meta-midrange.md
+#   scripts/build-guide --all              # rebuild every guide
+#
+# Source of truth is the .md file; guides/out/ is build output (gitignored,
+# regenerate any time). Requires pandoc.
+
+DIR=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+GUIDES="$DIR/guides"
+OUT="$GUIDES/out"
+
+PANDOC=$(command -v pandoc 2>/dev/null)
+[ -z "$PANDOC" ] && PANDOC=$(ls "$HOME"/anaconda3/bin/pandoc 2>/dev/null | head -1)
+[ -z "$PANDOC" ] && { echo "build-guide: no pandoc found (looked on PATH and in anaconda3/bin)" >&2; exit 127; }
+
+mkdir -p "$OUT"
+
+build_one() {
+  src="$1"
+  base=$(basename -- "$src" .md)
+  "$PANDOC" "$src" -o "$OUT/$base.docx" --standalone
+  echo "built guides/out/$base.docx"
+}
+
+case "$1" in
+  "")
+    echo "guides available in $GUIDES:"
+    for f in "$GUIDES"/*.md; do
+      [ -e "$f" ] || continue
+      echo "  $(basename -- "$f" .md)"
+    done
+    echo
+    echo "usage: scripts/build-guide <name>|<path.md>|--all"
+    ;;
+  --all)
+    for f in "$GUIDES"/*.md; do
+      [ -e "$f" ] || continue
+      build_one "$f"
+    done
+    ;;
+  *)
+    if [ -f "$1" ]; then
+      src="$1"
+    elif [ -f "$GUIDES/$1.md" ]; then
+      src="$GUIDES/$1.md"
+    else
+      echo "build-guide: no such guide '$1' (looked for $GUIDES/$1.md)" >&2
+      exit 1
+    fi
+    build_one "$src"
+    ;;
+esac
