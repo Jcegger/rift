@@ -32,6 +32,34 @@
    "words": 10945
   },
   {
+   "slug": "reksai-void-burrower",
+   "file": "guides/reksai-void-burrower.md",
+   "title": "Rek'Sai Void Burrower — Deck Dossier",
+   "subtitle": "Riftbound, Vendetta season",
+   "date": "2026-09-14",
+   "legend": "Void Burrower",
+   "champion": "Rek'Sai, Breacher",
+   "sections": [
+    "The short version",
+    "1. What this deck is",
+    "2. The engine, and what it actually costs",
+    "3. How combat actually resolves",
+    "4. The reveal economy: what you can actually afford",
+    "5. Card by card — the main deck",
+    "6. Deathknell, tokens, and why your units want to die",
+    "7. Keywords, precisely",
+    "8. What the format actually plays",
+    "9. Matchups",
+    "10. Mulligans",
+    "11. Sequencing — how your turn actually goes",
+    "12. Errata that change your cards",
+    "13. The sideboard",
+    "14. What I'd test",
+    "Sources and method"
+   ],
+   "words": 8219
+  },
+  {
    "slug": "sivir-anti-meta-midrange",
    "file": "guides/sivir-anti-meta-midrange.md",
    "title": "Anti-Meta Sivir Midrange — Deck Dossier",
