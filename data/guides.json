@@ -4,6 +4,34 @@
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
   {
+   "slug": "khazix-voidreaver",
+   "file": "guides/khazix-voidreaver.md",
+   "title": "Kha'Zix Voidreaver — Deck Dossier",
+   "subtitle": "Riftbound, Vendetta season",
+   "date": "2026-09-14",
+   "legend": "Voidreaver",
+   "champion": "Kha'Zix, Mutating Horror",
+   "sections": [
+    "The short version",
+    "1. What this deck is",
+    "2. The engine, and its three hard ceilings",
+    "3. How combat actually resolves",
+    "4. Winning a combat outright: the four levers",
+    "5. Card by card — the main deck",
+    "6. The trash is a resource",
+    "7. Keywords, precisely",
+    "8. What the format actually plays",
+    "9. Matchups",
+    "10. Mulligans",
+    "11. Sequencing — how your turn actually goes",
+    "12. Errata that change your cards",
+    "13. The sideboard, and what you still owe",
+    "14. What I'd test",
+    "Sources and method"
+   ],
+   "words": 10945
+  },
+  {
    "slug": "sivir-anti-meta-midrange",
    "file": "guides/sivir-anti-meta-midrange.md",
    "title": "Anti-Meta Sivir Midrange — Deck Dossier",
