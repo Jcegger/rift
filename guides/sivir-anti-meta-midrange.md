@@ -64,7 +64,49 @@ of 1-Power cards; so does her own casting cost plus one more. A 6-Might
 Ganking body for 4 Energy is above rate, and you will clear the threshold by
 accident more often than on purpose.
 
-## 3. Rune math — read this before you plan a Baron turn
+## 3. How combat actually resolves
+
+Everything the deck does sits in the gaps between four properties of Riftbound
+combat. They are worth knowing exactly, because the deck is built to exploit
+each one.
+
+**Combat is never declared.** It happens on its own, in a Cleanup, when the
+Chain is empty, a Combat is staged at a Battlefield, and no Showdown or Combat
+is running anywhere else (rule 460). A Combat gets staged at any Battlefield
+that Contested was applied to with units present from opposing players (rule
+323.9). You start a fight by *moving somewhere*. There is no attack step to opt
+out of, which is why every repositioning card in §5 is also a combat trick.
+
+**There is no blocking and no pairing off.** Each side sums the Might of all its
+units and assigns that whole total across the other side's units (rule 465.2.a–c).
+A 1-Might unit and a 6-Might unit are, for the purposes of the sum, seven Might.
+Nothing "blocks" anything — which is why adding a body and adding Might are the
+same act, and why Switcheroo and Gust can decide a fight without touching a
+damage number.
+
+**The attacker assigns damage first.** The defender allocates knowing the
+attacker's choices; only the *dealing* is simultaneous (rule 465.2.c,
+465.2.c.1.a). Assignment must put lethal damage on a unit in full before moving
+to the next, and may not overkill (rule 465.2.c.3–4). You cannot spread damage
+to spare a unit, and neither can they.
+
+**The Showdown is your window.** Combat opens with a Combat Showdown before any
+damage (rule 464), and in a Showdown State only cards with Action or Reaction
+can be played (rule 308.1.a). This is where most of the deck lives: Punch First,
+Switcheroo, Challenge and Here to Help are Actions; Gust, Star-Crossed and Flash
+are Reactions. **You are allowed to rewrite the sum after the opponent has
+committed to it.**
+
+And one asymmetry that decides close games. If the defenders survive, the
+attackers are *recalled* (rule 466.1.a.2) and the combat is a **No Result** —
+not a defender win (rule 466.3.d). But if *everyone* dies, no units remain and
+the Battlefield becomes **Uncontrolled** (rule 466.5.b). So against an opponent
+who currently controls a Battlefield, an even trade is not a wash: it costs them
+the Hold, and a Hold is 1 Victory Point in their Beginning Phase (rule 469.2,
+315.2.b.2). Trading evenly into a held Battlefield is a point swing, and this
+deck is built to make trades look even that aren't.
+
+## 4. Rune math — read this before you plan a Baron turn
 
 You channel exactly 2 runes per turn (rule 315.3.b) and your rune deck is
 exactly 12 (rule 402.1). The part that's easy to get wrong is that a rune's two
@@ -152,16 +194,16 @@ which hands you control of a fourth battlefield and one more card off Seat of
 Power. The catch is mobility: "Units can move here from anywhere" describes
 moving *in*, not out, so without Ganking he's parked there for a while.
 
-## 4. The forty
+## 5. The forty
 
 Text below is current text, with Riot's errata applied — four of your cards no
-longer read the way they're printed. See §13.
+longer read the way they're printed. See §14.
 
 ### Repositioning and displacement — 11 cards
 
 - **Gust** (1E, Chaos, Reaction) — return a unit at a battlefield with 3 Might
   or less to its owner's hand. Cheapest answer in the list, and the only one
-  that is *permanent* against tokens (see §8, Azir).
+  that is *permanent* against tokens (see §9, Azir).
 - **Star-Crossed** (3E / 1 Chaos, Reaction) — returns a friendly **and** an
   enemy unit. Both halves are mandatory; no Might cap. Budget a spare body.
 - **Flash** (2E, Chaos, Reaction) — move up to 2 friendly units to base. Purely
@@ -184,7 +226,7 @@ longer read the way they're printed. See §13.
   single highest-value one-mana play you have, and it doubles as perfect
   information for the rest of the turn.
 - **Punch First** ×3 (1E / **2 Body Power**) — +5 Might. Enormous, and
-  structurally uncounterable by Defy (§7).
+  structurally uncounterable by Defy (§8).
 - **Switcheroo** ×2 (2E / **2 Chaos Power**, Hidden) — swap two units' Might at
   one battlefield. Also Defy-proof. The clean answer to a single pumped threat.
 - **Challenge** ×2 (2E / 1 Body) — your unit and theirs deal Might to each
@@ -224,15 +266,15 @@ longer read the way they're printed. See §13.
   kind of interaction entirely.
 - **Baron Nashor** ×2 (10E / 3 Chaos, 12 Might) — can't be chosen by enemy
   spells or abilities; other friendly units get +2 Might (no location clause —
-  the aura reaches the whole board). See §3 for how he actually gets cast, and
+  the aura reaches the whole board). See §4 for how he actually gets cast, and
   for why only your *second* Baron can be aimed at a battlefield. His protection dodges Hidden Blade (23% of decks) and
   every other "choose a unit" removal in the format — but not combat, not
   Flurry of Blades, and not your own sideboard Downwell.
-- **Sivir, Mercenary** ×1 — the champion. See §12; you own three.
+- **Sivir, Mercenary** ×1 — the champion. See §13; you own three.
 - **Here to Help** ×2 (2E / 1 Body, Hidden) — play a unit from hand to a
   battlefield you control for 3 less Energy. Hidden on an earlier turn it costs
   nothing at all to play, which makes it the fastest Baron Nashor line in the
-  deck — a full turn ahead of hard-casting him, with five runes left over (§3).
+  deck — a full turn ahead of hard-casting him, with five runes left over (§4).
   It's also fine on Rengar or Sivir when Baron isn't the plan.
 
 ### Battlefields — 3
@@ -243,12 +285,12 @@ longer read the way they're printed. See §13.
   (Evelynn, Merchant) and leaves a body behind.
 - **Forbidding Waste** — a unit defending alone here has -2 Might. Punishes
   every deck that leaves one body home to hold. Note the exact anti-synergy in
-  §8: Master Yi's legend gives a lone defender +2, and the two cancel precisely.
+  §9: Master Yi's legend gives a lone defender +2, and the two cancel precisely.
 - **Seat of Power** — on conquer, draw 1 for each **other** battlefield you or
   allies control. Best pure card advantage in the list, and a 14%-of-format
   staple for the same reason.
 
-## 5. What each card is hunting for
+## 6. What each card is hunting for
 
 Eight cards in the 40 are conditional — they need something specific to exist
 before they do anything. A deck fails quietly when those targets aren't actually
@@ -272,7 +314,7 @@ Targets are the nine units costing 4+ Energy — 22% of the deck:
 | Target | Normal | Via Here to Help | Verdict |
 |---|---|---|---|
 | **Sivir + Accelerate** | 5E + 2 Chaos | **2E + 2 Chaos** | The best target in the deck |
-| Baron Nashor, 2nd copy | 10E + 3 Chaos | 7E + 3 Chaos | Yes — the copy you can actually aim (§3) |
+| Baron Nashor, 2nd copy | 10E + 3 Chaos | 7E + 3 Chaos | Yes — the copy you can actually aim (§4) |
 | Baron Nashor, 1st copy | 10E + 3 Chaos | 7E + 3 Chaos | Discount only; he leaves for the Pit |
 | Vex / Kha'Zix | 4E | 1E | Fine, unexciting |
 | Rengar | 5E + 1 Body | 2E + 1 Body | Usually worse than just Ambushing him |
@@ -282,7 +324,7 @@ rainbow Power. Next turn, play it free, play Sivir, and pay Accelerate: 4E + 1
 Chaos base, plus Accelerate's 1E + 1 Chaos, minus 3E — discounts reduce
 additional costs too (rule 356.4.f) — for **2 Energy and 2 Chaos Power**. Two
 Chaos runes pay the entire bill: exhaust both for the Energy, then recycle those
-same two for the Power (§3). And those 2 Chaos Power *are* her threshold, so she
+same two for the Power (§4). And those 2 Chaos Power *are* her threshold, so she
 lands **ready, 6 Might, with Ganking**, off two runes, as early as turn three.
 
 The one string attached: played from Hidden, she must enter at the battlefield
@@ -328,14 +370,14 @@ Share of each archetype's main deck that is a non-unit, i.e. a legal grab:
 Against Azir, nine of every ten cards is Equipment or a spell — Sabotage is very
 close to a guaranteed hit, and the card you take is usually Hidden Blade or
 Arise!. Zed and LeBlanc are the whiff risks, and Zed is also the deck where
-recycling a card half-helps them (§9).
+recycling a card half-helps them (§10).
 
 ### Kha'Zix — needs a *lone* enemy, and you have to build it
 
 +2 Might and 2 XP only when a single enemy unit is at his battlefield. Nothing
 gives that to you for free: Faefolk drags one body in, or Gust removes the
 second. Set up first, Ambush second. Without the setup he is a vanilla 4/4 — and
-the 2 XP is dead either way (§4).
+the 2 XP is dead either way (§5).
 
 ### Emperor's Dais — eight units are worth the bounce
 
@@ -351,7 +393,7 @@ Dead on an even board; best the moment they commit one oversized unit. Your
 *smallest* body is the resource that makes it work, which is another quiet
 argument for three Irresistible Faefolk at 1 Might.
 
-## 6. What the format actually plays
+## 7. What the format actually plays
 
 424 public and tournament lists, 2026-07-12 to 2026-09-10. Percentages are the
 share of decks running at least one copy.
@@ -368,7 +410,7 @@ share of decks running at least one copy.
 | Not So Fast | 12% | 2E / 1 Calm | Counters anything that chooses their unit |
 | Deathgrip | 10% | 2E Order | Sacrifices a unit to pump another, draw 1 |
 
-## 7. Playing around the top four
+## 8. Playing around the top four
 
 **Defy (32%)** counters a spell costing *no more than 4 Energy and no more than
 1 rainbow Power*. Check your suite against that line:
@@ -403,7 +445,7 @@ exhausts it and recalls it to base. Killing through it doesn't remove the unit
 from the game, it resets it. Bouncing the unit instead sidesteps the Hourglass
 entirely.
 
-## 8. Matchups
+## 9. Matchups
 
 Ordered by how often the archetype actually appeared in the 60-day window —
 which is a different order from the tier list, and the more useful one.
@@ -615,7 +657,7 @@ Assault 2.
 | Akali — Rogue Assassin | 11 | Defy 11/11, Zhonya's 10/11 — the most protection-dense deck in the format |
 | Jayce — Defender of Tomorrow | 11 | Platewyrm Egg (10/11); gear-centric, Akshan boards in |
 
-## 9. The *other* Battle Mistress deck
+## 10. The *other* Battle Mistress deck
 
 Seven Battle Mistress lists appear in the window. Five are tournament entries —
 second only to Master Yi's six — with a best finish of 10th of 82. That number
@@ -639,7 +681,7 @@ And **it is not your deck.** Their shell:
 | Ride the Wind | 3 | Move a friendly unit and ready it |
 | Aspirant's Climb, Forgotten Monument | 1 each | Battlefields that *slow the game down* |
 
-They attack §3's shrink cycle head-on: Catalyst and Mobilize channel extra
+They attack §4's shrink cycle head-on: Catalyst and Mobilize channel extra
 runes so recycling for Power never costs them tempo, Sigil of the Storm forces
 an extra recycle every conquer (which is another Gold token), and the two
 battlefields buy the turns that plan needs. Then they cast three Barons and an
@@ -653,10 +695,10 @@ ramp-control deck wearing the same legend.
 Two honest conclusions. First: nothing in their results says your deck is bad —
 they're evidence about a different list. Second: they are getting far more out
 of Battle Mistress's Gold engine than you are, because they manufacture rune
-recycles instead of waiting for them. §12 takes the cheapest piece of that idea
+recycles instead of waiting for them. §13 takes the cheapest piece of that idea
 without turning your deck into theirs.
 
-## 10. Mulligans
+## 11. Mulligans
 
 Keep a hand that can do something on turns two and three and has a way to
 refuel. Concretely:
@@ -666,13 +708,13 @@ refuel. Concretely:
 - **Keep:** Sabotage plus two two-drops. Turn-one information shapes everything
   after it.
 - **Ship:** hands with both Barons and no early play. He's castable from turn
-  five (§3), but a hand that does nothing until then loses the board before it
+  five (§4), but a hand that does nothing until then loses the board before it
   gets there. One Baron and a curve is fine; two Barons and a Fizz is not.
 - **Ship:** hands with three-plus Power-heavy cards and one rune colour's worth
   of plan. Punch First wants two Body runes *at once*.
 - **Fizz is not a keep.** With an empty trash he's a 3/3 for 3E and 1 Power.
 
-## 11. Sequencing
+## 12. Sequencing
 
 1. **Hide Here to Help early**, on a battlefield you expect to hold. It costs 1
    rainbow Power now and nothing later, and it pulls Baron a full turn forward
@@ -693,7 +735,7 @@ refuel. Concretely:
 7. **Kill anything, ready Battle Mistress.** When two lines are otherwise equal,
    take the one that kills an enemy unit — even a token — for the free untap.
 
-## 12. What I'd test next
+## 13. What I'd test next
 
 You own everything below already; the deck is at 0 cards still to get, so all
 of this is free.
@@ -748,7 +790,7 @@ Might to turn on Mighty. Your units are 1–4 Might.
 
 Where your friends are right: Rampage's unkicked mode costs **no Power**, which
 is quietly excellent on a Baron turn when every Chaos rune is already committed
-(§3). If you want to try it, add 1–2 over Flash and the third Stacked Deck and
+(§4). If you want to try it, add 1–2 over Flash and the third Stacked Deck and
 keep all three Challenge — eight decks in the data run both, and you own nine
 copies.
 
@@ -757,7 +799,7 @@ anything. As built, Kha'Zix's 2 XP per trigger is simply discarded. Either
 accept that and value him as a 4/4, or buy the payoff — but don't count XP as
 upside in the current 40.
 
-## 13. Errata that change your cards
+## 14. Errata that change your cards
 
 Riot publishes errata on its own pages and never feeds them back into the card
 data, so four of your cards don't read the way they're printed:
@@ -778,7 +820,7 @@ banishes itself off the top and plays for 1 Power, 8/9 Kennen lists), Guards!
 and Arise! (Azir), Targon's Peak (*up to* 2 runes), Deathgrip, Sigil of the
 Storm, and both LeBlanc copy effects.
 
-## 14. Sideboard
+## 15. Sideboard
 
 Eight of ten slots used: Akshan, Mischievous ×2 · Ruin Runner ×2 · Hard Bargain
 ×2 · Downwell ×1 · Gust ×1.
@@ -815,7 +857,7 @@ week-4 list, generated 2026-09-10.
 
 Two caveats worth carrying. The tournament sample is small — 20 decks across
 eight events — so treat every placing as anecdote, including the Battle
-Mistress ones in §9. And the tier list is one site's editorial judgement, which
-§8 shows diverging sharply from what people actually register: its #1 deck is
+Mistress ones in §10. And the tier list is one site's editorial judgement, which
+§9 shows diverging sharply from what people actually register: its #1 deck is
 the fifth-rarest archetype in the data, and the most-played deck in the format
 sits in its Tier 5.

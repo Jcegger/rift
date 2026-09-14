@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-12",
+ "generatedAt": "2026-09-14",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -14,21 +14,22 @@
    "sections": [
     "1. What this deck is",
     "2. The engine, and the timing detail that matters",
-    "3. Rune math — read this before you plan a Baron turn",
-    "4. The forty",
-    "5. What each card is hunting for",
-    "6. What the format actually plays",
-    "7. Playing around the top four",
-    "8. Matchups",
-    "9. The *other* Battle Mistress deck",
-    "10. Mulligans",
-    "11. Sequencing",
-    "12. What I'd test next",
-    "13. Errata that change your cards",
-    "14. Sideboard",
+    "3. How combat actually resolves",
+    "4. Rune math — read this before you plan a Baron turn",
+    "5. The forty",
+    "6. What each card is hunting for",
+    "7. What the format actually plays",
+    "8. Playing around the top four",
+    "9. Matchups",
+    "10. The *other* Battle Mistress deck",
+    "11. Mulligans",
+    "12. Sequencing",
+    "13. What I'd test next",
+    "14. Errata that change your cards",
+    "15. Sideboard",
     "Sources and method"
    ],
-   "words": 7818
+   "words": 8237
   }
  ]
 }
