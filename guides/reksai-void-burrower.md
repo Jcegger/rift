@@ -207,6 +207,63 @@ your preferred place to fight, and **Forbidding Waste** (*"while a unit here is
 defending alone, it has -2 Might"*) punishes exactly the lone defender you are trying
 to run over — but it is symmetrical, so do not leave one of yours alone there.
 
+### How often you actually win one
+
+Put the assignment rules together and the condition collapses to arithmetic you can do
+at the table. To kill all of their units you need **your total Might ≥ their total**;
+they kill all of yours if **their damage total ≥ yours**. So you win outright exactly
+when **your Might exceeds their damage total**.
+
+Simulated against the real Might distributions of the archetypes in §9, with your board
+built from *cards played* — units plus the tokens they bring — and attacking:
+
+| | your 3 cards vs their 2 units | vs their 3 units | vs 3, **with Undertitan** |
+|---|---|---|---|
+| Kennen | 66% | 30% | **96%** |
+| Master Yi | 69% | 36% | **99%** |
+| Rengar | 78% | 40% | **100%** |
+| **Azir** | 59% | **18%** | **100%** |
+| Irelia | 83% | 54% | **100%** |
+| Kha'Zix, Voidreaver | 72% | 36% | **99%** |
+
+**Three things fall out, and they are the deck's whole strategy stated numerically.**
+
+**You win by out-*carding* them, not by out-statting them.** Three cards against two of
+their units is 59–83%. The same three cards against three units is 18–54%. Your units
+are small; what wins is having more of them on the board, which is exactly what the
+token-makers buy.
+
+**Undertitan's anthem is the largest single swing in the deck** — *"give your other
+units +2 Might this turn"* takes an even board from roughly a third to essentially
+certain. §4's advice to budget the reveal is really advice to budget for *this card*.
+It is also why revealing it with no Order Power available is the most expensive misplay
+available to you.
+
+**Getting there a turn late is fatal.** From a two-card board rather than three, the
+same fights read 21–52% against two units and **3–23% against three**. This is the
+arithmetic behind §10's insistence on early bodies.
+
+**Might delivered per card**, which printed stats understate badly:
+
+| Card | Bodies | Total Might |
+|---|---|---|
+| **Vanguard Captain** (Legion) | **3** | **5** |
+| **Faithful Manufactor** | **2** | **3** |
+| Noxus Hopeful | 1 | 4 |
+| Vi, Peacekeeper | 1 | 5 |
+| Rek'Sai, Breacher | 1 | 3 (+1 attacking) |
+| Honest Broker / Noxian Emissary | 1 | 2 |
+| Inferna | 1 | 1 (+2 attacking) |
+| Carrion Dredger | 1 | 1 |
+
+A Legion'd Vanguard Captain is three lethal thresholds and five Might for three Energy.
+That is the best rate in the deck and the reason §11 opens with "play a cheap card
+first."
+
+*Modelling note: this ignores Blood Rush, Cleave and Hidden Blade, so treat every figure
+as a floor for a hand that also has a trick. Vi's stun is worth about ten points on its
+own — real, but not a substitute for bodies.*
+
 ## 4. The reveal economy: what you can actually afford
 
 Because you pay full price, the reveal is a budgeting problem. Here is the whole deck
@@ -946,8 +1003,19 @@ Collection and deck state come from the live app state via `scripts/rift deck re
 Target pools and the Power-demand figures in §5 are computed from `data/cards.json`
 rather than recalled.
 
-Tier placement is riftbound.gg's editorial judgement (Tier 3, #4 of 49, week 4 report,
-2026-09-10). Event shares, cohort records and Kevplayer's finish come from the Yomi's
+**The tier placement has been dropped from the header.** riftbound.gg had this at Tier
+3, #4 of 49 in its week-4 report (2026-09-10) — but that judgement predates the 18
+September ban, and §8 argues the ban moved this deck's position without moving the
+deck. A stale tier is worse than no tier.
+
+The clean-win figures in §3 and the mulligan figures in §10 are simulations, not
+observations: hypergeometric where a closed form exists, Monte Carlo at 60,000–200,000
+trials otherwise, against the Might distributions in `data/decks.json`. The combat model
+implements rules 465.2 and 466.3 directly. Post-ban share projections in §8 are a model
+anchored to the measured RQ standings — the measured numbers are marked as such and the
+projections are not presented as data.
+
+Event shares, cohort records and Kevplayer's finish come from the Yomi's
 Place RQ standings — the only one of these sites that serves automated requests.
 riftbound.gg, Mobalytics and riftDecks all return HTTP 403, so anything attributed to
 them came via search results rather than the pages themselves. **Note that
