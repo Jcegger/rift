@@ -225,6 +225,8 @@ So a single copy is not a lottery ticket — it is a guarantee. Extra copies liv
 
 That rule is a resource. A 1-Might Tentacle absorbs **exactly one** point of their assignment and no more. Two tokens tax two points off the total they have available to kill anything that matters. And Riot's own example shows the other half: **pre-existing damage lowers the minimum lethal**, which is why a card that pings their whole board before damage is worth more than its numbers suggest.
 
+**One card in the format switches this off, and it is the reason §10 has an Aurora entry.** Elder Dragon reads *"Any amount of your damage is enough to kill enemy units."* Minimum lethal against everything you control becomes 1, so its 10 Might kills **ten** of your units rather than one or two. Every line in this section that depends on cheap bodies taxing their assignment — the Tentacle wall, lever four, Star-Crossed pointing at a token — is false while it is on the board. It is a 12-Energy card, so you will normally only meet it cheated into play; answer it by returning it to hand, where it cannot be recast.
+
 ### The clean-win math
 
 Put the assignment rules together and the condition collapses to something you can compute at the table. To kill every one of their units you need **your total Might ≥ their total**. They kill all of yours if **their damage total ≥ yours**. So:
@@ -243,6 +245,8 @@ Simulated against the real Might distributions of the top archetypes — two of 
 | Rek'Sai | 48% | **95%** | 83% | 62% |
 | **Azir** | **27%** | 88% | 66% | 39% |
 | Irelia | 57% | **96%** | 87% | 69% |
+| **Jayce** | 29% | 71% | 57% | 38% |
+| **Aurora ramp** | **1%** | **17%** | 7% | 3% |
 
 **Three things follow.**
 
@@ -252,7 +256,9 @@ Simulated against the real Might distributions of the top archetypes — two of 
 
 **Isolation is real, and it is the plan.** Their one unit alone against two of yours is a **79–89%** clean win, and **95–99%** once Kha'Zix adds his +2. That is what the six enablers buy.
 
-**Azir is your hardest matchup, not Kennen** — 27% baseline, because their units are bigger (average 3.72 Might, median 4).
+**Of the six you will meet most, Azir is the hardest — not Kennen** — 27% baseline, because their units are bigger (average 3.72 Might, median 4).
+
+**Two matchups sit off the bottom of this table, and they are the reason §10 grew.** Jayce averages 4.27 Might and Aurora ramp averages **7.41**, against your own 3.14. Read the Aurora row carefully: **1% untricked, 17% with Punch First, 3% with a stun.** That is not a matchup you fix with a better trick — it is a matchup you do not enter. Note also how the pump columns decay as their units grow: Punch First is worth +59 points against Kennen and +42 against Jayce, because +5 stops mattering once their average body is bigger than your best one. **Against big-unit decks the lever is removal, not Might.**
 
 ---
 
@@ -509,11 +515,11 @@ Wide boards are where **Up from the Deep** and the no-overkill rule earn their s
 
 *In:* Cannon Barrage ×2, Rebuke ×2. *Out:* Rampage ×2, Sabotage ×2. Against Rengar specifically Sabotage is near-dead — they run almost no non-unit cards.
 
-### Azir, Emperor of the Sands — ~7%, and your worst matchup
+### Azir, Emperor of the Sands — ~7%, and the worst of the six you see most
 
 **Not a big-equipped-threat deck.** It is a token swarm that *counts* equipment: roughly 15 cheap equips and only ~3.5 real units, with Arise! playing a Sand Soldier per Equipment and then readying two. Killing one gear is noise, which is why there is no gear hate in this board.
 
-Your answer is **Vex**, who stuns every Sand Soldier as it arrives and blanks the ready clause, plus **Cannon Barrage** to sweep what lands. At 27% baseline clean-win this is the fight you most need a trick for.
+Your answer is **Vex**, who stuns every Sand Soldier as it arrives and blanks the ready clause, plus **Cannon Barrage** to sweep what lands. At 27% baseline clean-win this is the fight you most need a trick for — worst of the common six, though Aurora is worse still.
 
 *In:* Cannon Barrage ×2, Rebuke ×2. *Out:* Rampage ×2, Star-Crossed ×2. **Vex stays in.**
 
@@ -536,6 +542,54 @@ Wide and small like Rengar (25.8 units a deck, 49% at ≤2 Might) with 2.8 untar
 
 *In:* Cannon Barrage ×2, Rebuke ×2. *Out:* Rampage ×2, Sabotage ×2.
 
+### Dazzling Aurora ramp — ~6% and rising, and the matchup you are least built for
+
+**5.9% of the archive runs Dazzling Aurora, at an average of 2.8 copies**, and it spans shells rather than sitting in one: Battle Mistress (6), Jayce (5), Grand Duelist (4), Relentless Storm (4). Eighteen of those twenty-five lose nothing to the ban. Treat it as an archetype, not a package — and expect it to grow into the room Kennen vacates.
+
+**Dazzling Aurora** (9E / 2 Body, Gear) — *"At the end of your turn, reveal cards from the top of your Main Deck until you reveal a unit. Play it, ignoring its cost, and recycle the rest."*
+
+*Ignoring its cost* is the whole card. What it is paying for:
+
+| Cheated in | Real cost | Might |
+|---|---|---|
+| **Elder Dragon** | 12E / 4 Power | **10** |
+| **Baron Nashor** | 10E / 3 Power | **12** |
+| Kadregrin the Infernal | 9E / 2 Power | 9 |
+| Gentle Gemdragon | 8E / 0 Power | 8 |
+| Deadbloom Predator | 8E / 2 Power | 8 |
+| Rift Herald | 8E / 1 Power | 7 |
+
+The composite: **9.2 units a deck, average Might 7.41, median 7, and only 2% at 2 Might or less.** That is the largest board in the format by a distance — your own top end is Rengar at 6.
+
+**Do not try to win a combat against a resolved monster.** §4's model prices two of your units against two of theirs at **1% clean wins with no trick, 17% with Punch First, and 3% with a Vex stun** — the worst row in the table by a factor of twenty, and the only one no card in your deck meaningfully moves. A stun barely helps because 423.1.c still makes you deal a 12-Might Baron twelve damage to kill it. You cannot get there. Two cards make it worse than that arithmetic suggests:
+
+- **Elder Dragon** reads *"Any amount of your damage is enough to kill enemy units."* **That switches off rule 465.2.c.4 for its entire side** — minimum lethal against everything you own becomes 1, so its 10 Might kills **ten** of your units. Up from the Deep, the Tentacle wall, lever four, the whole no-overkill tax: all of it evaporates against one card. See §4.
+- **Baron Nashor** reads *"I can't be chosen by enemy spells and abilities"* and *"Other friendly units have +2 Might."* **Rebuke, Star-Crossed, Rampage and Void Assault are all dead cards against it** — every one of them chooses. It also arrives on its own Baron Pit token, which *"units can move here from anywhere."*
+
+**So the plan is the clock, not the fight.** Nine units a deck, most of them 8–12 Energy, means that before Aurora lands their board is nearly empty — and a near-empty board is the easiest isolation in the format, with a lone enemy sitting exactly on Kha'Zix's trigger. You are not racing a fast deck; you are racing a nine-Energy gear. Hold battlefields, bank XP, and be lethal before it resolves.
+
+**What actually answers what:**
+
+- **Sabotage is your best card here, and you already run three.** Gear is a **non-unit card**, so Sabotage takes Aurora straight out of their hand — the cheapest possible answer to a nine-drop, and proactive rather than reactive. Board the third copy in.
+- **Bounce answers every monster except Baron.** Aurora plays them *ignoring cost*; return one to hand with Rebuke or Star-Crossed and it is a **brick** at 10–12 Energy, permanently uncastable. Because Aurora reveals off the **Main Deck**, a card sitting in their hand is also out of the engine pool for good. You do not just answer it, you delete it.
+- **Your counterspells do nothing to the engine.** Hard Bargain and Abandon both counter a *spell*. Aurora is a Gear. Do not board counters in expecting to stop it.
+- **Vex still earns her slot** against anything they hard-cast, and she is the one card that ignores Baron's untargetability — she does not choose (§6). One caveat worth confirming: Aurora's trigger fires *"at the end of your turn"*, and 423.1.a.2 drops Stunned status during the end-of-turn cleanup, so a stun applied to an Aurora-cheated unit may expire almost immediately. Against hard-cast monsters she is unambiguous.
+- **Rampage is your worst card here.** It is mutual damage into an average of 7.41 Might — your unit dies every time.
+
+*In:* Rebuke ×2, Sabotage ×1. *Out:* Rampage ×2, Hard Bargain ×1.
+
+### Jayce, Defender of Tomorrow — ~3%, the hardest board you will actually have to fight
+
+Distinct from the Aurora shell even though five of these lists run it. Jayce is the only gear deck whose gear is **expensive and few** — 9.2 pieces at an average of 3.5 Energy, 37% at 2 or less — which is exactly the profile gear hate is supposed to answer.
+
+**It still is not worth boarding gear hate.** Their units average **4.27 Might, the biggest of any archetype you regularly face** — above Azir's 3.72. §4 prices the fight at **29% untricked and only 71% with Punch First**, where the same trick takes Kennen to 87%: their bodies are big enough that +5 stops closing the gap. But the units are what beat you, and returning an equipped unit to hand undoes the whole gear investment in one card, where killing one gear shaves a point or two off a board that still has the unit on it.
+
+**The number that decides the matchup: zero Defy, 1.1 Deflect.** It is the friendliest removal environment in the format. Every subtraction spell you own resolves, every time. Against Irelia you play around Defy and lean on Punch First; here you do the opposite — **lead with subtraction, not pumps**, because everything lands and their units are too big to out-pump anyway.
+
+Only 10.5 units a deck, so each one you remove is a far bigger share of their board than one of Rengar's thirty.
+
+*In:* Rebuke ×2, Sabotage ×1. *Out:* Rampage ×2, Up from the Deep ×1.
+
 ---
 
 ## 11. The sideboard
@@ -547,11 +601,11 @@ Ten cards, six names, nothing at one copy that does not have to be.
 | | Card | For |
 |---|---|---|
 | 2 | **Abandon** (2E / 0P, Reaction) | Kennen trash-denial, Irelia |
-| 2 | **Rebuke** (2E / **2 Chaos**, Action) | un-Defiable removal; any size, any battlefield |
+| 2 | **Rebuke** (2E / **2 Chaos**, Action) | un-Defiable removal, any size; **bricks a cheated Aurora monster** |
 | 2 | **Cannon Barrage** (2E / 1 Body, Reaction) | anything wide — does not choose |
 | 2 | **Hard Bargain** (2E / 0P, Reaction) | the counterspell matchups |
 | 1 | **Sett, Brawler** (5E / 1 Body, 4 Might) | grindy midrange and the mirror |
-| 1 | **Sabotage** (1E / 1 Body) | third copy vs Irelia and Master Yi |
+| 1 | **Sabotage** (1E / 1 Body) | third copy vs Irelia and Master Yi; **strips Dazzling Aurora from hand** |
 
 **Cannon Barrage** is the one speculative slot and worth naming as such — 0 of 10 archived Kha'Zix lists. The mechanical case is sound: *"Deal 2 to all enemy units in combat"* is one-sided, at Reaction speed, does not choose, and 35–49% of the rising archetypes' units die to it outright. If it overperforms, it earns maindeck slots over Rampage.
 
@@ -560,6 +614,12 @@ Ten cards, six names, nothing at one copy that does not have to be.
 **Copy caps:** Hard Bargain is 1 main + 2 board = 3, Sabotage is 2 main + 1 board = 3. Both are maxed; you cannot bring in a fourth of either.
 
 **What was cut from the pre-ban board, and why:** Unyielding Spirit prevents *spell and ability* damage only, and Kennen, Rengar, Azir and Irelia run zero spell-damage sources. Acceptable Losses is one-sided but toothless — *they* pick which of their gear dies. Akshan costs 2 Body Power to steal one of Azir's fifteen cheap equips. Angler Beast catches nine of your own units plus every token. Switcheroo is redundant with Rebuke, which does the same job without needing both units at one battlefield.
+
+**On gear hate, since the gear decks are the ones the ban promoted.** The instinct is right about the metagame and wrong about the card. Gear removal only pays against gear that is *few and expensive*, and the field splits against you: it works on Jayce (2.6% of the archive) and Keeper of the Hammer (1.2%), and is noise against Ornn (16.3 gear a deck at 1.9 Energy average), Azir (13.9 at 1.9) and Rogue Assassin (8.2 at 2.3). You would be teching for the smaller half.
+
+Against the Aurora shell specifically, **the gear is not the card that beats you — the monster is**, and bouncing a monster that was played *ignoring its cost* is a permanent answer where killing one of their 2.8 Auroras is not. Rebuke already does that job.
+
+If the package keeps showing up, the cheapest real slot is **Factory Recall** (1E / 0 Power, Chaos, Action) over Sett. Against a **9-Energy** gear, returning it to hand costs them an entire turn to rebuild — the objection that bounce is only tempo is true of Azir's 1-Energy equips and false here. **Ravenbloom Prefect** (3E / 0 Power, *"When an opponent plays a gear, you may banish me to banish it"*) is the permanent version, but it has to already be on the board.
 
 ---
 
