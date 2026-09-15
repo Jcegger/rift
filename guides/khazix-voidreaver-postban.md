@@ -354,6 +354,18 @@ Its real job is not the XP — it is that **it is castable on a turn when Punch 
 
 **The XP clause is unresolved.** Riot templates two different conditions: Glorious Executioner reads *"When **you** win a combat... (You win if only your units remain after combat)"*, while Nidalee, Cat Form reads *"When **I** win a combat... (I win if I remain after combat.)"* Grim Resolve uses the unit phrasing — *"when **it** wins a combat"* — which would pay on fights you merely survive. The Unleashed patch notes say units do not win combats. **Ask a judge.** If it is player-level, the card is still playable and this copy count is still fine; it is just less exciting.
 
+**Onslaught ×1** (4E / **0 Power**, Flow 4E) — *"Give a unit +6 Might this turn."*
+
+**The biggest number in the deck, and the one you cannot hold up.** +6 beats Punch First's +5, and it costs no Power at all — so it is the pump you cast on a turn when your Body runes are already spent. That is the whole case for the slot (§1).
+
+Everything awkward about it follows from one omission: **it has no Action keyword.** It is a Main Phase card, which means committing the deck's largest swing *before* you move — before you see whether they have a trick. Sequencing it is step 4 of §9, not step 5.
+
+**Flow does not fix that.** Rule 829.1.b.2 is explicit that playing a spell for its Flow cost *"does not change the timing at which it can be played, nor any permissions for the spell aside from the zone from which it can be played."* The copy you cast out of the trash is Main-Phase-only too. What Flow buys is a **second use**, not a second speed: cast it, it goes to the trash, play it again for 4 Energy, then it is banished.
+
+**Defy catches it permanently.** At 4 Energy and no Power it satisfies both of Defy's clauses, and rule 206 means the printed cost is the one checked — Sandswept Tomb's discount will never drag it out of range, exactly as it never drags Punch First in. Against Irelia it is one of the cards that leaves (§10).
+
+**It is the one spell Fizz cannot rebuy** — 4 Energy, over her 3-Energy limit, the single hole in a pool of eighteen. The compensation is that it is also the one card in the deck **you are happy to Burn** (§7): the trash is not a dead end for it.
+
 **Sabotage ×2** (1E / 1 Body) — *"Choose an opponent. They reveal their hand. Choose a non-unit card from it, and recycle that card."* Proactive protection for a plan slow enough to be disrupted, and the reveal is information for the next three turns. Non-unit only.
 
 **Hard Bargain ×1** (2E / 0 Power / Reaction, Repeat 2E) — a soft counter that mostly buys a turn. One copy main is the archetype norm (average 1.4 across the archive); two more sit in the board.
@@ -501,7 +513,7 @@ The Calm interaction deck. **Defy** counters a spell costing no more than 4 Ener
 | Structurally immune (Power > 1) | Counterable |
 |---|---|
 | **Punch First** (1E / **2 Body**) | Sabotage, Grim Resolve, Hard Bargain, Void Assault |
-| **Rebuke** (2E / **2 Chaos**, SB) | Rampage, Star-Crossed, Up from the Deep |
+| **Rebuke** (2E / **2 Chaos**, SB) | Rampage, Star-Crossed, Up from the Deep, **Onslaught** |
 
 **Your best combat trick cannot be countered**, and rule 206 makes that structural rather than incidental — a discount never drags a spell into Defy range and never lifts one out. Play around Defy with everything else, and let Punch First be the card you commit into open Power.
 
@@ -544,7 +556,7 @@ Ten cards, six names, nothing at one copy that does not have to be.
 
 **Cannon Barrage in the main, over Rampage.** If you board it in every round, that is the definition of a maindeck card. Watch the Body Power cost — it is 1 Body each on a base already carrying Punch First.
 
-**Rebuke in the main, over Grim Resolve.** Your showdown density is 7 and five of those are pumps. What the deck lacks at Action speed is *subtraction*, and Rebuke is un-Defiable. This is also the answer if a judge rules Grim Resolve's XP clause player-level.
+**Rebuke in the main, over Grim Resolve.** Your showdown density is 7 and four of those are pumps. What the deck lacks at Action speed is *subtraction*, and Rebuke is un-Defiable. This is also the answer if a judge rules Grim Resolve's XP clause player-level.
 
 **Grove of the God-Willow over Zaun Warrens.** *"When you hold here, draw 1"* is a repeating draw engine costing **zero deck slots**, and it is in 9% of archived decks — comparable support to Warrens' own 11%. The cost is symmetry: they draw when they hold it.
 
@@ -564,6 +576,6 @@ Ten cards, six names, nothing at one copy that does not have to be.
 
 **Simulations** are hypergeometric where a closed form exists and Monte Carlo at 200,000 trials otherwise. The combat model implements rules 465.2 and 466.3 directly: clean win when your Might exceeds their damage total, with stun removing a unit's contribution under 423.1.b.
 
-**Ban information** is Riot's announcement of 15 September 2026, effective 18 September. Note that `data/banned.json` was generated on 10 September and does **not** yet list Stacked Deck or Ekko, Recurrent — rerun `scripts/build-banned.mjs` to refresh it.
+**Ban information** is Riot's announcement of 15 September 2026, effective 18 September. `data/banned.json` was regenerated on 15 September and now carries both Stacked Deck and Ekko, Recurrent, each tagged `effective: 2026-09-18` — announced, but not enforceable until that date. The upstream banned flag had not caught up, so `scripts/build-banned.mjs` carries announced bans itself.
 
 **What this dossier does not claim.** It does not claim the deck is better than it was. Stacked Deck was doing real work on a four-card hand, nothing in Body/Chaos replaces it, and the honest expectation is that this list is a little weaker and a little harder to pilot than the one that posted 83% at Barcelona. The gap between the archetype's 57% and a strong pilot's 83% was already reps rather than cards. It just got wider.
