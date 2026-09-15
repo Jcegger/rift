@@ -1,7 +1,7 @@
 {
- "generatedAt": "2026-09-10",
- "source": "api.dotgg.gg/cgfw/getcards (banned flag) + riftbound.gg/rules/banned-cards for format-specific bans",
- "note": "Riot bans outright; there is no restricted list. A ban covers the card, so every printing of it is banned.",
+ "generatedAt": "2026-09-15",
+ "source": "api.dotgg.gg/cgfw/getcards (banned flag) + riftbound.gg/rules/banned-cards for format-specific bans, plus announced bans the flag has not reached yet",
+ "note": "Riot bans outright; there is no restricted list. A ban covers the card, so every printing of it is banned. An entry carrying `effective` is announced but not enforceable until that date.",
  "constructed": [
   {
    "key": "OGN|276",
@@ -85,6 +85,18 @@
    "inCatalog": true
   },
   {
+   "key": "OGN|183",
+   "name": "Stacked Deck",
+   "type": "Spell",
+   "code": "OGN-183/298",
+   "printings": [
+    "OGN-183"
+   ],
+   "inCatalog": true,
+   "effective": "2026-09-18",
+   "note": "announced 2026-09-15; consistency higher than intended, compounding with the Kennen legend"
+  },
+  {
    "key": "SFD|20",
    "name": "Draven, Vanquisher",
    "type": "Unit",
@@ -94,6 +106,18 @@
     "SFD-020A"
    ],
    "inCatalog": true
+  },
+  {
+   "key": "OGN|110",
+   "name": "Ekko, Recurrent",
+   "type": "Unit",
+   "code": "OGN-110/298",
+   "printings": [
+    "OGN-110"
+   ],
+   "inCatalog": true,
+   "effective": "2026-09-18",
+   "note": "announced 2026-09-15; the infinite promotes limited windows of interaction"
   },
   {
    "key": "OGN|177",

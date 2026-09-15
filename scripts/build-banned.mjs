@@ -26,6 +26,21 @@ const EXTRA_FORMAT_BANS = [
     note: "banned 2026-07-24 for overshadowing every other 2v2 Legend option" },
 ];
 
+// Bans Riot has announced but that the flag does not carry yet, because the flag
+// tracks what is legal *today* and an announcement lands days ahead of the date it
+// bites. Without this the list is wrong for exactly the window in which people are
+// rebuilding decks around the announcement.
+//
+// Each entry records the date it becomes enforceable. When the upstream flag catches
+// up, the builder says so and the entry should be deleted — it is a bridge, not a
+// second source of truth.
+const ANNOUNCED_BANS = [
+  { code: "OGN-183", name: "Stacked Deck", type: "Spell", effective: "2026-09-18",
+    note: "announced 2026-09-15; consistency higher than intended, compounding with the Kennen legend" },
+  { code: "OGN-110", name: "Ekko, Recurrent", type: "Unit", effective: "2026-09-18",
+    note: "announced 2026-09-15; the infinite promotes limited windows of interaction" },
+];
+
 function normColl(seg) {
   let s = String(seg ?? "").replace(/\s+/g, "");
   if (!s) return null;
@@ -96,7 +111,29 @@ const main = async () => {
       printings: e.codes.sort(),
       inCatalog: !!hit,
     };
-  }).sort((a, b) => (a.type || "").localeCompare(b.type || "") || a.name.localeCompare(b.name));
+  });
+
+  // Fold in the announced-but-not-yet-flagged bans, and notice when upstream has
+  // caught up so the hand-maintained list cannot quietly rot.
+  const flagged = new Set(constructed.map((b) => b.key));
+  const nowRedundant = [];
+  for (const b of ANNOUNCED_BANS) {
+    const k = baseKey(keyOf(b.code));
+    if (flagged.has(k)) { nowRedundant.push(b.name); continue; }
+    const hit = known.get(k);
+    constructed.push({
+      key: k,
+      name: hit ? hit.n : b.name,
+      type: hit ? hit.t || b.type : b.type,
+      code: hit ? hit.c : b.code,
+      printings: [b.code],
+      inCatalog: !!hit,
+      effective: b.effective,
+      note: b.note,
+    });
+  }
+
+  constructed.sort((a, b) => (a.type || "").localeCompare(b.type || "") || a.name.localeCompare(b.name));
 
   const byFormat = {};
   for (const b of EXTRA_FORMAT_BANS) {
@@ -110,8 +147,8 @@ const main = async () => {
 
   const out = {
     generatedAt: new Date().toISOString().slice(0, 10),
-    source: "api.dotgg.gg/cgfw/getcards (banned flag) + riftbound.gg/rules/banned-cards for format-specific bans",
-    note: "Riot bans outright; there is no restricted list. A ban covers the card, so every printing of it is banned.",
+    source: "api.dotgg.gg/cgfw/getcards (banned flag) + riftbound.gg/rules/banned-cards for format-specific bans, plus announced bans the flag has not reached yet",
+    note: "Riot bans outright; there is no restricted list. A ban covers the card, so every printing of it is banned. An entry carrying `effective` is announced but not enforceable until that date.",
     constructed,
     byFormat,
   };
@@ -121,7 +158,10 @@ const main = async () => {
   for (const b of constructed)
     console.log(`  ${(b.type || "?").padEnd(12)} ${b.name.padEnd(24)} ${b.code}` +
       `${b.printings.length > 1 ? `  (${b.printings.length} printings)` : ""}` +
+      `${b.effective ? `   <-- announced, effective ${b.effective}` : ""}` +
       `${b.inCatalog ? "" : "   <-- NOT IN CATALOG"}`);
+  if (nowRedundant.length)
+    console.log(`\nNOTE: upstream now flags ${nowRedundant.join(", ")} — drop from ANNOUNCED_BANS`);
   for (const [fmt, list] of Object.entries(byFormat)) {
     console.log(`\nplus ${list.length} banned in ${fmt} only:`);
     for (const b of list) console.log(`  ${b.name}  ${b.code}${b.inCatalog ? "" : "   <-- NOT IN CATALOG"}`);
