@@ -1,14 +1,15 @@
 ---
 title: Rek'Sai Void Burrower — Deck Dossier
-subtitle: Riftbound, Vendetta season
+subtitle: Riftbound, Vendetta season — revised after the 18 September bans
 author: rift toolchain
-date: 2026-09-14
+date: 2026-09-15
 ---
 
 **Legend:** Void Burrower (Fury/Order) · **Champion:** Rek'Sai, Breacher
-**Registered:** 40 main + 12 runes (6 Fury / 6 Order) + 3 battlefields + 1 legend = 56 · **Sideboard:** 10 of 10
+**Registered:** 40 main (Champion included) + 12 runes (6 Fury / 6 Order) + 3 battlefields + 1 legend = 56 · **Sideboard:** 10 of 10
+**Shuffled library:** 39 — the Champion starts outside the deck (rule 103.2.a.1, §2)
 **Collection status:** complete — 0 cards still to get, $0.00 gap
-**riftbound.gg tier:** Tier 3, #4 (14th of 49 ranked champions)
+**Ban status:** **unaffected.** Neither card banned on 2026-09-18 is legal in Fury/Order (§8)
 **List:** Kevplayer's Barcelona RQ registration, main deck matched card-for-card
 
 ## The short version
@@ -129,6 +130,33 @@ afford to flip. Two Energy spare means you can take a Carrion Dredger or a Hones
 Broker. Four spare with an Order Power means Undertitan is live. Nothing spare means
 you are conquering for the point only, and you should probably not exhaust the legend
 at all — declining the trigger costs you nothing and keeps it ready.
+
+### The Champion is free, and that is not obvious from the list
+
+**One copy of Rek'Sai, Breacher is not a singleton.** It is your **Chosen Champion**,
+and the rules put it outside the deck before the game starts:
+
+> **103.2.** A Main Deck of at least 40 cards: A Chosen Champion Unit, as well as
+> Units, Gear, and Spells
+> **103.2.a.1.** This will be placed in the Champion Zone at the start of the game.
+> **108.3.d.** The Chosen Champion can be played from here as normal, following the
+> rules of Playing a Card.
+
+Two consequences, and both matter more here than in most decks.
+
+**You have Breacher in every game, from turn one, without drawing him.** A deck whose
+engine only switches on after a conquer gets to treat its Accelerate enabler as a
+guaranteed turn-three play rather than a card it hopes to see.
+
+**Your library is 39, not 40.** Every consistency figure in this dossier is computed
+against that number. It is also why the mulligan advice in §10 is about the *rest* of
+the deck — the one card you would most like to guarantee is already guaranteed.
+
+Note 103.2.a.3: any additional copy of the same card, anywhere, also counts as your
+Chosen Champion for rules purposes. This list runs one, so it does not come up — but
+it is why running a second would be redundancy rather than access.
+
+---
 
 **Rek'Sai, Breacher ×1** (3E / 3 Might, Fury) is the other half of the engine, and it
 too is less free than it looks: *"Friendly units played from anywhere other than a
@@ -530,8 +558,59 @@ was registered. Both tables are Top 64.
 | Irelia, Blade Dancer | — | 12.5% (68.4% WR) |
 | **Rek'Sai, Void Burrower** | **4.7%** (71.9% WR) | 4.7% (66.3% WR) |
 
-**Kennen is the format and is still growing.** More than a third of the top tables.
-Sideboard for it first.
+**Kennen was the format.** More than a third of the top tables, at a 72%+ win rate
+across both events. That was true when this list was registered, and it is the single
+thing the September ban changed.
+
+### What the 18 September ban did to this deck: nothing, which is the point
+
+Stacked Deck and Ekko, Recurrent were banned effective 2026-09-18. **Neither is legal
+in Fury/Order**, so this list does not change by a single card. What changes is who
+you are playing against.
+
+Measured across the 424-deck archive, by the domains in each legend's identity:
+
+| Domain | Decks running a now-banned card |
+|---|---|
+| **Chaos** | **59%** |
+| Mind | 20% |
+| Fury | 19% |
+| Body | 13% |
+| Calm | 9% |
+| **Order** | **9%** |
+
+Stacked Deck was a Chaos card. Ekko is Mind. **You are the only pairing on that table
+that is cheap on both axes.** Checking the archetype directly: of the nine Void
+Burrower decks in the archive, exactly two run any banned card at all, and in both
+cases it is **The Arena's Greatest** — a Colorless battlefield banned back in July,
+nothing to do with this wave.
+
+By legend, against the decks in §9:
+
+| Their legend | Domains | % of decks hit | avg copies |
+|---|---|---|---|
+| **Kennen** | Order/**Chaos** | **89%** | 3.0 |
+| Kha'Zix, Voidreaver | Body/**Chaos** | 80% | 2.9 |
+| **Irelia** | Calm/**Chaos** | **69%** | 2.2 |
+| Master Yi | Calm/Body | **0%** | — |
+| Rengar | Fury/Body | **0%** | — |
+| Azir | Calm/Order | **0%** | — |
+| **You** | Fury/Order | **0%** | — |
+
+**One caveat before you celebrate.** Kennen keeps **Lightning Rush** — 1 Energy, look
+at the top 3, draw 1 — which is Order/Chaos and survived. It did not lose its engine,
+it lost redundancy, going from six diggers to three. Expect its share to fall and its
+win rate to soften, not to disappear.
+
+**What that means at the table.** Projecting the Singapore shares forward by ban
+exposure: Kennen down to roughly 24% and still the most common deck; Master Yi to
+~13%, Rengar to ~12%, Azir and you to ~7% each. **Sideboard for Kennen first still** —
+but the decks gaining on you are the wide Body ones in §9, not the Chaos ones, and
+that shifts which of your cards are live.
+
+The honest summary is that **this deck's position improved without the deck changing.**
+§8's read below — that the archetype is average and shrinking — was measured before the
+ban. The shrinking half is the part most likely to have reversed.
 
 **But be careful with that 71.9%.** It is the win rate of the three Rek'Sai decks that
 *made* the Top 64 — survivorship, not a read on the archetype. The honest number is the
@@ -558,6 +637,18 @@ cohort's is the part that does not come in the box.
 A caveat: the local deck archive is North-American-and-online only, so the archetype
 card lists below come from it while shares and win rates come from the RQ standings
 (§8).
+
+**Read the percentages in these headings as history, not as forecast.** They are what
+actually happened at Singapore, which is solid data — but Singapore was played before
+the 18 September ban. The post-ban projections in §8 are a model, and I have left the
+measured numbers in place rather than overwrite good data with an estimate.
+
+**The direction of travel, applied to this section:** Kennen (~34% → ~24%) and Irelia
+(69% ban exposure) get less common; Master Yi, Rengar and Azir get more common at zero
+exposure. **So weight your practice toward the three sections below that did not lose a
+card.** One card list below is now stale in a useful way: Kennen's core still shows
+Stacked Deck, which they can no longer play — expect a third digger rather than six,
+and a deck that stumbles more often than these notes assume.
 
 ### Kennen, Heart of the Tempest — 34.4% of the Singapore Top 64
 
@@ -634,6 +725,27 @@ downstream of a board.
 
 **Keep:** any two 2-drops. With twenty-one cards at 2 Energy and five at 1, a hand
 without two of them has actively mulliganed itself.
+
+**And unlike most decks, that keep is easy.** Your opening hand is 4 cards (rule 116)
+from a 39-card library, with one mulligan that swaps up to 2 (117.1). Against that:
+
+| | in the opening 4 | after the mulligan |
+|---|---|---|
+| **Two or more cards at 2 Energy or less** | **90.1%** | **98.9%** |
+| Two or more 2-Energy *units* specifically | 31.3% | 55.3% |
+| Two or more Undertitan (the auto-ship) | **2.3%** | — |
+
+**This is the deck's quiet structural advantage.** Twenty-six of forty cards cost two
+or less, so the hand you need turns up nine times in ten before you have even
+mulliganed. Compare a toolbox deck built on singletons, where the equivalent keep sits
+near 10%. You are not fighting your opening hand; you are fighting the board.
+
+Read the second row carefully though. Two *cards* at 2 Energy is nearly automatic; two
+2-Energy **units** is barely a coin flip, because eleven of those twenty-one are
+spells. A hand of two 2-drop spells and no body is not the keep this rule means.
+
+And the auto-ship is genuinely rare — you will see a double Undertitan opener about
+once in forty-three games. Do not build your mulligan habits around it.
 
 **Keep:** Faithful Manufactor or Vanguard Captain plus a 1-Energy spell. The spell
 turns the Captain on (Legion) and the Manufactor is two bodies by itself.

@@ -62,8 +62,8 @@
    "slug": "reksai-void-burrower",
    "file": "guides/reksai-void-burrower.md",
    "title": "Rek'Sai Void Burrower — Deck Dossier",
-   "subtitle": "Riftbound, Vendetta season",
-   "date": "2026-09-14",
+   "subtitle": "Riftbound, Vendetta season — revised after the 18 September bans",
+   "date": "2026-09-15",
    "legend": "Void Burrower",
    "champion": "Rek'Sai, Breacher",
    "sections": [
@@ -84,7 +84,7 @@
     "14. What I'd test",
     "Sources and method"
    ],
-   "words": 8219
+   "words": 9268
   },
   {
    "slug": "sivir-anti-meta-midrange",
