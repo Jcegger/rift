@@ -1,8 +1,35 @@
 {
- "generatedAt": "2026-09-14",
+ "generatedAt": "2026-09-15",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
+  {
+   "slug": "khazix-voidreaver-postban",
+   "file": "guides/khazix-voidreaver-postban.md",
+   "title": "Kha'Zix Voidreaver — Post-Ban Dossier",
+   "subtitle": "Riftbound, Vendetta season — after the 18 September bans",
+   "date": "2026-09-15",
+   "legend": "Voidreaver",
+   "champion": "Kha'Zix, Mutating Horror",
+   "sections": [
+    "The short version",
+    "The list",
+    "1. What the ban did, and to whom",
+    "2. The rule that governs the deck",
+    "3. The engine, and where it actually bottlenecks",
+    "4. How combat resolves, and what it actually costs you",
+    "5. The four levers, priced",
+    "6. Card by card",
+    "7. The trash is a resource",
+    "8. Mulligans — the real numbers",
+    "9. Sequencing — how your turn actually goes",
+    "10. Matchups",
+    "11. The sideboard",
+    "12. What I'd test",
+    "Sources and method"
+   ],
+   "words": 7585
+  },
   {
    "slug": "khazix-voidreaver",
    "file": "guides/khazix-voidreaver.md",
