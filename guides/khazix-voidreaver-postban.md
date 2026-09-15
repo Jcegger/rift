@@ -256,9 +256,9 @@ Simulated against the real Might distributions of the top archetypes — two of 
 
 ---
 
-## 5. The four levers, priced
+## 5. The five levers, priced
 
-Since only clean wins pay, these are the exact tools that convert a trade into a win. **Fourteen of your forty cards are one of them** — Vex ×2, Punch First ×3, Grim Resolve ×1, Onslaught ×1, Rampage ×2, Star-Crossed ×2, Up from the Deep ×3.
+Since only clean wins pay, these are the exact tools that convert a trade into a win. **Sixteen of your forty cards are one of them** — Vex ×2, Punch First ×3, Grim Resolve ×1, Onslaught ×1, Rampage ×2, Star-Crossed ×2, Up from the Deep ×3, Rengar ×2.
 
 **Lever one — stun.** Vex ×2. Subtracting their biggest unit's Might from their assignment total while leaving it on the board as a body you still have to kill. Worth about +10 points of clean-win rate on its own — her real value is elsewhere (§6).
 
@@ -267,6 +267,9 @@ Since only clean wins pay, these are the exact tools that convert a trade into a
 **Lever three — subtraction.** Rampage ×2, Star-Crossed ×2. Removing a unit from the fight removes its Might from their sum **and** removes it as a body you must kill. Subtraction is worth roughly double addition for the purposes of a clean win.
 
 **Lever four — bodies.** Up from the Deep ×3 (six Tentacles). Extra units both add Might and soak assignment under the no-overkill rule, and they keep your real threats from being *alone* — which matters at Forbidding Waste and is the difference between your unit eating the −2 and theirs.
+
+**Lever five — a body at Reaction speed.** Rengar ×2, confirmed (§6). Six Might arriving mid-showdown into a battlefield where you control nothing is +6 Might *and* an extra unit soaking assignment — a bigger single swing than Punch First or Onslaught, and the only one you can hold up without committing first. He is listed last because he costs 5 Energy and a Body rune — the lever you can least often afford on the turn you want it.
+
 
 ---
 
@@ -292,7 +295,11 @@ The other half of the same job, and the reason you never mulligan one away light
 
 **Read the errata, not the printed card.** Six Might deployable into a battlefield where you control nothing, which no other card here can do. A lone enemy of 6 Might or less is a battlefield you can simply take for one card — and a lone enemy is exactly Kha'Zix's condition. The two cards want the same board.
 
-**One open question.** Ambush grants two things: permission to play there, *and* Reaction timing *"as long as I'm being played to a battlefield where you control Units."* Rengar plainly expands the first. Whether he expands the second is not stated anywhere, and at a battlefield where you control nothing the Reaction clause's own condition is false. **Treat it as Main-Phase-only until a judge rules otherwise.**
+**He keeps the Reaction timing — this is settled, and it makes him a trick.** Ambush is short for two things (822.1.b): permission to play there, *and* *"I have [Reaction] as long as I'm being played to a battlefield where you control Units."* Rengar's errata rewrote his clause from "I can **be played** to" into "I can **[Ambush]** to", and 822.1.d reads that verb as *"play with the permissions of the Ambush keyword"* — using Rengar as its own worked example. He gets the whole keyword with a widened location set, Reaction timing included.
+
+**What it widens to, exactly:** from *battlefields where you control units* to *battlefields where there are units*, either side's. It does **not** reach an empty one — 822.3 voids Ambush's permission wherever no units remain at the chosen location before Finalization completes, and that exclusion survives the expansion. So: their board, yes; your board, yes; an open battlefield, never.
+
+**Which makes him the largest swing in the deck.** A 6-Might body arriving mid-showdown after they have committed is +6 Might *and* an extra unit to soak assignment under the no-overkill rule — strictly more than Onslaught's +6, which is the number alone. And because a lone enemy is exactly Kha'Zix's condition, and Rengar is not friendly to them, dropping Rengar in does not un-lone their unit. Both cards fire on the same board, at Reaction speed, from an empty side of the field.
 
 ### The bodies
 
@@ -352,7 +359,11 @@ The best card in the deck by a wide margin (§4), and the only spell Defy cannot
 
 Its real job is not the XP — it is that **it is castable on a turn when Punch First is not.** Body is the scarce resource, and a Power-free pump you can hold up with no runes left is a genuinely different card.
 
-**The XP clause is unresolved.** Riot templates two different conditions: Glorious Executioner reads *"When **you** win a combat... (You win if only your units remain after combat)"*, while Nidalee, Cat Form reads *"When **I** win a combat... (I win if I remain after combat.)"* Grim Resolve uses the unit phrasing — *"when **it** wins a combat"* — which would pay on fights you merely survive. The Unleashed patch notes say units do not win combats. **Ask a judge.** If it is player-level, the card is still playable and this copy count is still fine; it is just less exciting.
+**The XP clause pays on clean wins only, and the buffed unit has to live to collect.** Two rules settle it. **466.3.c** — *"Units at this battlefield inherit the same combat result as their controllers"* — means a unit wins exactly when *you* win (466.3.a), so there is no separate unit-level win to trigger on. And Nidalee, Cat Form's *"(I win if I remain after combat.)"* does not create an exception to that: it is parenthetical reminder text, and **135.2.d.3** says the exact wording of reminder text *"has no effect on game function."* Compare Glorious Executioner, whose *"(You win if only your units remain after combat.)"* restates 466.3.a exactly — same family, accurate summary. Nidalee's reads like it predates the Unleashed tightening of the tie definitions.
+
+**The consequence that matters at the table:** combat resolves 466.1 Cleanup → 466.3 Determine Combat Result, so anything that died is already gone when results are assigned, and 466.3.c only covers *"Units **at this battlefield**."* **A buffed unit that trades away pays you nothing, even on a clean win you took with something else.** The +3 is doing two jobs — winning the fight and keeping the collector alive — so point it at a unit that survives, not at the one you are spending. Same reason it has to be at the battlefield you actually won: buff at A, win at B, no trigger.
+
+So it is a +3 pump with an XP rider you earn about as often as you were going to win anyway. Still the right card for the slot (§1) — just not the exciting one. §12's Rebuke swap is live on the merits, not contingent on a ruling.
 
 **Onslaught ×1** (4E / **0 Power**, Flow 4E) — *"Give a unit +6 Might this turn."*
 
@@ -398,7 +409,7 @@ Short reference for the ones this deck's lines actually hinge on. Rule numbers v
 
 | Keyword | What it does | The detail that catches people |
 |---|---|---|
-| **Ambush** (822) | Play to a battlefield where you control units; has Reaction while doing so | If no units remain there at Finalization the permission is void (822.3). Rengar expands *where* — whether he expands the Reaction timing is unsettled |
+| **Ambush** (822) | Play to a battlefield where you control units; has Reaction while doing so | If no units remain there at Finalization the permission is void (822.3) — so never an empty battlefield. Rengar widens the location set to *any* battlefield with units on it, Reaction timing included (822.1.d) |
 | **Hidden** (811) | Hide facedown for a rainbow; from the next turn it is a Reaction you play for 0 | Targets are normally confined to that battlefield (811.1.d.2) |
 | **Empower** (827 / 441) | Activated cost that flips a permanent to Empowered | One-way and permanent — "use only if not Empowered". Matriarch's costs 2 Energy **and a Chaos rune** |
 | **Burn** (440) | Top of your Main Deck to your trash | Mandatory when instructed. Shadow Order Disciple's is optional, which is the whole point post-ban |
@@ -464,7 +475,7 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **Step 4 — arrange, then move.** Moving is what creates combat, so everything that repositions is the trigger, not the setup. Drag the lone enemy where you want it, confirm your sum kills *all* of theirs, and only then move in.
 
-**Step 5 — hold your Actions and Reactions.** Check the keyword before you count on a card mid-fight. Your showdown-legal spells are **Punch First ×3** and **Grim Resolve ×1** (Actions), **Star-Crossed ×2** and **Hard Bargain ×1** (Reactions), plus Ambush bodies arriving at Reaction timing. **Onslaught, Rampage, Sabotage, Void Assault and Up from the Deep carry no keyword at all** — they are Main-Phase setup and cannot be held up. Onslaught in particular has to be committed *before* you move, which is the cost of its +6.
+**Step 5 — hold your Actions and Reactions.** Check the keyword before you count on a card mid-fight. Your showdown-legal spells are **Punch First ×3** and **Grim Resolve ×1** (Actions), **Star-Crossed ×2** and **Hard Bargain ×1** (Reactions), plus **Kha'Zix and Rengar ×2** arriving at Reaction timing on Ambush — Rengar into their side of the board, which is the biggest thing you can do mid-showdown (§6). **Onslaught, Rampage, Sabotage, Void Assault and Up from the Deep carry no keyword at all** — they are Main-Phase setup and cannot be held up. Onslaught in particular has to be committed *before* you move, which is the cost of its +6.
 
 Seven showdown-legal spells, down from nine before the ban. That is the clearest thing the ban took, and no amount of extra pump replaces it — running Onslaught over the second Grim Resolve trades one of them for a bigger number you must pre-commit.
 
@@ -556,7 +567,7 @@ Ten cards, six names, nothing at one copy that does not have to be.
 
 **Cannon Barrage in the main, over Rampage.** If you board it in every round, that is the definition of a maindeck card. Watch the Body Power cost — it is 1 Body each on a base already carrying Punch First.
 
-**Rebuke in the main, over Grim Resolve.** Your showdown density is 7 and four of those are pumps. What the deck lacks at Action speed is *subtraction*, and Rebuke is un-Defiable. This is also the answer if a judge rules Grim Resolve's XP clause player-level.
+**Rebuke in the main, over Grim Resolve.** Your showdown density is 7 and four of those are pumps. What the deck lacks at Action speed is *subtraction*, and Rebuke is un-Defiable. Grim Resolve's XP rider is now known to be clean-wins-only and to need the buffed unit alive (§6), which prices the slot lower than it looked.
 
 **Grove of the God-Willow over Zaun Warrens.** *"When you hold here, draw 1"* is a repeating draw engine costing **zero deck slots**, and it is in 9% of archived decks — comparable support to Warrens' own 11%. The cost is symmetry: they draw when they hold it.
 

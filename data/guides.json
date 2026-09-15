@@ -18,7 +18,7 @@
     "2. The rule that governs the deck",
     "3. The engine, and where it actually bottlenecks",
     "4. How combat resolves, and what it actually costs you",
-    "5. The four levers, priced",
+    "5. The five levers, priced",
     "6. Card by card",
     "7. The trash is a resource",
     "8. Mulligans — the real numbers",
@@ -28,7 +28,7 @@
     "12. What I'd test",
     "Sources and method"
    ],
-   "words": 8346
+   "words": 8825
   },
   {
    "slug": "khazix-voidreaver",
