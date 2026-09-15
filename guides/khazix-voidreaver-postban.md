@@ -19,7 +19,7 @@ date: 2026-09-15
 
 **The one rule that governs the deck.** Voidreaver pays XP only when you **win** a combat — meaning you are the *only* player with units left at that battlefield (rule 466.3.a). A mutual wipe, an even trade, or your attackers bouncing off survivors are all **No Result**, and No Result pays nothing. **An even trade is a failure here.**
 
-**What the ban took.** Stacked Deck was banned on 18 September. It was not just a consistency card — it was **the card that made singleton toolbox slots playable**. Take it away and every 1-of becomes a card you draw at random. That is why this list has no random singletons left.
+**What the ban took.** Stacked Deck was banned on 18 September. It was not just a consistency card — it was **the card that made singleton toolbox slots playable**. Take it away and every 1-of becomes a card you draw at random. The list keeps three (Grim Resolve, Hard Bargain, Onslaught) and each one is defended in §1 — but the *toolbox* singletons, the ones whose value needed you to find them on a particular turn, are gone.
 
 **The number that shapes every decision.** Your opening hand is **4 cards** (rule 116) drawn from a **39-card** library, and you may swap at most **2** of them, once (117.1). You do not get to find things. Play accordingly.
 
@@ -60,7 +60,7 @@ Sorted by set number, the way you build it. **Kha'Zix counts toward the 40 but s
 | 3 | Punch First | SFD-097 | 1E / 2 Body · Action |
 | 1 | Hard Bargain | SFD-136 | 2E · Reaction |
 | 2 | Fizz, Trickster | SFD-140 | 3E / 1 Chaos · 3 Might |
-| 2 | Grim Resolve | UNL-095 | 2E · Action |
+| 1 | Grim Resolve | UNL-095 | 2E · Action |
 | 2 | Kinkou Initiate | UNL-097 | 3E · 3 Might |
 | 3 | Irresistible Faefolk | UNL-112 | 2E · 1 Might |
 | 2 | Rengar, Trophy Hunter | UNL-120 | 5E / 1 Body · 6 Might |
@@ -68,6 +68,7 @@ Sorted by set number, the way you build it. **Kha'Zix counts toward the 40 but s
 | **1** | **Kha'Zix, Mutating Horror** | **UNL-143** | **4E / 1 Chaos · 4 Might — Champion Zone** |
 | 2 | Vex, Apathetic | UNL-150 | 4E · 4 Might |
 | 3 | Void Assault | UNL-202 | 2E / 1 Power |
+| 1 | Onslaught | VEN-081 | 4E · Flow 4E |
 | 2 | Rampage | VEN-083 | 3E |
 | 3 | Shadow Order Disciple | VEN-095 | 2E · 2 Might |
 | 3 | Up from the Deep | VEN-100 | 3E · Flow 3E |
@@ -123,13 +124,23 @@ Nothing in the legal Body/Chaos pool replaces a 1-Energy Action that digs three 
 What the three slots became, and why:
 
 - **Kinkou Initiate ×2** — a 3-Might body that replaces itself. 19% of Body-legend decks run it at an average of 2.6 copies, the best-supported option in the pool.
-- **Grim Resolve ×2** — the only 0-Power pump in the deck, so it is castable on turns when Punch First is not.
+- **Grim Resolve ×1 and Onslaught ×1** — the two 0-Power pumps, castable on turns when Punch First is not. Grim Resolve is the Action; Onslaught is the bigger number.
 - **Traveling Merchant 2 → 3** — now the deck's only repeatable selection.
-- **Rampage 1 → 2** and **Hard Bargain 1 → 2 → 1** — consolidating singletons.
+- **Rampage 1 → 2** — up to the archetype average, and subtraction scales into the wide decks the ban promotes.
+- **Hard Bargain 2 → 1**, with the second and third copies in the sideboard. One main is the archetype norm (average 1.4 across the archive).
 
-And two cards left because they were singletons the deck can no longer find: **Tideturner** (1 of 10 archived lists) and **Onslaught** (3 of 10, and the only spell outside Fizz's rebuy range).
+And **Tideturner** left because it was a singleton the deck can no longer find — 1 of 10 archived lists, and its whole value needs you to draw it *and* have hidden it a turn earlier.
 
-Cutting Onslaught has a quiet payoff: **every spell in the deck is now within Fizz's 3-Energy limit.** Two Fizz with no hole in the pool is a better card than three Fizz with one.
+**Onslaught was cut and then deliberately brought back at one copy, over the second Grim Resolve.** The case against it is real and worth stating: it is the **only spell outside Fizz's 3-Energy rebuy range**, it carries no Action keyword so it cannot be held for the showdown, and at one copy it is a card you cannot dig for.
+
+The case for it won anyway:
+
+- **+6 Might is the largest single swing available to you** — more than Punch First's +5, and §4's simulation shows that a pump of that size is worth roughly 45 points of clean-win rate. This deck is paid only for clean wins.
+- **It costs no Power.** Body is the scarce resource and Punch First eats six of your ten. Onslaught is a bigger Punch First you can cast on a turn with no Body runes left.
+- **Flow 4E gives it a second life.** Cast it, it goes to the trash, play it again from there for 4 Energy — then it is banished. A one-of that you get twice is not the same kind of one-of as Tideturner was.
+- It is a **trash spender**, and §7 notes the spend side of that economy shrank when Fizz went to two.
+
+The price, stated plainly: **showdown-legal spells drop from 8 to 7**, Fizz's pool loses its only hole-free property, and the deck now carries three singletons rather than one.
 
 ---
 
@@ -247,11 +258,11 @@ Simulated against the real Might distributions of the top archetypes — two of 
 
 ## 5. The four levers, priced
 
-Since only clean wins pay, these are the exact tools that convert a trade into a win. **Fourteen of your forty cards are one of them** — Vex ×2, Punch First ×3, Grim Resolve ×2, Rampage ×2, Star-Crossed ×2, Up from the Deep ×3.
+Since only clean wins pay, these are the exact tools that convert a trade into a win. **Fourteen of your forty cards are one of them** — Vex ×2, Punch First ×3, Grim Resolve ×1, Onslaught ×1, Rampage ×2, Star-Crossed ×2, Up from the Deep ×3.
 
 **Lever one — stun.** Vex ×2. Subtracting their biggest unit's Might from their assignment total while leaving it on the board as a body you still have to kill. Worth about +10 points of clean-win rate on its own — her real value is elsewhere (§6).
 
-**Lever two — raw Might.** Punch First ×3 (+5 for 1E/2 Body, Action) and Grim Resolve ×2 (+3 for 2E/0 Power, Action). Raising your sum kills more of theirs; it does not by itself keep yours alive.
+**Lever two — raw Might.** Punch First ×3 (+5 for 1E/2 Body, Action), Onslaught ×1 (**+6** for 4E/0 Power, Main Phase only, Flow 4E) and Grim Resolve ×1 (+3 for 2E/0 Power, Action). Raising your sum kills more of theirs; it does not by itself keep yours alive — and note the biggest of the three is the one you cannot hold up.
 
 **Lever three — subtraction.** Rampage ×2, Star-Crossed ×2. Removing a unit from the fight removes its Might from their sum **and** removes it as a body you must kill. Subtraction is worth roughly double addition for the purposes of a clean win.
 
@@ -309,7 +320,9 @@ Turn two is four Energy, so two 2-drops then Kinkou on three is the curve that t
 
 **Fizz, Trickster ×2** (3E / 1 Chaos / 3 Might) — *"When you play me, you may play a spell from your trash with Energy cost no more than 3, ignoring its Energy cost. Then recycle it."*
 
-You still pay the spell's **Power** cost. With Onslaught cut, **every spell in the deck is a legal target** — eight of the eighteen at no extra Power (Grim Resolve, Hard Bargain, Rampage, Up from the Deep). Two copies with a hole-free pool beats three with a dead slot.
+You still pay the spell's **Power** cost. **Seventeen of your eighteen spells are legal targets** — seven of them at no extra Power (Grim Resolve, Hard Bargain, Rampage ×2, Up from the Deep ×3). The one exception is **Onslaught at 4 Energy**, which is the only card in the deck Fizz cannot reach.
+
+Worth holding in mind when you decide what to let hit the trash: a trashed Onslaught is not Fizz food, but it *is* still castable through its own Flow for 4 Energy. It leaves by a different door.
 
 **Vex, Apathetic ×2** (4E / 4 Might, Deflect) — *"When an opponent plays a unit while I'm at a battlefield, Stun it. They can't move it this turn."*
 
@@ -335,7 +348,7 @@ The best card in the deck by a wide margin (§4), and the only spell Defy cannot
 
 **It eats 6 of your 10 Body demand.** Count Body runes before you commit anything else.
 
-**Grim Resolve ×2** (2E / **0 Power** / Action) — *"Give a friendly unit +3 Might this turn. When it wins a combat this turn, gain 2 XP."*
+**Grim Resolve ×1** (2E / **0 Power** / Action) — *"Give a friendly unit +3 Might this turn. When it wins a combat this turn, gain 2 XP."*
 
 Its real job is not the XP — it is that **it is castable on a turn when Punch First is not.** Body is the scarce resource, and a Power-free pump you can hold up with no runes left is a genuinely different card.
 
@@ -394,7 +407,9 @@ Four cards depend on it, and new pilots treat it as a graveyard rather than a se
 
 **Spending it:** Fizz (any spell in the deck), Tail-Cloaked Matriarch (13 legal unit targets), Up from the Deep (Flow), Shadow Clone (banish a unit for Assault 4).
 
-Six filler copies against nine spenders. The economy is healthy, but the direction of travel changed with the ban: **fill went up** (Merchant to three) while **spend went down** (Fizz to two, Onslaught gone). Combined with the mulligan reality, that is why the Burn default flipped to no.
+Six filler copies against ten spenders — Onslaught's Flow is the tenth. The economy is healthy, but the direction of travel changed with the ban: **fill went up** (Merchant to three) while **spend went down** (Fizz to two). Combined with the mulligan reality, that is why the Burn default flipped to no.
+
+**One Burn worth taking:** milling your own Onslaught is close to free, because Flow lets you cast it from the trash for 4 Energy anyway. It is the one card in the deck that does not mind being in the bin.
 
 **Deck-out is not a risk.** Merchant discards from hand, not library; Burn is optional. A long game sees roughly 16 of 39.
 
@@ -437,9 +452,9 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **Step 4 — arrange, then move.** Moving is what creates combat, so everything that repositions is the trigger, not the setup. Drag the lone enemy where you want it, confirm your sum kills *all* of theirs, and only then move in.
 
-**Step 5 — hold your Actions and Reactions.** Check the keyword before you count on a card mid-fight. Your showdown-legal spells are **Punch First ×3** and **Grim Resolve ×2** (Actions), **Star-Crossed ×2** and **Hard Bargain ×1** (Reactions), plus Ambush bodies arriving at Reaction timing. **Rampage, Sabotage, Void Assault and Up from the Deep carry no keyword at all** — they are Main-Phase setup and cannot be held up.
+**Step 5 — hold your Actions and Reactions.** Check the keyword before you count on a card mid-fight. Your showdown-legal spells are **Punch First ×3** and **Grim Resolve ×1** (Actions), **Star-Crossed ×2** and **Hard Bargain ×1** (Reactions), plus Ambush bodies arriving at Reaction timing. **Onslaught, Rampage, Sabotage, Void Assault and Up from the Deep carry no keyword at all** — they are Main-Phase setup and cannot be held up. Onslaught in particular has to be committed *before* you move, which is the cost of its +6.
 
-Seven showdown-legal spells, down from nine before the ban. That is the clearest thing the ban took, and no amount of extra pump replaces it.
+Seven showdown-legal spells, down from nine before the ban. That is the clearest thing the ban took, and no amount of extra pump replaces it — running Onslaught over the second Grim Resolve trades one of them for a bigger number you must pre-commit.
 
 **The one-line version:** *activate, buff, develop, arrange, move, then hold up everything with Action or Reaction on it.*
 
@@ -490,7 +505,7 @@ The Calm interaction deck. **Defy** counters a spell costing no more than 4 Ener
 
 **Your best combat trick cannot be countered**, and rule 206 makes that structural rather than incidental — a discount never drags a spell into Defy range and never lifts one out. Play around Defy with everything else, and let Punch First be the card you commit into open Power.
 
-*In:* Rebuke ×2, Hard Bargain ×2, Abandon ×2, Sabotage ×1. *Out:* Rampage ×2, Up from the Deep ×2, Grim Resolve ×2, Star-Crossed ×1.
+*In:* Rebuke ×2, Hard Bargain ×2, Abandon ×2, Sabotage ×1. *Out:* Rampage ×2, Up from the Deep ×2, Grim Resolve ×1, Onslaught ×1, Star-Crossed ×1.
 
 ### Rek'Sai, Void Burrower — ~7%
 
