@@ -4,6 +4,33 @@
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
   {
+   "slug": "khazix-voidreaver-aggro",
+   "file": "guides/khazix-voidreaver-aggro.md",
+   "title": "Kha'Zix Voidreaver — Aggro Dossier",
+   "subtitle": "Riftbound, Vendetta season — Jun's aggressive build, after the 18 September bans",
+   "date": "2026-09-16",
+   "legend": "Voidreaver",
+   "champion": "Kha'Zix, Mutating Horror",
+   "sections": [
+    "The short version",
+    "The list",
+    "1. What this deck is, and what it is not",
+    "2. The six cards",
+    "3. The engine: XP you make rather than XP you win",
+    "4. What this build is strictly better at",
+    "5. What this build gives up",
+    "6. How the cards combine",
+    "7. Mulligans",
+    "8. Sequencing",
+    "9. Piloting — why this is the easier of the two",
+    "10. Matchups",
+    "11. The sideboard",
+    "12. What to watch, and what to ask Jun",
+    "Sources and method"
+   ],
+   "words": 5233
+  },
+  {
    "slug": "khazix-voidreaver-postban",
    "file": "guides/khazix-voidreaver-postban.md",
    "title": "Kha'Zix Voidreaver — Post-Ban Dossier",
