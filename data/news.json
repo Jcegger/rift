@@ -1,19 +1,64 @@
 {
- "generatedAt": "2026-09-10",
+ "generatedAt": "2026-09-16",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "tags": {
-  "News": 31,
-  "Events": 19,
-  "Metagame": 17,
+  "News": 28,
+  "Metagame": 18,
+  "Events": 20,
   "Legends": 15,
-  "Sets": 2,
+  "Sets": 4,
   "Guides": 3,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Ekko, Recurrent & Stacked Deck Banned: Riftbound Ban List Updates – September 18, 2026",
+   "dt": "2026-09-15",
+   "url": "https://riftbound.gg/ban-list-updates-september-18-2026",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
+  {
+   "title": "Riftbound Metagame Update - Post Ekko,Reccurent and Stacked Deck Ban",
+   "dt": "2026-09-15",
+   "url": "https://riftbound.gg/riftbound-metagame-update-post-ekkoreccurent-and-stacked-deck-ban",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Shenyang Regional Qualifier Results – Top 8, Best-of Decks, Metagame, Popularity & Conversion Rates!",
+   "dt": "2026-09-13",
+   "url": "https://riftbound.gg/shenyang-regional-qualifier",
+   "tags": [
+    "Events"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Los Angeles Regional Qualifier 2026 Event Information",
+   "dt": "2026-09-12",
+   "url": "https://riftbound.gg/los-angeles-regional-qualifier-2026-event-information",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
+  {
+   "title": "Riftbound Meta Tier List - Best Decks for Vendetta - Post Singapore Regional Qualifier",
+   "dt": "2026-09-11",
+   "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-post-singapore-regional-qualifier",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
   {
    "title": "All Best-of Legends Prizing Decks in Singapore RQ (Updated)",
    "dt": "2026-09-07",
@@ -343,7 +388,7 @@
    "dt": "2026-07-18",
    "url": "https://riftbound.gg/secret-garden-bundle",
    "tags": [
-    "News"
+    "Sets"
    ],
    "author": "Theo-74825"
   },
@@ -433,7 +478,7 @@
    "dt": "2026-06-26",
    "url": "https://riftbound.gg/riftbound-t1-worlds-bundle",
    "tags": [
-    "News"
+    "Sets"
    ],
    "author": "Theo-74825"
   },
@@ -778,42 +823,6 @@
     "News"
    ],
    "author": "Riftbound.gg"
-  },
-  {
-   "title": "Potential Card Bans: Riftbound Game Director's Update",
-   "dt": "2026-03-10",
-   "url": "https://riftbound.gg/card-bans-riftbound-game-directors-update",
-   "tags": [
-    "News"
-   ],
-   "author": "Riftbound.gg"
-  },
-  {
-   "title": "Everything Revealed at Riftbound GAMA Expo 2026 - Upcoming Sets & Cards",
-   "dt": "2026-03-07",
-   "url": "https://riftbound.gg/everything-revealed-at-riftbound-gama-expo-2026-upcoming-sets-cards",
-   "tags": [
-    "News"
-   ],
-   "author": "Theo27"
-  },
-  {
-   "title": "Riftbound at PAX East 2026",
-   "dt": "2026-03-07",
-   "url": "https://riftbound.gg/riftbound-at-pax-east-2026",
-   "tags": [
-    "News"
-   ],
-   "author": "Riftbound.gg"
-  },
-  {
-   "title": "Riftbound Meta Tier List – Best Decks for Spiritforged - Post-Vegas Metagame",
-   "dt": "2026-03-06",
-   "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-spiritforged-post-vegas-metagame",
-   "tags": [
-    "Metagame"
-   ],
-   "author": "Den"
   }
  ]
 }
