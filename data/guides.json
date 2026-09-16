@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15",
+ "generatedAt": "2026-09-16",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -21,14 +21,15 @@
     "5. The five levers, priced",
     "6. Card by card",
     "7. The trash is a resource",
-    "8. Mulligans — the real numbers",
-    "9. Sequencing — how your turn actually goes",
-    "10. Matchups",
-    "11. The sideboard",
-    "12. What I'd test",
+    "8. How the cards combine",
+    "9. Mulligans — the real numbers",
+    "10. Sequencing — how your turn actually goes",
+    "11. Matchups",
+    "12. The sideboard",
+    "13. What I'd test",
     "Sources and method"
    ],
-   "words": 10346
+   "words": 13276
   },
   {
    "slug": "khazix-voidreaver",

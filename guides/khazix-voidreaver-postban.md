@@ -8,8 +8,8 @@ date: 2026-09-15
 **Legend:** Voidreaver (Body/Chaos) · **Champion:** Kha'Zix, Mutating Horror
 **Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend = 56 · **Sideboard:** 10 of 10
 **Shuffled library:** 39 — the Champion starts outside the deck (rule 103.2.a.1)
-**Collection status:** 3 cards still to get, $19.88 gap
-**Built from:** JUN's pre-ban list, rebuilt around the loss of Stacked Deck
+**Collection status:** 2 cards still to get, $12.12 gap
+**Built from:** Jun's own post-ban midrange list, 16 September — saved in the app as `Kha'Zix Midrange (Jun, post-ban)`
 
 ---
 
@@ -19,7 +19,7 @@ date: 2026-09-15
 
 **The one rule that governs the deck.** Voidreaver pays XP only when you **win** a combat — meaning you are the *only* player with units left at that battlefield (rule 466.3.a). A mutual wipe, an even trade, or your attackers bouncing off survivors are all **No Result**, and No Result pays nothing. **An even trade is a failure here.**
 
-**What the ban took.** Stacked Deck was banned on 18 September. It was not just a consistency card — it was **the card that made singleton toolbox slots playable**. Take it away and every 1-of becomes a card you draw at random. The list keeps three (Grim Resolve, Hard Bargain, Onslaught) and each one is defended in §1 — but the *toolbox* singletons, the ones whose value needed you to find them on a particular turn, are gone.
+**What the ban took.** Stacked Deck was banned on 18 September. It was not just a consistency card — it was **the card that made singleton toolbox slots playable**. Take it away and every 1-of becomes a card you draw at random. This list keeps two singletons (Onslaught and Ride the Wind) and both are defended in §1 — but the *toolbox* singletons, the ones whose value needed you to find them on a particular turn, are gone.
 
 **The number that shapes every decision.** Your opening hand is **4 cards** (rule 116) drawn from a **39-card** library, and you may swap at most **2** of them, once (117.1). You do not get to find things. Play accordingly.
 
@@ -37,7 +37,7 @@ date: 2026-09-15
 
 **You lose most even fights.** Against real archetype boards, two of your units versus two of theirs is a clean win **38–48% of the time with no trick.** Punch First takes that to **85–96%.** If you cannot see the trick, do not start the fight.
 
-**Your turn, in order:** activate the legend → buff → develop → arrange the fight → *then* move → hold up everything with Action or Reaction on it. Moving is what starts combat, so it comes last (§11).
+**Your turn, in order:** activate the legend → buff → develop → arrange the fight → *then* move → hold up everything with Action or Reaction on it. Moving is what starts combat, so it comes last (§12).
 
 **Three numbers worth memorising.**
 
@@ -56,11 +56,10 @@ Sorted by set number, the way you build it. **Kha'Zix counts toward the 40 but s
 | | Card | Number | Cost |
 |---|---|---|---|
 | 2 | Sabotage | OGN-156 | 1E / 1 Body |
+| 1 | Ride the Wind | OGN-173 | 2E / 1 Chaos · Action |
 | 3 | Traveling Merchant | OGN-185 | 2E · 2 Might |
 | 3 | Punch First | SFD-097 | 1E / 2 Body · Action |
-| 1 | Hard Bargain | SFD-136 | 2E · Reaction |
-| 2 | Fizz, Trickster | SFD-140 | 3E / 1 Chaos · 3 Might |
-| 1 | Grim Resolve | UNL-095 | 2E · Action |
+| 3 | Fizz, Trickster | SFD-140 | 3E / 1 Chaos · 3 Might |
 | 2 | Kinkou Initiate | UNL-097 | 3E · 3 Might |
 | 3 | Irresistible Faefolk | UNL-112 | 2E · 1 Might |
 | 2 | Rengar, Trophy Hunter | UNL-120 | 5E / 1 Body · 6 Might |
@@ -78,9 +77,9 @@ Sorted by set number, the way you build it. **Kha'Zix counts toward the 40 but s
 **Legend** Voidreaver `UNL-201` · **Runes** 6 Body `OGN-126` / 6 Chaos `OGN-166`
 **Battlefields** Zaun Warrens `OGN-298` · Forbidding Waste `UNL-210` · Sandswept Tomb `VEN-164`
 
-**Sideboard** — 2 Cannon Barrage `OGN-127` · 1 Sabotage `OGN-156` · 1 Sett, Brawler `OGN-164` · 2 Rebuke `OGN-172` · 2 Hard Bargain `SFD-136` · 2 Abandon `UNL-131`
+**Sideboard** — 2 Gust `OGN-169` · 2 Hard Bargain `SFD-136` · 1 Unyielding Spirit `OGN-145` · 1 Sabotage `OGN-156` · 1 Acceptable Losses `OGN-179` · 1 Switcheroo `SFD-145` · 1 Angler Beast `UNL-132` · 1 Ravenbloom Prefect `VEN-102`
 
-22 units / 18 spells. **Hard Bargain (1 + 2) and Sabotage (2 + 1) both sit exactly at the three-copy cap** across main deck and sideboard — you cannot bring in a fourth of either.
+23 units / 17 spells. **Sabotage (2 + 1) sits exactly at the three-copy cap** across main deck and sideboard. Hard Bargain is 0 main + 2 board, so unlike the previous build you have a third copy available if you ever want it.
 
 ---
 
@@ -121,26 +120,30 @@ By legend, against the five matchups that matter:
 
 Nothing in the legal Body/Chaos pool replaces a 1-Energy Action that digs three deep. The honest position is that **this deck is weaker than it was**, and the rebuild makes it coherent rather than better.
 
-What the three slots became, and why:
+This is Jun's answer to those slots, and it differs from the previous rebuild in three places worth naming:
 
-- **Kinkou Initiate ×2** — a 3-Might body that replaces itself. 19% of Body-legend decks run it at an average of 2.6 copies, the best-supported option in the pool.
-- **Grim Resolve ×1 and Onslaught ×1** — the two 0-Power pumps, castable on turns when Punch First is not. Grim Resolve is the Action; Onslaught is the bigger number.
-- **Traveling Merchant 2 → 3** — now the deck's only repeatable selection.
-- **Rampage 1 → 2** — up to the archetype average, and subtraction scales into the wide decks the ban promotes.
-- **Hard Bargain 2 → 1**, with the second and third copies in the sideboard. One main is the archetype norm (average 1.4 across the archive).
+- **Fizz 2 → 3.** The previous build cut Fizz to two and spent the slot on pumps. Jun went the other way and maxed it. Fizz is in **4 of 4** of the archived tournament Voidreaver lists and 76% of all of them, and with Stacked Deck gone it is the closest thing left to selection — it does not dig, but it turns a dead spell in the trash into a live one for its Power cost alone.
+- **Ride the Wind ×1 in, Grim Resolve ×1 out.** Both are 2-Energy Actions, so showdown density is unchanged at that slot, but what you hold up changes completely: Grim Resolve was a third pump, Ride the Wind is the only card in the deck that *repositions* at Action speed. §8 covers what that buys.
+- **Hard Bargain 1 → 0 main, 2 → 2 board.** The counterspell moved entirely to the sideboard.
 
-And **Tideturner** left because it was a singleton the deck can no longer find — 1 of 10 archived lists, and its whole value needs you to draw it *and* have hidden it a turn earlier.
+- **Kinkou Initiate ×2** — kept. A 3-Might body that replaces itself, the best-supported option in the pool.
+- **Traveling Merchant 2 → 3** — kept, and now the deck's only repeatable selection.
+- **Rampage 1 → 2** — kept, up to the archetype average.
 
-**Onslaught was cut and then deliberately brought back at one copy, over the second Grim Resolve.** The case against it is real and worth stating: it is the **only spell outside Fizz's 3-Energy rebuy range**, it carries no Action keyword so it cannot be held for the showdown, and at one copy it is a card you cannot dig for.
+**What cutting Grim Resolve actually costs.** Grim Resolve read *"give a friendly unit +3 Might this turn. When it wins a combat this turn, gain 2 XP"* — it was the deck's only XP source that was not the legend's own trigger. With it gone, **every point of XP in this list comes from winning a combat outright.** That does not change the strategy, but it sharpens §2: an even trade was always a failure here, and now there is no card in the deck that pays you around it.
 
-The case for it won anyway:
+**Onslaught survives at one copy**, and the case for it is unchanged from the previous build. The case against is real and worth restating: it is the **only spell outside Fizz's 3-Energy rebuy range**, it carries no Action keyword so it cannot be held for the showdown, and at one copy it is a card you cannot dig for.
 
-- **+6 Might is the largest single swing available to you** — more than Punch First's +5, and §4's simulation shows that a pump of that size is worth roughly 45 points of clean-win rate. This deck is paid only for clean wins.
+The case for it:
+
+- **+6 Might is the largest single swing available to you** — more than Punch First's +5, and §4's simulation shows a pump of that size is worth roughly 45 points of clean-win rate. This deck is paid only for clean wins.
 - **It costs no Power.** Body is the scarce resource and Punch First eats six of your ten. Onslaught is a bigger Punch First you can cast on a turn with no Body runes left.
-- **Flow 4E gives it a second life.** Cast it, it goes to the trash, play it again from there for 4 Energy — then it is banished. A one-of that you get twice is not the same kind of one-of as Tideturner was.
-- It is a **trash spender**, and §7 notes the spend side of that economy shrank when Fizz went to two.
+- **Flow 4E gives it a second life.** Cast it, it goes to the trash, play it again from there for 4 Energy — then it is banished. A one-of you get twice is not the same kind of one-of.
+- It is a **trash spender**, and §7 notes the spend side of that economy is the half under pressure.
 
-The price, stated plainly: **showdown-legal spells drop from 8 to 7**, Fizz's pool loses its only hole-free property, and the deck now carries three singletons rather than one.
+And **Tideturner** stayed out, for the same reason as before: a singleton the deck can no longer find.
+
+The price of the whole configuration, stated plainly: **showdown-legal spells sit at 6** — Punch First ×3 and Ride the Wind ×1 at Action speed, Star-Crossed ×2 at Reaction — and the deck carries two singletons rather than three.
 
 ---
 
@@ -225,7 +228,7 @@ So a single copy is not a lottery ticket — it is a guarantee. Extra copies liv
 
 That rule is a resource. A 1-Might Tentacle absorbs **exactly one** point of their assignment and no more. Two tokens tax two points off the total they have available to kill anything that matters. And Riot's own example shows the other half: **pre-existing damage lowers the minimum lethal**, which is why a card that pings their whole board before damage is worth more than its numbers suggest.
 
-**One card in the format switches this off, and it is the reason §10 has an Aurora entry.** Elder Dragon reads *"Any amount of your damage is enough to kill enemy units."* Minimum lethal against everything you control becomes 1, so its 10 Might kills **ten** of your units rather than one or two. Every line in this section that depends on cheap bodies taxing their assignment — the Tentacle wall, lever four, Star-Crossed pointing at a token — is false while it is on the board. It is a 12-Energy card, so you will normally only meet it cheated into play; answer it by returning it to hand, where it cannot be recast.
+**One card in the format switches this off, and it is the reason §11 has an Aurora entry.** Elder Dragon reads *"Any amount of your damage is enough to kill enemy units."* Minimum lethal against everything you control becomes 1, so its 10 Might kills **ten** of your units rather than one or two. Every line in this section that depends on cheap bodies taxing their assignment — the Tentacle wall, lever four, Star-Crossed pointing at a token — is false while it is on the board. It is a 12-Energy card, so you will normally only meet it cheated into play; answer it by returning it to hand, where it cannot be recast.
 
 ### The clean-win math
 
@@ -237,7 +240,7 @@ Stun changes the second half only. A Stunned unit *"does not contribute its migh
 
 Simulated against the real Might distributions of the top archetypes — two of your units against two of theirs:
 
-| | no trick | **+Punch First** | +Grim Resolve | +Vex stun |
+| | no trick | **+Punch First** | +3 pump (reference) | +Vex stun |
 |---|---|---|---|---|
 | Kennen | 38% | **85%** | 72% | 50% |
 | Master Yi | 43% | **88%** | 73% | 53% |
@@ -252,23 +255,23 @@ Simulated against the real Might distributions of the top archetypes — two of 
 
 **You lose roughly 60% of untricked even fights.** §2's patience is not temperament, it is arithmetic.
 
-**Punch First is not one card among four — it is the engine.** It swings clean-win rate by about 45 points where Grim Resolve swings 30. The +5 versus +3 does far more work than the two-Energy difference suggests.
+**Punch First is not one card among four — it is the engine.** It swings clean-win rate by about 45 points where a +3 swings 30. The +5 does far more work than the two-point difference suggests, which is most of why cutting Grim Resolve costs less than it looks.
 
 **Isolation is real, and it is the plan.** Their one unit alone against two of yours is a **79–89%** clean win, and **95–99%** once Kha'Zix adds his +2. That is what the six enablers buy.
 
 **Of the six you will meet most, Azir is the hardest — not Kennen** — 27% baseline, because their units are bigger (average 3.72 Might, median 4).
 
-**Two matchups sit off the bottom of this table, and they are the reason §10 grew.** Jayce averages 4.27 Might and Aurora ramp averages **7.41**, against your own 3.14. Read the Aurora row carefully: **1% untricked, 17% with Punch First, 3% with a stun.** That is not a matchup you fix with a better trick — it is a matchup you do not enter. Note also how the pump columns decay as their units grow: Punch First is worth +59 points against Kennen and +42 against Jayce, because +5 stops mattering once their average body is bigger than your best one. **Against big-unit decks the lever is removal, not Might.**
+**Two matchups sit off the bottom of this table, and they are the reason §11 grew.** Jayce averages 4.27 Might and Aurora ramp averages **7.41**, against your own 3.14. Read the Aurora row carefully: **1% untricked, 17% with Punch First, 3% with a stun.** That is not a matchup you fix with a better trick — it is a matchup you do not enter. Note also how the pump columns decay as their units grow: Punch First is worth +59 points against Kennen and +42 against Jayce, because +5 stops mattering once their average body is bigger than your best one. **Against big-unit decks the lever is removal, not Might.**
 
 ---
 
 ## 5. The five levers, priced
 
-Since only clean wins pay, these are the exact tools that convert a trade into a win. **Sixteen of your forty cards are one of them** — Vex ×2, Punch First ×3, Grim Resolve ×1, Onslaught ×1, Rampage ×2, Star-Crossed ×2, Up from the Deep ×3, Rengar ×2.
+Since only clean wins pay, these are the exact tools that convert a trade into a win. **Fifteen of your forty cards are one of them** — Vex ×2, Punch First ×3, Onslaught ×1, Rampage ×2, Star-Crossed ×2, Up from the Deep ×3, Rengar ×2.
 
 **Lever one — stun.** Vex ×2. Subtracting their biggest unit's Might from their assignment total while leaving it on the board as a body you still have to kill. Worth about +10 points of clean-win rate on its own — her real value is elsewhere (§6).
 
-**Lever two — raw Might.** Punch First ×3 (+5 for 1E/2 Body, Action), Onslaught ×1 (**+6** for 4E/0 Power, Main Phase only, Flow 4E) and Grim Resolve ×1 (+3 for 2E/0 Power, Action). Raising your sum kills more of theirs; it does not by itself keep yours alive — and note the biggest of the three is the one you cannot hold up.
+**Lever two — raw Might.** Punch First ×3 (+5 for 1E/2 Body, Action) and Onslaught ×1 (**+6** for 4E/0 Power, Main Phase only, Flow 4E). With Grim Resolve cut this is now only four cards, and the biggest of them is the one you cannot hold up.
 
 **Lever three — subtraction.** Rampage ×2, Star-Crossed ×2. Removing a unit from the fight removes its Might from their sum **and** removes it as a body you must kill. Subtraction is worth roughly double addition for the purposes of a clean win.
 
@@ -333,7 +336,7 @@ Turn two is four Energy, so two 2-drops then Kinkou on three is the curve that t
 
 **Fizz, Trickster ×2** (3E / 1 Chaos / 3 Might) — *"When you play me, you may play a spell from your trash with Energy cost no more than 3, ignoring its Energy cost. Then recycle it."*
 
-You still pay the spell's **Power** cost. **Seventeen of your eighteen spells are legal targets** — seven of them at no extra Power (Grim Resolve, Hard Bargain, Rampage ×2, Up from the Deep ×3). The one exception is **Onslaught at 4 Energy**, which is the only card in the deck Fizz cannot reach.
+You still pay the spell's **Power** cost. **Sixteen of your seventeen spells are legal targets** — five of them at no extra Power (Rampage ×2, Up from the Deep ×3). The one exception is **Onslaught at 4 Energy**, the only card in the deck Fizz cannot reach.
 
 Worth holding in mind when you decide what to let hit the trash: a trashed Onslaught is not Fizz food, but it *is* still castable through its own Flow for 4 Energy. It leaves by a different door.
 
@@ -361,25 +364,29 @@ The best card in the deck by a wide margin (§4), and the only spell Defy cannot
 
 **It eats 6 of your 10 Body demand.** Count Body runes before you commit anything else.
 
-**Grim Resolve ×1** (2E / **0 Power** / Action) — *"Give a friendly unit +3 Might this turn. When it wins a combat this turn, gain 2 XP."*
+**Ride the Wind ×1** (2E / **1 Chaos** / Action) — *"Move a friendly unit and ready it."*
 
-Its real job is not the XP — it is that **it is castable on a turn when Punch First is not.** Body is the scarce resource, and a Power-free pump you can hold up with no runes left is a genuinely different card.
+**The only card in the deck that repositions at Action speed.** Your other five showdown-legal copies all change how big a unit is; this one changes where it is, and untaps it on the way. Three uses, in rough order of how often they come up:
 
-**The XP clause pays on clean wins only, and the buffed unit has to live to collect.** Two rules settle it. **466.3.c** — *"Units at this battlefield inherit the same combat result as their controllers"* — means a unit wins exactly when *you* win (466.3.a), so there is no separate unit-level win to trigger on. And Nidalee, Cat Form's *"(I win if I remain after combat.)"* does not create an exception to that: it is parenthetical reminder text, and **135.2.d.3** says the exact wording of reminder text *"has no effect on game function."* Compare Glorious Executioner, whose *"(You win if only your units remain after combat.)"* restates 466.3.a exactly — same family, accurate summary. Nidalee's reads like it predates the Unleashed tightening of the tie definitions.
+1. **Trigger a move payoff mid-showdown** — Traveling Merchant loots, Shadow Order Disciple burns for +1. See §8.
+2. **Ready a unit that has already fought**, which is the closest thing the deck has to a second action.
+3. **Pull a unit out of a fight you have lost**, in the window after they commit and before damage.
 
-**The consequence that matters at the table:** combat resolves 466.1 Cleanup → 466.3 Determine Combat Result, so anything that died is already gone when results are assigned, and 466.3.c only covers *"Units **at this battlefield**."* **A buffed unit that trades away pays you nothing, even on a clean win you took with something else.** The +3 is doing two jobs — winning the fight and keeping the collector alive — so point it at a unit that survives, not at the one you are spending. Same reason it has to be at the battlefield you actually won: buff at A, win at B, no trigger.
+It replaced Grim Resolve, and that swap is §1's. The one thing lost with it is worth stating precisely, because it also settles a rules question people ask about the archetype:
 
-So it is a +3 pump with an XP rider you earn about as often as you were going to win anyway. Still the right card for the slot (§1) — just not the exciting one. §12's Rebuke swap is live on the merits, not contingent on a ruling.
+**An XP rider on a pump would have paid on clean wins only, and needed the buffed unit to live.** Two rules settle it. **466.3.c** — *"Units at this battlefield inherit the same combat result as their controllers"* — means a unit wins exactly when *you* win (466.3.a), so there is no separate unit-level win to trigger on. And Nidalee, Cat Form's *"(I win if I remain after combat.)"* does not create an exception: it is parenthetical reminder text, and **135.2.d.3** says the exact wording of reminder text *"has no effect on game function."* Compare Glorious Executioner, whose *"(You win if only your units remain after combat.)"* restates 466.3.a exactly.
+
+Combat resolves 466.1 Cleanup → 466.3 Determine Combat Result, so anything that died is already gone when results are assigned, and 466.3.c only covers *"Units **at this battlefield**."* That is why the rider was worth less than it read, and most of why cutting it costs so little.
 
 **Onslaught ×1** (4E / **0 Power**, Flow 4E) — *"Give a unit +6 Might this turn."*
 
 **The biggest number in the deck, and the one you cannot hold up.** +6 beats Punch First's +5, and it costs no Power at all — so it is the pump you cast on a turn when your Body runes are already spent. That is the whole case for the slot (§1).
 
-Everything awkward about it follows from one omission: **it has no Action keyword.** It is a Main Phase card, which means committing the deck's largest swing *before* you move — before you see whether they have a trick. Sequencing it is step 4 of §9, not step 5.
+Everything awkward about it follows from one omission: **it has no Action keyword.** It is a Main Phase card, which means committing the deck's largest swing *before* you move — before you see whether they have a trick. Sequencing it is step 4 of §10, not step 5.
 
 **Flow does not fix that.** Rule 829.1.b.2 is explicit that playing a spell for its Flow cost *"does not change the timing at which it can be played, nor any permissions for the spell aside from the zone from which it can be played."* The copy you cast out of the trash is Main-Phase-only too. What Flow buys is a **second use**, not a second speed: cast it, it goes to the trash, play it again for 4 Energy, then it is banished.
 
-**Defy catches it permanently.** At 4 Energy and no Power it satisfies both of Defy's clauses, and rule 206 means the printed cost is the one checked — Sandswept Tomb's discount will never drag it out of range, exactly as it never drags Punch First in. Against Irelia it is one of the cards that leaves (§10).
+**Defy catches it permanently.** At 4 Energy and no Power it satisfies both of Defy's clauses, and rule 206 means the printed cost is the one checked — Sandswept Tomb's discount will never drag it out of range, exactly as it never drags Punch First in. Against Irelia it is one of the cards that leaves (§11).
 
 **It is the one spell Fizz cannot rebuy** — 4 Energy, over her 3-Energy limit, the single hole in a pool of eighteen. The compensation is that it is also the one card in the deck **you are happy to Burn** (§7): the trash is not a dead end for it.
 
@@ -444,7 +451,131 @@ Six filler copies against ten spenders — Onslaught's Flow is the tenth. The ec
 
 ---
 
-## 8. Mulligans — the real numbers
+## 8. How the cards combine
+
+The forty is not forty independent cards. About a third of them only do their job next to a specific partner, and two of them look like partners and are not. This section is what to know before you sit down.
+
+### The isolation chain: Rengar → Kha'Zix
+
+Both carry [Ambush], so both can arrive as a Reaction — mid-showdown. Their conditions are not the same, and the difference is the whole line:
+
+- **Kha'Zix** — Ambush to *a battlefield where you have units*.
+- **Rengar** — the same, plus *"I can be played to a battlefield where there are enemy units (even if you don't have units there)."*
+
+Rengar is the only card in the deck that can open a battlefield you have no presence at. Once he lands, Kha'Zix's Ambush becomes legal there too. Rengar first, Kha'Zix second, same showdown: **10 Might arriving out of nowhere at Reaction speed** — and if the unit Rengar dropped on was by itself, that is exactly the *alone* Kha'Zix is paid for.
+
+### Forbidding Waste + Kha'Zix — the four-point swing
+
+| | |
+|---|---|
+| Forbidding Waste | While a unit here is **defending alone**, it has **-2 Might** |
+| Kha'Zix | When I attack or defend, **if an enemy unit is alone here**, +2 Might and 2 XP |
+
+The same condition, read from both sides. Attack a lone defender at the Waste and they are at -2 while Kha'Zix is at +2 — a four-point swing off two cards you were playing anyway. It is why Forbidding Waste is in **82%** of archived Voidreaver lists and all four of the tournament ones.
+
+**The trap:** the Waste says *a unit*, not *an enemy unit*. Your own lone defender there takes the same -2. Never leave one body holding it.
+
+### Sandswept Tomb + your tricks — the rune fix
+
+*"Each spell that chooses one or more units here that are friendly to it costs 1 rune less."*
+
+The deck's bottleneck is Power, not Energy. Punch First is 1 Energy but **2 Body**, and you own six Body runes; §7 and §5 both end up at the same place. At the Tomb, Punch First costs 1 Body, Star-Crossed's 1 Chaos goes to zero, Void Assault's 1 Power goes to zero.
+
+So the Tomb is where you fight on the turns you need to hold up two tricks. That is a battlefield choice made a turn early, not a reaction.
+
+### Shadow Order Disciple → the four spenders
+
+Burn 1 is not a pump with a drawback. It is the deck's only deliberate way to stock the bin, and there are four things downstream of it:
+
+| Spender | Takes from the trash |
+|---|---|
+| **Fizz, Trickster** | any spell at ≤3 Energy |
+| **Tail-Cloaked Matriarch** | any unit at ≤3 Energy and ≤1 Power |
+| **Up from the Deep** / **Onslaught** | themselves, via Flow |
+| **Shadow Clone** | banishes any unit, for Assault 4 |
+
+§7's default of *don't Burn* still holds. Burn when a spender is already in hand, not on the chance one shows up.
+
+### Ride the Wind + any "when I move" body
+
+New to this build, and the reason it is not simply a sixth pump: it moves **and readies**. It triggers Traveling Merchant (discard 1, draw 1) or Shadow Order Disciple (Burn for +1) and leaves the unit able to fight again. Of your six showdown-legal spells it is the only one that changes *where* a unit is rather than how big it is.
+
+### Sabotage → whatever you were about to cast
+
+The two decks you will see most both run three **Defy**, and the full text is *"counter a spell that costs no more than 4 Energy **and** no more than one rainbow Power."* Both clauses matter. Every spell in this deck is 4 Energy or less, so the first clause never saves you — but **Punch First's 2 Body puts it permanently out of range** (§6, and rule 206 makes it structural). Fourteen of your seventeen spells are counterable; three are not.
+
+Sabotage reveals their hand and recycles a non-unit card, and it is the only main-deck card that takes the Defy *before* you commit. Against Master Yi and Akali, lead with it rather than saving it for something bigger — and when you have no Sabotage, commit Punch First into open Power and keep the counterable spells for after their Defy is spent.
+
+---
+
+### Rampage + any pump — the deck's only kill spell
+
+Rampage reads *"choose a friendly unit and an enemy unit. If you paid the additional cost, give the friendly unit +2 Might this turn. They deal damage equal to their Mights to each other."* That resolves **outside combat**, so it is the one card in the deck that removes a unit without a showdown.
+
+Point a pump at the friendly half first and it stops being a trade. Punch First takes a 2-Might Shadow Order Disciple to 7 and kills almost anything in the format; Onslaught takes it to 8. The friendly unit still takes their Might back, so pick a body you are willing to lose or one large enough to survive.
+
+**And it is not spell damage.** Rule **417.6.b.3** settles this with Challenge as its worked example — identical wording to Rampage — and says plainly: *"The damage that Challenge causes to be dealt is dealt by the chosen units, not by Challenge."* So an opposing Unyielding Spirit, or anything else that prevents spell and ability damage, **does not stop Rampage**. It also means Rampage is not how you play around damage prevention; it is how you ignore it.
+
+### Gust manufactures the thing Kha'Zix needs (sideboard)
+
+Gust returns a unit at 3 Might or less to its owner's hand, for 1 Energy, at Reaction speed. Read it as removal and it looks small. Read it as **an isolation tool** and it is the cheapest one in the seventy-five: a battlefield with two enemy units is a battlefield where Kha'Zix gets nothing, and Gust turns it into one where he gets +2 and 2 XP — mid-showdown, after they have committed.
+
+### Up from the Deep answers the Forbidding Waste trap
+
+The Waste's -2 applies to *any* unit defending alone, including yours. Two Tentacle tokens for 3 Energy are the cheapest way to make sure the unit holding it never is — and unlike a real body, you were not going to cast them for anything else.
+
+### Kinkou Initiate — know what turns it on
+
+*"Draw 1 if your **other** units have total Might 5 or more."* Your own Might does not count, so the sequencing is always develop first, Kinkou second. What gets you there:
+
+- any **one** of Vex (4) or Rengar (6) or Zed (5) — Rengar and Zed do it alone
+- **three** small bodies: Merchant (2) + Disciple (2) + Faefolk (1) = 5 exactly
+- two 2-Might bodies is **4** and does not do it — this is the near-miss to watch for
+
+### Zaun Warrens is a Traveling Merchant that costs no card
+
+*"When you conquer here, discard 1, then draw 1"* — the same loot, the same trash-filling, on a battlefield slot rather than a deck slot. Conquering the Warrens is therefore worth slightly more than conquering the other two, and it is the fill half of §7's economy running for free every time you take it.
+
+### Vex answers the chain in reverse
+
+*"When an opponent plays a unit while I'm at a battlefield, Stun it."* That is a direct answer to exactly the Rengar → Kha'Zix play at the top of this section — theirs, in the mirror, and Akali's Mischievous Marai, and every Ambush body in the format. Vex on a contested battlefield taxes their entire Reaction-speed plan, and Deflect means they have to pay a rainbow Power to remove her first.
+
+### Two sideboard details worth knowing before you need them
+
+**Hard Bargain has [Repeat] 2E.** Pay two more Energy and it counters a second spell. Against a deck holding three Defy that is the difference between one answer and two on the turn that matters.
+
+**Acceptable Losses is one-sided here.** *"Each player kills one of their gear"* — and **this deck runs zero gear.** The symmetry that normally prices it down costs you nothing. §12's real objection stands, though: *they* choose which of theirs dies.
+
+### Tokens die when they are bounced — rule 186.1
+
+*"If a token is put into any Non-Board Zone besides the chain, it ceases to exist immediately after moving to its new zone."* Four consequences, and they run in both directions:
+
+- **Gust and Star-Crossed are hard removal against token decks.** Azir's Sand Soldiers, Jayce's Recruits, a Shadow Clone — bounced is dead, not delayed. Against Azir in particular this reprices both cards upward.
+- **Angler Beast eats your own Tentacles.** It returns *all* units at 2 Might or less, and your two Up from the Deep tokens are 1 Might each. They do not come back to hand; they stop existing.
+- **When Star-Crossed makes you bounce something friendly, bounce a real unit, not a token.** The real one is re-castable. The token is gone.
+- **Their bounce kills your Shadow Clone the same way**, so do not build a turn around a clone that a 1-Energy Gust deletes.
+
+### Three-card lines
+
+**Traveling Merchant → Fizz → the spell you pitched.** Merchant discards on every move; Fizz plays a spell from the trash at ≤3 Energy, ignoring the Energy and paying only the Power. A Star-Crossed pitched to Merchant comes back for 1 Chaos and no Energy at all. This is the deck's best card-quality line and it costs nothing you were not already doing.
+
+*The hole:* **Onslaught is 4 Energy and outside Fizz's range.** It is the one card Merchant should not pitch — unless you want it in the bin for its own Flow, which is the one Burn §7 calls close to free.
+
+**Tail-Cloaked Matriarch → Fizz → a spell.** Matriarch's Empower rebuys a unit from the trash at ≤3 Energy and ≤1 Power. Fizz is 3E / 1 Chaos, so it qualifies. Matriarch plays Fizz; Fizz's own arrival plays a spell from the trash. One Empower buys a 3-Might body and a free spell.
+
+**Zed → Shadow Clone → the trash.** Zed's conquer plays a 0-Might Shadow Clone to your base, and his Action swaps his location with the clone's. The clone is therefore both a second body and an escape hatch — swap Zed home out of a fight you have lost, or swap him into one the clone opened. The clone's own attack banishes a unit from the trash for Assault 4, which makes it the fourth spender on the bin Shadow Order Disciple fills.
+
+---
+
+### The two that look like synergies and are not
+
+**Irresistible Faefolk into an occupied battlefield.** Faefolk moves an enemy unit to wherever it moved. If an enemy is already there you have built a two-on-one against yourself *and* switched Kha'Zix's bonus off, because nothing is alone any more. Faefolk is for pulling one unit onto an empty field, not for adding to a crowd.
+
+**Star-Crossed as a rescue.** It returns a friendly unit **and** an enemy unit, and both halves are mandatory. Bouncing their blocker to save your attacker also undoes the isolation you spent a Void Assault setting up. It is a reset button, not a trick.
+
+---
+
+## 9. Mulligans — the real numbers
 
 **The pre-ban dossier's keep rule is unusable.** "Any two of {Shadow Order Disciple, Irresistible Faefolk, Traveling Merchant} plus a Void Assault or Punch First" is met by **7.6% of opening hands.** You cannot ship 92% of hands with a single two-card swap.
 
@@ -469,7 +600,7 @@ Six filler copies against ten spenders — Onslaught's Flow is the tenth. The ec
 
 ---
 
-## 9. Sequencing — how your turn actually goes
+## 10. Sequencing — how your turn actually goes
 
 Before your Main Phase, three things happen on their own: you **ready everything** including Voidreaver; you **Hold all battlefields you control**, scoring 1 point each — so last turn's board is what pays you today; then you channel 2 runes and draw 1.
 
@@ -481,19 +612,21 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **Step 4 — arrange, then move.** Moving is what creates combat, so everything that repositions is the trigger, not the setup. Drag the lone enemy where you want it, confirm your sum kills *all* of theirs, and only then move in.
 
-**Step 5 — hold your Actions and Reactions.** Check the keyword before you count on a card mid-fight. Your showdown-legal spells are **Punch First ×3** and **Grim Resolve ×1** (Actions), **Star-Crossed ×2** and **Hard Bargain ×1** (Reactions), plus **Kha'Zix and Rengar ×2** arriving at Reaction timing on Ambush — Rengar into their side of the board, which is the biggest thing you can do mid-showdown (§6). **Onslaught, Rampage, Sabotage, Void Assault and Up from the Deep carry no keyword at all** — they are Main-Phase setup and cannot be held up. Onslaught in particular has to be committed *before* you move, which is the cost of its +6.
+**Step 5 — hold your Actions and Reactions.** Check the keyword before you count on a card mid-fight. Your showdown-legal spells are **Punch First ×3** and **Ride the Wind ×1** (Actions) and **Star-Crossed ×2** (Reactions), plus **Kha'Zix and Rengar ×2** arriving at Reaction timing on Ambush — Rengar into their side of the board, which is the biggest thing you can do mid-showdown (§6, and the chain in §8). **Zed's activated ability is also an Action**, so the Shadow Clone swap is available mid-showdown; it is the only non-spell in that column. **Onslaught, Rampage, Sabotage, Void Assault and Up from the Deep carry no keyword at all** — they are Main-Phase setup and cannot be held up. Onslaught in particular has to be committed *before* you move, which is the cost of its +6.
 
-Seven showdown-legal spells, down from nine before the ban. That is the clearest thing the ban took, and no amount of extra pump replaces it — running Onslaught over the second Grim Resolve trades one of them for a bigger number you must pre-commit.
+**Six showdown-legal spells, down from nine before the ban.** That is the clearest thing the ban took, and no amount of extra pump replaces it. Note what the six copies are: **three add Might** (Punch First), **two return a pair of units** (Star-Crossed), **one repositions** (Ride the Wind). Moving Hard Bargain to the sideboard means you hold up **no counterspell** in game one — Star-Crossed is your only mid-showdown answer to a unit, and it costs you a body of your own to use.
 
 **The one-line version:** *activate, buff, develop, arrange, move, then hold up everything with Action or Reaction on it.*
 
 ---
 
-## 10. Matchups
+## 11. Matchups
 
-Share figures are projections from the pre-ban Singapore Top 64 adjusted for ban exposure; treat them as directional.
+Share figures are **actual counts** from the 1,184-list snapshot rebuilt on 16 September — the one that first carried riftbound.gg's backfill of the Chinese circuit. They are shares of the whole archive, not of a Top 64, so they run lower than the projections this section used to carry.
 
-### Kennen, Heart of the Tempest — ~24%, still the deck to beat
+**Board plans below use Jun's ten (§12).** Every plan in the previous dossier named Abandon, Cannon Barrage or Rebuke, none of which are in this board.
+
+### Kennen, Heart of the Tempest — 6.3%, and the archetype the ban was aimed at
 
 Their core: Lightning Rush, Ride the Wind, Traveling Merchant, Nocturne, Rhasa the Sunderer, Star-Crossed, Kennen Storm of Shuriken, Minefield.
 
@@ -501,48 +634,70 @@ A self-milling tempo deck that plays from its trash much as you do. They are fas
 
 **Vex is your best card here**, because every unit they deploy arrives stunned and their whole plan is deployment. Rhasa at 6 Might is the one body your buffs will not out-scale; answer it with Rampage or Star-Crossed rather than racing.
 
-**Abandon is the specific tech.** Rhasa gets cheaper per card in *their* trash and Lightning Rush rebuys itself with Flow — so countering a spell **into their hand instead of their trash** denies the fuel. The usual drawback is the point.
+**Abandon was the specific tech and is no longer in the board.** Rhasa gets cheaper per card in *their* trash, so countering a spell into their *hand* rather than their trash denied the fuel. Hard Bargain does not do that — it is a tax, and a countered spell still goes to the bin. If this matchup stays common, Abandon is the card to find room for.
 
-*In:* Abandon ×2, Hard Bargain ×2. *Out:* Rampage ×2, Star-Crossed ×2.
+*In:* Hard Bargain ×2, Gust ×2. *Out:* Rampage ×2, Sabotage ×2.
 
-### Master Yi and Rengar — ~25% combined, and rising
+**What the ban did to this matchup.** Stacked Deck was in 16 of their 17 archived top-8 lists at ~2.9 copies, and Riot's note named the Kennen legend as the reason. Kennen keeps Lightning Rush, so it kept an engine — but this is no longer the deck to beat, and the old In/Out here was built for a version of it that will not be at the table.
+
+### Master Yi, Wuju Bladesman — 9.0%, the most-played legend in the format
 
 Cheap, wide aggro. Master Yi averages 18.3 units a deck, Rengar **30.0**; 46% and 35% of those are 2 Might or less.
 
-Two problems. **Their untargetable density** — Master Yi runs 2.7 Deflect-or-untargetable units per deck — blanks Rampage, Star-Crossed, Rebuke and Void Assault, all of which choose. And **their Defy density** (Master Yi 3.1) means only Punch First is structurally safe.
+Two problems. **Their untargetable density** — Master Yi runs 2.7 Deflect-or-untargetable units per deck — blanks Rampage, Star-Crossed, Gust and Void Assault, all of which choose. And **their Defy density** (Master Yi 3.1) means only Punch First is structurally safe.
 
-Wide boards are where **Up from the Deep** and the no-overkill rule earn their slot. **Cannon Barrage is the sideboard answer**: it does not choose, it is a Reaction, and pre-damaging their board lowers minimum lethal on the survivors.
+Wide boards are where **Up from the Deep** and the no-overkill rule earn their slot. **Angler Beast is this board's sweeper** — it returns every unit at 2 Might or less, which is 46% of their deck. Read the warning in §12 first: it catches nine of yours as well, so it is a card you play from behind, not ahead.
 
-*In:* Cannon Barrage ×2, Rebuke ×2. *Out:* Rampage ×2, Sabotage ×2. Against Rengar specifically Sabotage is near-dead — they run almost no non-unit cards.
+*In:* Hard Bargain ×2, Gust ×2, Angler Beast ×1, Sabotage ×1. *Out:* Rampage ×2, Onslaught ×1, Star-Crossed ×1, Zed ×1, Tail-Cloaked Matriarch ×1.
 
-### Azir, Emperor of the Sands — ~7%, and the worst of the six you see most
+**Leave Unyielding Spirit out.** Their removal is Charm, Defy, En Garde and Discipline — moves, counters and pumps. There is no spell damage in the matchup for it to prevent.
+
+**The structural problem, stated plainly.** Their legend reads *"while a friendly unit defends alone, it gets +2 Might."* Yours pays out when *an enemy unit is alone*. You spend Faefolk and Void Assault manufacturing a lone defender; they get +2 for free on the board state you built. §8's Forbidding Waste swing is the one place you win that exchange — their -2 from the Waste cancels their legend's +2, and your Kha'Zix keeps his.
+
+### Akali, Rogue Assassin — 4.5%, and the best results in the archive
+
+Their core: 3 Defy, 3 Shuriken Flip, ~2.6 Falling Star, 3 Discipline, ~2.6 Zhonya's Hourglass, ~2.2 Long Sword, Mischievous Marai, Akali Deadly Weapon, Stellacorn Herder, Kai'Sa Survivor, Astral Heron.
+
+Absent from the previous dossier, and it should not have been: Akali holds a win at Singapore RQ, a win at Shenyang Regional Open and a #1 at King's Road Season 7 — the best result set of any archetype in the file.
+
+**The matchup is decided by their damage, not their bodies.** Shuriken Flip deals 2 for one Energy, Falling Star deals 3 twice, Marai deals 2 on arrival, and 71% of their best lists run **Void Gate** — *"spells and abilities affecting units here each deal 1 Bonus Damage."* With the Gate up, Shuriken Flip kills a 3-Might unit and each half of Falling Star kills a 4.
+
+Count what that catches in this list: nine units at 2 Might or less and five at exactly 3 — **fourteen of your twenty-three bodies die to one cheap spell.** Rengar at 6 and Zed at 5 are the two that do not.
+
+**Unyielding Spirit is the single best card you can bring**, and you have one. *"Prevent all spell and ability damage this turn"* for 1 Energy blanks their entire removal suite for a turn, including the Void Gate bonus. If this matchup is common at your locals, the second copy is the first change worth making to the board.
+
+**Do not fight at Void Gate**, and remember §8: Sandswept Tomb is the battlefield that makes *your* tricks cheaper. Given the choice, take that fight there.
+
+*In:* Unyielding Spirit ×1, Hard Bargain ×2, Gust ×2, Ravenbloom Prefect ×1, Acceptable Losses ×1. *Out:* Rampage ×2, Onslaught ×1, Up from the Deep ×2, Star-Crossed ×2.
+
+### Azir, Emperor of the Sands — 2.8%, and still the worst board you fight often
 
 **Not a big-equipped-threat deck.** It is a token swarm that *counts* equipment: roughly 15 cheap equips and only ~3.5 real units, with Arise! playing a Sand Soldier per Equipment and then readying two. Killing one gear is noise, which is why there is no gear hate in this board.
 
-Your answer is **Vex**, who stuns every Sand Soldier as it arrives and blanks the ready clause, plus **Cannon Barrage** to sweep what lands. At 27% baseline clean-win this is the fight you most need a trick for — worst of the common six, though Aurora is worse still.
+Your answer is **Vex**, who stuns every Sand Soldier as it arrives and blanks the ready clause, plus **Angler Beast** to sweep what lands — a token swarm is the one board where its symmetry does not hurt you. At 27% baseline clean-win this is the fight you most need a trick for.
 
-*In:* Cannon Barrage ×2, Rebuke ×2. *Out:* Rampage ×2, Star-Crossed ×2. **Vex stays in.**
+*In:* Gust ×2, Angler Beast ×1, Hard Bargain ×2. *Out:* Rampage ×2, Onslaught ×1, Zed ×1, Tail-Cloaked Matriarch ×1. **Vex stays in.**
 
-### Irelia, Blade Dancer — ~5% and falling
+### Irelia, Blade Dancer — 5.2%, and hit hard by the ban
 
 The Calm interaction deck. **Defy** counters a spell costing no more than 4 Energy **and** no more than one rainbow Power — the second clause is the one that matters:
 
 | Structurally immune (Power > 1) | Counterable |
 |---|---|
-| **Punch First** (1E / **2 Body**) | Sabotage, Grim Resolve, Hard Bargain, Void Assault |
-| **Rebuke** (2E / **2 Chaos**, SB) | Rampage, Star-Crossed, Up from the Deep, **Onslaught** |
+| **Punch First** (1E / **2 Body**) | Sabotage, Ride the Wind, Void Assault |
+| **Switcheroo** (2E / **2 Chaos**, SB) | Rampage, Star-Crossed, Up from the Deep, **Onslaught** |
 
 **Your best combat trick cannot be countered**, and rule 206 makes that structural rather than incidental — a discount never drags a spell into Defy range and never lifts one out. Play around Defy with everything else, and let Punch First be the card you commit into open Power.
 
-*In:* Rebuke ×2, Hard Bargain ×2, Abandon ×2, Sabotage ×1. *Out:* Rampage ×2, Up from the Deep ×2, Grim Resolve ×1, Onslaught ×1, Star-Crossed ×1.
+*In:* Hard Bargain ×2, Gust ×2, Sabotage ×1, Switcheroo ×1. *Out:* Rampage ×2, Up from the Deep ×2, Onslaught ×1, Star-Crossed ×1.
 
-### Rek'Sai, Void Burrower — ~7%
+### Rek'Sai, Void Burrower — 5.4%, untouched by the ban
 
-Wide and small like Rengar (25.8 units a deck, 49% at ≤2 Might) with 2.8 untargetable bodies, but no counterspells at all. Cannon Barrage is excellent; your counters are dead.
+Wide and small (25.8 units a deck, 49% at ≤2 Might) with 2.8 untargetable bodies, but no counterspells at all. Angler Beast is excellent here and Hard Bargain is dead — leave the counters in the box.
 
-*In:* Cannon Barrage ×2, Rebuke ×2. *Out:* Rampage ×2, Sabotage ×2.
+*In:* Gust ×2, Angler Beast ×1, Switcheroo ×1. *Out:* Rampage ×2, Sabotage ×2.
 
-### Dazzling Aurora ramp — ~6% and rising, and the matchup you are least built for
+### Dazzling Aurora ramp — the matchup you are least built for
 
 **5.9% of the archive runs Dazzling Aurora, at an average of 2.8 copies**, and it spans shells rather than sitting in one: Battle Mistress (6), Jayce (5), Grand Duelist (4), Relentless Storm (4). Eighteen of those twenty-five lose nothing to the ban. Treat it as an archetype, not a package — and expect it to grow into the room Kennen vacates.
 
@@ -564,21 +719,23 @@ The composite: **9.2 units a deck, average Might 7.41, median 7, and only 2% at 
 **Do not try to win a combat against a resolved monster.** §4's model prices two of your units against two of theirs at **1% clean wins with no trick, 17% with Punch First, and 3% with a Vex stun** — the worst row in the table by a factor of twenty, and the only one no card in your deck meaningfully moves. A stun barely helps because 423.1.c still makes you deal a 12-Might Baron twelve damage to kill it. You cannot get there. Two cards make it worse than that arithmetic suggests:
 
 - **Elder Dragon** reads *"Any amount of your damage is enough to kill enemy units."* **That switches off rule 465.2.c.4 for its entire side** — minimum lethal against everything you own becomes 1, so its 10 Might kills **ten** of your units. Up from the Deep, the Tentacle wall, lever four, the whole no-overkill tax: all of it evaporates against one card. See §4.
-- **Baron Nashor** reads *"I can't be chosen by enemy spells and abilities"* and *"Other friendly units have +2 Might."* **Rebuke, Star-Crossed, Rampage and Void Assault are all dead cards against it** — every one of them chooses. It also arrives on its own Baron Pit token, which *"units can move here from anywhere."*
+- **Baron Nashor** reads *"I can't be chosen by enemy spells and abilities"* and *"Other friendly units have +2 Might."* **Star-Crossed, Rampage and Void Assault are all dead cards against it** — every one of them chooses. It also arrives on its own Baron Pit token, which *"units can move here from anywhere."*
 
 **So the plan is the clock, not the fight.** Nine units a deck, most of them 8–12 Energy, means that before Aurora lands their board is nearly empty — and a near-empty board is the easiest isolation in the format, with a lone enemy sitting exactly on Kha'Zix's trigger. You are not racing a fast deck; you are racing a nine-Energy gear. Hold battlefields, bank XP, and be lethal before it resolves.
 
 **What actually answers what:**
 
 - **Sabotage is your best card here, and you already run three.** Gear is a **non-unit card**, so Sabotage takes Aurora straight out of their hand — the cheapest possible answer to a nine-drop, and proactive rather than reactive. Board the third copy in.
-- **Bounce answers every monster except Baron.** Aurora plays them *ignoring cost*; return one to hand with Rebuke or Star-Crossed and it is a **brick** at 10–12 Energy, permanently uncastable. Because Aurora reveals off the **Main Deck**, a card sitting in their hand is also out of the engine pool for good. You do not just answer it, you delete it.
-- **Your counterspells do nothing to the engine.** Hard Bargain and Abandon both counter a *spell*. Aurora is a Gear. Do not board counters in expecting to stop it.
+- **Bounce answers every monster except Baron.** Aurora plays them *ignoring cost*; return one to hand with **Star-Crossed** and it is a **brick** at 10–12 Energy, permanently uncastable. Because Aurora reveals off the **Main Deck**, a card sitting in their hand is also out of the engine pool for good. You do not just answer it, you delete it. Star-Crossed is the only bounce in this configuration, so the two copies are load-bearing — do not board them out here.
+- **Your counterspells do nothing to the engine.** Hard Bargain counters a *spell*. Aurora is a Gear. Ravenbloom Prefect is the card that answers it, and §12 explains why it has to be on the board first.
 - **Vex still earns her slot** against anything they hard-cast, and she is the one card that ignores Baron's untargetability — she does not choose (§6). One caveat worth confirming: Aurora's trigger fires *"at the end of your turn"*, and 423.1.a.2 drops Stunned status during the end-of-turn cleanup, so a stun applied to an Aurora-cheated unit may expire almost immediately. Against hard-cast monsters she is unambiguous.
 - **Rampage is your worst card here.** It is mutual damage into an average of 7.41 Might — your unit dies every time.
 
-*In:* Rebuke ×2, Sabotage ×1. *Out:* Rampage ×2, Hard Bargain ×1.
+*In:* Ravenbloom Prefect ×1, Acceptable Losses ×1, Sabotage ×1, Hard Bargain ×2. *Out:* Rampage ×2, Up from the Deep ×1, Star-Crossed ×2.
 
-### Jayce, Defender of Tomorrow — ~3%, the hardest board you will actually have to fight
+**Ravenbloom Prefect is the card, and it is not reactive.** It banishes a gear *as it is played*, so it has to be on the board before the Aurora resolves — deploy it on turn three and hold it. Acceptable Losses lets *them* choose which gear dies, so against three copies of Aurora it is the weaker half of the pair.
+
+### Jayce, Defender of Tomorrow — 3.1%, the hardest board you will actually have to fight
 
 Distinct from the Aurora shell even though five of these lists run it. Jayce is the only gear deck whose gear is **expensive and few** — 9.2 pieces at an average of 3.5 Energy, 37% at 2 or less — which is exactly the profile gear hate is supposed to answer.
 
@@ -588,46 +745,44 @@ Distinct from the Aurora shell even though five of these lists run it. Jayce is 
 
 Only 10.5 units a deck, so each one you remove is a far bigger share of their board than one of Rengar's thirty.
 
-*In:* Rebuke ×2, Sabotage ×1. *Out:* Rampage ×2, Up from the Deep ×1.
+*In:* Ravenbloom Prefect ×1, Acceptable Losses ×1, Sabotage ×1, Gust ×2. *Out:* Rampage ×2, Up from the Deep ×1, Star-Crossed ×2.
 
 ---
 
-## 11. The sideboard
+## 12. The sideboard
 
-Ten cards, six names, nothing at one copy that does not have to be.
-
-**The reason it is not ten singletons:** on a four-card hand from a 39-card library, a 1-of is a **25%** plan by turn five. A 2-of is 44%. Ten singletons is nine cards and a comfort blanket.
+Jun's ten, eight names. **Five of these are cards the previous build's dossier argued against**, and that disagreement is the most interesting thing on the page — so it is set out honestly below rather than quietly dropped.
 
 | | Card | For |
 |---|---|---|
-| 2 | **Abandon** (2E / 0P, Reaction) | Kennen trash-denial, Irelia |
-| 2 | **Rebuke** (2E / **2 Chaos**, Action) | un-Defiable removal, any size; **bricks a cheated Aurora monster** |
-| 2 | **Cannon Barrage** (2E / 1 Body, Reaction) | anything wide — does not choose |
-| 2 | **Hard Bargain** (2E / 0P, Reaction) | the counterspell matchups |
-| 1 | **Sett, Brawler** (5E / 1 Body, 4 Might) | grindy midrange and the mirror |
-| 1 | **Sabotage** (1E / 1 Body) | third copy vs Irelia and Master Yi; **strips Dazzling Aurora from hand** |
+| 2 | **Gust** (1E / 0P, Reaction) | anything at 3 Might or less, at Reaction speed, for one Energy |
+| 2 | **Hard Bargain** (2E / 0P, Reaction) | the counterspell matchups — and your only counterplay to Defy |
+| 1 | **Unyielding Spirit** (1E / 1 Body, Reaction) | prevents *all* spell and ability damage this turn |
+| 1 | **Sabotage** (1E / 1 Body) | third copy; strips a Defy or a Dazzling Aurora before you commit |
+| 1 | **Acceptable Losses** (1E / 0P, Action) | each player kills a gear |
+| 1 | **Switcheroo** (2E / 2 Chaos, Hidden, Action) | swap the Might of two units at one battlefield |
+| 1 | **Angler Beast** (5E / 1 Chaos, 5 Might) | returns **all** units at 2 Might or less |
+| 1 | **Ravenbloom Prefect** (3E / 0P, 3 Might) | banish itself to banish a gear as it is played |
 
-**Cannon Barrage** is the one speculative slot and worth naming as such — 0 of 10 archived Kha'Zix lists. The mechanical case is sound: *"Deal 2 to all enemy units in combat"* is one-sided, at Reaction speed, does not choose, and 35–49% of the rising archetypes' units die to it outright. If it overperforms, it earns maindeck slots over Rampage.
+**On the disagreement.** The previous dossier cut Unyielding Spirit on the grounds that *"Kennen, Rengar, Azir and Irelia run zero spell-damage sources."* That was true of the field it was written against. It is not true of the field that actually turned up: **Akali** runs 3 Shuriken Flip, ~2.6 Falling Star, ~2 Mischievous Marai and a ping on her own move, and 71% of her best lists run **Void Gate**, which adds 1 to every instance of that damage. Against that deck Unyielding Spirit blanks a whole turn of removal for one Energy. The objection was field-dependent and the field moved — Jun is right and the old note was right at the time.
 
-**Sett** is the only card that buffs himself without spending XP or the legend's activation — but per 702.3 he holds one buff at a time, so he is a self-contained threat, not an engine piece. Do not waste an activation buffing him. *Out:* Rampage, or a Star-Crossed in the grindier matchups.
+The same correction applies to the gear hate. The old note priced **Acceptable Losses** and **Ravenbloom Prefect** against Jayce alone and called them narrow. In the current field they are live in three matchups, not one: Master Yi runs ~2.3 Zhonya's Hourglass, Akali runs Zhonya's plus ~2.2 Long Sword, and Jayce runs eleven gear including three Dazzling Aurora.
 
-**Copy caps:** Hard Bargain is 1 main + 2 board = 3, Sabotage is 2 main + 1 board = 3. Both are maxed; you cannot bring in a fourth of either.
+**Where the old objection survives.** *"Angler Beast catches nine of your own units plus every token."* Count them in this list: Irresistible Faefolk ×3, Traveling Merchant ×3, Shadow Order Disciple ×3 — **exactly nine**, plus both Tentacles off Up from the Deep. It is a board wipe you are on the wrong side of unless you have already committed the big half of your deck. Bring it in against Akali and Yi, where their 0-to-2 Might density is higher than yours; never bring it in on the draw against a deck that develops after you.
 
-**What was cut from the pre-ban board, and why:** Unyielding Spirit prevents *spell and ability* damage only, and Kennen, Rengar, Azir and Irelia run zero spell-damage sources. Acceptable Losses is one-sided but toothless — *they* pick which of their gear dies. Akshan costs 2 Body Power to steal one of Azir's fifteen cheap equips. Angler Beast catches nine of your own units plus every token. Switcheroo is redundant with Rebuke, which does the same job without needing both units at one battlefield.
+**And on Acceptable Losses specifically:** *they* choose which gear dies. Against Jayce's three Dazzling Aurora that means you are unlikely to hit the one that matters. Ravenbloom Prefect is the card that answers the Aurora, because it banishes the gear **as it is played** — but it has to already be on the board, so it is a card you deploy on turn three against a ramp deck and hold, not a reactive answer you draw into.
 
-**On gear hate, since the gear decks are the ones the ban promoted.** The instinct is right about the metagame and wrong about the card. Gear removal only pays against gear that is *few and expensive*, and the field splits against you: it works on Jayce (2.6% of the archive) and Keeper of the Hammer (1.2%), and is noise against Ornn (16.3 gear a deck at 1.9 Energy average), Azir (13.9 at 1.9) and Rogue Assassin (8.2 at 2.3). You would be teching for the smaller half.
+**Copy caps:** Sabotage is 2 main + 1 board = **3**, and maxed. Hard Bargain is 0 main + 2 board = 2, so a third copy is available if the counterspell matchups prove worse than expected.
 
-Against the Aurora shell specifically, **the gear is not the card that beats you — the monster is**, and bouncing a monster that was played *ignoring its cost* is a permanent answer where killing one of their 2.8 Auroras is not. Rebuke already does that job.
-
-If the package keeps showing up, the cheapest real slot is **Factory Recall** (1E / 0 Power, Chaos, Action) over Sett. Against a **9-Energy** gear, returning it to hand costs them an entire turn to rebuild — the objection that bounce is only tempo is true of Azir's 1-Energy equips and false here. **Ravenbloom Prefect** (3E / 0 Power, *"When an opponent plays a gear, you may banish me to banish it"*) is the permanent version, but it has to already be on the board.
+**The sideboarding problem you will actually have.** Against Master Yi and Akali, the cards that come in are Hard Bargain ×2, Gust ×2, Unyielding Spirit, Angler Beast, Sabotage and — because both run gear — the two gear answers. That is **ten cards for those two matchups alone**, and you cannot cut ten. Prioritise in this order: Hard Bargain, Unyielding Spirit, Gust, then the gear hate. What comes out is the top end you cannot afford to durdle with: the second Zed, then Onslaught, then a Tail-Cloaked Matriarch.
 
 ---
 
-## 12. What I'd test
+## 13. What I'd test
 
-**Cannon Barrage in the main, over Rampage.** If you board it in every round, that is the definition of a maindeck card. Watch the Body Power cost — it is 1 Body each on a base already carrying Punch First.
+**A second Unyielding Spirit in the board.** It is the single best card against Akali, whose damage suite plus Void Gate kills fourteen of your twenty-three bodies (§11), and you have one copy. If Akali is common at your locals this is the first change to make.
 
-**Rebuke in the main, over Grim Resolve.** Your showdown density is 7 and four of those are pumps. What the deck lacks at Action speed is *subtraction*, and Rebuke is un-Defiable. Grim Resolve's XP rider is now known to be clean-wins-only and to need the buffed unit alive (§6), which prices the slot lower than it looked.
+**A Hard Bargain back in the main, over Onslaught.** Your six showdown-legal copies are three pumps, two bounces and a move — no counterspell at all in game one (§10), in a format where the two most-played decks both hold three Defy. The third copy is available because Jun's board only uses two. The cost is the biggest number in the deck, and §5 prices that honestly.
 
 **Grove of the God-Willow over Zaun Warrens.** *"When you hold here, draw 1"* is a repeating draw engine costing **zero deck slots**, and it is in 9% of archived decks — comparable support to Warrens' own 11%. The cost is symmetry: they draw when they hold it.
 
