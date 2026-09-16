@@ -28,8 +28,8 @@
   "claimedEventsUnmatched": 19,
   "claimedEventAliases": {},
   "claimedDecksByRegion": {
-   "Asia": 24,
    "Europe": 8,
+   "Asia": 24,
    "unknown": 3,
    "Oceania": 1,
    "North America": 2
