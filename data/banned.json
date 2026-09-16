@@ -90,11 +90,10 @@
    "type": "Spell",
    "code": "OGN-183/298",
    "printings": [
-    "OGN-183"
+    "OGN-183",
+    "OGN-183-P"
    ],
-   "inCatalog": true,
-   "effective": "2026-09-18",
-   "note": "announced 2026-09-15; consistency higher than intended, compounding with the Kennen legend"
+   "inCatalog": true
   },
   {
    "key": "SFD|20",
@@ -115,9 +114,7 @@
    "printings": [
     "OGN-110"
    ],
-   "inCatalog": true,
-   "effective": "2026-09-18",
-   "note": "announced 2026-09-15; the infinite promotes limited windows of interaction"
+   "inCatalog": true
   },
   {
    "key": "OGN|177",

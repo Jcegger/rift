@@ -24,15 +24,15 @@
    "Beijing City Challenge (China)",
    "Shenyang City Challenge (China)"
   ],
-  "claimedEvents": 19,
-  "claimedEventsUnmatched": 19,
+  "claimedEvents": 20,
+  "claimedEventsUnmatched": 20,
   "claimedEventAliases": {},
   "claimedDecksByRegion": {
-   "Europe": 8,
-   "Asia": 24,
-   "unknown": 3,
-   "Oceania": 1,
-   "North America": 2
+   "unknown": 5,
+   "Asia": 23,
+   "North America": 2,
+   "Oceania": 2,
+   "Europe": 9
   },
   "registryEventsByRegion": {
    "unknown": 1190
@@ -43,13 +43,14 @@
    "Dinan Regional",
    "Hartford RQ",
    "New Zealand 10K Open",
+   "Riftbound Showdown $25K",
+   "Riftbound Showdown Series Germany",
    "S4 Beijing City Challenge",
    "S4 Qingdao City Challenge",
+   "S4 Tianjin City Challenge",
    "S4 Wuhan City Challenge",
-   "S4 Wuhan Regional Open",
    "SG 2026",
    "Shenayng RO",
-   "Shenyang",
    "Shenyang RO",
    "Shenyang Regional Open",
    "Singapore RQ",
