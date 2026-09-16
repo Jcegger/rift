@@ -67,23 +67,61 @@ const PLACE_PATTERNS = [
   [/\b(\d{1,3})(?:st|nd|rd|th)\s+place\b/i, (m) => Number(m[1])],
 ];
 
+/* Series words that authors glue to a city: "ChangshaRQ", "WuhanOpen". The event was
+   read correctly in every other respect and then thrown away by the single-word guard
+   below, which is how a real Top 32 ended up in the file with a placing and no event.
+   Splitting them first lets the guard keep doing its job. */
+const GLUED = /(?<=[a-z0-9])(RQ|RO|Open|Regional|Challenge|Championship|Invitational|Qualifier|Series|Cup)\b/g;
+
+// Filler that trails a result phrase and is not part of an event name.
+const FILLER = /^(?:deck|list|decklist|build)s?\b/i;
+
+// One word is a tournament only when it is a place we know — "Shenyang" is an event,
+// "Skirmish" and "Midrange" are not.
+const namesAPlace = (s) => PLACES.some(([re]) => re.test(s));
+const usableEvent = (s) => {
+  const e = String(s || "").replace(/\s*\([^)]*\)\s*$/, "").trim();
+  if (e.length < 4) return null;
+  return /\s/.test(e) || namesAPlace(e) ? e : null;
+};
+
 // "Sivir Top 8 S4 Beijing City Challenge - copy" -> { place: 8, event: "S4 Beijing City Challenge" }
+// "Kha'Zix Top 32 ChangshaRQ - copy"            -> { place: 32, event: "Changsha RQ" }
+// "Irelia Wuhan 26 Open Winner"                 -> { place: 1, event: "Wuhan 26 Open" }
 // Returns null when the title claims nothing, which is the common case.
-const claimFromTitle = (title) => {
-  const raw = String(title || "").replace(/\s*-\s*copy(\s*\d+)?\s*$/i, "").trim();
+const claimFromTitle = (title, champs = new Set()) => {
+  const raw = String(title || "").replace(/\s*-\s*copy(\s*\d+)?\s*$/i, "").trim()
+                                 .replace(GLUED, " $1");
   if (!raw) return null;
   for (const [re, read] of PLACE_PATTERNS) {
     const m = raw.match(re);
     if (!m) continue;
     // Everything after the result phrase is the event, minus a leading "at"/"of"/"@".
-    let event = raw.slice(m.index + m[0].length)
-                   .replace(/^\s*(?:at|in|of|@|-|–|,)\s*/i, "")
-                   .replace(/\s*\([^)]*\)\s*$/, "")
-                   .trim();
-    // A bare "Top 8" names no event, and a single word is usually the rest of a deck
-    // name rather than a tournament.
-    if (event.length < 4 || !/\s/.test(event)) event = null;
-    return { place: read(m), event };
+    let event = usableEvent(raw.slice(m.index + m[0].length)
+                               .replace(/^\s*(?:at|in|of|@|-|–|,)\s*/i, "")
+                               .replace(FILLER, "")
+                               .trim());
+    /* The phrase is not always in the middle. "Irelia Wuhan 26 Open Winner" and
+       "Vex - Shenyang Top 8 Deck" put the event *before* it, and reading only the tail
+       scored them as a placing with no event at all. Fall back to the head, minus the
+       champion name that opens almost every title on the site: drop the leading token,
+       but only while something with substance is left. */
+    if (!event) {
+      let head = raw.slice(0, m.index).replace(/\s*[-–:,]\s*$/, "").trim();
+      const sep = head.lastIndexOf(" - ");
+      if (sep > -1) head = head.slice(sep + 3).trim();
+      // Almost every title on the site opens with the champion. Strip it by name
+      // rather than by position, so "S4 Beijing City Challenge" keeps its "S4".
+      const toks = head.split(/\s+/);
+      for (const n of [2, 1]) {
+        if (toks.length > n && champs.has(toks.slice(0, n).join(" ").toLowerCase())) {
+          head = toks.slice(n).join(" ");
+          break;
+        }
+      }
+      event = usableEvent(head);
+    }
+    return { place: read(m), event: event || null };
   }
   return null;
 };
@@ -113,6 +151,10 @@ const COUNTRY = {
   Hartford: "US", Seattle: "US", Chicago: "US", Boston: "US", Atlanta: "US",
   Pittsburgh: "US", Columbus: "US", Dallas: "US", Weatherford: "US",
   Tokyo: "JP", Osaka: "JP", Seoul: "KR", Singapore: "SG", Taipei: "TW",
+  // Named by claims the circuit table above missed. Xi'an needs its apostrophe
+  // escaped out of the compiled word-boundary regex; "New Zealand" is a country
+  // rather than a city, which the lookup handles the same way.
+  "Xi'an": "CN", Xian: "CN", "New Zealand": "NZ",
 };
 const REGION = {
   CN: "Asia", JP: "Asia", KR: "Asia", SG: "Asia", TW: "Asia",
@@ -121,7 +163,8 @@ const REGION = {
 };
 // Compiled once: a bare indexOf would read "Chengdu" out of a player's handle and
 // "Milan" out of a surname, so each city has to match as a whole word.
-const PLACES = Object.entries(COUNTRY).map(([city, cc]) => [new RegExp(`\\b${city}\\b`, "i"), cc]);
+const PLACES = Object.entries(COUNTRY).map(([city, cc]) =>
+  [new RegExp(`\\b${city.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i"), cc]);
 
 // "S4 Guangzhou City Challenge" -> { cc: "CN", rg: "Asia" }. Null when the name carries
 // no city this knows, which is most of the online events and every generic series name.
@@ -246,6 +289,9 @@ const main = async () => {
   const max = arg("max", 700);
 
   const cat = JSON.parse(await readFile(new URL("../data/cards.json", import.meta.url), "utf8"));
+  // Champion tags carried by the legend cards — what titles open with.
+  const CHAMPS = new Set();
+  for (const c of cat.cards || []) if (c.t === "Legend") for (const g of c.g || []) CHAMPS.add(String(g).toLowerCase());
 
   // Event sizes, so a tournament deck can carry how big its event was. Optional: the
   // snapshot is still usable without it, the decks just lose their credibility weight.
@@ -337,7 +383,7 @@ const main = async () => {
     const t = d.tournament || {};
     // Only for lists upstream did not flag: a deck cannot carry both a record and a
     // claim, so the two can never be double-counted downstream.
-    const claim = isTour ? null : claimFromTitle(d.humanname);
+    const claim = isTour ? null : claimFromTitle(d.humanname, CHAMPS);
     // Read off whichever event the deck actually names — the record for a flagged list,
     // the claim for the rest — so the field means the same thing on both.
     const where = placeOf(claim ? claim.event : t.tournament_name);

@@ -24,13 +24,14 @@
    "Beijing City Challenge (China)",
    "Shenyang City Challenge (China)"
   ],
-  "claimedEvents": 15,
-  "claimedEventsUnmatched": 15,
+  "claimedEvents": 19,
+  "claimedEventsUnmatched": 19,
   "claimedEventAliases": {},
   "claimedDecksByRegion": {
-   "Asia": 19,
-   "unknown": 5,
+   "Asia": 24,
    "Europe": 8,
+   "unknown": 3,
+   "Oceania": 1,
    "North America": 2
   },
   "registryEventsByRegion": {
@@ -38,6 +39,7 @@
   },
   "unresolvedClaimEvents": [
    "Barcelona RQ",
+   "Changsha RQ",
    "Dinan Regional",
    "Hartford RQ",
    "New Zealand 10K Open",
@@ -45,11 +47,14 @@
    "S4 Qingdao City Challenge",
    "S4 Wuhan City Challenge",
    "S4 Wuhan Regional Open",
+   "SG 2026",
    "Shenayng RO",
+   "Shenyang",
    "Shenyang RO",
    "Shenyang Regional Open",
    "Singapore RQ",
    "Utrecht RQ",
+   "Wuhan 26 Open",
    "Wuhan Regional Open",
    "Xi'an Regional"
   ],
