@@ -2834,8 +2834,10 @@ function deckPanel(g, opts){
     <div class="meter-sub">
       ${g.share ? `<span><b>${g.share.toFixed(1)}%</b> of recent lists</span>` : ''}
       ${g.tourLists ? `<span><b>${g.tourLists}</b> tournament</span>` : ''}
-      ${g.evCount ? `<span title="How big a field this archetype has been played in, summed over the distinct events it turned up at. This is the size of the test, not how well it did — that is the finish beside it."><b>${
-        g.evPlayers.toLocaleString('en-US')}</b>-player field${g.evCount > 1 ? ` over ${g.evCount} events` : ''}</span>` : ''}
+      ${g.evCount && g.evPlayers ? `<span title="How big a field this archetype has been played in, summed over the distinct events it turned up at. This is the size of the test, not how well it did — that is the finish beside it."><b>${
+        g.evPlayers.toLocaleString('en-US')}</b>-player field${g.evCount > 1 ? ` over ${g.evCount} events` : ''}</span>`
+        : g.evCount ? `<span title="These lists come from events upstream's tournament registry does not carry, so their field sizes are unknown. An unknown field is shown as unknown rather than counted as zero."><b>${
+        g.evCount}</b> event${g.evCount > 1 ? 's' : ''}, field size unrecorded</span>` : ''}
       ${g.evNewest ? `<span>last seen <b>${esc(g.evNewest)}</b></span>` : ''}
       ${g.bestPlace != null ? `<span>best finish <b>#${g.bestPlace}</b></span>` : ''}
       ${g.claim && g.claim.located ? `<span style="color:var(--maize)" title="${esc(claimText(g.claim))}">claimed in <b>${
@@ -3002,9 +3004,15 @@ function renderMeta(){
           <span class="nm">${esc(g.name)}
             <span class="code">${g.lists} list${g.lists === 1 ? '' : 's'} · ${g.share.toFixed(1)}%${
               g.tourLists ? ` · ${g.tourLists} tournament` : ''}</span></span>
-          <span class="qty${g.evCount || g.claim.lists ? '' : ' need'}">${g.evCount
+          <span class="qty${g.evCount || g.claim.lists ? '' : ' need'}">${g.evCount && g.evPlayers
             ? `${g.evPlayers.toLocaleString('en-US')}-player field<span class="code"> · last ${
                 esc(g.evNewest)}${g.bestPlace != null ? ` · best #${g.bestPlace}` : ''}</span>`
+            : g.evCount
+              ? `${g.tourLists} tournament list${g.tourLists === 1 ? '' : 's'}<span class="code"> · field size unrecorded${
+                  g.bestPlace != null ? ` · best #${g.bestPlace}` : ''} · last ${esc(g.evNewest)}${
+                  g.claim.lists && claimWhere(g.claim) ? ` · also ${g.claim.best === 1 ? 'claims a win'
+                    : g.claim.best != null ? `claims top ${g.claim.best}` : 'claims a result'
+                  }, unverified · ${esc(claimWhere(g.claim))}` : ''}</span>`
             : g.claim.lists
               ? `<span style="color:var(--maize)">${g.claim.best === 1 ? 'claims a win'
                   : g.claim.best != null ? `claims top ${g.claim.best}` : 'claims a result'}</span><span class="code"> · unverified${

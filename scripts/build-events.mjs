@@ -4,7 +4,24 @@
 //   node scripts/build-events.mjs
 //
 // Source: riftbound.gg's tournament list (api.dotgg.gg/cgfw/gettournaments). No key
-// and no auth, one request, no pagination.
+// and no auth.
+//
+// PAGINATION, added 2026-09-16. Upstream used to return its whole archive in one
+// response. On 2026-09-11 it became a rolling window of 30 rows per page, which broke
+// this builder silently: it still got 200 and still got 30 events, but they were the
+// most recent three days of 8-to-40-player locals. data/events.json went from
+// June-to-August with Dallas at 433 players to a 72-hour slice whose biggest event was
+// 41, every deck's event stopped resolving, and every tournament deck lost its player
+// count. `&page=N` walks back from there.
+//
+// ACCUMULATION, same change. Pagination reaches roughly 18 days in 30 pages, so even a
+// full crawl no longer sees the majors this file used to carry. The archive is
+// therefore append-only: rows already committed are kept, fetched rows are merged over
+// them by slug, and nothing is ever dropped because upstream stopped serving it. That
+// also makes the daily run cheap - it stops at the first page with nothing new on it.
+//
+// Be polite. The endpoint 429s after about ten rapid requests, so pages are spaced and
+// a 429 backs off rather than failing the build.
 //
 // Why this exists separately from the deck snapshot. Deck entries already carry an
 // event name and a finishing place, but nothing about how big the event was, so a
@@ -20,6 +37,11 @@
 import { writeFile, readFile } from "node:fs/promises";
 
 const API = "https://api.dotgg.gg/cgfw/gettournaments?game=riftbound";
+const PAGE_CAP = 40;        // ~1,150 events; far past where the window runs dry
+const PAGE_PAUSE = 1500;    // upstream 429s at roughly ten rapid requests
+const RETRY_PAUSE = 60000;
+const RETRIES = 3;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const day = (unix) => {
   const n = Number(unix);
@@ -31,16 +53,52 @@ const int = (v) => {
 };
 
 const main = async () => {
-  process.stdout.write("fetching tournaments… ");
-  const r = await fetch(API, {
-    headers: { "User-Agent": "rift.jayegger.com event builder", Origin: "https://riftbound.gg" },
-  });
-  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-  const raw = await r.json();
-  if (!Array.isArray(raw)) throw new Error("unexpected payload shape");
-  console.log(`${raw.length} events`);
+  // What is already committed. Upstream no longer serves this far back, so it is the
+  // floor the crawl merges onto rather than something to be replaced.
+  let kept = [];
+  try {
+    const prev = JSON.parse(await readFile(new URL("../data/events.json", import.meta.url), "utf8"));
+    kept = Array.isArray(prev.events) ? prev.events : [];
+  } catch { /* first run */ }
+  const key = (e) => e.slug || `${e.name}|${e.dt}`;
+  const have = new Set(kept.map(key));
 
-  const events = raw
+  process.stdout.write("fetching tournaments… ");
+  const raw = [];
+  let page = 1, stop = "page cap";
+  for (; page <= PAGE_CAP; page++) {
+    let body = null;
+    for (let attempt = 0; attempt <= RETRIES; attempt++) {
+      const r = await fetch(`${API}&page=${page}`, {
+        headers: { "User-Agent": "rift.jayegger.com event builder", Origin: "https://riftbound.gg" },
+      });
+      if (r.status === 429) {
+        if (attempt === RETRIES) throw new Error("429 after " + RETRIES + " backoffs");
+        await sleep(RETRY_PAUSE);
+        continue;
+      }
+      if (!r.ok) throw new Error(`${r.status} ${r.statusText} on page ${page}`);
+      const text = await r.text();
+      if (!text.trim().startsWith("[")) throw new Error(`non-JSON payload on page ${page}`);
+      body = JSON.parse(text);
+      break;
+    }
+    if (!Array.isArray(body)) throw new Error("unexpected payload shape");
+    if (!body.length) { stop = `page ${page} empty`; break; }
+    raw.push(...body);
+    // Stop at the first page that tells us nothing we did not already have, from this
+    // crawl or from the committed file. That is what keeps the daily run to one page.
+    const fresh = body.filter((e) => {
+      const k = e.slug || `${e.name}|${day(e.date)}`;
+      return !have.has(k);
+    }).length;
+    for (const e of body) have.add(e.slug || `${e.name}|${day(e.date)}`);
+    if (!fresh) { stop = `page ${page} had nothing new`; break; }
+    if (page < PAGE_CAP) await sleep(PAGE_PAUSE);
+  }
+  console.log(`${raw.length} rows over ${Math.min(page, PAGE_CAP)} page(s) — stopped: ${stop}`);
+
+  const fetched = raw
     .map((e) => ({
       name: e.name || null,
       dt: day(e.date),
@@ -50,8 +108,20 @@ const main = async () => {
       country: e.winner_country || null,
       slug: e.slug || null,
     }))
-    .filter((e) => e.name && e.dt)
-    .sort((a, b) => b.dt.localeCompare(a.dt));
+    .filter((e) => e.name && e.dt);
+
+  // Merge: fetched rows win on a key collision (player counts get revised upward as
+  // an event is reported), committed rows survive when upstream no longer serves them.
+  const merged = new Map(kept.map((e) => [key(e), e]));
+  let added = 0, revised = 0;
+  for (const e of fetched) {
+    const k = key(e);
+    if (!merged.has(k)) added++;
+    else if (JSON.stringify(merged.get(k)) !== JSON.stringify(e)) revised++;
+    merged.set(k, e);
+  }
+  const events = [...merged.values()].sort((a, b) => b.dt.localeCompare(a.dt));
+  console.log(`archive: ${kept.length} kept + ${added} new (${revised} revised) = ${events.length}`);
 
   // Cross-reference the deck snapshot, if there is one, so the report says plainly how
   // much of the tournament scene the meta reading can actually see.
@@ -111,7 +181,7 @@ const main = async () => {
 
   const out = {
     generatedAt: new Date().toISOString().slice(0, 10),
-    source: "api.dotgg.gg/cgfw/gettournaments (riftbound.gg)",
+    source: "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
     note: "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
     coverage,
     events,

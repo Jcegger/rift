@@ -562,14 +562,27 @@ else {
      events.events.every((e) => e.name && e.dt && Number.isFinite(e.players)), `${events.events.length} events`);
   // The join by exact name is what carries player counts onto decks. If it breaks, the
   // credibility numbers silently become zero.
+  /* Upstream's tournament *flag* and its tournament *registry* are two different feeds,
+     and since 2026-09-11 they no longer overlap. The flag now covers ~720 decks and
+     every one of them names a Chinese City Challenge; the registry carries none of
+     those, at any pagination depth. So "every event resolves" stopped being true about
+     the world and started being a test that froze the data — it is what failed the
+     refresh for five days. What has to stay true instead: a failed join is recorded
+     rather than silent, and an event nobody sized is never given a number. */
   const byName = new Set(events.events.map((e) => e.name));
   const deckEvents = new Set(A.DECKS.filter((d) => d.ev).map((d) => d.ev));
   const unresolved = [...deckEvents].filter((n) => !byName.has(n));
-  ok('every event named on a deck resolves to the archive', unresolved.length === 0,
-     unresolved.slice(0, 3).join(', ') || `${deckEvents.size} event names matched`);
-  ok('every tournament deck carries a player count',
-     A.DECKS.filter((d) => d.tour && d.ev).every((d) => Number(d.ec) > 0),
+  ok('an event a deck names but the archive lacks is recorded, not dropped',
+     unresolved.every((n) => (events.coverage?.unresolvedDeckEvents || []).includes(n)),
+     `${unresolved.length} of ${deckEvents.size} deck event names have no registry row`);
+  ok('a tournament deck is either sized by the archive or explicitly unsized',
+     A.DECKS.filter((d) => d.tour && d.ev).every((d) =>
+       byName.has(d.ev) ? Number(d.ec) > 0 : d.ec == null),
+     `${A.DECKS.filter((d) => d.tour && d.ec == null).length} unsized of ` +
      `${A.DECKS.filter((d) => d.tour).length} tournament decks`);
+  ok('an unsized tournament deck never reports a field of zero',
+     A.DECKS.filter((d) => d.tour).every((d) => d.ec == null || Number(d.ec) > 0),
+     'ec is a number or absent, never 0');
 
   A.S.inv = {};
   const arch = A.metaArchetypes(A.metaPool());
@@ -782,7 +795,9 @@ section('Claimed results');
      this app can say about a scene it otherwise cannot see at all. It has to stay
      attached to the claim wording — a region rendered as a bare fact would read like
      a record of where the archetype placed. */
-  const located = withClaim.filter((g) => g.claim.located);
+  // Only archetypes whose claim is the thing actually rendered — one with a sized field
+  // shows the field instead, which is correct and is not this test's business.
+  const located = withClaim.filter((g) => g.claim.located && !(g.evCount && g.evPlayers));
   const anyRegion = new RegExp(`unverified · (?:${
     [...new Set(located.flatMap((g) => Object.keys(g.claim.regions)))].join('|') || 'x'})`);
   ok('an archetype with located claims says where they came from',
@@ -790,6 +805,11 @@ section('Claimed results');
      `${located.length} archetypes have a claim with a region`);
   // The region rides on the claim wording. Rendered as a bare fact it would read like a
   // record of where the archetype placed, which is the one thing it is not.
+  /* The zero that started as a rendering bug: with no field sizes anywhere, evPlayers
+     summed to 0 and the Meta row printed "0-player field" for 35 archetypes — a made-up
+     number dressed as a measurement, which is the one thing this app must not do. */
+  ok('an archetype with no sized events never reads as a zero-player field',
+     !/\b0-player field\b/.test(flat), 'an unknown field prints as unknown');
   ok('the region never appears without the claim wording',
      !anyRegion.test(flat) || /unverified/.test(flat),
      'region is attached to the claim, not stated as a record');
