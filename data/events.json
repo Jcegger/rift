@@ -24,11 +24,11 @@
    "Beijing City Challenge (China)",
    "Shenyang City Challenge (China)"
   ],
-  "claimedEvents": 24,
-  "claimedEventsUnmatched": 24,
+  "claimedEvents": 25,
+  "claimedEventsUnmatched": 25,
   "claimedEventAliases": {},
   "claimedDecksByRegion": {
-   "Asia": 28,
+   "Asia": 31,
    "Europe": 12,
    "North America": 3,
    "unknown": 6,
@@ -40,6 +40,7 @@
   "unresolvedClaimEvents": [
    "Barcelona RQ",
    "Changsha RQ",
+   "Chengdu Regional",
    "Dinan Regional",
    "Hartford RQ",
    "NO HERON",
