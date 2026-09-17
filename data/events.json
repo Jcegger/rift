@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-09-16",
+ "generatedAt": "2026-09-17",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 1190,
+  "events": 1207,
   "eventsWithDecks": 0,
-  "players": 32056,
+  "players": 32347,
   "playersWithDecks": 0,
   "unresolvedDeckEvents": [
    "Sunday 3+ Unleashed Tournament @ 3+X次元馆(雅宝店) Riftbound Top Decks (China)",
@@ -35,7 +35,7 @@
    "Europe": 9
   },
   "registryEventsByRegion": {
-   "unknown": 1190
+   "unknown": 1207
   },
   "unresolvedClaimEvents": [
    "Barcelona RQ",
@@ -79,6 +79,60 @@
  },
  "events": [
   {
+   "name": "Wednesday Evening Vendetta Summoner Skirmish II",
+   "dt": "2026-09-16",
+   "players": 11,
+   "format": "Constructed",
+   "winner": "Pine Tree",
+   "country": null,
+   "slug": "wednesday-evening-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "nexus night",
+   "dt": "2026-09-16",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Carrot",
+   "country": null,
+   "slug": "nexus-night-2743"
+  },
+  {
+   "name": "GG Gaming MY - Riftbound GRAND OPENING Event - 1v1",
+   "dt": "2026-09-16",
+   "players": 45,
+   "format": "Constructed",
+   "winner": "VS n3Sh",
+   "country": null,
+   "slug": "gg-gaming-my-riftbound-grand-opening-event-1v1"
+  },
+  {
+   "name": "IZAKAYA Vendetta Summoner Skirmish II",
+   "dt": "2026-09-16",
+   "players": 29,
+   "format": "Constructed",
+   "winner": "sheik3frz",
+   "country": null,
+   "slug": "izakaya-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Tuesday Evening Vendetta Summoner Skirmish II",
+   "dt": "2026-09-16",
+   "players": 13,
+   "format": "Constructed",
+   "winner": "Arice",
+   "country": null,
+   "slug": "tuesday-evening-vendetta-summoner-skirmish-ii-9773"
+  },
+  {
+   "name": "skirmish",
+   "dt": "2026-09-16",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Knickknackz",
+   "country": null,
+   "slug": "skirmish"
+  },
+  {
    "name": "Tuesday Nexus Nights - Constructed Best of 1",
    "dt": "2026-09-15",
    "players": 19,
@@ -113,6 +167,24 @@
    "winner": "panndab",
    "country": null,
    "slug": "nexus-night-zen-6367"
+  },
+  {
+   "name": "Riftbound Vendetta Summoner Skirmish at WoodForSheep Hobbies.",
+   "dt": "2026-09-15",
+   "players": 11,
+   "format": "Constructed",
+   "winner": "NinCrab",
+   "country": null,
+   "slug": "riftbound-vendetta-summoner-skirmish-at-woodforsheep-hobbies-9441"
+  },
+  {
+   "name": "Tuesday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-09-15",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Sinzari",
+   "country": null,
+   "slug": "tuesday-morning-vendetta-summoner-skirmish-ii"
   },
   {
    "name": "Monday Evening Vendetta Summoner Skirmish II",
@@ -608,6 +680,24 @@
    "winner": "Luc",
    "country": null,
    "slug": "sunday-morning-vendetta-summoner-skirmish-i-9739"
+  },
+  {
+   "name": "Riftbound | Vendetta - Skirmish",
+   "dt": "2026-09-13",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "Dumbledom",
+   "country": null,
+   "slug": "riftbound-vendetta-skirmish"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish I @ Summon PH",
+   "dt": "2026-09-13",
+   "players": 15,
+   "format": "Constructed",
+   "winner": "BakingSoda",
+   "country": null,
+   "slug": "vendetta-summoner-skirmish-i-summon-ph"
   },
   {
    "name": "Custom Deck Challenge Oops All Units",
@@ -1472,6 +1562,69 @@
    "winner": "Estsmbre",
    "country": null,
    "slug": "friday-evening-nexus-nights-1v1-7944"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish I Hangar Rebelde",
+   "dt": "2026-09-12",
+   "players": 23,
+   "format": "Constructed",
+   "winner": "Zigh",
+   "country": null,
+   "slug": "vendetta-summoner-skirmish-i-hangar-rebelde"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish I",
+   "dt": "2026-09-12",
+   "players": 18,
+   "format": "Constructed",
+   "winner": "Loafalotapus",
+   "country": null,
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-i-4219"
+  },
+  {
+   "name": "GG Haven X Mad Merchant - Path of Vengeance (Vendetta Case Tournament)",
+   "dt": "2026-09-12",
+   "players": 35,
+   "format": "Constructed",
+   "winner": "Mocha",
+   "country": null,
+   "slug": "gg-haven-x-mad-merchant-path-of-vengeance-vendetta-case-tournament"
+  },
+  {
+   "name": "Saturday Evening Vendetta Summoner Skirmish I",
+   "dt": "2026-09-12",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Bussy Breaker",
+   "country": null,
+   "slug": "saturday-evening-vendetta-summoner-skirmish-i-814"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish I",
+   "dt": "2026-09-12",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "Heexxto",
+   "country": null,
+   "slug": "saturday-morning-vendetta-summoner-skirmish-i-2662"
+  },
+  {
+   "name": "Astora - Vendetta Summoner Skirmish I",
+   "dt": "2026-09-12",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "bultaco78",
+   "country": null,
+   "slug": "astora-vendetta-summoner-skirmish-i"
+  },
+  {
+   "name": "Saturday morning Vendetta Summoner Skirmish I ZTCards Heusenstamm",
+   "dt": "2026-09-12",
+   "players": 16,
+   "format": "Constructed",
+   "winner": "Heiji",
+   "country": null,
+   "slug": "saturday-morning-vendetta-summoner-skirmish-i-ztcards-heusenstamm"
   },
   {
    "name": "SCG CON Baltimore - Riftbound Trial 4:00 pm",
