@@ -32,6 +32,9 @@ const arg = (name, fallback) => {
 };
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const RETRIES = 4;
+const RETRY_PAUSE = 45000;
+const PAGE_PAUSE = 1200;   // was 300ms, which is what got it rate-limited
 
 // Their titles are HTML-escaped: "Best Decks &amp; Synergies".
 const unescape = (s) => String(s ?? "")
@@ -58,11 +61,23 @@ const main = async () => {
   const posts = new Map();          // url -> post, deduped across pages
   let fetched = 0;
 
+  /* This shares a host with the deck and tournament builders, which page it hard, so a
+     429 here is contention rather than abuse and is worth waiting out rather than
+     failing the source on. Without the retry, news 429s on about page 7 and keeps its
+     last-good file — which is survivable until it drifts past its shelf life and fails
+     the whole run. */
   for (let page = 1; page <= pages; page++) {
     process.stdout.write(`page ${page}… `);
-    const r = await fetch(`${API}&page=${page}`, {
-      headers: { "User-Agent": "rift.jayegger.com news builder", Origin: "https://riftbound.gg" },
-    });
+    let r;
+    for (let attempt = 0; ; attempt++) {
+      r = await fetch(`${API}&page=${page}`, {
+        headers: { "User-Agent": "rift.jayegger.com news builder", Origin: "https://riftbound.gg" },
+      });
+      if (r.status !== 429) break;
+      if (attempt >= RETRIES) throw new Error(`429 on page ${page} after ${RETRIES} backoffs`);
+      process.stdout.write(`429, waiting ${RETRY_PAUSE / 1000}s… `);
+      await sleep(RETRY_PAUSE);
+    }
     if (!r.ok) throw new Error(`${r.status} ${r.statusText} on page ${page}`);
     const batch = await r.json();
     if (!Array.isArray(batch)) throw new Error("unexpected payload shape");
@@ -83,7 +98,7 @@ const main = async () => {
       });
     }
     console.log(`${batch.length} posts, ${kept} new from ${SOURCE}`);
-    await sleep(300);
+    await sleep(PAGE_PAUSE);
   }
 
   const list = [...posts.values()].sort((a, b) => b.dt.localeCompare(a.dt) || a.title.localeCompare(b.title));

@@ -39,8 +39,8 @@ import { writeFile, readFile } from "node:fs/promises";
 const API = "https://api.dotgg.gg/cgfw/gettournaments?game=riftbound";
 const PAGE_CAP = 40;        // ~1,150 events; far past where the window runs dry
 const PAGE_PAUSE = 1500;    // upstream 429s at roughly ten rapid requests
-const RETRY_PAUSE = 60000;
-const RETRIES = 3;
+const RETRY_PAUSE = 45000;
+const RETRIES = 4;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const day = (unix) => {
@@ -62,6 +62,18 @@ const main = async () => {
   } catch { /* first run */ }
   const key = (e) => e.slug || `${e.name}|${e.dt}`;
   const have = new Set(kept.map(key));
+
+  /* The workflow runs this twice: once as a source, and again after build-decks so the
+     coverage figures see the new snapshot. That second pass used to be "cheap, one
+     request" and pagination made it a second full crawl, back to back with build-decks
+     hammering the same host — which is how both passes started 429ing each other.
+     --coverage-only recomputes from the committed archive and touches the network not
+     at all, which is what the second pass always meant to do. */
+  if (process.argv.includes("--coverage-only")) {
+    if (!kept.length) throw new Error("--coverage-only needs a committed data/events.json");
+    console.log(`coverage-only: recomputing against ${kept.length} committed events, no fetch`);
+    return finish(kept);
+  }
 
   process.stdout.write("fetching tournaments… ");
   const raw = [];
@@ -123,6 +135,12 @@ const main = async () => {
   const events = [...merged.values()].sort((a, b) => b.dt.localeCompare(a.dt));
   console.log(`archive: ${kept.length} kept + ${added} new (${revised} revised) = ${events.length}`);
 
+  return finish(events);
+};
+
+// Everything downstream of having an events list: coverage against the deck snapshot,
+// the file, and the report. Shared by the crawling path and --coverage-only.
+const finish = async (events) => {
   // Cross-reference the deck snapshot, if there is one, so the report says plainly how
   // much of the tournament scene the meta reading can actually see.
   let coverage = null;

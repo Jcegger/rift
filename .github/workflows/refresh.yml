@@ -171,14 +171,17 @@ jobs:
           node scripts/build-errata.mjs
 
       # Events again: build-decks changes which events have lists, and the coverage
-      # figures the Meta tab quotes are computed here. Cheap, one request. This pass
-      # rewrites events.json wholesale, so its outcome is the one that counts.
+      # figures the Meta tab quotes are computed here. --coverage-only recomputes from
+      # the archive the first pass just wrote and makes no requests at all — without it
+      # this is a second full crawl immediately after build-decks has paged the same
+      # host forty times, and the two 429 each other. This pass rewrites events.json
+      # wholesale, so its outcome is the one that counts.
       - name: Recompute event coverage
         id: events2
         continue-on-error: true
         run: |
           case ",$SIMULATE," in *,events,*) echo "simulated failure"; exit 1;; esac
-          node scripts/build-events.mjs
+          node scripts/build-events.mjs --coverage-only
 
       # The recorder, not a builder: it fetches nothing and derives today's row from the
       # two files above. It runs after them and outside the fail-soft set on purpose — a
