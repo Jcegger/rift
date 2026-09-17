@@ -2464,6 +2464,62 @@ section('The rules');
        coreIds.size > 0 && trIds.size > 0,
        `${coreIds.size} core / ${trIds.size} tournament, ${overlap} numbers used by both`);
 
+    /* ── the rules that must not go missing ────────────────────────────────────────
+       The handbook is hand-written, so a rewrite can drop a citation without anything
+       noticing. Most citations are not worth pinning; these are. Each one is load
+       bearing for a question that has actually been got wrong from this repo, and the
+       failure mode is silent — you do not discover the handbook stopped mentioning
+       §359.3.e.12 until you have already given somebody a confident wrong answer built
+       out of the rules it still does mention. */
+    const LOAD_BEARING = {
+      '359.3.e.12': 'information read off an off-board source returns null',
+      '359.3.e.5': 'a target that went illegal is simply unaffected',
+      '359.3.e.13': 'a cost or effect that moves something may look back at it',
+      '811.1.d.2': "Hidden pins a play effect's targets to that battlefield",
+      '204.3.a': 'a cost within instructions is the base cost, paid at finalisation',
+      '164.2.a': 'a rune pays Energy by exhausting',
+      '164.2.b': 'a rune pays Power by recycling — the same rune can do both',
+      '103.2.b.2': 'two printings of a character have different names',
+      '142.4.b': 'lethal damage is a non-zero amount at or above Might',
+      '186.1': 'a token put into a non-board zone ceases to exist',
+    };
+    const uncited = Object.keys(LOAD_BEARING).filter((n) => !citedCore.has(n));
+    ok('the handbook still cites every rule marked load-bearing',
+       uncited.length === 0,
+       uncited.length ? `${uncited.length} dropped: ${uncited.map((n) => `§${n} (${LOAD_BEARING[n]})`).join('; ')}`
+                      : `${Object.keys(LOAD_BEARING).length} pinned, all present`);
+
+    /* ── rulings that are not in the rules ─────────────────────────────────────────
+       docs/rules-rulings.md holds answers from Riot staff that decide something the
+       published rules leave ambiguous. It cannot be derived or rebuilt, so the only
+       thing worth asserting is that each entry stays checkable: a date, a source, an
+       expiry, and rule numbers that actually resolve. A ruling citing a rule that a
+       future update renumbers should fail loudly rather than quietly mislead. */
+    let rulings = '';
+    try { rulings = readFileSync(join(ROOT, 'docs/rules-rulings.md'), 'utf8'); } catch { /* reported below */ }
+    ok('docs/rules-rulings.md is present', rulings.length > 0, `${(rulings.length / 1024).toFixed(0)}KB`);
+    if (rulings) {
+      const entries = rulings.split(/^## /m).slice(1);
+      const FIELDS = ['Date', 'Source', 'Rules', 'Expires'];
+      const missing = [];
+      const badCites = [];
+      for (const e of entries) {
+        const title = e.split('\n')[0].trim();
+        for (const f of FIELDS) if (!new RegExp(`\\*\\*${f}:\\*\\*`).test(e)) missing.push(`${title} → ${f}`);
+        for (const m of e.matchAll(/§(\d{3}(?:\.\d+|\.[a-z])*)/g))
+          if (!coreIds.has(m[1])) badCites.push(`${title} → §${m[1]}`);
+      }
+      ok('every ruling carries a date, a source, the rules it composes and an expiry',
+         entries.length > 0 && missing.length === 0,
+         missing.length ? missing.slice(0, 4).join('; ') : `${entries.length} ruling${entries.length === 1 ? '' : 's'}`);
+      ok('every rule a ruling cites is a real Core rule',
+         badCites.length === 0,
+         badCites.length ? badCites.slice(0, 6).join('; ') : 'all resolved');
+      ok('the handbook points readers at the rulings that outrank a derivation',
+         /rules-rulings\.md/.test(book),
+         'docs/rules.md must link rules-rulings.md');
+    }
+
     // A card printing a bracket the rules do not define means a set landed and the
     // rules index did not. Failing here is the signal to rerun build-rules.mjs.
     // ALL-CAPS brackets are the feed's placeholders, not game terms: the six Vendetta

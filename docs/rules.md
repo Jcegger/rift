@@ -22,6 +22,12 @@ itself from Riot; this half does not, so when they part company the build says s
   update (which has since happened), and Riot's Origins one carries a "may no longer
   reflect Riftbound's rules" banner. They bind only where the current Core Rules still
   carry them — which, for the two Unleashed rulings cited below, they do.
+- **[rules-rulings.md](rules-rulings.md)** is for rulings that are *not in the published
+  rules at all* — answers from Riot's dev/design or judge staff that decide a question the
+  Core Rules leave ambiguous. They sit **below the FAQ and above any reading of my own**,
+  and each one names an expiry: the rules update that is expected to absorb it. Check it
+  before deriving an answer from first principles, because a derivation cannot find a
+  ruling that has not been written into the rules yet.
 - **[rules-full.md](rules-full.md)** is Riot's own wording, unedited, every rule in order.
   Every `§` below resolves there — `grep -n '807\.' docs/rules-full.md`. When this file
   and that file disagree, that file is right and this one has a bug.
@@ -113,7 +119,12 @@ of its domains, and it then counts as part of your identity anyway (§103.1.b.5)
 
 **Copy limits.** 3 of any name (§103.2.b), and names include the subtitle — `Kai'Sa,
 Evolutionary` and `Kai'Sa, Survivor` are different cards and you may run 3 of each
-(§132.4). **Your Chosen Champion counts against that 3**, so it plus at most 2 more
+(§132.4, and §103.2.b.2 says it outright: cards have different names even when they
+represent the same character). That rule is also why the catalog must keep the subtitle:
+Riot's card feed splits `name` and `subtitle` into separate fields, and a build that
+reads only `name` collapses every printing of a character onto one name and quietly
+breaks the copy limit along with every name-keyed join in the app.
+**Your Chosen Champion counts against that 3**, so it plus at most 2 more
 copies (§103.2.b.1). **Signature cards are capped at 3 total across the whole
 deck regardless of name**, and they must all match your Legend's champion tag (§103.2.d).
 Cards with **Unique** are limited to 1 (§825.3.a).
@@ -158,9 +169,9 @@ Fury Power pays the Fury symbol. Rainbow Power (`[A]`) pays any domain's Power c
 
 **Runes make both.** Every basic rune has exactly two abilities (§164.2):
 
-- `[E]: [Reaction] — Add [1].` — exhaust for 1 Energy.
+- `[E]: [Reaction] — Add [1].` — exhaust for 1 Energy (§164.2.a).
 - `Recycle this: [Reaction] — Add [C].` — send it back to the Rune Deck for 1 Power of
-  its own domain.
+  its own domain (§164.2.b).
 
 **Those two abilities have different costs, and that is the whole trick.** The first
 costs `[E]` — exhausting the rune. The second costs *recycling* it, and recycling is not
@@ -352,8 +363,11 @@ action having been performed.
 
 So Hidden Blade on a unit that "can't be killed" *still* draws 2 — the kill was negated,
 not ignored. Hidden Blade on a unit that Flashed to base does not. This explicitly
-reverses the Ride the Wind / Vilemaw's Lair example printed at §359.3.e.6. And if an instruction's information source is gone, it returns **null** and
-everything computed from it is ignored (§359.3.e.12).
+reverses the Ride the Wind / Vilemaw's Lair example printed at §359.3.e.6.
+
+The other way an instruction drops out is that the thing it needed to read is gone. That
+is §359.3.e.12 and it governs a whole family of questions, so it has its own section
+below: **[When the source leaves the board](#when-the-source-leaves-the-board)**.
 
 **Linked instructions** ("Kill a unit. *Its* controller draws 2") are chained: if the
 first was **ignored**, the second is too (§359.3.e.14.a) — but see the ignored/negated
@@ -365,6 +379,54 @@ no longer meets the restrictions — which is what effects reading "a spell that
 it and no other friendly unit" are looking at. The one thing that breaks the
 relationship is a change to a **non-board zone**, because that makes it a new object
 (§124).
+
+---
+
+### When the source leaves the board
+
+Most of the hard questions in this game are a version of *"I removed it in response — does
+the thing still happen?"* The answer is almost never "the ability fizzles". It is one of
+five, and they are five different rules.
+
+**1. The ability itself survives.** A triggered ability on the chain is not its source.
+Costs paid to finalise it are already spent, and its instructions still execute. Overzealous
+Fan reads *"when I defend, you may kill me to move an attacking unit to its base"* — the
+cost is killing itself, and the attacking unit still moves (§204.3.a). A source moving to a
+non-board zone in reaction to its own trigger does not change where that trigger's effect
+lands (§359.3.f.3).
+
+**2. But information *about* the source returns null.** If an instruction checks something
+about a card whose location, zone or status has changed such that the information is no
+longer available, the check returns **null** and everything computed from it is ignored
+(§359.3.e.12). A unit that is no longer on the board has null Might, null cost, and — the
+one that catches people — **no location**.
+
+**3. So a restriction anchored to the source dies with it.** This is the case worth naming,
+because no single rule states it. When a card's own text pins a target to somewhere defined
+by the source — above all Hidden's *"chosen from among options at that battlefield"*
+(§811.1.d.2) — **the chain item does not carry that battlefield. It has to read it off the
+source.** Remove the source before resolution and the check returns null, the target can no
+longer be confirmed legal, and the instruction is ignored (§359.3.e.5, §359.3.e.6). The
+Kennen/Gust ruling in [rules-rulings.md](rules-rulings.md) turns on exactly this, and it is
+why the same play behaves differently depending on whether the unit was played from hand or
+from Hidden.
+
+**4. Delayed abilities are never generated.** "You control it until I leave the board" and
+anything shaped like it does not fire at all if the source is gone by the time it would be
+created (§359.3.e.16).
+
+**5. The exception — costs and effects may look back.** A spell or ability that moves
+something to another zone *as its own cost or effect* can read that object's characteristics
+from before the move (§359.3.e.13). Looking back at what you yourself moved is legal;
+looking up something that left independently is null.
+
+**The test, in one question:** *does this instruction have to read anything off the source?*
+If no, it resolves. If yes, that read is null and the instruction drops out.
+
+Note the vocabulary trap, because it is why this is hard to look up: §359.3.e.12 says
+"location, zone, or status has changed such that that information is no longer available."
+It never says *bounce*, *return to hand* or *leaves the board*. Grepping
+[rules-full.md](rules-full.md) for the words a player would use does not find it.
 
 ---
 
@@ -468,6 +530,12 @@ defender** (§465.2.c), so the defender allocates knowing the attacker's choices
 
 Assignment rules, in order of how often they bite:
 
+- **What "lethal" means.** A **non-zero** amount at or above the unit's Might (§142.4.b).
+  The non-zero half is not pedantry: a unit at 0 Might — or pushed below 0, which is
+  treated as 0 when referenced but is not 0 (§143.2.b, §143.2.b.1) — does **not** die on
+  its own. It needs at least 1 damage marked on it. That is why Scuttle Crab at 0 Might is
+  a real card, and why a unit sitting at -1 under Forbidding Waste is alive but loses every
+  fight it is in.
 - **Lethal before moving on.** You must assign full lethal damage to one unit before
   assigning any to the next (§465.2.c.3). 5 damage into four 3-Might units is 3 and 2,
   never 2/1/1/1.
@@ -738,6 +806,12 @@ the normal rules (§813.3.a).
   card is free. Third: if a hidden card causes you to **play a unit**, that unit must go to
   that battlefield too (§811.1.d.3). And a hidden spell with no legal target under these
   rules cannot be played from hidden at all (§811.1.d).
+  **That battlefield pin is read off the source, not baked into the chain item** — remove
+  the hidden permanent before its play effect resolves and the battlefield can no longer be
+  confirmed, so the target goes illegal and the instruction is ignored. This is the single
+  biggest behavioural difference between playing a card from hand and playing it from
+  Hidden. See [When the source leaves the board](#when-the-source-leaves-the-board) and the
+  Kennen ruling in [rules-rulings.md](rules-rulings.md).
 - **Ambush** — §822 · 23 cards. May be played to a battlefield **where you already have
   units**, and has Reaction while being played that way (§822.1.b). Also appears as a
   verb meaning "play with Ambush's permissions" (§822.1.d). The permission is re-checked
