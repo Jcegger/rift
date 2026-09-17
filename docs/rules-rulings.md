@@ -73,8 +73,13 @@ none of the words *bounce*, *return to hand* or *leaves the board*, so searching
 rules in a player's vocabulary will not surface it. See
 [When the source leaves the board](rules.md#when-the-source-leaves-the-board).
 
-**Practical note.** Hidden is also the *only* reason Gust can reach this Kennen at all. He
-has no Ambush, so played from hand he enters base, where Gust — which requires a unit "at a
-battlefield" — cannot target him (§822.1.c). Played from Hidden he must enter at that
-battlefield (§811.1.d.1) at 2 Might. And the window closes on resolution: with a stunned
+**Practical note — it is about choice, not legality.** By default a unit may be played to
+its controller's base *or* a battlefield they control (§355.2.a), so a Kennen cast from hand
+*can* legally be put on a battlefield and Gusted there. The difference is that from hand
+that is optional and you will normally choose base, where Gust — which requires a unit "at a
+battlefield" — cannot reach him. **From Hidden it is compulsory**: §811.1.d.1 says a hidden
+permanent *must* be played to that battlefield, and you hide only at battlefields you
+control (§811.1.b). So Hidden removes the safe option, and at 2 Might he lands inside Gust's
+range with no say in it. He has no Ambush, so battlefields he does not control are not
+available to him either way (§822.1.c). The window then closes on resolution: with a stunned
 enemy at his battlefield he is 4 Might and out of Gust's range for good.

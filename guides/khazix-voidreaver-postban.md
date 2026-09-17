@@ -455,6 +455,63 @@ Six filler copies against ten spenders — Onslaught's Flow is the tenth. The ec
 
 The forty is not forty independent cards. About a third of them only do their job next to a specific partner, and two of them look like partners and are not. This section is what to know before you sit down.
 
+### Void Assault — the deepest card in the deck
+
+Three copies, 2 Energy, and in **88% of archived Voidreaver lists at 2.9 copies**. It reads
+like a positioning spell and is closer to a toolbox, because of three rules it quietly
+breaks.
+
+1. **No destination restriction.** §449.1 says *"the source of the Move will provide details
+   on any restrictions on legality for Destination"* — and Void Assault provides none. Any
+   location the unit is allowed to be, other than the one it is in (§355.4.a). A Standard
+   Move is base↔battlefield only; **battlefield → battlefield otherwise requires Ganking**
+   (§810), which no card in this deck has.
+2. **No exhaust cost.** The Standard Move *costs* exhausting the unit (§144.2, §420.3.a).
+   Void Assault is a Game Effect move (§420.2.a) and pays nothing, so it moves **exhausted**
+   units — including anything you played this turn, since units enter exhausted (§143.4).
+   This is what lets a 5-Energy Zed or Rengar act on the turn it lands.
+3. **It cannot be answered.** §446.3.c: *"Moving does not use the Chain, nor is it able to be
+   Reacted to."* They can counter the spell. They cannot respond to the movement.
+
+**The friendly half** unsticks a unit you just played, repositions between battlefields,
+retreats a unit out of a fight before the cleanup stages combat, and triggers your move
+payoffs (Traveling Merchant, Shadow Order Disciple — see the distinction two sections down).
+It also builds the landing zone for Ambush: Kha'Zix may only arrive *"to a battlefield where
+you have units,"* and this is how the first unit gets there.
+
+**The enemy half is where it earns the reputation.**
+
+*Break the stack, and manufacture the isolation.* The scan worth making every turn is **do
+they have two units in one place?** Move your body in and one of theirs out. You are now
+fighting one unit instead of two — **and the survivor is alone**, which is exactly what
+Kha'Zix's +2 Might and 2 XP require. One card does the combat math and the trigger together.
+Do not wait for a lone enemy to present itself; build one.
+
+*Strip a battlefield without fighting for it.* §323.6, cleanup step 4: *"players lose control
+of any controlled Battlefields without their Units occupying them if the turn is in an Open
+State and there is no Showdown or Combat ongoing there."* Move their **last** unit off a
+battlefield they control and it goes Uncontrolled at the next cleanup — and a move always
+causes one (§453). They stop Holding it for a point a turn, and you never fought for it.
+
+*And the same move trashes their hidden card.* §107.3.d plus §323.7: when they lose control,
+*"remove all Hidden cards from all Battlefields that are not controlled by the same player
+and place them in their owner's Trash."* Not returned — **trashed**. They can only hide at
+battlefields they control (§811.1.b), so the setup is ordinary. A 2-Energy spell that strips
+a battlefield and destroys a facedown card is the best rate in the deck.
+
+**Who is the attacker, precisely.** §190.3.a.1: Contested is applied by *the unit's
+controller*, not by the spell's, and *"attacker = the player who applied Contested"*
+(§464.2.c). So when both units move to a neutral battlefield the reminder text settles it in
+your favour; but when you move **only their unit** into a battlefield you control, **they**
+applied Contested and **they** are the attacker. That is usually fine — Kha'Zix reads *"when
+I attack **or defend**"* and does not care which.
+
+**Its limits, which are real.** It carries **no Action or Reaction keyword**, so it is
+Main-Phase-only: you cannot spring it inside a showdown, and it cannot rescue a unit from a
+combat already running. It moves **one** enemy, so a three-stack becomes a two-stack. And
+**the friendly move resolves first**, so you commit your own unit before placing theirs —
+decide both before you cast.
+
 ### The isolation chain: Rengar → Kha'Zix
 
 Both carry [Ambush], so both can arrive as a Reaction — mid-showdown. Their conditions are not the same, and the difference is the whole line:
@@ -554,6 +611,116 @@ The Waste's -2 applies to *any* unit defending alone, including yours. Two Tenta
 - **Angler Beast eats your own Tentacles.** It returns *all* units at 2 Might or less, and your two Up from the Deep tokens are 1 Might each. They do not come back to hand; they stop existing.
 - **When Star-Crossed makes you bounce something friendly, bounce a real unit, not a token.** The real one is re-castable. The token is gone.
 - **Their bounce kills your Shadow Clone the same way**, so do not build a turn around a clone that a 1-Energy Gust deletes.
+
+### Vex reads narrower than she is
+
+*"When an opponent plays a unit while I'm at a battlefield, [Stun] it. They can't move it
+this turn."*
+
+**There is no "here" in that sentence.** The location clause is a condition on **Vex**, not
+on the unit they played. While Vex stands at any battlefield, **every unit your opponent
+plays — anywhere on the board, including their own base — arrives stunned**, and there is no
+"once each turn" on it. Read alongside Kha'Zix's *"if an enemy unit is alone **here**"*, the
+absence is deliberate.
+
+What that is worth:
+
+- **Stunned means no Might contributed to combat damage** (§423.1.b). Their unit is a body
+  that cannot punch.
+- **It still takes its full Might in damage to kill** (§423.1.c). The stun does not make it
+  easier to remove, only harmless — do not plan around killing it more cheaply.
+- *"They can't move it this turn"* blocks **effect-driven moves too**, not just the Standard
+  Move. Their own repositioning spell cannot fix a unit Vex has stunned.
+- Stacked on top of units entering exhausted (§143.4), a stunned unit is inert for a full
+  turn cycle.
+- **Vex does not choose.** Her trigger names no target, so she is one of the few answers in
+  the deck to a unit reading *"I can't be chosen by enemy spells and abilities."*
+- And **Deflect** means removing her costs them an extra rainbow Power *per time they choose
+  her* (§809.1.c) — a mandatory additional cost that can simply price the answer out.
+
+The expiry is the catch: stun drops during the end-of-turn cleanup (§423.1.a.2), so it buys
+a turn, not a removal.
+
+### "When I move" is not "when I move to a battlefield"
+
+Three cards in this deck pay you for movement, and they are not worded the same way. This is
+worth internalising because it changes which moves are free value.
+
+| card | trigger | fires on a retreat to base? |
+|---|---|---|
+| **Traveling Merchant** | "When I move, discard 1, then draw 1" | **yes** |
+| **Shadow Order Disciple** | "When I move, you may Burn 1…" | **yes** |
+| **Irresistible Faefolk** | "When I move **to a battlefield**…" | no |
+
+So a Merchant or a Disciple pays out on **any** move, including backwards. Concretely, all
+of these loot:
+
+- Void Assault moving one of them *home* from a battlefield.
+- Ride the Wind moving them anywhere at Action speed.
+- **The legend's own 2-XP ability** — *"move an exhausted friendly unit from a battlefield to
+  its base."* It says **move**, so it is a Move, and a Merchant walked home by the legend
+  draws you a card on the way.
+
+That last line is the one people miss. Voidreaver's second XP sink is usually read as a
+rescue button; with a Merchant or a Disciple on the battlefield it is also a cantrip.
+
+**Bounce is not a move.** Gust and Star-Crossed return a unit *to its owner's hand*, and
+§446.2 is explicit: *"a card changing game zones does not in itself constitute a Move."* None
+of the three trigger off being bounced.
+
+### You can conquer without a fight
+
+Combat is not the only way to score. §348.2.a: when a **non-combat showdown** closes — one
+you opened by moving to a battlefield where the opponent has nothing — *"if only one player's
+Units remain at the Battlefield, and if that player does not already Control the Battlefield,
+that player establishes Control"*, and §348.2.a.1: *"this results in a Conquer if that player
+has not yet scored that Battlefield this turn."*
+
+So a lone unit walked onto an empty or uncontrolled battlefield **conquers**, with no combat,
+no trick, and no risk. For this deck that matters twice over: it is a point, and it is a
+**Zed conquer trigger** — a free Shadow Clone without ever putting him in a fight. If they
+have abandoned a battlefield, take it with the cheapest body you have.
+
+### The legend's buff has a ceiling
+
+*"Spend 1 XP, exhaust: [Buff] a unit."* A Buff is a counter worth **+1 Might** (§703), and
+**there can only be one Buff on a Unit at a time** (§702.3). Buffing an already-buffed unit
+does nothing and triggers nothing.
+
+The consequence for how you spend XP: **you cannot stack the legend into one threat.** Four
+XP does not make a 9-Might Zed; it makes four different units one bigger, and only if you
+have four unbuffed units. XP wants a **wide** board, which quietly argues for the token
+halves of Up from the Deep and for keeping small bodies alive rather than trading them off.
+
+The escape hatch is §702.2.b — buffs can be **spent as a cost**, which frees the slot for
+another. Nothing in this list spends them, so in practice the ceiling holds.
+
+### Rampage reaches the base
+
+*"Choose a friendly unit and an enemy unit… They deal damage equal to their Mights to each
+other."* Note what the text does **not** say: it names no location. Both units can be
+anywhere — **including their base**. It is the only card in the deck that can kill something
+that never came to a battlefield.
+
+Two further properties worth knowing:
+
+- **Pump first, then Rampage.** Punch First on your 2-Might Shadow Order Disciple makes it
+  deal 7. That converts Rampage from a trade into removal.
+- **It is not spell damage.** Rule §417.6.b.3 uses Challenge — identical wording — as its
+  worked example and says plainly that *"the damage that Challenge causes to be dealt is
+  dealt by the chosen units, not by Challenge."* An opposing Unyielding Spirit, or anything
+  else preventing spell and ability damage, **does not stop Rampage**.
+
+### A unit cannot be answered on the way in
+
+§337.2: *"If, after finalizing the Chain Item, that item is a Unit, Gear, or an ability that
+Adds resources, it resolves immediately."* A unit never sits on the chain waiting to be
+countered — it is on the board the moment it finalizes.
+
+What your opponent actually responds to is the **play effect** that follows it onto the chain
+(§383.4.a.2). This is why Vex's stun works the way it does, and it is the whole mechanism
+behind the Hidden ruling in `docs/rules-rulings.md`: the unit is already
+gone or already present before anybody gets to act.
 
 ### Three-card lines
 
