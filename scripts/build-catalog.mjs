@@ -163,13 +163,36 @@ const main = async () => {
     return finishes.get(id) || finishes.get(publicCode) || null;
   };
 
+  /* ── the name is two fields now ───────────────────────────────────────────────
+     Riot split the card name on 2026-09-17: `name` carries the character or the
+     card, `subtitle` carries the epithet. "Kha'Zix, Mutating Horror" arrives as
+     name "Kha'Zix" + subtitle "Mutating Horror". Taking `name` alone collapsed
+     five different Kha'Zix cards onto one name, which broke champion resolution,
+     the tier-list join, the roster and the errata overlay in one go — and is also
+     just wrong, since rule 103.2.b.2 turns on two printings of a character having
+     *different* names.
+
+     Three joins, verified by reproducing all 1,189 previously committed names:
+       no subtitle              -> the name                          (872 cards)
+       subtitle "Starter"       -> "Name - Starter"                  (4 legends)
+       Signature supertype      -> the name; its subtitle is the      (21 cards)
+                                   champion tag, not part of the name
+       everything else          -> "Name, Subtitle"                  (292 cards) */
+  const fullName = (c) => {
+    const sub = c.subtitle?.trim();
+    if (!sub) return c.name;
+    const supers = (c.cardType?.superType ?? []).map((x) => x.label);
+    if (supers.includes("Signature")) return c.name;
+    return sub === "Starter" ? `${c.name} - ${sub}` : `${c.name}, ${sub}`;
+  };
+
   const cards = raw
     .map((c) => {
       const setId = c.set?.value?.id ?? null;
       const card = {
         c: c.publicCode,
         ri: c.id, // Riot's own id ("ogn-066a-298"), kept so imports can match on it
-        n: c.name,
+        n: fullName(c),
         s: setId,
         no: c.collectorNumber,
         v: variantOf(c.publicCode, baseSize[setId]),

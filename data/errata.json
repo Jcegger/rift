@@ -1,8 +1,8 @@
 {
- "generatedAt": "2026-09-16",
+ "generatedAt": "2026-09-17",
  "source": "Riot's per-set errata pages, as tracked in data/rules.json",
  "note": "`new` is the current text and supersedes what data/cards.json carries for that card.",
- "catalogAt": "2026-09-16",
+ "catalogAt": "2026-09-17",
  "pages": [
   {
    "slug": "riftbound-origins-card-errata",
@@ -363,7 +363,7 @@
    "newAsPrinted": "[2], [E]: Move a friendly unit to or from its base.",
    "old": "[2], [E]: Move a friendly unit to or from your base.",
    "code": "OGN-259/298",
-   "status": "current",
+   "status": "catalog-stale",
    "split": true
   },
   {

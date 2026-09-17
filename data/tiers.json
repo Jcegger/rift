@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-16",
+ "generatedAt": "2026-09-17",
  "source": "https://riftbound.gg/tier-list/",
  "set": "Vendetta",
  "report": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-week-4-report/",
@@ -10,344 +10,344 @@
    "champion": "Kennen",
    "tier": 1,
    "rank": 1,
-   "guide": "https://riftbound.gg/kennen-heart-of-the-tempest-guide/",
-   "epithet": "Heart Of The Tempest"
-  },
-  {
-   "champion": "Master Yi",
-   "tier": 1,
-   "rank": 2,
-   "guide": "https://riftbound.gg/master-yi-wuju-bladesman-guide/",
-   "epithet": "Wuju Bladesman"
-  },
-  {
-   "champion": "Azir",
-   "tier": 1,
-   "rank": 3,
-   "guide": "https://riftbound.gg/azir-best-decks-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/ven-155-kennen/",
+   "epithet": "Heart of the Tempest"
   },
   {
    "champion": "Akali",
    "tier": 1,
-   "rank": 4,
-   "guide": "https://riftbound.gg/akali-rogue-assassin-guide/",
+   "rank": 2,
+   "guide": "https://riftbound.gg/meta/ven-139-akali/",
    "epithet": "Rogue Assassin"
   },
   {
+   "champion": "Master Yi",
+   "tier": 1,
+   "rank": 3,
+   "guide": "https://riftbound.gg/meta/ogs-019-master-yi/",
+   "epithet": "Wuju Bladesman - Starter"
+  },
+  {
    "champion": "Irelia",
-   "tier": 2,
-   "rank": 1,
-   "guide": "https://riftbound.gg/irelia-best-decks-cards/",
-   "epithet": null
+   "tier": 1,
+   "rank": 4,
+   "guide": "https://riftbound.gg/meta/sfd-195-irelia/",
+   "epithet": "Blade Dancer"
   },
   {
    "champion": "Rengar",
    "tier": 2,
-   "rank": 2,
-   "guide": "https://riftbound.gg/rengar-pridestalker-guide/",
+   "rank": 1,
+   "guide": "https://riftbound.gg/meta/unl-183-rengar/",
    "epithet": "Pridestalker"
+  },
+  {
+   "champion": "Azir",
+   "tier": 2,
+   "rank": 2,
+   "guide": "https://riftbound.gg/meta/sfd-197-azir/",
+   "epithet": "Emperor of the Sands"
   },
   {
    "champion": "Fiora",
    "tier": 2,
    "rank": 3,
-   "guide": "https://riftbound.gg/fiora-best-decks-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/sfd-205-fiora/",
+   "epithet": "Grand Duelist"
   },
   {
-   "champion": "Ornn",
+   "champion": "Ezreal",
    "tier": 2,
    "rank": 4,
-   "guide": "https://riftbound.gg/ornn-best-decks-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/sfd-199-ezreal/",
+   "epithet": "Prodigal Explorer"
   },
   {
    "champion": "Jayce",
    "tier": 2,
    "rank": 5,
-   "guide": "https://riftbound.gg/jayce-defender-of-tomorrow-guide/",
-   "epithet": "Defender Of Tomorrow"
+   "guide": "https://riftbound.gg/meta/ven-149-jayce/",
+   "epithet": "Defender of Tomorrow"
   },
   {
    "champion": "Diana",
    "tier": 2,
    "rank": 6,
-   "guide": "https://riftbound.gg/diana-scorn-of-the-moon-guide/",
-   "epithet": "Scorn Of The Moon"
+   "guide": "https://riftbound.gg/meta/unl-197-diana/",
+   "epithet": "Scorn of the Moon"
   },
   {
-   "champion": "Kha'Zix",
+   "champion": "Rek'Sai",
    "tier": 2,
    "rank": 7,
-   "guide": "https://riftbound.gg/khazix-voidreaver-guide/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/sfd-187-reksai/",
+   "epithet": "Void Burrower"
   },
   {
-   "champion": "Ezreal",
+   "champion": "Vex",
    "tier": 2,
    "rank": 8,
-   "guide": "https://riftbound.gg/ezreal-best-decks-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/unl-193-vex/",
+   "epithet": "Gloomist"
+  },
+  {
+   "champion": "Ornn",
+   "tier": 3,
+   "rank": 1,
+   "guide": "https://riftbound.gg/meta/sfd-189-ornn/",
+   "epithet": "Fire Below the Mountain"
   },
   {
    "champion": "Lucian",
    "tier": 3,
-   "rank": 1,
-   "guide": "https://riftbound.gg/lucian-purifier-guide/",
+   "rank": 2,
+   "guide": "https://riftbound.gg/meta/sfd-183-lucian/",
    "epithet": "Purifier"
   },
   {
    "champion": "LeBlanc",
    "tier": 3,
-   "rank": 2,
-   "guide": "https://riftbound.gg/leblanc-deceiver-guide/",
+   "rank": 3,
+   "guide": "https://riftbound.gg/meta/unl-199-leblanc/",
    "epithet": "Deceiver"
   },
   {
-   "champion": "Rek'Sai",
+   "champion": "Kha'Zix",
    "tier": 3,
-   "rank": 3,
-   "guide": "https://riftbound.gg/reksai-best-decks-cards/",
-   "epithet": null
+   "rank": 4,
+   "guide": "https://riftbound.gg/meta/unl-201-khazix/",
+   "epithet": "Voidreaver"
   },
   {
    "champion": "Draven",
    "tier": 3,
-   "rank": 4,
-   "guide": "https://riftbound.gg/draven-best-decks-cards/",
-   "epithet": null
-  },
-  {
-   "champion": "Vex",
-   "tier": 3,
    "rank": 5,
-   "guide": "https://riftbound.gg/vex-gloomist-guide/",
-   "epithet": "Gloomist"
+   "guide": "https://riftbound.gg/meta/sfd-185-draven/",
+   "epithet": "Glorious Executioner"
   },
   {
    "champion": "Mel",
    "tier": 4,
    "rank": 1,
-   "guide": "https://riftbound.gg/mel-souls-reflection-guide/",
-   "epithet": "Souls Reflection"
+   "guide": "https://riftbound.gg/meta/ven-151-mel/",
+   "epithet": "Soul's Reflection"
   },
   {
    "champion": "Kai'Sa",
    "tier": 4,
    "rank": 2,
-   "guide": "https://riftbound.gg/kaisa-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/ogn-247-kaisa/",
+   "epithet": "Daughter of the Void"
   },
   {
    "champion": "Lux",
    "tier": 4,
    "rank": 3,
-   "guide": "https://riftbound.gg/lux-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
-  },
-  {
-   "champion": "Nasus",
-   "tier": 4,
-   "rank": 4,
-   "guide": "https://riftbound.gg/nasus-curator-of-the-sands-guide/",
-   "epithet": "Curator Of The Sands"
-  },
-  {
-   "champion": "Lillia",
-   "tier": 4,
-   "rank": 5,
-   "guide": "https://riftbound.gg/lillia-bashful-bloom-guide/",
-   "epithet": "Bashful Bloom"
+   "guide": "https://riftbound.gg/meta/ogs-021-lux/",
+   "epithet": "Lady of Luminosity - Starter"
   },
   {
    "champion": "Viktor",
    "tier": 4,
+   "rank": 4,
+   "guide": "https://riftbound.gg/meta/ogn-265-viktor/",
+   "epithet": "Herald of the Arcane"
+  },
+  {
+   "champion": "Nasus",
+   "tier": 4,
+   "rank": 5,
+   "guide": "https://riftbound.gg/meta/ven-145-nasus/",
+   "epithet": "Curator of the Sands"
+  },
+  {
+   "champion": "Lillia",
+   "tier": 4,
    "rank": 6,
-   "guide": "https://riftbound.gg/viktor-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/unl-189-lillia/",
+   "epithet": "Bashful Bloom"
+  },
+  {
+   "champion": "Sivir",
+   "tier": 4,
+   "rank": 7,
+   "guide": "https://riftbound.gg/meta/sfd-203-sivir/",
+   "epithet": "Battle Mistress"
+  },
+  {
+   "champion": "Volibear",
+   "tier": 4,
+   "rank": 8,
+   "guide": "https://riftbound.gg/meta/ogn-249-volibear/",
+   "epithet": "Relentless Storm"
+  },
+  {
+   "champion": "Vi",
+   "tier": 5,
+   "rank": 1,
+   "guide": "https://riftbound.gg/meta/unl-187-vi/",
+   "epithet": "Piltover Enforcer"
   },
   {
    "champion": "Jhin",
    "tier": 5,
-   "rank": 1,
-   "guide": "https://riftbound.gg/jhin-virtuoso-guide/",
-   "epithet": "Virtuoso"
-  },
-  {
-   "champion": "Sivir",
-   "tier": 5,
    "rank": 2,
-   "guide": "https://riftbound.gg/sivir-best-decks-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/unl-181-jhin/",
+   "epithet": "Virtuoso"
   },
   {
    "champion": "Master Yi",
    "tier": 5,
    "rank": 3,
-   "guide": "https://riftbound.gg/master-yi-wuju-master-guide/",
+   "guide": "https://riftbound.gg/meta/unl-191-master-yi/",
    "epithet": "Wuju Master"
   },
   {
    "champion": "Annie",
    "tier": 5,
    "rank": 4,
-   "guide": "https://riftbound.gg/annie-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/ogs-017-annie/",
+   "epithet": "Dark Child - Starter"
   },
   {
    "champion": "Teemo",
    "tier": 5,
    "rank": 5,
-   "guide": "https://riftbound.gg/teemo-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/ogn-263-teemo/",
+   "epithet": "Swift Scout"
   },
   {
    "champion": "Zed",
    "tier": 5,
    "rank": 6,
-   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-post-barcelona-rq/#Zed",
+   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-preparing-for-the-ekko-and-stacked-deck-ban/#Zed",
    "epithet": null
   },
   {
    "champion": "Rumble",
    "tier": 5,
    "rank": 7,
-   "guide": "https://riftbound.gg/rumble-best-decks-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/sfd-181-rumble/",
+   "epithet": "Mechanized Menace"
+  },
+  {
+   "champion": "Poppy",
+   "tier": 5,
+   "rank": 8,
+   "guide": "https://riftbound.gg/meta/unl-203-poppy/",
+   "epithet": "Keeper of the Hammer"
   },
   {
    "champion": "Reneton",
    "tier": 5,
-   "rank": 8,
-   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-post-barcelona-rq/#Renekton",
+   "rank": 9,
+   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-preparing-for-the-ekko-and-stacked-deck-ban/#Renekton",
    "epithet": null
   },
   {
    "champion": "Ivern",
    "tier": 5,
-   "rank": 9,
-   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-unleashed-heading-into-regional-qualifiers/#Ivern",
-   "epithet": null
-  },
-  {
-   "champion": "Jax",
-   "tier": 5,
    "rank": 10,
-   "guide": "https://riftbound.gg/jax-best-decks-cards/",
-   "epithet": null
-  },
-  {
-   "champion": "Ambessa",
-   "tier": 5,
-   "rank": 11,
-   "guide": "https://riftbound.gg/ambessa-matriarch-of-war-guide/",
-   "epithet": "Matriarch Of War"
+   "guide": "https://riftbound.gg/meta/unl-195-ivern/",
+   "epithet": "Green Father"
   },
   {
    "champion": "Pyke",
    "tier": 5,
-   "rank": 12,
-   "guide": "https://riftbound.gg/pyke-bloodharbor-ripper-guide/",
+   "rank": 11,
+   "guide": "https://riftbound.gg/meta/unl-185-pyke/",
    "epithet": "Bloodharbor Ripper"
+  },
+  {
+   "champion": "Ambessa",
+   "tier": 5,
+   "rank": 12,
+   "guide": "https://riftbound.gg/meta/ven-153-ambessa/",
+   "epithet": "Matriarch of War"
+  },
+  {
+   "champion": "Jax",
+   "tier": 5,
+   "rank": 13,
+   "guide": "https://riftbound.gg/meta/sfd-193-jax/",
+   "epithet": "Grandmaster at Arms"
   },
   {
    "champion": "Renata Glasc",
    "tier": 5,
-   "rank": 13,
-   "guide": "https://riftbound.gg/renata-glasc-best-decks-cards/",
-   "epithet": null
+   "rank": 14,
+   "guide": "https://riftbound.gg/meta/sfd-201-renata-glasc/",
+   "epithet": "Chem-Baroness"
   },
   {
    "champion": "Shen",
    "tier": 5,
-   "rank": 14,
-   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-post-barcelona-rq/#Shen",
-   "epithet": null
-  },
-  {
-   "champion": "Vi",
-   "tier": 5,
    "rank": 15,
-   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-unleashed-heading-into-regional-qualifiers/#Vi",
-   "epithet": null
-  },
-  {
-   "champion": "Poppy",
-   "tier": 5,
-   "rank": 16,
-   "guide": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-unleashed-heading-into-regional-qualifiers/#Poppy",
-   "epithet": null
-  },
-  {
-   "champion": "Volibear",
-   "tier": 5,
-   "rank": 17,
-   "guide": "https://riftbound.gg/volibear-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/ven-147-shen/",
+   "epithet": "Eye of Twilight"
   },
   {
    "champion": "Leona",
    "tier": 5,
-   "rank": 18,
-   "guide": "https://riftbound.gg/leona-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "rank": 16,
+   "guide": "https://riftbound.gg/meta/ogn-261-leona/",
+   "epithet": "Radiant Dawn"
   },
   {
    "champion": "Sett",
    "tier": 5,
-   "rank": 19,
-   "guide": "https://riftbound.gg/sett-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "rank": 17,
+   "guide": "https://riftbound.gg/meta/ogn-269-sett/",
+   "epithet": "The Boss"
   },
   {
    "champion": "Miss Fortune",
    "tier": 5,
+   "rank": 18,
+   "guide": "https://riftbound.gg/meta/ogn-267-miss-fortune/",
+   "epithet": "Bounty Hunter"
+  },
+  {
+   "champion": "Yasuo",
+   "tier": 5,
+   "rank": 19,
+   "guide": "https://riftbound.gg/meta/ogn-259-yasuo/",
+   "epithet": "Unforgiven"
+  },
+  {
+   "champion": "Jinx",
+   "tier": 5,
    "rank": 20,
-   "guide": "https://riftbound.gg/miss-fortune-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/ogn-251-jinx/",
+   "epithet": "Loose Cannon"
   },
   {
    "champion": "Ahri",
    "tier": 5,
    "rank": 21,
-   "guide": "https://riftbound.gg/ahri-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/ogn-255-ahri/",
+   "epithet": "Nine-Tailed Fox"
   },
   {
-   "champion": "Darius",
+   "champion": "Lee Sin",
    "tier": 5,
    "rank": 22,
-   "guide": "https://riftbound.gg/darius-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/ogn-257-lee-sin/",
+   "epithet": "Blind Monk"
   },
   {
    "champion": "Garen",
    "tier": 5,
    "rank": 23,
-   "guide": "https://riftbound.gg/garen-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/ogs-023-garen/",
+   "epithet": "Might of Demacia - Starter"
   },
   {
-   "champion": "Jinx",
+   "champion": "Darius",
    "tier": 5,
    "rank": 24,
-   "guide": "https://riftbound.gg/jinx-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
-  },
-  {
-   "champion": "Lee Sin",
-   "tier": 5,
-   "rank": 25,
-   "guide": "https://riftbound.gg/lee-sin-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
-  },
-  {
-   "champion": "Yasuo",
-   "tier": 5,
-   "rank": 26,
-   "guide": "https://riftbound.gg/yasuo-champion-spotlight-overview-strategy-and-cards/",
-   "epithet": null
+   "guide": "https://riftbound.gg/meta/ogn-253-darius/",
+   "epithet": "Hand of Noxus"
   }
  ]
 }

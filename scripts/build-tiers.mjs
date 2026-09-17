@@ -26,9 +26,15 @@
 // an empty or half-read tier list. check.mjs asserts the file has a plausible legend
 // count for the same reason.
 
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 
 const PAGE = "https://riftbound.gg/tier-list/";
+// The weekly report used to be linked from the tier list itself. On 2026-09-17 that
+// page stopped carrying the links — it now points at per-legend /meta/<code>-<champ>/
+// pages instead — while the reports themselves carried on being published under the
+// same slug on the metagame index. Without a second look here the file loses its set,
+// its week and its citation, and the Meta panel shows a tier list it cannot source.
+const METAGAME = "https://riftbound.gg/metagame/";
 const UA = "Mozilla/5.0 (rift.jayegger.com tier builder; +https://rift.jayegger.com)";
 const MIN_LEGENDS = 20;   // the list has run ~50; well under this means the parse broke
 
@@ -39,6 +45,19 @@ const decode = (s) => String(s || "")
 // "kennen-heart-of-the-tempest-guide" + champion "Kennen" -> "Heart of the Tempest".
 // Only the "-guide" slugs carry an epithet; "-best-decks-cards", "-champion-spotlight-…"
 // and "#anchor" links do not, and those return null.
+/* The links on the tier list changed shape on 2026-09-17, from
+   "/kennen-heart-of-the-tempest-guide/" to "/meta/ven-155-kennen/". The new one is
+   better for this purpose: it carries the legend's own collector code, so the epithet
+   comes from the catalog instead of being parsed out of a slug. That matters for
+   exactly one thing and it is the thing this field exists for — Master Yi has two
+   legends in two different tiers, and OGS-019 tells them apart where "master-yi"
+   cannot. Falls back to the old slug parse, since nothing says the links will not
+   change back. */
+function epithetFromMeta(url, legendByCode) {
+  const m = /riftbound\.gg\/meta\/([a-z]{3}-\d{3}[a-z]?)-/i.exec(url || "");
+  return m ? legendByCode.get(m[1].toUpperCase()) || null : null;
+}
+
 function epithetFromGuide(url, champion) {
   const m = /riftbound\.gg\/([a-z0-9-]+)-guide\/?$/.exec(url || "");
   if (!m) return null;
@@ -51,6 +70,17 @@ function epithetFromGuide(url, champion) {
 }
 
 const main = async () => {
+  // Legend names by collector code, for the epithet the new links encode.
+  const legendByCode = new Map();
+  try {
+    const cat = JSON.parse(await readFile(new URL("../data/cards.json", import.meta.url), "utf8"));
+    for (const c of cat.cards || []) {
+      if (c.t !== "Legend") continue;
+      const code = String(c.c).split("/")[0].toUpperCase();
+      if (!legendByCode.has(code)) legendByCode.set(code, c.n);
+    }
+  } catch { /* no catalog yet; the slug fallback still works */ }
+
   process.stdout.write("fetching tier list… ");
   const r = await fetch(PAGE, { headers: { "User-Agent": UA, "Accept-Language": "en-US" } });
   if (!r.ok) throw new Error(`${r.status} ${r.statusText} for ${PAGE}`);
@@ -78,7 +108,8 @@ const main = async () => {
     const champion = decode((a ? a[2] : cap).replace(/<[^>]+>/g, "").replace(/[\u{1F000}-\u{1FAFF}←-⇿☀-➿]/gu, ""));
     if (!champion) continue;
     const guide = a ? a[1] : null;
-    tiers.push({ champion, tier, rank: ++rank, guide, epithet: epithetFromGuide(guide, champion) });
+    const epithet = epithetFromMeta(guide, legendByCode) ?? epithetFromGuide(guide, champion);
+    tiers.push({ champion, tier, rank: ++rank, guide, epithet });
   }
 
   if (tiers.length < MIN_LEGENDS) throw new Error(`only ${tiers.length} legends parsed (expected >= ${MIN_LEGENDS})`);
@@ -87,9 +118,23 @@ const main = async () => {
   // links on the page. Report slugs read
   // "riftbound-meta-tier-list-best-decks-for-<set>-week-<n>-report".
   let set = null, report = null, week = -1;
-  for (const rm of html.matchAll(/href="(https:\/\/riftbound\.gg\/riftbound-meta-tier-list-best-decks-for-([a-z0-9-]+?)-week-(\d+)-report\/?)"/gi)) {
-    const w = Number(rm[3]);
-    if (w > week) { week = w; report = rm[1]; set = rm[2].replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()); }
+  const REPORT = /href="(https:\/\/riftbound\.gg\/riftbound-meta-tier-list-best-decks-for-([a-z0-9-]+?)-week-(\d+)-report\/?)"/gi;
+  const scanReports = (src) => {
+    for (const rm of src.matchAll(REPORT)) {
+      const w = Number(rm[3]);
+      if (w > week) { week = w; report = rm[1]; set = rm[2].replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()); }
+    }
+  };
+  scanReports(html);
+  if (!report) {
+    // Second source, and a failure here costs the citation rather than the file.
+    try {
+      const mr = await fetch(METAGAME, { headers: { "User-Agent": UA, "Accept-Language": "en-US" } });
+      if (mr.ok) {
+        scanReports((await mr.text()).replace(/<script[\s\S]*?<\/script>/g, ""));
+        if (report) console.log(`  report link came from ${METAGAME} — the tier page no longer carries one`);
+      }
+    } catch { /* citation is optional; the tiers are not */ }
   }
   if (!set) {
     const sm = /updated for [^.]*?Set\s*\d+\s*-\s*([A-Za-z]+)/i.exec(html);

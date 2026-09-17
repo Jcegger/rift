@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-09-16",
+ "generatedAt": "2026-09-17",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "tags": {
-  "News": 27,
-  "Metagame": 18,
+  "Metagame": 19,
+  "News": 26,
   "Events": 20,
   "Legends": 15,
   "Sets": 4,
@@ -14,6 +14,15 @@
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Riftbound Meta Tier List - Best Decks for Vendetta - Preparing for the Ekko and Stacked Deck Ban",
+   "dt": "2026-09-17",
+   "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-preparing-for-the-ekko-and-stacked-deck-ban",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
   {
    "title": "Ekko, Recurrent & Stacked Deck Banned: Riftbound Ban List Updates – September 18, 2026",
    "dt": "2026-09-15",
@@ -24,7 +33,7 @@
    "author": "Riftbound.gg"
   },
   {
-   "title": "Riftbound Metagame Update - Post Ekko,Reccurent and Stacked Deck Ban",
+   "title": "Riftbound Metagame Update - Post Ekko, Reccurent and Stacked Deck Ban",
    "dt": "2026-09-15",
    "url": "https://riftbound.gg/riftbound-metagame-update-post-ekkoreccurent-and-stacked-deck-ban",
    "tags": [
@@ -805,15 +814,6 @@
     "Metagame"
    ],
    "author": "Den"
-  },
-  {
-   "title": "Unleashed Preview Season - Spoiler Schedule",
-   "dt": "2026-03-13",
-   "url": "https://riftbound.gg/unleashed-preview-season-spoiler-schedule",
-   "tags": [
-    "News"
-   ],
-   "author": "Riftbound.gg"
   }
  ]
 }
