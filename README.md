@@ -1044,6 +1044,36 @@ every bracketed term a card can print to the rule that defines it.
 every claim carrying its rule number. It does not rebuild itself, and the builder says
 so out loud when Riot's date moves.
 
+### Four files, and which one answers the question
+
+There are four, they are not interchangeable, and reaching for the wrong one first is
+how this repo has produced its confident wrong answers.
+
+| file | what it is | rebuilds? |
+|---|---|---|
+| **`docs/rules.md`** | the handbook — the rules rewritten to be read, every claim carrying its §. **Start here.** | no, hand-written |
+| **`docs/rules-full.md`** | Riot's verbatim text, all 3,326 rules. The proof, not the index. | yes |
+| **`docs/rules-faq.md`** | Riot's per-set FAQs. The current one **outranks the Core Rules** outright. | yes |
+| **`docs/rules-rulings.md`** | rulings from Riot staff that decide something the published rules leave ambiguous. **Cannot be derived from any of the above.** | no, hand-written |
+
+**Lookup order: handbook → verbatim → FAQ → rulings.** The handbook tells you which
+rules are involved and how they compose; the verbatim confirms the exact wording; the
+FAQ overrides both where it differs; the rulings file holds the answers that are not in
+any published document yet.
+
+**Why not just grep the verbatim.** Because the rules are written in the rules'
+vocabulary and questions arrive in players' vocabulary. §359.3.e.12 governs what happens
+when a card is bounced in response to its own trigger, and its text contains none of
+*bounce*, *return to hand*, or *leaves the board* — it says "location, zone, or status
+has changed such that that information is no longer available". Grep found nothing; the
+handbook had cited it all along. The composition of two rules is also never findable by
+searching for either one, which is what `docs/rules-rulings.md` exists to record.
+
+`check.mjs` pins a list of **load-bearing rules** that must stay cited in the handbook.
+They are the rules that have actually been got wrong from this repo, and the failure
+mode is silent, so a rewrite that drops one fails the build rather than the next
+answer.
+
 **The PDF URLs are content hashes.** Every revision is a new URL, which means a
 hardcoded link does not go stale — it goes *permanent*, silently serving the rules from
 a previous set forever. So the builder reads the Rules Hub page for both the current

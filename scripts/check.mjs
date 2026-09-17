@@ -12,7 +12,7 @@
 //
 //   node scripts/check.mjs
 
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -2682,6 +2682,58 @@ section('The rules');
                        `${said === real ? '' : ` — ${detail} (enforced under --max-age)`}`);
     }
   }
+}
+
+/* ══ the documentation, and whether it still describes the repo ══════════════════
+   README.md and CLAUDE.md are hand-written and nothing regenerates them, so the only
+   thing keeping them true is that adding an undocumented file fails the build. That is
+   not hypothetical: docs/rules-rulings.md was added and left out of the README in the
+   same session this check was written, and this is what caught it. */
+section('The documentation');
+{
+  const readDoc = (f) => { try { return readFileSync(join(ROOT, f), 'utf8'); } catch { return ''; } };
+  const readme = readDoc('README.md');
+  const claude = readDoc('CLAUDE.md');
+  ok('README.md is present', readme.length > 1000, `${(readme.length / 1024).toFixed(0)}KB`);
+  ok('CLAUDE.md is present', claude.length > 500, `${(claude.length / 1024).toFixed(0)}KB`);
+
+  // Everything a future reader has to find has to be findable from the README.
+  const listed = (dir, re) => { try { return readdirSync(join(ROOT, dir)).filter((f) => re.test(f)); } catch { return []; } };
+  const groups = [
+    ['docs', listed('docs', /\.md$/), 'docs/'],
+    ['builders', listed('scripts', /^build-.*\.mjs$/), 'scripts/'],
+    ['data files', listed('data', /\.json$/), 'data/'],
+  ];
+  for (const [label, files, dir] of groups) {
+    const undocumented = files.filter((f) => !readme.includes(f));
+    ok(`README.md documents every one of the ${label}`,
+       files.length > 0 && undocumented.length === 0,
+       undocumented.length ? `${undocumented.length} undocumented: ${undocumented.map((f) => dir + f).join(', ')}`
+                           : `${files.length} documented`);
+  }
+
+  /* The lookup order is the single most load-bearing sentence in CLAUDE.md, because
+     getting it wrong is what produced the wrong answers it exists to prevent. Assert
+     the four files appear, and appear in that order — a reshuffle that puts the
+     verbatim first would read as fine and quietly restore the old failure. */
+  const ORDER = ['docs/rules.md', 'docs/rules-full.md', 'docs/rules-faq.md', 'docs/rules-rulings.md'];
+  /* Anchored to the numbered list, not to first mention anywhere in the file: rules.md
+     is named in the prose above it, so an indexOf over the whole document reads as
+     correctly ordered no matter how the list itself is shuffled. */
+  const listed4 = [...claude.matchAll(/^\d+\. \*\*`(docs\/[a-z-]+\.md)`\*\*/gm)].map((m) => m[1]);
+  const inOrder = listed4.length === ORDER.length && ORDER.every((f, i) => listed4[i] === f);
+  ok('CLAUDE.md states the rules lookup order, in order',
+     inOrder,
+     inOrder ? 'handbook → verbatim → FAQ → rulings'
+             : listed4.length ? `list reads: ${listed4.join(' → ')}` : 'no numbered lookup list found');
+
+  // The two claims in CLAUDE.md that are cheap to state and expensive to have wrong.
+  ok('CLAUDE.md still warns that personal state is not in git',
+     /not in git/i.test(claude) && /supabase/i.test(claude),
+     'the collection and decks live in Supabase, not the repo');
+  ok('CLAUDE.md still says check.mjs is allowed to block',
+     /stale data that works beats fresh data that lies/i.test(claude),
+     'the refresh commits nothing when this file fails');
 }
 
 console.log(failures ? `\n${failures} FAILED` : '\nall checks pass');
