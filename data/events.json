@@ -24,16 +24,16 @@
    "Beijing City Challenge (China)",
    "Shenyang City Challenge (China)"
   ],
-  "claimedEvents": 19,
-  "claimedEventsUnmatched": 18,
+  "claimedEvents": 20,
+  "claimedEventsUnmatched": 19,
   "claimedEventAliases": {
    "RiftAtlas Convergence #2": "Convergence #2"
   },
   "claimedDecksByRegion": {
-   "unknown": 5,
    "Asia": 28,
-   "Europe": 9,
-   "North America": 1
+   "North America": 2,
+   "unknown": 5,
+   "Europe": 7
   },
   "registryEventsByRegion": {
    "unknown": 1375
@@ -47,6 +47,7 @@
    "S3 Shanghai City Challenge",
    "S3 Shenyang City Challenge",
    "S4 Beijing City Challenge",
+   "S4 Chengdu City Challenge",
    "S4 Guangzhou City Challenge",
    "Shenayng RO",
    "Shenyang RO",
@@ -54,7 +55,7 @@
    "Sideways Showdown: CN vs World",
    "Singapore RQ",
    "Utrecht RQ",
-   "Wuhan 26 Open",
+   "Vancouver RQ",
    "Wuhan Regional Open",
    "Xi'an Regional"
   ],
