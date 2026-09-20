@@ -776,8 +776,27 @@ section('Claimed results');
   ok('an archetype with a claim but no record still reads as having no record',
      groups.every((g) => !(g.claim.lists && !g.evCount) || (g.evPlayers === 0 && g.evCount === 0)));
   const withClaim = groups.filter((g) => g.claim.lists);
-  ok('some archetype gained a claim it had no record for',
-     !parsed || withClaim.some((g) => !g.evCount), `${withClaim.filter((g) => !g.evCount).length} archetypes`);
+  /* Whether the live feed holds a claim the archive has no record of is a fact about
+     upstream, not about this app: it ran 2 → 1 → 0 over three days in September 2026
+     as the event archive caught up with the events being claimed. Asserting that one
+     exists therefore fails the refresh over a gap in someone else's coverage while the
+     data and the code are both fine. The invariant worth holding is that such an
+     archetype reads as having no record — so build one and assert on that, and report
+     the feed's own count rather than requiring it. */
+  const seed = A.DECKS.find((d) => d.cp != null && !d.tour);
+  const fixture = seed && A.metaArchetypes([...A.metaPool(), {
+    ...seed, s: 'check-fixture-claim-no-record', ln: 'Check Fixture — a claim with no record',
+    ev: '', ec: null, pl: null, tour: 0, cp: 4, rg: 'Europe',
+    ce: 'An event this archive has never seen',
+  }]).find((g) => g.name.startsWith('Check Fixture'));
+  ok('an archetype whose only results are claims reads as having no record',
+     !parsed || !!(fixture && fixture.claim.lists === 1 && !fixture.evCount &&
+                   fixture.evPlayers === 0 && /unverified$/.test(A.claimText(fixture.claim))),
+     fixture ? A.claimText(fixture.claim).slice(0, 62) : 'no claimed list to seed the fixture from');
+  ok('the feed still supplies claims for the surfaces below to render',
+     !parsed || withClaim.length > 0,
+     `${withClaim.length} archetypes carry a claim, ${
+       withClaim.filter((g) => !g.evCount).length} with no record of their own`);
   ok('the claim phrase always says it is unverified',
      withClaim.length > 0 && withClaim.every((g) => /unverified$/.test(A.claimText(g.claim))) || !parsed,
      A.claimText(withClaim[0] && withClaim[0].claim).slice(0, 70));
@@ -1643,12 +1662,13 @@ section('Deck options');
   };
   const block = expansionOf(multi.name);
   const EXP_CAP = 12;
-  // The roll's own order, so a check can say where the representative lands in it.
-  const repRank = (g) => g.rows.slice()
+  // The roll's own order, so a check can say where the representative lands in it —
+  // and, past the cap, which rows the expansion actually renders.
+  const rollOrder = (g) => g.rows.slice()
     .sort((a, b) => (b.deck.vw || 0) - (a.deck.vw || 0) ||
       (a.deck.pr ?? Infinity) - (b.deck.pr ?? Infinity) ||
-      (a.deck.s || '').localeCompare(b.deck.s || ''))
-    .findIndex((x) => x.deck.s === g.best.deck.s);
+      (a.deck.s || '').localeCompare(b.deck.s || ''));
+  const repRank = (g) => rollOrder(g).findIndex((x) => x.deck.s === g.best.deck.s);
   const picks = A.legendPicks(multi);
   const divider = '— every list, most viewed first —';
   const rollStart = block.indexOf(divider);
@@ -1687,14 +1707,32 @@ section('Deck options');
              : 'no archetype in the table ranks its representative past the cap today');
     A.S.expand = [multi.name];   // section 3 pins against the fixture's expansion
   }
-  // A re-entered copy is flagged rather than linked as canonical.
-  const copySlugs = multi.rows.filter((x) => /-copy(-|$)/.test(x.deck.s)).map((x) => x.deck.s);
-  ok('a fan-copy list in the roll is flagged as such',
-     copySlugs.length === 0 || copySlugs.some((s) => {
-       const i = roll.indexOf(`data-pick-list="${s}"`);
-       return i > -1 && roll.lastIndexOf('fan copy', i) > roll.lastIndexOf('</div>', i);
-     }),
-     `${copySlugs.length} copy slugs in ${multi.name}`);
+  // A re-entered copy is flagged rather than linked as canonical. Same fixture trap as
+  // the block above, and it bit harder: the roll renders only the first EXP_CAP rows,
+  // and a fan copy is a re-entry that rarely out-views the list it was copied from, so
+  // the fixture's copies can all sit in the tail. Scanning every row and asserting one
+  // of them rendered then tests nothing at all — it stayed green only while one copy
+  // was popular enough to make the cap, and went red in CI the day that deck left the
+  // feed, with no change to the code it guards. So: pick whichever archetype in the
+  // table actually shows a copy today, and require every copy it shows to be flagged.
+  {
+    const inTable = tableRows();
+    const isCopy = (x) => /-copy(-|$)/.test(x.deck.s);
+    const shownCopies = (g) => rollOrder(g).slice(0, EXP_CAP).filter(isCopy).map((x) => x.deck.s);
+    const withCopy = arch.filter((g) => inTable.has(g.name) && shownCopies(g).length)
+                         .sort((a, b) => shownCopies(b).length - shownCopies(a).length)[0];
+    const bl = withCopy && expansionOf(withCopy.name);
+    const br = bl && (bl.indexOf(divider) > -1 ? bl.slice(bl.indexOf(divider)) : bl);
+    const slugs = withCopy ? shownCopies(withCopy) : [];
+    ok('a fan-copy list in the roll is flagged as such',
+       !withCopy || (br != null && slugs.every((s) => {
+         const i = br.indexOf(`data-pick-list="${s}"`);
+         return i > -1 && br.lastIndexOf('fan copy', i) > br.lastIndexOf('</div>', i);
+       })),
+       withCopy ? `${slugs.length} of ${withCopy.rows.filter(isCopy).length} copies shown in ${withCopy.name}`
+                : 'no archetype in the table shows a fan copy inside the cap today');
+    A.S.expand = [multi.name];   // section 3 pins against the fixture's expansion
+  }
 
   // 3. Pinning a non-default list drives the panel and the plan.
   const def = multi.best.deck.s;
