@@ -26,6 +26,7 @@
 // half-built brew is not a deck.
 
 import { writeFile, readFile } from "node:fs/promises";
+import { pathToFileURL } from "node:url";
 
 const API = "https://api.dotgg.gg/cgfw/getdecks";
 // The API caps a page at 30 no matter what limit you ask for.
@@ -543,7 +544,14 @@ const main = async () => {
   if (noLegend) console.log(`\nWARNING: ${noLegend} decks have no identifiable Legend`);
 };
 
-main().catch((e) => {
-  console.error("\nbuild-decks failed:", e.message);
-  process.exit(1);
-});
+/* Exported so scripts/check.mjs can test the title parser against known shapes rather
+   than against whatever the feed happens to contain today. main() is guarded so the
+   import does not kick off a network build. */
+export { claimFromTitle };
+
+if (import.meta.url === pathToFileURL(process.argv[1] || "").href) {
+  main().catch((e) => {
+    console.error("\nbuild-decks failed:", e.message);
+    process.exit(1);
+  });
+}

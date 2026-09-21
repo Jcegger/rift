@@ -13,6 +13,7 @@
 //   node scripts/check.mjs
 
 import { readdirSync, readFileSync } from 'node:fs';
+import { claimFromTitle } from './build-decks.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -760,9 +761,32 @@ section('Claimed results');
      claimed.filter((d) => d.cp != null).length + ' with a placing');
   ok('a claim never carries a field size, since its event is not in the archive',
      claimed.every((d) => !d.ec));
-  // The parser reads titles, so a rename upstream silently empties it. Assert the yield.
-  ok('the title parser still reads a useful share of the field', !parsed || claimed.length >= 20,
-     `${claimed.length} parsed`);
+  /* The yield was asserted here as `claimed.length >= 20`, which cannot tell a broken
+     parser from a feed that stopped naming results in titles — only one of those is our
+     bug, and the count is upstream's to move. The parser is a pure function, so test it
+     on titles whose answers are known and report the live yield. Every row below is a
+     shape that was once parsed wrongly: a series word glued to a city, a result phrase
+     at the end rather than the middle, a separator before the event, and a single word
+     that is only an event because it is a place. */
+  const PARSE_CASES = [
+    ['Sivir Top 8 S4 Beijing City Challenge - copy', 8, 'S4 Beijing City Challenge'],
+    ["Kha'Zix Top 32 ChangshaRQ - copy",            32, 'Changsha RQ'],
+    ['Irelia Wuhan 26 Open Winner',                  1, 'Wuhan 26 Open'],
+    ['Vex - Shenyang Top 8 Deck - copy',             8, 'Shenyang'],
+    ['Akali SG 2026 Winner deck',                    1, 'SG 2026'],
+    ['Ahri Skirmish Winner - copy',                  1, null],
+    ["Kha'Zix - Voidreaver Deck",                 null, null],
+  ];
+  const champFixture = new Set(['sivir', "kha'zix", 'irelia', 'vex', 'akali', 'ahri']);
+  const parseMisses = PARSE_CASES.filter(([title, place, event]) => {
+    const got = claimFromTitle(title, champFixture);
+    if (place === null) return got !== null;
+    return !got || got.place !== place || (got.event ?? null) !== event;
+  }).map(([t]) => t);
+  ok('the title parser still reads every shape it has been taught',
+     parseMisses.length === 0,
+     parseMisses.length ? `${parseMisses.length} wrong: ${parseMisses.join(' | ')}`
+                        : `${PARSE_CASES.length} shapes, ${claimed.length} claims in today's feed`);
   ok('no claim was read out of a word that merely contains one',
      claimed.every((d) => /\b(top\s*\d|wins?\b|winner|\d(st|nd|rd|th)\s+place|undefeated|x-0)/i.test(d.h || '')),
      claimed.filter((d) => !/\b(top\s*\d|wins?\b|winner|\d(st|nd|rd|th)\s+place|undefeated|x-0)/i.test(d.h || ''))
