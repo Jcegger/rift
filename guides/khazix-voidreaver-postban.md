@@ -37,9 +37,9 @@ date: 2026-09-22
 
 **Hiding cannot be answered.** It does not open a chain (§811.1.c.2) and it is not playing a card (§811.1.c.1), so no counterspell, no Legion trigger, no response. The card simply becomes a facedown object your opponent can see the back of.
 
-**The trap that will cost you games.** A hidden permanent's play effect reads its battlefield **off the source**. Bounce the source in response to its own trigger and that read returns null, the target cannot be confirmed, and the instruction is **ignored** (§359.3.e.12, §359.3.f.2.a, and the recorded Kennen ruling). Evelynn is 2 Might, Tideturner is 2, Pyke is 3 — **all three sit inside Gust's range**, and Gust is in 14.5% of the archive. §5 is entirely about this.
+**The trap that will cost you games.** A hidden permanent's play effect reads its battlefield **off the source**. Bounce the source in response to its own trigger and that read returns null, the target cannot be confirmed, and the instruction is **ignored** (§359.3.e.12, §359.3.f.2.a, and the recorded Kennen ruling). Evelynn is 2 Might, Tideturner is 2, Pyke is 3 — **all three sit inside Gust's range**. But the answer is concentrated, not ambient: four archetypes hold a Reaction that can take the unit back, and seven hold none at all. §5 is entirely about this.
 
-**Your new best card against big-unit decks is Switcheroo, and it is not close.** Swapping the Might of your smallest unit and their largest is a swing of **twice the gap**. Simulated 2v2 it converts a clean win **93–97% of the time against every archetype measured** — including Jayce at 97%, where Punch First manages 49%. Punch First decays as their units grow; Switcheroo *scales with it*.
+**Your new best card against big-unit decks is Switcheroo, and it is not close.** Swapping the Might of your smallest unit and their largest is a swing of **twice the gap**. Simulated 2v2 it converts a clean win **94–98% of the time against every archetype measured** — including Jayce at 97%, where Punch First manages 46%. Punch First decays as their units grow; Switcheroo *scales with it*.
 
 **Your turn, in order:** activate the legend → buff → develop → **hide** → arrange the fight → *then* move or flip → hold up everything with Action, Reaction or a facedown card. Flipping Evelynn starts a combat, so it comes last, not first (§11).
 
@@ -47,7 +47,7 @@ date: 2026-09-22
 
 - **Body 10 pips, Chaos 9, three flexible, plus up to four `[A]` for hiding.** The Hidden tax is paid in *any* domain — that is what Pyke's Gold tokens are for (§6).
 - **36.3% of opening hands contain a Hidden card**, and you cannot hide on turn one because you do not control a battlefield yet.
-- **You still lose most untricked even fights** — 15–61% clean wins with no trick, and under half against eight of the eleven archetypes measured (§7).
+- **You still lose most untricked even fights** — 12–58% clean wins with no trick, and under half against eight of the eleven archetypes measured (§7).
 
 **The most common way to lose with this build:** hiding a card at a battlefield you then lose, and handing them a 2-for-0.
 
@@ -108,7 +108,7 @@ Jun's update does three separate things, and it is worth keeping them apart beca
 **Switcheroo ×1** `SFD-145` · 2E / 2 Chaos · Action, Hidden
 > *Swap the Might of two units at the same battlefield this turn.*
 
-These are not fringe cards. Across the 1,226-deck archive, **Tideturner is the third most-played Hidden card in the format at 19.0%**, Switcheroo the sixth at 11.3%; Evelynn is in 4.5% of decks and Pyke in 3.6%. **83% of all archived decks run at least one Hidden card.** Nor is this new to the archetype: **six of the fourteen archived Voidreaver lists already run at least one Hidden card** — two on Evelynn, two on Switcheroo, one on Tideturner, none on Pyke. What is unusual is running all four at once, and building the battlefield around them.
+These are not fringe cards. Across the 1,226-deck archive, **Tideturner is the third most-played Hidden card in the format at 19.0%**, Switcheroo the sixth at 11.3%; Evelynn is in 4.5% of decks and Pyke in 5.7%. **83% of all archived decks run at least one Hidden card.** Nor is this new to the archetype: **six of the fourteen archived Voidreaver lists already run at least one Hidden card** — two on Evelynn, two on Switcheroo, one on Tideturner, and one each on Edge of Night, Tornado Warrior and Bone Skewer. None on Pyke. What is unusual is running all four at once, and building the battlefield around them.
 
 ### The battlefield swap
 
@@ -117,7 +117,7 @@ These are not fringe cards. Across the 1,226-deck archive, **Tideturner is the t
 > **Forbidding Waste** `UNL-210` — *While a unit here is defending alone, it has -2 `[M]`.*
 > **Star Spring** `UNL-215` — *The first time a player plays a non-token unit here each turn, they may move another unit they control here to its base.*
 
-Forbidding Waste was a weapon against an isolated defender and a liability whenever the lone defender was yours. Star Spring is a **free copy of your legend's two-XP walk-home ability**, once per turn, triggered by exactly the thing you now do every turn: play a unit at that battlefield. It is in 6 of the 14 archived Voidreaver lists (43%), second only to Forbidding Waste at 9 — so the archetype is already split on exactly this choice.
+Forbidding Waste was a weapon against an isolated defender and a liability whenever the lone defender was yours. Star Spring is a **free copy of your legend's two-XP walk-home ability**, once per turn, triggered by exactly the thing you now do every turn: play a unit at that battlefield. It is in 6 of the 14 archived Voidreaver lists (43%), behind Forbidding Waste and Monastery of Hirana, which tie at 9 — so the archetype is already split on exactly this choice.
 
 Two details that make it better than it reads. It has **no exhaustion requirement**, where the legend's ability does (*"move an **exhausted** friendly unit"*) — so Star Spring can rescue a ready unit the legend cannot touch. And the move it grants **is a move**, so it triggers *"when I move"* abilities: Traveling Merchant loots, Shadow Order Disciple can Burn for +1. It does **not** trigger Irresistible Faefolk, whose text is *"when I move **to a battlefield**"* and this is a move to base.
 
@@ -145,7 +145,9 @@ It is symmetric — your opponent gets their own first-time-each-turn trigger th
 
 Unchanged from the previous build, and still the first thing to have straight.
 
-> **466.3.** Determine the result of combat. A player holding a designation wins if they are the only player with units remaining at that battlefield. It is **No Result** if the attackers were recalled, if both players still have units there, or if neither does.
+> **466.3.a.** A Player has won a combat if they received either the attacker or defender designation and are the only Player that has units remaining at this battlefield during this step.
+>
+> **466.3.d.** There is "No Result" if units were recalled during step 3d of the Combat Cleanup, if both Players have units present during this task, or if neither player has units present during this task.
 
 Voidreaver reads *"When you win a combat, gain 1 XP."* So:
 
@@ -306,17 +308,17 @@ Four details.
 
 **The arithmetic.** Let your total be `M`, theirs be `T`, the unit of yours you swap be `m`, and theirs be `t`. After the swap your total is `M − m + t` and theirs is `T − t + m`, so the gap moves by **2 × (t − m)**. Swap your smallest into their largest and you get **twice the gap** in one card.
 
-That is why it behaves so differently from a pump. **Punch First's +5 is a constant; Switcheroo's swing grows with their units.** Against Jayce, whose units average 5.42 Might against your 3.04, swapping a 1-Might Faefolk for a 7-Might unit is a **12-point** swing.
+That is why it behaves so differently from a pump. **Punch First's +5 is a constant; Switcheroo's swing grows with their units.** Against Jayce, whose units average 5.64 Might against your 3.04, swapping a 1-Might Faefolk for a 7-Might unit is a **12-point** swing.
 
 Simulated 2v2 against real archetype Might distributions (method in §7):
 
 | | Kennen | Master Yi | Azir | Jayce | Rengar | Rek'Sai |
 |---|---|---|---|---|---|---|
-| no trick | 39% | 46% | 27% | **15%** | 39% | 55% |
-| + Punch First | 91% | 91% | 86% | **49%** | 88% | 97% |
-| + **Switcheroo** | **96%** | **96%** | **94%** | **97%** | **96%** | **95%** |
+| no trick | 38% | 43% | 24% | **12%** | 38% | 54% |
+| + Punch First | 89% | 89% | 86% | **46%** | 88% | 97% |
+| + **Switcheroo** | **97%** | **98%** | **94%** | **97%** | **98%** | **98%** |
 
-**Read the Jayce column.** Punch First gets you to 49%; Switcheroo gets you to 97%. The previous dossier's conclusion — *"against big-unit decks the lever is removal, not Might"* — was right about Punch First and is no longer the whole story. **Switcheroo is the answer to the two matchups this deck could not previously fight.**
+**Read the Jayce column.** Punch First gets you to 46%; Switcheroo gets you to 97%. The previous dossier's conclusion — *"against big-unit decks the lever is removal, not Might"* — was right about Punch First and is no longer the whole story. **Switcheroo is the answer to the two matchups this deck could not previously fight.**
 
 Three things to watch.
 
@@ -336,8 +338,11 @@ The repo carries the ruling: [*A Hidden permanent removed in response to its own
 
 **The general shape.** A triggered ability normally outlives its source — the ability on the chain is not the card, and its instructions still execute (§204.3.a, §359.3.f.3). What does *not* survive is **information read off the source**:
 
-> **359.3.e.12.** If an instruction checks information about a card whose location, zone, or status has changed such that that information is no longer available, the check returns null and everything computed from it is ignored.
+> **359.3.e.12.** If the spell checks information about a target that is no longer legal or a card or permanent whose location, zone, or status has changed such that that information is no longer available, that check returns "null" and all calculations based on it are ignored. Examples: […] A unit that is no longer on the board has no location, is neither exhausted nor readied, etc.
+>
 > **359.3.f.2.a.** When a referent checks information on execution of the instruction related to a target, and that target isn't legal, that referent will return "null" and all instructions related to it will be ignored.
+
+**One honest wrinkle about that first quote.** §359.3 is headed *"A Spell lingers on the Chain"*, and §359.3.e.12 says "the spell". Evelynn's play effect is a **triggered ability**, not a spell. The recorded ruling applies §359.3.e.12 to a triggered ability anyway, and §359.3.f — the Referents block, which is written for "abilities" — reaches the same answer by a cleaner route. §359.3.f.2's own worked example is this play, with different cards: a Yasuo attack trigger, the opponent reacting with a hidden Fight or Flight to move Yasuo to base, and *"when the attack trigger resolves, 'here' is no longer the battlefield where combat is ongoing and the attack trigger mistargets."* **Cite §359.3.f.2 first if you are asked to show your working; it is the rule that is actually about abilities.**
 
 **Applied to your cards.**
 
@@ -353,17 +358,37 @@ There is a genuine tension in the rules here worth knowing, because it is the ki
 
 > **Gust** `OGN-169` — *[Reaction] Return a unit at a battlefield with 3 `[M]` or less to its owner's hand.*
 
-**Evelynn is 2 Might. Tideturner is 2. Pyke is 3.** All three are inside Gust's range, and Gust is in **14.5%** of the archive. **Star-Crossed** (24.5%) and **Retreat** (10.6%) are Reaction-speed too; **Rebuke** (8.2%) is Action-speed and has no Might cap. **50% of all archived decks carry at least one bounce effect and 38% carry one at Reaction speed.**
+**Evelynn is 2 Might. Tideturner is 2. Pyke is 3.** All three are inside Gust's range.
+
+**But be precise about what can actually do this to you, because most "bounce" in the format cannot.** Of the fourteen cards in the pool that return a unit to hand, **six can only return a *friendly* unit** — Retreat, Pack of Wonders, Grim Apothecary, Bloodharbor Ripper, Mesmerize and Emperor's Dais are self-bounce for value, and **none of them can touch your flip.** What is left that can take *your* unit off the board mid-trigger:
+
+| | | |
+|---|---|---|
+| **Gust** | 1E · **Reaction** · ≤3 Might | **14.5%** of the archive |
+| **Star-Crossed** | 3E / 1 Chaos · **Reaction** · one of each | **24.5%** |
+| **Rebuke** | 2E / 2 Chaos · Action · no cap | 8.2% |
+| Whirlwind, Zaunite Bouncer, Beast Below, Ocean Drake | Main Phase | under 1% combined |
+| Windsinger | Hidden, so Reaction speed when flipped | 0.7% |
+
+**So: 29.9% of archived decks carry anything that can return one of your units to hand, and 26.8% carry one at Reaction speed — and at Reaction speed it is two cards, Gust and Star-Crossed.**
+
+**And it is concentrated, which is the part that changes how you play.** The threat is not spread thinly across the field; it lives in four archetypes and is absent from the rest:
+
+| holds a Reaction that can take your unit | holds none |
+|---|---|
+| **Diana 100%** · **Irelia 90%** · **Kennen 78%** · **Vex 74%** | **Akali · Master Yi · Rengar · Azir · Fiora · Jayce · Rek'Sai — 0%** |
+
+Against seven of the eleven archetypes on the matchup table, **the trap in this section cannot happen to you**, and Evelynn is simply a three-XP card. Against the other four, assume the Reaction is up until you have seen it spent. Master Yi is the one worth naming: 85% of his lists run a bounce effect, **all of it friendly-only**, so the card you see is not the card that beats you.
 
 And Hidden makes it worse, for the reason the recorded ruling spells out: **from hand you could have played Evelynn to your base, where Gust cannot reach her. From Hidden you cannot.** §811.1.d.1 makes the battlefield compulsory. *Hidden removes the safe option.*
 
 **What to do about it.**
 
-1. **Count their open runes before you flip.** A flip is free, which makes it feel free to do at a bad moment. It is not: the card is the cost.
+1. **First, check whether they are even one of the four.** Against Akali, Yi, Rengar, Azir, Fiora, Jayce or Rek'Sai, flip freely — nothing in their archived lists answers it. Against Diana, Irelia, Kennen or Vex, count their open runes before you flip. A flip is free, which makes it feel free to do at a bad moment. It is not: the card is the cost.
 2. **Flip into a tapped-out opponent**, or after they have spent their Reaction on something else. Your Void Assaults and your standard moves are the bait.
 3. **Prefer their turn for Pyke and Tideturner** — Pyke has nothing to lose, and Tideturner mid-combat is usually flipped when they have already committed.
 4. **Prefer your own Main Phase for Evelynn**, because you have no choice; her trigger requires it. Accept that she is the most exposed of the four and hide her when you have a reason, not because the slot is empty.
-5. **Board in Hard Bargain** against the decks that hold up Gust. It is the one card that protects the flip, and §14 covers when it is worth the slot.
+5. **Board in Hard Bargain** against Diana, Irelia, Kennen and Vex, and against nobody else. It is the one card that protects the flip, and §14 covers when it is worth the slot.
 
 ---
 
@@ -423,35 +448,35 @@ Kill all of theirs needs your total ≥ theirs; they kill all of yours if their 
 
 ### The table
 
-Monte Carlo, 200,000 trials, **two of your units against two of theirs**, drawn from your actual unit Might distribution (24 units, mean 3.04, median 3) and from each archetype's real distribution in `data/decks.json`.
+Monte Carlo, 200,000 trials, **two of your units against two of theirs**, drawn from your actual unit Might distribution (24 units, mean 3.04, median 3) and from each archetype's real distribution in `data/decks.json`, joined so that alternate printings of the same card collapse together (see **Sources and method**).
 
 | | no trick | + Punch First | **+ Switcheroo** | + Vex stun | isolated 2v1 | isolated + Kha'Zix |
 |---|---|---|---|---|---|---|
-| Kennen | 39% | 91% | **96%** | 53% | 82% | 95% |
-| Akali | 43% | 91% | **96%** | 56% | 83% | 95% |
-| Master Yi | 46% | 91% | **96%** | 58% | 82% | 95% |
-| Irelia | 61% | 98% | 95% | 74% | 92% | 99% |
-| Rengar | 39% | 88% | **96%** | 51% | 81% | 94% |
-| **Azir** | **27%** | 86% | **94%** | 37% | 76% | 96% |
-| Fiora | 38% | 92% | **95%** | 52% | 84% | 96% |
-| **Jayce** | **15%** | **49%** | **97%** | 21% | 56% | 71% |
-| Rek'Sai | 55% | 97% | 95% | 68% | 89% | 98% |
-| Vex (Gloomist) | 55% | 94% | **96%** | 67% | 87% | 96% |
-| Diana | 39% | 92% | 93% | 53% | 83% | 96% |
+| Kennen | 38% | 89% | **97%** | 51% | 82% | 95% |
+| Akali | 40% | 91% | **97%** | 53% | 82% | 96% |
+| Master Yi | 43% | 89% | **98%** | 54% | 80% | 94% |
+| Irelia | 58% | 98% | 97% | 71% | 91% | 99% |
+| Rengar | 38% | 88% | **98%** | 50% | 81% | 94% |
+| **Azir** | **24%** | 86% | **94%** | 34% | 75% | 96% |
+| Fiora | 35% | 90% | **97%** | 49% | 82% | 95% |
+| **Jayce** | **12%** | **46%** | **97%** | 18% | 53% | 69% |
+| Rek'Sai | 54% | 97% | **98%** | 67% | 88% | 98% |
+| Vex (Gloomist) | 53% | 93% | **98%** | 65% | 86% | 96% |
+| Diana | 39% | 93% | **97%** | 53% | 84% | 96% |
 
 **Five things follow.**
 
-**You still lose most untricked even fights.** 15–61%, and under 50% against eight of the eleven. Patience is arithmetic, not temperament.
+**You still lose most untricked even fights.** 12–58%, and under 50% against eight of the eleven. Patience is arithmetic, not temperament.
 
-**Punch First is still the workhorse and still decays.** +52 points against Kennen, +34 against Jayce, because +5 stops mattering once their average body is bigger than your best one.
+**Punch First is still the workhorse and still decays.** +51 points against Kennen, +34 against Jayce, because +5 stops mattering once their average body is bigger than your best one.
 
-**Switcheroo does not decay.** It is 93–97% across the board and it is *best* where Punch First is worst. One copy is not enough of a card this good; §15 argues for the second.
+**Switcheroo does not decay.** It is 94–98% across the board and it is *best* where Punch First is worst. One copy is not enough of a card this good; §15 argues for the second.
 
-**Isolation is still the plan.** Their one unit alone against two of yours is **76–92%**, and **94–99%** once Kha'Zix adds his +2 — against everyone except Jayce, who sits at 56% and 71%. That is what Void Assault ×3, Irresistible Faefolk ×3 and now Evelynn buy — **seven cards that choose where the fight happens**, up from six.
+**Isolation is still the plan.** Their one unit alone against two of yours is **75–91%**, and **94–99%** once Kha'Zix adds his +2 — against everyone except Jayce, who sits at 53% and 69%. That is what Void Assault ×3, Irresistible Faefolk ×3 and now Evelynn buy — **seven cards that choose where the fight happens**, up from six.
 
-**Azir and Jayce remain the hard boards** at 27% and 15% bare, and Jayce is the one archetype where even the isolation line only reaches 71%. Against Jayce, Switcheroo is not a nice-to-have, it is the plan.
+**Azir and Jayce remain the hard boards** at 24% and 12% bare, and Jayce is the one archetype where even the isolation line only reaches 69%. Against Jayce, Switcheroo is not a nice-to-have, it is the plan.
 
-**One caveat on the Azir row.** Those 37 decks contribute only 97 units between them — Azir lists are thin on bodies by construction. The distribution is real but the sample behind it is small, and I would not bet a sideboard slot on the second decimal.
+**One caveat on the Azir row.** Those 37 decks contribute only 124 units between them — Azir lists are thin on bodies by construction. The distribution is real but the sample behind it is small, and I would not bet a sideboard slot on the second decimal.
 
 ---
 
@@ -668,75 +693,135 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 
 ## 13. Matchups
 
-**Share figures are actual counts** from the 1,226-deck archive rebuilt 20 September, covering 22 July to 20 September. Two caveats you should carry into every line below.
+**Share figures are actual counts** from the 1,226-deck archive rebuilt 20 September, covering 22 July to 20 September. Two caveats you should carry into every card below.
 
 **The post-ban field is four days old.** Only 506 of those 1,226 decks are dated 18 September or later, and 466 of those are from two days. The post-ban ordering is directionally interesting and statistically thin — Vex/Gloomist leads it at 6.3% having been eighth in Tier 2 the week before. I report both windows and lean on the full one.
 
 **riftbound.gg's Vendetta week 4 tier list (20 September) puts Kha'Zix Voidreaver at Tier 3, rank 4** — sixteenth of the forty-nine ranked archetypes. That is the honest starting position, and the archive agrees: **14 Voidreaver decks out of 1,226, four of them tournament-vouched.** The archetype has ranged between 6 and 18 decks on every day the history file records since 27 August, with no trend in either direction. This is an off-meta deck and the update does not change that.
 
-### Kennen, Heart of the Tempest — Tier 1, 7.2% overall / 4.2% post-ban
+### How to read a card
 
-Their core: Lightning Rush, Ride the Wind, Traveling Merchant, Star-Crossed, Kennen Storm of Shuriken. A self-milling tempo deck that plays from its trash much as you do, goes wide, and is happy to trade — which costs you XP and costs them nothing.
+**Flip safety** is the line that is new, and it is the one worth checking first. It is the share of that archetype's archived lists holding a card that can return *your* unit to hand at Reaction speed — the §5 trap. Where it reads **0%**, nothing in their lists answers a flip and you may hide and flip on curve without thinking about it. Everything else on the card assumes you already did that check.
 
-**Clean win 39% bare, 91% with Punch First, 96% with Switcheroo.** Mean unit Might 3.26.
+---
 
-They lost more to the ban than you did (75% of Kennen lists in the archive ran a now-banned card, against 36% of Voidreaver's) but kept Lightning Rush, so their digging went from six cards to three rather than to zero.
+### Kennen, Heart of the Tempest — Tier 1.1 · 7.2% overall / 4.2% post-ban · mean Might 3.35
 
-**The Hidden consideration:** Kennen lists carry Star-Crossed at high rates and **Kennen, Keeper of Balance is itself a Hidden card in 5.4% of the field.** Assume a Reaction is up. Flip Pyke, never Evelynn, into open Chaos.
+**Verdict: a grindy, even fight you win by refusing the trade. Flip carefully.**
 
-### Master Yi, Wuju Bladesman — Tier 1, 9.0% overall, the most-played legend in the archive
+**They do:** self-milling tempo that plays from its trash much as you do. Lightning Rush 98%, Kennen Storm of Shuriken 84%, Minefield 83%, Ride the Wind 82%, Fizz 82%, Rhasa the Sunderer 81%. They go wide and they are happy to trade — which costs you XP and costs them nothing.
+**You do:** 38% bare, 89% with Punch First, 97% with Switcheroo. Their 3.35 mean is small enough that +5 is decisive, so Punch First is your main lever here, not the swap.
+**Flip safety: 78%** — Gust, Star-Crossed and Rebuke all appear. Assume a Reaction is up. **Flip Pyke freely, Evelynn only into a tapped-out board.** Their own Kennen, Keeper of Balance is a Hidden card in 6.6% of the field, so expect them to know the flip game from the other side.
+**Ban note:** they lost more than you did — 75% of their archived lists ran a now-banned card, against 36% of yours — but kept Lightning Rush, so their digging went from six cards to three rather than to zero.
+**Board:** +2 Gust, +1 Hard Bargain. −1 Decree of Strength (Order/Chaos — structurally dead).
 
-110 decks, 90 of them tournament-vouched. Cheap, wide, Calm/Body, and it lost almost nothing to the ban — 4% of its lists ran a banned card. Mean unit Might 2.97.
+### Akali, Rogue Assassin — Tier 1.2 · 4.3% overall / 4.0% post-ban · mean Might 3.18
 
-**Clean win 46% bare, 91% with Punch First, 82% isolated.** The best raw matchup of the Tier 1 decks for you, because their units are small enough that +5 is decisive.
+**Verdict: a fair fight, and a free one for your Hidden package.**
 
-**Plan:** this is the matchup where going wide beats going tall. Up from the Deep's Tentacles tax their assignment; Kinkou Initiate turns on trivially. Hide **Switcheroo** only if they have a single large unit — against a genuinely flat board it is your worst Hidden card.
+**They do:** Fury/Calm interaction — Discipline 96%, Shuriken Flip 96%, Defy 94%, Stellacorn Herder 89%, Zhonya's Hourglass 77%. The danger is counterspells and combat tricks, not removal.
+**You do:** 40% bare, 91% with Punch First, 97% with Switcheroo. **Defy at 94% is the number to respect** — it counters a spell costing no more than 4 Energy and no more than `[A]`, which means **Punch First at 2 Power is permanently out of its reach and most of the rest of your deck is not** (§206).
+**Flip safety: 0%.** Nothing in 53 archived lists returns your unit to hand. Hide and flip on curve.
+**Ban note:** zero of their 53 lists ran a banned card, so expect this share to hold or rise.
+**Board:** +1 Hard Bargain (against Defy, not against bounce). −1 Decree (Fury/Calm).
 
-### Akali, Rogue Assassin — Tier 1, 4.3% overall / 4.0% post-ban
+### Master Yi, Wuju Bladesman — Tier 1.3 · 9.0% overall / 4.0% post-ban · mean Might 3.12
 
-Fury/Calm, mean Might 3.08, and **zero** of its 53 archived lists ran a banned card — so expect the share to hold or rise. **43% bare, 91% with Punch First, 96% with Switcheroo.**
+**Verdict: the most-played deck in the archive and your best Tier 1 matchup. Go wide, not tall.**
 
-### Irelia, Blade Dancer — Tier 1, 5.6% overall
+**They do:** cheap, wide, Calm/Body. Charm 100%, Defy 100%, Discipline 99%, Lonely Poro 98%, Zhonya's Hourglass 97%, Punch First 97% — they play your own best spell. 110 decks, 90 of them tournament-vouched.
+**You do:** 43% bare, 89% with Punch First. Their bodies are small enough that +5 decides fights. Up from the Deep's Tentacles tax their damage assignment under the no-overkill rule; Kinkou Initiate turns on trivially.
+**Flip safety: 0%** — and this is the one to know cold. **85% of their lists run a bounce effect and all of it is friendly-only** (Retreat, Pack of Wonders and friends, played for value and to re-channel a rune). The card you see cannot touch your flip.
+**Switcheroo is your worst Hidden card here.** Against a genuinely flat board the swap has nothing to swap into. Hide it only once they have committed a single large unit.
+**Board:** −1 Switcheroo, −1 Decree (Calm/Body). +1 Ravenbloom Prefect if you see Zhonya's early.
 
-Mean Might **2.36**, the smallest board you fight regularly, and **61% bare** — your best matchup on this table. Punch First takes it to 98%. Irelia is Calm/Chaos and was hit hard by the ban: 68% of her archived lists ran a banned card.
+### Irelia, Blade Dancer — Tier 1.4 · 5.6% overall / 3.6% post-ban · mean Might 2.49
 
-**Note the one row where Switcheroo is worse than Punch First** — 95% against 98%. Against genuinely small boards the swap has nothing to swap into. Board it out, keep the pumps.
+**Verdict: your best matchup on the table, and your worst one for flipping.**
 
-### Azir, Emperor of the Sands — Tier 2, 3.0% overall / 3.0% post-ban
+**They do:** the smallest board you fight regularly — 2.49 mean. Defy 100%, Discipline 99%, Irelia Fervent 97%, Boots of Swiftness 97%, Defiant Dance 97%, Abandoned Hall 97%.
+**You do:** **58% bare, 98% with Punch First** — the only archetype you beat more often than not with no trick at all. Keep the pumps.
+**Note the one row where Switcheroo is worse than Punch First:** 97% against 98%. Against genuinely small boards the swap has nothing to swap into. **Board it out.**
+**Flip safety: 90%** — the second-highest on this page. Gust and Star-Crossed are near-universal. Hide Pyke, not Evelynn, unless they are tapped out.
+**Ban note:** hit hard — 68% of their archived lists ran a banned card.
+**Board:** +1 Hard Bargain, +2 Gust. −1 Switcheroo, −1 Decree (Calm/Chaos).
 
-**27% bare.** Their units average 3.68 Might, median 4, they run very few of them, and they are among the hardest of the common boards to fight straight. Punch First reaches 86%; **Switcheroo reaches 94%.**
+### Rengar, Pridestalker — Tier 2.1 · 2.4% overall / 3.6% post-ban · mean Might 3.35
 
-**Plan:** do not enter a fight you have not already rigged. Isolation gets you to 76% and isolation-plus-Kha'Zix to 96%. Hide Switcheroo at the battlefield you intend to defend.
+**Verdict: a rising, even fight. Flip freely.**
 
-### Jayce, Defender of Tomorrow — Tier 2, 3.7% overall / 3.2% post-ban
+**They do:** Rengar Trophy Hunter 93% (the same card you run two of), Thrill of the Hunt 90%, Inferna 87%, Nidalee Cat Form 83%, Punch First 80%, Irresistible Faefolk 77% — they contest the same board you do, with the same tools.
+**You do:** 38% bare, 88% with Punch First, 98% with Switcheroo.
+**Flip safety: 0%.** 77% of their lists run a bounce effect — **Thrill of the Hunt, which banishes a *friendly* unit and replays it to any battlefield, ignoring its cost.** That is a threat to your combat maths, not to your flip: it puts a Rengar into a fight at Reaction speed for free, exactly the way your Tideturner does. Count it before you commit to a fight you think you have won.
+**Ban note:** effectively untouched (3%), and they are 2.4% of the full archive against 3.6% of the post-ban window — expect more of them.
+**Board:** +1 Switcheroo (their Rengar and Inferna are the single large threats it is for). −1 Decree (Fury/Body).
 
-Mean Might **5.42**, median 5 — the biggest board you will actually have to fight, from only 308 units across 45 lists. **15% bare, 49% with Punch First, 56% isolated, 71% isolated-plus-Kha'Zix.** Every one of those is a losing or coin-flip number.
+### Azir, Emperor of the Sands — Tier 2.2 · 3.0% overall / 3.0% post-ban · mean Might 3.78, median 4
 
-**And 97% with Switcheroo.** Swapping your 1-Might Faefolk into a 7-Might Jayce unit is a twelve-point swing that no other card in your deck approximates.
+**Verdict: do not enter a fight you have not already rigged.**
 
-**Plan:** this is the matchup the update fixed. Board in the **second Switcheroo**. Keep Faefolk — their small bodies exist to be swapped up. Do not try to win on Might; win on the swap and on Rampage. **Jayce is Mind/Body**, which makes him one of only two archetypes on this page that Decree of Strength can touch — bring both copies.
+**They do:** Azir Sovereign 100%, Arise! 100%, Defy 97%, Hidden Blade 95%, Brutalizer 95%, Eye of the Herald 95%. Equipment-heavy, few bodies, big ones.
+**You do:** **24% bare** — your second-worst straight fight. Punch First reaches 86%; **Switcheroo reaches 94%.** Isolation gets you to 75%, and isolation-plus-Kha'Zix to **96%** — the largest gap on the page between fighting fair and fighting rigged.
+**Flip safety: 0%.** Hide Switcheroo at the battlefield you intend to defend and take your time.
+**Sample caveat:** those 37 decks contribute only 124 units between them — Azir lists are thin on bodies by construction. The distribution is real but the sample behind it is small.
+**Board:** +1 Switcheroo, +1 Rebuke, +1 Ravenbloom Prefect (Equipment). −1 Decree (Calm/Order).
 
-### Rengar, Pridestalker — Tier 2, 3.6% post-ban
+### Fiora, Grand Duelist — Tier 2.3 · 3.2% overall / 4.3% post-ban · mean Might 3.40
 
-Mean Might 3.33 and effectively untouched by the ban (3% exposure), so expect more of them — they are 2.4% of the full archive but 3.6% of the post-ban window. **39% bare, 88% with Punch First, 96% with Switcheroo.**
+**Verdict: a standard midrange fight decided by whether you can see the trick.**
 
-### Rek'Sai, Void Burrower — Tier 2, 4.9% overall
+**They do:** Riposte 100%, Punch First 97%, Pit Rookie 92%, Sunken Temple 90%, First Mate 87%, Rampage 79%. **Riposte is the card to play around** — 2E / 2 Chaos, Reaction, counters a spell *and* gives their unit +Might equal to that spell's Energy cost. Walking a Punch First into it swings the fight both ways at once.
+**You do:** 35% bare, 90% with Punch First, 97% with Switcheroo.
+**Flip safety: 0%.** Nothing in 39 lists touches your flip.
+**Board:** −1 Decree (Body/Order).
 
-Mean Might 2.63, and untouched by the ban. **55% bare, 97% with Punch First** — a good matchup on the numbers. Their Deathknell units *want* to die, so clean wins are harder to convert than the table implies: killing their board is not the same as beating them.
+### Jayce, Defender of Tomorrow — Tier 2.5 · 3.7% overall / 3.2% post-ban · mean Might 5.64, median 5
 
-**The one battlefield note in this dossier:** Rek'Sai wants units returning home, and **Star Spring's trigger is symmetric.** Against Rek'Sai, bring Zaun Warrens or Sandswept Tomb instead.
+**Verdict: the matchup the update fixed. Win on the swap, not on Might.**
 
-### Vex, Gloomist — Tier 2, 6.3% of the post-ban window
+**They do:** the biggest board you will actually have to fight — 5.64 mean from only 354 units across 45 lists. Platewyrm Egg 84%, Bellows Breath 82%, Dazzling Aurora 76%, **Elder Dragon 73%**, Garbage Grabber 73%, Sabotage 73%.
+**You do:** **12% bare, 46% with Punch First, 53% isolated, 69% isolated-plus-Kha'Zix.** Every one of those is a losing or coin-flip number. **And 97% with Switcheroo.** Swapping your 1-Might Faefolk into a 7-Might unit is a twelve-point swing that no other card in your deck approximates. Mulligan toward it.
+**Keep Faefolk** — their small bodies exist to be swapped up.
+**Watch for Elder Dragon** at 73% of their lists: *"any amount of your damage is enough to kill enemy units"* switches off minimum lethal, and with it every line in §7 that depends on cheap bodies taxing their assignment. Tentacles stop absorbing. Answer the enabler by returning it to hand — that is what Rebuke is in the board for.
+**Flip safety: 0%.** Hide and flip freely; they have no answer.
+**Board:** **+1 Switcheroo, +1 Rebuke, +2 Decree of Strength** — Jayce is **Mind/Body**, one of only two archetypes on this page Decree can touch, and it is the worst board in §7. −2 Punch First.
 
-The archetype that jumped hardest after the ban — 3.2% of the full archive, 6.3% of the four days since. Read that gain carefully: only 7 of its 39 archived lists are tournament-vouched. Calm/Chaos, mean Might 2.65. **55% bare, 94% with Punch First.** You play two Vex, Apathetic yourself, so the mirror on that card is worth knowing: Deflect taxes *opponents'* spells, so your Rampage into their Vex costs `[A]` more.
+### Diana, Scorn of the Moon — Tier 2.6 · 4.4% overall / 2.8% post-ban · mean Might 3.22
 
-### Fiora, Grand Duelist — Tier 2, 4.3% post-ban
+**Verdict: the hardest deck in the format to flip against. Play the Hidden package as though you did not have it.**
 
-Body/Order, mean Might 3.27. **38% bare, 92% with Punch First, 95% with Switcheroo.** A standard midrange fight decided by whether you can see the trick.
+**They do:** Stupefy 100%, Ravenbloom Student 100%, Diana Lunari 100%, **Gust 98%**, Ride the Wind 98%, Moonfall 98%, **Tideturner 96%** — they run your Hidden card, and they run the answer to it.
+**You do:** 39% bare, 93% with Punch First, 97% with Switcheroo. The combat maths is ordinary; the sequencing is not.
+**Flip safety: 100%.** Every single archived Diana list holds a Reaction that can take your unit back mid-trigger. **Do not flip Evelynn into open Chaos, ever.** Pyke and Tideturner are fine — Pyke has no play effect to lose, and Tideturner is usually flipped after they have already committed.
+**Ban note:** 81% of their lists ran a banned card, the heaviest exposure on this page, so treat the 4.4% share as a ceiling rather than a forecast.
+**Board:** +1 Hard Bargain, **+2 Decree of Strength** (Mind/Chaos — the other archetype it is live against). −1 Acceptable Losses.
 
-### What you are least built for
+### Rek'Sai, Void Burrower — Tier 2.7 · 4.9% overall / 2.6% post-ban · mean Might 2.66
 
-The archive still contains ramp lists whose average unit dwarfs anything here. Against a board where minimum lethal is switched off — Elder Dragon's *"any amount of your damage is enough to kill enemy units"* — every line in §7 that depends on cheap bodies taxing their assignment is false. Tentacles stop absorbing, Faefolk stops being a body, and Switcheroo is the only card that still does its job. Answer the enabler by **returning it to hand**, which is what Rebuke is in the board for.
+**Verdict: good on the numbers, worse in practice. Their units want to die.**
+
+**They do:** The Candlelit Sanctum 98%, Rek'Sai Breacher 98%, Void Rush 98%, Cull the Weak 97%, Carrion Dredger 97%, Cleave 95%. Deathknell bodies that pay them for dying.
+**You do:** 54% bare, 97% with Punch First — a good matchup on the numbers. But **killing their board is not the same as beating them**, so clean wins convert worse than the table implies. Prioritise holding battlefields over trading.
+**Flip safety: 0%.**
+**The one battlefield note in this dossier:** Rek'Sai wants units returning home, and **Star Spring's trigger is symmetric** — it hands them the same free walk-home it hands you, into a deck built to use it. **Bring Zaun Warrens or Sandswept Tomb instead.**
+**Board:** −1 Decree (Fury/Order).
+
+### Vex, Gloomist — Tier 2.8 · 3.2% overall / **6.3% post-ban** · mean Might 2.75
+
+**Verdict: the archetype that jumped hardest after the ban. Treat the share with suspicion and the Reactions without.**
+
+**They do:** Vex Apathetic 100% (you play two yourself), Back Off 92%, Defy 85%, Mutated Mouser 79%, Discipline 67%, Star-Crossed 67%. Calm/Chaos, small bodies, lots of interaction.
+**You do:** 53% bare, 93% with Punch First, 98% with Switcheroo.
+**Read the share carefully:** 3.2% of the full archive against 6.3% of the four days since the ban, and **only 7 of its 39 archived lists are tournament-vouched.** That is a spike on thin evidence.
+**The Vex mirror:** Deflect taxes *opponents'* spells, so your Rampage into their Vex costs `[A]` more (§809). Yours does the same to them.
+**Flip safety: 74%** — Star-Crossed mostly. Flip Pyke, hold Evelynn.
+**Board:** +1 Hard Bargain. −1 Decree (Calm/Chaos).
+
+---
+
+### The one you are least built for, and it is not on the tier list
+
+The archive still contains ramp lists whose average unit dwarfs anything here. Against a board where minimum lethal is switched off — **Elder Dragon**'s *"any amount of your damage is enough to kill enemy units"* — every line in §7 that depends on cheap bodies taxing their assignment is false. Tentacles stop absorbing, Faefolk stops being a body, and **Switcheroo is the only card in your deck that still does its job.** Answer the enabler by returning it to hand, which is what **Rebuke** is in the board for. It shows up most often inside Jayce, at 73% of those lists.
 
 ---
 
@@ -768,7 +853,7 @@ The two it is live against are **Jayce (Mind/Body)** and **Diana (Mind/Chaos)** 
 
 ## 15. What I'd test
 
-**1. The second Switcheroo belongs in the main deck.** It is 93–97% across every archetype measured and it is the only card in the list that fixes Jayce and Azir. One copy in a 39-card library is in your opening hand 10.3% of the time and in your first nine cards 23% of the time — for the best card in the deck against your worst matchups, that is too rare. **Move the board copy main, over the second Sabotage**, and register the third copy in the board.
+**1. The second Switcheroo belongs in the main deck.** It is 94–98% across every archetype measured and it is the only card in the list that fixes Jayce and Azir. One copy in a 39-card library is in your opening hand 10.3% of the time and in your first nine cards 23% of the time — for the best card in the deck against your worst matchups, that is too rare. **Move the board copy main, over the second Sabotage**, and register the third copy in the board.
 
 **2. Traveling Merchant at one is too few.** The deck lost Stacked Deck, then lost two Merchants, and Fizz is not selection. Star Spring and Zaun Warrens both exist to trigger the Merchant, and at one copy those battlefields are doing less than they should. **Test Merchant 1 → 2, cutting the Ride the Wind.**
 
@@ -792,10 +877,14 @@ The two it is live against are **Jayce (Mind/Body)** and **Diana (Mind/Chaos)** 
 
 **Card text** is `data/cards.json` with `data/errata.json` applied on read (catalog 2026-09-20). Three cards in this list are errata'd and all three are named in §12.
 
+**"Flip safety" in §13 counts one specific thing**, because most of what reads as bounce in this format cannot touch you: the share of an archetype's archived lists holding a card that can return an **enemy** unit to hand at **Reaction** speed. Fourteen cards in the pool return a unit to hand; six of those are friendly-only and are excluded, which is why Retreat — 10.6% of the archive, and named as a threat in the previous draft of §5 — does not count. At Reaction speed the set is two cards, Gust and Star-Crossed.
+
 **The decklist** was read live from the app's Supabase state on 22 September 2026 via `scripts/rift deck "Kha'Zix Midrange"`, not from a cached copy. The list is complete against the collection: nothing to acquire.
 
-**Archetype data** — Might distributions, card adoption, bounce density, Hidden density — comes from `data/decks.json`: **1,226 decks over 2026-07-22 to 2026-09-20**, of which 720 are tournament-vouched and 506 fall after the 18 September bans. **Every archetype join in this dossier is keyed on the legend's name, not its collector number**, because alternate printings of a legend carry unrelated numbers — Heart of the Tempest is `VEN-155` *and* `VEN-197`, Voidreaver is `UNL-201` *and* `UNL-236`. A number-keyed join silently drops a third of Kennen's lists and a fifth of yours, and the first draft of this page was built that way before the counts were checked against `ln`. Upstream's archive is North American, online and Chinese-circuit; `data/events.json` records 1,375 events and **zero** of them resolve to decklists, so the archive is reliable for *composition* and weak for *share*. Tier placement is riftbound.gg's curated Vendetta week 4 list, scraped 2026-09-20.
+**Archetype data** — Might distributions, card adoption, flip-safety density, Hidden density — comes from `data/decks.json`: **1,226 decks over 2026-07-22 to 2026-09-20**, of which 720 are tournament-vouched and 506 fall after the 18 September bans. **Alternate printings are collapsed on both sides of every join in this dossier, and the reason is worth stating once.** A legend's alternate printing carries an unrelated collector number — Heart of the Tempest is `VEN-155` *and* `VEN-197`, Voidreaver is `UNL-201` *and* `UNL-236` — so deck-to-archetype is keyed on the legend's **name** (`ln`), not its number. A number-keyed join drops a third of Kennen's lists and a fifth of yours.
 
-**Simulations** are hypergeometric where a closed form exists and Monte Carlo at 200,000 trials otherwise. The combat model implements §465.2 and §466.3 directly: a clean win when your Might total strictly exceeds theirs, with stun removing a unit's damage contribution but not its Might for lethal purposes (§423.1.b–c). The Switcheroo column assumes optimal choice of which two units to swap. Your own Might distribution is the 24 units of this list weighted by copies (mean 3.04); theirs is each archetype's units in the archive weighted by copies. **The mulligan comparison in §10 uses one definition applied to both lists** — it does not reproduce the previous dossier's figure, which used a different keep rule, and the two are not comparable.
+**The same hazard applies one level down, to cards**, and the first two drafts of this page missed it there after fixing it for legends. 178 card names in the catalog carry more than one collector number, usually as a trailing-letter variant — Pyke, Returned is `UNL-145` *and* `UNL-145a`, Kennen, Keeper of Balance is `VEN-135` *and* `VEN-135a`. A strict number join drops those copies silently: it understated Pyke's adoption as 3.6% against a true 5.7%, and it left 209 Kennen cards, 182 Master Yi and 175 Vex unmatched, which pulled every archetype's mean Might down by 0.02 to 0.22. **Every figure on this page now resolves a deck's card codes to catalog *names* before counting**, which is also how `data/banned.json` models the same problem in its `printings` array. The correction moved the bare clean-win column down one to three points across §7 and changed no recommendation on the page. Upstream's archive is North American, online and Chinese-circuit; `data/events.json` records 1,375 events and **zero** of them resolve to decklists, so the archive is reliable for *composition* and weak for *share*. Tier placement is riftbound.gg's curated Vendetta week 4 list, scraped 2026-09-20.
+
+**Simulations** are hypergeometric where a closed form exists and Monte Carlo at 200,000 trials otherwise. The combat model implements §465.2 and §466.3 directly: a clean win when your Might total strictly exceeds theirs, with stun removing a unit's damage contribution but not its Might for lethal purposes (§423.1.b–c). The Switcheroo column assumes optimal choice of which two units to swap. The Vex-stun column takes the clean win as "you kill both of theirs *and* their reduced damage fails to kill both of yours", since a stunned unit still needs its full Might to die. Your own Might distribution is the 24 units of this list weighted by copies (mean 3.04); theirs is each archetype's units in the archive weighted by copies. **The mulligan comparison in §10 uses one definition applied to both lists** — it does not reproduce the previous dossier's figure, which used a different keep rule, and the two are not comparable.
 
 **What this dossier does not claim.** It does not claim the deck is now good. riftbound.gg has it at Tier 3, the archive has fourteen of it out of 1,226, and the archetype has not moved in a month. What the update changes is the shape of its bad matchups: Jayce and Azir went from unwinnable-on-Might to a single card, and the deck acquired a resource — the facedown slot — that costs a rune and pays a whole card. That is a real improvement and it is not a tier change. It also does not claim the Tideturner referent question in §5 is settled; the recorded ruling covers the identical shape for a different card, and a match that turns on it deserves a judge.
