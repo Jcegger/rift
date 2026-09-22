@@ -1,15 +1,17 @@
 ---
-title: Kha'Zix Voidreaver — Post-Ban Dossier
-subtitle: Riftbound, Vendetta season — after the 18 September bans
+title: Kha'Zix Voidreaver — Midrange Dossier
+subtitle: Riftbound, Vendetta season — Jun's midrange build, September update, with the Hidden package
 author: rift toolchain
-date: 2026-09-15
+date: 2026-09-22
 ---
 
 **Legend:** Voidreaver (Body/Chaos) · **Champion:** Kha'Zix, Mutating Horror
 **Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend = 56 · **Sideboard:** 10 of 10
-**Shuffled library:** 39 — the Champion starts outside the deck (rule 103.2.a.1)
-**Collection status:** 2 cards still to get, $12.12 gap
-**Built from:** Jun's own post-ban midrange list, 16 September — saved in the app as `Kha'Zix Midrange (Jun, post-ban)`
+**Shuffled library:** 39 — the Champion starts outside the deck (rule 103.2.a.1, 108.3.d)
+**Collection status:** complete, nothing to get
+**Built from:** Jun's September update to the midrange list — saved in the app as `Kha'Zix Midrange (Jun, post-ban)`, read live from the app's state on 22 September 2026
+
+*This file kept the `khazix-voidreaver-postban` slug so the links in the [aggro dossier](khazix-voidreaver-aggro.md) still resolve. Both Jun lists are post-ban now; this is the midrange one.*
 
 ---
 
@@ -17,35 +19,37 @@ date: 2026-09-15
 
 *Everything here is expanded below with the rule text behind it. This page is the part worth having at the table.*
 
-**The one rule that governs the deck.** Voidreaver pays XP only when you **win** a combat — meaning you are the *only* player with units left at that battlefield (rule 466.3.a). A mutual wipe, an even trade, or your attackers bouncing off survivors are all **No Result**, and No Result pays nothing. **An even trade is a failure here.**
+**What changed.** Four cards with **Hidden** came in — Evelynn, Entrancing; Pyke, Returned; Tideturner; and a main-deck Switcheroo — and **Forbidding Waste became Star Spring**. Onslaught is gone, Traveling Merchant fell 3 → 1, Up from the Deep 3 → 2, Zed 2 → 1, Kinkou Initiate 2 → 3. The sideboard traded Unyielding Spirit, Angler Beast and a Hard Bargain for **2 Decree of Strength and a Rebuke**. Full diff in §1.
 
-**What the ban took.** Stacked Deck was banned on 18 September. It was not just a consistency card — it was **the card that made singleton toolbox slots playable**. Take it away and every 1-of becomes a card you draw at random. This list keeps two singletons (Onslaught and Ride the Wind) and both are defended in §1 — but the *toolbox* singletons, the ones whose value needed you to find them on a particular turn, are gone.
+**The deck is now a Hidden deck, and that is a different deck.** Hiding is a cost you pay a turn early in exchange for a card that later costs nothing and can be played at Reaction speed. Four of your forty cards work that way. The whole of §3 and §4 is about doing it correctly, because doing it carelessly loses cards for free.
 
-**The number that shapes every decision.** Your opening hand is **4 cards** (rule 116) drawn from a **39-card** library, and you may swap at most **2** of them, once (117.1). You do not get to find things. Play accordingly.
+**The one rule that still governs everything.** Voidreaver pays XP only when you **win** a combat — you are the *only* player with units left at that battlefield (rule 466.3). A mutual wipe, an even trade, or attackers bouncing off survivors are all **No Result**, and No Result pays nothing. **An even trade is still a failure here.** The Hidden package does not change that; it changes how cheaply you can rig the fight.
 
-**What your legend can and cannot do.**
+**Five facts about Hidden you must have straight before you sleeve this.**
 
 | | |
 |---|---|
-| Gains XP | Every combat you win — **no limit per turn**, no cost, automatic |
-| Spends XP | **Once per turn** (it exhausts), and **only in your own Main Phase** |
-| 1 XP | Buff a unit: **permanent +1 Might**, max one buff per unit, ever |
-| 2 XP | Walk an exhausted unit home from a battlefield |
-| Never | Mid-combat, mid-showdown, or on their turn at all (rule 381) |
+| To hide | Your turn, **Open State**, pay `[A]`, at a battlefield **you already control** (§811.1.b) |
+| One per battlefield | The Facedown Zone holds **one card** (§107.3.b) |
+| When you can flip it | **The next turn**, not this one — and from then on it has **Reaction** and costs **0** (§811.1.b) |
+| Where the unit lands | **That battlefield.** No choice (§811.1.d.1) |
+| If you lose the battlefield | The card is **trashed and revealed** — it does not come back to hand (§107.3.d, §323.7, §421.4) |
 
-**Kha'Zix is free.** He starts in the Champion Zone and can be played from there as normal (108.3.d). You have him **every game, from turn one, with no draw required.** That is why one copy is correct and not an oversight.
+**Hiding cannot be answered.** It does not open a chain (§811.1.c.2) and it is not playing a card (§811.1.c.1), so no counterspell, no Legion trigger, no response. The card simply becomes a facedown object your opponent can see the back of.
 
-**You lose most even fights.** Against real archetype boards, two of your units versus two of theirs is a clean win **38–48% of the time with no trick.** Punch First takes that to **85–96%.** If you cannot see the trick, do not start the fight.
+**The trap that will cost you games.** A hidden permanent's play effect reads its battlefield **off the source**. Bounce the source in response to its own trigger and that read returns null, the target cannot be confirmed, and the instruction is **ignored** (§359.3.e.12, §359.3.f.2.a, and the recorded Kennen ruling). Evelynn is 2 Might, Tideturner is 2, Pyke is 3 — **all three sit inside Gust's range**, and Gust is in 14.5% of the archive. §5 is entirely about this.
 
-**Your turn, in order:** activate the legend → buff → develop → arrange the fight → *then* move → hold up everything with Action or Reaction on it. Moving is what starts combat, so it comes last (§12).
+**Your new best card against big-unit decks is Switcheroo, and it is not close.** Swapping the Might of your smallest unit and their largest is a swing of **twice the gap**. Simulated 2v2 it converts a clean win **93–97% of the time against every archetype measured** — including Jayce at 97%, where Punch First manages 49%. Punch First decays as their units grow; Switcheroo *scales with it*.
+
+**Your turn, in order:** activate the legend → buff → develop → **hide** → arrange the fight → *then* move or flip → hold up everything with Action, Reaction or a facedown card. Flipping Evelynn starts a combat, so it comes last, not first (§11).
 
 **Three numbers worth memorising.**
 
-- **Body Power is the scarce resource.** Weighted demand is Body 10 vs Chaos 9 on a 6/6 base, and Punch First ×3 is 6 of that 10.
-- **Punch First cannot be countered by Defy** — 2 Power puts it permanently out of range (rule 206). It is the one spell you can always commit into open Power.
-- **Six cards choose where the fight happens** (Void Assault ×3, Irresistible Faefolk ×3), and **half your opening hands contain none of them.**
+- **Body 10 pips, Chaos 9, three flexible, plus up to four `[A]` for hiding.** The Hidden tax is paid in *any* domain — that is what Pyke's Gold tokens are for (§6).
+- **36.3% of opening hands contain a Hidden card**, and you cannot hide on turn one because you do not control a battlefield yet.
+- **You still lose most untricked even fights** — 15–61% clean wins with no trick, and under half against eight of the eleven archetypes measured (§7).
 
-**The most common way to lose:** moving first and thinking second, into a fight you will merely survive.
+**The most common way to lose with this build:** hiding a card at a battlefield you then lose, and handing them a 2-for-0.
 
 ---
 
@@ -53,922 +57,745 @@ date: 2026-09-15
 
 Sorted by set number, the way you build it. **Kha'Zix counts toward the 40 but starts outside the shuffled pile**, so you sleeve 39 and set him next to the legend.
 
-| | Card | Number | Cost |
-|---|---|---|---|
-| 2 | Sabotage | OGN-156 | 1E / 1 Body |
-| 1 | Ride the Wind | OGN-173 | 2E / 1 Chaos · Action |
-| 3 | Traveling Merchant | OGN-185 | 2E · 2 Might |
-| 3 | Punch First | SFD-097 | 1E / 2 Body · Action |
-| 3 | Fizz, Trickster | SFD-140 | 3E / 1 Chaos · 3 Might |
-| 2 | Kinkou Initiate | UNL-097 | 3E · 3 Might |
-| 3 | Irresistible Faefolk | UNL-112 | 2E · 1 Might |
-| 2 | Rengar, Trophy Hunter | UNL-120 | 5E / 1 Body · 6 Might |
-| 2 | Star-Crossed | UNL-128 | 3E / 1 Chaos · Reaction |
-| **1** | **Kha'Zix, Mutating Horror** | **UNL-143** | **4E / 1 Chaos · 4 Might — Champion Zone** |
-| 2 | Vex, Apathetic | UNL-150 | 4E · 4 Might |
-| 3 | Void Assault | UNL-202 | 2E / 1 Power |
-| 1 | Onslaught | VEN-081 | 4E · Flow 4E |
-| 2 | Rampage | VEN-083 | 3E |
-| 3 | Shadow Order Disciple | VEN-095 | 2E · 2 Might |
-| 3 | Up from the Deep | VEN-100 | 3E · Flow 3E |
-| 2 | Tail-Cloaked Matriarch | VEN-104 | 4E · 4 Might |
-| 2 | Zed, Without a Sound | VEN-112 | 5E · 5 Might |
+| | Card | Number | Cost | Note |
+|---|---|---|---|---|
+| 2 | Sabotage | OGN-156 | 1E / 1 Body | |
+| 1 | Ride the Wind | OGN-173 | 2E / 1 Chaos · Action | |
+| 1 | Traveling Merchant | OGN-185 | 2E · 2 Might | **3 → 1** |
+| **1** | **Tideturner** | **OGN-199** | **2E · 2 Might · Hidden** | **new** |
+| 3 | Punch First | SFD-097 | 1E / 2 Body · Action | |
+| 3 | Fizz, Trickster | SFD-140 | 3E / 1 Chaos · 3 Might | |
+| **1** | **Switcheroo** | **SFD-145** | **2E / 2 Chaos · Action · Hidden** | **board → main** |
+| 3 | Kinkou Initiate | UNL-097 | 3E · 3 Might | **2 → 3** |
+| 3 | Irresistible Faefolk | UNL-112 | 2E · 1 Might | |
+| 2 | Rengar, Trophy Hunter | UNL-120 | 5E / 1 Body · 6 Might · Ambush | |
+| 2 | Star-Crossed | UNL-128 | 3E / 1 Chaos · Reaction | |
+| **1** | **Evelynn, Entrancing** | **UNL-141** | **2E · 2 Might · Hidden, Backline** | **new** |
+| **1** | **Kha'Zix, Mutating Horror** | **UNL-143** | **4E / 1 Chaos · 4 Might — Champion Zone** | |
+| **1** | **Pyke, Returned** | **UNL-145** | **3E · 3 Might · Hidden, Backline** | **new** |
+| 2 | Vex, Apathetic | UNL-150 | 4E · 4 Might · Deflect | |
+| 3 | Void Assault | UNL-202 | 2E / 1 Power | |
+| 2 | Rampage | VEN-083 | 3E (+1 Body optional) | |
+| 3 | Shadow Order Disciple | VEN-095 | 2E · 2 Might | |
+| 2 | Up from the Deep | VEN-100 | 3E · Flow 3E | **3 → 2** |
+| 2 | Tail-Cloaked Matriarch | VEN-104 | 4E · 4 Might · Empower 2E/1 Chaos | |
+| 1 | Zed, Without a Sound | VEN-112 | 5E · 5 Might | **2 → 1** |
 
 **Legend** Voidreaver `UNL-201` · **Runes** 6 Body `OGN-126` / 6 Chaos `OGN-166`
-**Battlefields** Zaun Warrens `OGN-298` · Forbidding Waste `UNL-210` · Sandswept Tomb `VEN-164`
+**Battlefields** Zaun Warrens `OGN-298` · **Star Spring `UNL-215`** *(replaces Forbidding Waste)* · Sandswept Tomb `VEN-164`
 
-**Sideboard** — 2 Gust `OGN-169` · 2 Hard Bargain `SFD-136` · 1 Unyielding Spirit `OGN-145` · 1 Sabotage `OGN-156` · 1 Acceptable Losses `OGN-179` · 1 Switcheroo `SFD-145` · 1 Angler Beast `UNL-132` · 1 Ravenbloom Prefect `VEN-102`
+**Sideboard** (10) — 2 Gust `OGN-169` · 1 Sabotage `OGN-156` · 1 Rebuke `OGN-172` *(new)* · 1 Acceptable Losses `OGN-179` · 1 Hard Bargain `SFD-136` *(2 → 1)* · 1 Switcheroo `SFD-145` · 2 Decree of Strength `VEN-085` *(new)* · 1 Ravenbloom Prefect `VEN-102`
 
-23 units / 17 spells. **Sabotage (2 + 1) sits exactly at the three-copy cap** across main deck and sideboard. Hard Bargain is 0 main + 2 board, so unlike the previous build you have a third copy available if you ever want it.
+**24 units / 16 spells.** Curve: 1E ×5, 2E ×14, 3E ×13, 4E ×5, 5E ×3 — mean 2.68 Energy, down from the previous build. **Sabotage sits at 2 main + 1 board, exactly at the three-copy cap** across the whole deck (§103.2.b); **Switcheroo is 1 main + 1 board**, two of a legal three.
 
 ---
 
-## 1. What the ban did, and to whom
+## 1. What changed, and why
 
-**Banned effective 2026-09-18:** Stacked Deck and Ekko, Recurrent, on top of the existing list.
+Jun's update does three separate things, and it is worth keeping them apart because only one of them is the interesting one.
 
-Stacked Deck read *"[Action] Look at the top 3 cards of your Main Deck. Put 1 into your hand and recycle the rest"* for 1 Energy and no Power. On a four-card opening hand that is enormous, and Riot's stated reason was that *"the consistency it provides is higher than we would like."*
+### The Hidden package — four cards in
 
-**It was a Chaos card, and that is the whole story of the new metagame.** Measured across the 424-deck archive:
+**Evelynn, Entrancing ×1** `UNL-141` · 2E · 2 Might · Hidden, Backline
+> *When you play me from face down on your turn, you may move an enemy unit at a different location to my battlefield.*
 
-| Domain | Decks running a now-banned card |
-|---|---|
-| **Chaos** | **59%** |
-| Mind | 20% |
-| Fury | 19% |
-| Body | 13% |
-| Calm | 9% |
-| Order | 9% |
+**Pyke, Returned ×1** `UNL-145` · 3E · 3 Might · Hidden, Backline
+> *Once each turn, when an enemy unit dies while I'm at a battlefield, play a Gold gear token exhausted. (It has "[Reaction][>] Kill this, `[E]`: [Add] `[A]`.")*
 
-By legend, against the five matchups that matter:
+**Tideturner ×1** `OGN-199` · 2E · 2 Might · Hidden — **errata'd**, current text:
+> *When you play me, you may choose a unit you control at another location. Move me to its location and it to my original location.*
 
-| Their legend | Domains | % of decks hit | avg copies |
+**Switcheroo ×1** `SFD-145` · 2E / 2 Chaos · Action, Hidden
+> *Swap the Might of two units at the same battlefield this turn.*
+
+These are not fringe cards. Across the 1,226-deck archive, **Tideturner is the third most-played Hidden card in the format at 19.0%**, Switcheroo the sixth at 11.3%; Evelynn is in 4.5% of decks and Pyke in 3.6%. **83% of all archived decks run at least one Hidden card.** Nor is this new to the archetype: **six of the fourteen archived Voidreaver lists already run at least one Hidden card** — two on Evelynn, two on Switcheroo, one on Tideturner, none on Pyke. What is unusual is running all four at once, and building the battlefield around them.
+
+### The battlefield swap
+
+**Forbidding Waste → Star Spring.**
+
+> **Forbidding Waste** `UNL-210` — *While a unit here is defending alone, it has -2 `[M]`.*
+> **Star Spring** `UNL-215` — *The first time a player plays a non-token unit here each turn, they may move another unit they control here to its base.*
+
+Forbidding Waste was a weapon against an isolated defender and a liability whenever the lone defender was yours. Star Spring is a **free copy of your legend's two-XP walk-home ability**, once per turn, triggered by exactly the thing you now do every turn: play a unit at that battlefield. It is in 6 of the 14 archived Voidreaver lists (43%), second only to Forbidding Waste at 9 — so the archetype is already split on exactly this choice.
+
+Two details that make it better than it reads. It has **no exhaustion requirement**, where the legend's ability does (*"move an **exhausted** friendly unit"*) — so Star Spring can rescue a ready unit the legend cannot touch. And the move it grants **is a move**, so it triggers *"when I move"* abilities: Traveling Merchant loots, Shadow Order Disciple can Burn for +1. It does **not** trigger Irresistible Faefolk, whose text is *"when I move **to a battlefield**"* and this is a move to base.
+
+It is symmetric — your opponent gets their own first-time-each-turn trigger there. Against a deck that wants its units at battlefields, that is close to irrelevant; against Rek'Sai, who wants units returning home, read it before you choose it.
+
+### The trimming
+
+| | was | now | what it means |
 |---|---|---|---|
-| **Kennen** — Heart of the Tempest | Order/**Chaos** | **89%** | 3.0 |
-| **You** — Voidreaver | Body/**Chaos** | 80% | 2.9 |
-| **Irelia** — Blade Dancer | Calm/**Chaos** | 69% | 2.2 |
-| Master Yi — Wuju Bladesman | Calm/Body | **0%** | — |
-| Rengar — Pridestalker | Fury/Body | **0%** | — |
-| Azir — Emperor of the Sands | Calm/Order | **0%** | — |
-| Rek'Sai — Void Burrower | Fury/Order | **0%** | — |
+| Onslaught | 1 | **0** | The +6 is gone. It cost 4 Energy, carried no Action keyword, and sat outside Fizz's rebuy range. Switcheroo replaces it as the big swing and is strictly better at the job (§4). |
+| Traveling Merchant | 3 | **1** | The deck's repeatable selection is nearly gone. This is the change I like least, and §15 is where I would put copies back. |
+| Up from the Deep | 3 | **2** | One fewer pair of Tentacles. Flow 3E means the copies you draw are effectively worth more than one card each, which is the argument for going to two. |
+| Zed, Without a Sound | 2 | **1** | 5 Energy in a deck whose mean cost fell to 2.68. |
+| Kinkou Initiate | 2 | **3** | The one that went up. A 3-Might body that replaces itself, and the extra cheap bodies make its *"other units have total Might 5 or more"* condition easier to meet. |
+| Hard Bargain (board) | 2 | **1** | |
+| Unyielding Spirit, Angler Beast (board) | 1, 1 | **0** | |
+| Decree of Strength (board) | 0 | **2** | A Mind-domain Sabotage. Structurally dead against nine of the eleven archetypes in §13 — see §14 before you board it in. |
+| Rebuke (board) | 0 | **1** | 2E / 2 Chaos, **Action**, returns *any* unit at a battlefield to hand. Gust with no Might cap and no Reaction timing. |
 
-**Read that carefully.** Kennen lost *more* than you did. But the three archetypes that lost **nothing** are Master Yi, Rengar and Azir — and Rek'Sai alongside them. Expect the field to rotate toward cheap, wide Body decks, and expect Kennen to remain the single most common deck anyway.
-
-**One thing Kennen keeps that you do not:** Lightning Rush (1E, look at top 3, draw 1) is **Order/Chaos**, so it survived. Kennen did not lose its engine; it lost redundancy, going from six diggers to three. You lost your only one.
-
-### What replaced Stacked Deck here, and what did not
-
-Nothing in the legal Body/Chaos pool replaces a 1-Energy Action that digs three deep. The honest position is that **this deck is weaker than it was**, and the rebuild makes it coherent rather than better.
-
-This is Jun's answer to those slots, and it differs from the previous rebuild in three places worth naming:
-
-- **Fizz 2 → 3.** The previous build cut Fizz to two and spent the slot on pumps. Jun went the other way and maxed it. Fizz is in **4 of 4** of the archived tournament Voidreaver lists and 76% of all of them, and with Stacked Deck gone it is the closest thing left to selection — it does not dig, but it turns a dead spell in the trash into a live one for its Power cost alone.
-- **Ride the Wind ×1 in, Grim Resolve ×1 out.** Both are 2-Energy Actions, so showdown density is unchanged at that slot, but what you hold up changes completely: Grim Resolve was a third pump, Ride the Wind is the only card in the deck that *repositions* at Action speed. §8 covers what that buys.
-- **Hard Bargain 1 → 0 main, 2 → 2 board.** The counterspell moved entirely to the sideboard.
-
-- **Kinkou Initiate ×2** — kept. A 3-Might body that replaces itself, the best-supported option in the pool.
-- **Traveling Merchant 2 → 3** — kept, and now the deck's only repeatable selection.
-- **Rampage 1 → 2** — kept, up to the archetype average.
-
-**What cutting Grim Resolve actually costs.** Grim Resolve read *"give a friendly unit +3 Might this turn. When it wins a combat this turn, gain 2 XP"* — it was the deck's only XP source that was not the legend's own trigger. With it gone, **every point of XP in this list comes from winning a combat outright.** That does not change the strategy, but it sharpens §2: an even trade was always a failure here, and now there is no card in the deck that pays you around it.
-
-**Onslaught survives at one copy**, and the case for it is unchanged from the previous build. The case against is real and worth restating: it is the **only spell outside Fizz's 3-Energy rebuy range**, it carries no Action keyword so it cannot be held for the showdown, and at one copy it is a card you cannot dig for.
-
-The case for it:
-
-- **+6 Might is the largest single swing available to you** — more than Punch First's +5, and §4's simulation shows a pump of that size is worth roughly 45 points of clean-win rate. This deck is paid only for clean wins.
-- **It costs no Power.** Body is the scarce resource and Punch First eats six of your ten. Onslaught is a bigger Punch First you can cast on a turn with no Body runes left.
-- **Flow 4E gives it a second life.** Cast it, it goes to the trash, play it again from there for 4 Energy — then it is banished. A one-of you get twice is not the same kind of one-of.
-- It is a **trash spender**, and §7 notes the spend side of that economy is the half under pressure.
-
-And **Tideturner** stayed out, for the same reason as before: a singleton the deck can no longer find.
-
-The price of the whole configuration, stated plainly: **showdown-legal spells sit at 6** — Punch First ×3 and Ride the Wind ×1 at Action speed, Star-Crossed ×2 at Reaction — and the deck carries two singletons rather than three.
+**What the trimming costs you in one sentence:** the deck has traded one large Main-Phase pump and two loot bodies for four cards that cost nothing on the turn you use them, and it is now a deck about *timing* rather than about *size*.
 
 ---
 
 ## 2. The rule that governs the deck
 
-> **466.3.a.** A Player has won a combat if they received either the attacker or defender designation and are the **only** Player that has units remaining at this battlefield during this step.
+Unchanged from the previous build, and still the first thing to have straight.
 
-Everything else is No Result:
+> **466.3.** Determine the result of combat. A player holding a designation wins if they are the only player with units remaining at that battlefield. It is **No Result** if the attackers were recalled, if both players still have units there, or if neither does.
 
-> **466.3.d.** There is "No Result" if units were recalled during step 3d of the Combat Cleanup, if both Players have units present during this task, or if neither player has units present during this task.
+Voidreaver reads *"When you win a combat, gain 1 XP."* So:
 
-And the Combat Cleanup itself explains the most common way you get nothing:
+- You attack, kill everything, keep a unit → **win**, 1 XP.
+- You attack, kill everything, lose everything → **No Result**, 0 XP. The battlefield goes Uncontrolled (§466.5.b).
+- You attack, they survive → your attackers are **recalled** (§466.1.a.2) → **No Result**, 0 XP.
+- **They** attack you, you kill everything and keep a unit → **win**, 1 XP. Defending pays exactly the same as attacking.
 
-> **466.1.a.1.** Insert "3c. Heal all Units."
-> **466.1.a.2.** Insert "3d. Recall Attackers present at the Battlefield if Defenders are still present."
+That last line is the one the Hidden package leans on. **Evelynn makes you the defender of a combat you chose** (§4), and defending is cheaper: your units are not recalled, and a fight you merely survive costs you nothing but the turn.
 
-So if you attack and a single defender lives, **your attackers go home and you are paid nothing.** Damage does not carry: units heal at the end of every combat, so chipping them this turn buys you nothing next turn.
-
-This inverts normal card-game instinct. You are not trying to break even on cards. **You are trying to kill every enemy unit at a battlefield while keeping at least one of yours alive**, because only that pays XP. The removal exists to turn trades into clean wins. The patience exists because a clean win you cannot yet guarantee is a combat you should not start.
-
-**One edge case, quoted without over-claiming:** 466.3.d.1 says *"If 'No Result' was reached, and both players have units remaining, stage a Showdown and a Combat at this battlefield."* In the ordinary attacker-bounces-off case the attackers are recalled first, so this does not fire. If you hit a board state where it might, ask a judge rather than assuming.
-
----
-
-## 3. The engine, and where it actually bottlenecks
-
-**Voidreaver** — *"When you win a combat, gain 1 XP. Spend 1 XP, {exhaust}: Buff a unit. Spend 2 XP, {exhaust}: Move an exhausted friendly unit from a battlefield to its base."*
-
-XP is unbounded, public, and cannot be interacted with. Nobody can touch your bank. The ceilings are all on the spending.
-
-**Ceiling one: one activation per turn.** *"When you win a combat, gain 1 XP"* is a triggered ability with no cost — it fires on **every** combat you win, as many times a turn as you can win them. The other two lines carry the exhaust symbol, and rule 381 confines them: *"All Activated Abilities can only be activated on the Controlling Player's Turn and during an Open State."*
-
-So **earning is passive and unlimited; spending is the bottleneck.** A turn where you win three combats banks three XP even though you can only cash one.
-
-**Ceiling two: one buff per unit, +1 Might each.**
-
-> **702.3.** There can only be one Buff on a Unit at a time.
-> **702.3.a.** If a Buff is added, or instructed to be added, on a Unit that already has a Buff, it is not placed instead.
-
-You cannot build one enormous unit out of XP. You build a **wide board of slightly-better units**, one per turn. That is the whole clock: +1 Might per turn, permanently, compounding — because every +1 makes the next clean win easier to guarantee, which pays the next XP.
-
-**Ceiling three: neither ability is a trick.** Rule 381 again, plus the Showdown restrictions: the legend operates **only in a Neutral Open state, on your own turn.** You cannot buff in response to their combat trick. You cannot buff mid-showdown at all. On their turn the legend does nothing whatsoever.
-
-**The 2-XP mode is therefore proactive, not a rescue.** It has to be used before the combat is staged, and it can never save anything on their turn. Its real use is disengagement — walking an exhausted unit home from a fight you have worked out you cannot win.
-
-**The free value line nobody writes down.** That ability is a **move**, and two cards you run at three copies each trigger on *any* move, with no "to a battlefield" clause:
-
-- **Traveling Merchant** — *"When I move, discard 1, then draw 1."*
-- **Shadow Order Disciple** — *"When I move, you may Burn 1 to give me +1 Might this turn."*
-
-So walking one of those home fires its trigger. **Retreating is not purely defensive** — with 2 XP spare and either of them exhausted at a battlefield you are leaving, the retreat is free value. Irresistible Faefolk does *not* qualify; its trigger says "when I move **to a battlefield**."
-
-Buffs survive the trip. Rule 705 strips a buff only when a unit *leaves play*, and Base is on the Board — so a buffed unit walks home still buffed.
-
-### The Champion Zone, and why one Kha'Zix is right
-
-This is the fact that reframes everything downstream, and it is absent from the pre-ban dossier.
-
-> **103.2.** A Main Deck of at least 40 cards: A Chosen Champion Unit, as well as Units, Gear, and Spells
-> **103.2.a.1.** This will be placed in the Champion Zone at the start of the game.
-> **108.3.d.** The Chosen Champion can be played from here as normal, following the rules of Playing a Card.
-
-Your registered main deck is 40 **including** Kha'Zix. At setup he comes out and sits next to Voidreaver, leaving **39 cards shuffled**. You have him in every game, on turn one, without drawing him.
-
-So a single copy is not a lottery ticket — it is a guarantee. Extra copies live in the shuffled 39 and are pure redundancy for after the first one dies (25.6% to show by turn five). The six enablers exist to turn the one you already have on.
-
-**Note 103.2.a.3:** any additional copy of the same card anywhere also counts as your Chosen Champion for rules purposes.
-
----
-
-## 4. How combat resolves, and what it actually costs you
-
-**Combat is never declared.** It happens on its own, in a Cleanup, when the Chain is empty and a Combat is staged. You start a fight by *moving somewhere* — which is precisely why Void Assault and Irresistible Faefolk are combat cards, not utility cards.
-
-**Moving is not free.** The standard move is a Discretionary Action whose *"Cost is Exhausting one or more Units"* (420.3.a). So a unit moves — and therefore fights — **once per turn**, and an exhausted unit cannot standard-move at all. Effect-based moves do not exhaust unless they say so.
-
-**There is no blocking and no pairing off.** Each side sums the Might of all its units and assigns that whole total across the other side's units. A 1-Might token and a 6-Might Rengar are, for the purposes of the sum, seven Might.
-
-**The attacker assigns first, and cannot overkill.**
-
-> **465.2.c.4.** Units cannot have more damage assigned to them than the minimum required to constitute lethal damage unless no further units remain to have damage assigned to them. *Example: If a player has 5 damage to distribute among four 3 Might units and those units each have 1 damage already marked on them, that player may not assign more than 2 damage to any of those units.*
-
-That rule is a resource. A 1-Might Tentacle absorbs **exactly one** point of their assignment and no more. Two tokens tax two points off the total they have available to kill anything that matters. And Riot's own example shows the other half: **pre-existing damage lowers the minimum lethal**, which is why a card that pings their whole board before damage is worth more than its numbers suggest.
-
-**One card in the format switches this off, and it is the reason §11 has an Aurora entry.** Elder Dragon reads *"Any amount of your damage is enough to kill enemy units."* Minimum lethal against everything you control becomes 1, so its 10 Might kills **ten** of your units rather than one or two. Every line in this section that depends on cheap bodies taxing their assignment — the Tentacle wall, lever four, Star-Crossed pointing at a token — is false while it is on the board. It is a 12-Energy card, so you will normally only meet it cheated into play; answer it by returning it to hand, where it cannot be recast.
-
-### The clean-win math
-
-Put the assignment rules together and the condition collapses to something you can compute at the table. To kill every one of their units you need **your total Might ≥ their total**. They kill all of yours if **their damage total ≥ yours**. So:
-
-> **You win outright exactly when your Might exceeds their damage total.**
-
-Stun changes the second half only. A Stunned unit *"does not contribute its might to damage in the combat damage step"* (423.1.b) but still needs its full Might in damage to die (423.1.c).
-
-Simulated against the real Might distributions of the top archetypes — two of your units against two of theirs:
-
-| | no trick | **+Punch First** | +3 pump (reference) | +Vex stun |
-|---|---|---|---|---|
-| Kennen | 38% | **85%** | 72% | 50% |
-| Master Yi | 43% | **88%** | 73% | 53% |
-| Rengar | 46% | **96%** | 84% | 60% |
-| Rek'Sai | 48% | **95%** | 83% | 62% |
-| **Azir** | **27%** | 88% | 66% | 39% |
-| Irelia | 57% | **96%** | 87% | 69% |
-| **Jayce** | 29% | 71% | 57% | 38% |
-| **Aurora ramp** | **1%** | **17%** | 7% | 3% |
-
-**Three things follow.**
-
-**You lose roughly 60% of untricked even fights.** §2's patience is not temperament, it is arithmetic.
-
-**Punch First is not one card among four — it is the engine.** It swings clean-win rate by about 45 points where a +3 swings 30. The +5 does far more work than the two-point difference suggests, which is most of why cutting Grim Resolve costs less than it looks.
-
-**Isolation is real, and it is the plan.** Their one unit alone against two of yours is a **79–89%** clean win, and **95–99%** once Kha'Zix adds his +2. That is what the six enablers buy.
-
-**Of the six you will meet most, Azir is the hardest — not Kennen** — 27% baseline, because their units are bigger (average 3.72 Might, median 4).
-
-**Two matchups sit off the bottom of this table, and they are the reason §11 grew.** Jayce averages 4.27 Might and Aurora ramp averages **7.41**, against your own 3.14. Read the Aurora row carefully: **1% untricked, 17% with Punch First, 3% with a stun.** That is not a matchup you fix with a better trick — it is a matchup you do not enter. Note also how the pump columns decay as their units grow: Punch First is worth +59 points against Kennen and +42 against Jayce, because +5 stops mattering once their average body is bigger than your best one. **Against big-unit decks the lever is removal, not Might.**
-
----
-
-## 5. The five levers, priced
-
-Since only clean wins pay, these are the exact tools that convert a trade into a win. **Fifteen of your forty cards are one of them** — Vex ×2, Punch First ×3, Onslaught ×1, Rampage ×2, Star-Crossed ×2, Up from the Deep ×3, Rengar ×2.
-
-**Lever one — stun.** Vex ×2. Subtracting their biggest unit's Might from their assignment total while leaving it on the board as a body you still have to kill. Worth about +10 points of clean-win rate on its own — her real value is elsewhere (§6).
-
-**Lever two — raw Might.** Punch First ×3 (+5 for 1E/2 Body, Action) and Onslaught ×1 (**+6** for 4E/0 Power, Main Phase only, Flow 4E). With Grim Resolve cut this is now only four cards, and the biggest of them is the one you cannot hold up.
-
-**Lever three — subtraction.** Rampage ×2, Star-Crossed ×2. Removing a unit from the fight removes its Might from their sum **and** removes it as a body you must kill. Subtraction is worth roughly double addition for the purposes of a clean win.
-
-**Lever four — bodies.** Up from the Deep ×3 (six Tentacles). Extra units both add Might and soak assignment under the no-overkill rule, and they keep your real threats from being *alone* — which matters at Forbidding Waste and is the difference between your unit eating the −2 and theirs.
-
-**Lever five — a body at Reaction speed.** Rengar ×2, confirmed (§6). Six Might arriving mid-showdown into a battlefield where you control nothing is +6 Might *and* an extra unit soaking assignment — a bigger single swing than Punch First or Onslaught, and the only one you can hold up without committing first. He is listed last because he costs 5 Energy and a Body rune — the lever you can least often afford on the turn you want it.
-
-
----
-
-## 6. Card by card
-
-### The isolation package
-
-**Kha'Zix, Mutating Horror ×1** (4E / 1 Chaos / 4 Might, Ambush) — *"When I attack or defend, if an enemy unit is alone here, give me +2 Might this turn and gain 2 XP."*
-
-Read the trigger carefully: it checks whether an **enemy** unit is alone, and a unit is alone when there are no other units friendly *to it* at the same location. So the condition is "they have exactly one unit here." Two enemy units and he is a vanilla 4-Might Ambush body.
-
-One copy, because he is free (§3). Ambush means he arrives mid-showdown, after they have committed — but if no units remain at the chosen location when Finalization completes, the permission is void.
-
-**Irresistible Faefolk ×3** (2E / 1 Might) — *"When I move to a battlefield, you may move an enemy unit to that battlefield."*
-
-The isolation engine. It triggers on *move to a battlefield*, not on play, so it keeps working every turn you move it. It drags an enemy **to** the Faefolk, which means you choose the fight's location. A 1-Might body also costs them exactly 1 damage of assignment to kill.
-
-**Void Assault ×3** (2E / 1 Power) — *"Move a friendly unit, then move an enemy unit."*
-
-The other half of the same job, and the reason you never mulligan one away lightly. Between them, six cards let you choose where the fight happens — and **49.7% of opening hands contain none of them.**
-
-**Rengar, Trophy Hunter ×2** (5E / 1 Body / 6 Might, Ambush) — *"I can Ambush to a battlefield where there are enemy units, even if you don't have units there."*
-
-**Read the errata, not the printed card.** Six Might deployable into a battlefield where you control nothing, which no other card here can do. A lone enemy of 6 Might or less is a battlefield you can simply take for one card — and a lone enemy is exactly Kha'Zix's condition. The two cards want the same board.
-
-**He keeps the Reaction timing — this is settled, and it makes him a trick.** Ambush is short for two things (822.1.b): permission to play there, *and* *"I have [Reaction] as long as I'm being played to a battlefield where you control Units."* Rengar's errata rewrote his clause from "I can **be played** to" into "I can **[Ambush]** to", and 822.1.d reads that verb as *"play with the permissions of the Ambush keyword"* — using Rengar as its own worked example. He gets the whole keyword with a widened location set, Reaction timing included.
-
-**What it widens to, exactly:** from *battlefields where you control units* to *battlefields where there are units*, either side's. It does **not** reach an empty one — 822.3 voids Ambush's permission wherever no units remain at the chosen location before Finalization completes, and that exclusion survives the expansion. So: their board, yes; your board, yes; an open battlefield, never.
-
-**Which makes him the largest swing in the deck.** A 6-Might body arriving mid-showdown after they have committed is +6 Might *and* an extra unit to soak assignment under the no-overkill rule — strictly more than Onslaught's +6, which is the number alone. And because a lone enemy is exactly Kha'Zix's condition, and Rengar is not friendly to them, dropping Rengar in does not un-lone their unit. Both cards fire on the same board, at Reaction speed, from an empty side of the field.
-
-### The bodies
-
-**Shadow Order Disciple ×3** (2E / 2 Might) — *"When I move, you may Burn 1 to give me +1 Might this turn."*
-
-Your early-board filler, and the trash engine. Burn is optional and fires on every move, so it is repeatable across turns.
-
-**The habit has changed.** Pre-ban the default answer was yes, because Stacked Deck could dig back to whatever you milled. **Now the default is no** unless you actually need the Might that turn or specifically want a unit in the trash. This is what "less greedy with discards" means in practice.
-
-**Traveling Merchant ×3** (2E / 2 Might) — *"When I move, discard 1, then draw 1."*
-
-Loot on every move, and this deck moves constantly. With Stacked Deck gone it is the only repeatable selection left, which is why it went from two copies to three. It also triggers off the legend's 2-XP move (§3).
-
-**Kinkou Initiate ×2** (3E / 0 Power / 3 Might) — *"When you play me, draw 1 if your other units have total Might 5 or more."*
-
-A body that replaces itself. How live the condition is, measured against your own unit pool:
-
-| Other units on board | Condition met |
-|---|---|
-| 1 | 17.5% |
-| 2 | **80.1%** |
-| 3 | 99.0% |
-
-Turn two is four Energy, so two 2-drops then Kinkou on three is the curve that turns it on. Three things in the deck feed the threshold: **Shadow Order Disciple's Burn** (+1 this turn, so a 2-Might Disciple becomes 3), **the legend's buff** (a permanent +1), and **Tentacles** at 1 Might each.
-
-**Fizz, Trickster ×2** (3E / 1 Chaos / 3 Might) — *"When you play me, you may play a spell from your trash with Energy cost no more than 3, ignoring its Energy cost. Then recycle it."*
-
-You still pay the spell's **Power** cost. **Sixteen of your seventeen spells are legal targets** — five of them at no extra Power (Rampage ×2, Up from the Deep ×3). The one exception is **Onslaught at 4 Energy**, the only card in the deck Fizz cannot reach.
-
-Worth holding in mind when you decide what to let hit the trash: a trashed Onslaught is not Fizz food, but it *is* still castable through its own Flow for 4 Energy. It leaves by a different door.
-
-**Vex, Apathetic ×2** (4E / 4 Might, Deflect) — *"When an opponent plays a unit while I'm at a battlefield, Stun it. They can't move it this turn."*
-
-Three things make her better than her combat math suggests:
-
-- **There is no once-per-turn clause.** She fires on *every* unit they play. Against Rengar at 30 units a deck, that is two or three a turn.
-- **She does not choose a target.** Rule 355.10 defines what counts as a target, and Vex's "it" is programmatically the triggering unit — so she goes through Deflect and every untargetable body. She is one of only two cards you have that does.
-- **She answers token swarms.** Played tokens trigger her, and "they can't move it this turn" blanks the ready-two clause on Azir's Arise!
-
-Do not hold her as a combat trick. Her job is stopping units *arriving*.
-
-**Tail-Cloaked Matriarch ×2** (4E / 4 Might, Empower 2E+Chaos) — *"When I become Empowered, you may choose a unit in your trash with Energy cost no more than 3 and Power cost no more than 1 rainbow. Play it to your base, ignoring its cost."*
-
-Thirteen legal targets in the list: Faefolk ×3, Disciple ×3, Merchant ×3, Kinkou ×2, Fizz ×2. Note the Empower is an ability cost of 2 Energy **and a Chaos rune** — it is a real part of the Chaos demand (§7).
-
-**Zed, Without a Sound ×2** (5E / 5 Might) — *"When I conquer, play a 0-Might Shadow Clone token to your base."* The clone can banish a unit from your trash for Assault 4. His Action-speed swap costs 1 Energy and a Chaos rune.
-
-### The spells
-
-**Punch First ×3** (1E / **2 Body** / Action) — *"Give a unit +5 Might this turn."*
-
-The best card in the deck by a wide margin (§4), and the only spell Defy cannot touch: 2 Power puts it permanently outside Defy's range, and rule 206 makes that structural — a discount from Sandswept Tomb never drags it into range.
-
-**It eats 6 of your 10 Body demand.** Count Body runes before you commit anything else.
-
-**Ride the Wind ×1** (2E / **1 Chaos** / Action) — *"Move a friendly unit and ready it."*
-
-**The only card in the deck that repositions at Action speed.** Your other five showdown-legal copies all change how big a unit is; this one changes where it is, and untaps it on the way. Three uses, in rough order of how often they come up:
-
-1. **Trigger a move payoff mid-showdown** — Traveling Merchant loots, Shadow Order Disciple burns for +1. See §8.
-2. **Ready a unit that has already fought**, which is the closest thing the deck has to a second action.
-3. **Pull a unit out of a fight you have lost**, in the window after they commit and before damage.
-
-It replaced Grim Resolve, and that swap is §1's. The one thing lost with it is worth stating precisely, because it also settles a rules question people ask about the archetype:
-
-**An XP rider on a pump would have paid on clean wins only, and needed the buffed unit to live.** Two rules settle it. **466.3.c** — *"Units at this battlefield inherit the same combat result as their controllers"* — means a unit wins exactly when *you* win (466.3.a), so there is no separate unit-level win to trigger on. And Nidalee, Cat Form's *"(I win if I remain after combat.)"* does not create an exception: it is parenthetical reminder text, and **135.2.d.3** says the exact wording of reminder text *"has no effect on game function."* Compare Glorious Executioner, whose *"(You win if only your units remain after combat.)"* restates 466.3.a exactly.
-
-Combat resolves 466.1 Cleanup → 466.3 Determine Combat Result, so anything that died is already gone when results are assigned, and 466.3.c only covers *"Units **at this battlefield**."* That is why the rider was worth less than it read, and most of why cutting it costs so little.
-
-**Onslaught ×1** (4E / **0 Power**, Flow 4E) — *"Give a unit +6 Might this turn."*
-
-**The biggest number in the deck, and the one you cannot hold up.** +6 beats Punch First's +5, and it costs no Power at all — so it is the pump you cast on a turn when your Body runes are already spent. That is the whole case for the slot (§1).
-
-Everything awkward about it follows from one omission: **it has no Action keyword.** It is a Main Phase card, which means committing the deck's largest swing *before* you move — before you see whether they have a trick. Sequencing it is step 4 of §10, not step 5.
-
-**Flow does not fix that.** Rule 829.1.b.2 is explicit that playing a spell for its Flow cost *"does not change the timing at which it can be played, nor any permissions for the spell aside from the zone from which it can be played."* The copy you cast out of the trash is Main-Phase-only too. What Flow buys is a **second use**, not a second speed: cast it, it goes to the trash, play it again for 4 Energy, then it is banished.
-
-**Defy catches it permanently.** At 4 Energy and no Power it satisfies both of Defy's clauses, and rule 206 means the printed cost is the one checked — Sandswept Tomb's discount will never drag it out of range, exactly as it never drags Punch First in. Against Irelia it is one of the cards that leaves (§11).
-
-**It is the one spell Fizz cannot rebuy** — 4 Energy, over her 3-Energy limit, the single hole in a pool of eighteen. The compensation is that it is also the one card in the deck **you are happy to Burn** (§7): the trash is not a dead end for it.
-
-**Sabotage ×2** (1E / 1 Body) — *"Choose an opponent. They reveal their hand. Choose a non-unit card from it, and recycle that card."* Proactive protection for a plan slow enough to be disrupted, and the reveal is information for the next three turns. Non-unit only.
-
-**Hard Bargain ×1** (2E / 0 Power / Reaction, Repeat 2E) — a soft counter that mostly buys a turn. One copy main is the archetype norm (average 1.4 across the archive); two more sit in the board.
-
-**Rampage ×2** (3E / 0 Power, +2 Might for an optional Body) — *"Choose a friendly unit and an enemy unit. They deal damage equal to their Mights to each other."*
-
-Subtraction, and it kills permanently. **Two caveats.** It carries neither Action nor Reaction, so it is a step-4 setup card, not a trick. And it is mutual damage — point it at an equal-sized unit and both die, which §2 calls the worst outcome available. Only fire it when your unit is clearly bigger. **It is your default first cut in almost every matchup.**
-
-**Star-Crossed ×2** (3E / 1 Chaos / Reaction) — *"Return a friendly unit and an enemy unit to their owners' hands."*
-
-Subtraction at Reaction speed, which matters because you only have three Reactions. **Point the friendly half at a Tentacle:** rule 186.1 says a token put into a non-board zone ceases to exist, so you spend a body you were spending anyway instead of a buffed real unit. Up from the Deep quietly makes this card better.
-
-**Up from the Deep ×3** (3E / Flow 3E) — two 1-Might Tentacles for one card, and Flow lets you cast it a second time from the trash, then banish it. Four bodies per card over a game.
-
-### The runes and battlefields
-
-**Six Body / six Chaos.** Printed Power demand looks Body 10 / Chaos 5, which would argue for a Body-heavy split — but that count misses **ability** costs. Matriarch's Empower is 2 Energy + a Chaos rune, ×2, and Zed's Action is 1 Energy + a Chaos rune, ×2, and Zed's is repeatable every turn. Real demand is **Body 10 / Chaos 9**, plus Void Assault ×3 which takes either. The even split is correct.
-
-Paying Power **recycles** the rune — it leaves your base for the bottom of the rune deck. You channel 2 per turn. Punch First's 2 Body is therefore a full turn's channel committed to one domain; you have two Body runes available **72.7% of the time by turn two and 96% by turn three.**
-
-**Forbidding Waste** — *"While a unit here is defending alone, it has −2 Might."* Symmetric, and this deck frequently leaves a single dragged unit somewhere. It stacks with the isolation plan: the lone enemy is simultaneously at −2 and switching Kha'Zix on.
-
-**Sandswept Tomb** — each spell choosing one or more friendly units here costs a rainbow less. This is most often how you afford Punch First and a 3-drop on the same turn. The discount is symmetric — it cheapens their tricks at that battlefield too.
-
-**Zaun Warrens** — loot on conquer. Another trash filler, and JUN's own post-ban note singles it out as worth keeping.
-
-### Keywords, precisely
-
-Short reference for the ones this deck's lines actually hinge on. Rule numbers verified against `docs/rules-full.md`.
-
-| Keyword | What it does | The detail that catches people |
-|---|---|---|
-| **Ambush** (822) | Play to a battlefield where you control units; has Reaction while doing so | If no units remain there at Finalization the permission is void (822.3) — so never an empty battlefield. Rengar widens the location set to *any* battlefield with units on it, Reaction timing included (822.1.d) |
-| **Hidden** (811) | Hide facedown for a rainbow; from the next turn it is a Reaction you play for 0 | Targets are normally confined to that battlefield (811.1.d.2) |
-| **Empower** (827 / 441) | Activated cost that flips a permanent to Empowered | One-way and permanent — "use only if not Empowered". Matriarch's costs 2 Energy **and a Chaos rune** |
-| **Burn** (440) | Top of your Main Deck to your trash | Mandatory when instructed. Shadow Order Disciple's is optional, which is the whole point post-ban |
-| **Flow** (829) | Play a spell from your trash for its Flow cost, then banish it | Banished, so once each — it is not a loop |
-| **Deflect** (809) | Opponents pay a rainbow to choose it with a spell or ability | A tax, not a prohibition. Vex has it |
-| **Stun** (423) | Unit contributes no Might to combat damage (423.1.b) | Still needs full Might in damage to die (423.1.c); wears off at end of turn |
-| **Repeat** (820) | Optional additional cost to execute the effect twice | Hard Bargain's second use costs 2 more Energy |
-| **Action** (806) | Playable on your turn **or in showdowns** | Five of your spells. This is what you hold up |
-| **Reaction** (813) | Playable any time, even before spells resolve | Only three of your spells. The scarcest timing you own |
-
----
-
-## 7. The trash is a resource
-
-Four cards depend on it, and new pilots treat it as a graveyard rather than a second hand.
-
-**Filling it:** Shadow Order Disciple (Burn on every move), Traveling Merchant (discard on every move), Zaun Warrens (discard on conquer).
-
-**Spending it:** Fizz (any spell in the deck), Tail-Cloaked Matriarch (13 legal unit targets), Up from the Deep (Flow), Shadow Clone (banish a unit for Assault 4).
-
-Six filler copies against ten spenders — Onslaught's Flow is the tenth. The economy is healthy, but the direction of travel changed with the ban: **fill went up** (Merchant to three) while **spend went down** (Fizz to two). Combined with the mulligan reality, that is why the Burn default flipped to no.
-
-**One Burn worth taking:** milling your own Onslaught is close to free, because Flow lets you cast it from the trash for 4 Energy anyway. It is the one card in the deck that does not mind being in the bin.
-
-**Deck-out is not a risk.** Merchant discards from hand, not library; Burn is optional. A long game sees roughly 16 of 39.
-
----
-
-## 8. How the cards combine
-
-The forty is not forty independent cards. About a third of them only do their job next to a specific partner, and two of them look like partners and are not. This section is what to know before you sit down.
-
-### Void Assault — the deepest card in the deck
-
-Three copies, 2 Energy, and in **88% of archived Voidreaver lists at 2.9 copies**. It reads
-like a positioning spell and is closer to a toolbox, because of three rules it quietly
-breaks.
-
-1. **No destination restriction.** §449.1 says *"the source of the Move will provide details
-   on any restrictions on legality for Destination"* — and Void Assault provides none. Any
-   location the unit is allowed to be, other than the one it is in (§355.4.a). A Standard
-   Move is base↔battlefield only; **battlefield → battlefield otherwise requires Ganking**
-   (§810), which no card in this deck has.
-2. **No exhaust cost.** The Standard Move *costs* exhausting the unit (§144.2, §420.3.a).
-   Void Assault is a Game Effect move (§420.2.a) and pays nothing, so it moves **exhausted**
-   units — including anything you played this turn, since units enter exhausted (§143.4).
-   This is what lets a 5-Energy Zed or Rengar act on the turn it lands.
-3. **It cannot be answered.** §446.3.c: *"Moving does not use the Chain, nor is it able to be
-   Reacted to."* They can counter the spell. They cannot respond to the movement.
-
-**The friendly half** unsticks a unit you just played, repositions between battlefields,
-retreats a unit out of a fight before the cleanup stages combat, and triggers your move
-payoffs (Traveling Merchant, Shadow Order Disciple — see the distinction two sections down).
-It also builds the landing zone for Ambush: Kha'Zix may only arrive *"to a battlefield where
-you have units,"* and this is how the first unit gets there.
-
-**The enemy half is where it earns the reputation.**
-
-*Break the stack, and manufacture the isolation.* The scan worth making every turn is **do
-they have two units in one place?** Move your body in and one of theirs out. You are now
-fighting one unit instead of two — **and the survivor is alone**, which is exactly what
-Kha'Zix's +2 Might and 2 XP require. One card does the combat math and the trigger together.
-Do not wait for a lone enemy to present itself; build one.
-
-*Strip a battlefield without fighting for it.* §323.6, cleanup step 4: *"players lose control
-of any controlled Battlefields without their Units occupying them if the turn is in an Open
-State and there is no Showdown or Combat ongoing there."* Move their **last** unit off a
-battlefield they control and it goes Uncontrolled at the next cleanup — and a move always
-causes one (§453). They stop Holding it for a point a turn, and you never fought for it.
-
-*And the same move trashes their hidden card.* §107.3.d plus §323.7: when they lose control,
-*"remove all Hidden cards from all Battlefields that are not controlled by the same player
-and place them in their owner's Trash."* Not returned — **trashed**. They can only hide at
-battlefields they control (§811.1.b), so the setup is ordinary. A 2-Energy spell that strips
-a battlefield and destroys a facedown card is the best rate in the deck.
-
-**Who is the attacker, precisely.** §190.3.a.1: Contested is applied by *the unit's
-controller*, not by the spell's, and *"attacker = the player who applied Contested"*
-(§464.2.c). So when both units move to a neutral battlefield the reminder text settles it in
-your favour; but when you move **only their unit** into a battlefield you control, **they**
-applied Contested and **they** are the attacker. That is usually fine — Kha'Zix reads *"when
-I attack **or defend**"* and does not care which.
-
-**Its limits, which are real.** It carries **no Action or Reaction keyword**, so it is
-Main-Phase-only: you cannot spring it inside a showdown, and it cannot rescue a unit from a
-combat already running. It moves **one** enemy, so a three-stack becomes a two-stack. And
-**the friendly move resolves first**, so you commit your own unit before placing theirs —
-decide both before you cast.
-
-### The isolation chain: Rengar → Kha'Zix
-
-Both carry [Ambush], so both can arrive as a Reaction — mid-showdown. Their conditions are not the same, and the difference is the whole line:
-
-- **Kha'Zix** — Ambush to *a battlefield where you have units*.
-- **Rengar** — the same, plus *"I can be played to a battlefield where there are enemy units (even if you don't have units there)."*
-
-Rengar is the only card in the deck that can open a battlefield you have no presence at. Once he lands, Kha'Zix's Ambush becomes legal there too. Rengar first, Kha'Zix second, same showdown: **10 Might arriving out of nowhere at Reaction speed** — and if the unit Rengar dropped on was by itself, that is exactly the *alone* Kha'Zix is paid for.
-
-### Forbidding Waste + Kha'Zix — the four-point swing
+**What the legend can and cannot do**
 
 | | |
 |---|---|
-| Forbidding Waste | While a unit here is **defending alone**, it has **-2 Might** |
-| Kha'Zix | When I attack or defend, **if an enemy unit is alone here**, +2 Might and 2 XP |
+| Gains XP | Every combat you win — no limit per turn, no cost, automatic |
+| Spends XP | **Once per turn** (it exhausts), and **only in your own Main Phase, in an Open State** |
+| 1 XP | `[Buff]` a unit: permanent +1 Might, **one buff per unit at a time** (§702.3) |
+| 2 XP | Move an **exhausted** friendly unit from a battlefield to its base |
+| Never | Mid-combat, mid-showdown, or on their turn at all (§381) |
 
-The same condition, read from both sides. Attack a lone defender at the Waste and they are at -2 while Kha'Zix is at +2 — a four-point swing off two cards you were playing anyway. It is why Forbidding Waste is in **82%** of archived Voidreaver lists and all four of the tournament ones.
+Voidreaver has no Action or Reaction keyword. The Vendetta FAQ states it plainly for the same shape of card: *"Abilities can only be used in your Main Phase, outside of a showdown, unless they have the Action or Reaction keyword."* **Once a showdown opens, your legend is switched off for the rest of the turn.** That is why the sequencing in §11 puts the activation first and not fifth.
 
-**The trap:** the Waste says *a unit*, not *an enemy unit*. Your own lone defender there takes the same -2. Never leave one body holding it.
-
-### Sandswept Tomb + your tricks — the rune fix
-
-*"Each spell that chooses one or more units here that are friendly to it costs 1 rune less."*
-
-The deck's bottleneck is Power, not Energy. Punch First is 1 Energy but **2 Body**, and you own six Body runes; §7 and §5 both end up at the same place. At the Tomb, Punch First costs 1 Body, Star-Crossed's 1 Chaos goes to zero, Void Assault's 1 Power goes to zero.
-
-So the Tomb is where you fight on the turns you need to hold up two tricks. That is a battlefield choice made a turn early, not a reaction.
-
-### Shadow Order Disciple → the four spenders
-
-Burn 1 is not a pump with a drawback. It is the deck's only deliberate way to stock the bin, and there are four things downstream of it:
-
-| Spender | Takes from the trash |
-|---|---|
-| **Fizz, Trickster** | any spell at ≤3 Energy |
-| **Tail-Cloaked Matriarch** | any unit at ≤3 Energy and ≤1 Power |
-| **Up from the Deep** / **Onslaught** | themselves, via Flow |
-| **Shadow Clone** | banishes any unit, for Assault 4 |
-
-§7's default of *don't Burn* still holds. Burn when a spender is already in hand, not on the chance one shows up.
-
-### Ride the Wind + any "when I move" body
-
-New to this build, and the reason it is not simply a sixth pump: it moves **and readies**. It triggers Traveling Merchant (discard 1, draw 1) or Shadow Order Disciple (Burn for +1) and leaves the unit able to fight again. Of your six showdown-legal spells it is the only one that changes *where* a unit is rather than how big it is.
-
-### Sabotage → whatever you were about to cast
-
-The two decks you will see most both run three **Defy**, and the full text is *"counter a spell that costs no more than 4 Energy **and** no more than one rainbow Power."* Both clauses matter. Every spell in this deck is 4 Energy or less, so the first clause never saves you — but **Punch First's 2 Body puts it permanently out of range** (§6, and rule 206 makes it structural). Fourteen of your seventeen spells are counterable; three are not.
-
-Sabotage reveals their hand and recycles a non-unit card, and it is the only main-deck card that takes the Defy *before* you commit. Against Master Yi and Akali, lead with it rather than saving it for something bigger — and when you have no Sabotage, commit Punch First into open Power and keep the counterable spells for after their Defy is spent.
+**Kha'Zix is free.** He starts in the Champion Zone and is playable from there as normal (§108.3.d). You have him every game, from turn one, with no draw required. One copy is correct, not an oversight.
 
 ---
 
-### Rampage + any pump — the deck's only kill spell
+## 3. Hidden, precisely
 
-Rampage reads *"choose a friendly unit and an enemy unit. If you paid the additional cost, give the friendly unit +2 Might this turn. They deal damage equal to their Mights to each other."* That resolves **outside combat**, so it is the one card in the deck that removes a unit without a showdown.
+This is the section the update exists for. Read it once properly and the four cards play themselves.
 
-Point a pump at the friendly half first and it stops being a trade. Punch First takes a 2-Might Shadow Order Disciple to 7 and kills almost anything in the format; Onslaught takes it to 8. The friendly unit still takes their Might back, so pick a body you are willing to lose or one large enough to survive.
+### What hiding is
 
-**And it is not spell damage.** Rule **417.6.b.3** settles this with Challenge as its worked example — identical wording to Rampage — and says plainly: *"The damage that Challenge causes to be dealt is dealt by the chosen units, not by Challenge."* So an opposing Unyielding Spirit, or anything else that prevents spell and ability damage, **does not stop Rampage**. It also means Rampage is not how you play around damage prevention; it is how you ignore it.
+> **811.1.b.** It is functionally short for *"While this card is in your hand or in your Champion Zone on your turn during an Open State, you may pay `[A]` to hide this facedown at a battlefield you control that doesn't already have a facedown card hidden there for as long as you control that battlefield. Beginning on the next turn, this gains [Reaction] and you may play this, ignoring its base cost."*
 
-### Gust manufactures the thing Kha'Zix needs (sideboard)
+Unpack that into the five things it actually constrains.
 
-Gust returns a unit at 3 Might or less to its owner's hand, for 1 Energy, at Reaction speed. Read it as removal and it looks small. Read it as **an isolation tool** and it is the cheapest one in the seventy-five: a battlefield with two enemy units is a battlefield where Kha'Zix gets nothing, and Gust turns it into one where he gets +2 and 2 XP — mid-showdown, after they have committed.
+**1. Timing: your turn, Open State.** Not during a showdown, not during a combat, not on their turn. Hiding is a Discretionary Action (§421.2), so it lives in the same window as your legend activation and your standard moves.
 
-### Up from the Deep answers the Forbidding Waste trap
+**2. Cost: `[A]` — one Power of any domain.** You pay it by **recycling a rune**, which sends that rune to the bottom of your Rune Deck and shrinks your board by one until you channel it back. You channel 2 a turn (§315.3.b), so **a hide costs you half a turn of ramp.** It is the cheapest thing in the deck in Energy and the most expensive in tempo.
 
-The Waste's -2 applies to *any* unit defending alone, including yours. Two Tentacle tokens for 3 Energy are the cheapest way to make sure the unit holding it never is — and unlike a real body, you were not going to cast them for anything else.
+**3. Prerequisite: a battlefield you already control.** The FAQ says it outright: *"you must already control a battlefield (have units there) to hide the card at."* Control is having units there and having established it (§190.4). **You cannot hide on turn one.** The earliest realistic hide is turn two: move a unit to an open battlefield, the non-combat showdown closes with you taking control (§348.2.a — that is a Conquer, 1 point), then hide in the same Main Phase.
 
-### Kinkou Initiate — know what turns it on
+**4. Capacity: one card per battlefield.** *"Each Facedown Zone has a maximum occupancy of one card"* (§107.3.b). In a 1v1 there are only two battlefields on the table (§485.4), and you will rarely control both, so **in practice you have one facedown slot at a time.** Four Hidden cards competing for one slot is the real deckbuilding constraint here, and it is why one copy of each is right rather than three of one.
 
-*"Draw 1 if your **other** units have total Might 5 or more."* Your own Might does not count, so the sequencing is always develop first, Kinkou second. What gets you there:
+**5. Delay: next turn, not this turn.** *"Beginning on the next turn."* The FAQ confirms: *"You can't play cards the same turn you hide them."*
 
-- any **one** of Vex (4) or Rengar (6) or Zed (5) — Rengar and Zed do it alone
-- **three** small bodies: Merchant (2) + Disciple (2) + Faefolk (1) = 5 exactly
-- two 2-Might bodies is **4** and does not do it — this is the near-miss to watch for
+### What hiding buys
 
-### Zaun Warrens is a Traveling Merchant that costs no card
+**It costs nothing to play afterwards.** *"You may play this, ignoring its base cost"* — 0 Energy, 0 Power. Switcheroo's 2 Energy and 2 Chaos Power vanish. Pyke's 3 Energy vanishes.
 
-*"When you conquer here, discard 1, then draw 1"* — the same loot, the same trash-filling, on a battlefield slot rather than a deck slot. Conquering the Warrens is therefore worth slightly more than conquering the other two, and it is the fill half of §7's economy running for free every time you take it.
+**It gains Reaction.** §811.6: *"A card that is Hidden gains Reaction while facedown or played from facedown."* That is the full Reaction permission — showdowns, closed states, anyone's turn. And per the FAQ, *"You can play them any time you can normally play a reaction, which includes when you're not actually reacting to anything. You're not restricted to playing them during showdowns at their own battlefield."*
 
-### Vex answers the chain in reverse
+**It cannot be answered.** Hiding does not open a chain (§811.1.c.2) and hiding is not playing (§811.1.c.1) — so it dodges counterspells entirely, and it does not turn on Legion for anybody. The opponent sees a facedown card appear and learns nothing except that it exists. *Playing* from facedown does open a chain (§811.1.c.3), and that chain is answerable like any other.
 
-*"When an opponent plays a unit while I'm at a battlefield, Stun it."* That is a direct answer to exactly the Rengar → Kha'Zix play at the top of this section — theirs, in the mirror, and Akali's Mischievous Marai, and every Ambush body in the format. Vex on a contested battlefield taxes their entire Reaction-speed plan, and Deflect means they have to pay a rainbow Power to remove her first.
+**The property is private.** §811.6.a: *"The property is granted to the card in its facedown state, and is not publicly known."* Facedown Zones are public but the card in them is private (§107.3.f) — only you may look.
 
-### Two sideboard details worth knowing before you need them
+### The three restrictions when you flip it
 
-**Hard Bargain has [Repeat] 2E.** Pay two more Energy and it counters a second spell. Against a deck holding three Defy that is the difference between one answer and two on the turn that matters.
+> **811.1.d.** Some choices made while playing a card from Hidden are restricted to the battlefield where it was hidden. A card cannot be played from Hidden if it is a spell with no valid targets under these restrictions.
 
-**Acceptable Losses is one-sided here.** *"Each player kills one of their gear"* — and **this deck runs zero gear.** The symmetry that normally prices it down costs you nothing. §12's real objection stands, though: *they* choose which of theirs dies.
+**a. A hidden permanent must be played to that battlefield** (§811.1.d.1). No choice. This overrides gear's normal base-only restriction (§811.1.d.1.a), and it is the reason a hidden unit is always exposed to whatever can reach a battlefield.
 
-### Tokens die when they are bounced — rule 186.1
+**b. Each target must be chosen from among options at that battlefield** — *"unless the ability explicitly restricts targeting in a way that makes this impossible"* (§811.1.d.2). And crucially, **each target is judged separately** (§811.1.d.2.a): one target on a card can be pinned to the battlefield while another on the same card is free.
 
-*"If a token is put into any Non-Board Zone besides the chain, it ceases to exist immediately after moving to its new zone."* Four consequences, and they run in both directions:
+**c. If the card causes you to play a unit, that unit goes to that battlefield too** (§811.1.d.3).
 
-- **Gust and Star-Crossed are hard removal against token decks.** Azir's Sand Soldiers, Jayce's Recruits, a Shadow Clone — bounced is dead, not delayed. Against Azir in particular this reprices both cards upward.
-- **Angler Beast eats your own Tentacles.** It returns *all* units at 2 Might or less, and your two Up from the Deep tokens are 1 Might each. They do not come back to hand; they stop existing.
-- **When Star-Crossed makes you bounce something friendly, bounce a real unit, not a token.** The real one is re-castable. The token is gone.
-- **Their bounce kills your Shadow Clone the same way**, so do not build a turn around a clone that a 1-Energy Gust deletes.
+**And nothing else is restricted.** §811.2 is explicit: *"Abilities and instructions of hidden cards other than the choices listed above function as normal."* The Vendetta FAQ restates it as *"Only effects that choose are restricted."* A hidden card's non-choosing text works normally, everywhere.
 
-### Vex reads narrower than she is
+### Where each of your four sits
 
-*"When an opponent plays a unit while I'm at a battlefield, [Stun] it. They can't move it
-this turn."*
-
-**There is no "here" in that sentence.** The location clause is a condition on **Vex**, not
-on the unit they played. While Vex stands at any battlefield, **every unit your opponent
-plays — anywhere on the board, including their own base — arrives stunned**, and there is no
-"once each turn" on it. Read alongside Kha'Zix's *"if an enemy unit is alone **here**"*, the
-absence is deliberate.
-
-What that is worth:
-
-- **Stunned means no Might contributed to combat damage** (§423.1.b). Their unit is a body
-  that cannot punch.
-- **It still takes its full Might in damage to kill** (§423.1.c). The stun does not make it
-  easier to remove, only harmless — do not plan around killing it more cheaply.
-- *"They can't move it this turn"* blocks **effect-driven moves too**, not just the Standard
-  Move. Their own repositioning spell cannot fix a unit Vex has stunned.
-- Stacked on top of units entering exhausted (§143.4), a stunned unit is inert for a full
-  turn cycle.
-- **Vex does not choose.** Her trigger names no target, so she is one of the few answers in
-  the deck to a unit reading *"I can't be chosen by enemy spells and abilities."*
-- And **Deflect** means removing her costs them an extra rainbow Power *per time they choose
-  her* (§809.1.c) — a mandatory additional cost that can simply price the answer out.
-
-The expiry is the catch: stun drops during the end-of-turn cleanup (§423.1.a.2), so it buys
-a turn, not a removal.
-
-### "When I move" is not "when I move to a battlefield"
-
-Three cards in this deck pay you for movement, and they are not worded the same way. This is
-worth internalising because it changes which moves are free value.
-
-| card | trigger | fires on a retreat to base? |
+| Card | Pinned to the hide battlefield? | Why |
 |---|---|---|
-| **Traveling Merchant** | "When I move, discard 1, then draw 1" | **yes** |
-| **Shadow Order Disciple** | "When I move, you may Burn 1…" | **yes** |
-| **Irresistible Faefolk** | "When I move **to a battlefield**…" | no |
+| **Switcheroo** | **Yes — both units** | Nothing in its text restricts targeting elsewhere, so §811.1.d.2 pins both. It wants two units at one battlefield anyway; the rule just decides *which* battlefield. |
+| **Tideturner** | **No** | §811.1.d.2 uses Tideturner as its own worked example: *"Because its play effect has a targeting restriction that can never be fulfilled by a unit at its battlefield, its target may be chosen freely."* **He** still lands at the hide battlefield under 811.1.d.1. |
+| **Evelynn** | **No** | *"an enemy unit **at a different location**"* — the same exception, for the same reason. She lands at the hide battlefield. |
+| **Pyke** | n/a | He has no play effect and chooses nothing. He simply lands at the hide battlefield. |
 
-So a Merchant or a Disciple pays out on **any** move, including backwards. Concretely, all
-of these loot:
+### The cost of being wrong about the battlefield
 
-- Void Assault moving one of them *home* from a battlefield.
-- Ride the Wind moving them anywhere at Action speed.
-- **The legend's own 2-XP ability** — *"move an exhausted friendly unit from a battlefield to
-  its base."* It says **move**, so it is a Move, and a Merchant walked home by the legend
-  draws you a card on the way.
+> **107.3.d.** If a player loses Control of a Battlefield, any cards in the Facedown Zone associated with that Battlefield are removed during the next Cleanup.
+> **323.7.** Remove all Hidden cards from all Battlefields that are not controlled by the same player and place them in their owner's Trash.
+> **466.5.c.** Remove all Hidden cards from this Battlefield that do not share a controller with the Battlefield.
+> **421.4.** If a facedown card would change zones or if the game ends, its owner reveals it to all players.
 
-That last line is the one people miss. Voidreaver's second XP sink is usually read as a
-rescue button; with a Merchant or a Disciple on the battlefield it is also a cantrip.
+**Four things follow, and they are the whole risk profile of this package.**
 
-**Bounce is not a move.** Gust and Star-Crossed return a unit *to its owner's hand*, and
-§446.2 is explicit: *"a card changing game zones does not in itself constitute a Move."* None
-of the three trigger off being bounced.
+1. Lose the battlefield, lose the card. It goes to your **trash**, not your hand.
+2. **A mutual wipe does it too.** If neither player has units left, the battlefield becomes Uncontrolled (§466.5.b) — and an uncontrolled battlefield is not controlled by *the same player* as your facedown card, so §323.7 trashes it. The even trade that already paid you no XP now costs you a card as well. **In this deck the even trade got worse, not better.**
+3. You **reveal it** on the way out. They learn what you had, for free.
+4. The trash is not nowhere. Evelynn, Pyke and Tideturner are all within **Tail-Cloaked Matriarch's** rebuy range (Energy ≤ 3, Power ≤ `[A]`), and Switcheroo is within **Fizz's** (Energy ≤ 3, you still pay the 2 Chaos). A trashed facedown card is a setback, not a write-off — but the rebuy plays it from the trash, not from face down, so **Evelynn's play effect does not trigger off a Matriarch rebuy.**
 
-### You can conquer without a fight
+### One more that is easy to miss
 
-Combat is not the only way to score. §348.2.a: when a **non-combat showdown** closes — one
-you opened by moving to a battlefield where the opponent has nothing — *"if only one player's
-Units remain at the Battlefield, and if that player does not already Control the Battlefield,
-that player establishes Control"*, and §348.2.a.1: *"this results in a Conquer if that player
-has not yet scored that Battlefield this turn."*
-
-So a lone unit walked onto an empty or uncontrolled battlefield **conquers**, with no combat,
-no trick, and no risk. For this deck that matters twice over: it is a point, and it is a
-**Zed conquer trigger** — a free Shadow Clone without ever putting him in a fight. If they
-have abandoned a battlefield, take it with the cheapest body you have.
-
-### The legend's buff has a ceiling
-
-*"Spend 1 XP, exhaust: [Buff] a unit."* A Buff is a counter worth **+1 Might** (§703), and
-**there can only be one Buff on a Unit at a time** (§702.3). Buffing an already-buffed unit
-does nothing and triggers nothing.
-
-The consequence for how you spend XP: **you cannot stack the legend into one threat.** Four
-XP does not make a 9-Might Zed; it makes four different units one bigger, and only if you
-have four unbuffed units. XP wants a **wide** board, which quietly argues for the token
-halves of Up from the Deep and for keeping small bodies alive rather than trading them off.
-
-The escape hatch is §702.2.b — buffs can be **spent as a cost**, which frees the slot for
-another. Nothing in this list spends them, so in practice the ceiling holds.
-
-### Rampage reaches the base
-
-*"Choose a friendly unit and an enemy unit… They deal damage equal to their Mights to each
-other."* Note what the text does **not** say: it names no location. Both units can be
-anywhere — **including their base**. It is the only card in the deck that can kill something
-that never came to a battlefield.
-
-Two further properties worth knowing:
-
-- **Pump first, then Rampage.** Punch First on your 2-Might Shadow Order Disciple makes it
-  deal 7. That converts Rampage from a trade into removal.
-- **It is not spell damage.** Rule §417.6.b.3 uses Challenge — identical wording — as its
-  worked example and says plainly that *"the damage that Challenge causes to be dealt is
-  dealt by the chosen units, not by Challenge."* An opposing Unyielding Spirit, or anything
-  else preventing spell and ability damage, **does not stop Rampage**.
-
-### A unit cannot be answered on the way in
-
-§337.2: *"If, after finalizing the Chain Item, that item is a Unit, Gear, or an ability that
-Adds resources, it resolves immediately."* A unit never sits on the chain waiting to be
-countered — it is on the board the moment it finalizes.
-
-What your opponent actually responds to is the **play effect** that follows it onto the chain
-(§383.4.a.2). This is why Vex's stun works the way it does, and it is the whole mechanism
-behind the Hidden ruling in `docs/rules-rulings.md`: the unit is already
-gone or already present before anybody gets to act.
-
-### Three-card lines
-
-**Traveling Merchant → Fizz → the spell you pitched.** Merchant discards on every move; Fizz plays a spell from the trash at ≤3 Energy, ignoring the Energy and paying only the Power. A Star-Crossed pitched to Merchant comes back for 1 Chaos and no Energy at all. This is the deck's best card-quality line and it costs nothing you were not already doing.
-
-*The hole:* **Onslaught is 4 Energy and outside Fizz's range.** It is the one card Merchant should not pitch — unless you want it in the bin for its own Flow, which is the one Burn §7 calls close to free.
-
-**Tail-Cloaked Matriarch → Fizz → a spell.** Matriarch's Empower rebuys a unit from the trash at ≤3 Energy and ≤1 Power. Fizz is 3E / 1 Chaos, so it qualifies. Matriarch plays Fizz; Fizz's own arrival plays a spell from the trash. One Empower buys a 3-Might body and a free spell.
-
-**Zed → Shadow Clone → the trash.** Zed's conquer plays a 0-Might Shadow Clone to your base, and his Action swaps his location with the clone's. The clone is therefore both a second body and an escape hatch — swap Zed home out of a fight you have lost, or swap him into one the clone opened. The clone's own attack banishes a unit from the trash for Assault 4, which makes it the fourth spender on the bin Shadow Order Disciple fills.
+**A facedown card is a legal target.** The Vendetta FAQ: *"A facedown card at a battlefield can be a target, because while the card's face is Private information, its presence as a facedown card in that zone is Public."* In this format that matters mostly for **Pack of Wonders** (`OGN-181`, 2.3% of the archive), which returns a *friendly* facedown card to hand — so it is a card that rescues your hidden cards, not one that kills them. There is no meaningful facedown-hate deck in the archive. The way your hidden cards die is by losing the battlefield, and only that.
 
 ---
 
-### The two that look like synergies and are not
+## 4. The four Hidden cards, and how to use each
 
-**Irresistible Faefolk into an occupied battlefield.** Faefolk moves an enemy unit to wherever it moved. If an enemy is already there you have built a two-on-one against yourself *and* switched Kha'Zix's bonus off, because nothing is alone any more. Faefolk is for pulling one unit onto an empty field, not for adding to a crowd.
+### Evelynn, Entrancing — the card the build is for
 
-**Star-Crossed as a rescue.** It returns a friendly unit **and** an enemy unit, and both halves are mandatory. Bouncing their blocker to save your attacker also undoes the isolation you spent a Void Assault setting up. It is a reset button, not a trick.
+> *[Hidden] · [Backline] (I must be assigned combat damage last.) · When you play me **from face down on your turn**, you may move an enemy unit **at a different location** to my battlefield.*
+
+**Read the trigger condition first.** *"When you play me from face down on your turn"* — the conditional sits immediately after the trigger, which makes it part of the **condition**, not the effect (§383.2.a.1). So the ability does not even go on the chain unless both halves are true. **Evelynn played from hand does nothing. Evelynn flipped on their turn does nothing.** She is a 2-Energy 2/2 with Backline, and that is all.
+
+That is unusually demanding, and it is why she is the card that most rewards knowing the rules: **there is exactly one way to get value out of her, and you have to set it up a turn in advance.**
+
+**What she does when you do it right.** In your Main Phase, for free, she drags a lone enemy unit from anywhere on the board to your battlefield. Then:
+
+- That unit arrives at a battlefield its controller does not control, which **applies Contested** (§190.3.a.1).
+- **§464.2.c.1: "The Attacker is the player whose unit(s) applied the Contested status."** Their unit applied it. **They are the attacker. You are the defender.**
+- If Kha'Zix is at that battlefield, his trigger reads *"When I attack **or defend**, if an enemy unit is alone here, give me +2 `[M]` this turn and **gain 2 XP**."* One dragged unit with no friends there is **alone** (§740.2.a: no other *friendly* unit at the same location). The trigger fires on defence exactly as it does on attack.
+- If you win the fight, that is **another** XP from the legend. Kha'Zix's 2 plus the win's 1 is **3 XP from a card that cost you one rune, last turn.**
+- If you lose the fight, your attackers are not recalled — you did not attack. If any of your units survive, **their** unit is recalled and it is a No Result (§466.1.a.2). You are out a body, not a battlefield.
+
+**The sequencing rule this creates, and it is absolute.** Flipping Evelynn ends your ability to do anything else. Her trigger resolves, the chain empties, a Cleanup runs, Contested is applied, combat is staged, and it opens because you are in a Neutral Open state (§323.9–§323.12). **There is no window between the drag and the fight.** So: activate the legend, buff, develop every body you intend to have in the fight, *then* flip her.
+
+**What to drag.** The single best target is a lone enemy unit sitting on a battlefield they control, because taking it away also strips their board there. The second best is a unit at their base — a unit at base is doing nothing, and dragging it into a fight it will lose is a clean two-for-one. Both are "a different location", so both are legal, and §811.1.d.2's exception means you may choose freely rather than from your own battlefield.
+
+**Backline is not decoration.** *"I must be assigned combat damage last"* (§826) — she is assigned lethal only after every one of your units without Backline. At 2 Might in a defensive fight she survives anything that does not have the damage to spare, which means the unit that set up the fight is usually still there to hold the battlefield afterwards.
+
+### Tideturner — free Reaction-speed reinforcement
+
+> *[Hidden] · When you play me, you may choose a unit you control at another location. Move me to its location and it to my original location.* **(errata'd — see §12)**
+
+He lands at the hide battlefield (§811.1.d.1), then swaps places with any unit of yours elsewhere. His original location *is* that battlefield, so **the unit you choose arrives there and Tideturner leaves.**
+
+**What that actually is: a free, 0-cost, Reaction-speed way to put a big unit into a fight.** Hide Tideturner at your battlefield. They attack it. Mid-showdown, flip him: he enters, then swaps with **Rengar at your base**, and a 6-Might body is suddenly a defender. A unit that becomes present after designations are handed out gains its designation in the following Cleanup (§464.2.c.3.a) and its attack or defend trigger *does* fire, because that is its first time gaining the designation (§383.4.e).
+
+Compare the two ways to get Rengar into a fight at Reaction speed. **Ambush** costs 5 Energy and a Body rune and requires you to have units there. **Tideturner** costs a rune paid last turn, and works with a Rengar already on the board that you cannot otherwise move (he exhausted to get to base, or he has already moved this turn). **These stack** — Tideturner brings the Rengar you already have, Ambush brings the one in hand.
+
+Three more uses worth having in mind:
+
+- **He is not restricted to reinforcing.** Swap him with a unit that is *about to die* in a fight you have lost. The unit goes to Tideturner's battlefield and Tideturner goes to theirs — read which way the swap runs before you commit; it moves both, and it is not a recall.
+- **The move he performs is a move**, so both Shadow Order Disciple (*"when I move, you may Burn 1 for +1 Might"*) and Traveling Merchant (*"when I move, discard 1, then draw 1"*) trigger. Irresistible Faefolk does **not** — her text is *"when I move **to a battlefield**"*, and Tideturner's swap sends him to wherever the chosen unit was, which may be your base.
+- **He does not exhaust anybody.** Effect-based moves are not standard moves; the exhaust cost in §144 belongs to the standard move alone. A unit that arrives by Tideturner is ready and can still use an `[E]` ability if it has Action or Reaction.
+
+### Pyke, Returned — the card that pays the Hidden tax
+
+> *[Hidden] · [Backline] · Once each turn, when an enemy unit dies while I'm at a battlefield, play a Gold gear token exhausted. (It has "[Reaction][>] Kill this, `[E]`: [Add] `[A]`.")*
+
+**This is a rune engine, and it is specifically the engine for this package.** Every hide costs `[A]`. Every Gold token *is* an `[A]`. Pyke turns each turn in which you kill something into one free hide.
+
+Four details.
+
+1. **The trigger does not require the death to be at his battlefield.** *"When an enemy unit dies while I'm at a battlefield"* — the location condition is on **Pyke**, not on the dying unit. Kill something anywhere while Pyke stands on any battlefield and you get the token.
+2. **Once each turn.** A combat that kills three of their units still makes one token.
+3. **The token enters exhausted**, and its ability costs `[E]` — exhausting it. An exhausted permanent cannot pay `[E]` (§414.1.b). **So the token is usable from your next Awaken, not the turn it appears.** Plan a turn ahead, the same way you plan the hide itself.
+4. **The token's ability has Reaction**, so once it is ready you can crack it at any moment you are asked to pay — including mid-payment of a cost, with no priority, and it resolves the instant it finalizes without passing priority (§429.2, §429.3, §444.2.c). It is a Power you can always produce.
+
+**Pyke himself is a fine body.** 3 Energy, 3 Might, Backline. Hidden makes him free. He is the one of the four whose flip is never a decision about targets — he is just a body that arrives at Reaction speed for nothing, which is exactly what you want mid-showdown when the fight is one point of Might away.
+
+**Where he wants to stand:** the battlefield you intend to keep. His engine only runs while he is at a battlefield, and Backline keeps him alive while it does.
+
+### Switcheroo — the biggest swing in the deck
+
+> *[Hidden] · [Action] · Swap the Might of two units at the same battlefield this turn.*
+
+**The arithmetic.** Let your total be `M`, theirs be `T`, the unit of yours you swap be `m`, and theirs be `t`. After the swap your total is `M − m + t` and theirs is `T − t + m`, so the gap moves by **2 × (t − m)**. Swap your smallest into their largest and you get **twice the gap** in one card.
+
+That is why it behaves so differently from a pump. **Punch First's +5 is a constant; Switcheroo's swing grows with their units.** Against Jayce, whose units average 5.42 Might against your 3.04, swapping a 1-Might Faefolk for a 7-Might unit is a **12-point** swing.
+
+Simulated 2v2 against real archetype Might distributions (method in §7):
+
+| | Kennen | Master Yi | Azir | Jayce | Rengar | Rek'Sai |
+|---|---|---|---|---|---|---|
+| no trick | 39% | 46% | 27% | **15%** | 39% | 55% |
+| + Punch First | 91% | 91% | 86% | **49%** | 88% | 97% |
+| + **Switcheroo** | **96%** | **96%** | **94%** | **97%** | **96%** | **95%** |
+
+**Read the Jayce column.** Punch First gets you to 49%; Switcheroo gets you to 97%. The previous dossier's conclusion — *"against big-unit decks the lever is removal, not Might"* — was right about Punch First and is no longer the whole story. **Switcheroo is the answer to the two matchups this deck could not previously fight.**
+
+Three things to watch.
+
+- **From Hidden, both targets are pinned to the hide battlefield** (§811.1.d.2 — nothing in its text restricts targeting elsewhere). Since the card requires two units at one battlefield anyway, that only bites when the fight you want to affect is happening somewhere else. **A hidden Switcheroo is a defensive card.** For an attack, you cast it from hand for 2E / 2 Chaos.
+- **Lethal is non-zero.** Swapping a unit down to 1 Might does not kill it; it still needs 1 damage marked (§142.4.b). And swapping down to 0 leaves a unit that **cannot die to damage at all** without something assigning it at least 1.
+- **Sandswept Tomb discounts it.** *"Each spell that chooses one or more units here that are friendly to it costs `[A]` less."* Switcheroo chooses one of yours, so cast from hand at Sandswept Tomb it is 2E / **1** Chaos.
 
 ---
 
-## 9. Mulligans — the real numbers
+## 5. The trap: removed in response
 
-**The pre-ban dossier's keep rule is unusable.** "Any two of {Shadow Order Disciple, Irresistible Faefolk, Traveling Merchant} plus a Void Assault or Punch First" is met by **7.6% of opening hands.** You cannot ship 92% of hands with a single two-card swap.
+**This is the single most important rules interaction in the build, and it is the one the published rules do not state in one place.**
 
-**The working threshold is: one 2-drop, plus a way to use it.** Simulated over 200,000 hands:
+The repo carries the ruling: [*A Hidden permanent removed in response to its own play effect loses the target*](../docs/rules-rulings.md), from Riot dev/design relayed through judge channels on 17 September 2026. Quoting the answer:
+
+> …the play effect itself doesn't contain the information of what battlefield its source was played from; it has to reference that information from its source itself. If the source is no longer on the board to have its information referenced (per 359.3.e.12), the triggered ability can't confirm that the target in question is at the correct battlefield, and thus that target will not be legal.
+
+**The general shape.** A triggered ability normally outlives its source — the ability on the chain is not the card, and its instructions still execute (§204.3.a, §359.3.f.3). What does *not* survive is **information read off the source**:
+
+> **359.3.e.12.** If an instruction checks information about a card whose location, zone, or status has changed such that that information is no longer available, the check returns null and everything computed from it is ignored.
+> **359.3.f.2.a.** When a referent checks information on execution of the instruction related to a target, and that target isn't legal, that referent will return "null" and all instructions related to it will be ignored.
+
+**Applied to your cards.**
+
+**Evelynn.** Her effect is *"move an enemy unit at a different location **to my battlefield**."* Both halves read off her: *"a different location"* is different from *hers*, and *"my battlefield"* is a referent in the §359.3.f.1 sense (*"recognized by the presence of words like 'here,' 'my,' or 'its'"*), checked on execution (§359.3.f.2). Bounce her in response to the trigger and there is no location to be different from and nowhere to move the unit to. **Nothing moves.** You have spent a card and a rune and produced a 2/2 in your hand.
+
+**Tideturner.** Same shape: *"Move me to its location and it to **my original location**."* Remove him and the destination is null.
+
+There is a genuine tension in the rules here worth knowing, because it is the kind of thing a judge will be asked. §359.3.f.2 checks referents **on execution**, which gives the null; §359.3.f.3 freezes information taken **from the trigger condition** when the trigger fires, which would preserve it — that is the Lillia case, *"when I move from a location, play a token **there**."* Tideturner's word is *"original"*, which reads like a referent to me rather than trigger-condition information, and the recorded ruling resolves the identical shape for Kennen the same way. **Play as though it does not work, and call a judge if a match hinges on it.** The practical answer does not change either way: do not flip him into open Reaction mana you have not accounted for.
+
+**Pyke and Switcheroo are not exposed.** Pyke has no play effect. Switcheroo chooses both targets at play time and reads nothing off itself — it is a spell, and a spell on the chain is not a permanent that can be bounced.
+
+### Why this bites this deck specifically
+
+> **Gust** `OGN-169` — *[Reaction] Return a unit at a battlefield with 3 `[M]` or less to its owner's hand.*
+
+**Evelynn is 2 Might. Tideturner is 2. Pyke is 3.** All three are inside Gust's range, and Gust is in **14.5%** of the archive. **Star-Crossed** (24.5%) and **Retreat** (10.6%) are Reaction-speed too; **Rebuke** (8.2%) is Action-speed and has no Might cap. **50% of all archived decks carry at least one bounce effect and 38% carry one at Reaction speed.**
+
+And Hidden makes it worse, for the reason the recorded ruling spells out: **from hand you could have played Evelynn to your base, where Gust cannot reach her. From Hidden you cannot.** §811.1.d.1 makes the battlefield compulsory. *Hidden removes the safe option.*
+
+**What to do about it.**
+
+1. **Count their open runes before you flip.** A flip is free, which makes it feel free to do at a bad moment. It is not: the card is the cost.
+2. **Flip into a tapped-out opponent**, or after they have spent their Reaction on something else. Your Void Assaults and your standard moves are the bait.
+3. **Prefer their turn for Pyke and Tideturner** — Pyke has nothing to lose, and Tideturner mid-combat is usually flipped when they have already committed.
+4. **Prefer your own Main Phase for Evelynn**, because you have no choice; her trigger requires it. Accept that she is the most exposed of the four and hide her when you have a reason, not because the slot is empty.
+5. **Board in Hard Bargain** against the decks that hold up Gust. It is the one card that protects the flip, and §14 covers when it is worth the slot.
+
+---
+
+## 6. The rune math, and the `[A]` tax
+
+Your Rune Deck is **6 Body / 6 Chaos**, unchanged. The demand it serves did change.
+
+**Mandatory pips in the main deck:**
+
+| Domain | Pips | Where |
+|---|---|---|
+| **Body** | **10** | Punch First ×3 @ 2, Sabotage ×2 @ 1, Rengar ×2 @ 1 |
+| **Chaos** | **9** | Fizz ×3 @ 1, Star-Crossed ×2 @ 1, Switcheroo ×1 @ 2, Kha'Zix @ 1, Ride the Wind @ 1 |
+| Either | 3 | Void Assault ×3 @ 1 — it is Body/Chaos, so its `[C]` reads as either (§135.2.e.6) |
+| **Any** | **up to 4** | **Hiding: Evelynn, Pyke, Tideturner, Switcheroo** |
+| Optional | 2 | Rampage ×2's additional Body cost |
+
+**Chaos demand rose from 7 to 9** — entirely Switcheroo's two pips. That is the one card in the deck that wants two Power of one colour, and it is the reason to remember the Sandswept Tomb discount.
+
+**The new line in that table is the important one.** The Hidden tax is paid in `[A]`, *any* domain. It never competes with Punch First for a Body rune or with Fizz for a Chaos one — it takes whichever rune you were least going to use. In practice that is a Body rune on a Chaos turn and vice versa, which is why the tax is much cheaper than four extra pips would suggest.
+
+**The formula, restated because it decides every turn.** To cast something costing **E** Energy and **P** Power you need
+
+```
+max(E, P) runes on the board, at least E of them READY
+```
+
+Exhausting a rune for Energy and recycling it for Power are different costs — recycling does not require the rune to be ready — so **the same rune can pay Energy and then Power in the same turn** (§164.2). What recycling costs you is next turn's board.
+
+**Three ways this deck refills the Power it spends hiding:**
+
+- **Pyke's Gold tokens** — one per turn on a kill, usable from the following Awaken, `[Add] [A]`. Purpose-built for the tax.
+- **Channelling.** 2 a turn. A hide is half a turn of it.
+- **Not hiding.** The slot holds one card. If the facedown slot is occupied, the tax is zero for that turn.
+
+**A cheap turn-two line worth knowing.** Move a 2-Energy unit to the open battlefield (that is a Conquer and 1 point when the non-combat showdown closes, §348.2.a.1), then recycle one rune to hide. You end the turn with three runes instead of four and a point on the board, and next turn a free card.
+
+---
+
+## 7. How combat resolves, and the clean-win maths
+
+**Combat is never declared.** It happens on its own in a Cleanup, at a Contested battlefield where opposing units are both present, the chain is empty and no other fight is running (§460, §323.9). You start a fight by *moving somewhere* — or, now, by *dragging something to you*.
+
+**There is no blocking and no pairing off.** Each side sums the Might of all its units and assigns that whole total across the other side's units. The attacker assigns first (§465.2.c), and cannot overkill:
+
+> **465.2.c.4.** Units cannot have more damage assigned to them than the minimum required to constitute lethal damage unless no further units remain to have damage assigned to them.
+
+That rule is a resource: a 1-Might Tentacle absorbs exactly one point and no more.
+
+**Backline changes who absorbs it.** §826: a unit with Backline must be assigned lethal **after** every one of your units without it. **Evelynn and Pyke are your two Backline units**, and in a defensive fight that is genuine protection — they are the last things to die, which means they are usually the things still standing when the attackers are recalled and you hold the battlefield.
+
+**The condition, collapsed:**
+
+> **You win outright exactly when your Might total exceeds theirs.**
+
+Kill all of theirs needs your total ≥ theirs; they kill all of yours if their total ≥ yours; so a clean win is strictly greater. Stun changes the second half only — a stunned unit contributes no Might to damage but still needs its full Might to die (§423.1.b–c).
+
+### The table
+
+Monte Carlo, 200,000 trials, **two of your units against two of theirs**, drawn from your actual unit Might distribution (24 units, mean 3.04, median 3) and from each archetype's real distribution in `data/decks.json`.
+
+| | no trick | + Punch First | **+ Switcheroo** | + Vex stun | isolated 2v1 | isolated + Kha'Zix |
+|---|---|---|---|---|---|---|
+| Kennen | 39% | 91% | **96%** | 53% | 82% | 95% |
+| Akali | 43% | 91% | **96%** | 56% | 83% | 95% |
+| Master Yi | 46% | 91% | **96%** | 58% | 82% | 95% |
+| Irelia | 61% | 98% | 95% | 74% | 92% | 99% |
+| Rengar | 39% | 88% | **96%** | 51% | 81% | 94% |
+| **Azir** | **27%** | 86% | **94%** | 37% | 76% | 96% |
+| Fiora | 38% | 92% | **95%** | 52% | 84% | 96% |
+| **Jayce** | **15%** | **49%** | **97%** | 21% | 56% | 71% |
+| Rek'Sai | 55% | 97% | 95% | 68% | 89% | 98% |
+| Vex (Gloomist) | 55% | 94% | **96%** | 67% | 87% | 96% |
+| Diana | 39% | 92% | 93% | 53% | 83% | 96% |
+
+**Five things follow.**
+
+**You still lose most untricked even fights.** 15–61%, and under 50% against eight of the eleven. Patience is arithmetic, not temperament.
+
+**Punch First is still the workhorse and still decays.** +52 points against Kennen, +34 against Jayce, because +5 stops mattering once their average body is bigger than your best one.
+
+**Switcheroo does not decay.** It is 93–97% across the board and it is *best* where Punch First is worst. One copy is not enough of a card this good; §15 argues for the second.
+
+**Isolation is still the plan.** Their one unit alone against two of yours is **76–92%**, and **94–99%** once Kha'Zix adds his +2 — against everyone except Jayce, who sits at 56% and 71%. That is what Void Assault ×3, Irresistible Faefolk ×3 and now Evelynn buy — **seven cards that choose where the fight happens**, up from six.
+
+**Azir and Jayce remain the hard boards** at 27% and 15% bare, and Jayce is the one archetype where even the isolation line only reaches 71%. Against Jayce, Switcheroo is not a nice-to-have, it is the plan.
+
+**One caveat on the Azir row.** Those 37 decks contribute only 97 units between them — Azir lists are thin on bodies by construction. The distribution is real but the sample behind it is small, and I would not bet a sideboard slot on the second decimal.
+
+---
+
+## 8. Card by card
+
+### The isolation package — seven cards that choose the fight
+
+**Kha'Zix, Mutating Horror ×1** (4E / 1 Chaos / 4 Might, Ambush) — *"When I attack or defend, if an enemy unit is alone here, give me +2 `[M]` this turn and gain 2 XP."*
+The whole deck's reason for existing. **Alone** means no other unit *friendly to it* at that location (§740.2.a) — their unit, by itself, whatever else you have there. The trigger checks its condition once per combat, at the moment designations are handed out (§383.4.e.2.a); if they are not alone at that instant it never fires that combat. Ambush lets him arrive at Reaction speed to a battlefield where you have units, and the permission is re-checked through finalization — if there are no units at all there by the time it completes, Ambush no longer authorises the play (§822.3).
+
+**Void Assault ×3** (2E / 1 Power) — *"Move a friendly unit, then move an enemy unit."*
+Still the deepest card in the deck: it makes the fight, chooses which of their units is in it, and decides who attacks. Note the parenthetical — *if they both move to a battlefield you don't control, you're the attacker*. It has **no Action keyword**, so it is Main-Phase setup and cannot be held up.
+
+**Irresistible Faefolk ×3** (2E / 1 Might) — *"When I move to a battlefield, you may move an enemy unit to that battlefield."*
+A 1-Might body that drags. Read the trigger precisely: **"when I move to a battlefield"**, not "when I move". Moving her home to base does nothing, and neither does Star Spring's move or a Tideturner swap that lands her at base.
+
+**Evelynn, Entrancing ×1** — §4. The only one of the seven that makes you the **defender**.
+
+### The Hidden package
+
+Covered in full in §4. In list terms: **Evelynn ×1, Pyke ×1, Tideturner ×1, Switcheroo ×1** — four cards, one facedown slot, 36.3% of opening hands contain at least one.
+
+### The bodies
+
+**Shadow Order Disciple ×3** (2E / 2 Might) — *"When I move, you may [Burn 1] to give me +1 `[M]` this turn."*
+The cheapest way to add Might to a fight, and it triggers on **any** move, including Star Spring's walk home and a Tideturner swap. Burn puts the top card of your deck in your trash (§440), which is a cost in a deck with **two** Flow cards and two Matriarchs — you are filling the resource, not spending it. It **can** burn you out (§440.4).
+
+**Kinkou Initiate ×3** (3E / 3 Might) — *"When you play me, draw 1 if your other units have total Might 5 or more."*
+**"Other units" is board-wide**, not per-location — base and battlefields both count, and Kinkou himself does not. Going to three copies and adding four cheap bodies makes the condition trivial from turn three. The condition sits *after* the trigger, so it is part of the effect and checked on resolution.
+
+**Fizz, Trickster ×3** (3E / 1 Chaos / 3 Might) — *"When you play me, you may play a spell from your trash with Energy cost no more than 3, ignoring its Energy cost. Then recycle it. (You must still pay its Power cost.)"* **(errata'd — §12)**
+With Traveling Merchant down to one, Fizz is the closest thing to selection this deck has left. It does not dig; it turns a dead spell in the trash into a live one for its Power cost alone. **Switcheroo is in range** (2 Energy) — you still pay the 2 Chaos, and at Sandswept Tomb only 1.
+
+**Traveling Merchant ×1** (2E / 2 Might) — *"When I move, discard 1, then draw 1."*
+Down from three. At one copy it is no longer a plan, but it is still the best partner Star Spring has: flip a unit at Star Spring, walk the Merchant home, loot. Discard-then-draw is a real order — you may discard the card you are about to replace.
+
+**Tail-Cloaked Matriarch ×2** (4E / 4 Might, Empower 2E/1 Chaos) — *"When I become [Empowered], you may choose a unit in your trash with Energy cost no more than 3 and Power cost no more than `[A]`. Play it to your base, ignoring its cost."*
+The trash rebuy, and now it has four more targets: **Evelynn, Pyke and Tideturner all qualify** (2–3 Energy, no Power), as do Fizz, Kinkou, Disciple, Faefolk and the Merchant. Kha'Zix at 4 Energy does not. Empowered is permanent until the card leaves the board (§442), and Empower may only be activated while not already Empowered (§827.1.c.1). **The rebuy plays to your base and is not "from face down", so Evelynn's trigger does not fire.**
+
+**Vex, Apathetic ×2** (4E / 4 Might, Deflect) — *"When an opponent plays a unit while I'm at a battlefield, [Stun] it. They can't move it this turn."*
+Read her narrowly: she triggers on a **unit being played**, not on one moving. Deflect makes opponents pay `[A]` more per time they choose her with a spell or ability (§809), which is often enough to price a removal spell out of reach entirely.
+
+**Rengar, Trophy Hunter ×2** (5E / 1 Body / 6 Might, Ambush) — *"I can [Ambush] to a battlefield where there are enemy units, even if you don't have units there."* **(errata'd — §12)**
+Your biggest body and the only one that can arrive at Reaction speed into a board you do not occupy. **And now Tideturner can fetch the one already on your board**, which is the interaction that makes two copies feel like three.
+
+**Zed, Without a Sound ×1** (5E / 5 Might) — *"When I conquer, play a 0 `[M]` Shadow Clone token to your base… [Action][>] 1E / 1 Chaos: Move me and a Shadow Clone you control to each other's locations."*
+Down to one. His activated ability is the deck's **only non-spell Action**, so the clone swap is available mid-showdown. Remember the clone is a **token**: tokens cease to exist in any non-board zone except the chain (§186.1), so bouncing one kills it.
+
+### The spells
+
+**Punch First ×3** (1E / 2 Body, Action) — +5 Might, and the single biggest lever in the deck by clean-win rate. At 2 Power it is permanently out of Defy's reach (§206), so it is the one spell you can always commit into open Power.
+
+**Star-Crossed ×2** (3E / 1 Chaos, Reaction) — returns one of yours and one of theirs to hand. Subtraction is worth roughly double addition for a clean win: it removes their unit's Might from the sum *and* removes a body you must kill. It costs you a body of your own, which is why pointing it at your own Tentacle token is a real line — tokens that leave the board cease to exist (§186.1), so you lose nothing.
+
+**Rampage ×2** (3E, +1 Body optional) — *"Choose a friendly unit and an enemy unit. If you paid the additional cost, give the friendly unit +2 `[M]` this turn. They deal damage equal to their Mights to each other."* The deck's only removal that does not need a combat, and it reaches units at base. No Action keyword.
+
+**Sabotage ×2** (1E / 1 Body) — hand disruption that hits **non-unit** cards. Against 83% of the field it can also take a Hidden card out of their hand before they can hide it — though not once it is facedown.
+
+**Ride the Wind ×1** (2E / 1 Chaos, Action) — *"Move a friendly unit and ready it."* The only card that repositions at Action speed. Readying is what makes it more than a move: a unit that already moved this turn can move again.
+
+**Up from the Deep ×2** (3E, Flow 3E) — two 1-Might Tentacles, and playable again from the trash for its Flow cost, after which it is banished. Flow's banish is a delayed replacement on leaving the chain (§829.1.b.1), so a Flow'd copy that gets countered goes to Banishment rather than to hand.
+
+**Switcheroo ×1** — §4.
+
+### The runes and battlefields
+
+**6 Body / 6 Chaos.** §6.
+
+**Zaun Warrens** `OGN-298` — *"When you conquer here, discard 1, then draw 1."* A free Traveling Merchant trigger every time you take it.
+
+**Star Spring** `UNL-215` — §1. The reason to bring it is that it is a free walk-home the turn you flip a hidden unit.
+
+**Sandswept Tomb** `VEN-164` — *"Each spell that chooses one or more units here that are friendly to it costs `[A]` less."* Punch First for 1E/1 Body, Switcheroo for 2E/1 Chaos, Star-Crossed for 3E/0. In a deck whose Chaos demand just went up, this is the one battlefield that fixes it.
+
+Only **one** of the three is used in any given 1v1 game (§485.4.a), chosen during setup. You register all three and you may not change the registered set between games in constructed (TR §403.4.b).
+
+---
+
+## 9. How the cards combine
+
+### The Evelynn line — three XP for one rune
+
+The reason this build exists. Turn N: control a battlefield, hide Evelynn (`[A]`). Turn N+1: activate the legend, buff whatever needs it, develop every body you want in the fight, put Kha'Zix at that battlefield, **then** flip Evelynn and drag their lone unit in.
+
+What you collect: **Kha'Zix's 2 XP** for an enemy unit alone at his battlefield (the trigger reads *attack or defend*), **+2 Might on him this turn**, **1 XP** if you win the combat, and their unit is dead. You are the defender, so nothing of yours is recalled. Total outlay: one rune, recycled a turn ago.
+
+**Why the order is not negotiable:** the legend switches off once a showdown opens, and flipping Evelynn opens one in the same Cleanup, with no window in between.
+
+### Tideturner → Rengar — the free 6 Might
+
+Hide Tideturner at the battlefield you expect them to attack. When they commit, flip him for 0 at Reaction speed; he enters there, then swaps with Rengar at your base. Rengar gains the Defender designation in the following Cleanup (§464.2.c.3.a) and adds 6 Might to a fight they had already counted. Cost: one rune, a turn ago.
+
+This is strictly additive with Rengar's own Ambush. One Rengar comes off the board, the other out of your hand.
+
+### Pyke → the tax
+
+Pyke at a battlefield, any enemy unit dies anywhere, once a turn: a Gold token. It enters exhausted, readies on your Awaken, and cracks for `[A]` at Reaction speed. **That is next turn's hide, paid for by this turn's kill.** With Pyke online the Hidden package costs you no runes at all.
+
+### Switcheroo → the biggest unit on the table
+
+Their 7-Might threat and your 1-Might Faefolk at the same battlefield is a 12-point swing for one card. From hand it is 2E / 2 Chaos, or 2E / 1 Chaos at Sandswept Tomb, or free from facedown if the fight is at the battlefield you hid it at. **Against Jayce and Azir this is the card you mulligan toward.**
+
+### Star Spring + Traveling Merchant — free loot on the flip
+
+Flip any hidden unit at Star Spring. Its trigger — *the first time a player plays a non-token unit here each turn* — lets you walk another of your units there home to base. Send the Traveling Merchant: *"when I move, discard 1, then draw 1."* You get the hidden card for free, a loot for free, and the Merchant off a battlefield you may be about to lose. **Shadow Order Disciple** also triggers on that move, though +1 Might at base is usually worthless — take the Burn only if you want a specific card in the trash for Fizz or Matriarch.
+
+### Star Spring instead of two XP
+
+The legend's walk-home costs **2 XP** and requires the unit to be **exhausted**. Star Spring costs nothing and does not care. Any turn you flip a unit at Star Spring, you have effectively banked the legend's activation for a buff instead. Over a long game that is the difference between three buffs and one.
+
+### The trash is a resource, and it just got deeper
+
+Four routes out of the trash: **Fizz** (a spell ≤3 Energy, pay its Power), **Matriarch** (a unit ≤3 Energy and ≤`[A]` Power, to your base), **Up from the Deep**'s Flow, and a Burn from Shadow Order Disciple *filling* it deliberately. A hidden card lost to a lost battlefield lands in the trash where two of those four can reach it. That does not make losing the battlefield fine; it makes it survivable.
+
+### Sabotage before they can hide
+
+Sabotage takes a **non-unit** card from their hand. Switcheroo, Zhonya's Hourglass, Hidden Blade, Temporal Breach and Back Off are all non-unit Hidden cards, and all five are top-ten in the field. Taking one pre-emptively is better than answering it later, because **once it is facedown you cannot touch it** — it is private, and nothing in the legal pool meaningfully removes an opponent's facedown card.
+
+### Two things that look like synergies and are not
+
+**Matriarch does not rebuy Evelynn's trigger.** The rebuy plays her to your base from the trash. Her condition is *"from face down on your turn"*. She arrives as a vanilla 2/2 with Backline.
+
+**Faefolk does not trigger off Tideturner or Star Spring.** *"When I move **to a battlefield**"* — a swap that lands her at base, or a walk home, is not that.
+
+---
+
+## 10. Mulligans
+
+Opening hand is **4 cards** from a **39-card** library (§116). You may set aside up to **2**, draw that many, then recycle the set-aside cards to the bottom — one pass, not a redraw (§117).
+
+**Exact hypergeometric, 4 from 39:**
 
 | | rate |
 |---|---|
-| Functional keep, pre-mulligan | **38.3%** |
-| Functional keep, after mulligan | **56.2%** |
-| No 2-drop unit at all | 33.2% |
-| Spell-flooded (≤1 unit) | 24.7% |
-| No Void Assault or Faefolk | **49.7%** |
-| Three or more cards at 4E+ | 2.2% |
+| At least one 2- or 3-Energy unit (16 in deck) | **89.2%** |
+| At least one 2-Energy unit (9) | 66.7% |
+| At least one **Hidden** card (4) | **36.3%** |
+| At least one Void Assault (3) | 28.4% |
+| At least one Punch First (3) | 28.4% |
 
-**Ship:** hands with three or more spells and one unit. Every trick modifies a combat; with no board there is no combat to modify.
+**Monte Carlo, 200,000 hands, against the previous build under the same definition** — a keep being *a 2-Energy unit plus a card that uses it* (Void Assault, Punch First, Faefolk or Evelynn):
 
-**Ship:** hands with Zed, Rengar and Matriarch and no 2-drop. The top end is unbeatable late and irrelevant on turn two.
+| | previous build | **this build** |
+|---|---|---|
+| Functional keep, pre-mulligan | 46.3% | **50.5%** |
+| Functional keep, after one mulligan | 65.9% | **70.1%** |
+| No 2-Energy unit at all | 33.4% | 33.4% |
+| Spell-flooded (one unit or none) | 21.1% | **17.8%** |
 
-**Do not ship a Void Assault.** Only six cards let you choose the fight, half your hands have none, and you cannot dig for more.
+**The list got more keepable**, by about four points, and that is the quiet benefit of the update: twenty-four units instead of twenty-three, and a lower curve.
 
-**The test to apply, in one question:** *by turn three, can I see a fight I win outright?* Not a fight I can take — a fight where all of their units at that battlefield die and one of mine lives.
+**Keep** anything with a 2-Energy unit and a way to use it. That is half of all hands and seven in ten after the mulligan.
 
----
+**Ship** hands with three or more spells and one unit. Every trick in this deck modifies a combat; with no board there is no combat to modify.
 
-## 10. Sequencing — how your turn actually goes
+**Ship** Rengar-plus-Zed-plus-Matriarch hands with no early body. The top end is unbeatable late and irrelevant on turn two.
 
-Before your Main Phase, three things happen on their own: you **ready everything** including Voidreaver; you **Hold all battlefields you control**, scoring 1 point each — so last turn's board is what pays you today; then you channel 2 runes and draw 1.
+**Do not ship a Hidden card to make a marginal keep.** You will see one in only 36% of openers, the whole package runs on having one down early, and **the tempo cost of hiding falls every turn you delay it** — a rune recycled on turn two is back by turn four; one recycled on turn six is a rune you needed.
 
-**Step 1 — decide the legend activation first.** It is the scarcest thing you own, once per turn, and the window closes the moment a showdown starts. Buff, walk something home, or bank — but know that banking spends the turn's activation on nothing.
+**Do not ship a Void Assault.** Seven cards choose where the fight happens, you have none in 44% of hands, and you cannot dig for more.
 
-**Step 2 — buff before you move, always.** A buff applied after the showdown opens is not a legal play.
-
-**Step 3 — develop.** Bodies first. They soak assignment and stop your threats being *alone*.
-
-**Step 4 — arrange, then move.** Moving is what creates combat, so everything that repositions is the trigger, not the setup. Drag the lone enemy where you want it, confirm your sum kills *all* of theirs, and only then move in.
-
-**Step 5 — hold your Actions and Reactions.** Check the keyword before you count on a card mid-fight. Your showdown-legal spells are **Punch First ×3** and **Ride the Wind ×1** (Actions) and **Star-Crossed ×2** (Reactions), plus **Kha'Zix and Rengar ×2** arriving at Reaction timing on Ambush — Rengar into their side of the board, which is the biggest thing you can do mid-showdown (§6, and the chain in §8). **Zed's activated ability is also an Action**, so the Shadow Clone swap is available mid-showdown; it is the only non-spell in that column. **Onslaught, Rampage, Sabotage, Void Assault and Up from the Deep carry no keyword at all** — they are Main-Phase setup and cannot be held up. Onslaught in particular has to be committed *before* you move, which is the cost of its +6.
-
-**Six showdown-legal spells, down from nine before the ban.** That is the clearest thing the ban took, and no amount of extra pump replaces it. Note what the six copies are: **three add Might** (Punch First), **two return a pair of units** (Star-Crossed), **one repositions** (Ride the Wind). Moving Hard Bargain to the sideboard means you hold up **no counterspell** in game one — Star-Crossed is your only mid-showdown answer to a unit, and it costs you a body of your own to use.
-
-**The one-line version:** *activate, buff, develop, arrange, move, then hold up everything with Action or Reaction on it.*
+**The test, in one question:** *by turn three, can I see a fight I win outright?* Not a fight I can take — a fight where all of their units at that battlefield die and one of mine lives.
 
 ---
 
-## 11. Matchups
+## 11. Sequencing — how your turn actually goes
 
-Share figures are **actual counts** from the 1,184-list snapshot rebuilt on 16 September — the one that first carried riftbound.gg's backfill of the Chinese circuit. They are shares of the whole archive, not of a Top 64, so they run lower than the projections this section used to carry.
+Before your Main Phase, three things happen on their own: you **ready everything** including Voidreaver; you **Hold every battlefield you control**, 1 point each — so last turn's board is what pays you today; then you channel 2 and draw 1. Hold scoring happens in the Beginning Phase, **before** Channel and Draw, so a battlefield you are about to lose is worth taking to the start of your turn.
 
-**Board plans below use Jun's ten (§12).** Every plan in the previous dossier named Abandon, Cannon Barrage or Rebuke, none of which are in this board.
+**Step 1 — activate the legend first.** It is the scarcest thing you own, once per turn, and **the window closes the moment any showdown starts.** Buff, walk an exhausted unit home, or bank — but know that banking spends the turn's activation on nothing.
 
-### Kennen, Heart of the Tempest — 6.3%, and the archetype the ban was aimed at
+**Step 2 — buff before you move or flip, always.** A buff applied after the showdown opens is not a legal play.
 
-Their core: Lightning Rush, Ride the Wind, Traveling Merchant, Nocturne, Rhasa the Sunderer, Star-Crossed, Kennen Storm of Shuriken, Minefield.
+**Step 3 — develop.** Bodies first. They soak assignment under the no-overkill rule and they stop your threats being *alone*.
 
-A self-milling tempo deck that plays from its trash much as you do. They are fast and they go wide, and both attack the premise of §2 — they are happy to trade, because trades cost you XP and cost them nothing.
+**Step 4 — hide.** After developing, before anything that might start a fight. Hiding needs an **Open State**, so it is illegal the moment a showdown is live. Check three things: do you control the battlefield, is its facedown slot empty, and can you afford the rune this turn rather than next.
 
-**Vex is your best card here**, because every unit they deploy arrives stunned and their whole plan is deployment. Rhasa at 6 Might is the one body your buffs will not out-scale; answer it with Rampage or Star-Crossed rather than racing.
+**Step 5 — arrange, then move or flip.** Moving is what creates combat, and **so is flipping Evelynn.** Drag the lone enemy where you want it, confirm your sum kills *all* of theirs, and only then commit. There is no window between Evelynn's trigger resolving and the combat opening.
 
-**Abandon was the specific tech and is no longer in the board.** Rhasa gets cheaper per card in *their* trash, so countering a spell into their *hand* rather than their trash denied the fuel. Hard Bargain does not do that — it is a tax, and a countered spell still goes to the bin. If this matchup stays common, Abandon is the card to find room for.
+**Step 6 — hold up everything with Action, Reaction, or a face down.** Your showdown-legal plays:
 
-*In:* Hard Bargain ×2, Gust ×2. *Out:* Rampage ×2, Sabotage ×2.
-
-**What the ban did to this matchup.** Stacked Deck was in 16 of their 17 archived top-8 lists at ~2.9 copies, and Riot's note named the Kennen legend as the reason. Kennen keeps Lightning Rush, so it kept an engine — but this is no longer the deck to beat, and the old In/Out here was built for a version of it that will not be at the table.
-
-### Master Yi, Wuju Bladesman — 9.0%, the most-played legend in the format
-
-Cheap, wide aggro. Master Yi averages 18.3 units a deck, Rengar **30.0**; 46% and 35% of those are 2 Might or less.
-
-Two problems. **Their untargetable density** — Master Yi runs 2.7 Deflect-or-untargetable units per deck — blanks Rampage, Star-Crossed, Gust and Void Assault, all of which choose. And **their Defy density** (Master Yi 3.1) means only Punch First is structurally safe.
-
-Wide boards are where **Up from the Deep** and the no-overkill rule earn their slot. **Angler Beast is this board's sweeper** — it returns every unit at 2 Might or less, which is 46% of their deck. Read the warning in §12 first: it catches nine of yours as well, so it is a card you play from behind, not ahead.
-
-*In:* Hard Bargain ×2, Gust ×2, Angler Beast ×1, Sabotage ×1. *Out:* Rampage ×2, Onslaught ×1, Star-Crossed ×1, Zed ×1, Tail-Cloaked Matriarch ×1.
-
-**Leave Unyielding Spirit out.** Their removal is Charm, Defy, En Garde and Discipline — moves, counters and pumps. There is no spell damage in the matchup for it to prevent.
-
-**The structural problem, stated plainly.** Their legend reads *"while a friendly unit defends alone, it gets +2 Might."* Yours pays out when *an enemy unit is alone*. You spend Faefolk and Void Assault manufacturing a lone defender; they get +2 for free on the board state you built. §8's Forbidding Waste swing is the one place you win that exchange — their -2 from the Waste cancels their legend's +2, and your Kha'Zix keeps his.
-
-### Akali, Rogue Assassin — 4.5%, and the best results in the archive
-
-Their core: 3 Defy, 3 Shuriken Flip, ~2.6 Falling Star, 3 Discipline, ~2.6 Zhonya's Hourglass, ~2.2 Long Sword, Mischievous Marai, Akali Deadly Weapon, Stellacorn Herder, Kai'Sa Survivor, Astral Heron.
-
-Absent from the previous dossier, and it should not have been: Akali holds a win at Singapore RQ, a win at Shenyang Regional Open and a #1 at King's Road Season 7 — the best result set of any archetype in the file.
-
-**The matchup is decided by their damage, not their bodies.** Shuriken Flip deals 2 for one Energy, Falling Star deals 3 twice, Marai deals 2 on arrival, and 71% of their best lists run **Void Gate** — *"spells and abilities affecting units here each deal 1 Bonus Damage."* With the Gate up, Shuriken Flip kills a 3-Might unit and each half of Falling Star kills a 4.
-
-Count what that catches in this list: nine units at 2 Might or less and five at exactly 3 — **fourteen of your twenty-three bodies die to one cheap spell.** Rengar at 6 and Zed at 5 are the two that do not.
-
-**Unyielding Spirit is the single best card you can bring**, and you have one. *"Prevent all spell and ability damage this turn"* for 1 Energy blanks their entire removal suite for a turn, including the Void Gate bonus. If this matchup is common at your locals, the second copy is the first change worth making to the board.
-
-**Do not fight at Void Gate**, and remember §8: Sandswept Tomb is the battlefield that makes *your* tricks cheaper. Given the choice, take that fight there.
-
-*In:* Unyielding Spirit ×1, Hard Bargain ×2, Gust ×2, Ravenbloom Prefect ×1, Acceptable Losses ×1. *Out:* Rampage ×2, Onslaught ×1, Up from the Deep ×2, Star-Crossed ×2.
-
-### Azir, Emperor of the Sands — 2.8%, and still the worst board you fight often
-
-**Not a big-equipped-threat deck.** It is a token swarm that *counts* equipment: roughly 15 cheap equips and only ~3.5 real units, with Arise! playing a Sand Soldier per Equipment and then readying two. Killing one gear is noise, which is why there is no gear hate in this board.
-
-Your answer is **Vex**, who stuns every Sand Soldier as it arrives and blanks the ready clause, plus **Angler Beast** to sweep what lands — a token swarm is the one board where its symmetry does not hurt you. At 27% baseline clean-win this is the fight you most need a trick for.
-
-*In:* Gust ×2, Angler Beast ×1, Hard Bargain ×2. *Out:* Rampage ×2, Onslaught ×1, Zed ×1, Tail-Cloaked Matriarch ×1. **Vex stays in.**
-
-### Irelia, Blade Dancer — 5.2%, and hit hard by the ban
-
-The Calm interaction deck. **Defy** counters a spell costing no more than 4 Energy **and** no more than one rainbow Power — the second clause is the one that matters:
-
-| Structurally immune (Power > 1) | Counterable |
+| | |
 |---|---|
-| **Punch First** (1E / **2 Body**) | Sabotage, Ride the Wind, Void Assault |
-| **Switcheroo** (2E / **2 Chaos**, SB) | Rampage, Star-Crossed, Up from the Deep, **Onslaught** |
+| **Action** | Punch First ×3 · Ride the Wind ×1 · **Switcheroo ×1** · Zed's clone swap |
+| **Reaction** | Star-Crossed ×2 |
+| **Ambush (Reaction while played that way)** | Kha'Zix ×1 · Rengar ×2 |
+| **Facedown** | whatever is in the slot — free, Reaction speed, from the turn after you hid it |
+| **No keyword at all** | Rampage · Sabotage · Void Assault · Up from the Deep — Main Phase only, cannot be held up |
 
-**Your best combat trick cannot be countered**, and rule 206 makes that structural rather than incidental — a discount never drags a spell into Defy range and never lifts one out. Play around Defy with everything else, and let Punch First be the card you commit into open Power.
+**Seven showdown-legal spells, up from six**, plus the facedown slot. That slot is the real gain: it is a card you already paid for, at Reaction speed, that does not cost you a card in hand.
 
-*In:* Hard Bargain ×2, Gust ×2, Sabotage ×1, Switcheroo ×1. *Out:* Rampage ×2, Up from the Deep ×2, Onslaught ×1, Star-Crossed ×1.
-
-### Rek'Sai, Void Burrower — 5.4%, untouched by the ban
-
-Wide and small (25.8 units a deck, 49% at ≤2 Might) with 2.8 untargetable bodies, but no counterspells at all. Angler Beast is excellent here and Hard Bargain is dead — leave the counters in the box.
-
-*In:* Gust ×2, Angler Beast ×1, Switcheroo ×1. *Out:* Rampage ×2, Sabotage ×2.
-
-### Dazzling Aurora ramp — the matchup you are least built for
-
-**5.9% of the archive runs Dazzling Aurora, at an average of 2.8 copies**, and it spans shells rather than sitting in one: Battle Mistress (6), Jayce (5), Grand Duelist (4), Relentless Storm (4). Eighteen of those twenty-five lose nothing to the ban. Treat it as an archetype, not a package — and expect it to grow into the room Kennen vacates.
-
-**Dazzling Aurora** (9E / 2 Body, Gear) — *"At the end of your turn, reveal cards from the top of your Main Deck until you reveal a unit. Play it, ignoring its cost, and recycle the rest."*
-
-*Ignoring its cost* is the whole card. What it is paying for:
-
-| Cheated in | Real cost | Might |
-|---|---|---|
-| **Elder Dragon** | 12E / 4 Power | **10** |
-| **Baron Nashor** | 10E / 3 Power | **12** |
-| Kadregrin the Infernal | 9E / 2 Power | 9 |
-| Gentle Gemdragon | 8E / 0 Power | 8 |
-| Deadbloom Predator | 8E / 2 Power | 8 |
-| Rift Herald | 8E / 1 Power | 7 |
-
-The composite: **9.2 units a deck, average Might 7.41, median 7, and only 2% at 2 Might or less.** That is the largest board in the format by a distance — your own top end is Rengar at 6.
-
-**Do not try to win a combat against a resolved monster.** §4's model prices two of your units against two of theirs at **1% clean wins with no trick, 17% with Punch First, and 3% with a Vex stun** — the worst row in the table by a factor of twenty, and the only one no card in your deck meaningfully moves. A stun barely helps because 423.1.c still makes you deal a 12-Might Baron twelve damage to kill it. You cannot get there. Two cards make it worse than that arithmetic suggests:
-
-- **Elder Dragon** reads *"Any amount of your damage is enough to kill enemy units."* **That switches off rule 465.2.c.4 for its entire side** — minimum lethal against everything you own becomes 1, so its 10 Might kills **ten** of your units. Up from the Deep, the Tentacle wall, lever four, the whole no-overkill tax: all of it evaporates against one card. See §4.
-- **Baron Nashor** reads *"I can't be chosen by enemy spells and abilities"* and *"Other friendly units have +2 Might."* **Star-Crossed, Rampage and Void Assault are all dead cards against it** — every one of them chooses. It also arrives on its own Baron Pit token, which *"units can move here from anywhere."*
-
-**So the plan is the clock, not the fight.** Nine units a deck, most of them 8–12 Energy, means that before Aurora lands their board is nearly empty — and a near-empty board is the easiest isolation in the format, with a lone enemy sitting exactly on Kha'Zix's trigger. You are not racing a fast deck; you are racing a nine-Energy gear. Hold battlefields, bank XP, and be lethal before it resolves.
-
-**What actually answers what:**
-
-- **Sabotage is your best card here, and you already run three.** Gear is a **non-unit card**, so Sabotage takes Aurora straight out of their hand — the cheapest possible answer to a nine-drop, and proactive rather than reactive. Board the third copy in.
-- **Bounce answers every monster except Baron.** Aurora plays them *ignoring cost*; return one to hand with **Star-Crossed** and it is a **brick** at 10–12 Energy, permanently uncastable. Because Aurora reveals off the **Main Deck**, a card sitting in their hand is also out of the engine pool for good. You do not just answer it, you delete it. Star-Crossed is the only bounce in this configuration, so the two copies are load-bearing — do not board them out here.
-- **Your counterspells do nothing to the engine.** Hard Bargain counters a *spell*. Aurora is a Gear. Ravenbloom Prefect is the card that answers it, and §12 explains why it has to be on the board first.
-- **Vex still earns her slot** against anything they hard-cast, and she is the one card that ignores Baron's untargetability — she does not choose (§6). One caveat worth confirming: Aurora's trigger fires *"at the end of your turn"*, and 423.1.a.2 drops Stunned status during the end-of-turn cleanup, so a stun applied to an Aurora-cheated unit may expire almost immediately. Against hard-cast monsters she is unambiguous.
-- **Rampage is your worst card here.** It is mutual damage into an average of 7.41 Might — your unit dies every time.
-
-*In:* Ravenbloom Prefect ×1, Acceptable Losses ×1, Sabotage ×1, Hard Bargain ×2. *Out:* Rampage ×2, Up from the Deep ×1, Star-Crossed ×2.
-
-**Ravenbloom Prefect is the card, and it is not reactive.** It banishes a gear *as it is played*, so it has to be on the board before the Aurora resolves — deploy it on turn three and hold it. Acceptable Losses lets *them* choose which gear dies, so against three copies of Aurora it is the weaker half of the pair.
-
-### Jayce, Defender of Tomorrow — 3.1%, the hardest board you will actually have to fight
-
-Distinct from the Aurora shell even though five of these lists run it. Jayce is the only gear deck whose gear is **expensive and few** — 9.2 pieces at an average of 3.5 Energy, 37% at 2 or less — which is exactly the profile gear hate is supposed to answer.
-
-**It still is not worth boarding gear hate.** Their units average **4.27 Might, the biggest of any archetype you regularly face** — above Azir's 3.72. §4 prices the fight at **29% untricked and only 71% with Punch First**, where the same trick takes Kennen to 87%: their bodies are big enough that +5 stops closing the gap. But the units are what beat you, and returning an equipped unit to hand undoes the whole gear investment in one card, where killing one gear shaves a point or two off a board that still has the unit on it.
-
-**The number that decides the matchup: zero Defy, 1.1 Deflect.** It is the friendliest removal environment in the format. Every subtraction spell you own resolves, every time. Against Irelia you play around Defy and lean on Punch First; here you do the opposite — **lead with subtraction, not pumps**, because everything lands and their units are too big to out-pump anyway.
-
-Only 10.5 units a deck, so each one you remove is a far bigger share of their board than one of Rengar's thirty.
-
-*In:* Ravenbloom Prefect ×1, Acceptable Losses ×1, Sabotage ×1, Gust ×2. *Out:* Rampage ×2, Up from the Deep ×1, Star-Crossed ×2.
+**The one-line version:** *activate, buff, develop, hide, arrange, move or flip, then hold up everything with Action, Reaction or a face down.*
 
 ---
 
-## 12. The sideboard
+## 12. Errata that change your cards
 
-Jun's ten, eight names. **Five of these are cards the previous build's dossier argued against**, and that disagreement is the most interesting thing on the page — so it is set out honestly below rather than quietly dropped.
+Card text throughout this dossier is `data/cards.json` with `data/errata.json` applied. Three cards in this list are errata'd, and one of the three matters a great deal.
 
-| | Card | For |
-|---|---|---|
-| 2 | **Gust** (1E / 0P, Reaction) | anything at 3 Might or less, at Reaction speed, for one Energy |
-| 2 | **Hard Bargain** (2E / 0P, Reaction) | the counterspell matchups — and your only counterplay to Defy |
-| 1 | **Unyielding Spirit** (1E / 1 Body, Reaction) | prevents *all* spell and ability damage this turn |
-| 1 | **Sabotage** (1E / 1 Body) | third copy; strips a Defy or a Dazzling Aurora before you commit |
-| 1 | **Acceptable Losses** (1E / 0P, Action) | each player kills a gear |
-| 1 | **Switcheroo** (2E / 2 Chaos, Hidden, Action) | swap the Might of two units at one battlefield |
-| 1 | **Angler Beast** (5E / 1 Chaos, 5 Might) | returns **all** units at 2 Might or less |
-| 1 | **Ravenbloom Prefect** (3E / 0P, 3 Might) | banish itself to banish a gear as it is played |
+**Tideturner** `OGN-199` — **functional, and it is the reason he is playable from Hidden at all.**
+> **Was:** *When you play me, you may choose a friendly unit. Move me to its location and it to my original location.*
+> **Now:** *When you play me, you may choose **a unit you control at another location**. Move me to its location and it to my original location.*
 
-**On the disagreement.** The previous dossier cut Unyielding Spirit on the grounds that *"Kennen, Rengar, Azir and Irelia run zero spell-damage sources."* That was true of the field it was written against. It is not true of the field that actually turned up: **Akali** runs 3 Shuriken Flip, ~2.6 Falling Star, ~2 Mischievous Marai and a ping on her own move, and 71% of her best lists run **Void Gate**, which adds 1 to every instance of that damage. Against that deck Unyielding Spirit blanks a whole turn of removal for one Energy. The objection was field-dependent and the field moved — Jun is right and the old note was right at the time.
+The Vendetta FAQ explains the change directly: *"Tideturner is receiving minor errata, both to restrict its targeting to a unit you control and to make sure that it can target a unit at another location under these rules."* Without the words **at another location**, §811.1.d.2 would pin his target to his own battlefield and the card would do nothing from Hidden. With them, the exception applies and the target is free. §811.1.d.2 now uses him as its own worked example.
 
-The same correction applies to the gear hate. The old note priced **Acceptable Losses** and **Ravenbloom Prefect** against Jayce alone and called them narrow. In the current field they are live in three matchups, not one: Master Yi runs ~2.3 Zhonya's Hourglass, Akali runs Zhonya's plus ~2.2 Long Sword, and Jayce runs eleven gear including three Dazzling Aurora.
+**Rengar, Trophy Hunter** `UNL-120` — functional.
+> **Was:** *I can be played to a battlefield where there are enemy units.*  **Now:** *I can **[Ambush]** to a battlefield where there are enemy units, even if you don't have units there.*
 
-**Where the old objection survives.** *"Angler Beast catches nine of your own units plus every token."* Count them in this list: Irresistible Faefolk ×3, Traveling Merchant ×3, Shadow Order Disciple ×3 — **exactly nine**, plus both Tentacles off Up from the Deep. It is a board wipe you are on the wrong side of unless you have already committed the big half of your deck. Bring it in against Akali and Yi, where their 0-to-2 Might density is higher than yours; never bring it in on the draw against a deck that develops after you.
+The permission is now explicitly tied to Ambush, which means it carries Ambush's Reaction timing and Ambush's re-check through finalization (§822.3).
 
-**And on Acceptable Losses specifically:** *they* choose which gear dies. Against Jayce's three Dazzling Aurora that means you are unlikely to hit the one that matters. Ravenbloom Prefect is the card that answers the Aurora, because it banishes the gear **as it is played** — but it has to already be on the board, so it is a card you deploy on turn three against a ramp deck and hold, not a reactive answer you draw into.
-
-**Copy caps:** Sabotage is 2 main + 1 board = **3**, and maxed. Hard Bargain is 0 main + 2 board = 2, so a third copy is available if the counterspell matchups prove worse than expected.
-
-**The sideboarding problem you will actually have.** Against Master Yi and Akali, the cards that come in are Hard Bargain ×2, Gust ×2, Unyielding Spirit, Angler Beast, Sabotage and — because both run gear — the two gear answers. That is **ten cards for those two matchups alone**, and you cannot cut ten. Prioritise in this order: Hard Bargain, Unyielding Spirit, Gust, then the gear hate. What comes out is the top end you cannot afford to durdle with: the second Zed, then Onslaught, then a Tail-Cloaked Matriarch.
+**Fizz, Trickster** `SFD-140` — cosmetic. *"Recycle that spell after you play it"* became *"Then recycle it."*
 
 ---
 
-## 13. What I'd test
+## 13. Matchups
 
-**A second Unyielding Spirit in the board.** It is the single best card against Akali, whose damage suite plus Void Gate kills fourteen of your twenty-three bodies (§11), and you have one copy. If Akali is common at your locals this is the first change to make.
+**Share figures are actual counts** from the 1,226-deck archive rebuilt 20 September, covering 22 July to 20 September. Two caveats you should carry into every line below.
 
-**A Hard Bargain back in the main, over Onslaught.** Your six showdown-legal copies are three pumps, two bounces and a move — no counterspell at all in game one (§10), in a format where the two most-played decks both hold three Defy. The third copy is available because Jun's board only uses two. The cost is the biggest number in the deck, and §5 prices that honestly.
+**The post-ban field is four days old.** Only 506 of those 1,226 decks are dated 18 September or later, and 466 of those are from two days. The post-ban ordering is directionally interesting and statistically thin — Vex/Gloomist leads it at 6.3% having been eighth in Tier 2 the week before. I report both windows and lean on the full one.
 
-**Grove of the God-Willow over Zaun Warrens.** *"When you hold here, draw 1"* is a repeating draw engine costing **zero deck slots**, and it is in 9% of archived decks — comparable support to Warrens' own 11%. The cost is symmetry: they draw when they hold it.
+**riftbound.gg's Vendetta week 4 tier list (20 September) puts Kha'Zix Voidreaver at Tier 3, rank 4** — sixteenth of the forty-nine ranked archetypes. That is the honest starting position, and the archive agrees: **14 Voidreaver decks out of 1,226, four of them tournament-vouched.** The archetype has ranged between 6 and 18 decks on every day the history file records since 27 August, with no trend in either direction. This is an off-meta deck and the update does not change that.
 
-**A third Kinkou Initiate**, if you find the condition live more often than the 80%-at-two-bodies figure suggests.
+### Kennen, Heart of the Tempest — Tier 1, 7.2% overall / 4.2% post-ban
 
-**The two things to watch on your first few nights:** whether you flood on 3-drops, and whether you ever wish you had a third Punch First. Those are the two calls most likely to be overturned by reps.
+Their core: Lightning Rush, Ride the Wind, Traveling Merchant, Star-Crossed, Kennen Storm of Shuriken. A self-milling tempo deck that plays from its trash much as you do, goes wide, and is happy to trade — which costs you XP and costs them nothing.
+
+**Clean win 39% bare, 91% with Punch First, 96% with Switcheroo.** Mean unit Might 3.26.
+
+They lost more to the ban than you did (75% of Kennen lists in the archive ran a now-banned card, against 36% of Voidreaver's) but kept Lightning Rush, so their digging went from six cards to three rather than to zero.
+
+**The Hidden consideration:** Kennen lists carry Star-Crossed at high rates and **Kennen, Keeper of Balance is itself a Hidden card in 5.4% of the field.** Assume a Reaction is up. Flip Pyke, never Evelynn, into open Chaos.
+
+### Master Yi, Wuju Bladesman — Tier 1, 9.0% overall, the most-played legend in the archive
+
+110 decks, 90 of them tournament-vouched. Cheap, wide, Calm/Body, and it lost almost nothing to the ban — 4% of its lists ran a banned card. Mean unit Might 2.97.
+
+**Clean win 46% bare, 91% with Punch First, 82% isolated.** The best raw matchup of the Tier 1 decks for you, because their units are small enough that +5 is decisive.
+
+**Plan:** this is the matchup where going wide beats going tall. Up from the Deep's Tentacles tax their assignment; Kinkou Initiate turns on trivially. Hide **Switcheroo** only if they have a single large unit — against a genuinely flat board it is your worst Hidden card.
+
+### Akali, Rogue Assassin — Tier 1, 4.3% overall / 4.0% post-ban
+
+Fury/Calm, mean Might 3.08, and **zero** of its 53 archived lists ran a banned card — so expect the share to hold or rise. **43% bare, 91% with Punch First, 96% with Switcheroo.**
+
+### Irelia, Blade Dancer — Tier 1, 5.6% overall
+
+Mean Might **2.36**, the smallest board you fight regularly, and **61% bare** — your best matchup on this table. Punch First takes it to 98%. Irelia is Calm/Chaos and was hit hard by the ban: 68% of her archived lists ran a banned card.
+
+**Note the one row where Switcheroo is worse than Punch First** — 95% against 98%. Against genuinely small boards the swap has nothing to swap into. Board it out, keep the pumps.
+
+### Azir, Emperor of the Sands — Tier 2, 3.0% overall / 3.0% post-ban
+
+**27% bare.** Their units average 3.68 Might, median 4, they run very few of them, and they are among the hardest of the common boards to fight straight. Punch First reaches 86%; **Switcheroo reaches 94%.**
+
+**Plan:** do not enter a fight you have not already rigged. Isolation gets you to 76% and isolation-plus-Kha'Zix to 96%. Hide Switcheroo at the battlefield you intend to defend.
+
+### Jayce, Defender of Tomorrow — Tier 2, 3.7% overall / 3.2% post-ban
+
+Mean Might **5.42**, median 5 — the biggest board you will actually have to fight, from only 308 units across 45 lists. **15% bare, 49% with Punch First, 56% isolated, 71% isolated-plus-Kha'Zix.** Every one of those is a losing or coin-flip number.
+
+**And 97% with Switcheroo.** Swapping your 1-Might Faefolk into a 7-Might Jayce unit is a twelve-point swing that no other card in your deck approximates.
+
+**Plan:** this is the matchup the update fixed. Board in the **second Switcheroo**. Keep Faefolk — their small bodies exist to be swapped up. Do not try to win on Might; win on the swap and on Rampage. **Jayce is Mind/Body**, which makes him one of only two archetypes on this page that Decree of Strength can touch — bring both copies.
+
+### Rengar, Pridestalker — Tier 2, 3.6% post-ban
+
+Mean Might 3.33 and effectively untouched by the ban (3% exposure), so expect more of them — they are 2.4% of the full archive but 3.6% of the post-ban window. **39% bare, 88% with Punch First, 96% with Switcheroo.**
+
+### Rek'Sai, Void Burrower — Tier 2, 4.9% overall
+
+Mean Might 2.63, and untouched by the ban. **55% bare, 97% with Punch First** — a good matchup on the numbers. Their Deathknell units *want* to die, so clean wins are harder to convert than the table implies: killing their board is not the same as beating them.
+
+**The one battlefield note in this dossier:** Rek'Sai wants units returning home, and **Star Spring's trigger is symmetric.** Against Rek'Sai, bring Zaun Warrens or Sandswept Tomb instead.
+
+### Vex, Gloomist — Tier 2, 6.3% of the post-ban window
+
+The archetype that jumped hardest after the ban — 3.2% of the full archive, 6.3% of the four days since. Read that gain carefully: only 7 of its 39 archived lists are tournament-vouched. Calm/Chaos, mean Might 2.65. **55% bare, 94% with Punch First.** You play two Vex, Apathetic yourself, so the mirror on that card is worth knowing: Deflect taxes *opponents'* spells, so your Rampage into their Vex costs `[A]` more.
+
+### Fiora, Grand Duelist — Tier 2, 4.3% post-ban
+
+Body/Order, mean Might 3.27. **38% bare, 92% with Punch First, 95% with Switcheroo.** A standard midrange fight decided by whether you can see the trick.
+
+### What you are least built for
+
+The archive still contains ramp lists whose average unit dwarfs anything here. Against a board where minimum lethal is switched off — Elder Dragon's *"any amount of your damage is enough to kill enemy units"* — every line in §7 that depends on cheap bodies taxing their assignment is false. Tentacles stop absorbing, Faefolk stops being a body, and Switcheroo is the only card that still does its job. Answer the enabler by **returning it to hand**, which is what Rebuke is in the board for.
+
+---
+
+## 14. The sideboard
+
+**1 Ravenbloom Prefect · 1 Acceptable Losses · 2 Decree of Strength · 2 Gust · 1 Hard Bargain · 1 Rebuke · 1 Sabotage · 1 Switcheroo**
+
+Ten of ten. Swaps are one-for-one between games, you may change your Chosen Champion, and you may **never** change runes, Legend or battlefields after registration (TR §403.4.b). No sideboarding before game 1 or after a draw.
+
+**Switcheroo ×1** — the most important card in the board, and it should probably not be in the board (§15). In against Jayce, Azir, Rengar and anything with a single large threat. Out against Irelia and flat Master Yi boards.
+
+**Gust ×2** (1E, Reaction, returns a unit at a battlefield with 3 Might or less) — does three jobs. It manufactures the **alone** condition Kha'Zix needs by removing the second unit; it answers their cheap threats; and it is the mirror-image of the card that beats your own Hidden flips, so knowing how it plays from their side is worth something.
+
+**Hard Bargain ×1** (2E, Reaction, Repeat 2E, counter unless they pay 2) — **the card that protects a flip.** Against Kennen, Irelia and anything else holding up Gust, this is the difference between Evelynn working and Evelynn being a 2/2. One copy is thin for that job; see §15.
+
+**Rebuke ×1** (2E / 2 Chaos, **Action**, return *any* unit at a battlefield to hand) — Gust with no Might cap. In against Jayce, Azir and anything that cheats a large unit into play, where returning it to hand is strictly better than killing it because they must recast it.
+
+**Sabotage ×1** — third copy, taking you to the legal maximum of three across main and board. In against combo and against decks whose Hidden cards you would rather take from hand.
+
+**Acceptable Losses ×1** (1E, Action, each player kills one of their gear) — gear hate. **Note the interaction with your own Pyke:** it is symmetric, and a Gold token is gear. Crack the token first, then cast it.
+
+**Ravenbloom Prefect ×1** (3E / 3 Might, *"when an opponent plays a gear, you may banish me to banish it"*) — a body that doubles as gear removal.
+
+**Decree of Strength ×2** (1E, no Power: they reveal their hand, you make them recycle a **Mind** card) — narrow, and aimed more precisely than it first looks. A card is only in their deck if their Legend's identity contains its domains (§103.1.b.4), so Decree is a **literal blank** against nine of the eleven archetypes in §13: Kennen (Order/Chaos), Akali (Fury/Calm), Master Yi (Calm/Body), Irelia (Calm/Chaos), Rengar (Fury/Body), Azir (Calm/Order), Fiora (Body/Order), Rek'Sai (Fury/Order) and Vex (Calm/Chaos).
+
+The two it is live against are **Jayce (Mind/Body)** and **Diana (Mind/Chaos)** — 3.7% and 4.4% of the archive, 8.1% together — and Jayce is the single worst board in §7. So it is not a bad card, it is a **hyper-specific** one, and it is aimed at the right target. Whether that justifies two of ten slots is the question §15 asks.
+
+---
+
+## 15. What I'd test
+
+**1. The second Switcheroo belongs in the main deck.** It is 93–97% across every archetype measured and it is the only card in the list that fixes Jayce and Azir. One copy in a 39-card library is in your opening hand 10.3% of the time and in your first nine cards 23% of the time — for the best card in the deck against your worst matchups, that is too rare. **Move the board copy main, over the second Sabotage**, and register the third copy in the board.
+
+**2. Traveling Merchant at one is too few.** The deck lost Stacked Deck, then lost two Merchants, and Fizz is not selection. Star Spring and Zaun Warrens both exist to trigger the Merchant, and at one copy those battlefields are doing less than they should. **Test Merchant 1 → 2, cutting the Ride the Wind.**
+
+**3. One Decree of Strength, not two.** Live against Jayce and Diana and structurally dead against the other nine, and one copy already answers the single card you most want gone. **Test the freed slot as a second Hard Bargain** — protecting a flip against the Gust decks is worth more than the second narrow discard, and Hard Bargain's Repeat gives it a late-game mode.
+
+**4. Is one Pyke enough to matter?** His engine is excellent and a single copy reaches your hand in the first nine cards 23% of the time. The argument for a second is that he is the only card that pays the Hidden tax; the argument against is the single facedown slot. **Test Pyke 1 → 2 over the second Vex** and see whether the slot competition is as bad in practice as it looks on paper.
+
+**5. Does Evelynn justify her demands?** She needs a controlled battlefield, a spare rune, a turn of setup, an empty facedown slot, a lone enemy unit worth dragging, and an opponent without Gust. Every one of those is likely; all six at once is not. The payoff when they line up is three XP for a rune. **Track how many games she actually converts.** If it is under a third, the slot is a Kinkou Initiate.
+
+**6. Star Spring against Rek'Sai.** The symmetric trigger reads like a real liability there and I have not tested it. Zaun Warrens is the obvious substitute.
 
 ---
 
 ## Sources and method
 
-**Rule text** is `docs/rules-full.md` — Riot's Core Rules and Tournament Rules, verbatim, generated by `scripts/build-rules.mjs` from the PDFs on the Rules Hub. Every unqualified "rule N" here is a **Core Rules** entry; the two documents number independently and several numbers collide. Every citation in this dossier was checked against that file rather than from memory.
+**Rule text** is `docs/rules-full.md` — Riot's Core Rules and Tournament Rules (2026-07-16, Vendetta update effective 2026-07-24), verbatim, generated by `scripts/build-rules.mjs` from the PDFs on the Rules Hub. Every unqualified "rule N" or `§N` here is a **Core Rules** entry; the two documents number independently and several numbers collide. Every citation was checked against that file rather than from memory, working from `docs/rules.md` first.
 
-**Card text** is `data/cards.json` with `data/errata.json` applied on read. Two cards in this list are errata'd: **Rengar, Trophy Hunter** (functional — Ambush as a verb) and **Fizz, Trickster** (cosmetic).
+**Where the FAQ outranks the rules**, the FAQ is what is quoted. `docs/rules-faq.md` carries the Vendetta FAQ of 2026-08-14, which states that where it differs from the Core Rules Document it takes precedence until a newer Core Rules Document is published. The Hidden restrictions in §3 and the Tideturner errata in §12 are both FAQ material.
 
-**Archetype data** — Might distributions, unit counts, Deflect and Defy density, card adoption rates — comes from `data/decks.json`, 424 archived decks over 2026-07-12 to 09-10. That archive is North-American-and-online, so it is reliable for *composition* and unreliable for *share*; share figures are anchored to the Singapore and Barcelona RQ Top 64 standings and adjusted for ban exposure.
+**The Hidden-removed-in-response ruling in §5** is `docs/rules-rulings.md`, dated 2026-09-17: Riot dev/design relayed through judge channels, confirming an existing CN ruling. **Its provenance is secondary** — the primary document has not been read directly from this repo — and it expires at the next Core Rules update, where dev stated the Hidden rules "don't currently express that with 100% clarity" and "we will make this clearer in a future rules update". Nothing in §5 can be derived from the published rules alone, which is why that file exists.
 
-**Simulations** are hypergeometric where a closed form exists and Monte Carlo at 200,000 trials otherwise. The combat model implements rules 465.2 and 466.3 directly: clean win when your Might exceeds their damage total, with stun removing a unit's contribution under 423.1.b.
+**Card text** is `data/cards.json` with `data/errata.json` applied on read (catalog 2026-09-20). Three cards in this list are errata'd and all three are named in §12.
 
-**Ban information** is Riot's announcement of 15 September 2026, effective 18 September. `data/banned.json` was regenerated on 15 September and now carries both Stacked Deck and Ekko, Recurrent, each tagged `effective: 2026-09-18` — announced, but not enforceable until that date. The upstream banned flag had not caught up, so `scripts/build-banned.mjs` carries announced bans itself.
+**The decklist** was read live from the app's Supabase state on 22 September 2026 via `scripts/rift deck "Kha'Zix Midrange"`, not from a cached copy. The list is complete against the collection: nothing to acquire.
 
-**What this dossier does not claim.** It does not claim the deck is better than it was. Stacked Deck was doing real work on a four-card hand, nothing in Body/Chaos replaces it, and the honest expectation is that this list is a little weaker and a little harder to pilot than the one that posted 83% at Barcelona. The gap between the archetype's 57% and a strong pilot's 83% was already reps rather than cards. It just got wider.
+**Archetype data** — Might distributions, card adoption, bounce density, Hidden density — comes from `data/decks.json`: **1,226 decks over 2026-07-22 to 2026-09-20**, of which 720 are tournament-vouched and 506 fall after the 18 September bans. **Every archetype join in this dossier is keyed on the legend's name, not its collector number**, because alternate printings of a legend carry unrelated numbers — Heart of the Tempest is `VEN-155` *and* `VEN-197`, Voidreaver is `UNL-201` *and* `UNL-236`. A number-keyed join silently drops a third of Kennen's lists and a fifth of yours, and the first draft of this page was built that way before the counts were checked against `ln`. Upstream's archive is North American, online and Chinese-circuit; `data/events.json` records 1,375 events and **zero** of them resolve to decklists, so the archive is reliable for *composition* and weak for *share*. Tier placement is riftbound.gg's curated Vendetta week 4 list, scraped 2026-09-20.
+
+**Simulations** are hypergeometric where a closed form exists and Monte Carlo at 200,000 trials otherwise. The combat model implements §465.2 and §466.3 directly: a clean win when your Might total strictly exceeds theirs, with stun removing a unit's damage contribution but not its Might for lethal purposes (§423.1.b–c). The Switcheroo column assumes optimal choice of which two units to swap. Your own Might distribution is the 24 units of this list weighted by copies (mean 3.04); theirs is each archetype's units in the archive weighted by copies. **The mulligan comparison in §10 uses one definition applied to both lists** — it does not reproduce the previous dossier's figure, which used a different keep rule, and the two are not comparable.
+
+**What this dossier does not claim.** It does not claim the deck is now good. riftbound.gg has it at Tier 3, the archive has fourteen of it out of 1,226, and the archetype has not moved in a month. What the update changes is the shape of its bad matchups: Jayce and Azir went from unwinnable-on-Might to a single card, and the deck acquired a resource — the facedown slot — that costs a rune and pays a whole card. That is a real improvement and it is not a tier change. It also does not claim the Tideturner referent question in §5 is settled; the recorded ruling covers the identical shape for a different card, and a match that turns on it deserves a judge.

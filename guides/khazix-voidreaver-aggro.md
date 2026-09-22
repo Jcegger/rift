@@ -11,7 +11,9 @@ date: 2026-09-16
 **Collection status:** 2 cards still to get, $41.58 gap
 **Built from:** Jun's post-ban aggressive list, 16 September — saved in the app as `Kha'Zix Aggro (Jun, post-ban)`
 
-**This is a companion to the [post-ban midrange dossier](khazix-voidreaver-postban.md), not a replacement for it.** The two lists share 34 of 40 cards, the same legend, the same rune base and the same sideboard. Everything that dossier establishes about combat resolution (§4), the XP rules (§2), keywords (§6) and the clean-win maths still applies here unchanged, and is not repeated. This page is about the six cards that differ and what they change.
+**This is a companion to the [midrange dossier](khazix-voidreaver-postban.md), not a replacement for it.** Everything that dossier establishes about combat resolution (§7), the XP rules (§2), keywords (§8) and the clean-win maths still applies here unchanged, and is not repeated. This page is about the cards that differ and what they change.
+
+**Note, 22 September:** Jun updated the midrange list after this page was written, and the two builds have drifted apart. They now share **33 of 40** cards; the sideboards are **no longer identical**; the midrange list has cut Onslaught, dropped Forbidding Waste for Star Spring, and added four **Hidden** cards. The six-card framing below is against the *previous* midrange list and is kept because it is still the clearest way to explain what this build is doing. Cross-references to that dossier's section numbers have been updated; where a paragraph below describes what midrange runs, read it as describing the September build of it.
 
 ---
 
@@ -25,7 +27,7 @@ date: 2026-09-16
 
 **What it actually does differently.** The midrange list earns XP the way the legend intends: win a combat, gain 1. This one adds **Mister Root, which gains 2 XP every time it moves to a battlefield** — twice a combat win, for no combat at all — and three Ride the Wind to move it. Six movement cards against nine payoffs, where midrange has four.
 
-**Two things it is strictly better at.** Showdown density is **8 copies against midrange's 6**, and with Onslaught gone **every one of your 18 spells is inside Fizz's 3-Energy rebuy range** — the hole the midrange dossier names in its §1 does not exist here.
+**Two things it is strictly better at.** Showdown density is **8 copies against midrange's 7**, and **every one of your 18 spells is inside Fizz's 3-Energy rebuy range**. (Midrange has since cut Onslaught too, so that second edge is now shared rather than exclusive — what remains exclusive is the raw count.)
 
 **Two things it is worse at.** The trash economy loses its best filler and one whole spender: no Traveling Merchant looting on every move, no Shadow Clone banishing from the bin. And the **Body squeeze gets worse** — Power demand on Body rises to 11 against a 6-rune base, because the third Rengar costs Body and nothing that costs Body was cut.
 
@@ -153,13 +155,13 @@ Two things, and both are structural rather than matchup-dependent.
 
 Plus Kha'Zix and **three** Rengar arriving at Reaction timing on Ambush, against midrange's two. In a format where the two most-played decks both hold three Defy and three Discipline, being the deck with more to do inside a showdown is worth a great deal.
 
-**Fizz reaches every spell you own.** The midrange dossier's §1 concedes a hole: *"Onslaught is the only card in the deck Fizz cannot reach."* With Onslaught cut, **all 18 spells cost 3 Energy or less** and every one is a legal Fizz target. Three Fizz at 100% coverage is a meaningfully better card than three Fizz at 94%, and it makes the trash a genuinely general resource rather than one with a known gap.
+**Fizz reaches every spell you own.** The previous midrange list carried Onslaught at 4 Energy — the one card Fizz could not rebuy. With Onslaught cut, **all 18 spells cost 3 Energy or less** and every one is a legal Fizz target. Three Fizz at 100% coverage is a meaningfully better card than three Fizz at 94%, and it makes the trash a genuinely general resource rather than one with a known gap. (The September midrange build cut Onslaught as well, so this is no longer a point of difference between the two lists — only the deeper spell count is.)
 
 ---
 
 ## 5. What this build gives up
 
-**The trash economy loses a filler and a spender.** The midrange dossier's §7 counts six filler copies against ten spenders. Here:
+**The trash economy loses a filler and a spender.** The midrange list runs the Traveling Merchant and Zed halves of that economy; this one does not. Here:
 
 | | fills the trash | spends it |
 |---|---|---|
@@ -183,7 +185,7 @@ The practical rule, and it is the single most common way to misplay this list: *
 
 ## 6. How the cards combine
 
-**Everything in the midrange dossier's §8 applies here**, including the Rengar → Kha'Zix chain, the Forbidding Waste four-point swing, Sandswept Tomb as the rune fix, Sabotage taking a Defy before you commit, rule 186.1 on bounced tokens, and both of the traps. What follows is what is specific to these six cards.
+**Everything in the midrange dossier's §9 applies here**, including the Rengar → Kha'Zix chain, Sandswept Tomb as the rune fix, Sabotage taking a card before you commit, rule 186.1 on bounced tokens, and both of the traps. One line no longer lives there: the **Forbidding Waste four-point swing** — midrange dropped that battlefield in September, and this list still registers it. *While a unit here is defending alone, it has -2 `[M]`* is still yours to use, and isolating their defender there is still the largest free swing in the deck. What follows is what is specific to these six cards.
 
 ### Mister Root + Ride the Wind — the two-card XP engine
 
@@ -211,7 +213,7 @@ Nothing combines badly here so much as competes. Rengar costs 1 Body, Punch Firs
 
 ## 7. Mulligans
 
-The midrange dossier's §9 numbers were simulated against a list with three Traveling Merchant and two Zed. The threshold it lands on — *one 2-drop, plus a way to use it* — holds here and is easier to meet: **fifteen of the forty cards cost 2**, and nine of those are units.
+The midrange dossier's §10 numbers are simulated against that list, not this one. The threshold it lands on — *one 2-drop, plus a way to use it* — holds here and is easier to meet: **fifteen of the forty cards cost 2**, and nine of those are units.
 
 **What changes:**
 
@@ -226,7 +228,7 @@ The midrange dossier's §9 numbers were simulated against a list with three Trav
 
 ## 8. Sequencing
 
-The order is the same as the midrange dossier's §10 — *activate, buff, develop, arrange, move, then hold up everything with Action or Reaction on it* — with one insertion.
+The order is the same as the midrange dossier's §11 minus its hiding step, which this list has no use for — *activate, buff, develop, arrange, move, then hold up everything with Action or Reaction on it* — with one insertion.
 
 **Step 3.5 — move Mister Root before you arrange the fight.** Its 2 XP is a Main Phase resource, and the legend's activation happens at Step 1. If you move Mister Root after you have already activated, the XP sits unusable until next turn. On a turn where you plan to move Mister Root at all, you are choosing between:
 
@@ -263,7 +265,7 @@ This list's added complexity is Mister Root's Accelerate — *pay 1 Energy and a
 
 ## 10. Matchups
 
-Shares are actual counts from the 1,184-list snapshot of 16 September. All seven board plans use the ten cards in §11 — the same ten as the midrange list.
+Shares are actual counts from the 1,184-list snapshot of 16 September. All seven board plans use the ten cards in §11, which are this list's own — the midrange board has since changed and the two are no longer the same ten.
 
 ### Master Yi, Wuju Bladesman — 9.0%, and the worst matchup in the format for this build
 
@@ -323,7 +325,7 @@ A token swarm that counts equipment, not a big-equipped-threat deck. Vex stuns e
 
 ## 11. The sideboard
 
-**Identical to the midrange list's ten**, and the reasoning in that dossier's §12 stands unchanged — including the correction that Unyielding Spirit was cut from an earlier board against a field that had no spell damage in it, and that the field has since changed.
+**No longer identical to the midrange list's ten** — that board was rebuilt in September and now runs Decree of Strength and Rebuke over Unyielding Spirit, Angler Beast and a second Hard Bargain. The reasoning behind *this* ten stands unchanged, including the correction that Unyielding Spirit was cut from an earlier board against a field that had no spell damage in it, and that the field has since changed. The midrange board is argued in that dossier's §14.
 
 One thing is different here and it is a scheduling problem. Against Master Yi and Akali the cards that want to come in total ten, and this list has **less it can comfortably cut** than midrange does: the top end is three Rengar you need, and the two-drops are the engine. The realistic cut list is Rampage ×2, then Star-Crossed, then Kinkou Initiate, then Up from the Deep — and past that you are cutting things that make the deck work.
 
@@ -358,4 +360,4 @@ This section is deliberately not a list of card swaps. Jun has the reps on this 
 
 **Collection figures** are from the live app state via `scripts/rift deck aggro`.
 
-**What this page does not repeat:** combat resolution, the clean-win simulation, the XP rules in full, keyword definitions and the shared interactions all live in the [post-ban midrange dossier](khazix-voidreaver-postban.md). The two lists share 34 of 40 cards and there is no version of this deck that can be played well without that page.
+**What this page does not repeat:** combat resolution, the clean-win simulation, the XP rules in full, keyword definitions and the shared interactions all live in the [post-ban midrange dossier](khazix-voidreaver-postban.md). The two lists share 33 of 40 cards and there is no version of this deck that can be played well without that page.

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-17",
+ "generatedAt": "2026-09-22",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -28,35 +28,37 @@
     "12. What to watch, and what to ask Jun",
     "Sources and method"
    ],
-   "words": 5233
+   "words": 5457
   },
   {
    "slug": "khazix-voidreaver-postban",
    "file": "guides/khazix-voidreaver-postban.md",
-   "title": "Kha'Zix Voidreaver — Post-Ban Dossier",
-   "subtitle": "Riftbound, Vendetta season — after the 18 September bans",
-   "date": "2026-09-15",
+   "title": "Kha'Zix Voidreaver — Midrange Dossier",
+   "subtitle": "Riftbound, Vendetta season — Jun's midrange build, September update, with the Hidden package",
+   "date": "2026-09-22",
    "legend": "Voidreaver",
    "champion": "Kha'Zix, Mutating Horror",
    "sections": [
     "The short version",
     "The list",
-    "1. What the ban did, and to whom",
+    "1. What changed, and why",
     "2. The rule that governs the deck",
-    "3. The engine, and where it actually bottlenecks",
-    "4. How combat resolves, and what it actually costs you",
-    "5. The five levers, priced",
-    "6. Card by card",
-    "7. The trash is a resource",
-    "8. How the cards combine",
-    "9. Mulligans — the real numbers",
-    "10. Sequencing — how your turn actually goes",
-    "11. Matchups",
-    "12. The sideboard",
-    "13. What I'd test",
+    "3. Hidden, precisely",
+    "4. The four Hidden cards, and how to use each",
+    "5. The trap: removed in response",
+    "6. The rune math, and the `[A]` tax",
+    "7. How combat resolves, and the clean-win maths",
+    "8. Card by card",
+    "9. How the cards combine",
+    "10. Mulligans",
+    "11. Sequencing — how your turn actually goes",
+    "12. Errata that change your cards",
+    "13. Matchups",
+    "14. The sideboard",
+    "15. What I'd test",
     "Sources and method"
    ],
-   "words": 14986
+   "words": 13656
   },
   {
    "slug": "khazix-voidreaver",
