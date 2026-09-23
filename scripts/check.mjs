@@ -468,6 +468,61 @@ for (const [label0, inv] of Object.entries(collections)){
 }
 
 /* ══ freshness ═══════════════════════════════════════════════════════════ */
+section('The deck archive');
+{
+  const dts = A.DECKS.map((d) => d.dt).filter(Boolean).sort();
+  const distinct = new Set(dts);
+  const span = dts.length
+    ? Math.round((Date.parse(dts[dts.length - 1]) - Date.parse(dts[0])) / 86400000) : 0;
+  const declared = (snap.window && snap.window.days) || 0;
+
+  ok('every deck in the archive carries a date', dts.length === A.DECKS.length,
+     `${dts.length} of ${A.DECKS.length}`);
+
+  // 2026-09-23: the feed returned 810 decks all stamped with the build date, sharing
+  // not one slug with the previous build and carrying an archetype mix nothing like
+  // it — Daughter of the Void 6.9% to 28.3%. The row count was plausible and every
+  // other assertion passed, so the refresh committed it. The builder pages with
+  // `srt: "date", direct: "desc"` until a page stops adding anything, so once every
+  // row carries the same date that walk returns an arbitrary slice of the feed.
+  // A one-day archive cannot support a share, a trend, or a pre/post-ban split.
+  ok('the archive spans more than a single day', distinct.size > 1,
+     `${distinct.size} distinct date${distinct.size === 1 ? '' : 's'} across ${span}d`);
+
+  // The same break seen from the other side, and the more specific signature: if every
+  // deck is dated the day the build ran, the feed is reporting when it was scraped
+  // rather than when the deck was played.
+  ok('deck dates are not simply the build date',
+     !(distinct.size === 1 && distinct.has(snap.generatedAt)),
+     distinct.size === 1 ? `all ${A.DECKS.length} dated ${snap.generatedAt}` : 'dates predate the build');
+
+  // Not a failure. The window has over-claimed since 2026-09-16 — 1,226 decks sold as
+  // 60 days were six — and blocking the whole refresh over it would freeze the catalog,
+  // the tier list and the events feed as well. It is printed on green runs instead, so
+  // a degradation that is not yet a break cannot sit there unread.
+  if (declared && span < declared / 2)
+    console.log(`  --   the archive covers ${span} of the ${declared} days it declares` +
+                `${dts.length ? ` (${dts[0]} to ${dts[dts.length - 1]})` : ''} — ` +
+                `every share is over that span, not over the window`);
+  else
+    ok('the archive covers the window it declares', true, `${span} of ${declared} days`);
+
+  // Cross-build. A refresh replaces the archive wholesale only when something upstream
+  // changed shape, so consecutive builds overlap in the days they cover. On 2026-09-23
+  // the new archive (09-23 to 09-23) and the one before it (09-14 to 09-20) were
+  // disjoint. Rows built before build-history.mjs recorded f/l are skipped rather than
+  // guessed at.
+  const ranged = history ? history.days.filter((r) => r.f && r.l) : [];
+  if (ranged.length >= 2){
+    const [p, q] = ranged.slice(-2);
+    ok('consecutive builds cover overlapping days', p.f <= q.l && q.f <= p.l,
+       `${p.d}: ${p.f}..${p.l} vs ${q.d}: ${q.f}..${q.l}`);
+  } else {
+    console.log(`  --   deck-date ranges recorded for ${ranged.length} of ${history ? history.days.length : 0} ` +
+                `days — the build-to-build comparison starts once two rows carry them`);
+  }
+}
+
 section('Freshness');
 {
   const iso = (d) => new Date(Date.now() - d * 86400000).toISOString().slice(0, 10);

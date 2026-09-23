@@ -821,7 +821,11 @@ node scripts/build-history.mjs
 
 `data/history.json` is the archive, appended at the end of the daily job. It fetches
 nothing — it derives today's row from `decks.json` and `tiers.json` and is idempotent by
-date, so the evening run corrects the morning's row rather than sitting beside it.
+date, so the evening run corrects the morning's row rather than sitting beside it. Each
+row also records `f` and `l`, the earliest and latest deck date the snapshot actually
+covered, which is not the same as the window it declared: `check.mjs` compares one
+build's range against the next so a wholesale replacement of the archive cannot pass as
+a refresh.
 
 **Mining the answer back out of git does not work, and that is the whole reason this
 file exists.** The oldest deck snapshot in the archive holds 250 decks against today's
