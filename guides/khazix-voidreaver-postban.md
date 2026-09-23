@@ -1,15 +1,15 @@
 ---
 title: Kha'Zix Voidreaver — Midrange Dossier
-subtitle: Riftbound, Vendetta season — Jun's midrange build, September update, with the Hidden package
+subtitle: Riftbound, Vendetta season — Jun's midrange build, 23 September revision, with the Hidden package
 author: rift toolchain
-date: 2026-09-22
+date: 2026-09-23
 ---
 
 **Legend:** Voidreaver (Body/Chaos) · **Champion:** Kha'Zix, Mutating Horror
 **Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend = 56 · **Sideboard:** 10 of 10
 **Shuffled library:** 39 — the Champion starts outside the deck (rule 103.2.a.1, 108.3.d)
 **Collection status:** complete, nothing to get
-**Built from:** Jun's September update to the midrange list — saved in the app as `Kha'Zix Midrange (Jun, post-ban)`, read live from the app's state on 22 September 2026
+**Built from:** Jun's 23 September revision of the midrange list — saved in the app as `Kha'Zix Midrange (Jun, post-ban)`, read live from the app's state on 23 September 2026
 
 *This file kept the `khazix-voidreaver-postban` slug so the links in the [aggro dossier](khazix-voidreaver-aggro.md) still resolve. Both Jun lists are post-ban now; this is the midrange one.*
 
@@ -19,7 +19,9 @@ date: 2026-09-22
 
 *Everything here is expanded below with the rule text behind it. This page is the part worth having at the table.*
 
-**What changed.** Four cards with **Hidden** came in — Evelynn, Entrancing; Pyke, Returned; Tideturner; and a main-deck Switcheroo — and **Forbidding Waste became Star Spring**. Onslaught is gone, Traveling Merchant fell 3 → 1, Up from the Deep 3 → 2, Zed 2 → 1, Kinkou Initiate 2 → 3. The sideboard traded Unyielding Spirit, Angler Beast and a Hard Bargain for **2 Decree of Strength and a Rebuke**. Full diff in §1.
+**What changed, 23 September.** **Pyke, Returned is out and Tornado Warrior is in** — still four Hidden cards, still one facedown slot, but the package no longer pays its own tax. The sideboard moved hard toward gear: **Acceptable Losses 1 → 2, Ravenbloom Prefect 1 → 2**, Decree of Strength 2 → 1, a third Rampage in, and **Rebuke and the second Switcheroo gone**. Full diff in §1.
+
+**What the September update before it did.** Four cards with **Hidden** came in — Evelynn, Entrancing; Tideturner; a main-deck Switcheroo; and Pyke, now replaced — and **Forbidding Waste became Star Spring**. Onslaught went, Traveling Merchant fell 3 → 1, Up from the Deep 3 → 2, Zed 2 → 1, Kinkou Initiate 2 → 3.
 
 **The deck is now a Hidden deck, and that is a different deck.** Hiding is a cost you pay a turn early in exchange for a card that later costs nothing and can be played at Reaction speed. Four of your forty cards work that way. The whole of §3 and §4 is about doing it correctly, because doing it carelessly loses cards for free.
 
@@ -37,7 +39,7 @@ date: 2026-09-22
 
 **Hiding cannot be answered.** It does not open a chain (§811.1.c.2) and it is not playing a card (§811.1.c.1), so no counterspell, no Legion trigger, no response. The card simply becomes a facedown object your opponent can see the back of.
 
-**The trap that will cost you games.** A hidden permanent's play effect reads its battlefield **off the source**. Bounce the source in response to its own trigger and that read returns null, the target cannot be confirmed, and the instruction is **ignored** (§359.3.e.12, §359.3.f.2.a, and the recorded Kennen ruling). Evelynn is 2 Might, Tideturner is 2, Pyke is 3 — **all three sit inside Gust's range**. But the answer is concentrated, not ambient: four archetypes hold a Reaction that can take the unit back, and seven hold none at all. §5 is entirely about this.
+**The trap that will cost you games.** A hidden permanent's play effect reads its battlefield **off the source**. Bounce the source in response to its own trigger and that read returns null, the target cannot be confirmed, and the instruction is **ignored** (§359.3.e.12, §359.3.f.2.a, and the recorded Kennen ruling). Evelynn is 2 Might, Tideturner is 2, Tornado Warrior is 3 — **all three sit inside Gust's range**, and with Pyke gone the trap now catches **three of your four Hidden cards** rather than two. But the answer is concentrated, not ambient: four archetypes hold a Reaction that can take the unit back, and seven hold none at all. §5 is entirely about this.
 
 **Your new best card against big-unit decks is Switcheroo, and it is not close.** Swapping the Might of your smallest unit and their largest is a swing of **twice the gap**. Simulated 2v2 it converts a clean win **94–98% of the time against every archetype measured** — including Jayce at 97%, where Punch First manages 46%. Punch First decays as their units grow; Switcheroo *scales with it*.
 
@@ -45,7 +47,7 @@ date: 2026-09-22
 
 **Three numbers worth memorising.**
 
-- **Body 10 pips, Chaos 9, three flexible, plus up to four `[A]` for hiding.** The Hidden tax is paid in *any* domain — that is what Pyke's Gold tokens are for (§6).
+- **Body 10 pips, Chaos 9, three flexible, plus up to four `[A]` for hiding.** The Hidden tax is paid in *any* domain, so it takes the rune you were least going to use. **Nothing refunds it any more** — that was Pyke's job (§6).
 - **36.3% of opening hands contain a Hidden card**, and you cannot hide on turn one because you do not control a battlefield yet.
 - **You still lose most untricked even fights** — 12–58% clean wins with no trick, and under half against eight of the eleven archetypes measured (§7).
 
@@ -72,11 +74,11 @@ Sorted by set number, the way you build it. **Kha'Zix counts toward the 40 but s
 | 2 | Star-Crossed | UNL-128 | 3E / 1 Chaos · Reaction | |
 | **1** | **Evelynn, Entrancing** | **UNL-141** | **2E · 2 Might · Hidden, Backline** | **new** |
 | **1** | **Kha'Zix, Mutating Horror** | **UNL-143** | **4E / 1 Chaos · 4 Might — Champion Zone** | |
-| **1** | **Pyke, Returned** | **UNL-145** | **3E · 3 Might · Hidden, Backline** | **new** |
 | 2 | Vex, Apathetic | UNL-150 | 4E · 4 Might · Deflect | |
 | 3 | Void Assault | UNL-202 | 2E / 1 Power | |
 | 2 | Rampage | VEN-083 | 3E (+1 Body optional) | |
 | 3 | Shadow Order Disciple | VEN-095 | 2E · 2 Might | |
+| **1** | **Tornado Warrior** | **VEN-099** | **3E · 3 Might · Hidden** | **new — replaces Pyke** |
 | 2 | Up from the Deep | VEN-100 | 3E · Flow 3E | **3 → 2** |
 | 2 | Tail-Cloaked Matriarch | VEN-104 | 4E · 4 Might · Empower 2E/1 Chaos | |
 | 1 | Zed, Without a Sound | VEN-112 | 5E · 5 Might | **2 → 1** |
@@ -84,23 +86,46 @@ Sorted by set number, the way you build it. **Kha'Zix counts toward the 40 but s
 **Legend** Voidreaver `UNL-201` · **Runes** 6 Body `OGN-126` / 6 Chaos `OGN-166`
 **Battlefields** Zaun Warrens `OGN-298` · **Star Spring `UNL-215`** *(replaces Forbidding Waste)* · Sandswept Tomb `VEN-164`
 
-**Sideboard** (10) — 2 Gust `OGN-169` · 1 Sabotage `OGN-156` · 1 Rebuke `OGN-172` *(new)* · 1 Acceptable Losses `OGN-179` · 1 Hard Bargain `SFD-136` *(2 → 1)* · 1 Switcheroo `SFD-145` · 2 Decree of Strength `VEN-085` *(new)* · 1 Ravenbloom Prefect `VEN-102`
+**Sideboard** (10) — 2 Gust `OGN-169` · 1 Sabotage `OGN-156` · **2 Acceptable Losses** `OGN-179` *(1 → 2)* · 1 Hard Bargain `SFD-136` · 1 Rampage `VEN-083` *(new)* · 1 Decree of Strength `VEN-085` *(2 → 1)* · **2 Ravenbloom Prefect** `VEN-102` *(1 → 2)*
 
-**24 units / 16 spells.** Curve: 1E ×5, 2E ×14, 3E ×13, 4E ×5, 5E ×3 — mean 2.68 Energy, down from the previous build. **Sabotage sits at 2 main + 1 board, exactly at the three-copy cap** across the whole deck (§103.2.b); **Switcheroo is 1 main + 1 board**, two of a legal three.
+**24 units / 16 spells.** Curve: 1E ×5, 2E ×14, 3E ×13, 4E ×5, 5E ×3 — mean 2.68 Energy, down from the previous build. **Sabotage sits at 2 main + 1 board and Rampage at 2 main + 1 board, both exactly at the three-copy cap** across the whole deck (§103.2.b). **Switcheroo is now a singleton across the whole 56** — the board copy is gone, which §15 argues is the wrong way round.
 
 ---
 
 ## 1. What changed, and why
 
-Jun's update does three separate things, and it is worth keeping them apart because only one of them is the interesting one.
+### The 23 September revision — Pyke out, Tornado Warrior in
+
+**Pyke, Returned ×1 → Tornado Warrior ×1.** Both are 3 Energy, 3 Might, Chaos and Hidden, so nothing in the curve, the pip count, the Might distribution or the mulligan maths moves at all. What moves is what the flip *does*.
+
+| | Pyke, Returned | Tornado Warrior |
+|---|---|---|
+| Flip does | makes a Gold token on a kill, once a turn | empowers something at its battlefield |
+| Works on their turn | yes, but the token arrives exhausted | **yes, fully** |
+| Needs a partner card | no | **yes — Tail-Cloaked Matriarch** |
+| Exposed to the §5 trap | **no** | **yes** — its *"here"* is a referent |
+| Paid the Hidden tax | **yes, that was the point** | no |
+| Backline | yes | no |
+
+**The honest summary: the package got a payoff and lost its engine.** Pyke refunded the `[A]` you spent hiding; nothing does now. In exchange, Tornado Warrior turns a Matriarch into a free trash rebuy at Reaction speed, and re-arms her for later (§4).
+
+**It is a build-around, and the build is already here.** Tornado Warrior is in **2.5% of the archive**, sixteenth among Hidden cards, against Pyke's 5.7% — so on raw adoption this is a downgrade. It is not a downgrade in *this* deck, because the two Tail-Cloaked Matriarchs that make it work are themselves unusual: only **3 of the 14 archived Voidreaver lists run Matriarch at all**, and one of those is the only archived Voidreaver list running Tornado Warrior.
+
+**The sideboard moved to gear.** Acceptable Losses 1 → 2 and Ravenbloom Prefect 1 → 2 put **four of ten board slots on gear answers**, up from two. Decree of Strength fell 2 → 1, a third Rampage came in, and **Rebuke and the second Switcheroo are gone** — see §14, because both leaving costs the Jayce and Azir plans something real.
+
+**One clean gain, easy to miss:** Acceptable Losses kills a gear from each player, and the only gear you made was Pyke's Gold token. **With him gone the card is one-sided**, which is a large part of why it went to two.
+
+### The September update before it
+
+That update did three separate things, and it is worth keeping them apart because only one of them is the interesting one.
 
 ### The Hidden package — four cards in
 
 **Evelynn, Entrancing ×1** `UNL-141` · 2E · 2 Might · Hidden, Backline
 > *When you play me from face down on your turn, you may move an enemy unit at a different location to my battlefield.*
 
-**Pyke, Returned ×1** `UNL-145` · 3E · 3 Might · Hidden, Backline
-> *Once each turn, when an enemy unit dies while I'm at a battlefield, play a Gold gear token exhausted. (It has "[Reaction][>] Kill this, `[E]`: [Add] `[A]`.")*
+**Tornado Warrior ×1** `VEN-099` · 3E · 3 Might · Hidden — *the 23 September replacement for Pyke*
+> *When you play me from face down, you may empower something here. Disempower it at end of turn.*
 
 **Tideturner ×1** `OGN-199` · 2E · 2 Might · Hidden — **errata'd**, current text:
 > *When you play me, you may choose a unit you control at another location. Move me to its location and it to my original location.*
@@ -108,7 +133,7 @@ Jun's update does three separate things, and it is worth keeping them apart beca
 **Switcheroo ×1** `SFD-145` · 2E / 2 Chaos · Action, Hidden
 > *Swap the Might of two units at the same battlefield this turn.*
 
-These are not fringe cards. Across the 1,226-deck archive, **Tideturner is the third most-played Hidden card in the format at 19.0%**, Switcheroo the sixth at 11.3%; Evelynn is in 4.5% of decks and Pyke in 5.7%. **83% of all archived decks run at least one Hidden card.** Nor is this new to the archetype: **six of the fourteen archived Voidreaver lists already run at least one Hidden card** — two on Evelynn, two on Switcheroo, one on Tideturner, and one each on Edge of Night, Tornado Warrior and Bone Skewer. None on Pyke. What is unusual is running all four at once, and building the battlefield around them.
+These are mostly not fringe cards. Across the 1,226-deck archive, **Tideturner is the third most-played Hidden card in the format at 19.0%**, Switcheroo the sixth at 11.3%; Evelynn is in 4.5% of decks and **Tornado Warrior in 2.5%**, sixteenth. **83% of all archived decks run at least one Hidden card.** Nor is this new to the archetype: **six of the fourteen archived Voidreaver lists already run at least one Hidden card** — two on Evelynn, two on Switcheroo, one on Tideturner, and one each on Edge of Night, Tornado Warrior and Bone Skewer. None on Pyke. What is unusual is running all four at once, and building the battlefield around them.
 
 ### The battlefield swap
 
@@ -125,6 +150,8 @@ It is symmetric — your opponent gets their own first-time-each-turn trigger th
 
 ### The trimming
 
+*This table is the 22 September state. Two of its sideboard rows were reversed again on 23 September and are marked.*
+
 | | was | now | what it means |
 |---|---|---|---|
 | Onslaught | 1 | **0** | The +6 is gone. It cost 4 Energy, carried no Action keyword, and sat outside Fizz's rebuy range. Switcheroo replaces it as the big swing and is strictly better at the job (§4). |
@@ -134,8 +161,8 @@ It is symmetric — your opponent gets their own first-time-each-turn trigger th
 | Kinkou Initiate | 2 | **3** | The one that went up. A 3-Might body that replaces itself, and the extra cheap bodies make its *"other units have total Might 5 or more"* condition easier to meet. |
 | Hard Bargain (board) | 2 | **1** | |
 | Unyielding Spirit, Angler Beast (board) | 1, 1 | **0** | |
-| Decree of Strength (board) | 0 | **2** | A Mind-domain Sabotage. Structurally dead against nine of the eleven archetypes in §13 — see §14 before you board it in. |
-| Rebuke (board) | 0 | **1** | 2E / 2 Chaos, **Action**, returns *any* unit at a battlefield to hand. Gust with no Might cap and no Reaction timing. |
+| Decree of Strength (board) | 0 | **2** | A Mind-domain Sabotage. Structurally dead against nine of the eleven archetypes in §13. **Since cut to 1** — §14. |
+| Rebuke (board) | 0 | **1** | 2E / 2 Chaos, **Action**, returns *any* unit at a battlefield to hand. Gust with no Might cap. **Since cut entirely** — §14, and §15 argues it should not have been. |
 
 **What the trimming costs you in one sentence:** the deck has traded one large Main-Phase pump and two loot bodies for four cards that cost nothing on the turn you use them, and it is now a deck about *timing* rather than about *size*.
 
@@ -223,7 +250,7 @@ Unpack that into the five things it actually constrains.
 | **Switcheroo** | **Yes — both units** | Nothing in its text restricts targeting elsewhere, so §811.1.d.2 pins both. It wants two units at one battlefield anyway; the rule just decides *which* battlefield. |
 | **Tideturner** | **No** | §811.1.d.2 uses Tideturner as its own worked example: *"Because its play effect has a targeting restriction that can never be fulfilled by a unit at its battlefield, its target may be chosen freely."* **He** still lands at the hide battlefield under 811.1.d.1. |
 | **Evelynn** | **No** | *"an enemy unit **at a different location**"* — the same exception, for the same reason. She lands at the hide battlefield. |
-| **Pyke** | n/a | He has no play effect and chooses nothing. He simply lands at the hide battlefield. |
+| **Tornado Warrior** | **Yes** | *"Empower something **here**"* — his own text says *here*, so §811.1.d.2 has nothing left to do. Whatever he empowers must be standing at the hide battlefield. |
 
 ### The cost of being wrong about the battlefield
 
@@ -237,7 +264,7 @@ Unpack that into the five things it actually constrains.
 1. Lose the battlefield, lose the card. It goes to your **trash**, not your hand.
 2. **A mutual wipe does it too.** If neither player has units left, the battlefield becomes Uncontrolled (§466.5.b) — and an uncontrolled battlefield is not controlled by *the same player* as your facedown card, so §323.7 trashes it. The even trade that already paid you no XP now costs you a card as well. **In this deck the even trade got worse, not better.**
 3. You **reveal it** on the way out. They learn what you had, for free.
-4. The trash is not nowhere. Evelynn, Pyke and Tideturner are all within **Tail-Cloaked Matriarch's** rebuy range (Energy ≤ 3, Power ≤ `[A]`), and Switcheroo is within **Fizz's** (Energy ≤ 3, you still pay the 2 Chaos). A trashed facedown card is a setback, not a write-off — but the rebuy plays it from the trash, not from face down, so **Evelynn's play effect does not trigger off a Matriarch rebuy.**
+4. The trash is not nowhere. Evelynn, Tornado Warrior and Tideturner are all within **Tail-Cloaked Matriarch's** rebuy range (Energy ≤ 3, Power ≤ `[A]`), and Switcheroo is within **Fizz's** (Energy ≤ 3, you still pay the 2 Chaos). Which is its own small joke: Tornado Warrior's whole purpose is to turn Matriarch on, and Matriarch is what buys him back. A trashed facedown card is a setback, not a write-off — but the rebuy plays it from the trash, not from face down, so **Evelynn's play effect does not trigger off a Matriarch rebuy.**
 
 ### One more that is easy to miss
 
@@ -285,22 +312,27 @@ Three more uses worth having in mind:
 - **The move he performs is a move**, so both Shadow Order Disciple (*"when I move, you may Burn 1 for +1 Might"*) and Traveling Merchant (*"when I move, discard 1, then draw 1"*) trigger. Irresistible Faefolk does **not** — her text is *"when I move **to a battlefield**"*, and Tideturner's swap sends him to wherever the chosen unit was, which may be your base.
 - **He does not exhaust anybody.** Effect-based moves are not standard moves; the exhaust cost in §144 belongs to the standard move alone. A unit that arrives by Tideturner is ready and can still use an `[E]` ability if it has Action or Reaction.
 
-### Pyke, Returned — the card that pays the Hidden tax
+### Tornado Warrior — the free Matriarch activation
 
-> *[Hidden] · [Backline] · Once each turn, when an enemy unit dies while I'm at a battlefield, play a Gold gear token exhausted. (It has "[Reaction][>] Kill this, `[E]`: [Add] `[A]`.")*
+> *[Hidden] · When you play me **from face down**, you may empower something **here**. Disempower it at end of turn.*
 
-**This is a rune engine, and it is specifically the engine for this package.** Every hide costs `[A]`. Every Gold token *is* an `[A]`. Pyke turns each turn in which you kill something into one free hide.
+**Read the trigger condition, then read what it does not say.** Like Evelynn, he does nothing played from hand — *"from face down"* is a condition, not flavour, so from hand he is a vanilla 3/3. **Unlike Evelynn, he is not restricted to your turn.** Her condition is *"from face down **on your turn**"*; his stops at *"from face down"*. He is a Reaction-speed flip on their turn, and that is most of why he is here.
 
-Four details.
+**What he empowers.** *"Something here"* — and **Tail-Cloaked Matriarch is the only card in your forty that cares**:
 
-1. **The trigger does not require the death to be at his battlefield.** *"When an enemy unit dies while I'm at a battlefield"* — the location condition is on **Pyke**, not on the dying unit. Kill something anywhere while Pyke stands on any battlefield and you get the token.
-2. **Once each turn.** A combat that kills three of their units still makes one token.
-3. **The token enters exhausted**, and its ability costs `[E]` — exhausting it. An exhausted permanent cannot pay `[E]` (§414.1.b). **So the token is usable from your next Awaken, not the turn it appears.** Plan a turn ahead, the same way you plan the hide itself.
-4. **The token's ability has Reaction**, so once it is ready you can crack it at any moment you are asked to pay — including mid-payment of a cost, with no priority, and it resolves the instant it finalizes without passing priority (§429.2, §429.3, §444.2.c). It is a Power you can always produce.
+> *When I become [Empowered], you may choose a unit in your trash with Energy cost no more than 3 and Power cost no more than `[A]`. Play it to your base, ignoring its cost.*
 
-**Pyke himself is a fine body.** 3 Energy, 3 Might, Backline. Hidden makes him free. He is the one of the four whose flip is never a decision about targets — he is just a body that arrives at Reaction speed for nothing, which is exactly what you want mid-showdown when the fight is one point of Might away.
+So the line is: Matriarch at a battlefield, Tornado Warrior hidden there, flip him for **0** at Reaction speed → she becomes Empowered → a unit comes back from your trash for free. **Her own Empower costs 2 Energy and a Chaos rune. He does it for nothing, on their turn.**
 
-**Where he wants to stand:** the battlefield you intend to keep. His engine only runs while he is at a battlefield, and Backline keeps him alive while it does.
+**"Disempower it at end of turn" is an upside, not a drawback**, and this is the detail the card is easy to misread on. Empowered is otherwise **permanent** until the card leaves the board (§442), and Empower *"may only be activated while not already Empowered"* (§827.1.c.1) — so a Matriarch you empowered normally is spent, permanently. Tornado Warrior empowers her, she rebuys, and the status **falls off at end of turn, re-arming her own Empower for a later turn.** One Tornado Warrior makes a Matriarch a two-shot card.
+
+Three details.
+
+1. **"Here" pins it, and it exposes him.** He lands at the hide battlefield (§811.1.d.1), and *"here"* is that battlefield — so the Matriarch has to be standing there when you flip. *"Here"* is also a referent read off him, which puts him squarely inside §5's trap, **where Pyke never was.** That is the real cost of this swap: the trap now catches three of your four.
+2. **"Something", not "a friendly unit".** Unusually broad text. There is nothing else in your deck to point it at, but it is not restricted to your own permanents if an opponent ever gives you a reason.
+3. **The floor is a free 3-Might body at Reaction speed.** Flip him into a fight with no Matriarch present and you have still added 3 Might for nothing. He is never dead, he is just often only half a card.
+
+**Where he wants to stand:** wherever a Matriarch is — and that is a genuine constraint. She is a 4-Energy unit you have two of, she wants to be at a battlefield, and he does very little without her.
 
 ### Switcheroo — the biggest swing in the deck
 
@@ -352,13 +384,15 @@ The repo carries the ruling: [*A Hidden permanent removed in response to its own
 
 There is a genuine tension in the rules here worth knowing, because it is the kind of thing a judge will be asked. §359.3.f.2 checks referents **on execution**, which gives the null; §359.3.f.3 freezes information taken **from the trigger condition** when the trigger fires, which would preserve it — that is the Lillia case, *"when I move from a location, play a token **there**."* Tideturner's word is *"original"*, which reads like a referent to me rather than trigger-condition information, and the recorded ruling resolves the identical shape for Kennen the same way. **Play as though it does not work, and call a judge if a match hinges on it.** The practical answer does not change either way: do not flip him into open Reaction mana you have not accounted for.
 
-**Pyke and Switcheroo are not exposed.** Pyke has no play effect. Switcheroo chooses both targets at play time and reads nothing off itself — it is a spell, and a spell on the chain is not a permanent that can be bounced.
+**Tornado Warrior is exposed, and Pyke was not.** *"Empower something **here**"* reads *here* off him exactly as Evelynn reads *my battlefield* off her. Bounce him in response and there is no *here* to empower into: the Matriarch never becomes Empowered, and you have spent a card and a rune to put a 3/3 in your hand. **The 23 September swap traded the one Hidden card that could not be blown out for one that can.**
+
+**Only Switcheroo is safe now.** It chooses both targets at play time and reads nothing off itself — it is a spell, and a spell on the chain is not a permanent that can be bounced.
 
 ### Why this bites this deck specifically
 
 > **Gust** `OGN-169` — *[Reaction] Return a unit at a battlefield with 3 `[M]` or less to its owner's hand.*
 
-**Evelynn is 2 Might. Tideturner is 2. Pyke is 3.** All three are inside Gust's range.
+**Evelynn is 2 Might. Tideturner is 2. Tornado Warrior is 3.** All three are inside Gust's range, and all three now read something off themselves.
 
 **But be precise about what can actually do this to you, because most "bounce" in the format cannot.** Of the fourteen cards in the pool that return a unit to hand, **six can only return a *friendly* unit** — Retreat, Pack of Wonders, Grim Apothecary, Bloodharbor Ripper, Mesmerize and Emperor's Dais are self-bounce for value, and **none of them can touch your flip.** What is left that can take *your* unit off the board mid-trigger:
 
@@ -386,7 +420,7 @@ And Hidden makes it worse, for the reason the recorded ruling spells out: **from
 
 1. **First, check whether they are even one of the four.** Against Akali, Yi, Rengar, Azir, Fiora, Jayce or Rek'Sai, flip freely — nothing in their archived lists answers it. Against Diana, Irelia, Kennen or Vex, count their open runes before you flip. A flip is free, which makes it feel free to do at a bad moment. It is not: the card is the cost.
 2. **Flip into a tapped-out opponent**, or after they have spent their Reaction on something else. Your Void Assaults and your standard moves are the bait.
-3. **Prefer their turn for Pyke and Tideturner** — Pyke has nothing to lose, and Tideturner mid-combat is usually flipped when they have already committed.
+3. **Prefer their turn for Tornado Warrior and Tideturner** — both work on their turn, and both are usually flipped once the opponent has already committed. Note the change from the previous build: Pyke could be flipped into anything because he had nothing to lose. **Tornado Warrior does.**
 4. **Prefer your own Main Phase for Evelynn**, because you have no choice; her trigger requires it. Accept that she is the most exposed of the four and hide her when you have a reason, not because the slot is empty.
 5. **Board in Hard Bargain** against Diana, Irelia, Kennen and Vex, and against nobody else. It is the one card that protects the flip, and §14 covers when it is worth the slot.
 
@@ -403,7 +437,7 @@ Your Rune Deck is **6 Body / 6 Chaos**, unchanged. The demand it serves did chan
 | **Body** | **10** | Punch First ×3 @ 2, Sabotage ×2 @ 1, Rengar ×2 @ 1 |
 | **Chaos** | **9** | Fizz ×3 @ 1, Star-Crossed ×2 @ 1, Switcheroo ×1 @ 2, Kha'Zix @ 1, Ride the Wind @ 1 |
 | Either | 3 | Void Assault ×3 @ 1 — it is Body/Chaos, so its `[C]` reads as either (§135.2.e.6) |
-| **Any** | **up to 4** | **Hiding: Evelynn, Pyke, Tideturner, Switcheroo** |
+| **Any** | **up to 4** | **Hiding: Evelynn, Tornado Warrior, Tideturner, Switcheroo** |
 | Optional | 2 | Rampage ×2's additional Body cost |
 
 **Chaos demand rose from 7 to 9** — entirely Switcheroo's two pips. That is the one card in the deck that wants two Power of one colour, and it is the reason to remember the Sandswept Tomb discount.
@@ -418,11 +452,13 @@ max(E, P) runes on the board, at least E of them READY
 
 Exhausting a rune for Energy and recycling it for Power are different costs — recycling does not require the rune to be ready — so **the same rune can pay Energy and then Power in the same turn** (§164.2). What recycling costs you is next turn's board.
 
-**Three ways this deck refills the Power it spends hiding:**
+**The tax is now paid out of pocket, and that is the real cost of cutting Pyke.** His Gold tokens were the one thing in the deck that refunded a hide — one per turn on a kill, `[Add] [A]`, purpose-built for exactly this. Nothing replaces them. What is left is not a refund, it is just arithmetic:
 
-- **Pyke's Gold tokens** — one per turn on a kill, usable from the following Awaken, `[Add] [A]`. Purpose-built for the tax.
-- **Channelling.** 2 a turn. A hide is half a turn of it.
-- **Not hiding.** The slot holds one card. If the facedown slot is occupied, the tax is zero for that turn.
+- **Channelling.** 2 a turn. A hide is half a turn of it, every time, with nothing giving it back.
+- **Not hiding.** The slot holds one card. If the facedown slot is already occupied, the tax is zero that turn — which means the package is cheapest exactly when it is doing least.
+- **Paying in the off colour.** The tax is `[A]`, any domain, so it never competes with Punch First for a Body rune or Fizz for a Chaos one. It takes whichever rune you were least going to use, and that is genuinely most of why four Hidden cards is affordable at all.
+
+**Plan the hide a turn earlier than feels necessary.** A rune recycled on turn two is back by turn four. One recycled on turn six is a rune you needed.
 
 **A cheap turn-two line worth knowing.** Move a 2-Energy unit to the open battlefield (that is a Conquer and 1 point when the non-combat showdown closes, §348.2.a.1), then recycle one rune to hide. You end the turn with three runes instead of four and a point on the board, and next turn a free card.
 
@@ -438,7 +474,7 @@ Exhausting a rune for Energy and recycling it for Power are different costs — 
 
 That rule is a resource: a 1-Might Tentacle absorbs exactly one point and no more.
 
-**Backline changes who absorbs it.** §826: a unit with Backline must be assigned lethal **after** every one of your units without it. **Evelynn and Pyke are your two Backline units**, and in a defensive fight that is genuine protection — they are the last things to die, which means they are usually the things still standing when the attackers are recalled and you hold the battlefield.
+**Backline changes who absorbs it.** §826: a unit with Backline must be assigned lethal **after** every one of your units without it. **Evelynn is now your only Backline unit** — Pyke was the other, and Tornado Warrior does not have it. In a defensive fight she is the last thing to die, which is usually why she is still standing when the attackers are recalled and you hold the battlefield. With one copy, that protection is now a single card rather than a property of the package.
 
 **The condition, collapsed:**
 
@@ -497,7 +533,7 @@ A 1-Might body that drags. Read the trigger precisely: **"when I move to a battl
 
 ### The Hidden package
 
-Covered in full in §4. In list terms: **Evelynn ×1, Pyke ×1, Tideturner ×1, Switcheroo ×1** — four cards, one facedown slot, 36.3% of opening hands contain at least one.
+Covered in full in §4. In list terms: **Evelynn ×1, Tornado Warrior ×1, Tideturner ×1, Switcheroo ×1** — four cards, one facedown slot, 36.3% of opening hands contain at least one. Because Tornado Warrior is a 3-Energy 3-Might Chaos unit exactly as Pyke was, none of the maths in §7 or §10 moved with the swap.
 
 ### The bodies
 
@@ -514,7 +550,7 @@ With Traveling Merchant down to one, Fizz is the closest thing to selection this
 Down from three. At one copy it is no longer a plan, but it is still the best partner Star Spring has: flip a unit at Star Spring, walk the Merchant home, loot. Discard-then-draw is a real order — you may discard the card you are about to replace.
 
 **Tail-Cloaked Matriarch ×2** (4E / 4 Might, Empower 2E/1 Chaos) — *"When I become [Empowered], you may choose a unit in your trash with Energy cost no more than 3 and Power cost no more than `[A]`. Play it to your base, ignoring its cost."*
-The trash rebuy, and now it has four more targets: **Evelynn, Pyke and Tideturner all qualify** (2–3 Energy, no Power), as do Fizz, Kinkou, Disciple, Faefolk and the Merchant. Kha'Zix at 4 Energy does not. Empowered is permanent until the card leaves the board (§442), and Empower may only be activated while not already Empowered (§827.1.c.1). **The rebuy plays to your base and is not "from face down", so Evelynn's trigger does not fire.**
+The trash rebuy, and **the reason Tornado Warrior is in the deck** (§4, §9). Its targets: **Evelynn, Tornado Warrior and Tideturner all qualify** (2–3 Energy, no Power), as do Fizz, Kinkou, Disciple, Faefolk and the Merchant. Kha'Zix at 4 Energy does not. Empowered is permanent until the card leaves the board (§442), and Empower may only be activated while not already Empowered (§827.1.c.1). **The rebuy plays to your base and is not "from face down", so Evelynn's trigger does not fire.**
 
 **Vex, Apathetic ×2** (4E / 4 Might, Deflect) — *"When an opponent plays a unit while I'm at a battlefield, [Stun] it. They can't move it this turn."*
 Read her narrowly: she triggers on a **unit being played**, not on one moving. Deflect makes opponents pay `[A]` more per time they choose her with a spell or ability (§809), which is often enough to price a removal spell out of reach entirely.
@@ -571,9 +607,15 @@ Hide Tideturner at the battlefield you expect them to attack. When they commit, 
 
 This is strictly additive with Rengar's own Ambush. One Rengar comes off the board, the other out of your hand.
 
-### Pyke → the tax
+### Tornado Warrior → Matriarch — the free rebuy, at Reaction speed
 
-Pyke at a battlefield, any enemy unit dies anywhere, once a turn: a Gold token. It enters exhausted, readies on your Awaken, and cracks for `[A]` at Reaction speed. **That is next turn's hide, paid for by this turn's kill.** With Pyke online the Hidden package costs you no runes at all.
+Matriarch at a battlefield, Tornado Warrior hidden there. On **their** turn, mid-showdown, flip him for 0: she becomes Empowered, her trigger plays a unit out of your trash to your base for free, and the status falls off at end of turn so her own 2E / 1 Chaos Empower is live again later.
+
+For one rune, paid a turn ago: **a 3-Might body into the fight, a card back out of the trash, and a re-armed Matriarch.**
+
+**What to rebuy.** Anything at 2–3 Energy with no Power cost — Fizz, Kinkou Initiate, Shadow Order Disciple, Faefolk, the Merchant, and all three of your other Hidden cards. **A Hidden card you lost to a lost battlefield is the obvious target**: it comes back to your *base*, not face down, so its play effect does not fire and Evelynn arrives as a vanilla 2/2 — but a body you already paid for is a body you already paid for.
+
+**The constraint that decides the turn.** She has to be standing where he is hidden. Two Matriarchs and one facedown slot means this line is available much less often than it reads, which is §15's question about the card.
 
 ### Switcheroo → the biggest unit on the table
 
@@ -663,7 +705,7 @@ Before your Main Phase, three things happen on their own: you **ready everything
 | **Action** | Punch First ×3 · Ride the Wind ×1 · **Switcheroo ×1** · Zed's clone swap |
 | **Reaction** | Star-Crossed ×2 |
 | **Ambush (Reaction while played that way)** | Kha'Zix ×1 · Rengar ×2 |
-| **Facedown** | whatever is in the slot — free, Reaction speed, from the turn after you hid it |
+| **Facedown** | whatever is in the slot — free, Reaction speed, from the turn after you hid it. Three of the four now read something off themselves, so check §5 before you flip |
 | **No keyword at all** | Rampage · Sabotage · Void Assault · Up from the Deep — Main Phase only, cannot be held up |
 
 **Seven showdown-legal spells, up from six**, plus the facedown slot. That slot is the real gain: it is a card you already paid for, at Reaction speed, that does not cost you a card in hand.
@@ -711,9 +753,9 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 
 **They do:** self-milling tempo that plays from its trash much as you do. Lightning Rush 98%, Kennen Storm of Shuriken 84%, Minefield 83%, Ride the Wind 82%, Fizz 82%, Rhasa the Sunderer 81%. They go wide and they are happy to trade — which costs you XP and costs them nothing.
 **You do:** 38% bare, 89% with Punch First, 97% with Switcheroo. Their 3.35 mean is small enough that +5 is decisive, so Punch First is your main lever here, not the swap.
-**Flip safety: 78%** — Gust, Star-Crossed and Rebuke all appear. Assume a Reaction is up. **Flip Pyke freely, Evelynn only into a tapped-out board.** Their own Kennen, Keeper of Balance is a Hidden card in 6.6% of the field, so expect them to know the flip game from the other side.
+**Flip safety: 78%** — Gust, Star-Crossed and Rebuke all appear. Assume a Reaction is up, and note you no longer have a safe flip: **all three of your Hidden units can now be blown out**, so flip only into a tapped-out board or after they have spent the Reaction. Their own Kennen, Keeper of Balance is a Hidden card in 6.6% of the field, so expect them to know the flip game from the other side.
 **Ban note:** they lost more than you did — 75% of their archived lists ran a now-banned card, against 36% of yours — but kept Lightning Rush, so their digging went from six cards to three rather than to zero.
-**Board:** +2 Gust, +1 Hard Bargain. −1 Decree of Strength (Order/Chaos — structurally dead).
+**Board:** +2 Gust, +1 Hard Bargain. −1 Decree of Strength (Order/Chaos — structurally dead). Kennen lists are light on Equipment, so the four gear slots stay in the box here.
 
 ### Akali, Rogue Assassin — Tier 1.2 · 4.3% overall / 4.0% post-ban · mean Might 3.18
 
@@ -723,7 +765,7 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 **You do:** 40% bare, 91% with Punch First, 97% with Switcheroo. **Defy at 94% is the number to respect** — it counters a spell costing no more than 4 Energy and no more than `[A]`, which means **Punch First at 2 Power is permanently out of its reach and most of the rest of your deck is not** (§206).
 **Flip safety: 0%.** Nothing in 53 archived lists returns your unit to hand. Hide and flip on curve.
 **Ban note:** zero of their 53 lists ran a banned card, so expect this share to hold or rise.
-**Board:** +1 Hard Bargain (against Defy, not against bounce). −1 Decree (Fury/Calm).
+**Board:** +1 Hard Bargain (against Defy, not against bounce), **+2 Ravenbloom Prefect and +2 Acceptable Losses** — Zhonya's Hourglass is in 77% of their lists and both answer it. −1 Decree (Fury/Calm).
 
 ### Master Yi, Wuju Bladesman — Tier 1.3 · 9.0% overall / 4.0% post-ban · mean Might 3.12
 
@@ -733,7 +775,7 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 **You do:** 43% bare, 89% with Punch First. Their bodies are small enough that +5 decides fights. Up from the Deep's Tentacles tax their damage assignment under the no-overkill rule; Kinkou Initiate turns on trivially.
 **Flip safety: 0%** — and this is the one to know cold. **85% of their lists run a bounce effect and all of it is friendly-only** (Retreat, Pack of Wonders and friends, played for value and to re-channel a rune). The card you see cannot touch your flip.
 **Switcheroo is your worst Hidden card here.** Against a genuinely flat board the swap has nothing to swap into. Hide it only once they have committed a single large unit.
-**Board:** −1 Switcheroo, −1 Decree (Calm/Body). +1 Ravenbloom Prefect if you see Zhonya's early.
+**Board:** −1 Switcheroo, −1 Decree (Calm/Body). **+2 Ravenbloom Prefect, +2 Acceptable Losses** — Zhonya's Hourglass is 97% of their lists, the highest on this page, and the gear package exists for exactly this.
 
 ### Irelia, Blade Dancer — Tier 1.4 · 5.6% overall / 3.6% post-ban · mean Might 2.49
 
@@ -742,7 +784,7 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 **They do:** the smallest board you fight regularly — 2.49 mean. Defy 100%, Discipline 99%, Irelia Fervent 97%, Boots of Swiftness 97%, Defiant Dance 97%, Abandoned Hall 97%.
 **You do:** **58% bare, 98% with Punch First** — the only archetype you beat more often than not with no trick at all. Keep the pumps.
 **Note the one row where Switcheroo is worse than Punch First:** 97% against 98%. Against genuinely small boards the swap has nothing to swap into. **Board it out.**
-**Flip safety: 90%** — the second-highest on this page. Gust and Star-Crossed are near-universal. Hide Pyke, not Evelynn, unless they are tapped out.
+**Flip safety: 90%** — the second-highest on this page. Gust and Star-Crossed are near-universal, and since the Pyke cut you have no flip that shrugs them off. Hide **Switcheroo**, the only one of the four they cannot punish mid-trigger.
 **Ban note:** hit hard — 68% of their archived lists ran a banned card.
 **Board:** +1 Hard Bargain, +2 Gust. −1 Switcheroo, −1 Decree (Calm/Chaos).
 
@@ -754,7 +796,7 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 **You do:** 38% bare, 88% with Punch First, 98% with Switcheroo.
 **Flip safety: 0%.** 77% of their lists run a bounce effect — **Thrill of the Hunt, which banishes a *friendly* unit and replays it to any battlefield, ignoring its cost.** That is a threat to your combat maths, not to your flip: it puts a Rengar into a fight at Reaction speed for free, exactly the way your Tideturner does. Count it before you commit to a fight you think you have won.
 **Ban note:** effectively untouched (3%), and they are 2.4% of the full archive against 3.6% of the post-ban window — expect more of them.
-**Board:** +1 Switcheroo (their Rengar and Inferna are the single large threats it is for). −1 Decree (Fury/Body).
+**Board:** +1 Rampage. −1 Decree (Fury/Body). The second Switcheroo used to come in here and no longer exists (§15).
 
 ### Azir, Emperor of the Sands — Tier 2.2 · 3.0% overall / 3.0% post-ban · mean Might 3.78, median 4
 
@@ -764,7 +806,7 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 **You do:** **24% bare** — your second-worst straight fight. Punch First reaches 86%; **Switcheroo reaches 94%.** Isolation gets you to 75%, and isolation-plus-Kha'Zix to **96%** — the largest gap on the page between fighting fair and fighting rigged.
 **Flip safety: 0%.** Hide Switcheroo at the battlefield you intend to defend and take your time.
 **Sample caveat:** those 37 decks contribute only 124 units between them — Azir lists are thin on bodies by construction. The distribution is real but the sample behind it is small.
-**Board:** +1 Switcheroo, +1 Rebuke, +1 Ravenbloom Prefect (Equipment). −1 Decree (Calm/Order).
+**Board:** **+2 Ravenbloom Prefect, +2 Acceptable Losses** — Hidden Blade 95%, Brutalizer 95%, Eye of the Herald 95%: this is the matchup the new board was built for. −1 Decree (Calm/Order). **Note what you no longer have:** the second Switcheroo and Rebuke were this matchup's plan in the previous build, and both are gone (§15).
 
 ### Fiora, Grand Duelist — Tier 2.3 · 3.2% overall / 4.3% post-ban · mean Might 3.40
 
@@ -784,7 +826,8 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 **Keep Faefolk** — their small bodies exist to be swapped up.
 **Watch for Elder Dragon** at 73% of their lists: *"any amount of your damage is enough to kill enemy units"* switches off minimum lethal, and with it every line in §7 that depends on cheap bodies taxing their assignment. Tentacles stop absorbing. Answer the enabler by returning it to hand — that is what Rebuke is in the board for.
 **Flip safety: 0%.** Hide and flip freely; they have no answer.
-**Board:** **+1 Switcheroo, +1 Rebuke, +2 Decree of Strength** — Jayce is **Mind/Body**, one of only two archetypes on this page Decree can touch, and it is the worst board in §7. −2 Punch First.
+**Board:** **+1 Decree of Strength** — Jayce is **Mind/Body**, one of only two archetypes Decree can touch, and it is the worst board in §7. **+1 Rampage.** −2 Punch First.
+**This plan got worse on 23 September, and you should know by how much.** The previous board held a second Switcheroo and a Rebuke; both are gone. Switcheroo is the 97% card here and there is now exactly one copy in the whole 56, seen in your opener 10.3% of the time. Rebuke was the answer to a resolved Elder Dragon. Neither has a replacement in the current ten — see §15.
 
 ### Diana, Scorn of the Moon — Tier 2.6 · 4.4% overall / 2.8% post-ban · mean Might 3.22
 
@@ -794,7 +837,7 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 **You do:** 39% bare, 93% with Punch First, 97% with Switcheroo. The combat maths is ordinary; the sequencing is not.
 **Flip safety: 100%.** Every single archived Diana list holds a Reaction that can take your unit back mid-trigger. **Do not flip Evelynn into open Chaos, ever.** Pyke and Tideturner are fine — Pyke has no play effect to lose, and Tideturner is usually flipped after they have already committed.
 **Ban note:** 81% of their lists ran a banned card, the heaviest exposure on this page, so treat the 4.4% share as a ceiling rather than a forecast.
-**Board:** +1 Hard Bargain, **+2 Decree of Strength** (Mind/Chaos — the other archetype it is live against). −1 Acceptable Losses.
+**Board:** +1 Hard Bargain, **+1 Decree of Strength** (Mind/Chaos — the other archetype it is live against, and there is only the one copy now).
 
 ### Rek'Sai, Void Burrower — Tier 2.7 · 4.9% overall / 2.6% post-ban · mean Might 2.66
 
@@ -814,7 +857,7 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 **You do:** 53% bare, 93% with Punch First, 98% with Switcheroo.
 **Read the share carefully:** 3.2% of the full archive against 6.3% of the four days since the ban, and **only 7 of its 39 archived lists are tournament-vouched.** That is a spike on thin evidence.
 **The Vex mirror:** Deflect taxes *opponents'* spells, so your Rampage into their Vex costs `[A]` more (§809). Yours does the same to them.
-**Flip safety: 74%** — Star-Crossed mostly. Flip Pyke, hold Evelynn.
+**Flip safety: 74%** — Star-Crossed mostly. Hold Evelynn and Tornado Warrior; Switcheroo is the flip they cannot punish.
 **Board:** +1 Hard Bargain. −1 Decree (Calm/Chaos).
 
 ---
@@ -827,45 +870,49 @@ The archive still contains ramp lists whose average unit dwarfs anything here. A
 
 ## 14. The sideboard
 
-**1 Ravenbloom Prefect · 1 Acceptable Losses · 2 Decree of Strength · 2 Gust · 1 Hard Bargain · 1 Rebuke · 1 Sabotage · 1 Switcheroo**
+**2 Gust · 2 Acceptable Losses · 2 Ravenbloom Prefect · 1 Sabotage · 1 Hard Bargain · 1 Rampage · 1 Decree of Strength**
 
 Ten of ten. Swaps are one-for-one between games, you may change your Chosen Champion, and you may **never** change runes, Legend or battlefields after registration (TR §403.4.b). No sideboarding before game 1 or after a draw.
 
-**Switcheroo ×1** — the most important card in the board, and it should probably not be in the board (§15). In against Jayce, Azir, Rengar and anything with a single large threat. Out against Irelia and flat Master Yi boards.
+**The 23 September board is a gear board.** Four of the ten slots now answer Equipment, up from two. That is a defensible read of the field — Zhonya's Hourglass is in 97% of Master Yi lists and 77% of Akali's, and Azir runs Hidden Blade, Brutalizer and Eye of the Herald at 95% each — but it was paid for by cutting the two cards that fixed your worst matchups.
 
-**Gust ×2** (1E, Reaction, returns a unit at a battlefield with 3 Might or less) — does three jobs. It manufactures the **alone** condition Kha'Zix needs by removing the second unit; it answers their cheap threats; and it is the mirror-image of the card that beats your own Hidden flips, so knowing how it plays from their side is worth something.
+**Acceptable Losses ×2** (1E, Action, each player kills one of their gear) — **and it is one-sided now.** The previous build had to crack a Gold token before casting it, because Pyke's token was gear and the card is symmetric. With Pyke cut you make no gear at all, so this is pure removal. That is most of the argument for the second copy.
 
-**Hard Bargain ×1** (2E, Reaction, Repeat 2E, counter unless they pay 2) — **the card that protects a flip.** Against Kennen, Irelia and anything else holding up Gust, this is the difference between Evelynn working and Evelynn being a 2/2. One copy is thin for that job; see §15.
+**Ravenbloom Prefect ×2** (3E / 3 Might, *"when an opponent plays a gear, you may banish me to banish it"*) — a body that doubles as gear removal, and unlike Acceptable Losses it answers the gear **as it is played**, before it does anything. Two copies against the Equipment decks is a real plan rather than a gesture.
 
-**Rebuke ×1** (2E / 2 Chaos, **Action**, return *any* unit at a battlefield to hand) — Gust with no Might cap. In against Jayce, Azir and anything that cheats a large unit into play, where returning it to hand is strictly better than killing it because they must recast it.
+**Gust ×2** (1E, Reaction, returns a unit at a battlefield with 3 Might or less) — unchanged, and still doing three jobs: it manufactures the **alone** condition Kha'Zix needs, it answers their cheap threats, and it is the mirror image of the card that beats your own flips.
 
-**Sabotage ×1** — third copy, taking you to the legal maximum of three across main and board. In against combo and against decks whose Hidden cards you would rather take from hand.
+**Hard Bargain ×1** (2E, Reaction, Repeat 2E, counter unless they pay 2) — **the card that protects a flip**, and it matters more than it did: three of your four Hidden cards are now blowout-able where two were. In against Diana, Irelia, Kennen and Vex, and against nobody else.
 
-**Acceptable Losses ×1** (1E, Action, each player kills one of their gear) — gear hate. **Note the interaction with your own Pyke:** it is symmetric, and a Gold token is gear. Crack the token first, then cast it.
+**Sabotage ×1** — third copy, at the three-copy cap across main and board.
 
-**Ravenbloom Prefect ×1** (3E / 3 Might, *"when an opponent plays a gear, you may banish me to banish it"*) — a body that doubles as gear removal.
+**Rampage ×1** — third copy, also at cap. New to the board on 23 September. Removal that needs no combat and reaches units at base, which is the shape of answer this board is otherwise short of.
 
-**Decree of Strength ×2** (1E, no Power: they reveal their hand, you make them recycle a **Mind** card) — narrow, and aimed more precisely than it first looks. A card is only in their deck if their Legend's identity contains its domains (§103.1.b.4), so Decree is a **literal blank** against nine of the eleven archetypes in §13: Kennen (Order/Chaos), Akali (Fury/Calm), Master Yi (Calm/Body), Irelia (Calm/Chaos), Rengar (Fury/Body), Azir (Calm/Order), Fiora (Body/Order), Rek'Sai (Fury/Order) and Vex (Calm/Chaos).
+**Decree of Strength ×1** — down from two. A card is only in their deck if their Legend's identity contains its domains (§103.1.b.4), so Decree is a **literal blank** against nine of the eleven archetypes in §13: Kennen (Order/Chaos), Akali (Fury/Calm), Master Yi (Calm/Body), Irelia (Calm/Chaos), Rengar (Fury/Body), Azir (Calm/Order), Fiora (Body/Order), Rek'Sai (Fury/Order) and Vex (Calm/Chaos). It is live against **Jayce (Mind/Body)** and **Diana (Mind/Chaos)** — 3.7% and 4.4% of the archive, 8.1% together. **Going to one copy is right**; the previous build's two was the page's own complaint in §15, and Jun cut it.
 
-The two it is live against are **Jayce (Mind/Body)** and **Diana (Mind/Chaos)** — 3.7% and 4.4% of the archive, 8.1% together — and Jayce is the single worst board in §7. So it is not a bad card, it is a **hyper-specific** one, and it is aimed at the right target. Whether that justifies two of ten slots is the question §15 asks.
+### What left, and what it cost
 
----
+**Rebuke ×1** (2E / 2 Chaos, Action, return *any* unit at a battlefield to hand) and **Switcheroo ×1** (the second copy) are both gone.
+
+That is the part of this update worth arguing with. Rebuke was Gust with no Might cap — the answer to a resolved Elder Dragon or any other unit cheated past your removal, and §13 named it against Jayce and Azir. The board Switcheroo was the second copy of **the best card in the deck against your two worst matchups**, 97% against Jayce and 94% against Azir.
+
+**Both of the cards that fixed Jayce and Azir left the same list on the same day, for gear hate.** §15 is where that argument goes.
 
 ## 15. What I'd test
 
-**1. The second Switcheroo belongs in the main deck.** It is 94–98% across every archetype measured and it is the only card in the list that fixes Jayce and Azir. One copy in a 39-card library is in your opening hand 10.3% of the time and in your first nine cards 23% of the time — for the best card in the deck against your worst matchups, that is too rare. **Move the board copy main, over the second Sabotage**, and register the third copy in the board.
+**1. Switcheroo is a singleton, and it should not be.** This was the first recommendation on this page before the update, and the update went the other way: the board copy came out, leaving **one copy in all 56 cards**. It is 94–98% against every archetype measured, it is the only card in the list that fixes Jayce (97%) and Azir (94%), and at one copy you see it in your opening hand **10.3%** of the time and in your first nine cards 23%. Every other card in the deck is a lever you sometimes want; this is the one you always want. **The single highest-value question to put to Jun.**
 
-**2. Traveling Merchant at one is too few.** The deck lost Stacked Deck, then lost two Merchants, and Fizz is not selection. Star Spring and Zaun Warrens both exist to trigger the Merchant, and at one copy those battlefields are doing less than they should. **Test Merchant 1 → 2, cutting the Ride the Wind.**
+**2. Does the gear package need four slots?** Two Acceptable Losses and two Ravenbloom Prefect is a real plan against Yi, Akali and Azir — Zhonya's at 97% / 77% and Azir's three Equipment at 95% justify *a* package. Whether it justifies **four of ten**, at the price of Rebuke and the second Switcheroo, is the trade to test. **Try three, and put the fourth back on Switcheroo.**
 
-**3. One Decree of Strength, not two.** Live against Jayce and Diana and structurally dead against the other nine, and one copy already answers the single card you most want gone. **Test the freed slot as a second Hard Bargain** — protecting a flip against the Gust decks is worth more than the second narrow discard, and Hard Bargain's Repeat gives it a late-game mode.
+**3. Is one Tornado Warrior enough to be worth the slot?** He needs a Matriarch standing at the battlefield you hid him at, with the facedown slot free. Two Matriarchs, one slot, one copy of him. When it works it is a free card at Reaction speed and a re-armed Matriarch; when it does not he is a 3-Might body for nothing, which is a fine floor but not why he is in the deck. **Track how often the Matriarch is actually there.** If it is under half, the question is whether Pyke's guaranteed small value beat this card's occasional large one — the honest answer is that you have now played both and your read is worth more than mine.
 
-**4. Is one Pyke enough to matter?** His engine is excellent and a single copy reaches your hand in the first nine cards 23% of the time. The argument for a second is that he is the only card that pays the Hidden tax; the argument against is the single facedown slot. **Test Pyke 1 → 2 over the second Vex** and see whether the slot competition is as bad in practice as it looks on paper.
+**4. The package no longer pays for itself.** Pyke refunded a hide; nothing does. Four Hidden cards at one facedown slot cost you up to four half-turns of ramp across a game with no rebate. **Watch whether you are ever short a rune on the turn you wanted to act** — if so, the fourth Hidden card is costing more than it returns, and Switcheroo's second copy is the card to add in its place.
 
-**5. Does Evelynn justify her demands?** She needs a controlled battlefield, a spare rune, a turn of setup, an empty facedown slot, a lone enemy unit worth dragging, and an opponent without Gust. Every one of those is likely; all six at once is not. The payoff when they line up is three XP for a rune. **Track how many games she actually converts.** If it is under a third, the slot is a Kinkou Initiate.
+**5. Traveling Merchant at one is still too few.** Unchanged from the last revision. The deck lost Stacked Deck, then lost two Merchants, and Fizz is not selection. Star Spring and Zaun Warrens both exist to trigger the Merchant, and at one copy those battlefields are doing less than they should. **Test Merchant 1 → 2, cutting the Ride the Wind.**
 
-**6. Star Spring against Rek'Sai.** The symmetric trigger reads like a real liability there and I have not tested it. Zaun Warrens is the obvious substitute.
+**6. Does Evelynn justify her demands?** Also unchanged. She needs a controlled battlefield, a spare rune, a turn of setup, an empty facedown slot, a lone enemy unit worth dragging, and an opponent without Gust. Every one of those is likely; all six at once is not. **Track how many games she actually converts.** If it is under a third, the slot is a Kinkou Initiate.
 
----
+**7. Star Spring against Rek'Sai.** The symmetric trigger reads like a real liability there and I have not tested it. Zaun Warrens is the obvious substitute.
 
 ## Sources and method
 
@@ -879,7 +926,9 @@ The two it is live against are **Jayce (Mind/Body)** and **Diana (Mind/Chaos)** 
 
 **"Flip safety" in §13 counts one specific thing**, because most of what reads as bounce in this format cannot touch you: the share of an archetype's archived lists holding a card that can return an **enemy** unit to hand at **Reaction** speed. Fourteen cards in the pool return a unit to hand; six of those are friendly-only and are excluded, which is why Retreat — 10.6% of the archive, and named as a threat in the previous draft of §5 — does not count. At Reaction speed the set is two cards, Gust and Star-Crossed.
 
-**The decklist** was read live from the app's Supabase state on 22 September 2026 via `scripts/rift deck "Kha'Zix Midrange"`, not from a cached copy. The list is complete against the collection: nothing to acquire.
+**The decklist** was read live from the app's Supabase state on 23 September 2026 via `scripts/rift deck "Kha'Zix Midrange"`, not from a cached copy. The list is complete against the collection: nothing to acquire.
+
+**The archive figures on this page are deliberately not the ones in `HEAD`.** On 2026-09-23 the deck feed returned 810 decks all stamped with the build date, sharing not one entry with the 1,226 that preceded them and carrying an archetype mix nothing like theirs. That snapshot cannot support a share, a trend or a pre/post-ban split, so **every archive number here is computed against the last good build, `e9596e7` — 1,226 decks, generated 2026-09-20.** `check.mjs` has since been given assertions that block a single-day archive (PR #14); until the feed is fixed the numbers on this page should be read as of 20 September and not re-derived from the current data files.
 
 **Archetype data** — Might distributions, card adoption, flip-safety density, Hidden density — comes from `data/decks.json`: **1,226 decks over 2026-07-22 to 2026-09-20**, of which 720 are tournament-vouched and 506 fall after the 18 September bans. **Alternate printings are collapsed on both sides of every join in this dossier, and the reason is worth stating once.** A legend's alternate printing carries an unrelated collector number — Heart of the Tempest is `VEN-155` *and* `VEN-197`, Voidreaver is `UNL-201` *and* `UNL-236` — so deck-to-archetype is keyed on the legend's **name** (`ln`), not its number. A number-keyed join drops a third of Kennen's lists and a fifth of yours.
 

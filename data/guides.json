@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-22",
+ "generatedAt": "2026-09-23",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -34,8 +34,8 @@
    "slug": "khazix-voidreaver-postban",
    "file": "guides/khazix-voidreaver-postban.md",
    "title": "Kha'Zix Voidreaver — Midrange Dossier",
-   "subtitle": "Riftbound, Vendetta season — Jun's midrange build, September update, with the Hidden package",
-   "date": "2026-09-22",
+   "subtitle": "Riftbound, Vendetta season — Jun's midrange build, 23 September revision, with the Hidden package",
+   "date": "2026-09-23",
    "legend": "Voidreaver",
    "champion": "Kha'Zix, Mutating Horror",
    "sections": [
@@ -58,7 +58,7 @@
     "15. What I'd test",
     "Sources and method"
    ],
-   "words": 15654
+   "words": 17395
   },
   {
    "slug": "khazix-voidreaver",
