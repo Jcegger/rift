@@ -13,7 +13,9 @@ date: 2026-09-16
 
 **This is a companion to the [midrange dossier](khazix-voidreaver-postban.md), not a replacement for it.** Everything that dossier establishes about combat resolution (§7), the XP rules (§2), keywords (§8) and the clean-win maths still applies here unchanged, and is not repeated. This page is about the cards that differ and what they change.
 
-**Note, 22 September:** Jun updated the midrange list after this page was written, and the two builds have drifted apart. They now share **33 of 40** cards; the sideboards are **no longer identical**; the midrange list has cut Onslaught, dropped Forbidding Waste for Star Spring, and added four **Hidden** cards. The six-card framing below is against the *previous* midrange list and is kept because it is still the clearest way to explain what this build is doing. Cross-references to that dossier's section numbers have been updated; where a paragraph below describes what midrange runs, read it as describing the September build of it.
+**Note, updated 23 September:** Jun has revised the midrange list twice since this page was written, and the two builds have drifted apart. They still share **33 of 40** cards and the sideboards are **no longer identical**. Midrange has cut Onslaught, dropped Forbidding Waste for Star Spring, and added four **Hidden** cards — Evelynn, Tideturner, Switcheroo and, as of 23 September, **Tornado Warrior in place of Pyke, Returned**. Its sideboard was rebuilt again on the 23rd around gear hate, losing Rebuke and its second Switcheroo.
+
+The six-card framing below is against the *original* midrange list and is kept because it is still the clearest way to explain what this build is doing. Cross-references to section numbers are current. Where a paragraph describes what midrange runs, the figures have been brought up to the 23 September build.
 
 ---
 
@@ -84,7 +86,7 @@ Average main-deck Energy, measured across every archetype in the 1,184-list snap
 | Rek'Sai, Void Burrower | 2.57 |
 | Akali, Rogue Assassin | 2.59 |
 | **This list** | **2.65** |
-| Kha'Zix midrange (Jun) | 2.77 |
+| Kha'Zix midrange (Jun) | 2.68 |
 | LeBlanc, Deceiver | 3.59 |
 | Jayce, Defender of Tomorrow | 4.01 |
 
@@ -103,7 +105,7 @@ out                          in
 1 Onslaught             ->   1 Rengar, Trophy Hunter  (a third copy; midrange runs two)
 ```
 
-Thirty-four cards are identical, including the entire rune base, all three battlefields and all ten sideboard slots. Everything this dossier says about the deck's identity rests on six cards, so they are worth reading individually.
+Thirty-four cards were identical when this page was written, including the entire rune base, all three battlefields and all ten sideboard slots. **After two midrange revisions it is 33 of 40, and the sideboards now share only six cards** — the rune base and battlefields still match. Everything this dossier says about the deck's identity rests on six cards, so they are worth reading individually.
 
 **In — Mister Root ×3** (2E / 0 Power · 1 Might · Chaos). *"[Accelerate] (You may pay 1 Energy + 1 Chaos as an additional cost to have me enter ready.) When I move to a battlefield, gain 2 XP."*
 
@@ -166,9 +168,9 @@ Plus Kha'Zix and **three** Rengar arriving at Reaction timing on Ambush, against
 | | fills the trash | spends it |
 |---|---|---|
 | **This list** | Shadow Order Disciple ×3, Zaun Warrens | Fizz ×3, Tail-Cloaked Matriarch ×2, Up from the Deep ×3 |
-| Midrange | Shadow Order Disciple ×3, Traveling Merchant ×3, Zaun Warrens | the same, plus Onslaught's Flow and Zed's Shadow Clone |
+| Midrange (23 Sep) | Shadow Order Disciple ×3, Traveling Merchant ×1, Zaun Warrens | Fizz ×3, Tail-Cloaked Matriarch ×2, Up from the Deep ×2, Zed's Shadow Clone |
 
-Three filler copies against eight spenders, where midrange has six against ten. **Burn matters more here and you have fewer ways to do it.** The midrange default of *don't Burn unless a spender is in hand* becomes closer to *Burn when the spender is in hand and you can afford the card*, because Shadow Order Disciple is now carrying the fill side almost alone.
+Three filler copies against eight spenders, where midrange now has four against eight — it cut two Merchants, a Zed and Onslaught, so its own fill side thinned at the same time. **Burn matters more here and you have fewer ways to do it.** The midrange default of *don't Burn unless a spender is in hand* becomes closer to *Burn when the spender is in hand and you can afford the card*, because Shadow Order Disciple is now carrying the fill side almost alone.
 
 **The Body squeeze gets worse.** Single-domain Power demand across the main deck:
 
@@ -249,7 +251,7 @@ This is worth stating with numbers, because it is a real argument and not a soft
 
 | | midrange | this list |
 |---|---|---|
-| trash-dependent copies | 11 across 5 cards | **8 across 3** |
+| trash-dependent copies | 8 across 4 cards | **8 across 3** |
 | activated abilities | Zed's clone swap | Mister Root's Accelerate |
 | Reaction-speed cards | 5 | 6 |
 
@@ -273,7 +275,7 @@ Everything the midrange dossier says applies, and two things are worse.
 
 Their legend reads *"while a friendly unit defends alone, it gets +2 Might"* and yours pays out when *an enemy unit is alone* — you spend cards manufacturing the board state that rewards them for free. That is true of both builds. What is specific here: **you cut the two cards that beat them in a long game.** Zed at 5 Might outlives their removal and Traveling Merchant refuels; this list has neither, and its replacement resources are XP rather than cards.
 
-Their three Defy also bite harder. Midrange has six showdown-legal spells of which three are Defy-immune Punch First; this list has eight of which three are. **Five of your eight held-up cards can be countered**, against midrange's three of six.
+Their three Defy also bite harder. Defy counters a spell costing no more than 4 Energy **and** no more than `[A]`, so anything at 2 Power walks through it. Midrange holds seven showdown-legal spells of which **four** are Defy-proof — three Punch First and Switcheroo, all at 2 Power. This list holds eight of which three are. **Five of your eight held-up cards can be countered, against midrange's three of seven.**
 
 *In:* Hard Bargain ×2, Gust ×2, Angler Beast ×1, Sabotage ×1. *Out:* Rampage ×2, Star-Crossed ×1, Tail-Cloaked Matriarch ×2, Kinkou Initiate ×1.
 **Leave Unyielding Spirit out** — Charm, Defy, En Garde and Discipline are moves, counters and pumps. There is no spell damage to prevent.
@@ -325,7 +327,7 @@ A token swarm that counts equipment, not a big-equipped-threat deck. Vex stuns e
 
 ## 11. The sideboard
 
-**No longer identical to the midrange list's ten** — that board was rebuilt in September and now runs Decree of Strength and Rebuke over Unyielding Spirit, Angler Beast and a second Hard Bargain. The reasoning behind *this* ten stands unchanged, including the correction that Unyielding Spirit was cut from an earlier board against a field that had no spell damage in it, and that the field has since changed. The midrange board is argued in that dossier's §14.
+**No longer identical to the midrange list's ten** — that board has been rebuilt twice. As of 23 September it runs a four-slot gear package (2 Acceptable Losses, 2 Ravenbloom Prefect) plus a third Rampage and a single Decree of Strength, having dropped Unyielding Spirit, Angler Beast, a second Hard Bargain, Rebuke and its second Switcheroo. The reasoning behind *this* ten stands unchanged, including the correction that Unyielding Spirit was cut from an earlier board against a field that had no spell damage in it, and that the field has since changed. The midrange board is argued in that dossier's §14.
 
 One thing is different here and it is a scheduling problem. Against Master Yi and Akali the cards that want to come in total ten, and this list has **less it can comfortably cut** than midrange does: the top end is three Rengar you need, and the two-drops are the engine. The realistic cut list is Rampage ×2, then Star-Crossed, then Kinkou Initiate, then Up from the Deep — and past that you are cutting things that make the deck work.
 
