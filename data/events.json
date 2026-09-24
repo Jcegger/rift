@@ -22,9 +22,9 @@
   "claimedEventsUnmatched": 16,
   "claimedEventAliases": {},
   "claimedDecksByRegion": {
-   "Europe": 11,
    "unknown": 18,
-   "Asia": 13
+   "Europe": 12,
+   "Asia": 14
   },
   "registryEventsByRegion": {
    "unknown": 1666
