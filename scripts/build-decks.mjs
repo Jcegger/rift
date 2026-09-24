@@ -247,17 +247,48 @@ async function getPage(page, filters, attempt = 0) {
   return Array.isArray(d) ? d : [];
 }
 
-// Newest first, until a page stops adding anything.
+/* ── walking a feed whose ordering stopped being an ordering ──────────────────
+   This asks for `srt: "date", direct: "desc"` and pages until the rows stop being
+   new. That is only a crawl if the server returns a stable total order. Upstream has
+   been serving a near-constant `date` since 2026-09-16 — on 2026-09-23 every row came
+   back stamped with the same day — and with every sort key tied there is no stable
+   order to page through. The same page number then returns different rows on different
+   calls, pages overlap at random, and the old rule (stop at the first page that adds
+   nothing) fires at an arbitrary depth.
+
+   That is not a hypothesis. Consecutive daily runs produced 1,226 decks and then 810
+   with **no slug in common**, every request 200 OK and well formed. The count swung
+   424 → 1,180 → 1,226 → 810 while the archive's real date span collapsed from 59 days
+   to 0.
+
+   So a dry page is evidence, not proof. Keep going while pages still produce, give up
+   only after several consecutive dry ones, and carry the duplicate rate out so that a
+   crawl which is really a random sample of the feed says so out loud — including on a
+   run that otherwise passes. */
+const DRY_PAGES = 3;
+
 async function getAll(filters, max) {
   const seen = new Map();
+  const stats = { pages: 0, rows: 0, dryPages: 0, stopped: "page cap" };
+  let dry = 0;
   for (let page = 1; page <= 80 && seen.size < max; page++) {
     const batch = await getPage(page, filters);
-    if (!batch.length) break;
+    stats.pages++;
+    if (!batch.length) { stats.stopped = "empty page"; break; }
+    stats.rows += batch.length;
     const before = seen.size;
     for (const d of batch) if (!seen.has(d.slug)) seen.set(d.slug, d);
-    if (seen.size === before) break;
+    if (seen.size === before) {
+      stats.dryPages++;
+      if (++dry >= DRY_PAGES) { stats.stopped = `${DRY_PAGES} dry pages`; break; }
+    } else dry = 0;
   }
-  return [...seen.values()];
+  if (seen.size >= max) stats.stopped = "max reached";
+  stats.unique = seen.size;
+  // How much of what came back had already been seen. Near zero on a stable feed;
+  // high means the pages are overlapping, which means the order is not one.
+  stats.dupRate = stats.rows ? 1 - seen.size / stats.rows : 0;
+  return { decks: [...seen.values()], stats };
 }
 
 // Kept identical to the copy in index.html: the two must agree or a deck that the
@@ -329,11 +360,11 @@ const main = async () => {
   };
 
   process.stdout.write("fetching public decks… ");
-  const pub = await getAll(FILTERS(false), max);
-  console.log(pub.length);
+  const { decks: pub, stats: pubStats } = await getAll(FILTERS(false), max);
+  console.log(`${pub.length} (${pubStats.pages} pages, stopped on ${pubStats.stopped})`);
   process.stdout.write("fetching tournament decks… ");
-  const tour = await getAll(FILTERS(true), max);
-  console.log(tour.length);
+  const { decks: tour, stats: tourStats } = await getAll(FILTERS(true), max);
+  console.log(`${tour.length} (${tourStats.pages} pages, stopped on ${tourStats.stopped})`);
 
   // The window is measured from the freshest deck seen, not from today, so a quiet
   // week does not silently empty the file.
@@ -401,6 +432,12 @@ const main = async () => {
       // How many players the event drew. A 9-player local and a 433-player major used
       // to weigh the same, which is the whole reason this is carried through.
       ec: (eventByName.get(t.tournament_name || "") || {}).players || null,
+      /* Upstream's `date`. Read it sceptically: since 2026-09-21 it has been serving
+         the same value for every row in a response, which makes it the day the feed
+         was read rather than the day the deck was played. `span` in the output says
+         how many distinct dates the file actually holds, and the crawl report shouts
+         when that is one. Until it is more than a few, nothing date-derived — a
+         trend, a pre/post-ban split, a share "over 60 days" — is safe to state. */
       dt: deckDate(d),
       vw: Number(d.views) || 0,
       pr: Math.round(Number(d.price) || 0),
@@ -434,21 +471,67 @@ const main = async () => {
     for (const c of d._unknown) unknown.set(c, (unknown.get(c) || 0) + 1);
     delete d._unknown;
   }
-  decks.sort((a, b) => (b.tour - a.tour) || (b.dt || "").localeCompare(a.dt || ""));
+
+  /* ── accumulate, because a crawl is a sample and not a census ────────────────
+     While the feed's ordering is unreliable (see getAll) a single run returns some
+     arbitrary slice of what exists. Writing that slice over the file is how this
+     archive lost two thirds of itself in one run with every request returning 200 OK.
+
+     So: committed rows are kept and freshly fetched rows merge over them by slug —
+     the same append-and-merge build-events.mjs adopted on 2026-09-16 when upstream
+     paginated `gettournaments` underneath it. The window still applies to the union,
+     so nothing outlives its 60 days and a deck that upstream retires ages out rather
+     than lingering forever. A bad crawl now costs freshness instead of the archive. */
+  let prior = [];
+  try {
+    const old = JSON.parse(await readFile(new URL("../data/decks.json", import.meta.url), "utf8"));
+    if (Array.isArray(old.decks)) prior = old.decks;
+  } catch { /* first run, or no file yet */ }
+  const fetched = new Set(decks.map((d) => d.s));
+  const carried = prior.filter((d) =>
+    d && d.s && !fetched.has(d.s) && d.dt && d.dt >= cutoff && (d.sz || 0) >= MIN_SIZE);
+  const merged = [...decks, ...carried];
+  merged.sort((a, b) => (b.tour - a.tour) || (b.dt || "").localeCompare(a.dt || ""));
+
+  /* The window above is *declared* — computed from the newest deck and the day count,
+     which is why data/decks.json went on advertising 60 days while holding one. `span`
+     is what the file actually covers, measured from the rows in it. check.mjs compares
+     the two, and build-history.mjs records the range so one build can be compared with
+     the next. */
+  const dts = merged.map((d) => d.dt).filter(Boolean).sort();
+  const spanDays = dts.length
+    ? Math.round((Date.parse(dts[dts.length - 1]) - Date.parse(dts[0])) / 86400000) : 0;
 
   const out = {
     generatedAt: new Date().toISOString().slice(0, 10),
     source: "api.dotgg.gg/cgfw/getdecks (riftbound.gg): recent public decks for popularity, tournament entries for placings",
     window: { from: cutoff, to: newest, days },
-    decks,
+    span: { from: dts[0] || null, to: dts[dts.length - 1] || null, days: spanDays, dates: new Set(dts).size },
+    crawl: {
+      public: pubStats, tournament: tourStats,
+      carried: carried.length, fetchedRows: decks.length,
+    },
+    decks: merged,
   };
   await writeFile(new URL("../data/decks.json", import.meta.url), JSON.stringify(out) + "\n");
 
   // ── report ────────────────────────────────────────────────────────────
-  const tourN = decks.filter((d) => d.tour).length;
-  console.log(`\nwindow ${cutoff} to ${newest} (${days}d)`);
-  console.log(`${decks.length} decks kept: ${tourN} tournament, ${decks.length - tourN} public` +
+  const tourN = merged.filter((d) => d.tour).length;
+  console.log(`\nwindow ${cutoff} to ${newest} (${days}d declared)`);
+  console.log(`span   ${dts[0] || "—"} to ${dts[dts.length - 1] || "—"} (${spanDays}d actual, ${new Set(dts).size} distinct dates)`);
+  console.log(`${merged.length} decks kept: ${tourN} tournament, ${merged.length - tourN} public` +
     `${clones ? `, ${clones} clones collapsed` : ""}`);
+  console.log(`  ${decks.length} from this crawl, ${carried.length} carried from the committed file`);
+
+  /* Printed every run, not only on failure. The whole reason the 2026-09-16 degradation
+     went a week unnoticed is that nothing said out loud how much of the feed a crawl had
+     actually reached. */
+  for (const [label, st] of [["public", pubStats], ["tournament", tourStats]])
+    console.log(`  crawl/${label}: ${st.pages} pages, ${st.rows} rows, ${st.unique} unique, ` +
+      `${(st.dupRate * 100).toFixed(0)}% already seen, stopped on ${st.stopped}` +
+      `${st.dupRate > 0.5 ? "  <-- pages are overlapping; the feed's order is not stable" : ""}`);
+  if (new Set(dts).size <= 1)
+    console.log("  !! every deck carries one date — the feed is not reporting when decks were played");
 
   const sets = {};
   for (const d of decks)
@@ -547,7 +630,7 @@ const main = async () => {
 /* Exported so scripts/check.mjs can test the title parser against known shapes rather
    than against whatever the feed happens to contain today. main() is guarded so the
    import does not kick off a network build. */
-export { claimFromTitle };
+export { claimFromTitle, placeOf };
 
 if (import.meta.url === pathToFileURL(process.argv[1] || "").href) {
   main().catch((e) => {

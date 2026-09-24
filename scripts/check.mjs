@@ -13,7 +13,7 @@
 //   node scripts/check.mjs
 
 import { readdirSync, readFileSync } from 'node:fs';
-import { claimFromTitle } from './build-decks.mjs';
+import { claimFromTitle, placeOf } from './build-decks.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -665,11 +665,47 @@ else {
      Number.isFinite(events.coverage?.claimedEvents),
      `${events.coverage?.claimedEvents ?? 0} claimed events, ` +
      `${events.coverage?.claimedEventsUnmatched ?? 0} with no row here`);
-  // If the city table ever stops matching, every claim silently becomes locationless.
+  /* Replaced 2026-09-24, and the reason is the point. This used to require 70% of
+     claimed events to resolve to a region. That held while the claims were Chinese
+     City Challenges, every one of which names a city. It stopped holding when
+     upstream's claim population shifted to online series — "Convergence #3", "CCS 25k
+     Qualifier #5", "36P Tournament" — which name no city at all. `placeOf` returning
+     null for those is the lookup working exactly as its comment promises, not failing.
+
+     So the old assertion was a ratio over a population upstream controls: a monitor
+     wearing a test's clothes. It failed six scheduled runs running and froze seven
+     healthy sources behind it, and the only way to clear it would have been to move
+     the threshold — which is how this file has been eroded twice before (see 1f444a2,
+     1566b3e, both titled "assertions that tested the feed, not the code").
+
+     The replacement invariant is the code, asserted against fixed inputs that no feed
+     can move: the table compiles, it matches a city inside a real event name, it
+     matches only on whole words, and it refuses to guess. The live rate is reported
+     underneath rather than gated on. */
+  ok('the city lookup resolves a name that carries a city',
+     placeOf('S4 Guangzhou City Challenge')?.rg === 'Asia' &&
+     placeOf('Barcelona RQ')?.rg === 'Europe' &&
+     placeOf('36P in China')?.cc === 'CN');
+  ok('the city lookup returns null for a name that carries none',
+     placeOf('Convergence #3') === null && placeOf('36P Tournament') === null &&
+     placeOf('CCS 25k Qualifier #5') === null);
+  ok('a city matches as a whole word, never inside a longer one',
+     placeOf('Milanov Memorial') === null && placeOf('Chengduchen handle') === null &&
+     placeOf('Milan Open')?.cc === 'IT');
+
+  // Liveness, not a rate: if the lookup ever stops firing altogether — a broken regex,
+  // a renamed field — every claim goes locationless at once, and that is worth blocking.
   const claims = A.DECKS.filter((d) => d.ce);
-  ok('claimed events still resolve to a region',
-     !claims.length || claims.filter((d) => d.rg).length >= claims.length * 0.7,
-     `${claims.filter((d) => d.rg).length} of ${claims.length} located`);
+  const located = claims.filter((d) => d.rg).length;
+  ok('the lookup is still firing on live data', !claims.length || located > 0,
+     `${located} of ${claims.length} claimed events carry a region`);
+  if (claims.length && located < claims.length * 0.7){
+    const names = [...new Set(claims.filter((d) => !d.rg).map((d) => d.ce))];
+    console.log(`  --   ${claims.length - located} of ${claims.length} claimed events name no city ` +
+                `the table knows — ${names.slice(0, 3).join('; ')}` +
+                `${names.length > 3 ? `; +${names.length - 3} more` : ''}. ` +
+                `Online and generic series names resolve to null by design.`);
+  }
   // Null means unknown. A region without a country, or either on a deck that names no
   // event at all, would be a location this project made up.
   ok('a region is never invented',

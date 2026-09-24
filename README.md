@@ -873,6 +873,22 @@ riftbound.gg's public deck API. Refresh it whenever:
 node scripts/build-decks.mjs [--days 60] [--max 700]
 ```
 
+**It accumulates rather than replaces.** A crawl is a sample, not a census: upstream's
+`srt: date` ordering has been sorting on a near-constant field since 2026-09-21, so a
+single run returns an arbitrary slice and one run replacing the file is how the archive
+lost two thirds of itself on 2026-09-23 with every request returning 200 OK. Committed
+rows are kept and fetched rows merge over them by slug, the same append-and-merge
+`build-events.mjs` adopted when `gettournaments` paginated underneath it. The window
+still applies to the union, so rows age out rather than accruing forever.
+
+Three fields exist to keep the file honest about itself. `window` is *declared* —
+computed from the newest deck and the day count, which is why the file went on
+advertising 60 days while holding one. `span` is *measured* from the rows present, with
+`span.dates` counting how many distinct dates they carry. `crawl` records pages read,
+rows returned, how many were already seen and why the walk stopped, so a crawl that
+truncated at `--max` or ran into an unstable ordering says so on a green run rather
+than only when something downstream breaks.
+
 It draws on two sources deliberately, because neither is enough alone.
 
 **Popularity comes from recent public decks.** There are hundreds from the last
