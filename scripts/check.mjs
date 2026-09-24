@@ -13,7 +13,7 @@
 //   node scripts/check.mjs
 
 import { readdirSync, readFileSync } from 'node:fs';
-import { claimFromTitle } from './build-decks.mjs';
+import { claimFromTitle, placeOf } from './build-decks.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -468,6 +468,61 @@ for (const [label0, inv] of Object.entries(collections)){
 }
 
 /* ══ freshness ═══════════════════════════════════════════════════════════ */
+section('The deck archive');
+{
+  const dts = A.DECKS.map((d) => d.dt).filter(Boolean).sort();
+  const distinct = new Set(dts);
+  const span = dts.length
+    ? Math.round((Date.parse(dts[dts.length - 1]) - Date.parse(dts[0])) / 86400000) : 0;
+  const declared = (snap.window && snap.window.days) || 0;
+
+  ok('every deck in the archive carries a date', dts.length === A.DECKS.length,
+     `${dts.length} of ${A.DECKS.length}`);
+
+  // 2026-09-23: the feed returned 810 decks all stamped with the build date, sharing
+  // not one slug with the previous build and carrying an archetype mix nothing like
+  // it — Daughter of the Void 6.9% to 28.3%. The row count was plausible and every
+  // other assertion passed, so the refresh committed it. The builder pages with
+  // `srt: "date", direct: "desc"` until a page stops adding anything, so once every
+  // row carries the same date that walk returns an arbitrary slice of the feed.
+  // A one-day archive cannot support a share, a trend, or a pre/post-ban split.
+  ok('the archive spans more than a single day', distinct.size > 1,
+     `${distinct.size} distinct date${distinct.size === 1 ? '' : 's'} across ${span}d`);
+
+  // The same break seen from the other side, and the more specific signature: if every
+  // deck is dated the day the build ran, the feed is reporting when it was scraped
+  // rather than when the deck was played.
+  ok('deck dates are not simply the build date',
+     !(distinct.size === 1 && distinct.has(snap.generatedAt)),
+     distinct.size === 1 ? `all ${A.DECKS.length} dated ${snap.generatedAt}` : 'dates predate the build');
+
+  // Not a failure. The window has over-claimed since 2026-09-16 — 1,226 decks sold as
+  // 60 days were six — and blocking the whole refresh over it would freeze the catalog,
+  // the tier list and the events feed as well. It is printed on green runs instead, so
+  // a degradation that is not yet a break cannot sit there unread.
+  if (declared && span < declared / 2)
+    console.log(`  --   the archive covers ${span} of the ${declared} days it declares` +
+                `${dts.length ? ` (${dts[0]} to ${dts[dts.length - 1]})` : ''} — ` +
+                `every share is over that span, not over the window`);
+  else
+    ok('the archive covers the window it declares', true, `${span} of ${declared} days`);
+
+  // Cross-build. A refresh replaces the archive wholesale only when something upstream
+  // changed shape, so consecutive builds overlap in the days they cover. On 2026-09-23
+  // the new archive (09-23 to 09-23) and the one before it (09-14 to 09-20) were
+  // disjoint. Rows built before build-history.mjs recorded f/l are skipped rather than
+  // guessed at.
+  const ranged = history ? history.days.filter((r) => r.f && r.l) : [];
+  if (ranged.length >= 2){
+    const [p, q] = ranged.slice(-2);
+    ok('consecutive builds cover overlapping days', p.f <= q.l && q.f <= p.l,
+       `${p.d}: ${p.f}..${p.l} vs ${q.d}: ${q.f}..${q.l}`);
+  } else {
+    console.log(`  --   deck-date ranges recorded for ${ranged.length} of ${history ? history.days.length : 0} ` +
+                `days — the build-to-build comparison starts once two rows carry them`);
+  }
+}
+
 section('Freshness');
 {
   const iso = (d) => new Date(Date.now() - d * 86400000).toISOString().slice(0, 10);
@@ -610,11 +665,47 @@ else {
      Number.isFinite(events.coverage?.claimedEvents),
      `${events.coverage?.claimedEvents ?? 0} claimed events, ` +
      `${events.coverage?.claimedEventsUnmatched ?? 0} with no row here`);
-  // If the city table ever stops matching, every claim silently becomes locationless.
+  /* Replaced 2026-09-24, and the reason is the point. This used to require 70% of
+     claimed events to resolve to a region. That held while the claims were Chinese
+     City Challenges, every one of which names a city. It stopped holding when
+     upstream's claim population shifted to online series — "Convergence #3", "CCS 25k
+     Qualifier #5", "36P Tournament" — which name no city at all. `placeOf` returning
+     null for those is the lookup working exactly as its comment promises, not failing.
+
+     So the old assertion was a ratio over a population upstream controls: a monitor
+     wearing a test's clothes. It failed six scheduled runs running and froze seven
+     healthy sources behind it, and the only way to clear it would have been to move
+     the threshold — which is how this file has been eroded twice before (see 1f444a2,
+     1566b3e, both titled "assertions that tested the feed, not the code").
+
+     The replacement invariant is the code, asserted against fixed inputs that no feed
+     can move: the table compiles, it matches a city inside a real event name, it
+     matches only on whole words, and it refuses to guess. The live rate is reported
+     underneath rather than gated on. */
+  ok('the city lookup resolves a name that carries a city',
+     placeOf('S4 Guangzhou City Challenge')?.rg === 'Asia' &&
+     placeOf('Barcelona RQ')?.rg === 'Europe' &&
+     placeOf('36P in China')?.cc === 'CN');
+  ok('the city lookup returns null for a name that carries none',
+     placeOf('Convergence #3') === null && placeOf('36P Tournament') === null &&
+     placeOf('CCS 25k Qualifier #5') === null);
+  ok('a city matches as a whole word, never inside a longer one',
+     placeOf('Milanov Memorial') === null && placeOf('Chengduchen handle') === null &&
+     placeOf('Milan Open')?.cc === 'IT');
+
+  // Liveness, not a rate: if the lookup ever stops firing altogether — a broken regex,
+  // a renamed field — every claim goes locationless at once, and that is worth blocking.
   const claims = A.DECKS.filter((d) => d.ce);
-  ok('claimed events still resolve to a region',
-     !claims.length || claims.filter((d) => d.rg).length >= claims.length * 0.7,
-     `${claims.filter((d) => d.rg).length} of ${claims.length} located`);
+  const located = claims.filter((d) => d.rg).length;
+  ok('the lookup is still firing on live data', !claims.length || located > 0,
+     `${located} of ${claims.length} claimed events carry a region`);
+  if (claims.length && located < claims.length * 0.7){
+    const names = [...new Set(claims.filter((d) => !d.rg).map((d) => d.ce))];
+    console.log(`  --   ${claims.length - located} of ${claims.length} claimed events name no city ` +
+                `the table knows — ${names.slice(0, 3).join('; ')}` +
+                `${names.length > 3 ? `; +${names.length - 3} more` : ''}. ` +
+                `Online and generic series names resolve to null by design.`);
+  }
   // Null means unknown. A region without a country, or either on a deck that names no
   // event at all, would be a location this project made up.
   ok('a region is never invented',

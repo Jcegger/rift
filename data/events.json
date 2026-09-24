@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-09-23",
+ "generatedAt": "2026-09-24",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 1652,
+  "events": 1666,
   "eventsWithDecks": 0,
-  "players": 39741,
+  "players": 39937,
   "playersWithDecks": 0,
   "unresolvedDeckEvents": [
    "Riftbound Online Tournament",
@@ -18,23 +18,34 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 5,
-  "claimedEventsUnmatched": 5,
+  "claimedEvents": 18,
+  "claimedEventsUnmatched": 16,
   "claimedEventAliases": {},
   "claimedDecksByRegion": {
-   "Asia": 2,
-   "unknown": 1,
-   "Europe": 2
+   "Europe": 11,
+   "unknown": 18,
+   "Asia": 13
   },
   "registryEventsByRegion": {
-   "unknown": 1652
+   "unknown": 1666
   },
   "unresolvedClaimEvents": [
+   "36P Tournament",
+   "47P tournament",
+   "60P Tournament",
+   "60P tournament",
+   "A-Case @ Nexus",
    "Azir, Emperor of the Sands: Barcelona Regional Qualifier",
    "Barcelona RQ",
    "CCS 25k Qualifier #5",
    "Changsha RQ",
-   "Shenyang RO"
+   "Dinan Regional",
+   "Shenyang RO",
+   "Shenyang Regional Open",
+   "Singapore RQ",
+   "Utrecht RQ",
+   "Wuhan Regional Open",
+   "Xi'an Regional"
   ],
   "decksByEvent": {
    "CCS Riftbound $10,000 Tournament": 222,
@@ -49,6 +60,42 @@
   }
  },
  "events": [
+  {
+   "name": "J.K. Entertainment Wednesday Nexus Nights",
+   "dt": "2026-09-23",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "pentakilla94",
+   "country": null,
+   "slug": "jk-entertainment-wednesday-nexus-nights-4713"
+  },
+  {
+   "name": "Wednesday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-09-23",
+   "players": 11,
+   "format": "Constructed",
+   "winner": "KeinHirn",
+   "country": null,
+   "slug": "wednesday-afternoon-vendetta-summoner-skirmish-ii-6995"
+  },
+  {
+   "name": "Wednesday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-09-23",
+   "players": 17,
+   "format": "Constructed",
+   "winner": "MtyAlley Angelo",
+   "country": null,
+   "slug": "wednesday-afternoon-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Tuesday Evening Vendetta Summoner Skirmish II",
+   "dt": "2026-09-23",
+   "players": 15,
+   "format": "Constructed",
+   "winner": "SDG Charmaster",
+   "country": null,
+   "slug": "tuesday-evening-vendetta-summoner-skirmish-ii-4253"
+  },
   {
    "name": "Riftbound League @ Das Brett",
    "dt": "2026-09-22",
@@ -84,6 +131,42 @@
    "winner": "Duality",
    "country": null,
    "slug": "monday-evening-vendetta-summoner-skirmish-ii-6267"
+  },
+  {
+   "name": "Nexus Nights @ The Brass Dragon",
+   "dt": "2026-09-22",
+   "players": 11,
+   "format": "Constructed",
+   "winner": "Kyromi",
+   "country": null,
+   "slug": "nexus-nights-the-brass-dragon-1982"
+  },
+  {
+   "name": "Tuesday Evening Vendetta Summoner Skirmish II",
+   "dt": "2026-09-22",
+   "players": 15,
+   "format": "Constructed",
+   "winner": "Sinzari",
+   "country": null,
+   "slug": "tuesday-evening-vendetta-summoner-skirmish-ii-9585"
+  },
+  {
+   "name": "Ottava Tappa RNC Nexus",
+   "dt": "2026-09-22",
+   "players": 13,
+   "format": "Constructed",
+   "winner": "Yakubay",
+   "country": null,
+   "slug": "ottava-tappa-rnc-nexus"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II",
+   "dt": "2026-09-22",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Jab Jabich",
+   "country": null,
+   "slug": "vendetta-summoner-skirmish-ii-4058"
   },
   {
    "name": "Fabled Tavern Thursday Night Vendetta Summoner Skirmish II",
@@ -1587,6 +1670,60 @@
    "winner": "AbyssTCG Ghost",
    "country": null,
    "slug": "no-top-cut-sunday-morning-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Sunday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 28,
+   "format": "Constructed",
+   "winner": "TM2",
+   "country": null,
+   "slug": "sunday-morning-vendetta-summoner-skirmish-ii-9528"
+  },
+  {
+   "name": "TATC September Skirmish",
+   "dt": "2026-09-20",
+   "players": 17,
+   "format": "Constructed",
+   "winner": "PP LilacAngel",
+   "country": null,
+   "slug": "tatc-september-skirmish"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 16,
+   "format": "Constructed",
+   "winner": "WARP Etrata",
+   "country": null,
+   "slug": "vendetta-summoner-skirmish-ii-3733"
+  },
+  {
+   "name": "Chimera Gaming Summoner Skirmish - September",
+   "dt": "2026-09-20",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Bubble Burn",
+   "country": null,
+   "slug": "chimera-gaming-summoner-skirmish-september"
+  },
+  {
+   "name": "9/20 Gaming Giant Summoners Skirmish - September",
+   "dt": "2026-09-20",
+   "players": 11,
+   "format": "Constructed",
+   "winner": "TSD Lusa",
+   "country": null,
+   "slug": "920-gaming-giant-summoners-skirmish-september"
+  },
+  {
+   "name": "GTWF Vendetta Summoner Skirmish 2",
+   "dt": "2026-09-20",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Madara Coochieha",
+   "country": null,
+   "slug": "gtwf-vendetta-summoner-skirmish-2"
   },
   {
    "name": "Nexus Nights - GameSpirit",

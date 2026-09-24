@@ -821,7 +821,11 @@ node scripts/build-history.mjs
 
 `data/history.json` is the archive, appended at the end of the daily job. It fetches
 nothing — it derives today's row from `decks.json` and `tiers.json` and is idempotent by
-date, so the evening run corrects the morning's row rather than sitting beside it.
+date, so the evening run corrects the morning's row rather than sitting beside it. Each
+row also records `f` and `l`, the earliest and latest deck date the snapshot actually
+covered, which is not the same as the window it declared: `check.mjs` compares one
+build's range against the next so a wholesale replacement of the archive cannot pass as
+a refresh.
 
 **Mining the answer back out of git does not work, and that is the whole reason this
 file exists.** The oldest deck snapshot in the archive holds 250 decks against today's
@@ -868,6 +872,27 @@ riftbound.gg's public deck API. Refresh it whenever:
 ```
 node scripts/build-decks.mjs [--days 60] [--max 700]
 ```
+
+**It accumulates rather than replaces, because one crawl can no longer see 60 days.**
+The API caps a result set at roughly 26 pages, about 780 rows, and since a bulk import
+on 2026-09-23 stamped 720+ tournament decks inside five minutes the feed now produces
+that many rows in under two days — where in early September the same crawl reached 59
+days at about seven decks a day. So a crawl is a sample of the last 48 hours, and one
+run replacing the file is how the archive went from 1,226 decks to 810 with every
+request returning 200 OK. Committed rows are kept and fetched rows merge over them by
+slug, the same append-and-merge `build-events.mjs` adopted when `gettournaments`
+paginated underneath it. The window still applies to the union, so rows age out at 60
+days rather than accruing forever. A 60-day archive now has to be assembled a day at a
+time; its depth is a function of how long this has run since the change, which `span`
+reports rather than papers over.
+
+Three fields exist to keep the file honest about itself. `window` is *declared* —
+computed from the newest deck and the day count, which is why the file went on
+advertising 60 days while holding one. `span` is *measured* from the rows present, with
+`span.dates` counting how many distinct dates they carry. `crawl` records pages read,
+rows returned, how many were already seen and why the walk stopped, so a crawl that
+truncated at `--max` or ran into an unstable ordering says so on a green run rather
+than only when something downstream breaks.
 
 It draws on two sources deliberately, because neither is enough alone.
 

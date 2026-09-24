@@ -77,11 +77,19 @@ const main = async () => {
   // Positional against `legends`, zero-filled, so the app can index straight in.
   const c = Array.from({ length: legends.length }, (_, i) => counts.get(i) || 0);
 
+  // The days the archive actually covers, which is not the same as the window it
+  // declares. The feed has returned a 60-day window holding six days of decks since
+  // 2026-09-16, and on 2026-09-23 it returned one day. Recording the real range is
+  // what lets check.mjs compare one build against the next.
+  const dts = snap.decks.map((d) => d.dt).filter(Boolean).sort();
+
   const row = {
     d: today,
     n: snap.decks.length,
     w: (snap.window && snap.window.days) || null,
     u: unidentified,
+    f: dts[0] || null,
+    l: dts[dts.length - 1] || null,
     c,
   };
 
