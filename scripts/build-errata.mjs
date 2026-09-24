@@ -30,6 +30,48 @@ import { articleText } from "./build-rules.mjs";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const UA = "rift.jayegger.com errata builder";
 
+/* ── fetching the four pages ──────────────────────────────────────────────────
+   These were fetched with a bare `fetch` and no retry, which cost this source its
+   whole day the first time the network hiccuped: on 2026-09-24 CI, page 2 of 4 died
+   with `fetch failed` — a connection-level rejection, not an HTTP status, so the
+   `!r.ok` check never saw it — and the overlay kept a stale file while the other
+   seven sources shipped.
+
+   Retry what is transient: a dropped connection, a 429 from sharing riftbound.gg with
+   the tier scrape, a 5xx. Keep failing hard on everything else, because unlike the
+   news feed this source must not ship partial results. A half-fetched overlay leaves
+   superseded text on every card it did not reach, and a complete overlay from
+   yesterday beats an incomplete one from today. */
+const RETRIES = 4;
+const backoff = (attempt) => 3000 * 2 ** attempt;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const PAGE_PAUSE = 600;   // four rapid hits on one host is what invites the 429
+
+async function fetchPage(pg) {
+  for (let attempt = 0; ; attempt++) {
+    const wait = backoff(attempt);
+    let r;
+    try {
+      r = await fetch(pg.url, { headers: { "User-Agent": UA } });
+    } catch (e) {
+      // Network-level: DNS, reset, timeout. Never carries a status.
+      if (attempt >= RETRIES) throw new Error(`${pg.slug}: ${e.message} after ${RETRIES} retries`);
+      process.stdout.write(`(${e.message}, ${wait / 1000}s) `);
+      await sleep(wait);
+      continue;
+    }
+    if (r.status === 429 || r.status >= 500) {
+      if (attempt >= RETRIES) throw new Error(`${pg.slug} ${r.status} ${r.statusText} after ${RETRIES} retries`);
+      process.stdout.write(`(${r.status}, ${wait / 1000}s) `);
+      await sleep(wait);
+      continue;
+    }
+    // A 404 or a 403 is the page moving or the scrape being blocked, not a blip.
+    if (!r.ok) throw new Error(`${pg.slug} ${r.status} ${r.statusText}`);
+    return r.text();
+  }
+}
+
 /* ── comparing Riot's two dialects ───────────────────────────────────────── */
 
 // The card feed writes symbols as :rb_might:; the errata pages write them as [M]. Worse,
@@ -226,9 +268,7 @@ const main = async () => {
   const counts = new Map();
   for (const pg of pages) {
     process.stdout.write(`${pg.slug}… `);
-    const r = await fetch(pg.url, { headers: { "User-Agent": UA } });
-    if (!r.ok) throw new Error(`${pg.slug} ${r.status} ${r.statusText}`);
-    const md = articleText(await r.text());
+    const md = articleText(await fetchPage(pg));
     if (!md) throw new Error(`${pg.slug}: article body not found`);
     const got = parseErrata(md, pg.slug);
     console.log(`${got.length} cards`);
@@ -239,6 +279,7 @@ const main = async () => {
       `${pg.slug}: parsed 0 cards. The page's shape has changed — see the header.`);
     counts.set(pg.slug, got.length);
     entries.push(...got);
+    await sleep(PAGE_PAUSE);
   }
   if (!entries.length) throw new Error(
     "no errata parsed from any page — the pages' shape has changed, see the header");
