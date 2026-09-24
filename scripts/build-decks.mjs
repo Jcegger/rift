@@ -247,24 +247,32 @@ async function getPage(page, filters, attempt = 0) {
   return Array.isArray(d) ? d : [];
 }
 
-/* ── walking a feed whose ordering stopped being an ordering ──────────────────
-   This asks for `srt: "date", direct: "desc"` and pages until the rows stop being
-   new. That is only a crawl if the server returns a stable total order. Upstream has
-   been serving a near-constant `date` since 2026-09-16 — on 2026-09-23 every row came
-   back stamped with the same day — and with every sort key tied there is no stable
-   order to page through. The same page number then returns different rows on different
-   calls, pages overlap at random, and the old rule (stop at the first page that adds
-   nothing) fires at an arbitrary depth.
+/* ── the feed got too busy to reach 60 days ───────────────────────────────────
+   Measured against the live API on 2026-09-24, because the first version of this
+   comment guessed and guessed wrong. The facts:
 
-   That is not a hypothesis. Consecutive daily runs produced 1,226 decks and then 810
-   with **no slug in common**, every request 200 OK and well formed. The count swung
-   424 → 1,180 → 1,226 → 810 while the archive's real date span collapsed from 59 days
-   to 0.
+     `date` is a real per-deck posting timestamp and always was — 30 distinct values
+     across 30 rows. The ordering is stable: page 1 is 2026-09-24 20:15, page 10 is
+     09-23 19:48, page 24 is 09-23 08:18, monotonically older.
 
-   So a dry page is evidence, not proof. Keep going while pages still produce, give up
-   only after several consecutive dry ones, and carry the duplicate rate out so that a
-   crawl which is really a random sample of the feed says so out loud — including on a
-   run that otherwise passes. */
+     The API caps a result set at roughly 26 pages, about 780 rows. Page 27 and beyond
+     return an empty set regardless of how much older data exists.
+
+     On 2026-09-23, between 08:15 and 08:20 UTC, upstream bulk-imported 720+ tournament
+     decks — page 1 and page 24 of the tournament filter are five minutes apart.
+
+   Put together: the newest ~780 rows now span under two days, where in early September
+   the same crawl reached 59 days at roughly seven decks a day. **A 60-day window is no
+   longer reachable from a single crawl**, and that is not a bug anyone here can fix.
+
+   It also explains the scare that prompted this rewrite. Consecutive runs produced
+   1,226 decks and then 810 with no slug in common — not because the ordering broke,
+   but because at this volume the newest 700 decks on Wednesday share nothing with the
+   newest 700 on Sunday. Every request was 200 OK because every request was fine.
+
+   The walk itself is therefore sound, and the dry-page tolerance below is only a cheap
+   guard in case the ordering ever does go. What was broken was writing one crawl over
+   the file; see the accumulate block in main(). */
 const DRY_PAGES = 3;
 
 async function getAll(filters, max) {
@@ -432,12 +440,13 @@ const main = async () => {
       // How many players the event drew. A 9-player local and a 433-player major used
       // to weigh the same, which is the whole reason this is carried through.
       ec: (eventByName.get(t.tournament_name || "") || {}).players || null,
-      /* Upstream's `date`. Read it sceptically: since 2026-09-21 it has been serving
-         the same value for every row in a response, which makes it the day the feed
-         was read rather than the day the deck was played. `span` in the output says
-         how many distinct dates the file actually holds, and the crawl report shouts
-         when that is one. Until it is more than a few, nothing date-derived — a
-         trend, a pre/post-ban split, a share "over 60 days" — is safe to state. */
+      /* Upstream's `date`, a real posting timestamp — not, as an earlier version of
+         this comment claimed, the day the feed was read. What it is not is evenly
+         spread: a bulk import on 2026-09-23 stamped 720+ tournament decks inside five
+         minutes, so a snapshot taken near one of those lands almost entirely on a
+         single day. `span.dates` counts how many distinct days the file actually
+         holds. While that is small, nothing date-derived — a trend, a pre/post-ban
+         split, a share quoted "over 60 days" — is safe to state from this file. */
       dt: deckDate(d),
       vw: Number(d.views) || 0,
       pr: Math.round(Number(d.price) || 0),
@@ -472,16 +481,21 @@ const main = async () => {
     delete d._unknown;
   }
 
-  /* ── accumulate, because a crawl is a sample and not a census ────────────────
-     While the feed's ordering is unreliable (see getAll) a single run returns some
-     arbitrary slice of what exists. Writing that slice over the file is how this
-     archive lost two thirds of itself in one run with every request returning 200 OK.
+  /* ── accumulate, because one crawl can only see two days ─────────────────────
+     The API hands back at most ~780 rows and the feed now produces that in under two
+     days (see getAll). So a crawl is a sample of the last 48 hours, not a census of
+     the window, and writing it over the file is how this archive went from 1,226 decks
+     to 810 in one run with every request returning 200 OK.
 
-     So: committed rows are kept and freshly fetched rows merge over them by slug —
-     the same append-and-merge build-events.mjs adopted on 2026-09-16 when upstream
-     paginated `gettournaments` underneath it. The window still applies to the union,
-     so nothing outlives its 60 days and a deck that upstream retires ages out rather
-     than lingering forever. A bad crawl now costs freshness instead of the archive. */
+     Committed rows are kept and freshly fetched rows merge over them by slug — the
+     same append-and-merge build-events.mjs adopted on 2026-09-16 when `gettournaments`
+     paginated underneath it. The window still applies to the union, so rows age out at
+     60 days rather than accruing forever.
+
+     This is the only route back to a 60-day archive: it has to be assembled a day at a
+     time, because no single request can reach that far any more. It also means the
+     archive's depth is now a function of how many days this has run since the change,
+     which `span` reports honestly rather than papering over. */
   let prior = [];
   try {
     const old = JSON.parse(await readFile(new URL("../data/decks.json", import.meta.url), "utf8"));

@@ -1,19 +1,39 @@
 {
- "generatedAt": "2026-09-20",
+ "generatedAt": "2026-09-24",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
+ "cutShort": null,
+ "carriedFromPrevious": 0,
  "tags": {
-  "News": 28,
   "Metagame": 19,
   "Events": 20,
+  "News": 28,
   "Legends": 15,
   "Sets": 4,
   "Guides": 3,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Riftbound Meta Tier List – Best Decks for Vendetta – Post-Ban Metagame Heading to Los Angeles",
+   "dt": "2026-09-24",
+   "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-post-ban-metagame-heading-to-los-angeles",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "CCS Riftbound Qualifier #5 Results - What Does It Tell Us About the Post-Ban Metagame?",
+   "dt": "2026-09-22",
+   "url": "https://riftbound.gg/ccs-riftbound-qualifier-5",
+   "tags": [
+    "Events"
+   ],
+   "author": "Den"
+  },
   {
    "title": "Riftbound Heartsteel Cards (Release Date and All Cards)",
    "dt": "2026-09-19",
@@ -814,24 +834,6 @@
     "News"
    ],
    "author": "Riftbound.gg"
-  },
-  {
-   "title": "Shenzen National Open Results – Popularity, Conversion Rate & Best Deck for Every Legend!",
-   "dt": "2026-03-23",
-   "url": "https://riftbound.gg/shenzen-national-open",
-   "tags": [
-    "Events"
-   ],
-   "author": "Den"
-  },
-  {
-   "title": "Riftbound Meta Tier List – Best Decks for Spiritforged - Non-Regional Tournament Metagame",
-   "dt": "2026-03-19",
-   "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-spiritforged-non-regional-tournament-metagame",
-   "tags": [
-    "Metagame"
-   ],
-   "author": "Den"
   }
  ]
 }

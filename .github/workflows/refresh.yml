@@ -120,19 +120,24 @@ jobs:
           case ",$SIMULATE," in *,events,*) echo "simulated failure"; exit 1;; esac
           node scripts/build-events.mjs
 
-      - name: Rebuild the deck snapshot
-        id: decks
-        continue-on-error: true
-        run: |
-          case ",$SIMULATE," in *,decks,*) echo "simulated failure"; exit 1;; esac
-          node scripts/build-decks.mjs --days "$DAYS"
-
+      # News before decks, deliberately. Both page api.dotgg.gg and build-decks makes
+      # around fifty requests to it; run after that and news 429s partway through, which
+      # is exactly what happened on 2026-09-24. News is eight pages and costs ten
+      # seconds, it has no dependents, so it goes first and takes the host while the
+      # budget is still there. build-news survives being cut short now either way.
       - name: Rebuild the news feed
         id: news
         continue-on-error: true
         run: |
           case ",$SIMULATE," in *,news,*) echo "simulated failure"; exit 1;; esac
           node scripts/build-news.mjs
+
+      - name: Rebuild the deck snapshot
+        id: decks
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,decks,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-decks.mjs --days "$DAYS"
 
       # A scrape of riftbound.gg's tier-list page, so more brittle than the others.
       # build-tiers.mjs exits non-zero and writes nothing if the parse comes up short,

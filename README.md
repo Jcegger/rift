@@ -873,13 +873,18 @@ riftbound.gg's public deck API. Refresh it whenever:
 node scripts/build-decks.mjs [--days 60] [--max 700]
 ```
 
-**It accumulates rather than replaces.** A crawl is a sample, not a census: upstream's
-`srt: date` ordering has been sorting on a near-constant field since 2026-09-21, so a
-single run returns an arbitrary slice and one run replacing the file is how the archive
-lost two thirds of itself on 2026-09-23 with every request returning 200 OK. Committed
-rows are kept and fetched rows merge over them by slug, the same append-and-merge
-`build-events.mjs` adopted when `gettournaments` paginated underneath it. The window
-still applies to the union, so rows age out rather than accruing forever.
+**It accumulates rather than replaces, because one crawl can no longer see 60 days.**
+The API caps a result set at roughly 26 pages, about 780 rows, and since a bulk import
+on 2026-09-23 stamped 720+ tournament decks inside five minutes the feed now produces
+that many rows in under two days — where in early September the same crawl reached 59
+days at about seven decks a day. So a crawl is a sample of the last 48 hours, and one
+run replacing the file is how the archive went from 1,226 decks to 810 with every
+request returning 200 OK. Committed rows are kept and fetched rows merge over them by
+slug, the same append-and-merge `build-events.mjs` adopted when `gettournaments`
+paginated underneath it. The window still applies to the union, so rows age out at 60
+days rather than accruing forever. A 60-day archive now has to be assembled a day at a
+time; its depth is a function of how long this has run since the change, which `span`
+reports rather than papers over.
 
 Three fields exist to keep the file honest about itself. `window` is *declared* —
 computed from the newest deck and the day count, which is why the file went on

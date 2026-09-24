@@ -21,7 +21,7 @@
 // logic is exactly the hazard the deck parser already warns about. The raw title
 // ships and the app joins it against the live roster.
 
-import { writeFile } from "node:fs/promises";
+import { writeFile, readFile } from "node:fs/promises";
 
 const API = "https://api.dotgg.gg/cgfw/getposts?game=riftbound";
 const SOURCE = "riftbound.gg";
@@ -61,11 +61,18 @@ const main = async () => {
   const posts = new Map();          // url -> post, deduped across pages
   let fetched = 0;
 
-  /* This shares a host with the deck and tournament builders, which page it hard, so a
-     429 here is contention rather than abuse and is worth waiting out rather than
-     failing the source on. Without the retry, news 429s on about page 7 and keeps its
-     last-good file — which is survivable until it drifts past its shelf life and fails
-     the whole run. */
+  /* This shares a host with the deck and tournament builders, which page it hard and
+     run immediately before it, so a 429 here is contention rather than abuse. Waiting
+     it out is not always enough: on 2026-09-24 CI it 429'd on page 7 through all four
+     backoffs and threw, which discarded the six pages it had already fetched and kept
+     a file four days stale. Losing a whole source to the last page of a crawl that had
+     mostly succeeded is the wrong trade.
+
+     So a page that cannot be fetched now ends the crawl instead of failing it, and
+     what was collected still ships — merged over the committed file below, so a short
+     crawl cannot shorten the archive either. Only an empty first page is fatal, because
+     then there is genuinely nothing to write. */
+  let cutShort = null;
   for (let page = 1; page <= pages; page++) {
     process.stdout.write(`page ${page}… `);
     let r;
@@ -74,11 +81,16 @@ const main = async () => {
         headers: { "User-Agent": "rift.jayegger.com news builder", Origin: "https://riftbound.gg" },
       });
       if (r.status !== 429) break;
-      if (attempt >= RETRIES) throw new Error(`429 on page ${page} after ${RETRIES} backoffs`);
+      if (attempt >= RETRIES) break;
       process.stdout.write(`429, waiting ${RETRY_PAUSE / 1000}s… `);
       await sleep(RETRY_PAUSE);
     }
-    if (!r.ok) throw new Error(`${r.status} ${r.statusText} on page ${page}`);
+    if (!r.ok) {
+      if (page === 1) throw new Error(`${r.status} ${r.statusText} on page 1 — nothing fetched`);
+      cutShort = `${r.status} on page ${page}`;
+      console.log(`${r.status}, stopping here and keeping ${posts.size} posts`);
+      break;
+    }
     const batch = await r.json();
     if (!Array.isArray(batch)) throw new Error("unexpected payload shape");
     if (!batch.length) { console.log("empty, stopping"); break; }
@@ -101,6 +113,19 @@ const main = async () => {
     await sleep(PAGE_PAUSE);
   }
 
+  /* Merge over what is already committed, for the same reason build-decks and
+     build-events do: a crawl that stopped early is a sample, and a sample must not be
+     allowed to shorten the archive. Fetched posts win on url, prior posts are carried. */
+  let prior = [];
+  try {
+    const old = JSON.parse(await readFile(new URL("../data/news.json", import.meta.url), "utf8"));
+    if (Array.isArray(old.posts)) prior = old.posts;
+  } catch { /* first run */ }
+  let carried = 0;
+  for (const p of prior) {
+    if (p && p.url && !posts.has(p.url)) { posts.set(p.url, p); carried++; }
+  }
+
   const list = [...posts.values()].sort((a, b) => b.dt.localeCompare(a.dt) || a.title.localeCompare(b.title));
   const byTag = {};
   for (const p of list) for (const t of (p.tags.length ? p.tags : ["Untagged"])) byTag[t] = (byTag[t] || 0) + 1;
@@ -111,13 +136,19 @@ const main = async () => {
     note: "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
     pagesRead: pages,
     postsSeen: fetched,
+    // Non-null when the crawl ended on an error rather than on the end of the feed.
+    // The file is still current for everything it did reach.
+    cutShort,
+    carriedFromPrevious: carried,
     tags: byTag,
     posts: list,
   };
   await writeFile(new URL("../data/news.json", import.meta.url), JSON.stringify(out, null, 1) + "\n");
 
   console.log(`\nkept ${list.length} ${SOURCE} posts out of ${fetched} seen` +
-              ` (${(list.length / (fetched || 1) * 100).toFixed(1)}% of the network feed)`);
+              ` (${(list.length / (fetched || 1) * 100).toFixed(1)}% of the network feed)` +
+              `${carried ? `, ${carried} carried from the committed file` : ""}`);
+  if (cutShort) console.log(`NOTE: crawl cut short — ${cutShort}. Shipped what it reached.`);
   console.log(`covering ${list[list.length - 1].dt} to ${list[0].dt}`);
   console.log("by tag:");
   for (const [t, n] of Object.entries(byTag).sort((a, b) => b[1] - a[1]))
