@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-09-24",
+ "generatedAt": "2026-09-25",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 1666,
+  "events": 1705,
   "eventsWithDecks": 0,
-  "players": 39937,
+  "players": 40528,
   "playersWithDecks": 0,
   "unresolvedDeckEvents": [
    "Riftbound Online Tournament",
@@ -18,16 +18,16 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 18,
-  "claimedEventsUnmatched": 16,
+  "claimedEvents": 19,
+  "claimedEventsUnmatched": 17,
   "claimedEventAliases": {},
   "claimedDecksByRegion": {
-   "unknown": 18,
-   "Europe": 12,
-   "Asia": 14
+   "Asia": 19,
+   "unknown": 19,
+   "Europe": 12
   },
   "registryEventsByRegion": {
-   "unknown": 1666
+   "unknown": 1705
   },
   "unresolvedClaimEvents": [
    "36P Tournament",
@@ -40,6 +40,7 @@
    "CCS 25k Qualifier #5",
    "Changsha RQ",
    "Dinan Regional",
+   "S4 Wuhan City Challenge",
    "Shenyang RO",
    "Shenyang Regional Open",
    "Singapore RQ",
@@ -60,6 +61,24 @@
   }
  },
  "events": [
+  {
+   "name": "Thursday Evening Nexus Nights - 1v1",
+   "dt": "2026-09-24",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "DoeCong",
+   "country": null,
+   "slug": "thursday-evening-nexus-nights-1v1-7337"
+  },
+  {
+   "name": "Wednesday Evening Vendetta Summoner Skirmish II",
+   "dt": "2026-09-24",
+   "players": 13,
+   "format": "Constructed",
+   "winner": "Employee 427",
+   "country": null,
+   "slug": "wednesday-evening-vendetta-summoner-skirmish-ii-7788"
+  },
   {
    "name": "J.K. Entertainment Wednesday Nexus Nights",
    "dt": "2026-09-23",
@@ -95,6 +114,51 @@
    "winner": "SDG Charmaster",
    "country": null,
    "slug": "tuesday-evening-vendetta-summoner-skirmish-ii-4253"
+  },
+  {
+   "name": "Wednesday Evening Vendetta Summoner Skirmish II",
+   "dt": "2026-09-23",
+   "players": 22,
+   "format": "Constructed",
+   "winner": "ABG ItstehPats",
+   "country": null,
+   "slug": "wednesday-evening-vendetta-summoner-skirmish-ii-6272"
+  },
+  {
+   "name": "Wednesday Afternoon Skirmish",
+   "dt": "2026-09-23",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Wardrium",
+   "country": null,
+   "slug": "wednesday-afternoon-skirmish"
+  },
+  {
+   "name": "CoreTCG 9/23 Pre-LA Regionals Case Tournament",
+   "dt": "2026-09-23",
+   "players": 28,
+   "format": "Constructed",
+   "winner": "TheWindKing",
+   "country": null,
+   "slug": "coretcg-923-pre-la-regionals-case-tournament"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-09-23",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "Baldasarre Cossa",
+   "country": null,
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-2103"
+  },
+  {
+   "name": "🃏Kardventure Nexus Night - Tournoi",
+   "dt": "2026-09-23",
+   "players": 13,
+   "format": "Constructed",
+   "winner": "Hyoshiiro",
+   "country": null,
+   "slug": "kardventure-nexus-night-tournoi"
   },
   {
    "name": "Riftbound League @ Das Brett",
@@ -239,6 +303,15 @@
    "winner": "CGM",
    "country": null,
    "slug": "anteiku-cafe-sundays-nexus-night-1v1"
+  },
+  {
+   "name": "Powerplay Monday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-09-21",
+   "players": 16,
+   "format": "Constructed",
+   "winner": "Brimba",
+   "country": null,
+   "slug": "powerplay-monday-morning-vendetta-summoner-skirmish-ii"
   },
   {
    "name": "Sunday Afternoon Vendetta Summoner Skirmish II",
@@ -1724,6 +1797,150 @@
    "winner": "Madara Coochieha",
    "country": null,
    "slug": "gtwf-vendetta-summoner-skirmish-2"
+  },
+  {
+   "name": "Sunday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "CB vAzn",
+   "country": null,
+   "slug": "sunday-afternoon-vendetta-summoner-skirmish-ii-8128"
+  },
+  {
+   "name": "Sunday Night Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "lunasky",
+   "country": null,
+   "slug": "sunday-night-vendetta-summoner-skirmish-ii-6323"
+  },
+  {
+   "name": "Sunday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 13,
+   "format": "Constructed",
+   "winner": "Milt",
+   "country": null,
+   "slug": "sunday-afternoon-vendetta-summoner-skirmish-ii-367"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Crossbreed",
+   "country": null,
+   "slug": "vendetta-summoner-skirmish-ii-2711"
+  },
+  {
+   "name": "Sunday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 16,
+   "format": "Constructed",
+   "winner": "Teemoshiny",
+   "country": null,
+   "slug": "sunday-morning-vendetta-summoner-skirmish-ii-1323"
+  },
+  {
+   "name": "CeD Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 16,
+   "format": "Constructed",
+   "winner": "PENINHA",
+   "country": null,
+   "slug": "ced-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Sunday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "MuffinicK",
+   "country": null,
+   "slug": "sunday-morning-vendetta-summoner-skirmish-ii-7859"
+  },
+  {
+   "name": "Sunday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 23,
+   "format": "Constructed",
+   "winner": "CoolGer",
+   "country": null,
+   "slug": "sunday-afternoon-vendetta-summoner-skirmish-ii-7732"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II @De Zilveren Vos",
+   "dt": "2026-09-20",
+   "players": 16,
+   "format": "Constructed",
+   "winner": "TLN Zotta",
+   "country": null,
+   "slug": "vendetta-summoner-skirmish-ii-de-zilveren-vos"
+  },
+  {
+   "name": "CGPremium Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 17,
+   "format": "Constructed",
+   "winner": "NuggetBox",
+   "country": null,
+   "slug": "cgpremium-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Domenica Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "Pirandello4",
+   "country": null,
+   "slug": "domenica-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Gamevault's Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "ichirawr",
+   "country": null,
+   "slug": "gamevaults-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "(จัดที่ GAME ON MBK) Wakaterra Vendetta Summoner Skirmish 2🟥วันอาทิตย์ที่ 20 SEPTEMBER 13:00 🟥",
+   "dt": "2026-09-20",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "polsomrang",
+   "country": null,
+   "slug": "game-on-mbk-wakaterra-vendetta-summoner-skirmish-2-20-september-1300"
+  },
+  {
+   "name": "Sunday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 25,
+   "format": "Constructed",
+   "winner": "Jackvdg",
+   "country": null,
+   "slug": "sunday-afternoon-vendetta-summoner-skirmish-ii-9092"
+  },
+  {
+   "name": "ARKHIVE Summoner Skirmishes : Chapter II",
+   "dt": "2026-09-20",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "Xallorev",
+   "country": null,
+   "slug": "arkhive-summoner-skirmishes-chapter-ii"
+  },
+  {
+   "name": "Sunday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-09-20",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "NATInvincible",
+   "country": null,
+   "slug": "sunday-morning-vendetta-summoner-skirmish-ii-6258"
   },
   {
    "name": "Nexus Nights - GameSpirit",
@@ -3758,6 +3975,141 @@
    "winner": "MonkeyDChelo",
    "country": null,
    "slug": "vendetta-summoner-skirmish-2-4523"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II - September",
+   "dt": "2026-09-19",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "Yugi OHHHHHHHHHH",
+   "country": null,
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-september"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-09-19",
+   "players": 33,
+   "format": "Constructed",
+   "winner": "aionlights",
+   "country": null,
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-4867"
+  },
+  {
+   "name": "09/19 - Vendetta September Summoner Skirmish - Game Grid Lehi",
+   "dt": "2026-09-19",
+   "players": 23,
+   "format": "Constructed",
+   "winner": "threefloating",
+   "country": null,
+   "slug": "0919-vendetta-september-summoner-skirmish-game-grid-lehi"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-09-19",
+   "players": 11,
+   "format": "Constructed",
+   "winner": "Lunar",
+   "country": null,
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-3001"
+  },
+  {
+   "name": "Saturday Evening | Vendetta Summoner Skirmish - September",
+   "dt": "2026-09-19",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "Support Nature",
+   "country": null,
+   "slug": "saturday-evening-vendetta-summoner-skirmish-september"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-09-19",
+   "players": 21,
+   "format": "Constructed",
+   "winner": "Doubtful",
+   "country": null,
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-6164"
+  },
+  {
+   "name": "Saturday Evening Vendetta Summoner Skirmish II",
+   "dt": "2026-09-19",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "Briikk",
+   "country": null,
+   "slug": "saturday-evening-vendetta-summoner-skirmish-ii-9663"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish 2",
+   "dt": "2026-09-19",
+   "players": 13,
+   "format": "Constructed",
+   "winner": "Scarborough",
+   "country": null,
+   "slug": "vendetta-summoner-skirmish-2-7884"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-09-19",
+   "players": 15,
+   "format": "Constructed",
+   "winner": "Yanzingo",
+   "country": null,
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-8073"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-09-19",
+   "players": 13,
+   "format": "Constructed",
+   "winner": "Futeran",
+   "country": null,
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-5752"
+  },
+  {
+   "name": "Hall of Fame City Comic Con Case Tournament",
+   "dt": "2026-09-19",
+   "players": 19,
+   "format": "Constructed",
+   "winner": "claused1213",
+   "country": null,
+   "slug": "hall-of-fame-city-comic-con-case-tournament"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish -September",
+   "dt": "2026-09-19",
+   "players": 16,
+   "format": "Constructed",
+   "winner": "NewBee",
+   "country": null,
+   "slug": "vendetta-summoner-skirmish-september-8119"
+  },
+  {
+   "name": "Riftbound Summoner Skirmish - September",
+   "dt": "2026-09-19",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "LuxMaxxer",
+   "country": null,
+   "slug": "riftbound-summoner-skirmish-september-1366"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II",
+   "dt": "2026-09-19",
+   "players": 20,
+   "format": "Constructed",
+   "winner": "LittleDemon84",
+   "country": null,
+   "slug": "vendetta-summoner-skirmish-ii-5190"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-09-19",
+   "players": 22,
+   "format": "Constructed",
+   "winner": "ManuRiftbound",
+   "country": null,
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-3692"
   },
   {
    "name": "Friday Evening Vendetta Summoner Skirmish II",

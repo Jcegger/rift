@@ -1,8 +1,8 @@
 {
- "generatedAt": "2026-09-24",
+ "generatedAt": "2026-09-25",
  "source": "Riot's per-set errata pages, as tracked in data/rules.json",
  "note": "`new` is the current text and supersedes what data/cards.json carries for that card.",
- "catalogAt": "2026-09-24",
+ "catalogAt": "2026-09-25",
  "pages": [
   {
    "slug": "riftbound-origins-card-errata",
