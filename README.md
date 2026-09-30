@@ -44,6 +44,8 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `.github/workflows/refresh.yml` - rebuilds all of the above daily and commits.
 - `schema.sql` - the Supabase table and its policies.
 - `docs/picking-a-deck.md` - how to drive the Next tab's Find my deck panel.
+- `docs/match-journal.md` - a pen-and-paper template for logging games. A plan, not
+  a finished thing, and nothing in the app reads it.
 - `guides/` - the deck dossiers, in Markdown. The source of truth for the Guides
   tab and for `guides/out/*.docx`, which is build output and gitignored.
 - `worker/` - the Cloudflare Worker that proxies the riftbound.gg profile.
