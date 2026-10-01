@@ -303,10 +303,11 @@ device may replace paper at low OPL only at the head judge's discretion (TR §41
 (`--pages N` for more match pages). They are 6 × 8 in, the Scribe's 3:4, and print fine
 scaled to A4 or Letter.
 
-**Getting them on:** send each PDF with Amazon's Send to Kindle (the web page, the app,
-or email to your Kindle address) and choose to keep it as a PDF you can write on, or copy
-it into the Scribe's `documents` folder over USB. Open it from the library and write
-straight on the page with the pen.
+**Getting them on: Send to Kindle, not USB.** Send each PDF with Amazon's Send to Kindle
+(the web page, the app, or email to your Kindle address). That converts it to a format
+the pen can write on; a PDF copied over USB opens but reportedly takes no pen strokes.
+Sent PDFs land in the Library, not in Notebooks, and the Scribe has no custom notebook
+templates — so the PDF itself is the template, and a fresh copy is a fresh send.
 
 **Each Nexus Night, send a fresh `match-night.pdf`.** One page per match. Before each
 match, open the next blank page and show it to your opponent (TR §416.2); during games,
