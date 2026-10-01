@@ -40,6 +40,8 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `scripts/build-history.mjs` - appends today's row to the archive. Fetches nothing.
 - `scripts/build-guides.mjs` - regenerates the guide manifest. Fetches nothing.
 - `scripts/build-guide` - turns one guide into a Word doc with pandoc. No 's'.
+- `scripts/build-journal` - renders the match journal's blank pages to PDFs in
+  `guides/out/journal/`, sized for a Kindle Scribe. Fetches nothing.
 - `scripts/check.mjs` - the regression checks; run it after touching the engine.
 - `.github/workflows/refresh.yml` - rebuilds all of the above daily and commits.
 - `schema.sql` - the Supabase table and its policies.

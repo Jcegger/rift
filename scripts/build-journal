@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+"""Renders the match journal template (docs/match-journal.md) to PDFs in guides/out/journal/.
+
+    scripts/build-journal             # 5 match pages per night
+    scripts/build-journal --pages 8
+
+Writes three files, kept separate on purpose:
+
+    match-night.pdf   blank match pages -- the only one open during games (TR 416.4)
+    trouble-list.pdf  the running trouble list -- read between games, never during one
+    review.pdf        the ten-match review
+
+Sized 3:4 (6 x 8 in) for a Kindle Scribe; prints fine scaled to A4 or Letter. The pages
+carry field labels only -- no shorthand key, no advice -- because anything more is a note
+from outside the match. Source of truth is docs/match-journal.md; guides/out/ is build
+output (gitignored). Drawn with matplotlib, so it needs no browser.
+"""
+import argparse
+import pathlib
+
+import matplotlib
+
+matplotlib.use("agg")  # agg measures text widths; PdfPages still writes the PDF
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+OUT = ROOT / "guides" / "out" / "journal"
+
+W, H = 6.0, 8.0      # page, inches
+L, R = 0.35, 5.65    # left and right margins
+INK, FAINT = "#000000", "#9a9a9a"
+
+
+class Page:
+    """One page, in inches, y measured down from the top."""
+
+    def __init__(self, pdf):
+        self.pdf = pdf
+        self.fig = plt.figure(figsize=(W, H))
+        self.ax = self.fig.add_axes([0, 0, 1, 1])
+        self.ax.set_xlim(0, W)
+        self.ax.set_ylim(H, 0)
+        self.ax.axis("off")
+        self.renderer = self.fig.canvas.get_renderer()
+
+    def text(self, x, y, s, size=7.5, bold=True, ha="left"):
+        t = self.ax.text(x, y, s, fontsize=size, fontweight="bold" if bold else "normal",
+                         ha=ha, va="baseline", color=INK, family="DejaVu Sans")
+        return t.get_window_extent(self.renderer).width / self.fig.dpi
+
+    def line(self, x1, x2, y, lw=0.6, color=INK):
+        self.ax.plot([x1, x2], [y, y], color=color, lw=lw, solid_capstyle="butt")
+
+    def vline(self, x, y1, y2, lw=0.6):
+        self.ax.plot([x, x], [y1, y2], color=INK, lw=lw, solid_capstyle="butt")
+
+    def fields(self, y, specs, gap=0.12):
+        """A row of `label ______` fields; widths are fractions of the row."""
+        x, span = L, R - L - gap * (len(specs) - 1)
+        for label, frac in specs:
+            w = span * frac
+            lw = self.text(x, y, label) if label else 0
+            self.line(x + lw + 0.04, x + w, y + 0.02)
+            x += w + gap
+
+    def section(self, y, title):
+        self.text(L, y, title.upper(), size=6.5)
+        self.line(L, R, y + 0.05, lw=1.2)
+
+    def table(self, y, cols, rows, row_h):
+        """cols: [(label, width)]; a width of None takes the rest of the row."""
+        fixed = sum(w for _, w in cols if w)
+        widths = [w if w else (R - L - fixed) for _, w in cols]
+        x = L
+        for (label, _), w in zip(cols, widths):
+            if label:
+                self.text(x + 0.03, y, label, size=6.5)
+            x += w
+        top = y + 0.07
+        bottom = top + row_h * len(rows)
+        for i in range(len(rows) + 1):
+            self.line(L, R, top + i * row_h)
+        x = L
+        self.vline(x, top, bottom)
+        for w in widths:
+            x += w
+            self.vline(x, top, bottom)
+        for i, cells in enumerate(rows):
+            x = L
+            for cell, w in zip(cells, widths):
+                if cell:
+                    self.text(x + w / 2, top + i * row_h + row_h * 0.64, cell, ha="center")
+                x += w
+        return bottom
+
+    def done(self):
+        self.pdf.savefig(self.fig)
+        plt.close(self.fig)
+
+
+def match_page(pdf):
+    p = Page(pdf)
+    p.fields(0.45, [("#", 0.09), ("date", 0.22), ("event", 0.38), ("rd", 0.11), ("list v", 0.2)])
+    p.fields(0.80, [("me", 0.4), ("/", 0.4), ("match", 0.2)])
+    p.fields(1.12, [("opp", 0.5), ("/", 0.5)])
+    cols = [("", 0.3), ("first", 0.5), ("BF mine", None), ("BF theirs", 1.1),
+            ("mull", 0.45), ("sideboard", 1.0), ("result @", 0.65)]
+    bottom = p.table(1.42, cols, [["G1", "", "", "", "", "—", ""], ["G2"], ["G3"]], 0.3)
+    y = bottom + 0.3
+    p.section(y, "notes")
+    y += 0.12
+    for g in ("G1", "G2", "G3"):
+        y += 0.24
+        p.text(L, y, g)
+        for _ in range(4):
+            y += 0.27
+            p.line(L, R, y, lw=0.4, color=FAINT)
+        y += 0.04
+    y += 0.3
+    p.section(y, "after")
+    p.fields(y + 0.38, [("my mistake", 1.0)])
+    p.fields(y + 0.72, [("next time I'll", 1.0)])
+    p.done()
+
+
+def trouble_page(pdf):
+    p = Page(pdf)
+    p.text(L, 0.45, "TROUBLE LIST", size=10)
+    cols = [("card", 1.1), ("their legend", 0.85), ("marks", 0.6),
+            ("what it does to me", None), ("answer", 1.05), ("worked?", 0.5)]
+    p.table(0.75, cols, [[""]] * 18, 0.37)
+    p.done()
+
+
+def review_page(pdf):
+    p = Page(pdf)
+    p.text(L, 0.45, "REVIEW — TEN MATCHES", size=10)
+    p.fields(0.78, [("matches", 0.3), ("deck", 0.45), ("lists v", 0.25)])
+    p.fields(1.08, [("record: matches", 0.5), ("games", 0.5)])
+    bottom = p.table(1.38, [("vs", 1.5), ("match", 0.55), ("games", 0.55), ("why", None)], [[""]] * 6, 0.26)
+    y = bottom + 0.32
+    p.fields(y, [("game 1", 0.25), ("games 2–3", 0.25), ("going 1st", 0.25), ("going 2nd", 0.25)])
+    lines = [
+        "mistakes that repeated", "", "“next time I'll” I kept",
+        "“next time I'll” I broke", "flags I still can't answer", "",
+        "worst matchup → plan", "top trouble card → answer",
+        "sideboard cards that earned it", "battlefield to lead with",
+        "card I kept wanting", "card that did nothing", "mulligans I'd change",
+        "one change to my play", "one change to my deck",
+    ]
+    for label in lines:
+        y += 0.28
+        p.fields(y, [(label, 1.0)])
+    p.done()
+
+
+def build(name, draw, count):
+    with PdfPages(OUT / name) as pdf:
+        for _ in range(count):
+            draw(pdf)
+    print(f"built guides/out/journal/{name}")
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--pages", type=int, default=5, help="match pages in match-night.pdf")
+    args = ap.parse_args()
+    OUT.mkdir(parents=True, exist_ok=True)
+    build("match-night.pdf", match_page, args.pages)
+    build("trouble-list.pdf", trouble_page, 3)
+    build("review.pdf", review_page, 3)
+
+
+if __name__ == "__main__":
+    main()

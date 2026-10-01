@@ -299,6 +299,10 @@ device may replace paper at low OPL only at the head judge's discretion (TR §41
 | `trouble-list.pdf` | between games and at home |
 | `review.pdf` | at home |
 
+**Building them:** `scripts/build-journal` writes all three to `guides/out/journal/`
+(`--pages N` for more match pages). They are 6 × 8 in, the Scribe's 3:4, and print fine
+scaled to A4 or Letter.
+
 **Getting them on:** send each PDF with Amazon's Send to Kindle (the web page, the app,
 or email to your Kindle address) and choose to keep it as a PDF you can write on, or copy
 it into the Scribe's `documents` folder over USB. Open it from the library and write
