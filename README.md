@@ -45,6 +45,8 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `scripts/check.mjs` - the regression checks; run it after touching the engine.
 - `.github/workflows/refresh.yml` - rebuilds all of the above daily and commits.
 - `schema.sql` - the Supabase table and its policies.
+- `docs/fundamentals.md` - how the game works and what the field actually plays. The
+  teaching layer over `docs/rules.md`'s reference layer.
 - `docs/picking-a-deck.md` - how to drive the Next tab's Find my deck panel.
 - `docs/match-journal.md` - a pen-and-paper template for logging games. A plan, not
   a finished thing, and nothing in the app reads it.
