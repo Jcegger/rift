@@ -96,9 +96,9 @@ Chosen Champion counts against its own 3. **Unique** cards are limited to 1.
 your identity, and the 3-copy limit spans main deck and sideboard **together**. You may
 never change runes, Legend or battlefields after registration (TR §403.4.b).
 
-**A typical archived deck** averages 19 units and 18 spells in its 40, plus its 12 runes
-and 3 battlefields. The unit/spell split is close to even across the field — a deck much
-past 24 of either is making a deliberate statement.
+**A typical archived deck** averages **19 units, 16 spells and 4 gear** in its 40, plus
+its 12 runes and 3 battlefields. Gear is easy to forget and 43% of decks run some — if you
+have no answer to it you will meet a deck that does nothing else.
 
 ---
 
@@ -245,16 +245,23 @@ Measured by how many archived decks run at least one card carrying them:
 
 | keyword | reach | what it does |
 |---|---|---|
-| **Accelerate** | 74% | optional extra `[1][C]` as you play: the unit **enters ready** |
-| **Hidden** | 70% | pay `[A]` to hide it facedown at a battlefield you control; from next turn it gains Reaction and costs **nothing** |
-| **Deflect X** | 69% | **opponents** pay X more Power to target it — can price a removal spell out of reach entirely |
-| **Deathknell** | 58% | "when I die" |
-| **Ganking** | 48% | adds battlefield → battlefield to your standard move |
-| **Assault X** | 47% | +X Might **while attacking** |
-| **Shield X** | 37% | +X Might **while defending** |
-| **Tank / Backline** | — | must be assigned lethal **first** / **last** |
+| **Hidden** | **76%** | pay `[A]` to hide it facedown at a battlefield you control; from next turn it gains Reaction and costs **nothing** |
+| **Deflect X** | **61%** | **opponents** pay X more Power to target it — can price a removal spell out of reach entirely |
+| **Deathknell** | 55% | "when I die" — so killing it is not always the answer |
+| **Ganking** | 46% | adds battlefield → battlefield to your standard move |
+| **Accelerate** | 44% | optional extra `[1][C]` as you play: the unit **enters ready** |
+| **Equip** | 43% | attach gear to a unit you control |
+| **Stun** | 41% | it deals no combat damage this turn, but still needs full Might to die |
+| **Assault X** | 38% | +X Might **while attacking** |
+| **Empower** | 37% | pay a cost to gain the Empowered status — permanent until it leaves the board |
+| **Ambush** | 36% | play it as a `[Reaction]` to a battlefield where you already have units |
+| **Repeat [cost]** | 33% | pay again to execute the whole effect an **extra** time |
+| **Shield X** | 31% | +X Might **while defending** |
+| **Flow [cost]** | 31% | play the spell **from your trash**, then banish it |
+| **Tank / Temporary** | 27% / 26% | assigned lethal **first** / dies at the start of its controller's Beginning Phase, **before scoring** |
+| **Backline** | 10% | assigned lethal **last** |
 
-**Hidden deserves its own paragraph** because it is 70% of decks and it changes how you
+**Hidden deserves its own paragraph** because it is in **76%** of decks and it changes how you
 read a board. A facedown card is a free card at Reaction speed from the turn after it is
 hidden. You can see that it exists but not what it is. **Treat any opponent with a
 facedown card as having one more open answer than their runes suggest** — playing from
@@ -317,8 +324,13 @@ does not sell you a card that only draws cards — it sells you a trick that rep
 
 ### The staples, by domain
 
-Six domains, top six legal cards each. This is the deckbuilding view: your Legend's
+Six domains, top ten legal cards each. This is the deckbuilding view: your Legend's
 identity decides which of these tables you are allowed to read.
+
+**There is no "goodstuff" tier below this.** No main-deck card is domainless — only
+battlefields are colourless — and every two-domain card is fringe, the most-played being
+Riposte and Shuriken Flip at 4%. So a two-domain Legend reads exactly two of these tables
+and nothing else. The breadth of your identity is the breadth of your card pool.
 
 #### Fury — damage and aggression
 
@@ -330,6 +342,10 @@ identity decides which of these tables you are allowed to read.
 | **Inferna** | 9% | 2E 1M · `[Ambush]` · Assault 2 |
 | **Kai'Sa, Survivor** | 8% | 4E 4M · Accelerate · when I conquer, draw 1 |
 | **Ferrous Forerunner** | 8% | 6E/1 6M · Deathknell — two 3-Might Mech tokens to your base |
+| **Long Sword** | 6% | 2E/1 gear · `[Quick-Draw]` · `[Equip]` Fury |
+| **Brynhir Thundersong** | 5% | 6E 5M · on play, **opponents can't play cards this turn** |
+| **Darius, Trifarian** | 5% | 5E/1 5M · on your **second card each turn**, +2 Might and ready me |
+| **Vi, Destructive** | 5% | 2E/1 3M · `[Ganking]` · recycle 1 from your trash for +1 Might |
 
 Fury's staples are the least concentrated of any domain — no single card above 12%. It
 pays in damage and attack buffs rather than in cards.
@@ -344,6 +360,10 @@ pays in damage and attack buffs rather than in cards.
 | **Back Off** | 19% | 3E · `[Hidden][Action]` Stun a unit |
 | **Scuttle Crab** | 17% | 2E **0 Might** · draw 1 on play; Deathknell hand-reveal |
 | **Zhonya's Hourglass** | 16% | 2E · `[Hidden]` save a unit from dying, recall it |
+| **En Garde** | 14% | 1E · `[Reaction]` +1 Might, and +1 more if it is defending |
+| **Not So Fast** | 12% | 2E/1 · `[Reaction]` counter an enemy spell **that chooses a friendly unit or gear** |
+| **Lonely Poro** | 10% | 2E 2M · Deathknell — if I died **alone**, draw 1 |
+| **Stellacorn Herder** | 10% | 4E 3M · **when I move, draw 1** |
 
 **Scuttle Crab at 0 Might is a real card** because lethal damage must be non-zero — it
 cannot die to damage at all without something assigning it at least 1.
@@ -358,6 +378,10 @@ cannot die to damage at all without something assigning it at least 1.
 | **Bellows Breath** | 11% | 1E/1 · `[Action]` `[Repeat]` deal 1 to up to three units at one location |
 | **Singularity** | 10% | 6E/2 · deal 6 to each of up to two units |
 | **Sprite Fountain** | 10% | 2E/1 · Temporary · a ready 3-Might Sprite token |
+| **Patched Porobot** | 7% | 2E 2M · draw 1 on play if you control **3 or more other gear** |
+| **Watchful Sentry** | 6% | 2E 1M · Deathknell — draw 1 |
+| **Plundering Poro** | 6% | 2E 2M · when I conquer, a Gold gear token |
+| **Wages of Pain** | 6% | 3E · `[Hidden][Action]` deal 3 at a battlefield, plus a Gold token |
 
 Mind shrinks Might rather than dealing damage, which **dodges Deflect and protection
 entirely** — a unit reduced to 1 Might is still alive but loses every fight it is in.
@@ -372,6 +396,10 @@ entirely** — a unit reduced to 1 Might is still alive but loses every fight it
 | **Rampage** | 13% | 3E (+1 Body optional) · two units deal damage equal to their Might to each other |
 | **Sabotage** | 12% | 1E/1 · reveal their hand, recycle a **non-unit** card |
 | **Rengar, Trophy Hunter** | 10% | 5E/1 6M · can `[Ambush]` to a battlefield **even with no units there** |
+| **Kinkou Initiate** | 7% | 3E 3M · draw 1 on play if your **other** units total 5+ Might |
+| **Challenge** | 6% | 2E/1 · `[Action]` two units deal damage equal to their Might to each other |
+| **Irresistible Faefolk** | 6% | 2E 1M · when I **move to a battlefield**, drag an enemy unit there |
+| **Mobilize** | 5% | 2E · channel a rune exhausted; if you can't, draw 1 |
 
 Body is the pump domain, and **Punch First is the single best cheap trick in the format**
 — +5 for one Energy, playable in showdowns, and out of Defy's reach forever.
@@ -386,6 +414,10 @@ Body is the pump domain, and **Punch First is the single best cheap trick in the
 | **Tideturner** | 13% | 2E 2M · `[Hidden]` swap places with a unit you control elsewhere |
 | **Fizz, Trickster** | 13% | 3E/1 3M · replay a ≤3-Energy spell from your trash, paying only its Power |
 | **Traveling Merchant** | 12% | 2E 2M · when I move, discard 1 then draw 1 |
+| **Vex, Apathetic** | 12% | 4E 4M · `[Deflect]` · **Stuns any unit an opponent plays** while she is at a battlefield |
+| **Switcheroo** | 10% | 2E/2 · `[Hidden][Action]` **swap the Might of two units** at one battlefield |
+| **Rebuke** | 9% | 2E/2 · `[Action]` return **any** unit at a battlefield to hand — no Might cap |
+| **Hard Bargain** | 9% | 2E · `[Reaction]` `[Repeat]` counter a spell unless they pay 2 |
 
 Chaos decides **where** fights happen rather than who wins them. Readying on a move
 (Ride the Wind) is the quiet one — a unit that already moved can move again.
@@ -400,6 +432,10 @@ Chaos decides **where** fights happen rather than who wins them. Readying on a m
 | **Kennen, Keeper of Balance** | 9% | 3E 2M · `[Hidden]` pay 2 to Stun on play or attack |
 | **Soaring Scout** | 8% | 2E 1M · Deathknell — channel 1 rune exhausted |
 | **Honest Broker** | 8% | 2E 2M · Deathknell — a Gold gear token |
+| **B.F. Sword** | 8% | 4E gear · `[Equip]` Order |
+| **Deathgrip** | 8% | 2E · `[Reaction]` kill your own unit to give another +Might equal to its Might |
+| **Call to Glory** | 7% | 3E · `[Reaction]` · spend a buff to ignore its cost |
+| **Salvage** | 7% | 2E/1 · `[Action]` kill up to one gear, draw 1 |
 
 **Hidden Blade is the most-played unconditional removal in the game** and the reason the
 "can they punish my flip?" question is not only about bounce. Killing a unit removes it
