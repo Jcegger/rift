@@ -39,7 +39,7 @@ date: 2026-09-23
 
 **Hiding cannot be answered.** It does not open a chain (§811.1.c.2) and it is not playing a card (§811.1.c.1), so no counterspell, no Legion trigger, no response. The card simply becomes a facedown object your opponent can see the back of.
 
-**The trap that will cost you games.** A hidden permanent's play effect reads its battlefield **off the source**. Bounce the source in response to its own trigger and that read returns null, the target cannot be confirmed, and the instruction is **ignored** (§359.3.e.12, §359.3.f.2.a, and the recorded Kennen ruling). Evelynn is 2 Might, Tideturner is 2, Tornado Warrior is 3 — **all three sit inside Gust's range**, and with Pyke gone the trap now catches **three of your four Hidden cards** rather than two. But the answer is concentrated, not ambient: four archetypes hold a Reaction that can take the unit back, and seven hold none at all. §5 is entirely about this.
+**The trap that will cost you games.** A hidden permanent's play effect reads its battlefield **off the source**. Bounce the source in response to its own trigger and that read returns null, the target cannot be confirmed, and the instruction is **ignored** (§359.3.e.12, §359.3.f.2.a, and the recorded Kennen ruling). Evelynn is 2 Might, Tideturner is 2, Tornado Warrior is 3 — **all three sit inside Gust's range**, and with Pyke gone the trap now catches **three of your four Hidden cards** rather than two. And it is not only bounce — **killing your unit strips its location just as well**, which is why only **three** archetypes on the matchup table cannot punish a flip. §5 is entirely about this.
 
 **Your new best card against big-unit decks is Switcheroo, and it is not close.** Swapping the Might of your smallest unit and their largest is a swing of **twice the gap**. Simulated 2v2 it converts a clean win **94–98% of the time against every archetype measured** — including Jayce at 97%, where Punch First manages 46%. Punch First decays as their units grow; Switcheroo *scales with it*.
 
@@ -413,7 +413,7 @@ There is a genuine tension in the rules here worth knowing, because it is the ki
 
 **Hidden Blade has one saving grace.** It is `[Action]`, so from hand its controller can only cast it on *their* turn or in a showdown. Evelynn's trigger resolves on *your* turn before any showdown opens, so only a **facedown** Hidden Blade can punish her. **Their empty facedown slot is permission to flip.**
 
-**And it is concentrated, which is the part that changes how you play.** The threat is not spread thinly across the field; it lives in four archetypes and is absent from the rest:
+**It is near-universal, and that is the part that changes how you play.** Only three archetypes on the matchup table hold nothing that can remove your unit at Reaction speed:
 
 | can remove your unit at Reaction speed | cannot |
 |---|---|
@@ -907,7 +907,7 @@ Ten of ten. Swaps are one-for-one between games, you may change your Chosen Cham
 
 **Gust ×2** (1E, Reaction, returns a unit at a battlefield with 3 Might or less) — unchanged, and still doing three jobs: it manufactures the **alone** condition Kha'Zix needs, it answers their cheap threats, and it is the mirror image of the card that beats your own flips.
 
-**Hard Bargain ×1** (2E, Reaction, Repeat 2E, counter unless they pay 2) — **the card that protects a flip**, and it matters more than it did: three of your four Hidden cards are now blowout-able where two were. In against Diana, Irelia, Kennen and Vex, and against nobody else.
+**Hard Bargain ×1** (2E, Reaction, Repeat 2E, counter unless they pay 2) — **the card that protects a flip**, and it matters more than it did: three of your four Hidden cards are now blowout-able where two were, and eight of the eleven archetypes hold something that can do it. **In against everything except Akali, Master Yi and Rengar** — it counters the removal whichever way it removes.
 
 **Sabotage ×1** — third copy, at the three-copy cap across main and board.
 
