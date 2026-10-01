@@ -293,13 +293,24 @@ const main = async () => {
   // where the card is "Dark Child - Starter" — so comma and dash both collapse.
   const key = (n) => String(n).replace(/[‘’]/g, "'").replace(/\s*[,\-–—]\s*/g, " ")
                               .toLowerCase().replace(/\s+/g, " ").trim();
-  for (const c of cat.cards) if (!byName.has(key(c.n))) byName.set(key(c.n), c);
+  // All printings per name, not the first. A reprint carries the same name and
+  // different text, so which one an errata is about has to be chosen rather than
+  // assumed — see the pick below.
+  for (const c of cat.cards){
+    const k = key(c.n);
+    if (!byName.has(k)) byName.set(k, []);
+    byName.get(k).push(c);
+  }
   // Legends are stored under their epithet alone — "Deceiver", not "LeBlanc, Deceiver"
   // — which is the same dash-naming quirk the README describes for the catalog. So a
   // two-part name also gets tried as its tail.
   const byTail = new Map();
   for (const c of cat.cards)
-    if (c.t === "Legend" && !byTail.has(key(c.n))) byTail.set(key(c.n), c);
+    if (c.t === "Legend"){
+      const k = key(c.n);
+      if (!byTail.has(k)) byTail.set(k, []);
+      byTail.get(k).push(c);
+    }
 
   let stale = 0, current = 0, unmatched = 0, missing = 0, noop = 0;
   const dialectDrift = [], guessed = [];
@@ -309,17 +320,37 @@ const main = async () => {
     // ("Lee Sin, Blind Monk") yields the tail "sin blind monk" and resolves nothing.
     const comma = /^[^,]+,\s*(.+)$/.exec(e.card);
     const tail = comma ? key(comma[1]) : "";
-    const c = byName.get(key(e.card)) || (tail && (byTail.get(tail) || byName.get(tail)));
-    if (!c) { missing++; cards.push({ ...e, blocks: undefined, status: "no-such-card" }); continue; }
+    const cands = byName.get(key(e.card)) || (tail && (byTail.get(tail) || byName.get(tail))) || [];
+    if (!cands.length) { missing++; cards.push({ ...e, blocks: undefined, status: "no-such-card" }); continue; }
     const { blocks, ...rest } = e;
-    const halves = blocks ? resolveSplit(e, c.x) : { new: e.new, old: e.old, resolved: true };
-    const now = canon(c.x), looseNow = loose(c.x);
-    const status =
-        canon(halves.old) === now ? "catalog-stale"
-      : canon(halves.new) === now ? "current"
-      : loose(halves.old) === looseNow ? "catalog-stale"
-      : loose(halves.new) === looseNow ? "current"
-      : "no-match";
+    /* Which printing is this errata about? Radiance reprinted Yone, Blademaster with
+       its reminder text abbreviated to a bare [Weaponmaster], and because the reprint
+       sorts ahead of the Spiritforged original the Spiritforged errata resolved against
+       it and matched neither half — a "no-match" that is a join bug rather than parse
+       drift, and one that will recur on every reprint of an errata'd card.
+
+       So score every printing of the name and keep the one the errata text actually
+       describes. Falling back to the first preserves the old behaviour for an entry
+       that genuinely matches nothing, which still has to be reported rather than
+       silently dropped. */
+    const score = (cand) => {
+      const halves = blocks ? resolveSplit(e, cand.x) : { new: e.new, old: e.old, resolved: true };
+      const now = canon(cand.x), looseNow = loose(cand.x);
+      const status =
+          canon(halves.old) === now ? "catalog-stale"
+        : canon(halves.new) === now ? "current"
+        : loose(halves.old) === looseNow ? "catalog-stale"
+        : loose(halves.new) === looseNow ? "current"
+        : "no-match";
+      return { cand, halves, status, now, looseNow };
+    };
+    const scored = cands.map(score);
+    // A resolved boundary beats a guessed one when both otherwise match.
+    const best = scored.find((x) => x.status !== "no-match" && x.halves.resolved !== false)
+              || scored.find((x) => x.status !== "no-match")
+              || scored[0];
+    const c = best.cand, halves = best.halves, status = best.status;
+    const now = best.now, looseNow = best.looseNow;
     // If the two halves are indistinguishable once symbols are flattened, the "errata"
     // carries no change this pipeline can see. Never silently treat that as applied.
     if (status !== "no-match" && loose(halves.new) === loose(halves.old)) noop++;
