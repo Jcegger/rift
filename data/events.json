@@ -29,11 +29,11 @@
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "unknown": 42,
+   "unknown": 50,
+   "Asia": 27,
    "North America": 3,
    "Europe": 18,
-   "Oceania": 1,
-   "Asia": 26
+   "Oceania": 1
   },
   "registryEventsByRegion": {
    "unknown": 1953
