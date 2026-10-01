@@ -273,7 +273,9 @@ Shares are actual counts from the 1,184-list snapshot of 16 September. All seven
 
 Everything the midrange dossier says applies, and two things are worse.
 
-Their legend reads *"while a friendly unit defends alone, it gets +2 Might"* and yours pays out when *an enemy unit is alone* — you spend cards manufacturing the board state that rewards them for free. That is true of both builds. What is specific here: **you cut the two cards that beat them in a long game.** Zed at 5 Might outlives their removal and Traveling Merchant refuels; this list has neither, and its replacement resources are XP rather than cards.
+Their legend reads *"while a friendly unit defends alone, it gets +2 Might"* and yours pays out when *an enemy unit is alone* — you spend cards manufacturing the board state that rewards them for free. That is true of both builds, and the midrange dossier's Master Yi card now carries the way out: their bonus reads **defends**, so drag their unit to yours rather than attacking into it. The unit that moves in applies Contested and becomes the attacker (§464.2.c.1), which switches their legend off while Kha'Zix's *"attack or defend"* still fires.
+
+**This build has less access to that line than midrange does.** Evelynn is a midrange card; what you have is Void Assault ×3 and Faefolk ×3, and Faefolk only drags to the battlefield she moves to. Plan the pull before you commit the body. What is specific here: **you cut the two cards that beat them in a long game.** Zed at 5 Might outlives their removal and Traveling Merchant refuels; this list has neither, and its replacement resources are XP rather than cards.
 
 Their three Defy also bite harder. Defy counters a spell costing no more than 4 Energy **and** no more than `[A]`, so anything at 2 Power walks through it. Midrange holds seven showdown-legal spells of which **four** are Defy-proof — three Punch First and Switcheroo, all at 2 Power. This list holds eight of which three are. **Five of your eight held-up cards can be countered, against midrange's three of seven.**
 

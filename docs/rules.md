@@ -748,6 +748,12 @@ All 25 in the glossary (§805–§829). Card counts are printings in `data/cards
 of the catalog dated **2026-09-08** — indicative, not asserted, and they move when a set
 lands. `X` omitted always means 1.
 
+**A set has landed since: Radiance, 84 printings, catalog 2026-10-01.** Every count below
+predates it and is low by a handful either way — Ambush is 25 rather than 23, Deathknell
+29 rather than 27. They are kept rather than rewritten because nothing reads them as
+data, and because the three terms Radiance printed are not in this glossary at all: see
+**Printed, but not yet in the rules** at the end of this section.
+
 ### Combat
 
 - **Assault X** — §807 · 58 cards. +X Might **while I am an attacker**. Multiple sources

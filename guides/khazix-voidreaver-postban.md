@@ -739,7 +739,11 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 
 **The post-ban field is four days old.** Only 506 of those 1,226 decks are dated 18 September or later, and 466 of those are from two days. The post-ban ordering is directionally interesting and statistically thin — Vex/Gloomist leads it at 6.3% having been eighth in Tier 2 the week before. I report both windows and lean on the full one.
 
-**riftbound.gg's Vendetta week 4 tier list (20 September) puts Kha'Zix Voidreaver at Tier 3, rank 4** — sixteenth of the forty-nine ranked archetypes. That is the honest starting position, and the archive agrees: **14 Voidreaver decks out of 1,226, four of them tournament-vouched.** The archetype has ranged between 6 and 18 decks on every day the history file records since 27 August, with no trend in either direction. This is an off-meta deck and the update does not change that.
+**The deck slid a tier after Los Angeles.** riftbound.gg's Vendetta tier list, scraped **1 October**, puts Kha'Zix Voidreaver at **Tier 4, rank 3 — 22nd of the forty-nine ranked archetypes**, down from Tier 3, rank 4 and 16th when this page was first written. The page is still labelled week 4; the placement is not.
+
+**The Los Angeles Regional Qualifier is the reason, and it is a real sample for once.** `data/events.json` records it on **26 September at 2,165 players** — the largest event this archive has ever carried for the format, and the last regional of the Vendetta season. Riftbound.gg's coverage puts the best Kha'Zix at **Top 32 on 10-2-1**, which is a respectable finish in a field that size and still the only one. **Seven of the eight Top 8 legends were Calm-domain**, the exception being the Rengar list that won it. Treat the Top 32 as the deck author's reported result rather than something this archive vouches for: `data/events.json` carries the event and its field size, not its decklists.
+
+That is the honest starting position, and the archive agrees with the direction: **14 Voidreaver decks out of 1,226, four of them tournament-vouched.** This is an off-meta deck and neither update changes that.
 
 ### How to read a card
 
@@ -769,11 +773,21 @@ The permission is now explicitly tied to Ambush, which means it carries Ambush's
 
 ### Master Yi, Wuju Bladesman — Tier 1.3 · 9.0% overall / 4.0% post-ban · mean Might 3.12
 
-**Verdict: the most-played deck in the archive and your best Tier 1 matchup. Go wide, not tall.**
+**Verdict: the most-played deck in the archive, and the one matchup where your main plan backfires. Go wide, and isolate in the right direction.**
 
 **They do:** cheap, wide, Calm/Body. Charm 100%, Defy 100%, Discipline 99%, Lonely Poro 98%, Zhonya's Hourglass 97%, Punch First 97% — they play your own best spell. 110 decks, 90 of them tournament-vouched.
 **You do:** 43% bare, 89% with Punch First. Their bodies are small enough that +5 decides fights. Up from the Deep's Tentacles tax their damage assignment under the no-overkill rule; Kinkou Initiate turns on trivially.
 **Flip safety: 0%** — and this is the one to know cold. **85% of their lists run a bounce effect and all of it is friendly-only** (Retreat, Pack of Wonders and friends, played for value and to re-channel a rune). The card you see cannot touch your flip.
+**The isolation trap, and it is specific to this matchup.** Their legend reads:
+
+> **Wuju Bladesman** — *While a friendly unit defends alone, it gets +2 `[M]`.*
+
+**The board state your entire deck manufactures is the one that pays them.** Isolate a Yi unit on defence and their +2 cancels Kha'Zix's +2 exactly: you have spent a card and a move to arrive at the fight you already had. Every other matchup on this page rewards isolation; this one charges for it.
+
+**The way out is the direction of the fight, not the fight.** Their bonus reads *defends*. So do not attack into their lone unit — **drag it to yours**. The unit that moves in applies Contested, which makes **them** the attacker (§190.3.a.1, §464.2.c.1), and a unit that is attacking is not defending: their legend switches off. Kha'Zix's trigger reads *"when I attack **or defend**"* and fires either way.
+
+Evelynn and Void Assault both pull in that direction. Walking a unit over and attacking does not. Same isolation, opposite direction, and the four-Might swing between the two decides the fight.
+
 **Switcheroo is your worst Hidden card here.** Against a genuinely flat board the swap has nothing to swap into. Hide it only once they have committed a single large unit.
 **Board:** −1 Switcheroo, −1 Decree (Calm/Body). **+2 Ravenbloom Prefect, +2 Acceptable Losses** — Zhonya's Hourglass is 97% of their lists, the highest on this page, and the gear package exists for exactly this.
 
@@ -936,4 +950,4 @@ That is the part of this update worth arguing with. Rebuke was Gust with no Migh
 
 **Simulations** are hypergeometric where a closed form exists and Monte Carlo at 200,000 trials otherwise. The combat model implements §465.2 and §466.3 directly: a clean win when your Might total strictly exceeds theirs, with stun removing a unit's damage contribution but not its Might for lethal purposes (§423.1.b–c). The Switcheroo column assumes optimal choice of which two units to swap. The Vex-stun column takes the clean win as "you kill both of theirs *and* their reduced damage fails to kill both of yours", since a stunned unit still needs its full Might to die. Your own Might distribution is the 24 units of this list weighted by copies (mean 3.04); theirs is each archetype's units in the archive weighted by copies. **The mulligan comparison in §10 uses one definition applied to both lists** — it does not reproduce the previous dossier's figure, which used a different keep rule, and the two are not comparable.
 
-**What this dossier does not claim.** It does not claim the deck is now good. riftbound.gg has it at Tier 3, the archive has fourteen of it out of 1,226, and the archetype has not moved in a month. What the update changes is the shape of its bad matchups: Jayce and Azir went from unwinnable-on-Might to a single card, and the deck acquired a resource — the facedown slot — that costs a rune and pays a whole card. That is a real improvement and it is not a tier change. It also does not claim the Tideturner referent question in §5 is settled; the recorded ruling covers the identical shape for a different card, and a match that turns on it deserves a judge.
+**What this dossier does not claim.** It does not claim the deck is now good. riftbound.gg has it at **Tier 4** after Los Angeles, the archive has fourteen of it out of 1,226, and one Top 32 in a 2,165-player field is the whole of its regional record. What the update changes is the shape of its bad matchups: Jayce and Azir went from unwinnable-on-Might to a single card, and the deck acquired a resource — the facedown slot — that costs a rune and pays a whole card. That is a real improvement and it is not a tier change. It also does not claim the Tideturner referent question in §5 is settled; the recorded ruling covers the identical shape for a different card, and a match that turns on it deserves a judge.
