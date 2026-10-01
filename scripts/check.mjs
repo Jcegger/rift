@@ -1961,9 +1961,22 @@ section('Deck options');
     const panels = (h.match(/class="panel"/g) || []).length;
     const lines = h.replace(/<[^>]+>/g, '\n').replace(/&#?\w+;/g, '')
                    .split('\n').map((x) => x.trim()).filter(Boolean).length;
+    /* The bound used to be `lines <= 1400`, which is a fact about how many archetypes
+       existed when it was written rather than about the layout. Radiance pushed the real
+       render to roughly 1,420 and froze the pipeline over 25 lines of ordinary growth.
+       What this guard is actually for is catching a render that ran away — a loop that
+       repeats a row, a panel that nests itself — and that shows up as lines *per row*,
+       which does not move when the archive gains archetypes. */
+    const rows = Math.max(1, (h.match(/data-pick="/g) || []).length);
+    const perRow = lines / rows;
+    /* Two bounds, because a runaway can grow either way and neither dimension alone
+       catches both. A row that renders itself twice shows up in lines-per-row and not in
+       the row count; an unbounded row list shows up in the row count and not per row.
+       Both sit at roughly double what the layout actually produces (20 rows, 64-70 lines
+       each), so ordinary growth never reaches them. */
     ok(`[${label}] expand-all stays bounded`,
-       panels <= 8 && lines <= 1400 && !/undefined|NaN|\[object Object\]/.test(h),
-       `${panels} panels, ${lines} lines`);
+       panels <= 8 && rows <= 40 && perRow <= 100 && !/undefined|NaN|\[object Object\]/.test(h),
+       `${panels} panels, ${rows} rows, ${lines} lines, ${perRow.toFixed(1)}/row`);
   }
 
   A.S.expandAll = false;

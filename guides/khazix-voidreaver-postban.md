@@ -404,25 +404,34 @@ There is a genuine tension in the rules here worth knowing, because it is the ki
 | Whirlwind, Zaunite Bouncer, Beast Below, Ocean Drake | Main Phase | under 1% combined |
 | Windsinger | Hidden, so Reaction speed when flipped | 0.7% |
 
-**So: 29.9% of archived decks carry anything that can return one of your units to hand, and 26.8% carry one at Reaction speed — and at Reaction speed it is two cards, Gust and Star-Crossed.**
+**And bouncing is only half of it.** Killing your unit strips its location exactly as returning it does — a unit in the trash has no location (§359.3.e.12) — so removal springs the same trap. Two more cards matter, both `[Hidden]` and therefore Reaction-speed when flipped:
+
+| | | |
+|---|---|---|
+| **Hidden Blade** | 2E/1 Order · `[Hidden][Action]` | **kills** a unit at a battlefield; 21.8% of the archive |
+| **Temporal Breach** | 2E/1 Mind · `[Hidden]` | **banishes** and replays it — gone long enough to null the referent |
+
+**Hidden Blade has one saving grace.** It is `[Action]`, so from hand its controller can only cast it on *their* turn or in a showdown. Evelynn's trigger resolves on *your* turn before any showdown opens, so only a **facedown** Hidden Blade can punish her. **Their empty facedown slot is permission to flip.**
 
 **And it is concentrated, which is the part that changes how you play.** The threat is not spread thinly across the field; it lives in four archetypes and is absent from the rest:
 
-| holds a Reaction that can take your unit | holds none |
+| can remove your unit at Reaction speed | cannot |
 |---|---|
-| **Diana 100%** · **Irelia 90%** · **Kennen 78%** · **Vex 74%** | **Akali · Master Yi · Rengar · Azir · Fiora · Jayce · Rek'Sai — 0%** |
+| **Diana 100%** · **Azir 95%** · **Kennen 94%** · **Irelia 90%** · **Fiora 77%** · **Vex 74%** · **Jayce 64%** · **Rek'Sai 27%** | **Akali · Master Yi · Rengar — 0%** |
 
-Against seven of the eleven archetypes on the matchup table, **the trap in this section cannot happen to you**, and Evelynn is simply a three-XP card. Against the other four, assume the Reaction is up until you have seen it spent. Master Yi is the one worth naming: 85% of his lists run a bounce effect, **all of it friendly-only**, so the card you see is not the card that beats you.
+**Three archetypes cannot punish a flip. Not seven** — that was this page's own error for two drafts, from counting bounce and forgetting that killing a unit removes it just as well.
+
+Against Akali, Master Yi and Rengar, Evelynn is simply a three-XP card and you should hide and flip on curve. Against the other eight, assume the answer is up until you have seen it spent — and note the two different tells: **Gust and Star-Crossed need open runes**, which you can count, while **Hidden Blade and Temporal Breach need a facedown card**, which you can see. Master Yi is still worth naming for the opposite reason: 85% of his lists run a bounce effect, **all of it friendly-only**, so the card you see is not a card that beats you.
 
 And Hidden makes it worse, for the reason the recorded ruling spells out: **from hand you could have played Evelynn to your base, where Gust cannot reach her. From Hidden you cannot.** §811.1.d.1 makes the battlefield compulsory. *Hidden removes the safe option.*
 
 **What to do about it.**
 
-1. **First, check whether they are even one of the four.** Against Akali, Yi, Rengar, Azir, Fiora, Jayce or Rek'Sai, flip freely — nothing in their archived lists answers it. Against Diana, Irelia, Kennen or Vex, count their open runes before you flip. A flip is free, which makes it feel free to do at a bad moment. It is not: the card is the cost.
+1. **First, check whether they are one of the three.** Against Akali, Master Yi or Rengar, flip freely — nothing in their archived lists removes your unit at Reaction speed. Against everyone else, count their open runes **and look at their facedown slot** before you flip. A flip is free, which makes it feel free to do at a bad moment. It is not: the card is the cost.
 2. **Flip into a tapped-out opponent**, or after they have spent their Reaction on something else. Your Void Assaults and your standard moves are the bait.
 3. **Prefer their turn for Tornado Warrior and Tideturner** — both work on their turn, and both are usually flipped once the opponent has already committed. Note the change from the previous build: Pyke could be flipped into anything because he had nothing to lose. **Tornado Warrior does.**
 4. **Prefer your own Main Phase for Evelynn**, because you have no choice; her trigger requires it. Accept that she is the most exposed of the four and hide her when you have a reason, not because the slot is empty.
-5. **Board in Hard Bargain** against Diana, Irelia, Kennen and Vex, and against nobody else. It is the one card that protects the flip, and §14 covers when it is worth the slot.
+5. **Board in Hard Bargain** against anything that is not Akali, Master Yi or Rengar — it counters the spell whichever way it removes the unit. It is the one card that protects the flip, and §14 covers when it is worth the slot.
 
 ---
 
@@ -747,7 +756,9 @@ That is the honest starting position, and the archive agrees with the direction:
 
 ### How to read a card
 
-**Flip safety** is the line that is new, and it is the one worth checking first. It is the share of that archetype's archived lists holding a card that can return *your* unit to hand at Reaction speed — the §5 trap. Where it reads **0%**, nothing in their lists answers a flip and you may hide and flip on curve without thinking about it. Everything else on the card assumes you already did that check.
+**Flip safety** is the line worth checking first: the share of that archetype's archived lists holding a card that can **remove your unit from the board at Reaction speed** — bounce *or* kill. Either one springs the §5 trap, because a unit in the trash has no location just as surely as one in hand.
+
+**This line was wrong in the first two drafts of this page**, which counted only bounce and therefore read 0% for Azir, Fiora, Jayce and Rek'Sai — every one of which holds Reaction-speed removal. Three archetypes genuinely cannot punish a flip. It is not seven.
 
 ---
 
@@ -757,7 +768,7 @@ That is the honest starting position, and the archive agrees with the direction:
 
 **They do:** self-milling tempo that plays from its trash much as you do. Lightning Rush 98%, Kennen Storm of Shuriken 84%, Minefield 83%, Ride the Wind 82%, Fizz 82%, Rhasa the Sunderer 81%. They go wide and they are happy to trade — which costs you XP and costs them nothing.
 **You do:** 38% bare, 89% with Punch First, 97% with Switcheroo. Their 3.35 mean is small enough that +5 is decisive, so Punch First is your main lever here, not the swap.
-**Flip safety: 78%** — Gust, Star-Crossed and Rebuke all appear. Assume a Reaction is up, and note you no longer have a safe flip: **all three of your Hidden units can now be blown out**, so flip only into a tapped-out board or after they have spent the Reaction. Their own Kennen, Keeper of Balance is a Hidden card in 6.6% of the field, so expect them to know the flip game from the other side.
+**Flip safety: 94%** — Gust, Star-Crossed *and* Hidden Blade. Assume a Reaction is up, and note you no longer have a safe flip: **all three of your Hidden units can now be blown out**, so flip only into a tapped-out board or after they have spent the Reaction. Their own Kennen, Keeper of Balance is a Hidden card in 6.6% of the field, so expect them to know the flip game from the other side.
 **Ban note:** they lost more than you did — 75% of their archived lists ran a now-banned card, against 36% of yours — but kept Lightning Rush, so their digging went from six cards to three rather than to zero.
 **Board:** +2 Gust, +1 Hard Bargain. −1 Decree of Strength (Order/Chaos — structurally dead). Kennen lists are light on Equipment, so the four gear slots stay in the box here.
 
@@ -767,7 +778,7 @@ That is the honest starting position, and the archive agrees with the direction:
 
 **They do:** Fury/Calm interaction — Discipline 96%, Shuriken Flip 96%, Defy 94%, Stellacorn Herder 89%, Zhonya's Hourglass 77%. The danger is counterspells and combat tricks, not removal.
 **You do:** 40% bare, 91% with Punch First, 97% with Switcheroo. **Defy at 94% is the number to respect** — it counters a spell costing no more than 4 Energy and no more than `[A]`, which means **Punch First at 2 Power is permanently out of its reach and most of the rest of your deck is not** (§206).
-**Flip safety: 0%.** Nothing in 53 archived lists returns your unit to hand. Hide and flip on curve.
+**Flip safety: 0%** — one of only three. Nothing in 53 archived lists removes your unit from the board at Reaction speed, by bounce or by kill. Hide and flip on curve.
 **Ban note:** zero of their 53 lists ran a banned card, so expect this share to hold or rise.
 **Board:** +1 Hard Bargain (against Defy, not against bounce), **+2 Ravenbloom Prefect and +2 Acceptable Losses** — Zhonya's Hourglass is in 77% of their lists and both answer it. −1 Decree (Fury/Calm).
 
@@ -777,7 +788,7 @@ That is the honest starting position, and the archive agrees with the direction:
 
 **They do:** cheap, wide, Calm/Body. Charm 100%, Defy 100%, Discipline 99%, Lonely Poro 98%, Zhonya's Hourglass 97%, Punch First 97% — they play your own best spell. 110 decks, 90 of them tournament-vouched.
 **You do:** 43% bare, 89% with Punch First. Their bodies are small enough that +5 decides fights. Up from the Deep's Tentacles tax their damage assignment under the no-overkill rule; Kinkou Initiate turns on trivially.
-**Flip safety: 0%** — and this is the one to know cold. **85% of their lists run a bounce effect and all of it is friendly-only** (Retreat, Pack of Wonders and friends, played for value and to re-channel a rune). The card you see cannot touch your flip.
+**Flip safety: 0%** — one of only three, and the one to know cold. **85% of their lists run a bounce effect and all of it is friendly-only** (Retreat, Pack of Wonders and friends, played for value and to re-channel a rune). The card you see cannot touch your flip.
 **The isolation trap, and it is specific to this matchup.** Their legend reads:
 
 > **Wuju Bladesman** — *While a friendly unit defends alone, it gets +2 `[M]`.*
@@ -798,7 +809,7 @@ Evelynn and Void Assault both pull in that direction. Walking a unit over and at
 **They do:** the smallest board you fight regularly — 2.49 mean. Defy 100%, Discipline 99%, Irelia Fervent 97%, Boots of Swiftness 97%, Defiant Dance 97%, Abandoned Hall 97%.
 **You do:** **58% bare, 98% with Punch First** — the only archetype you beat more often than not with no trick at all. Keep the pumps.
 **Note the one row where Switcheroo is worse than Punch First:** 97% against 98%. Against genuinely small boards the swap has nothing to swap into. **Board it out.**
-**Flip safety: 90%** — the second-highest on this page. Gust and Star-Crossed are near-universal, and since the Pyke cut you have no flip that shrugs them off. Hide **Switcheroo**, the only one of the four they cannot punish mid-trigger.
+**Flip safety: 90%** — Gust and Star-Crossed, no kill effects. Gust and Star-Crossed are near-universal, and since the Pyke cut you have no flip that shrugs them off. Hide **Switcheroo**, the only one of the four they cannot punish mid-trigger.
 **Ban note:** hit hard — 68% of their archived lists ran a banned card.
 **Board:** +1 Hard Bargain, +2 Gust. −1 Switcheroo, −1 Decree (Calm/Chaos).
 
@@ -808,7 +819,7 @@ Evelynn and Void Assault both pull in that direction. Walking a unit over and at
 
 **They do:** Rengar Trophy Hunter 93% (the same card you run two of), Thrill of the Hunt 90%, Inferna 87%, Nidalee Cat Form 83%, Punch First 80%, Irresistible Faefolk 77% — they contest the same board you do, with the same tools.
 **You do:** 38% bare, 88% with Punch First, 98% with Switcheroo.
-**Flip safety: 0%.** 77% of their lists run a bounce effect — **Thrill of the Hunt, which banishes a *friendly* unit and replays it to any battlefield, ignoring its cost.** That is a threat to your combat maths, not to your flip: it puts a Rengar into a fight at Reaction speed for free, exactly the way your Tideturner does. Count it before you commit to a fight you think you have won.
+**Flip safety: 0%** — the third and last of them. 77% of their lists run a bounce effect — **Thrill of the Hunt, which banishes a *friendly* unit and replays it to any battlefield, ignoring its cost.** That is a threat to your combat maths, not to your flip: it puts a Rengar into a fight at Reaction speed for free, exactly the way your Tideturner does. Count it before you commit to a fight you think you have won.
 **Ban note:** effectively untouched (3%), and they are 2.4% of the full archive against 3.6% of the post-ban window — expect more of them.
 **Board:** +1 Rampage. −1 Decree (Fury/Body). The second Switcheroo used to come in here and no longer exists (§15).
 
@@ -818,7 +829,7 @@ Evelynn and Void Assault both pull in that direction. Walking a unit over and at
 
 **They do:** Azir Sovereign 100%, Arise! 100%, Defy 97%, Hidden Blade 95%, Brutalizer 95%, Eye of the Herald 95%. Equipment-heavy, few bodies, big ones.
 **You do:** **24% bare** — your second-worst straight fight. Punch First reaches 86%; **Switcheroo reaches 94%.** Isolation gets you to 75%, and isolation-plus-Kha'Zix to **96%** — the largest gap on the page between fighting fair and fighting rigged.
-**Flip safety: 0%.** Hide Switcheroo at the battlefield you intend to defend and take your time.
+**Flip safety: 95%** — the highest on this page after Diana, and it is **Hidden Blade**, which kills rather than bounces. See the Azir note in §5: a facedown card on their side is the tell, because from hand Hidden Blade is `[Action]` and cannot fire on your turn. Empty facedown slot → flip freely, since Azir runs no bounce at all. Occupied → hide Switcheroo, which reads nothing off itself.
 **Sample caveat:** those 37 decks contribute only 124 units between them — Azir lists are thin on bodies by construction. The distribution is real but the sample behind it is small.
 **Board:** **+2 Ravenbloom Prefect, +2 Acceptable Losses** — Hidden Blade 95%, Brutalizer 95%, Eye of the Herald 95%: this is the matchup the new board was built for. −1 Decree (Calm/Order). **Note what you no longer have:** the second Switcheroo and Rebuke were this matchup's plan in the previous build, and both are gone (§15).
 
@@ -828,7 +839,7 @@ Evelynn and Void Assault both pull in that direction. Walking a unit over and at
 
 **They do:** Riposte 100%, Punch First 97%, Pit Rookie 92%, Sunken Temple 90%, First Mate 87%, Rampage 79%. **Riposte is the card to play around** — 2E / 2 Chaos, Reaction, counters a spell *and* gives their unit +Might equal to that spell's Energy cost. Walking a Punch First into it swings the fight both ways at once.
 **You do:** 35% bare, 90% with Punch First, 97% with Switcheroo.
-**Flip safety: 0%.** Nothing in 39 lists touches your flip.
+**Flip safety: 77%** — Hidden Blade again. Same tell as Azir: watch the facedown slot, and prefer Switcheroo as the hide.
 **Board:** −1 Decree (Body/Order).
 
 ### Jayce, Defender of Tomorrow — Tier 2.5 · 3.7% overall / 3.2% post-ban · mean Might 5.64, median 5
@@ -839,7 +850,7 @@ Evelynn and Void Assault both pull in that direction. Walking a unit over and at
 **You do:** **12% bare, 46% with Punch First, 53% isolated, 69% isolated-plus-Kha'Zix.** Every one of those is a losing or coin-flip number. **And 97% with Switcheroo.** Swapping your 1-Might Faefolk into a 7-Might unit is a twelve-point swing that no other card in your deck approximates. Mulligan toward it.
 **Keep Faefolk** — their small bodies exist to be swapped up.
 **Watch for Elder Dragon** at 73% of their lists: *"any amount of your damage is enough to kill enemy units"* switches off minimum lethal, and with it every line in §7 that depends on cheap bodies taxing their assignment. Tentacles stop absorbing. Answer the enabler by returning it to hand — that is what Rebuke is in the board for.
-**Flip safety: 0%.** Hide and flip freely; they have no answer.
+**Flip safety: 64%** — **Temporal Breach**, a `[Hidden]` banish-and-replay. It removes your unit from the board for long enough to null the referent, so the flip fizzles even though the unit comes straight back.
 **Board:** **+1 Decree of Strength** — Jayce is **Mind/Body**, one of only two archetypes Decree can touch, and it is the worst board in §7. **+1 Rampage.** −2 Punch First.
 **This plan got worse on 23 September, and you should know by how much.** The previous board held a second Switcheroo and a Rebuke; both are gone. Switcheroo is the 97% card here and there is now exactly one copy in the whole 56, seen in your opener 10.3% of the time. Rebuke was the answer to a resolved Elder Dragon. Neither has a replacement in the current ten — see §15.
 
@@ -859,7 +870,7 @@ Evelynn and Void Assault both pull in that direction. Walking a unit over and at
 
 **They do:** The Candlelit Sanctum 98%, Rek'Sai Breacher 98%, Void Rush 98%, Cull the Weak 97%, Carrion Dredger 97%, Cleave 95%. Deathknell bodies that pay them for dying.
 **You do:** 54% bare, 97% with Punch First — a good matchup on the numbers. But **killing their board is not the same as beating them**, so clean wins convert worse than the table implies. Prioritise holding battlefields over trading.
-**Flip safety: 0%.**
+**Flip safety: 27%** — the lowest of the eight that have any, and it is Hidden Blade. The likeliest of the non-zero matchups to let a flip through, but not one to assume.
 **The one battlefield note in this dossier:** Rek'Sai wants units returning home, and **Star Spring's trigger is symmetric** — it hands them the same free walk-home it hands you, into a deck built to use it. **Bring Zaun Warrens or Sandswept Tomb instead.**
 **Board:** −1 Decree (Fury/Order).
 
@@ -871,7 +882,7 @@ Evelynn and Void Assault both pull in that direction. Walking a unit over and at
 **You do:** 53% bare, 93% with Punch First, 98% with Switcheroo.
 **Read the share carefully:** 3.2% of the full archive against 6.3% of the four days since the ban, and **only 7 of its 39 archived lists are tournament-vouched.** That is a spike on thin evidence.
 **The Vex mirror:** Deflect taxes *opponents'* spells, so your Rampage into their Vex costs `[A]` more (§809). Yours does the same to them.
-**Flip safety: 74%** — Star-Crossed mostly. Hold Evelynn and Tornado Warrior; Switcheroo is the flip they cannot punish.
+**Flip safety: 74%** — Star-Crossed and Gust, no kill. Hold Evelynn and Tornado Warrior; Switcheroo is the flip they cannot punish.
 **Board:** +1 Hard Bargain. −1 Decree (Calm/Chaos).
 
 ---
@@ -938,7 +949,9 @@ That is the part of this update worth arguing with. Rebuke was Gust with no Migh
 
 **Card text** is `data/cards.json` with `data/errata.json` applied on read (catalog 2026-09-20). Three cards in this list are errata'd and all three are named in §12.
 
-**"Flip safety" in §13 counts one specific thing**, because most of what reads as bounce in this format cannot touch you: the share of an archetype's archived lists holding a card that can return an **enemy** unit to hand at **Reaction** speed. Fourteen cards in the pool return a unit to hand; six of those are friendly-only and are excluded, which is why Retreat — 10.6% of the archive, and named as a threat in the previous draft of §5 — does not count. At Reaction speed the set is two cards, Gust and Star-Crossed.
+**"Flip safety" in §13 counts what can remove an enemy unit from the board at Reaction speed** — bounce or kill, because either strips the location the trigger reads. The set is five cards, hand-checked rather than pattern-matched: **Gust, Star-Crossed, Hidden Blade, Temporal Breach** and the fringe **Windsinger**.
+
+Two exclusions are deliberate. **Retreat** returns only a *friendly* unit and cannot touch you, despite being 10.6% of the archive and named as a threat in an early draft. **Mesmerize** is modal and its bounce half is friendly-only too, so it is out for the same reason — a regex counted it and a reading of the card removed it.
 
 **The decklist** was read live from the app's Supabase state on 23 September 2026 via `scripts/rift deck "Kha'Zix Midrange"`, not from a cached copy. The list is complete against the collection: nothing to acquire.
 
