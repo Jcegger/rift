@@ -1,4 +1,9 @@
-# Fundamentals of Riftbound
+---
+title: Fundamentals of Riftbound
+subtitle: How the game works, and what the field actually plays — the teaching layer over docs/rules.md
+author: rift toolchain
+date: 2026-10-01
+---
 
 How the game actually works, and what you will actually face across the table. This is
 the teaching layer; [rules.md](rules.md) is the reference layer. Where this page explains

@@ -302,6 +302,9 @@ body{overflow-x:hidden}
 .g-body em{color:var(--dim);font-style:italic}
 .g-code{font-family:var(--head);font-size:.9em;color:var(--teal);
   background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+.g-pre{margin:18px 0;padding:12px 14px;background:var(--bg2);border:1px solid var(--line);
+  border-radius:6px;overflow-x:auto;font-family:var(--head);font-size:13px;
+  line-height:1.5;color:var(--cream);white-space:pre}
 .g-list{margin:0 0 15px;padding-left:20px}
 .g-list li{margin-bottom:8px}
 .g-list li::marker{color:var(--dimmer)}
@@ -4665,6 +4668,20 @@ function mdToHtml(src){
 
     if (!ln.trim()){ flush(); i++; continue; }
 
+    /* Fenced blocks. Three guides use one — a cost formula, a swap list — and
+       without this the fences rendered as literal backticks and the alignment that
+       made the block worth fencing was collapsed into a paragraph. Contents are
+       escaped and never passed through mdInline: inside a fence the text is the text. */
+    if (/^```/.test(ln)){
+      flush();
+      const buf = [];
+      i++;
+      while (i < lines.length && !/^```/.test(lines[i])) buf.push(lines[i++]);
+      i++;                                    // the closing fence, if it is there
+      out.push(`<pre class="g-pre">${esc(buf.join('\n'))}</pre>`);
+      continue;
+    }
+
     // Headings. h2 opens a numbered section, h3 a subsection.
     const h = /^(#{2,4})\s+(.*)$/.exec(ln);
     if (h){
@@ -4747,15 +4764,15 @@ function renderGuides(){
       <div class="panel">
         <h2>GUIDES <span class="code">${GUIDES.length}</span></h2>
         <p class="note">Deck dossiers: what the list is trying to do, what the format is
-        actually playing against it, and the card-by-card reasoning. Written here, in
-        <code>guides/</code>, rather than scraped — so unlike every other tab these are
-        opinions, not data. Each one also builds to a Word doc with
-        <code>scripts/build-guide</code>.</p>
+        actually playing against it, and the card-by-card reasoning — plus the odd
+        reference page about the game rather than a deck. Written here rather than
+        scraped, so unlike every other tab these are opinions, not data. Each one also
+        builds to a Word doc with <code>scripts/build-guide</code>.</p>
       </div>
       <div class="g-shelf">
         ${GUIDES.map(g => `
           <button class="g-card" data-guide="${esc(g.slug)}">
-            <span class="g-card-kicker">${esc(g.legend || 'Dossier')}${g.champion ? ' · ' + esc(g.champion) : ''}</span>
+            <span class="g-card-kicker">${esc(g.kicker || g.legend || 'Dossier')}${!g.kicker && g.champion ? ' · ' + esc(g.champion) : ''}</span>
             <span class="g-card-title">${esc(g.title.replace(/\s*—\s*Deck Dossier$/, ''))}</span>
             <span class="g-card-meta">${g.sections.length} sections · ${g.words.toLocaleString()} words${g.date ? ' · ' + esc(g.date) : ''}</span>
           </button>`).join('')}

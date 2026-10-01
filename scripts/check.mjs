@@ -55,6 +55,7 @@ const js = page.slice(page.indexOf('<script>') + 8, page.lastIndexOf('</script>'
                .replace(/\nboot\(\);\s*$/, '\n');
 const NAMED = [
   'gameName', 'buildNameIndex', 'identityOf', 'championOf', 'legendRoster', 'legendText',
+  'mdToHtml',
   'matches', 'tagsOf', 'allTags', 'buildFilterUI',
   'championRoster', 'CH_STATES', 'legendlessChampions',
   'foilOnlyProblems', 'foilOnlyText', 'renderFoilOnly', 'championIndex',
@@ -2948,6 +2949,34 @@ section('The rules');
    thing keeping them true is that adding an undocumented file fails the build. That is
    not hypothetical: docs/rules-rulings.md was added and left out of the README in the
    same session this check was written, and this is what caught it. */
+section('The guide renderer');
+{
+  /* The renderer is a deliberate subset of Markdown — the constructs the guides use and
+     nothing else — which only works while something checks that the guides have not
+     started using a construct it drops. Fenced blocks were exactly that: three guides
+     carried one and the fences rendered as literal backticks for weeks. */
+  const guideFiles = readdirSync(join(ROOT, 'guides')).filter((f) => f.endsWith('.md'))
+    .map((f) => join('guides', f)).concat(['docs/fundamentals.md']);
+  const fenced = guideFiles.filter((f) => /^```/m.test(readFileSync(join(ROOT, f), 'utf8')));
+  ok('every page on the shelf renders without leaking its own markup',
+     guideFiles.every((f) => {
+       const h = A.mdToHtml(readFileSync(join(ROOT, f), 'utf8'));
+       return !/```/.test(h) && !/\|\s*---/.test(h) && !/undefined|\[object Object\]/.test(h);
+     }), `${guideFiles.length} pages`);
+  ok('a fenced block becomes a pre, not backticks',
+     fenced.length > 0 && fenced.every((f) => /<pre class="g-pre">/.test(A.mdToHtml(readFileSync(join(ROOT, f), 'utf8')))),
+     `${fenced.length} pages carry a fenced block`);
+  // The shelf labels a page by its kicker, then its legend. A page with neither reads
+  // "Dossier", which is wrong for a reference page — so the manifest has to carry one.
+  const manifest = read('data/guides.json').guides;
+  ok('every shelf entry has a title that is not its filename',
+     manifest.every((g) => g.title && !g.title.endsWith('.md')),
+     manifest.map((g) => g.slug).join(', '));
+  ok('a page outside guides/ carries a kicker',
+     manifest.filter((g) => !g.file.startsWith('guides/')).every((g) => g.kicker),
+     manifest.filter((g) => !g.file.startsWith('guides/')).map((g) => `${g.slug}: ${g.kicker}`).join(', ') || 'none');
+}
+
 section('The documentation');
 {
   const readDoc = (f) => { try { return readFileSync(join(ROOT, f), 'utf8'); } catch { return ''; } };

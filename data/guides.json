@@ -6,6 +6,7 @@
   {
    "slug": "khazix-voidreaver-aggro",
    "file": "guides/khazix-voidreaver-aggro.md",
+   "kicker": null,
    "title": "Kha'Zix Voidreaver — Aggro Dossier",
    "subtitle": "Riftbound, Vendetta season — Jun's aggressive build, after the 18 September bans",
    "date": "2026-09-16",
@@ -33,6 +34,7 @@
   {
    "slug": "khazix-voidreaver-matchups",
    "file": "guides/khazix-voidreaver-matchups.md",
+   "kicker": null,
    "title": "Kha'Zix Voidreaver — Champion Matchup Guide",
    "subtitle": "Riftbound, Vendetta season — every ranked archetype against Jun's midrange list, after the Los Angeles Regional",
    "date": "2026-10-01",
@@ -75,6 +77,7 @@
   {
    "slug": "khazix-voidreaver-postban",
    "file": "guides/khazix-voidreaver-postban.md",
+   "kicker": null,
    "title": "Kha'Zix Voidreaver — Midrange Dossier",
    "subtitle": "Riftbound, Vendetta season — Jun's midrange build, 23 September revision, with the Hidden package",
    "date": "2026-09-23",
@@ -105,6 +108,7 @@
   {
    "slug": "khazix-voidreaver",
    "file": "guides/khazix-voidreaver.md",
+   "kicker": null,
    "title": "Kha'Zix Voidreaver — Deck Dossier",
    "subtitle": "Riftbound, Vendetta season",
    "date": "2026-09-14",
@@ -133,6 +137,7 @@
   {
    "slug": "reksai-void-burrower",
    "file": "guides/reksai-void-burrower.md",
+   "kicker": null,
    "title": "Rek'Sai Void Burrower — Deck Dossier",
    "subtitle": "Riftbound, Vendetta season — revised after the 18 September bans",
    "date": "2026-09-15",
@@ -161,6 +166,7 @@
   {
    "slug": "sivir-anti-meta-midrange",
    "file": "guides/sivir-anti-meta-midrange.md",
+   "kicker": null,
    "title": "Anti-Meta Sivir Midrange — Deck Dossier",
    "subtitle": "Riftbound, Vendetta season",
    "date": "2026-09-12",
@@ -185,6 +191,31 @@
     "Sources and method"
    ],
    "words": 8237
+  },
+  {
+   "slug": "fundamentals",
+   "file": "docs/fundamentals.md",
+   "kicker": "Reference · every deck",
+   "title": "Fundamentals of Riftbound",
+   "subtitle": "How the game works, and what the field actually plays — the teaching layer over docs/rules.md",
+   "date": "2026-10-01",
+   "legend": null,
+   "champion": null,
+   "sections": [
+    "1. The one sentence everything hangs off",
+    "2. Your deck",
+    "3. The turn",
+    "4. Resources: Energy and Power",
+    "5. Combat",
+    "6. The chain, and why your spell did not resolve",
+    "7. The keywords that actually matter",
+    "8. The staples",
+    "9. Battlefields",
+    "10. Things that are not what they look like",
+    "11. Reading a deck you have never seen",
+    "Where these numbers come from"
+   ],
+   "words": 5469
   }
  ]
 }

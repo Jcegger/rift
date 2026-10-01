@@ -12,7 +12,17 @@
 import { readdir, readFile, writeFile } from "node:fs/promises";
 
 const GUIDES = new URL("../guides/", import.meta.url);
+const ROOT = new URL("../", import.meta.url);
 const OUT = new URL("../data/guides.json", import.meta.url);
+
+/* Pages that belong on the same shelf but are not deck dossiers. A dossier is about
+   one list; these are about the game, so they carry no legend or champion and the
+   shelf would label them "Dossier" by default. `kicker` is what it says instead.
+   Listed explicitly rather than globbed from docs/, because most of docs/ is reference
+   material for this repo — the rules dumps, the FAQ — and has no business in the app. */
+const EXTRA = [
+  { file: "docs/fundamentals.md", kicker: "Reference · every deck" },
+];
 
 // The frontmatter is pandoc's, so read it rather than inventing a second one.
 function frontmatter(src) {
@@ -29,15 +39,20 @@ function frontmatter(src) {
 const firstMatch = (src, re) => (re.exec(src) || [])[1]?.trim() || null;
 
 const files = (await readdir(GUIDES)).filter((f) => f.endsWith(".md")).sort();
+const entries = [
+  ...files.map((f) => ({ path: `guides/${f}`, url: new URL(f, GUIDES), kicker: null })),
+  ...EXTRA.map((e) => ({ path: e.file, url: new URL(e.file, ROOT), kicker: e.kicker })),
+];
 const guides = [];
 
-for (const file of files) {
-  const src = await readFile(new URL(file, GUIDES), "utf8");
+for (const { path: file, url, kicker } of entries) {
+  const src = await readFile(url, "utf8");
   const fm = frontmatter(src);
   const body = src.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "");
   guides.push({
-    slug: file.replace(/\.md$/, ""),
-    file: `guides/${file}`,
+    slug: file.replace(/^.*\//, "").replace(/\.md$/, ""),
+    file,
+    kicker,
     title: fm.title || file,
     subtitle: fm.subtitle || null,
     date: fm.date || null,
