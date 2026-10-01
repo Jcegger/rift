@@ -5,8 +5,10 @@ the teaching layer; [rules.md](rules.md) is the reference layer. Where this page
 *why*, that one gives you the rule number to show a judge — and when the two disagree,
 **rules.md is right and this file has a bug**.
 
-Card shares come from `data/decks.json`. Read the caveat in **Where these numbers come
-from** before you quote any of them.
+Card shares are **not** from the `data/decks.json` currently in this repo — that file is
+mid-rebuild and is not a sample of the format. They come from a 506-deck post-ban slice of
+an older snapshot, with banned cards excluded. **Where these numbers come from** explains
+why, and you should read it before quoting any of them.
 
 ---
 
@@ -552,11 +554,11 @@ time. The file in the repo today holds 1,204 decks spanning **3 distinct dates**
 not a sample of the format — it is a sample of whatever slice the feed returned. The proof
 is the cards it disagrees with itself about:
 
-| | current 3-day file | 18–20 Sep file |
+| | current 3-day file | the 506-deck basis |
 |---|---|---|
-| **Punch First** | 7% | **20%** |
-| **Star-Crossed** | 7% | **24%** |
-| Cleave | 30% | 13% |
+| **Punch First** | 7% | **18%** |
+| **Star-Crossed** | 7% | **18%** |
+| Cleave | 30% | 9% |
 
 Punch First is a Body staple and the current file says it is fringe. So this page uses the
 **post-ban slice of the last archive that spanned more than a few days — 506 decks dated
