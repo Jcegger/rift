@@ -452,7 +452,8 @@ const READONLY = new URLSearchParams(location.search).get('view') === 'trade';
 let CAT = null;            // { generatedAt, imagePrefix, sets[], cards[] }
 let DECKS = null;          // tournament decklists from data/decks.json
 let DECKS_AT = null;       // when that snapshot was taken
-let DECKS_WINDOW = null;   // { from, to, days } the snapshot covers
+let DECKS_WINDOW = null;   // { from, to, days } the snapshot *claims* to cover
+let DECKS_SPAN = null;     // { from, to, days, dates } it actually covers — see below
 let NEWS = null;           // riftbound.gg posts from data/news.json
 let NEWS_AT = null;
 let EVENTS = null;         // the tournament archive from data/events.json
@@ -2895,10 +2896,23 @@ function renderMeta(){
   host.innerHTML = `
     <div class="panel">
       <h2>THE META</h2>
-      <p class="note">${DECKS.length} lists from the last ${DECKS_WINDOW ? DECKS_WINDOW.days : 60} days${
-        DECKS_WINDOW ? `, ${esc(DECKS_WINDOW.from)} to ${esc(DECKS_WINDOW.to)}` : ''}, grouped into
+      <p class="note">${DECKS.length} lists${
+        /* `window` is computed from the newest deck and a day count, so it reads 60 days
+           whatever the file holds — it advertised 60 while holding one for a week after
+           an upstream change. `span` is measured from the rows present. Show the
+           measured one, and say so when the two disagree, because every share on this
+           tab is over the span and not over the window. */
+        DECKS_SPAN && DECKS_SPAN.from
+          ? ` covering ${esc(DECKS_SPAN.from)} to ${esc(DECKS_SPAN.to)} (${DECKS_SPAN.days} day${DECKS_SPAN.days === 1 ? '' : 's'}${
+              DECKS_SPAN.dates ? `, ${DECKS_SPAN.dates} distinct date${DECKS_SPAN.dates === 1 ? '' : 's'}` : ''})`
+          : DECKS_WINDOW ? ` from the last ${DECKS_WINDOW.days} days, ${esc(DECKS_WINDOW.from)} to ${esc(DECKS_WINDOW.to)}` : ''
+      }, grouped into
       ${arch.length} archetypes by Legend. Snapshot ${esc(DECKS_AT || 'unknown')}. What <em>you</em> can
       build and what to buy are on the <b>Next</b> tab; this one only describes the field.</p>
+      ${DECKS_SPAN && DECKS_WINDOW && DECKS_SPAN.days < DECKS_WINDOW.days / 2
+        ? `<p class="note" style="color:var(--maize)">The snapshot asks for ${DECKS_WINDOW.days} days and
+           upstream returned ${DECKS_SPAN.days}. Shares below are over that shorter span — ordering is
+           reliable, small gaps are not.</p>` : ''}
       ${staleNote('decks', 'everything on this tab')}
       <div class="stats" style="margin-top:14px">
         <div class="stat" title="Every distinct Legend played in the window. Popularity is a count of public lists, which is a weak signal on its own — the most-played archetype takes only a few percent."><div class="v">${arch.length}</div><div class="k">archetypes</div></div>
@@ -5509,6 +5523,7 @@ async function boot(){
       DECKS = dd.decks || null;
       DECKS_AT = dd.generatedAt || null;
       DECKS_WINDOW = dd.window || null;
+      DECKS_SPAN = dd.span || null;
     }
   } catch { /* no meta snapshot */ }
 

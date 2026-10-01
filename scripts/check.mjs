@@ -83,6 +83,7 @@ const A = new Function(`${js}
     set MATCH(v){MATCH=v},
     get DECKS(){return DECKS}, set DECKS(v){DECKS=v},
     set DECKS_AT(v){DECKS_AT=v}, set DECKS_WINDOW(v){DECKS_WINDOW=v},
+    set DECKS_SPAN(v){DECKS_SPAN=v},
     get S(){return S}, set TAB(v){TAB=v},
     get F(){return F},
     get PARTNER(){return PARTNER}, set PARTNER(v){PARTNER=v},
@@ -2949,6 +2950,29 @@ section('The rules');
    thing keeping them true is that adding an undocumented file fails the build. That is
    not hypothetical: docs/rules-rulings.md was added and left out of the README in the
    same session this check was written, and this is what caught it. */
+section('What the Meta tab claims');
+{
+  /* The snapshot's `window` is computed from the newest deck and a day count, so it says
+     60 days whatever the file holds — it advertised 60 while holding one for a week.
+     The tab must quote the measured `span`, or it tells the reader the shares cover five
+     times the ground they do. */
+  const snapNow = read('data/decks.json');
+  A.DECKS_SPAN = snapNow.span || null;
+  A.DECKS_WINDOW = snapNow.window || null;   // earlier sections reassign this
+  A.TAB = 'meta'; A.render();
+  const meta = els.get('v-meta').innerHTML.replace(/<[^>]+>/g, ' ');
+  if (snapNow.span && snapNow.span.from){
+    ok('the Meta tab quotes the span it measured, not the window it asked for',
+       meta.includes(snapNow.span.from) && meta.includes(snapNow.span.to) &&
+       !new RegExp(`last ${snapNow.window.days} days`).test(meta),
+       `${snapNow.span.from} to ${snapNow.span.to}, ${snapNow.span.days}d`);
+    if (snapNow.span.days < snapNow.window.days / 2)
+      ok('a short span is called out rather than passed off as the window',
+         /asks for \d+ days and\s+upstream returned/.test(meta),
+         `${snapNow.span.days} of ${snapNow.window.days} days`);
+  }
+}
+
 section('The guide renderer');
 {
   /* The renderer is a deliberate subset of Markdown — the constructs the guides use and
