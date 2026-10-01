@@ -881,6 +881,26 @@ the switch that `[Empowered][>]` abilities read.
 
 - **Unique** — §825 · 3 cards. One copy per deck by name. No gameplay effect at all.
 
+### Printed, but not yet in the rules
+
+**Radiance shipped three bracketed terms the Core Rules do not define.** The rules this
+repo reads are refreshed daily and are still the 2026-07-16 document, so these cannot be
+looked up anywhere — not here, not in [rules-full.md](rules-full.md), not in the FAQ:
+
+| | cards | first seen on |
+|---|---|---|
+| **[Deploy]** | 14 | Amateur Demolitionist |
+| **[Disarm]** | 4 | Kai'Sa, Rebel |
+| **[Show Off]** | 2 | Primordial Roar |
+
+**Do not infer what they do from the cards that carry them.** That is the one move this
+handbook exists to prevent, and a wrong premise about a keyword would be wrong on every
+card printing it. Until Riot publishes an updated Core Rules Document or a Radiance FAQ,
+the honest answer to "what does Deploy do" is that we do not know — ask a judge.
+
+`check.mjs` prints these on every run rather than blocking on them, so the list stays
+visible and this table can be deleted the day the rules catch up.
+
 ---
 
 ## Bracketed terms that are not keywords

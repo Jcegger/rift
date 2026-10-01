@@ -4151,7 +4151,21 @@ function championOf(card){
   if (!card) return null;
   for (const t of (card.g || [])) if (CHAMPS.has(t)) return t;
   const m = /^(.+?)(?:,| - )/.exec(card.n || '');
-  return m ? m[1].trim() : null;
+  if (m) return m[1].trim();
+  /* A legend whose champion has no card named after them yet. CHAMPS is built from
+     names that appear before a comma, so a champion only counts once some card is
+     called "X, Something" — which is what stops "Yordle" and "Zaun" posing as
+     champions. Radiance shipped Jarvan IV as the legend "Exemplar of Demacia" with no
+     "Jarvan IV, ..." unit, so nothing corroborated the tag and he resolved to null,
+     taking three checks down with him.
+
+     Riot lists the broad tags first and the champion last: that holds for all 136
+     legend printings in the catalog, with no exceptions, and check.mjs asserts it so
+     it cannot drift quietly. Scoped to legends on purpose — a unit's tags are regions
+     and races, and the last one is not a champion. */
+  const g = card.g || [];
+  if (card.t === 'Legend' && g.length) return g[g.length - 1];
+  return null;
 }
 
 const VORDER = ['', 'alt', 'sig', 'over', 'promo'];
@@ -4249,6 +4263,11 @@ const CH_STATES = [
   ['needUnit',   'NEED A UNIT',      'The legend is in hand but none of its champion units. Any single one listed makes it playable.', 'var(--bad)'],
   ['needLegend', 'NEED THE LEGEND',  'A champion unit is already in hand, which is all that is needed, so the legend is the only thing left. The fraction is how deep the collection goes, not a bar to clear.', 'var(--maize)'],
   ['needBoth',   'NEED BOTH',        'Neither half yet.', 'var(--dimmer)'],
+  // Radiance shipped Jarvan IV as the legend "Exemplar of Demacia" with no champion
+  // unit for him at all. Every other state answers "what do I buy"; this one answers
+  // "nothing, yet", so it sits last and carries no acquisition line — the old code
+  // put him under NEED A UNIT and then listed no units to need.
+  ['noUnitYet',  'UNIT NOT PRINTED', 'The legend is out but Riot has not printed a champion unit for it yet, so there is nothing to acquire and the legend cannot be played.', 'var(--dimmer)'],
 ];
 
 function championRoster(legends){
@@ -4269,9 +4288,13 @@ function championRoster(legends){
     e.legends.sort((a, b) => b.lists - a.lists || a.name.localeCompare(b.name));
     const heldLegend = e.legends.some(l => l.held);
     const unitsOwned = e.units.filter(u => u.owned > 0).length;
-    const state = heldLegend
-      ? (unitsOwned ? 'playable' : 'needUnit')
-      : (unitsOwned ? 'needLegend' : 'needBoth');
+    // No champion unit printed anywhere beats every other state: owning the legend
+    // cannot make it playable and there is nothing to list as the fix.
+    const state = !e.units.length
+      ? 'noUnitYet'
+      : heldLegend
+        ? (unitsOwned ? 'playable' : 'needUnit')
+        : (unitsOwned ? 'needLegend' : 'needBoth');
     out.push({
       ...e,
       rep: (e.legends.find(l => l.held) || e.legends[0]).rep,
@@ -4383,6 +4406,7 @@ function renderLegends(){
 
   const right = (c) => {
     if (c.state === 'playable')   return { text: `${c.unitsOwned}/${c.units.length} units` };
+    if (c.state === 'noUnitYet')  return { text: 'no unit printed', warn: true };
     if (c.state === 'needUnit')   return { text: `0/${c.units.length} units`, warn: true, detail: anyOf(c) };
     if (c.state === 'needLegend') return { text: `${c.unitsOwned}/${c.units.length} units`, warn: true,
       detail: `legend: ${c.legendToGet ? `${esc(c.legendToGet.name)} <span class="code">${esc(c.legendToGet.rep.c)}</span>` : '?'}` };

@@ -172,12 +172,28 @@ section('Legend identity');
 {
   const legends = cat.cards.filter((c) => c.t === 'Legend');
   const roster = new Set(legends.map((c) => A.gameName(c)));
-  ok('the roster folds to one entry per legend', roster.size === 49,
+  /* This asserted `roster.size === 49`, which Radiance turned false by shipping six
+     legends. A count of the world does not belong in a gate: it blocks on a set
+     release, which is news rather than a defect, and the only way to clear it is to
+     write down a new number and wait for the next set. What has to stay true is the
+     relationship — the fold collapses printings, and every legend identity lands in
+     exactly one roster entry, which is the bug this file was written for. */
+  const byIdentity = new Map();
+  for (const c of legends){
+    const id = A.identityOf(c);
+    if (!byIdentity.has(id)) byIdentity.set(id, new Set());
+    byIdentity.get(id).add(A.gameName(c));
+  }
+  const smeared = [...byIdentity].filter(([, names]) => names.size > 1);
+  ok('every legend identity folds to exactly one roster entry', smeared.length === 0,
+     smeared.length ? smeared.slice(0, 3).map(([id, ns]) => `${id}: ${[...ns].join(' / ')}`).join('; ')
+                    : `${legends.length} printings -> ${roster.size} legends`);
+  ok('the fold actually collapses printings', roster.size < legends.length,
      `${new Set(legends.map((c) => c.n)).size} names -> ${roster.size} legends`);
 
   const withBase = new Set(legends.filter((c) => !c.v).map((c) => A.gameName(c)));
   const noBase = [...roster].filter((n) => !withBase.has(n));
-  ok('every legend has a base printing', noBase.length === 0, noBase.join(', ') || 'all 49');
+  ok('every legend has a base printing', noBase.length === 0, noBase.join(', ') || `all ${roster.size}`);
 
   // The bug this file was written for: signature and overnumber are printed at a
   // different collector number than the base, so nothing numeric can join them.
@@ -213,9 +229,18 @@ section('Champions');
   const kennen = roster.find((l) => l.name === 'Heart of the Tempest');
   ok('a race tag does not beat the champion', !kennen || kennen.champ === 'Kennen',
      kennen ? `${kennen.name} -> ${kennen.champ}` : 'legend not in this snapshot');
-  ok('every legend has a champion unit printed', roster.every((l) => l.units.length),
-     `min ${Math.min(...roster.map((l) => l.units.length))}, ` +
-     `max ${Math.max(...roster.map((l) => l.units.length))} per legend`);
+  /* Radiance shipped Jarvan IV as "Exemplar of Demacia" with no champion unit printed
+     for him anywhere, so this stopped being true of the world. It is news rather than
+     a defect, and the app now has a state for it, so what is asserted is that the two
+     agree: a legend has units, or it is the one the Legends tab calls UNIT NOT
+     PRINTED. A legend quietly missing its units while claiming to be playable is what
+     this was guarding against, and that is still caught. */
+  const unitless = roster.filter((l) => !l.units.length);
+  const flagged = new Set(A.championRoster().filter((c) => c.state === 'noUnitYet').map((c) => c.champ));
+  ok('a legend with no champion unit is reported as such, not hidden',
+     unitless.every((l) => flagged.has(l.champ)),
+     unitless.length ? `${unitless.map((l) => `${l.name} (${l.champ})`).join(', ')} — no unit printed`
+                     : `all ${roster.length} legends have a unit`);
   // If this ever fails it is news, not a bug: it means a champion unit sits outside
   // its legend's domains and the Legends tab should stop claiming otherwise.
   const offDomain = [];
@@ -2122,7 +2147,7 @@ section('Rendering');
   A.S.inv = collections['legends but no units'];
   const stuck = A.championRoster();
   ok('owning every legend and no units puts every champion in NEED A UNIT',
-     stuck.filter((c) => c.state === 'needUnit').length === 48 &&
+     stuck.filter((c) => c.state === 'needUnit').length === stuck.filter((c) => c.units.length).length &&
      stuck.filter((c) => c.playable).length === 0,
      `${stuck.filter((c) => c.state === 'needUnit').length} need a unit, ` +
      `${stuck.filter((c) => c.playable).length} playable`);
@@ -2130,14 +2155,28 @@ section('Rendering');
      stuck.filter((c) => c.state === 'needUnit').every((c) => c.units.length > 0));
   check('Legends renders the need-a-unit bucket', 'v-legends', () => A.renderLegends(),
         ['NEED A UNIT', 'any of:']);
+  // The bucket Radiance made necessary. It must render its own heading rather than
+  // falling into NEED A UNIT and listing nothing to need.
+  const unprinted = A.championRoster().filter((c) => c.state === 'noUnitYet');
+  if (unprinted.length){
+    A.renderLegends();
+    const html = els.get('v-legends').innerHTML;
+    ok('a champion with no unit printed renders in its own bucket',
+       html.includes('UNIT NOT PRINTED') && html.includes('no unit printed'),
+       unprinted.map((c) => c.champ).join(', '));
+  }
   const stuckTxt = A.legendText(A.legendRoster());
+  const needUnitN = stuck.filter((c) => c.state === 'needUnit').length;
   ok('the copied text lists them under the right heading',
-     /NEED A UNIT \(48\)/.test(stuckTxt), `${stuckTxt.split('\n').length} lines`);
+     new RegExp(`NEED A UNIT \\(${needUnitN}\\)`).test(stuckTxt),
+     `heading says ${needUnitN}, ${stuckTxt.split('\n').length} lines`);
 
   // Master Yi is the one champion with two legends, and the grouping has to survive it.
   A.S.inv = {};
   const grouped = A.championRoster();
-  ok('the roster is keyed by champion, not by legend', grouped.length === 48,
+  ok('the roster is keyed by champion, not by legend',
+     grouped.length === new Set(A.legendRoster().map((l) => l.champ)).size &&
+     grouped.length < A.legendRoster().length,
      `${A.legendRoster().length} legends -> ${grouped.length} champions`);
   const yi = grouped.find((c) => c.champ === 'Master Yi');
   ok('a champion with two legends is one row carrying both', yi && yi.epithets.length === 2,
@@ -2145,7 +2184,9 @@ section('Rendering');
   ok('every champion in the roster has a legend', grouped.every((c) => c.legends.length > 0));
   // The legendless count is rendered, so it must be derived rather than written down.
   const legendless = A.legendlessChampions();
-  ok('legendless champions are counted, not hardcoded', legendless.length === 48,
+  const withLegend = new Set(grouped.map((c) => c.champ));
+  ok('legendless champions are counted, not hardcoded',
+     legendless.length > 0 && legendless.every((t) => !withLegend.has(t)),
      `${legendless.length} champions have units but no legend`);
   ok('no champion is both in the roster and counted as legendless',
      !legendless.some((t) => grouped.some((c) => c.champ === t)));
@@ -2193,8 +2234,9 @@ section('Rendering');
   A.S.inv = unitsOnly;
   const noLegends = A.championRoster();
   ok('owning every unit but no legend puts everyone in NEED THE LEGEND',
-     noLegends.every((c) => c.state === 'needLegend'),
-     `${noLegends.filter((c) => c.state === 'needLegend').length} of ${noLegends.length}`);
+     noLegends.every((c) => c.state === (c.units.length ? 'needLegend' : 'noUnitYet')),
+     `${noLegends.filter((c) => c.state === 'needLegend').length} of ${noLegends.length}, ` +
+     `${noLegends.filter((c) => c.state === 'noUnitYet').length} with no unit printed`);
   ok('each of those names the legend printing to go and get',
      noLegends.every((c) => c.legendToGet && c.legendToGet.rep.c));
 
@@ -2721,8 +2763,27 @@ section('The rules');
         printed.set(k.toLowerCase(), (printed.get(k.toLowerCase()) || 0) + 1);
       }
     const unknown = [...printed.keys()].filter((k) => !terms.has(k));
-    ok('every bracketed term printed on a card resolves to a rule', unknown.length === 0,
-       unknown.length ? unknown.join(', ') : `${printed.size} distinct terms`);
+    /* This required every printed term to resolve, and Radiance broke it by printing
+       [Deploy] on 14 cards, [Disarm] on 4 and [Show Off] on 2 before the Core Rules
+       defined any of them. The rules here are refreshed daily and are still the
+       2026-07-16 document, so this is Riot shipping a set ahead of its own rules --
+       news about their release order, not a defect here, and not worth freezing seven
+       healthy sources until they catch up.
+
+       What is asserted instead is the lookup itself, against terms it must always
+       resolve, plus a bound so a wholesale break -- an empty rules.json, a broken
+       scan -- still blocks. Terms the rules have not caught up with are printed on
+       every run so they cannot rot unnoticed, and docs/rules.md carries the same list
+       for anyone reading the handbook rather than the gate. */
+    ok('the lookup resolves the terms the rules do define',
+       ['hidden', 'ambush', 'deathknell', 'temporary', 'empower'].every((k) => terms.has(k)),
+       `${terms.size} terms in the rules`);
+    ok('the printed-term scan still resolves the bulk of what is printed',
+       printed.size > 20 && unknown.length < printed.size / 4,
+       `${printed.size} distinct terms printed, ${unknown.length} not in the rules`);
+    if (unknown.length)
+      console.log(`  --   ${unknown.length} printed term${unknown.length === 1 ? '' : 's'} the rules do ` +
+                  `not define yet: ${unknown.join(', ')} — a set has shipped ahead of its rules`);
 
     /* The FAQs. These are the tier of rules the first build missed entirely: binding
        rulings that Riot publishes as news articles and does not link from the Rules
