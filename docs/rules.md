@@ -1081,6 +1081,17 @@ them that turn.
 - **Matches** are best of 3 by default; draws don't count toward the two wins, and on
   time the winner is whoever has more game wins (TR §404).
 - **You may count your opponent's sideboard at any time** (TR §403.6).
+- **Who plays first** — in game 1, a designated player chosen by any agreed random method
+  decides (TR §407.1, TR §407.2); after that the **loser of the previous game** chooses, and
+  after a draw the previous order stands (TR §407.4).
+- **Notes** — you may write notes during a match and use them during that match's games
+  (TR §416.1). Your sheet must be **empty and visible to opponents** when the match starts
+  (TR §416.2), and you need not reveal what you write (TR §416.3). During games you may
+  **not** refer to notes from outside the current match, including previous matches
+  (TR §416.4); **between games you may**, privately (TR §416.5). At low OPL (Nexus Night,
+  TR §205.2) a digital device may replace the paper sheet (TR §417.2), at the head judge's
+  discretion (TR §417.3); otherwise no devices during matches (TR §417.1). Whether a
+  pre-printed blank template counts as "empty" is not stated — ask the judge.
 - **Conceding** removes you from the game; in a team mode your teammate loses too
   (§651.4). A removed player's cards are banished and their battlefield is replaced with
   a blank token battlefield (§652).
