@@ -4,10 +4,15 @@
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
   "events": 1953,
-  "eventsWithDecks": 0,
+  "eventsWithDecks": 3,
   "players": 50500,
-  "playersWithDecks": 0,
+  "playersWithDecks": 603,
   "unresolvedDeckEvents": [
+   "Hefei City Challenge (China)",
+   "Nanning City Challenge (China)",
+   "Hangzhou City Challenge (China)",
+   "Shanghai City Challenge (China)",
+   "Guangzhou City Challenge (China)",
    "Riftbound Online Tournament",
    "Riftbound Remote Showdown Pop Up Cup",
    "Riftbound Remote Showdown #2",
@@ -18,13 +23,17 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 19,
-  "claimedEventsUnmatched": 17,
-  "claimedEventAliases": {},
+  "claimedEvents": 28,
+  "claimedEventsUnmatched": 25,
+  "claimedEventAliases": {
+   "Common Box Games Summoner Skirmish": "Summoner Skirmish"
+  },
   "claimedDecksByRegion": {
-   "Asia": 19,
-   "unknown": 19,
-   "Europe": 12
+   "unknown": 42,
+   "North America": 3,
+   "Europe": 18,
+   "Oceania": 1,
+   "Asia": 26
   },
   "registryEventsByRegion": {
    "unknown": 1953
@@ -35,16 +44,24 @@
    "60P Tournament",
    "60P tournament",
    "A-Case @ Nexus",
+   "Atlanta CGS",
    "Azir, Emperor of the Sands: Barcelona Regional Qualifier",
    "Barcelona RQ",
    "CCS 25k Qualifier #5",
    "Changsha RQ",
    "Dinan Regional",
+   "Hartford RQ",
+   "Los Angeles RQ",
+   "Nexus Nights - 1v1 by Atlantis Games & Comics",
+   "S4 Beijing City Challenge",
    "S4 Wuhan City Challenge",
+   "S4 Wuhan Regional Open",
    "Shenyang RO",
    "Shenyang Regional Open",
    "Singapore RQ",
+   "Sydney",
    "Utrecht RQ",
+   "Vancouver RQ",
    "Wuhan Regional Open",
    "Xi'an Regional"
   ],
@@ -52,11 +69,19 @@
    "CCS Riftbound $10,000 Tournament": 222,
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament": 198,
    "Friday $5,000 Riftbound: League of Legends TCG Tournament": 180,
+   "Riftbound $10,000 Cash Tournament @ Pro-Play Summit: Orlando": 69,
    "CCS Riftbound Sunday $1000": 64,
+   "Hangzhou City Challenge (China)": 58,
+   "Nanning City Challenge (China)": 57,
+   "Guangzhou City Challenge (China)": 56,
+   "Hefei City Challenge (China)": 50,
+   "Shanghai City Challenge (China)": 45,
+   "Riftbound $2,500 Cash Tournament @ Pro-Play Summit: Orlando": 21,
    "Riftbound Remote Showdown #3": 20,
    "Riftbound Remote Showdown #2": 14,
    "Riftbound Online Tournament": 13,
    "Riftbound Remote Showdown #4": 8,
+   "Showdown Series Bristol by Organized Play Events": 1,
    "Riftbound Remote Showdown Pop Up Cup": 1
   }
  },
@@ -67,7 +92,7 @@
    "players": 12,
    "format": "Constructed",
    "winner": "Bangus Bong",
-   "country": null,
+   "country": "US",
    "slug": "vendetta-summoner-skirmish-ii-2174"
   },
   {
@@ -76,7 +101,7 @@
    "players": 45,
    "format": "Constructed",
    "winner": "Imperial Kant",
-   "country": null,
+   "country": "AU",
    "slug": "nexus-night-zen-1232"
   },
   {
@@ -85,7 +110,7 @@
    "players": 8,
    "format": "Constructed",
    "winner": "Prøject",
-   "country": null,
+   "country": "US",
    "slug": "monday-evening-vendetta-summoner-skirmish-ii-6786"
   },
   {
@@ -94,7 +119,7 @@
    "players": 12,
    "format": "Constructed",
    "winner": "Chmelak",
-   "country": null,
+   "country": "CZ",
    "slug": "xzone-brno-vendetta-summoner-skirmish-ii"
   },
   {
@@ -103,7 +128,7 @@
    "players": 9,
    "format": "Constructed",
    "winner": "Walmir",
-   "country": null,
+   "country": "BR",
    "slug": "ss2"
   },
   {
@@ -112,7 +137,7 @@
    "players": 19,
    "format": "Constructed",
    "winner": "Danyui",
-   "country": null,
+   "country": "US",
    "slug": "sunday-evening-vendetta-summoner-skirmish-ii-7459"
   },
   {
@@ -121,7 +146,7 @@
    "players": 15,
    "format": "Constructed",
    "winner": "Myoui",
-   "country": null,
+   "country": "US",
    "slug": "sunday-afternoon-vendetta-summoner-skirmish-ii-4770"
   },
   {
@@ -130,7 +155,7 @@
    "players": 12,
    "format": "Constructed",
    "winner": "Darkish96",
-   "country": null,
+   "country": "PE",
    "slug": "skirmish-septiembre"
   },
   {
@@ -139,7 +164,7 @@
    "players": 9,
    "format": "Constructed",
    "winner": "thesmannumber1",
-   "country": null,
+   "country": "US",
    "slug": "cdb-vendetta-summoner-skirmish-ii"
   },
   {
@@ -148,7 +173,7 @@
    "players": 11,
    "format": "Constructed",
    "winner": "Soap",
-   "country": null,
+   "country": "US",
    "slug": "boomloot-vendetta-summoner-skirmish-september"
   },
   {
@@ -157,7 +182,7 @@
    "players": 12,
    "format": "Constructed",
    "winner": "DeceptiveLeBussy",
-   "country": null,
+   "country": "US",
    "slug": "sunday-afternoon-vendetta-summoner-skirmish-ii-8083"
   },
   {
@@ -166,7 +191,7 @@
    "players": 12,
    "format": "Constructed",
    "winner": "Phantom S Maker",
-   "country": null,
+   "country": "US",
    "slug": "enders-games-vendetta-summoner-skirmish-ii"
   },
   {
@@ -175,7 +200,7 @@
    "players": 13,
    "format": "Constructed",
    "winner": "Jalynfein",
-   "country": null,
+   "country": "US",
    "slug": "sunday-afternoon-vendetta-summoner-skirmish-ii-6164"
   },
   {
@@ -184,7 +209,7 @@
    "players": 13,
    "format": "Constructed",
    "winner": "g0blin",
-   "country": null,
+   "country": "US",
    "slug": "heroes-hideout-vendetta-summoner-skirmish-ii"
   },
   {
@@ -193,7 +218,7 @@
    "players": 16,
    "format": "Constructed",
    "winner": "harpy",
-   "country": null,
+   "country": "US",
    "slug": "summoner-skirmish-vendetta-ii-tower-of-games-vb"
   },
   {
@@ -202,7 +227,7 @@
    "players": 9,
    "format": "Constructed",
    "winner": "flyingnome",
-   "country": null,
+   "country": "CA",
    "slug": "sunday-afternoon-vendetta-summoner-skirmish-ii-2892"
   },
   {
@@ -211,7 +236,7 @@
    "players": 931,
    "format": "Constructed",
    "winner": "DragonWyvern",
-   "country": null,
+   "country": "US",
    "slug": "secretlab-regional-rebound-rq-los-angeles-sunday-11am"
   },
   {
@@ -220,7 +245,7 @@
    "players": 17,
    "format": "Constructed",
    "winner": "TGC Unicorn",
-   "country": null,
+   "country": "CA",
    "slug": "sunday-afternoon-vendetta-summoner-skirmish-september"
   },
   {
@@ -229,7 +254,7 @@
    "players": 12,
    "format": "Constructed",
    "winner": "IzexD",
-   "country": null,
+   "country": "US",
    "slug": "lvl1-sunday-afternoon-vendetta-summoner-skirmish-ii"
   },
   {
@@ -238,7 +263,7 @@
    "players": 8,
    "format": "Constructed",
    "winner": "CommanderTrauma",
-   "country": null,
+   "country": "US",
    "slug": "treasure-trove-september-riftbound-summoner-skirmish"
   },
   {
@@ -247,7 +272,7 @@
    "players": 11,
    "format": "Constructed",
    "winner": "Alaskan Kodiak",
-   "country": null,
+   "country": "US",
    "slug": "upkeep-canton-vendetta-summoner-skirmish-ii"
   },
   {
@@ -256,7 +281,7 @@
    "players": 16,
    "format": "Constructed",
    "winner": "ghost yeet",
-   "country": null,
+   "country": "US",
    "slug": "phoenix-rise-sun-summoner-skirmish-septvendetta"
   },
   {
@@ -265,7 +290,7 @@
    "players": 15,
    "format": "Constructed",
    "winner": "Grumpy Gamer",
-   "country": null,
+   "country": "US",
    "slug": "trainer-js-vendetta-summoner-skirmish-4149"
   },
   {
@@ -274,7 +299,7 @@
    "players": 9,
    "format": "Constructed",
    "winner": "DTax",
-   "country": null,
+   "country": "CA",
    "slug": "sunday-afternoon-vendetta-summoner-skirmish-ii-7151"
   },
   {
@@ -283,7 +308,7 @@
    "players": 11,
    "format": "Constructed",
    "winner": "TMI Cavalo Rampz",
-   "country": null,
+   "country": "BR",
    "slug": "vendetta-summoner-skirmish-ii-2015"
   },
   {
@@ -292,7 +317,7 @@
    "players": 16,
    "format": "Constructed",
    "winner": "Abeldean",
-   "country": null,
+   "country": "CA",
    "slug": "vendetta-summoner-skirmish-ii-sept-27"
   },
   {
@@ -301,7 +326,7 @@
    "players": 19,
    "format": "Constructed",
    "winner": "Azeca",
-   "country": null,
+   "country": "CA",
    "slug": "sunday-afternoon-vendetta-summoner-skirmish-ii-8744"
   },
   {
@@ -310,7 +335,7 @@
    "players": 15,
    "format": "Constructed",
    "winner": "BigRed2000",
-   "country": null,
+   "country": "US",
    "slug": "sunday-afternoon-vendetta-summoner-skirmish-ii-4537"
   },
   {
@@ -319,7 +344,7 @@
    "players": 13,
    "format": "Constructed",
    "winner": "K1tten",
-   "country": null,
+   "country": "HN",
    "slug": "sunday-morning-vendetta-summoner-skirmish-ii-6047"
   },
   {
@@ -328,7 +353,7 @@
    "players": 8,
    "format": "Constructed",
    "winner": "milkiii",
-   "country": null,
+   "country": "US",
    "slug": "iron-city-games-vendetta-summoner-skirmish-ii"
   },
   {
