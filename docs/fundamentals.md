@@ -270,58 +270,140 @@ the instruction is ignored. See **When the source leaves the board** in
 
 ## 8. The staples
 
-What you will actually see across the table, by function. Percentages are the share of
-archived decks running at least one copy.
+**Basis:** 506 tournament-legal decks dated 18–20 September 2026 — the post-ban slice of
+the last archive that spanned more than a few days — with **every banned card excluded**.
+Percentages are the share of those decks running at least one copy. The **Where these
+numbers come from** section explains why this basis and not the current one.
 
-### Interaction you must play around
+### The ten to know, across every domain
 
 | | share | |
 |---|---|---|
-| **Stupefy** | **35%** | 1E Mind · `[Reaction]` −1 Might this turn, **draw 1** |
-| **Defy** | **28%** | 1E/1 Calm · `[Reaction]` counter a spell costing **≤4 Energy and ≤1 Power** |
-| **Falling Star** | 27% | 2E/2 Fury · **Deal 3 to a unit. Deal 3 to a unit.** (two instances — can stack on one) |
-| **Retreat** | 25% | 1E Mind · `[Reaction]` return a **friendly** unit to hand, channel 1 |
-| **Void Seeker** | 23% | 3E/1 Fury · `[Action]` deal 4 at a battlefield, draw 1 |
-| **Hidden Blade** | 22% | 2E/1 Order · `[Hidden][Action]` **kill a unit** at a battlefield; its controller draws 2 |
+| **Defy** | **34%** | 1E/1 Calm · `[Reaction]` counter a spell costing **≤4 Energy and ≤1 Power** |
+| **Discipline** | **31%** | 2E Calm · `[Reaction]` +2 Might this turn, **draw 1** |
+| **Hidden Blade** | **24%** | 2E/1 Order · `[Hidden][Action]` **kill a unit** at a battlefield; its controller draws 2 |
 | **Charm** | 21% | 1E/1 Calm · move an enemy unit |
-| **Gust** | 20% | 1E Chaos · `[Reaction]` return a unit with **≤3 Might** to hand |
+| **Back Off** | 19% | 3E Calm · `[Hidden][Action]` **Stun** a unit; draw 1 if played from hand |
+| **Stupefy** | 19% | 1E Mind · `[Reaction]` −1 Might this turn, **draw 1** |
+| **Ride the Wind** | 19% | 2E/1 Chaos · `[Action]` move a friendly unit **and ready it** |
+| **Punch First** | **18%** | 1E/2 Body · `[Action]` **+5 Might** this turn |
+| **Star-Crossed** | 18% | 3E/1 Chaos · `[Reaction]` return **one of each player's** units to hand |
+| **Zhonya's Hourglass** | 16% | 2E Calm · `[Hidden]` if a friendly unit would die, kill this instead and recall it |
 
-**Defy is the one to memorise.** It counters a spell at **≤4 Energy *and* ≤1 Power** —
-*and* means anything costing 2 Power walks straight through it, however cheap. If you are
-building, that is a reason to prefer two-pip cards; if you are playing, it tells you which
-of your spells are safe to commit into open Calm.
+**Three of those four most-played cards are Calm**, and all four are interaction rather
+than threats. That is the shape of the format: you are rarely beaten by a card being
+bigger than yours, you are beaten by one answering yours at the moment it mattered.
 
-**Retreat is a trap to misread.** It returns a **friendly** unit — it is value and
-tempo-saving for its controller, not removal. Several cards that look like answers are
-self-bounce; check whose unit before you fear them.
+### Two readings that cost games
 
-### Card advantage
+**Defy counters at ≤4 Energy *and* ≤1 Power.** *And*, not *or* — so **anything costing two
+pips walks straight through it, however cheap.** Punch First at 1E/2 Body is permanently
+Defy-proof. If you are building, that is an argument for two-pip cards; if you are playing,
+it tells you exactly which of your spells are safe to commit into open Calm.
+
+**Check whose unit a bounce returns.** **Retreat** (1E Mind) returns a **friendly** unit —
+it is value and tempo-saving for its controller, not removal, and it cannot touch you.
+**Star-Crossed** returns one of each. **Gust** returns any unit at ≤3 Might. Six of the
+pool's fourteen unit-bounce cards are self-bounce only. Fear the right ones.
+
+### Self-replacing interaction is the format's engine
+
+Look at what the top cards have in common: **Discipline** pumps *and* draws, **Stupefy**
+shrinks *and* draws, **Hidden Blade** kills *and* draws (for its victim). Riftbound mostly
+does not sell you a card that only draws cards — it sells you a trick that replaces itself.
+
+**A deck with no self-replacing interaction runs out first**, and that is usually what
+"they out-grind me" means in practice.
+
+### The staples, by domain
+
+Six domains, top six legal cards each. This is the deckbuilding view: your Legend's
+identity decides which of these tables you are allowed to read.
+
+#### Fury — damage and aggression
 
 | | share | |
 |---|---|---|
-| **Stupefy** | 35% | interaction that replaces itself |
-| **Kai'Sa, Survivor** | 31% | 4E 4M Fury · Accelerate · **when I conquer, draw 1** |
-| **Discipline** | 27% | 2E Calm · `[Reaction]` +2 Might this turn, **draw 1** |
-| **Watchful Sentry** | 24% | 2E 1M Mind · **Deathknell — draw 1** |
-| **Lecturing Yordle** | 20% | 3E 2M Mind · Tank · draw 1 on play |
+| **Noxus Hopeful** | 12% | 4E 4M · **Legion** — costs 2 less if you have played another card this turn |
+| **Cleave** | 9% | 1E · `[Action]` give a unit **Assault 3** this turn |
+| **Falling Star** | 9% | 2E/2 · **Deal 3 to a unit. Deal 3 to a unit.** Two instances — both can hit one unit |
+| **Inferna** | 9% | 2E 1M · `[Ambush]` · Assault 2 |
+| **Kai'Sa, Survivor** | 8% | 4E 4M · Accelerate · when I conquer, draw 1 |
+| **Ferrous Forerunner** | 8% | 6E/1 6M · Deathknell — two 3-Might Mech tokens to your base |
 
-Notice how much of it is **stapled to something else you wanted to do anyway**. Riftbound
-mostly does not sell you a card that only draws cards; it sells you a trick that replaces
-itself. A deck with no self-replacing interaction will run out first.
+Fury's staples are the least concentrated of any domain — no single card above 12%. It
+pays in damage and attack buffs rather than in cards.
 
-### Threats and payoffs
+#### Calm — interaction, and the most-played domain
 
 | | share | |
 |---|---|---|
-| **Thousand-Tailed Watcher** | 34% | 7E/1 Mind, 7 Might · on play, **enemy units get −3 Might this turn** |
-| **Darius, Trifarian** | 30% | 5E/1 Fury, 5M · on your **second card each turn**, +2 Might and ready me |
-| **Ravenbloom Student** | 29% | 2E 2M Mind · +1 Might whenever you play a spell |
-| **Noxus Hopeful** | 27% | 4E 4M Fury · **Legion** — costs 2 less if you have played another card this turn |
-| **Pouty Poro** | 26% | 2E 2M Fury · **Deflect** |
+| **Defy** | **34%** | 1E/1 · `[Reaction]` counter ≤4 Energy **and** ≤1 Power |
+| **Discipline** | **31%** | 2E · `[Reaction]` +2 Might, draw 1 |
+| **Charm** | 21% | 1E/1 · move an enemy unit |
+| **Back Off** | 19% | 3E · `[Hidden][Action]` Stun a unit |
+| **Scuttle Crab** | 17% | 2E **0 Might** · draw 1 on play; Deathknell hand-reveal |
+| **Zhonya's Hourglass** | 16% | 2E · `[Hidden]` save a unit from dying, recall it |
 
-**The pattern worth seeing:** several of the most-played units reward playing *more cards
-per turn* — Darius, Ravenbloom Student, Noxus Hopeful's Legion. Riftbound rewards
-sequencing multiple cheap cards in one turn far more than most games do.
+**Scuttle Crab at 0 Might is a real card** because lethal damage must be non-zero — it
+cannot die to damage at all without something assigning it at least 1.
+
+#### Mind — shrink, reach, and card flow
+
+| | share | |
+|---|---|---|
+| **Stupefy** | 19% | 1E · `[Reaction]` −1 Might, draw 1 |
+| **Thousand-Tailed Watcher** | 14% | 7E/1 7M · on play, **all enemy units −3 Might this turn** |
+| **Ravenbloom Student** | 11% | 2E 2M · +1 Might whenever you play a spell |
+| **Bellows Breath** | 11% | 1E/1 · `[Action]` `[Repeat]` deal 1 to up to three units at one location |
+| **Singularity** | 10% | 6E/2 · deal 6 to each of up to two units |
+| **Sprite Fountain** | 10% | 2E/1 · Temporary · a ready 3-Might Sprite token |
+
+Mind shrinks Might rather than dealing damage, which **dodges Deflect and protection
+entirely** — a unit reduced to 1 Might is still alive but loses every fight it is in.
+
+#### Body — pumps, bodies and disruption
+
+| | share | |
+|---|---|---|
+| **Punch First** | **18%** | 1E/2 · `[Action]` **+5 Might** this turn — the biggest cheap swing, and Defy-proof |
+| **First Mate** | 14% | 3E 3M · on play, **ready another unit** |
+| **Pit Rookie** | 14% | 2E 2M · on play, buff another friendly unit |
+| **Rampage** | 13% | 3E (+1 Body optional) · two units deal damage equal to their Might to each other |
+| **Sabotage** | 12% | 1E/1 · reveal their hand, recycle a **non-unit** card |
+| **Rengar, Trophy Hunter** | 10% | 5E/1 6M · can `[Ambush]` to a battlefield **even with no units there** |
+
+Body is the pump domain, and **Punch First is the single best cheap trick in the format**
+— +5 for one Energy, playable in showdowns, and out of Defy's reach forever.
+
+#### Chaos — movement and repositioning
+
+| | share | |
+|---|---|---|
+| **Ride the Wind** | 19% | 2E/1 · `[Action]` move a friendly unit **and ready it** |
+| **Star-Crossed** | 18% | 3E/1 · `[Reaction]` return one unit of each player's to hand |
+| **Gust** | 13% | 1E · `[Reaction]` return a unit at ≤3 Might to hand |
+| **Tideturner** | 13% | 2E 2M · `[Hidden]` swap places with a unit you control elsewhere |
+| **Fizz, Trickster** | 13% | 3E/1 3M · replay a ≤3-Energy spell from your trash, paying only its Power |
+| **Traveling Merchant** | 12% | 2E 2M · when I move, discard 1 then draw 1 |
+
+Chaos decides **where** fights happen rather than who wins them. Readying on a move
+(Ride the Wind) is the quiet one — a unit that already moved can move again.
+
+#### Order — removal and stuns
+
+| | share | |
+|---|---|---|
+| **Hidden Blade** | **24%** | 2E/1 · `[Hidden][Action]` **kill a unit** at a battlefield; its controller draws 2 |
+| **Vi, Peacekeeper** | 14% | 5E/1 5M · `[Ambush]` · when I attack, Stun an enemy unit here |
+| **Cull the Weak** | 11% | 2E/1 · **each player** kills one of their units |
+| **Kennen, Keeper of Balance** | 9% | 3E 2M · `[Hidden]` pay 2 to Stun on play or attack |
+| **Soaring Scout** | 8% | 2E 1M · Deathknell — channel 1 rune exhausted |
+| **Honest Broker** | 8% | 2E 2M · Deathknell — a Gold gear token |
+
+**Hidden Blade is the most-played unconditional removal in the game** and the reason the
+"can they punish my flip?" question is not only about bounce. Killing a unit removes it
+from the board exactly as returning it does.
 
 ### Protection
 
@@ -343,18 +425,30 @@ than a formality. The field's choices:
 
 | | share | |
 |---|---|---|
-| **The Dreaming Tree** | 27% | first time each turn a player targets a friendly unit here with a spell, **they draw 1** |
-| **Grove of the God-Willow** | 23% | **when you hold here, draw 1** |
-| **Zaun Warrens** | 18% | when you conquer here, discard 1 then draw 1 |
-| **Vilemaw's Lair** | 17% | **units can't move from here to base** |
-| **The Arena's Greatest** | 16% | each player gains **1 point** at the start of their first Beginning Phase |
-| **Obelisk of Power** | 14% | each player channels 1 extra rune on their first Beginning Phase |
-| **Targon's Peak** | 14% | when you conquer here, ready up to 2 runes at end of turn |
+| **Zaun Warrens** | 14% | when you conquer here, discard 1 then draw 1 |
+| **Forbidding Waste** | 14% | while a unit here is **defending alone**, it has **−2 Might** |
+| **Grove of the God-Willow** | 13% | **when you hold here, draw 1** |
+| **Seat of Power** | 13% | when you conquer here, draw 1 for each other battlefield you control |
+| **Sunken Temple** | 12% | when you conquer here with a **Mighty** unit, pay 1 to draw |
+| **Star Spring** | 12% | first non-token unit played here each turn, that player may walk another unit home |
+| **Targon's Peak** | 11% | when you conquer here, ready up to 2 runes at end of turn |
+| **Trifarian War Camp** | 11% | **units here have +1 Might** — both players' |
+| **Vilemaw's Lair** | 8% | **units can't move from here to base** |
+| **Rockfall Path** | 7% | **units can't be played here** |
 
-**Almost all of them are symmetric.** Grove rewards whoever holds it — including them.
-The Arena's Greatest gives *both* players a point. Read a battlefield as "what does this
-do for the person who ends up holding it", not "what does it do for me", because the
+**Watch the ban list before you register one.** Four battlefields that still show up in
+archived decks — **The Dreaming Tree, The Arena's Greatest, Obelisk of Power and Reaver's
+Row** — are **banned in constructed**. They appear in the data because the archive carries
+lists from before the ban and from unsanctioned play.
+
+**Almost all of them are symmetric.** Grove rewards whoever holds it, including them.
+Trifarian War Camp pumps *both* players' units. Read a battlefield as *"what does this do
+for the person who ends up holding it"*, not *"what does it do for me"* — because the
 person holding it is frequently not you.
+
+**The two that change a game plan rather than add value:** Vilemaw's Lair means committing
+is permanent — no retreating home, which is a cage against a repositioning deck. Rockfall
+Path means nothing can be *played* there at all, so it can only be contested by moving.
 
 **Vilemaw's Lair is the one that changes a game plan**: units cannot retreat home from it,
 so committing there is permanent. Against a deck built on repositioning, it is a cage.
@@ -414,13 +508,30 @@ Rules entry.
 **printed** text, and errata are published separately and never flow back into it, so the
 raw catalog confidently shows superseded wording.
 
-**Card shares** are `data/decks.json`, and they need a health warning. After an upstream
-feed change in late September 2026 the archive rebuilds a day at a time: at the time of
-writing it holds **1,204 decks spanning 3 distinct dates**, not the 60 days its window
-claims. The ordering of the big staples is robust — Stupefy and Defy are not going to turn
-out to be fringe — but **anything separated by a few points is noise**, and the
-archetype-level figures in the deck dossiers are deliberately pinned to an older, wider
-snapshot.
+**Card shares** are **not** taken from the current `data/decks.json`, and the reason
+matters more than the numbers.
+
+After an upstream feed change in late September 2026 the deck archive rebuilds a day at a
+time. The file in the repo today holds 1,204 decks spanning **3 distinct dates**, and it is
+not a sample of the format — it is a sample of whatever slice the feed returned. The proof
+is the cards it disagrees with itself about:
+
+| | current 3-day file | 18–20 Sep file |
+|---|---|---|
+| **Punch First** | 7% | **20%** |
+| **Star-Crossed** | 7% | **24%** |
+| Cleave | 30% | 13% |
+
+Punch First is a Body staple and the current file says it is fringe. So this page uses the
+**post-ban slice of the last archive that spanned more than a few days — 506 decks dated
+18–20 September 2026** — with every card on `data/banned.json` excluded. That still skews
+toward whatever was being posted that week, so **anything separated by a few points here is
+noise**; only the shape is reliable. The deck dossiers are pinned to the same snapshot for
+the same reason.
+
+**The banned filter is not optional.** A first draft of this page listed The Dreaming Tree,
+The Arena's Greatest and Obelisk of Power as staple battlefields. All three are banned in
+constructed; they rank highly because the archive still carries lists that played them.
 
 **What this page does not do** is tell you what the three Radiance keywords do. `[Deploy]`,
 `[Disarm]` and `[Show Off]` are printed on 20 cards between them and the Core Rules define
