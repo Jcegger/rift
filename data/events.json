@@ -4,10 +4,13 @@
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
   "events": 1962,
-  "eventsWithDecks": 3,
+  "eventsWithDecks": 5,
   "players": 50648,
-  "playersWithDecks": 603,
+  "playersWithDecks": 4822,
   "unresolvedDeckEvents": [
+   "Runes & Rift Open 19",
+   "Mardi - Championship #1",
+   "Nightcup League Cup #1 — Cycle 1",
    "Riftbound Online Series Season 4 Week 1",
    "Mardi - championship #2",
    "Riftbound Regional Qualifier - Barcelona",
@@ -28,20 +31,21 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 29,
-  "claimedEventsUnmatched": 26,
+  "claimedEvents": 31,
+  "claimedEventsUnmatched": 27,
   "claimedEventAliases": {
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
+   "unknown": 68,
+   "Europe": 22,
+   "Asia": 33,
    "Oceania": 2,
-   "unknown": 59,
-   "Europe": 21,
-   "Asia": 30,
    "North America": 4
   },
   "registryEventsByRegion": {
-   "unknown": 1962
+   "unknown": 1961,
+   "Asia": 1
   },
   "unresolvedClaimEvents": [
    "10K Showdown - Auckland Card Show",
@@ -64,6 +68,7 @@
    "S4 Wuhan Regional Open",
    "Shenyang RO",
    "Shenyang Regional Open",
+   "Showdown Series Bristol",
    "Singapore RQ",
    "Sydney",
    "Utrecht RQ",
@@ -75,6 +80,7 @@
    "CCS Riftbound $10,000 Tournament": 222,
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament": 198,
    "Friday $5,000 Riftbound: League of Legends TCG Tournament": 180,
+   "Riftbound Regional Qualifier - Singapore": 77,
    "Riftbound $10,000 Cash Tournament @ Pro-Play Summit: Orlando": 70,
    "CCS Riftbound Sunday $1000": 64,
    "League Cup #2 - Cycle 1": 62,
@@ -83,13 +89,17 @@
    "Guangzhou City Challenge (China)": 56,
    "Riftbound Regional Qualifier - Barcelona": 52,
    "Hefei City Challenge (China)": 50,
+   "Nightcup League Cup #1 — Cycle 1": 47,
    "Riftbound Online Series Season 4 Week 1": 46,
    "Shanghai City Challenge (China)": 45,
    "Mardi - championship #2": 35,
+   "Riftbound Regional Qualifier - Los Angeles": 30,
+   "Mardi - Championship #1": 29,
    "Riftbound $2,500 Cash Tournament @ Pro-Play Summit: Orlando": 21,
    "Riftbound Remote Showdown #3": 20,
    "Riftbound Remote Showdown #2": 14,
    "Riftbound Online Tournament": 13,
+   "Runes & Rift Open 19": 8,
    "Triple Win-A-Box | Vendetta Tournament": 8,
    "Riftbound Remote Showdown #4": 8,
    "Showdown Series Bristol by Organized Play Events": 1,
