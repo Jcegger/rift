@@ -818,6 +818,13 @@ the normal rules (§813.3.a).
   biggest behavioural difference between playing a card from hand and playing it from
   Hidden. See [When the source leaves the board](#when-the-source-leaves-the-board) and the
   Kennen ruling in [rules-rulings.md](rules-rulings.md).
+  **The same pin means a facedown card cannot answer a flip at the other battlefield.** You
+  can only hide at a battlefield you control (§811.1.b), and a hidden card at a battlefield
+  its owner no longer controls is removed (§323.7) — so in a 1v1, your facedown card and
+  theirs are always at different battlefields, and §811.1.d.2 keeps each one's targets at
+  its own. Their facedown Hidden Blade cannot kill the unit you just flipped; only a
+  `[Reaction]` from hand can. (It *can* act on their own unit at its battlefield — e.g.
+  blinking a unit your play effect chose.)
 - **Ambush** — §822 · 23 cards. May be played to a battlefield **where you already have
   units**, and has Reaction while being played that way (§822.1.b). Also appears as a
   verb meaning "play with Ambush's permissions" (§822.1.d). The permission is re-checked

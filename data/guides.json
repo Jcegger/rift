@@ -42,9 +42,9 @@
    "champion": null,
    "sections": [
     "The headline: this is the Los Angeles list",
-    "How to read a card",
+    "How to use this page",
     "Before the dice roll: which game is this?",
-    "At a glance — for practice games",
+    "At a glance",
     "Irelia, Blade Dancer — Tier 1.1 · 4.4% · Calm/Chaos · mean Might 2.6",
     "Akali, Rogue Assassin — Tier 1.2 · 5.0% · Fury/Calm · mean Might 3.6",
     "LeBlanc, Deceiver — Tier 1.3 · 3.9% · Mind/Order · mean Might 3.82",
@@ -73,7 +73,7 @@
     "Quick reference",
     "Sources and method"
    ],
-   "words": 6238
+   "words": 10776
   },
   {
    "slug": "khazix-voidreaver-postban",
@@ -104,7 +104,7 @@
     "15. What I'd test",
     "Sources and method"
    ],
-   "words": 19075
+   "words": 19346
   },
   {
    "slug": "khazix-voidreaver",
