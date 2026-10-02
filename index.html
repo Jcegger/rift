@@ -4724,7 +4724,13 @@ function mdToHtml(src){
       flush();
       const q = [];
       while (i < lines.length && /^>\s?/.test(lines[i])){ q.push(lines[i].replace(/^>\s?/, '')); i++; }
-      out.push(`<blockquote class="g-quote">${mdInline(q.join(' '))}</blockquote>`);
+      // The matchup guide's "At the table" boxes are a lead line plus a list.
+      const items = q.filter(l => /^[-*]\s+/.test(l));
+      const lead = q.filter(l => !/^[-*]\s+/.test(l));
+      const list = items.length
+        ? `<ul class="g-list">${items.map(l => `<li>${mdInline(l.replace(/^[-*]\s+/, ''))}</li>`).join('')}</ul>`
+        : '';
+      out.push(`<blockquote class="g-quote">${mdInline(lead.join(' '))}${list}</blockquote>`);
       continue;
     }
 

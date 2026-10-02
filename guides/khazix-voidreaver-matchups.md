@@ -53,10 +53,31 @@ Two questions, both answerable from their first two turns.
 | if they… | you play | why |
 |---|---|---|
 | **cannot cover two battlefields** (few cheap units) | **take both, race** | 2 points a turn ends it in four |
-| **cover two and out-grind you** (grind > 10) | **win one fight early, convert it** | you can neither spread nor wait |
-| **cover two but you out-grind them** (grind < 10) | **hold one, refuse trades** | they need it short; you do not |
+| **cover two and out-grind you** (grind > 12) | **win one fight early, convert it** | you can neither spread nor wait |
+| **cover two but you out-grind them** (grind < 12) | **hold one, refuse trades** | they need it short; you do not |
 
-Your grind number is **12**. Never hold zero battlefields; never take a fight you have not rigged.
+Your grind number is **12**, and every card below compares theirs to it: **above 12 they win long, below it you do.** Never hold zero battlefields; never take a fight you have not rigged.
+
+---
+
+## At a glance — for practice games
+
+Every card below opens with an **At the table** box: the plan, the fights to take, what to watch for, and whether you can flip. This table is those boxes in one place, made to sit beside a practice game on RiftAtlas.
+
+| Opponent | Plan | Flip? | The thing that beats you |
+|---|---|---|---|
+| Irelia | contest early, fight straight | Chaos tapped | Gust / Star-Crossed on a flip |
+| Akali | one fight early, **your turn only** | **freely** | Falling Star on Rengar |
+| LeBlanc | one fight early, rigged only | empty facedown | Thousand-Tailed Watcher at 7 runes |
+| Jayce | take both, race | check facedown | a fair fight (15%) |
+| Azir | take both before Arise! | empty facedown | Equipment piling up |
+| Rengar | hold one, grind | **freely** | Thrill of the Hunt mid-fight |
+| Vex | hold one, grind | count Chaos | playing units while Vex, Apathetic is out |
+| Kennen | one fight early, no trades | tapped *and* empty | an even trade |
+| Rek'Sai | hold one, let time work | mostly | trading bodies |
+| Master Yi | drag their lone unit to you | **freely** | attacking a lone defender |
+| Ezreal | take both, race | **don't** | flipping at all |
+| Fiora | hold one, win long | empty facedown | Punch First into Riposte |
 
 ---
 
@@ -64,15 +85,27 @@ Your grind number is **12**. Never hold zero battlefields; never take a fight yo
 
 ## Irelia, Blade Dancer — Tier 1.1 · 4.4% · Calm/Chaos · mean Might 2.6
 
+> **At the table**
+> - **Plan:** contest both early. Fair fights favour you (56% bare) and the long game is roughly even.
+> - **Fights:** take them straight; keep Punch First for the turn Discipline or Defiant Dance shows up.
+> - **Watch:** open Calm (Defy, Discipline) and open Chaos (Gust, Star-Crossed, Defiant Dance).
+> - **Flip:** only once their Chaos is tapped.
+
 **Verdict: your best fair fight on the page, and one of your worst for flipping.**
 
 **They play:** Defy 100%, Discipline 100%, Ride the Wind 100%, Stellacorn Herder 98%, Boots of Swiftness 98%, Defiant Dance 95%.
 **Your numbers:** **56 bare** · 94 +PF · 98 +Sw · 96 iso.
 **Flip safety: 66%** — Gust and Star-Crossed. Open Chaos is the tell.
-**The plan:** the only archetype you beat more often than not with no trick at all. Their 2.6 mean is the smallest board you meet. **Keep the pumps, board the Switcheroo out** — against a flat board the swap has nothing to swap into. They out-grind you at 10.9, so do not let it go long: contest early and convert.
+**The plan:** the only archetype you beat more often than not with no trick at all. Their 2.6 mean is the smallest board you meet. **Keep the pumps, board the Switcheroo out** — against a flat board the swap has nothing to swap into. Their grind of 10.9 is just under your 12, so the long game is roughly even — contest early, because fair fights are where you are strongest.
 **Board:** +2 Gust, +1 Hard Bargain. −1 Switcheroo, −2 Star-Crossed — Gust does Star-Crossed's job against a 2.6 board for 1 Energy, without bouncing your own unit.
 
 ## Akali, Rogue Assassin — Tier 1.2 · 5.0% · Fury/Calm · mean Might 3.6
+
+> **At the table**
+> - **Plan:** win one fight early and keep it. **Fight only on your turn** — their legend can only rescue a unit on theirs.
+> - **Fights:** Akali, Silent is 4 on your turn and 6 on hers. Punch First and Switcheroo walk through Defy; nothing else does.
+> - **Watch:** two open Fury (Falling Star kills Rengar) and a facedown card (Zhonya's). Escapes still hand you the point.
+> - **Flip:** freely — nothing in their lists punishes it.
 
 **Verdict: hardest quadrant on the page — but the only Tier 1 deck that cannot punish a flip.**
 
@@ -87,16 +120,29 @@ Your grind number is **12**. Never hold zero battlefields; never take a fight yo
 
 ## LeBlanc, Deceiver — Tier 1.3 · 3.9% · Mind/Order · mean Might 3.82
 
+> **At the table**
+> - **Plan:** win one fight early and convert it. 29% bare — never fight unrigged.
+> - **Fights:** Switcheroo (98%) or isolation (90%). Not on the turn they reach 7 runes: Thousand-Tailed Watcher gives all your units −3.
+> - **Watch:** the facedown slot (Hidden Blade, Temporal Breach) and Ganking units off Windswept Hillock.
+> - **Flip:** only with their facedown slot empty.
+
 **Verdict: new to Tier 1 and absent from your dossier. Token-wide, Hidden-heavy, and Decree is live.**
 
 **They play:** Soaring Scout 95%, Mirror Image 95%, Watchful Sentry 92%, Glasc Mixologist 92%, **Hidden Blade 90%**, Windswept Hillock 90%.
 **Your numbers:** 29 bare · 79 +PF · **98 +Sw** · 90 iso.
 **Flip safety: 92%** — Hidden Blade *and* Temporal Breach, both `[Hidden]`. **The facedown slot is the tell, not their runes.**
 **The plan:** 7 cheap units and 4.1 token-makers per deck means they cover both battlefields; grind 12.2 means they beat you long. That is the hardest quadrant — **win one fight early and convert it**. 29% bare is near the bottom of the page, so nothing unrigged.
+**Thousand-Tailed Watcher is in 88% of their lists** — 7 Energy, *"give enemy units −3 Might this turn, to a minimum of 1"*. On the turn they can reach 7, assume every fight you set up loses three per unit.
 **Windswept Hillock gives units Ganking** — battlefield to battlefield movement, so their board repositions in ways yours cannot.
 **Board:** **+1 Decree of Strength** (Mind/Order — live), +1 Hard Bargain, +1 Rampage. −1 Sabotage, −1 Tornado Warrior, −1 Traveling Merchant. Decree does Sabotage's job here and can take a unit; both their removal cards are Hidden, so Tornado Warrior is the flip to drop. Punch First stays — 79% is not a card you cut.
 
 ## Jayce, Defender of Tomorrow — Tier 1.4 · 4.1% · Mind/Body · mean Might 5.45
+
+> **At the table**
+> - **Plan:** take both battlefields and race — they cannot contest two early, and they win any long game.
+> - **Fights:** never fair (15%). Switcheroo (97%) or isolation plus Kha'Zix (71%); Punch First is a coin flip.
+> - **Watch:** Elder Dragon (any damage kills) and Temporal Breach in the facedown slot.
+> - **Flip:** check the facedown slot first.
 
 **Verdict: the biggest board you will meet. Win on the swap or not at all.**
 
@@ -113,6 +159,12 @@ Your grind number is **12**. Never hold zero battlefields; never take a fight yo
 
 ## Azir, Emperor of the Sands — Tier 2.1 · 4.2% · Calm/Order · mean Might 3.8
 
+> **At the table**
+> - **Plan:** take both before Arise! lands. Every gear you kill is a Sand Soldier they never get.
+> - **Fights:** isolate (95%) or Switcheroo (96%). 24% bare — the board is bigger than it looks once Equipment attaches.
+> - **Watch:** the facedown slot — Guards! is a surprise 2-Might body, Hidden Blade a surprise kill.
+> - **Flip:** freely if the facedown slot is empty; otherwise hide Switcheroo.
+
 **Verdict: deferred, not slow. Equipment count is the size of their board.**
 
 **They play:** Doran's Shield 98%, Eye of the Herald 98%, **Guards! 98%**, Hall of Legends 98%, Discipline 95%, B.F. Sword 95%. **7.1 token-makers per deck.**
@@ -123,6 +175,12 @@ Your grind number is **12**. Never hold zero battlefields; never take a fight yo
 **Board:** **+2 Ravenbloom Prefect, +2 Acceptable Losses** — this is the matchup the gear package exists for. −2 Rampage, −1 Tornado Warrior, −1 Traveling Merchant: Rampage trades Might into a bigger board, Hidden Blade makes Tornado Warrior the riskiest flip, and the Merchant does least in a race.
 
 ## Rengar, Pridestalker — Tier 2.2 · 3.1% · Fury/Body · mean Might 2.96
+
+> **At the table**
+> - **Plan:** hold one battlefield and grind. You win long; let them run out.
+> - **Fights:** Punch First wins 96%. Refuse marginal trades.
+> - **Watch:** Thrill of the Hunt (Reaction, 2E + 1 Power) drops a Rengar into any fight for free. Count their open runes before you commit.
+> - **Flip:** freely.
 
 **Verdict: the best matchup on the page. They cannot punish a flip and you out-grind them.**
 
@@ -135,17 +193,30 @@ Your grind number is **12**. Never hold zero battlefields; never take a fight yo
 
 ## Vex, Gloomist — Tier 2.3 · 5.2% · Calm/Chaos · mean Might 2.88
 
+> **At the table**
+> - **Plan:** hold one and grind. **Kill Vex, Apathetic before you play units** — every unit you play while she is at a battlefield is stunned.
+> - **Fights:** Punch First decides most (90%). Mutated Mouser defends at 3 with Tank, so it soaks damage first.
+> - **Watch:** the facedown slot (Back Off stuns a unit), open Calm (Defy), and their own Switcheroo, in three of four lists.
+> - **Flip:** count their Chaos — Gust and Star-Crossed.
+
 **Verdict: small, interactive, and happy to answer you. You out-grind it.**
 
 **They play:** Back Off 94%, Vex Apathetic 94%, Defy 88%, Discipline 88%, Mutated Mouser 77%, Startipped Peak 73%.
 **Your numbers:** **50 bare** · 90 +PF · 98 +Sw · 94 iso.
 **Flip safety: 77%** — Star-Crossed and Gust. Count their Chaos.
 **The plan:** grind 9.4 against your 12 — **hold one and grind.** Their 2.88 mean means Punch First decides most fights.
+**What else they hold:** **Switcheroo in 75%** of their lists — the swap you rely on cuts both ways, and your 6-Might Rengar is the unit worth swapping. **Back Off** is `[Hidden]` and stuns a unit, so their facedown card is a combat trick, not just a flip threat. **Mutated Mouser** defends at 3 with Tank and must be assigned damage first.
 **The Vex mirror:** you play two yourself. Deflect taxes *opponents'* spells and abilities, so your Rampage into their Vex costs `[A]` more (§809) — and theirs into yours does the same.
 **Kill their Vex, Apathetic before you play a unit.** *"When an opponent plays a unit while I'm at a battlefield, [Stun] it. They can't move it this turn."* She only has to be *at a battlefield* — the unit you play can be anywhere, base included. While she stands, Rengar, an Ambush Kha'Zix and every other unit from hand arrive dealing no combat damage and unable to move. So the turn's order is: remove her, *then* deploy. Drag her into your biggest unit with Faefolk or Void Assault — both *choose*, so her Deflect charges you `[A]` — and **move the big unit first**: into an empty battlefield it takes control in a non-combat showdown, and Faefolk then walks in and pulls her. Move Faefolk first and she fights Vex alone at 1 Might, because nobody walks in once a fight has started (§144.1).
 **Board:** +1 Hard Bargain (for Defy). −1 Ride the Wind.
 
 ## Kennen, Heart of the Tempest — Tier 2.4 · 6.6% · Order/Chaos · mean Might 3.32
+
+> **At the table**
+> - **Plan:** win one fight early and refuse every even trade — you cannot outlast them and cannot spread.
+> - **Fights:** Punch First is the lever (89%).
+> - **Watch:** everything. Open Chaos (Gust, Star-Crossed) *and* the facedown slot (Hidden Blade).
+> - **Flip:** only into tapped Chaos with an empty facedown slot.
 
 **Verdict: the most-played deck you will face, and the one that answers everything.**
 
@@ -156,6 +227,12 @@ Your grind number is **12**. Never hold zero battlefields; never take a fight yo
 **Board:** +2 Gust, +1 Hard Bargain. −2 Star-Crossed, −1 Tornado Warrior — Gust does Star-Crossed's job for 1 Energy, and at 97% flip safety Tornado Warrior is the Hidden unit to drop.
 
 ## Rek'Sai, Void Burrower — Tier 2.5 · 3.3% · Fury/Order · mean Might 2.63
+
+> **At the table**
+> - **Plan:** hold one battlefield and let time work. Trading is how they win.
+> - **Fights:** easy on paper (55% bare) — but each kill pays their Deathknells, so fight for battlefields, not bodies.
+> - **Watch:** Cull the Weak (each player kills one of their own units: keep a cheap spare) and Hidden Blade in the facedown slot.
+> - **Flip:** mostly safe; check the facedown slot. **Don't register Star Spring** here.
 
 **Verdict: good on the numbers, worse in practice. Their units want to die.**
 
@@ -168,16 +245,29 @@ Your grind number is **12**. Never hold zero battlefields; never take a fight yo
 
 ## Master Yi, Wuju Bladesman — Tier 2.6 · 7.6% · Calm/Body · mean Might 3.35
 
+> **At the table**
+> - **Plan:** **drag their lone unit to yours** — never attack into it. A unit defending alone gets +2.
+> - **Fights:** Evelynn and Void Assault pull the right way. Charm lets them drag *you* into a lone defender, so it cuts both ways.
+> - **Watch:** open Calm (Defy, Discipline, En Garde) and Zhonya's Hourglass.
+> - **Flip:** freely.
+
 **Verdict: the single most-played archetype, and the one where your main plan backfires.**
 
 **They play:** Defy 95%, Discipline 93%, Charm 91%, En Garde 84%, First Mate 83%, Zhonya's Hourglass 81%.
 **Your numbers:** 39 bare · 85 +PF · 98 +Sw · 92 iso.
 **Flip safety: 0%** — one of only three, and the one to know cold. **Their bounce is all friendly-only**, so the card you see is not the card that beats you.
 **The isolation trap.** Their legend: *"While a friendly unit **defends** alone, it gets +2 `[M]`."* The board state your whole deck manufactures is the one that pays them — their +2 cancels Kha'Zix's exactly.
+**Charm (91%) is their Void Assault** — *"move an enemy unit"* — so they can walk *your* unit in on their lone defender and make you the attacker into their +2. It has no Action keyword, so it only happens on their turn.
 **The way out is the direction of the fight.** Do not attack into their lone unit — **drag it to yours.** The unit that moves in applies Contested and becomes the **attacker** (§190.3.a.1, §464.2.c.1), so their legend switches off while Kha'Zix's *"attack **or** defend"* still fires. Evelynn and Void Assault pull that way; walking over and attacking does not.
 **Board:** +2 Ravenbloom Prefect, +2 Acceptable Losses (Zhonya's 81%). −1 Switcheroo (flat board), −2 Star-Crossed, −1 Rampage — Defy counters both. Void Assault stays: it is how you drag.
 
 ## Ezreal, Prodigal Explorer — Tier 2.7 · 2.1% · Mind/Chaos · mean Might 3.61
+
+> **At the table**
+> - **Plan:** take both and race — they cannot contest two, and they answer everything one at a time.
+> - **Fights:** Punch First (85%) or Switcheroo (96%).
+> - **Watch:** Gust, Star-Crossed and Stupefy are in nearly every list.
+> - **Flip:** don't. Switcheroo is the only safe hide.
 
 **Verdict: absent from your dossier. Every list answers a flip, and Decree is live.**
 
@@ -189,6 +279,12 @@ Your grind number is **12**. Never hold zero battlefields; never take a fight yo
 **Board:** **+1 Decree of Strength** (Mind/Chaos — live), +1 Hard Bargain. −1 Evelynn, −1 Tornado Warrior — the Hidden units whose triggers must survive a Reaction they always hold. Punch First stays at 85%.
 
 ## Fiora, Grand Duelist — Tier 2.8 · 4.1% · Body/Order · mean Might 3.68
+
+> **At the table**
+> - **Plan:** hold one, refuse trades, win long.
+> - **Fights:** Punch First (85%) — unless Body and Order are open. Riposte counters it *and* pumps their unit.
+> - **Watch:** open Body + Order (Riposte) and the facedown slot (Hidden Blade).
+> - **Flip:** only with the facedown slot empty.
 
 **Verdict: a standard midrange fight decided by whether you see the trick.**
 
@@ -205,12 +301,16 @@ Your grind number is **12**. Never hold zero battlefields; never take a fight yo
 
 ## Ornn, Fire Below the Mountain — Tier 3.1 · 1.8% · Calm/Mind · mean Might 2.24
 
+> **At the table:** beat it straight (66% bare), but end it — they win long. Kill gear. Flip freely.
+
 **Verdict: the smallest board in the format, and it cannot punish a flip.**
 **They play:** Defy 100%, Seal of Focus 100%, Guardian Angel 100%, Sprite Fountain 100%, Patched Porobot 100%, Poro Snax 94%.
 **Numbers:** **66 bare** · 98 +PF · 97 +Sw · 98 iso. · **Flip safety 0%.**
 Gear-heavy ramp with a 2.24 mean — your best raw matchup anywhere. Grind 14.7 means do not let it go long. **+2 Ravenbloom Prefect, +2 Acceptable Losses, +1 Decree** (Calm/Mind — live). −1 Switcheroo, −2 Star-Crossed, −1 Rampage, −1 Sabotage — the swap has nothing to swap into, Defy counters both spells, and Decree takes Sabotage's slot.
 
 ## Viktor, Herald of the Arcane — Tier 3.2 · 4.0% · Mind/Order · mean Might 3.31
+
+> **At the table:** hold one and grind. Every list has Hidden Blade: never flip into an occupied facedown slot.
 
 **Verdict: 4% of the field, absent from your dossier, and 100% flip coverage.**
 **They play:** **Hidden Blade 100%**, Cull the Weak 95%, Stupefy 90%, Viktor Leader 80%, Imperial Decree 73%, Bellows Breath 65%. **8.1 token-makers.**
@@ -219,18 +319,26 @@ Grind 6.9 — **you out-grind them**, so hold one and grind. **Never flip into a
 
 ## Kai'Sa, Daughter of the Void — Tier 3.3 · 1.5% · Fury/Mind · mean Might 3.55
 
+> **At the table:** rig every fight. At 7 runes, Thousand-Tailed Watcher gives your units −3; two open Fury is Falling Star; a facedown card may be Temporal Breach.
+
 **They play:** Falling Star 100%, Stupefy 100%, Thousand-Tailed Watcher 100%, Hextech Ray 93%, Kai'Sa Survivor 93%, Lecturing Yordle 93%.
 **Numbers:** 35 bare · 83 +PF · 98 +Sw · 91 iso. · **Flip safety 67%** — Temporal Breach.
 **Thousand-Tailed Watcher gives your units −3 Might on play** — a 7-Might body that also wipes your combat maths for a turn. Count it. **+1 Decree** (live), −1 Tornado Warrior.
 
 ## Lucian, Purifier — Tier 3.4 · 0.9% · Fury/Body · mean Might 3.2
+
+> **At the table:** hold one, flip freely, win late.
 **Numbers:** 38 bare · 94 +PF · 97 +Sw · 97 iso. · **Flip safety 0%.** Grind 5.8 — you out-grind them comfortably. Hold one, flip freely, win late.
 
 ## Mel, Soul's Reflection — Tier 3.5 · 1.0% · Mind/Chaos · mean Might 3.33
+
+> **At the table:** don't go long. Every list answers a flip — hide only Switcheroo, and count their Chaos.
 **They play:** Stupefy 100%, Star-Crossed 90%, Rebuttal 90%, Ride the Wind 90%, Gust 80%.
 **Numbers:** 35 bare · 92 +PF · 96 +Sw · 96 iso. · **Flip safety 100%** — Gust and Star-Crossed. Grind 15.3, so do not go long. **+1 Decree** (live), −1 Evelynn.
 
 ## Lillia, Bashful Bloom — Tier 3.6 · 2.1% · Calm/Mind · mean Might 3.21
+
+> **At the table:** hold one against the token swarm. Flips are effectively safe; mind Defy and Discipline.
 **They play:** Sprite Burst 95%, Defy 90%, Discipline 90%, Stupefy 90%, Dusk Rose Lab 90%. **9.4 token-makers — the most in the format.**
 **Numbers:** 42 bare · 89 +PF · 97 +Sw · 94 iso. · **Flip safety 5%** — effectively safe to flip.
 A token swarm that covers both battlefields. Hold one. **+1 Decree** (live), −1 Sabotage.
@@ -239,29 +347,43 @@ A token swarm that covers both battlefields. Hold one. **+1 Decree** (live), −
 
 # Tier 4 and below, by how often you will see them
 
-## Viktor and Zed are the two you will actually meet
+## Zed is the one you will actually meet
+
+> **At the table:** race. They have the best long game in the format, so never let it go long.
 
 **Zed, Master of Shadows — Tier 5.6 but 3.0% of the field**, more played than nine ranked above it.
 **They play:** Death Mark 100%, Zaun Warrens 97%, Shadow Order Disciple 93%, Traveling Merchant 87%, Perfect Execution 83%.
 **Numbers:** 35 bare · 89 +PF · 97 +Sw · 95 iso. · **Flip safety 57%** — Star-Crossed and Gust. Grind **18.2 — the highest in the format.** You cannot win a long game against this. Race it.
 
 ## Vi, Piltover Enforcer — Tier 4.1 · 2.1% · Fury/Order
+
+> **At the table:** hold one and grind; check the facedown slot (Hidden Blade) before you flip.
 **Numbers:** 36 bare · 91 +PF · 98 +Sw · 96 iso. · **Flip safety 57%** (Hidden Blade). Grind 5.7 — you out-grind them. Hold one.
 
 ## Diana, Scorn of the Moon — Tier 4.2 · 2.0% · Mind/Chaos
+
+> **At the table:** play as if you had no Hidden cards. Never flip Evelynn into open Chaos.
 **Numbers:** 39 bare · 93 +PF · 97 +Sw · 96 iso. · **Flip safety 95%** — Gust, Star-Crossed, Temporal Breach. **Do not flip Evelynn into open Chaos, ever.** **+1 Decree, +1 Hard Bargain; −1 Evelynn, −1 Tornado Warrior.**
 
 ## Kha'Zix, Voidreaver — the mirror · Tier 4.3 · 1.5%
+
+> **At the table:** land the first clean combat win and buff off it. Drag their unit to yours so *they* attack.
 **Numbers:** 43 bare · 91 +PF · 98 +Sw · 95 iso. · **Flip safety 80%** — they hold Star-Crossed and Gust, because they are you.
 **The mirror is decided by XP, not by board.** Both decks lose fair fights and both rig them. Whoever lands the first clean combat win compounds it into buffs. Isolation beats isolation: the player who makes the *other* one the attacker wins the exchange.
 
 ## Teemo, Swift Scout — Tier 4.7 · 1.5% · Mind/Chaos
+
+> **At the table:** beat the tiny board straight; every list answers a flip, so hide only Switcheroo.
 **Numbers:** **61 bare** · 95 +PF · 98 +Sw · 97 iso. · **Flip safety 87%** — all four threat cards appear. A tiny board (2.51 mean) you beat straight, but every list answers a flip. **+1 Decree** (live), −1 Tornado Warrior.
 
 ## Nasus, Shen, Draven, Ambessa, Sett — 1.0–1.6% each
+
+> **At the table:** fair fights are ordinary. Nasus has a few very large bodies, so save Switcheroo for those; check the facedown slot against Shen, Ambessa and Sett.
 All within a few points of 36–43 bare, 76–97 with Punch First. **Nasus is the outlier: 76 with Punch First and 83 isolated**, the worst Punch First conversion on the page, because 3.65 mean with a 2 median means a few very large bodies. **Shen, Ambessa and Sett hold Hidden Blade** (50–90%). **Nasus is Mind — Decree live.**
 
 ## The worst board in the game is Tier 5
+
+> **At the table:** Volibear — no fair fight exists. Switcheroo is the matchup.
 
 **Volibear, Furious — Tier 5.3, 0.7%, mean Might 6.46.**
 **3% bare. 27% with Punch First.** 63% isolated plus Kha'Zix. There is no fair fight here at any point — **97% with Switcheroo** is the entire matchup. You will almost never see it, but if you do, the swap is not a nice-to-have.
@@ -287,8 +409,9 @@ All within a few points of 36–43 bare, 76–97 with Punch First. **Nasus is th
 
 ### Who out-grinds you (your grind is 12)
 
-**They win long:** Zed 18.2 · Kennen 17.0 · Jayce 15.9 · Mel 15.3 · Nasus 15.1 · Ornn 14.7 · Akali 14.2 · Kai'Sa 12.4 · LeBlanc 12.2
-**You win long:** Rek'Sai 1.8 · Sett 4.4 · Ambessa 5.1 · Draven 5.2 · Vi 5.7 · Lucian 5.8 · Fiora 6.5 · Viktor 6.9 · Ivern 7.8 · Azir 7.9 · Rengar 8.0 · Vex 9.4
+**They win long (above 12):** Zed 18.2 · Kennen 17.0 · Jayce 15.9 · Mel 15.3 · Nasus 15.1 · Ornn 14.7 · Akali 14.2 · Kai'Sa 12.4 · LeBlanc 12.2
+**Roughly even (10–12):** Irelia 10.9
+**You win long (below 10):** Rek'Sai 1.8 · Sett 4.4 · Ambessa 5.1 · Draven 5.2 · Vi 5.7 · Lucian 5.8 · Fiora 6.5 · Viktor 6.9 · Ivern 7.8 · Azir 7.9 · Rengar 8.0 · Vex 9.4
 
 ### Who cannot contest two battlefields
 
@@ -305,6 +428,10 @@ All within a few points of 36–43 bare, 76–97 with Punch First. **Nasus is th
 **The Los Angeles claim** is the deck author's, carried in `ce`/`cp` and not in an upstream result field. `data/events.json` independently records the **Riftbound Regional Qualifier – Los Angeles, 26 September, 2,165 players**. The event and its size are records; the Top 32 finish is a claim, and the card-for-card match against your list is this repo's own comparison.
 
 **Simulations** are Monte Carlo at 120,000 trials implementing §465.2 and §466.3 directly: a clean win when your Might total strictly exceeds theirs. Your distribution is the 24 units of the current list weighted by copies (mean 3.04); theirs is each archetype's units in the archive weighted by copies.
+
+**Grind** is not defined anywhere in this repo. Reverse-engineered, it behaves like the copies per deck of cards whose text mentions **draw, trash, recycle or Flow**: that count gives your list exactly 12 and Irelia 10.9, lands within a point for Kennen, Vex, Fiora, Jayce and Ezreal, and misses Rek'Sai and LeBlanc by 2.4 and 2.8. It is a keyword count, not a measured card-advantage rate, so read it as direction: well above or well below 12 means something, 10.9 against 12 does not.
+
+**Re-checked 1 October** against the archive as it then stood (1,048 decks in the same window, up from 992): every bare, +PF and isolation figure on this page reproduces within two points, and every play rate within a few.
 
 **Flip safety** counts cards that remove an **enemy** unit from the board at **Reaction** speed — bounce or kill, hand-checked rather than pattern-matched: **Gust, Star-Crossed, Hidden Blade, Temporal Breach, Windsinger**. Retreat and Mesmerize are excluded because their bounce is friendly-only.
 
