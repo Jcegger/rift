@@ -212,7 +212,7 @@ So:
 
 > **323.7.** Remove all Hidden cards from all Battlefields that are not controlled by the same player and place them in their owner's Trash.
 
-1. Lose the battlefield, and the card goes to your **trash**, revealed (§421.4).
+1. Lose the battlefield, and the card goes to your **trash**, revealed (§421.4). **Moving your own last unit off counts.** A legend walk-home, Star Spring's move, a Tideturner swap that takes it away, or a standard move all leave you with no units there, and you lose control at the next cleanup in an Open state (§190.4.c, §323.6). The same cleanup trashes the card (§323.7). Flip it first, or keep a second unit there. That is why Jun's Star Spring save works: the flipped unit stays behind.
 2. **A mutual wipe does it too.** If nobody has units left, the battlefield is Uncontrolled (§466.5.b), which is not "the same player", so §323.7 trashes it. **In this deck the even trade got worse**: no XP *and* a lost card.
 3. The trash is not nowhere. Tail-Cloaked Matriarch can rebuy Evelynn, Tornado Warrior or Tideturner, and Fizz can recast Switcheroo. A rebuy plays from the trash, though, not from face down, so **Evelynn's trigger does not fire off a Matriarch rebuy.**
 
@@ -402,6 +402,14 @@ Zed is pumped into their hold and they answer with their own pump. Swap Zed out 
 ### The Vex lock: free points to close
 
 Clear their board, then leave Vex, Apathetic on a battlefield: anything they play is stunned and cannot move, so they cannot contest it. Jun took a game from 5 to 8 points this way with a Vex on each battlefield ([Jun's notes §10](khazix-voidreaver-jun.md#10-jun-on-video)). It works best after a board wipe, which is why "develop, then clear them at once" and Vex belong together.
+
+### Use it or lose it: drag the unit guarding their facedown card
+
+Their lone unit at the battlefield where their facedown card sits is guarding that card. Drag it away with Void Assault, Faefolk or Evelynn, and they face a choice.
+- **Flip in response.** While your spell or trigger is on the chain the state is Closed, so control cannot change yet, and the hidden card has Reaction (§811.6). But its targets must be at *that* battlefield (§811.1.d.2), so it can only protect or replace things there.
+- **Or lose it.** Once the unit is gone and the chain empties, they lose control in the next Open-state cleanup and the card is trashed, revealed (§190.4.c, §323.6, §323.7).
+
+Either way they spend the card now, on your terms, not when it would have hurt you. Expect the response: a unit flip (Guards!, Kennen, Tideturner) keeps them a unit there, and a **Temporal Breach** on the unit you are dragging blinks it, so your move fizzles. That is why the Evelynn line prefers targets from their base when you need the fight itself to happen.
 
 ### Strip the counter before the spell that wins
 
