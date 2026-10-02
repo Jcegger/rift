@@ -122,7 +122,7 @@ Before your Main Phase, three things happen on their own: you **ready everything
 - spend it now walking an exhausted unit home;
 - **hold it deliberately** and spend the XP the fight pays you once it is over.
 
-**Step 2 — buff before you move or flip, always.** A buff after the showdown opens is not a legal play.
+**Step 2 — buff before you move or flip, always.** A buff after the showdown opens is not a legal play. **If a second trick of theirs would beat you, buff now.** Jun lost a fight on camera exactly this way: an unbuffed Kha'Zix into a second Defiant Dance ([Jun's notes §10](khazix-voidreaver-jun.md#10-jun-on-video)). The cost is that a buffed unit has used the turn's activation, so it cannot also walk home.
 
 **Step 3 — develop.** Bodies first. Under the no-overkill rule they soak damage assignment, and they stop your own threats being *alone*.
 
@@ -394,6 +394,14 @@ Zed is pumped into their hold and they answer with their own pump. Swap Zed out 
 - **Fizz + Up from the Deep:** mass early development. The earlier the better, but early Power is costly.
 - **Fizz + Star-Crossed:** bounce Fizz and replay him, taking another spell from the trash.
 
+### The Vex lock: free points to close
+
+Clear their board, then leave Vex, Apathetic on a battlefield: anything they play is stunned and cannot move, so they cannot contest it. Jun took a game from 5 to 8 points this way with a Vex on each battlefield ([Jun's notes §10](khazix-voidreaver-jun.md#10-jun-on-video)). It works best after a board wipe, which is why "develop, then clear them at once" and Vex belong together.
+
+### Strip the counter before the spell that wins
+
+When one spell wins the game, such as Star-Crossed on their key unit, they keep Defy up for exactly that. Make something else eat it first: **Sabotage** (which also shows you the rest of their hand), or a lesser spell they cannot let resolve. Then cast the one that matters.
+
 ### Vex holding, Rengar in hand
 
 Pass and play reactively. If they conquer the other battlefield, Ambush Rengar there. If they only develop, Vex stuns what they play and Rengar comes down beside her.
@@ -515,6 +523,8 @@ From Jun's list and this page's own:
 7. **Flipping into open Chaos.** Or, for Evelynn, into open Calm.
 8. **Trying to use the legend mid-fight.** Buff first, or hold it and spend the fight's XP after.
 9. **Missing lethal**, for yourself or for them. From 5 points, check every turn.
+10. **Not buffing before a fight a second trick would beat.** Jun's own on-camera mistake. If their open runes could hold two pumps, buff first.
+11. **Holding when retreating is better.** The defender shows what is defending, and the attacker builds the fight around it. Walking a unit home is not conceding the point; it sets up the next turn (Jun).
 
 ---
 

@@ -41,7 +41,9 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `scripts/build-guides.mjs` - regenerates the guide manifest. Fetches nothing.
 - `scripts/build-guide` - turns one guide into a Word doc with pandoc. No 's'.
 - `scripts/build-journal` - renders the match journal's blank pages to PDFs in
-  `guides/out/journal/`, sized for a Kindle Scribe. Fetches nothing.
+  `guides/out/journal/`, sized for a Kindle Scribe, plus a between-games matchup card
+  printed from the pocket-card table in `guides/khazix-voidreaver-matchups.md`. Fetches
+  nothing.
 - `scripts/check.mjs` - the regression checks; run it after touching the engine.
 - `.github/workflows/refresh.yml` - rebuilds all of the above daily and commits.
 - `schema.sql` - the Supabase table and its policies.

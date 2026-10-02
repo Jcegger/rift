@@ -4,19 +4,24 @@
     scripts/build-journal             # 5 match pages per night
     scripts/build-journal --pages 8
 
-Writes three files, kept separate on purpose:
+Writes four files, kept separate on purpose:
 
     match-night.pdf   blank match pages -- the only one open during games (TR 416.4)
     trouble-list.pdf  the running trouble list -- read between games, never during one
     review.pdf        the ten-match review
+    matchup-card.pdf  the Kha'Zix pocket card -- between games only, like the trouble list
 
 Sized 3:4 (6 x 8 in) for a Kindle Scribe; prints fine scaled to A4 or Letter. The pages
 carry field labels only -- no shorthand key, no advice -- because anything more is a note
 from outside the match. Source of truth is docs/match-journal.md; guides/out/ is build
-output (gitignored). Drawn with matplotlib, so it needs no browser.
+output (gitignored). The matchup card is the exception: it carries advice, so it is
+printed from the "pocket card" table in guides/khazix-voidreaver-matchups.md and is never
+open during a game. Drawn with matplotlib, so it needs no browser.
 """
 import argparse
 import pathlib
+import re
+import textwrap
 
 import matplotlib
 
@@ -142,16 +147,65 @@ def review_page(pdf):
     y = bottom + 0.32
     p.fields(y, [("game 1", 0.25), ("games 2–3", 0.25), ("going 1st", 0.25), ("going 2nd", 0.25)])
     lines = [
-        "mistakes that repeated", "", "by type  t   s   o   c   i   p   r", "“next time I'll” I kept",
+        "mistakes that repeated", "", "by type  t   s   o   c   i   p   r    ·  marks  h   n   f", "“next time I'll” I kept",
         "“next time I'll” I broke", "flags I still can't answer", "",
         "worst matchup → plan", "top trouble card → answer",
         "sideboard cards that earned it", "battlefield to lead with",
         "card I kept wanting", "card that did nothing", "mulligans I'd change",
-        "one change to my play", "one change to my deck",
+        "one change to my play", "one question for Jun, or one test",
     ]
     for label in lines:
         y += 0.28
         p.fields(y, [(label, 1.0)])
+    p.done()
+
+
+MATCHUPS = ROOT / "guides" / "khazix-voidreaver-matchups.md"
+CARD_HEADING = "## Between games: the pocket card"
+
+
+def card_rows():
+    """The pocket-card table from the matchup guide, as dicts keyed by its header."""
+    src = MATCHUPS.read_text(encoding="utf-8")
+    at = src.index(CARD_HEADING)  # fail loudly if the section is renamed
+    rows = [ln for ln in src[at:].splitlines() if ln.startswith("|")]
+    plain = lambda c: re.sub(r"\*\*|`|\[([^\]]+)\]\([^)]*\)", lambda m: m.group(1) or "", c).strip()
+    cells = [[plain(c) for c in r.strip("|").split("|")] for r in rows]
+    head, body = cells[0], [r for r in cells[2:] if len(r) == len(cells[0])]
+    if len(body) < 10:
+        raise SystemExit(f"pocket card has {len(body)} rows; expected the Tier 1-2 field")
+    return [dict(zip(head, r)) for r in body]
+
+
+def card_pages(pdf):
+    """Opponent blocks, flowed down the page and onto the next as needed."""
+    rows, wrap = card_rows(), textwrap.TextWrapper(width=88)
+    labels = [("plan", "plan"), ("flips", "flips"), ("never", "never"), ("board", "board"), ("BF", "battlefield")]
+    p, y = None, 0.0
+
+    def fresh():
+        page = Page(pdf)
+        page.text(L, 0.45, "MATCHUP CARD — BETWEEN GAMES ONLY", size=10)
+        page.text(L, 0.68, "Kha'Zix Midrange (Jun) · from guides/khazix-voidreaver-matchups.md", size=6, bold=False)
+        return page, 0.95
+
+    for row in rows:
+        lines = [(lab, wrap.wrap(row[key]) or ["—"]) for lab, key in labels]
+        need = 0.2 + 0.15 * sum(len(t) for _, t in lines) + 0.12
+        if p is None or y + need > H - 0.35:
+            if p:
+                p.done()
+            p, y = fresh()
+        y += 0.2
+        p.text(L, y, f"{row['opponent'].upper()}  ·  Jun: {row['Jun']}", size=7)
+        for lab, text in lines:
+            for i, t in enumerate(text):
+                y += 0.15
+                if i == 0:
+                    p.text(L, y, lab, size=6)
+                p.text(L + 0.55, y, t, size=6, bold=False)
+        y += 0.06
+        p.line(L, R, y, lw=0.4, color=FAINT)
     p.done()
 
 
@@ -170,6 +224,7 @@ def main():
     build("match-night.pdf", match_page, args.pages)
     build("trouble-list.pdf", trouble_page, 3)
     build("review.pdf", review_page, 3)
+    build("matchup-card.pdf", card_pages, 1)
 
 
 if __name__ == "__main__":

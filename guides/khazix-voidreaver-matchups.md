@@ -20,7 +20,7 @@ date: 2026-10-02
 **Jun's own post-ban read of the field:**
 - Jayce and LeBlanc have "always been superb" for Kha'Zix.
 - Irelia and Akali, the Astral Heron decks, are decent.
-- Rengar and Master Yi are even or slightly unfavoured, "nothing we can't beat".
+- Rengar and Master Yi are even or slightly unfavoured, "nothing we can't beat". On ban day he called Master Yi "not so great" and Azir "a good matchup" ([Jun's notes §10](khazix-voidreaver-jun.md#10-jun-on-video)).
 - Kennen got much worse with the ban.
 
 ---
@@ -87,12 +87,12 @@ Never hold zero battlefields, and never take a fight you have not rigged.
 | Akali | decent | one fight early, **your turn only**; offer a fight before Heron | tapped Calm | **freely** | Falling Star on Rengar; Marai when you attack them |
 | LeBlanc | superb | one fight early, rigged only | **freely** | **freely** | Thousand-Tailed Watcher at 7 runes; one mistake against a veteran |
 | Jayce | superb | take both, race; answer Aurora | pull from base | **freely** | a fair fight (15%); an unanswered Dazzling Aurora |
-| Azir | — | develop, then clear them at once | **freely** | **freely** | Equipment piling up |
+| Azir | good | develop, then clear them at once | **freely** | **freely** | Equipment piling up |
 | Rengar | even | patient: hold one, make them act first | **freely** | **freely** | the early game; Ambush bodies mid-fight |
 | Vex | — | hold one, grind | tapped Chaos *and* Calm | tapped Chaos | playing units while Vex, Apathetic is out |
 | Kennen | tough, weaker post-ban | pressure their setup, then one big turn | tapped Chaos | tapped Chaos | a completed setup by turn 4–5; an even trade |
 | Rek'Sai | — | hold one, let time work | **freely** | **freely** | trading bodies; Falling Star |
-| Master Yi | even | develop hard, then **hold** | tapped Calm | **freely** | attacking a lone defender |
+| Master Yi | even to slightly unfavoured | develop hard, then **hold** | tapped Calm | **freely** | attacking a lone defender |
 | Ezreal | — | take both, race | **don't** | **don't** | flipping at all |
 | Fiora | — | hold one, win long | **freely** | **freely** | any spell into open Body + Order (Riposte) |
 
@@ -113,6 +113,7 @@ Never hold zero battlefields, and never take a fight you have not rigged.
 > - **Middle:** they will use the legend to ready a unit and fight twice, so keep a body back at the battlefield you hold. **Punish a greedy tap-out with removal** (Jun). His named Rampage target here is **Stellacorn Herder** (98%), which draws every time it moves. **Astral Heron** is in 38% of lists, and its discount works only while it stands at a battlefield, so contest that battlefield the turn it lands.
 > - **Closing:** game 1, Punch First is your finisher: Defy and Not So Fast cannot touch it. In games 2–3 Jun takes two out and leans on Sabotage, Hard Bargain and Switcheroo; this page's board takes one.
 > - **Flips:** Tideturner and Tornado Warrior only into tapped Chaos. Evelynn only into tapped Chaos *and* Calm, because Not So Fast is in 72% of lists. Switcheroo: flip it after they pump.
+> - **From Jun's Irelia video (pre-ban):** open a key turn with **Sabotage** to see what you are playing into, and make it, or a lesser spell, eat their Defy before the **Star-Crossed** on their Irelia. Bouncing her usually wins. Close with the **Vex lock**: with their board cleared, Vex on a battlefield stuns whatever they play.
 > - **Never:** cast Void Assault or Rampage into open Calm. Defy counters both.
 
 ### Their deck
@@ -149,7 +150,7 @@ Usually **Zhonya's Hourglass** (85%) or **Tideturner** (89%). Zhonya's saves the
 
 ### Battlefields
 
-They bring **Abandoned Hall** (89% — any player who casts a spell may give a unit there +1, which suits their 13 Reactions), **Sunken Temple** (87%) and **Targon's Peak** (83%). Usual order; Sandswept Tomb's Punch First discount matters most here in games 2–3.
+They bring **Abandoned Hall** (89% — any player who casts a spell may give a unit there +1, which suits their 13 Reactions), **Sunken Temple** (87%) and **Targon's Peak** (83%). **Jun rates Irelia "slightly favoured" on Targon's Peak**, which readies their runes after a conquest, so they keep pumps up through your turn. Expect it in one game of the three, and once used it is retired for the match (§486.5). Usual order otherwise; Sandswept Tomb's Punch First discount matters most here in games 2–3.
 
 ### Board
 
@@ -282,7 +283,7 @@ They bring **Void Gate** (76%) — *"Spells and abilities affecting units here e
 > **At the table**
 > - **How you win:** take both battlefields and race. They run 8 units a deck, only 1.5 of them cheap, so they cannot contest two battlefields early, and their grind of 15.9 means a long game is theirs. Jun rates it "superb" for Kha'Zix.
 > - **The Aurora rule (Jun):** the game usually turns on whether they find **Dazzling Aurora** (70%) on time and whether you find the answer on time. **Sabotage** takes it from their hand (it is a non-unit card). **Ravenbloom Prefect** banishes it as it is played; Jun calls the Prefect "incredibly oppressive" here and often brings it in on the draw. **Acceptable Losses** kills it once it resolves, but only if it is their only gear, because they choose which one dies.
-> - **Mulligan:** keep **Switcheroo** above everything: it is 97% here and nothing else in your deck comes close. Faefolk is the other keep, a 1-Might body to swap.
+> - **Mulligan:** keep **Switcheroo** above everything: it is 97% here and nothing else in your deck comes close. Faefolk is the other keep, a 1-Might body to swap. On the draw in games 2–3, **a Ravenbloom Prefect on turn 1 or 2** can be "already too much for a Jayce deck to handle" (Jun).
 > - **Early:** spread. Two battlefields with a unit each is two points a turn while they ramp.
 > - **Middle:** hide Switcheroo as soon as you can. **Sabotage (76%) takes it from your hand, but cannot reach a facedown card.** Flip it at the battlefield their big unit attacks.
 > - **Closing:** you need eight points before Elder Dragon or Aurora takes over. Every turn you hold two battlefields is a turn closer.
@@ -889,6 +890,29 @@ All within a few points of 36–43 bare, 76–97 with Punch First. **Nasus is th
 
 **Volibear, Furious — Tier 5.3, 0.7%, mean Might 6.46.**
 **3% bare. 27% with Punch First.** 63% isolated plus Kha'Zix. **97% with Switcheroo** is the entire matchup. You will almost never see it, but if you do, the swap is not a nice-to-have.
+
+---
+
+## Between games: the pocket card
+
+The Tier 1–2 entries above, cut to one row each. `scripts/build-journal` prints this table as `matchup-card.pdf`, so **edit it here** and the card follows. It is a note from outside the match: **read it between games, never during one** (TR §416.4, §416.5), which is also when you sideboard.
+
+| opponent | Jun | plan | flips | never | board | battlefield |
+|---|---|---|---|---|---|---|
+| Irelia | decent | press: score early, reach 6 first | Tide/Tornado into tapped Chaos; Evelynn into tapped Chaos + Calm | Void Assault or Rampage into open Calm | +2 Gust +1 Hard Bargain; −2 Star-Crossed −1 Punch First | their Targon's Peak favours them |
+| Akali | decent | one fight early, your turn only; fight before Heron lands | Tide/Tornado freely; Evelynn and Switcheroo into tapped Calm | a 2-Might attacker into their facedown card (Marai) | +2 Prefect +2 Acceptable Losses +1 Hard Bargain; −2 Rampage −2 Star-Crossed −1 Up from the Deep | no Rengar fights at Void Gate into open Fury |
+| LeBlanc | superb | one fight early, rigged only; points, not kills | freely | trading just because you can (Karthus) | +1 Decree; −1 Sabotage | never your Star Spring |
+| Jayce | superb | take both, race; answer Aurora | freely; Evelynn pulls from their base | a fair fight (15%) | +2 Prefect +1 Decree; −2 Punch First −1 Up from the Deep | Forgotten Monument slows your race |
+| Azir | good | develop, then clear them at once | freely | Star-Crossed or Void Assault into open Calm | +2 Prefect +2 Acceptable Losses; −1 Zed −1 Up from the Deep −1 Star-Crossed −1 Merchant | usual order |
+| Rengar | even | patient, hold one; make them act first | freely | committing everything to one fight | +1 Rampage +1 Hard Bargain; −1 Ride the Wind −1 Sabotage | avoid your Star Spring |
+| Vex | — | hold one, grind; kill Vex, Apathetic before you deploy | Tide/Tornado into tapped Chaos; Evelynn into tapped Chaos + Calm | playing units while Vex, Apathetic stands | +1 Hard Bargain; −1 Ride the Wind | usual order |
+| Kennen | tough, weaker post-ban | pressure their setup; kill Kennen, Storm of Shuriken on sight | only into tapped Chaos | an even trade | +2 Gust +1 Hard Bargain; −2 Star-Crossed −1 Tornado Warrior | they run Zaun Warrens too |
+| Rek'Sai | — | hold one, let time work | freely | Rengar into two open Fury | none | never your Star Spring |
+| Master Yi | even to slightly unfavoured | develop, then hold; drag their lone unit to you | Tide/Tornado freely; Evelynn into tapped Calm | attacking a lone defender | +2 Prefect +2 Acceptable Losses; −1 Up from the Deep −2 Star-Crossed −1 Rampage | usual order |
+| Ezreal | — | take both, race | don't | flipping into open Chaos | +1 Decree +1 Hard Bargain; −1 Evelynn −1 Tornado Warrior | usual order |
+| Fiora | — | hold one, win long | freely | Punch First into open Body + Order (Riposte) | +1 Hard Bargain; −1 Ride the Wind | usual order |
+
+"Usual order" is Zaun Warrens, then Sandswept Tomb or Star Spring. Every battlefield used in a decided game retires for the match, yours and theirs (§486.5).
 
 ---
 

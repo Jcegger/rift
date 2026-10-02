@@ -242,7 +242,7 @@ The catch that costs games: a hidden **permanent** must be played to the battlef
 
 ## 9. The staples
 
-**Basis:** the 1,048-deck window, banned cards excluded. A share is the fraction of decks running at least one copy, with alternate printings counted once. **Costs show Power where this repo has it sourced**; the catalog carries Energy only, so a bare "2E" may still carry a Power cost.
+**Basis:** the 1,048-deck window, banned cards excluded. A share is the fraction of decks running at least one copy, with alternate printings counted once. Costs are written Energy/Power, so a bare "2E" costs no Power.
 
 ### The twelve to know, across every domain
 
@@ -289,7 +289,7 @@ The deckbuilding view: your Legend's identity decides which of these tables you 
 | **Cleave** | 9% | 1E · `[Action]` give a unit **Assault 3** this turn |
 | **Darius, Trifarian** | 8% | 5E/1 · 5 Might · on your **second card each turn**, +2 Might and ready me |
 | **Long Sword** | 7% | 2E/1 gear · `[Quick-Draw]` · `[Equip]` Fury |
-| **Perfect Execution** | 6% | 3E · ready a unit and give it Assault 3 · Flow |
+| **Perfect Execution** | 6% | 3E/1 · ready a unit and give it Assault 3 · Flow |
 | **Blood Rush** | 5% | 1E · `[Action]` `[Repeat]` give a unit Assault 2 |
 
 Fury's staples are the least concentrated of any domain: no card above 15%. It pays in damage and attack buffs rather than in cards.
@@ -323,7 +323,7 @@ Fury's staples are the least concentrated of any domain: no card above 15%. It p
 | **Ravenbloom Student** | 10% | 2E · 2 Might · +1 Might whenever you play a spell |
 | **Sprite Burst** | 9% | 5E · two ready 3-Might Temporary Sprite tokens |
 | **Wages of Pain** | 7% | 3E · `[Hidden][Action]` deal 3 at a battlefield, plus a Gold token |
-| **Temporal Breach** | 7% | 2E · `[Hidden]` banish a unit and replay it at the same location |
+| **Temporal Breach** | 7% | 2E/1 · `[Hidden]` banish a unit and replay it at the same location |
 | **Deadly Flourish** | 6% | 4E · deal 3 to an enemy unit; a Gold token when it dies |
 
 Mind shrinks Might rather than dealing damage, which **dodges damage prevention**: a unit reduced to 1 Might is still alive, but loses every fight it is in.
@@ -469,7 +469,7 @@ The two rules that hold in every matchup: **never hold zero battlefields, and ne
 
 **Rule text** is [rules-full.md](rules-full.md), Riot's Core Rules verbatim. [rules-faq.md](rules-faq.md) outranks it where they differ, and [rules-rulings.md](rules-rulings.md) covers what neither states. Every `§N` here is a Core Rules entry.
 
-**Card text** is `data/cards.json` with `data/errata.json` applied. Riot's feed serves **printed** text, and errata are published separately and never flow back into it, so the raw catalog shows superseded wording. The catalog carries **no Power costs**, which is why [§9](#9-the-staples) shows Power only where the repo had it from another source.
+**Card text** is `data/cards.json` with `data/errata.json` applied. Riot's feed serves **printed** text, and errata are published separately and never flow back into it, so the raw catalog shows superseded wording. Power costs are the catalog's `p` field, which agrees with riftbound.gg's card database on all 1,140 printings both carry.
 
 **Card shares** come from `data/decks.json`, restricted to the **1,048 decks dated 24 September – 1 October 2026**:
 - **Excluded:** the 23 September bulk-import day, 901 decks posted within minutes that skew every share they touch.

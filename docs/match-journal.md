@@ -91,9 +91,11 @@ These are decisions that only exist across games, so the page records them:
   method, decides (TR §407.1, §407.2). After that **the loser of the previous game
   chooses**; after a draw the previous order stands (TR §407.4). Going second channels
   an extra rune on your first Channel Phase (§485.7), so the choice is real.
-- **Which battlefield.** Each game you choose one of your three, and a battlefield used in
-  a decided game is retired for the match (§486.6). Leading with your best one, or saving
-  it, is a decision worth checking afterwards.
+- **Which battlefield.** Each game you choose one of your three, and **every battlefield
+  used in a decided game is retired for the match, yours and theirs** (§486.5, §486.6).
+  So your three have to cover three games. Jun's order for Kha'Zix is Zaun Warrens in
+  game 1, then Sandswept Tomb (mostly when going second) or Star Spring. Whether you
+  followed it, and whether it cost you, is worth checking afterwards.
 - **Sideboarding**, if your store uses it. Not before game 1 (TR §403.5); between games,
   1-for-1 (TR §403.4), and you may change your Chosen Champion (TR §403.4.a). Game 1 is
   therefore always your main deck against theirs, and games 2–3 are both players'
@@ -113,6 +115,15 @@ words**.
 | `s` | surprised me | `3s react on my move` |
 | `?` | rules question to look up | `7? Hidden + Star Spring` |
 | `d` | my Conquer drew instead of scoring (missed the 7+ gate, §471.1.b) | `8d` |
+
+Three more for the ways [Kha'Zix](../guides/khazix-voidreaver.md#the-short-version)
+loses, so the review page can count them:
+
+| mark | means | example |
+|---|---|---|
+| `h` | lost a hidden card to a lost battlefield | `5h Evel — lost Spring` |
+| `n` | No Result: an even trade or a bounce, so no XP | `4n traded Kha for Rengar` |
+| `f` | a flip blown out: Gust or Star-Crossed in response, or the trigger countered | `6f Tide — Gust` |
 
 For the slots between games:
 
@@ -170,8 +181,10 @@ result slot is enough to see when it was decided.
 
 Fill that game's row: `first`, battlefields, mull, result and `@turn`. Then, if you lost,
 choose first or last; pick your battlefield; sideboard and write the swaps in the next
-row. **This is also when you may open the trouble list** (TR §416.5). About thirty
-seconds, and you are sideboarding anyway.
+row. **This is also when you may open the trouble list and the matchup card** (TR §416.5).
+The card's row for this opponent gives the board swaps, the flip rules and the battlefield
+note in five lines. About thirty seconds, and you are sideboarding anyway. **Close both
+before the next game starts.**
 
 ### After the match
 
@@ -205,7 +218,9 @@ With the notes in front of you:
   two lines you were choosing between, and for each the clean, awkward and punish reply
   ([strategy.md §0](strategy.md#0-the-order-of-every-decision)). Don't just start
   from the turn the game was lost. Find the first turn where your options got
-  narrower than theirs.
+  narrower than theirs. **And ask Jun's question: was there a turn I held when I should
+  have retreated?** The defender shows what is defending; walking home is not conceding
+  the point.
 - **Ask about your opponent's view** if you got the chance at the table — "what would you
   have done on turn 4?" is often better review than your own notes. Jot it beside the
   match.
@@ -226,7 +241,7 @@ going first         __–__        going second       __–__
 
 mistakes that repeated   ______________________________
                          ______________________________
-by type   t __  s __  o __  c __  i __  p __  r __
+by type   t __  s __  o __  c __  i __  p __  r __    marks  h __  n __  f __
 "next time I'll" I kept  ______________________________
 "next time I'll" I broke ______________________________
 flags I still can't answer ____________________________
@@ -240,11 +255,14 @@ card that did nothing     ______________________________
 mulligans I'd change      ______________________________
 
 one change to my play  _________________________________
-one change to my deck  _________________________________
+one question for Jun, or one test  ______________________
 ```
 
 - **`mistakes that repeated`** is the payoff. Read the `my mistake` lines together and look
   for the same thing in different words.
+- **`marks`** tallies every `h`, `n` and `f` from the block's notes. They are the
+  deck's own failure modes. Three `h` in ten matches means you are hiding at
+  battlefields you cannot keep; three `f` means you are flipping into open Chaos.
 - **`by type`** tallies the ten `type` letters. A column with three or more is the habit;
   the matching section of [strategy.md](strategy.md) is what to reread before the next
   block. A `t` is worth fixing first: it is the only type where the right play was
@@ -253,9 +271,13 @@ one change to my deck  _________________________________
   rule you keep breaking needs to be simpler, not repeated.
 - **`game 1` vs `games 2–3`** is the Bo3 split. Strong game 1s and weak sided games point at
   the sideboard plan; the reverse points at the main deck.
-- **One change each to play and deck**, and only one — and **change the list only here**,
-  not mid-block. A list that changes after match 4 turns the review into two half-reviews
-  of two decks. `list v__` on each page is the record if you break this.
+- **One change to your play, and one question for Jun or one test**, and only one of
+  each. The list is Jun's, and the standing rule is to pick between his lists, not edit
+  them. So a deck idea from ten matches is a question to bring him (the
+  [deck guide's §13](../guides/khazix-voidreaver.md#13-questions-to-bring-to-jun) keeps
+  the open ones), or a test to run in practice, not a change to the 56. If you do switch
+  to another of his lists, **switch only here**, not mid-block. `list v__` on each page
+  is the record.
 - **Ten matches find habits, not win rates.** Three matches against one archetype says
   almost nothing about the matchup. Use this page to fix how you play, and be slow to
   change the deck on its numbers.
@@ -306,7 +328,7 @@ The same pages as PDFs you write on with the pen. **Ask the store's judge first*
 device may replace paper at low OPL only at the head judge's discretion (TR §417.2,
 §417.3).
 
-**Keep three separate files**, because only one of them may be open during a game
+**Keep four separate files**, because only one of them may be open during a game
 (TR §416.4):
 
 | file | when it may be open |
@@ -314,9 +336,13 @@ device may replace paper at low OPL only at the head judge's discretion (TR §41
 | `match-night.pdf` — five blank match pages | during games: **only the current match's page** |
 | `trouble-list.pdf` | between games and at home |
 | `review.pdf` | at home |
+| `matchup-card.pdf` — the Kha'Zix pocket card | **between games only**, never during one |
 
-**Building them:** `scripts/build-journal` writes all three to `guides/out/journal/`
-(`--pages N` for more match pages). They are 6 × 8 in, the Scribe's 3:4, and print fine
+**Building them:** `scripts/build-journal` writes all four to `guides/out/journal/`
+(`--pages N` for more match pages). **The matchup card is printed from the pocket-card
+table in the [matchup guide](../guides/khazix-voidreaver-matchups.md#between-games-the-pocket-card)**,
+so it carries advice. That is exactly why it stays closed during games. Rebuild it
+whenever that table changes. They are 6 × 8 in, the Scribe's 3:4, and print fine
 scaled to A4 or Letter.
 
 **Getting them on: Send to Kindle, not USB.** Send each PDF with Amazon's Send to Kindle

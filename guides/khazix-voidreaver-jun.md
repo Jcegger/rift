@@ -187,3 +187,53 @@ His six write-ups, written against the pre-ban list, with his post-ban read in [
 **Two that are not corrections:**
 - **Hard Bargain.** He holds it for his own turn. The deck guide boards it in to protect flips, which can happen on their turn. He wrote that before he ran Hidden cards, so the two do not really conflict. The flip-protection case is new.
 - **Faefolk numbers.** His 45.7% turn-1 Faefolk figure assumes 3 Faefolk and a two-card mulligan.
+
+---
+
+## 10. Jun on video
+
+Three of Jun's YouTube videos, transcribed from their auto-generated captions and summarised in our words. The Metafy-only matchup posts (Akali, Jayce and LeBlanc, 22–23 September) are not on YouTube.
+
+### "Top 5 mistakes Riftbound players make" (29 November 2025)
+
+His first video, and general rather than Kha'Zix-specific. It is consistent with [strategy.md](../docs/strategy.md) point for point.
+
+1. **Actions and Reactions.** Reactions are the stronger tool, because they answer anything that opens a chain, so spend them sparingly. **Casting a spell pre-emptively, before the fight, can win you information.** His example: removal on their unit before you attack. If they answer it with a pump, you change your attacks. If they don't, you attack and keep your own trick for their response.
+2. **Sequencing.** Before any move or play, think the whole turn through: am I forcing a showdown, am I playing a unit, am I holding runes for Actions or Reactions? **Moving and conquering before you play units keeps more options open, and shows the opponent less** before they have to decide on interaction.
+3. **Mulligan for the matchup.** You know who goes first and what they play, so picture how the game goes, not just your curve. A curve-perfect hand of 2-drops can be wrong against a deck whose early units are bigger than yours.
+4. **Role recognition.** You are the aggressor or the defender, and that can change mid-match. The aggressor forces trades and scores before the opponent stabilises. The defender preserves units and avoids inefficient early trades.
+5. **Holding.** Their points do not slow your own clock, so **letting them score is fine if it improves your position.** **The defender has already revealed what is defending**, and the attacker builds the fight around that, which is the first-in trap from strategy.md in his words. So **retreating is often right even from a winning position**: "retreating is not surrendering a point, it's usually setting up for future turns." Hold when the board or a hold-trigger battlefield makes it worth the risk.
+
+### "The best decks post Vendetta banlist" (15 September 2026, ban day)
+
+A tier list recorded an hour after the bans, so first impressions rather than testing. On Kha'Zix, he puts it around the top of B tier: it loses Stacked Deck's consistency but none of what makes it unique. The matchup reads:
+
+| vs | Jun |
+|---|---|
+| **Azir** | **good matchup** |
+| **Master Yi** (Proving Grounds) | **not so great** — and he rates Yi S tier |
+| **Rengar** | even |
+| A-tier decks generally | "some really strong matchups" |
+
+**Why the ban helps Kha'Zix:** Kennen was gatekeeping the format, and "yellow decrees", the Decree spells, "were a big problem for Kha'Zix" and should now see less play. That is the same Decree of Unity he blamed in the Metafy update.
+
+His read of the field, where it touches your matchups:
+- **Jayce** is the best deck going into LA, but easily hated. "Every deck or almost every deck has cards that can hate" it, and **a turn-1 or turn-2 Ravenbloom Prefect could already be too much for a Jayce deck to handle.**
+- **LeBlanc** rose to about A tier. It lost nothing, and with fewer Chaos decks around, Gust and Star-Crossed are less of a threat to it.
+- **Akali** is hard to play, with **below-50% win rates** in his stats. It keeps doing well through a few excellent pilots, not broad success.
+- **Rengar, Azir and Master Yi** are the three strongest decks, keeping each other in balance. Rengar vs Yi and Rengar vs Azir are both skill matchups.
+- **Rek'Sai** may struggle in a Heron format, because the Heron decks are "extremely well equipped to hold" against it.
+- **Vex** is B tier: "holding in general isn't the best strategy in Riftbound."
+
+### "How to beat Irelia — Best-of-Kha'Zix live match commentary" (25 June 2026)
+
+**Pre-ban, from the RQ Utrecht era**, on a list with Stacked Deck, Mister Root, Akshan and Arena's Greatest. Read it for the play patterns, not the cards. He calls Irelia "quite a good matchup" for Kha'Zix, then plays a best-of-three with his thinking out loud:
+
+- **Sabotage first, to see what you are playing into.** He opens a key turn with Sabotage to learn whether the line is safe, and takes the card that swings fights most (Defiant Dance) over the counterspell.
+- **Strip the Defy before the spell that matters.** Their plan is to keep Defy up to protect their Irelia from Star-Crossed. His answer is to make Sabotage, or a lesser spell, eat the Defy first, so Star-Crossed resolves. "If we bounce Irelia there, we are about to win the game."
+- **Make them commit first.** Kha'Zix "represents six Might, which puts our opponent in the situation where they need to respond first", and a fight where you already lead on Might forces them to spend before you decide anything.
+- **His own mistake, called on camera:** going into a Void Assault fight without buffing Kha'Zix first, against a possible second Defiant Dance. The second Dance came, and the fight was lost. **If a second trick would beat you, buff before the fight**: the legend cannot act mid-showdown, and a buff now is the only way to play around it.
+- **The Vex lock closes games.** With their board cleared and Vex, Apathetic on a battlefield, anything they play is stunned and cannot move, so "they can't contest". Vex on each battlefield took him from 5 to 8 points with Irelia unable to answer.
+- **Retreat rather than offer them a good turn.** With a fight looking bad, he walks Kha'Zix home and passes: "I don't want to offer my opponent a very good Irelia turn."
+- **Battlefields change the matchup.** On Targon's Peak, which readies their runes after a conquest, he rates Irelia "slightly favoured", so he plans to win the games where it is not in play.
+- **Sideboarding by play/draw, as his guide says.** On the draw he lowers his 2-drop count. On the play he wants all nine 2-drops and trims the top end.
