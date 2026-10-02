@@ -17,11 +17,11 @@ component-rating tables and its chapter on philosophy are left out. The author s
 himself that the formulas are never calculated at the table, and the ideas survive
 without them. Buy the book for the full argument.
 
-**Why take it seriously.** According to Jay, the author won RQ Barcelona and has many Top 8
-finishes. That is not in our archive yet: the archive has Barcelona RQ decks but no
-player names. So treat it as Jay's account, not a record. The advice itself is
-consistent with what this repo has found independently. The matchup guide's "which game
-is this" table is the book's role question, arrived at from the numbers.
+**Why take it seriously.** The book does not list the author's results, so it has to earn
+its place on its content. It does. The advice is consistent with what this repo found
+independently: the matchup guide's "which game is this" table is the book's role
+question, arrived at from the numbers. It also agrees with Jun, who has the RQ results
+([Jun's notes](../guides/khazix-voidreaver-jun.md)), on most points where the two overlap.
 
 **What is dated.** The book reflects the July 2026 field. Several of its example cards
 are now banned, and those examples have been re-anchored to today's field. See
@@ -358,8 +358,9 @@ add hidden hands, find the same structure in a second matchup, then do it in rea
 
 ## 7. Applied to Kha'Zix Voidreaver
 
-For Jun's list, as covered in the [midrange dossier](../guides/khazix-voidreaver-postban.md)
-and the [matchup guide](../guides/khazix-voidreaver-matchups.md).
+For Jun's list, as covered in the [midrange dossier](../guides/khazix-voidreaver-postban.md),
+the [matchup guide](../guides/khazix-voidreaver-matchups.md) and
+[Jun's own notes](../guides/khazix-voidreaver-jun.md). Where this section and Jun differ, Jun wins.
 
 **Your deck is built to respond second, which is the side the first-in trap favours.**
 Kha'Zix, Mutating Horror has **Ambush** and arrives as a Reaction to any battlefield where

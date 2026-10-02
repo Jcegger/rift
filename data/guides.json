@@ -32,6 +32,29 @@
    "words": 5749
   },
   {
+   "slug": "khazix-voidreaver-jun",
+   "file": "guides/khazix-voidreaver-jun.md",
+   "kicker": null,
+   "title": "Kha'Zix Voidreaver — Jun's Notes",
+   "subtitle": "Riftbound, Vendetta season — what Jun's Metafy guide says about playing the deck, read against the post-ban list",
+   "date": "2026-10-02",
+   "legend": "Voidreaver",
+   "champion": "Kha'Zix, Mutating Horror",
+   "sections": [
+    "0. How fresh each part is",
+    "1. What the post-ban format asks of you",
+    "2. The game plan in one paragraph",
+    "3. Patience, development and the curve",
+    "4. Points, holds and playing from behind",
+    "5. How Jun uses the cards you actually run",
+    "6. Battlefields and mulligans",
+    "7. Sideboarding",
+    "8. Matchups",
+    "9. Where this corrected the other guides"
+   ],
+   "words": 4096
+  },
+  {
    "slug": "khazix-voidreaver-matchups",
    "file": "guides/khazix-voidreaver-matchups.md",
    "kicker": null,
@@ -73,7 +96,7 @@
     "Quick reference",
     "Sources and method"
    ],
-   "words": 10776
+   "words": 10993
   },
   {
    "slug": "khazix-voidreaver-postban",
@@ -104,7 +127,7 @@
     "15. What I'd test",
     "Sources and method"
    ],
-   "words": 19346
+   "words": 19418
   },
   {
    "slug": "khazix-voidreaver",

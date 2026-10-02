@@ -753,6 +753,8 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **Seven showdown-legal spells, up from six**, plus the facedown slot. That slot is the real gain: it is a card you already paid for, at Reaction speed, that does not cost you a card in hand.
 
+**Hold up what is free or spare, never instead of developing.** Jun lists "developing through Ambush" as a rookie mistake. If you keep five runes open to Ambush Rengar on their turn, a good opponent simply develops instead, and five open runes announce Rengar anyway. The facedown slot is the exception that makes this deck different: it threatens a Reaction for 0 Energy, so it costs you no development ([Jun's notes §5](khazix-voidreaver-jun.md#5-how-jun-uses-the-cards-you-actually-run)).
+
 **The one-line version:** *decide the activation, buff, develop, hide, arrange, move or flip, then hold up everything with Action, Reaction or a face down — and if you held the activation, spend it once the fight is over.*
 
 ---

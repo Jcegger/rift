@@ -4,3 +4,6 @@ node_modules/
 _test.html
 _demo.html
 guides/out/
+
+# Paid source material (guides, books) read for docs/strategy.md and guides/*-jun.md. Never published.
+docs/*.pdf

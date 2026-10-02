@@ -51,9 +51,9 @@ Tier 3 entries keep the box and compress the rest. Tier 4 and below get a box an
 
 | | text | for you |
 |---|---|---|
-| **Sandswept Tomb** | *"Each spell that chooses one or more units here that are friendly to it costs `[A]` less."* | Punch First becomes 1E / 1 Body and Switcheroo 2E / 1 Chaos. Symmetric: their self-targeting spells get cheaper too. **The default pick.** |
-| **Zaun Warrens** | *"When you conquer here, discard 1, then draw 1."* | Smooths your draws. Kennen and Zed run it themselves. |
-| **Star Spring** | *"The first time a player plays a non-token unit here each turn, they may move another unit they control here to its base."* | A free walk-home. Symmetric, so **never against Rek'Sai or LeBlanc**, whose units want to come home or die. |
+| **Sandswept Tomb** | *"Each spell that chooses one or more units here that are friendly to it costs `[A]` less."* | Punch First becomes 1E / 1 Body and Switcheroo 2E / 1 Chaos. Symmetric: their self-targeting spells get cheaper too. **Jun saves it mostly for going second in games 2–3** ([Jun's notes §6](khazix-voidreaver-jun.md#6-battlefields-and-mulligans)). |
+| **Zaun Warrens** | *"When you conquer here, discard 1, then draw 1."* | Smooths your draws, and you pick what feeds the trash, so it plays asymmetric for you. Kennen and Zed run it themselves. **Jun's game-1 default.** |
+| **Star Spring** | *"The first time a player plays a non-token unit here each turn, they may move another unit they control here to its base."* | A free walk-home, and with a hidden unit there, a 0-Energy save for a hold that is going wrong ([Jun's notes §5](khazix-voidreaver-jun.md#interactions-worth-knowing)). Symmetric, so **never against Rek'Sai or LeBlanc**, whose units want to come home or die, and **risky against Rengar**, who has ten-plus Reaction-speed ways to trigger it. |
 
 ---
 
@@ -79,7 +79,7 @@ Your grind number is **12**, and every card below compares theirs to it: **above
 | Akali | one fight early, **your turn only** | tapped Calm | **freely** | Falling Star on Rengar; Marai when you attack them |
 | LeBlanc | one fight early, rigged only | **freely** | **freely** | Thousand-Tailed Watcher at 7 runes; killing what wants to die |
 | Jayce | take both, race | pull from base | **freely** | a fair fight (15%); Sabotage taking Switcheroo |
-| Azir | take both before Arise! | **freely** | **freely** | Equipment piling up |
+| Azir | develop, then clear them at once | **freely** | **freely** | Equipment piling up |
 | Rengar | hold one, grind | **freely** | **freely** | Ambush bodies mid-fight |
 | Vex | hold one, grind | tapped Chaos *and* Calm | tapped Chaos | playing units while Vex, Apathetic is out |
 | Kennen | one fight early, no trades | tapped Chaos | tapped Chaos | an even trade |
@@ -102,7 +102,7 @@ Your grind number is **12**, and every card below compares theirs to it: **above
 > - **Early:** develop two bodies and take a battlefield with a straight fight. Do not lead with spells — Defy is in every list.
 > - **Middle:** they will use the legend to ready a unit and fight twice. Keep a body back at the battlefield you hold, so a second attack meets a defender.
 > - **Closing:** Punch First is your finisher — Defy and Not So Fast cannot touch it, and only Abandon (13%) or Hard Bargain (4%) can.
-> - **Flips:** Tideturner and Tornado Warrior only into tapped Chaos. Evelynn only into tapped Chaos *and* Calm — Not So Fast is in 72% of lists. Switcheroo is boarded out after game 1.
+> - **Flips:** Tideturner and Tornado Warrior only into tapped Chaos. Evelynn only into tapped Chaos *and* Calm — Not So Fast is in 72% of lists. Switcheroo stays in after game 1: flip it after they pump.
 > - **Never:** cast Void Assault or Rampage into open Calm. Defy counters both.
 
 ### Their deck
@@ -143,7 +143,7 @@ They bring **Abandoned Hall** (89% — any player who casts a spell may give a u
 
 ### Board
 
-+2 Gust, +1 Hard Bargain. −1 Switcheroo, −2 Star-Crossed. Gust does Star-Crossed's job against a 2.6 board for 1 Energy, without bouncing your own unit; Hard Bargain answers Not So Fast and Defy alike; and Switcheroo has nothing to swap into against a flat board.
++2 Gust, +1 Hard Bargain. −2 Star-Crossed, −1 Punch First. Gust does Star-Crossed's job against a 2.6 board for 1 Energy, without bouncing your own unit; Hard Bargain answers Not So Fast and Defy alike. **Switcheroo stays.** An earlier version of this line cut it because "there is nothing to swap into against a flat board", but its target is the unit they just pumped, not their natural biggest. Jun brings Switcheroo in here and cuts two Punch First ([Jun's notes §7](khazix-voidreaver-jun.md#7-sideboarding)).
 
 ---
 
@@ -323,12 +323,12 @@ A ramp deck. Platewyrm Egg and the legend make extra Energy; Catalyst of Aeons a
 
 ## Azir, Emperor of the Sands — Tier 2.1 · 4.2% · Calm/Order · mean Might 3.8
 
-**In a sentence:** almost no units in the list and a board made of tokens and Equipment — so take both battlefields before the Equipment count turns into an army.
+**In a sentence:** almost no units in the list and a board made of tokens and Equipment. Their early game is theirs, so develop through it and clear the board in one go, because Azir rebuilds one unit a turn.
 
 > **At the table**
-> - **How you win:** take both battlefields before Arise! lands. They run **3.6 units a deck**; their board is Sand Soldier tokens, and Arise! makes one for every Equipment they control.
+> - **How you win:** let them have the early game and win the late one. Develop, accept their early point lead, then clear their board with removal in as few turns as you can. Azir usually develops one unit a turn and runs out of cards, so a cleared board stays cleared (Jun). They run **3.6 units a deck**; their board is Sand Soldier tokens, and Arise! makes one for every Equipment they control, so play around it. *An earlier version of this box said "take both battlefields before Arise! lands". Jun's plan replaced it.*
 > - **Mulligan:** keep cheap units and Switcheroo. You want bodies on two battlefields early.
-> - **Early:** spread. They have 0.3 cheap units a deck, so an early battlefield is usually uncontested.
+> - **Early:** develop first. They have 0.3 cheap units a deck, so a free early point is there if it costs you no development, but it is not the plan.
 > - **Middle:** every Equipment you kill is a Sand Soldier they never get, and a smaller swing in every fight. Ravenbloom Prefect banishes Equipment as it is played.
 > - **Closing:** isolation is 95% — their units are few and large. Drag one onto Kha'Zix.
 > - **Flips:** freely. Nothing they run removes your hidden unit; Not So Fast is in 7%.
@@ -373,7 +373,7 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 ### Board
 
-**+2 Ravenbloom Prefect, +2 Acceptable Losses** — this is the matchup the gear package exists for. −2 Rampage, −1 Star-Crossed, −1 Traveling Merchant: Rampage trades Might into a bigger board, Defy counters Star-Crossed, and the Merchant does least in a race. Keep all four Hidden cards.
+**+2 Ravenbloom Prefect, +2 Acceptable Losses** — this is the matchup the gear package exists for. −1 Zed, −1 Up from the Deep, −1 Star-Crossed, −1 Traveling Merchant. Defy counters Star-Crossed, and Jun cuts Zed and Up from the Deep here. **Rampage stays**, because clearing their board at once is the plan. Keep all four Hidden cards.
 
 ---
 
@@ -650,7 +650,7 @@ Their +2 cancels Kha'Zix's +2 exactly. **The unit that moves in applies Conteste
 
 ### Board
 
-+2 Ravenbloom Prefect, +2 Acceptable Losses (Zhonya's 81%). −1 Switcheroo (flat board), −2 Star-Crossed, −1 Rampage — Defy counters both. Void Assault stays: it is how you drag.
++2 Ravenbloom Prefect, +2 Acceptable Losses (Zhonya's 81%). −1 Up from the Deep, −2 Star-Crossed, −1 Rampage — Defy counters both. Void Assault stays: it is how you drag. **Switcheroo stays too.** Jun brings it in here and cuts Up from the Deep instead ([Jun's notes §7](khazix-voidreaver-jun.md#7-sideboarding)).
 
 ---
 
