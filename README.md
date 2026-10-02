@@ -47,6 +47,9 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `schema.sql` - the Supabase table and its policies.
 - `docs/fundamentals.md` - how the game works and what the field actually plays. The
   teaching layer over `docs/rules.md`'s reference layer.
+- `docs/strategy.md` - how to choose between two legal lines: the lethal check, roles,
+  reading the opponent, pressure, and reviewing a game. Distilled from Mateo Ferreira's
+  *The Mathematics of Winning Positions* and applied to Kha'Zix. On the Guides shelf.
 - `docs/picking-a-deck.md` - how to drive the Next tab's Find my deck panel.
 - `docs/match-journal.md` - a pen-and-paper template for logging games. A plan, not
   a finished thing, and nothing in the app reads it.

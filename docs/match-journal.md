@@ -150,7 +150,7 @@ G3 ________________________________________________________________________
    ________________________________________________________________________
 
 after ─────────────────────────────────────────────────────────────────────
-my mistake      ____________________________________   (wins too)
+my mistake      ______________________________  type _   (wins too)
 next time I'll  ____________________________________
 ```
 
@@ -182,6 +182,11 @@ usually one of them.
 - **`my mistake`** — one, the biggest, across the whole match. Your decision, not their
   draw. **Wins get this line too**: an opponent's errors hide yours, and a win with no
   mistake noted is the most suspicious entry on the page.
+- **`type`** — one letter for what *kind* of mistake it was, from
+  [strategy.md §8](strategy.md#8-reviewing-a-game): **`t`**erminal (missed a win or a
+  loss to prevent), **`s`**tate, **`o`**bjective, **`c`**onversion, **`i`**nformation,
+  **`p`**ressure, **`r`**ole. The words in `my mistake` change from match to match; the
+  letter is what lets the review page see the same mistake three times.
 - **`next time I'll`** — the mistake rewritten as a rule you could follow at the table.
   "Next time I'll count their open runes before attacking", not "play better".
 
@@ -195,7 +200,12 @@ With the notes in front of you:
   composed to answer belongs in [`docs/rules-rulings.md`](rules-rulings.md).
 - **Look up any card you couldn't name**, and read the actual text of every trouble card
   — half of "I can't beat that card" is a misread of what it does.
-- **Answer the `!` flags you still can.** The ones you can't go on the review page.
+- **Answer the `!` flags you still can.** The ones you can't go on the review page. For
+  each, run the terminal scan first (was there a win, or a loss to stop?). Then write the
+  two lines you were choosing between, and for each the clean, awkward and punish reply
+  ([strategy.md §0](strategy.md#0-the-order-of-every-decision)). Don't just start
+  from the turn the game was lost. Find the first turn where your options got
+  narrower than theirs.
 - **Ask about your opponent's view** if you got the chance at the table — "what would you
   have done on turn 4?" is often better review than your own notes. Jot it beside the
   match.
@@ -216,6 +226,7 @@ going first         __–__        going second       __–__
 
 mistakes that repeated   ______________________________
                          ______________________________
+by type   t __  s __  o __  c __  i __  p __  r __
 "next time I'll" I kept  ______________________________
 "next time I'll" I broke ______________________________
 flags I still can't answer ____________________________
@@ -234,6 +245,10 @@ one change to my deck  _________________________________
 
 - **`mistakes that repeated`** is the payoff. Read the `my mistake` lines together and look
   for the same thing in different words.
+- **`by type`** tallies the ten `type` letters. A column with three or more is the habit;
+  the matching section of [strategy.md](strategy.md) is what to reread before the next
+  block. A `t` is worth fixing first: it is the only type where the right play was
+  already on the board.
 - **`kept` / `broke`** checks whether last block's lessons actually changed anything. A
   rule you keep breaking needs to be simpler, not repeated.
 - **`game 1` vs `games 2–3`** is the Bo3 split. Strong game 1s and weak sided games point at

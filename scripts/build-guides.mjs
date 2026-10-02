@@ -22,6 +22,7 @@ const OUT = new URL("../data/guides.json", import.meta.url);
    material for this repo — the rules dumps, the FAQ — and has no business in the app. */
 const EXTRA = [
   { file: "docs/fundamentals.md", kicker: "Reference · every deck" },
+  { file: "docs/strategy.md", kicker: "Strategy · every deck" },
 ];
 
 // The frontmatter is pandoc's, so read it rather than inventing a second one.

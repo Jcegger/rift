@@ -119,7 +119,7 @@ def match_page(pdf):
         y += 0.04
     y += 0.3
     p.section(y, "after")
-    p.fields(y + 0.38, [("my mistake", 1.0)])
+    p.fields(y + 0.38, [("my mistake", 0.8), ("type", 0.2)])
     p.fields(y + 0.72, [("next time I'll", 1.0)])
     p.done()
 
@@ -142,7 +142,7 @@ def review_page(pdf):
     y = bottom + 0.32
     p.fields(y, [("game 1", 0.25), ("games 2–3", 0.25), ("going 1st", 0.25), ("going 2nd", 0.25)])
     lines = [
-        "mistakes that repeated", "", "“next time I'll” I kept",
+        "mistakes that repeated", "", "by type  t   s   o   c   i   p   r", "“next time I'll” I kept",
         "“next time I'll” I broke", "flags I still can't answer", "",
         "worst matchup → plan", "top trouble card → answer",
         "sideboard cards that earned it", "battlefield to lead with",

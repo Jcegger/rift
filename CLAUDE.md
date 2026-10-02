@@ -37,6 +37,16 @@ says. A wrong premise silently invalidates every piece of advice built on it.
 
 ---
 
+## Giving play advice
+
+**Read `docs/strategy.md` before advising on a line, a matchup plan or a game review.**
+It is how this repo chooses between two legal plays. **Run its terminal scan first:**
+can either player reach 8 before the other acts again? A hold at 7 wins, because hold
+points are not gated (§471.1.a.1). Only after that does future-position reasoning apply.
+Review mistakes using its seven types, so the match journal's tallies stay comparable.
+
+---
+
 ## What lives where
 
 **The collection, decks, wants and settings are not in git.** They live in a Supabase

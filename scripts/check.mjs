@@ -2980,7 +2980,7 @@ section('The guide renderer');
      started using a construct it drops. Fenced blocks were exactly that: three guides
      carried one and the fences rendered as literal backticks for weeks. */
   const guideFiles = readdirSync(join(ROOT, 'guides')).filter((f) => f.endsWith('.md'))
-    .map((f) => join('guides', f)).concat(['docs/fundamentals.md']);
+    .map((f) => join('guides', f)).concat(['docs/fundamentals.md', 'docs/strategy.md']);
   const fenced = guideFiles.filter((f) => /^```/m.test(readFileSync(join(ROOT, f), 'utf8')));
   ok('every page on the shelf renders without leaking its own markup',
      guideFiles.every((f) => {

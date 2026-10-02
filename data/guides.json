@@ -217,6 +217,29 @@
     "Where these numbers come from"
    ],
    "words": 5469
+  },
+  {
+   "slug": "strategy",
+   "file": "docs/strategy.md",
+   "kicker": "Strategy · every deck",
+   "title": "Winning Positions — Strategy Notes",
+   "subtitle": "How to think about a turn, distilled from Mateo Ferreira's The Mathematics of Winning Positions and applied to the current field",
+   "date": "2026-10-02",
+   "legend": null,
+   "champion": null,
+   "sections": [
+    "0. The order of every decision",
+    "1. The board is not the position",
+    "2. Every deck is solving a different problem",
+    "3. Resources are only what they can become",
+    "4. Information is about plans, not cards",
+    "5. Pressure is the removal of good choices",
+    "6. Matchups are two systems competing",
+    "7. Applied to Kha'Zix Voidreaver",
+    "8. Reviewing a game",
+    "9. What has changed since the book"
+   ],
+   "words": 4499
   }
  ]
 }
