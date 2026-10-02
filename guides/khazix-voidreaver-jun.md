@@ -24,6 +24,7 @@ The guide has two layers, and they are not the same age.
 | **Card choices, game plan, mulligans, mistakes, matchups** | the **pre-ban** "Kha'Zix Midrange Vendetta" list | **the reasoning is current; some of the cards are not.** That list ran Stacked Deck ×3 (now banned), Onslaught, Hard Bargain main, Up from the Deep ×3, Forbidding Waste, and no Evelynn or Tornado Warrior |
 | **Sideboard tables** | the pre-ban side (Sett, Akshan, Angler Beast, Abandon, Rebuke, Unyielding Spirit) | **the principles hold; the tables mostly do not.** See [§7](#7-sideboarding) |
 | **Dated matchup posts** (22–23 September: Akali, Jayce, LeBlanc) and the **gameplay videos** | post-ban | **not captured.** They are video or did not print. Watch them on Metafy |
+| **YouTube videos** (§10): Top 5 mistakes, the ban-day tier list, Irelia commentary | Nov 2025, 15 Sep 2026 (ban day), Jun 2026 (pre-ban) | the tier list is current but untested first impressions; the other two are general or pre-ban play patterns |
 
 ---
 

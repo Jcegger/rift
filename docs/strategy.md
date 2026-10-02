@@ -358,57 +358,23 @@ add hidden hands, find the same structure in a second matchup, then do it in rea
 
 ## 7. Applied to Kha'Zix Voidreaver
 
-For Jun's list, as covered in the [deck guide](../guides/khazix-voidreaver.md),
-the [matchup guide](../guides/khazix-voidreaver-matchups.md) and
-[Jun's own notes](../guides/khazix-voidreaver-jun.md). Where this section and Jun differ, Jun wins.
+The book is general; Jun is specific. Where they meet, the advice is as solid as this repo has. **Where they differ, Jun wins.** The detail lives in the [deck guide](../guides/khazix-voidreaver.md), the [matchup guide](../guides/khazix-voidreaver-matchups.md) and [Jun's notes](../guides/khazix-voidreaver-jun.md). This section is the map between them.
 
-**Your deck is built to respond second, which is the side the first-in trap favours.**
-Kha'Zix, Mutating Horror has **Ambush** and arrives as a Reaction to any battlefield where
-you have a unit. The Hidden cards flip **at Reaction speed for 0** from the turn after
-you hide them. **Evelynn makes you the defender of a fight you chose.** In each case the
-opponent commits first and you answer the allocation they showed you. Play to that
-strength:
+| the book says | Jun says, for this deck | so at the table |
+|---|---|---|
+| **Who is happier if nothing happens?** ([§2](#2-every-deck-is-solving-a-different-problem)) | your late game (removal, finishers, Fizz, Matriarch) is the better one against most of the field, so **develop first, spells second** | quiet early turns usually favour you. Against the decks that out-grind you, the matchup guide's role table says force it earlier |
+| **Check for lethal first** ([§0](#0-the-order-of-every-decision)) | **reach 6 before them**: Void Assault and the Ambush units take both battlefields in one turn | from 5 points, scan every turn for both players. Keep the finishing cards for the turn that needs them |
+| **A bad win loses to what follows** ([§1](#1-the-board-is-not-the-position)) | the legend's best use is the **walk-home** after a conquest; don't spend everything on the 6th point | an even trade is No Result and pays no XP (§466.3), a failed conversion, not a neutral outcome. Losing a battlefield you hid at is the bad win in its purest form |
+| **The first-in trap** ([§5](#5-pressure-is-the-removal-of-good-choices)) | "the defender has already revealed what the defending units will be"; **retreating is not surrendering a point**. Kha'Zix "represents six Might", which makes them respond first | your Ambush, Hidden and Evelynn cards are built to answer second. Make them commit, and walk home rather than hold a battlefield they can plan against |
+| **A hold is strong only if it is backed** ([§1](#1-the-board-is-not-the-position)) | **"can I win this game without a hold?"** If not, force one. Post-ban, the Heron decks make that most games | hold with a facedown card behind you. At 7, a split board with a hidden Tideturner |
+| **Refuse the exchange they prepared** ([§5](#5-pressure-is-the-removal-of-good-choices)) | "developing through Ambush" is a rookie mistake, seen from the other side: don't hold five runes open for a Rengar a good player will simply develop past | hiding is your way to refuse: it cannot be answered (§811.1.c.1, §811.1.c.2) and costs no Energy on their turn. Flipping into open Chaos or Calm is offering them the exchange |
+| **Information is about plans, and needs a baseline** ([§4](#4-information-is-about-plans-not-cards)) | **Sabotage first** to see what you are playing into, and cast a spell *before* the fight to see whether they answer it | open Calm on a normal development turn is weak evidence; a rune kept open *instead of* developing is strong. The flip rules in the matchup guide turn on exactly that |
+| **Every trick sends a message** ([§5](#5-pressure-is-the-removal-of-good-choices)) | make Sabotage, or a lesser spell, **eat their Defy before the Star-Crossed that wins**. Switcheroo's target is **the unit they just pumped** | choose your trick for the next fight, not just this one. **If a second trick of theirs would beat you, buff before the fight**: Jun lost a game on camera by not doing it |
+| **Roles change mid-game** ([§2](#2-every-deck-is-solving-a-different-problem)) | aggressor or defender "can change mid-match" | re-ask the role question the turn they land the piece that beats you long: Astral Heron, Dazzling Aurora, a resolved Rhasa |
 
-- **Make them enter first.** The book's general warning, that the holder passes without
-  knowing what is coming, applies to *them* when you hold with a facedown card behind
-  you. A hold backed by a hidden card is the "backed by a punish" kind of hold from
-  [§1](#1-the-board-is-not-the-position).
-- **Hiding is how you refuse their prepared exchange.** It cannot be answered: it opens no
-  chain and is not playing a card (§811.1.c.1, §811.1.c.2). When they pass with
-  interaction up, hiding or developing is the "develop without offering the trigger"
-  line. Flipping into open Calm or Chaos is offering it.
-
-**The XP rule is the bad-win rule, made strict.** Voidreaver pays XP only when you
-**win** a combat, meaning you are the only one with units left (§466.3). An even trade
-is No Result, and it pays nothing. So "I traded evenly" is not a neutral outcome for
-this deck; it is a failed conversion. And **losing a battlefield with a card hidden
-there trashes the card** (§107.3.d). That is the bad win in its purest form: hiding,
-then over-committing the battlefield you hid at, then losing it, is a 2-for-0 for them.
-
-**Your role call is already written down.** The matchup guide's *Before the dice roll*
-table is the book's "who benefits if nothing happens" question, answered with the
-grind number of 12. **Ask it again mid-game.** Roles change with the score: a "hold one,
-grind" matchup becomes a "push now" game the moment they get an engine piece down.
-
-**Read their open runes against their baseline.** The *Flip?* column turns on what they
-have untapped. Apply the asymmetry from [§4](#4-information-is-about-plans-not-cards):
-if they leave Calm open on a normal development turn, that is weak evidence. If they
-*chose* to interact instead of developing, they have shown you a card class and spent
-the rune. That is the window.
-
-**Texture around the legend.** The legend cannot be used from the moment a showdown opens
-until the fight resolves. **Buff before the fight if you need it for the fight. Hold the
-activation if you do not**, and let the win pay XP you can spend afterwards. That is
-resource conversion: the same XP, spent where it gets you more.
-
-**Punch First vs. Switcheroo is a message choice as well as a maths choice.** Punch First
-cannot be Defied (it costs 2 Power) and cannot be Not So Fast'd (it only chooses your
-unit). Switcheroo scales with *their* biggest unit. Before choosing which to use, ask
-what you want them to believe about your hand for the *next* fight.
-
-**From 5 points on, run the terminal scan every turn, for both players.** The
-6-hold-plus-conquest and 7-hold lines in [§0](#0-the-order-of-every-decision) are the
-ones that end games, and they are just as live for them.
+**Two places the book's general advice needs Jun's correction:**
+- **Conquering is not always worse than holding, for this deck.** The book warns that holders reveal their allocation. Kha'Zix's answer is to hold with *hidden* allocation: a facedown card, an Ambush threat, or Star Spring's walk-home behind a strong unit. That changes the trade.
+- **The simulations behind this repo's numbers miss the opponent's answer.** A Monte Carlo swaps against the board as it stands, so it rated Switcheroo low against small boards. Jun's play shows the swap target is created by their pump. Treat simulated rates as a floor on what the card can do, and correct them from play.
 
 ---
 
@@ -440,7 +406,15 @@ wrong predictions.** A record of why your first judgment failed is the most usef
 review you have.
 
 The [match journal](match-journal.md) carries both: a type letter beside `my mistake`,
-and the type tally on the ten-match review page.
+and the type tally on the ten-match review page. For Kha'Zix it also counts the deck's
+own failure modes as marks: `h` a hidden card lost with its battlefield, `n` a No Result,
+`f` a flip blown out. Those are conversion and information mistakes with a name on them.
+
+**Jun's version of the same discipline** ([Jun's notes §10](../guides/khazix-voidreaver-jun.md#10-jun-on-video)):
+in his Irelia commentary he stops on his own error, says what he should have done (buff
+before the fight), and says why (a second Defiant Dance was likely). That is a review in
+one breath: the state, the alternative line, and the evidence that should have changed
+the choice.
 
 ---
 

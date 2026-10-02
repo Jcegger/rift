@@ -102,6 +102,16 @@ Six phases, but only one of them is open (§315–317):
 
 **Going second** channels an extra rune on its first Channel Phase (§485.7). That is the whole compensation for going second.
 
+### Plan the whole turn before the first action
+
+Jun lists sequencing among the five mistakes every new player makes ([Jun's notes §10](../guides/khazix-voidreaver-jun.md#10-jun-on-video)). Showdowns can happen at any point in a turn, and more than once, so think it through before committing to any move or play. Ask three things:
+
+1. **Am I going to force a showdown?**
+2. **Am I going to play a unit?**
+3. **Am I holding runes for Actions or Reactions?**
+
+**Moving and conquering before you play units usually keeps more options open**, and shows the opponent less before they must decide on their interaction. Draw-first effects reward the same patience: see what the draw gave you, then choose which card to play.
+
 ---
 
 ## 4. Resources: Energy and Power
@@ -177,6 +187,8 @@ The game is always in one of four states (§310), and the state is the whole per
 - **`[Action]`** buys you into showdowns, on anyone's turn.
 - **`[Reaction]`** buys you that *plus* closed states, responding to things on the chain.
 
+**Spend Reactions sparingly, and use Actions for information.** A Reaction answers anything that opens a chain, so it is the stronger card, and the one to keep. But casting an Action spell **before** the fight can win you information. Jun's example: remove or shrink their unit first. If they answer it with a pump, you change your attack; if they don't, you attack and keep your own trick for their response. The same spells, in a different order, turn a losing showdown into a winning one.
+
 ### HOT FEPR
 
 The loop the game runs on (§334): Handle Outstanding Tasks, then **F**inalize, **E**xecute, **P**ass, **R**esolve.
@@ -198,6 +210,8 @@ The loop the game runs on (§334): Handle Outstanding Tasks, then **F**inalize, 
 The rules above say how points are made. This section is how strong players think about making them, drawn from [strategy.md](strategy.md) and Jun's Kha'Zix guide.
 
 **Conquering and holding are different kinds of advantage.** Conquering takes a point or denies one. Holding keeps a battlefield so they cannot freely enter and score. **Conquering is often easier than holding**, because the holder has parked material where the opponent can plan an attack, and has to pass without knowing what is coming. A hold is strong only if it is **hard to break, expensive to break, or backed by a punish** for the attempt: a facedown card, an Ambush threat, a retake ready in base.
+
+**Their points do not slow your clock.** You are still the same number of points from winning, so **letting them score is fine when it improves your position**: retreating a unit that would lose the fight anyway, or keeping a body ready to attack next turn (Jun).
 
 **"The best defence is a good offence"** (Jun). The player in the lead who can mostly conquer is better placed than the player holding to keep up. **But holding is the most powerful way to score and the riskiest**, because a failed hold often loses the game. So the question to ask is not "should I hold?" but **"can I win this game without a hold?"** If not, force one, even if it may fail. Refusing a hold you needed loses as surely as a bad one.
 
@@ -459,7 +473,7 @@ The tells, roughly:
 
 **Then read their plan, not their cards** ([strategy.md §4](strategy.md#4-information-is-about-plans-not-cards)). First ask what their deck would *normally* do this turn. A play the deck makes with almost any hand tells you little. **A deviation tells you a lot**: a declined fight, a skipped development, a hold they could break and did not. **Not interacting does not prove they lack the card. Interacting *instead of* developing usually proves something.**
 
-**And start well.** Jun's mulligan rule holds for almost every deck: **have a play for turn 1 and turn 2. If you don't, put two cards back.** Points come from units on battlefields, so a hand of tricks with no bodies has nothing to trick.
+**And start well.** Jun's mulligan rule holds for almost every deck: **have a play for turn 1 and turn 2. If you don't, put two cards back.** Points come from units on battlefields, so a hand of tricks with no bodies has nothing to trick. **Then mulligan for the matchup, not just the curve.** You already know who goes first and what they play, so picture how the game goes. A curve-perfect hand of 2-drops can be wrong against a deck whose early units are bigger than yours and come back when they die; ship one or two for removal.
 
 The two rules that hold in every matchup: **never hold zero battlefields, and never take a fight you have not already rigged.**
 

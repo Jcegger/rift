@@ -166,6 +166,7 @@ They bring **Abandoned Hall** (89% — any player who casts a spell may give a u
 > - **How you win:** take one battlefield early and keep it. **Start every fight on your own turn**: their legend can only rescue a unit on theirs, and a rescued unit leaves you the battlefield anyway.
 > - **The Heron rule (Jun):** Astral Heron is in 80% of their lists. **Do not let them conquer for free and drop Heron unopposed**, or you fall very far behind. Offer a fight before it lands. Once it is down, contest the battlefield it stands on, because its discount works only while it is at a battlefield. This is the matchup the hold-centric list was built for.
 > - **Mulligan:** Punch First is the card to keep, the one trick neither Defy nor Not So Fast can touch. A 2-drop plus Punch First is the ideal four.
+> - **Who you are facing (Jun, ban day):** Akali is hard to play, with **below-50% win rates** in his stats; it keeps doing well through a few excellent pilots. An Akali deep in an event is probably one of them, so expect them to punish loose fights.
 > - **Early:** take a battlefield before their 4-drops land. Kai'Sa, Survivor (75%) draws when she conquers, so the battlefield you hold is also card advantage you deny.
 > - **Middle:** watch for **two open Fury**: Falling Star is 3 + 3 damage, enough to kill Rengar. Fight Akali, Silent on your turn, when she is 4, not on hers, when she is 6.
 > - **Closing:** they win long, so convert. When they hold up runes, make them spend them on your turn.
@@ -231,6 +232,7 @@ They bring **Void Gate** (76%) — *"Spells and abilities affecting units here e
 > - **Middle:** when they reach 7 runes, assume **Thousand-Tailed Watcher** (88%): every unit you have is −3 that turn. Do not set up a fight you need to win on that turn; set it up for the next one.
 > - **Closing:** they rebuy dead units (Glasc Mixologist, Rift Herald) faster than you can grind them. Turn the battlefield you hold into points, not kills.
 > - **Flips:** freely. Nothing in their lists removes your hidden unit or counters a trigger.
+> - **Why it rose (Jun, ban day):** LeBlanc lost nothing to the ban, and with fewer Chaos decks around it rarely meets Gust or Star-Crossed. That is also why it never answers your flips.
 > - **Never:** trade a unit just because you can. Karthus (88%) makes every Deathknell trigger twice.
 > - **Watch:** Jun's 23 September video, *Kha'Zix Midrange vs LeBlanc*, on Metafy. It is the one post-ban LeBlanc game we know of from him.
 

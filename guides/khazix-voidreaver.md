@@ -29,7 +29,7 @@ date: 2026-10-02
 
 **Post-ban, the deck holds.** The Heron decks (Irelia and Akali) punish you if they can conquer for free and drop Astral Heron unopposed. So the Hidden cards are there to make **midgame holds cheap**: a hidden card costs one rune now and nothing later. Jun's test for any game is ***"can I win this without a hold?"*** If not, force one, even though it's risky.
 
-**Your turn, in order:** check for lethal (§3) → decide the legend activation → buff → develop → **hide** → arrange the fight → *then* move or flip → hold up only what is free or spare.
+**Your turn, in order:** check for lethal (§3) → decide the legend activation → buff → **take the open battlefields** → develop, onto them if it helps → **hide** → start the fights, flipping Evelynn last → hold up only what is free or spare.
 
 **Five facts about Hidden.**
 
@@ -124,13 +124,17 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **Step 2 — buff before you move or flip, always.** A buff after the showdown opens is not a legal play. **If a second trick of theirs would beat you, buff now.** Jun lost a fight on camera exactly this way: an unbuffed Kha'Zix into a second Defiant Dance ([Jun's notes §10](khazix-voidreaver-jun.md#10-jun-on-video)). The cost is that a buffed unit has used the turn's activation, so it cannot also walk home.
 
-**Step 3 — develop.** Bodies first. Under the no-overkill rule they soak damage assignment, and they stop your own threats being *alone*.
+**Step 3 — take the open battlefields first** (Jun). Move into any battlefield nobody holds before you play anything. That is a Conquer when its showdown closes (§348.2.a). Doing it first shows them less before they must decide on their interaction, and it opens options: **a unit may be played to a battlefield you control** (§355.2.a), and you can only hide at one you control.
 
-**Step 4 — hide.** After developing, before anything that might start a fight. Hiding needs an **Open State**, so it is illegal once a showdown is live. Check three things: you control the battlefield, its facedown slot is empty, and you can afford the rune this turn rather than next.
+**Step 4 — develop, and decide where each body lands.** Units enter exhausted (§143.4), and a standard move costs exhausting the unit (§144.2), so **nothing you play this turn can make a standard move this turn**. Effects still can: Void Assault, Ride the Wind (which also readies) and a Tideturner swap. Where it enters is the decision:
+- **base**, ready to attack next turn;
+- **a battlefield you control**, to make a hold bigger, soak damage under the no-overkill rule, or stop your threat being *alone*.
 
-**Step 5 — arrange, then move or flip.** Moving creates combat, **and so does flipping Evelynn.** Drag the lone enemy where you want it, confirm your total kills *all* of theirs, and only then commit. There is no window between Evelynn's trigger and the fight.
+**Step 5 — hide.** After developing, before anything that might start a fight. Hiding needs an **Open State**, so it is illegal once a showdown is live. Check three things: you control the battlefield, its facedown slot is empty, and you can afford the rune this turn rather than next.
 
-**Step 6 — hold up only what is free or spare.** Your showdown-legal plays:
+**Step 6 — start the fights.** Moves into their battlefields, Void Assault, Faefolk, and **flipping Evelynn, which starts a combat too, so it comes last.** Drag the lone enemy where you want it, confirm your total kills *all* of theirs, and only then commit. There is no window between Evelynn's trigger and the fight. Once every fight has resolved, you are back in your Main Phase: the legend is live again if unused, and you can still play cards.
+
+**Step 7 — hold up only what is free or spare.** Your showdown-legal plays:
 
 | | |
 |---|---|
@@ -250,6 +254,7 @@ Card text is `data/cards.json` with `data/errata.json` applied. "Jun" marks how 
 **Kha'Zix, Mutating Horror ×1** · 4E / 1 Chaos · 4 Might · Ambush — *"When I attack or defend, if an enemy unit is alone here, give me +2 `[M]` this turn and gain 2 XP."*
 **Alone** means no other unit *friendly to it* at that location (§740.2.a). The trigger checks once, when designations are handed out (§383.4.e.2.a). Ambush lets him arrive at Reaction speed where you have units, re-checked through finalization (§822.3).
 - **Jun:** a combat trick that develops your base. Ambush onto the isolated unit, take 3 XP, spend 2 walking him home.
+- **Do it on your own turn.** The walk-home moves an *exhausted* unit, and only in your Main Phase. Ambush him on *their* turn and he readies at your next Awaken, before you can spend the XP, so he stays on the battlefield they get to plan against. That is the rules reason behind Jun's "keep combat happening in your own turn".
 - **Jun:** don't count him as your turn-2 unit, and seldom play him to base and pass.
 
 **Void Assault ×3** · 2E / 1 Power — *"Move a friendly unit, then move an enemy unit. (If they both move to a battlefield you don't control, you're the attacker.)"*
