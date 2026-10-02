@@ -262,9 +262,10 @@ one change to my deck  _________________________________
 - **`top trouble card`** comes straight off the trouble list: the one with the most marks
   and no answer that works yet.
 - **`card I kept wanting`** is how a real conclusion about a deck arrives from play rather
-  than from simulation — the second Switcheroo in
-  [the midrange dossier](../guides/khazix-voidreaver-postban.md) is exactly the kind of
-  finding that should have come from ten matches rather than from a Monte Carlo.
+  than from simulation. The [deck guide](../guides/khazix-voidreaver.md)'s Switcheroo
+  question is exactly that kind of finding: a simulation rated the card low against small
+  boards, and Jun's play showed the target is the unit they just pumped. Ten matches
+  settle what a Monte Carlo cannot.
 
 ## The trouble list, at the back
 

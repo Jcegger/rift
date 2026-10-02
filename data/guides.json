@@ -4,34 +4,6 @@
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
   {
-   "slug": "khazix-voidreaver-aggro",
-   "file": "guides/khazix-voidreaver-aggro.md",
-   "kicker": null,
-   "title": "Kha'Zix Voidreaver — Aggro Dossier",
-   "subtitle": "Riftbound, Vendetta season — Jun's aggressive build, after the 18 September bans",
-   "date": "2026-09-16",
-   "legend": "Voidreaver",
-   "champion": "Kha'Zix, Mutating Horror",
-   "sections": [
-    "The short version",
-    "The list",
-    "1. What this deck is, and what it is not",
-    "2. The six cards",
-    "3. The engine: XP you make rather than XP you win",
-    "4. What this build is strictly better at",
-    "5. What this build gives up",
-    "6. How the cards combine",
-    "7. Mulligans",
-    "8. Sequencing",
-    "9. Piloting — why this is the easier of the two",
-    "10. Matchups",
-    "11. The sideboard",
-    "12. What to watch, and what to ask Jun",
-    "Sources and method"
-   ],
-   "words": 5749
-  },
-  {
    "slug": "khazix-voidreaver-jun",
    "file": "guides/khazix-voidreaver-jun.md",
    "kicker": null,
@@ -52,7 +24,7 @@
     "8. Matchups",
     "9. Where this corrected the other guides"
    ],
-   "words": 4096
+   "words": 4100
   },
   {
    "slug": "khazix-voidreaver-matchups",
@@ -60,11 +32,11 @@
    "kicker": null,
    "title": "Kha'Zix Voidreaver — Champion Matchup Guide",
    "subtitle": "Riftbound, Vendetta season — every ranked archetype against Jun's midrange list, after the Los Angeles Regional",
-   "date": "2026-10-01",
+   "date": "2026-10-02",
    "legend": null,
    "champion": null,
    "sections": [
-    "The headline: this is the Los Angeles list",
+    "The headline: this list won Best-of-Kha'Zix at Los Angeles",
     "How to use this page",
     "Before the dice roll: which game is this?",
     "At a glance",
@@ -96,67 +68,35 @@
     "Quick reference",
     "Sources and method"
    ],
-   "words": 10993
-  },
-  {
-   "slug": "khazix-voidreaver-postban",
-   "file": "guides/khazix-voidreaver-postban.md",
-   "kicker": null,
-   "title": "Kha'Zix Voidreaver — Midrange Dossier",
-   "subtitle": "Riftbound, Vendetta season — Jun's midrange build, 23 September revision, with the Hidden package",
-   "date": "2026-09-23",
-   "legend": "Voidreaver",
-   "champion": "Kha'Zix, Mutating Horror",
-   "sections": [
-    "The short version",
-    "The list",
-    "1. What changed, and why",
-    "2. The rule that governs the deck",
-    "3. Hidden, precisely",
-    "4. The four Hidden cards, and how to use each",
-    "5. The trap: removed in response",
-    "6. The rune math, and the `[A]` tax",
-    "7. How combat resolves, and the clean-win maths",
-    "8. Card by card",
-    "9. How the cards combine",
-    "10. Mulligans",
-    "11. Sequencing — how your turn actually goes",
-    "12. Errata that change your cards",
-    "13. Matchups",
-    "14. The sideboard",
-    "15. What I'd test",
-    "Sources and method"
-   ],
-   "words": 19418
+   "words": 11981
   },
   {
    "slug": "khazix-voidreaver",
    "file": "guides/khazix-voidreaver.md",
    "kicker": null,
-   "title": "Kha'Zix Voidreaver — Deck Dossier",
-   "subtitle": "Riftbound, Vendetta season",
-   "date": "2026-09-14",
+   "title": "Kha'Zix Voidreaver — Deck Guide",
+   "subtitle": "Riftbound, Vendetta season — Jun's post-ban midrange list, how to play it, and the rules it runs on",
+   "date": "2026-10-02",
    "legend": "Voidreaver",
    "champion": "Kha'Zix, Mutating Horror",
    "sections": [
     "The short version",
-    "1. What this deck is",
-    "2. The engine, and its three hard ceilings",
-    "3. How combat actually resolves",
-    "4. Winning a combat outright: the four levers",
-    "5. Card by card — the main deck",
-    "6. The trash is a resource",
-    "7. Keywords, precisely",
-    "8. What the format actually plays",
-    "9. Matchups",
-    "10. Mulligans",
-    "11. Sequencing — how your turn actually goes",
+    "1. What the deck is trying to do",
+    "2. The game in four stages",
+    "3. Your turn, in order",
+    "4. The rule that governs the deck, and the legend",
+    "5. Hidden, precisely",
+    "6. Card by card",
+    "7. Lines that win games",
+    "8. The numbers",
+    "9. Mulligans",
+    "10. Sideboarding",
+    "11. Mistakes that lose games",
     "12. Errata that change your cards",
-    "13. The sideboard, and what you still owe",
-    "14. What I'd test",
+    "13. Questions to bring to Jun",
     "Sources and method"
    ],
-   "words": 10987
+   "words": 8125
   },
   {
    "slug": "reksai-void-burrower",
@@ -221,8 +161,8 @@
    "file": "docs/fundamentals.md",
    "kicker": "Reference · every deck",
    "title": "Fundamentals of Riftbound",
-   "subtitle": "How the game works, and what the field actually plays — the teaching layer over docs/rules.md",
-   "date": "2026-10-01",
+   "subtitle": "How the game works, how points are actually won, and what the field plays — the teaching layer over docs/rules.md",
+   "date": "2026-10-02",
    "legend": null,
    "champion": null,
    "sections": [
@@ -232,14 +172,15 @@
     "4. Resources: Energy and Power",
     "5. Combat",
     "6. The chain, and why your spell did not resolve",
-    "7. The keywords that actually matter",
-    "8. The staples",
-    "9. Battlefields",
-    "10. Things that are not what they look like",
-    "11. Reading a deck you have never seen",
+    "7. Points, holds and roles",
+    "8. The keywords that actually matter",
+    "9. The staples",
+    "10. Battlefields",
+    "11. Things that are not what they look like",
+    "12. Reading a deck you have never seen",
     "Where these numbers come from"
    ],
-   "words": 5469
+   "words": 6314
   },
   {
    "slug": "strategy",
@@ -262,7 +203,7 @@
     "8. Reviewing a game",
     "9. What has changed since the book"
    ],
-   "words": 4499
+   "words": 4507
   }
  ]
 }

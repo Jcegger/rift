@@ -358,7 +358,7 @@ add hidden hands, find the same structure in a second matchup, then do it in rea
 
 ## 7. Applied to Kha'Zix Voidreaver
 
-For Jun's list, as covered in the [midrange dossier](../guides/khazix-voidreaver-postban.md),
+For Jun's list, as covered in the [deck guide](../guides/khazix-voidreaver.md),
 the [matchup guide](../guides/khazix-voidreaver-matchups.md) and
 [Jun's own notes](../guides/khazix-voidreaver-jun.md). Where this section and Jun differ, Jun wins.
 
