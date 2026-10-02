@@ -36,9 +36,10 @@ with at least one of mine alive?", do not start the fight.**
 So: **earning is free and unlimited, spending is the bottleneck.** Bank freely. A
 turn where you win three combats banks three XP even though you can only cash one.
 
-**Your turn, in order:** activate the legend → buff → develop → arrange the fight →
+**Your turn, in order:** decide the legend activation → buff → develop → arrange the fight →
 *then* move → hold up everything with Action or Reaction on it. Moving is what
-starts combat, so it comes last. (§11)
+starts combat, so it comes last. (§11) The legend is unavailable only while a showdown
+is open — hold it through the fight and you can spend the XP the fight pays you.
 
 **Four ways to turn a trade into a clean win:** stun it (Vex), grow it (Punch
 First), remove it (Star-Crossed, Rebuke, Rampage), or add bodies (Up from the Deep —
@@ -890,12 +891,12 @@ resources cannot be spent late.
 **Then the Main Phase, in this order:**
 
 **Step 1 — Decide the legend activation before you touch anything else.** It is the
-scarcest resource you own (§2), it is once per turn, and rule 381 means the window
-closes the moment a showdown starts. Ask: is there a unit whose permanent +1 makes a
+scarcest resource you own (§2), it is once per turn, and rule 381 means it is
+unavailable from the moment a showdown starts until the fight resolves — after which
+you are back in a Neutral Open state and can activate it. Ask: is there a unit whose permanent +1 makes a
 fight I want this turn winnable *outright*? If yes, buff now. If instead there is an
 exhausted unit stuck somewhere I cannot win, spend 2 XP and walk it home now. If
-neither, bank the XP — but know you have spent the turn's activation on nothing, and
-that is a genuine cost.
+neither, hold it: spend it after the fight, on the XP the fight just paid you.
 
 **Step 2 — Buff before you move, always.** A buff applied after the showdown opens
 is not a legal play. Pre-commit it, accept that they can see it, and plan the combat

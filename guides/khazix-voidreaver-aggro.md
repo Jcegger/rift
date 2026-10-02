@@ -236,6 +236,7 @@ The order is the same as the midrange dossier's §11 minus its hiding step, whic
 
 1. Activate first, spend the XP you already had, then move Mister Root and bank the 2.
 2. Move Mister Root first, then activate with 2 more XP available.
+3. Hold the activation through the fight and spend it once the fight resolves. The legend is unavailable only while a showdown is open (midrange dossier §2), so this pays out the Root XP *and* the 1 XP a won combat gives — at the price of not having the buff for that fight.
 
 **Option 2 is right more often than it looks**, because the legend spends only once per turn either way, and a buff is permanent. The exception is when the buff is what makes the fight winnable — then it has to be Step 1, because a buff applied after the showdown opens is not a legal play.
 
