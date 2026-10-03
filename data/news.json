@@ -1,21 +1,39 @@
 {
- "generatedAt": "2026-10-02",
+ "generatedAt": "2026-10-03",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 7,
+ "carriedFromPrevious": 8,
  "tags": {
-  "News": 32,
+  "Metagame": 20,
+  "News": 33,
   "Events": 21,
-  "Metagame": 19,
   "Legends": 15,
   "Sets": 4,
   "Guides": 3,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Riftbound Meta Tier List – Best Decks for Vendetta – Post-Ban Metagame Week 3",
+   "dt": "2026-10-03",
+   "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-post-ban-metagame-week-3",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Ultimate Rare Card Revealed for Radiance - Packed Amphitheater",
+   "dt": "2026-10-03",
+   "url": "https://riftbound.gg/ultimate-rare-card-revealed-for-radiance-packed-amphitheater",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
   {
    "title": "All Best-of Legends Prizing Decks in Los Angeles (Updated)",
    "dt": "2026-10-01",
