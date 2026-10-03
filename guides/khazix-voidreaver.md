@@ -396,6 +396,7 @@ Zed is pumped into their hold and they answer with their own pump. Swap Zed out 
 - **Fizz + Rampage:** 5 damage anywhere and a body, for 3 Energy plus 2 Power.
 - **Fizz + Up from the Deep:** mass early development. The earlier the better, but early Power is costly.
 - **Fizz + Star-Crossed:** bounce Fizz and replay him, taking another spell from the trash.
+- **Fizz + Grim Resolve: completely free.** Fizz ignores the Energy cost and you pay only the Power, and Grim Resolve has none. Through Fizz, Punch First still costs 2 Body and Switcheroo 2 Chaos. It is Main Phase, before the fight, so put the +3 on the unit about to fight, not on Fizz, who enters exhausted. **Against Defy decks it is the best bait you have**: a Defy spent on it costs you nothing from hand, and the Punch First that follows is out of Defy's reach. The spell is recycled afterwards, so it is one free cast per trip through the trash.
 
 ### The Vex lock: free points to close
 
