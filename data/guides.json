@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-02",
+ "generatedAt": "2026-10-03",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -25,7 +25,7 @@
     "9. Where this corrected the other guides",
     "10. Jun on video"
    ],
-   "words": 5167
+   "words": 5252
   },
   {
    "slug": "khazix-voidreaver-matchups",
@@ -70,7 +70,7 @@
     "Quick reference",
     "Sources and method"
    ],
-   "words": 12797
+   "words": 12834
   },
   {
    "slug": "khazix-voidreaver",
@@ -78,7 +78,7 @@
    "kicker": null,
    "title": "Kha'Zix Voidreaver — Deck Guide",
    "subtitle": "Riftbound, Vendetta season — Jun's post-ban midrange list, how to play it, and the rules it runs on",
-   "date": "2026-10-02",
+   "date": "2026-10-03",
    "legend": "Voidreaver",
    "champion": "Kha'Zix, Mutating Horror",
    "sections": [
@@ -98,7 +98,7 @@
     "13. Questions to bring to Jun",
     "Sources and method"
    ],
-   "words": 8857
+   "words": 9004
   },
   {
    "slug": "reksai-void-burrower",

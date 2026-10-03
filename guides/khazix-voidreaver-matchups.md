@@ -13,7 +13,7 @@ date: 2026-10-02
 
 ## The headline: this list won Best-of-Kha'Zix at Los Angeles
 
-**Cuoemrei won the Best-of-Kha'Zix prize at the Los Angeles RQ** on 26 September, a 2,165-player field and the largest this archive has carried. The archive carries Cuoemrei's list, and it is **identical to yours, all 56 cards**. So is HTCG Dizoo's list at the Orlando $10k the same weekend (36th of 78, tournament-vouched), and so is a list titled "Kha'Zix Top 32 Los Angeles RQ".
+**Cuoemrei won the Best-of-Kha'Zix prize at the Los Angeles RQ** on 26 September, a 2,165-player field and the largest this archive has carried. The archive carries Cuoemrei's list: Jun's 23 September build, which shares **54 of your 56 cards**. So does HTCG Dizoo's list at the Orlando $10k the same weekend (36th of 78, tournament-vouched), and a list titled "Kha'Zix Top 32 Los Angeles RQ". **Your list is Jun's 3 October revision**: −Tideturner, −Ride the Wind, +Grim Resolve, +1 Traveling Merchant.
 
 **And the deck is Tier 4** on riftbound.gg's list as of 1 October. Their note: Kha'Zix "didn't do much in third-party events before the bans either, but typically rose to the occasion during regional tournaments." Both are true at once. **It converts in the hands of someone who knows the matchups, and it does not convert on raw power.** That is what this page is for.
 
@@ -34,7 +34,7 @@ Built to sit beside a practice game. Every Tier 1 and Tier 2 opponent gets the s
 | **At the table** | how you win, the mulligan, early, middle and late, whether to flip, and the one mistake to avoid | before the game, and between turns |
 | **Their deck** | the legend, the shape of the list, and the cards that will hurt you | before the game |
 | **Fights** | how often you win a 2v2, and how to rig it | when you are about to commit |
-| **Flips and counters** | which of your four Hidden cards they can punish, and what to count | before every flip |
+| **Flips and counters** | which of your three Hidden cards they can punish, and what to count | before every flip |
 | **Their facedown card** | what is likely hiding at *their* battlefield, and what it does when you attack there | when you attack into it |
 | **Battlefields** | what their battlefields do to you, and any reason to change your usual order | at setup |
 | **Board** | games 2 and 3 | between games |
@@ -44,7 +44,7 @@ Tier 3 entries keep the box and compress the rest. Tier 4 and below get a box an
 **Four things hold in every matchup**, so the entries do not repeat them:
 
 1. **Check for lethal first, from 5 points on, for both players.** A hold at 7 wins outright, and at 6 a hold plus a conquest of the other battlefield wins ([deck guide §2](khazix-voidreaver.md#closing-68-points)).
-2. **Punch First is your hardest trick to counter.** It costs 2 Power, so Defy cannot touch it, and it only chooses *your* unit, so Not So Fast cannot either. Only a counter that takes any spell (Riposte, Hard Bargain, Abandon) stops it.
+2. **Punch First is your hardest trick to counter.** It costs 2 Power, so Defy cannot touch it, and it only chooses *your* unit, so Not So Fast cannot either. Grim Resolve also dodges Not So Fast, but it costs no Power, so **Defy counters it**: against Defy decks, cast Punch First first. Only a counter that takes any spell (Riposte, Hard Bargain, Abandon) stops it.
 3. **Their facedown card cannot touch your flip.** They can only hide at a battlefield they control, and its targets must be at that battlefield (§811.1.b, §811.1.d.2), so it is never at yours. What it *can* do is hurt you when **you attack its battlefield**. That is what the "Their facedown card" line is for.
 4. **Kha'Zix starts in your Champion Zone.** You have him every game. His *"if an enemy unit is alone here"* trigger fires whether he attacks or defends.
 
@@ -112,7 +112,7 @@ Never hold zero battlefields, and never take a fight you have not rigged.
 > - **Early:** develop two bodies and take a battlefield with a straight fight. Do not lead with spells, because Defy is in every list. **Be patient with your spells and aggressive with your units** (Jun). Giving up a unit for a point is fine.
 > - **Middle:** they will use the legend to ready a unit and fight twice, so keep a body back at the battlefield you hold. **Punish a greedy tap-out with removal** (Jun). His named Rampage target here is **Stellacorn Herder** (98%), which draws every time it moves. **Astral Heron** is in 38% of lists, and its discount works only while it stands at a battlefield, so contest that battlefield the turn it lands.
 > - **Closing:** game 1, Punch First is your finisher: Defy and Not So Fast cannot touch it. In games 2–3 Jun takes two out and leans on Sabotage, Hard Bargain and Switcheroo; this page's board takes one.
-> - **Flips:** Tideturner and Tornado Warrior only into tapped Chaos. Evelynn only into tapped Chaos *and* Calm, because Not So Fast is in 72% of lists. Switcheroo: flip it after they pump.
+> - **Flips:** Tornado Warrior only into tapped Chaos. Evelynn only into tapped Chaos *and* Calm, because Not So Fast is in 72% of lists. Switcheroo: flip it after they pump.
 > - **From Jun's Irelia video (pre-ban):** open a key turn with **Sabotage** to see what you are playing into, and make it, or a lesser spell, eat their Defy before the **Star-Crossed** on their Irelia. Bouncing her usually wins. Close with the **Vex lock**: with their board cleared, Vex on a battlefield stuns whatever they play.
 > - **Never:** cast Void Assault or Rampage into open Calm. Defy counters both.
 
@@ -170,7 +170,7 @@ They bring **Abandoned Hall** (89% — any player who casts a spell may give a u
 > - **Early:** take a battlefield before their 4-drops land. Kai'Sa, Survivor (75%) draws when she conquers, so the battlefield you hold is also card advantage you deny.
 > - **Middle:** watch for **two open Fury**: Falling Star is 3 + 3 damage, enough to kill Rengar. Fight Akali, Silent on your turn, when she is 4, not on hers, when she is 6.
 > - **Closing:** they win long, so convert. When they hold up runes, make them spend them on your turn.
-> - **Flips:** Tideturner and Tornado Warrior freely, because nothing removes your hidden unit. Evelynn and Switcheroo only into tapped Calm: Not So Fast (67%) counters both.
+> - **Flips:** Tornado Warrior freely, because nothing removes your hidden unit. Evelynn and Switcheroo only into tapped Calm: Not So Fast (67%) counters both.
 > - **Never:** attack their battlefield with a 2-Might unit while they have a facedown card there. Mischievous Marai (73%) kills it on arrival.
 
 ### Their deck
@@ -205,7 +205,7 @@ They bring **Abandoned Hall** (89% — any player who casts a spell may give a u
 
 ### Flips and counters
 
-**2% can remove your hidden unit · 67% can counter Evelynn · 67% can counter Switcheroo.** All of it is Not So Fast, which needs Calm. Tideturner and Tornado Warrior are your free flips.
+**2% can remove your hidden unit · 67% can counter Evelynn · 67% can counter Switcheroo.** All of it is Not So Fast, which needs Calm. Tornado Warrior is your free flip.
 
 ### Their facedown card
 
@@ -289,7 +289,7 @@ They bring **Void Gate** (76%) — *"Spells and abilities affecting units here e
 > - **Early:** spread. Two battlefields with a unit each is two points a turn while they ramp.
 > - **Middle:** hide Switcheroo as soon as you can. **Sabotage (76%) takes it from your hand, but cannot reach a facedown card.** Flip it at the battlefield their big unit attacks.
 > - **Closing:** you need eight points before Elder Dragon or Aurora takes over. Every turn you hold two battlefields is a turn closer.
-> - **Flips:** Tideturner, Tornado Warrior and Switcheroo freely. Evelynn: pull from their base, not from the battlefield with their facedown card (Temporal Breach, 43%).
+> - **Flips:** Tornado Warrior and Switcheroo freely. Evelynn: pull from their base, not from the battlefield with their facedown card (Temporal Breach, 43%).
 > - **Never:** take a fair fight. 15% bare.
 
 ### Their deck
@@ -446,7 +446,7 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 ### Board
 
-+1 Rampage, +1 Hard Bargain. −1 Ride the Wind, −1 Sabotage — you hold one and grind, so the repositioning card is the one you need least. Jun brings in Hard Bargain and takes out Sabotage here.
++1 Rampage, +1 Hard Bargain. −1 Grim Resolve, −1 Sabotage — Punch First already wins 96% here, so the smaller pump is the one you need least. Jun brings in Hard Bargain and takes out Sabotage here.
 
 ---
 
@@ -460,7 +460,7 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 > - **Early:** take a battlefield. Develop before she lands, because after she does every unit you play is stunned.
 > - **Middle:** **kill Vex, Apathetic before you play units.** Drag her into your biggest unit with Faefolk or Void Assault (her Deflect charges you `[A]`). Move the big unit first, then Faefolk.
 > - **Closing:** grind. They draw off holding with their legend, so taking their battlefield away matters more than killing units.
-> - **Flips:** Tideturner and Tornado Warrior into tapped Chaos (Gust, Star-Crossed). Evelynn also needs tapped Calm (Not So Fast, 31%). Switcheroo is countered 45% of the time.
+> - **Flips:** Tornado Warrior into tapped Chaos (Gust, Star-Crossed). Evelynn also needs tapped Calm (Not So Fast, 31%). Switcheroo is countered 45% of the time.
 > - **Never:** play Rengar or an Ambush Kha'Zix while she stands at a battlefield.
 
 ### Their deck
@@ -503,7 +503,7 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 ### Board
 
-+1 Hard Bargain (for Defy and the flip). −1 Ride the Wind.
++1 Hard Bargain (for Defy and the flip). −1 Grim Resolve — Defy (89%) counters it and cannot touch Punch First.
 
 ---
 
@@ -626,7 +626,7 @@ None. Extra removal is wrong against a deck paid for dying.
 > - **Early:** take a battlefield with two units on it, so you are never the lone defender yourself.
 > - **Middle:** watch Charm (91%): on their turn they can move *your* unit onto their lone defender, which makes you the attacker into their +2.
 > - **Closing:** Ruin Runner (69%) cannot be chosen at all, not by Switcheroo and not by Rampage. Beat it in combat or play around it.
-> - **Flips:** Tideturner and Tornado Warrior freely. Evelynn into tapped Calm; Not So Fast is in 28%.
+> - **Flips:** Tornado Warrior freely. Evelynn into tapped Calm; Not So Fast is in 28%.
 > - **Never:** attack into a lone defender.
 
 ### Their deck
@@ -778,7 +778,7 @@ Their +2 cancels Kha'Zix's +2 exactly. **The unit that moves in applies Conteste
 
 ### Board
 
-+1 Hard Bargain — to counter Riposte, not to protect flips. −1 Ride the Wind: you win long here.
++1 Hard Bargain — to counter Riposte, not to protect flips. −1 Grim Resolve: Riposte punishes it most (+2 to their unit).
 
 ---
 
@@ -902,17 +902,17 @@ The Tier 1–2 entries above, cut to one row each. `scripts/build-journal` print
 | opponent | Jun | plan | flips | never | board | battlefield |
 |---|---|---|---|---|---|---|
 | Irelia | decent | press: score early, reach 6 first | Tide/Tornado into tapped Chaos; Evelynn into tapped Chaos + Calm | Void Assault or Rampage into open Calm | +2 Gust +1 Hard Bargain; −2 Star-Crossed −1 Punch First | their Targon's Peak favours them |
-| Akali | decent | one fight early, your turn only; fight before Heron lands | Tide/Tornado freely; Evelynn and Switcheroo into tapped Calm | a 2-Might attacker into their facedown card (Marai) | +2 Prefect +2 Acceptable Losses +1 Hard Bargain; −2 Rampage −2 Star-Crossed −1 Up from the Deep | no Rengar fights at Void Gate into open Fury |
+| Akali | decent | one fight early, your turn only; fight before Heron lands | Tornado freely; Evelynn and Switcheroo into tapped Calm | a 2-Might attacker into their facedown card (Marai) | +2 Prefect +2 Acceptable Losses +1 Hard Bargain; −2 Rampage −2 Star-Crossed −1 Up from the Deep | no Rengar fights at Void Gate into open Fury |
 | LeBlanc | superb | one fight early, rigged only; points, not kills | freely | trading just because you can (Karthus) | +1 Decree; −1 Sabotage | never your Star Spring |
 | Jayce | superb | take both, race; answer Aurora | freely; Evelynn pulls from their base | a fair fight (15%) | +2 Prefect +1 Decree; −2 Punch First −1 Up from the Deep | Forgotten Monument slows your race |
 | Azir | good | develop, then clear them at once | freely | Star-Crossed or Void Assault into open Calm | +2 Prefect +2 Acceptable Losses; −1 Zed −1 Up from the Deep −1 Star-Crossed −1 Merchant | usual order |
-| Rengar | even | patient, hold one; make them act first | freely | committing everything to one fight | +1 Rampage +1 Hard Bargain; −1 Ride the Wind −1 Sabotage | avoid your Star Spring |
-| Vex | — | hold one, grind; kill Vex, Apathetic before you deploy | Tide/Tornado into tapped Chaos; Evelynn into tapped Chaos + Calm | playing units while Vex, Apathetic stands | +1 Hard Bargain; −1 Ride the Wind | usual order |
+| Rengar | even | patient, hold one; make them act first | freely | committing everything to one fight | +1 Rampage +1 Hard Bargain; −1 Grim Resolve −1 Sabotage | avoid your Star Spring |
+| Vex | — | hold one, grind; kill Vex, Apathetic before you deploy | Tornado into tapped Chaos; Evelynn into tapped Chaos + Calm | playing units while Vex, Apathetic stands | +1 Hard Bargain; −1 Grim Resolve | usual order |
 | Kennen | tough, weaker post-ban | pressure their setup; kill Kennen, Storm of Shuriken on sight | only into tapped Chaos | an even trade | +2 Gust +1 Hard Bargain; −2 Star-Crossed −1 Tornado Warrior | they run Zaun Warrens too |
 | Rek'Sai | — | hold one, let time work | freely | Rengar into two open Fury | none | never your Star Spring |
-| Master Yi | even to slightly unfavoured | develop, then hold; drag their lone unit to you | Tide/Tornado freely; Evelynn into tapped Calm | attacking a lone defender | +2 Prefect +2 Acceptable Losses; −1 Up from the Deep −2 Star-Crossed −1 Rampage | usual order |
+| Master Yi | even to slightly unfavoured | develop, then hold; drag their lone unit to you | Tornado freely; Evelynn into tapped Calm | attacking a lone defender | +2 Prefect +2 Acceptable Losses; −1 Up from the Deep −2 Star-Crossed −1 Rampage | usual order |
 | Ezreal | — | take both, race | don't | flipping into open Chaos | +1 Decree +1 Hard Bargain; −1 Evelynn −1 Tornado Warrior | usual order |
-| Fiora | — | hold one, win long | freely | Punch First into open Body + Order (Riposte) | +1 Hard Bargain; −1 Ride the Wind | usual order |
+| Fiora | — | hold one, win long | freely | Punch First into open Body + Order (Riposte) | +1 Hard Bargain; −1 Grim Resolve | usual order |
 
 "Usual order" is Zaun Warrens, then Sandswept Tomb or Star Spring. Every battlefield used in a decided game retires for the match, yours and theirs (§486.5).
 

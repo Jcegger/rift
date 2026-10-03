@@ -2,15 +2,15 @@
 title: Kha'Zix Voidreaver — Deck Guide
 subtitle: Riftbound, Vendetta season — Jun's post-ban midrange list, how to play it, and the rules it runs on
 author: rift toolchain
-date: 2026-10-02
+date: 2026-10-03
 ---
 
 **Legend:** Voidreaver (Body/Chaos) · **Champion:** Kha'Zix, Mutating Horror
 **Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend = 56 · **Sideboard:** 10 of 10
 **Shuffled library:** 39 — the Champion starts outside the deck (§103.2.a.1, §108.3.d)
 **Collection status:** complete, nothing to get
-**The list:** Jun's 23 September midrange build, saved in the app as `Kha'Zix Midrange (Jun, post-ban)`
-**Its results:** **Best-of-Kha'Zix at the Los Angeles RQ** (26 September, 2,165 players), won by Cuoemrei on this list card for card · **36th of 78** at the Orlando $10k (HTCG Dizoo, the same 56) · a deck in the archive titled "Kha'Zix Top 32 Los Angeles RQ", also identical
+**The list:** Jun's **3 October** midrange revision, saved in the app as `Kha'Zix Midrange (Jun, post-ban)`. Two swaps from his 23 September build: **−Tideturner, −Ride the Wind, +Grim Resolve, +1 Traveling Merchant** ([§6](#6-card-by-card))
+**Its results:** **Best-of-Kha'Zix at the Los Angeles RQ** (26 September, 2,165 players), won by Cuoemrei on the 23 September list, which shares **54 of these 56 cards** · **36th of 78** at the Orlando $10k (HTCG Dizoo, the same 23 September 56) · a deck in the archive titled "Kha'Zix Top 32 Los Angeles RQ", also the 23 September list
 **Good until:** Radiance, released **23 October** (prereleases from the 16th). Jun will retest every build then.
 
 **Companions.** [Jun's notes](khazix-voidreaver-jun.md) are the source this guide leans on hardest. The [matchup guide](khazix-voidreaver-matchups.md) covers who you are playing. [strategy.md](../docs/strategy.md) is how to think about any turn. This page is how to play *this deck*.
@@ -41,7 +41,7 @@ date: 2026-10-02
 | Where a unit lands | **That battlefield.** No choice (§811.1.d.1) |
 | If you lose the battlefield | The card is **trashed and revealed** (§107.3.d, §323.7, §421.4) |
 
-**The trap that costs games.** A hidden unit's play effect reads its battlefield off the unit. Bounce or kill the unit in response to its own trigger and the effect does nothing (§5). **Evelynn, Tideturner and Tornado Warrior are all inside Gust's range.** Count their open Chaos, and for Evelynn their open Calm too, before you flip.
+**The trap that costs games.** A hidden unit's play effect reads its battlefield off the unit. Bounce or kill the unit in response to its own trigger and the effect does nothing (§5). **Evelynn and Tornado Warrior are both inside Gust's range.** Count their open Chaos, and for Evelynn their open Calm too, before you flip.
 
 **The three ways this deck loses:**
 1. Hiding a card at a battlefield you then lose. That hands them a 2-for-0.
@@ -101,7 +101,7 @@ This is where you spend. Finish their board with removal and take the points, bu
 | **6** | hold one, then conquer the other | win |
 | **6** | hold nothing, conquer both | win. The first conquest makes 7 and counts as scoring that battlefield |
 
-**At 7, hold with a split board and a facedown Tideturner behind it** (Jun). Units on both battlefields plus a hidden card that can swap a big unit in at Reaction speed "can really mess with your opponent's attacks."
+**At 7, hold with a split board and a facedown card behind it** (Jun). Units on both battlefields plus a hidden card "can really mess with your opponent's attacks." Jun named Tideturner, which he cut on 3 October; the hidden cards you have now are Tornado Warrior (a free 3 Might on their turn) and Switcheroo, which is pinned to its battlefield and so is a defensive card anyway.
 
 **If they are at 7 and holding**, they win at the start of their turn unless you take the battlefield now. That outranks every plan you had.
 
@@ -126,7 +126,7 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **Step 3 — take the open battlefields first** (Jun). Move into any battlefield nobody holds before you play anything. That is a Conquer when its showdown closes (§348.2.a). Doing it first shows them less before they must decide on their interaction, and it opens options: **a unit may be played to a battlefield you control** (§355.2.a), and you can only hide at one you control.
 
-**Step 4 — develop, and decide where each body lands.** Units enter exhausted (§143.4), and a standard move costs exhausting the unit (§144.2), so **nothing you play this turn can make a standard move this turn**. Effects still can: Void Assault, Ride the Wind (which also readies) and a Tideturner swap. Where it enters is the decision:
+**Step 4 — develop, and decide where each body lands.** Units enter exhausted (§143.4), and a standard move costs exhausting the unit (§144.2), so **nothing you play this turn can make a standard move this turn**. Effects still can — Void Assault above all. Where it enters is the decision:
 - **base**, ready to attack next turn;
 - **a battlefield you control**, to make a hold bigger, soak damage under the no-overkill rule, or stop your threat being *alone*.
 
@@ -138,7 +138,7 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 | | |
 |---|---|
-| **Action** | Punch First ×3 · Ride the Wind ×1 · Switcheroo ×1 · Zed's clone swap |
+| **Action** | Punch First ×3 · Grim Resolve ×1 · Switcheroo ×1 · Zed's clone swap |
 | **Reaction** | Star-Crossed ×2 |
 | **Ambush** (Reaction when played that way) | Kha'Zix ×1 · Rengar ×2 |
 | **Facedown** | whatever is in the slot: free, Reaction speed, from the turn after you hid it |
@@ -204,17 +204,16 @@ So:
 | card | target pinned to the hide battlefield? | why |
 |---|---|---|
 | **Switcheroo** | **yes, both units** | nothing in its text points elsewhere. **So a hidden Switcheroo is a defensive card**; for an attack, cast it from hand |
-| **Tideturner** | **no** | *"a unit you control at another location"*. §811.1.d.2 uses him as its own worked example |
-| **Evelynn** | **no** | *"an enemy unit at a different location"*: the same exception |
+| **Evelynn** | **no** | *"an enemy unit at a different location"*: a restriction that can never be met at her own battlefield, which is §811.1.d.2's exception (its worked example is Tideturner) |
 | **Tornado Warrior** | **yes** | *"empower something **here**"* |
 
 ### The cost of losing the battlefield
 
 > **323.7.** Remove all Hidden cards from all Battlefields that are not controlled by the same player and place them in their owner's Trash.
 
-1. Lose the battlefield, and the card goes to your **trash**, revealed (§421.4). **Moving your own last unit off counts.** A legend walk-home, Star Spring's move, a Tideturner swap that takes it away, or a standard move all leave you with no units there, and you lose control at the next cleanup in an Open state (§190.4.c, §323.6). The same cleanup trashes the card (§323.7). Flip it first, or keep a second unit there. That is why Jun's Star Spring save works: the flipped unit stays behind.
+1. Lose the battlefield, and the card goes to your **trash**, revealed (§421.4). **Moving your own last unit off counts.** A legend walk-home, Star Spring's move, or a standard move all leave you with no units there, and you lose control at the next cleanup in an Open state (§190.4.c, §323.6). The same cleanup trashes the card (§323.7). Flip it first, or keep a second unit there. That is why Jun's Star Spring save works: the flipped unit stays behind.
 2. **A mutual wipe does it too.** If nobody has units left, the battlefield is Uncontrolled (§466.5.b), which is not "the same player", so §323.7 trashes it. **In this deck the even trade got worse**: no XP *and* a lost card.
-3. The trash is not nowhere. Tail-Cloaked Matriarch can rebuy Evelynn, Tornado Warrior or Tideturner, and Fizz can recast Switcheroo. A rebuy plays from the trash, though, not from face down, so **Evelynn's trigger does not fire off a Matriarch rebuy.**
+3. The trash is not nowhere. Tail-Cloaked Matriarch can rebuy Evelynn or Tornado Warrior, and Fizz can recast Switcheroo. A rebuy plays from the trash, though, not from face down, so **Evelynn's trigger does not fire off a Matriarch rebuy.**
 
 ### The trap: removed in response
 
@@ -223,7 +222,6 @@ A hidden unit's play effect reads its battlefield **off the unit**, not off the 
 **Cite §359.3.f.2 first if a judge asks.** §359.3.e.12 sits under "A Spell lingers on the Chain", but §359.3.f.2's own worked example is this exact play: a Yasuo attack trigger whose *"here"* is moved away by a hidden Fight or Flight.
 
 - **Evelynn** (*"move an enemy unit at a different location **to my battlefield**"*): bounced in response, nothing moves.
-- **Tideturner** (*"…and it to **my original location**"*): the destination is null. §359.3.f.3 freezes trigger-condition information and could be argued the other way, but *original* reads like a referent, and the recorded ruling resolves the same shape for Kennen the same way. **Play as though it fails, and call a judge if a match hinges on it.**
 - **Tornado Warrior** (*"empower something **here**"*): no *here*, no empower.
 - **Switcheroo is safe.** It chooses both targets when you play it and reads nothing off itself.
 
@@ -235,7 +233,7 @@ A hidden unit's play effect reads its battlefield **off the unit**, not off the 
 
 | | what beats it | count it by |
 |---|---|---|
-| **Tideturner, Tornado Warrior** | Gust, Star-Crossed | their open Chaos |
+| **Tornado Warrior** | Gust, Star-Crossed | their open Chaos |
 | **Evelynn** | the above, **plus** Not So Fast / Repulse, **plus** a Temporal Breach on her target | open Chaos *and* open Calm; where her target stands |
 | **Switcheroo** | any spell counter except Defy | open runes of their counter's colour |
 
@@ -263,7 +261,7 @@ No Action keyword, so it is Main-Phase only.
 - **Do not use it like a Charm.** If Faefolk, Star-Crossed or Rampage can remove that backline unit, save the Void Assault. The test is *does my own unit need to move this turn?*
 
 **Irresistible Faefolk ×3** · 2E · 1 Might — *"When I move to a battlefield, you may move an enemy unit to that battlefield."*
-**"To a battlefield"**: moving her home, Star Spring's walk-home, or a Tideturner swap that lands her at base do nothing.
+**"To a battlefield"**: moving her home or Star Spring's walk-home do nothing.
 - **Jun:** the best 2-cost unit in the game. On turn 1 it either stops their unit or gets it killed, and it stays live as removal all game.
 
 **Evelynn, Entrancing ×1** · 2E · 2 Might · Hidden, Backline — *"When you play me from face down on your turn, you may move an enemy unit at a different location to my battlefield."* See [§7](#the-evelynn-line-three-xp-for-one-rune).
@@ -271,11 +269,7 @@ The condition is part of the trigger (§383.2.a.1). **Played from hand, or flipp
 
 ### The Hidden package
 
-**Tideturner ×1** · 2E · 2 Might · Hidden (**errata'd**) — *"When you play me, you may choose a unit you control at another location. Move me to its location and it to my original location."*
-His original location *is* the hide battlefield, so the unit you choose arrives there and Tideturner leaves. That is **a free, Reaction-speed way to put Rengar into a fight.**
-- The swap is a move, so it triggers Disciple and Merchant.
-- An effect move does not exhaust anybody; only the standard move costs an exhaust (§144).
-- **Jun:** his main job is "another hidden card for holds", above all at 7 points.
+**Tideturner — cut on 3 October.** He swapped a unit already on your board into a fight at Reaction speed. Nothing does that now: **Rengar's Ambush, from hand, is your only Reaction-speed reinforcement**, and three Hidden cards share the slot instead of four.
 
 **Tornado Warrior ×1** · 3E · 3 Might · Hidden — *"When you play me from face down, you may empower something here. Disempower it at end of turn."*
 - **Not restricted to your turn.**
@@ -292,7 +286,7 @@ The gap moves by **twice the difference** between the two units. Its swing grows
 ### The bodies
 
 **Shadow Order Disciple ×3** · 2E · 2 Might — *"When I move, you may [Burn 1] to give me +1 `[M]` this turn."*
-It triggers on **any** move, including Star Spring and Tideturner. Burn fills the trash Fizz and Matriarch draw from, and it *can* burn you out (§440.4).
+It triggers on **any** move, including Star Spring's walk-home. Burn fills the trash Fizz and Matriarch draw from, and it *can* burn you out (§440.4).
 - **Jun:** the second-best 2-drop. On the draw it slows the game, because their 2-drop does not want to score a point and then die to it.
 
 **Kinkou Initiate ×3** · 3E · 3 Might — *"When you play me, draw 1 if your other units have total Might 5 or more."*
@@ -302,7 +296,7 @@ It triggers on **any** move, including Star Spring and Tideturner. Burn fills th
 **Fizz, Trickster ×3** · 3E / 1 Chaos · 3 Might — *"When you play me, you may play a spell from your trash with Energy cost no more than 3, ignoring its Energy cost. Then recycle it. (You must still pay its Power cost.)"*
 - **Jun:** keep him for the late game, where he takes games over.
 
-**Traveling Merchant ×1** · 2E · 2 Might — *"When I move, discard 1, then draw 1."* Your plan when low on cards: it draws even with nothing to discard.
+**Traveling Merchant ×2** · 2E · 2 Might — *"When I move, discard 1, then draw 1."* Your plan when low on cards: it draws even with nothing to discard. **Back to two copies on 3 October**, so Star Spring's walk-home and Zaun Warrens' conquest loot more often.
 
 **Tail-Cloaked Matriarch ×2** · 4E · 4 Might · Empower 2E / 1 Chaos — *"When I become [Empowered], you may choose a unit in your trash with Energy cost no more than 3 and Power cost no more than `[A]`. Play it to your base, ignoring its cost."*
 - **Jun:** a turn-2 developer whose Empower stays a threat for turns. Late, **keep her in hand and reveal her on the turn you Empower immediately**, above all to bring back Fizz.
@@ -335,14 +329,18 @@ Your only removal that needs no combat, and it reaches units at base.
 **Sabotage ×2** · 1E / 1 Body — reveal their hand, recycle a **non-unit** card. It takes Hidden cards and Equipment out of their hand *before* they can hide them. Once a card is facedown you cannot touch it.
 - **Jun:** save it for turns with a lot of combat, or use it *defensively*: before playing a unit you cannot afford to lose, check that the coast is clear.
 
-**Ride the Wind ×1** · 2E / 1 Chaos · Action — move a unit and ready it, so a unit that already moved can move again.
+**Grim Resolve ×1** · 2E · Action — *"Give a friendly unit +3 Might this turn. When it wins a combat this turn, gain 2 XP."* **New on 3 October**, replacing Ride the Wind.
+- **An XP card first.** A win pays the legend's 1 **plus 2 more**. On an isolated Kha'Zix that is five XP from one fight ([§7](#grim-resolve-on-an-isolated-khazix-five-xp-from-one-fight)).
+- **The unit must survive.** Units inherit the combat result only if they are *"at this battlefield"* when it is determined (§466.3.c). If the buffed unit dies, no 2 XP, even when you take the battlefield.
+- **Defy counters it** (2 Energy, no Power); Not So Fast cannot, because it only chooses your unit. Against Defy decks, Punch First goes first.
+- **Jun's notes said he deliberately did not run it** ("early pumps cost development"). He changed his mind on 3 October; the same patience applies, so it is a midgame card like Punch First.
 
 **Up from the Deep ×2** · 3E · Flow 3E — two 1-Might Tentacles, replayable from the trash and then banished (§829.1.b.1).
 - **Jun:** the cheap scoring bodies the whole plan relies on, and still useful from the trash.
 
 ### Runes and battlefields
 
-**6 Body / 6 Chaos.** Body demand is 10 pips (Punch First, Sabotage, Rengar). Chaos demand is 9 (Fizz, Star-Crossed, Switcheroo's two, Kha'Zix, Ride the Wind). Void Assault takes either (§135.2.e.6), and the hide tax takes any.
+**6 Body / 6 Chaos.** Body demand is 10 pips (Punch First, Sabotage, Rengar). Chaos demand is 8 (Fizz, Star-Crossed, Switcheroo's two, Kha'Zix), down from 9 when Ride the Wind left. Void Assault takes either (§135.2.e.6), and the hide tax takes any.
 
 **Zaun Warrens: Jun's game-1 default.** *"When you conquer here, discard 1, then draw 1."* You choose what goes to the trash, which suits a deck built around the trash, and you can pitch narrow cards in matchups where they are dead. That makes a symmetric battlefield play asymmetric for you.
 
@@ -365,9 +363,9 @@ Turn N: control a battlefield and hide Evelynn. Turn N+1: activate the legend, b
 - Kha'Zix's trigger reads *attack or defend*: +2 Might and 2 XP. Win the fight for 1 more.
 - **Drag a lone unit from a battlefield they control** (it strips their board there), or from their base (it was doing nothing).
 
-### Tideturner → Rengar: the free 6 Might
+### Grim Resolve on an isolated Kha'Zix: five XP from one fight
 
-Hide Tideturner where you expect them to attack. When they commit, flip him: he swaps with Rengar at your base, and Rengar becomes a defender in the following Cleanup (§464.2.c.3.a), with his trigger firing (§383.4.e). This stacks with Rengar's own Ambush: one Rengar comes off the board, the other out of your hand.
+Drag their lone unit onto Kha'Zix (Faefolk, Void Assault or Evelynn). His trigger gives +2 and **2 XP**. Cast Grim Resolve on him in the combat showdown for **+3 more**, so a 4-Might Kha'Zix fights at 9. Win, and you collect the legend's 1 XP and Grim Resolve's 2 on top: **five XP from one combat**. It needs him alive at the end (§466.3.c), which at 9 Might he usually is. Into tapped Calm if they play Defy.
 
 ### Tornado Warrior → Matriarch: a free rebuy on their turn
 
@@ -378,7 +376,7 @@ Matriarch at a battlefield, Tornado Warrior hidden there. On their turn, mid-sho
 Jun's post-ban line. Conquer Star Spring with a strong unit (Vex or Rengar), then hide a card behind it. If the hold goes wrong on their turn, flip the hidden unit: Star Spring moves your strong unit home, out of the fight. Jun calls it "a 1-Power, 0-Energy Flash."
 - **Under the rules:** playing from Hidden is playing the card (§811.1.b), the unit is played to that battlefield (§811.1.d.1), and a unit moved to base "is no longer in combat" (§359.3.e.5's own example).
 - **Caveat:** Star Spring fires only on **the first** non-token unit played there each turn.
-- **The cheaper version:** walk the Traveling Merchant home instead, for a free loot.
+- **The cheaper version:** walk a Traveling Merchant home instead, for a free loot. With two in the list, it is there more often.
 
 ### Switcheroo into the pumped unit
 
@@ -419,14 +417,10 @@ When one spell wins the game, such as Star-Crossed on their key unit, they keep 
 
 Pass and play reactively. If they conquer the other battlefield, Ambush Rengar there. If they only develop, Vex stuns what they play and Rengar comes down beside her.
 
-### Faefolk + Tideturner on their turn
-
-Flip Tideturner and swap with Faefolk. Faefolk "moves to a battlefield" and drags an enemy unit there. Use it to make their other conquest harder while your hold is safe.
-
 ### Two that look like synergies and are not
 
 - **Matriarch does not rebuy Evelynn's trigger.** The rebuy plays her from the trash to your base, so her "from face down on your turn" condition fails.
-- **Faefolk does not trigger off a move to base.** Her text is "when I move **to a battlefield**", so Star Spring's walk-home or a Tideturner swap that lands her at base do nothing.
+- **Faefolk does not trigger off a move to base.** Her text is "when I move **to a battlefield**", so Star Spring's walk-home does nothing.
 
 ---
 
@@ -472,7 +466,7 @@ Opening hand is 4 cards from 39. Set aside up to 2, draw that many, and the set-
 |---|---|
 | At least one 2- or 3-Energy unit | 89.2% |
 | At least one 2-Energy unit | 66.7% |
-| At least one Hidden card | 36.3% |
+| At least one Hidden card (three in the list) | 28.4% |
 | At least one Void Assault | 28.4% |
 | At least one Punch First | 28.4% |
 
@@ -543,7 +537,7 @@ From Jun's list and this page's own:
 
 ## 12. Errata that change your cards
 
-**Tideturner** — **the reason he works from Hidden at all.**
+**Tideturner** *(cut 3 October; kept because §811.1.d.2 uses him as its worked example)* — **the reason he worked from Hidden at all.**
 > **Was:** *…choose a friendly unit…* **Now:** *…choose **a unit you control at another location**…*
 
 Without *at another location*, §811.1.d.2 would pin his target to his own battlefield and the card would do nothing from Hidden.
@@ -566,12 +560,13 @@ Jun's list has the results, and this repo's standing rule is to pick between his
 3. **How often is Matriarch actually standing where Tornado Warrior is hidden?** It is worth tracking in your journal.
 4. **Evelynn's conversion rate.** She needs a controlled battlefield, a spare rune, a turn of setup, an empty slot, a lone target and no open Chaos or Calm. Track how many games she converts.
 5. **Star Spring against Rek'Sai.** The symmetric trigger looks like a liability. Is it?
+6. **Grim Resolve.** His guide said he does not run it because early pumps cost development. What changed by 3 October — and is it the card he holds for the five-XP Kha'Zix fight?
 
 ---
 
 ## Sources and method
 
-**The list** was read live from the app's Supabase state via `scripts/rift deck "Kha'Zix Midrange"`.
+**The list** is Jun's 3 October revision, written to the app's Supabase state on 3 October and read back via `scripts/rift deck "Kha'Zix Midrange"`.
 - **Its results:** riftbound.gg's *All Best-of Legends Prizing Decks in Los Angeles* names Cuoemrei as the Best-of Kha'Zix winner, and the archive carries Cuoemrei's list, identical to this one. HTCG Dizoo's Orlando list is tournament-vouched in the archive (`tour: 1`, placing 36), at an event `data/events.json` records with 78 players. The Top 32 LA title is the deck author's claim.
 - **Tier:** riftbound.gg's tier list of 1 October has Kha'Zix at Tier 4, noting it "didn't do much in third-party events before the bans either, but typically rose to the occasion during regional tournaments."
 
@@ -579,7 +574,7 @@ Jun's list has the results, and this repo's standing rule is to pick between his
 
 **Rule text** is `docs/rules-full.md`, with `docs/rules-faq.md` outranking it where they differ (the Hidden restrictions and the Tideturner errata are FAQ material). The **removed-in-response ruling** is `docs/rules-rulings.md`: secondary provenance, and it expires at the next Core Rules update. The **Star Spring save** is a composition of §811.1.b, §811.1.d.1 and §359.3.e.5, derived here, not a ruling.
 
-**The combat table and opening-hand figures** are from the previous edition of this dossier and were computed against the 20 September archive (1,226 decks). They are Monte Carlo at 200,000 trials for combat and exact hypergeometric for hands. The combat model implements §465.2 and §466.3 directly. **Alternate printings are collapsed by name** on both sides of every join. Matchup-level figures are recomputed from the current window in the matchup guide.
+**The combat table and opening-hand figures** are from the previous edition of this dossier and were computed against the 20 September archive (1,226 decks). They are Monte Carlo at 200,000 trials for combat and exact hypergeometric for hands. The combat model implements §465.2 and §466.3 directly. **Alternate printings are collapsed by name** on both sides of every join. Matchup-level figures are recomputed from the current window in the matchup guide. **The 3 October swap moves none of the combat or curve figures**: Tideturner and the second Merchant are both 2-Energy 2-Might units, and Ride the Wind and Grim Resolve both 2-Energy spells. Only the Hidden-card rate changes (36.3% → 28.4%).
 
 **Release date:** riftbound.gg, *Radiance Preconstructed Decks & All Products*: launch 23 October 2026, Pre-Rift events 16–22 October.
 
