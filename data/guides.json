@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-03",
+ "generatedAt": "2026-10-04",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -25,7 +25,7 @@
     "9. Where this corrected the other guides",
     "10. Jun on video"
    ],
-   "words": 5252
+   "words": 5142
   },
   {
    "slug": "khazix-voidreaver-matchups",
@@ -70,7 +70,7 @@
     "Quick reference",
     "Sources and method"
    ],
-   "words": 12834
+   "words": 12828
   },
   {
    "slug": "khazix-voidreaver",
@@ -98,7 +98,7 @@
     "13. Questions to bring to Jun",
     "Sources and method"
    ],
-   "words": 9109
+   "words": 8911
   },
   {
    "slug": "reksai-void-burrower",

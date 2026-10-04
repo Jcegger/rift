@@ -21,7 +21,7 @@ The guide has two layers, and they are not the same age.
 |---|---|---|
 | **Updates, 15 and 21 September** | the post-ban format | current. The metagame read and the choice of build |
 | **The midrange list he ends on** | post-ban | the 23 September list: Kinkou Initiate ×3, Star Spring, the Hidden package |
-| **His 3 October revision** (passed on directly, not in the Metafy guide) | post-ban | **current, and the list you run**: −Tideturner, −Ride the Wind, +Grim Resolve, +1 Traveling Merchant. Where the notes below discuss those four cards, this overrides them |
+| **His 3 October revision** (passed on directly, not in the Metafy guide) | post-ban | **current, and the list you run**: one Grim Resolve and a second Traveling Merchant come in. Where the notes below discuss those cards, this overrides them |
 | **Card choices, game plan, mulligans, mistakes, matchups** | the **pre-ban** "Kha'Zix Midrange Vendetta" list | **the reasoning is current; some of the cards are not.** That list ran Stacked Deck ×3 (now banned), Onslaught, Hard Bargain main, Up from the Deep ×3, Forbidding Waste, and no Evelynn or Tornado Warrior |
 | **Sideboard tables** | the pre-ban side (Sett, Akshan, Angler Beast, Abandon, Rebuke, Unyielding Spirit) | **the principles hold; the tables mostly do not.** See [§7](#7-sideboarding) |
 | **Dated matchup posts** (22–23 September: Akali, Jayce, LeBlanc) and the **gameplay videos** | post-ban | **not captured.** They are video or did not print. Watch them on Metafy |
@@ -68,7 +68,7 @@ You are the proactive deck and they are the reactive one. They can never safely 
 - **Behind on points is fine if you are ahead on development.** Let them score first, then enter, win the fight and retreat. Some games you develop for several turns and then wipe their board in one turn with Void Assault, Faefolk and Rampage.
 - **"The best defence is a good offence."** The player in the lead who can mostly conquer is better placed than the player holding to keep up. Kha'Zix may be the best deck in the format at this, because the legend retreat leaves nothing behind for the opponent to hit.
 - **But you must hold sometimes, and that is where the post-ban list differs.** He calls holding "the single most powerful mechanic to gain points" and also "the single most risky", because a bad hold often loses the game. A good Kha'Zix player avoids bad holds. **A great one finds the holds that are required.** His test: **can I win this game without a hold?** If the answer is no, force one, midgame or on the last turn. It may fail, but refusing to hold in a losing game guarantees the loss.
-- **At 7, hold with a split board plus a hidden card.** He named Tideturner, which he cut on 3 October. Dividing your units across both battlefields with a facedown Tideturner behind them "can really mess with your opponent's attacks."
+- **At 7, hold with a split board plus a hidden card.** Dividing your units across both battlefields with a facedown card behind them "can really mess with your opponent's attacks."
 
 ---
 
@@ -81,7 +81,6 @@ Only the cards in your current 56, in his words where it matters.
 - **Irresistible Faefolk** is the best 2-cost unit in the game. On turn 1 it either stops their turn-1 unit or gets it killed next turn. It stays live as removal all game and helps finish games late.
 - **Shadow Order Disciple** is the second-best 2-drop: it burns cards and grows when it moves. On the draw it slows the game down, because their 2-drop does not want to score a point and then die to it.
 - **Traveling Merchant** (two copies since 3 October) handles filtering, filling the trash, and drawing even when you have nothing to discard. It is your plan for when you run low on cards.
-- **Tideturner** *(cut 3 October)* gave you movement onto the opposing battlefield, a pseudo-Ganking. Mostly, though, it was **another hidden card for holds.**
 - **Fizz, Trickster** is a 3-Might body plus a free spell from the trash, for 3 Energy and 1 Power. Keep him for the late game, where he takes games over.
 - **Vex, Apathetic** is a strong turn-2 play: 4 Energy, no Power, and Deflect makes her hard to remove. **Plan B:** once their units are cleared, leave Vex on a battlefield. The threat of scoring to 6 on both battlefields while she stuns anything they play is a real way to win.
 - **Tail-Cloaked Matriarch** is a turn-2 developer whose Empower is still a threat several turns later. In the late game, **keep her in hand and reveal her on the turn you Empower immediately**, bringing back Fizz above all. That is a lot of pressure out of nowhere.
@@ -101,13 +100,13 @@ Only the cards in your current 56, in his words where it matters.
 - **Ravenbloom Prefect** (side). Mainly for Dazzling Aurora, where it is "incredibly oppressive": if they cannot remove it, they cannot play the game, and Matriarch revives it. He would side it in often on the draw, to play on turn 1.
 
 **Cards he deliberately does not run,** in case you are tempted:
-- Grim Resolve: early pumps cost development. **Reversed on 3 October**: he now runs one, in Ride the Wind's slot.
+- Grim Resolve: early pumps cost development. **Reversed on 3 October**: he now runs one.
 - Spirit Wheel: too slow.
 - Gust Monk, Noxian Demolitionist and Nidalee: Nidalee is better in Rengar.
 - First Mate and Lucian: Up from the Deep does Lucian's job longer.
 - Kennen, Storm of Shuriken: Fizz already does it.
 
-He also ran **Kinkou Initiate** only reluctantly before the ban, because it draws less reliably in Kha'Zix than in Rengar. **Ride the Wind** he called a mediocre Void Assault in a deck that taps out on its own turn. Both made the post-ban list anyway, which tells you how much the ban changed — and Ride the Wind left again on 3 October.
+He also ran **Kinkou Initiate** only reluctantly before the ban, because it draws less reliably in Kha'Zix than in Rengar. It is in the post-ban list anyway, which tells you how much the ban changed.
 
 ### Interactions worth knowing
 
@@ -115,7 +114,6 @@ He also ran **Kinkou Initiate** only reluctantly before the ban, because it draw
 - **Fizz + Rampage:** 3 Energy plus 2 Power for 5 damage anywhere and a body.
 - **Fizz + Up from the Deep:** mass early development. The earlier the better, but early Power is costly.
 - **Fizz + Star-Crossed:** bounce Fizz and replay him, taking another spell from the trash.
-- **Faefolk + Tideturner** *(Tideturner cut 3 October)*: flip Tideturner on their turn and swap with Faefolk, which drags an enemy unit to that battlefield. Use it when your hold is safe and you want their other conquest to be harder.
 - **Faefolk or Void Assault + Forbidding Waste:** drag a unit there so it defends alone at −2. Forbidding Waste is no longer in your 56, so this one is for when you build differently.
 - **Zed + Void Assault:** attack with the Shadow Clone to get Assault 4, swap it with Zed, then Void Assault the Clone back in for a second Assault 4. Effectively 8 Might, for breaking a big hold.
 - **Zed + Switcheroo:** Zed is pumped into their hold and they answer with their own Punch First. Swap Zed out for a Clone, Switcheroo the Clone with their biggest unit, swap Zed back in, conquer, and lose nothing.
@@ -151,12 +149,12 @@ He also ran **Kinkou Initiate** only reluctantly before the ban, because it draw
 
 | vs | of your cards, he brings in | and cuts |
 |---|---|---|
-| Kennen | Acceptable Losses, Switcheroo (Gust per the post-ban text) | Zed, Star-Crossed; on the play Up from the Deep and a Punch First, on the draw Tideturner and a Merchant |
+| Kennen | Acceptable Losses, Switcheroo (Gust per the post-ban text) | Zed, Star-Crossed; on the play Up from the Deep and a Punch First, on the draw a Merchant |
 | Rengar | Hard Bargain, Switcheroo | Sabotage; on the play Up from the Deep ×2, on the draw a Merchant |
 | Master Yi | Acceptable Losses, Sabotage, Switcheroo | Star-Crossed, Up from the Deep (×3 on the play, ×2 on the draw), and a Merchant on the draw |
 | Azir | Acceptable Losses, Sabotage, Hard Bargain | Zed ×2, Star-Crossed; on the play Up from the Deep ×3, on the draw Merchant ×2 |
-| Irelia | Acceptable Losses, Sabotage, Hard Bargain, Switcheroo | **Punch First ×2** both ways; on the play Up from the Deep ×2 and Zed, on the draw Tideturner, Matriarch and a Merchant |
-| Diana | Sabotage, Hard Bargain, Switcheroo | on the play Up from the Deep ×2 and Zed, on the draw Tideturner, Matriarch and a Merchant |
+| Irelia | Acceptable Losses, Sabotage, Hard Bargain, Switcheroo | **Punch First ×2** both ways; on the play Up from the Deep ×2 and Zed, on the draw Matriarch and a Merchant |
+| Diana | Sabotage, Hard Bargain, Switcheroo | on the play Up from the Deep ×2 and Zed, on the draw Matriarch and a Merchant |
 
 He brings **Switcheroo in against five of the six**. That was from the board when he ran it there. You run one copy main.
 

@@ -13,7 +13,7 @@ date: 2026-10-02
 
 ## The headline: this list won Best-of-Kha'Zix at Los Angeles
 
-**Cuoemrei won the Best-of-Kha'Zix prize at the Los Angeles RQ** on 26 September, a 2,165-player field and the largest this archive has carried. The archive carries Cuoemrei's list: Jun's 23 September build, which shares **54 of your 56 cards**. So does HTCG Dizoo's list at the Orlando $10k the same weekend (36th of 78, tournament-vouched), and a list titled "Kha'Zix Top 32 Los Angeles RQ". **Your list is Jun's 3 October revision**: −Tideturner, −Ride the Wind, +Grim Resolve, +1 Traveling Merchant.
+**Cuoemrei won the Best-of-Kha'Zix prize at the Los Angeles RQ** on 26 September, a 2,165-player field and the largest this archive has carried. The archive carries Cuoemrei's list: Jun's 23 September build, which shares **54 of your 56 cards**. So does HTCG Dizoo's list at the Orlando $10k the same weekend (36th of 78, tournament-vouched), and a list titled "Kha'Zix Top 32 Los Angeles RQ". **Your list is Jun's 3 October revision**, two cards different.
 
 **And the deck is Tier 4** on riftbound.gg's list as of 1 October. Their note: Kha'Zix "didn't do much in third-party events before the bans either, but typically rose to the occasion during regional tournaments." Both are true at once. **It converts in the hands of someone who knows the matchups, and it does not convert on raw power.** That is what this page is for.
 

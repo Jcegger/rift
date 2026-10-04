@@ -9,7 +9,7 @@ date: 2026-10-03
 **Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend = 56 · **Sideboard:** 10 of 10
 **Shuffled library:** 39 — the Champion starts outside the deck (§103.2.a.1, §108.3.d)
 **Collection status:** complete, nothing to get
-**The list:** Jun's **3 October** midrange revision, saved in the app as `Kha'Zix Midrange (Jun, post-ban)`. Two swaps from his 23 September build: **−Tideturner, −Ride the Wind, +Grim Resolve, +1 Traveling Merchant** ([§6](#6-card-by-card))
+**The list:** Jun's **3 October** midrange revision, saved in the app as `Kha'Zix Midrange (Jun, post-ban)`
 **Its results:** **Best-of-Kha'Zix at the Los Angeles RQ** (26 September, 2,165 players), won by Cuoemrei on the 23 September list, which shares **54 of these 56 cards** · **36th of 78** at the Orlando $10k (HTCG Dizoo, the same 23 September 56) · a deck in the archive titled "Kha'Zix Top 32 Los Angeles RQ", also the 23 September list
 **Good until:** Radiance, released **23 October** (prereleases from the 16th). Jun will retest every build then.
 
@@ -101,7 +101,7 @@ This is where you spend. Finish their board with removal and take the points, bu
 | **6** | hold one, then conquer the other | win |
 | **6** | hold nothing, conquer both | win. The first conquest makes 7 and counts as scoring that battlefield |
 
-**At 7, hold with a split board and a facedown card behind it** (Jun). Units on both battlefields plus a hidden card "can really mess with your opponent's attacks." Jun named Tideturner, which he cut on 3 October; the hidden cards you have now are Tornado Warrior (a free 3 Might on their turn) and Switcheroo, which is pinned to its battlefield and so is a defensive card anyway.
+**At 7, hold with a split board and a facedown card behind it** (Jun). Units on both battlefields plus a hidden card "can really mess with your opponent's attacks." Tornado Warrior is a free 3 Might on their turn; a hidden Switcheroo is pinned to its battlefield, so it is a defensive card anyway.
 
 **If they are at 7 and holding**, they win at the start of their turn unless you take the battlefield now. That outranks every plan you had.
 
@@ -204,7 +204,7 @@ So:
 | card | target pinned to the hide battlefield? | why |
 |---|---|---|
 | **Switcheroo** | **yes, both units** | nothing in its text points elsewhere. **So a hidden Switcheroo is a defensive card**; for an attack, cast it from hand |
-| **Evelynn** | **no** | *"an enemy unit at a different location"*: a restriction that can never be met at her own battlefield, which is §811.1.d.2's exception (its worked example is Tideturner) |
+| **Evelynn** | **no** | *"an enemy unit at a different location"*: a restriction that can never be met at her own battlefield, which is §811.1.d.2's exception |
 | **Tornado Warrior** | **yes** | *"empower something **here**"* |
 
 ### The cost of losing the battlefield
@@ -269,8 +269,6 @@ The condition is part of the trigger (§383.2.a.1). **Played from hand, or flipp
 
 ### The Hidden package
 
-**Tideturner — cut on 3 October.** He swapped a unit already on your board into a fight at Reaction speed. Nothing does that now: **Rengar's Ambush, from hand, is your only Reaction-speed reinforcement**, and three Hidden cards share the slot instead of four.
-
 **Tornado Warrior ×1** · 3E · 3 Might · Hidden — *"When you play me from face down, you may empower something here. Disempower it at end of turn."*
 - **Not restricted to your turn.**
 - The one card it cares about is **Tail-Cloaked Matriarch** standing at that battlefield: flip him for 0, she becomes Empowered, and she rebuys a unit from your trash.
@@ -329,7 +327,7 @@ Your only removal that needs no combat, and it reaches units at base.
 **Sabotage ×2** · 1E / 1 Body — reveal their hand, recycle a **non-unit** card. It takes Hidden cards and Equipment out of their hand *before* they can hide them. Once a card is facedown you cannot touch it.
 - **Jun:** save it for turns with a lot of combat, or use it *defensively*: before playing a unit you cannot afford to lose, check that the coast is clear.
 
-**Grim Resolve ×1** · 2E · Action — *"Give a friendly unit +3 Might this turn. When it wins a combat this turn, gain 2 XP."* **New on 3 October**, replacing Ride the Wind.
+**Grim Resolve ×1** · 2E · Action — *"Give a friendly unit +3 Might this turn. When it wins a combat this turn, gain 2 XP."* 
 - **An XP card first.** A win pays the legend's 1 **plus 2 more**. On an isolated Kha'Zix that is five XP from one fight ([§7](#grim-resolve-on-an-isolated-khazix-five-xp-from-one-fight)).
 - **The unit must survive.** Units inherit the combat result only if they are *"at this battlefield"* when it is determined (§466.3.c). If the buffed unit dies, no 2 XP, even when you take the battlefield.
 - **Defy counters it** (2 Energy, no Power); Not So Fast cannot, because it only chooses your unit. Against Defy decks, Punch First goes first.
@@ -340,7 +338,7 @@ Your only removal that needs no combat, and it reaches units at base.
 
 ### Runes and battlefields
 
-**6 Body / 6 Chaos.** Body demand is 10 pips (Punch First, Sabotage, Rengar). Chaos demand is 8 (Fizz, Star-Crossed, Switcheroo's two, Kha'Zix), down from 9 when Ride the Wind left. Void Assault takes either (§135.2.e.6), and the hide tax takes any.
+**6 Body / 6 Chaos.** Body demand is 10 pips (Punch First, Sabotage, Rengar). Chaos demand is 8 (Fizz, Star-Crossed, Switcheroo's two, Kha'Zix). Void Assault takes either (§135.2.e.6), and the hide tax takes any.
 
 **Zaun Warrens: Jun's game-1 default.** *"When you conquer here, discard 1, then draw 1."* You choose what goes to the trash, which suits a deck built around the trash, and you can pitch narrow cards in matchups where they are dead. That makes a symmetric battlefield play asymmetric for you.
 
@@ -538,11 +536,6 @@ From Jun's list and this page's own:
 
 ## 12. Errata that change your cards
 
-**Tideturner** *(cut 3 October; kept because §811.1.d.2 uses him as its worked example)* — **the reason he worked from Hidden at all.**
-> **Was:** *…choose a friendly unit…* **Now:** *…choose **a unit you control at another location**…*
-
-Without *at another location*, §811.1.d.2 would pin his target to his own battlefield and the card would do nothing from Hidden.
-
 **Rengar, Trophy Hunter.**
 > **Was:** *I can be played to a battlefield where there are enemy units.* **Now:** *I can **[Ambush]** to a battlefield where there are enemy units, even if you don't have units there.*
 
@@ -573,9 +566,9 @@ Jun's list has the results, and this repo's standing rule is to pick between his
 
 **Jun's guide** is distilled in [Jun's notes](khazix-voidreaver-jun.md), and every "Jun" here traces to it. His card-by-card chapter was written for his **pre-ban** list. Where a card's role changed since, this guide says so.
 
-**Rule text** is `docs/rules-full.md`, with `docs/rules-faq.md` outranking it where they differ (the Hidden restrictions and the Tideturner errata are FAQ material). The **removed-in-response ruling** is `docs/rules-rulings.md`: secondary provenance, and it expires at the next Core Rules update. The **Star Spring save** is a composition of §811.1.b, §811.1.d.1 and §359.3.e.5, derived here, not a ruling.
+**Rule text** is `docs/rules-full.md`, with `docs/rules-faq.md` outranking it where they differ (the Hidden restrictions are FAQ material). The **removed-in-response ruling** is `docs/rules-rulings.md`: secondary provenance, and it expires at the next Core Rules update. The **Star Spring save** is a composition of §811.1.b, §811.1.d.1 and §359.3.e.5, derived here, not a ruling.
 
-**The combat table and opening-hand figures** are from the previous edition of this dossier and were computed against the 20 September archive (1,226 decks). They are Monte Carlo at 200,000 trials for combat and exact hypergeometric for hands. The combat model implements §465.2 and §466.3 directly. **Alternate printings are collapsed by name** on both sides of every join. Matchup-level figures are recomputed from the current window in the matchup guide. **The 3 October swap moves none of the combat or curve figures**: Tideturner and the second Merchant are both 2-Energy 2-Might units, and Ride the Wind and Grim Resolve both 2-Energy spells. Only the Hidden-card rate changes (36.3% → 28.4%).
+**The combat table and opening-hand figures** are from the previous edition of this dossier and were computed against the 20 September archive (1,226 decks). They are Monte Carlo at 200,000 trials for combat and exact hypergeometric for hands. The combat model implements §465.2 and §466.3 directly. **Alternate printings are collapsed by name** on both sides of every join. Matchup-level figures are recomputed from the current window in the matchup guide.
 
 **Release date:** riftbound.gg, *Radiance Preconstructed Decks & All Products*: launch 23 October 2026, Pre-Rift events 16–22 October.
 
