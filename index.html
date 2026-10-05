@@ -319,6 +319,15 @@ body{overflow-x:hidden}
 .g-table tr:last-child td{border-bottom:none}
 .g-table td:first-child{color:var(--cream)}
 </style>
+  <!-- Google Analytics (same property as jayegger.com). Kept in <head>, and the inline tag has an id, because
+       scripts/check.mjs slices the app from the first bare <script> to the last </script>. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-70QQ2KC0XH"></script>
+  <script id="ga-init">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-70QQ2KC0XH', { 'anonymize_ip': true });
+  </script>
 </head>
 <body>
 <div class="wrap">
