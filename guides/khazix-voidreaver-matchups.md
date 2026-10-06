@@ -64,7 +64,7 @@ The question under every matchup is ***if neither of us acts, who is happier?***
 
 | if they… | you play | why |
 |---|---|---|
-| **cannot cover two battlefields** (few cheap units) | **take both, race** | 2 points a turn ends it in four |
+| **cannot cover two battlefields** (few cheap units) | **take both, race** | 2 points a turn, but five turns at best from the first unit: it enters exhausted (§143.4) and attacks the turn after |
 | **cover two and out-grind you** (grind > 12) | **win one fight early, convert it** | you can neither spread nor wait |
 | **cover two but you out-grind them** (grind < 12) | **hold one, refuse trades** | they need it short; you do not |
 
@@ -74,6 +74,13 @@ The question under every matchup is ***if neither of us acts, who is happier?***
 - **Whatever the plan, the target is 6 points before them.** Your end-game needs little setup, because Void Assault and the Ambush units can take both battlefields in one turn.
 - **Ask, every game, "can I win this without a hold?"** If not, force one. Post-ban that is most games against the Heron decks.
 - **Re-ask the role question when the board changes.** A "hold one, grind" game becomes "push now" the turn they land the engine piece that beats you long, whether that is Astral Heron, Dazzling Aurora or a resolved Rhasa.
+
+**Three more board changes that flip the plan** ([strategy.md](../docs/strategy.md)):
+- **They hold both battlefields.** Patience works only while the board is split. Once they hold both, the setup is already paid: 2 points every Beginning Phase whatever you build, four turns at most from zero. Break it now (§2).
+- **Either player reaches 5.** Scan every turn for a line to 8, theirs before yours (§0). Void Assault and the Ambush units take both battlefields in one turn.
+- **Their base is big but slow.** Pressure it before it converts (§2).
+
+**Patience is a habit, not a plan.** It is "the deck's first skill" in every matchup: units first, spells second ([Jun §3](khazix-voidreaver-jun.md#3-patience-development-and-the-curve)). The table decides what the developed board then does. **Pushing is not recycling runes**: even in a race, spend Power on the turn that scores, because Power is expensive early.
 
 Never hold zero battlefields, and never take a fight you have not rigged.
 
