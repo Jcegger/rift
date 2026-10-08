@@ -1,21 +1,48 @@
 {
- "generatedAt": "2026-10-04",
+ "generatedAt": "2026-10-08",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 8,
+ "carriedFromPrevious": 11,
  "tags": {
+  "News": 35,
+  "Guides": 4,
   "Metagame": 20,
-  "News": 33,
   "Events": 21,
   "Legends": 15,
   "Sets": 4,
-  "Guides": 3,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "How to Get the Riftbound x Worlds 2026 Bundle",
+   "dt": "2026-10-08",
+   "url": "https://riftbound.gg/riftbound-worlds-2026-bundle",
+   "tags": [
+    "News"
+   ],
+   "author": "Theo-74825"
+  },
+  {
+   "title": "Playing & Building Kennen in the Post-Ban Metagame",
+   "dt": "2026-10-07",
+   "url": "https://riftbound.gg/playing-building-kennen-in-the-post-ban-metagame",
+   "tags": [
+    "Guides"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Riftbound Radiance K/DA Cards",
+   "dt": "2026-10-06",
+   "url": "https://riftbound.gg/radiance-kda-special-alt-art-cards",
+   "tags": [
+    "News"
+   ],
+   "author": "Theo-74825"
+  },
   {
    "title": "Riftbound Meta Tier List – Best Decks for Vendetta – Post-Ban Metagame Week 3",
    "dt": "2026-10-03",
@@ -305,7 +332,7 @@
    "author": "Den"
   },
   {
-   "title": "Kennen, Heart of the Tempest - Best Decks & Synergies",
+   "title": "Kennen, Heart of the Tempest Deck Guide - Post-Ban Vendetta Metagame",
    "dt": "2026-08-08",
    "url": "https://riftbound.gg/kennen-heart-of-the-tempest-guide",
    "tags": [
