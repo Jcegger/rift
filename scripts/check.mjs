@@ -1558,8 +1558,28 @@ section('Compounding and the fringe gate');
   const wantEst = new Set([...rawLists].filter(([k, n]) => n >= 4 || rawTour.get(k)).map(([k]) => k));
   ok('the fringe gate matches its rule', est.size === wantEst.size && [...est].every((k) => wantEst.has(k)),
      `${est.size} established`);
-  ok('the gate actually splits the roster', est.size > 5 && est.size < rawLists.size,
-     `${est.size} of ${rawLists.size} established`);
+  /* This used to require the gate to exclude something in the live snapshot. On
+     2026-10-04 the archive grew until every archetype cleared the bar (57 of 57:
+     four-plus lists or a tournament entry each), which is the world changing shape,
+     not the gate breaking. The invariant it was protecting is that the gate is not
+     vacuous, so assert that directly: a synthetic one-list, no-placing archetype
+     added to the snapshot must be excluded while every real one keeps its verdict. */
+  ok('the gate is not vacuous in the live snapshot', est.size > 5,
+     `${est.size} of ${rawLists.size} established` +
+     (est.size === rawLists.size ? ' — every archetype clears the bar this snapshot' : ''));
+  {
+    const realDecks = A.DECKS;
+    const probe = { s: 'synthetic-one-off', ln: 'Synthetic One-Off Legend', lg: 'ZZZ-000', tour: 0, cards: {} };
+    A.DECKS = [...realDecks, probe];
+    A.forgetDeckCaches();
+    const withProbe = A.establishedArchetypes();
+    const probeName = A.archetypeName(probe);
+    const kept = [...est].every((k) => withProbe.has(k));
+    A.DECKS = realDecks;
+    A.forgetDeckCaches();
+    ok('the gate excludes a one-list, no-placing archetype', !withProbe.has(probeName) && kept,
+       `"${probeName}" ${withProbe.has(probeName) ? 'admitted' : 'excluded'}; real verdicts ${kept ? 'unchanged' : 'CHANGED'}`);
+  }
 
   // Overlap credit: synthetic candidates that share exactly one priced card.
   const priced = A.DECKS.find((d) => Object.keys(d.cards).some((c) => {

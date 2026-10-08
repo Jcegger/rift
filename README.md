@@ -273,8 +273,10 @@ established at four or more distinct lists in the snapshot, or any tournament en
 open so the plan is never empty when a deck could be built. Recency would have been the
 natural gate, but the snapshot is a rolling 60-day window rebuilt daily, so every
 archetype in it reads as "seen yesterday" — list count is what actually separates a
-known deck from one person's experiment. 42 of 47 clear the bar; the 5 that do not are
-starter decks and one-offs.
+known deck from one person's experiment. 42 of 47 cleared the bar when this was written;
+the 5 that did not were starter decks and one-offs. **By 4 October 2026 every archetype in
+the snapshot cleared it** (57 of 57), which is the gate correctly finding nothing fringe,
+not the gate breaking.
 
 **The history, since the reasoning still holds for ties.**
 Against a staples-only collection, 13 archetypes tie at exactly 38 cards short.
@@ -548,7 +550,9 @@ way to reach the need-a-unit state the Legends tab exists to report, and one tha
 owns every unit and no legend, which is the only way to reach its mirror.
 
 Compounding and the fringe gate have their own block: the gate matches its list-count
-rule and genuinely splits the roster, the compounding credit is zero for a gap nothing
+rule, is not vacuous (a synthetic one-list, no-placing archetype added to the snapshot
+is excluded while every real verdict holds; the live snapshot is allowed to have nothing
+fringe in it), the compounding credit is zero for a gap nothing
 else shares and never exceeds the priced gap, redundancy flags a full reprint and not a
 different list, `byCost` is strictly cheapest-gap first and `byCards` strictly
 fewest-cards first, `byPlanTarget` adds the bucket → non-redundant → compounding rule,
