@@ -324,10 +324,43 @@ async function discoverSupplements() {
 // The hash matters more than the date. A page edited in place keeps its publishDate,
 // and a ruling that changes silently is exactly the failure this whole exercise is
 // about, so what gets compared between runs is the text itself.
+/* Every CI run since at least 2026-10-04 lost the same page, the second supplement,
+   to `fetch failed`: a connection-level drop right after the first request to the same
+   host, never an HTTP status. build-errata.mjs fetches that page fine because it retries
+   and pauses between pages; this builder did neither, so it logged FAILED, carried the
+   previous copy, and the run stayed green. Harmless only while that page is unchanged —
+   an edit to it could never be detected. Same policy as build-errata: retry the
+   transient (network errors, 429, 5xx) with backoff, fail hard on the rest. */
+const RETRIES = 4;
+const backoff = (attempt) => 3000 * 2 ** attempt;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const PAGE_PAUSE = 600;
+
+async function fetchText(url, label) {
+  for (let attempt = 0; ; attempt++) {
+    const wait = backoff(attempt);
+    let r;
+    try {
+      r = await fetch(url, { headers: { "User-Agent": UA } });
+    } catch (e) {
+      if (attempt >= RETRIES) throw new Error(`${label}: ${e.message} after ${RETRIES} retries`);
+      process.stdout.write(`(${e.message}, ${wait / 1000}s) `);
+      await sleep(wait);
+      continue;
+    }
+    if (r.status === 429 || r.status >= 500) {
+      if (attempt >= RETRIES) throw new Error(`${label} ${r.status} ${r.statusText} after ${RETRIES} retries`);
+      process.stdout.write(`(${r.status}, ${wait / 1000}s) `);
+      await sleep(wait);
+      continue;
+    }
+    if (!r.ok) throw new Error(`${label} ${r.status} ${r.statusText}`);
+    return r.text();
+  }
+}
+
 async function loadSupplement(doc) {
-  const r = await fetch(doc.url, { headers: { "User-Agent": UA } });
-  if (!r.ok) throw new Error(`${doc.slug} ${r.status} ${r.statusText}`);
-  const raw = await r.text();
+  const raw = await fetchText(doc.url, doc.slug);
   const html = unescapeHtml(raw);
   let published = null;
   for (const m of html.matchAll(new RegExp(doc.slug, "g"))) {
@@ -625,7 +658,8 @@ const main = async () => {
   // and a supplement that vanishes is news, not a crash. Carry the previous copy and
   // say so, in the same graded-failure spirit as the workflow.
   const supp = [];
-  for (const d of listed) {
+  for (const [i, d] of listed.entries()) {
+    if (i) await sleep(PAGE_PAUSE);   // back-to-back hits on one host drop connections
     process.stdout.write(`  ${d.slug}… `);
     try {
       const full = await loadSupplement(d);
