@@ -7,7 +7,7 @@
  "cutShort": null,
  "carriedFromPrevious": 12,
  "tags": {
-  "News": 36,
+  "News": 39,
   "Guides": 4,
   "Metagame": 20,
   "Events": 21,
@@ -16,6 +16,33 @@
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "October 2026 Tournament Rules Update & Changelog",
+   "dt": "2026-10-09",
+   "url": "https://riftbound.gg/october-2026-tournament-rules-update-changelog",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
+  {
+   "title": "Radiance Core Rules Patch Notes",
+   "dt": "2026-10-09",
+   "url": "https://riftbound.gg/radiance-core-rules-patch-notes",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
+  {
+   "title": "Radiance Errata Updates",
+   "dt": "2026-10-09",
+   "url": "https://riftbound.gg/radiance-errata-updates",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
   {
    "title": "Riftbound Meta Tier List – Best Decks for Vendetta – Heading to Radiance!",
    "dt": "2026-10-09",
