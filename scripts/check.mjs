@@ -14,7 +14,7 @@
 
 import { readdirSync, readFileSync } from 'node:fs';
 import { claimFromTitle, placeOf } from './build-decks.mjs';
-import { bannedNameSet, deckIsLegal } from './state.mjs';
+import { bannedNameSet, deckIsLegal, standardNameSet } from './state.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -1285,13 +1285,48 @@ section('Caches');
      Meta tab drops, or an answer and the app are describing two different fields. */
   {
     const cliBY = new Map(cat.cards.map((c) => [c.c, c]));
-    const cliBanned = bannedNameSet(read('data/banned.json'));
-    const cliIllegal = A.DECKS.filter((d) => !deckIsLegal(d, cliBY, cliBanned));
-    const disagree = A.DECKS.filter((d) => deckIsLegal(d, cliBY, cliBanned) !== A.deckLegalForConstructed(d));
-    ok('scripts/rift meta drops the same banned-card lists the Meta tab does',
+    const banJson = read('data/banned.json');
+    const cliBanned = bannedNameSet(banJson);
+    const cliStd = standardNameSet(banJson, cat.cards);
+    const cliIllegal = A.DECKS.filter((d) => !deckIsLegal(d, cliBY, cliBanned, cliStd));
+    const disagree = A.DECKS.filter((d) => deckIsLegal(d, cliBY, cliBanned, cliStd) !== A.deckLegalForConstructed(d));
+    ok('scripts/rift meta drops the same illegal lists the Meta tab does',
        disagree.length === 0,
        disagree.length ? `${disagree.length} disagree, e.g. ${disagree[0].s}`
                        : `${cliIllegal.length} of ${A.DECKS.length} dropped by both`);
+  }
+  /* Standard is read from the Tournament Rules, not typed: the set list in banned.json
+     must be exactly the sets §601.3.c names. And it must actually gate — a card printed
+     only in a set outside it (Radiance, until Riot adds it) makes a deck illegal, while a
+     reprint of a Standard card in that set does not (§601.2.a). */
+  {
+    const banJson = read('data/banned.json');
+    const full = readFileSync(join(ROOT, 'docs/rules-full.md'), 'utf8');
+    const sec = full.slice(full.indexOf('### 601.3. Standard'), full.indexOf('## 602.', full.indexOf('### 601.3. Standard')));
+    const named = [...sec.matchAll(/601\.3\.c\.\d+\.?\**\s[^\n(]*\(([A-Za-z]{2,4})\)/g)].map((m) => m[1].toUpperCase());
+    const listed = (banJson.standard && banJson.standard.sets) || [];
+    ok('banned.json carries the Standard sets exactly as TR §601.3.c names them',
+       named.length > 0 && named.join() === listed.join(),
+       `rules: ${named.join(' ') || 'none'} · banned.json: ${listed.join(' ') || 'none'}`);
+    const std = new Set(listed);
+    const stdNamesHere = new Set(cat.cards.filter((c) => std.has(c.s)).map((c) => c.n));
+    const outside = cat.cards.find((c) => c.s && !std.has(c.s) && c.t !== 'Legend' && !stdNamesHere.has(c.n));
+    const bannedHere = bannedNameSet(banJson);
+    const reprint = cat.cards.find((c) => c.s && !std.has(c.s) && stdNamesHere.has(c.n) && c.t !== 'Rune' && !bannedHere.has(c.n));
+    if (outside) {
+      const fx = { s: 'check-fixture-unreleased', h: 'Check Fixture — one card outside Standard',
+                   ln: 'Check Fixture', lg: null, sz: 1, cards: { [outside.c.split('/')[0]]: 1 } };
+      ok('a card no Standard set prints makes a deck illegal, in the app and the CLI',
+         !A.deckLegalForConstructed(fx) && !deckIsLegal(fx, new Map(cat.cards.map((c) => [c.c, c])), bannedNameSet(banJson), standardNameSet(banJson, cat.cards)),
+         `${outside.n} (${outside.c})`);
+    } else ok('a card no Standard set prints makes a deck illegal, in the app and the CLI', true,
+              'every set in the catalog is Standard, so there is nothing to gate');
+    if (reprint) {
+      const fx = { s: 'check-fixture-reprint', h: 'Check Fixture — a reprint', ln: 'Check Fixture',
+                   lg: null, sz: 1, cards: { [reprint.c.split('/')[0]]: 1 } };
+      ok('a reprint of a Standard card in a newer set stays legal (§601.2.a)',
+         A.deckLegalForConstructed(fx), `${reprint.n} (${reprint.c})`);
+    }
   }
   ok('a deck holding a banned card reads as illegal',
      !!illegalFixture && !A.deckLegalForConstructed(illegalFixture),

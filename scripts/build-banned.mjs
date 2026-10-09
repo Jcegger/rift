@@ -66,6 +66,26 @@ const baseKey = (k) => {
   return m ? `${set}|${m[1]}${m[2]}` : k;
 };
 
+/* Which sets are Standard. A ban is not the only way a card is illegal: a set Riot has
+   printed but not released — Radiance, in the catalog from 2026-10-01 and released on
+   2026-10-23 — is not in Standard, and 237 archived lists were already running its cards
+   as theory before release. The list is a rules fact, so it is read from the Tournament
+   Rules (§601.3.c, in docs/rules-full.md, which build-rules.mjs keeps verbatim) rather
+   than typed here: when Riot adds Radiance to §601.3.c and the rules rebuild, the next
+   run of this builder makes its cards legal with no code change. A card is legal if a
+   card of the same name is printed in one of these sets (§601.2.a), so reprints count. */
+async function standardSets() {
+  const md = await readFile(new URL("../docs/rules-full.md", import.meta.url), "utf8");
+  const start = md.indexOf("### 601.3. Standard");
+  const end = md.indexOf("## 602.", start);
+  if (start < 0 || end < 0) throw new Error("rules-full.md has no §601.3 Standard section — its shape changed");
+  const sets = [...md.slice(start, end).matchAll(/601\.3\.c\.\d+\.?\**\s[^\n(]*\(([A-Za-z]{2,4})\)/g)]
+    .map((m) => m[1].toUpperCase());
+  if (!sets.length) throw new Error("§601.3.c names no sets — the Standard list could not be read");
+  return { sets: [...new Set(sets)], source: "Tournament Rules §601.3.c, read from docs/rules-full.md",
+           note: "A card is Constructed-legal only if a card of the same name is printed in one of these sets (TR §601.2.a)." };
+}
+
 const main = async () => {
   process.stdout.write("fetching card database… ");
   const r = await fetch(API, {
@@ -145,14 +165,17 @@ const main = async () => {
     });
   }
 
+  const standard = await standardSets();
   const out = {
     generatedAt: new Date().toISOString().slice(0, 10),
     source: "api.dotgg.gg/cgfw/getcards (banned flag) + riftbound.gg/rules/banned-cards for format-specific bans, plus announced bans the flag has not reached yet",
     note: "Riot bans outright; there is no restricted list. A ban covers the card, so every printing of it is banned. An entry carrying `effective` is announced but not enforceable until that date.",
     constructed,
     byFormat,
+    standard,
   };
   await writeFile(new URL("../data/banned.json", import.meta.url), JSON.stringify(out, null, 1) + "\n");
+  console.log(`Standard (TR §601.3.c): ${standard.sets.join(", ")}`);
 
   console.log(`\n${constructed.length} cards banned in Constructed:`);
   for (const b of constructed)

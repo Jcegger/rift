@@ -2295,6 +2295,10 @@ async function scanPartner(user){
    the two can never drift apart. Refresh with scripts/build-banned.mjs.        */
 let BANNED = new Map();      // identity -> { name, type, formats: [] }
 let BANNED_AT = null;
+// The sets Standard consists of (TR §601.3.c), carried in banned.json. Null means the
+// list did not say, and then nothing is gated on it.
+let STANDARD = null;
+let STD_NAMES = null;        // names printed in a Standard set; rebuilt with the catalog
 
 // Overlays Riot's card errata onto the catalog in memory. Named and separated so
 // check.mjs can call it with a synthetic catalog and prove it actually rewrites text —
@@ -2334,6 +2338,36 @@ function loadBans(payload){
   for (const [fmt, list] of Object.entries(payload.byFormat || {}))
     for (const b of list) add(b, fmt);
   BANNED_AT = payload.generatedAt || null;
+  STANDARD = payload.standard && Array.isArray(payload.standard.sets) && payload.standard.sets.length
+    ? new Set(payload.standard.sets) : null;
+  STD_NAMES = null;
+}
+
+/* A card is Constructed-legal only if a card of the same name is printed in a Standard
+   set (TR §601.2.a), so a reprint in an unreleased set stays legal and a new card there
+   does not. That is what keeps Radiance theory lists — 237 of them in the archive a week
+   before release — out of the field. Names fold through gameName, so a promo legend
+   under the dash spelling counts as the card it prints. */
+function stdNames(){
+  if (STD_NAMES) return STD_NAMES;
+  STD_NAMES = new Set();
+  if (CAT && STANDARD) for (const c of CAT.cards) if (STANDARD.has(c.s)) STD_NAMES.add(gameName(c));
+  return STD_NAMES;
+}
+const outsideStandard = (card) => !!(card && STANDARD && !stdNames().has(gameName(card)));
+
+// The cards a deck runs that no Standard set prints. Cached like the bans.
+let DECK_STD = new Map();
+function deckOutsideStandard(deck){
+  const key = deck && deck.s;
+  if (key && DECK_STD.has(key)) return DECK_STD.get(key);
+  const out = [];
+  if (STANDARD) for (const code of Object.keys(deck.cards || {})){
+    const hit = matchRow({ id: code });
+    if (hit && outsideStandard(hit.card)) out.push(hit.card);
+  }
+  if (key) DECK_STD.set(key, out);
+  return out;
 }
 
 function banLabel(card){
@@ -2363,7 +2397,8 @@ function deckBans(deck){
   return out.sort((a, b) => b.qty - a.qty);
 }
 const deckLegalForConstructed = (deck) =>
-  !deckBansCached(deck).some((x) => x.ban.formats.includes('constructed'));
+  !deckBansCached(deck).some((x) => x.ban.formats.includes('constructed')) &&
+  !deckOutsideStandard(deck).length;
 
 // A deck's archetype, which is its Legend's name folded through the dash naming. The
 // Secret Garden promos are base-set legends under riftbound.gg's `Champion - Epithet`
@@ -2530,7 +2565,7 @@ function deckBansCached(deck){
   return out;
 }
 
-function forgetDeckCaches(){ DECK_REQ = new Map(); DECK_BANS = new Map(); ESTABLISHED = null; HIST_NAMES = null; MOVE_CACHE = undefined; }
+function forgetDeckCaches(){ DECK_REQ = new Map(); DECK_BANS = new Map(); DECK_STD = new Map(); STD_NAMES = null; ESTABLISHED = null; HIST_NAMES = null; MOVE_CACHE = undefined; }
 
 function evalDeck(deck, have){
   const { needById, unknown } = deckRequirements(deck);
@@ -2943,7 +2978,7 @@ function renderMeta(){
         })()}. Those are real events, so they are counted as claims and never as evidence.</p>` : ''}
       <div class="bar-row" style="margin-top:12px">
         <button class="chip" id="btn-show-illegal" aria-pressed="${!hideIllegal}">Include lists with banned cards</button>
-        <span class="note">${illegalCount} of ${(DECKS || []).length} lists run a banned card${
+        <span class="note">${illegalCount} of ${(DECKS || []).length} lists run a banned card or one no Standard set prints yet${
           hideIllegal ? ' and are hidden' : ''}${BANNED.size ? `; ban list from ${esc(BANNED_AT || '?')}` : ''}</span>
       </div>
     </div>

@@ -345,8 +345,34 @@ export function codeName(BY, code) {
   return BY._bare.get(code) || BY._bare.get(code.replace(/-[A-Z]+$/, "").replace(/(\d)[a-z]+$/i, "$1")) || null;
 }
 
-export function deckIsLegal(deck, BY, bannedNames) {
-  return !Object.keys(deck.cards || {}).some((k) => bannedNames.has(codeName(BY, k)));
+/* Names printed in a Standard set (TR §601.3.c, carried in banned.json as `standard`).
+   A card is legal only if a card of its name is (§601.2.a): a reprint in an unreleased
+   set stays legal, a new card there does not. Names fold the dash spelling the same way
+   the app's gameName does, so "Lillia - Bashful Bloom" is the card "Bashful Bloom".
+   Null when the list does not say, and then nothing is gated on it. */
+export function standardNameSet(banned, cards) {
+  const sets = banned?.standard?.sets;
+  if (!Array.isArray(sets) || !sets.length) return null;
+  const std = new Set(sets);
+  const names = new Set(cards.map((c) => c.n));
+  const fold = (n) => {
+    if (!n || !n.includes(" - ")) return n;
+    const comma = n.replace(" - ", ", ");
+    if (names.has(comma)) return comma;
+    const tail = n.slice(n.indexOf(" - ") + 3);
+    return names.has(tail) ? tail : n;
+  };
+  const out = new Set(cards.filter((c) => std.has(c.s)).map((c) => fold(c.n)));
+  out.fold = fold;
+  return out;
+}
+
+export function deckIsLegal(deck, BY, bannedNames, stdNames = null) {
+  return !Object.keys(deck.cards || {}).some((k) => {
+    const n = codeName(BY, k);
+    if (bannedNames.has(n)) return true;
+    return !!(n && stdNames && !stdNames.has(stdNames.fold(n)));
+  });
 }
 
 async function cmdMeta(cat, args) {
@@ -365,6 +391,7 @@ async function cmdMeta(cat, args) {
   } catch { /* optional: --since then falls back to posting dates */ }
   const banned = await readJson(url("banned.json")).catch(() => ({ constructed: [] }));
   const bannedNames = bannedNameSet(banned);
+  const stdNames = standardNameSet(banned, cat.cards);
   const { BY } = cat;
 
   const legend = (d) => (d.lg && BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
@@ -387,11 +414,11 @@ async function cmdMeta(cat, args) {
   const playedOn = (d) => (d.tour && d.ev && evDate.get(d.ev)) || d.dt || null;
 
   let pool = snap.decks;
-  const illegal = all ? 0 : pool.filter((d) => !deckIsLegal(d, BY, bannedNames)).length;
-  if (!all) pool = pool.filter((d) => deckIsLegal(d, BY, bannedNames));
+  const illegal = all ? 0 : pool.filter((d) => !deckIsLegal(d, BY, bannedNames, stdNames)).length;
+  if (!all) pool = pool.filter((d) => deckIsLegal(d, BY, bannedNames, stdNames));
   const beforeSince = pool.length;
   if (since) pool = pool.filter((d) => (playedOn(d) || "") >= since);
-  const head = `${snap.decks.length} archived lists · ${all ? "banned lists included" : `${illegal} hold a banned card and are dropped`}` +
+  const head = `${snap.decks.length} archived lists · ${all ? "illegal lists included" : `${illegal} hold a banned card or one no Standard set prints (${(banned.standard?.sets || []).join(" ")}) and are dropped`}` +
     (since ? ` · ${beforeSince - pool.length} more played before ${since}` : "");
 
   if (!terms.length) {

@@ -346,6 +346,16 @@ every hand-rolled read of `data/decks.json` counted lists no one could register:
 2026-10-08 986 of 3,008 rows held a banned card, and half the Diana lists "dated after
 the ban" ran Stacked Deck, because `dt` is a posting date and pre-ban events are still
 being posted. `check.mjs` asserts the two filters drop exactly the same decks.
+**Legal means Standard, not just unbanned.** `banned.json` also carries `standard`, the
+sets the Tournament Rules name in §601.3.c, which `build-banned.mjs` reads out of
+`docs/rules-full.md` rather than typing. A card is legal only if a card of its name is
+printed in one of them (§601.2.a), so reprints count and a set that is printed but not
+released does not. Radiance is the case that forced this: in the catalog from 1 October,
+released 23 October, and in **226 archived lists** as theory by 9 October, all of which
+read as legal while legality meant only "no banned card". When Riot adds Radiance to
+§601.3.c and the rules rebuild, the next `build-banned.mjs` run legalises it with no code
+change; `check.mjs` asserts the list matches the rules and that it gates in both the app
+and the CLI.
 **Legal is not post-ban**: a pre-ban list that happened to run no banned card passes.
 `--since YYYY-MM-DD` is the stricter cut, dating vouched lists by their *event* in
 `data/events.json` and the rest by posting date.
