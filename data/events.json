@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-08",
+ "generatedAt": "2026-10-09",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2252,
+  "events": 2257,
   "eventsWithDecks": 6,
-  "players": 57174,
+  "players": 57257,
   "playersWithDecks": 4837,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
@@ -38,14 +38,14 @@
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "unknown": 138,
-   "Asia": 62,
-   "Europe": 29,
+   "Europe": 30,
+   "unknown": 141,
+   "Asia": 63,
    "Oceania": 3,
    "North America": 6
   },
   "registryEventsByRegion": {
-   "unknown": 2251,
+   "unknown": 2256,
    "Asia": 1
   },
   "unresolvedClaimEvents": [
@@ -128,6 +128,33 @@
   }
  },
  "events": [
+  {
+   "name": "Wednesday Evening Vendetta Summoner Skirmish II",
+   "dt": "2026-10-08",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "Gold Experience",
+   "country": "MX",
+   "slug": "wednesday-evening-vendetta-summoner-skirmish-ii-446"
+  },
+  {
+   "name": "POYU´s Summoner Skirmish - October",
+   "dt": "2026-10-07",
+   "players": 28,
+   "format": "Constructed",
+   "winner": "Wooploop",
+   "country": "DE",
+   "slug": "poyus-summoner-skirmish-october"
+  },
+  {
+   "name": "(Ticketed - see details) Wednesday Evening Vendetta Summoner Skirmish II",
+   "dt": "2026-10-07",
+   "players": 16,
+   "format": "Constructed",
+   "winner": "yatessy",
+   "country": "AU",
+   "slug": "ticketed-see-details-wednesday-evening-vendetta-summoner-skirmish-ii"
+  },
   {
    "name": "Phantom's Summoner Skirmish Event!",
    "dt": "2026-10-06",
@@ -1090,6 +1117,24 @@
    "winner": "Luc",
    "country": "AU",
    "slug": "sunday-morning-vendetta-summoner-skirmish-ii-9421"
+  },
+  {
+   "name": "Sunday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-04",
+   "players": 15,
+   "format": "Constructed",
+   "winner": "iAmJmxD",
+   "country": "EC",
+   "slug": "sunday-morning-vendetta-summoner-skirmish-ii-8628"
+  },
+  {
+   "name": "Summoner Skirmish - October",
+   "dt": "2026-10-04",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "Bermuda",
+   "country": "GB",
+   "slug": "summoner-skirmish-october"
   },
   {
    "name": "Saturday Morning 401 Games Vaughan Vendetta Summoner Skirmish II",

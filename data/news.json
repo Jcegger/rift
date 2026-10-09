@@ -1,13 +1,13 @@
 {
- "generatedAt": "2026-10-08",
+ "generatedAt": "2026-10-09",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 11,
+ "carriedFromPrevious": 12,
  "tags": {
-  "News": 35,
+  "News": 36,
   "Guides": 4,
   "Metagame": 20,
   "Events": 21,
@@ -16,6 +16,15 @@
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Riftbound Meta Tier List – Best Decks for Vendetta – Heading to Radiance!",
+   "dt": "2026-10-09",
+   "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-vendetta-heading-to-radiance",
+   "tags": [
+    "News"
+   ],
+   "author": "Den"
+  },
   {
    "title": "How to Get the Riftbound x Worlds 2026 Bundle",
    "dt": "2026-10-08",
