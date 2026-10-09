@@ -7,6 +7,8 @@
 #   scripts/rift card body rune  # catalog lookup with owned/want/trade
 #   scripts/rift want | trade | sets | raw
 #   scripts/rift piltover > collection-piltover.csv   # full Piltover import (Replace mode)
+#   scripts/rift meta [legend] [--since DATE]          # what the legal field plays (no banned lists)
+#   scripts/rift event <locator id>                    # a store event: standings + legends
 #
 # See scripts/state.mjs for the full command list and data sources.
 

@@ -338,6 +338,35 @@ what "buy the cards that appear in the most decks" advice assumes.
 `metaPool()` is the single definition of which lists count, so the ban toggle on
 the Meta tab cannot mean two different things on two tabs.
 
+**The command line uses the same filter.** `scripts/rift meta` prints archetype shares,
+and `scripts/rift meta <legend>` one archetype's card play rates and best finishes,
+over the lists `metaPool()` would keep. That is the CLI's half, and it matters because
+rules and matchup answers are built from there, not from the app. Before it existed,
+every hand-rolled read of `data/decks.json` counted lists no one could register: on
+2026-10-08 986 of 3,008 rows held a banned card, and half the Diana lists "dated after
+the ban" ran Stacked Deck, because `dt` is a posting date and pre-ban events are still
+being posted. `check.mjs` asserts the two filters drop exactly the same decks.
+**Legal is not post-ban**: a pre-ban list that happened to run no banned card passes.
+`--since YYYY-MM-DD` is the stricter cut, dating vouched lists by their *event* in
+`data/events.json` and the rest by posting date.
+
+**Local events come from a different source.** `data/events.json` is riftbound.gg's
+registry, which carries a country at most, so a store's events never surface in it. Riot's
+store locator (`locator.riftbound.uvsgames.com`) reads a public, read-only API that has
+them, and `scripts/rift event <id>` reads it live: the event, every registration with its
+final place and record, and the per-round standings, which carry each player's
+"deck-defining card" when the store recorded one. **Many stores never do**, and an
+unrecorded legend prints as unrecorded. `--scout <ids…>` cross-references the event's
+players against other events by locator user id, and `--scout-near [miles]` finds every
+Summoner Skirmish within that radius over the previous 60 days through the locator's own
+search and prints the recorded local meta. Nothing is cached or committed. Requests are
+paced at half a second and back off on 429, so a 58-event scout takes about two minutes.
+
+**Power is in the catalog.** Riot's feed carries it, and `build-catalog.mjs` writes it as
+`p`, absent meaning 0. `scripts/rift card`, `deck` and `meta` print cost as Energy then
+Power, and `deck` adds the main deck's Power budget. It is a count, not a colour: the
+domain it is paid in is the card's own (§135.2.e.6).
+
 ## Legends
 
 A deck is built around one Legend, and a Legend needs a champion unit to work: the

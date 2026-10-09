@@ -14,6 +14,7 @@
 
 import { readdirSync, readFileSync } from 'node:fs';
 import { claimFromTitle, placeOf } from './build-decks.mjs';
+import { bannedNameSet, deckIsLegal } from './state.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -1278,6 +1279,20 @@ section('Caches');
     s: 'check-fixture-illegal', h: 'Check Fixture — one banned card', ln: 'Check Fixture',
     lg: null, sz: 1, cards: { [banned1.code]: 1 },
   };
+  /* The CLI's `meta` reads the same archive for rules and matchup answers, and every
+     hand-rolled read before it counted lists no one could register (2026-10-08: half
+     the "post-ban" Diana lists ran Stacked Deck). It must drop exactly the decks the
+     Meta tab drops, or an answer and the app are describing two different fields. */
+  {
+    const cliBY = new Map(cat.cards.map((c) => [c.c, c]));
+    const cliBanned = bannedNameSet(read('data/banned.json'));
+    const cliIllegal = A.DECKS.filter((d) => !deckIsLegal(d, cliBY, cliBanned));
+    const disagree = A.DECKS.filter((d) => deckIsLegal(d, cliBY, cliBanned) !== A.deckLegalForConstructed(d));
+    ok('scripts/rift meta drops the same banned-card lists the Meta tab does',
+       disagree.length === 0,
+       disagree.length ? `${disagree.length} disagree, e.g. ${disagree[0].s}`
+                       : `${cliIllegal.length} of ${A.DECKS.length} dropped by both`);
+  }
   ok('a deck holding a banned card reads as illegal',
      !!illegalFixture && !A.deckLegalForConstructed(illegalFixture),
      illegalFixture ? `${banned1.name} · the feed also has ${withBans} of ${A.DECKS.length}`
