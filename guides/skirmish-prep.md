@@ -82,8 +82,8 @@ Rerun it any time with `scripts/rift event 501411 --scout-near 10` (about two mi
 | Ornn | 5 | 2.6% |
 | 18 others | 1–4 each | |
 
-**Two differences from the RQ field.** **Kennen is twice as common here** (11.1%, against
-2.3% of legal lists online), so the rewritten Kennen entry matters more on Sunday than its
+**Two differences from the RQ field.** **Kennen is five times as common here** (11.1%, against
+2.2% of legal lists online), so the rewritten Kennen entry matters more on Sunday than its
 tier suggests. And Ornn, which won the Silk Road Skirmish on 3 October, is only 2.6% across
 the city. That win was one event.
 

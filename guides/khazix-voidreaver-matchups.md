@@ -162,7 +162,7 @@ Never hold zero battlefields, and never take a fight you have not rigged.
 
 # Tier 1
 
-## Irelia, Blade Dancer — Tier 1.1 · 3.3% · Calm/Chaos · mean Might 2.6
+## Irelia, Blade Dancer — Tier 1.1 · 3.3% · Calm/Chaos · mean Might 2.69
 
 **In a sentence:** the smallest board you meet and your best fair fight — but the most reactive deck on the page, and the one that punishes your tricks hardest.
 
@@ -170,7 +170,7 @@ Never hold zero battlefields, and never take a fight you have not rigged.
 > - **How you win (Jun):** press. Score a lot early without losing value, and reach 6 first. Irelia plays few units, so it rarely builds the extraordinary hold it needs to stop your double conquest. You win 56% of fair 2v2s, the only matchup on the page where you are favoured with no trick at all.
 > - **Mulligan:** keep units. A 2-drop plus a 3-drop is a fine hand; you do not need a trick to win fights against 2.6 Might.
 > - **Early:** develop two bodies and take a battlefield with a straight fight. Do not lead with spells, because Defy is in every list. **Be patient with your spells and aggressive with your units** (Jun). Giving up a unit for a point is fine.
-> - **Middle:** they will use the legend to ready a unit and fight twice, so keep a body back at the battlefield you hold. **Punish a greedy tap-out with removal** (Jun). His named Rampage target here is **Stellacorn Herder** (100%), which draws every time it moves. **Astral Heron** is in 33% of lists, and its discount works only while it stands at a battlefield, so contest that battlefield the turn it lands. **Ride the Wind is in every list**: a moved and readied unit is a second attack, so count it in their open Chaos.
+> - **Middle:** they will use the legend to ready a unit and fight twice, so keep a body back at the battlefield you hold. **Punish a greedy tap-out with removal** (Jun). His named Rampage target here is **Stellacorn Herder** (100%), which draws every time it moves. **Astral Heron** is in 35% of lists, and its discount works only while it stands at a battlefield, so contest that battlefield the turn it lands. **Ride the Wind is in every list**: a moved and readied unit is a second attack, so count it in their open Chaos.
 > - **Closing:** game 1, Punch First is your finisher: Defy and Not So Fast cannot touch it. In games 2–3 Jun takes two out and leans on Sabotage, Hard Bargain and Switcheroo; this page's board takes one.
 > - **Flips:** Tornado Warrior only into tapped Chaos. Evelynn only into tapped Chaos *and* Calm, because Not So Fast is in 76% of lists. Switcheroo: flip it after they pump.
 > - **From Jun's Irelia video (pre-ban):** open a key turn with **Sabotage** to see what you are playing into, and make it, or a lesser spell, eat their Defy before the **Star-Crossed** on their Irelia. Bouncing her usually wins. Close with the **Vex lock**: with their board cleared, Vex on a battlefield stuns whatever they play.
@@ -180,22 +180,22 @@ Never hold zero battlefields, and never take a fight you have not rigged.
 
 > **Blade Dancer** — *"When you choose a friendly unit, you may exhaust me and pay `[A]` to ready it. When you conquer, you may pay `[1]` to ready me."*
 
-Every pump they cast on their own unit can also **ready** it — so a unit that just fought can move and fight again. 14 units a deck, 6 of them at 2 Energy or less, and **13 Reactions a deck**: they hold runes up and answer you. Six or seven Hidden cards a deck, mostly Tideturner (95%), Zhonya's Hourglass (77%) and Edge of Night (41%).
+Every pump they cast on their own unit can also **ready** it — so a unit that just fought can move and fight again. 14 units a deck, 6 of them at 2 Energy or less, and **13 Reactions a deck**: they hold runes up and answer you. Six or seven Hidden cards a deck, mostly Tideturner (94%), Zhonya's Hourglass (79%) and Edge of Night (38%).
 
 | card | in | what it does to you |
 |---|---|---|
 | **Defy** | 100% | counters a spell up to 4 Energy and 1 Power. That's everything you cast except Punch First and Switcheroo |
 | **Discipline** | 100% | Reaction +2 Might and draw. It's why a fight you counted is suddenly two short |
 | **Ride the Wind** | 100% | moves and readies a unit, so the same unit fights again |
-| **Boots of Swiftness** | 97% | Equipment, +2 Might |
-| **Defiant Dance** | 97% | Reaction +2 to theirs *and* −2 to yours: a four-point swing for 1 Energy |
-| **Scuttle Crab** | 88% | draws on play. When it dies you reveal your hand and they see your facedown cards that turn |
+| **Boots of Swiftness** | 93% | Equipment, +2 Might |
+| **Defiant Dance** | 91% | Reaction +2 to theirs *and* −2 to yours: a four-point swing for 1 Energy |
+| **Scuttle Crab** | 85% | draws on play. When it dies you reveal your hand and they see your facedown cards that turn |
 | **Not So Fast** | 76% | counters any spell or ability that chooses their unit: Switcheroo, Void Assault, Rampage, Evelynn's trigger |
-| **En Garde** | 70% | Reaction +1, or +2 if their unit is alone |
-| **Charm** | 68% | moves your unit. Their version of Void Assault |
-| **Flash** | 61% | Reaction: up to two of their units go home. It escapes a fight and leaves you the battlefield |
-| **Vex, Apathetic** | 53% | stuns every unit you play while she's at a battlefield (see Vex) |
-| **Akali, Silent** | 53% | can't be chosen by your spells outside combat. +2 the turn she moves in |
+| **En Garde** | 68% | Reaction +1, or +2 if their unit is alone |
+| **Charm** | 66% | moves your unit. Their version of Void Assault |
+| **Flash** | 59% | Reaction: up to two of their units go home. It escapes a fight and leaves you the battlefield |
+| **Vex, Apathetic** | 56% | stuns every unit you play while she's at a battlefield (see Vex) |
+| **Akali, Silent** | 54% | can't be chosen by your spells outside combat. +2 the turn she moves in |
 
 ### Fights
 
@@ -204,19 +204,19 @@ Every pump they cast on their own unit can also **ready** it — so a unit that 
 - Count their open runes, not their board. Discipline and Defiant Dance are 1–2 Energy each; two open runes is +2 to +4 on their side of any fight.
 - **Punch First is the trick that lands.** Hold it for the fight where they have already spent a pump.
 - Their units are small enough that Kha'Zix isolation (96%) is overkill. Spend your setup cards on tempo, not on manufacturing a lone defender.
-- **Don't kill Scuttle Crab** (88%) on a turn a hidden card carries your plan. Its Deathknell shows them your hand and your facedown cards for that turn.
+- **Don't kill Scuttle Crab** (85%) on a turn a hidden card carries your plan. Its Deathknell shows them your hand and your facedown cards for that turn.
 
 ### Flips and counters
 
-**71% can remove your hidden unit · 97% can counter Evelynn · 83% can counter Switcheroo.** Gust and Star-Crossed need Chaos. Not So Fast needs Calm. No flip is free here.
+**72% can remove your hidden unit · 96% can counter Evelynn · 82% can counter Switcheroo.** Gust and Star-Crossed need Chaos. Not So Fast needs Calm. No flip is free here.
 
 ### Their facedown card
 
-Usually **Tideturner** (95%) or **Zhonya's Hourglass** (77%). Zhonya's (errata text) kills itself instead of their unit, then heals, exhausts and recalls that unit to base. You still win the combat if it was their last unit there. Tideturner swaps one of their units into the fight.
+Usually **Tideturner** (94%) or **Zhonya's Hourglass** (79%). Zhonya's (errata text) kills itself instead of their unit, then heals, exhausts and recalls that unit to base. You still win the combat if it was their last unit there. Tideturner swaps one of their units into the fight.
 
 ### Battlefields
 
-They bring **Abandoned Hall** (94% — any player who casts a spell may give a unit there +1, which suits their 13 Reactions), **Targon's Peak** (89%) and **Sunken Temple** (76%). **Jun rates Irelia "slightly favoured" on Targon's Peak**, which readies their runes after a conquest, so they keep pumps up through your turn. Expect it in one game of the three, and once used it is retired for the match (§486.5). Usual order otherwise; Sandswept Tomb's Punch First discount matters most here in games 2–3.
+They bring **Abandoned Hall** (89% — any player who casts a spell may give a unit there +1, which suits their 13 Reactions), **Targon's Peak** (87%) and **Sunken Temple** (73%). **Jun rates Irelia "slightly favoured" on Targon's Peak**, which readies their runes after a conquest, so they keep pumps up through your turn. Expect it in one game of the three, and once used it is retired for the match (§486.5). Usual order otherwise; Sandswept Tomb's Punch First discount matters most here in games 2–3.
 
 ### Board
 
@@ -226,7 +226,7 @@ They bring **Abandoned Hall** (94% — any player who casts a spell may give a u
 
 - **LA RQ: Xeno #2 overall (finalist) and TM2 #5 (top 8)**, records per Riot. Field: 193 Day 1 → 48 Day 2 (24.9%), the most-played legend.
 - **Other post-ban:** Vitor Grassato 2nd of 22 (Orlando $2.5k); SNB Holy Butts 11th of 78 (Orlando $10k).
-- **Core** (n=67 clean lists): Defy, Discipline, Ride the Wind, Stellacorn Herder, Defiant Dance, Boots of Swiftness, Tideturner, Scuttle Crab, Zhonya's Hourglass, Not So Fast. Battlefields: Abandoned Hall, Targon's Peak, Sunken Temple.
+- **Core** (n=83 clean lists): Defy, Discipline, Ride the Wind, Stellacorn Herder, Defiant Dance, Boots of Swiftness, Tideturner, Scuttle Crab, Zhonya's Hourglass, Not So Fast. Battlefields: Abandoned Hall, Targon's Peak, Sunken Temple.
 - **Two different LA builds:**
   - **Xeno (no Heron):** the tempo shell plus 1 Abandon (16/67 in the archive), 2 Star-Crossed, 1 Gust, 1 Vex, Apathetic, 1 Flash.
   - **TM2 (Heron):** 3 Astral Heron (23/67), 2 Lonely Poro (13/67), 2 Rebuke, 1 Switcheroo, 3 Zhonya's.
@@ -234,10 +234,11 @@ They bring **Abandoned Hall** (94% — any player who casts a spell may give a u
   - Abandon is a counter that also hits Punch First. Defy (1E, ≤1 Power) can't counter Punch First, but Abandon can.
   - Rebuke (Action, any unit at a battlefield) bounces Kha'Zix or Rengar regardless of Might.
   - Against the Heron build, the guide's "fight before Heron lands" applies.
+- **Claims added 8 October** (list titles, not records): "Irelia wins Riftbound Showdown Series: Malmö" and "Irelia wins S4 Wuhan Regional Open".
 
 ---
 
-## Master Yi, Wuju Bladesman — Tier 1.2 · 7.0% · Calm/Body · mean Might 3.35
+## Master Yi, Wuju Bladesman — Tier 1.2 · 6.2% · Calm/Body · mean Might 3.36
 
 **In a sentence:** the most-played archetype, and the one where your isolation plan feeds their legend — unless you make *them* attack.
 
@@ -246,8 +247,8 @@ They bring **Abandoned Hall** (94% — any player who casts a spell may give a u
 > - **Isolate in the right direction:** their legend gives a lone *defender* +2. **Drag their lone unit to your battlefield** so it is the attacker, or move their units so they attack into your hold. Never attack a lone defender. Holding with more than one unit also switches their +2 off.
 > - **Mulligan:** Void Assault or Faefolk, the drag, plus Punch First.
 > - **Early:** take a battlefield with two units on it, so you are never the lone defender yourself.
-> - **Middle:** watch Charm (91%): on their turn they can move *your* unit onto their lone defender, which makes you the attacker into their +2. **Sabotage is in 77% of their lists**: hide Switcheroo early rather than hold it in hand.
-> - **Closing:** Ruin Runner (69%) cannot be chosen at all, not by Switcheroo and not by Rampage. Beat it in combat or play around it.
+> - **Middle:** watch Charm (90%): on their turn they can move *your* unit onto their lone defender, which makes you the attacker into their +2. **Sabotage is in 76% of their lists**: hide Switcheroo early rather than hold it in hand.
+> - **Closing:** Ruin Runner (73%) cannot be chosen at all, not by Switcheroo and not by Rampage. Beat it in combat or play around it.
 > - **Flips:** Tornado Warrior freely. Evelynn into tapped Calm; Not So Fast is in 20%.
 > - **Never:** attack into a lone defender.
 
@@ -259,20 +260,20 @@ The archive files most of these lists under the legend's Starter printing, *Wuju
 
 | card | in | what it does to you |
 |---|---|---|
-| **Defy** | 95% | counters your cheap spells — Void Assault included |
-| **Discipline** | 93% | +2 at Reaction speed |
-| **Charm** | 91% | *"Move an enemy unit"* — their drag, on their turn |
-| **En Garde** | 84% | Reaction +1, or +2 if their unit is alone |
-| **Zhonya's Hourglass** | 81% | their next dying unit goes home |
+| **Defy** | 93% | counters your cheap spells — Void Assault included |
+| **Discipline** | 94% | +2 at Reaction speed |
+| **Charm** | 90% | *"Move an enemy unit"* — their drag, on their turn |
+| **En Garde** | 87% | Reaction +1, or +2 if their unit is alone |
+| **Zhonya's Hourglass** | 80% | their next dying unit goes home |
 | **Punch First** | 83% | your own trick |
 | **Rengar, Trophy Hunter** | 80% | the same 6-Might Ambush you run |
-| **Ruin Runner** | 69% | 5 Might, can't be chosen by your spells or abilities |
+| **Ruin Runner** | 73% | 5 Might, can't be chosen by your spells or abilities |
 | **Onslaught** | 57% | +6 Might, with Flow |
-| **First Mate** | 86% | readies another unit on play. A unit that already fought fights again |
-| **Lonely Poro** | 84% | Deathknell: draws if it died alone. Killing their lone defender pays them |
-| **Pit Rookie** | 80% | buffs another unit on play |
-| **Scuttle Crab** | 79% | when it dies you reveal your hand and they see your facedown cards that turn |
-| **Sabotage** | 77% | takes Punch First or Switcheroo from your hand. **Hide Switcheroo** |
+| **First Mate** | 85% | readies another unit on play. A unit that already fought fights again |
+| **Lonely Poro** | 83% | Deathknell: draws if it died alone. Killing their lone defender pays them |
+| **Pit Rookie** | 79% | buffs another unit on play |
+| **Scuttle Crab** | 78% | when it dies you reveal your hand and they see your facedown cards that turn |
+| **Sabotage** | 76% | takes Punch First or Switcheroo from your hand. **Hide Switcheroo** |
 
 ### Fights
 
@@ -287,31 +288,32 @@ The archive files most of these lists under the legend's Starter printing, *Wuju
 
 ### Their facedown card
 
-**Zhonya's Hourglass** (81%) or **Back Off** (24%).
+**Zhonya's Hourglass** (80%) or **Back Off** (23%).
 
 ### Battlefields
 
-**Emperor's Dais** (79%), **Star Spring** (72%), **Seat of Power** (47%) and **Grove of the God-Willow** (36%). Usual order.
+**Emperor's Dais** (78%), **Star Spring** (74%), **Seat of Power** (56%) and **Grove of the God-Willow** (29%). Usual order.
 
 ### Board
 
-+2 Ravenbloom Prefect, +2 Acceptable Losses (Zhonya's 81%). −1 Up from the Deep, −2 Star-Crossed, −1 Rampage — Defy counters both. Void Assault stays: it is how you drag. **Switcheroo stays too.** Jun brings it in here and cuts Up from the Deep instead ([Jun's notes §7](khazix-voidreaver-jun.md#7-sideboarding)).
++2 Ravenbloom Prefect, +2 Acceptable Losses (Zhonya's 80%). −1 Up from the Deep, −2 Star-Crossed, −1 Rampage — Defy counters both. Void Assault stays: it is how you drag. **Switcheroo stays too.** Jun brings it in here and cuts Up from the Deep instead ([Jun's notes §7](khazix-voidreaver-jun.md#7-sideboarding)).
 
 ### Proven lists
 
 - **LA RQ: SWAGALISK #6 overall (top 8), 11-2-1** per riftbound.gg. Field: 75 → 17 (22.7%). Gamer Tag Mythras marks this legend not Best-Of-eligible.
 - **Other post-ban:** HTCG GuMmY **3rd of 78 (Orlando $10k)**.
-- **Core** (n=142): Defy, Discipline, Charm, En Garde, First Mate, Zhonya's, Pit Rookie, Punch First, Lonely Poro, Master Yi, Tempered, Rengar, Trophy Hunter. Battlefields: Emperor's Dais, Star Spring.
+- **Core** (n=158): Defy, Discipline, Charm, En Garde, First Mate, Zhonya's, Pit Rookie, Punch First, Lonely Poro, Master Yi, Tempered, Rengar, Trophy Hunter. Battlefields: Emperor's Dais, Star Spring.
 - **SWAGALISK's list:** **3 Sabotage**, 3 Scuttle Crab, 1 Akali, Silent (22/142), 1 Legion Marauder, 1 Onslaught, 1 Ruin Runner. **Sideboard:** 2 Decree of Strength, 3 Disarming Rake.
 - **For Kha'Zix:**
   - **Charm ×3** (1E: move an enemy unit) is how they strip your lone-defender maths.
   - **Akali, Silent** can't be chosen by your spells outside combat. Switcheroo it once it's in combat.
+- **Claims added 8 October** (list titles, not records): "Master Yi Wins Showdown Series Bristol" (Bristol is a confirmed post-ban event, but the archive carries no vouched Yi placing there) and "Master Yi wins S4 Beijing City Challenge".
 
 ---
 
 # Tier 2
 
-## Rengar, Pridestalker — Tier 2.1 · 3.3% · Fury/Body · mean Might 2.96
+## Rengar, Pridestalker — Tier 2.1 · 3.0% · Fury/Body · mean Might 3.03
 
 **In a sentence:** a mirror of your own tools — Faefolk, Punch First, Rengar — but you out-grind it, and it cannot punish a flip.
 
@@ -322,7 +324,7 @@ The archive files most of these lists under the legend's Starter printing, *Wuju
 > - **Early:** take one battlefield and make it expensive to attack. Refuse fights you have not counted *including their Ambush*.
 > - **Middle:** assume an Ambush unit or Thrill of the Hunt in every fight. They hold about 12 Reaction or Ambush cards a deck, and their legend adds +1 Might every time they play a unit. First Mate (92%) readies a unit, so a unit that already fought can fight again. Count it like Ride the Wind.
 > - **Closing:** you win the long game. Do not hand them a coin-flip fight to end it sooner.
-> - **Flips:** freely (Repulse in 6%).
+> - **Flips:** freely (Repulse in 5%).
 > - **Never:** commit everything to one fight. A Rengar arriving on Ambush is 6 Might plus their legend's +1.
 
 ### Their deck
@@ -333,22 +335,22 @@ The archive files most of these lists under the legend's Starter printing, *Wuju
 
 | card | in | what it does to you |
 |---|---|---|
-| **Thrill of the Hunt** | 100% | Reaction: banish one of their units and replay it to **any** battlefield for free |
+| **Thrill of the Hunt** | 96% | Reaction: banish one of their units and replay it to **any** battlefield for free |
 | **Inferna** | 100% | 2-Energy Ambush, Assault 2 |
-| **Nidalee, Cat Form** | 100% | 3-Energy Ambush, 4 Might, draws on a win |
-| **Punch First** | 97% | your own best trick, in their hands |
-| **Rengar, Trophy Hunter** | 97% | the same 6-Might Ambush you run |
-| **Grim Apothecary** | 97% | Ambush that returns one of their units to hand — saves a unit you were about to kill |
-| **Irresistible Faefolk** | 97% | they drag too |
+| **Nidalee, Cat Form** | 99% | 3-Energy Ambush, 4 Might, draws on a win |
+| **Punch First** | 95% | your own best trick, in their hands |
+| **Rengar, Trophy Hunter** | 95% | the same 6-Might Ambush you run |
+| **Grim Apothecary** | 93% | Ambush that returns one of their units to hand — saves a unit you were about to kill |
+| **Irresistible Faefolk** | 93% | they drag too |
 | **Sabotage** | 80% | takes Punch First or Switcheroo from your hand |
-| **Rampage** | 78% | removal that reaches your base |
-| **Pit Rookie** | 97% | buffs another unit on play. Their legend's +1 stacks on top |
+| **Rampage** | 77% | removal that reaches your base |
+| **Pit Rookie** | 95% | buffs another unit on play. Their legend's +1 stacks on top |
 | **Noxus Hopeful** | 95% | cheap body |
-| **Kinkou Initiate** | 95% | your card, in their deck |
+| **Kinkou Initiate** | 93% | your card, in their deck |
 | **First Mate** | 92% | readies another unit on play: a second attack |
 | **Kai'Sa, Survivor** | 88% | 4 Might, draws when she conquers |
-| **Ferrous Forerunner** | 86% | Deathknell: two 3-Might Mech tokens. Killing it costs you a board ([strategy.md §5](../docs/strategy.md#5-pressure-is-the-removal-of-good-choices) uses exactly this card) |
-| **Darius, Trifarian** | 62% | +2 and readies on their second card in a turn |
+| **Ferrous Forerunner** | 85% | Deathknell: two 3-Might Mech tokens. Killing it costs you a board ([strategy.md §5](../docs/strategy.md#5-pressure-is-the-removal-of-good-choices) uses exactly this card) |
+| **Darius, Trifarian** | 64% | +2 and readies on their second card in a turn |
 
 ### Fights
 
@@ -356,7 +358,7 @@ The archive files most of these lists under the legend's Starter printing, *Wuju
 
 - Every fight has a hidden third card: their Ambush. Before committing, count their open runes — Inferna is 2, Nidalee 3 + 1, Rengar 5 + 1, Thrill 2 + 1 — and add their legend's +1 per unit played.
 - Sabotage takes your trick out of your hand. **Hide Switcheroo** if you are holding it for a later fight.
-- **Do not kill Ferrous Forerunner (86%) into an open base.** Two 3-Might Mechs replace it.
+- **Do not kill Ferrous Forerunner (85%) into an open base.** Two 3-Might Mechs replace it.
 
 ### Flips and counters
 
@@ -364,11 +366,11 @@ The archive files most of these lists under the legend's Starter printing, *Wuju
 
 ### Their facedown card
 
-**Pyke, Dockside Butcher** (71%) or **Pakaa Cub** (62%) — bodies, not tricks. Expect one more unit in the fight.
+**Pyke, Dockside Butcher** (70%) or **Pakaa Cub** (58%) — bodies, not tricks. Expect one more unit in the fight.
 
 ### Battlefields
 
-**Emperor's Dais** (97%), **Star Spring** (94%) and **Seat of Power** (77%). **Avoid your Star Spring here**: Rengar has ten-plus Reaction-speed ways to trigger it (Jun). Zaun Warrens, then Sandswept Tomb.
+**Emperor's Dais** (95%), **Star Spring** (93%) and **Seat of Power** (77%). **Avoid your Star Spring here**: Rengar has ten-plus Reaction-speed ways to trigger it (Jun). Zaun Warrens, then Sandswept Tomb.
 
 ### Board
 
@@ -378,7 +380,7 @@ The archive files most of these lists under the legend's Starter printing, *Wuju
 
 - **LA RQ: DSG Prismaticism, #1 — won the event, 14-0-2** (Riot graphic, via Gamer Tag Mythras). Field: 92 → 20 (21.7%).
 - **Other post-ban:** Joshua Robbins 12th and Patrick Zafaralla 18th of 78 (Orlando $10k).
-- **Core** (n=67, very tight): Inferna, Nidalee, Cat Form, Thrill of the Hunt, Noxus Hopeful, Pit Rookie, Punch First, Grim Apothecary, Kinkou Initiate, Irresistible Faefolk, Rengar, Trophy Hunter, First Mate, Ferrous Forerunner, Kai'Sa, Survivor, Sabotage, Rampage. Battlefields: Emperor's Dais, Star Spring, Seat of Power.
+- **Core** (n=76, very tight): Inferna, Nidalee, Cat Form, Thrill of the Hunt, Noxus Hopeful, Pit Rookie, Punch First, Grim Apothecary, Kinkou Initiate, Irresistible Faefolk, Rengar, Trophy Hunter, First Mate, Ferrous Forerunner, Kai'Sa, Survivor, Sabotage, Rampage. Battlefields: Emperor's Dais, Star Spring, Seat of Power.
 - **The winning list is the stock list.** Nothing in it is under 35% of the archive. **Sideboard:** 2 Brittle Steel, 1 Brynhir Thundersong, **2 Decree of Strength**, 2 Ferrous Forerunner, 1 Noxian Demolitionist, 1 Pyke, 1 Rampage.
 - **For Kha'Zix:**
   - **They board Decree of Strength.** It takes a Mind card, and you run no Mind, so it's dead against you.
@@ -387,7 +389,7 @@ The archive files most of these lists under the legend's Starter printing, *Wuju
 
 ---
 
-## Azir, Emperor of the Sands — Tier 2.2 · 3.8% · Calm/Order · mean Might 3.8
+## Azir, Emperor of the Sands — Tier 2.2 · 3.4% · Calm/Order · mean Might 3.83
 
 **In a sentence:** almost no units in the list and a board made of tokens and Equipment. Their early game is theirs, so develop through it and clear the board in one go, because Azir rebuilds one unit a turn.
 
@@ -396,9 +398,9 @@ The archive files most of these lists under the legend's Starter printing, *Wuju
 > - **Mulligan:** keep cheap units and Switcheroo.
 > - **Early:** develop first. They have 0.3 cheap units a deck, so a free early point is there if it costs you no development, but it is not the plan.
 > - **Middle:** watch your rune economy (Jun); this is a game you win by spending well, not fast. Every Equipment you kill is a Sand Soldier they never get, and Ravenbloom Prefect banishes Equipment as it is played. **Sabotage takes their non-unit cards** (Equipment, Arise!, Guards!) before they can use them (Jun).
-> - **Closing:** isolation is 95%, because their units are few and large. Drag one onto Kha'Zix. **Play around Arise!** (93%): a Sand Soldier for each Equipment they control, two of them ready.
-> - **Flips:** freely. Nothing they run removes your hidden unit; Not So Fast is in 9%.
-> - **Never:** cast Star-Crossed or Void Assault into open Calm. Defy is in 93%.
+> - **Closing:** isolation is 95%, because their units are few and large. Drag one onto Kha'Zix. **Play around Arise!** (94%): a Sand Soldier for each Equipment they control, two of them ready.
+> - **Flips:** freely. Nothing they run removes your hidden unit; Not So Fast is in 10%.
+> - **Never:** cast Star-Crossed or Void Assault into open Calm. Defy is in 92%.
 
 ### Their deck
 
@@ -410,14 +412,14 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 |---|---|---|
 | **Guards!** | 98% | Hidden: a 2-Might Sand Soldier, readied for `[Order]` |
 | **Equipment** | 95–98% each | Doran's Shield, Eye of the Herald, Soul Sword, Brutalizer, B.F. Sword (+3) |
-| **Arise!** | 93% | a Sand Soldier for each Equipment they control, two of them ready |
-| **Defy** | 93% | counters your cheap spells |
-| **Hidden Blade** | 93% | kills a unit at *its* battlefield |
-| **Back Off** | 84% | Hidden stun |
+| **Arise!** | 94% | a Sand Soldier for each Equipment they control, two of them ready |
+| **Defy** | 92% | counters your cheap spells |
+| **Hidden Blade** | 95% | kills a unit at *its* battlefield |
+| **Back Off** | 85% | Hidden stun |
 | **Deathgrip** | 86% | Reaction: kill their own unit to add its Might to another, and draw 1 |
-| **Vi, Peacekeeper** | 63% | Ambush, stuns one of yours on attack |
+| **Vi, Peacekeeper** | 61% | Ambush, stuns one of yours on attack |
 | **Discipline** | 94% | +2 at Reaction speed and draw. Count it in every fight |
-| **En Garde** | 67% | Reaction +1, or +2 if their unit is alone, which hits your isolation plan |
+| **En Garde** | 66% | Reaction +1, or +2 if their unit is alone, which hits your isolation plan |
 
 ### Fights
 
@@ -433,11 +435,11 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 ### Their facedown card
 
-**Guards!** (98% — a 2-Might token arriving mid-fight), **Hidden Blade** (93%) or **Back Off** (84%). Attacking their battlefield, expect one more defender, one dead attacker, or one stunned attacker.
+**Guards!** (98% — a 2-Might token arriving mid-fight), **Hidden Blade** (95%) or **Back Off** (85%). Attacking their battlefield, expect one more defender, one dead attacker, or one stunned attacker.
 
 ### Battlefields
 
-**Hall of Legends** (98%, conquer to ready their legend for `[1]` — another token), **Trifarian War Camp** (88%, +1 Might to every unit there, both sides) and **Seat of Power** (73%). Usual order.
+**Hall of Legends** (96%, conquer to ready their legend for `[1]` — another token), **Trifarian War Camp** (91%, +1 Might to every unit there, both sides) and **Seat of Power** (74%). Usual order.
 
 ### Board
 
@@ -447,7 +449,7 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 - **LA RQ: MICE Squirtle #3 overall and NRW Rocklho #4 overall, both top 4.** riftbound.gg gives one Azir semifinalist as 12-2-1. Field: 79 → 16 (20.3%).
 - **Other post-ban:** Brandon Rodriguez 17th and Kyle Rushing 20th of 78 (Orlando $10k).
-- **Core** (n=76, very tight): Doran's Shield, Eye of the Herald, Guards!, Brutalizer, B.F. Sword, Discipline, Hidden Blade, Arise!, Soul Sword, Defy, Deathgrip, Back Off. Battlefields: Hall of Legends, Trifarian War Camp, Seat of Power.
+- **Core** (n=86, very tight): Doran's Shield, Eye of the Herald, Guards!, Brutalizer, B.F. Sword, Discipline, Hidden Blade, Arise!, Soul Sword, Defy, Deathgrip, Back Off. Battlefields: Hall of Legends, Trifarian War Camp, Seat of Power.
 - **The two top-4 lists:**
   - **Squirtle** is the stock list.
   - **Rocklho** adds 2 Desert's Call (19/76), 1 Sacrifice and 1 Vi, Peacekeeper. He cuts to 1 Back Off and 2 Soul Sword.
@@ -457,7 +459,7 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 ---
 
-## LeBlanc, Deceiver — Tier 2.3 · 3.9% · Mind/Order · mean Might 3.82
+## LeBlanc, Deceiver — Tier 2.3 · 4.0% · Mind/Order · mean Might 3.79
 
 **In a sentence:** a Deathknell engine that wants its units to die, with a seven-drop that wipes your combat maths — and nothing at all that punishes a flip.
 
@@ -466,12 +468,12 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 > - **Mulligan:** keep Switcheroo (98%), or a Faefolk plus a 2-drop. You need a way to make the fight unfair.
 > - **Early:** take a battlefield before their 5-drops. Their early units are 1-Might Deathknell bodies, and killing them pays them a card or a rune, so **fight for the battlefield, not the bodies**.
 > - **Bounce beats killing.** A unit returned to hand never dies, so no Deathknell fires. Your **Star-Crossed** sends Ruined Rex, Glasc Mixologist, Rift Herald or Thousand-Tailed Watcher back with no payout. On a Reflection token it is cleaner still: a token put into a hand ceases to exist (§186.1) and never dies.
-> - **Middle:** when they reach 7 runes, assume **Thousand-Tailed Watcher** (89%). It is a unit, so it lands on *their* turn, and every unit you have is −3 for that turn. **Do not count on a hold surviving that turn.** Your pumps afterwards still count in full: "to a minimum of 1" snapshots (§477.3.b), so a 2-Might unit takes a flat −1 and a Punch First on top is +5 from there. **Decree of Strength can take Watcher from their hand.** It is a Mind card, and Sabotage cannot reach units. TwistedTCG's 12th-place LA list ran three 8-drops (Harnessed Dragon, Rift Herald) and one Watcher, so against that build the danger turn is 8, not 7.
+> - **Middle:** when they reach 7 runes, assume **Thousand-Tailed Watcher** (87%). It is a unit, so it lands on *their* turn, and every unit you have is −3 for that turn. **Do not count on a hold surviving that turn.** Your pumps afterwards still count in full: "to a minimum of 1" snapshots (§477.3.b), so a 2-Might unit takes a flat −1 and a Punch First on top is +5 from there. **Decree of Strength can take Watcher from their hand.** It is a Mind card, and Sabotage cannot reach units. TwistedTCG's 12th-place LA list ran three 8-drops (Harnessed Dragon, Rift Herald) and one Watcher, so against that build the danger turn is 8, not 7.
 > - **Every hold of theirs is worth more than a point.** Their legend copies a unit at a battlefield they conquer or hold, and gives the copy Temporary, so it is killed at the start of their next Beginning Phase, before scoring (§816.1.b). A copy takes the original's rules text (§477.1.b.1.a; §477.1.b.1.b uses a Reflection copying Honest Broker as its example), and a Deathknell triggers as its permanent is killed, before it reaches the trash (§808.1.c, §808.1.d.2), where a token then ceases to exist (§186.1). So **a copied Ruined Rex dies and deals 4 to one of your units, twice with Karthus**.
 > - **Closing:** they rebuy dead units (Glasc Mixologist, Rift Herald) faster than you can grind them. Turn the battlefield you hold into points, not kills.
 > - **Flips:** freely. Nothing in their lists removes your hidden unit or counters a trigger.
 > - **Why it rose (Jun, ban day):** LeBlanc lost nothing to the ban, and with fewer Chaos decks around it rarely meets Gust or Star-Crossed. That is also why it never answers your flips.
-> - **Never:** trade a unit just because you can. Karthus (88%) makes every Deathknell trigger twice. If you are going to kill one unit, Karthus is the one whose death switches the doubling off. *(This last sentence is this page's analysis, not Jun's.)*
+> - **Never:** trade a unit just because you can. Karthus (86%) makes every Deathknell trigger twice. If you are going to kill one unit, Karthus is the one whose death switches the doubling off. *(This last sentence is this page's analysis, not Jun's.)*
 > - **Watch:** Jun's 23 September video, *Kha'Zix Midrange vs LeBlanc*, on Metafy. It is the one post-ban LeBlanc game we know of from him.
 
 ### Their deck
@@ -482,22 +484,22 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 | card | in | what it does to you |
 |---|---|---|
-| **Mirror Image** | 95% | errata: *"Choose a unit."* A ready temporary copy of any unit on the table, yours included |
+| **Mirror Image** | 93% | errata: *"Choose a unit."* A ready temporary copy of any unit on the table, yours included |
 | **Soaring Scout** | 94% | Deathknell: channel a rune |
-| **Vi, Peacekeeper** | 91% | Ambush 5-drop that stuns one of yours when she attacks |
-| **Thousand-Tailed Watcher** | 89% | 7 Energy (8 to enter ready): *"give enemy units −3 Might this turn, to a minimum of 1"* |
-| **Ruined Rex** | 89% | Deathknell: deal 4 to one of your units |
-| **Sacrifice** | 89% | Reaction: kill their own 5+ Might unit to draw 2 and ramp. It pulls a unit out of a fight for value |
-| **Glasc Mixologist** | 89% | Deathknell: replays a ≤3-cost unit from their trash |
-| **Watchful Sentry** | 89% | Deathknell: draw 1 |
-| **Karthus, Eternal** | 88% | their Deathknell effects trigger an additional time |
-| **Hidden Blade** | 88% | kills a unit at *its* battlefield, and that unit's controller draws 2. A fight card, not a flip card |
-| **Black Rose Dignitary** | 88% | Assault. Deathknell: channel a rune |
-| **Honest Broker** | 83% | Deathknell: a Gold gear token |
-| **Deathgrip** | 73% | errata: Reaction, kill one of their units, give its Might to **another** of theirs, draw 1. **Their combat trick** |
-| **Rift Herald** | 70% | 8 Energy, 7 Might. Deathknell: a unit from their hand onto the board |
-| **Baited Hook** | 65% | gear: kill one of their units and pull a bigger one from the top 5 |
-| **Harnessed Dragon** | 64% | 8 Energy, kills one of your units on play |
+| **Vi, Peacekeeper** | 90% | Ambush 5-drop that stuns one of yours when she attacks |
+| **Thousand-Tailed Watcher** | 87% | 7 Energy (8 to enter ready): *"give enemy units −3 Might this turn, to a minimum of 1"* |
+| **Ruined Rex** | 90% | Deathknell: deal 4 to one of your units |
+| **Sacrifice** | 88% | Reaction: kill their own 5+ Might unit to draw 2 and ramp. It pulls a unit out of a fight for value |
+| **Glasc Mixologist** | 90% | Deathknell: replays a ≤3-cost unit from their trash |
+| **Watchful Sentry** | 90% | Deathknell: draw 1 |
+| **Karthus, Eternal** | 86% | their Deathknell effects trigger an additional time |
+| **Hidden Blade** | 89% | kills a unit at *its* battlefield, and that unit's controller draws 2. A fight card, not a flip card |
+| **Black Rose Dignitary** | 90% | Assault. Deathknell: channel a rune |
+| **Honest Broker** | 86% | Deathknell: a Gold gear token |
+| **Deathgrip** | 76% | errata: Reaction, kill one of their units, give its Might to **another** of theirs, draw 1. **Their combat trick** |
+| **Rift Herald** | 67% | 8 Energy, 7 Might. Deathknell: a unit from their hand onto the board |
+| **Baited Hook** | 59% | gear: kill one of their units and pull a bigger one from the top 5 |
+| **Harnessed Dragon** | 59% | 8 Energy, kills one of your units on play |
 
 ### Fights
 
@@ -505,8 +507,8 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 - **Switcheroo is the matchup**, and nothing they run counters it.
 - Ruined Rex's Deathknell deals 4 *after* it dies. Count that 4 against your surviving units before you kill it.
-- **Deathgrip** (73%) needs a second unit of theirs **anywhere**: the unit they kill can be at base, so **Kha'Zix isolation does not dodge it**. Count their biggest unit anywhere as a possible +Might on the defender. *(An earlier answer from this toolchain said isolation dodged it. The card says "another friendly unit" with no location.)*
-- **Sacrifice** (89%) lets them kill their own 5+ Might defender mid-fight for 2 cards. If it was their only unit there, you still win the combat and the battlefield.
+- **Deathgrip** (76%) needs a second unit of theirs **anywhere**: the unit they kill can be at base, so **Kha'Zix isolation does not dodge it**. Count their biggest unit anywhere as a possible +Might on the defender. *(An earlier answer from this toolchain said isolation dodged it. The card says "another friendly unit" with no location.)*
+- **Sacrifice** (88%) lets them kill their own 5+ Might defender mid-fight for 2 cards. If it was their only unit there, you still win the combat and the battlefield.
 - Vi, Peacekeeper on Ambush turns a fight you counted into one where your best unit deals nothing. Leave a margin of one unit.
 
 ### Flips and counters
@@ -515,11 +517,11 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 ### Their facedown card
 
-**Hidden Blade** (88%). A card hidden there can only target units at that battlefield (§811.1.d.2), which is exactly where your attacker will be. If you attack it, one of your units dies and you draw 2. Attack it with a spare unit in the fight, not a lone Rengar or Kha'Zix.
+**Hidden Blade** (89%). A card hidden there can only target units at that battlefield (§811.1.d.2), which is exactly where your attacker will be. If you attack it, one of your units dies and you draw 2. Attack it with a spare unit in the fight, not a lone Rengar or Kha'Zix.
 
 ### Battlefields
 
-**Windswept Hillock** (95%: units there gain Ganking, yours too), **Star Spring** (77%) and **Dusk Rose Lab** (71%: they kill their own unit there to draw, which their Deathknells love). Forbidding Waste is in 29%. **Never your Star Spring**, which hands their units free walk-homes. Zaun Warrens, then Sandswept Tomb.
+**Windswept Hillock** (94%: units there gain Ganking, yours too), **Star Spring** (80%) and **Dusk Rose Lab** (72%: they kill their own unit there to draw, which their Deathknells love). Forbidding Waste is in 23%. **Never your Star Spring**, which hands their units free walk-homes. Zaun Warrens, then Sandswept Tomb.
 
 ### Board
 
@@ -531,7 +533,7 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 - **LA RQ: MILL TwistedTCG #12 overall**, LeBlanc's best (Riot). Field: 149 → 38 (25.5%).
 - **Other post-ban:** Anthony Carter 9th, HTCG Spartan 14th and Justin Obordo 15th of 78 (Orlando $10k). **Six LeBlancs in the Orlando $10k top 56.**
-- **Core** (n=78): Mirror Image, Soaring Scout, LeBlanc, Fragmented, Watchful Sentry, Vi, Peacekeeper, Thousand-Tailed Watcher, Hidden Blade, Glasc Mixologist, Ruined Rex, Sacrifice, Karthus, Black Rose Dignitary, Honest Broker. Battlefields: Windswept Hillock, Star Spring.
+- **Core** (n=102): Mirror Image, Soaring Scout, LeBlanc, Fragmented, Watchful Sentry, Vi, Peacekeeper, Thousand-Tailed Watcher, Hidden Blade, Glasc Mixologist, Ruined Rex, Sacrifice, Karthus, Black Rose Dignitary, Honest Broker. Battlefields: Windswept Hillock, Star Spring.
 - **TwistedTCG's list** is the archive's top-end build, not the average:
   - 3 Baited Hook, 3 Harnessed Dragon and 3 Rift Herald (each ~60–70% of the archive)
   - only **1** Thousand-Tailed Watcher main (+1 in the sideboard)
@@ -539,24 +541,24 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
   - Battlefields: Dusk Rose Lab, Star Spring, Windswept Hillock
 - **For Kha'Zix:**
   - **Three 8-drops** (Dragon kills one of your units on play; Herald's Deathknell puts a unit from hand onto the board) shift the danger turn from 7 runes (Watcher) to 8.
-  - **Baited Hook ×3** is the gear engine your Ravenbloom Prefect / Acceptable Losses answer. It's in 50 of 78 clean lists and isn't in the guide's 1 Oct table.
+  - **Baited Hook ×3** is the gear engine your Ravenbloom Prefect / Acceptable Losses answer. It's in 60 of 102 clean lists and isn't in the guide's 1 Oct table.
 
 ---
 
-## Akali, Rogue Assassin — Tier 2.4 · 4.9% · Fury/Calm · mean Might 3.6
+## Akali, Rogue Assassin — Tier 2.4 · 4.6% · Fury/Calm · mean Might 3.53
 
 **In a sentence:** they out-grind you, cover both battlefields and counter half your deck — but they can only escape fights on their own turn, so you win by fighting on yours.
 
 > **At the table**
 > - **How you win:** take one battlefield early and keep it. **Start every fight on your own turn**: their legend can only rescue a unit on theirs, and a rescued unit leaves you the battlefield anyway.
-> - **The Heron rule (Jun):** Astral Heron is in 71% of their lists. **Do not let them conquer for free and drop Heron unopposed**, or you fall very far behind. Offer a fight before it lands. Once it is down, contest the battlefield it stands on, because its discount works only while it is at a battlefield. This is the matchup the hold-centric list was built for.
+> - **The Heron rule (Jun):** Astral Heron is in 73% of their lists. **Do not let them conquer for free and drop Heron unopposed**, or you fall very far behind. Offer a fight before it lands. Once it is down, contest the battlefield it stands on, because its discount works only while it is at a battlefield. This is the matchup the hold-centric list was built for.
 > - **Mulligan:** Punch First is the card to keep, the one trick neither Defy nor Not So Fast can touch. A 2-drop plus Punch First is the ideal four.
 > - **Who you are facing (Jun, ban day):** Akali is hard to play, with **below-50% win rates** in his stats; it keeps doing well through a few excellent pilots. An Akali deep in an event is probably one of them, so expect them to punish loose fights.
-> - **Early:** take a battlefield before their 4-drops land. Kai'Sa, Survivor (68%) draws when she conquers, so the battlefield you hold is also card advantage you deny.
+> - **Early:** take a battlefield before their 4-drops land. Kai'Sa, Survivor (69%) draws when she conquers, so the battlefield you hold is also card advantage you deny.
 > - **Middle:** watch for **two open Fury**: Falling Star is 3 + 3 damage, enough to kill Rengar. Fight Akali, Silent on your turn, when she is 4, not on hers, when she is 6.
 > - **Closing:** they win long, so convert. When they hold up runes, make them spend them on your turn.
-> - **Flips:** Tornado Warrior freely, because nothing removes your hidden unit. Evelynn and Switcheroo only into tapped Calm: Not So Fast (57%) counters both.
-> - **Never:** attack their battlefield with a 2-Might unit while they have a facedown card there. Mischievous Marai (59%) kills it on arrival.
+> - **Flips:** Tornado Warrior freely, because nothing removes your hidden unit. Evelynn and Switcheroo only into tapped Calm: Not So Fast (60%) counters both.
+> - **Never:** attack their battlefield with a 2-Might unit while they have a facedown card there. Mischievous Marai (65%) kills it on arrival.
 
 ### Their deck
 
@@ -566,22 +568,22 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 | card | in | what it does to you |
 |---|---|---|
-| **Discipline** | 98% | Reaction +2 Might and draw. In every list |
-| **Defy** | 97% | counters everything you cast except Punch First and Switcheroo |
-| **Shuriken Flip** | 97% | 2 damage to your unit, then they move one of theirs. Kills Faefolk, Tentacles and every 2-drop |
-| **Stellacorn Herder** | 91% | draws every time it moves |
-| **Akali, Deadly Weapon** | 87% | deals 1 (2 empowered) whenever she moves to or from a battlefield |
-| **Falling Star** | 87% | 3 damage, twice. Kills Rengar on its own |
+| **Discipline** | 95% | Reaction +2 Might and draw. In nearly every list |
+| **Defy** | 94% | counters everything you cast except Punch First and Switcheroo |
+| **Shuriken Flip** | 94% | 2 damage to your unit, then they move one of theirs. Kills Faefolk, Tentacles and every 2-drop |
+| **Stellacorn Herder** | 90% | draws every time it moves |
+| **Akali, Deadly Weapon** | 88% | deals 1 (2 empowered) whenever she moves to or from a battlefield |
+| **Falling Star** | 86% | 3 damage, twice. Kills Rengar on its own |
 | **Zhonya's Hourglass** | 84% | their next dying unit goes home instead |
-| **Long Sword** | 74% | Quick-Draw Equipment, attaches at Reaction speed |
-| **Astral Heron** | 71% | 7 Might. Their next card each turn costs `[2][A][A]` less while Heron is at a battlefield |
-| **Back Off** | 70% | Hidden stun |
-| **Kai'Sa, Survivor** | 68% | 4 Might, draws when she conquers |
-| **Mournful Witness** | 64% | +2 Might after every combat it was in |
-| **Mischievous Marai** | 59% | Hidden. Deals 2 to an enemy unit at its battlefield when played |
-| **Not So Fast** | 57% | counters Switcheroo, Void Assault, Rampage and Evelynn's trigger |
+| **Long Sword** | 75% | Quick-Draw Equipment, attaches at Reaction speed |
+| **Astral Heron** | 73% | 7 Might. Their next card each turn costs `[2][A][A]` less while Heron is at a battlefield |
+| **Back Off** | 74% | Hidden stun |
+| **Kai'Sa, Survivor** | 69% | 4 Might, draws when she conquers |
+| **Mournful Witness** | 68% | +2 Might after every combat it was in |
+| **Mischievous Marai** | 65% | Hidden. Deals 2 to an enemy unit at its battlefield when played |
+| **Not So Fast** | 60% | counters Switcheroo, Void Assault, Rampage and Evelynn's trigger |
 | **Scuttle Crab** | 53% | when it dies you reveal your hand and they see your facedown cards that turn |
-| **Blitzcrank, Impassive** | 49% | Tank. When played to a battlefield it drags one of your units there |
+| **Blitzcrank, Impassive** | 54% | Tank. When played to a battlefield it drags one of your units there |
 
 **Akali, Silent** reads *"I can't be chosen by enemy spells and abilities unless I'm in combat. When I move to a battlefield, give me +2 Might this turn."* She is 6 on the turn she moves in and **4 sitting still on your turn**. Void Assault, Faefolk, Evelynn and Rampage all choose, so none reach her outside combat — and Rampage, with no Action keyword, can never be cast inside one.
 
@@ -596,15 +598,15 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 
 ### Flips and counters
 
-**1% can remove your hidden unit · 57% can counter Evelynn · 57% can counter Switcheroo.** All of it is Not So Fast, which needs Calm. Tornado Warrior is your free flip.
+**1% can remove your hidden unit · 60% can counter Evelynn · 61% can counter Switcheroo.** All of it is Not So Fast, which needs Calm. Tornado Warrior is your free flip.
 
 ### Their facedown card
 
-At their battlefield it's **Zhonya's Hourglass** (84%), **Back Off** (70%) or **Mischievous Marai** (59%). Attacking into it means one of: a unit that won't die, a unit of yours that deals no damage, or 2 damage to one of yours on arrival. **Attack with 3-Might units or bigger, and expect the fight to be one unit worse than it looks.**
+At their battlefield it's **Zhonya's Hourglass** (84%), **Back Off** (74%) or **Mischievous Marai** (65%). Attacking into it means one of: a unit that won't die, a unit of yours that deals no damage, or 2 damage to one of yours on arrival. **Attack with 3-Might units or bigger, and expect the fight to be one unit worse than it looks.**
 
 ### Battlefields
 
-They bring **Void Gate** (72%) — *"Spells and abilities affecting units here each deal 1 Bonus Damage"*, which makes Falling Star 4 + 4 and Shuriken Flip 3 — **Sigil of the Storm** (50%) and **Forgotten Monument** (39%, nobody scores there until their third turn). Do not fight with Rengar at Void Gate into open Fury. Usual order.
+They bring **Void Gate** (73%) — *"Spells and abilities affecting units here each deal 1 Bonus Damage"*, which makes Falling Star 4 + 4 and Shuriken Flip 3 — **Sigil of the Storm** (56%) and **Forgotten Monument** (41%, nobody scores there until their third turn). Do not fight with Rengar at Void Gate into open Fury. Usual order.
 
 ### Board
 
@@ -614,7 +616,7 @@ They bring **Void Gate** (72%) — *"Spells and abilities affecting units here e
 
 - **LA RQ: HXN TEMPETE一些雪 #7 overall (top 8), 11-2-1** per riftbound.gg. Field: 83 → 12 (14.5%).
 - **Other post-ban:** HTCG Nick **won the Orlando $2.5k** (1st of 22); Joshua 5th of 22; Trevon Gagnon 34th of 78.
-- **Core** (n=100): Discipline, Defy, Shuriken Flip, Stellacorn Herder, Akali, Deadly Weapon, Falling Star, Zhonya's.
+- **Core** (n=118): Discipline, Defy, Shuriken Flip, Stellacorn Herder, Akali, Deadly Weapon, Falling Star, Zhonya's.
 - **HXN's list:** 3 Astral Heron, 3 Kai'Sa, Survivor, 2 Mischievous Marai, Block, Ferrous Forerunner and Sterak's Gage (each ~24% of the archive). Battlefields: Forgotten Monument, Sigil of the Storm, Void Gate.
 - **For Kha'Zix:**
   - **Block** (Hidden Action: Shield 3 + Tank this turn) is another facedown fight card at their battlefield.
@@ -623,61 +625,61 @@ They bring **Void Gate** (72%) — *"Spells and abilities affecting units here e
 
 ---
 
-## Kennen, Heart of the Tempest — Tier 2.5 · 2.3% · Order/Chaos · mean Might 3.32
+## Kennen, Heart of the Tempest — Tier 2.5 · 2.2% · Order/Chaos · mean Might 3.40
 
 **In a sentence:** the best answer suite in the format, and the deck the ban hit hardest. Most Kennen lists in the archive are pre-ban, so the post-ban version is less proven. Win one fight early and never trade.
 
 > **At the table**
 > - **How you win (Jun):** keep the pressure high and deny their setup. Kennen cannot both contest your board and build its trash, so make it choose. They out-grind you badly (17.0) once set up, so a slow game is theirs. Jun calls it a hard matchup, but much weaker since the ban took Stacked Deck. Archive share once lists holding a banned card are dropped: 2.3%, not 6.0%. **But it converted best at Los Angeles**: 165 Day 1 pilots, 63 into Day 2 (38.2%).
 > - **Mulligan:** Punch First (89%) and a 2-drop. Their mean is small enough that +5 decides most fights.
-> - **Early:** **kill Kennen, Storm of Shuriken (80%) the moment it lands** (Jun). Score with expendable bodies such as Tentacles, so the points cost you nothing.
+> - **Early:** **kill Kennen, Storm of Shuriken (84%) the moment it lands** (Jun). Score with expendable bodies such as Tentacles, so the points cost you nothing.
 > - **Middle:** expect their setup to be complete by **turns 4–5**, and expect a **10+ Might hold**: a conquest, then Rhasa the Sunderer (68%) at that battlefield. Keep Punch First and a developed base to break it. **Sabotage Last Rites (60%) the turn before they would play it** (Jun). Refuse every even trade: a trade fills their trash, and their trash is their hand.
 > - **Closing:** if they set up anyway, the game is not over. **Wipe their board in one turn** with all your removal, which cuts off the conquer-and-hold loop they use to rebuild. Get to 6 first.
-> - **Flips:** only into tapped Chaos, because Gust or Star-Crossed is in 88% of lists. **Seal of Discord** (65%) adds a Chaos Power at Reaction speed, so count one more open Chaos than their runes show. **Gust is Jun's main answer to them replaying Ride the Wind**: wait for the Ride the Wind and react.
+> - **Flips:** only into tapped Chaos, because Gust or Star-Crossed is in 88% of lists. **Seal of Discord** (60%) adds a Chaos Power at Reaction speed, so count one more open Chaos than their runes show. **Gust is Jun's main answer to them replaying Ride the Wind**: wait for the Ride the Wind and react.
 > - **Never:** trade a unit for a unit.
 
 ### Their deck
 
 > **Heart of the Tempest** — *"When you play a card from anywhere other than your hand, empower me. [Action] Disempower me, Exhaust: Give a unit [Assault 2] this turn."*
 
-Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **20 of 46 legal lists are tournament-vouched.** An earlier version of this page said 54 of 65, which counted pre-ban lists.
+Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **20 of 56 legal lists are tournament-vouched.** An earlier version of this page said 54 of 65, which counted pre-ban lists.
 
 | card | in | what it does to you |
 |---|---|---|
-| **Lightning Rush** | 95% | digs and fills the trash. Flow from it again |
-| **Fizz, Trickster** | 85% | replays a spell from the trash |
-| **Star-Crossed** | 85% | removes your hidden unit mid-flip |
-| **Traveling Merchant** | 82% | loots on every move |
-| **Kennen, Storm of Shuriken** | 80% | burns 2 on play. When it conquers, a spell in their trash gains Flow |
-| **Switcheroo** | 75% | swaps your big unit with their small one |
+| **Lightning Rush** | 94% | digs and fills the trash. Flow from it again |
+| **Fizz, Trickster** | 82% | replays a spell from the trash |
+| **Star-Crossed** | 84% | removes your hidden unit mid-flip |
+| **Traveling Merchant** | 80% | loots on every move |
+| **Kennen, Storm of Shuriken** | 84% | burns 2 on play. When it conquers, a spell in their trash gains Flow |
+| **Switcheroo** | 72% | swaps your big unit with their small one |
 | **Ride the Wind** | 72% | moves and readies a unit: a second fight |
 | **Gust** | 70% | removes your hidden unit mid-flip |
-| **Ezreal, Prodigy** | 70% | discard 1, draw 2 on play. Their optional costs (Repeat, extra costs) cost 1 less |
+| **Ezreal, Prodigy** | 64% | discard 1, draw 2 on play. Their optional costs (Repeat, extra costs) cost 1 less |
 | **Rhasa the Sunderer** | 68% | 6 Might. Costs 1 less for each card in their trash |
-| **Seal of Discord** | 65% | 0-cost gear that adds a Chaos Power at Reaction speed. **One more open Chaos than their runes show** |
+| **Seal of Discord** | 60% | 0-cost gear that adds a Chaos Power at Reaction speed. **One more open Chaos than their runes show** |
 | **Flash** | 62% | Reaction: up to two of their units go home |
 | **Last Rites** | 60% | Equip by recycling 2 from their trash |
 | **Tail-Cloaked Matriarch** | 60% | your recursion card, in their deck |
-| **Shadow Temple** | 55% | battlefield: when they hold there, burn 3 (more fuel) |
+| **Shadow Temple** | 58% | battlefield: when they hold there, burn 3 (more fuel) |
 
 ### Fights
 
 **40 bare · 89 +PF · 97 +Sw · 94 iso.**
 
-- Their Switcheroo (75%) is the trick to fear: never count a fight on Rengar's 6 alone.
+- Their Switcheroo (72%) is the trick to fear: never count a fight on Rengar's 6 alone.
 - Flash escapes a fight at Reaction speed. Like Akali's legend, it leaves you the only player there — you still win the battlefield.
 
 ### Flips and counters
 
-**88% · 88% · 28%.** Count their open Chaos before any flip, **plus one for an untapped Seal of Discord** (65%).
+**88% · 88% · 28%.** Count their open Chaos before any flip, **plus one for an untapped Seal of Discord** (60%).
 
 ### Their facedown card
 
-**Switcheroo** or **Tideturner** (65%). Assume a swap when you attack their battlefield.
+**Switcheroo** or **Tideturner** (64%). Assume a swap when you attack their battlefield.
 
 ### Battlefields
 
-**Zaun Warrens** (72%), **Minefield** (70%: conquering mills two, which is fuel for them) and **Shadow Temple** (55%: holding there burns 3). Usual order. They run Zaun Warrens too, so it is fully symmetric here, and it may already be retired when you want it (§486.5).
+**Zaun Warrens** (74%), **Minefield** (70%: conquering mills two, which is fuel for them) and **Shadow Temple** (58%: holding there burns 3). Usual order. They run Zaun Warrens too, so it is fully symmetric here, and it may already be retired when you want it (§486.5).
 
 ### Board
 
@@ -687,18 +689,19 @@ Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **
 
 - **LA RQ: DSG AwesumRosum #13 overall**, Kennen's best (Riot). riftbound.gg: the two Kennens in contention "ended their run at 11–2". Field: **165 → 63 (38.2%), the best conversion of any legend with 20+ pilots.**
 - **Other post-ban:** Raja 3rd of 22 (Orlando $2.5k); Brandon Davis 5th and Brian Stevens 6th of 78 (Orlando $10k). 18 post-ban-confirmed lists.
-- **Core** (n=46): Lightning Rush, Fizz, Traveling Merchant, Star-Crossed, Kennen, Storm of Shuriken. Ride the Wind, Switcheroo, Rhasa, Shadow Order Disciple, Gust, Ezreal, Prodigy, Tideturner, Seal of Discord, Matriarch, Last Rites, Salvage and Flash are in 27–34 lists.
+- **Core** (n=56): Lightning Rush, Fizz, Traveling Merchant, Star-Crossed, Kennen, Storm of Shuriken. Ride the Wind, Switcheroo, Rhasa, Shadow Order Disciple, Gust, Ezreal, Prodigy, Tideturner, Seal of Discord, Matriarch, Last Rites, Salvage and Flash are in 33–34 lists.
 - **AwesumRosum's list:** 3 Rhasa, 3 Seal of Discord, 3 Matriarch, 2 Tornado Warrior, 2 Switcheroo, 2 Last Rites, +1 Hard Bargain (10/46) and 1 Carrion Dredger. Battlefields: Minefield, Shadow Temple, **Zaun Warrens**.
 - **For Kha'Zix:**
   - Kennen's top list is half your deck: Merchant, Disciple, Matriarch, Fizz, Tornado Warrior, Switcheroo, Tideturner.
   - **Hard Bargain main** can counter your Punch First unless you pay 2.
   - They bring Zaun Warrens too, so it may already be retired when you want it (§486.5).
+- **Claim added 8 October** (list title, not a record): "Kennen wins Showdown Series: Murcia".
 
 ---
 
 # Tier 3
 
-## Vex, Gloomist — Tier 3.1 · 5.2% · Calm/Chaos · mean Might 2.88
+## Vex, Gloomist — Tier 3.1 · 5.0% · Calm/Chaos · mean Might 2.89
 
 **In a sentence:** small and interactive, built around a unit that stuns everything you play — and you out-grind it once she is gone.
 
@@ -706,9 +709,9 @@ Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **
 > - **How you win:** hold one battlefield and grind (9.4 against your 12). Their 2.88 mean means Punch First decides most fights.
 > - **Mulligan:** Faefolk or Void Assault — a way to drag Vex, Apathetic — plus Punch First.
 > - **Early:** take a battlefield. Develop before she lands, because after she does every unit you play is stunned.
-> - **Middle:** kill or contest **Sona, Harmonious** (48%) before you plan a flip: she readies four of their runes at the end of their turn, so their Reactions are always up on yours. Then **kill Vex, Apathetic before you play units.** Drag her into your biggest unit with Faefolk or Void Assault (her Deflect charges you `[A]`). Move the big unit first, then Faefolk.
+> - **Middle:** kill or contest **Sona, Harmonious** (45%) before you plan a flip: she readies four of their runes at the end of their turn, so their Reactions are always up on yours. Then **kill Vex, Apathetic before you play units.** Drag her into your biggest unit with Faefolk or Void Assault (her Deflect charges you `[A]`). Move the big unit first, then Faefolk.
 > - **Closing:** grind. They draw off holding with their legend, so taking their battlefield away matters more than killing units.
-> - **Flips:** Tornado Warrior into tapped Chaos (Gust 39%, Star-Crossed 59%). Evelynn also needs tapped Calm (Not So Fast, 33%). Switcheroo is countered 51% of the time.
+> - **Flips:** Tornado Warrior into tapped Chaos (Gust 39%, Star-Crossed 62%). Evelynn also needs tapped Calm (Not So Fast, 35%). Switcheroo is countered 55% of the time.
 > - **Never:** play Rengar or an Ambush Kha'Zix while she stands at a battlefield.
 
 ### Their deck
@@ -719,22 +722,22 @@ Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **
 
 | card | in | what it does to you |
 |---|---|---|
-| **Vex, Apathetic** | 100% | *"When an opponent plays a unit while I'm at a battlefield, [Stun] it. They can't move it this turn."* |
-| **Back Off** | 95% | Hidden stun |
-| **Defy** | 89% | counters your cheap spells |
-| **Discipline** | 81% | +2 Might at Reaction speed |
-| **Mutated Mouser** | 78% | 1 Might, Shield 2, Tank — defends at 3 and must be assigned damage first |
-| **Switcheroo** | 67% | the swap cuts both ways — your 6-Might Rengar is the unit worth swapping |
-| **Star-Crossed** | 59% | removes your hidden unit mid-flip |
-| **Steel Paws** | 51% | 0 Might, Deflect; empowered for 7 Energy it is 7 Might |
+| **Vex, Apathetic** | 94% | *"When an opponent plays a unit while I'm at a battlefield, [Stun] it. They can't move it this turn."* |
+| **Back Off** | 89% | Hidden stun |
+| **Defy** | 86% | counters your cheap spells |
+| **Discipline** | 80% | +2 Might at Reaction speed |
+| **Mutated Mouser** | 75% | 1 Might, Shield 2, Tank — defends at 3 and must be assigned damage first |
+| **Switcheroo** | 65% | the swap cuts both ways — your 6-Might Rengar is the unit worth swapping |
+| **Star-Crossed** | 62% | removes your hidden unit mid-flip |
+| **Steel Paws** | 44% | 0 Might, Deflect; empowered for 7 Energy it is 7 Might |
 | **Gust** | 39% | removes a 3-Might-or-less unit mid-flip |
-| **Boots of Swiftness** | 60% | Equipment, +2 Might |
-| **Scuttle Crab** | 56% | when it dies you reveal your hand and they see your facedown cards that turn |
-| **Charm** | 55% | moves your unit, on their turn |
-| **Existential Dread** | 52% | Action: stuns an attacker. Pay the Repeat and a stunned attacker goes back to hand. **Your attack can be turned off at no card cost to their board** |
-| **Sona, Harmonious** | 48% | while at a battlefield, readies 4 of their runes at the end of their turn. **They start your turn with 4 open**, so count it in every fight and flip |
-| **Vilemaw** | 45% | 8-Energy Ambush, 8 Might. Your units there with less Might deal no combat damage. Only Switcheroo or Punch First on a big unit gets through |
-| **Astral Heron** | 41% | 7 Might, discount while at a battlefield |
+| **Boots of Swiftness** | 56% | Equipment, +2 Might |
+| **Scuttle Crab** | 48% | when it dies you reveal your hand and they see your facedown cards that turn |
+| **Charm** | 54% | moves your unit, on their turn |
+| **Existential Dread** | 53% | Action: stuns an attacker. Pay the Repeat and a stunned attacker goes back to hand. **Your attack can be turned off at no card cost to their board** |
+| **Sona, Harmonious** | 45% | while at a battlefield, readies 4 of their runes at the end of their turn. **They start your turn with 4 open**, so count it in every fight and flip |
+| **Vilemaw** | 41% | 8-Energy Ambush, 8 Might. Your units there with less Might deal no combat damage. Only Switcheroo or Punch First on a big unit gets through |
+| **Astral Heron** | 40% | 7 Might, discount while at a battlefield |
 
 ### Fights
 
@@ -746,19 +749,19 @@ Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **
 
 ### Flips and counters
 
-**66% can remove your hidden unit · 72% can counter Evelynn · 51% can counter Switcheroo.**
+**68% can remove your hidden unit · 75% can counter Evelynn · 55% can counter Switcheroo.**
 
 ### Their facedown card
 
-**Back Off** (95%) — one of your attackers deals no damage. **Switcheroo** (67%) — your biggest attacker becomes their smallest. Attack their battlefield with a margin of one unit.
+**Back Off** (89%) — one of your attackers deals no damage. **Switcheroo** (65%) — your biggest attacker becomes their smallest. Attack their battlefield with a margin of one unit.
 
 ### Battlefields
 
-**Startipped Peak** (64%, they channel a rune when they hold), **Fortified Position** (44%, a defender there gains Shield 2), **Grove of the God-Willow** (25%) and **Bandle Tree** (24%, a second facedown card). Usual order.
+**Startipped Peak** (59%, they channel a rune when they hold), **Fortified Position** (42%, a defender there gains Shield 2), **Grove of the God-Willow** (26%) and **Bandle Tree** (25%, a second facedown card). Usual order.
 
 ### Board
 
-+1 Hard Bargain (for Defy and the flip). −1 Grim Resolve — Defy (89%) counters it and cannot touch Punch First.
++1 Hard Bargain (for Defy and the flip). −1 Grim Resolve — Defy (86%) counters it and cannot touch Punch First.
 
 ### Proven lists
 
@@ -767,7 +770,7 @@ Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **
   - $10k: SNB Rubber Duck 4th, eric bradford 10th, Trenton Gross 16th
   - $2.5k: SNB bdg4life 4th, Kevin Nieves 6th, eric bradford 7th
   - 14 post-ban-confirmed lists in all
-- **Core** (n=105) is thin: Vex, Apathetic, Back Off, Defy, Discipline, Mutated Mouser. Switcheroo, Star-Crossed, Boots, Evelynn, Charm and Tornado Warrior are in 56–71 lists.
+- **Core** (n=127) is thin: Vex, Apathetic, Back Off, Defy, Discipline, Mutated Mouser. Switcheroo, Star-Crossed, Boots, Evelynn, Charm and Tornado Warrior are in 59–83 lists.
 - **bsweitz's list** is unusual:
   - 3 Clockwork Keeper (4/105), 2 Janna, Savior (11/105), 2 Pyke, Returned, 1 Meditation, 1 Edge of Night
   - plus 3 Astral Heron, **3 Evelynn and 3 Switcheroo**
@@ -778,7 +781,7 @@ Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **
 
 ---
 
-## Jayce, Defender of Tomorrow — Tier 3.2 · 4.5% · Mind/Body · mean Might 5.45
+## Jayce, Defender of Tomorrow — Tier 3.2 · 4.0% · Mind/Body · mean Might 5.42
 
 **In a sentence:** the biggest board you meet, and it arrives late — so take both battlefields and race before it does.
 
@@ -787,9 +790,9 @@ Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **
 > - **The Aurora rule (Jun):** the game usually turns on whether they find **Dazzling Aurora** (66%) on time and whether you find the answer on time. **Sabotage** takes it from their hand (it is a non-unit card). **Ravenbloom Prefect** banishes it as it is played; Jun calls the Prefect "incredibly oppressive" here and often brings it in on the draw. **Acceptable Losses** kills it once it resolves, but only if it is their only gear, because they choose which one dies.
 > - **Mulligan:** keep **Switcheroo** above everything: it is 97% here and nothing else in your deck comes close. Faefolk is the other keep, a 1-Might body to swap. On the draw in games 2–3, **a Ravenbloom Prefect on turn 1 or 2** can be "already too much for a Jayce deck to handle" (Jun).
 > - **Early:** spread. Two battlefields with a unit each is two points a turn while they ramp.
-> - **Middle:** hide Switcheroo as soon as you can. **Sabotage (72%) takes it from your hand, but cannot reach a facedown card.** Flip it at the battlefield their big unit attacks.
+> - **Middle:** hide Switcheroo as soon as you can. **Sabotage (73%) takes it from your hand, but cannot reach a facedown card.** Flip it at the battlefield their big unit attacks.
 > - **Closing:** you need eight points before Elder Dragon or Aurora takes over. Every turn you hold two battlefields is a turn closer.
-> - **Flips:** Tornado Warrior and Switcheroo freely. Evelynn: pull from their base, not from the battlefield with their facedown card (Temporal Breach, 36%).
+> - **Flips:** Tornado Warrior and Switcheroo freely. Evelynn: pull from their base, not from the battlefield with their facedown card (Temporal Breach, 34%).
 > - **Never:** take a fair fight. 15% bare.
 
 ### Their deck
@@ -800,16 +803,16 @@ A ramp deck. Platewyrm Egg and the legend make extra Energy; Catalyst of Aeons a
 
 | card | in | what it does to you |
 |---|---|---|
-| **Sabotage** | 72% | takes a non-unit card from your hand — Switcheroo or Punch First |
+| **Sabotage** | 73% | takes a non-unit card from your hand — Switcheroo or Punch First |
 | **Bellows Breath** | 72% | 1 damage to up to three units at one location, repeatable |
 | **Flurry of Blades** | 69% | Reaction: 1 damage to **every** unit at battlefields — Faefolk, Tentacles and Shadow Clones die |
 | **Elder Dragon** | 71% | 10 Might, 12 Energy: *"any amount of your damage is enough to kill enemy units"* — and 1 damage to one of yours at each location on play |
 | **Dazzling Aurora** | 66% | 9-Energy gear: a free unit off the top of their deck every turn |
 | **Gutter Palace** | 64% | an alternate win: exactly 4 cards in hand and 4 units at battlefields at the start of their Beginning Phase |
-| **Sprite Burst** | 61% | two ready 3-Might tokens |
-| **Temporal Breach** | 36% | Hidden blink — protects their unit from your Evelynn pull |
+| **Sprite Burst** | 59% | two ready 3-Might tokens |
+| **Temporal Breach** | 34% | Hidden blink — protects their unit from your Evelynn pull |
 | **Garbage Grabber** | 72% | recycles 3 from their trash to draw |
-| **Promising Future** | 59% | errata: each player banishes one of their top 5 and plays it free. You get a free card too |
+| **Promising Future** | 57% | errata: each player banishes one of their top 5 and plays it free. You get a free card too |
 
 ### Fights
 
@@ -821,15 +824,15 @@ A ramp deck. Platewyrm Egg and the legend make extra Energy; Catalyst of Aeons a
 
 ### Flips and counters
 
-**0% can remove your hidden unit · 5% counter Evelynn (+36% Temporal Breach guarding her target) · 5% counter Switcheroo.**
+**0% can remove your hidden unit · 7% counter Evelynn (+34% Temporal Breach guarding her target) · 7% counter Switcheroo.**
 
 ### Their facedown card
 
-**Temporal Breach** (36%) — it blinks one of their units at that battlefield, which fizzles anything of yours that chose it.
+**Temporal Breach** (34%) — it blinks one of their units at that battlefield, which fizzles anything of yours that chose it.
 
 ### Battlefields
 
-**Sigil of the Storm** (70%), **Forgotten Monument** (63% — no scoring there until each player's third turn, which slows *your* race) and **Dragon Roost** (39%, any player may pay `[A][A]` to play a Dragon there). Usual order. Forgotten Monument slows your race, so the faster you start scoring elsewhere the better.
+**Sigil of the Storm** (70%), **Forgotten Monument** (64% — no scoring there until each player's third turn, which slows *your* race) and **Dragon Roost** (36%, any player may pay `[A][A]` to play a Dragon there). Usual order. Forgotten Monument slows your race, so the faster you start scoring elsewhere the better.
 
 ### Board
 
@@ -839,7 +842,7 @@ A ramp deck. Platewyrm Egg and the legend make extra Energy; Catalyst of Aeons a
 
 - **LA RQ: ASC Brandon #42 overall**, Jayce's best (Riot). Field: 153 → 33 (21.6%). The most-played legend not to place top 32.
 - **Other post-ban:** Waleed Abdelwahab 7th of 78 (Orlando $10k); Vince Gay 13th of 22 (Orlando $2.5k).
-- **Core** (n=92) is thin, so the archetype is split. Platewyrm Egg and Dredge Up are core. Garbage Grabber, Sabotage, Bellows Breath, Mobilize, Elder Dragon, Flurry of Blades, Catalyst of Aeons, Clairvoyance, Dazzling Aurora and Promising Future each appear in 52–65 lists.
+- **Core** (n=101) is thin, so the archetype is split. Platewyrm Egg and Dredge Up are core. Garbage Grabber, Sabotage, Bellows Breath, Mobilize, Elder Dragon, Flurry of Blades, Catalyst of Aeons, Clairvoyance, Dazzling Aurora and Promising Future each appear in 56–72 lists.
 - **Brandon's list** is the Dazzling Aurora ×3 / Elder Dragon ×3 ramp build, with 2 Rocket Barrage (30/92) and 1 Sprite Fountain. Battlefields: Forgotten Monument, Frozen Fortress, Sigil of the Storm.
 - **For Kha'Zix:**
   - **Rocket Barrage** (choose: deal 4 to a unit **in a base**, or kill a gear; Repeat) hits units you've walked home.
@@ -847,7 +850,7 @@ A ramp deck. Platewyrm Egg and the legend make extra Energy; Catalyst of Aeons a
 
 ---
 
-## Rek'Sai, Void Burrower — Tier 3.3 · 3.3% · Fury/Order · mean Might 2.63
+## Rek'Sai, Void Burrower — Tier 3.3 · 3.2% · Fury/Order · mean Might 2.66
 
 **In a sentence:** good for you on paper and in time, as long as you remember their units are paid for dying.
 
@@ -855,10 +858,10 @@ A ramp deck. Platewyrm Egg and the legend make extra Energy; Catalyst of Aeons a
 > - **How you win:** hold one battlefield and let time work. Their grind is 1.8, the lowest in the format.
 > - **Mulligan:** any working curve. You beat a 2.63 board straight (55%).
 > - **Early:** take a battlefield and make them come to you.
-> - **Middle:** they have 11 cheap units and 8 token-makers a deck. Holding beats trading — each of their dead units pays a Deathknell. **Inferna** (97%) Ambushes into your fight for 2 Energy; count it the way the Rengar entry counts Ambush.
+> - **Middle:** they have 11 cheap units and 8 token-makers a deck. Holding beats trading — each of their dead units pays a Deathknell. **Inferna** (94%) Ambushes into your fight for 2 Energy; count it the way the Rengar entry counts Ambush.
 > - **Closing:** points, not kills.
 > - **Flips:** freely. Nothing in their lists punishes one.
-> - **Never:** fight with Rengar into two open Fury — Falling Star (88%).
+> - **Never:** fight with Rengar into two open Fury — Falling Star (86%).
 
 ### Their deck
 
@@ -868,17 +871,17 @@ A ramp deck. Platewyrm Egg and the legend make extra Energy; Catalyst of Aeons a
 
 | card | in | what it does to you |
 |---|---|---|
-| **Cull the Weak** | 97% | each player kills one of their own units — keep a cheap spare so you choose what dies |
-| **Cleave** · **Blood Rush** | 97% · 81% | Assault for a turn — their attacks are bigger than their units |
-| **Carrion Dredger** · **Honest Broker** | 97% · 94% | Deathknell bodies: a token or a Gold on death |
-| **Undertitan** | 94% | 6 Energy: +2 Might to all their other units this turn |
-| **Falling Star** | 88% | 3 + 3 damage |
-| **Vi, Peacekeeper** | 44% | Ambush, stuns on attack |
-| **Noxus Hopeful** | 98% | cheap body |
-| **Inferna** | 97% | 2-Energy Ambush, Assault 2 |
+| **Cull the Weak** | 96% | each player kills one of their own units — keep a cheap spare so you choose what dies |
+| **Cleave** · **Blood Rush** | 90% · 79% | Assault for a turn — their attacks are bigger than their units |
+| **Carrion Dredger** · **Honest Broker** | 91% · 88% | Deathknell bodies: a token or a Gold on death |
+| **Undertitan** | 91% | 6 Energy: +2 Might to all their other units this turn |
+| **Falling Star** | 86% | 3 + 3 damage |
+| **Vi, Peacekeeper** | 41% | Ambush, stuns on attack |
+| **Noxus Hopeful** | 96% | cheap body |
+| **Inferna** | 94% | 2-Energy Ambush, Assault 2 |
 | **Void Rush** | 90% | errata: reveal 2, play one 2 Energy cheaper, draw the other |
-| **Faithful Manufactor** | 89% | plays a 1-Might Recruit token at its location on play |
-| **Noxian Emissary** | 68% | empowered, its Deathknell makes two 1-Might Recruits |
+| **Faithful Manufactor** | 87% | plays a 1-Might Recruit token at its location on play |
+| **Noxian Emissary** | 71% | empowered, its Deathknell makes two 1-Might Recruits |
 
 ### Fights
 
@@ -893,11 +896,11 @@ A ramp deck. Platewyrm Egg and the legend make extra Energy; Catalyst of Aeons a
 
 ### Their facedown card
 
-**Hidden Blade** (46%) when there is one.
+**Hidden Blade** (50%) when there is one.
 
 ### Battlefields
 
-**The Candlelit Sanctum** (94%), **Forbidding Waste** (82% — a lone defender there is −2, good for your isolation and bad for your lone defender) and **Mystic Vortex** (36% — Reactions cost `[A]` more in showdowns there, Hidden flips included). **Bring Zaun Warrens or Sandswept Tomb; never Star Spring**, which hands their units the walk-home they are built to use.
+**The Candlelit Sanctum** (87%), **Forbidding Waste** (81% — a lone defender there is −2, good for your isolation and bad for your lone defender) and **Mystic Vortex** (35% — Reactions cost `[A]` more in showdowns there, Hidden flips included). **Bring Zaun Warrens or Sandswept Tomb; never Star Spring**, which hands their units the walk-home they are built to use.
 
 ### Board
 
@@ -907,7 +910,7 @@ None. Extra removal is wrong against a deck paid for dying.
 
 - **LA RQ: Sinzari #41 overall** (Riot). Field: 74 → 12 (16.2%).
 - **Other post-ban:** Andrew Gainey **2nd of 78 (Orlando $10k)**.
-- **Core** (n=67): Noxus Hopeful, Cull the Weak, Inferna, Undertitan, Carrion Dredger, Cleave, Honest Broker, Void Rush, Faithful Manufactor, Falling Star, Blood Rush. Battlefields: The Candlelit Sanctum, Forbidding Waste.
+- **Core** (n=82): Noxus Hopeful, Cull the Weak, Inferna, Undertitan, Carrion Dredger, Cleave, Honest Broker, Void Rush, Faithful Manufactor, Falling Star, Blood Rush. Battlefields: The Candlelit Sanctum, Forbidding Waste.
 - **Sinzari's techs:** 2 Mischievous Marai (11/67), Hextech Ray, Shadow Fiend, Imperial Decree, Hidden Blade. Battlefields: Forbidding Waste, **Rockfall Path**, Void Gate.
 - **For Kha'Zix:**
   - **Rockfall Path** stops Ambush there, and a Hidden unit hidden there can never be played.
@@ -916,7 +919,7 @@ None. Extra removal is wrong against a deck paid for dying.
 
 ---
 
-## Fiora, Grand Duelist — Tier 3.4 · 3.5% · Body/Order · mean Might 3.68
+## Fiora, Grand Duelist — Tier 3.4 · 3.2% · Body/Order · mean Might 3.86
 
 **In a sentence:** a straight midrange fight decided by one card — Riposte, which counters any spell you cast and makes their unit bigger.
 
@@ -926,7 +929,7 @@ None. Extra removal is wrong against a deck paid for dying.
 > - **Early:** take a battlefield.
 > - **Middle:** cast tricks only when they cannot pay for Riposte — **2 Energy, one Body and one Order**. Bait it with a cheap spell first.
 > - **Closing:** they grow units to 5+ Might (Mighty) for value. Kill or swap the Mighty one.
-> - **Flips:** freely — Repulse in 26% is the only thing that touches one. But Switcheroo is a spell, and Riposte counters it.
+> - **Flips:** freely — Repulse in 28% is the only thing that touches one. But Switcheroo is a spell, and Riposte counters it.
 > - **Never:** cast Punch First into open Body + Order.
 
 ### Their deck
@@ -938,15 +941,15 @@ None. Extra removal is wrong against a deck paid for dying.
 | card | in | what it does to you |
 |---|---|---|
 | **Riposte** | 95% | Reaction: counter any spell and give their unit + its Energy cost |
-| **Punch First** | 88% | your trick, in their hands — it makes a unit Mighty |
-| **Fiora, Victorious** | 65% | while Mighty: Deflect, Ganking, Shield |
-| **Rampage** | 67% | removal |
-| **Harnessed Dragon** | 60% | 8 Energy, kills one of your units on play |
-| **Call to Glory** | 46% | Reaction +3, free if they spend a buff |
-| **Hidden Blade** | 54% | kills a unit at its battlefield |
-| **Rengar, Trophy Hunter** | 47% | 6-Might Ambush |
-| **Pit Rookie** | 72% | buffs a unit on play. One more step to Mighty |
-| **First Mate** | 66% | readies another unit: a second attack |
+| **Punch First** | 82% | your trick, in their hands — it makes a unit Mighty |
+| **Fiora, Victorious** | 61% | while Mighty: Deflect, Ganking, Shield |
+| **Rampage** | 72% | removal |
+| **Harnessed Dragon** | 59% | 8 Energy, kills one of your units on play |
+| **Call to Glory** | 45% | Reaction +3, free if they spend a buff |
+| **Hidden Blade** | 51% | kills a unit at its battlefield |
+| **Rengar, Trophy Hunter** | 50% | 6-Might Ambush |
+| **Pit Rookie** | 71% | buffs a unit on play. One more step to Mighty |
+| **First Mate** | 64% | readies another unit: a second attack |
 | **Sacrifice** | 56% | Reaction: kill their own Mighty unit to draw 2 and ramp |
 | **B.F. Sword** | 54% | Equipment, +3 Might |
 
@@ -963,11 +966,11 @@ None. Extra removal is wrong against a deck paid for dying.
 
 ### Their facedown card
 
-**Hidden Blade** (54%) — one dead attacker. Attack their battlefield with a spare unit.
+**Hidden Blade** (51%) — one dead attacker. Attack their battlefield with a spare unit.
 
 ### Battlefields
 
-**Sunken Temple** (88%), **Monastery of Hirana** (41%) and **Valley of Idols** (28%, any unit played there can be buffed for `[1]`). Usual order.
+**Sunken Temple** (90%), **Monastery of Hirana** (40%) and **Valley of Idols** (28%, any unit played there can be buffed for `[1]`). Usual order.
 
 ### Board
 
@@ -977,7 +980,7 @@ None. Extra removal is wrong against a deck paid for dying.
 
 - **LA RQ: VVES #32 overall** (Riot). Field: 41 → 4 (9.8%).
 - **Other post-ban:** none confirmed in the archive (1 list).
-- **Core** (n=70): Riposte, Punch First. Battlefield: Sunken Temple. Pit Rookie, Rampage, First Mate, Fiora, Victorious, Harnessed Dragon and Sacrifice are common.
+- **Core** (n=82): Riposte, Punch First. Battlefield: Sunken Temple. Pit Rookie, Rampage, First Mate, Fiora, Victorious, Harnessed Dragon and Sacrifice are common.
 - **VVES's list** is a ramp-to-big build:
   - 3 Akshan, Mischievous (12/70), 3 Elder Dragon (18/70), 3 Rift Herald, 2 Harnessed Dragon, 2 Doran's Blade
   - plus 3 Kayle, Justified, 3 Rengar, 3 Riposte, 3 Sacrifice
@@ -989,17 +992,17 @@ None. Extra removal is wrong against a deck paid for dying.
 
 ---
 
-## Kai'Sa, Daughter of the Void — Tier 3.5 · 2.3% · Fury/Mind · mean Might 3.55
+## Kai'Sa, Daughter of the Void — Tier 3.5 · 2.2% · Fury/Mind · mean Might 3.56
 
 **In a sentence:** a burn deck with twenty units and a Watcher at seven — rig every fight, convert one battlefield, and know which of your units survive 3 damage.
 
 > **At the table**
 > - **How you win:** rig every fight and convert one battlefield. Grind 12.4 is even to slightly theirs, and their late game (Watcher, Progress Day, Time Warp) is stronger than yours. **Reach 6 first.**
 > - **Mulligan:** Punch First plus a 2-drop. +PF takes you from 35 to 83.
-> - **Early:** contest with cheap units. **Hextech Ray** (96%, 1 Energy, 3 damage at a battlefield) is an Action, so it lands in your fights. A unit with 3 Might or less at a battlefield is one rune from dead.
-> - **Middle:** **know your damage thresholds.** Hextech Ray deals 3, and 4 at Void Gate. Falling Star deals 3 *twice*, to any unit anywhere, and 4 + 4 at Void Gate. Rengar (6) survives one Ray; Kha'Zix (4) dies to a Ray at Void Gate. Thousand-Tailed Watcher (93%) at 7 runes shrinks your units by 3 *and* lowers what kills them, because Might is the lethal threshold. Watcher plus one Ray kills Rengar.
-> - **Closing:** at 10 runes, assume **Time Warp** (85%): an extra turn, so their Beginning Phase and its hold points come twice. **From 10 runes on, run the terminal scan for two of their turns, not one.**
-> - **Flips:** freely, but pull Evelynn's target **from their base**. Temporal Breach (63%) guards a unit at its battlefield.
+> - **Early:** contest with cheap units. **Hextech Ray** (91%, 1 Energy, 3 damage at a battlefield) is an Action, so it lands in your fights. A unit with 3 Might or less at a battlefield is one rune from dead.
+> - **Middle:** **know your damage thresholds.** Hextech Ray deals 3, and 4 at Void Gate. Falling Star deals 3 *twice*, to any unit anywhere, and 4 + 4 at Void Gate. Rengar (6) survives one Ray; Kha'Zix (4) dies to a Ray at Void Gate. Thousand-Tailed Watcher (91%) at 7 runes shrinks your units by 3 *and* lowers what kills them, because Might is the lethal threshold. Watcher plus one Ray kills Rengar.
+> - **Closing:** at 10 runes, assume **Time Warp** (84%): an extra turn, so their Beginning Phase and its hold points come twice. **From 10 runes on, run the terminal scan for two of their turns, not one.**
+> - **Flips:** freely, but pull Evelynn's target **from their base**. Temporal Breach (77%) guards a unit at its battlefield.
 > - **Never:** fight with Rengar into open Fury. A Ray plus Stupefy is 4 Might off him for 2 Energy.
 
 ### Their deck
@@ -1010,16 +1013,16 @@ One extra Power every turn, for spells only. 19.7 units a deck at 3.5 Might: Wat
 
 | card | in | what it does to you |
 |---|---|---|
-| **Stupefy** | 98% | Reaction −1 and draw |
-| **Hextech Ray** | 96% | 1 Energy, Action: 3 damage to a unit at a battlefield |
-| **Falling Star** | 93% | 2 Energy, their turn only: 3 damage, twice, to any units |
-| **Thousand-Tailed Watcher** | 93% | 2.8 a deck. Your units −3, minimum 1 |
-| **Time Warp** | 85% | 10 Energy: another turn |
-| **Temporal Breach** | 63% | Hidden: blinks their unit, and Evelynn's move then has nothing to move |
-| **Brynhir Thundersong** | 59% | 6 Energy 5/5: when played, you can't play cards this turn — no Ambush, no Reactions |
-| **Ferrous Forerunner** | 57% | 6/6, Deathknell: two 3-Might Mechs. Ask what begins if you kill it |
-| **Void Seeker** | 50% | 3 Energy, Action: 4 damage at a battlefield, draw |
-| **Singularity** | 54% | 6 damage to each of up to two units |
+| **Stupefy** | 93% | Reaction −1 and draw |
+| **Hextech Ray** | 91% | 1 Energy, Action: 3 damage to a unit at a battlefield |
+| **Falling Star** | 91% | 2 Energy, their turn only: 3 damage, twice, to any units |
+| **Thousand-Tailed Watcher** | 91% | 2.8 a deck. Your units −3, minimum 1 |
+| **Time Warp** | 84% | 10 Energy: another turn |
+| **Temporal Breach** | 77% | Hidden: blinks their unit, and Evelynn's move then has nothing to move |
+| **Brynhir Thundersong** | 75% | 6 Energy 5/5: when played, you can't play cards this turn — no Ambush, no Reactions |
+| **Ferrous Forerunner** | 68% | 6/6, Deathknell: two 3-Might Mechs. Ask what begins if you kill it |
+| **Void Seeker** | 32% | 3 Energy, Action: 4 damage at a battlefield, draw |
+| **Singularity** | 48% | 6 damage to each of up to two units |
 
 ### Fights
 
@@ -1031,15 +1034,15 @@ One extra Power every turn, for spells only. 19.7 units a deck at 3.5 Might: Wat
 
 ### Flips and counters
 
-**2% can remove your hidden unit · 2% can counter Evelynn · 0% can counter Switcheroo** (Shakedown; 46 post-ban lists). Breach is the only thing to plan around. **Pull from their base, or from a battlefield with no facedown card.**
+**2% can remove your hidden unit · 2% can counter Evelynn · 0% can counter Switcheroo** (Shakedown; 44 legal lists, 24 Sep–8 Oct). Breach is the only thing to plan around. **Pull from their base, or from a battlefield with no facedown card.**
 
 ### Their facedown card
 
-**Temporal Breach** (63%). It protects *their* unit at its battlefield, so Evelynn's pull and Switcheroo on that unit fizzle. It does not hurt your attacker.
+**Temporal Breach** (77%). It protects *their* unit at its battlefield, so Evelynn's pull and Switcheroo on that unit fizzle. It does not hurt your attacker.
 
 ### Battlefields
 
-**Void Gate** (91% — +1 damage per instance from spells and abilities there, so their whole burn suite gets better), **Rockfall Path** (59%), **Frozen Fortress** (54% — 1 damage to every unit there at each Beginning Phase; it kills your Tentacles and 1-Might Faefolk), **Targon's Peak** (24%). **Fight away from Void Gate where you can.** Usual order.
+**Void Gate** (95% — +1 damage per instance from spells and abilities there, so their whole burn suite gets better), **Rockfall Path** (75%), **Frozen Fortress** (70% — 1 damage to every unit there at each Beginning Phase; it kills your Tentacles and 1-Might Faefolk), **Targon's Peak** (9%). **Fight away from Void Gate where you can.** Usual order.
 
 ### Board
 
@@ -1049,8 +1052,8 @@ One extra Power every turn, for spells only. 19.7 units a deck at 3.5 Might: Wat
 
 - **LA RQ:** will win, pl 9 (archive record; Riot lists no Kai'Sa Best-Of and Gamer Tag Mythras marks it ineligible). Field: 10 → 2. A list titled "Kai'Sa Top 16 Los Angeles RQ" is a claim.
 - **Other post-ban:** THR Dancypluto270 11th of 22 (Orlando $2.5k).
-- **The archetype is the most contaminated in the archive: 220 of 266 lists run a banned card.** Only 46 are clean.
-- **Core** (n=46): Stupefy, Hextech Ray, Falling Star, Lecturing Yordle, Watchful Sentry, Thousand-Tailed Watcher, Kai'Sa, Survivor, Noxus Hopeful, Time Warp. Battlefield: Void Gate.
+- **The archetype is the most contaminated in the archive: 222 of 279 lists run a banned card.** Only 57 are clean.
+- **Core** (n=57): Stupefy, Hextech Ray, Falling Star, Lecturing Yordle, Watchful Sentry, Thousand-Tailed Watcher, Kai'Sa, Survivor, Noxus Hopeful, Time Warp. Battlefield: Void Gate.
 - **will win's list:** 3 Watcher, 3 Temporal Breach, 3 Brynhir Thundersong, 2 Time Warp, 1 Rocket Barrage. Battlefields: Rockfall Path, Frozen Fortress, Void Gate.
 - **For Kha'Zix:**
   - **3 Watcher plus 2 Time Warp** means two turns in a row with your board at −3.
@@ -1058,7 +1061,7 @@ One extra Power every turn, for spells only. 19.7 units a deck at 3.5 Might: Wat
 
 ---
 
-## Kha'Zix, Voidreaver — the mirror · Tier 3.6 · 1.8% · Body/Chaos · mean Might 3.17
+## Kha'Zix, Voidreaver — the mirror · Tier 3.6 · 1.8% · Body/Chaos · mean Might 3.15
 
 **In a sentence:** whoever lands the first clean combat win and turns it into XP gets the buffs and walk-homes, and the other player falls behind.
 
@@ -1068,7 +1071,7 @@ One extra Power every turn, for spells only. 19.7 units a deck at 3.5 Might: Wat
 > - **Early:** drag their unit to yours so **they** attack. Then your Ambush units and flips answer second.
 > - **Middle:** your Vex stuns their Ambush Rengar and Kha'Zix, and theirs stuns yours. **Check where both Vexes stand before any Ambush.**
 > - **Closing:** both decks take two battlefields in one turn from 5 points. Run the terminal scan for them as hard as for you.
-> - **Flips:** into tapped Chaos only (Star-Crossed 72%).
+> - **Flips:** into tapped Chaos only (Star-Crossed 86%).
 > - **Never:** offer a lone unit. Their Kha'Zix gets +2 and 2 XP off it.
 
 ### Their deck
@@ -1080,13 +1083,13 @@ Your list, more or less. Two shapes in the window: the midrange Hidden build, an
 | card | in | what it does to you |
 |---|---|---|
 | **Punch First** · **Void Assault** · Kha'Zix | 97% each | the same tricks you have |
-| Irresistible Faefolk | 85% | isolates *your* unit |
-| **Star-Crossed** · Rampage | 82% each | removal, and the flip punish |
-| Rengar, Trophy Hunter | 76% | 6-Might Ambush |
-| Sabotage | 71% | takes your Punch First before the fight |
-| Evelynn · Vex, Apathetic | 68% each | the pull; the Ambush stun |
-| Switcheroo · Tideturner | 53% · 50% | hidden swaps |
-| Mister Root | 38% | the aggro build |
+| Irresistible Faefolk | 84% | isolates *your* unit |
+| **Star-Crossed** · Rampage | 86% each | removal, and the flip punish |
+| Rengar, Trophy Hunter | 74% | 6-Might Ambush |
+| Sabotage | 72% | takes your Punch First before the fight |
+| Evelynn · Vex, Apathetic | 67% each | the pull; the Ambush stun |
+| Switcheroo · Tideturner | 53% · 51% | hidden swaps |
+| Mister Root | 35% | the aggro build |
 
 **Results:** **Jun, 21st of 2,165 at the Los Angeles RQ** (vouched), and **Yusen Caballero, 8th of 78 at the Orlando $10k**. Cuoemrei was Riot's Best-of-Kha'Zix at Los Angeles, one place ahead of Jun, on the same 56 cards (see *Los Angeles RQ: what won*, above).
 
@@ -1117,12 +1120,12 @@ Your list, more or less. Two shapes in the window: the midrange Hidden build, an
 
 - See *Los Angeles RQ: what won*, above. **LA: Cuoemrei #20 (Riot Best-Of) and ASC JUN #21 (archive record), the same list.**
 - **Orlando $10k:** Yusen Caballero 8th (aggro build); HTCG Dizoo 36th (Cuoemrei list). **Orlando $2.5k:** James Angle 20th of 22 (Mister Root build).
-- **Core** (n=37): Punch First, Kha'Zix, Void Assault, Irresistible Faefolk, Star-Crossed, Rampage, Rengar.
+- **Core** (n=46): Punch First, Kha'Zix, Void Assault, Irresistible Faefolk, Star-Crossed, Rampage, Rengar.
 - **For the mirror:** the opponent is most likely on the Cuoemrei/Jun list, or a Mister Root aggro build. Yusen ran 2 Repulse, 2 Existential Dread and 3 Nidalee.
 
 ---
 
-## Ornn, Fire Below the Mountain — Tier 3.7 · 2.2% · Calm/Mind · mean Might 2.24
+## Ornn, Fire Below the Mountain — Tier 3.7 · 2.1% · Calm/Mind · mean Might 2.29
 
 **In a sentence:** your best raw fight on the page, against a gear engine that wins if you let it run — so beat it straight and end it.
 
@@ -1130,27 +1133,27 @@ Your list, more or less. Two shapes in the window: the midrange Hidden build, an
 > - **How you win:** fight. 66% bare is your best untricked matchup in the format. But they win long (grind 14.7): every turn adds gear, and Ornn, Forge God grows +1 per gear. **Win early fights, score, and close before the engine pays.**
 > - **Mulligan:** units. A turn-1 and a turn-2 unit, as always ([Jun §6](khazix-voidreaver-jun.md#6-battlefields-and-mulligans)). Their units are 2.2 Might on average, so bodies win fights here without help.
 > - **Early:** take a battlefield with a straight fight. Their early units are Patched Porobot (enters exhausted), Scuttle Crab (0 Might) and Clockwork Keeper. **Kill Pit Crew on sight**: it readies whenever they play a gear, so it attacks twice.
-> - **Middle:** they spend each turn on gear, so you have the tempo. Their tricks arrive as **Quick-Draw Equipment**: Sterak's Gage (89%) and Cloth Armor (70%) have Reaction and attach themselves on play (§819.1.d). Count one Calm rune open as a pump on their side.
-> - **Closing:** Punch First. Defy (100%) cannot counter it, because of its Power cost. Defy *does* counter Grim Resolve, Void Assault and Rampage, so cast those only after Defy is spent or into tapped Calm.
-> - **Flips:** freely. Nothing in the current lists removes a hidden unit; Not So Fast (9%) is the only counter to Evelynn's trigger or Switcheroo.
+> - **Middle:** they spend each turn on gear, so you have the tempo. Their tricks arrive as **Quick-Draw Equipment**: Sterak's Gage (86%) and Cloth Armor (75%) have Reaction and attach themselves on play (§819.1.d). Count one Calm rune open as a pump on their side.
+> - **Closing:** Punch First. Defy (98%) cannot counter it, because of its Power cost. Defy *does* counter Grim Resolve, Void Assault and Rampage, so cast those only after Defy is spent or into tapped Calm.
+> - **Flips:** freely. Nothing in the current lists removes a hidden unit; Not So Fast (10%) is the only counter to Evelynn's trigger or Switcheroo.
 > - **Never:** let it go long, and never cast a cheap key spell into open Calm.
 
 ### Their deck
 
 > **Fire Below the Mountain** — *"`[Exhaust]`: [Reaction] — [Add] `[A]`. Use only to play gear or use gear abilities."*
 
-One extra Power every turn, for gear only. 14.3 units a deck at 2.2 Might, and almost every other card is gear: Poro Snax, Seal of Focus, Brutalizer, Sprite Fountain, Sterak's Gage, Guardian Angel, Mask of Foresight. 0.3 Hidden cards a deck.
+One extra Power every turn, for gear only. 15.1 units a deck at 2.3 Might, and almost every other card is gear: Poro Snax, Seal of Focus, Brutalizer, Sprite Fountain, Sterak's Gage, Guardian Angel, Mask of Foresight. 0.3 Hidden cards a deck.
 
 | card | in | what it does to you |
 |---|---|---|
-| **Defy** | 100% | counters a spell up to 4 Energy and 1 Power. Everything you cast except Punch First and Switcheroo |
-| **Sterak's Gage** | 89% | Quick-Draw Equipment: a Reaction pump that stays attached |
-| **Charm** | 86% | moves one of your units, their Void Assault |
-| **Pit Crew** | 93% | a 3/3 that readies when they play a gear |
-| **Scuttle Crab** | 91% | 0 Might, draws on play. **Deathknell: you reveal your hand and they see your facedown cards this turn**, plus 1 XP |
-| **Mask of Foresight** | 80% | +1 to a unit that attacks or defends alone — your isolation trick costs a point here |
-| **Helm of Suppression** | 34% | your spells cost 1 Energy more; Empowered, 1 Energy and 1 Power more |
-| **Ornn, Forge God** | 32% | 6 Energy, Deflect 2, +1 Might per friendly gear |
+| **Defy** | 98% | counters a spell up to 4 Energy and 1 Power. Everything you cast except Punch First and Switcheroo |
+| **Sterak's Gage** | 86% | Quick-Draw Equipment: a Reaction pump that stays attached |
+| **Charm** | 88% | moves one of your units, their Void Assault |
+| **Pit Crew** | 92% | a 3/3 that readies when they play a gear |
+| **Scuttle Crab** | 92% | 0 Might, draws on play. **Deathknell: you reveal your hand and they see your facedown cards this turn**, plus 1 XP |
+| **Mask of Foresight** | 82% | +1 to a unit that attacks or defends alone — your isolation trick costs a point here |
+| **Helm of Suppression** | 33% | your spells cost 1 Energy more; Empowered, 1 Energy and 1 Power more |
+| **Ornn, Forge God** | 29% | 6 Energy, Deflect 2, +1 Might per friendly gear |
 
 ### Fights
 
@@ -1162,33 +1165,33 @@ One extra Power every turn, for gear only. 14.3 units a deck at 2.2 Might, and a
 
 ### Flips and counters
 
-**0% can remove your hidden unit · 9% can counter Evelynn · 9% can counter Switcheroo** (Not So Fast; 44 post-ban lists, 23 Sep–4 Oct). The quick reference's 5–7% and 5–12% came from the earlier window; both say the same thing. Flip on curve.
+**0% can remove your hidden unit · 10% can counter Evelynn · 10% can counter Switcheroo** (Not So Fast; 51 legal lists, 24 Sep–8 Oct). Flip on curve.
 
 ### Their facedown card
 
-Rarely there: 0.3 Hidden cards a deck. If there is one, it is most likely Zhonya's Hourglass (7%).
+Rarely there: 0.3 Hidden cards a deck. If there is one, it is most likely Zhonya's Hourglass (8%).
 
 ### Battlefields
 
-They bring **Ornn's Forge** (95% — their first gear each turn costs 1 less), **Veiled Temple** (84% — conquer to ready a gear) and **Seat of Power** (77% — conquer to draw one per other battlefield they control). All three reward *them* conquering. **Deny conquests at Seat of Power while they hold the other battlefield.** Usual order.
+They bring **Ornn's Forge** (94% — their first gear each turn costs 1 less), **Veiled Temple** (80% — conquer to ready a gear) and **Seat of Power** (75% — conquer to draw one per other battlefield they control). All three reward *them* conquering. **Deny conquests at Seat of Power while they hold the other battlefield.** Usual order.
 
 ### Board
 
 +2 Ravenbloom Prefect, +2 Acceptable Losses, +1 Decree (Calm/Mind — live). −1 Switcheroo, −2 Star-Crossed, −1 Rampage, −1 Sabotage. The swap has nothing to swap into, Defy counters both spells, and Decree takes Sabotage's slot.
 
 - **Prefect is the stronger half.** It banishes a gear as it is played, including a Quick-Draw Sterak's Gage played mid-fight. Banished is not killed, so a banished Sprite Fountain never gets its Deathknell.
-- **Acceptable Losses is weaker than it looks here.** "Each player kills one of their gear": *they* choose which, and Seal of Focus (84%) and Poro Snax (95%) are cheap gear to give up. It is still one-sided, since you make no gear. Worth testing a Gust or Hard Bargain in that slot; this page has not.
+- **Acceptable Losses is weaker than it looks here.** "Each player kills one of their gear": *they* choose which, and Seal of Focus (82%) and Poro Snax (94%) are cheap gear to give up. It is still one-sided, since you make no gear. Worth testing a Gust or Hard Bargain in that slot; this page has not.
 
 ### Proven lists
 
 - **LA RQ: MICE TheManLand #8 overall (top 8), 11-2-1** per riftbound.gg. Field: 50 → 12 (24.0%).
-- **Core** (n=44): Defy, Patched Porobot, Brutalizer, Poro Snax, Sprite Fountain, Pit Crew, Scuttle Crab, Sterak's Gage, Charm, Guardian Angel, Seal of Focus, Mask of Foresight, Clockwork Keeper. Battlefields: Ornn's Forge, Veiled Temple, Seat of Power.
+- **Core** (n=54): Defy, Patched Porobot, Brutalizer, Poro Snax, Sprite Fountain, Pit Crew, Scuttle Crab, Sterak's Gage, Charm, Guardian Angel, Seal of Focus, Mask of Foresight, Clockwork Keeper. Battlefields: Ornn's Forge, Veiled Temple, Seat of Power.
 - **TheManLand's list is the stock list.** The archive's `MICE TheManLand` Ornn is also pl 1 at Barcelona RQ, which is pre-ban.
 - **For Kha'Zix:** Ornn is an Equipment deck, so your Ravenbloom Prefect and Acceptable Losses sideboard is live. Every Equipment they play is a Prefect target.
 
 ---
 
-## Diana, Scorn of the Moon — Tier 3.8 · 1.5% · Mind/Chaos · mean Might 3.32
+## Diana, Scorn of the Moon — Tier 3.8 · 1.5% · Mind/Chaos · mean Might 3.28
 
 **In a sentence:** a Chaos spell deck with your own Gust, Star-Crossed and Fizz, a legend that adds 1 Energy to every fight, and Moonfall to punish any battlefield you crowd.
 
@@ -1198,7 +1201,7 @@ They bring **Ornn's Forge** (95% — their first gear each turn costs 1 less), *
 > - **Early:** don't over-extend (Jun). Kill Ravenbloom Students before spells pump them.
 > - **Middle:** they split their Energy between developing and interacting, "so pressure the side they skimp on". Sabotage when they hold Energy up, but only once your board is developed.
 > - **Closing:** they "hold battlefields well and are stronger very late, so do not stall too long". Reach 6 first.
-> - **Flips:** **play as if you had no Hidden cards.** Star-Crossed 92%, Gust 85%, and 77% can counter Switcheroo.
+> - **Flips:** **play as if you had no Hidden cards.** Star-Crossed 91%, Gust 85%, and 79% can counter Switcheroo.
 > - **Never:** flip Evelynn into open Chaos, or stack three units on one battlefield into Moonfall.
 
 ### Their deck
@@ -1209,19 +1212,19 @@ They bring **Ornn's Forge** (95% — their first gear each turn costs 1 less), *
 
 | card | in | what it does to you |
 |---|---|---|
-| **Moonfall** | 96% | Action, 3E: on a battlefield where they have units, drag one of yours in, then **−2 to every unit of yours there** |
-| Stupefy | 92% | Reaction, 1E: −1 (minimum 1), draw |
-| **Star-Crossed** | 92% | bounces one of yours and one of theirs |
-| Fizz, Trickster | 92% | **recasts a ≤3E spell from their trash free** |
-| Ride the Wind · Tideturner | 92% · 88% | move-and-ready · Hidden swap |
+| **Moonfall** | 94% | Action, 3E: on a battlefield where they have units, drag one of yours in, then **−2 to every unit of yours there** |
+| Stupefy | 91% | Reaction, 1E: −1 (minimum 1), draw |
+| **Star-Crossed** | 91% | bounces one of yours and one of theirs |
+| Fizz, Trickster | 88% | **recasts a ≤3E spell from their trash free** |
+| Ride the Wind · Tideturner | 94% · 88% | move-and-ready · Hidden swap |
 | Flash | 88% | Reaction: up to two of their units go home, dodging your fight |
 | Gust | 85% | Reaction, 1E: bounce a ≤3-Might unit at a battlefield |
-| Hwei, Brooding Painter | 81% | 5/5 that draws when it moves |
-| Vex, Apathetic | 81% | stuns every unit you play while she stands at a battlefield, **Ambush included** |
-| **Eclipse** | 69% | Reaction, 3E: −4 |
+| Hwei, Brooding Painter | 82% | 5/5 that draws when it moves |
+| Vex, Apathetic | 79% | stuns every unit you play while she stands at a battlefield, **Ambush included** |
+| **Eclipse** | 68% | Reaction, 3E: −4 |
 | Hard Bargain | 65% | counter unless you pay 2 |
 | Smoke Screen | 50% | Reaction, 2E: −4 (minimum 1) |
-| Rebuke | 46% | Action, 2E: bounce **any** unit at a battlefield |
+| Rebuke | 53% | Action, 2E: bounce **any** unit at a battlefield |
 
 **Results:** **nalkpas finished 22nd of 2,165 at the Los Angeles RQ** (vouched). There is also a 46th of 78 at the Orlando $10k.
 
@@ -1260,7 +1263,7 @@ Hard Bargain is weaker inside a fight, because the legend's Energy helps them pa
 
 - **LA RQ: ASC nalkpas #22 overall**, Diana's best (Riot). Field: 43 → 9 (20.9%). It finished two places behind Cuoemrei and one behind Jun.
 - **Other post-ban:** Jeffrey Cooper 46th of 78 (Orlando $10k).
-- **Core** (n=30): Moonfall, Stupefy, Fizz, Diana, Lunari, Star-Crossed, Ride the Wind, Tideturner, Ravenbloom Student, Flash, Gust, Vex, Apathetic, Hwei.
+- **Core** (n=38): Moonfall, Stupefy, Fizz, Diana, Lunari, Star-Crossed, Ride the Wind, Tideturner, Ravenbloom Student, Flash, Gust, Vex, Apathetic, Hwei.
 - **nalkpas's list:**
   - **3 Moonfall**, 3 Hwei, 3 Vex, 3 Tideturner, 3 Merchant
   - 2 Eclipse, 2 Hard Bargain, 2 Sprite Fountain (10/30)
@@ -1271,16 +1274,16 @@ Hard Bargain is weaker inside a fight, because the legend's Energy helps them pa
 
 ---
 
-## Lucian, Purifier — Tier 3.9 · 1.3% · Fury/Body · mean Might 3.2
+## Lucian, Purifier — Tier 3.9 · 1.4% · Fury/Body · mean Might 3.28
 
 **In a sentence:** an Equipment aggro deck running your Punch First, your Sabotage and your Faefolk — you out-grind it, so hold one and let its attacks run out.
 
 > **At the table**
 > - **How you win:** hold one, flip freely, win late. Your grind is 12, theirs 5.8. They need it short.
-> - **Mulligan:** units. Two cheap bodies beat a trick here, because Sabotage (81%) will take the trick anyway.
-> - **Early:** their Faefolk (85%) drags your unit like yours does. Develop two bodies so a drag never leaves a battlefield empty.
+> - **Mulligan:** units. Two cheap bodies beat a trick here, because Sabotage (73%) will take the trick anyway.
+> - **Early:** their Faefolk (76%) drags your unit like yours does. Develop two bodies so a drag never leaves a battlefield empty.
 > - **Middle:** **their Equipment only adds Assault while the unit attacks.** The legend gives every Equipment Assault (+1 attacking). So **the fights you start are cheaper than the fights they start.** Attack them before they attack you.
-> - **Their attacks come twice.** Lucian, Merciless readies after his first conquer each turn, and First Mate (92%) readies a unit when played. Keep a body back at the battlefield you hold.
+> - **Their attacks come twice.** Lucian, Merciless readies after his first conquer each turn, and First Mate (88%) readies a unit when played. Keep a body back at the battlefield you hold.
 > - **Closing:** hide your key spell. Sabotage reveals and recycles from your *hand*, and a facedown card is not in your hand. **A hidden Switcheroo survives their Sabotage.**
 > - **Flips:** freely. Only Repulse (12%) can counter Evelynn's trigger, and only on a unit at a battlefield: **pull from their base** and Repulse has nothing to protect.
 > - **Never:** let a Punch First sit in hand into their Sabotage turn when you could have cast it.
@@ -1294,13 +1297,13 @@ Hard Bargain is weaker inside a fight, because the legend's Energy helps them pa
 | card | in | what it does to you |
 |---|---|---|
 | **Lucian, Merciless** | 100% | Weaponmaster; readies after his first conquer each turn |
-| **First Mate** | 92% | readies another unit as it is played |
-| **Punch First** | 92% | your +5, on their side |
-| **Relentless Pursuit** | 92% | Action: move a unit, attach an Equipment, and walk it home after it conquers |
-| **Irresistible Faefolk** | 85% | your drag, on their side |
-| **Long Sword** | 81% | Quick-Draw: a Reaction pump that attaches itself |
-| **Sabotage** | 81% | reveals your hand, recycles a non-unit |
-| **Ruin Runner** | 35% | 6 Energy 5 Might; **can't be chosen by your spells**: no Switcheroo, Rampage, Star-Crossed or Void Assault on it |
+| **First Mate** | 88% | readies another unit as it is played |
+| **Punch First** | 94% | your +5, on their side |
+| **Relentless Pursuit** | 85% | Action: move a unit, attach an Equipment, and walk it home after it conquers |
+| **Irresistible Faefolk** | 76% | your drag, on their side |
+| **Long Sword** | 79% | Quick-Draw: a Reaction pump that attaches itself |
+| **Sabotage** | 73% | reveals your hand, recycles a non-unit |
+| **Ruin Runner** | 36% | 6 Energy 5 Might; **can't be chosen by your spells**: no Switcheroo, Rampage, Star-Crossed or Void Assault on it |
 
 ### Fights
 
@@ -1311,7 +1314,7 @@ Hard Bargain is weaker inside a fight, because the legend's Energy helps them pa
 
 ### Flips and counters
 
-**0% can remove your hidden unit · 12% can counter Evelynn · 0% can counter Switcheroo** (Repulse; 26 post-ban lists). Flip on curve.
+**3% can remove your hidden unit · 15% can counter Evelynn · 12% can counter Switcheroo** (Shakedown, Repulse; 33 legal lists). Flip on curve.
 
 ### Their facedown card
 
@@ -1319,7 +1322,7 @@ None. They run no Hidden cards.
 
 ### Battlefields
 
-**Forge of the Fluft** (96% — while they control it, their legend can attach an Equipment), **Sunken Temple** (42%), **Forbidding Waste** (38%) and **Windswept Hillock** (38% — Ganking there, for both players). **Take Forge of the Fluft from them early.** It is how their Equipment moves to whichever unit is fighting. Usual order.
+**Forge of the Fluft** (79% — while they control it, their legend can attach an Equipment), **Sunken Temple** (45%), **Forbidding Waste** (33%) and **Windswept Hillock** (45% — Ganking there, for both players). **Take Forge of the Fluft from them early.** It is how their Equipment moves to whichever unit is fighting. Usual order.
 
 ### Board (draft — not Jun)
 
@@ -1328,7 +1331,7 @@ None in this page or in Jun's tables. **Untested suggestion:** +2 Ravenbloom Pre
 ### Proven lists
 
 - **LA RQ: ASC Deamon #25 overall** (Riot). Field: 36 → 5 (13.9%).
-- **Core** (n=26): Lucian, Merciless, First Mate, Punch First, Relentless Pursuit, Kai'Sa, Survivor, Doran's Blade, Irresistible Faefolk, Sabotage, Long Sword. Battlefield: Forge of the Fluft.
+- **Core** (n=35): Lucian, Merciless, First Mate, Punch First, Relentless Pursuit, Kai'Sa, Survivor, Doran's Blade, Irresistible Faefolk, Sabotage, Long Sword. Battlefield: Forge of the Fluft.
 - **Deamon's list:**
   - 3 Gem Jammer (9/26), 3 Skyfall of Areion, 3 Trinity Force, 2 Jhin, Murderous Artist (4/26), 2 Ruin Runner, 1 Poppy, Paragon
   - no Doran's Blade (22/26)
@@ -1339,7 +1342,7 @@ None in this page or in Jun's tables. **Untested suggestion:** +2 Ravenbloom Pre
 
 ---
 
-## Ezreal, Prodigal Explorer — Tier 3.10 · 1.6% · Mind/Chaos · mean Might 3.61
+## Ezreal, Prodigal Explorer — Tier 3.10 · 1.6% · Mind/Chaos · mean Might 3.70
 
 **In a sentence:** a control deck with an answer for everything — so make it answer two battlefields at once.
 
@@ -1348,8 +1351,8 @@ None in this page or in Jun's tables. **Untested suggestion:** +2 Ravenbloom Pre
 > - **Mulligan:** two cheap units. Tricks matter less than bodies on the board.
 > - **Early:** spread across both battlefields before their 3-drops.
 > - **Middle:** they answer one threat at a time with Gust, Star-Crossed, Wages of Pain and Singularity. Present two.
-> - **Closing:** at 7 runes, Thousand-Tailed Watcher (95%) shrinks your whole board by 3 for a turn; at 6, Singularity deals 6 to two units.
-> - **Flips:** don't. Gust and Star-Crossed are in every list, and 60% can counter Switcheroo.
+> - **Closing:** at 7 runes, Thousand-Tailed Watcher (92%) shrinks your whole board by 3 for a turn; at 6, Singularity deals 6 to two units.
+> - **Flips:** don't. Star-Crossed is in every list and Gust in 97%, and 63% can counter Switcheroo.
 > - **Never:** flip a Hidden unit into open Chaos.
 
 ### Their deck
@@ -1360,33 +1363,33 @@ None in this page or in Jun's tables. **Untested suggestion:** +2 Ravenbloom Pre
 
 | card | in | what it does to you |
 |---|---|---|
-| **Gust** | 100% | bounces a 3-Might-or-less unit at Reaction speed |
-| **Stupefy** | 100% | −1 and draw |
+| **Gust** | 97% | bounces a 3-Might-or-less unit at Reaction speed |
+| **Stupefy** | 97% | −1 and draw |
 | **Wages of Pain** | 100% | Hidden: 3 damage at its battlefield |
 | **Star-Crossed** | 100% | bounces one of yours |
 | **Singularity** | 95% | 6 damage to each of two units |
-| **Thousand-Tailed Watcher** | 95% | −3 to all your units for a turn |
-| **Vex, Apathetic** | 86% | stuns every unit you play |
-| **Hard Bargain** | 57% | counters a spell unless you pay 2 |
+| **Thousand-Tailed Watcher** | 92% | −3 to all your units for a turn |
+| **Vex, Apathetic** | 87% | stuns every unit you play |
+| **Hard Bargain** | 61% | counters a spell unless you pay 2 |
 | **Deadly Flourish** | 100% | 3 damage to one of yours (no Reaction keyword, so main phase only). A Gold token if it kills |
 | **Fizz, Trickster** | 100% | replays Gust, Star-Crossed or Stupefy from the trash |
 | **Bewitching Spirit** | 97% | you discard 1 on play |
-| **Pack of Wonders** | 93% | errata: returns *their own* gear, unit or facedown card. Cannot touch yours |
-| **Bellows Breath** | 93% | 1 damage to up to three units, repeatable. Kills Faefolk and Tentacles |
-| **The List** | 93% | names a tag, then −2 to one unit with it each turn. Expect "Kha'Zix" or "The Void" |
-| **Sprite Fountain** | 87% | two waves of 3-Might Temporary Sprites |
-| **Turn to Dust** | 87% | gives a gear Temporary |
+| **Pack of Wonders** | 95% | errata: returns *their own* gear, unit or facedown card. Cannot touch yours |
+| **Bellows Breath** | 95% | 1 damage to up to three units, repeatable. Kills Faefolk and Tentacles |
+| **The List** | 95% | names a tag, then −2 to one unit with it each turn. Expect "Kha'Zix" or "The Void" |
+| **Sprite Fountain** | 89% | two waves of 3-Might Temporary Sprites |
+| **Turn to Dust** | 89% | gives a gear Temporary |
 
 ### Fights
 
 **32 bare · 85 +PF · 96 +Sw · 92 iso.**
 
 - Punch First is the trick that survives here — Hard Bargain is the only counter that touches it, and paying 2 beats it.
-- Vex, Apathetic (86%): kill her before you deploy, as in the Vex entry.
+- Vex, Apathetic (87%): kill her before you deploy, as in the Vex entry.
 
 ### Flips and counters
 
-**100% · 100% · 60%.** 33 legal lists, a thin sample. Abandon is down to 3%.
+**100% · 100% · 63%.** 38 legal lists, a thin sample. Abandon is down to 3%.
 
 ### Their facedown card
 
@@ -1394,7 +1397,7 @@ None in this page or in Jun's tables. **Untested suggestion:** +2 Ravenbloom Pre
 
 ### Battlefields
 
-**Frozen Fortress** (93%: 1 damage to every unit there at each Beginning Phase, so Faefolk and Tentacles die), **Sigil of the Storm** (90%), **Vilemaw's Lair** (47%: units can't move from there to base, so your legend's walk-home and Star Spring both fail) and **Heisho, Shell of the World** (37%: Deflect ignored there). Usual order.
+**Frozen Fortress** (95%: 1 damage to every unit there at each Beginning Phase, so Faefolk and Tentacles die), **Sigil of the Storm** (92%), **Vilemaw's Lair** (45%: units can't move from there to base, so your legend's walk-home and Star Spring both fail) and **Heisho, Shell of the World** (42%: Deflect ignored there). Usual order.
 
 ### Board
 
@@ -1404,7 +1407,7 @@ None in this page or in Jun's tables. **Untested suggestion:** +2 Ravenbloom Pre
 
 - **LA RQ: KactusxKing #37 overall** (Riot). Field: 45 → 11 (24.4%).
 - **Other post-ban:** RBC_Kidleotcg 9th of 22 (Orlando $2.5k) and 23rd of 78 (Orlando $10k).
-- **Core** (n=33, extremely tight): Wages of Pain, Fizz, Deadly Flourish, Star-Crossed, Stupefy, Singularity, Gust, Bewitching Spirit, Pack of Wonders, Bellows Breath, The List, Thousand-Tailed Watcher, Treasure Trove, Turn to Dust, Sprite Fountain, Vex, Apathetic. Battlefields: Frozen Fortress, Sigil of the Storm.
+- **Core** (n=41, extremely tight): Wages of Pain, Fizz, Deadly Flourish, Star-Crossed, Stupefy, Singularity, Gust, Bewitching Spirit, Pack of Wonders, Bellows Breath, The List, Thousand-Tailed Watcher, Treasure Trove, Turn to Dust, Sprite Fountain, Vex, Apathetic. Battlefields: Frozen Fortress, Sigil of the Storm.
 - **Kactus's list** is stock plus 1 Acceptable Losses. **Sideboard: 2 Kha'Zix, Mutating Horror.**
 - **For Kha'Zix:**
   - **Wages of Pain** (Hidden Action: 3 damage to a unit at a battlefield) is the facedown card at their battlefield.
@@ -1414,57 +1417,57 @@ None in this page or in Jun's tables. **Untested suggestion:** +2 Ravenbloom Pre
 
 # Tier 4
 
-## Lillia, Bashful Bloom — Tier 4.1 · 3.0% · Calm/Mind · mean Might 3.21
+## Lillia, Bashful Bloom — Tier 4.1 · 2.9% · Calm/Mind · mean Might 2.99
 
 **In a sentence:** a swarm of 3-Might Sprites that die every Beginning Phase — they conquer, but they cannot hold.
 
 > **At the table**
 > - **How you win:** hold one against the token swarm. **Temporary units die at the start of their controller's Beginning Phase, before scoring** (§816.1.b–c), so a Sprite never holds. Their holds need real units: Lillia, Ravenbloom Student, Lonely Poro. **Kill the real units, and every battlefield they take with Sprites is a conquest point, never a hold.**
 > - **Mulligan:** units, plus Void Assault or Faefolk to drag Lillia, Fae Fawn into your fight.
-> - **Early:** Lillia, Fae Fawn (98%) leaves a 3-Might Sprite behind every time she moves. **She is the engine. Kill or bounce her first.**
-> - **Middle:** they play Sprite Burst (95%, two ready 3-Might Sprites) and use the legend to make more. Every extra Temporary unit makes the next legend Sprite 1 Energy cheaper. Do not race the swarm. **Hold with units bigger than 3**, and let the Sprites die on their own clock.
-> - **At 7 runes, assume Unchecked Power** (45%): it exhausts their units, then deals 12 to **every unit at a battlefield**. **Keep a unit in your base** so you are not empty after it. Thousand-Tailed Watcher (55%) is the other 7.
-> - **Flips:** freely. 4% can punish a flip. But **58% can counter Switcheroo** (Lilting Lullaby, Not So Fast).
-> - **Never:** cast your key spell into open Calm. Defy (90%) and Lilting Lullaby (55% — counter, and *you can't play spells for the rest of the turn*).
+> - **Early:** Lillia, Fae Fawn (99%) leaves a 3-Might Sprite behind every time she moves. **She is the engine. Kill or bounce her first.**
+> - **Middle:** they play Sprite Burst (94%, two ready 3-Might Sprites) and use the legend to make more. Every extra Temporary unit makes the next legend Sprite 1 Energy cheaper. Do not race the swarm. **Hold with units bigger than 3**, and let the Sprites die on their own clock.
+> - **At 7 runes, assume Unchecked Power** (61%): it exhausts their units, then deals 12 to **every unit at a battlefield**. **Keep a unit in your base** so you are not empty after it. Thousand-Tailed Watcher (65%) is the other 7.
+> - **Flips:** freely. 6% can punish a flip. But **46% can counter Switcheroo** (Lilting Lullaby, Not So Fast).
+> - **Never:** cast your key spell into open Calm. Defy (93%) and Lilting Lullaby (45% — counter, and *you can't play spells for the rest of the turn*).
 
 ### Their deck
 
 > **Bashful Bloom** — *"`[4]`, `[Exhaust]`: Play a ready 3 `[M]` Sprite unit token with [Temporary]. This ability costs `[1]` less for each friendly unit with [Temporary]."*
 
-12.6 units a deck — the fewest on the page — but every turn makes more: Sprite Burst, Sprite Fountain (90%), Lillia's moves, the legend, and Sprite Queen (35%). 4.1 Hidden cards a deck: Smoke and Mirrors and Back Off.
+12.6 units a deck — the fewest on the page — but every turn makes more: Sprite Burst, Sprite Fountain (91%), Lillia's moves, the legend, and Sprite Queen (29%). 4.1 Hidden cards a deck: Smoke and Mirrors and Back Off.
 
 | card | in | what it does to you |
 |---|---|---|
-| **Lillia, Fae Fawn** | 98% | leaves a 3-Might Sprite where she moved from |
-| **Sprite Burst** | 95% | two ready 3-Might Temporary Sprites |
-| **Defy** | 90% | counters a spell up to 4 Energy and 1 Power |
-| **Sprite Fountain** | 90% | Temporary gear: a Sprite now, and **another when the gear dies** |
-| **Smoke and Mirrors** | 85% | Hidden: two of their units swap locations, if one is Temporary |
-| **Charm** | 85% | moves your unit |
-| **Discipline** | 82% | Reaction +2, draw |
-| **En Garde** | 70% | Reaction +1, or +2 if their unit is alone there |
-| **Lilting Lullaby** | 55% | counter a spell; you play no more spells this turn |
-| **Unchecked Power** | 45% | 12 damage to everything at battlefields |
+| **Lillia, Fae Fawn** | 99% | leaves a 3-Might Sprite where she moved from |
+| **Sprite Burst** | 94% | two ready 3-Might Temporary Sprites |
+| **Defy** | 93% | counters a spell up to 4 Energy and 1 Power |
+| **Sprite Fountain** | 91% | Temporary gear: a Sprite now, and **another when the gear dies** |
+| **Smoke and Mirrors** | 90% | Hidden: two of their units swap locations, if one is Temporary |
+| **Charm** | 87% | moves your unit |
+| **Discipline** | 90% | Reaction +2, draw |
+| **En Garde** | 80% | Reaction +1, or +2 if their unit is alone there |
+| **Lilting Lullaby** | 45% | counter a spell; you play no more spells this turn |
+| **Unchecked Power** | 61% | 12 damage to everything at battlefields |
 
 ### Fights
 
 **42 bare · 89 +PF · 97 +Sw · 94 iso.**
 
-- **Count their pumps before a fight.** Discipline (+2) and En Garde (+1, or +2 alone) are 1–2 Energy each. At **Black Flame Altar** (78%) their Temporary units also have Shield: +1 while defending.
+- **Count their pumps before a fight.** Discipline (+2) and En Garde (+1, or +2 alone) are 1–2 Energy each. At **Black Flame Altar** (77%) their Temporary units also have Shield: +1 while defending.
 - **A Sprite is 3 Might for a turn.** Do not trade a real unit for one. Bounce it (Gust, Star-Crossed) and it is gone, because a token put into a hand ceases to exist (§186.1).
 - Lilting Lullaby ends your spells for the turn. **Cast the spell you need most first**, or bait the Lullaby with a lesser one.
 
 ### Flips and counters
 
-**0% can remove your hidden unit · 5% can counter Evelynn · 58% can counter Switcheroo** (40 post-ban lists). Flip units freely. Flip Switcheroo into tapped Calm.
+**0% can remove your hidden unit · 6% can counter Evelynn · 46% can counter Switcheroo** (69 legal lists). Flip units freely. Flip Switcheroo into tapped Calm.
 
 ### Their facedown card
 
-**Smoke and Mirrors** (85%) or **Back Off** (35% — stuns one of your units). Smoke and Mirrors swaps one of their units at that battlefield with one elsewhere, so the defender you counted may not be the one you fight. **Attack their facedown card with a margin.**
+**Smoke and Mirrors** (90%) or **Back Off** (38% — stuns one of your units). Smoke and Mirrors swaps one of their units at that battlefield with one elsewhere, so the defender you counted may not be the one you fight. **Attack their facedown card with a margin.**
 
 ### Battlefields
 
-**Dusk Rose Lab** (92% — at their Beginning Phase they may kill a unit there to draw; a Sprite about to die anyway is free fuel), **Black Flame Altar** (78%), **Seat of Power** (58%). **Do not let them conquer Seat of Power while they hold the other battlefield.** Usual order.
+**Dusk Rose Lab** (94% — at their Beginning Phase they may kill a unit there to draw; a Sprite about to die anyway is free fuel), **Black Flame Altar** (77%), **Seat of Power** (70%). **Do not let them conquer Seat of Power while they hold the other battlefield.** Usual order.
 
 ### Board
 
@@ -1476,7 +1479,7 @@ None in this page or in Jun's tables. **Untested suggestion:** +2 Ravenbloom Pre
 ### Proven lists
 
 - **LA RQ: DanOz #43 overall** (Riot). Field: 55 → 9 (16.4%).
-- **Core** (n=61): Lillia, Fae Fawn, Defy, Sprite Burst, Stupefy, Sprite Fountain, Smoke and Mirrors, Charm, Discipline, Ravenbloom Student. Battlefields: Dusk Rose Lab, Black Flame Altar.
+- **Core** (n=75): Lillia, Fae Fawn, Defy, Sprite Burst, Stupefy, Sprite Fountain, Smoke and Mirrors, Charm, Discipline, Ravenbloom Student. Battlefields: Dusk Rose Lab, Black Flame Altar.
 - **DanOz** adds 1 Tomb-Raider Barbara (6/61) and 1 Thousand-Tailed Watcher, and plays Seat of Power.
 - **For Kha'Zix:**
   - **Temporary Sprites** die on their own. Don't spend removal on them.
@@ -1484,7 +1487,7 @@ None in this page or in Jun's tables. **Untested suggestion:** +2 Ravenbloom Pre
 
 ---
 
-## Viktor, Herald of the Arcane — Tier 4.2 · 4.4% · Mind/Order · mean Might 3.31
+## Viktor, Herald of the Arcane — Tier 4.2 · 4.2% · Mind/Order · mean Might 3.20
 
 **In a sentence:** a token-and-removal deck you out-grind — the danger is not the board, it is the turn you over-commit into Imperial Decree.
 
@@ -1494,8 +1497,8 @@ None in this page or in Jun's tables. **Untested suggestion:** +2 Ravenbloom Pre
 > - **Mulligan:** two cheap units. Cull the Weak (97%) means you always want a spare body.
 > - **Early:** develop wide but cheap. Their legend makes a 1-Might Recruit every turn for 1 Energy, so they cover both battlefields from turn 2. Win the battlefield fights with real units; do not chase Recruits.
 > - **Middle:** **keep a spare cheap unit on the board at all times.** Cull the Weak makes *each player* kill one of their own units, and you choose yours (it has no targets — FAQ). An Up from the Deep Tentacle is the ideal choice. That is a reason to keep Up from the Deep in.
-> - **At 5 open runes, assume Imperial Decree** (78%, 2.6 a deck). It is an Action, so it works in your fights. Under it, **any damage kills**: their combat damage kills whichever of your units they assign it to, whatever its Might, and Bellows Breath (69%, 1 Energy) kills up to three of your units at one battlefield. Do not commit three units to one fight into 6 open runes.
-> - **At 7 runes, assume Thousand-Tailed Watcher** (57%): all your units −3 on their turn, then they attack. Do not need a hold that turn.
+> - **At 5 open runes, assume Imperial Decree** (80%, 2.6 a deck). It is an Action, so it works in your fights. Under it, **any damage kills**: their combat damage kills whichever of your units they assign it to, whatever its Might, and Bellows Breath (71%, 1 Energy) kills up to three of your units at one battlefield. Do not commit three units to one fight into 6 open runes.
+> - **At 7 runes, assume Thousand-Tailed Watcher** (50%): all your units −3 on their turn, then they attack. Do not need a hold that turn.
 > - **Flips:** freely. Nothing they run reaches a flip.
 > - **Never:** attack their battlefield with one unit into a facedown card.
 
@@ -1507,16 +1510,16 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 | card | in | what it does to you |
 |---|---|---|
-| **Hidden Blade** | 100% | kills a unit at a battlefield; you draw 2. Hidden, so it waits at their battlefield |
+| **Hidden Blade** | 99% | kills a unit at a battlefield; you draw 2. Hidden, so it waits at their battlefield |
 | **Cull the Weak** | 97% | each player kills one of their units — pay with your spare |
-| **Stupefy** | 90% | Reaction −1 and draw |
+| **Stupefy** | 89% | Reaction −1 and draw |
 | **Viktor, Leader** | 84% | a Recruit each time another non-Recruit of theirs dies |
-| **Imperial Decree** | 78% | Action: any unit that takes damage this turn dies |
-| **Bellows Breath** | 69% | 1 damage to up to three units at one location; Repeat. With Decree, three kills |
-| **Wages of Pain** | 65% | Hidden, 3 damage to a unit at a battlefield, plus a Gold token |
-| **Singularity** | 61% | 6 damage to each of up to two units |
-| **Thousand-Tailed Watcher** | 57% | 7 Energy: your units −3, minimum 1 |
-| **Xin Zhao, Vigilant** | 50% | a 3-Energy 4-Might Tank that enters ready with two units in their base |
+| **Imperial Decree** | 80% | Action: any unit that takes damage this turn dies |
+| **Bellows Breath** | 71% | 1 damage to up to three units at one location; Repeat. With Decree, three kills |
+| **Wages of Pain** | 71% | Hidden, 3 damage to a unit at a battlefield, plus a Gold token |
+| **Singularity** | 60% | 6 damage to each of up to two units |
+| **Thousand-Tailed Watcher** | 50% | 7 Energy: your units −3, minimum 1 |
+| **Xin Zhao, Vigilant** | 52% | a 3-Energy 4-Might Tank that enters ready with two units in their base |
 
 ### Fights
 
@@ -1528,15 +1531,15 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 ### Flips and counters
 
-**0% · 0% · 0%** (88 post-ban lists). Hidden Blade cannot reach a flip: their facedown card is at their own battlefield and its targets must be there too (§811.1.d.2). Flip on curve.
+**0% · 0% · 0%** (92 legal lists). Hidden Blade cannot reach a flip: their facedown card is at their own battlefield and its targets must be there too (§811.1.d.2). Flip on curve.
 
 ### Their facedown card
 
-**Hidden Blade** (100%, 2.8 a deck) or **Wages of Pain** (65%). Either one kills or burns one of your units **when you attack its battlefield**. Blade gives you 2 cards. Attack there with a spare unit in the fight, and never with your only unit.
+**Hidden Blade** (99%, 2.8 a deck) or **Wages of Pain** (71%). Either one kills or burns one of your units **when you attack its battlefield**. Blade gives you 2 cards. Attack there with a spare unit in the fight, and never with your only unit.
 
 ### Battlefields
 
-**Forbidding Waste** (55%), **Rockfall Path** (48% — units cannot be played there: no Ambush, and a Hidden unit hidden there can never flip), **Trifarian War Camp** (25%, +1 to every unit there) and **Vilemaw's Lair** (24% — units cannot move from there to base, so your legend's walk-home and Star Spring both fail there). **Do not hide a unit at Rockfall Path. Do not plan a walk-home from Vilemaw's Lair.** Usual order.
+**Forbidding Waste** (55%), **Rockfall Path** (47% — units cannot be played there: no Ambush, and a Hidden unit hidden there can never flip), **Trifarian War Camp** (25%, +1 to every unit there) and **Vilemaw's Lair** (17% — units cannot move from there to base, so your legend's walk-home and Star Spring both fail there). **Do not hide a unit at Rockfall Path. Do not plan a walk-home from Vilemaw's Lair.** Usual order.
 
 ### Board
 
@@ -1547,7 +1550,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 - **LA RQ:** 17 → 4 (23.5%). There's no Best-Of (Gamer Tag Mythras marks Viktor ineligible) and the archive has no LA Viktor list.
 - **Post-ban: Gio Luccani won the Orlando $10k (1st of 78).** It's the biggest post-ban result for a legend outside the LA top 8.
 - **Gio's list:** 3 Hidden Blade, 3 Cull the Weak, 3 Imperial Decree, 3 Wages of Pain, 3 Xin Zhao, Vigilant, 3 Carrion Dredger, 3 Plundering Poro, 3 Sprite Fountain, 3 Stupefy, 2 Singularity, 2 Vi, Peacekeeper, 2 Escaped Grayback. Battlefields: Forbidding Waste, Rockfall Path, Seat of Power.
-- **Core** (n=88): Hidden Blade, Cull the Weak, Stupefy, Viktor, Leader, Imperial Decree.
+- **Core** (n=107): Hidden Blade, Cull the Weak, Stupefy, Viktor, Leader, Imperial Decree.
 - **For Kha'Zix:**
   - **Imperial Decree** plus **Cull the Weak** punish trading.
   - **Rockfall Path** shuts off Ambush and Hidden units there.
@@ -1555,18 +1558,18 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 ---
 
-## Jhin, Virtuoso — Tier 4.4 · 0.9% · Fury/Mind · mean Might 3.69
+## Jhin, Virtuoso — Tier 4.4 · 0.9% · Fury/Mind · mean Might 3.66
 
 **Mean Might 3.69, 14.6 units a deck**, the fewest on the page. **In a sentence:** a spell deck that spends 4 Energy at a time, ramps off its own spells, and kills your units in base as well as at battlefields.
 
 > **At the table** (Jay beat Jhin decisively on 3 October: selective Power, Grim Resolve to finish)
-> - **How you win:** they can't cover two battlefields with 14 units. **Take both and race.** Their game is long, with Thousand-Tailed Watcher (65%) and Time Warp (65%).
-> - **Watch:** **Rocket Barrage** (88%) deals 4 to a unit **in a base**. Your base is not safe ground, so play units the turn you'll use them, and keep Ambush units in hand. Curtain Call (94%) picks modes: 2 damage at a battlefield, 3 at a base, −4. Deadly Flourish (94%) deals 3. Frigid Touch (59%) is Reaction −2. Singularity (76%) deals 6 to two units.
+> - **How you win:** they can't cover two battlefields with 14 units. **Take both and race.** Their game is long, with Thousand-Tailed Watcher (59%) and Time Warp (59%).
+> - **Watch:** **Rocket Barrage** (82%) deals 4 to a unit **in a base**. Your base is not safe ground, so play units the turn you'll use them, and keep Ambush units in hand. Curtain Call (91%) picks modes: 2 damage at a battlefield, 3 at a base, −4. Deadly Flourish (91%) deals 3. Frigid Touch (50%) is Reaction −2. Singularity (73%) deals 6 to two units.
 > - **The legend counts their 4E spells.** Every fourth one channels 4 runes and draws. **Hard Bargain's 2 tax** hits exactly those spells.
 > - **Flips:** freely. Nothing in the window removes one or counters one.
 > - **Never:** park a developed board in base to wait for the right turn.
 
-**Their deck:** Deadly Flourish 94%, Curtain Call 94%, Rocket Barrage 88%, Sprite Burst 88% (two ready 3/3 temporaries), Jhin, Meticulous Killer 88% (4/4 for one Mind after a 4E spell), Consult the Past 76% (their facedown card), Singularity 76%, Ferrous Forerunner 76%.
+**Their deck:** Deadly Flourish 91%, Curtain Call 91%, Rocket Barrage 82%, Sprite Burst 86% (two ready 3/3 temporaries), Jhin, Meticulous Killer 86% (4/4 for one Mind after a 4E spell), Consult the Past 77% (their facedown card), Singularity 73%, Ferrous Forerunner 68%.
 **Results: Jibbs, 107th of 2,165 at the Los Angeles RQ** (vouched). The same player finished 116th at Singapore and 255th at Barcelona.
 **29 bare · 84 +PF.**
 **Battlefields:** **Frozen Fortress** (11 of 17: 1 damage to every unit there each Beginning Phase, so **Faefolk and Tentacles die there**), Sigil of the Storm (9).
@@ -1574,19 +1577,19 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 ---
 
-## Nasus, Curator of the Sands — Tier 4.5 · 1.7% · Calm/Mind · mean Might 3.83
+## Nasus, Curator of the Sands — Tier 4.5 · 1.9% · Calm/Mind · mean Might 3.83
 
 **In a sentence:** big-mana control: Defy in every list, Astral Heron and Thousand-Tailed Watcher on top, and an 8-Might Nasus that scores an extra point when it conquers.
 
 > **At the table**
 > - **How you win:** race. Grind 15.1, so they win long. Take both battlefields early, while their units are 0-Might Scuttle Crabs and Steel Paws.
-> - **Watch:** **Defy (100%)** counters any spell up to 4E with at most one Power. **Punch First and Switcheroo are out of its reach. Grim Resolve and Void Assault are not.** Not So Fast (62%) counters anything that targets their unit, Evelynn's trigger included.
+> - **Watch:** **Defy (100%)** counters any spell up to 4E with at most one Power. **Punch First and Switcheroo are out of its reach. Grim Resolve and Void Assault are not.** Not So Fast (52%) counters anything that targets their unit, Evelynn's trigger included.
 > - **Middle:** at 7 runes, assume Watcher (94%): all your units −3 that turn. Their legend can ready 2 runes when they play a 7+ cost unit or gear, so a Heron turn can still leave Defy up.
-> - **Closing:** Nasus, Ascended (100%) is 8 Might with **Deflect 2**. Targeting it costs you two extra Power. Empowered, its conquest scores an extra point. Time Warp (47%) at 10.
-> - **Flips:** Tornado Warrior freely (0% removal). Evelynn only into tapped Calm (Not So Fast 62%).
+> - **Closing:** Nasus, Ascended (100%) is 8 Might with **Deflect 2**. Targeting it costs you two extra Power. Empowered, its conquest scores an extra point. Time Warp (44%) at 10.
+> - **Flips:** Tornado Warrior freely (0% removal). Evelynn only into tapped Calm (Not So Fast 52%).
 > - **Never:** lead with Grim Resolve into open Calm. Bait Defy with it on purpose, then cast Punch First.
 
-**Their deck:** Defy 100%, Watcher 94%, Find Your Center 91% (draw and ramp, cheaper once you're within 3 of winning), Discipline 91% (Reaction +2, draw), Bellows Breath 91% (1 damage to up to three units, kills Faefolk and Tentacles), Scuttle Crab 88%, Stupefy 76%, Astral Heron 59%, Zhonya's Hourglass 53% (Hidden).
+**Their deck:** Defy 100%, Watcher 94%, Find Your Center 94% (draw and ramp, cheaper once you're within 3 of winning), Discipline 94% (Reaction +2, draw), Bellows Breath 94% (1 damage to up to three units, kills Faefolk and Tentacles), Scuttle Crab 90%, Stupefy 83%, Astral Heron 60%, Zhonya's Hourglass 54% (Hidden).
 **Results:** **won the Nanning City Challenge**, plus 2nd and 3rd at two other events (vouched), and 30th of 78 at the Orlando $10k.
 **33 bare · 74 +PF** (the guide had 76 +PF and 83 isolated, the worst Punch First conversion on the page). *An earlier version of this page grouped Nasus with "ordinary fair fights". It is a Defy-and-Heron control deck.*
 **Battlefields:** **Vilemaw's Lair** (18 of 34: no moves from there to base, so **no legend walk-home and no Star Spring**), **Sigil of the Storm** (16: whoever conquers there recycles one of their own runes), Rockfall Path (11).
@@ -1596,24 +1599,25 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 ### Proven lists
 
 - **LA RQ: Niguel, Legend Rank #1/38, Overall #142** (Riot). Field: 38 → 5.
-- Core (n=35): Defy, Thousand-Tailed Watcher (×2.8), Find Your Center, Discipline, Bellows Breath, Scuttle Crab, Stupefy.
+- Core (n=49): Defy, Thousand-Tailed Watcher (×2.8), Find Your Center, Discipline, Bellows Breath, Scuttle Crab, Stupefy.
 - Niguel runs **3 Watcher**, 3 Sprite Burst and 3 Tasty Faefolk. Battlefields: Frozen Fortress, **Rockfall Path**, Vilemaw's Lair.
 - **Vilemaw's Lair** stops both your walk-home and Star Spring.
 - Post-ban: Angel santiago 30th of 78 (Orlando $10k, 3 Astral Heron build).
+- **Claims added 8 October** (list titles, not records): "Nasus Wins S4 Tianjin City Challenge" and "Nasus wins Top Shelf Masters Tournament".
 
 ---
 
-## Draven, Glorious Executioner — Tier 4.6 · 0.7% · Fury/Chaos · mean Might 3.17
+## Draven, Glorious Executioner — Tier 4.6 · 0.6% · Fury/Chaos · mean Might 3.15
 
 **In a sentence:** an aggro deck that draws a card for every combat it wins, and the closest list on the page to your own Chaos half.
 
 > **At the table**
 > - **How you win:** hold one and refuse trades (grind 5.2, you win long). Every combat they win is a card for them, so **No Result is a fine outcome against Draven.**
-> - **Watch:** Draven, Showboat (100%) gains +1 Might per point they have, so he's huge late. Falling Star (85%) is two 3s. **Overzealous Fan** (85%) kills itself on defence to send your attacker home. Rebuke (77%) bounces any unit at a battlefield.
+> - **Watch:** Draven, Showboat (100%) gains +1 Might per point they have, so he's huge late. Falling Star (80%) is two 3s. **Overzealous Fan** (87%) kills itself on defence to send your attacker home. Rebuke (80%) bounces any unit at a battlefield.
 > - **Flips:** into tapped Chaos (removes 46%).
 > - **Never:** attack an Overzealous Fan with your only attacker.
 
-**Their deck:** Spinning Axe 100% (Quick-Draw Equipment, +3), Draven, Showboat 100%, Falling Star 85%, Tideturner 85%, Overzealous Fan 85%, Rebuke 77%, Vex, Apathetic 77%, Kai'Sa, Survivor 77%, Noxus Hopeful 77%, Switcheroo 69%, Evelynn 69%, Kha'Zix 62%.
+**Their deck:** Spinning Axe 93% (Quick-Draw Equipment, +3), Draven, Showboat 100%, Falling Star 80%, Tideturner 87%, Overzealous Fan 87%, Rebuke 80%, Vex, Apathetic 73%, Kai'Sa, Survivor 73%, Noxus Hopeful 80%, Switcheroo 67%, Evelynn 67%, Kha'Zix 53%.
 **Results:** 13th and 31st of 78 at the Orlando $10k (vouched). Three lists are titled "Top 256 Los Angeles RQ" (claim).
 **38 bare · 95 +PF.**
 **Battlefields:** Zaun Warrens (8 of 13), Treasure Hoard, Targon's Peak, Grove, Star Spring (5 each).
@@ -1630,18 +1634,18 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 # Tier 5, by how often you will see them
 
-## Sett, The Boss — Tier 5.15 · 2.9% · Body/Order · mean Might 3.31
+## Sett, The Boss — Tier 5.15 · 2.7% · Body/Order · mean Might 3.28
 
 **In a sentence:** a buff deck whose legend sends a buffed unit home instead of letting it die, so your kills don't stick.
 
 > **At the table**
 > - **How you win:** hold one, grind (4.4, the second-lowest grind on the page). Take battlefields and ignore the bodies. A buffed unit you "kill" goes home, exhausted.
-> - **Watch:** **Call to Glory** (94%: Reaction +3, **free if they spend a buff**). Count every buffed unit as a free +3. Challenge (71%) is their Rampage.
+> - **Watch:** **Call to Glory** (92%: Reaction +3, **free if they spend a buff**). Count every buffed unit as a free +3. Challenge (62%) is their Rampage.
 > - **Your bounce gets around their legend.** Gust (side), Star-Crossed and Switcheroo don't kill, so the legend never fires.
-> - **Flips:** freely (0% removal; Repulse 24%).
+> - **Flips:** freely (0% removal; Repulse 27%).
 > - **Never:** count a buffed unit as dead before it has left the board.
 
-**Their deck:** First Mate 94%, Call to Glory 94%, Showstopper 94% (buff a base unit and move it to a battlefield), Pit Rookie 88%, Hidden Blade 88%, Sett, Kingpin 88% (5/5 Tank, +1 per buffed friendly there), Arena Bar 76% (gear: buff an exhausted unit), Fiora, Victorious 76%, Challenge 71%.
+**Their deck:** First Mate 85%, Call to Glory 92%, Showstopper 88% (buff a base unit and move it to a battlefield), Pit Rookie 92%, Hidden Blade 81%, Sett, Kingpin 85% (5/5 Tank, +1 per buffed friendly there), Arena Bar 77% (gear: buff an exhausted unit), Fiora, Victorious 73%, Challenge 62%.
 **Results:** no vouched result in the window. One list is titled "Top 4 Utrecht RQ" (claim, pre-ban event).
 **35 bare · 92 +PF.**
 **Battlefields:** **Monastery of Hirana** (14 of 17: spend a buff on a conquest to draw), Grove (10), Valley of Idols (7).
@@ -1654,7 +1658,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 ---
 
-## Vi, Piltover Enforcer — Tier 5.8 · 2.6% · Fury/Order · mean Might 3.23
+## Vi, Piltover Enforcer — Tier 5.8 · 2.4% · Fury/Order · mean Might 3.22
 
 **In a sentence:** Equipment aggro whose units hit far harder attacking than defending, with a stun on its best 5-drop and nothing that touches your flips.
 
@@ -1662,7 +1666,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 > - **How you win:** hold one and grind (5.7, you win long). They have to keep attacking into you.
 > - **Mulligan:** a 2-drop and a 3-drop. You need bodies on the board before Vi, Peacekeeper.
 > - **Early:** contest, but **expect their attack to be +2 to +4 above the printed Might.** Sharkling attacks as 5 and Inferna as 3, and Rengar, Unseen gets Assault 2.
-> - **Middle:** Vi, Peacekeeper (96%) stuns your best defender when she attacks. Keep two defenders where one would do. A stunned unit deals no damage, so it can't kill her.
+> - **Middle:** Vi, Peacekeeper (93%) stuns your best defender when she attacks. Keep two defenders where one would do. A stunned unit deals no damage, so it can't kill her.
 > - **Closing:** their legend readies a unit after a conquest with 3+ excess damage, which gives them a second attack. Don't leave a lone small unit for them to overkill.
 > - **Flips:** freely. 4% of lists can touch one.
 > - **Never:** let them conquer through a single small blocker. That excess damage is what readies their unit.
@@ -1675,16 +1679,16 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 | card | in | what it does to you |
 |---|---|---|
-| **Vi, Peacekeeper** | 96% | 5/5 Ambush. When she attacks, stuns one of your units there |
+| **Vi, Peacekeeper** | 93% | 5/5 Ambush. When she attacks, stuns one of your units there |
 | **Hextech Gauntlets** | 90% | Equipment. Its equip cost drops by the chosen unit's Might |
-| **Rengar, Unseen** | 82% | 4/4, Accelerate, Assault 2, **Deflect**, Ganking |
-| Tactical Retreat | 60% | Reaction: their unit survives its next death this turn and goes home |
-| Inferna · Sharkling | 56% · 46% | Ambush Assault 2 · Accelerate Assault 4 |
-| **Hidden Blade** | 52% | kill a unit at its battlefield; you draw 2 |
-| Vi, Hotheaded | 50% | Deflect; 2E + Fury: double her Might this turn |
-| Vault Breaker | 50% | 1E: Assault 2 and Ganking this turn |
-| Deathgrip | 42% | kill their own unit, give its Might to another |
-| Kennen, Keeper of Balance | 40% | Hidden; pays 2 to stun one of yours |
+| **Rengar, Unseen** | 78% | 4/4, Accelerate, Assault 2, **Deflect**, Ganking |
+| Tactical Retreat | 56% | Reaction: their unit survives its next death this turn and goes home |
+| Inferna · Sharkling | 56% · 42% | Ambush Assault 2 · Accelerate Assault 4 |
+| **Hidden Blade** | 54% | kill a unit at its battlefield; you draw 2 |
+| Vi, Hotheaded | 47% | Deflect; 2E + Fury: double her Might this turn |
+| Vault Breaker | 51% | 1E: Assault 2 and Ganking this turn |
+| Deathgrip | 47% | kill their own unit, give its Might to another |
+| Kennen, Keeper of Balance | 42% | Hidden; pays 2 to stun one of yours |
 
 **Results:** the best vouched result in the window is 34th at the Nanning City Challenge. No Los Angeles RQ list.
 
@@ -1693,7 +1697,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 **36 bare · 91 +PF · 98 +Sw · 96 iso.**
 
 - **Deflect on Rengar, Unseen and Vi, Hotheaded** makes your Rampage and Switcheroo cost an extra Power when they target those units. Swap or Rampage the units without Deflect when you can.
-- **Tactical Retreat** (60%) undoes a kill but not a conquest. Fight for the battlefield.
+- **Tactical Retreat** (56%) undoes a kill but not a conquest. Fight for the battlefield.
 
 ### Flips and counters
 
@@ -1714,13 +1718,13 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 ### Proven lists
 
 - **LA RQ: aydeedee, Legend Rank #1/29, Overall #374** (Riot). Field: 29 → 0.
-- **Core** (n=53): Vi, Peacekeeper, Hextech Gauntlets, Rengar, Unseen.
+- **Core** (n=62): Vi, Peacekeeper, Hextech Gauntlets, Rengar, Unseen.
 - **aydeedee's list** is a Mech build: 3 Rumble, Hotheaded (6/53), 3 Ferrous Forerunner, 3 Gem Jammer, 3 Kai'Sa, 2 Trusty Ramhound, 2 Hidden Blade, 2 Deathgrip, 2 Sacrifice.
 - **For Kha'Zix:** Forerunner Deathknells make Mechs that Rumble gives Assault. Conquering through a Forerunner leaves two 3-Might Mechs behind.
 
 ---
 
-## Zed, Master of Shadows — Tier 5.7 · 2.4% · Fury/Chaos · mean Might 3.55
+## Zed, Master of Shadows — Tier 5.7 · 2.7% · Fury/Chaos · mean Might 3.56
 
 **In a sentence:** your own Chaos shell with Fury attack spells bolted on. It fills its trash on purpose and turns it into Assault, so its attacks are far bigger than its units.
 
@@ -1729,9 +1733,9 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 > - **Mulligan:** units that can contest early, and Punch First. You want to be the one scoring on turns 3–5.
 > - **Early:** take a battlefield and make them answer it. Every turn they spend answering is a turn their trash is not paying them.
 > - **Middle:** defend against the **attacker's** Might, not the printed Might. A 0-Might Shadow Clone attacks as 4, Perfect Execution adds 3 and readies the unit to attack again, and Cleave adds 3. Count their open Fury.
-> - **Closing:** Rhasa the Sunderer (44%) gets cheaper with every card in their trash. When their trash is deep, assume a 6-Might body for very little.
-> - **Flips:** only into tapped Chaos (Star-Crossed 52%, Gust 27%). **Wind and Ghosts** (38%) banishes a flipped 2–3 Might unit for good in a showdown, so Matriarch cannot bring it back.
-> - **Never:** let the game go long, or attack their battlefield with one unit into a facedown card (Switcheroo, 53%).
+> - **Closing:** Rhasa the Sunderer (43%) gets cheaper with every card in their trash. When their trash is deep, assume a 6-Might body for very little.
+> - **Flips:** only into tapped Chaos (Star-Crossed 43%, Gust 28%). **Wind and Ghosts** (42%) banishes a flipped 2–3 Might unit for good in a showdown, so Matriarch cannot bring it back.
+> - **Never:** let the game go long, or attack their battlefield with one unit into a facedown card (Switcheroo, 48%).
 
 ### Their deck
 
@@ -1741,17 +1745,17 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 | card | in | what it does to you |
 |---|---|---|
-| **Death Mark** | 96% | Burn 3, and a 0-Might Shadow Clone that attacks with **Assault 4** by banishing a unit from their trash. Flow, so it comes back |
-| **Zed, Without a Sound** | 93% | your Zed: conquer → a Clone. Swaps places with a Clone for 1 Chaos |
-| **Perfect Execution** | 87% | ready a unit, Assault 3. A second attack in one turn. Flow |
-| Shadow Order Disciple · Traveling Merchant | 87% · 84% | your 2-drops |
-| **Switcheroo** | 53% | their swap, usually face down |
-| Zed, From the Shadows | 49% | 4-drop that discards for a Clone |
-| **Rhasa the Sunderer** | 44% | 6 Might, costs 1 less per card in their trash |
-| Star-Crossed · Tideturner | 44% · 40% | the flip punish, the swap |
-| **Wind and Ghosts** | 38% | Action: banish a ≤3-Might unit at a battlefield, or bounce a bigger one |
-| Cleave · Ruthless Strike | 36% · 33% | Assault 3 · 3 or 5 damage at a battlefield |
-| Kennen, Storm of Shuriken | 33% | Burn 2; conquer → a spell in their trash gains Flow |
+| **Death Mark** | 95% | Burn 3, and a 0-Might Shadow Clone that attacks with **Assault 4** by banishing a unit from their trash. Flow, so it comes back |
+| **Zed, Without a Sound** | 94% | your Zed: conquer → a Clone. Swaps places with a Clone for 1 Chaos |
+| **Perfect Execution** | 88% | ready a unit, Assault 3. A second attack in one turn. Flow |
+| Shadow Order Disciple · Traveling Merchant | 88% · 85% | your 2-drops |
+| **Switcheroo** | 48% | their swap, usually face down |
+| Zed, From the Shadows | 54% | 4-drop that discards for a Clone |
+| **Rhasa the Sunderer** | 43% | 6 Might, costs 1 less per card in their trash |
+| Star-Crossed · Tideturner | 43% · 37% | the flip punish, the swap |
+| **Wind and Ghosts** | 42% | Action: banish a ≤3-Might unit at a battlefield, or bounce a bigger one |
+| Cleave · Ruthless Strike | 35% · 35% | Assault 3 · 3 or 5 damage at a battlefield |
+| Kennen, Storm of Shuriken | 32% | Burn 2; conquer → a spell in their trash gains Flow |
 
 **Results:** no tournament-vouched Zed result in the window above 47th (Hangzhou City Challenge). Two lists are titled "Top 512 Los Angeles RQ", which is the author's claim.
 
@@ -1769,7 +1773,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 ### Their facedown card
 
-**Switcheroo (24 of 45 lists) or Tideturner (18).** Either one turns your best attacker into their smallest. Attack it with a unit you can lose, or Sabotage first.
+**Switcheroo (31 of 65 lists) or Tideturner (24).** Either one turns your best attacker into their smallest. Attack it with a unit you can lose, or Sabotage first.
 
 ### Battlefields
 
@@ -1783,7 +1787,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 - **LA RQ: Egoist, Legend Rank #1/26, Overall #330** (Riot). Field: 26 → 1.
 - **The archive has 49 clean Zed lists and only 1 tournament-vouched**, from Hangzhou (pre-ban or undated).
-- **Core** (n=49): Zed, Without a Sound, Death Mark, Perfect Execution, Shadow Order Disciple, Traveling Merchant. Battlefield: Zaun Warrens.
+- **Core** (n=69): Zed, Without a Sound, Death Mark, Perfect Execution, Shadow Order Disciple, Traveling Merchant. Battlefield: Zaun Warrens.
 - **Egoist's list:**
   - 3 Kai'Sa, Survivor, 3 The Harrowing (10/49), 2 Baron Nashor, 2 Vi, Destructive, 2 Vex, Apathetic, 2 Switcheroo
   - 1 each Gust, Hard Bargain, Star-Crossed
@@ -1792,18 +1796,18 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 ---
 
-## Shen, Eye of Twilight — Tier 5.12 · 2.2% · Calm/Order · mean Might 3.20
+## Shen, Eye of Twilight — Tier 5.12 · 2.4% · Calm/Order · mean Might 3.22
 
 **In a sentence:** a defensive deck built around Tank and Shield, which can score an extra point just for holding with exactly two units.
 
 > **At the table**
-> - **How you win:** don't attack their holds on their terms. **Shen, Leader of the Kinkou Order** (47%) scores a point when it holds with exactly one other unit. Break that pair with Void Assault or Faefolk: drag one out, or drag a third in.
-> - **Watch:** **Disciple of Shen** (Hidden, 66%) gets Shield 3 at a battlefield with exactly one other friendly unit. **Shen, Kinkou** (89%) is a 3-Might Reaction unit with Shield 2 and Tank, and Kinkou Temple gives Tank units +1. Count their defenders as +2 to +4.
-> - **Middle:** Shadow Dash (68%) drags your unit into their pair. Ki Barrier (63%) prevents 7 damage. Back Off (47%) stuns. Defy (71%) on your cheap spells.
-> - **Flips:** freely (0% removal; Not So Fast 18%).
+> - **How you win:** don't attack their holds on their terms. **Shen, Leader of the Kinkou Order** (50%) scores a point when it holds with exactly one other unit. Break that pair with Void Assault or Faefolk: drag one out, or drag a third in.
+> - **Watch:** **Disciple of Shen** (Hidden, 71%) gets Shield 3 at a battlefield with exactly one other friendly unit. **Shen, Kinkou** (89%) is a 3-Might Reaction unit with Shield 2 and Tank, and Kinkou Temple gives Tank units +1. Count their defenders as +2 to +4.
+> - **Middle:** Shadow Dash (77%) drags your unit into their pair. Ki Barrier (70%) prevents 7 damage. Back Off (43%) stuns. Defy (66%) on your cheap spells.
+> - **Flips:** freely (0% removal; Not So Fast 16%).
 > - **Never:** attack a pair with one unit and no Punch First.
 
-**Their deck:** Discipline 100%, Shen, Kinkou 89%, Charm 76% (moves your unit), Defy 71%, Shadow Dash 68%, Disciple of Shen 66%, Ki Barrier 63%, Kennen, Keeper of Balance 61%, Hidden Blade 50%, Vi, Peacekeeper 47%.
+**Their deck:** Discipline 100%, Shen, Kinkou 89%, Charm 82% (moves your unit), Defy 66%, Shadow Dash 77%, Disciple of Shen 71%, Ki Barrier 70%, Kennen, Keeper of Balance 68%, Hidden Blade 39%, Vi, Peacekeeper 45%.
 **Results:** best vouched finish 18th (Mardi Championship #1). No Los Angeles list.
 **41 bare · 90 +PF.**
 **Battlefields:** **Kinkou Temple** (35 of 38: Tank units +1) and **Grove of the God-Willow** (28: draw on a hold). Don't let them hold Grove.
@@ -1816,18 +1820,18 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 ---
 
-## Ambessa, Matriarch of War — Tier 5.20 · 2.0% · Body/Order · mean Might 2.97
+## Ambessa, Matriarch of War — Tier 5.20 · 1.9% · Body/Order · mean Might 2.98
 
 **In a sentence:** a deck of Empower and pump spells, with your own Punch First, and a 5-drop that kills a smaller unit every time it attacks.
 
 > **At the table**
 > - **How you win:** hold one, grind (5.1). Their units are small until empowered, so hit them before Risen Altar makes empowering cheap.
-> - **Watch:** **Punch First (87%)**, Guttural Roar (92%: +2, or **+4 if empowered**), Onslaught (50%: +6, with Flow). Their pump count rivals yours, so **buff before the fight when they have open Body.** Public Execution (84%) kills your unit if it's smaller than one of theirs.
-> - **Ambessa, Respected and Feared** (58%): empowered, she kills a smaller unit of yours whenever she attacks. Kill or swap her first.
-> - **Flips:** freely (0% removal; Repulse 42% counters Evelynn's trigger).
+> - **Watch:** **Punch First (85%)**, Guttural Roar (93%: +2, or **+4 if empowered**), Onslaught (54%: +6, with Flow). Their pump count rivals yours, so **buff before the fight when they have open Body.** Public Execution (80%) kills your unit if it's smaller than one of theirs.
+> - **Ambessa, Respected and Feared** (54%): empowered, she kills a smaller unit of yours whenever she attacks. Kill or swap her first.
+> - **Flips:** freely (0% removal; Repulse 43% counters Evelynn's trigger).
 > - **Never:** fight into open Body without your own trick in hand.
 
-**Their deck:** Legion Marauder 95%, Rampage 95%, Ambessa, The Wolf 92%, Guttural Roar 92%, Kayle, Justified 89% (+2 per empower, up to three times), Punch First 87%, Public Execution 84%, First Mate 71%, Sabotage 63%, Hidden Blade 63%.
+**Their deck:** Legion Marauder 91%, Rampage 93%, Ambessa, The Wolf 93%, Guttural Roar 93%, Kayle, Justified 91% (+2 per empower, up to three times), Punch First 85%, Public Execution 80%, First Mate 67%, Sabotage 61%, Hidden Blade 67%.
 **Results:** 5th (Runes & Rift Open 19) and two 9ths (vouched). One list is titled "Top 256 Los Angeles RQ".
 **44 bare · 96 +PF.**
 **Battlefields:** **Risen Altar** (35 of 38: their Empower costs are 1 cheaper there) and Sunken Temple (24). **Deny Risen Altar.**
@@ -1840,35 +1844,35 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 ---
 
-## Ivern, Green Father — Tier 5.2 · 1.9% · Calm/Order · mean Might 3.58
+## Ivern, Green Father — Tier 5.2 · 1.7% · Calm/Order · mean Might 3.50
 
-**Mean Might 3.58** (36 lists: 23 under "Green Father", 13 under "Ivern - Green Father", same shape). **In a sentence:** pets that defend big, Defy behind them, and a legend that turns their battlefields into Brush.
+**Mean Might 3.58** (41 lists: 24 under "Green Father", 17 under "Ivern - Green Father", same shape). **In a sentence:** pets that defend big, Defy behind them, and a legend that turns their battlefields into Brush.
 
 > **At the table**
 > - **How you win:** don't attack their pairs fairly. Mutated Mouser has Shield 2 and Tank, Stalwart Poro has Shield, and Trusty Ramhound gets +1 with a friend, so their defence is always bigger than the board. **Take the battlefield they leave open, and isolate.** Forbidding Waste (17 of 23 bring it) makes a lone defender −2, and that cuts both ways.
-> - **Watch:** **Fallen Feline** (48%) names a spell, and you can't cast that spell while it stands at a battlefield. Expect "Punch First". Kill it, or move it, before you need the trick. **Emperor's Divide** (Hidden, 52%) sends their whole battlefield home, so your attack hits nothing. **Daisy!** (70%) is an 8/8 that enters ready and stuns on attack with all four pet tags. Defy 87%, Flurry of Feathers 52% (counter any spell, or four Deflect birds).
-> - **Flips:** freely (0% removal; Not So Fast 26%). **Switcheroo counter 70%**, mostly Flurry.
+> - **Watch:** **Fallen Feline** (61%) names a spell, and you can't cast that spell while it stands at a battlefield. Expect "Punch First". Kill it, or move it, before you need the trick. **Emperor's Divide** (Hidden, 52%) sends their whole battlefield home, so your attack hits nothing. **Daisy!** (76%) is an 8/8 that enters ready and stuns on attack with all four pet tags. Defy 90%, Flurry of Feathers 51% (counter any spell, or four Deflect birds).
+> - **Flips:** freely (0% removal; Not So Fast 37%). **Switcheroo counter 80%**, mostly Flurry.
 > - **Never:** cast your trick into open Calm plus 4 Energy (Flurry).
 
-**Their deck:** Frisky Hunter 96% (3/3 and a Deflect bird), Defy 87%, Stalwart Poro 87%, Discipline 87%, Mutated Mouser 87%, Trusty Ramhound 83%, Ivern, Nurturer 83%, Daisy! 70%, Hidden Blade 65%, Back Off 65%.
-**Results:** best vouched finish 26th (Nightcup League Cup).
+**Their deck:** Frisky Hunter 98% (3/3 and a Deflect bird), Defy 90%, Stalwart Poro 85%, Discipline 88%, Mutated Mouser 90%, Trusty Ramhound 80%, Ivern, Nurturer 83%, Daisy! 76%, Hidden Blade 56%, Back Off 73%.
+**Results:** best vouched finish 26th (Nightcup League Cup). One list is titled "Ivern Wins S4 Wuhan City Challenge" (claim, added 8 October).
 **35 bare · 82 +PF.**
 **Battlefields:** Forbidding Waste (17 of 23), **Vilemaw's Lair** (15: no walk-home) and **Rockfall Path** (14: no Ambush, no flip). Their battlefields turn off most of your tools. Plan each game around **your** battlefield.
 **Board (draft — not Jun):** +1 Hard Bargain (Flurry, Discipline), −1 Grim Resolve (Defy).
 
 ---
 
-## Ahri, Nine-Tailed Fox — Tier 5.25 · 1.1% · Calm/Mind · mean Might 3.60
+## Ahri, Nine-Tailed Fox — Tier 5.25 · 1.3% · Calm/Mind · mean Might 3.51
 
 **In a sentence:** Calm/Mind control whose legend shrinks every attacker you send at its battlefields.
 
 > **At the table**
-> - **How you win:** the legend gives each of your attackers −1 at a battlefield they control. **Attack with one big unit plus a trick, not three small ones.** Ahri, Inquisitive (76%) adds −2 more when she fights. Ahri, Alluring (47%) scores an extra point when she holds, so break her holds at once.
-> - **Watch:** Defy 100%, Discipline 100%, Stupefy 82%, Charm 82% (moves your unit), Watcher 76% at 7 runes, Back Off 71% (Hidden stun), Singularity 59%. **Blitzcrank** (47%) drags your unit to his battlefield when he's played.
-> - **Flips:** freely (0% removal; Not So Fast 41%).
+> - **How you win:** the legend gives each of your attackers −1 at a battlefield they control. **Attack with one big unit plus a trick, not three small ones.** Ahri, Inquisitive (78%) adds −2 more when she fights. Ahri, Alluring (48%) scores an extra point when she holds, so break her holds at once.
+> - **Watch:** Defy 100%, Discipline 96%, Stupefy 85%, Charm 81% (moves your unit), Watcher 70% at 7 runes, Back Off 52% (Hidden stun), Singularity 56%. **Blitzcrank** (47%) drags your unit to his battlefield when he's played.
+> - **Flips:** freely (0% removal; Not So Fast 30%).
 > - **Never:** go wide into their battlefield. Every extra attacker is another −1.
 
-**Their deck:** as above, plus Ravenbloom Student 82%, Zhonya's Hourglass 59%, Sona, Harmonious 59%.
+**Their deck:** as above, plus Ravenbloom Student 67%, Zhonya's Hourglass 48%, Sona, Harmonious 52%.
 **Results:** best vouched finish 29th (Nanning City Challenge).
 **34 bare · 83 +PF.** Both are before the legend's −1 per attacker, so **read them as too high**.
 **Battlefields:** **Grove of the God-Willow** (13 of 17: draw on a hold), Abandoned Hall (6).
@@ -1876,7 +1880,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 ---
 
-## Mel, Soul's Reflection — Tier 5.11 · 1.0% · Mind/Chaos · mean Might 3.33
+## Mel, Soul's Reflection — Tier 5.11 · 1.0% · Mind/Chaos · mean Might 3.36
 
 **In a sentence:** the counter-and-steal deck — your best spell, cast into one open Mind rune, becomes theirs.
 
@@ -1884,10 +1888,10 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 > - **How you win:** do not go long (grind 15.3). Convert early, with units, while they are still developing.
 > - **Mulligan:** units. Your spells are their spells here until Rebuttal is spent.
 > - **Early:** develop and fight on bodies. Kill Ravenbloom Student before spells build it up.
-> - **Middle:** **Rebuttal** (90%, 3.0 a deck) is a 1-Energy Reaction that counters a spell up to 4 Energy, or, for one more Power, **takes control of it and makes new choices**. Every spell you run is 4 Energy or less. A stolen Punch First is +5 on *their* unit. A stolen Sabotage looks at *your* hand.
+> - **Middle:** **Rebuttal** (92%, 3.0 a deck) is a 1-Energy Reaction that counters a spell up to 4 Energy, or, for one more Power, **takes control of it and makes new choices**. Every spell you run is 4 Energy or less. A stolen Punch First is +5 on *their* unit. A stolen Sabotage looks at *your* hand.
 > - **Bait Rebuttal with the spell you least mind losing.** One cute fact: **a stolen Decree of Strength does nothing to you**. It recycles a Mind card from your hand, and you run none.
-> - **Kill Mel, Newly Awakened** (62%) before it Empowers. Empowered, their spells **cannot be countered**, so your Hard Bargain is dead, and every −Might they choose is 1 bigger: Stupefy −2, their legend −3.
-> - **Flips:** don't. Gust 76%, Star-Crossed 86%, 90% can punish.
+> - **Kill Mel, Newly Awakened** (60%) before it Empowers. Empowered, their spells **cannot be countered**, so your Hard Bargain is dead, and every −Might they choose is 1 bigger: Stupefy −2, their legend −3.
+> - **Flips:** don't. Gust 76%, Star-Crossed 84%, 88% can punish.
 > - **Never:** cast a key spell into open Mind + Chaos.
 
 ### Their deck
@@ -1898,15 +1902,15 @@ Empower Applied Researchers or a Mel, and the legend empowers too, then spends i
 
 | card | in | what it does to you |
 |---|---|---|
-| **Rebuttal** | 90% | counter a ≤4-Energy spell, or steal it for `[A]` |
-| **Stupefy** | 100% | Reaction −1 and draw |
-| **Star-Crossed** | 86% | bounces your unit with one of theirs |
-| **Applied Researchers** | 86% | Empowered: their spells cost 1 Energy and 1 Power less |
-| **Shock Blast** | 81% | Action: 4 damage at a battlefield, 2 cheaper while they have something Empowered |
+| **Rebuttal** | 92% | counter a ≤4-Energy spell, or steal it for `[A]` |
+| **Stupefy** | 96% | Reaction −1 and draw |
+| **Star-Crossed** | 84% | bounces your unit with one of theirs |
+| **Applied Researchers** | 80% | Empowered: their spells cost 1 Energy and 1 Power less |
+| **Shock Blast** | 84% | Action: 4 damage at a battlefield, 2 cheaper while they have something Empowered |
 | **Gust** | 76% | bounces a 3-Might-or-less unit at a battlefield |
-| **Mel, Newly Awakened** | 62% | Empowered: their spells can't be countered; −Might gets −1 more |
-| **Mel, Defiant Soul** | 57% | Empowered by discarding a spell: **banishes** your unit of 3 Might or less at a battlefield |
-| **Time Warp** | 48% | 10 Energy: another turn |
+| **Mel, Newly Awakened** | 60% | Empowered: their spells can't be countered; −Might gets −1 more |
+| **Mel, Defiant Soul** | 56% | Empowered by discarding a spell: **banishes** your unit of 3 Might or less at a battlefield |
+| **Time Warp** | 56% | 10 Energy: another turn |
 
 ### Fights
 
@@ -1917,15 +1921,15 @@ Empower Applied Researchers or a Mel, and the legend empowers too, then spends i
 
 ### Flips and counters
 
-**90% can remove your hidden unit · 90% can counter Evelynn · 90% can counter Switcheroo** (21 post-ban lists — small sample). Play as if you had no Hidden cards.
+**88% can remove your hidden unit · 88% can counter Evelynn · 92% can counter Switcheroo** (25 legal lists — small sample). Play as if you had no Hidden cards.
 
 ### Their facedown card
 
-**Tideturner** (71%) or **Switcheroo** (67%). Tideturner swaps one of their units into the fight. Their Switcheroo swaps Might between your unit and theirs at that battlefield. **Attack their facedown card with Might spread across units**, so one swap cannot flip the fight.
+**Tideturner** (68%) or **Switcheroo** (68%). Tideturner swaps one of their units into the fight. Their Switcheroo swaps Might between your unit and theirs at that battlefield. **Attack their facedown card with Might spread across units**, so one swap cannot flip the fight.
 
 ### Battlefields
 
-**Rockfall Path** (67%), **Zaun Warrens** (52% — so they may retire your game-1 default by playing it first), **Frozen Fortress** (43%), **Forbidding Waste** (38%), **Targon's Peak** (33%). If Zaun Warrens is theirs in game 1, open with Sandswept Tomb.
+**Rockfall Path** (68%), **Zaun Warrens** (48% — so they may retire your game-1 default by playing it first), **Frozen Fortress** (40%), **Forbidding Waste** (40%), **Targon's Peak** (32%). If Zaun Warrens is theirs in game 1, open with Sandswept Tomb.
 
 ### Board
 
@@ -1934,23 +1938,23 @@ Empower Applied Researchers or a Mel, and the legend empowers too, then spends i
 ### Proven lists
 
 - **LA RQ: DSG Alanzq, Legend Rank #1/7, Overall #480** (Riot). Field: 7 → 0.
-- **Core** (n=21): Stupefy, Rebuttal, Star-Crossed, Dredge Up, Applied Researchers, Ride the Wind, Ravenbloom Student, Shock Blast, Gust, Hwei.
+- **Core** (n=26): Stupefy, Rebuttal, Star-Crossed, Dredge Up, Applied Researchers, Ride the Wind, Ravenbloom Student, Shock Blast, Gust, Hwei.
 - **Alanzq** adds 2 Acceptable Losses and 2 Time Warp. Battlefields: Frozen Fortress, **Rockfall Path**, Targon's Peak.
 - **For Kha'Zix:** **Rebuttal** (1E Reaction: steal or counter a spell of ≤4E) takes your Punch First and lets them retarget it.
 
 ---
 
-## Leona, Radiant Dawn — Tier 5.4 · 1.0% · Calm/Order · mean Might 3.13
+## Leona, Radiant Dawn — Tier 5.4 · 1.0% · Calm/Order · mean Might 3.14
 
 **In a sentence:** a stun deck. A stunned unit deals no combat damage, and Leona, Zealot makes it 1 Might as well.
 
 > **At the table**
 > - **How you win:** a stunned unit deals no combat damage, so it can't help kill anything. Attack with **more units than they can stun**. If one of three attackers is stunned, the other two still deal damage.
-> - **Watch:** Thwonk! (59%, repeatable stun of an attacker), Zenith Blade (82%, stun and move), Back Off (71%, Hidden stun), Leona, Determined (76%, stuns on her attack). **Leona, Zealot** (53%): stunned enemy units at her battlefield have **−8, minimum 1**. Their legend buffs one of theirs every time they stun. Call to Glory 88%, Defy 100%.
-> - **Flips:** freely (0% removal; Not So Fast 18%).
+> - **Watch:** Thwonk! (59%, repeatable stun of an attacker), Zenith Blade (82%, stun and move), Back Off (64%, Hidden stun), Leona, Determined (73%, stuns on her attack). **Leona, Zealot** (64%): stunned enemy units at her battlefield have **−8, minimum 1**. Their legend buffs one of theirs every time they stun. Call to Glory 82%, Defy 100%.
+> - **Flips:** freely (0% removal; Not So Fast 27%).
 > - **Never:** send one attacker at Leona, Zealot.
 
-**Their deck:** Defy 100%, Discipline 100%, Call to Glory 88%, Zenith Blade 82%, Leona, Determined 76%, Zhonya's 71%, Back Off 71%, Kennen, Keeper of Balance 65%, Vi, Peacekeeper 59%, Thwonk! 59%.
+**Their deck:** Defy 100%, Discipline 91%, Call to Glory 82%, Zenith Blade 82%, Leona, Determined 73%, Zhonya's 71%, Back Off 64%, Kennen, Keeper of Balance 68%, Vi, Peacekeeper 59%, Thwonk! 59%.
 **Results:** 73rd of 78 at the Orlando $10k (vouched).
 **41 bare · 92 +PF.** The method can't see stuns, so **read them as too high**.
 **Battlefields:** **Monastery of Hirana** (15 of 17), Amateur Recital (8: on a hold, they send one of your units at a battlefield home).
@@ -1962,17 +1966,17 @@ Empower Applied Researchers or a Mel, and the legend empowers too, then spends i
 
 ---
 
-## Jax, Grandmaster at Arms — Tier 5.21 · 1.0% · Calm/Body · mean Might 3.07
+## Jax, Grandmaster at Arms — Tier 5.21 · 0.8% · Calm/Body · mean Might 3.06
 
 **Mean Might 3.07, 15.4 units a deck.** **In a sentence:** Equipment that Jax lets them play at Reaction speed, so their unit grows mid-fight, with Defy behind it.
 
 > **At the table**
 > - **How you win:** kill the gear, not the units. **Ravenbloom Prefect** banishes a gear the moment it's played, mid-fight included, and **Acceptable Losses** makes them kill one. You have no gear, so it is one-sided.
-> - **Watch:** Jax, Unmatched (89%, Deflect) gives every Equipment Quick-Draw, so an Equipment can come down in response to your Punch First. Counter Strike (83%) prevents the next damage and draws. Defy 89%.
-> - **Flips:** freely (0% removal; Not So Fast 44%).
+> - **Watch:** Jax, Unmatched (89%, Deflect) gives every Equipment Quick-Draw, so an Equipment can come down in response to your Punch First. Counter Strike (84%) prevents the next damage and draws. Defy 89%.
+> - **Flips:** freely (0% removal; Not So Fast 42%).
 > - **Never:** cast your last trick while they still have Calm open and Jax in play.
 
-**Their deck:** Defy 89%, Guardian Angel 89%, Jax 89%, Brutalizer 83%, Lucian, Merciless 83% (readies after his first conquest), Counter Strike 83%, Discipline 67%, Punch First 67%, Rampage 67%.
+**Their deck:** Defy 89%, Guardian Angel 89%, Jax 89%, Brutalizer 84%, Lucian, Merciless 84% (readies after his first conquest), Counter Strike 84%, Discipline 68%, Punch First 68%, Rampage 68%.
 **Results: samdsherman, 183rd of 2,165 at the Los Angeles RQ** (vouched). 27th and 45th in two League Cups.
 **43 bare · 92 +PF.** Both numbers ignore Equipment, which the method doesn't model, so **read them as too high**.
 **Battlefields:** **Ornn's Forge** (14 of 18: their first gear each turn is 1 cheaper while they control it), Sunken Temple (12).
@@ -1980,18 +1984,18 @@ Empower Applied Researchers or a Mel, and the legend empowers too, then spends i
 
 ---
 
-## Poppy, Keeper of the Hammer — Tier 5.5 · 0.9% · Body/Order · mean Might 4.06
+## Poppy, Keeper of the Hammer — Tier 5.5 · 0.9% · Body/Order · mean Might 3.92
 
 **Mean Might 4.06**, the biggest fair board on the page. **In a sentence:** a hold-and-XP deck whose 5-drop arrives ready the moment you get close to winning.
 
 > **At the table**
 > - **How you win:** isolate and swap. Bare 22% means **never** take a fair fight. Kha'Zix against a lone defender, Switcheroo and Punch First carry this matchup.
-> - **Watch:** **Poppy, Paragon** (76%, Deflect) enters ready with 3 XP **once you're within 3 points of winning**, so at 5 points expect a ready 5/5. **Keeper's Verdict** (59%) puts your unit on top or bottom of your deck. It's an Action, so it can come in your showdown. Repulse (41%) counters a spell that targets only one of their units.
+> - **Watch:** **Poppy, Paragon** (78%, Deflect) enters ready with 3 XP **once you're within 3 points of winning**, so at 5 points expect a ready 5/5. **Keeper's Verdict** (70%) puts your unit on top or bottom of your deck. It's an Action, so it can come in your showdown. Repulse (48%) counters a spell that targets only one of their units.
 > - **Their legend gains XP every time they hold.** Break holds early, before the XP piles up.
-> - **Flips:** freely (0% removal; Repulse 41%).
+> - **Flips:** freely (0% removal; Repulse 48%).
 > - **Never:** reach 5 with no plan for a ready 5/5.
 
-**Their deck:** Poppy, Paragon 76%, Grim Resolve 71%, Shepherd's Heirloom 65%, Demacian Diplomat 65%, Punch First 59%, Keeper's Verdict 59%, Sabotage 53%.
+**Their deck:** Poppy, Paragon 78%, Grim Resolve 74%, Shepherd's Heirloom 65%, Demacian Diplomat 70%, Punch First 61%, Keeper's Verdict 70%, Sabotage 52%.
 **Results:** 207th of 2,054 at Singapore (vouched). No Los Angeles list.
 **22 bare · 78 +PF.**
 **Battlefields:** **Gardens of Becoming** (10 of 17: units there can exhaust to gain XP).
@@ -1999,7 +2003,7 @@ Empower Applied Researchers or a Mel, and the legend empowers too, then spends i
 
 ---
 
-## Teemo, Swift Scout — Tier 5.6 · 0.8% · Mind/Chaos · mean Might 2.31
+## Teemo, Swift Scout — Tier 5.6 · 1.1% · Mind/Chaos · mean Might 2.29
 
 **In a sentence:** a deck of almost nothing but Hidden cards, whose small units grow when flipped and whose defender damages you for every Hidden card on top of its deck.
 
@@ -2008,8 +2012,8 @@ Empower Applied Researchers or a Mel, and the legend empowers too, then spends i
 > - **Mulligan:** units. Your bodies outclass theirs.
 > - **Early:** take both battlefields if you can. Teemo, Scout flips to 4 Might and Sprite Call makes a ready 3, so a facedown card is a unit you can't see yet.
 > - **Middle:** **attacking Teemo, Strategist costs you.** When it defends, it reveals 5 cards and deals 1 to your unit for each Hidden card, which is most of their deck. Their deck is about 60% Hidden, so five cards average about 3 damage. Attack it with a body that survives that, or Void Assault it out first.
-> - **Closing:** Guerilla Warfare (87%) returns two Hidden cards and lets them hide for free. Close before the second wave.
-> - **Flips:** into tapped Chaos (Gust 27%, Star-Crossed 13%). Pull Evelynn's target from their base, because Temporal Breach (53%) guards units at its battlefield.
+> - **Closing:** Guerilla Warfare (88%) returns two Hidden cards and lets them hide for free. Close before the second wave.
+> - **Flips:** into tapped Chaos (Gust 24%, Star-Crossed 28%). Pull Evelynn's target from their base, because Temporal Breach (52%) guards units at its battlefield.
 > - **Never:** attack one of their facedown cards with a unit you can't afford to lose.
 
 ### Their deck
@@ -2020,15 +2024,15 @@ About 24 Hidden cards a deck. Hiding costs them Energy instead of Power.
 
 | card | in | what it does to you |
 |---|---|---|
-| **Nocturne, Horrifying** | 93% | 4/4 Ganking; banish it off the top and play it for `[A]` |
-| **Teemo, Strategist** | 87% | Hidden 2/2. When it defends, 1 damage to your unit per Hidden card in their top 5 |
-| Guerilla Warfare | 87% | two Hidden cards back from the trash, free hiding this turn |
-| **Switcheroo** | 87% | their swap, face down |
+| **Nocturne, Horrifying** | 80% | 4/4 Ganking; banish it off the top and play it for `[A]` |
+| **Teemo, Strategist** | 100% | Hidden 2/2. When it defends, 1 damage to your unit per Hidden card in their top 5 |
+| Guerilla Warfare | 88% | two Hidden cards back from the trash, free hiding this turn |
+| **Switcheroo** | 88% | their swap, face down |
 | Consult the Past · Tideturner | 80% each | Hidden draw 2 · Hidden swap |
-| Sprite Call | 73% | Hidden: a ready 3/3 temporary Sprite |
-| Teemo, Scout | 73% | Hidden 1/1, +3 the turn it is played |
-| **Windsinger** | 67% | Hidden: bounces a ≤3-Might unit — **at its own battlefield only** |
-| Temporal Breach | 67% | Hidden: banish and replay a unit |
+| Sprite Call | 76% | Hidden: a ready 3/3 temporary Sprite |
+| Teemo, Scout | 76% | Hidden 1/1, +3 the turn it is played |
+| **Windsinger** | 60% | Hidden: bounces a ≤3-Might unit — **at its own battlefield only** |
+| Temporal Breach | 52% | Hidden: banish and replay a unit |
 
 **Results:** 39th of 78 at the Orlando $10k (vouched). One list claims Top 8 at a "16k€ Grand Summoner Skirmish".
 
@@ -2059,22 +2063,22 @@ About 24 Hidden cards a deck. Hiding costs them Energy instead of Power.
 
 - **LA RQ:** 2 Day 1 pilots, 0 Day 2. Ineligible per Gamer Tag Mythras.
 - **Post-ban:** JUAN C VILLARREAL 39th of 78 (Orlando $10k).
-- **Core** (n=17): Nocturne, Horrifying, Teemo, Strategist, Teemo, Scout, Guerilla Warfare, Consult the Past, Tideturner, Switcheroo. Battlefield: Grove of the God-Willow.
+- **Core** (n=27): Nocturne, Horrifying, Teemo, Strategist, Teemo, Scout, Guerilla Warfare, Consult the Past, Tideturner, Switcheroo. Battlefield: Grove of the God-Willow.
 - **JUAN's list:** 3 Switcheroo, 3 Temporal Breach, 3 Tideturner, 3 Windsinger, 2 Edge of Night, 1 Watcher.
 
 ---
 
-## Volibear, Relentless Storm — Tier 5.17 · 0.6% · Fury/Body · mean Might 6.46
+## Volibear, Relentless Storm — Tier 5.17 · 0.6% · Fury/Body · mean Might 6.65
 
 **In a sentence:** the worst board in the game. Their champion is Volibear, Furious.
 
 > **At the table:** Volibear. No fair fight exists, and Switcheroo is the matchup. But they are ramp, so **race before the board arrives.**
 > - **How you win:** take both battlefields in the first four turns. Their bodies cost 5 to 12 and they ramp to them with Mobilize and Catalyst, and **Forgotten Monument** (6 of 13) stops *both* players scoring there until their third turn.
-> - **Watch:** Volibear, Furious (85%) has **Deflect 2**: Switcheroo or Rampage on him costs two extra Power. Swap a non-Deflect body instead: Kadregrin (9), Elder Dragon (10), Blazing Scorcher (5). **Elder Dragon** (62%) lets any damage kill. Sky Splitter (69%) deals 5. Stormbringer (54%) deals a unit's Might to everything you have at a battlefield.
-> - **Flips:** freely. 15% can remove one, and Repulse 38% counters Evelynn's trigger.
+> - **Watch:** Volibear, Furious (88%) has **Deflect 2**: Switcheroo or Rampage on him costs two extra Power. Swap a non-Deflect body instead: Kadregrin (9), Elder Dragon (10), Blazing Scorcher (5). **Elder Dragon** (56%) lets any damage kill. Sky Splitter (75%) deals 5. Stormbringer (50%) deals a unit's Might to everything you have at a battlefield.
+> - **Flips:** freely. 19% can remove one (Shakedown), and Repulse 19% counters Evelynn's trigger.
 > - **Never:** build a board in place of points. One Stormbringer clears it.
 
-**Their deck:** Mobilize 100% and Catalyst of Aeons 77% (ramp), Volibear 85%, Kadregrin 69%, Blazing Scorcher 69%, Sky Splitter 69%, Elder Dragon 62%, Challenge 62%, Stormbringer 54%, Dazzling Aurora 46% (9E gear: a free unit every turn). No Hidden cards.
+**Their deck:** Mobilize 100% and Catalyst of Aeons 75% (ramp), Volibear 88%, Kadregrin 69%, Blazing Scorcher 62%, Sky Splitter 75%, Elder Dragon 56%, Challenge 56%, Stormbringer 50%, Dazzling Aurora 44% (9E gear: a free unit every turn). No Hidden cards.
 **3% bare. 27% with Punch First.** 63% isolated plus Kha'Zix. **97% with Switcheroo** is the whole matchup. You will almost never see it, but if you do, the swap is not a nice-to-have.
 **Battlefields:** **Sigil of the Storm** (7 of 13: whoever conquers there recycles a rune, so it hurts *you* if you take it early), Forgotten Monument (6), The Papertree (5: both players ramp on their hold).
 **Board (draft — not Jun):** +2 Ravenbloom Prefect (Dazzling Aurora), +1 Sabotage (ramp spells, Stormbringer); −2 Up from the Deep, −1 Grim Resolve.
@@ -2127,33 +2131,33 @@ Legal lists only (see [Sources](#sources-and-method)). Where an entry quotes an 
 
 | archetype | removes your hidden unit | …or counters Evelynn | counters Switcheroo |
 |---|---|---|---|
-| Ezreal | 100% | 100% | 60% |
-| Diana | 96% | 96% | 77% |
-| Mel | 90% | 90% | 90% |
-| Mirror | 88% | 91% | 50% |
-| Kennen | 88% | 88% | 28% |
-| Irelia | 71% | **97%** | 83% |
-| Vex | 66% | 72% | 51% |
-| Zed | 53% | 53% | 22% |
-| Teemo | 40% | 40% (+53% Breach) | 27% |
-| Kai'Sa | 2% | 2% | 0% |
-| Akali | 1% | **57%** | 57% |
-| Nasus | 0% | **62%** | 68% |
-| Fiora | 0% | 26% | **94%** |
-| Master Yi | 0% | 21% | 21% |
-| Lucian | 0% | 12% | 0% |
-| Lillia | 0% | 5% | 58% |
-| Jayce | 0% | 5% (+36% Breach) | 5% |
-| Azir | 0% | 9% | 11% |
-| Ornn | 0% | 9% | 9% |
-| Rengar | 0% | 6% | 6% |
-| **LeBlanc · Rek'Sai · Viktor · Vi** | 0–4% | 0–4% | 0% |
+| Ezreal | 100% | 100% | 63% |
+| Diana | 94% | 94% | 79% |
+| Mirror | 91% | 93% | 49% |
+| Mel | 88% | 88% | 92% |
+| Kennen | 88% | 88% | 26% |
+| Irelia | 72% | **96%** | 82% |
+| Vex | 68% | 75% | 55% |
+| Zed | 52% | 52% | 22% |
+| Teemo | 44% | 44% (+52% Breach) | 16% |
+| Lucian | 3% | 15% | 12% |
+| Kai'Sa | 2% | 2% (+77% Breach) | 0% |
+| Akali | 1% | **60%** | 61% |
+| Nasus | 0% | **52%** (+40% Breach) | 58% |
+| Fiora | 0% | 28% | **95%** |
+| Master Yi | 0% | 20% | 20% |
+| Lillia | 0% | 6% | 46% |
+| Jayce | 0% | 7% (+34% Breach) | 7% |
+| Azir | 0% | 10% | 12% |
+| Ornn | 0% | 10% | 10% |
+| Rengar | 0% | 5% | 5% |
+| **LeBlanc · Rek'Sai · Viktor · Vi** | 0–3% | 0–3% | 0% |
 
 "Breach" is Temporal Breach guarding the unit Evelynn chose — it only matters if that unit stands at their facedown card's battlefield.
 
 ### The card that shows them your facedown cards
 
-**Scuttle Crab** is in Ornn 91%, Irelia 88%, Master Yi 79%, Vex 56%, Akali 53% and Nasus 88%. *"[Deathknell] Choose an opponent. They reveal their hand. You can look at their facedown cards this turn."* **Killing it shows them your hand and every hidden card you have, for that turn.** Don't kill it on a turn a hidden card is carrying the plan.
+**Scuttle Crab** is in Ornn 92%, Nasus 90%, Irelia 85%, Master Yi 78%, Akali 53%, Vex 48% and Lillia 39%. *"[Deathknell] Choose an opponent. They reveal their hand. You can look at their facedown cards this turn."* **Killing it shows them your hand and every hidden card you have, for that turn.** Don't kill it on a turn a hidden card is carrying the plan.
 
 ### Where Decree of Strength is live
 
@@ -2172,7 +2176,7 @@ Grind is from the 1 October window (see Sources), not recomputed.
 
 ### Who cannot contest two battlefields
 
-**Azir 0.3 cheap units · Ezreal 0.8 · Volibear 0.9 · Jayce 1.5 · Miss Fortune 2.9.** Jhin runs 14.6 units a deck, the fewest of any entry. Against these, take both and race.
+**Azir 0.3 cheap units · Ezreal 0.1 · Volibear 0.8 · Jayce 1.8 · Miss Fortune 2.9** (units costing 2 Energy or less, per legal list). Jhin runs 14.6 units a deck, the fewest of any entry. Against these, take both and race.
 
 ### Battlefields that change how you play
 
@@ -2193,11 +2197,11 @@ Grind is from the 1 October window (see Sources), not recomputed.
 
 ## Sources and method
 
-**Which lists count.** `data/decks.json` keeps every list riftbound.gg serves, and its `dt` is the date a list was **posted**, not the date its event was played. Pre-ban events (Singapore 5 September, Barcelona, the CCS events, most China City Challenges) are still being posted weeks after the 15 September ban, so a date filter does not separate pre-ban from post-ban: on 8 October **986 of 3,008 archived lists held a banned card**, Stacked Deck in 480 of them. The 1 October version of this page counted those lists, which inflated Kennen (88 of its 128 lists in that window were pre-ban), Irelia, Ezreal, Vex and Kai'Sa. **This version uses legal lists only**: no list holding a card in `data/banned.json`. `scripts/rift meta` applies that filter (the same one the app's Meta tab uses, and `check.mjs` asserts they agree), and every share in a heading comes from it: 2,023 legal lists. Lillia and Ivern each appear under two legend spellings, and their shares add both.
+**Which lists count.** `data/decks.json` keeps every list riftbound.gg serves, and its `dt` is the date a list was **posted**, not the date its event was played. Pre-ban events (Singapore 5 September, Barcelona, the CCS events, most China City Challenges) are still being posted weeks after the 15 September ban, so a date filter does not separate pre-ban from post-ban: in the snapshot generated **8 October** (`generatedAt` 2026-10-08), **1,016 of 3,564 archived lists hold a banned card**. The 1 October version of this page counted those lists, which inflated Kennen, Irelia, Ezreal, Vex and Kai'Sa. **This version uses legal lists only**: no list holding a card in `data/banned.json`. `scripts/rift meta` applies that filter (the same one the app's Meta tab uses, and `check.mjs` asserts they agree), and every share in a heading comes from it: **2,548 legal lists**. Lillia and Ivern each appear under two legend spellings; `scripts/rift meta` folds both into one archetype.
 
-**Legal is not post-ban.** A pre-ban list that ran no banned card passes the filter. Only five events in the window are **confirmed post-ban** by their own date: the **Los Angeles RQ** (26 September), the **Orlando $10k** (26 September, 0 banned lists of 70), the **Orlando $2.5k** (27 September), **Showdown Series Bristol** (26 September) and the **Scrub Cup** (2 October). *Proven lists* name those finishes as post-ban; their "core" counts use every legal list, with n given, so read them as an archetype's shape, not its post-ban tuning. `scripts/rift meta <legend> --since 2026-09-15` is the stricter cut, dating tournament-vouched lists by their event.
+**Legal is not post-ban.** A pre-ban list that ran no banned card passes the filter. Only five events in the window are **confirmed post-ban** by their own date: the **Los Angeles RQ** (26 September), the **Orlando $10k** (26 September, 0 banned lists of 70), the **Orlando $2.5k** (27 September), **Showdown Series Bristol** (26 September) and the **Scrub Cup** (2 October). The 8 October refresh added **526 legal lists and no new tournament-vouched result**; it did add claimed finishes, which the *Proven lists* blocks mark as claims. *Proven lists* name the confirmed finishes as post-ban; their "core" counts use every legal list, with n given, so read them as an archetype's shape, not its post-ban tuning. `scripts/rift meta <legend> --since 2026-09-15` is the stricter cut, dating tournament-vouched lists by their event.
 
-**Card play rates** inside the entries were re-read between 1 and 8 October, each over legal lists in its window: 24 September to 4 October for most entries, the 23 September bulk-import day excluded (901 decks posted in minutes, which skews every share it touches). A card's rate is the share of lists holding at least one copy, alternate printings counted once.
+**Card play rates, flip and counter rates and mean Might** inside the entries were recomputed on 9 October over each archetype's **legal lists posted 24 September to 8 October**, the 23 September bulk-import day excluded (901 decks posted in minutes, which skews every share it touches). A card's rate is the share of lists holding at least one copy, alternate printings counted once. Simulation figures were not recomputed (see below).
 
 **Tier placement** is riftbound.gg's Vendetta week-4 list, scraped into `data/tiers.json` on **2026-10-04**: 49 ranked archetypes. It moved a lot since 1 October: Master Yi to 1.2, LeBlanc, Akali and Kennen down to Tier 2, Jayce down to 3.2, Kha'Zix up to 3.6.
 
@@ -2211,4 +2215,4 @@ Grind is from the 1 October window (see Sources), not recomputed.
 
 **Power costs are checked against the catalog.** `data/cards.json` carries Power as `p` (absent means 0), and `scripts/rift card` and `scripts/rift deck` print it. Every Power claim on this page was re-read against it on 9 October: Punch First and Switcheroo at 2 Power are out of Defy's reach (Defy counters up to 4 Energy and 1 Power), Grim Resolve, Hard Bargain and Rampage cost no Power, and Riposte is 2 Energy and 2 Power across Body and Order.
 
-**What this page does not claim.** Shares below about 2% rest on 13–40 legal lists and should be read as shape rather than measurement. The archive's real depth is the 11 days `span` reports, not the 60 its window declares, so **ordering is reliable and small gaps are not.** Nothing here claims the deck is good — it claims the deck has a regional result and a knowable set of matchups.
+**What this page does not claim.** Shares below about 2% rest on 15–50 legal lists and should be read as shape rather than measurement. The archive's real depth is the 15 days `span` reports, not the 60 its window declares, so **ordering is reliable and small gaps are not.** Nothing here claims the deck is good — it claims the deck has a regional result and a knowable set of matchups.
