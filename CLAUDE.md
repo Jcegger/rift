@@ -25,7 +25,9 @@ The order is **handbook → verbatim → FAQ → rulings**:
 questions arrive in players'. §359.3.e.12 decides what happens when a permanent is
 bounced in response to its own trigger and contains none of the words *bounce*, *return
 to hand* or *leaves the board*. Search the handbook by concept before the verbatim by
-keyword.
+keyword. **`docs/jargon.md`** translates players' words into the concept: "chase the queen"
+means repeated removal on the deck's protected champion unit, and asking Jay what it meant
+was the wrong move.
 
 **The answer is usually a composition, and no single rule states it.** Hidden pinning a
 target to a battlefield (§811.1.d.2) plus off-board reads returning null (§359.3.e.12)
