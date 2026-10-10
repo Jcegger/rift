@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-09",
+ "generatedAt": "2026-10-10",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2257,
+  "events": 2263,
   "eventsWithDecks": 6,
-  "players": 57257,
+  "players": 57324,
   "playersWithDecks": 4837,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
@@ -31,21 +31,21 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 52,
-  "claimedEventsUnmatched": 46,
+  "claimedEvents": 55,
+  "claimedEventsUnmatched": 49,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Asia": 64,
-   "Europe": 31,
-   "unknown": 141,
+   "Europe": 33,
+   "unknown": 150,
+   "Asia": 66,
    "Oceania": 3,
    "North America": 6
   },
   "registryEventsByRegion": {
-   "unknown": 2256,
+   "unknown": 2262,
    "Asia": 1
   },
   "unresolvedClaimEvents": [
@@ -63,6 +63,7 @@
    "CCS 25k Qualifier #5",
    "Changsha RQ",
    "Chengdu Regional",
+   "Dalian Regional",
    "Dinan Regional",
    "Fury Mind by will",
    "Harbin City Challenge",
@@ -72,6 +73,7 @@
    "Nanjing Regional",
    "Nexus Nights - 1v1 by Atlantis Games & Comics",
    "RiftAtlas Convergence #2",
+   "Riftbound Showdown Series Germany",
    "Riftbound Showdown Series: Malmö",
    "S4 Beijing City Challenge",
    "S4 Guangzhou City Challenge",
@@ -88,6 +90,7 @@
    "Sydney",
    "Sydney Regional Qualifier",
    "Tianjin Regional",
+   "Tianjing Regional",
    "Top Shelf Masters Tournament",
    "Utrecht RQ",
    "Vancouver RQ",
@@ -129,6 +132,51 @@
  },
  "events": [
   {
+   "name": "REDO Nexus Night",
+   "dt": "2026-10-09",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "TheZombiePriest",
+   "country": "FR",
+   "slug": "redo-nexus-night-4816"
+  },
+  {
+   "name": "Aquijabara Vendetta Summoner Skirmish II",
+   "dt": "2026-10-09",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "jimyNT",
+   "country": "ES",
+   "slug": "aquijabara-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "CAESAR CARDS’ Friday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-10-09",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "HO Sequinox",
+   "country": "SG",
+   "slug": "caesar-cards-friday-afternoon-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II",
+   "dt": "2026-10-09",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "EmmaK",
+   "country": "CO",
+   "slug": "vendetta-summoner-skirmish-ii-1176"
+  },
+  {
+   "name": "Thursday Nexus Nights",
+   "dt": "2026-10-09",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Baconpig",
+   "country": "US",
+   "slug": "thursday-nexus-nights-2187"
+  },
+  {
    "name": "Wednesday Evening Vendetta Summoner Skirmish II",
    "dt": "2026-10-08",
    "players": 10,
@@ -136,6 +184,15 @@
    "winner": "Gold Experience",
    "country": "MX",
    "slug": "wednesday-evening-vendetta-summoner-skirmish-ii-446"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II",
+   "dt": "2026-10-08",
+   "players": 13,
+   "format": "Constructed",
+   "winner": "Recusaurus",
+   "country": "IT",
+   "slug": "vendetta-summoner-skirmish-ii-4240"
   },
   {
    "name": "POYU´s Summoner Skirmish - October",
