@@ -136,6 +136,47 @@ Never hold zero battlefields, and never take a fight you have not rigged.
 
 ---
 
+## When Astral Heron lands
+
+**Astral Heron** is in **236 of 2,412 legal lists (9.8%)**, all of them Calm decks with Defy and Discipline behind it. *7 Energy, no Power, 7 Might, no keywords: "When you play your first card each turn, if I'm at a battlefield, the next card you play this turn costs [2][A][A] less."* While it stands at a battlefield, **every one of their turns is two plays**, and the second one is 2 Energy and 2 Power cheaper.
+
+| deck | lists with Heron | what sits behind it |
+|---|---|---|
+| **Akali** | 73% | Zhonya's Hourglass 82%, Defy 94%, Not So Fast 58%. Their legend rescues units on *their* turn only |
+| **Nasus** | 58% | Defy 98%, and Thousand-Tailed Watcher (92%): two 7-drops |
+| **Ivern** | 55% (both legend spellings) | Defy 88%, Discipline 88%, pets that defend big |
+| **Vex** | 39% | Vex, Apathetic (98%) stuns every unit you play while she's at a battlefield, Ambush included |
+| **Irelia** | 32% | a second queen. Not So Fast 81%, Zhonya's 81% |
+| **Ahri** | 22% | their legend gives each of your attackers −1 at their battlefields |
+| **Shen** | 11% | Discipline 100% |
+
+**Jun's test for the post-ban format:** *"If you let a Heron player conquer for free and drop Astral Heron without being offered a fight, you fall very far behind."* That is the whole plan in one sentence, and it is why his list became hold-centric. A unit can be played straight onto **a battlefield its controller already controls** (§355.2.a, [rules.md](../docs/rules.md)), so a free conquest is a landing pad: Heron arrives at a battlefield, and their *next* turn is already discounted.
+
+### Before it lands: no free landing pads
+
+- **Count to 7.** When they will have 7 runes on their turn, Heron is live. It costs no Power, so they can land it and still hold up Defy or Discipline.
+- **Never leave them a battlefield for free the turn before.** Contest it, or hold your own with a facedown card behind it. That's what the Hidden package is for: a hidden card costs one Power now and makes your hold expensive to break ([deck guide](khazix-voidreaver.md)).
+- **Offer the fight early.** Akali's plan line already says it: fight before Heron lands.
+
+### The turn after it lands: answer it before their next turn
+
+Heron enters exhausted (§143.4), and its discount needs it at a battlefield when they play their first card of a turn, so it pays off from their next turn. **Your turn in between is the window.** In order of reliability:
+
+1. **Fight it with Punch First.** It's the one answer their deck can't stop. Punch First chooses your unit, so Not So Fast can't touch it, and at 2 Power it's out of Defy's reach. Their only reply is a pump: Discipline makes Heron 9. **Kha'Zix against a lone Heron is 4 + 2 + 5 = 11.** Two Disciplines would make it 11 too, and a tie doesn't kill it, so count their open Calm. Against Akali, fight it on your turn, when their legend can't rescue it.
+2. **Bounce it with Star-Crossed.** Bounce beats kill here: Zhonya's Hourglass only saves a unit that *would die*, and they pay 7 again to replay it. But Defy and Not So Fast both counter Star-Crossed, so bait the Defy with a lesser spell, or cast it into tapped Calm. Heron has no Deflect.
+3. **Switcheroo it after they pump.** Heron's 7 (or 9) goes onto your Tentacle, and your Tentacle's Might goes onto Heron. Out of Defy's reach; Not So Fast still counters it.
+4. **Drag it.** Void Assault, Faefolk or Evelynn move Heron to *your* battlefield, so it attacks into your hold and leaves the battlefield it was paying from.
+
+**What doesn't work:** Gust (3 Might or less). Rampage, unless your unit has 7 Might, because the damage goes both ways. Sabotage and Decree of Strength can't take it from hand: it's a Calm unit.
+
+### If it survives a turn
+
+**The role flips** ([strategy.md §2](../docs/strategy.md#2-every-deck-is-solving-a-different-problem)). A discounted extra card every turn is their engine coming online, and quiet turns now favour them. **Push**: break the battlefield Heron stands on, because the discount only works while it's at one. Make them spend the discount on defending it rather than on developing. And count the discount in every read: their open runes now buy one more card than they show.
+
+**Per deck:** against **Vex**, check where Vex, Apathetic stands before an Ambush into a Heron fight. Against **Ahri**, attack Heron with one big unit plus Punch First, never wide. Against **Irelia**, Heron is a second queen, so the "make them protect two places" plan applies twice over. Against **Nasus**, race: Watcher is coming too.
+
+---
+
 ## At a glance
 
 | Opponent | Jun | Plan | Flip Evelynn? | Flip the rest? | The thing that beats you |
@@ -188,7 +229,7 @@ Never hold zero battlefields, and never take a fight you have not rigged.
 | Defy | 100% | counters your spell up to 4 Energy and 1 Power |
 | Not So Fast | 80% | counters any spell or ability that chooses her |
 
-**Chasing her is the trap.** Every spell of yours that chooses her pays **Deflect's extra Power** (§809.1.c). That's a mandatory additional cost, so Void Assault or Rampage aimed at her runs 2 Power into a deck that counters it. Their answer costs 1 Energy and makes her bigger. **Even when she dies, you've traded a trick and two Power for their 1-Energy card, and they scored while you did it.** *(Whether the Deflect tax puts a 1-Power spell beyond Defy's "no more than 1 Power" isn't settled on this page. Assume Defy still counters it.)*
+**Chasing her is the trap.** Every spell of yours that chooses her pays **Deflect's extra Power** (§809.1.c). That's a mandatory additional cost, so Void Assault or Rampage aimed at her runs 2 Power into a deck that counters it. Their answer costs 1 Energy and makes her bigger. **Even when she dies, you've traded a trick and two Power for their 1-Energy card, and they scored while you did it.** **And the tax buys nothing against Defy**: a cost check reads the card's printed cost, whatever you actually paid (§206, [rules.md](../docs/rules.md)). So Star-Crossed is still a 1-Power spell to Defy. The same rule works for you on Sandswept Tomb: a Punch First discounted to 1 Power there still reads 2, so it stays out of Defy's reach.
 
 **So don't chase her. Make her protect two places.**
 - **She's one unit.** Press the battlefield she isn't on and score it. That's the guide's plan anyway: press, reach 6 first, win straight fights (56% bare, your best fair number).
