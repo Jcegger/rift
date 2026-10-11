@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-10",
+ "generatedAt": "2026-10-11",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2263,
-  "eventsWithDecks": 6,
-  "players": 57324,
-  "playersWithDecks": 4837,
+  "events": 2322,
+  "eventsWithDecks": 7,
+  "players": 58171,
+  "playersWithDecks": 4857,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
    "Mardi - Championship #1",
@@ -38,14 +38,14 @@
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Europe": 35,
-   "unknown": 154,
-   "Asia": 66,
-   "Oceania": 3,
+   "Oceania": 4,
+   "Asia": 69,
+   "Europe": 37,
+   "unknown": 160,
    "North America": 6
   },
   "registryEventsByRegion": {
-   "unknown": 2262,
+   "unknown": 2321,
    "Asia": 1
   },
   "unresolvedClaimEvents": [
@@ -122,6 +122,7 @@
    "Riftbound Remote Showdown #3": 20,
    "Riftbound Remote Showdown #2": 14,
    "Riftbound Online Tournament": 13,
+   "Card Cosmos Denver Riftbound $1K Tourney": 12,
    "Runes & Rift Open 19": 8,
    "Triple Win-A-Box | Vendetta Tournament": 8,
    "Riftbound Remote Showdown #4": 8,
@@ -131,6 +132,510 @@
   }
  },
  "events": [
+  {
+   "name": "Card Cosmos Denver Riftbound $1K Tourney",
+   "dt": "2026-10-10",
+   "players": 20,
+   "format": "Constructed",
+   "winner": "Vorpal",
+   "country": null,
+   "slug": "card-cosmos-denver-riftbound-1k-tourney"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II (Win A Box)",
+   "dt": "2026-10-10",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "IcarusDwell",
+   "country": "CA",
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-win-a-box"
+  },
+  {
+   "name": "CARD CLUB - Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "Miyamoto Musashi",
+   "country": "DE",
+   "slug": "card-club-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 29,
+   "format": "Constructed",
+   "winner": "TCR Camilari",
+   "country": "ES",
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-9709"
+  },
+  {
+   "name": "Saturday Evening Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 13,
+   "format": "Constructed",
+   "winner": "Flames",
+   "country": "CA",
+   "slug": "saturday-evening-vendetta-summoner-skirmish-ii-2583"
+  },
+  {
+   "name": "October Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Mr mi guardi",
+   "country": "IT",
+   "slug": "october-vendetta-summoner-skirmish-ii-9236"
+  },
+  {
+   "name": "Summoner Skirmish - October",
+   "dt": "2026-10-10",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "MalgaxJungleGod",
+   "country": "IT",
+   "slug": "summoner-skirmish-october-8782"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "P4T0",
+   "country": "PT",
+   "slug": "vendetta-summoner-skirmish-ii-2680"
+  },
+  {
+   "name": "Vendetta Skirmish II - CWG",
+   "dt": "2026-10-10",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Hirano",
+   "country": "BR",
+   "slug": "vendetta-skirmish-ii-cwg"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II San Martino Pomeriggio",
+   "dt": "2026-10-10",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Vanyhal",
+   "country": "IT",
+   "slug": "vendetta-summoner-skirmish-ii-san-martino-pomeriggio"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "Whocutthecheese",
+   "country": "BE",
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-8920"
+  },
+  {
+   "name": "Mystic Crew's Nexus Night - 1v1 #8",
+   "dt": "2026-10-10",
+   "players": 27,
+   "format": "Constructed",
+   "winner": "Egoist",
+   "country": "VN",
+   "slug": "mystic-crews-nexus-night-1v1-8"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Proudy",
+   "country": "GB",
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-5074"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 28,
+   "format": "Constructed",
+   "winner": "Forg0",
+   "country": "IE",
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-3334"
+  },
+  {
+   "name": "Summoner Skirmish d'Octobre - Les Trois Commandements",
+   "dt": "2026-10-10",
+   "players": 13,
+   "format": "Constructed",
+   "winner": "Rajkit Overdoz",
+   "country": "FR",
+   "slug": "summoner-skirmish-doctobre-les-trois-commandements"
+  },
+  {
+   "name": "BFCG Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "Tobonator",
+   "country": "DE",
+   "slug": "bfcg-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Elteras",
+   "country": "GB",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-9437"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "Kaizarki",
+   "country": "DE",
+   "slug": "vendetta-summoner-skirmish-ii-8403"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Vankax",
+   "country": "GB",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-1402"
+  },
+  {
+   "name": "GIMLI-Store - Summoner Skirmish - Okt",
+   "dt": "2026-10-10",
+   "players": 11,
+   "format": "Constructed",
+   "winner": "Belun",
+   "country": "DE",
+   "slug": "gimli-store-summoner-skirmish-okt"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Porsche Peter",
+   "country": "DE",
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-7808"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish at Game Corner",
+   "dt": "2026-10-10",
+   "players": 11,
+   "format": "Constructed",
+   "winner": "RWLK Rayd3rs",
+   "country": "GB",
+   "slug": "vendetta-summoner-skirmish-at-game-corner"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "pentakilla94",
+   "country": "DE",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-4082"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 15,
+   "format": "Constructed",
+   "winner": "MikX",
+   "country": "FI",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-2605"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Sin",
+   "country": "DE",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-5730"
+  },
+  {
+   "name": "ZENTRO Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 18,
+   "format": "Constructed",
+   "winner": "Xilabit",
+   "country": "ES",
+   "slug": "zentro-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "KartenKumpel Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "ByVoidex",
+   "country": "DE",
+   "slug": "kartenkumpel-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "NRW Darisu",
+   "country": "DE",
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-6206"
+  },
+  {
+   "name": "Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "iSoSyS",
+   "country": "PT",
+   "slug": "summoner-skirmish-ii"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 16,
+   "format": "Constructed",
+   "winner": "MiguelAbreu",
+   "country": "PT",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-9609"
+  },
+  {
+   "name": "Swiss Summoner's Cup Vendetta Skirmish II",
+   "dt": "2026-10-10",
+   "players": 32,
+   "format": "Constructed",
+   "winner": "Bug Catcher Jose",
+   "country": "CH",
+   "slug": "swiss-summoners-cup-vendetta-skirmish-ii"
+  },
+  {
+   "name": "Manatorsk - 2v2 Magma Chamber",
+   "dt": "2026-10-10",
+   "players": 16,
+   "format": "Constructed",
+   "winner": "Henke W",
+   "country": "SE",
+   "slug": "manatorsk-2v2-magma-chamber"
+  },
+  {
+   "name": "Playoteket Summoner Skirmish September",
+   "dt": "2026-10-10",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Snarkizz",
+   "country": "SE",
+   "slug": "playoteket-summoner-skirmish-september"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 20,
+   "format": "Constructed",
+   "winner": "Solerk",
+   "country": "FR",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-8756"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Sonecon",
+   "country": "DE",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-6992"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II @ JustFreak.es",
+   "dt": "2026-10-10",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "i CheiZz",
+   "country": "ES",
+   "slug": "vendetta-summoner-skirmish-ii-justfreakes"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II - Date A Card",
+   "dt": "2026-10-10",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "Caled",
+   "country": "FR",
+   "slug": "vendetta-summoner-skirmish-ii-date-a-card"
+  },
+  {
+   "name": "Skirmish Atmos-Arena Octobre",
+   "dt": "2026-10-10",
+   "players": 17,
+   "format": "Constructed",
+   "winner": "AA flolcsc",
+   "country": "FR",
+   "slug": "skirmish-atmos-arena-octobre"
+  },
+  {
+   "name": "Torneo Colección Riftbound- 10 Octubre - La Cueva Roja",
+   "dt": "2026-10-10",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "Damaton",
+   "country": "ES",
+   "slug": "torneo-coleccion-riftbound-10-octubre-la-cueva-roja"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 32,
+   "format": "Constructed",
+   "winner": "Grützbeutel",
+   "country": "DE",
+   "slug": "vendetta-summoner-skirmish-ii-1702"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 17,
+   "format": "Constructed",
+   "winner": "Hyoshiiro",
+   "country": "FR",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-9847"
+  },
+  {
+   "name": "Vendetta Summoner Skirmish",
+   "dt": "2026-10-10",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "INFINITY Subkay",
+   "country": "DE",
+   "slug": "vendetta-summoner-skirmish-8880"
+  },
+  {
+   "name": "TOUL - Riftbound - Skirmish Vendetta",
+   "dt": "2026-10-10",
+   "players": 15,
+   "format": "Constructed",
+   "winner": "infa",
+   "country": "FR",
+   "slug": "toul-riftbound-skirmish-vendetta"
+  },
+  {
+   "name": "Le Troll Savant Créteil - Skirmish Riftbound 10/10/26",
+   "dt": "2026-10-10",
+   "players": 11,
+   "format": "Constructed",
+   "winner": "WILO",
+   "country": "FR",
+   "slug": "le-troll-savant-creteil-skirmish-riftbound-101026"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Vampire Briaries",
+   "country": "DE",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-4513"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 14,
+   "format": "Constructed",
+   "winner": "King K Rool",
+   "country": "DE",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-3094"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "xstrom06",
+   "country": "FR",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-9897"
+  },
+  {
+   "name": "🔵 Jupiter Madrid Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 12,
+   "format": "Constructed",
+   "winner": "Procaster88",
+   "country": "ES",
+   "slug": "jupiter-madrid-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Saturday Morning Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 22,
+   "format": "Constructed",
+   "winner": "Xaybor",
+   "country": "DE",
+   "slug": "saturday-morning-vendetta-summoner-skirmish-ii-9264"
+  },
+  {
+   "name": "Skirmish Vendetta w Przyczółku",
+   "dt": "2026-10-10",
+   "players": 16,
+   "format": "Constructed",
+   "winner": "Selverin",
+   "country": "PL",
+   "slug": "skirmish-vendetta-w-przyczolku"
+  },
+  {
+   "name": "Saturday Night Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 17,
+   "format": "Constructed",
+   "winner": "CochinitaMala",
+   "country": "ES",
+   "slug": "saturday-night-vendetta-summoner-skirmish-ii-4924"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 18,
+   "format": "Constructed",
+   "winner": "Hogvax",
+   "country": "SG",
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-6141"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "Ev0ke",
+   "country": "MY",
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-7367"
+  },
+  {
+   "name": "Jurong Games Haven Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 10,
+   "format": "Constructed",
+   "winner": "bitterstar",
+   "country": "SG",
+   "slug": "jurong-games-haven-vendetta-summoner-skirmish-ii"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 18,
+   "format": "Constructed",
+   "winner": "Chamelon",
+   "country": "TH",
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-2806"
+  },
+  {
+   "name": "Rogue's Passage - Vendetta Summoner Skirmish II",
+   "dt": "2026-10-10",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "GNE Crep",
+   "country": "SG",
+   "slug": "rogues-passage-vendetta-summoner-skirmish-ii"
+  },
   {
    "name": "REDO Nexus Night",
    "dt": "2026-10-09",
@@ -175,6 +680,33 @@
    "winner": "Baconpig",
    "country": "US",
    "slug": "thursday-nexus-nights-2187"
+  },
+  {
+   "name": "[RB] Win-A-Case Farwell to Vendetta",
+   "dt": "2026-10-09",
+   "players": 26,
+   "format": "Constructed",
+   "winner": "ViewPsyduck",
+   "country": "NZ",
+   "slug": "rb-win-a-case-farwell-to-vendetta"
+  },
+  {
+   "name": "Friday Evening Vendetta Summoner Skirmish II",
+   "dt": "2026-10-09",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Kuro",
+   "country": "CA",
+   "slug": "friday-evening-vendetta-summoner-skirmish-ii-2515"
+  },
+  {
+   "name": "Saturday Afternoon Vendetta Summoner Skirmish II",
+   "dt": "2026-10-09",
+   "players": 15,
+   "format": "Constructed",
+   "winner": "Diegoku10000",
+   "country": "EC",
+   "slug": "saturday-afternoon-vendetta-summoner-skirmish-ii-4144"
   },
   {
    "name": "Wednesday Evening Vendetta Summoner Skirmish II",
