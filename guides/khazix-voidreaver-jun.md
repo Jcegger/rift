@@ -22,6 +22,7 @@ The guide has two layers, and they are not the same age.
 | **Updates, 15 and 21 September** | the post-ban format | current. The metagame read and the choice of build |
 | **The midrange list he ends on** | post-ban | the 23 September list: Kinkou Initiate ×3, Star Spring, the Hidden package |
 | **His 3 October revision** (passed on directly, not in the Metafy guide) | post-ban | **current, and the list you run**: one Grim Resolve and a second Traveling Merchant come in. Where the notes below discuss those cards, this overrides them |
+| **His 11 October sideboard change** ("Midrange Kha'Zix 2.0" on Piltover Archive) | post-ban | **current**: Hard Bargain out of the board, a second Decree of Strength in. Where the notes below mention Hard Bargain, it is no longer one of your cards |
 | **Card choices, game plan, mulligans, mistakes, matchups** | the **pre-ban** "Kha'Zix Midrange Vendetta" list | **the reasoning is current; some of the cards are not.** That list ran Stacked Deck ×3 (now banned), Onslaught, Hard Bargain main, Up from the Deep ×3, Forbidding Waste, and no Evelynn or Tornado Warrior |
 | **Sideboard tables** | the pre-ban side (Sett, Akshan, Angler Beast, Abandon, Rebuke, Unyielding Spirit) | **the principles hold; the tables mostly do not.** See [§7](#7-sideboarding) |
 | **Dated matchup posts** (22–23 September: Akali, Jayce, LeBlanc) and the **gameplay videos** | post-ban | **not captured.** They are video or did not print. Watch them on Metafy |
@@ -155,6 +156,8 @@ He also ran **Kinkou Initiate** only reluctantly before the ban, because it draw
 | Azir | Acceptable Losses, Sabotage, Hard Bargain | Zed ×2, Star-Crossed; on the play Up from the Deep ×3, on the draw Merchant ×2 |
 | Irelia | Acceptable Losses, Sabotage, Hard Bargain, Switcheroo | **Punch First ×2** both ways; on the play Up from the Deep ×2 and Zed, on the draw Matriarch and a Merchant |
 | Diana | Sabotage, Hard Bargain, Switcheroo | on the play Up from the Deep ×2 and Zed, on the draw Matriarch and a Merchant |
+
+**Hard Bargain left your board on 11 October**, so the Rengar, Azir, Irelia and Diana rows above are one card short of his plan; the matchup guide's board lines have been updated for it.
 
 He brings **Switcheroo in against five of the six**. That was from the board when he ran it there. You run one copy main.
 

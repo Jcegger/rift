@@ -494,7 +494,7 @@ To cast something costing **E** Energy and **P** Power, you need **max(E, P) run
 
 ## 10. Sideboarding
 
-**The board:** 2 Gust · 2 Acceptable Losses · 2 Ravenbloom Prefect · 1 Sabotage · 1 Hard Bargain · 1 Rampage · 1 Decree of Strength. Ten of ten, and per-matchup swaps live in the [matchup guide](khazix-voidreaver-matchups.md).
+**The board:** 2 Gust · 2 Acceptable Losses · 2 Ravenbloom Prefect · 2 Decree of Strength · 1 Sabotage · 1 Rampage. Jun's **11 October** revision swapped Hard Bargain for the second Decree. Ten of ten, and per-matchup swaps live in the [matchup guide](khazix-voidreaver-matchups.md).
 
 **Jun's principles:**
 
@@ -509,10 +509,9 @@ To cast something costing **E** Energy and **P** Power, you need **max(E, P) run
 | **Gust ×2** | Star-Crossed's job against small boards for 1 Energy, without bouncing your own unit. **Jun's main answer to Kennen replaying Ride the Wind**: wait for the Ride the Wind and react |
 | **Acceptable Losses ×2** | each player kills one of their gear. You make no gear, so it is one-sided. It answers Zhonya's Hourglass and Equipment for 1 Energy, and Fizz replays it |
 | **Ravenbloom Prefect ×2** | a 3-Might body that banishes a gear as it is played. **Jun: "incredibly oppressive" against Dazzling Aurora**, and he often brings it in on the draw to play on turn 1 |
-| **Hard Bargain ×1** | counters a spell unless they pay 2. **Jun holds it for his own turn**, where it counters the one pump they kept open. This guide also uses it to protect flips, which can be on their turn. That is newer than Jun's write-up |
 | **Sabotage ×1** | the third copy, at the three-copy cap |
 | **Rampage ×1** | the third copy: removal that needs no fight |
-| **Decree of Strength ×1** | a Power-free Sabotage that only works against **Mind** decks: LeBlanc, Jayce, Ezreal, Viktor, Mel, Kai'Sa, Lillia, Ornn, Diana, Teemo |
+| **Decree of Strength ×2** | a Power-free Sabotage that only works against **Mind** decks: LeBlanc, Jayce, Ezreal, Viktor, Mel, Kai'Sa, Lillia, Ornn, Diana, Teemo. The second copy (11 October) took Hard Bargain's slot, so against Mind decks the old Hard Bargain swaps now bring in Decree, and elsewhere they are gone |
 
 ---
 
@@ -560,7 +559,7 @@ Jun's list has the results, and this repo's standing rule is to pick between his
 
 ## Sources and method
 
-**The list** is Jun's 3 October revision, written to the app's Supabase state on 3 October and read back via `scripts/rift deck "Kha'Zix Midrange"`.
+**The list** is Jun's 3 October revision, with his 11 October sideboard change (−1 Hard Bargain, +1 Decree of Strength; [Piltover Archive](https://piltoverarchive.com/decks/view/78855684-d5c2-468a-ad60-c52002a01844), "Midrange Kha'Zix 2.0"), written to the app's Supabase state on 3 and 11 October and read back via `scripts/rift deck "Kha'Zix Midrange"`.
 - **Its results:** riftbound.gg's *All Best-of Legends Prizing Decks in Los Angeles* names Cuoemrei as the Best-of Kha'Zix winner, and the archive carries Cuoemrei's list, identical to this one. HTCG Dizoo's Orlando list is tournament-vouched in the archive (`tour: 1`, placing 36), at an event `data/events.json` records with 78 players. The Top 32 LA title is the deck author's claim.
 - **Tier:** riftbound.gg's tier list of 1 October has Kha'Zix at Tier 4, noting it "didn't do much in third-party events before the bans either, but typically rose to the occasion during regional tournaments."
 

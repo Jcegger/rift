@@ -171,7 +171,7 @@ Never hold zero battlefields, and never take a fight you have not rigged.
 > - **Mulligan:** keep units. A 2-drop plus a 3-drop is a fine hand; you do not need a trick to win fights against 2.6 Might.
 > - **Early:** develop two bodies and take a battlefield with a straight fight. Do not lead with spells, because Defy is in every list. **Be patient with your spells and aggressive with your units** (Jun). Giving up a unit for a point is fine.
 > - **Middle:** they will use the legend to ready a unit and fight twice, so keep a body back at the battlefield you hold. **Punish a greedy tap-out with removal** (Jun). His named Rampage target here is **Stellacorn Herder** (100%), which draws every time it moves. **Astral Heron** is in 32% of lists, and its discount works only while it stands at a battlefield, so contest that battlefield the turn it lands. **Ride the Wind is in every list**: a moved and readied unit is a second attack, so count it in their open Chaos.
-> - **Closing:** game 1, Punch First is your finisher: Defy and Not So Fast cannot touch it. In games 2–3 Jun takes two out and leans on Sabotage, Hard Bargain and Switcheroo; this page's board takes one.
+> - **Closing:** game 1, Punch First is your finisher: Defy and Not So Fast cannot touch it. In games 2–3 Jun takes two out and leans on Sabotage, Hard Bargain and Switcheroo; this page's board takes one. *Hard Bargain left his board on 11 October.*
 > - **Flips:** Tornado Warrior only into tapped Chaos. Evelynn only into tapped Chaos *and* Calm, because Not So Fast is in 80% of lists. Switcheroo: flip it after they pump.
 > - **From Jun's Irelia video (pre-ban):** open a key turn with **Sabotage** to see what you are playing into, and make it, or a lesser spell, eat their Defy before the **Star-Crossed** on their Irelia. Bouncing her usually wins. Close with the **Vex lock**: with their board cleared, Vex on a battlefield stuns whatever they play.
 > - **Never:** cast Void Assault or Rampage into open Calm. Defy counters both. **And never chase the queen**: see below.
@@ -241,7 +241,7 @@ They bring **Abandoned Hall** (97% — any player who casts a spell may give a u
 
 ### Board
 
-+2 Gust, +1 Hard Bargain. −2 Star-Crossed, −1 Punch First. Gust does Star-Crossed's job against a 2.6 board for 1 Energy, without bouncing your own unit; Hard Bargain answers Not So Fast and Defy alike. **Switcheroo stays.** An earlier version of this line cut it because "there is nothing to swap into against a flat board", but its target is the unit they just pumped, not their natural biggest. Jun brings Switcheroo in here and cuts two Punch First ([Jun's notes §7](khazix-voidreaver-jun.md#7-sideboarding)).
++2 Gust. −2 Star-Crossed. Gust does Star-Crossed's job against a 2.6 board for 1 Energy, without bouncing your own unit. *Until 11 October this line also had +1 Hard Bargain −1 Punch First; Jun's 11 October list cut Hard Bargain from the board, and Decree is dead here (no Mind).* **Switcheroo stays.** An earlier version of this line cut it because "there is nothing to swap into against a flat board", but its target is the unit they just pumped, not their natural biggest. Jun brings Switcheroo in here and cuts two Punch First ([Jun's notes §7](khazix-voidreaver-jun.md#7-sideboarding)).
 
 ### Proven lists
 
@@ -410,7 +410,7 @@ The archive files most of these lists under the legend's Starter printing, *Wuju
 
 ### Board
 
-+1 Rampage, +1 Hard Bargain. −1 Grim Resolve, −1 Sabotage — Punch First already wins 96% here, so the smaller pump is the one you need least. Jun brings in Hard Bargain and takes out Sabotage here.
++1 Rampage. −1 Grim Resolve — Punch First already wins 96% here, so the smaller pump is the one you need least. Jun's pre-ban notes bring in Hard Bargain for Sabotage here; Hard Bargain left his board on 11 October, so Sabotage stays.
 
 ### Proven lists
 
@@ -669,7 +669,7 @@ They bring **Void Gate** (73%) — *"Spells and abilities affecting units here e
 
 ### Board
 
-+2 Ravenbloom Prefect, +2 Acceptable Losses (Zhonya's 84%), +1 Hard Bargain (for Not So Fast and Defy). −2 Rampage, −2 Star-Crossed, −1 Up from the Deep — Rampage cannot reach Silent, Defy counters both spells, and Akali, Deadly Weapon's move ping and Shuriken Flip kill Tentacles for free.
++2 Ravenbloom Prefect, +2 Acceptable Losses (Zhonya's 84%). −2 Rampage, −2 Star-Crossed — Rampage cannot reach Silent, and Defy counters both spells. *Until 11 October this was five for five, with +1 Hard Bargain −1 Up from the Deep (Akali, Deadly Weapon's move ping and Shuriken Flip kill Tentacles for free). Hard Bargain left the board; whether Up from the Deep should still go out, for something other than Hard Bargain, is untested.*
 
 ### Proven lists
 
@@ -748,7 +748,7 @@ Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **
 
 ### Board
 
-+2 Gust, +1 Hard Bargain. −2 Star-Crossed, −1 Tornado Warrior — Gust does Star-Crossed's job for 1 Energy, and with Gust or Star-Crossed in 88% of lists Tornado Warrior is the Hidden unit to drop.
++2 Gust. −2 Star-Crossed — Gust does Star-Crossed's job for 1 Energy. *Until 11 October this line also had +1 Hard Bargain −1 Tornado Warrior (Gust or Star-Crossed is in 88% of lists, so Tornado Warrior is the riskiest flip). Hard Bargain left the board, and Decree is dead here (no Mind).*
 
 ### Proven lists
 
@@ -833,7 +833,7 @@ Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **
 
 ### Board
 
-+1 Hard Bargain (for Defy and the flip). −1 Grim Resolve — Defy (86%) counters it and cannot touch Punch First.
+None. *Until 11 October: +1 Hard Bargain −1 Grim Resolve. Hard Bargain left the board, and Decree is dead here (no Mind).* Defy (86%) still counters Grim Resolve and cannot touch Punch First, so cast Punch First first.
 
 ### Proven lists
 
@@ -1066,7 +1066,7 @@ None. Extra removal is wrong against a deck paid for dying.
 
 ### Board
 
-+1 Hard Bargain — to counter Riposte, not to protect flips. −1 Grim Resolve: Riposte punishes it most (+2 to their unit).
+None. *Until 11 October: +1 Hard Bargain (to counter Riposte) −1 Grim Resolve. Hard Bargain left the board, and Decree is dead here (no Mind).* Riposte still punishes Grim Resolve most (+2 to their unit).
 
 ### Proven lists
 
@@ -1127,7 +1127,6 @@ One extra Power every turn, for spells only. 19.7 units a deck at 3.5 Might: Wat
 
 **35 bare · 83 +PF · 98 +Sw · 91 iso.**
 
-- **Their legend adds Power, not Energy.** It cannot help pay **Hard Bargain**'s 2-Energy tax. If you bring Hard Bargain, it is a clean Reaction answer to a Ray aimed at Rengar or Kha'Zix.
 - Your pumps are Actions. Punch First cannot answer a Ray already on the chain; it has to go first. **Pump before the fight when they have Fury open**, so the Ray needs more than 3.
 - Forerunner leaves two 3-Might Mechs when it dies. **Bounce it (Star-Crossed) rather than kill it** when you can: returned to hand is not a death.
 
@@ -1145,7 +1144,7 @@ One extra Power every turn, for spells only. 19.7 units a deck at 3.5 Might: Wat
 
 ### Board
 
-**+1 Decree of Strength** (Fury/Mind — live). −1 Sabotage. Decree can take Watcher or Time Warp, both Mind. Untested here: a Hard Bargain for a second Rampage, for the reason above.
+**+1 Decree of Strength** (Fury/Mind — live). −1 Sabotage. Decree can take Watcher or Time Warp, both Mind. Untested here: the second Decree for a second Rampage.
 
 ### Proven lists
 
@@ -1220,7 +1219,7 @@ Your list, more or less. Two shapes in the window: the midrange Hidden build, an
 
 ### Board (draft — not Jun)
 
-+1 Hard Bargain, −1 Evelynn. Hard Bargain counters their Punch First or Switcheroo, the two cards that decide fights here. Evelynn is the flip they punish most.
+None. *Until 11 October: +1 Hard Bargain (for their Punch First or Switcheroo) −1 Evelynn. Hard Bargain left the board, and Decree is dead in the mirror (no Mind).* Evelynn is still the flip they punish most.
 
 ### Proven lists
 
@@ -1293,7 +1292,7 @@ They bring **Ornn's Forge** (94% — their first gear each turn costs 1 less), *
 +2 Ravenbloom Prefect, +2 Acceptable Losses, +1 Decree (Calm/Mind — live). −1 Switcheroo, −2 Star-Crossed, −1 Rampage, −1 Sabotage. The swap has nothing to swap into, Defy counters both spells, and Decree takes Sabotage's slot.
 
 - **Prefect is the stronger half.** It banishes a gear as it is played, including a Quick-Draw Sterak's Gage played mid-fight. Banished is not killed, so a banished Sprite Fountain never gets its Deathknell.
-- **Acceptable Losses is weaker than it looks here.** "Each player kills one of their gear": *they* choose which, and Seal of Focus (82%) and Poro Snax (94%) are cheap gear to give up. It is still one-sided, since you make no gear. Worth testing a Gust or Hard Bargain in that slot; this page has not.
+- **Acceptable Losses is weaker than it looks here.** "Each player kills one of their gear": *they* choose which, and Seal of Focus (82%) and Poro Snax (94%) are cheap gear to give up. It is still one-sided, since you make no gear. Worth testing a Gust in that slot; this page has not.
 
 ### Proven lists
 
@@ -1373,9 +1372,9 @@ One small edge, **unconfirmed**: the legend's Energy is showdown-only, and Evely
 
 ### Board
 
-The guide had +1 Decree +1 Hard Bargain; −1 Evelynn −1 Tornado Warrior. Merged with Jun (who brings in Sabotage and Hard Bargain):
-**+1 Sabotage, +1 Hard Bargain, +1 Decree; −1 Evelynn, −1 Tornado Warrior, and −1 Up from the Deep on the play or −1 Traveling Merchant on the draw.**
-Hard Bargain is weaker inside a fight, because the legend's Energy helps them pay the 2. Use it on Moonfall or Eclipse cast outside one, or pay the Repeat.
+The guide had +1 Decree +1 Hard Bargain; −1 Evelynn −1 Tornado Warrior. Merged with Jun (who brings in Sabotage and Hard Bargain), then updated for his 11 October board, which swaps Hard Bargain for a second Decree:
+**+1 Sabotage, +2 Decree; −1 Evelynn, −1 Tornado Warrior, and −1 Up from the Deep on the play or −1 Traveling Merchant on the draw.**
+Both Decrees are live: Diana is Mind/Chaos, and Moonfall and Eclipse are the cards to take from hand.
 
 ### Proven lists
 
@@ -1532,7 +1531,7 @@ None in this page or in Jun's tables. **Untested suggestion:** +2 Ravenbloom Pre
 
 ### Board
 
-**+1 Decree of Strength** (Mind/Chaos — live), +1 Hard Bargain. −1 Evelynn, −1 Tornado Warrior — the Hidden units whose triggers must survive a Reaction they always hold. Punch First stays at 85%.
+**+2 Decree of Strength** (Mind/Chaos — live; the second copy replaced Hard Bargain on 11 October). −1 Evelynn, −1 Tornado Warrior — the Hidden units whose triggers must survive a Reaction they always hold. Punch First stays at 85%.
 
 ### Proven lists
 
@@ -1708,7 +1707,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 > **At the table** (Jay beat Jhin decisively on 3 October: selective Power, Grim Resolve to finish)
 > - **How you win:** they can't cover two battlefields with 14 units. **Take both and race.** Their game is long, with Thousand-Tailed Watcher (62%) and Time Warp (62%).
 > - **Watch:** **Rocket Barrage** (86%) deals 4 to a unit **in a base**. Your base is not safe ground, so play units the turn you'll use them, and keep Ambush units in hand. Curtain Call (90%) picks modes: 2 damage at a battlefield, 3 at a base, −4. Deadly Flourish (95%) deals 3. Frigid Touch (52%) is Reaction −2. Singularity (71%) deals 6 to two units.
-> - **The legend counts their 4E spells.** Every fourth one channels 4 runes and draws. **Hard Bargain's 2 tax** hits exactly those spells.
+> - **The legend counts their 4E spells.** Every fourth one channels 4 runes and draws. **Decree of Strength** can take those spells from hand: nearly all of them are Mind.
 > - **Flips:** freely. Nothing in the window removes one or counters one.
 > - **Never:** park a developed board in base to wait for the right turn.
 
@@ -1716,14 +1715,14 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 **Results: Jibbs, 107th of 2,165 at the Los Angeles RQ** (vouched). The same player finished 116th at Singapore and 255th at Barcelona.
 **29 bare · 84 +PF.**
 **Battlefields:** **Frozen Fortress** (11 of 17: 1 damage to every unit there each Beginning Phase, so **Faefolk and Tentacles die there**), Sigil of the Storm (9).
-**Board (draft — not Jun):** +1 Decree (Mind: nearly every spell), +1 Hard Bargain; −2 Star-Crossed. Star-Crossed needs a unit of theirs to bounce alongside yours, and they rarely have one.
+**Board (draft — not Jun):** +2 Decree (Mind: nearly every spell); −2 Star-Crossed. Star-Crossed needs a unit of theirs to bounce alongside yours, and they rarely have one.
 
 ---
 
 ### The key piece
 **Their legend's count.** Every spell they cast with 4+ Energy can be banished under the legend; at four, they channel **4 runes** and draw. Jhin, Meticulous Killer (19 of 22, 86%) then costs one Mind rune after any 4-Energy spell.
 - **The count is public.** Count the banished spells, and the turn after the fourth is their ramp turn.
-- **Chase the spells, not Jhin.** Decree takes Mind spells (nearly all of them); Hard Bargain taxes a 4E spell by 2.
+- **Chase the spells, not Jhin.** Both Decrees take Mind spells (nearly all of them).
 - **Race.** They can't cover two battlefields with 14 units.
 
 
@@ -1744,7 +1743,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 **33 bare · 74 +PF** (the guide had 76 +PF and 83 isolated, the worst Punch First conversion on the page). *An earlier version of this page grouped Nasus with "ordinary fair fights". It is a Defy-and-Heron control deck.*
 **Battlefields:** **Vilemaw's Lair** (18 of 34: no moves from there to base, so **no legend walk-home and no Star Spring**), **Sigil of the Storm** (16: whoever conquers there recycles one of their own runes), Rockfall Path (11).
 **Flips · counters:** 0% · 62% · 68%.
-**Board (draft — not Jun):** +1 Decree (Mind: Watcher, Bellows Breath, Stupefy, Time Warp), +1 Hard Bargain. −1 Evelynn, −1 Grim Resolve.
+**Board (draft — not Jun):** +2 Decree (Mind: Watcher, Bellows Breath, Stupefy, Time Warp). −1 Evelynn, −1 Grim Resolve.
 
 ### Proven lists
 
@@ -1962,7 +1961,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 
 ### Board (draft — not Jun)
 
-+1 Hard Bargain, −1 Tornado Warrior. Hard Bargain taxes a Flow cast of Death Mark or Perfect Execution. Tornado Warrior is the flip that half their lists punish.
+None. *Until 11 October: +1 Hard Bargain (to tax a Flow cast of Death Mark or Perfect Execution) −1 Tornado Warrior. Hard Bargain left the board, and Decree is dead here (no Mind).* Tornado Warrior is still the flip that half their lists punish.
 
 ### Proven lists
 
@@ -1993,7 +1992,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 **41 bare · 90 +PF.**
 **Battlefields:** **Kinkou Temple** (35 of 38: Tank units +1) and **Grove of the God-Willow** (28: draw on a hold). Don't let them hold Grove.
 **Facedown:** Disciple of Shen (25), Kennen, Keeper of Balance (23), Hidden Blade (19), Back Off (18) or Resonating Strike (16). Every one of them wins the fight they hid for.
-**Board (draft — not Jun):** +1 Hard Bargain (for Ki Barrier or Shadow Dash), −1 Grim Resolve (Defy).
+**Board (draft — not Jun):** none. *Until 11 October: +1 Hard Bargain −1 Grim Resolve; Hard Bargain left the board.*
 
 ### Proven lists
 
@@ -2023,7 +2022,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 **44 bare · 96 +PF.**
 **Battlefields:** **Risen Altar** (35 of 38: their Empower costs are 1 cheaper there) and Sunken Temple (24). **Deny Risen Altar.**
 **Facedown:** Hidden Blade (24) or Kennen, Keeper of Balance (15).
-**Board (draft — not Jun):** +1 Hard Bargain (Onslaught, Guttural Roar), −1 Up from the Deep.
+**Board (draft — not Jun):** none. *Until 11 October: +1 Hard Bargain −1 Up from the Deep; Hard Bargain left the board.*
 
 ### Proven lists
 
@@ -2052,7 +2051,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 **Results:** best vouched finish 26th (Nightcup League Cup). One list is titled "Ivern Wins S4 Wuhan City Challenge" (claim, added 8 October).
 **35 bare · 82 +PF.**
 **Battlefields:** Forbidding Waste (17 of 23), **Vilemaw's Lair** (15: no walk-home) and **Rockfall Path** (14: no Ambush, no flip). Their battlefields turn off most of your tools. Plan each game around **your** battlefield.
-**Board (draft — not Jun):** +1 Hard Bargain (Flurry, Discipline), −1 Grim Resolve (Defy).
+**Board (draft — not Jun):** none. *Until 11 October: +1 Hard Bargain −1 Grim Resolve; Hard Bargain left the board.*
 
 ---
 
@@ -2095,7 +2094,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 > - **Early:** develop and fight on bodies. Kill Ravenbloom Student before spells build it up.
 > - **Middle:** **Rebuttal** (96%, 3.0 a deck) is a 1-Energy Reaction that counters a spell up to 4 Energy, or, for one more Power, **takes control of it and makes new choices**. Every spell you run is 4 Energy or less. A stolen Punch First is +5 on *their* unit. A stolen Sabotage looks at *your* hand.
 > - **Bait Rebuttal with the spell you least mind losing.** One cute fact: **a stolen Decree of Strength does nothing to you**. It recycles a Mind card from your hand, and you run none.
-> - **Kill Mel, Newly Awakened** (58%) before it Empowers. Empowered, their spells **cannot be countered**, so your Hard Bargain is dead, and every −Might they choose is 1 bigger: Stupefy −2, their legend −3.
+> - **Kill Mel, Newly Awakened** (58%) before it Empowers. Empowered, their spells **cannot be countered**, and every −Might they choose is 1 bigger: Stupefy −2, their legend −3.
 > - **Flips:** don't. Gust 79%, Star-Crossed 88%, 88% can punish.
 > - **Never:** cast a key spell into open Mind + Chaos.
 
@@ -2342,20 +2341,20 @@ The fifteen archetypes you are most likely to meet, cut to one row each, in tier
 
 | opponent | Jun | plan | flips | never | board | battlefield |
 |---|---|---|---|---|---|---|
-| Irelia | decent | press: score early, reach 6 first | Tide/Tornado into tapped Chaos; Evelynn into tapped Chaos + Calm | Void Assault or Rampage into open Calm | +2 Gust +1 Hard Bargain; −2 Star-Crossed −1 Punch First | their Targon's Peak favours them |
+| Irelia | decent | press: score early, reach 6 first | Tide/Tornado into tapped Chaos; Evelynn into tapped Chaos + Calm | Void Assault or Rampage into open Calm | +2 Gust; −2 Star-Crossed | their Targon's Peak favours them |
 | Master Yi | even to slightly unfavoured | develop, then hold; drag their lone unit to you | Tornado freely; Evelynn into tapped Calm | attacking a lone defender | +2 Prefect +2 Acceptable Losses; −1 Up from the Deep −2 Star-Crossed −1 Rampage | usual order |
-| Rengar | even | patient, hold one; make them act first | freely | committing everything to one fight; killing Forerunner into an open base | +1 Rampage +1 Hard Bargain; −1 Grim Resolve −1 Sabotage | avoid your Star Spring |
+| Rengar | even | patient, hold one; make them act first | freely | committing everything to one fight; killing Forerunner into an open base | +1 Rampage; −1 Grim Resolve | avoid your Star Spring |
 | Azir | good | develop, then clear them at once | freely | Star-Crossed or Void Assault into open Calm | +2 Prefect +2 Acceptable Losses; −1 Zed −1 Up from the Deep −1 Star-Crossed −1 Merchant | usual order |
 | LeBlanc | superb | one fight early, rigged only; points, not kills; bounce rather than kill | freely | trading just because you can (Karthus) | +1 Decree; −1 Sabotage | never your Star Spring |
-| Akali | decent | one fight early, your turn only; fight before Heron lands | Tornado freely; Evelynn and Switcheroo into tapped Calm | a 2-Might attacker into their facedown card (Marai) | +2 Prefect +2 Acceptable Losses +1 Hard Bargain; −2 Rampage −2 Star-Crossed −1 Up from the Deep | no Rengar fights at Void Gate into open Fury |
-| Kennen | tough, weaker post-ban | pressure their setup; kill Kennen, Storm of Shuriken on sight | only into tapped Chaos, plus one for Seal of Discord | an even trade | +2 Gust +1 Hard Bargain; −2 Star-Crossed −1 Tornado Warrior | they run Zaun Warrens too |
-| Vex | — | hold one, grind; kill Sona, then Vex, Apathetic, before you deploy | Tornado into tapped Chaos; Evelynn into tapped Chaos + Calm | playing units while Vex, Apathetic stands | +1 Hard Bargain; −1 Grim Resolve | usual order |
+| Akali | decent | one fight early, your turn only; fight before Heron lands | Tornado freely; Evelynn and Switcheroo into tapped Calm | a 2-Might attacker into their facedown card (Marai) | +2 Prefect +2 Acceptable Losses; −2 Rampage −2 Star-Crossed | no Rengar fights at Void Gate into open Fury |
+| Kennen | tough, weaker post-ban | pressure their setup; kill Kennen, Storm of Shuriken on sight | only into tapped Chaos, plus one for Seal of Discord | an even trade | +2 Gust; −2 Star-Crossed | they run Zaun Warrens too |
+| Vex | — | hold one, grind; kill Sona, then Vex, Apathetic, before you deploy | Tornado into tapped Chaos; Evelynn into tapped Chaos + Calm | playing units while Vex, Apathetic stands | none | usual order |
 | Jayce | superb | take both, race; answer Aurora | freely; Evelynn pulls from their base | a fair fight (15%) | +2 Prefect +1 Decree; −2 Punch First −1 Up from the Deep | Forgotten Monument slows your race |
 | Rek'Sai | — | hold one, let time work | freely | Rengar into two open Fury | none | never your Star Spring |
-| Fiora | — | hold one, win long | freely | Punch First into open Body + Order (Riposte) | +1 Hard Bargain; −1 Grim Resolve | usual order |
+| Fiora | — | hold one, win long | freely | Punch First into open Body + Order (Riposte) | none | usual order |
 | Ornn | — | fight straight; close before the gear engine pays | freely | cheap spells into open Calm (Defy) | +2 Prefect +2 Acceptable Losses +1 Decree; −1 Switcheroo −2 Star-Crossed −1 Rampage −1 Sabotage | deny Seat of Power while they hold the other |
-| Diana | — | read their open Energy (+1 in fights for the legend) | don't | three units on one battlefield into Moonfall | +1 Sabotage +1 Hard Bargain +1 Decree; −1 Evelynn −1 Tornado Warrior −1 Up from the Deep (play) or −1 Merchant (draw) | deny their Targon's Peak conquest |
-| Ezreal | — | take both, race | don't | flipping into open Chaos | +1 Decree +1 Hard Bargain; −1 Evelynn −1 Tornado Warrior | usual order |
+| Diana | — | read their open Energy (+1 in fights for the legend) | don't | three units on one battlefield into Moonfall | +1 Sabotage +2 Decree; −1 Evelynn −1 Tornado Warrior −1 Up from the Deep (play) or −1 Merchant (draw) | deny their Targon's Peak conquest |
+| Ezreal | — | take both, race | don't | flipping into open Chaos | +2 Decree; −1 Evelynn −1 Tornado Warrior | usual order |
 | Viktor | — | hold one, grind; never race, keep your runes | freely | a crowd into 5+ open runes (Imperial Decree) | +1 Decree; −1 Sabotage (keep Up from the Deep) | don't hide at Rockfall Path |
 
 "Usual order" is Zaun Warrens, then Sandswept Tomb or Star Spring. Every battlefield used in a decided game retires for the match, yours and theirs (§486.5).
@@ -2403,7 +2402,7 @@ Legal lists only (see [Sources](#sources-and-method)). Where an entry quotes an 
 **Tier 1–3:** LeBlanc (2.3) · Jayce (3.2) · Kai'Sa (3.5) · Ornn (3.7) · Diana (3.8) · Ezreal (3.10)
 **Tier 4–5:** Lillia (4.1) · Viktor (4.2) · Jhin (4.4) · Nasus (4.5) · Teemo · Mel · Ahri · Lux · Rumble · Renata Glasc
 
-On 1 October **31% of the ranked field was Mind**, far more than the two archetypes the previous dossier named. Decree went to one copy when it looked live against two of eleven archetypes. Across the real field it is live against roughly a third, including LeBlanc and Jayce. Whether the second copy is worth a slot is a question for Jun ([deck guide §13](khazix-voidreaver.md#13-questions-to-bring-to-jun)), not an edit to make. **Two top lists board Decree themselves** (Prismaticism's winning Rengar, SWAGALISK's Yi): it is dead against you, because you run no Mind cards.
+On 1 October **31% of the ranked field was Mind**, far more than the two archetypes the previous dossier named. Decree went to one copy when it looked live against two of eleven archetypes. Across the real field it is live against roughly a third, including LeBlanc and Jayce. **Jun settled it on 11 October: his board now runs two**, in place of Hard Bargain. **Two top lists board Decree themselves** (Prismaticism's winning Rengar, SWAGALISK's Yi): it is dead against you, because you run no Mind cards.
 
 ### Who out-grinds you (your grind is 12)
 

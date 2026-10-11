@@ -128,11 +128,11 @@ entry before the practice game, not during it.
 | # | opponent | why it's here | the plan in one line | board |
 |---|---|---|---|---|
 | 1 | **LeBlanc** | three of Sunday's readable players, including the Sep 5 winner | **points, not kills**: one rigged fight early, then walk home. Deathgrip is live in every fight. Bounce Ruined Rex rather than kill it. Assume Watcher at 7 runes | +1 Decree; −1 Sabotage |
-| 2 | **Kennen** | 11% locally, two readable players | pressure the setup, kill Storm of Shuriken on sight, never an even trade. **Read the rewritten entry**: the post-ban list is a different deck | +2 Gust +1 Hard Bargain; −2 Star-Crossed −1 Tornado Warrior |
-| 3 | **Irelia** | most played locally, two readable players | **press**: score early, reach 6 first. Never Void Assault or Rampage into open Calm | +2 Gust +1 Hard Bargain; −2 Star-Crossed −1 Punch First |
+| 2 | **Kennen** | 11% locally, two readable players | pressure the setup, kill Storm of Shuriken on sight, never an even trade. **Read the rewritten entry**: the post-ban list is a different deck | +2 Gust; −2 Star-Crossed |
+| 3 | **Irelia** | most played locally, two readable players | **press**: score early, reach 6 first. Never Void Assault or Rampage into open Calm | +2 Gust; −2 Star-Crossed |
 | 4 | **Master Yi** | 10% locally, most played at small events everywhere | develop, then **hold**: one of the few matchups where you want to. Drag their lone unit to you so they attack your hold. Never attack a lone defender (+2) | +2 Prefect +2 Acceptable Losses; −1 Up from the Deep −2 Star-Crossed −1 Rampage |
-| 5 | **Rengar** | 9% locally; won LA | patient, hold one, make them act first. Their Punch First goes before yours | +1 Rampage +1 Hard Bargain; −1 Grim Resolve −1 Sabotage |
-| 6 | **Akali** | Fernando D, 3rd at Silk Road on it | one fight early, **your turn only**; offer the fight before Astral Heron lands | +2 Prefect +2 Acceptable Losses +1 Hard Bargain; −2 Rampage −2 Star-Crossed −1 Up from the Deep |
+| 5 | **Rengar** | 9% locally; won LA | patient, hold one, make them act first. Their Punch First goes before yours | +1 Rampage; −1 Grim Resolve |
+| 6 | **Akali** | Fernando D, 3rd at Silk Road on it | one fight early, **your turn only**; offer the fight before Astral Heron lands | +2 Prefect +2 Acceptable Losses; −2 Rampage −2 Star-Crossed |
 | 7 | **the mirror** | Anthony L | the first clean combat win and its XP decide it. Drag their unit so *they* attack. Check where both Vexes stand before any Ambush | see the entry |
 
 Nasus (Kevin S) is a Defy and Astral Heron control deck now, not the fair-fight deck the old
@@ -159,8 +159,8 @@ Energy, then Power.
 - **Fizz still pays the recast spell's Power**, so Fizz into a Punch First from the trash is
   1 + 2 = 3 Power.
 - **The sideboard:** Decree of Strength is 1E and **no Power**, which is why it's the cheap
-  Sabotage against Mind decks. Gust, Hard Bargain, Acceptable Losses and Ravenbloom Prefect
-  also cost none.
+  Sabotage against Mind decks. Gust, Acceptable Losses and Ravenbloom Prefect
+  also cost none. (Hard Bargain left the board on 11 October for a second Decree.)
 - **Against Defy** (counters up to 4 Energy and **1** Power): Punch First and Switcheroo, at 2
   Power, are out of its reach. Grim Resolve, Void Assault and Rampage are not.
 
