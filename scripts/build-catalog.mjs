@@ -151,7 +151,13 @@ const main = async () => {
       // What this printing costs in the cheapest finish it actually comes in. A
       // foil-only printing is priced as a foil because that is the only way to own it.
       const cost = hasNormal && normalPrice > 0 ? normalPrice : foilPrice;
-      finishes.set(x.id, { hasNormal, hasFoil, foilOnly: sure, cost });
+      // Their type and domain too: Riot's gallery feed carries preview data for an
+      // unreleased set, and for Radiance it had the wrong type on ~45 cards and the wrong
+      // domain on ~25 (checked against the printed card images, which dotgg matched on all
+      // 141 compared). On every released set the two sources agree exactly.
+      const type = Array.isArray(x.type) ? x.type[0] : null;
+      const domains = Array.isArray(x.color) ? x.color.filter(Boolean) : [];
+      finishes.set(x.id, { hasNormal, hasFoil, foilOnly: sure, cost, type, domains });
     }
     console.log(`${rows.length} rows, ${[...finishes.values()].filter((f) => f.foilOnly).length} unambiguously foil-only`);
   } catch (e) {
@@ -186,6 +192,7 @@ const main = async () => {
     return sub === "Starter" ? `${c.name} - ${sub}` : `${c.name}, ${sub}`;
   };
 
+  const corrected = [];
   const cards = raw
     .map((c) => {
       const setId = c.set?.value?.id ?? null;
@@ -214,6 +221,16 @@ const main = async () => {
       // empty-key pass below then drops it from every card it does not apply to.
       const fin = finishOf(c.publicCode);
       if (fin && fin.foilOnly) card.fo = 1;
+      // Where Riot and dotgg disagree on type or domain, dotgg's matches the printed card
+      // (see above). Logged below, so a correction is never silent.
+      if (fin && fin.type && fin.type !== card.t) {
+        corrected.push(`${card.c} ${card.n}: type ${card.t ?? "none"} -> ${fin.type}`);
+        card.t = fin.type;
+      }
+      if (fin && fin.domains.length && fin.domains.slice().sort().join("/") !== card.d.slice().sort().join("/")) {
+        corrected.push(`${card.c} ${card.n}: domain ${card.d.join("/") || "none"} -> ${fin.domains.join("/")}`);
+        card.d = fin.domains;
+      }
       // Rounded to cents. Their foil listings carry obvious junk — a Calm Rune priced at
       // $8,888 — but the app costs a card by the cheapest of its printings, and a
       // nonsense high price can never win a minimum, so it is left in rather than
@@ -231,7 +248,7 @@ const main = async () => {
   const out = {
     generatedAt: new Date().toISOString().slice(0, 10),
     source: "content.publishing.riotgames.com / riftbound_gallery_cards" +
-            (finishes.size ? " + api.dotgg.gg/cgfw/getcards for finishes" : ""),
+            (finishes.size ? " + api.dotgg.gg/cgfw/getcards for finishes, and type/domain where Riot's preview data disagrees" : ""),
     imagePrefix: IMG_PREFIX,
     sets,
     cards,
@@ -246,6 +263,11 @@ const main = async () => {
     const base = mine.filter((c) => !c.v).length;
     const flag = s.base && base !== s.base ? `  <-- MISMATCH, expected ${s.base}` : "";
     console.log(`  ${s.id.padEnd(4)} ${String(mine.length).padStart(4)} printings   ${String(base).padStart(3)} base of ${s.base}   ${mine.length - base} variants${flag}`);
+  }
+  if (corrected.length) {
+    const bySet = corrected.reduce((m, l) => ((m[l.slice(0, 3)] = (m[l.slice(0, 3)] || 0) + 1), m), {});
+    console.log(`\ncorrected ${corrected.length} type/domain values from dotgg, by set:`, bySet);
+    for (const l of corrected) console.log(`  ${l}`);
   }
   console.log("\nby variant: ", tally((c) => c.v || "base"));
   console.log("by type:    ", tally((c) => c.t));

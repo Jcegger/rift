@@ -1143,6 +1143,28 @@ section('The tag filter');
   ok('no tags means the filter has nothing to offer', A.allTags().length === 0);
 }
 
+section('Radiance card data');
+{
+  // Riot's gallery feed carried preview data for Radiance with ~45 wrong types and ~25
+  // wrong domains; build-catalog now takes type/domain from dotgg where they disagree.
+  // Radiance numbers its single-domain cards in domain blocks, so a regression shows.
+  const blocks = [[1, 23, 'Fury'], [24, 46, 'Calm'], [47, 69, 'Mind'], [70, 92, 'Body'],
+                  [93, 115, 'Chaos'], [116, 138, 'Order']];
+  const rad = cat.cards.filter((c) => c.s === 'RAD' && !c.v && c.no >= 1 && c.no <= 138 &&
+                                      c.t !== 'Legend' && c.t !== 'Battlefield' && c.t !== 'Rune' &&
+                                      !/^RAD-R/.test(c.c));   // runes reuse numbers 1-6
+  const off = rad.filter((c) => {
+    const b = blocks.find(([lo, hi]) => c.no >= lo && c.no <= hi);
+    return !(Array.isArray(c.d) && c.d.length === 1 && c.d[0] === b[2]);
+  });
+  ok('every single-domain Radiance card carries its printed domain', rad.length > 100 && off.length === 0,
+     off.length ? off.slice(0, 5).map((c) => `${c.c} ${c.n} ${c.d}`).join('; ')
+                : `${rad.length} cards match their collector-number block`);
+  const untyped = cat.cards.filter((c) => c.s === 'RAD' && !c.v && !c.t);
+  ok('every Radiance card has a type', untyped.length === 0,
+     untyped.length ? untyped.slice(0, 5).map((c) => `${c.c} ${c.n}`).join('; ') : '');
+}
+
 section('Finishes');
 {
   const flagged = cat.cards.filter((c) => c.fo);
