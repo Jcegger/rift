@@ -109,19 +109,16 @@ class Page:
 
 
 def match_page(pdf):
-    """One match. The score log is the legal record at Competitive OPL (TR §415.3: scores
-    tracked in writing, both players); everything else mid-game is what they reveal."""
+    """One match, as little as possible. The score boxes are the legal record at
+    Competitive OPL (TR §415.3: both scores, in writing); the rest is optional."""
     p = Page(pdf)
     p.fields(0.42, [("date", 0.25), ("vs", 0.75)])
-    y = 0.85
-    bw, bh = 0.46, 0.27            # point boxes: C conquer, H hold, E effect/burn-out; one per point
+    y = 0.95
+    bw, bh = 0.46, 0.27            # one box per point: C conquer, H hold, E effect/burn-out
     for g in ("G1", "G2", "G3"):
         p.text(L, y, g, size=9)
         p.text(L + 0.45, y, "1st   2nd", size=8, bold=False)
-        p.text(L + 1.45, y, "W   L", size=8, bold=False)
-        lw = p.text(L + 2.2, y, "their BF", size=7)
-        p.line(L + 2.2 + lw + 0.05, R, y + 0.02)
-        y += 0.22
+        y += 0.2
         for who in ("me", "opp"):
             p.text(L, y + bh * 0.7, who, size=7)
             x0 = L + 0.45
@@ -131,25 +128,14 @@ def match_page(pdf):
                 if who == "me":
                     p.text(x + bw / 2, y - 0.03, str(i + 1), size=5, bold=False, ha="center")
             y += bh
-        y += 0.26
-    p.section(y, "their cards seen")
-    y += 0.08
-    mid = (L + R) / 2
-    top = y
-    for _ in range(6):
-        y += 0.29
-        p.line(L, R, y, lw=0.4, color=FAINT)
-    p.vline(mid, top + 0.05, y)
-    y += 0.4
+        y += 0.36
     p.section(y, "notes")
     y += 0.08
-    for _ in range(2):
+    for _ in range(9):
         y += 0.29
         p.line(L, R, y, lw=0.4, color=FAINT)
-    y += 0.42
-    p.section(y, "after")
-    p.fields(y + 0.38, [("my mistake", 0.8), ("type", 0.2)])
-    p.fields(y + 0.72, [("next time I'll", 1.0)])
+    y += 0.5
+    p.fields(y, [("next time I'll", 1.0)])
     p.done()
 
 

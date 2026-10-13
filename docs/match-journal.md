@@ -140,24 +140,21 @@ art, `5T ?blue dragon — stole hold`, and look it up at home.
 ```
 date ________   vs ______________________________   (their name / legend)
 
-G1   1st  2nd     W  L     their BF ____________________
+G1   1st  2nd
           1   2   3   4   5   6   7   8     9   10
      me  [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]   [ ] [ ]
      opp [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]   [ ] [ ]
 G2   ... the same ...
 G3   ... the same ...
 
-their cards seen ──────────────────────────────────────────────────────────
-____________________________________ | ____________________________________
-   (six ruled lines, two columns)
-
 notes ─────────────────────────────────────────────────────────────────────
-___________________________________________________________________________
+   (nine ruled lines)
 
-after ─────────────────────────────────────────────────────────────────────
-my mistake      ______________________________  type _
-next time I'll  ____________________________________
+next time I'll ____________________________________________________________
 ```
+
+**As little as possible.** Only the score is required. The rest is one circle per game,
+whatever you choose to note, and one line after.
 
 **The score log is the sheet's main job.** At a Summoner Skirmish, which Riot's OP page
 puts at Competitive (see the [Skirmish prep](../guides/skirmish-prep.md)), **both
@@ -177,10 +174,11 @@ on the sheet.
 across games: besides the running total, they write **what the opponent revealed**, and
 little else, because every extra field costs attention and match time. Andreas Reling's
 note-taking guide (Cardmarket Insight, 2019) puts it as: write what you see, cross it off
-when it is gone, and only write more in downtime. An earlier version of this page had
-event, round, list version, both names, and per-game columns for battlefields, mulligans
-and sideboard swaps, and no score at all. It asked for paperwork at the table and left
-out the one record the rules require.
+when it is gone, and only write more in downtime. Earlier versions of this page asked for
+event, round, list version, names, battlefields, mulligans, sideboard swaps and a
+three-field review, and the first had no score at all. **Who won needs no field**: it is
+whoever filled box 8. **Their battlefield needs none either**: used battlefields are set
+aside on the table.
 
 ### During a game
 
@@ -188,42 +186,39 @@ out the one record the rules require.
 and say the new total aloud ("that's 5"). Their points go in the `opp` row: you track
 both (TR §415.1). The 9–10 boxes are spares for a correction or a 2v2.
 
-**Their cards seen**: each card of theirs that matters, the first time you see it, and a
-tick each time after. `Defy ||`, `Zhon`, `Hidden Blade |`. Reactions and tricks first,
-because they are what you play around in games 2 and 3, and what you sideboard against.
-
-**Notes** only when something surprises you or you hesitate: turn + mark + a few words
-(see Shorthand). Most games you write nothing here.
+**Notes**, if anything: mostly **their cards that matter**, the first time you see one and
+a tick after, `Defy ||`, `Zhon`. Reactions and tricks first, because they are what you
+play around in games 2 and 3, and what you sideboard against. Otherwise only when
+something surprises you or you hesitate: turn + mark + a few words (see Shorthand). Many
+games you write nothing.
 
 ### Between games
 
-Circle **1st/2nd** and **W/L** for the game just played, and write **their battlefield**:
-battlefields used in a decided game are retired (§486.5), so it narrows their next pick.
-Then, if you lost, choose to go first or second; pick your battlefield; sideboard,
-reading the cards-seen box. **This is also when you may open the trouble list and the
-matchup card** (TR §416.5). **Close both before the next game starts.**
+Circle **1st/2nd** for the game just played. Then, if you lost, choose to go first or
+second; pick your battlefield; sideboard, reading your notes. **This is also when you may
+open the trouble list and the matchup card** (TR §416.5). **Close both before the next
+game starts.**
 
 ### After the match
 
-Two lines, **before the next round** — within an hour you will remember the result and
-very little of the decision behind it. Read the `!` and `x` marks first; the mistake is
+One line, **before the next round**: within an hour you will remember the result and very
+little of the decision behind it. Read the `!` and `x` marks first; the mistake is
 usually one of them.
 
-- **`my mistake`** — one, the biggest, across the whole match. Your decision, not their
-  draw. **Wins get this line too**: an opponent's errors hide yours, and a win with no
-  mistake noted is the most suspicious entry on the page.
-- **`type`** — one letter for what *kind* of mistake it was, from
-  [strategy.md §8](strategy.md#8-reviewing-a-game): **`t`**erminal (missed a win or a
-  loss to prevent), **`s`**tate, **`o`**bjective, **`c`**onversion, **`i`**nformation,
-  **`p`**ressure, **`r`**ole. The words in `my mistake` change from match to match; the
-  letter is what lets the review page see the same mistake three times.
-- **`next time I'll`** — the mistake rewritten as a rule you could follow at the table.
-  "Next time I'll count their open runes before attacking", not "play better".
+- **`next time I'll`**: the match's biggest mistake rewritten as a rule you could follow
+  at the table. "Next time I'll count their open runes before attacking", not "play
+  better". Your decision, not their draw. **Wins get this line too**: an opponent's
+  errors hide yours.
 
 ### At home
 
 With the notes in front of you:
 
+- **Give the `next time I'll` line its type letter**, from
+  [strategy.md §8](strategy.md#8-reviewing-a-game): **`t`**erminal (missed a win or a
+  loss to prevent), **`s`**tate, **`o`**bjective, **`c`**onversion, **`i`**nformation,
+  **`p`**ressure, **`r`**ole. Write it beside the line. The words change from match to
+  match; the letter is what lets the review page see the same mistake three times.
 - **Copy every `T`** to the [trouble list](#the-trouble-list-at-the-back) — a new row, or a
   tally mark on an existing one.
 - **Settle every `?`** against [`docs/rules.md`](rules.md). One that needed several rules
@@ -275,7 +270,7 @@ one change to my play  _________________________________
 one question for Jun, or one test  ______________________
 ```
 
-- **`mistakes that repeated`** is the payoff. Read the `my mistake` lines together and look
+- **`mistakes that repeated`** is the payoff. Read the `next time I'll` lines and their type letters together and look
   for the same thing in different words.
 - **`marks`** tallies every `h`, `n` and `f` from the block's notes. They are the
   deck's own failure modes. Three `h` in ten matches means you are hiding at
