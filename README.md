@@ -47,6 +47,13 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
   them to the reMarkable cloud with rmapi (third-party, `~/.local/bin/rmapi`). Reading copies
   are replaced in place keeping highlights; sheets you write on are uploaded once, never
   overwritten. Never deletes anything on the device.
+- `scripts/pull-remarkable` - pulls the sheets Jay writes on (the `once` entries in
+  `guides/remarkable.txt`) back from the reMarkable with their handwriting, into
+  `notes/sheets/<name>.pdf`; git keeps every version. Blank sheets are skipped; never changes
+  the device. `--list` only reports which pages carry writing.
+- `.githooks/post-commit` - after a commit touching anything the reMarkable shows, runs
+  `scripts/sync-remarkable` in the background (log: `guides/out/sync-remarkable.log`).
+  Enable per clone with `git config core.hooksPath .githooks`.
 - `notes/answers.md` - answers to the numbered questions notebook on the reMarkable
   (`questions.pdf` from `scripts/build-journal`), batch by batch; synced as `answers`.
 - `scripts/build-journal` - renders the match journal's blank pages to PDFs in
