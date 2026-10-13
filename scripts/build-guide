@@ -1,13 +1,20 @@
 #!/bin/sh
-# Turns a Markdown guide in guides/ into a Word doc in guides/out/.
+# Turns a Markdown guide in guides/ into a Word doc (default) or an e-ink PDF in guides/out/.
 #
 #   scripts/build-guide                    # list available guides
 #   scripts/build-guide sivir-anti-meta-midrange
 #   scripts/build-guide guides/sivir-anti-meta-midrange.md
 #   scripts/build-guide --all              # rebuild every guide
+#   scripts/build-guide --pdf skirmish-prep
+#   scripts/build-guide --pdf docs/fundamentals.md
+#   scripts/build-guide --pdf --all
+#
+# --pdf lays the page out for a reMarkable 2 (157 x 210 mm, 3:4, grayscale) using
+# guides/eink.css, via pandoc -> HTML -> weasyprint. Any Markdown path works, so the
+# docs/ handbooks build too.
 #
 # Source of truth is the .md file; guides/out/ is build output (gitignored,
-# regenerate any time). Requires pandoc.
+# regenerate any time). Requires pandoc, and weasyprint for --pdf.
 
 DIR=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 GUIDES="$DIR/guides"
@@ -17,13 +24,34 @@ PANDOC=$(command -v pandoc 2>/dev/null)
 [ -z "$PANDOC" ] && PANDOC=$(ls "$HOME"/anaconda3/bin/pandoc 2>/dev/null | head -1)
 [ -z "$PANDOC" ] && { echo "build-guide: no pandoc found (looked on PATH and in anaconda3/bin)" >&2; exit 127; }
 
+FORMAT=docx
+if [ "$1" = "--pdf" ]; then
+  FORMAT=pdf
+  shift
+  WEASY=$(command -v weasyprint 2>/dev/null)
+  [ -z "$WEASY" ] && WEASY=$(ls "$HOME"/anaconda3/bin/weasyprint 2>/dev/null | head -1)
+  [ -z "$WEASY" ] && { echo "build-guide: --pdf needs weasyprint (looked on PATH and in anaconda3/bin)" >&2; exit 127; }
+fi
+
 mkdir -p "$OUT"
 
 build_one() {
   src="$1"
   base=$(basename -- "$src" .md)
-  "$PANDOC" "$src" -o "$OUT/$base.docx" --standalone
-  echo "built guides/out/$base.docx"
+  if [ "$FORMAT" = pdf ]; then
+    html=$(mktemp "${TMPDIR:-/tmp}/build-guide.XXXXXX.html")
+    # Relative links and images resolve against the source file's folder.
+    # Linked (not -s): an author stylesheet placed after pandoc's built-in one wins.
+    "$PANDOC" "$src" -t html5 --standalone --metadata pagetitle="$base" \
+      --css "file://$GUIDES/eink.css" -o "$html" &&
+      "$WEASY" --base-url "$(dirname -- "$src")/" "$html" "$OUT/$base.pdf" 2>/dev/null
+    status=$?
+    rm -f "$html"
+    [ $status -eq 0 ] || { echo "build-guide: failed on $src" >&2; return $status; }
+  else
+    "$PANDOC" "$src" -o "$OUT/$base.docx" --standalone
+  fi
+  echo "built guides/out/$base.$FORMAT"
 }
 
 case "$1" in
@@ -34,7 +62,7 @@ case "$1" in
       echo "  $(basename -- "$f" .md)"
     done
     echo
-    echo "usage: scripts/build-guide <name>|<path.md>|--all"
+    echo "usage: scripts/build-guide [--pdf] <name>|<path.md>|--all"
     ;;
   --all)
     for f in "$GUIDES"/*.md; do

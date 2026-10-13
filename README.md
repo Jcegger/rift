@@ -39,9 +39,12 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `scripts/build-tiers.mjs` - scrapes the meta tier list off riftbound.gg's page.
 - `scripts/build-history.mjs` - appends today's row to the archive. Fetches nothing.
 - `scripts/build-guides.mjs` - regenerates the guide manifest. Fetches nothing.
-- `scripts/build-guide` - turns one guide into a Word doc with pandoc. No 's'.
+- `scripts/build-guide` - turns one guide into a Word doc with pandoc. No 's'. With
+  `--pdf` it builds an e-ink PDF instead (pandoc + weasyprint), page-sized for a
+  reMarkable 2 and styled by `guides/eink.css`; any Markdown path works, so the `docs/`
+  handbooks build too.
 - `scripts/build-journal` - renders the match journal's blank pages to PDFs in
-  `guides/out/journal/`, sized for a Kindle Scribe, plus a between-games matchup card
+  `guides/out/journal/`, sized 3:4 (fits a Kindle Scribe or a reMarkable 2), plus a between-games matchup card
   printed from the pocket-card table in `guides/khazix-voidreaver-matchups.md`. Fetches
   nothing.
 - `scripts/check.mjs` - the regression checks; run it after touching the engine.

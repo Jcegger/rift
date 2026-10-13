@@ -1,0 +1,59 @@
+/* E-ink stylesheet for `scripts/build-guide --pdf`.
+   Page = the reMarkable 2 screen (157 x 210 mm, 3:4), so a page fills it with no
+   letterboxing. Grayscale only: nothing may depend on colour. The right margin is
+   wide on purpose, for handwritten notes. */
+
+@page {
+  size: 157mm 210mm;
+  margin: 12mm 22mm 14mm 12mm;
+  @bottom-right { content: counter(page); font: 8pt sans-serif; color: #000; }
+  @bottom-left  { content: string(doctitle); font: 7pt sans-serif; color: #444; }
+}
+
+html { font-size: 10pt; }
+/* pandoc 2.12 always embeds a screen stylesheet (36em column, padding, grey page,
+   12pt print size). Reset every one of those here. */
+body {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 10pt !important;
+  font-family: "DejaVu Serif", "Noto Serif", Georgia, serif;
+  line-height: 1.38;
+  color: #000;
+  background: #fff !important;
+  hyphens: auto;
+  overflow-wrap: normal;
+}
+
+header#title-block-header { margin-bottom: 6mm; border-bottom: 1.5pt solid #000; padding-bottom: 3mm; }
+h1.title { string-set: doctitle content(); font-size: 18pt; margin: 0 0 1mm; }
+p.subtitle { font-style: italic; margin: 0; }
+p.author, p.date { font-size: 8pt; margin: 1mm 0 0; color: #333; }
+
+h1, h2, h3, h4 { font-family: "DejaVu Sans", "Noto Sans", sans-serif; color: #000; break-after: avoid; }
+h2 { font-size: 13.5pt; break-before: page; border-bottom: 1pt solid #000; padding-bottom: 1mm; margin-top: 0; }
+h3 { font-size: 11.5pt; margin: 5mm 0 1.5mm; }
+h4 { font-size: 10.5pt; margin: 4mm 0 1mm; }
+
+p, li { orphans: 2; widows: 2; }
+strong { font-weight: 700; }
+a { color: #000; text-decoration: underline; }
+code { font-family: "DejaVu Sans Mono", monospace; font-size: 8.5pt; }
+pre { white-space: pre-wrap; font-size: 8pt; border: 0.75pt solid #000; padding: 2mm; }
+
+blockquote {
+  margin: 3mm 0; padding: 1mm 0 1mm 3mm;
+  border-left: 2.5pt solid #000;
+}
+
+/* Tables: thin black rules, no fills. Small text so wide matchup tables fit. */
+table { width: 100%; border-collapse: collapse; margin: 3mm 0; font-size: 8pt; line-height: 1.25; }
+thead { display: table-header-group; }
+th, td { border: 0.6pt solid #000; padding: 1mm 1.2mm; vertical-align: top; overflow-wrap: anywhere; }
+th { font-family: "DejaVu Sans", sans-serif; font-weight: 700; text-align: left; }
+tr { break-inside: avoid; }
+
+/* Markdown '---' separators: every h2 already starts a page, so a rule that lands at the
+   foot of a page would be printed alone on a blank one. Drop them. */
+hr { display: none; }
