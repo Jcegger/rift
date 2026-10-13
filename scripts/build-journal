@@ -69,6 +69,10 @@ class Page:
             self.line(x + lw + 0.04, x + w, y + 0.02)
             x += w + gap
 
+    def box(self, x, y, w, h, lw=0.6):
+        self.ax.plot([x, x + w, x + w, x, x], [y, y, y + h, y + h, y], color=INK, lw=lw,
+                     solid_capstyle="butt")
+
     def section(self, y, title):
         self.text(L, y, title.upper(), size=6.5)
         self.line(L, R, y + 0.05, lw=1.2)
@@ -105,24 +109,44 @@ class Page:
 
 
 def match_page(pdf):
+    """One match. The score log is the legal record at Competitive OPL (TR §415.3: scores
+    tracked in writing, both players); everything else mid-game is what they reveal."""
     p = Page(pdf)
-    p.fields(0.45, [("#", 0.09), ("date", 0.22), ("event", 0.38), ("rd", 0.11), ("list v", 0.2)])
-    p.fields(0.80, [("me", 0.4), ("/", 0.4), ("match", 0.2)])
-    p.fields(1.12, [("opp", 0.5), ("/", 0.5)])
-    cols = [("", 0.3), ("first", 0.5), ("BF mine", None), ("BF theirs", 1.1),
-            ("mull", 0.45), ("sideboard", 1.0), ("result @", 0.65)]
-    bottom = p.table(1.42, cols, [["G1", "", "", "", "", "—", ""], ["G2"], ["G3"]], 0.3)
-    y = bottom + 0.3
-    p.section(y, "notes")
-    y += 0.12
+    p.fields(0.42, [("date", 0.25), ("vs", 0.75)])
+    y = 0.85
+    bw, bh = 0.46, 0.27            # point boxes: C conquer, H hold, E effect/burn-out; one per point
     for g in ("G1", "G2", "G3"):
-        y += 0.24
-        p.text(L, y, g)
-        for _ in range(4):
-            y += 0.27
-            p.line(L, R, y, lw=0.4, color=FAINT)
-        y += 0.04
-    y += 0.3
+        p.text(L, y, g, size=9)
+        p.text(L + 0.45, y, "1st   2nd", size=8, bold=False)
+        p.text(L + 1.45, y, "W   L", size=8, bold=False)
+        lw = p.text(L + 2.2, y, "their BF", size=7)
+        p.line(L + 2.2 + lw + 0.05, R, y + 0.02)
+        y += 0.22
+        for who in ("me", "opp"):
+            p.text(L, y + bh * 0.7, who, size=7)
+            x0 = L + 0.45
+            for i in range(10):
+                x = x0 + i * bw + (0.12 if i >= 8 else 0)   # 8 to win, then 2 spares
+                p.box(x, y, bw, bh, lw=0.6 if i < 8 else 0.35)
+                if who == "me":
+                    p.text(x + bw / 2, y - 0.03, str(i + 1), size=5, bold=False, ha="center")
+            y += bh
+        y += 0.26
+    p.section(y, "their cards seen")
+    y += 0.08
+    mid = (L + R) / 2
+    top = y
+    for _ in range(6):
+        y += 0.29
+        p.line(L, R, y, lw=0.4, color=FAINT)
+    p.vline(mid, top + 0.05, y)
+    y += 0.4
+    p.section(y, "notes")
+    y += 0.08
+    for _ in range(2):
+        y += 0.29
+        p.line(L, R, y, lw=0.4, color=FAINT)
+    y += 0.42
     p.section(y, "after")
     p.fields(y + 0.38, [("my mistake", 0.8), ("type", 0.2)])
     p.fields(y + 0.72, [("next time I'll", 1.0)])

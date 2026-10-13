@@ -72,6 +72,9 @@ exception — see [Tournament rules worth carrying](rules.md#tournament-rules-wo
   (TR §416.5). This is when to read the trouble list — it is also when you sideboard.
 - **The page starts empty and visible** to your opponent (TR §416.2). You don't have to
   show them what you write afterwards (TR §416.3).
+- **Score must be in writing** unless the event is low OPL: both players track both
+  scores, legibly, and announce every change (TR §415.1–§415.3). Dice or an app only
+  replace the written score at low OPL (TR §415.3.a), and a Summoner Skirmish may not be.
 - **A pre-printed template**: the rules don't say whether printed blank fields count as
   "empty". They carry no strategy, so it should be fine — but **show it to the judge
   once** rather than assume. What a template must never carry is *content*: no old
@@ -125,16 +128,8 @@ loses, so the review page can count them:
 | `n` | No Result: an even trade or a bounce, so no XP | `4n traded Kha for Rengar` |
 | `f` | a flip blown out: Gust or Star-Crossed in response, or the trigger countered | `6f Tide — Gust` |
 
-For the slots between games:
-
-| mark | means |
-|---|---|
-| `1` / `2` | I went first / second |
-| `c` | ...and I chose it (e.g. `2c` — I chose to go second) |
-| `W` `L` `D` | won / lost / drew |
-| `m0` `m1` `m2` | mulliganed 0, 1 or 2 cards (§117) |
-| `+Card −Card` | sideboard swap, 1-for-1 |
-| `@7` | it was decided on turn 7 |
+**Cards seen:** the name once, then a tick per sighting, `Defy ||`. Per game if it
+matters: `Defy 1| 2||`.
 
 **Cards:** first word or first four letters — `Rock` (Super Mega Death Rocket!), `Swit`, `Kha`. Consistent beats
 readable; you are the only reader. **A card you can't name:** write what it did and the
@@ -143,48 +138,70 @@ art, `5T ?blue dragon — stole hold`, and look it up at home.
 ## The match page
 
 ```
-#__ date ______ event ____________ rd __  list v__          match W/L  __–__
-me  ______________ / ______________
-opp ______________ / ______________
+date ________   vs ______________________________   (their name / legend)
 
-    first   BF mine / theirs           mull   sideboard          result
-G1  ____    _________ / _________      ____   —                  ___ @__
-G2  ____    _________ / _________      ____   ______________     ___ @__
-G3  ____    _________ / _________      ____   ______________     ___ @__
+G1   1st  2nd     W  L     their BF ____________________
+          1   2   3   4   5   6   7   8     9   10
+     me  [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]   [ ] [ ]
+     opp [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]   [ ] [ ]
+G2   ... the same ...
+G3   ... the same ...
+
+their cards seen ──────────────────────────────────────────────────────────
+____________________________________ | ____________________________________
+   (six ruled lines, two columns)
 
 notes ─────────────────────────────────────────────────────────────────────
-G1 ________________________________________________________________________
-   ________________________________________________________________________
-G2 ________________________________________________________________________
-   ________________________________________________________________________
-G3 ________________________________________________________________________
-   ________________________________________________________________________
+___________________________________________________________________________
 
 after ─────────────────────────────────────────────────────────────────────
-my mistake      ______________________________  type _   (wins too)
+my mistake      ______________________________  type _
 next time I'll  ____________________________________
 ```
 
-**That is everything you write at the table.** The rest — the full reflection, the
-trouble list, the review — happens at home, from these notes.
+**The score log is the sheet's main job.** At a Summoner Skirmish, which Riot's OP page
+puts at Competitive (see the [Skirmish prep](../guides/skirmish-prep.md)), **both
+players must track both scores in writing** (TR §415.1, §415.3), announcing every change
+(TR §415.2). Dice or an app only stand in at low OPL (TR §415.3.a). One box per point,
+**C** for a conquest, **H** for a hold, **E** for anything else (a card effect such as
+Evelynn, In Control's point, or an opponent's burn-out), both rows: the boxes filled are the score, and
+the letters record how it was made. That is the same layout as the community's
+Rifthub × Turn'em Sideways score pad, and the same reason Magic players keep a life pad:
+a running written record is what a judge reads to find where a discrepancy began.
+
+**The labels are bare on purpose.** A printed page may carry field names but no advice,
+because advice is a note from outside the match (TR §416.4). The how-to lives here, not
+on the sheet.
+
+**Everything else is what they showed you.** How players use a match pad is consistent
+across games: besides the running total, they write **what the opponent revealed**, and
+little else, because every extra field costs attention and match time. Andreas Reling's
+note-taking guide (Cardmarket Insight, 2019) puts it as: write what you see, cross it off
+when it is gone, and only write more in downtime. An earlier version of this page had
+event, round, list version, both names, and per-game columns for battlefields, mulligans
+and sideboard swaps, and no score at all. It asked for paperwork at the table and left
+out the one record the rules require.
 
 ### During a game
 
-Only the **notes** lines, and only when something happens: turn + mark + a few words.
-Most turns you write nothing. A typical game's notes read:
-`3s react on my move · 4! hold back? · 5T Rock — killed my 5 · 7? Hidden + move`.
+**Score first.** Each time anyone scores, write **C**, **H** or **E** in that player's next box
+and say the new total aloud ("that's 5"). Their points go in the `opp` row: you track
+both (TR §415.1). The 9–10 boxes are spares for a correction or a 2v2.
 
-Score is not on the page — track it with dice or an app as you already do. `@turn` in the
-result slot is enough to see when it was decided.
+**Their cards seen**: each card of theirs that matters, the first time you see it, and a
+tick each time after. `Defy ||`, `Zhon`, `Hidden Blade |`. Reactions and tricks first,
+because they are what you play around in games 2 and 3, and what you sideboard against.
+
+**Notes** only when something surprises you or you hesitate: turn + mark + a few words
+(see Shorthand). Most games you write nothing here.
 
 ### Between games
 
-Fill that game's row: `first`, battlefields, mull, result and `@turn`. Then, if you lost,
-choose first or last; pick your battlefield; sideboard and write the swaps in the next
-row. **This is also when you may open the trouble list and the matchup card** (TR §416.5).
-The card's row for this opponent gives the board swaps, the flip rules and the battlefield
-note in five lines. About thirty seconds, and you are sideboarding anyway. **Close both
-before the next game starts.**
+Circle **1st/2nd** and **W/L** for the game just played, and write **their battlefield**:
+battlefields used in a decided game are retired (§486.5), so it narrows their next pick.
+Then, if you lost, choose to go first or second; pick your battlefield; sideboard,
+reading the cards-seen box. **This is also when you may open the trouble list and the
+matchup card** (TR §416.5). **Close both before the next game starts.**
 
 ### After the match
 
@@ -276,8 +293,8 @@ one question for Jun, or one test  ______________________
   them. So a deck idea from ten matches is a question to bring him (the
   [deck guide's §13](../guides/khazix-voidreaver.md#13-questions-to-bring-to-jun) keeps
   the open ones), or a test to run in practice, not a change to the 56. If you do switch
-  to another of his lists, **switch only here**, not mid-block. `list v__` on each page
-  is the record.
+  to another of his lists, **switch only here**, not mid-block. Write the list version
+  on the review page; that is the record.
 - **Ten matches find habits, not win rates.** Three matches against one archetype says
   almost nothing about the matchup. Use this page to fix how you play, and be slow to
   change the deck on its numbers.
