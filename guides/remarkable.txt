@@ -17,6 +17,8 @@
 /riftbound/table     once    journal:trouble-list
 /riftbound/table     once    journal:review
 
+/riftbound           once    journal:questions
+
 /riftbound/reading   update  radiance-pre-rift
 /riftbound/reading   update  docs/strategy.md
 /riftbound/reading   update  docs/fundamentals.md

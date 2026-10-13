@@ -301,6 +301,14 @@ one question for Jun, or one test  ______________________
   boards, and Jun's play showed the target is the unit they just pumped. Ten matches
   settle what a Monte Carlo cannot.
 
+## The questions notebook
+
+`questions.pdf`: ten pages of numbered slots, **Q1 onward**, for rules questions and
+"why did I lose that?" moments. Write in it at home or between rounds, **never during a
+game** (TR §416.4): it is a note from outside the match. The numbers run across pages, so
+an answers sheet can say "Q7" and you can find it. It syncs to `/riftbound/questions` on
+the reMarkable and is never overwritten (see `guides/remarkable.txt`).
+
 ## The trouble list, at the back
 
 A running page — or a few — at the back of the notebook, **kept across every deck and

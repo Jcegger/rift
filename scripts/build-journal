@@ -10,6 +10,7 @@ Writes four files, kept separate on purpose:
     trouble-list.pdf  the running trouble list -- read between games, never during one
     review.pdf        the ten-match review
     matchup-card.pdf  the Kha'Zix pocket card -- between games only, like the trouble list
+    questions.pdf     numbered slots for questions to answer later -- never open during a game
 
 Sized 3:4 (6 x 8 in) for a Kindle Scribe; prints fine scaled to A4 or Letter. The pages
 carry field labels only -- no shorthand key, no advice -- because anything more is a note
@@ -219,6 +220,29 @@ def card_pages(pdf):
     p.done()
 
 
+def questions_pages(pdf, pages=10, per_page=6):
+    """A notebook for rules questions and "why did I lose that?" moments, written at home
+    or between rounds, never during a game (TR §416.4). Slots are numbered across pages so
+    an answers sheet can refer to Q7."""
+    n = 0
+    for _ in range(pages):
+        p = Page(pdf)
+        p.fields(0.42, [("date", 0.3)])
+        p.text(R, 0.42, "QUESTIONS", size=7, ha="right")
+        y = 0.75
+        for _ in range(per_page):
+            n += 1
+            y += 0.28
+            p.text(L, y, f"Q{n}", size=9)
+            p.line(L + 0.45, R, y + 0.02, lw=0.4, color=FAINT)
+            for _ in range(2):
+                y += 0.3
+                p.line(L, R, y + 0.02, lw=0.4, color=FAINT)
+            y += 0.28
+        assert y < H - 0.25, f"questions page overruns: {y:.2f} in"
+        p.done()
+
+
 def build(name, draw, count):
     with PdfPages(OUT / name) as pdf:
         for _ in range(count):
@@ -235,6 +259,7 @@ def main():
     build("trouble-list.pdf", trouble_page, 3)
     build("review.pdf", review_page, 3)
     build("matchup-card.pdf", card_pages, 1)
+    build("questions.pdf", questions_pages, 1)
 
 
 if __name__ == "__main__":
