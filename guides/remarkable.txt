@@ -18,7 +18,8 @@
 /riftbound/table     once    journal:review
 
 /riftbound           once    journal:questions
-/riftbound           update  notes/answers.md
+# answers: re-enable with the first real batch of questions
+# /riftbound           update  notes/answers.md
 
 /riftbound/reading   update  radiance-pre-rift
 /riftbound/reading   update  docs/strategy.md
