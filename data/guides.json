@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-11",
+ "generatedAt": "2026-10-13",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -110,6 +110,26 @@
     "Sources and method"
    ],
    "words": 8916
+  },
+  {
+   "slug": "radiance-pre-rift",
+   "file": "guides/radiance-pre-rift.md",
+   "kicker": null,
+   "title": "Radiance Pre-Rift — Sealed Prep",
+   "subtitle": "Friday 16 October 2026 — building and playing a Radiance sealed deck, from the rules and the cards",
+   "date": "2026-10-13",
+   "legend": null,
+   "champion": null,
+   "sections": [
+    "1. The event in one page",
+    "2. Building in 45 minutes",
+    "3. What wins sealed",
+    "4. The commons and uncommons worth knowing",
+    "5. Your champion pack, legend by legend",
+    "6. Radiance rules worth knowing before Friday",
+    "Sources and method"
+   ],
+   "words": 2581
   },
   {
    "slug": "reksai-void-burrower",
