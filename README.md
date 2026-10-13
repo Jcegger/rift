@@ -43,6 +43,10 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
   `--pdf` it builds an e-ink PDF instead (pandoc + weasyprint), page-sized for a
   reMarkable 2 and styled by `guides/eink.css`; any Markdown path works, so the `docs/`
   handbooks build too.
+- `scripts/sync-remarkable` - builds the PDFs listed in `guides/remarkable.txt` and pushes
+  them to the reMarkable cloud with rmapi (third-party, `~/.local/bin/rmapi`). Reading copies
+  are replaced in place keeping highlights; sheets you write on are uploaded once, never
+  overwritten. Never deletes anything on the device.
 - `scripts/build-journal` - renders the match journal's blank pages to PDFs in
   `guides/out/journal/`, sized 3:4 (fits a Kindle Scribe or a reMarkable 2), plus a between-games matchup card
   printed from the pocket-card table in `guides/khazix-voidreaver-matchups.md`. Fetches
