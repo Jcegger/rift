@@ -1,27 +1,32 @@
-# What scripts/sync-remarkable puts on the reMarkable, one line per document:
+# What goes on the reMarkable, for rmsync (~/projects/rmsync). One line per document:
 #
-#   <cloud folder>  <mode>  <source>
+#   <cloud folder>  <mode>  <source>  [name=<name>]
 #
-# mode   update  rebuild and replace the PDF's content on every sync, keeping your
-#                highlights and handwriting (rmapi put --content-only)
+# mode   update  rebuild and replace the PDF's content on every push, keeping your
+#                highlights and handwriting
 #        once    upload only if it isn't there yet. For sheets you write on: replacing
 #                one would misalign your handwriting with a new layout
-# source journal:<name>  a PDF from scripts/build-journal
-#        <guide-name>    guides/<guide-name>.md, built with scripts/build-guide --pdf
-#        <path>.md       any Markdown path (docs/, notes/), built the same way
+# source <path>.md   built with guides/eink.css
+#        <path>.pdf  uploaded as is (the journal pages come from scripts/build-journal)
 #
 # Reading copies stay current; to drop one from the tablet, delete its line here and
-# remove it on the device.
+# remove it on the device. `rmsync pull` saves the written-on sheets to notes/sheets/.
 
-/riftbound/table     once    journal:match-night
-/riftbound/table     once    journal:trouble-list
-/riftbound/table     once    journal:review
+@out      guides/out
+@pull     notes/sheets
+@css      guides/eink.css
+@prebuild scripts/build-journal
+@watch    docs/match-journal.md scripts/build-journal guides/khazix-voidreaver-matchups.md
 
-/riftbound           once    journal:questions
+/riftbound/table     once    guides/out/journal/match-night.pdf
+/riftbound/table     once    guides/out/journal/trouble-list.pdf
+/riftbound/table     once    guides/out/journal/review.pdf
+
+/riftbound           once    guides/out/journal/questions.pdf
 # answers: re-enable with the first real batch of questions
 # /riftbound           update  notes/answers.md
 
-/riftbound/reading   update  radiance-pre-rift
+/riftbound/reading   update  guides/radiance-pre-rift.md
 /riftbound/reading   update  docs/strategy.md
 /riftbound/reading   update  docs/fundamentals.md
 /riftbound/reading   update  docs/rules.md

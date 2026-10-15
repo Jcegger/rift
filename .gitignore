@@ -7,3 +7,6 @@ guides/out/
 
 # Paid source material (guides, books) read for docs/strategy.md and guides/*-jun.md. Never published.
 docs/*.pdf
+
+# One-off collection exports (Piltover Archive migration). Personal data, not source.
+collection-*.csv

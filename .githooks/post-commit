@@ -1,19 +1,5 @@
 #!/bin/sh
-# After a commit that touches anything the reMarkable shows, sync it in the background.
-# Enabled per clone with: git config core.hooksPath .githooks
-# Log: guides/out/sync-remarkable.log. A lock stops two syncs overlapping (a rebase replays
-# several commits in a row). Never blocks or fails the commit.
-root=$(git rev-parse --show-toplevel) || exit 0
-rev=${1:-HEAD}   # git passes no arguments; a commit may be given by hand to test
-changed=$(git diff-tree --no-commit-id --name-only -r "$rev" 2>/dev/null)
-echo "$changed" | grep -Eq '^(guides/[^/]+\.(md|css|txt)|docs/[^/]+\.md|notes/[^/]+\.md|scripts/build-(guide|journal))$' || exit 0
-[ -x "$HOME/.local/bin/rmapi" ] || command -v rmapi >/dev/null 2>&1 || exit 0
-mkdir -p "$root/guides/out"
-log="$root/guides/out/sync-remarkable.log"
-lock="${TMPDIR:-/tmp}/rift-sync-remarkable.lock"
-if command -v flock >/dev/null 2>&1; then
-  ( flock -n 9 || exit 0; "$root/scripts/sync-remarkable" >"$log" 2>&1 ) 9>"$lock" &
-else
-  "$root/scripts/sync-remarkable" >"$log" 2>&1 &
-fi
-exit 0
+# Pushes to the reMarkable in the background after a commit that touches anything the
+# tablet shows (see ~/projects/rmsync). Never blocks or fails the commit.
+command -v rmsync >/dev/null 2>&1 || exit 0
+rmsync hook "$@" || true

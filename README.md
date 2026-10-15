@@ -43,17 +43,14 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
   `--pdf` it builds an e-ink PDF instead (pandoc + weasyprint), page-sized for a
   reMarkable 2 and styled by `guides/eink.css`; any Markdown path works, so the `docs/`
   handbooks build too.
-- `scripts/sync-remarkable` - builds the PDFs listed in `guides/remarkable.txt` and pushes
-  them to the reMarkable cloud with rmapi (third-party, `~/.local/bin/rmapi`). Reading copies
-  are replaced in place keeping highlights; sheets you write on are uploaded once, never
-  overwritten. Never deletes anything on the device.
-- `scripts/pull-remarkable` - pulls the sheets Jay writes on (the `once` entries in
-  `guides/remarkable.txt`) back from the reMarkable with their handwriting, into
-  `notes/sheets/<name>.pdf`; git keeps every version. Blank sheets are skipped; never changes
-  the device. `--list` only reports which pages carry writing.
+- `guides/remarkable.txt` - what goes on the reMarkable 2, pushed by `rmsync`
+  (`~/projects/rmsync`, shared with other repos). Reading copies are replaced in place keeping
+  highlights; sheets you write on are uploaded once, never overwritten. Never deletes anything
+  on the device. `scripts/sync-remarkable` and `scripts/pull-remarkable` still work: they call
+  `rmsync push` and `rmsync pull` (written-on sheets into `notes/sheets/<name>.pdf`).
 - `.githooks/post-commit` - after a commit touching anything the reMarkable shows, runs
-  `scripts/sync-remarkable` in the background (log: `guides/out/sync-remarkable.log`).
-  Enable per clone with `git config core.hooksPath .githooks`.
+  `rmsync push` in the background (log: `guides/out/rmsync.log`; `rmsync status`).
+  Enable per clone with `rmsync install-hook`.
 - `notes/answers.md` - answers to the numbered questions notebook on the reMarkable
   (`questions.pdf` from `scripts/build-journal`), batch by batch; synced as `answers`.
 - `scripts/build-journal` - renders the match journal's blank pages to PDFs in
