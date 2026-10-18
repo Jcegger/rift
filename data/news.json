@@ -1,21 +1,147 @@
 {
- "generatedAt": "2026-10-11",
+ "generatedAt": "2026-10-18",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 19,
+ "carriedFromPrevious": 28,
  "tags": {
-  "News": 39,
-  "Guides": 4,
+  "News": 43,
+  "Guides": 5,
+  "Legends": 24,
   "Metagame": 20,
   "Events": 21,
-  "Legends": 15,
   "Sets": 4,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Radiance Nexus Night Promos",
+   "dt": "2026-10-17",
+   "url": "https://riftbound.gg/radiance-nexus-night-promos",
+   "tags": [
+    "News"
+   ],
+   "author": "Theo-74825"
+  },
+  {
+   "title": "Riftbound Regional Championship Best-Of Prizing & Policy Updates",
+   "dt": "2026-10-16",
+   "url": "https://riftbound.gg/riftbound-regional-championship-best-of-prizing-policy-updates",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
+  {
+   "title": "Start of Game Rules Playtest Changes",
+   "dt": "2026-10-16",
+   "url": "https://riftbound.gg/start-of-game-rules-playtest-changes",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
+  {
+   "title": "Is a Riftbound Digital Client in the Making?",
+   "dt": "2026-10-15",
+   "url": "https://riftbound.gg/is-a-riftbound-digital-client-in-the-making",
+   "tags": [
+    "News"
+   ],
+   "author": "Theo-74825"
+  },
+  {
+   "title": "Radiance Pre-Rift Sealed Event Strategy Guide for All Kits",
+   "dt": "2026-10-15",
+   "url": "https://riftbound.gg/radiance-pre-rift-sealed-event-strategy-guide-for-all-kits",
+   "tags": [
+    "Guides"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Ekko, Boy Who Shattered Time Guide – Best Decks & Cards: Radiance Theorycraft",
+   "dt": "2026-10-14",
+   "url": "https://riftbound.gg/ekko-boy-who-shattered-time-guide",
+   "tags": [
+    "Legends"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Evelynn, Agony's Embrace Guide - Best Decks & Cards: Radiance Theorycraft",
+   "dt": "2026-10-14",
+   "url": "https://riftbound.gg/evelynn-agonys-embrace-guide",
+   "tags": [
+    "Legends"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Jarvan IV, Exemplar of Demacia Guide – Best Decks & Cards: Radiance Theorycraft",
+   "dt": "2026-10-14",
+   "url": "https://riftbound.gg/jarvan-iv-exemplar-of-demacia-guide",
+   "tags": [
+    "Legends"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Ziggs, Hexplosives Expert Guide - Best Decks & Cards: Radiance Theorycraft",
+   "dt": "2026-10-14",
+   "url": "https://riftbound.gg/ziggs-hexplosives-expert-guide",
+   "tags": [
+    "Legends"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "K'sante, Pride of Nazumah Guide - Best Decks & Cards: Radiance Theorycraft",
+   "dt": "2026-10-13",
+   "url": "https://riftbound.gg/ksante-pride-of-nazumah-guide",
+   "tags": [
+    "Legends"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Mordekaiser, Iron Revenant Guide - Best Decks & Cards: Radiance Theorycraft",
+   "dt": "2026-10-13",
+   "url": "https://riftbound.gg/mordekaiser-iron-revenant-guide",
+   "tags": [
+    "Legends"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Seraphine, Starry-Eyed Songstress Guide - Best Decks & Cards: Radiance Theorycraft",
+   "dt": "2026-10-13",
+   "url": "https://riftbound.gg/seraphine-starry-eyed-songstress-guide",
+   "tags": [
+    "Legends"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Orianna, Lady of Clockwork Guide - Best Decks & Cards: Radiance Theorycraft",
+   "dt": "2026-10-12",
+   "url": "https://riftbound.gg/orianna-lady-of-clockwork-guide",
+   "tags": [
+    "Legends"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Riven, The Exile Guide - Best Decks & Cards: Radiance Theorycraft",
+   "dt": "2026-10-12",
+   "url": "https://riftbound.gg/riven-the-exile-guide",
+   "tags": [
+    "Legends"
+   ],
+   "author": "Den"
+  },
   {
    "title": "October 2026 Tournament Rules Update & Changelog",
    "dt": "2026-10-09",
