@@ -32,6 +32,7 @@ const ERA_LEGAL = "2026-10-23";  // Radiance's release, TR §601.3.c.6.a. Kept h
                                  // lib/decks.mjs, whose entry is deleted once the set is legal
 const ERA_SHARE = 0.3;
 const MIN_PLACED = 3;
+const DRIFT = 0.2;               // a card's share moving this much since a build was written
 const BEFORE_DAYS = 60;          // the Vendetta baseline a legend's changes are read against
 const LISTS_KEPT = 6;
 
@@ -195,6 +196,9 @@ const main = async () => {
     const runesIn = (cards) => Object.entries(cards).reduce((a, [code, q]) => a + (card(code)?.t === "Rune" ? q : 0), 0);
     const trim = (d) => ({ s: d.s, h: d.h, ev: d.ev || null, pl: d.pl ?? null, players: d.ec || null, dt: d.dt, vw: d.vw, cards: d.cards, overlap: overlap(d.cards), runes: runesIn(d.cards) });
     const from = basis === "placed" ? P : basis === "brews" ? B : [];
+    // Every card's share of those lists, by name — what the tweak bench draws its bars from.
+    const shares = {};
+    if (from.length) for (const x of tally(from).values()) if (x.type !== "Legend") shares[x.name] = round(x.lists / from.length);
     const close = con ? from.filter((d) => overlap(d.cards) >= 0.7).length : 0;
     const noRunes = from.filter((d) => !runesIn(d.cards)).length;
     legends.push({
@@ -205,7 +209,7 @@ const main = async () => {
       finishes: P.slice(0, 12).map((d) => [d.pl, d.ec || null, d.ev]),
       brews: B.length, before: V.length, basis, consensus: con, changes,
       // Lists within 70% of the consensus, and lists the feed carries without a rune deck.
-      close, noRunes,
+      close, noRunes, shares,
       lists: [...P.slice(0, LISTS_KEPT), ...B.slice(0, basis === "placed" ? 0 : 3)].map((d) => ({ ...trim(d), brew: !d.tour })),
     });
   }
@@ -236,6 +240,20 @@ const main = async () => {
     if (broken.length) throw new Error(`builds/${f}: breaks ${broken.map((k) => `${k.label} (${k.val})`).join(", ")}`);
     const L = deckStats(deck, idx, {}).legend;
     if (!L || idx.legendName(L) !== b.legend) throw new Error(`builds/${f}: legend "${b.legend}" is not the list's (${L ? idx.legendName(L) : "none"})`);
+    // Has the field moved since the build was written? The build file records what it
+    // was made against (events, list count, card shares); today's counts are compared to
+    // that. New events, or a card whose share moved by DRIFT or more, mark it out of date —
+    // a prompt to revise it, not a change made to it.
+    const now = legends.find((l) => l.name === b.legend);
+    if (b.snapshot && now) {
+      const was = b.snapshot, newEvents = events.filter((e) => !was.events.includes(e.name));
+      const names = new Set([...Object.keys(was.shares || {}), ...Object.keys(now.shares || {})]);
+      const moved = [...names].map((n) => ({ name: n, was: was.shares?.[n] || 0, now: now.shares?.[n] || 0 }))
+        .filter((r) => Math.abs(r.now - r.was) >= DRIFT).sort((x, y) => Math.abs(y.now - y.was) - Math.abs(x.now - x.was)).slice(0, 10)
+        .map((r) => ({ ...r, inBuild: Object.keys(cards).some((k) => card(k)?.n === r.name) }));
+      b.drift = { stale: newEvents.length > 0 || moved.length > 0, since: was.date, listsThen: was.placed, listsNow: now.placed,
+        newEvents: newEvents.map((e) => ({ name: e.name, players: e.players, date: e.date, preRelease: e.preRelease })), moved };
+    } else b.drift = null;
     builds.push(b);
   }
 

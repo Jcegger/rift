@@ -32,6 +32,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   CSV import and its matcher, the Piltover worklist and merge file, foil-only typos, spares
   and trade matching. Tests: `lib/collection.test.mjs`.
 - `lib/markdown.mjs` - the guide renderer the site uses, with heading anchors.
+- `lib/sim.mjs` - the goldfish simulator's engine, shared by `scripts/sim.mjs` and the site.
+  `lib/sim-worker.mjs` runs it in a Web Worker for the tweak bench.
 - `data/cards.json` - the card catalog, generated and committed. Loaded at boot.
 - `data/extras.json` - printings Riot does not publish, merged in at load. The one
   hand-maintained file, and the only one carrying no `generatedAt`, so it sits outside
@@ -1250,6 +1252,17 @@ On the site: **Find a deck** opens on the Radiance-era table; each legend has an
 (consensus, flex, what changed, the lists, any Claude build, copy-to-my-decks); each of your
 decks gets a **Radiance update** panel against its legend's consensus. `scripts/rift ideas
 [legend]` prints the same, plus your saved deck's differences.
+
+**Tweak bench** (`#/bench/<legend>`): start from the consensus, a Claude build, any shown
+list or one of your decks; − / + any card, add what the field plays that the list doesn't, or
+search the legend's domains. Live: the deck's rule checks, each card's share of the lists,
+agreement with the consensus, and the goldfish curve (1,500 games in a worker, base vs now).
+Save writes it to your decks; it will not save a list that breaks a rule.
+
+**Builds that keep up.** Each build file carries a `snapshot` of the field it was written
+against (events, placed lists, card shares). The daily build compares that with today's: a
+new event, or a card whose share moved by 20 points or more, marks the build out of date on
+the site with what moved. That is a prompt for Claude to revise it, never an automatic edit.
 
 **Claude builds** (`builds/*.json`) start from a placed list and change it only with a
 reason drawn from the counts; the three of 2026-10-19 keep their source lists unchanged

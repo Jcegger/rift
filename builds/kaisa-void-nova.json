@@ -49,5 +49,45 @@
   "UNL-R03": 5,
   "VEN-066": 3
  },
- "sb": {}
+ "sb": {},
+ "snapshot": {
+  "date": "2026-10-19",
+  "events": [
+   "NovaRiftbound's $2,000 Online Showdown 5",
+   "Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview)"
+  ],
+  "placed": 12,
+  "shares": {
+   "Hextech Ray": 1,
+   "Noxus Hopeful": 1,
+   "Brynhir Thundersong": 1,
+   "Falling Star": 1,
+   "Kai'Sa, Survivor": 1,
+   "Lecturing Yordle": 0.83,
+   "Smoke Screen": 1,
+   "Stupefy": 1,
+   "Watchful Sentry": 1,
+   "Thousand-Tailed Watcher": 1,
+   "Time Warp": 1,
+   "Void Gate": 1,
+   "Bilgewater Tracker": 1,
+   "The Empyrean": 0.75,
+   "Ferrous Forerunner": 0.5,
+   "Bellows Breath": 1,
+   "Rockfall Path": 1,
+   "Frozen Fortress": 1,
+   "Plundering Poro": 1,
+   "Fury Rune": 1,
+   "Mind Rune": 1,
+   "Temporal Breach": 1,
+   "Singularity": 0.25,
+   "Lost to the Sands": 0.58,
+   "Pickpocket": 0.42,
+   "Void Seeker": 0.08,
+   "Riptide Mage": 0.08,
+   "Perfect Execution": 0.17,
+   "Pouty Poro": 0.08,
+   "Orb of Regret": 0.08
+  }
+ }
 }

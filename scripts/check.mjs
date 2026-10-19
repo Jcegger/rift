@@ -609,6 +609,10 @@ section('Deck ideas');
     // build-ideas.mjs already refuses a build whose list is another legend's; this is
     // the page-level half: a build is shown on its legend's idea page, so that page has
     // to exist.
+    // A build without a snapshot can never be told it is out of date.
+    ok('every Claude build records the field it was written against',
+       I.builds.every((b) => b.snapshot && Array.isArray(b.snapshot.events) && b.snapshot.shares && b.drift),
+       I.builds.filter((b) => !(b.snapshot && b.snapshot.shares)).map((b) => b.id).join(', ') || `${I.builds.filter((b) => b.drift?.stale).length} of ${I.builds.length} out of date`);
     const orphan = I.builds.filter((b) => !I.legends.some((l) => l.name === b.legend));
     ok("every Claude build belongs to a legend with Radiance-era evidence", !orphan.length,
        orphan.length ? orphan.map((b) => b.id).join(', ') : `${I.builds.length} builds`);
