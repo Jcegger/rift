@@ -1149,10 +1149,35 @@ bottomed, so the difference is the decision and not the luck.
 **What it models**, each from `docs/rules.md`: the Chosen Champion in the Champion Zone,
 the 4-card hand and the one mulligan of up to 2, two runes a turn plus one for the second
 player, a draw on every turn including the first player's first, and paying E Energy and
-P Power from max(E, P) runes with P recycled. Card text is read for three things only:
-draws and channels are played out, spells that exhaust, ready or buff a friendly unit
-wait for one, and **interaction** (counters, removal, bounce, stun) is held rather than
-cast, and kept out of the mulligan guide, because its worth is decided by a matchup.
+P Power from max(E, P) runes with P recycled. Card text is read for what a deck does to
+itself, and nothing that needs an opponent:
+
+- **Interaction** (counters, removal, bounce, stun) is held rather than cast, and kept out
+  of the mulligan guide, because its worth is decided by a matchup.
+- **Draws and channels** are played out (Meditation, Life from Stone); spells that exhaust,
+  ready or buff a friendly unit wait until there is one.
+- **Tokens made on play** count as units (Recruits, Sprites, Mechs, Sand Soldiers;
+  `[Temporary]` ones die next turn). Tokens from other triggers (Deathknell, on move, on
+  an opponent's turn) are left out rather than guessed.
+- **Gold** pays one Power of any domain. **Equipment** adds its Might bonus once a unit is
+  on the board.
+- **Legend abilities that make a unit** ("1 Energy, exhaust: play a Recruit", Viktor,
+  Azir, Lillia) are used once a turn. Conditions after the cost are not checked, so those
+  decks read as a ceiling. Other legend text is not modelled.
+
+**The rune split** is tested, not assumed: every split from 3/9 to 9/3 on the same
+shuffles. A different split is suggested only when it improves Energy by 0.2 or stuck
+hands by 3 points without being meaningfully worse on the other, and the smallest such
+move is preferred. On the pre-Radiance field that flags four decks, Viktor most clearly
+(6/6 → 4/8 takes stuck hands from 11% to 3%).
+
+**Skill expression.** A goldfish rewards tapping out every turn, so a deck built to hold
+up answers reads lower on Energy by design. The field table shows each deck's interaction
+count beside its numbers so that reads as a style, not a weakness. Nothing here ranks
+decks: these are consistency numbers, and who wins is for results and real games.
+
+`node scripts/sim.test.mjs` checks the card-text reads against real cards and the rules
+invariants (first-turn channel, never spending runes the board cannot make, determinism).
 
 **What it is not.** No opponent, so no matchup result. Points are capped at one per
 battlefield per turn (§470), so an unopposed deck scores on the same clock whatever it
