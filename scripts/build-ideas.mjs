@@ -28,6 +28,8 @@ import { indexCatalog, deckStats, deckChecks, unlimitedCopies, MAX_COPIES } from
 
 const ERA_SET = "RAD";
 const ERA_FROM = "2026-10-09";   // Radiance revealed in full (Riot's errata and rules, 9 Oct)
+const ERA_LEGAL = "2026-10-23";  // Radiance's release, TR §601.3.c.6.a. Kept here, not read from
+                                 // lib/decks.mjs, whose entry is deleted once the set is legal
 const ERA_SHARE = 0.3;
 const MIN_PLACED = 3;
 const BEFORE_DAYS = 60;          // the Vendetta baseline a legend's changes are read against
@@ -58,6 +60,10 @@ const main = async () => {
     const rad = ls.filter((d) => Object.keys(d.cards).some(isEra)).length;
     if (rad / ls.length >= ERA_SHARE)
       events.push({ name, players: ls[0].ec || null, lists: ls.length, radLists: rad, date: ls.map((d) => d.dt).sort()[0] });
+  // Played before the set was legal: unsanctioned, online, on a platform that had the
+  // cards early. Real games, not the results of the format — the pages say which.
+  // (The date is when the lists were posted, the nearest thing the feed has.)
+  for (const e of events) e.preRelease = e.date < ERA_LEGAL;
   }
   events.sort((a, b) => b.date.localeCompare(a.date) || (b.players || 0) - (a.players || 0));
   const eraEvents = new Set(events.map((e) => e.name));
@@ -237,7 +243,7 @@ const main = async () => {
     generatedAt: new Date().toISOString().slice(0, 10),
     source: "data/decks.json, read against data/cards.json and data/banned.json",
     note: "Counts, not opinions: each consensus row says how many of the lists play it. Main deck, runes and battlefields only — the deck feed carries no sideboards. Basis 'brews' means fewer than 3 placed lists and the count is of unplaced lists instead.",
-    era: { set: ERA_SET, from: ERA_FROM, rule: `an event counts as Radiance-format when ${ERA_SHARE * 100}% or more of its lists here play a Radiance card`, events, placed: placed.length, brews: brews.length, before: before.length, beforeFrom, skippedBanned: skipped.banned },
+    era: { set: ERA_SET, from: ERA_FROM, legalFrom: ERA_LEGAL, allPreRelease: events.length > 0 && events.every((e) => e.preRelease), rule: `an event counts as Radiance-format when ${ERA_SHARE * 100}% or more of its lists here play a Radiance card`, events, placed: placed.length, brews: brews.length, before: before.length, beforeFrom, skippedBanned: skipped.banned },
     newLegends,
     legends,
     builds,

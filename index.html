@@ -931,8 +931,9 @@ function radianceSection() {
   const rows = IDEAS.legends.filter((l) => l.placed || l.brews >= 3)
     .sort((a, b) => (mine.has(b.name) ? 1 : 0) - (mine.has(a.name) ? 1 : 0) || 0);
   return `<section class="panel">
-    <div class="headrow"><h2>Radiance era</h2><span class="small dim">${E.events.length} Radiance-format event${E.events.length === 1 ? "" : "s"} · ${E.placed} placed lists · ${E.brews} brews · built ${esc(IDEAS.generatedAt)}</span></div>
-    <p class="note">Radiance changes every legend, not just its nine new ones, so these are the lists from events that played with it: ${E.events.map((e) => `${esc(e.name)} (${e.players ?? "?"} players, ${esc(e.date)})`).join("; ") || "none yet"}. Online events ran it before the paper release on 2026-10-23. ${E.events.length < 4 ? "That is a small sample, so read 9 lists as 9 lists." : ""} Brews are unplaced lists with Radiance cards, a weaker kind of evidence.</p>
+    <div class="headrow"><h2>Radiance${E.allPreRelease ? " — online previews" : " era"}</h2><span class="small dim">${E.events.length} Radiance-format event${E.events.length === 1 ? "" : "s"} · ${E.placed} placed lists · ${E.brews} brews · built ${esc(IDEAS.generatedAt)}</span></div>
+    ${E.events.some((e) => e.preRelease) ? `<div class="banner warn"><b>${E.allPreRelease ? "These are not tournament results yet." : "Some of these are pre-release events."}</b> Radiance is not legal for sanctioned play until ${esc(E.legalFrom)}. ${E.allPreRelease ? "Every list here" : "Lists marked preview"} come${E.allPreRelease ? "s" : ""} from unsanctioned online events that played the set early, on platforms that may not implement every new card correctly, in its first week. Real games, and the earliest signal there is — not a settled format.</div>` : ""}
+    <p class="note">Radiance changes every legend, not just its nine new ones, so these are the lists from events that played with it: ${E.events.map((e) => `${esc(e.name)} (${e.players ?? "?"} players, ${esc(e.date)}${e.preRelease ? ", online preview" : ""})`).join("; ") || "none yet"}. ${E.events.length < 4 ? "That is a small sample, so read 9 lists as 9 lists." : ""} Brews are unplaced lists with Radiance cards, a weaker kind of evidence.</p>
     <div class="tablewrap"><table class="t"><thead><tr><th>Legend</th><th class="r">Placed</th><th class="r">Top 8</th><th>Best</th><th class="r hide-sm">Brews</th><th>Idea</th></tr></thead>
     <tbody>${rows.map((l) => `<tr>
       <td><span class="dots" style="display:inline-flex;margin-right:6px">${dots(l.domains, 9)}</span><a href="#/idea/${encodeURIComponent(l.name)}">${esc(l.name)}</a>
@@ -969,10 +970,11 @@ function viewIdea(name) {
     </div>
     ${l ? `<div class="stats"><div class="stat"><span class="lbl">Placed lists</span><b>${l.placed}</b></div><div class="stat"><span class="lbl">Top 8</span><b>${l.top8}</b></div><div class="stat"><span class="lbl">Brews</span><b>${l.brews}</b></div></div>` : ""}
   </section>
+  ${IDEAS?.era?.allPreRelease ? `<div class="banner warn">Every finish on this page is from an unsanctioned online event played before Radiance was legal (${esc(IDEAS.era.legalFrom)}). Early signal, not a settled result.</div>` : ""}
   ${builds.map(buildPanel).join("")}
   ${c ? `<div class="cols"><section class="panel wide">
       <div class="headrow"><h2>Consensus list</h2>${ROW ? `<button class="btn primary" data-copyidea="${esc(name)}">Copy to my decks</button>` : ""}</div>
-      <p class="note">${l.basis === "placed" ? `Counted from ${c.from} placed Radiance-era lists` : `<b>From ${c.from} brews</b>: fewer than 3 placed lists exist, so these are unplaced lists, a weaker kind of evidence`}. Each card at the number of copies most of them run, highest share first, until 40; the bar is the share of lists playing it. No sideboard: the deck feed has none.
+      <p class="note">${l.basis === "placed" ? `Counted from ${c.from} placed lists${IDEAS.era.allPreRelease ? " from online preview events (unsanctioned, before release)" : ""}` : `<b>From ${c.from} brews</b>: fewer than 3 placed lists exist, so these are unplaced lists, a weaker kind of evidence`}. Each card at the number of copies most of them run, highest share first, until 40; the bar is the share of lists playing it. No sideboard: the deck feed has none.
         <b>${l.close} of ${c.from}</b> lists are within 70% of it${l.close / c.from < 0.4 ? ` — <b style="color:var(--short)">these lists disagree, so this is a blend of different decks, not a deck anyone played</b>` : ""}.${c.checks.filter((k) => k.ok === false).length ? ` <b style="color:var(--bad)">Breaks: ${esc(c.checks.filter((k) => k.ok === false).map((k) => `${k.label} (${k.val})`).join(", "))}</b>` : ""}${c.checks.some((k) => k.ok === "later") ? " Radiance cards are legal from 2026-10-23." : ""}</p>
       ${consensusBlock(c)}
     </section>
@@ -1080,7 +1082,7 @@ function viewFind(legend) {
   return `
   <section class="panel">
     <div class="headrow"><h1>Find a deck</h1></div>
-    <p class="note">Results first. <b>Radiance era</b> is every legend in the events that have played with Radiance so far, each with a consensus list counted from its placed lists and, for some, a Claude build. Below it, Riot's own record of the Vendetta Regional Qualifiers: who brought what on Day 1, how many made Day 2, and the Top 8. <strong>Converts</strong> is Day 2 share ÷ Day 1 share, so above 1.00 the deck beat the room and below it lost to it.</p>
+    <p class="note">Results first. <b>Radiance</b> is every legend in the events that have played with the set so far${IDEAS?.era?.allPreRelease ? " — online previews only, until it is legal on " + esc(IDEAS.era.legalFrom) : ""}, each with a consensus list counted from its placed lists and, for some, a Claude build. Below it, Riot's own record of the Vendetta Regional Qualifiers: who brought what on Day 1, how many made Day 2, and the Top 8. <strong>Converts</strong> is Day 2 share ÷ Day 1 share, so above 1.00 the deck beat the room and below it lost to it.</p>
   </section>
   ${radianceSection()}
   ${f ? `<section class="panel">

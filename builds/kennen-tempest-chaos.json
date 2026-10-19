@@ -4,7 +4,7 @@
  "date": "2026-10-19",
  "author": "Claude",
  "title": "Kennen Tempest — the Chaos majority build",
- "summary": "The build most placed Kennen lists play (17 of 20 are within 70% of the consensus), from its best finish. The Haven winner is a different, Order-heavy deck — see its list below.",
+ "summary": "The build most placed Kennen lists play (17 of 20 are within 70% of the consensus), from its best finish. The Haven winner is a different, Order-heavy deck — see its list below. Both Kennen events were unsanctioned online previews played before Radiance was legal.",
  "basis": "terrencem - Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview), #5 of 50, Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview). 90% of its main deck matches the consensus. Chosen over the #1 list because that one (35% overlap, Illaoi and Seal of Unity, 8 Order runes) is one player's build; this one is what the field converged on and still finished top 8.",
  "changes": [
   {
@@ -21,7 +21,7 @@
  "matchups": [
   {
    "vs": "All",
-   "note": "No Radiance-era matchup records yet. The two events show Kennen beside Riven, Yasuo and Kai'Sa at the top; that is a field, not a matchup table."
+   "note": "No matchup records yet. The two online preview events show Kennen beside Riven, Yasuo and Kai'Sa at the top; that is a field, not a matchup table."
   }
  ],
  "sim": "Goldfish, 8,000 games: mulligan by bottoming 5+ cost cards; Energy spent turns 1–4 16.3 on the play / 17.4 on the draw; 3.4 units by turn 3; stuck on turn 3 1%; 9/3 runes fine.",

@@ -1233,7 +1233,10 @@ changes every legend, so the era is defined by **format**, not legend: an event 
 Radiance-format when 30% or more of the lists this snapshot holds for it play a Radiance card
 (on 2026-10-19, NovaRiftbound's $2,000 Online Showdown #5, 74 players, and Haven Online
 Challenger #5, 50 players; every October Vendetta event has none). Every placed list from
-those events counts, whichever legend. A **brew** is an unplaced list with a Radiance card
+those events counts, whichever legend. **Both are unsanctioned online events played before
+Radiance was legal (2026-10-23)** — real games on platforms that had the set early, not the
+format's results. `build-ideas.mjs` marks every event dated before release `preRelease`, and
+while all of them are, the site says so on the table, every idea page and the builds. A **brew** is an unplaced list with a Radiance card
 since 2026-10-09, used only for a legend with fewer than 3 placed lists and always labelled.
 
 The **consensus** is counted, not chosen: each card at the number of copies most lists run,
