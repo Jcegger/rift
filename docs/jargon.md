@@ -18,7 +18,7 @@ Do not promote one without a sighting.
 
 | term | means | Riftbound mapping | evidence |
 |---|---|---|---|
-| **the queen** / **protect the queen** | the one unit a deck is built to land and keep alive. For Irelia, **Irelia, Fervent** | the **Chosen Champion** in the Champion Zone (§103.2.a.1). The champion *unit*, not the legend | cardsrealm *Deck Tech: Voltron Irelia*: "Irelia (your queen!)", section "Protect Your Queen!" ([link](https://riftbound.cardsrealm.com/en-za/articles/riftbound-deck-tech-voltron-irelia)); Jay: "tried to chase the queen" |
+| **the queen** / **protect the queen** | the one unit a deck is built to land and keep alive. For Irelia, **Irelia, Fervent** | the **Chosen Champion** in the Champion Zone (§103.3.a.1). The champion *unit*, not the legend | cardsrealm *Deck Tech: Voltron Irelia*: "Irelia (your queen!)", section "Protect Your Queen!" ([link](https://riftbound.cardsrealm.com/en-za/articles/riftbound-deck-tech-voltron-irelia)); Jay: "tried to chase the queen" |
 | **chase the queen** | keep spending removal and tricks on the protected champion | the losing exchange in the Irelia entry: each attempt pays Deflect and walks into Defy, Not So Fast or a pump that also readies her | Jay |
 | **Voltron** | a deck that stacks its resources on one unit | Irelia (Fervent plus Reaction pumps), equipment-on-one-unit lists | cardsrealm *Voltron Irelia* ("that's why it's called a Voltron list") |
 | **win condition / wincon** | the card or plan that actually wins | the champion, or a finisher | animealley Irelia guide ("Your win condition is straightforward"); cardsrealm ("your main win condition"). "wincon" itself: TCG |
@@ -30,14 +30,14 @@ Do not promote one without a sighting.
 
 | term | means | Riftbound mapping | evidence |
 |---|---|---|---|
-| **conquer / hold** | take a battlefield / keep it into your next turn | conquer and hold scoring (§471); a hold at 7 wins (§471.1.a.1) | ultimateguard ("conquer one and hold it until our next turn"); cardsrealm ("conquer and hold your battlefields") |
-| **double conquer** | take both battlefields in one turn | the 6→8 line in strategy.md §0; at 7, conquering without having scored the other battlefield draws a card instead (§471.1.b.1) | tacter Chongqing write-up, via search summary ("go for the double conquer right away"); exact wording unconfirmed, page 404 on fetch |
+| **conquer / hold** | take a battlefield / keep it into your next turn | conquer and hold scoring (§473); a hold at 7 wins (§473.1.a.1) | ultimateguard ("conquer one and hold it until our next turn"); cardsrealm ("conquer and hold your battlefields") |
+| **double conquer** | take both battlefields in one turn | the 6→8 line in strategy.md §0; at 7, conquering without having scored the other battlefield draws a card instead (§473.1.b.1) | tacter Chongqing write-up, via search summary ("go for the double conquer right away"); exact wording unconfirmed, page 404 on fetch |
 | **play chicken** (with a hold) | sit on one battlefield and dare them to break it | the role question, strategy.md §2 | tacter Chongqing, via search summary |
 | **retreat** | pull units home rather than defend | Jun: "retreating is not surrendering a point"; the legend's walk-home (spend 2 XP) | tacter (summary); Jun's Top-5 video (repo) |
 | **walk home** | move a unit that just fought back to base | Voidreaver's 2-XP move, or Star Spring | repo (Jun's notes, matchup guide) |
 | **showdown** | the window where both players act at a battlefield | §342; it opens when a battlefield becomes Contested | ultimateguard, riftmana, Mobalytics |
 | **board presence** | units on the table | units at battlefields and in base | ultimateguard; animealley |
-| **8th point / final point** | the winning point, with its special rule | §471.1.b.1 | riftboundguide/rarecandy beginner guides |
+| **8th point / final point** | the winning point, with its special rule | §473.1.b.1 | riftboundguide/rarecandy beginner guides |
 
 ## 3. Resources
 
@@ -55,7 +55,7 @@ Do not promote one without a sighting.
 
 | term | means | Riftbound mapping | evidence |
 |---|---|---|---|
-| **trade / even trade** | both sides' units die | **No Result** if nobody remains (§466.3): no XP, no point | Mobalytics beginner guide, via search summary ("units with the same Might value defeat each other") |
+| **trade / even trade** | both sides' units die | **No Result** if nobody remains (§468.3): no XP, no point | Mobalytics beginner guide, via search summary ("units with the same Might value defeat each other") |
 | **rigged fight** | a fight already won before it starts | strategy.md §5; Jay's habit | Jay (memory, "rigged fights only") |
 | **bare / fair fight** | no tricks on either side | the matchup guide's "bare" column | repo |
 | **pump / buff** | a temporary Might boost | "+N Might this turn" Reactions; **Buff** is also a defined action | TCG; rules |
@@ -71,7 +71,7 @@ Do not promote one without a sighting.
 | term | means | Riftbound mapping | evidence |
 |---|---|---|---|
 | **hide / hidden / facedown** | a card set face down for 1 Power of any domain, played later for 0 Energy | §811 | rules; repo |
-| **flip** | play your hidden card | playing from Hidden; its choices are restricted to that battlefield (§811.1.d.2) | repo |
+| **flip** | play your hidden card | playing from Hidden; its choices are restricted to that battlefield (§811.1.d.2–3) | repo |
 | **flipped card** (judge sense) | a card accidentally face up in your deck | a technical error, not a game play | sheepesports Vancouver RQ final interview (Alanzq) |
 | **play around** | avoid the line their card punishes | | ultimateguard ("slow-roll its Units to play around a mass removal spell") |
 | **slow-roll** | deploy threats a few at a time, so one answer doesn't catch them all | | ultimateguard |
@@ -99,14 +99,14 @@ Do not promote one without a sighting.
 | term | means | evidence |
 |---|---|---|
 | **NN / Nexus Night** | the weekly casual store event (low OPL) | Jay ("0-3 at nn"); playriftbound OP page; ultimateguard ("Nexus Night Master") |
-| **Skirmish / Summoner Skirmish** | the top store event tier (Bo3, Swiss + cut). **Not** the rules' "Skirmish" (§487, three-player FFA) | skirmish-prep.md |
+| **Skirmish / Summoner Skirmish** | the top store event tier (Bo3, Swiss + cut). **Not** the rules' "Skirmish" (§489, three-player FFA) | skirmish-prep.md |
 | **RQ / RO / CC** | Regional Qualifier / Chinese Regional Open / City Challenge | events.json names; tacter "Regional Open" |
 | **0-3, 3-0, X-1, 4-1-1** | match record: wins-losses-draws | Swiss standings (store locator) |
 | **Day 2 / conversion** | made the second day / the share of an archetype's pilots who did | Gamer Tag Mythras LA table (matchup guide) |
 | **Best-Of** | Riot's best finisher per legend at an RQ | playriftbound LA top decks |
 | **RiftAtlas** | an online play platform. "got rekt on riftatlas" is an online game | Jay; events.json claim "RiftAtlas Convergence #2" |
 | **rekt** | lost badly | Jay |
-| **on the play / on the draw** | going first / second. Going second channels an extra rune turn 1 (§486.7) | Jun's notes ("on the play… on the draw") |
+| **on the play / on the draw** | going first / second. Going second channels an extra rune turn 1 (§488.7) | Jun's notes ("on the play… on the draw") |
 | **mull / mulligan** | redraw up to 2 of the opening 4 | §117; animealley ("Mulligan aggressively for her") |
 
 ## 8. League of Legends words
@@ -151,7 +151,7 @@ Read them with their ordinary TCG meaning, and ask if a reading would change the
    journal's `f` mark.
 6. **"Double conquered from 6."** → Took both battlefields in one turn from 6 points, the
    §0 winning line.
-7. **"Traded evenly and got nothing."** → Both sides' units died, so No Result (§466.3): no
+7. **"Traded evenly and got nothing."** → Both sides' units died, so No Result (§468.3): no
    XP and no point. The journal's `n` mark.
 8. **"Yi diff" / "deck diff."** → Blaming pilot skill or deck strength. Ask which: the
    answer decides whether the next step is practice or sideboard.

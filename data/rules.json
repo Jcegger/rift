@@ -1,20 +1,20 @@
 {
- "generatedAt": "2026-09-11",
+ "generatedAt": "2026-10-19",
  "source": "https://playriftbound.com/en-us/rules-hub/",
  "docs": {
   "core": {
    "title": "Core Rules",
-   "updated": "2026-07-16",
-   "url": "https://cmsassets.rgpub.io/sanity/files/dsfx7636/news_live/e9ac8e3d33e0f78cef296f5945aba7bc1313b086.pdf",
-   "pages": 120,
-   "rules": 2381
+   "updated": "2026-10-09",
+   "url": "https://cmsassets.rgpub.io/sanity/files/dsfx7636/news_live/5c7946f7c3b8c6e0faff85ab6dadc6d2e721ea94.pdf",
+   "pages": 142,
+   "rules": 2494
   },
   "tournament": {
    "title": "Tournament Rules",
-   "updated": "2026-07-16",
-   "url": "https://cmsassets.rgpub.io/sanity/files/dsfx7636/news_live/503da65669ced10598d62925a6f6bc15111af726.pdf",
-   "pages": 50,
-   "rules": 945
+   "updated": "2026-10-09",
+   "url": "https://cmsassets.rgpub.io/sanity/files/dsfx7636/news_live/861752822d217edf37d9febaeaf77a7d924c1bb6.pdf",
+   "pages": 53,
+   "rules": 973
   }
  },
  "sections": [
@@ -50,12 +50,12 @@
   },
   {
    "doc": "core",
-   "n": "103.3",
+   "n": "103.4",
    "title": "Rune Deck"
   },
   {
    "doc": "core",
-   "n": "103.4",
+   "n": "103.5",
    "title": "Battlefields"
   },
   {
@@ -470,257 +470,262 @@
   },
   {
    "doc": "core",
-   "n": "386",
+   "n": "387",
    "title": "Reflexive Triggers"
   },
   {
    "doc": "core",
-   "n": "389",
+   "n": "390",
    "title": "Delayed Abilities"
   },
   {
    "doc": "core",
-   "n": "393",
+   "n": "394",
    "title": "Linked Abilities"
   },
   {
    "doc": "core",
-   "n": "398",
+   "n": "399",
    "title": "Playing or Activating Abilities"
   },
   {
    "doc": "core",
-   "n": "407",
+   "n": "408",
    "title": "Game Actions"
   },
   {
    "doc": "core",
-   "n": "410.1",
+   "n": "411.1",
    "title": "Discretionary Actions"
   },
   {
    "doc": "core",
-   "n": "410.2",
+   "n": "411.2",
    "title": "Limited Actions"
   },
   {
    "doc": "core",
-   "n": "411",
+   "n": "412",
    "title": "Responsibility"
   },
   {
    "doc": "core",
-   "n": "412",
-   "title": "Types of Actions"
-  },
-  {
-   "doc": "core",
    "n": "413",
-   "title": "Draw"
+   "title": "Types of Actions (A Non-Exhaustive List)"
   },
   {
    "doc": "core",
    "n": "414",
-   "title": "Exhaust"
+   "title": "Draw"
   },
   {
    "doc": "core",
    "n": "415",
-   "title": "Ready"
+   "title": "Exhaust"
   },
   {
    "doc": "core",
    "n": "416",
-   "title": "Recycle"
+   "title": "Ready"
   },
   {
    "doc": "core",
    "n": "417",
-   "title": "Deal"
+   "title": "Recycle"
   },
   {
    "doc": "core",
    "n": "418",
-   "title": "Heal"
+   "title": "Deal"
   },
   {
    "doc": "core",
    "n": "419",
-   "title": "Play"
+   "title": "Heal"
   },
   {
    "doc": "core",
    "n": "420",
-   "title": "Move"
+   "title": "Play"
   },
   {
    "doc": "core",
    "n": "421",
-   "title": "Hide"
+   "title": "Move"
   },
   {
    "doc": "core",
    "n": "422",
-   "title": "Discard"
+   "title": "Hide"
   },
   {
    "doc": "core",
    "n": "423",
-   "title": "Stun"
+   "title": "Discard"
   },
   {
    "doc": "core",
    "n": "424",
-   "title": "Reveal"
+   "title": "Stun"
   },
   {
    "doc": "core",
    "n": "425",
-   "title": "Counter"
+   "title": "Reveal"
   },
   {
    "doc": "core",
    "n": "426",
-   "title": "Buff"
+   "title": "Counter"
   },
   {
    "doc": "core",
    "n": "427",
-   "title": "Banish"
+   "title": "Buff"
   },
   {
    "doc": "core",
    "n": "428",
-   "title": "Kill"
+   "title": "Banish"
   },
   {
    "doc": "core",
    "n": "429",
-   "title": "Add"
+   "title": "Kill"
   },
   {
    "doc": "core",
    "n": "430",
-   "title": "Channel"
+   "title": "Add"
   },
   {
    "doc": "core",
    "n": "431",
-   "title": "Burn Out"
+   "title": "Channel"
   },
   {
    "doc": "core",
    "n": "432",
-   "title": "Double"
+   "title": "Burn Out"
   },
   {
    "doc": "core",
    "n": "433",
-   "title": "Swap"
+   "title": "Double"
   },
   {
    "doc": "core",
    "n": "434",
-   "title": "Attach"
+   "title": "Swap"
   },
   {
    "doc": "core",
    "n": "435",
-   "title": "Detach"
+   "title": "Attach"
   },
   {
    "doc": "core",
    "n": "436",
-   "title": "Predict"
+   "title": "Detach"
   },
   {
    "doc": "core",
    "n": "437",
-   "title": "Prevent"
+   "title": "Predict"
   },
   {
    "doc": "core",
    "n": "438",
-   "title": "Replace"
+   "title": "Prevent"
   },
   {
    "doc": "core",
    "n": "439",
-   "title": "Create"
+   "title": "Replace"
   },
   {
    "doc": "core",
    "n": "440",
-   "title": "Burn"
+   "title": "Create"
   },
   {
    "doc": "core",
    "n": "441",
-   "title": "Empower"
+   "title": "Burn"
   },
   {
    "doc": "core",
    "n": "442",
-   "title": "Disempower"
+   "title": "Empower"
   },
   {
    "doc": "core",
    "n": "443",
-   "title": "Skip"
+   "title": "Disempower"
   },
   {
    "doc": "core",
    "n": "444",
-   "title": "Pay"
+   "title": "Skip"
   },
   {
    "doc": "core",
    "n": "445",
+   "title": "Pay"
+  },
+  {
+   "doc": "core",
+   "n": "446",
+   "title": "Copy"
+  },
+  {
+   "doc": "core",
+   "n": "447",
    "title": "Movement"
   },
   {
    "doc": "core",
-   "n": "454",
+   "n": "456",
    "title": "Recalls"
   },
   {
    "doc": "core",
-   "n": "459",
+   "n": "461",
    "title": "Combat"
   },
   {
    "doc": "core",
-   "n": "463",
+   "n": "465",
    "title": "The Steps of Combat"
   },
   {
    "doc": "core",
-   "n": "467",
+   "n": "469",
    "title": "Scoring"
   },
   {
    "doc": "core",
-   "n": "473",
+   "n": "475",
    "title": "Layers"
   },
   {
    "doc": "core",
-   "n": "481",
+   "n": "483",
    "title": "Modes of Play"
   },
   {
    "doc": "core",
-   "n": "483.8",
+   "n": "485.8",
    "title": "Unique Rules"
   },
   {
    "doc": "core",
-   "n": "484",
+   "n": "486",
    "title": "Sanctioned Modes"
   },
   {
    "doc": "core",
-   "n": "489.8",
+   "n": "491.8",
    "title": "Unique Rules"
   },
   {
@@ -937,6 +942,21 @@
    "doc": "core",
    "n": "829",
    "title": "Flow"
+  },
+  {
+   "doc": "core",
+   "n": "830",
+   "title": "Deploy"
+  },
+  {
+   "doc": "core",
+   "n": "831",
+   "title": "Disarm"
+  },
+  {
+   "doc": "core",
+   "n": "832",
+   "title": "Show Off"
   },
   {
    "doc": "tournament",
@@ -1385,132 +1405,148 @@
    "rule": "829",
    "kind": "keyword"
   },
-  "Draw": {
-   "rule": "413",
-   "kind": "action"
+  "Deploy": {
+   "rule": "830",
+   "kind": "keyword"
   },
-  "Exhaust": {
+  "Disarm": {
+   "rule": "831",
+   "kind": "keyword"
+  },
+  "Show Off": {
+   "rule": "832",
+   "kind": "keyword"
+  },
+  "Draw": {
    "rule": "414",
    "kind": "action"
   },
-  "Ready": {
+  "Exhaust": {
    "rule": "415",
    "kind": "action"
   },
-  "Recycle": {
+  "Ready": {
    "rule": "416",
    "kind": "action"
   },
-  "Deal": {
+  "Recycle": {
    "rule": "417",
    "kind": "action"
   },
-  "Heal": {
+  "Deal": {
    "rule": "418",
    "kind": "action"
   },
-  "Play": {
+  "Heal": {
    "rule": "419",
    "kind": "action"
   },
-  "Move": {
+  "Play": {
    "rule": "420",
    "kind": "action"
   },
-  "Hide": {
+  "Move": {
    "rule": "421",
    "kind": "action"
   },
-  "Discard": {
+  "Hide": {
    "rule": "422",
    "kind": "action"
   },
-  "Stun": {
+  "Discard": {
    "rule": "423",
    "kind": "action"
   },
-  "Reveal": {
+  "Stun": {
    "rule": "424",
    "kind": "action"
   },
-  "Counter": {
+  "Reveal": {
    "rule": "425",
    "kind": "action"
   },
-  "Buff": {
+  "Counter": {
    "rule": "426",
    "kind": "action"
   },
-  "Banish": {
+  "Buff": {
    "rule": "427",
    "kind": "action"
   },
-  "Kill": {
+  "Banish": {
    "rule": "428",
    "kind": "action"
   },
-  "Add": {
+  "Kill": {
    "rule": "429",
    "kind": "action"
   },
-  "Channel": {
+  "Add": {
    "rule": "430",
    "kind": "action"
   },
-  "Burn Out": {
+  "Channel": {
    "rule": "431",
    "kind": "action"
   },
-  "Double": {
+  "Burn Out": {
    "rule": "432",
    "kind": "action"
   },
-  "Swap": {
+  "Double": {
    "rule": "433",
    "kind": "action"
   },
-  "Attach": {
+  "Swap": {
    "rule": "434",
    "kind": "action"
   },
-  "Detach": {
+  "Attach": {
    "rule": "435",
    "kind": "action"
   },
-  "Predict": {
+  "Detach": {
    "rule": "436",
    "kind": "action"
   },
-  "Prevent": {
+  "Predict": {
    "rule": "437",
    "kind": "action"
   },
-  "Replace": {
+  "Prevent": {
    "rule": "438",
    "kind": "action"
   },
-  "Create": {
+  "Replace": {
    "rule": "439",
    "kind": "action"
   },
-  "Burn": {
+  "Create": {
    "rule": "440",
    "kind": "action"
   },
-  "Disempower": {
-   "rule": "442",
+  "Burn": {
+   "rule": "441",
    "kind": "action"
   },
-  "Skip": {
+  "Disempower": {
    "rule": "443",
    "kind": "action"
   },
-  "Pay": {
+  "Skip": {
    "rule": "444",
    "kind": "action"
   },
-  "Movement": {
+  "Pay": {
    "rule": "445",
+   "kind": "action"
+  },
+  "Copy": {
+   "rule": "446",
+   "kind": "action"
+  },
+  "Movement": {
+   "rule": "447",
    "kind": "action"
   },
   "Mighty": {
@@ -1531,6 +1567,14 @@
   }
  },
  "supplements": [
+  {
+   "slug": "radiance-errata-updates",
+   "kind": "errata",
+   "url": "https://playriftbound.com/en-us/news/announcements/radiance-errata-updates",
+   "published": "2026-10-09",
+   "chars": 2196,
+   "sha": "b677431ceecb"
+  },
   {
    "slug": "riftbound-origins-card-errata",
    "kind": "errata",
@@ -1594,6 +1638,14 @@
    "published": "2026-08-14",
    "chars": 35317,
    "sha": "b38543081f4c"
+  },
+  {
+   "slug": "core-rules-radiance-patch-notes-effective-october-16-2026",
+   "kind": "patch-notes",
+   "url": "https://playriftbound.com/en-us/news/announcements/core-rules-radiance-patch-notes-effective-october-16-2026",
+   "published": "2026-10-09",
+   "chars": 24279,
+   "sha": "468ed125ab83"
   },
   {
    "slug": "core-rules-vendetta-patch-notes",

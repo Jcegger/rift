@@ -19,14 +19,14 @@
 //   - how much board (units, Might) it has to contest battlefields with by turn 3–4
 //   - how often named key cards have been seen by a given turn
 // It does NOT say who wins a matchup. Points are capped at one per battlefield per turn
-// (§470), so an unopposed deck scores on the same clock whatever it plays; a "turns to
+// (§472), so an unopposed deck scores on the same clock whatever it plays; a "turns to
 // 8" figure would be the same number for every deck and is deliberately not reported.
 //
 // Rules modelled, each from docs/rules.md: 40-card main deck, the Chosen Champion starts
-// in the Champion Zone and is castable from there (§103.2.a, §108.3.d); 4-card opening
+// in the Champion Zone and is castable from there (§103.3.a, §108.3.d); 4-card opening
 // hand and one mulligan of up to 2 cards to the bottom (§116, §117); channel 2 ready runes
 // a turn, the player going second channels 1 extra on their first turn (§315.3.b,
-// §485.7); draw 1 every turn, including the first player's first (§315.4.b); a card
+// §487.7); draw 1 every turn, including the first player's first (§315.4.b); a card
 // costing E Energy and P Power needs max(E, P) runes, E of them ready, P of them of its
 // domain and recycled to the bottom of the rune deck (§164.2, rules.md "Resources");
 // units enter exhausted (§143.4), so a unit can first move the turn after it is played.
@@ -121,7 +121,7 @@ export function buildDeck(list, cat, opts = {}) {
     const k = classify(c);
     for (let i = 0; i < q; i++) main.push({ n: c.n, t: c.t, e: c.e ?? 0, p: c.p ?? 0, d: c.d || [], m: c.m ?? 0, ...k });
   }
-  // The Chosen Champion: a champion unit whose champion tag matches the legend (§103.2.a.2).
+  // The Chosen Champion: a champion unit whose champion tag matches the legend (§103.3.a.2).
   // The list does not say which copy was chosen, so take the one named, else the cheapest.
   const isChamp = (x) => x.t === "Unit" && x.n.includes(", ") && champTags.has(x.n.split(", ")[0]);
   let champ = null;

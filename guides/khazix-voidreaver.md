@@ -7,7 +7,7 @@ date: 2026-10-03
 
 **Legend:** Voidreaver (Body/Chaos) · **Champion:** Kha'Zix, Mutating Horror
 **Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend = 56 · **Sideboard:** 10 of 10
-**Shuffled library:** 39 — the Champion starts outside the deck (§103.2.a.1, §108.3.d)
+**Shuffled library:** 39 — the Champion starts outside the deck (§103.3.a.1, §108.3.d)
 **Collection status:** complete, nothing to get
 **The list:** Jun's **3 October** midrange revision, saved in the app as `Kha'Zix Midrange (Jun, post-ban)`
 **Its results:** **Best-of-Kha'Zix at the Los Angeles RQ** (26 September, 2,165 players), won by Cuoemrei on the 23 September list, which shares **54 of these 56 cards** · **36th of 78** at the Orlando $10k (HTCG Dizoo, the same 23 September 56) · a deck in the archive titled "Kha'Zix Top 32 Los Angeles RQ", also the 23 September list
@@ -23,7 +23,7 @@ date: 2026-10-03
 
 **What the deck does.** You are the proactive deck and they are the reactive one. You threaten a removal-plus-conquest every turn, so they can never safely pass with no runes open. **Develop units first, spells second. Aim to reach 6 points before they do.** Your finishers (Void Assault above all) pull units out of holds, so the last two points need very little setup.
 
-**The one rule that governs everything.** Voidreaver pays XP only when you **win** a combat, meaning you are the *only* player with units left there (§466.3). A mutual wipe, an even trade, or attackers bouncing off survivors are all **No Result**, and No Result pays nothing. **An even trade is a failure here.**
+**The one rule that governs everything.** Voidreaver pays XP only when you **win** a combat, meaning you are the *only* player with units left there (§468.3). A mutual wipe, an even trade, or attackers bouncing off survivors are all **No Result**, and No Result pays nothing. **An even trade is a failure here.**
 
 **Kha'Zix is a combat trick that develops your base, not a unit to develop** (Jun). Ambush him onto an isolated enemy and he attacks as 6 Might, for 3 XP: 2 from his trigger and 1 for the win. Spend 2 walking him home, and you have won a fight and left nothing behind to be hit.
 
@@ -39,7 +39,7 @@ date: 2026-10-03
 | One per battlefield | The Facedown Zone holds **one card** (§107.3.b) |
 | When you can flip it | **The next turn**, not this one. From then on it has **Reaction** and costs **0** (§811.1.b) |
 | Where a unit lands | **That battlefield.** No choice (§811.1.d.1) |
-| If you lose the battlefield | The card is **trashed and revealed** (§107.3.d, §323.7, §421.4) |
+| If you lose the battlefield | The card is **trashed and revealed** (§107.3.d, §323.6.a, §422.4) |
 
 **The trap that costs games.** A hidden unit's play effect reads its battlefield off the unit. Bounce or kill the unit in response to its own trigger and the effect does nothing (§5). **Evelynn and Tornado Warrior are both inside Gust's range.** Count their open Chaos, and for Evelynn their open Calm too, before you flip.
 
@@ -95,9 +95,9 @@ This is where you spend. Finish their board with removal and take the points, bu
 
 | you are at | and you | result |
 |---|---|---|
-| **7** | **hold** a battlefield at the start of your turn | **you win**. Hold points are not gated (§471.1.a.1) |
+| **7** | **hold** a battlefield at the start of your turn | **you win**. Hold points are not gated (§473.1.a.1) |
 | **7** | conquer, having scored the other battlefield this turn | you win |
-| **7** | conquer, **not** having scored the other this turn | **you draw a card instead** (§471.1.b.1) |
+| **7** | conquer, **not** having scored the other this turn | **you draw a card instead** (§473.1.b.1) |
 | **6** | hold one, then conquer the other | win |
 | **6** | hold nothing, conquer both | win. The first conquest makes 7 and counts as scoring that battlefield |
 
@@ -159,8 +159,8 @@ Before your Main Phase, three things happen on their own: you **ready everything
 So:
 
 - You attack, kill everything, keep a unit → **win**, 1 XP.
-- You attack, kill everything, lose everything → **No Result**, 0 XP, and the battlefield goes Uncontrolled (§466.5.b).
-- You attack, they survive → your attackers are **recalled** (§466.1.a.2) → **No Result**.
+- You attack, kill everything, lose everything → **No Result**, 0 XP, and the battlefield goes Uncontrolled (§468.5.b).
+- You attack, they survive → your attackers are **recalled** (§468.1.a.2) → **No Result**.
 - **They** attack you, you kill everything and keep a unit → **win**, 1 XP. **Defending pays exactly what attacking pays**, and a failed defence costs you nothing but the turn, because defenders are never recalled.
 
 **What the legend can and cannot do**
@@ -197,22 +197,22 @@ So:
 ### The restrictions when you flip
 
 - **A hidden permanent must be played to that battlefield** (§811.1.d.1).
-- **Each target must be chosen at that battlefield**, *unless the card's own text makes that impossible* (§811.1.d.2), and **each target is judged separately** (§811.1.d.2.a).
-- **A unit the card makes you play goes there too** (§811.1.d.3).
+- **Each target must be chosen at that battlefield**, *unless the card's own text makes that impossible* (§811.1.d.2 for a spell, §811.1.d.3 for a unit's play effect), and **each target is judged separately** (§811.1.d.4).
+- **A unit the card makes you play goes there too** (§811.1.d.5).
 - Nothing else is restricted (§811.2). The FAQ's line: *"Only effects that choose are restricted."*
 
 | card | target pinned to the hide battlefield? | why |
 |---|---|---|
 | **Switcheroo** | **yes, both units** | nothing in its text points elsewhere. **So a hidden Switcheroo is a defensive card**; for an attack, cast it from hand |
-| **Evelynn** | **no** | *"an enemy unit at a different location"*: a restriction that can never be met at her own battlefield, which is §811.1.d.2's exception |
+| **Evelynn** | **no** | *"an enemy unit at a different location"*: a restriction that can never be met at her own battlefield, which is §811.1.d.3's exception |
 | **Tornado Warrior** | **yes** | *"empower something **here**"* |
 
 ### The cost of losing the battlefield
 
 > **323.7.** Remove all Hidden cards from all Battlefields that are not controlled by the same player and place them in their owner's Trash.
 
-1. Lose the battlefield, and the card goes to your **trash**, revealed (§421.4). **Moving your own last unit off counts.** A legend walk-home, Star Spring's move, or a standard move all leave you with no units there, and you lose control at the next cleanup in an Open state (§190.4.c, §323.6). The same cleanup trashes the card (§323.7). Flip it first, or keep a second unit there. That is why Jun's Star Spring save works: the flipped unit stays behind.
-2. **A mutual wipe does it too.** If nobody has units left, the battlefield is Uncontrolled (§466.5.b), which is not "the same player", so §323.7 trashes it. **In this deck the even trade got worse**: no XP *and* a lost card.
+1. Lose the battlefield, and the card goes to your **trash**, revealed (§422.4). **Moving your own last unit off counts.** A legend walk-home, Star Spring's move, or a standard move all leave you with no units there, and you lose control at the next cleanup in an Open state (§190.4.c, §323.5). The same cleanup trashes the card (§323.7). Flip it first, or keep a second unit there. That is why Jun's Star Spring save works: the flipped unit stays behind.
+2. **A mutual wipe does it too.** If nobody has units left, the battlefield is Uncontrolled (§468.5.b), which is not "the same player", so §323.6.a trashes it. **In this deck the even trade got worse**: no XP *and* a lost card.
 3. The trash is not nowhere. Tail-Cloaked Matriarch can rebuy Evelynn or Tornado Warrior, and Fizz can recast Switcheroo. A rebuy plays from the trash, though, not from face down, so **Evelynn's trigger does not fire off a Matriarch rebuy.**
 
 ### The trap: removed in response
@@ -227,7 +227,7 @@ A hidden unit's play effect reads its battlefield **off the unit**, not off the 
 
 **What can do it to you.** Most "bounce" in the format is friendly-only: Retreat, Pack of Wonders, Grim Apothecary, Bloodharbor Ripper, Mesmerize and Emperor's Dais **cannot touch your flip.** The real threats are **Gust** (1E Reaction, ≤3 Might), **Star-Crossed** (Reaction), and rarely Shakedown. Two more Reactions **counter Evelynn's trigger** instead of removing her: **Not So Fast** and **Repulse**. Switcheroo can be countered by any spell counter except Defy, which its 2 Power puts out of reach.
 
-**Their facedown card cannot touch your flip.** They can only hide at a battlefield they control, and its targets must be at that battlefield (§811.1.b, §811.1.d.2). In a 1v1 that is never yours. What it *can* do is protect *their* unit. A Temporal Breach on the unit Evelynn pulls makes it a new object, and the move has nothing to move. **So pull from their base, or from a battlefield with no facedown card.**
+**Their facedown card cannot touch your flip.** They can only hide at a battlefield they control, and its targets must be at that battlefield (§811.1.b, §811.1.d.2–3). In a 1v1 that is never yours. What it *can* do is protect *their* unit. A Temporal Breach on the unit Evelynn pulls makes it a new object, and the move has nothing to move. **So pull from their base, or from a battlefield with no facedown card.**
 
 **The three questions per flip:**
 
@@ -272,7 +272,7 @@ The condition is part of the trigger (§383.2.a.1). **Played from hand, or flipp
 **Tornado Warrior ×1** · 3E · 3 Might · Hidden — *"When you play me from face down, you may empower something here. Disempower it at end of turn."*
 - **Not restricted to your turn.**
 - The one card it cares about is **Tail-Cloaked Matriarch** standing at that battlefield: flip him for 0, she becomes Empowered, and she rebuys a unit from your trash.
-- *"Disempower at end of turn"* is an upside. Empowered is otherwise permanent (§442), and Empower can only be activated while not already Empowered (§827.1.c.1), so Tornado Warrior re-arms her own Empower for later.
+- *"Disempower at end of turn"* is an upside. Empowered is otherwise permanent (§443), and Empower can only be activated while not already Empowered (§827.1.c.1), so Tornado Warrior re-arms her own Empower for later.
 - His floor is a free 3 Might at Reaction speed.
 
 **Switcheroo ×1** · 2E / 2 Chaos · Action, Hidden — *"Swap the Might of two units at the same battlefield this turn."*
@@ -284,7 +284,7 @@ The gap moves by **twice the difference** between the two units. Its swing grows
 ### The bodies
 
 **Shadow Order Disciple ×3** · 2E · 2 Might — *"When I move, you may [Burn 1] to give me +1 `[M]` this turn."*
-It triggers on **any** move, including Star Spring's walk-home. Burn fills the trash Fizz and Matriarch draw from, and it *can* burn you out (§440.4).
+It triggers on **any** move, including Star Spring's walk-home. Burn fills the trash Fizz and Matriarch draw from, and it *can* burn you out (§441.4).
 - **Jun:** the second-best 2-drop. On the draw it slows the game, because their 2-drop does not want to score a point and then die to it.
 
 **Kinkou Initiate ×3** · 3E · 3 Might — *"When you play me, draw 1 if your other units have total Might 5 or more."*
@@ -329,7 +329,7 @@ Your only removal that needs no combat, and it reaches units at base.
 
 **Grim Resolve ×1** · 2E · Action — *"Give a friendly unit +3 Might this turn. When it wins a combat this turn, gain 2 XP."* 
 - **An XP card first.** A win pays the legend's 1 **plus 2 more**. On an isolated Kha'Zix that is five XP from one fight ([§7](#grim-resolve-on-an-isolated-khazix-five-xp-from-one-fight)).
-- **The unit must survive.** Units inherit the combat result only if they are *"at this battlefield"* when it is determined (§466.3.c). If the buffed unit dies, no 2 XP, even when you take the battlefield.
+- **The unit must survive.** Units inherit the combat result only if they are *"at this battlefield"* when it is determined (§468.3.c). If the buffed unit dies, no 2 XP, even when you take the battlefield.
 - **Defy counters it** (2 Energy, no Power); Not So Fast cannot, because it only chooses your unit. Against Defy decks, Punch First goes first.
 - **Jun's notes said he deliberately did not run it** ("early pumps cost development"). He changed his mind on 3 October; the same patience applies, so it is a midgame card like Punch First.
 
@@ -348,7 +348,7 @@ Your only removal that needs no combat, and it reaches units at base.
 - The move it grants has no exhaustion requirement, unlike the legend's, and it triggers "when I move" abilities.
 - **It is symmetric.** Never bring it against Rek'Sai or LeBlanc, whose units want to come home or die. It is **risky against Rengar**, which has ten-plus Reaction-speed ways to trigger it.
 
-In a Bo3 you choose each game, and **every battlefield used in a game that someone won is retired for the match, yours included**, whoever won (§486.5). So game 1's choice is gone for game 2, and the three-battlefield plan has to last the match: Zaun Warrens first, then Sandswept Tomb or Star Spring. After a draw the same battlefields may be reused (§486.5.a). Registration is fixed for the event (TR §403.4.b).
+In a Bo3 you choose each game, and **every battlefield used in a game that someone won is retired for the match, yours included**, whoever won (§488.5). So game 1's choice is gone for game 2, and the three-battlefield plan has to last the match: Zaun Warrens first, then Sandswept Tomb or Star Spring. After a draw the same battlefields may be reused (§488.5.a). Registration is fixed for the event (TR §403.4.b).
 
 ---
 
@@ -357,13 +357,13 @@ In a Bo3 you choose each game, and **every battlefield used in a game that someo
 ### The Evelynn line: three XP for one rune
 
 Turn N: control a battlefield and hide Evelynn. Turn N+1: activate the legend, buff, develop every body you want in the fight, put Kha'Zix at that battlefield, **then** flip her and drag their lone unit in.
-- **They are the attacker**, because their unit applied Contested (§190.3.a.1, §464.2.c.1). So nothing of yours is recalled if it goes wrong.
+- **They are the attacker**, because their unit applied Contested (§190.3.a.1, §466.2.c.1). So nothing of yours is recalled if it goes wrong.
 - Kha'Zix's trigger reads *attack or defend*: +2 Might and 2 XP. Win the fight for 1 more.
 - **Drag a lone unit from a battlefield they control** (it strips their board there), or from their base (it was doing nothing).
 
 ### Grim Resolve on an isolated Kha'Zix: five XP from one fight
 
-Drag their lone unit onto Kha'Zix (Faefolk, Void Assault or Evelynn). His trigger gives +2 and **2 XP**. Cast Grim Resolve on him in the combat showdown for **+3 more**, so a 4-Might Kha'Zix fights at 9. Win, and you collect the legend's 1 XP and Grim Resolve's 2 on top: **five XP from one combat**. It needs him alive at the end (§466.3.c), which at 9 Might he usually is. Into tapped Calm if they play Defy.
+Drag their lone unit onto Kha'Zix (Faefolk, Void Assault or Evelynn). His trigger gives +2 and **2 XP**. Cast Grim Resolve on him in the combat showdown for **+3 more**, so a 4-Might Kha'Zix fights at 9. Win, and you collect the legend's 1 XP and Grim Resolve's 2 on top: **five XP from one combat**. It needs him alive at the end (§468.3.c), which at 9 Might he usually is. Into tapped Calm if they play Defy.
 
 ### Tornado Warrior → Matriarch: a free rebuy on their turn
 
@@ -403,8 +403,8 @@ Clear their board, then leave Vex, Apathetic on a battlefield: anything they pla
 ### Use it or lose it: drag the unit guarding their facedown card
 
 Their lone unit at the battlefield where their facedown card sits is guarding that card. Drag it away with Void Assault, Faefolk or Evelynn, and they face a choice.
-- **Flip in response.** While your spell or trigger is on the chain the state is Closed, so control cannot change yet, and the hidden card has Reaction (§811.6). But its targets must be at *that* battlefield (§811.1.d.2), so it can only protect or replace things there.
-- **Or lose it.** Once the unit is gone and the chain empties, they lose control in the next Open-state cleanup and the card is trashed, revealed (§190.4.c, §323.6, §323.7).
+- **Flip in response.** While your spell or trigger is on the chain the state is Closed, so control cannot change yet, and the hidden card has Reaction (§811.6). But its targets must be at *that* battlefield (§811.1.d.2–3), so it can only protect or replace things there.
+- **Or lose it.** Once the unit is gone and the chain empties, they lose control in the next Open-state cleanup and the card is trashed, revealed (§190.4.c, §323.5, §323.6.a).
 
 Either way they spend the card now, on your terms, not when it would have hurt you. Expect the response: a unit flip (Guards!, Kennen, Tideturner) keeps them a unit there, and a **Temporal Breach** on the unit you are dragging blinks it, so your move fizzles. That is why the Evelynn line prefers targets from their base when you need the fight itself to happen.
 
@@ -427,11 +427,11 @@ Pass and play reactively. If they conquer the other battlefield, Ambush Rengar t
 
 ### Combat is never declared, and ties destroy both boards
 
-Combat happens on its own in a Cleanup, at a Contested battlefield with both players' units present (§460, §323.9). Each side sums its Might and assigns that total across the other side's units. **The attacker assigns first, and no one may overkill while other units are unassigned** (§465.2.c.4). So a 1-Might Tentacle absorbs exactly one point.
+Combat happens on its own in a Cleanup, at a Contested battlefield with both players' units present (§462, §323.8). Each side sums its Might and assigns that total across the other side's units. **The attacker assigns first, and no one may overkill while other units are unassigned** (§467.2.c.4). So a 1-Might Tentacle absorbs exactly one point.
 
 > **You win outright exactly when your Might total is strictly greater than theirs.**
 
-A stun removes a unit's damage but not the Might it needs to die (§423.1.b–c).
+A stun removes a unit's damage but not the Might it needs to die (§424.1.b–c).
 
 ### Clean-win rates, two of yours against two of theirs
 
@@ -567,7 +567,7 @@ Jun's list has the results, and this repo's standing rule is to pick between his
 
 **Rule text** is `docs/rules-full.md`, with `docs/rules-faq.md` outranking it where they differ (the Hidden restrictions are FAQ material). The **removed-in-response ruling** is `docs/rules-rulings.md`: secondary provenance, and it expires at the next Core Rules update. The **Star Spring save** is a composition of §811.1.b, §811.1.d.1 and §359.3.e.5, derived here, not a ruling.
 
-**The combat table and opening-hand figures** are from the previous edition of this dossier and were computed against the 20 September archive (1,226 decks). They are Monte Carlo at 200,000 trials for combat and exact hypergeometric for hands. The combat model implements §465.2 and §466.3 directly. **Alternate printings are collapsed by name** on both sides of every join. Matchup-level figures are recomputed from the current window in the matchup guide.
+**The combat table and opening-hand figures** are from the previous edition of this dossier and were computed against the 20 September archive (1,226 decks). They are Monte Carlo at 200,000 trials for combat and exact hypergeometric for hands. The combat model implements §467.2 and §468.3 directly. **Alternate printings are collapsed by name** on both sides of every join. Matchup-level figures are recomputed from the current window in the matchup guide.
 
 **Release date:** riftbound.gg, *Radiance Preconstructed Decks & All Products*: launch 23 October 2026, Pre-Rift events 16–22 October.
 

@@ -33,8 +33,19 @@
 //
 // Verified against pypdf over both documents: identical text for all 2,381 rules,
 // plus two rules pypdf ran onto one line that the geometry here separates correctly.
+//
+// That day came on 9 Oct 2026: the Radiance Core Rules is no longer a Google Docs
+// export (PDF 1.7, object streams, TrueType fonts in WinAnsi), and this extractor read
+// zero rules from it, as designed. The Tournament Rules still are one. So the reader
+// above stays first, and when it finds nothing the document goes through pypdf
+// (pinned in .github/workflows/refresh.yml) instead — a dependency only for the file
+// that needs it, and a loud failure still if pypdf is missing or finds nothing either.
+// The pypdf path is checked against this reader on the Tournament Rules each run.
 
 import { writeFile, readFile, rename } from "node:fs/promises";
+import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { execFileSync } from "node:child_process";
 import { inflateSync } from "node:zlib";
 import { createHash } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -223,6 +234,20 @@ function pdf(buf) {
   return { pages: pages.length, lines: pages.flatMap(pageLines) };
 }
 
+// The fallback for PDFs the reader above cannot read: pypdf's text, one line per line.
+// Run isolated (-I) on a temp copy, so nothing in the repo is on its import path.
+const PYPDF = `import sys, json, pypdf
+r = pypdf.PdfReader(sys.argv[1])
+print(json.dumps({"pages": len(r.pages), "lines": [l for p in r.pages for l in (p.extract_text() or "").splitlines()]}))`;
+function pdfViaPypdf(buf) {
+  const dir = mkdtempSync(join(tmpdir(), "rift-rules-"));
+  try {
+    const f = join(dir, "doc.pdf");
+    writeFileSync(f, buf);
+    return JSON.parse(execFileSync(process.env.PYTHON || "python3", ["-I", "-c", PYPDF, f], { maxBuffer: 256 << 20 }));
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+}
+
 /* ── lines back into rules ───────────────────────────────────────────────── */
 
 // A rule number is three digits, then any number of .1 / .a / .1 parts, then a dot:
@@ -239,13 +264,32 @@ const RULE = /^(\d{3}(?:\.\d+|\.[a-z])*)\.\s*(.*)$/;
 const LIGATURES = { "\uFB00": "ff", "\uFB01": "fi", "\uFB02": "fl", "\uFB03": "ffi", "\uFB04": "ffl", "\uFB05": "st", "\uFB06": "st" };
 const unligature = (s) => s.replace(/[\uFB00-\uFB06]/g, (c) => LIGATURES[c] || c);
 
+// A wrapped line can still begin with a cross-reference: "…begin the process of" /
+// "408.4.a., except with five additional turns…", or "…see CR" / "128. Privacy for
+// information types." Geometry cannot tell those apart from a rule; the numbering can.
+// A real rule continues the sequence — the first child of the rule before it, or the
+// next sibling of it or of one of its ancestors — while a cross-reference almost always
+// points backwards. Until 2026-10-19 this split 18 Tournament Rules into phantoms.
+const parts = (n) => n.split(".");
+const bump = (x) => /^\d+$/.test(x) ? Number(x) : x.charCodeAt(0) - 96;
+function follows(prev, n) {
+  if (!prev) return true;
+  const p = parts(prev), q = parts(n);
+  if (q.length === p.length + 1 && q.slice(0, -1).join(".") === prev) return bump(q.at(-1)) === 1;
+  if (q.length > p.length) return false;
+  if (q.length === 1) return Number(q[0]) > Number(p[0]);
+  if (q.slice(0, -1).join(".") !== p.slice(0, q.length - 1).join(".")) return false;
+  const d = bump(q.at(-1)) - bump(p[q.length - 1]);
+  return d >= 1 && d <= 3;      // Riot occasionally retires a number; never by more
+}
+
 function toRules(lines) {
   const out = [];
   for (const raw of lines) {
     const line = unligature(raw).replace(/\s+/g, " ").trim();
     if (!line) continue;
     const m = RULE.exec(line);
-    if (m) out.push({ n: m[1], text: m[2] });
+    if (m && follows(out.at(-1)?.n, m[1])) out.push({ n: m[1], text: m[2] });
     else if (out.length) out[out.length - 1].text += " " + line;   // a wrapped line
     // anything before the first rule is the cover block, and is dropped
   }
@@ -572,7 +616,8 @@ function index(docs) {
     for (const r of core.rules.slice(glossary + 1))
       if (depth(r.n) === 1 && isHeading(r)) terms[r.text] = { rule: r.n, kind: "keyword" };
 
-  const actions = core.rules.findIndex((r) => /^Types of Actions$/i.test(r.text));
+  // "Types of Actions (A Non-Exhaustive List)" since Oct 2026.
+  const actions = core.rules.findIndex((r) => /^Types of Actions\b/i.test(r.text));
   if (actions >= 0)
     for (const r of core.rules.slice(actions + 1)) {
       if (depth(r.n) === 1 && !isHeading(r)) break;
@@ -716,13 +761,34 @@ const main = async () => {
     const r = await fetch(d.url, { headers: { "User-Agent": UA } });
     if (!r.ok) throw new Error(`${d.title} ${r.status} ${r.statusText}`);
     const buf = Buffer.from(await r.arrayBuffer());
-    const { pages, lines } = pdf(buf);
-    const rules = toRules(lines);
+    let { pages, lines } = pdf(buf);
+    let rules = toRules(lines), via = "own reader";
+    if (!rules.length) {
+      try { ({ pages, lines } = pdfViaPypdf(buf)); } catch (e) {
+        throw new Error(`${d.title}: this extractor reads no rules from it and pypdf could not run ` +
+          `(${String(e.message).split("\n")[0]}). See the header of this file.`);
+      }
+      rules = toRules(lines); via = "pypdf";
+    } else if (process.env.RULES_CROSSCHECK !== "0") {
+      // Keep the fallback honest on a file both can read: same rule numbers, same text.
+      try {
+        const alt = toRules(pdfViaPypdf(buf).lines);
+        const a = new Map(rules.map((r) => [r.n, r.text])), b = new Map(alt.map((r) => [r.n, r.text]));
+        // pypdf spaces out runs at font changes ("[ Warning ]"), so spacing is not a
+        // disagreement; a different rule list or different words is.
+        const flat = (t) => (t || "").replace(/\s+/g, "");
+        const spacing = [...a].filter(([n, t]) => b.get(n) !== t && flat(b.get(n)) === flat(t)).length;
+        const real = [...a].filter(([n, t]) => flat(b.get(n)) !== flat(t)).map(([n]) => n)
+          .concat([...b.keys()].filter((n) => !a.has(n)));
+        console.log(`  pypdf cross-check: ${a.size - spacing - real.length} identical, ${spacing} differ only in spacing, ` +
+          `${real.length} in substance${real.length ? ` — CHECK ${real.slice(0, 8).join(", ")}` : ""}`);
+      } catch { console.log("  pypdf unavailable, cross-check skipped"); }
+    }
     if (!rules.length) throw new Error(
-      `${d.title}: no numbered rules found in ${pages} pages. The PDF's shape has changed ` +
-      `and this extractor no longer reads it — see the header of this file.`);
-    console.log(`${(buf.length / 1048576).toFixed(1)}MB, ${pages} pages, ${rules.length} rules`);
-    docs.push({ ...d, pages, rules });
+      `${d.title}: no numbered rules found in ${pages} pages, by this extractor or by pypdf. ` +
+      `The PDF's shape has changed again — see the header of this file.`);
+    console.log(`${(buf.length / 1048576).toFixed(1)}MB, ${pages} pages, ${rules.length} rules (${via})`);
+    docs.push({ ...d, pages, rules, via });
   }
 
   const { sections, terms } = index(docs);

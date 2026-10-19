@@ -1368,9 +1368,13 @@ section('Caches');
     const sec = full.slice(full.indexOf('### 601.3. Standard'), full.indexOf('## 602.', full.indexOf('### 601.3. Standard')));
     const named = [...sec.matchAll(/601\.3\.c\.\d+\.?\**\s[^\n(]*\(([A-Za-z]{2,4})\)/g)].map((m) => m[1].toUpperCase());
     const listed = (banJson.standard && banJson.standard.sets) || [];
+    // A set Riot lists ahead of its release date sits in `upcoming` until then, so the
+    // invariant is that the two together are exactly what §601.3.c names.
+    const upcoming = ((banJson.standard && banJson.standard.upcoming) || []).map((u) => u.set);
+    const both = [...listed, ...upcoming].sort().join();
     ok('banned.json carries the Standard sets exactly as TR §601.3.c names them',
-       named.length > 0 && named.join() === listed.join(),
-       `rules: ${named.join(' ') || 'none'} · banned.json: ${listed.join(' ') || 'none'}`);
+       named.length > 0 && [...new Set(named)].sort().join() === both,
+       `rules: ${named.join(' ') || 'none'} · banned.json: ${listed.join(' ') || 'none'}${upcoming.length ? ` + upcoming ${upcoming.join(' ')}` : ''}`);
     const std = new Set(listed);
     const stdNamesHere = new Set(cat.cards.filter((c) => std.has(c.s)).map((c) => c.n));
     const outside = cat.cards.find((c) => c.s && !std.has(c.s) && c.t !== 'Legend' && !stdNamesHere.has(c.n));
@@ -2850,11 +2854,15 @@ section('The rules');
       '359.3.e.12': 'information read off an off-board source returns null',
       '359.3.e.5': 'a target that went illegal is simply unaffected',
       '359.3.e.13': 'a cost or effect that moves something may look back at it',
-      '811.1.d.2': "Hidden pins a play effect's targets to that battlefield",
-      '204.3.a': 'a cost within instructions is the base cost, paid at finalisation',
+      // Renumbered with the 2026-10-09 Core Rules: the Hidden pin split into a spell's
+      // (from) and a permanent's play effect (to), and 811.1.d.3.a wrote in what the
+      // Kennen/Gust ruling had to compose; 204.3.a became 204.1.c; 103.2.b.2 became 103.3.b.2.
+      '811.1.d.3': "Hidden pins a permanent's play-effect targets to the battlefield it was played to",
+      '811.1.d.3.a': 'that pin is read off the source, so it mistargets once the source is gone',
+      '204.1.c': 'a cost within instructions is the base cost, paid at finalisation',
       '164.2.a': 'a rune pays Energy by exhausting',
       '164.2.b': 'a rune pays Power by recycling — the same rune can do both',
-      '103.2.b.2': 'two printings of a character have different names',
+      '103.3.b.2': 'two printings of a character have different names',
       '142.4.b': 'lethal damage is a non-zero amount at or above Might',
       '186.1': 'a token put into a non-board zone ceases to exist',
     };

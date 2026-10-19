@@ -79,11 +79,27 @@ async function standardSets() {
   const start = md.indexOf("### 601.3. Standard");
   const end = md.indexOf("## 602.", start);
   if (start < 0 || end < 0) throw new Error("rules-full.md has no §601.3 Standard section — its shape changed");
-  const sets = [...md.slice(start, end).matchAll(/601\.3\.c\.\d+\.?\**\s[^\n(]*\(([A-Za-z]{2,4})\)/g)]
-    .map((m) => m[1].toUpperCase());
-  if (!sets.length) throw new Error("§601.3.c names no sets — the Standard list could not be read");
-  return { sets: [...new Set(sets)], source: "Tournament Rules §601.3.c, read from docs/rules-full.md",
-           note: "A card is Constructed-legal only if a card of the same name is printed in one of these sets (TR §601.2.a)." };
+  const sec = md.slice(start, end);
+  const heads = [...sec.matchAll(/601\.3\.c\.\d+\.?\**\s[^\n(]*\(([A-Za-z]{2,4})\)/g)];
+  if (!heads.length) throw new Error("§601.3.c names no sets — the Standard list could not be read");
+  // Since Oct 2026 Riot lists a set before it is out, with its date as a sub-rule
+  // ("601.3.c.6.a. Release Date: October 23rd, 2026"). Until that date it is not legal,
+  // so it is carried as upcoming rather than in `sets`; the daily rebuild moves it over.
+  const MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+  const today = new Date().toISOString().slice(0, 10);
+  const sets = [], upcoming = [];
+  heads.forEach((m, i) => {
+    const set = m[1].toUpperCase();
+    const block = sec.slice(m.index, i + 1 < heads.length ? heads[i + 1].index : sec.length);
+    const d = /Release Date:\s*([A-Za-z]+)\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})/i.exec(block);
+    const mo = d ? MONTHS.indexOf(d[1].toLowerCase()) : -1;
+    if (d && mo < 0) throw new Error(`§601.3.c gives ${set} a release date this cannot read: "${d[0]}"`);
+    const from = d ? `${d[3]}-${String(mo + 1).padStart(2, "0")}-${d[2].padStart(2, "0")}` : null;
+    if (from && from > today) { if (!upcoming.some((u) => u.set === set)) upcoming.push({ set, from }); }
+    else if (!sets.includes(set)) sets.push(set);
+  });
+  return { sets, upcoming, source: "Tournament Rules §601.3.c, read from docs/rules-full.md",
+           note: "A card is Constructed-legal only if a card of the same name is printed in one of these sets (TR §601.2.a). `upcoming` sets are listed by Riot but not legal until `from`." };
 }
 
 const main = async () => {
@@ -175,7 +191,7 @@ const main = async () => {
     standard,
   };
   await writeFile(new URL("../data/banned.json", import.meta.url), JSON.stringify(out, null, 1) + "\n");
-  console.log(`Standard (TR §601.3.c): ${standard.sets.join(", ")}`);
+  console.log(`Standard (TR §601.3.c): ${standard.sets.join(", ")}${standard.upcoming.length ? ` · upcoming ${standard.upcoming.map((u) => `${u.set} from ${u.from}`).join(", ")}` : ""}`);
 
   console.log(`\n${constructed.length} cards banned in Constructed:`);
   for (const b of constructed)

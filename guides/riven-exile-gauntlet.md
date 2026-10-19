@@ -61,7 +61,7 @@ day one.
 
 **Riven turns every unit you play into a card.** The Exile makes units played to a
 battlefield you control **enter ready**. A ready unit can pay an exhaust cost the turn it
-lands, and an exhausted unit **still defends** (§464.2.c.3). So Meditation draws 2, Life
+lands, and an exhausted unit **still defends** (§466.2.c.3). So Meditation draws 2, Life
 from Stone draws and ramps, Hunker Down cycles, Blade of the Exile equips, and Riven,
 Deserter readies a unit, all at almost no cost. **You win by out-carding the opponent at the
 battlefield you hold**, not by racing. The sim says the curve is smooth, no mulligan policy
@@ -92,8 +92,10 @@ Read its two lines against this field:
 | **Akali** | the Empowered ready on her legend |
 | **Ornn** | Pit Crew readying when a gear is played |
 
-The Thrill of the Hunt line is a **derived ruling**: §358.3.a plus Riot's own Warden example
-skip the play, and nothing undoes the banish. It's recorded in
+The Thrill of the Hunt line is a **derived ruling**: Warden's restriction makes the play
+fail to finalize (§355.17.b, whose own example is Warden), the failed play is undone
+(§358.5), and nothing undoes the banish. (Re-derived against the 2026-10-09 Core Rules,
+which dropped the §358.3.a sentence the first version leaned on; same answer.) It's recorded in
 [rules-rulings.md](../docs/rules-rulings.md). **Ask the judge before you rely on it.** The rest is
 Warden's plain text.
 

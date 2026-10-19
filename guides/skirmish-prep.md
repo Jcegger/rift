@@ -226,18 +226,18 @@ or nothing, but do them anyway.
 - **Warnings add up.** Three of the same game-play error in one event is a Game Loss
   (§702.1.b.1), and at Competitive so is **six warnings of any kind** (§702.1.b.2). If
   you're unsure about a rule, call a judge rather than guess.
-- **Notes.** Start each match with an empty, visible sheet (§416). During a game you may
+- **Notes.** Start each match with an empty, visible sheet (TR §416). During a game you may
   use only notes made in this match. **Between games you may read notes made before the
-  match** (§416.5). That is when the pocket card is legal, and only then.
+  match** (TR §416.5). That is when the pocket card is legal, and only then.
 - **No outside help** (§703.9). Nobody can advise you mid-match, and you can't ask.
 
 ---
 
 ## 5. Battlefields and play/draw across a best of three
 
-- **You choose your battlefield every game** (CR §486.5). Any battlefield used in a game
+- **You choose your battlefield every game** (CR §488.5). Any battlefield used in a game
   someone **won** is retired for the match, yours and theirs. After a draw, the same ones
-  can be reused (§486.5.a). Showing a used battlefield is a Deck Presentation Error (TR
+  can be reused (§488.5.a). Showing a used battlefield is a Deck Presentation Error (TR
   §703.4.a.1).
 - **Jun's order:** **Zaun Warrens in game 1.** Then **Sandswept Tomb mostly when going
   second**, or **Star Spring** when the hidden-unit save is worth more than its symmetry.
@@ -245,7 +245,7 @@ or nothing, but do them anyway.
   Star Spring against Rek'Sai or LeBlanc**, and it's risky against Rengar.
 - **Who plays first:** game 1 by any random method. After that, **the loser of the previous
   game chooses** (TR §407.4). In the top cut, **the higher Swiss seed chooses for game 1**
-  (§407.2.a). Going second, you channel an extra rune on turn 1 (CR §486.7).
+  (§407.2.a). Going second, you channel an extra rune on turn 1 (CR §488.7).
 - **Sideboard by play or draw, as Jun does.** On the draw, trim 2-drops. On the play, he
   wants all nine 2-drops and trims the top end. The matchup entries' board lines are the
   starting point; then ask whether a 3-drop is a good turn-2 play *in this matchup*.

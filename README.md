@@ -1259,14 +1259,14 @@ decks: these are consistency numbers, and who wins is for results and real games
 invariants (first-turn channel, never spending runes the board cannot make, determinism).
 
 **What it is not.** No opponent, so no matchup result. Points are capped at one per
-battlefield per turn (§470), so an unopposed deck scores on the same clock whatever it
+battlefield per turn (§472), so an unopposed deck scores on the same clock whatever it
 plays, and "turns to 8" is deliberately not reported: it would be the same number for
 every deck. Board presence by turn 3–4 is the measure of how well a deck can contest.
 
 ## Rules
 
 Riot publishes the rules as two PDFs and nothing else: no API, no HTML edition, no
-plain text. 120 pages of Core Rules and 50 of Tournament Rules, 3,326 numbered rules
+plain text. 142 pages of Core Rules and 53 of Tournament Rules, 3,467 numbered rules
 between them, and they have moved four times in a year — Origins, Spiritforged,
 Unleashed, Vendetta.
 
@@ -1290,7 +1290,7 @@ how this repo has produced its confident wrong answers.
 | file | what it is | rebuilds? |
 |---|---|---|
 | **`docs/rules.md`** | the handbook — the rules rewritten to be read, every claim carrying its §. **Start here.** | no, hand-written |
-| **`docs/rules-full.md`** | Riot's verbatim text, all 3,326 rules. The proof, not the index. | yes |
+| **`docs/rules-full.md`** | Riot's verbatim text, all 3,467 rules (2026-10-09). The proof, not the index. | yes |
 | **`docs/rules-faq.md`** | Riot's per-set FAQs. The current one **outranks the Core Rules** outright. | yes |
 | **`docs/rules-rulings.md`** | rulings from Riot staff that decide something the published rules leave ambiguous. **Cannot be derived from any of the above.** | no, hand-written |
 
@@ -1326,11 +1326,31 @@ only part that takes care is reading order — the text is laid out one glyph pe
 inside per-word `BT` blocks and the page matrix flips the y axis, so the extractor
 composes the full CTM and groups glyphs by device position rather than by the order
 they appear in the stream. Verified against pypdf across both documents: identical text
-for all 3,326 rules, plus two that pypdf runs onto one line.
+for all 3,326 rules of the July edition, plus two that pypdf runs onto one line.
 
 It is deliberately not a PDF library and must not become one. If Riot changes
 publishing tools, the honest failure is this script reporting zero rules, which it
 does, rather than a dependency quietly half-reading the new shape.
+
+**That happened on 2026-10-09.** The Radiance Core Rules is no longer a Google Docs
+export (PDF 1.7, object streams, TrueType fonts in WinAnsi) and the extractor read zero
+rules from it. The Tournament Rules still is one. So the extractor stays first, and only a
+document it reads nothing from goes through **pypdf**, pinned in the workflow and run
+isolated on a temp copy; if pypdf is missing or also finds nothing, the build fails as
+before. On the Tournament Rules, which both can read, the builder cross-checks the two
+every run. pypdf spaces out text at font changes ("[ Warning ]"), which is why the
+extractor stays first where it works; in substance they now agree on every rule.
+
+That cross-check found a bug that predated it: **18 Tournament Rules were being split into
+phantoms.** A wrapped line that happens to begin with a cross-reference ("…the process of"
+/ "408.4.a., except…") parsed as a new rule, truncating the real one and inventing another
+— 11 phantoms in the July document, 12 in October's. Rule lines are now accepted only if
+they continue the numbering (first child, or next sibling of the rule or an ancestor, by
+at most 3), which reproduces the Core Rules' verified 2,381 exactly and makes the two
+readers agree in substance on all three documents both can read. The same update renamed "Types of Actions"
+and inserted a rule ahead of it, renumbering most of the 100s–400s; every citation in the
+hand-written docs was remapped by matching rule text, and the passages built on rules
+whose text changed were rewritten by hand.
 
 One edit is made to Riot's text: **fi/fl ligatures are folded back out.** They are
 single glyphs in the font, so the ToUnicode map hands back `Deﬂect` and `battleﬁeld` as
@@ -1350,7 +1370,7 @@ read exactly like correct text.
 
 The first version of this check merged both rulebooks into one set of numbers, which
 was wrong in a way worth recording: **the Core and Tournament rules number
-independently and collide on 146 numbers.** §402.1 is "you may decides whether to
+independently and collide on 146 numbers.** §403.1 is "you may decides whether to
 perform the triggered ability" in one book and "register a Main Deck of exactly 40
 cards" in the other. Thirteen citations sat on such a collision and the check called
 them fine. So the two are now kept apart, the handbook writes its tournament citations

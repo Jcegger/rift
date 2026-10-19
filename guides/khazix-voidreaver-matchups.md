@@ -95,10 +95,10 @@ Entries for decks you will rarely meet fold *Their deck*, *Fights* and *Battlefi
 
 1. **Check for lethal first, from 5 points on, for both players.** A hold at 7 wins outright, and at 6 a hold plus a conquest of the other battlefield wins ([deck guide §2](khazix-voidreaver.md#closing-68-points)).
 2. **Punch First is your hardest trick to counter.** It costs 2 Power, so Defy cannot touch it, and it only chooses *your* unit, so Not So Fast cannot either. Grim Resolve also dodges Not So Fast, but it costs no Power, so **Defy counters it**: against Defy decks, cast Punch First first. Only a counter that takes any spell (Riposte, Hard Bargain, Abandon) stops it.
-3. **Their facedown card cannot touch your flip.** They can only hide at a battlefield they control, and its targets must be at that battlefield (§811.1.b, §811.1.d.2), so it is never at yours. What it *can* do is hurt you when **you attack its battlefield**. That is what the "Their facedown card" line is for.
+3. **Their facedown card cannot touch your flip.** They can only hide at a battlefield they control, and its targets must be at that battlefield (§811.1.b, §811.1.d.2–3), so it is never at yours. What it *can* do is hurt you when **you attack its battlefield**. That is what the "Their facedown card" line is for.
 4. **Kha'Zix starts in your Champion Zone.** You have him every game. His *"if an enemy unit is alone here"* trigger fires whether he attacks or defends.
 
-**Battlefields, in a match.** You choose one each game, and **every battlefield used in a game someone won is retired for the match, yours included** (§486.5). In a single unsanctioned game they are picked at random (§485.5). **Jun's order:** Zaun Warrens in game 1. Sandswept Tomb mostly when going second in games 2–3. Star Spring when the hidden-unit save is worth more than its symmetry. The Battlefields line in each entry only says when to break that order.
+**Battlefields, in a match.** You choose one each game, and **every battlefield used in a game someone won is retired for the match, yours included** (§488.5). In a single unsanctioned game they are picked at random (§487.5). **Jun's order:** Zaun Warrens in game 1. Sandswept Tomb mostly when going second in games 2–3. Star Spring when the hidden-unit save is worth more than its symmetry. The Battlefields line in each entry only says when to break that order.
 
 | | text | for you |
 |---|---|---|
@@ -278,7 +278,7 @@ Usually **Tideturner** (97%) or **Zhonya's Hourglass** (81%). Zhonya's (errata t
 
 ### Battlefields
 
-They bring **Abandoned Hall** (97% — any player who casts a spell may give a unit there +1, which suits their 13 Reactions), **Targon's Peak** (93%) and **Sunken Temple** (81%). **Jun rates Irelia "slightly favoured" on Targon's Peak**, which readies their runes after a conquest, so they keep pumps up through your turn. Expect it in one game of the three, and once used it is retired for the match (§486.5). Usual order otherwise; Sandswept Tomb's Punch First discount matters most here in games 2–3.
+They bring **Abandoned Hall** (97% — any player who casts a spell may give a unit there +1, which suits their 13 Reactions), **Targon's Peak** (93%) and **Sunken Temple** (81%). **Jun rates Irelia "slightly favoured" on Targon's Peak**, which readies their runes after a conquest, so they keep pumps up through your turn. Expect it in one game of the three, and once used it is retired for the match (§488.5). Usual order otherwise; Sandswept Tomb's Punch First discount matters most here in games 2–3.
 
 ### Board
 
@@ -325,7 +325,7 @@ They bring **Abandoned Hall** (97% — any player who casts a spell may give a u
 
 > **Wuju Bladesman** — *"While a friendly unit defends alone, it gets +2 Might."*
 
-The archive files most of these lists under the legend's Starter printing, *Wuju Bladesman - Starter*, which is banned in 2v2 only (`data/banned.json`) and legal here. Their +2 cancels Kha'Zix's +2 exactly. **The unit that moves in applies Contested and becomes the attacker** (§190.3.a.1, §464.2.c.1), and an attacking unit is not defending, so their legend switches off — while Kha'Zix's *"attack or defend"* still fires.
+The archive files most of these lists under the legend's Starter printing, *Wuju Bladesman - Starter*, which is banned in 2v2 only (`data/banned.json`) and legal here. Their +2 cancels Kha'Zix's +2 exactly. **The unit that moves in applies Contested and becomes the attacker** (§190.3.a.1, §466.2.c.1), and an attacking unit is not defending, so their legend switches off — while Kha'Zix's *"attack or defend"* still fires.
 
 | card | in | what it does to you |
 |---|---|---|
@@ -400,7 +400,7 @@ The archive files most of these lists under the legend's Starter printing, *Wuju
 ### The key piece
 **Rengar, Trophy Hunter** — 71 of 75 (95%), plus **Thrill of the Hunt** (96%). 5E 1P, 6 Might, *Ambush, and he can Ambush to a battlefield where only your units are.*
 - **Ignore him until he arrives; you can't chase a card in hand.** He shows up mid-fight as 6 Might plus their legend's +1, and Thrill of the Hunt re-plays one of their units to *any* battlefield at Reaction speed. Count both as live whenever they have 5E (or 2E for Thrill) open.
-- **The hard answer is your Vex, Apathetic.** Ambushing *is* playing a unit, and Vex stuns any unit an opponent plays while she's at a battlefield (card text). A stunned unit deals no combat damage (§423.1.b). **With Vex at the contested battlefield, an Ambush Rengar does nothing that fight.**
+- **The hard answer is your Vex, Apathetic.** Ambushing *is* playing a unit, and Vex stuns any unit an opponent plays while she's at a battlefield (card text). A stunned unit deals no combat damage (§424.1.b). **With Vex at the contested battlefield, an Ambush Rengar does nothing that fight.**
 - **Once he's on the board:** Switcheroo him with a 1-Might Tentacle, or Rampage him. He has no Deflect.
 - **The trap:** committing everything to one fight. Make them Ambush first, then answer.
 
@@ -553,8 +553,8 @@ Weaponmaster lets a Sand Soldier pick up an Equipment as it arrives, for `[A]` l
 > - **Mulligan:** keep Switcheroo (98%), or a Faefolk plus a 2-drop. You need a way to make the fight unfair.
 > - **Early:** take a battlefield before their 5-drops. Their early units are 1-Might Deathknell bodies, and killing them pays them a card or a rune, so **fight for the battlefield, not the bodies**.
 > - **Bounce beats killing.** A unit returned to hand never dies, so no Deathknell fires. Your **Star-Crossed** sends Ruined Rex, Glasc Mixologist, Rift Herald or Thousand-Tailed Watcher back with no payout. On a Reflection token it is cleaner still: a token put into a hand ceases to exist (§186.1) and never dies.
-> - **Middle:** when they reach 7 runes, assume **Thousand-Tailed Watcher** (88%). It is a unit, so it lands on *their* turn, and every unit you have is −3 for that turn. **Do not count on a hold surviving that turn.** Your pumps afterwards still count in full: "to a minimum of 1" snapshots (§477.3.b), so a 2-Might unit takes a flat −1 and a Punch First on top is +5 from there. **Decree of Strength can take Watcher from their hand.** It is a Mind card, and Sabotage cannot reach units. TwistedTCG's 12th-place LA list ran three 8-drops (Harnessed Dragon, Rift Herald) and one Watcher, so against that build the danger turn is 8, not 7.
-> - **Every hold of theirs is worth more than a point.** Their legend copies a unit at a battlefield they conquer or hold, and gives the copy Temporary, so it is killed at the start of their next Beginning Phase, before scoring (§816.1.b). A copy takes the original's rules text (§477.1.b.1.a; §477.1.b.1.b uses a Reflection copying Honest Broker as its example), and a Deathknell triggers as its permanent is killed, before it reaches the trash (§808.1.c, §808.1.d.2), where a token then ceases to exist (§186.1). So **a copied Ruined Rex dies and deals 4 to one of your units, twice with Karthus**.
+> - **Middle:** when they reach 7 runes, assume **Thousand-Tailed Watcher** (88%). It is a unit, so it lands on *their* turn, and every unit you have is −3 for that turn. **Do not count on a hold surviving that turn.** Your pumps afterwards still count in full: "to a minimum of 1" snapshots (§479.4.b), so a 2-Might unit takes a flat −1 and a Punch First on top is +5 from there. **Decree of Strength can take Watcher from their hand.** It is a Mind card, and Sabotage cannot reach units. TwistedTCG's 12th-place LA list ran three 8-drops (Harnessed Dragon, Rift Herald) and one Watcher, so against that build the danger turn is 8, not 7.
+> - **Every hold of theirs is worth more than a point.** Their legend copies a unit at a battlefield they conquer or hold, and gives the copy Temporary, so it is killed at the start of their next Beginning Phase, before scoring (§816.1.b). A copy takes the original's rules text (§479.1.b.1; §479.1.b uses a Reflection copying Honest Broker as its example), and a Deathknell triggers as its permanent is killed, before it reaches the trash (§808.1.c, §808.1.d.2), where a token then ceases to exist (§186.1). So **a copied Ruined Rex dies and deals 4 to one of your units, twice with Karthus**.
 > - **Closing:** they rebuy dead units (Glasc Mixologist, Rift Herald) faster than you can grind them. Turn the battlefield you hold into points, not kills.
 > - **Flips:** freely. Nothing in their lists removes your hidden unit or counters a trigger.
 > - **Why it rose (Jun, ban day):** LeBlanc lost nothing to the ban, and with fewer Chaos decks around it rarely meets Gust or Star-Crossed. That is also why it never answers your flips.
@@ -785,7 +785,7 @@ Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **
 
 ### Battlefields
 
-**Zaun Warrens** (77%), **Minefield** (72%: conquering mills two, which is fuel for them) and **Shadow Temple** (57%: holding there burns 3). Usual order. They run Zaun Warrens too, so it is fully symmetric here, and it may already be retired when you want it (§486.5).
+**Zaun Warrens** (77%), **Minefield** (72%: conquering mills two, which is fuel for them) and **Shadow Temple** (57%: holding there burns 3). Usual order. They run Zaun Warrens too, so it is fully symmetric here, and it may already be retired when you want it (§488.5).
 
 ### Board
 
@@ -800,7 +800,7 @@ Every card played from the trash (Flow, Fizz, Matriarch) charges a +2 attack. **
 - **For Kha'Zix:**
   - Kennen's top list is half your deck: Merchant, Disciple, Matriarch, Fizz, Tornado Warrior, Switcheroo, Tideturner.
   - **Hard Bargain main** can counter your Punch First unless you pay 2.
-  - They bring Zaun Warrens too, so it may already be retired when you want it (§486.5).
+  - They bring Zaun Warrens too, so it may already be retired when you want it (§488.5).
 - **Claim added 8 October** (list title, not a record): "Kennen wins Showdown Series: Murcia".
 
 ---
@@ -1405,7 +1405,7 @@ One small edge, **unconfirmed**: the legend's Energy is showdown-only, and Evely
 
 ### Their facedown card
 
-**Tideturner (23 of 26) or Switcheroo (14).** Their facedown card can't touch your flip (§811.1.d.2), but it swaps whatever attacks into it.
+**Tideturner (23 of 26) or Switcheroo (14).** Their facedown card can't touch your flip (§811.1.d.2–3), but it swaps whatever attacks into it.
 
 ### Battlefields
 
@@ -1883,7 +1883,7 @@ A Recruit every turn, Viktor, Leader turning every death into another Recruit, a
 ### The key piece
 **Vi, Peacekeeper** — 58 of 61 (95%). 5E 1P, 5 Might, *Ambush. When she attacks, stun one of your units here.*
 - **Her stun is on attack only.** If she Ambushes into your attack, she's a 5/5 defender with no stun.
-- **Your Vex, Apathetic stuns her on arrival** (an Ambush is a play), and a stunned unit deals no combat damage (§423.1.b).
+- **Your Vex, Apathetic stuns her on arrival** (an Ambush is a play), and a stunned unit deals no combat damage (§424.1.b).
 - **Their legend readies a unit after a conquest with 3+ excess damage,** so never block with one small unit.
 
 ### Their deck
@@ -2314,7 +2314,7 @@ About 24 Hidden cards a deck. Hiding costs them Energy instead of Power.
 **61 bare · 95 +PF · 98 +Sw · 97 iso.**
 
 - **Their units are the smallest on the page, but a face-down card isn't a 0.** Teemo, Scout attacks or defends as 4 the turn it flips, and Sprite Call is 3. Count each facedown card at a battlefield as about 3–4.
-- **Windsinger's bounce is limited to where it was hidden** (§811.1.d.2). It can bounce your attacker there, never your units elsewhere.
+- **Windsinger's bounce is limited to where it was hidden** (§811.1.d.3; a play effect, so strictly where it was played to, which from Hidden is the same place). It can bounce your attacker there, never your units elsewhere.
 
 ### Flips and counters
 
@@ -2398,7 +2398,7 @@ The fifteen archetypes you are most likely to meet, cut to one row each, in tier
 | Ezreal | — | take both, race | don't | flipping into open Chaos | +2 Decree; −1 Evelynn −1 Tornado Warrior | usual order |
 | Viktor | — | hold one, grind; never race, keep your runes | freely | a crowd into 5+ open runes (Imperial Decree) | +1 Decree; −1 Sabotage (keep Up from the Deep) | don't hide at Rockfall Path |
 
-"Usual order" is Zaun Warrens, then Sandswept Tomb or Star Spring. Every battlefield used in a decided game retires for the match, yours and theirs (§486.5).
+"Usual order" is Zaun Warrens, then Sandswept Tomb or Star Spring. Every battlefield used in a decided game retires for the match, yours and theirs (§488.5).
 
 ---
 
@@ -2486,11 +2486,11 @@ Grind is from the 1 October window (see Sources), not recomputed.
 
 **Los Angeles results.** The top 8 and every Best-Of list are from Riot's [Los Angeles' Top Decks](https://playriftbound.com/en-us/news/organizedplay/los-angeles-top-decks/); Riot gives overall ranks but no records, and does not order places 3–8. The Day 1 / Day 2 table and the winner's 14-0-2 are from [Gamer Tag Mythras](https://gamertagmythras.com/blog/riftbound-tcg/riftbound-rq-los-angeles-results), which reads them off Riot's placements graphic. Records for the other top-8 decks are [riftbound.gg's](https://riftbound.gg/los-angeles-regional-qualifier-results-top-8-decks-metagame-popularity-win-conversion-rates). `data/events.json` independently records the event, its date and its 2,165 players. A list *titled* "Top 32 Los Angeles RQ" is the deck author's claim (`cp`/`ce`) and is never counted as a result.
 
-**Simulations** are Monte Carlo at 120,000 trials implementing §465.2 and §466.3 directly: a clean win when your Might total strictly exceeds theirs. Your distribution is the 24 units of the current list weighted by copies (mean 3.04); theirs is each archetype's units in the archive weighted by copies. **The +PF and +Sw columns assume the spell resolves** — read them next to the counter rates in each entry. The four-column figures were computed on 1 October and not re-run: mean Might moved by 0.2 or less for every Tier 1–3 archetype once pre-ban lists were removed. Entries new in this version (Nasus, Shen, Draven, Ambessa, Sett, Ivern, Jhin, Jax, Poppy, Ahri, Leona) carry **bare and +PF only**, from a re-run that reproduces the published bare and +PF figures within three points. Its isolation and Switcheroo columns did not reproduce, so they are left out rather than guessed. The method cannot see Equipment, stuns or a legend's −Might, so Jax, Ahri and Leona's numbers read too high.
+**Simulations** are Monte Carlo at 120,000 trials implementing §467.2 and §468.3 directly: a clean win when your Might total strictly exceeds theirs. Your distribution is the 24 units of the current list weighted by copies (mean 3.04); theirs is each archetype's units in the archive weighted by copies. **The +PF and +Sw columns assume the spell resolves** — read them next to the counter rates in each entry. The four-column figures were computed on 1 October and not re-run: mean Might moved by 0.2 or less for every Tier 1–3 archetype once pre-ban lists were removed. Entries new in this version (Nasus, Shen, Draven, Ambessa, Sett, Ivern, Jhin, Jax, Poppy, Ahri, Leona) carry **bare and +PF only**, from a re-run that reproduces the published bare and +PF figures within three points. Its isolation and Switcheroo columns did not reproduce, so they are left out rather than guessed. The method cannot see Equipment, stuns or a legend's −Might, so Jax, Ahri and Leona's numbers read too high.
 
 **Grind** is not defined anywhere in this repo. Reverse-engineered, it behaves like the copies per deck of cards whose text mentions **draw, trash, recycle or Flow**: that count gives your list exactly 12 and Irelia 10.9, lands within a point for Kennen, Vex, Fiora, Jayce and Ezreal, and misses Rek'Sai and LeBlanc by 2.4 and 2.8. It is a keyword count, not a measured card-advantage rate, so read it as direction: well above or well below 12 means something, 10.9 against 12 does not.
 
-**Flip threats** count Reaction-speed cards **from hand** that can remove your hidden unit at your battlefield — Gust, Star-Crossed, Shakedown — and the two that counter Evelynn's trigger, Not So Fast and Repulse. **Facedown cards are excluded** because a hidden card's targets must be at its own battlefield (§811.1.d.2), and theirs is never at yours (§811.1.b, §323.7); earlier versions of this page counted Hidden Blade and Temporal Breach and were wrong to. Temporal Breach is reported separately, because it can blink *their* unit that Evelynn chose. **Switcheroo counters** are Not So Fast, Repulse, Hard Bargain, Abandon, Riposte, Rebuttal, Wind Wall, Lilting Lullaby, Flurry of Feathers and Crumbling Sands — every spell counter in the field except Defy, which Switcheroo's 2 Power puts out of reach.
+**Flip threats** count Reaction-speed cards **from hand** that can remove your hidden unit at your battlefield — Gust, Star-Crossed, Shakedown — and the two that counter Evelynn's trigger, Not So Fast and Repulse. **Facedown cards are excluded** because a hidden card's targets must be at its own battlefield (§811.1.d.2–3), and theirs is never at yours (§811.1.b, §323.6.a); earlier versions of this page counted Hidden Blade and Temporal Breach and were wrong to. Temporal Breach is reported separately, because it can blink *their* unit that Evelynn chose. **Switcheroo counters** are Not So Fast, Repulse, Hard Bargain, Abandon, Riposte, Rebuttal, Wind Wall, Lilting Lullaby, Flurry of Feathers and Crumbling Sands — every spell counter in the field except Defy, which Switcheroo's 2 Power puts out of reach.
 
 **Power costs are checked against the catalog.** `data/cards.json` carries Power as `p` (absent means 0), and `scripts/rift card` and `scripts/rift deck` print it. Every Power claim on this page was re-read against it on 9 October: Punch First and Switcheroo at 2 Power are out of Defy's reach (Defy counters up to 4 Energy and 1 Power), Grim Resolve, Hard Bargain and Rampage cost no Power, and Riposte is 2 Energy and 2 Power across Body and Order.
 

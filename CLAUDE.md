@@ -30,8 +30,8 @@ means repeated removal on the deck's protected champion unit, and asking Jay wha
 was the wrong move.
 
 **The answer is usually a composition, and no single rule states it.** Hidden pinning a
-target to a battlefield (§811.1.d.2) plus off-board reads returning null (§359.3.e.12)
-is a ruling neither rule contains. When you derive one of these and it matters, record
+target to a battlefield (§811.1.d.3) plus off-board reads returning null (§359.3.e.12)
+was a ruling neither rule contained, until Riot wrote it in as §811.1.d.3.a. When you derive one of these and it matters, record
 it in `docs/rules-rulings.md` with its four fields — `check.mjs` enforces them.
 
 **Never state a rules claim from inference about what a rule *must* mean.** Read what it
@@ -44,7 +44,7 @@ says. A wrong premise silently invalidates every piece of advice built on it.
 **Read `docs/strategy.md` before advising on a line, a matchup plan or a game review.**
 It is how this repo chooses between two legal plays. **Run its terminal scan first:**
 can either player reach 8 before the other acts again? A hold at 7 wins, because hold
-points are not gated (§471.1.a.1). Only after that does future-position reasoning apply.
+points are not gated (§473.1.a.1). Only after that does future-position reasoning apply.
 Review mistakes using its seven types, so the match journal's tallies stay comparable.
 
 ---

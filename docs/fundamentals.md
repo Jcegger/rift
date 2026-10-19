@@ -23,14 +23,14 @@ Card shares come from **1,048 decks dated 24 September – 1 October 2026**, the
 
 Not from damage, not from decking your opponent, not from killing their units. Killing things is a means. The scoreboard is the game.
 
-Two ways to score, and they are the whole engine (§469):
+Two ways to score, and they are the whole engine (§471):
 
 - **Conquer** — you gain control of a battlefield you have not yet scored this turn. **1 point.**
 - **Hold** — you still control it at the **start of your turn**. **1 point.**
 
-**Once per battlefield per turn, either way** (§470). So a battlefield you take and keep pays 1 the turn you take it, and 1 every turn after.
+**Once per battlefield per turn, either way** (§472). So a battlefield you take and keep pays 1 the turn you take it, and 1 every turn after.
 
-In a 1v1 there are **two battlefields on the table** (§485.4), one from each player. That caps the rate at 2 points a turn.
+In a 1v1 there are **two battlefields on the table** (§487.4), one from each player. That caps the rate at 2 points a turn.
 
 | board | their rate | they win in |
 |---|---|---|
@@ -45,7 +45,7 @@ Hold scoring happens in the **Beginning Phase**, before Channel, before Draw, be
 
 ### The eighth point is gated, and a Hold is not
 
-When you try to gain a point from **Conquer** and you are already **within 1 of the Victory Score** (7 or more in 1v1), you only get it **if you have Scored every battlefield on the table this turn.** Otherwise you draw a card instead (§471.1.b, §471.1.b.1). Points from anything other than Conquer are not gated at all (§471.1.a.1).
+When you try to gain a point from **Conquer** and you are already **within 1 of the Victory Score** (7 or more in 1v1), you only get it **if you have Scored every battlefield on the table this turn.** Otherwise you draw a card instead (§473.1.b, §473.1.b.1). Points from anything other than Conquer are not gated at all (§473.1.a.1).
 
 That gives the endgame table worth knowing cold:
 
@@ -61,7 +61,7 @@ Read it from their side too. **An opponent at 7 who holds a battlefield wins at 
 
 ### Running out of cards is not a loss
 
-It is a **Burn Out** (§431): shuffle your trash back into your Main Deck, **an opponent of your choice gains 1 point**, and finish the draw. If your trash is empty too, you burn out repeatedly, handing out a point each time. So "grind them out of cards" is not a win condition. You still need 8 points.
+It is a **Burn Out** (§432): shuffle your trash back into your Main Deck, **an opponent of your choice gains 1 point**, and finish the draw. If your trash is empty too, you burn out repeatedly, handing out a point each time. So "grind them out of cards" is not a win condition. You still need 8 points.
 
 ---
 
@@ -77,9 +77,9 @@ Five things, and they are not the same kind of thing (§103):
 | **Rune Deck** | 12 | shuffled, kept separate |
 | **Battlefields** | 3 | registered; only one is used per game in 1v1 |
 
-**Domain Identity.** There are six domains: Fury, Calm, Mind, Body, Chaos, Order. Your Legend's domains *are* your identity, and a card is legal only if your identity contains **all** of that card's domains (§103.1.b.4). So a card that punishes Mind does nothing against a Fury/Calm legend: they cannot be playing Mind cards at all.
+**Domain Identity.** There are six domains: Fury, Calm, Mind, Body, Chaos, Order. Your Legend's domains *are* your identity, and a card is legal only if your identity contains **all** of that card's domains (§103.2.b.4). So a card that punishes Mind does nothing against a Fury/Calm legend: they cannot be playing Mind cards at all.
 
-**Copy limits.** 3 of any name (§103.2.b), and **names include the subtitle**: `Kai'Sa, Survivor` and `Kai'Sa, Evolutionary` are different cards. Your Chosen Champion counts against its own 3. **Unique** cards are limited to 1.
+**Copy limits.** 3 of any name (§103.3.b), and **names include the subtitle**: `Kai'Sa, Survivor` and `Kai'Sa, Evolutionary` are different cards. Your Chosen Champion counts against its own 3. **Unique** cards are limited to 1.
 
 **Sideboard** is tournament-only: **10 or fewer**, every card legal for your identity, and the 3-copy limit spans main deck and sideboard **together**. Runes, Legend and battlefields never change after registration (TR §403.4.b).
 
@@ -100,7 +100,7 @@ Six phases, but only one of them is open (§315–317):
 
 **The ordering trap:** Hold scoring comes **before** Channel and Draw. A battlefield you are about to lose is still worth taking to the start of your turn.
 
-**Going second** channels an extra rune on its first Channel Phase (§485.7). That is the whole compensation for going second.
+**Going second** channels an extra rune on its first Channel Phase (§487.7). That is the whole compensation for going second.
 
 ### Plan the whole turn before the first action
 
@@ -146,7 +146,7 @@ A card costing 1 Energy and 2 Body Power needs **two** Body runes, not three. A 
 
 **Contested** is applied when a unit arrives at a battlefield its controller does not control, and the battlefield is not already Contested (§190.3.a.1).
 
-> **The player whose unit applied Contested is the Attacker** (§464.2.c.1).
+> **The player whose unit applied Contested is the Attacker** (§466.2.c.1).
 
 That sentence decides more games than it looks like it should. If you drag an enemy unit onto *your* battlefield, **they** are the attacker. That matters because many cards read "while attacking" or "while defending".
 
@@ -164,14 +164,14 @@ That sentence decides more games than it looks like it should. If you drag an en
 
 ### Who won
 
-> A player **wins** a combat if they held a designation and are the **only** player with units remaining at that battlefield (§466.3.a).
+> A player **wins** a combat if they held a designation and are the **only** player with units remaining at that battlefield (§468.3.a).
 
-Everything else is **No Result**: a mutual wipe, both sides surviving, or attackers being recalled (§466.3.d). **Defending pays exactly what attacking pays.**
+Everything else is **No Result**: a mutual wipe, both sides surviving, or attackers being recalled (§468.3.d). **Defending pays exactly what attacking pays.**
 
 - **A tie destroys both boards**, because each side's total is at or above the other's.
-- **Failed attacks are punished; failed defences are not.** Attackers are recalled if defenders survive (§466.1.a.2), and defenders stay. Attacking into an uncertain fight costs more than being attacked.
+- **Failed attacks are punished; failed defences are not.** Attackers are recalled if defenders survive (§468.1.a.2), and defenders stay. Attacking into an uncertain fight costs more than being attacked.
 
-Survivors **heal in the Combat Cleanup** (§466.1.a.1), so damage does not carry to a second fight that turn.
+Survivors **heal in the Combat Cleanup** (§468.1.a.1), so damage does not carry to a second fight that turn.
 
 ---
 
@@ -250,7 +250,7 @@ Measured by how many decks in the window run at least one card carrying them:
 
 The catch that costs games: a hidden **permanent** must be played to the battlefield it was hidden at, and its play effect reads that battlefield **off the source**. Remove the source in response to its own trigger, by bounce **or kill**, and the read returns null and the instruction is ignored. See **When the source leaves the board** in [rules.md](rules.md) and the recorded ruling in [rules-rulings.md](rules-rulings.md).
 
-**And their facedown card can only act at its own battlefield.** You can only hide at a battlefield you control, and a hidden card's targets must be at that battlefield (§811.1.b, §811.1.d.2). So in a 1v1, the card they hid can hurt you when **you attack its battlefield**, not anywhere else.
+**And their facedown card can only act at its own battlefield.** You can only hide at a battlefield you control, and a hidden card's targets must be at that battlefield (§811.1.b, §811.1.d.2–3). So in a 1v1, the card they hid can hurt you when **you attack its battlefield**, not anywhere else.
 
 ---
 
@@ -401,7 +401,7 @@ Chaos decides **where** fights happen rather than who wins them. **Flash** is th
 
 ## 10. Battlefields
 
-You register three and play one per game in 1v1, so they are a real deckbuilding decision. **In a best-of-three you choose each game, and every battlefield used in a game someone won is retired for the match, yours included** (§486.5). After a draw the same ones may return (§486.5.a). So plan the order across three games, not just the first.
+You register three and play one per game in 1v1, so they are a real deckbuilding decision. **In a best-of-three you choose each game, and every battlefield used in a game someone won is retired for the match, yours included** (§488.5). After a draw the same ones may return (§488.5.a). So plan the order across three games, not just the first.
 
 The field's choices:
 

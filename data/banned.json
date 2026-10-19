@@ -148,7 +148,13 @@
    "UNL",
    "VEN"
   ],
+  "upcoming": [
+   {
+    "set": "RAD",
+    "from": "2026-10-23"
+   }
+  ],
   "source": "Tournament Rules §601.3.c, read from docs/rules-full.md",
-  "note": "A card is Constructed-legal only if a card of the same name is printed in one of these sets (TR §601.2.a)."
+  "note": "A card is Constructed-legal only if a card of the same name is printed in one of these sets (TR §601.2.a). `upcoming` sets are listed by Riot but not legal until `from`."
  }
 }

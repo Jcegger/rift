@@ -48,9 +48,9 @@ The scoring facts the scan runs on, which strong players carry without thinking:
 
 | you are at | and you | result |
 |---|---|---|
-| **7** | **hold** a battlefield at the start of your turn | **you win.** Hold points are not gated (§471.1.a.1) |
+| **7** | **hold** a battlefield at the start of your turn | **you win.** Hold points are not gated (§473.1.a.1) |
 | **7** | conquer, having scored the other battlefield this turn | you win |
-| **7** | conquer, **not** having scored the other this turn | **you draw a card instead** (§471.1.b.1) |
+| **7** | conquer, **not** having scored the other this turn | **you draw a card instead** (§473.1.b.1) |
 | **6** | hold one, then conquer the other | win. The hold scored the first, so the conquest is the final point |
 | **6** | hold nothing, conquer both | win. The first conquest makes 7 and scores that battlefield, so the second is the final point |
 
@@ -364,7 +364,7 @@ The book is general; Jun is specific. Where they meet, the advice is as solid as
 |---|---|---|
 | **Who is happier if nothing happens?** ([§2](#2-every-deck-is-solving-a-different-problem)) | your late game (removal, finishers, Fizz, Matriarch) is the better one against most of the field, so **develop first, spells second** | quiet early turns usually favour you. Against the decks that out-grind you, the matchup guide's role table says force it earlier |
 | **Check for lethal first** ([§0](#0-the-order-of-every-decision)) | **reach 6 before them**: Void Assault and the Ambush units take both battlefields in one turn | from 5 points, scan every turn for both players. Keep the finishing cards for the turn that needs them |
-| **A bad win loses to what follows** ([§1](#1-the-board-is-not-the-position)) | the legend's best use is the **walk-home** after a conquest; don't spend everything on the 6th point | an even trade is No Result and pays no XP (§466.3), a failed conversion, not a neutral outcome. Losing a battlefield you hid at is the bad win in its purest form |
+| **A bad win loses to what follows** ([§1](#1-the-board-is-not-the-position)) | the legend's best use is the **walk-home** after a conquest; don't spend everything on the 6th point | an even trade is No Result and pays no XP (§468.3), a failed conversion, not a neutral outcome. Losing a battlefield you hid at is the bad win in its purest form |
 | **The first-in trap** ([§5](#5-pressure-is-the-removal-of-good-choices)) | "the defender has already revealed what the defending units will be"; **retreating is not surrendering a point**. Kha'Zix "represents six Might", which makes them respond first | your Ambush, Hidden and Evelynn cards are built to answer second. Make them commit, and walk home rather than hold a battlefield they can plan against |
 | **A hold is strong only if it is backed** ([§1](#1-the-board-is-not-the-position)) | **"can I win this game without a hold?"** If not, force one. Post-ban, the Heron decks make that most games | hold with a facedown card behind you. At 7, a split board with a hidden card |
 | **Refuse the exchange they prepared** ([§5](#5-pressure-is-the-removal-of-good-choices)) | "developing through Ambush" is a rookie mistake, seen from the other side: don't hold five runes open for a Rengar a good player will simply develop past | hiding is your way to refuse: it cannot be answered (§811.1.c.1, §811.1.c.2) and costs no Energy on their turn. Flipping into open Chaos or Calm is offering them the exchange |

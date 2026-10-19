@@ -167,12 +167,18 @@ jobs:
       #
       # It rebuilds the VERBATIM half only. docs/rules.md is hand-written, and the
       # --max-age gate below is what notices that it has fallen a set behind.
+      #
+      # pypdf is for the Core Rules only: since 2026-10-09 it is no longer a Google Docs
+      # export and the builder's own small reader cannot parse it (see its header).
+      # Pinned, because a PDF library that changes its text extraction would change
+      # the verbatim rules without anyone touching them.
       - name: Refresh the rules
         id: rules
         continue-on-error: true
         run: |
           case ",$SIMULATE," in *,rules,*) echo "simulated failure"; exit 1;; esac
-          node scripts/build-rules.mjs
+          python3 -m venv "$RUNNER_TEMP/pypdf" && "$RUNNER_TEMP/pypdf/bin/pip" install --quiet pypdf==6.14.2
+          PYTHON="$RUNNER_TEMP/pypdf/bin/python" node scripts/build-rules.mjs
 
       # After the rules, because it reads the errata page list that build-rules.mjs
       # discovers, and after the catalog, because every entry is verified against the

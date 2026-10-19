@@ -1,22 +1,26 @@
 # The rules of Riftbound
 
-Riot publishes the rules as two PDFs and nothing else — 120 pages of Core Rules and 50
-of Tournament Rules, 3,326 numbered rules between them. This is that, rewritten to be
+Riot publishes the rules as two PDFs and nothing else — 142 pages of Core Rules and 53
+of Tournament Rules, 3,467 numbered rules between them. This is that, rewritten to be
 read: the same rules, in the order you actually need them, with every claim carrying the
 rule number it came from.
 
-**Describes Core Rules 2026-07-16 and Tournament Rules 2026-07-16** — the Vendetta
-update, effective 2026-07-24. Sourced from
+**Describes Core Rules 2026-10-09 and Tournament Rules 2026-10-09** — the Radiance
+update, effective 2026-10-16. Brought up to date on 2026-10-19 by remapping every
+citation by rule text (Riot renumbered much of the 100s–400s) and rewriting what the
+patch notes changed; a passage that says "since 2026-10-09" marks a changed rule. Sourced from
 [Riot's Rules Hub](https://playriftbound.com/en-us/rules-hub/).
 
 That line is a contract, not a note: `check.mjs` parses those two dates and compares
 them to the rules actually committed in `data/rules.json`. The verbatim half rebuilds
 itself from Riot; this half does not, so when they part company the build says so.
 
-- **[rules-faq.md](rules-faq.md)** is Riot's per-set rules FAQs, and the current one
-  **outranks the Core Rules**: the Vendetta FAQ (2026-08-14) states that where it differs
-  from the Core Rules Document the FAQ takes precedence, until a newer Core Rules
-  Document is published. It post-dates the Core Rules here by four weeks. None of the
+- **[rules-faq.md](rules-faq.md)** is Riot's per-set rules FAQs. A FAQ **outranks the
+  Core Rules only until a newer Core Rules Document is published** — the Vendetta FAQ
+  (2026-08-14) says so in as many words — and the 2026-10-09 Core Rules is newer, so it
+  now wins wherever they differ. It codified most of that FAQ anyway (ignored vs negated,
+  mandatory requirements, Kayle). A Radiance FAQ is promised for after release; when it
+  lands it outranks this again. None of the
   FAQs are linked from Riot's Rules Hub, so check it before relying on anything below.
   Earlier FAQs are weaker: the Unleashed one declares itself obsolete at the next rules
   update (which has since happened), and Riot's Origins one carries a "may no longer
@@ -47,17 +51,17 @@ something beats a card allowing it, always (§054.1).
 
 **You win at the Victory Score, and points come from battlefields.** Almost everything
 else is in service of that sentence. The Victory Score is **8 by default** — 1v1 and
-free-for-all — but **11 in 2v2**, and card effects can move it (§194.3, §194.3.a, §489.3).
+free-for-all — but **11 in 2v2**, and card effects can move it (§194.3, §194.3.a, §491.3).
 
 There are 2–3 battlefields on the table depending on the mode. In a 1v1 there are
-**two** — each player registers three and brings one (§485.4). You take a battlefield by
+**two** — each player registers three and brings one (§487.4). You take a battlefield by
 putting units there and winning the fight, and then you get paid for it every turn you
-keep it. Two ways to score (§469):
+keep it. Two ways to score (§471):
 
 - **Conquer** — you gain control of a battlefield you have not yet scored this turn. 1 point.
 - **Hold** — you still control it at the start of your turn. 1 point.
 
-**Once per battlefield per turn, either way** (§470). So a battlefield you take and keep
+**Once per battlefield per turn, either way** (§472). So a battlefield you take and keep
 pays 1 on the turn you take it and 1 every turn after.
 
 The game ends in a **cleanup**, not the instant you cross the line: a player wins when a
@@ -66,20 +70,20 @@ cleanup happens and they have ≥ the Victory Score and strictly more than anyon
 
 The exception is the runaway burn-out chain below — once it is repeating, a point that
 puts someone at the Victory Score **and ahead of every opponent** wins immediately, with
-no cleanup (§431.3.c, §431.3.c.1). It skips the cleanup, not the tiebreak.
+no cleanup (§432.3.c, §432.3.c.1). It skips the cleanup, not the tiebreak.
 
 ### The eighth point is not like the others
 
 The last point by Conquer is gated. When you try to gain a point from Conquer and your
 total is **within 1 of the Victory Score or higher** — 7+ in 1v1, 10+ in 2v2 — you only
 get the point **if you have Scored every battlefield on the table this turn.** Otherwise
-you draw a card instead (§471.1.b, §471.1.b.1). In 2v2, "every battlefield" excepts any
-your ally **occupied** during the scoring step of your Beginning Phase (§489.8.g.1).
+you draw a card instead (§473.1.b, §473.1.b.1). In 2v2, "every battlefield" excepts any
+your ally **occupied** during the scoring step of your Beginning Phase (§491.8.g.1).
 Separately, a battlefield your ally **controlled** at that moment is disqualified from
-your team conquering it at all (§469.1.a) — occupation excuses you from the requirement,
+your team conquering it at all (§471.1.a) — occupation excuses you from the requirement,
 control is what blocks the conquer, and they are not the same test.
 
-**Read "Scored", not "conquered".** Hold is one of the two ways to Score (§469), so a
+**Read "Scored", not "conquered".** Hold is one of the two ways to Score (§471), so a
 battlefield you Held in your Beginning Phase already counts toward "every battlefield
 this turn". In a 1v1 that means: Hold one battlefield in your Beginning Phase to reach
 7, then Conquer the other — the Hold already counts as that battlefield's Score, so the
@@ -87,14 +91,14 @@ gate opens and the eighth point is yours. You do **not** have to conquer both. (
 *at* 7 the Conquer is never needed: a Hold is not gated at all, so it simply wins.)
 
 Points from anything other than Conquer — Hold, card effects, an opponent burning out —
-are not subject to the gate at all (§471.1.a.1).
+are not subject to the gate at all (§473.1.a.1).
 
 ### Losing your deck does not lose you the game
 
-Running out of cards is a **Burn Out** (§431), not a loss. You shuffle your trash back
+Running out of cards is a **Burn Out** (§432), not a loss. You shuffle your trash back
 into your Main Deck, **an opponent of your choice gains 1 point**, and you finish the
 draw. If your trash is empty too you burn out repeatedly, handing out a point each time,
-until someone wins (§431.3.a) — and those repeat points can't be prevented (§431.3.b).
+until someone wins (§432.3.a) — and those repeat points can't be prevented (§432.3.b).
 
 ---
 
@@ -105,28 +109,28 @@ Five things, and they are not all the same kind of thing (§103):
 | | count | notes |
 |---|---|---|
 | **Champion Legend** | 1 | starts in the Legend Zone, never leaves it (§107.4.d). Sets your **Domain Identity**. |
-| **Chosen Champion** | 1 | a champion unit whose champion tag matches your Legend (§103.2.a.2). Starts face-up in the Champion Zone and is playable from there (§108.3.d). |
+| **Chosen Champion** | 1 | a champion unit whose champion tag matches your Legend (§103.3.a.2). Starts face-up in the Champion Zone and is playable from there (§108.3.d). |
 | **Main Deck** | 40 | units, gear, spells. "At least 40" in the Core Rules; **exactly 40 in competition** (TR §402.1, TR §601.1.b). The Chosen Champion counts toward it. |
-| **Rune Deck** | 12 | shuffled, kept separate (§103.3). |
-| **Battlefields** | 3 | registered, each a different name (§103.4.c). Only one is used per game in 1v1 (§485.4.a). |
+| **Rune Deck** | 12 | shuffled, kept separate (§103.4). |
+| **Battlefields** | 3 | registered, each a different name (§103.5.c). Only one is used per game in 1v1 (§487.4.a). |
 
 **Domain Identity.** Six domains: Fury (red), Calm (green), Mind (blue), Body (orange),
 Chaos (purple), Order (yellow) (§134.2). Your Legend's domains *are* your identity, and
-a card is legal only if your identity contains **all** of that card's domains (§103.1.b.4)
+a card is legal only if your identity contains **all** of that card's domains (§103.2.b.4)
 — a two-domain card needs both. Domainless cards go in anything. Runes obey the same
-rule (§103.3.a.1). The one escape: a game effect may add a card to your deck regardless
-of its domains, and it then counts as part of your identity anyway (§103.1.b.5).
+rule (§103.4.a.1). The one escape: a game effect may add a card to your deck regardless
+of its domains, and it then counts as part of your identity anyway (§103.2.b.6).
 
-**Copy limits.** 3 of any name (§103.2.b), and names include the subtitle — `Kai'Sa,
+**Copy limits.** 3 of any name (§103.3.b), and names include the subtitle — `Kai'Sa,
 Evolutionary` and `Kai'Sa, Survivor` are different cards and you may run 3 of each
-(§132.4, and §103.2.b.2 says it outright: cards have different names even when they
+(§132.4, and §103.3.b.2 says it outright: cards have different names even when they
 represent the same character). That rule is also why the catalog must keep the subtitle:
 Riot's card feed splits `name` and `subtitle` into separate fields, and a build that
 reads only `name` collapses every printing of a character onto one name and quietly
 breaks the copy limit along with every name-keyed join in the app.
 **Your Chosen Champion counts against that 3**, so it plus at most 2 more
-copies (§103.2.b.1). **Signature cards are capped at 3 total across the whole
-deck regardless of name**, and they must all match your Legend's champion tag (§103.2.d).
+copies (§103.3.b.1). **Signature cards are capped at 3 total across the whole
+deck regardless of name**, and they must all match your Legend's champion tag (§103.3.d).
 Cards with **Unique** are limited to 1 (§825.3.a).
 
 **Sideboard** (tournament only, TR §601.1.c): **10 or fewer cards**, up from 8 before
@@ -151,7 +155,7 @@ the size, type and copy limits on hand-entered decks.
 5. **Mulligan, in turn order** (§117): set aside up to 2 cards, draw that many, then
    recycle the set-aside cards to the bottom of your deck. One pass, not a full redraw.
 6. First player begins. **The player going second channels an extra rune on their first
-   Channel Phase** (§485.7) — that is the whole on-the-play compensation in 1v1.
+   Channel Phase** (§487.7) — that is the whole on-the-play compensation in 1v1.
 
 ---
 
@@ -169,8 +173,8 @@ Fury Power pays the Fury symbol. Rainbow Power (`[A]`) pays any domain's Power c
 
 **Runes make both.** Every basic rune has exactly two abilities (§164.2):
 
-- `[E]: [Reaction] — Add [1].` — exhaust for 1 Energy (§164.2.a).
-- `Recycle this: [Reaction] — Add [C].` — send it back to the Rune Deck for 1 Power of
+- `[Reaction][>] [E]: Add [1].` — exhaust for 1 Energy (§164.2.a).
+- `[Reaction][>] Recycle this: Add [C].` — send it back to the Rune Deck for 1 Power of
   its own domain (§164.2.b).
 
 **Those two abilities have different costs, and that is the whole trick.** The first
@@ -189,7 +193,7 @@ max(E, P) runes on the board, at least E of them READY
 ```
 
 — E *ready* ones exhausted for Energy (an already-exhausted rune cannot pay `[E]` again,
-§414.1.b), P of them recycled for Power, and the recycled ones may be the very ones you
+§415.1.b), P of them recycled for Power, and the recycled ones may be the very ones you
 just exhausted, provided P of them match the domain. A card costing 1 Energy and 2 Body
 Power needs two Body runes, not three. A card costing 10 Energy and 3 Power needs ten
 runes, three of them the right domain — not thirteen.
@@ -201,14 +205,15 @@ someone else's turn.
 
 **You can always Add in response.** Reaction abilities that Add resources can be
 activated at *any* moment you are asked to pay — mid-payment, during another spell's
-resolution, even with no priority (§429.3, §444.2.c). They finalize and resolve
-immediately and do not pass priority (§429.2.a). You never lose a card to "I didn't tap
+resolution, even with no priority (§430.3, §445.2.c). They finalize and resolve
+immediately and do not pass priority or Focus, pausing whatever was in progress
+(§430.2, §430.2.a). You never lose a card to "I didn't tap
 first."
 
 **Paying is optional, but the consequence depends on what you were paying for.** If you
-decline (§444.2): when it was part of a card's or ability's own cost, the entire play is
-**undone** and the card goes back where it came from (§444.2.a); when it was any other
-cost, only that linked effect fails to happen (§444.2.b).
+decline, the instruction is negated (§445.2): when it was part of a card's or ability's own cost, the entire play is
+**undone** and the card goes back where it came from (§445.2.a); when it was any other
+cost, only that linked effect fails to happen (§445.2.b).
 
 ---
 
@@ -225,7 +230,7 @@ cost, only that linked effect fails to happen (§444.2.b).
 | Legend Zone | each player | public |
 | Champion Zone | each player | public (§108.3.e) |
 | Hand | each player | private; the *count* is public (§108.7.e) |
-| Main Deck / Rune Deck | each player | secret order (§108.4.d) |
+| Main Deck / Rune Deck | each player | secret order (§108.4.e) |
 | Trash | each player | **public, unordered** (§108.2.d) |
 | Banishment | each player | **public** (§108.6.e) |
 | The Chain | shared, exists only while something is on it (§330) | public |
@@ -259,7 +264,7 @@ under "Start of Turn".)
 2. **Beginning** — start-of-turn effects, then the **Scoring Step**: you Hold every
    battlefield you control, 1 point each (§315.2.b.2). **This is where Hold points
    happen — before you do anything.**
-3. **Channel** — channel 2 runes from your Rune Deck, ready (§315.3.b, §430.2.a).
+3. **Channel** — channel 2 runes from your Rune Deck, ready (§315.3.b, §431.2.a).
 4. **Draw** — draw 1. Empty deck here means Burn Out, then you still draw (§315.4.b).
 5. **Main** — **every player's** rune pool empties (§316.3), start-of-Main effects happen,
    then it is open. No structure: take any number of actions in any order (§316.5).
@@ -281,9 +286,9 @@ Units have one inherent ability: exhaust to move (§144). Restrictions that matt
   requires Ganking** (§810).
 - In multiplayer only, you cannot move to a battlefield already holding two *other*
   players' units, or where a combat between two other players is **staged or in progress**
-  (§144.4.a.1, §447.2.a). Never binds in 1v1.
+  (§144.4.a.1, §449.2.a). Never binds in 1v1.
 - With teammates, your **teammate's** occupied battlefields are invalid destinations for
-  any move of your units (§447.2.b).
+  any move of your units (§449.2.b).
 - You may move several units at once as **one game action** if they share a destination;
   origins may differ, and all the exhaust costs are paid together (§144.3).
 
@@ -307,7 +312,8 @@ Six steps (§353–359). They matter because things can go wrong at each one.
    resources floating beforehand: you may exhaust runes and fire Reaction Add abilities
    *inside* this step to produce exactly what you are paying (§357.1.a).
 5. **Check legality.** Targets still legal, costs paid, no illegal game state, correct
-   timing permission (§358). **If any check fails the whole thing is undone** (§358.5).
+   timing permission (§358). **If any check fails the whole thing is undone**, and
+   anything those steps caused is treated as never having happened (§358.5).
 6. **Finalize.** It stops being Pending. A permanent leaves the chain and enters the
    board immediately; a spell stays on the chain waiting to resolve (§359.2–359.3).
 
@@ -329,7 +335,8 @@ player's base**, by any means.
 
 ### Targeting, and how it goes wrong
 
-A thing you choose is a **target** (§355.7), with exceptions worth knowing (§355.10):
+A game object, player or zone a card **chooses** is a **target**; one it **picks** is not
+(§355.7, wording since the Oct 2026 Core Rules). The exceptions worth knowing (§355.10):
 
 - Something in a **non-public zone is not targeted** — "play a unit from your hand"
   targets nothing (§355.10.a).
@@ -353,8 +360,9 @@ resolves and that target is simply unaffected (§359.3.e.5). An instruction with
 drops out when **all** of them went illegal (§359.3.e.7); a multi-target instruction still
 executes on whichever survive (§359.3.e.8).
 
-**Ignored vs negated — the Vendetta FAQ narrows this, and it outranks the Core Rules.**
-An instruction is *ignored* **only** when it mistargeted. An instruction stopped any
+**Ignored vs negated.** The Vendetta FAQ drew this line first; the Core Rules of 2026-10-09
+now state it themselves (§359.3.e.6, §359.3.e.14.a–b). An instruction is *ignored* **only**
+when it mistargeted or needed information that is no longer available. An instruction stopped any
 other way is *negated*: a replacement effect, a "can't" restriction, a game action
 performed on something already in that state (buffing a buffed unit), or an untargeted
 object having left its zone. **Only an ignored instruction drags its linked instructions
@@ -362,8 +370,9 @@ down with it**; a negated one does not, unless the linked text refers specifical
 action having been performed.
 
 So Hidden Blade on a unit that "can't be killed" *still* draws 2 — the kill was negated,
-not ignored. Hidden Blade on a unit that Flashed to base does not. This explicitly
-reverses the Ride the Wind / Vilemaw's Lair example printed at §359.3.e.6.
+not ignored. Hidden Blade on a unit that Flashed to base does not: §359.3.e.6 now uses
+that very example. Its Ride the Wind / Vilemaw's Lair example, which used to say
+"ignored", now says the move is **negated**, matching the FAQ.
 
 The other way an instruction drops out is that the thing it needed to read is gone. That
 is §359.3.e.12 and it governs a whole family of questions, so it has its own section
@@ -391,7 +400,7 @@ five, and they are five different rules.
 **1. The ability itself survives.** A triggered ability on the chain is not its source.
 Costs paid to finalise it are already spent, and its instructions still execute. Overzealous
 Fan reads *"when I defend, you may kill me to move an attacking unit to its base"* — the
-cost is killing itself, and the attacking unit still moves (§204.3.a). A source moving to a
+cost is killing itself, and the attacking unit still moves (§204.1.c). A source moving to a
 non-board zone in reaction to its own trigger does not change where that trigger's effect
 lands (§359.3.f.3).
 
@@ -401,15 +410,17 @@ longer available, the check returns **null** and everything computed from it is 
 (§359.3.e.12). A unit that is no longer on the board has null Might, null cost, and — the
 one that catches people — **no location**.
 
-**3. So a restriction anchored to the source dies with it.** This is the case worth naming,
-because no single rule states it. When a card's own text pins a target to somewhere defined
-by the source — above all Hidden's *"chosen from among options at that battlefield"*
-(§811.1.d.2) — **the chain item does not carry that battlefield. It has to read it off the
-source.** Remove the source before resolution and the check returns null, the target can no
-longer be confirmed legal, and the instruction is ignored (§359.3.e.5, §359.3.e.6). The
-Kennen/Gust ruling in [rules-rulings.md](rules-rulings.md) turns on exactly this, and it is
-why the same play behaves differently depending on whether the unit was played from hand or
-from Hidden.
+**3. So a restriction anchored to the source dies with it.** When a card's own text pins a
+target to somewhere defined by the source — above all Hidden's *"chosen from among options
+at the battlefield it was played to"* (§811.1.d.3) — **the chain item does not carry that
+battlefield. It has to read it off the source.** Remove the source before resolution and
+the check returns null, the target can no longer be confirmed legal, and the instruction
+mistargets and is ignored (§359.3.e.5, §359.3.e.6). Until 9 Oct no single rule said this; it
+was the Kennen/Gust staff ruling in [rules-rulings.md](rules-rulings.md), and the Core Rules
+of 2026-10-09 wrote it in as **§811.1.d.3.a**. It is why the same play behaves differently
+depending on whether the unit was played from hand or from Hidden. (A hidden **spell** is
+the other half of the split: its targets come from the battlefield it was played *from*,
+§811.1.d.2.)
 
 **4. Delayed abilities are never generated.** "You control it until I leave the board" and
 anything shaped like it does not fire at all if the source is gone by the time it would be
@@ -499,59 +510,60 @@ Open state (§344).
 
 **Combat is never declared.** It happens on its own, in a cleanup, at a **Contested**
 battlefield where opposing units are both present, the chain is empty, and no other fight
-is running (§460, §323.9). You start a fight by moving somewhere, and then the rules take
+is running (§462, §323.8). You start a fight by moving somewhere, and then the rules take
 over.
 
-Only ever **two players** (§462). Three steps:
+Only ever **two players** (§464). Three steps:
 
-### Step 1 — Combat Showdown (§464)
+### Step 1 — Combat Showdown (§466)
 
 1. Start-of-combat effects.
-2. **Attacker = the player who applied Contested. Defender = the other one** (§464.2.c).
+2. **Attacker = the player who applied Contested. Defender = the other one** (§466.2.c).
    Units at the battlefield get the matching designation.
-3. Attacker gains focus (§464.2.d). Read that against §464.2.c.1.b, which says that when
-   a showdown was *already* running as combat opens, whoever holds focus keeps it — the
-   two sit in tension and §464.2.d states no exception. Worth a judge call.
+3. **Focus.** If a showdown opens with the combat, the attacker gains focus
+   (§466.2.c.1.a); if a showdown was *already* running when combat opens, whoever holds
+   focus keeps it (§466.2.c.1.b). (Until the 2026-10-09 Core Rules a separate "attacker
+   gains focus" step sat in tension with the second rule; it is gone.)
 4. Attack and defend triggers go on the combat chain — attacker's first, then
-   non-defenders in turn order, then the defender (§464.2.e.1).
+   non-defenders in turn order, then the defender (§466.2.d.1).
 5. Then it plays out as a showdown until everyone passes.
 
 A unit that arrives *after* designations are handed out gets its designation in the
-**next cleanup** (§464.2.c.3.a). That is its *first* time gaining the designation, so its
+**next cleanup** (§466.2.c.3.a). That is its *first* time gaining the designation, so its
 attack trigger **does** fire (§383.4.e). What §383.4.e.2.a prevents is a *second* trigger
 if a unit loses and re-gains the designation in the same combat.
 
-### Step 2 — Combat Damage (§465)
+### Step 2 — Combat Damage (§467)
 
 **Sum each side's Might.** There is no blocking and no pairing off — it is two totals,
 each assigned across the other side's units. **The attacker assigns first, then the
-defender** (§465.2.c), so the defender allocates knowing the attacker's choices; only the
-*dealing* is simultaneous (§465.2.c.1.a).
+defender** (§467.2.c), so the defender allocates knowing the attacker's choices; only the
+*dealing* is simultaneous (§467.2.c.1.a).
 
 Assignment rules, in order of how often they bite:
 
 - **What "lethal" means.** A **non-zero** amount at or above the unit's Might (§142.4.b).
   The non-zero half is not pedantry: a unit at 0 Might — or pushed below 0, which is
-  treated as 0 when referenced but is not 0 (§143.2.b, §143.2.b.1) — does **not** die on
+  treated as 0 when referenced but is not 0 (§143.2.c, §143.2.c.1) — does **not** die on
   its own. It needs at least 1 damage marked on it. That is why Scuttle Crab at 0 Might is
   a real card, and why a unit sitting at -1 under Forbidding Waste is alive but loses every
   fight it is in.
 - **Lethal before moving on.** You must assign full lethal damage to one unit before
-  assigning any to the next (§465.2.c.3). 5 damage into four 3-Might units is 3 and 2,
+  assigning any to the next (§467.2.c.3). 5 damage into four 3-Might units is 3 and 2,
   never 2/1/1/1.
 - **No overkill.** You may not assign more than the minimum lethal amount to a unit
-  while others remain unassigned (§465.2.c.4) — and existing marked damage counts, so a
+  while others remain unassigned (§467.2.c.4) — and existing marked damage counts, so a
   3-Might unit with 1 damage takes exactly 2.
 - **Tank first, Backline last** (§815, §826). Units with **Tank** must all be assigned
   lethal before any unit without it; units with **Backline** only after every unit
   without it. A unit with both lets the assigner pick which requirement to satisfy
-  (§465.2.c.8).
+  (§467.2.c.8).
 - **Stunned units deal nothing** but still need their full Might in damage to die
-  (§423.1.b–c).
+  (§424.1.b–c).
 - **Might below 0 counts as 0** for damage purposes, though the real negative value is
-  kept for arithmetic (§143.2.b).
+  kept for arithmetic (§143.2.c).
 - **Every replacement effect that would touch combat damage applies at assignment**,
-  not after (§465.2.c.5) — prevention, doubling, anything. A 2-Might unit with "prevent
+  not after (§467.2.c.5) — prevention, doubling, anything. A 2-Might unit with "prevent
   3" needs 5 damage assigned to be lethal. When several apply to one unit, **that unit's
   controller picks the order** (§372), and the choice is real: prevent-then-double and
   double-then-prevent give different results.
@@ -560,32 +572,32 @@ Assignment rules, in order of how often they bite:
   uses the altered figure.
 
 Then the damage step's own FEPR is **skipped** and outstanding tasks cancelled — you go
-straight to resolution (§465.3). The window is not gone for good: anything that triggered
+straight to resolution (§467.3). The window is not gone for good: anything that triggered
 off combat damage or the combat cleanup resolves with a normal FEPR during resolution,
-before the result is determined (§466.2).
+before the result is determined (§468.2).
 
-### Step 3 — Resolution (§466)
+### Step 3 — Resolution (§468)
 
 Each of the four sub-steps below is followed by a full FEPR window before the next
-begins (§466.2, §466.4, §466.6) — anything that triggered gets resolved, and players act,
+begins (§468.2, §468.4, §468.6) — anything that triggered gets resolved, and players act,
 between determining the result and establishing control.
 
 1. **Combat Cleanup**: units with lethal damage die, then **heal all units**, then
-   **recall the attackers if any defender is still standing** (§466.1.a).
-2. **Determine the result** (§466.3): a player holding a designation wins if they are the
+   **recall the attackers if any defender is still standing** (§468.1.a).
+2. **Determine the result** (§468.3): a player holding a designation wins if they are the
    only one with units left there. It is **No Result** if attackers were recalled in step
-   3d, if both players still have units, or if neither does (§466.3.d) — so the ordinary
+   3d, if both players still have units, or if neither does (§468.3.d) — so the ordinary
    "attackers get sent home" case is *No Result*, not a defender win. If both still have
-   units, a fresh showdown and combat are staged and you do it again (§466.3.d.1).
-3. **If nothing got re-staged here** (§466.5): establish control, clear Contested, remove
+   units, a fresh showdown and combat are staged and you do it again (§468.3.d.1).
+3. **If nothing got re-staged here** (§468.5): establish control, clear Contested, remove
    hidden cards not controlled by the battlefield's controller — a **Conquer** if that
-   player hasn't scored it this turn. It does *not* have to be the attacker (§466.5.e).
-   If no units remain at all, the battlefield becomes **Uncontrolled** (§466.5.b).
-4. Combat ends: designations removed, "this combat" effects expire (§466.7).
+   player hasn't scored it this turn. It does *not* have to be the attacker (§468.5.e).
+   If no units remain at all, the battlefield becomes **Uncontrolled** (§468.5.b).
+4. Combat ends: designations removed, "this combat" effects expire (§468.7).
 
 **The practical shape of an attack**: you need to kill every defender, or you get
 recalled. But an even trade is not simply a loss — a mutual wipe leaves nobody there, so
-the battlefield goes **Uncontrolled** (§466.5.b). If the defender controlled it going in,
+the battlefield goes **Uncontrolled** (§468.5.b). If the defender controlled it going in,
 trading evenly costs them the Hold, which is often worth the cards.
 
 ---
@@ -601,23 +613,25 @@ The order (§323), abbreviated but in sequence:
 
 1. **Someone at ≥ Victory Score with the lead wins.**
 2. Assign or remove attacker/defender designations.
-3. Death-triggers go on the chain, **then** units with lethal damage die (§323.4–5).
+3. Units with lethal damage die (§323.4). A unit's own death-triggers (Deathknell and
+   the like) go on the chain as it dies, *before* it reaches the trash, with its location
+   and attributes noted (§808.1.d.2–3; in the cleanup list itself before 2026-10-09).
 4. Players lose control of battlefields where they have no units — open state only, and
-   **not while a showdown or combat is ongoing there** (§323.6).
+   **not while a showdown or combat is ongoing there** (§323.5).
 5. Recall stray gear and runes, and permanents sitting in a foreign base; **trash** any
-   hidden card at a battlefield its controller does not control (§323.7) — they go to the
+   hidden card at a battlefield its controller does not control (§323.6.a) — they go to the
    owner's trash, they are not returned.
 6. Stage showdowns at Contested battlefields.
 7. Stage combats at **Contested** battlefields where opposing units are both present
-   (§323.9).
+   (§323.8).
 8. Clear Contested where it no longer applies.
 9. Open a staged showdown at a battlefield with **no combat staged**, if in a Neutral
-   Open state — turn player picks which (§323.12).
+   Open state — turn player picks which (§323.11).
 10. Open a staged combat, if in a Neutral Open state — turn player picks which.
 
 Two things to take from that. **Deaths are batched**: damage does not kill on the spot,
 it kills at the next cleanup, and everything that died dies together. And **the turn
-player chooses the order of multiple fights** (§461.1) — which is a real decision, since
+player chooses the order of multiple fights** (§463.1) — which is a real decision, since
 each combat resolves fully before the next opens.
 
 ---
@@ -635,7 +649,7 @@ Five kinds (§361.1):
   (§381), unless it has Action or Reaction.
 - **Triggered** — "when," "at," "the Nth time." Goes on the chain when its condition is
   met (§383).
-- **Delayed** — created by another ability, fires later at a specified time (§390).
+- **Delayed** — created by another ability, fires later at a specified time (§391).
 
 ### Triggered abilities worth naming
 
@@ -675,8 +689,8 @@ the timing (Unleashed FAQ, §383.2.a.1, §383.3.b):
    same shape is paid on resolution instead.
 
 **Reflexive triggers** are not a sixth category but a *kind of triggered ability*
-(§387): "**do this:**" or "do one of the following" creates a **new chain item** when its
-condition is met (§387.1, §388.1), which is what gives everyone a window between the two
+(§388): "**do this:**" or "do one of the following" creates a **new chain item** when its
+condition is met (§388.1, §389.1), which is what gives everyone a window between the two
 halves of one card. They are why so much errata inserts "Then do this:".
 
 ### Replacement effects
@@ -695,7 +709,7 @@ saved before the other one dies.
 
 An **event** is the single moment produced by a game action or a state change
 (§370.1.a). Replacing the event is the same as the action never occurring, so nothing
-that watches for it triggers (§370.1.a.1). That is exactly what **Skip** does (§443).
+that watches for it triggers (§370.1.a.1). That is exactly what **Skip** does (§444).
 
 **And the converse, which is easy to miss: no event means nothing to replace** (Vendetta
 FAQ). Stunning an already-stunned unit performs no stun action, so a replacement effect
@@ -713,30 +727,34 @@ event cannot see what the second one did.
 
 ### Layers
 
-When effects fight over a value, they apply in three layers, repeatedly until stable
-(§476, §477):
+When effects fight over a value, they apply in four layers, repeatedly until stable
+(§478, §479). Copy effects got a layer of their own in the 2026-10-09 Core Rules; before
+that they shared the first with trait-altering effects.
 
-1. **Trait-altering** — name, type, tags, controller, cost, domain, **Might assignment**
-   ("becomes 4"), and **copy effects**. A copy takes the **printed** traits (or the
-   copied ones, if the thing being copied is itself already a copy) — name, supertype,
-   type, tags, cost, domain, rules text — and **Might**, which §477.1.b.1.a omits but the
-   Vendetta FAQ adds explicitly. It does **not** take statuses or
-   temporary modifications: damage, buffs, Empowered, Temporary, attacker/defender all
-   stay with the original and whatever the copying object already had stays on it
-   (Vendetta FAQ). Each copied instance of an ability is a *separate* ability.
-2. **Ability-altering** — granting and removing keywords, passives, rules text.
-3. **Arithmetic** — **all increases first, then all decreases** (§477.3.e).
+1. **Copy** (§479.1). A copy takes the **copyable** traits: the **printed** ones (or the
+   copied ones, if the thing being copied is itself already a copy; a token's are what it
+   was created with) — name, supertype, type, tags, cost, domain, rules and effect text,
+   **Might** and Might bonus among them (§479.1.b.1; Might was the Vendetta FAQ's addition
+   until the rules wrote it in). It does **not** take statuses or temporary modifications:
+   damage, buffs, Empowered, Temporary, attacker/defender all stay with the original and
+   whatever the copying object already had stays on it (Vendetta FAQ; copyable traits are
+   distinct from actual ones, §479.1.c). Each copied instance of an ability is a
+   *separate* ability.
+2. **Trait-altering** — name, supertype, type, tags, controller, cost, domain, base Might
+   ("becomes 4") (§479.2).
+3. **Ability-altering** — granting and removing keywords, passives, rules text (§479.3).
+4. **Arithmetic** — **all increases first, then all decreases** (§479.4.e).
 
 Within a layer, **dependency** wins: if applying A changes what B does but not vice
-versa, B depends on A and A goes first (§478–479). Otherwise **timestamp order**, oldest
-first (§480).
+versa, B depends on A and A goes first (§480–481). Otherwise **timestamp order**, oldest
+first (§482).
 
 **Layers evaluate instantaneously** (Vendetta FAQ). There is no window mid-evaluation
 in which a unit is briefly 5 Might before an arithmetic effect drops it to 4, so nothing
 "becomes Mighty" on the way through. Relatedly, any "becomes X" trigger needs a genuine
 **transition into** the state: a unit that never left the state didn't become it again.
 
-**Snapshotting** (§477.3.b): a non-passive arithmetic effect with a limit locks in its
+**Snapshotting** (§479.4.b): a non-passive arithmetic effect with a limit locks in its
 computed value at application time. "-4 [M] to a minimum of 1" on a 2-Might unit becomes
 a flat -1 that persists at -1. Passive abilities do not snapshot — they recompute.
 
@@ -751,8 +769,8 @@ lands. `X` omitted always means 1.
 **A set has landed since: Radiance, 84 printings, catalog 2026-10-01.** Every count below
 predates it and is low by a handful either way — Ambush is 25 rather than 23, Deathknell
 29 rather than 27. They are kept rather than rewritten because nothing reads them as
-data, and because the three terms Radiance printed are not in this glossary at all: see
-**Printed, but not yet in the rules** at the end of this section.
+data. Radiance's three new keywords are at the end of this section: see
+**Radiance's mechanics**.
 
 ### Combat
 
@@ -807,21 +825,26 @@ the normal rules (§813.3.a).
   ignoring its base cost.** Three separate catches. A hidden **permanent must** be played
   to that battlefield — no exception, and this overrides gear's normal base-only
   restriction (§811.1.d.1, §811.1.d.1.a). **Each target individually** must be chosen from
-  that battlefield unless *that target's own* restriction makes it impossible (§811.1.d.2,
-  §811.1.d.2.a) — one target can be pinned to the battlefield while another on the same
-  card is free. Third: if a hidden card causes you to **play a unit**, that unit must go to
-  that battlefield too (§811.1.d.3). And a hidden spell with no legal target under these
+  that battlefield unless *that target's own* restriction makes it impossible (§811.1.d.4) —
+  one target can be pinned to the battlefield while another on the same card is free. Since
+  the 2026-10-09 Core Rules "that battlefield" means two things: a hidden **spell** targets
+  at the battlefield it was played **from** (§811.1.d.2), a hidden **permanent's** play
+  effect at the battlefield it was played **to** (§811.1.d.3) — so if something lets the
+  unit be played to a different battlefield, its play effect's targets follow it there. Third: if a hidden card causes you to **play a unit**, that unit must go to
+  that battlefield too (§811.1.d.5). And a hidden spell with no legal target under these
   rules cannot be played from hidden at all (§811.1.d).
   **That battlefield pin is read off the source, not baked into the chain item** — remove
   the hidden permanent before its play effect resolves and the battlefield can no longer be
-  confirmed, so the target goes illegal and the instruction is ignored. This is the single
+  confirmed, so the target goes illegal and the instruction is ignored (§811.1.d.3.a, which
+  also says that if the unit is gone before the play effect *finalizes*, it cannot choose a
+  legal target at all). This is the single
   biggest behavioural difference between playing a card from hand and playing it from
   Hidden. See [When the source leaves the board](#when-the-source-leaves-the-board) and the
   Kennen ruling in [rules-rulings.md](rules-rulings.md).
   **The same pin means a facedown card cannot answer a flip at the other battlefield.** You
   can only hide at a battlefield you control (§811.1.b), and a hidden card at a battlefield
-  its owner no longer controls is removed (§323.7) — so in a 1v1, your facedown card and
-  theirs are always at different battlefields, and §811.1.d.2 keeps each one's targets at
+  its owner no longer controls is removed (§323.6.a) — so in a 1v1, your facedown card and
+  theirs are always at different battlefields, and §811.1.d.2–3 keep each one's targets at
   its own. Their facedown Hidden Blade cannot kill the unit you just flipped; only a
   `[Reaction]` from hand can. (It *can* act on their own unit at its battlefield — e.g.
   blinking a unit your play effect chose.)
@@ -869,7 +892,7 @@ is met (§727.1.b), though other effects can still see it (§722.1).
 
 - **Legion** — §812 · 15 cards. Active if **you have played another card this turn**.
   One card satisfies every Legion on your board (§812.2). A countered card still counts —
-  it was finalized (§419.4.b).
+  it was finalized (§420.4.b).
 - **Level N** — §824 · 29 cards (N = 3, 6, 11, 16). Active while you have **N or more
   XP**. Rechecked continuously, and it follows the *current* controller's XP (§824.1.c.1).
 - **Empowered** — §828 · 70 cards. Active while the card has the **Empowered** status.
@@ -883,36 +906,39 @@ dependent abilities on the same card each switch on independently.
 - **Empower [cost]** — §827 · 53 cards. An activated ability: pay the cost to give
   **this** the Empowered status. Only usable if not already Empowered (§827.1.c.1).
 
-**Empowered** (the status, §441) is binary (§441.1.a) and **permanent** — it lasts until
-the card leaves the board or something Disempowers it (§442). Card text can override
-that: Kayle, Justified stacks up to 3 empowered statuses via the golden rule, her Empower
-may be activated even while empowered, and **Disempower removes exactly one instance**,
-not all of them (Vendetta FAQ). It does nothing by itself; it is
+**Empowered** (the status, §442) is binary (§442.1.a) and **permanent** — it lasts until
+the card leaves the board or something Disempowers it (§443). Card text can override
+that: Kayle, Justified stacks up to 3 empowered statuses, her Empower may be activated even
+while empowered — a card allowed to be Empowered more than once ignores "Play only if not
+Empowered" (§827.1.c.5, codifying the Vendetta FAQ; activating it at the cap is legal and
+does nothing) — and **Disempower removes exactly one instance**, not all of them (Vendetta
+FAQ). It does nothing by itself; it is
 the switch that `[Empowered][>]` abilities read.
 
 ### Deckbuilding only
 
 - **Unique** — §825 · 3 cards. One copy per deck by name. No gameplay effect at all.
 
-### Printed, but not yet in the rules
+### Radiance's mechanics
 
-**Radiance shipped three bracketed terms the Core Rules do not define.** The rules this
-repo reads are refreshed daily and are still the 2026-07-16 document, so these cannot be
-looked up anywhere — not here, not in [rules-full.md](rules-full.md), not in the FAQ:
+Defined in the Core Rules of 2026-10-09; legal in Constructed from Radiance's release,
+2026-10-23 (TR §601.3.c.6.a).
 
-| | cards | first seen on |
-|---|---|---|
-| **[Deploy]** | 14 | Amateur Demolitionist |
-| **[Disarm]** | 4 | Kai'Sa, Rebel |
-| **[Show Off]** | 2 | Primordial Roar |
+- **Deploy** — §830 · gear. Short for four things (§830.1.b): it **may be played or
+  created to any battlefield** — enemy-occupied and open ones included (§830.1.b.1) — and
+  **only** to a battlefield; a non-unit Deploy gear is **not recalled** from battlefields in
+  the cleanup (§830.1.b.3); and **"When an opponent holds here, kill this."** It can be
+  moved by effects that move gear (§830.1.b.2). Multiple instances are redundant (§830.2).
+- **Disarm X** — §831 · units. An attack trigger: *"When I attack, give an enemy unit here
+  -X [M] this turn"* (§831.1.d); X defaults to 1 (§831.1.c.3). Instances **sum** into one
+  trigger, like Assault (§831.1.d.1, §831.2).
+- **Show Off [object]** — §832. *"As you play this, you may reveal [object] from your hand
+  and/or pick [object] from among friendly game objects on the board"* (§832.1.c). You
+  decide while finalizing (§832.1.c.2), and **what it reads is locked in at that moment**:
+  later changes to the shown-off object do not count, even if it leaves play (§832.1.d.1;
+  the Radiance patch notes' Primordial Roar ruling). A facedown card has no front-side
+  characteristics, so it cannot be shown off (patch notes, §811.5.a).
 
-**Do not infer what they do from the cards that carry them.** That is the one move this
-handbook exists to prevent, and a wrong premise about a keyword would be wrong on every
-card printing it. Until Riot publishes an updated Core Rules Document or a Radiance FAQ,
-the honest answer to "what does Deploy do" is that we do not know — ask a judge.
-
-`check.mjs` prints these on every run rather than blocking on them, so the list stays
-visible and this table can be deleted the day the rules catch up.
 
 ---
 
@@ -920,25 +946,27 @@ visible and this table can be deleted the day the rules catch up.
 
 Cards print game actions in brackets exactly like keywords, with no visual distinction.
 These six appear in `data/cards.json` and are defined in the rules body rather than the
-keyword glossary — **Game Actions** (§407) for Add, Stun, Buff, Predict and Burn,
+keyword glossary — **Game Actions** (§408) for Add, Stun, Buff, Predict and Burn,
 **Additional Rules** (§700) for Mighty and the buff counter itself. `data/rules.json`
 records which is which, and `check.mjs` asserts that every bracket on every card resolves
 to one of them.
 
-- **[Add]** — §429 · 50 cards. Put resources in your rune pool. Add abilities
-  **resolve immediately on finalizing** and never pass priority (§429.2).
-- **[Stun]** — §423 · 18 cards. Binary status. A stunned unit **contributes no Might to
-  combat damage** but still needs its full Might in damage to die (§423.1.b–c). Wears
+- **[Add]** — §430 · 50 cards. Put resources in your rune pool. Add abilities
+  **finalize immediately and resolve as soon as they finalize**, even mid-task, and never
+  pass priority or focus (§430.2, §430.2.a). A *spell* that adds resolves at normal spell
+  timing (§430.2.b).
+- **[Stun]** — §424 · 18 cards. Binary status. A stunned unit **contributes no Might to
+  combat damage** but still needs its full Might in damage to die (§424.1.b–c). Wears
   off at end of turn. Stunning an already-stunned unit does nothing, and doesn't trigger
-  "when you stun" (§423.1.a.1).
-- **[Buff]** — §426, §701 · 12 cards. A counter worth **+1 Might** (§703). **One at a
+  "when you stun" (§424.1.a.1).
+- **[Buff]** — §427, §701 · 12 cards. A counter worth **+1 Might** (§703). **One at a
   time** (§702.3) — buffing an already-buffed unit does nothing and triggers nothing. But
   buffs can be **spent** as a cost (§702.2.b), which frees the slot for another, and some
-  effects explicitly permit multiple buffs (§426.1.b.2).
-- **[Predict X]** — §436 · 9 cards. Look at the top X, recycle any number, put the rest
-  back in any order. Never causes a Burn Out (§436.4.a).
-- **[Burn X]** — §440 · 9 cards. Top X of your Main Deck to your trash. **Can** burn you
-  out (§440.4).
+  effects explicitly permit multiple buffs (§427.1.b.2).
+- **[Predict X]** — §437 · 9 cards. Look at the top X, recycle any number, put the rest
+  back in any order. Never causes a Burn Out (§437.4.a).
+- **[Burn X]** — §441 · 9 cards. Top X of your Main Deck to your trash. **Can** burn you
+  out (§441.4).
 - **[Mighty]** — §706 · 14 cards. Not an action either — a description. A unit **is
   Mighty while its Might is 5 or greater** (§708), evaluated on current Might on the
   board and **printed Might everywhere else** (§710–711). "Becomes Mighty" fires only on
@@ -1009,17 +1037,17 @@ it becomes a legal target again (§758.2).
 
 A list of the rulings most likely to be got wrong, each verified against the text.
 
-- **Recalls are not moves** (§456). They don't trigger "when I move," and effects that
+- **Recalls are not moves** (§458). They don't trigger "when I move," and effects that
   stop movement don't stop them.
-- **Banish is not a kill and not a discard** (§427.2). Deathknell does not fire.
-- **Attaching is not a move** (§434.4.a), and attaching doesn't change ready/exhausted
-  state (§434.5).
-- **Assigning damage is not dealing damage** (§417.1.a). Assignment happens first for
+- **Banish is not a kill and not a discard** (§428.2). Deathknell does not fire.
+- **Attaching is not a move** (§435.4.a), and attaching doesn't change ready/exhausted
+  state (§435.5).
+- **Assigning damage is not dealing damage** (§418.1.a). Assignment happens first for
   everyone, then it is all dealt at once.
 - **Hiding is not playing** (§811.1.c.1) and doesn't open a chain — but playing *from*
   hidden does (§811.1.c.3).
-- **A countered card was never played** for triggers (§425.1.b), but it *was* finalized,
-  so Legion still counts it (§419.4.b). Costs are not refunded (§425.1.c).
+- **A countered card was never played** for triggers (§426.1.b), but it *was* finalized,
+  so Legion still counts it (§420.4.b). Costs are not refunded (§426.1.c).
 - **Tokens are not cards** (§185), and can never become them (§185.1.a) — nor can a card
   become a token (§185.1.b). Separately,
   inside *card effects* "card" means Main Deck card, so runes, legends and battlefields
@@ -1037,7 +1065,7 @@ A list of the rulings most likely to be got wrong, each verified against the tex
 - **The Chosen Champion can't go home by normal means** (§108.3.c) — but an effect that
   instructs the return succeeds if the Champion Zone is empty (§108.3.c.1). It plays from
   the Champion Zone, and a second copy in hand is also "your Chosen Champion" for every
-  rule that cares (§103.2.a.3).
+  rule that cares (§103.3.a.3).
 - **You can decline an instruction that names a type *or quality* of card in a secret
   *or* private zone** (§128.6) — your hand and your decks both. "Play a unit from your
   hand, ignoring its cost" is optional in practice even without "may", and so is anything
@@ -1061,9 +1089,11 @@ effect intervenes (§205).
 - **Spiritforged**, 2026-01-14. `Do this N times` was expanded into repeated
   instructions on **Falling Star** and **Icathian Rain**; **Jax, Unmatched** widened to
   "your Equipment **everywhere** have Quick-Draw"; **Tianna Crownguard** changed "score
-  points" to "**gain** points," which is a real difference (§468.1).
+  points" to "**gain** points," which was a real difference then. The 2026-10-09 Core
+  Rules reframed it: Scoring a battlefield and Gaining Points are now distinct processes,
+  and card text reading "Score X points" means *gaining* them, not Scoring (§470.1–470.3).
 - **Unleashed**, 2026-04-03 — nearly all of it inserting "**Then do this:**" to make a
-  reflexive trigger explicit (§387). **Rengar, Trophy Hunter** was reworded to use
+  reflexive trigger explicit (§388). **Rengar, Trophy Hunter** was reworded to use
   `[Ambush]` as a verb.
 - **Vendetta**, 2026-07-23. Mostly the pay-to-do rewrite (**Draven,
   Vanquisher**; **Diana, Lunari**; **Emperor's Dais**), plus **Astral Heron** and
@@ -1082,20 +1112,20 @@ substitute for the pages — read them when a specific card matters:
 
 | mode | players | victory | battlefields | notes |
 |---|---|---|---|---|
-| **1v1 Duel** | 2 | 8 | 2 (1 each) | best of 1; battlefield chosen at random from your 3 (§485) |
-| **1v1 Match** | 2 | 8 | 2 (1 each) | best of 3; **you choose**, and a battlefield used in a *decided* game is retired for the match. After a draw the same ones *may* be reused (§486.5.a) — and in sanctioned play **must** be (TR §406.1.b) |
-| **FFA3 Skirmish** | 3 | 8 | 3 | §487 |
-| **FFA4 War** | 4 | 8 | 3 | first player's battlefields are removed (§488) |
-| **2v2 Magma Chamber** | 4 | **11** | 3 | shared points, alternating turn order, teammates may act on your turn when invited (§489) |
+| **1v1 Duel** | 2 | 8 | 2 (1 each) | best of 1; battlefield chosen at random from your 3 (§487) |
+| **1v1 Match** | 2 | 8 | 2 (1 each) | best of 3; **you choose**, and a battlefield used in a *decided* game is retired for the match. After a draw the same ones *may* be reused (§488.5.a) — and in sanctioned play **must** be (TR §406.1.b) |
+| **FFA3 Skirmish** | 3 | 8 | 3 | §489 |
+| **FFA4 War** | 4 | 8 | 3 | first player's battlefields are removed (§490) |
+| **2v2 Magma Chamber** | 4 | **11** | 3 | shared points, alternating turn order, teammates may act on your turn when invited (§491) |
 
 In every multiplayer mode the player going **first skips their first draw**, and the
-player going **last channels an extra rune** (§487.7). In 1v1 only the extra rune applies
-(§485.7).
+player going **last channels an extra rune** (§489.7). In 1v1 only the extra rune applies
+(§487.7).
 
 Best-of-5 matches may reuse a battlefield in games 4 and 5, but only once all **three**
-you registered have been presented, and never more than twice (§486.6.a).
+you registered have been presented, and never more than twice (§488.6.a).
 
-**2v2 has its own rules worth knowing** (§489.8): control is not shared, you can't hide
+**2v2 has its own rules worth knowing** (§491.8): control is not shared, you can't hide
 at your teammate's battlefield or issue *standard movement* to their units — card effects
 that move a friendly unit still can, since "friendly" includes them — points *are* shared, "friendly"
 includes their units, teammates can't share a Legend or a battlefield, and battlefields
@@ -1121,7 +1151,9 @@ them that turn.
   (TR §416.1). Your sheet must be **empty and visible to opponents** when the match starts
   (TR §416.2), and you need not reveal what you write (TR §416.3). During games you may
   **not** refer to notes from outside the current match, including previous matches
-  (TR §416.4); **between games you may**, privately (TR §416.5). At low OPL (Nexus Night,
+  (TR §416.4); **between games you may** refer to written notes you made before the match,
+  privately — during sideboarding and after battlefields are revealed, but you must stop
+  once opening hands are drawn, before mulligans (TR §416.5, 2026-10-09). At low OPL (Nexus Night,
   TR §205.2) a digital device may replace the paper sheet (TR §417.2), at the head judge's
   discretion (TR §417.3); otherwise no devices during matches (TR §417.1). Whether a
   pre-printed blank template counts as "empty" is not stated — ask the judge.

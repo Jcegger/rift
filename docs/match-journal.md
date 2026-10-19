@@ -93,9 +93,9 @@ These are decisions that only exist across games, so the page records them:
 - **Who plays first.** For game 1 a designated player, chosen by any agreed random
   method, decides (TR §407.1, §407.2). After that **the loser of the previous game
   chooses**; after a draw the previous order stands (TR §407.4). Going second channels
-  an extra rune on your first Channel Phase (§485.7), so the choice is real.
+  an extra rune on your first Channel Phase (§487.7), so the choice is real.
 - **Which battlefield.** Each game you choose one of your three, and **every battlefield
-  used in a decided game is retired for the match, yours and theirs** (§486.5, §486.6).
+  used in a decided game is retired for the match, yours and theirs** (§488.5, §488.6).
   So your three have to cover three games. Jun's order for Kha'Zix is Zaun Warrens in
   game 1, then Sandswept Tomb (mostly when going second) or Star Spring. Whether you
   followed it, and whether it cost you, is worth checking afterwards.
@@ -117,7 +117,7 @@ words**.
 | `T` | trouble card, and what it did | `5T Rocket — killed my 5` |
 | `s` | surprised me | `3s react on my move` |
 | `?` | rules question to look up | `7? Hidden + Star Spring` |
-| `d` | my Conquer drew instead of scoring (missed the 7+ gate, §471.1.b) | `8d` |
+| `d` | my Conquer drew instead of scoring (missed the 7+ gate, §473.1.b) | `8d` |
 
 Three more for the ways [Kha'Zix](../guides/khazix-voidreaver.md#the-short-version)
 loses, so the review page can count them:

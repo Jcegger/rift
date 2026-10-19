@@ -59,7 +59,7 @@ for (const onDraw of [false, true]) {
     if (g.hand.some((h) => h < 0)) bad.hand++;
   }
 }
-ok("first turn channels 2 on the play, 3 on the draw (§485.7)", bad.t1 === 0, `${bad.t1} wrong`);
+ok("first turn channels 2 on the play, 3 on the draw (§487.7)", bad.t1 === 0, `${bad.t1} wrong`);
 ok("never spends Energy the board cannot make", bad.spend === 0, `${bad.spend} turns over`);
 ok("unit and hand counts never go negative", bad.units === 0 && bad.hand === 0);
 const a = simulate(deck, { games: 1000, seed: 9 }), b = simulate(deck, { games: 1000, seed: 9 });
