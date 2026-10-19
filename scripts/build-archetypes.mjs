@@ -61,12 +61,15 @@ const main = async () => {
   const legends = [];
   for (const [name, L] of legendCards) {
     const lists = byLegend.get(name) || [];
-    const placed = lists.filter((d) => d.tour && d.pl != null);
+    // A placed list is upstream's record (tour + place) OR a place the author claims in the
+    // title (cp) — filtering on tour alone hides every RQ result (README "Results the flag
+    // does not carry"); Kha'Zix's Barcelona and Utrecht finishes are claims.
+    const placed = lists.filter((d) => (d.tour && d.pl != null) || Number(d.cp) > 0);
     const from = placed.length >= MIN_PLACED ? placed : lists;
     const domains = (L.d || []).filter((d) => d !== "Colorless").sort();
     const row = { name, code: L.c, champion: idx.championOf(L), domains, pair: domains.join("/"), legendText: L.x || "",
       isNew: (idx.byId.get(idx.identity(L)) || [L]).every((p) => p.s === "RAD"),
-      lists: lists.length, placed: placed.length, basis: !lists.length ? "none" : from === placed ? "placed" : "all lists",
+      lists: lists.length, placed: placed.length, claimed: placed.filter((d) => !d.tour).length, basis: !lists.length ? "none" : from === placed ? "placed" : "all lists",
       radShare: lists.length ? round(lists.filter((d) => Object.keys(d.cards).some((k) => card(k)?.s === "RAD")).length / lists.length) : 0 };
     if (!from.length) { legends.push(row); continue; }
     const con = consensus(from);
@@ -109,7 +112,7 @@ const main = async () => {
   for (const l of legends) (pairs.get(l.pair) || pairs.set(l.pair, []).get(l.pair)).push(l);
   const pairRows = [];
   for (const [pair, ls] of [...pairs].sort()) {
-    const lists = ls.flatMap((l) => (byLegend.get(l.name) || []).filter((d) => d.tour && d.pl != null));
+    const lists = ls.flatMap((l) => (byLegend.get(l.name) || []).filter((d) => (d.tour && d.pl != null) || Number(d.cp) > 0));
     const has = new Map();
     for (const d of lists) for (const n of new Set(Object.keys(d.cards).map((k) => card(k)).filter((c) => c && !["Legend", "Rune", "Battlefield"].includes(c.t)).map((c) => c.n)))
       has.set(n, (has.get(n) || 0) + 1);

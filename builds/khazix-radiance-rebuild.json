@@ -1,0 +1,133 @@
+{
+ "id": "khazix-radiance-rebuild",
+ "kind": "experiment",
+ "legend": "Kha'Zix, Voidreaver",
+ "date": "2026-10-19",
+ "author": "Claude",
+ "title": "Kha'Zix — Radiance rebuild: choose every fight",
+ "summary": "An untested rebuild on Jun's post-ban midrange list: seven slots go to Radiance cards that do the deck's one job better — make the enemy unit be alone where you want it, and make the fight there unanswerable. Jun's own lists stay as they are; this is a list to test against them, and to show him.",
+ "basis": "Jun's \"Kha'Zix Midrange (post-ban)\" — his list, from a player who lists Best-of-Kha'Zix wins at RQ Utrecht and Barcelona (his own record). His 33 core cards are kept: Faefolk, Void Assault, Mutating Horror, Rengar, Fizz, Kinkou Initiate, Punch First, Rampage, Star-Crossed, Sabotage, Up from the Deep, Switcheroo, Tail-Cloaked Matriarch, his runes, battlefields and sideboard.",
+ "changes": [
+  {
+   "what": "−2 Vex, Apathetic",
+   "why": "The weakest-supported card in the data: the 9 placed Kha'Zix lists with Vex finished on average 42 percentile points worse than the 6 without. Nine lists is noise-sized, so this is the change to undo first if the deck feels worse. Vex also stuns only units the opponent plays — reactive, where every other card here makes fights happen. Moved out entirely; Jun's sideboard is unchanged."
+  },
+  {
+   "what": "−1 Grim Resolve, −1 Tornado Warrior, −1 Zed, Without a Sound, −2 Traveling Merchant",
+   "why": "The slots with the least to do in the isolation plan: a third pump behind Punch First and Rampage, a facedown 3-drop, a second movement payoff behind Shadow Order Disciple, and Merchant's discard-draw. Grim Resolve lists also finished worse in the data (17 points, 9 lists)."
+  },
+  {
+   "what": "+2 Siren's Song (Radiance)",
+   "why": "\"[Reaction] Move an enemy unit that moved this turn.\" The isolation tool the deck never had at Reaction speed: when they move two units in to defend or attack, move one away and the other is alone for Mutating Horror. In 69 lists, none of them Kha'Zix."
+  },
+  {
+   "what": "+1 Cataclysm (Radiance)",
+   "why": "\"Opponents can't play spells this turn. Move a friendly unit to an occupied enemy battlefield.\" The turn your fight cannot be answered with a trick — and that includes their facedown spells, because flipping a hidden card is playing it (rules §811.1.c.3). Hidden units can still come in. The finisher into the Reaction-heavy Calm/Chaos field (Irelia, Riven, Vex)."
+  },
+  {
+   "what": "+2 Siren of the Shallows (Radiance)",
+   "why": "2-drop with Disarm (when it attacks, an enemy unit there gets −1 Might this turn) and Ganking, replacing Traveling Merchant at the same cost. A cheap body that moves between battlefields to set up a lone defender."
+  },
+  {
+   "what": "+1 Pitiless Stalker (Radiance)",
+   "why": "\"[E]: [Stun] an enemy unit.\" Every turn, on your Main Phase before the fight (an activated ability without Reaction, so only then — §381.1): the defender you isolate deals no combat damage."
+  },
+  {
+   "what": "+1 Graves, Blasting Through (Radiance)",
+   "why": "\"When I attack or defend, deal damage equal to my Might to all enemy units here. I don't deal combat damage.\" 4 to everything at his battlefield — into the go-wide decks (Rek'Sai, Viktor's Recruits, Spiderlings) that never present the lone unit Kha'Zix wants."
+  }
+ ],
+ "plan": [
+  "Jun's plan is unchanged: develop first, spells second; win fights for XP; walk the exhausted winner home with the legend so the conquest is not punished.",
+  "What changes is control of the fight. Siren's Song and Faefolk/Void Assault decide who is alone; Pitiless Stalker stuns the defender before you go; Cataclysm makes one fight per game spell-proof; Graves cleans up when they refuse to be alone.",
+  "On the cost side, the goldfish says it is a touch slower — more of the 40 is held interaction and two threats cost 6 — so the early turns lean harder on Faefolk, Disciple and Siren of the Shallows."
+ ],
+ "matchups": [
+  {
+   "vs": "Calm/Chaos Reaction decks (Irelia, Riven, Vex)",
+   "note": "Cataclysm is for them: one combat they cannot Defy, Discipline or Defiant Dance. Untested."
+  },
+  {
+   "vs": "Go-wide (Rek'Sai, Viktor, Yasuo's Spiderlings)",
+   "note": "Graves is for them; Siren's Song still splits a pair. Untested."
+  },
+  {
+   "vs": "Kai'Sa",
+   "note": "Unchanged from Jun's plan — Sabotage for Time Warp; this list adds nothing for it."
+  }
+ ],
+ "sim": "Goldfish, 8,000 games, against Jun's midrange list: Energy spent turns 1–4 17.1 → 16.2 on the play (19.1 → 17.9 on the draw); units by turn 3 3.5 → 3.5; Might on board turn 4 15.3 → 14.1; stuck on Power turn 3 4% → 6%; mulligan keep all; runes 6/6 fine. Slower by about one Energy over four turns, the price of the extra interaction. The engine is not simulated.",
+ "cards": {
+  "UNL-201/219": 1,
+  "UNL-112/219": 3,
+  "RAD-097/167": 2,
+  "VEN-095/166": 3,
+  "SFD-140/221": 3,
+  "UNL-097/219": 3,
+  "UNL-143/219": 1,
+  "UNL-120/219": 2,
+  "VEN-104/166": 2,
+  "UNL-141/219": 1,
+  "RAD-104/167": 1,
+  "RAD-085/167": 1,
+  "SFD-097/221": 3,
+  "UNL-202/219": 3,
+  "VEN-083/166": 2,
+  "UNL-128/219": 2,
+  "OGN-156/298": 2,
+  "VEN-100/166": 2,
+  "SFD-145/221": 1,
+  "RAD-098/167": 2,
+  "RAD-084/167": 1,
+  "OGN-126/298": 6,
+  "OGN-166/298": 6,
+  "OGN-298/298": 1,
+  "UNL-215/219": 1,
+  "VEN-164/166": 1
+ },
+ "sb": {
+  "OGN-156/298": 1,
+  "OGN-169/298": 2,
+  "OGN-179/298": 2,
+  "VEN-083/166": 1,
+  "VEN-085/166": 2,
+  "VEN-102/166": 2
+ },
+ "baseCards": {
+  "OGN-126/298": 6,
+  "OGN-156/298": 2,
+  "OGN-166/298": 6,
+  "OGN-185/298": 2,
+  "OGN-298/298": 1,
+  "SFD-097/221": 3,
+  "SFD-140/221": 3,
+  "SFD-145/221": 1,
+  "UNL-095/219": 1,
+  "UNL-097/219": 3,
+  "UNL-112/219": 3,
+  "UNL-120/219": 2,
+  "UNL-128/219": 2,
+  "UNL-141/219": 1,
+  "UNL-143/219": 1,
+  "UNL-150/219": 2,
+  "UNL-201/219": 1,
+  "UNL-202/219": 3,
+  "UNL-215/219": 1,
+  "VEN-083/166": 2,
+  "VEN-095/166": 3,
+  "VEN-099/166": 1,
+  "VEN-100/166": 2,
+  "VEN-104/166": 2,
+  "VEN-112/166": 1,
+  "VEN-164/166": 1
+ },
+ "snapshot": {
+  "date": "2026-10-19",
+  "events": [
+   "NovaRiftbound's $2,000 Online Showdown 5",
+   "Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview)"
+  ],
+  "placed": 0,
+  "shares": {}
+ }
+}

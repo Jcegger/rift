@@ -4,6 +4,24 @@
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
   {
+   "slug": "discovery-radiance",
+   "file": "guides/discovery-radiance.md",
+   "kicker": null,
+   "title": "Discovery Report — What the Field Hasn't Tried",
+   "subtitle": "Riftbound, Radiance (from 23 October 2026) — leads for your three decks and the field, each with its evidence, its rules check and how to test it",
+   "date": "2026-10-19",
+   "legend": null,
+   "champion": null,
+   "sections": [
+    "Your decks",
+    "The field",
+    "Rules worth knowing for these leads",
+    "What the finish data hints at — weakest evidence",
+    "How to run the tests"
+   ],
+   "words": 1747
+  },
+  {
    "slug": "khazix-voidreaver-jun",
    "file": "guides/khazix-voidreaver-jun.md",
    "kicker": null,
