@@ -30,7 +30,11 @@ theorycraft. The site also shows the archetype **inferred from the cards alone**
 (`lib/infer.mjs`): legend, chosen champion, signature, colour pair, then the cards that should be
 in it. That reading is good at what a deck is built on and weak at its pace — it matches these
 headings' main word about half the time — so where it differs, the heading wins until a source
-says otherwise. Each **Engine** line is the answer key the engine reader is tested against.
+says otherwise. Where the sources split, a **Call** line says which way the heading went and why,
+with Radiance in mind: every deck changes a little on 23 Oct, and the calls lean on the
+Radiance-era lists (10 Oct on) where there are enough of them. The measured label's tempo
+threshold (10+ Hidden or Reaction cards) over-calls tempo for decks that hold — Vex, Leona, Riven,
+the Bladesman — so a measured "tempo" alone does not move a heading. Each **Engine** line is the answer key the engine reader is tested against.
 
 **The data is mostly Vendetta.** The snapshot spans 60 days, so most placed lists predate
 Radiance (legal 2026-10-23); its share is given per legend, and the nine Radiance legends are
@@ -96,7 +100,7 @@ each pick a different thing to grow — buffs, Equipment, levels, Shield.
   make them hold with more than one unit" (Jun). One of the few matchups where you want to hold.
 - **From Riven:** stun the defender, and attack with two so their pump only saves one fight.
 - **From Rek'Sai:** Punch First means a fight won by 2 is not won; hold Blood Rush.
-- **Sources disagree on its pace**, which is why the heading is the open call on this page: the
+- **Sources disagree on its pace:** the
   [Sivir guide](../guides/sivir-anti-meta-midrange.md) calls it "trick-dense combat-math midrange",
   the [Rek'Sai guide](../guides/reksai-void-burrower.md) "cheap wide aggro-tempo", Jun "develop
   hard, then hold"; the numbers say tempo (11 Reactions, cost 2.4), the card text midrange.
@@ -104,8 +108,9 @@ each pick a different thing to grow — buffs, Equipment, levels, Shield.
 - **Sources:** Jun (his Master Yi notes, [Kha'Zix — Jun's Notes](../guides/khazix-voidreaver-jun.md) §8);
   the [Riven gauntlet](../guides/riven-exile-gauntlet.md); riftbound.gg tier list (3 Oct 2026): Tier 1. The
   only legend here printed solely in a starter deck — the builders skipped it until 19 Oct 2026.
+- **Call (19 Oct 2026):** midrange. Jun, who plays against it, and the Sivir guide both describe develop-then-hold; the tempo reading is the measured label's 10-Reaction threshold, which also calls Vex and Leona tempo. Radiance adds nothing that changes the plan, and its first Radiance-era results are weak (#26 and #46 of 50).
 
-### K'Sante, Pride of Nazumah — Shield aggro *(Radiance)*
+### K'Sante, Pride of Nazumah — Shield midrange *(Radiance)*
 *measured tempo · 1 placed / 35 lists · u17 s19 g4 · cost 1.9 · thin, brews*
 - **Plan:** the legend turns Shield into Assault (`Give a friendly unit "I have [Assault] equal to
   my [Shield]" this turn`), so Shield cards (Block, Mutated Mouser, Nazuman Ntofo, Ntofo Strikes)
@@ -114,6 +119,7 @@ each pick a different thing to grow — buffs, Equipment, levels, Shield.
   removal outside combat ignores it.
 - **Engine:** winning fights — the legend converts Shield into Assault, so the Shield cards are fuel for attacks.
 - **Sources:** riftbound.gg guide (Radiance theorycraft, 15 Oct 2026): no label; a "showdown type of legend", good at holding, using Shield offensively. Read against the aggro label here.
+- **Call (19 Oct 2026):** midrange, not aggro. Shield works on both sides of a fight, the guide reads it as a holding legend, and 16 of the 40 are Radiance cards nobody has played yet; the cheap curve (2.3 in 21 Radiance-era lists) is brews building low, not a plan to race.
 
 ## Body / Chaos — isolate and punish
 
@@ -142,7 +148,7 @@ alone if possible, and win there.
   they win.
 - **Sources:** riftbound.gg guide (Unleashed, updated 5 Jul 2026): "midrange strategy", built on units that gain XP with Hidden, Ambush and Chaos disruption; Jun (post-ban): midrange, develop units first.
 
-### Evelynn, Agony's Embrace — facedown tempo *(Radiance)*
+### Evelynn, Agony's Embrace — facedown aggro *(Radiance)*
 *measured control · 2 placed / 71 lists · reactive 32 of 40 · brews*
 - **Plan:** almost everything is Hidden. The legend draws 1 the first time each turn you play a
   card from face down (and discards 1 if it is not your turn). Evelynn, Consuming readies and grows
@@ -156,6 +162,7 @@ alone if possible, and win there.
   information this deck is otherwise built to deny you.
 - **Engine:** facedown — the legend and Evelynn, Consuming pay off playing from face down, and nearly every card is Hidden.
 - **Sources:** riftbound.gg guide (Radiance theorycraft, 14 Oct 2026): no label; "pressure our opponent quickly", revealing Hidden cards on her own turn.
+- **Call (19 Oct 2026):** aggro, not tempo. Its 42 Radiance-era lists measure aggro (19 Radiance cards in the 40, 31 Hidden or Reaction), and the guide's plan is to "pressure our opponent quickly" — the Hidden cards are threats here, not answers.
 
 ### Sivir, Battle Mistress — gold aggro
 *measured aggro · 1 placed / 21 lists · thin*
@@ -257,6 +264,7 @@ Deploy gear.
 - **Against it:** keeping its units below Mighty denies the ramp and the keywords together.
 - **Engine:** Mighty — the legend ramps whenever a unit becomes Mighty; Fiora, Victorious gains her keywords while Mighty.
 - **Sources:** riftbound.gg tier list (3 Oct 2026): Tier 3, "ramp play style" for her best list — extra runes early to reach 8-cost units.
+- **Call (19 Oct 2026):** ramp, confirmed: its 36 Radiance-era lists measure ramp too (average cost 4.1), matching the tier list.
 
 ### Ambessa, Matriarch of War — empower aggro
 *measured aggro · 21 placed · u22 s16 g2 · cost 2.6*
@@ -337,7 +345,7 @@ Reactions to win fights after the opponent commits, and bounce.
   — Spiderling battlefields usually do.
 - **Engine:** tokens (Spiderlings, each counting the others) — Hidden lets them land together.
 
-### Riven, The Exile — exhaust tempo *(Radiance)* · *your deck*
+### Riven, The Exile — exhaust midrange *(Radiance)* · *your deck*
 *measured tempo · 9 placed (online previews) · u21 s13 g6 · reactive 19 · draw 12*
 - **Plan:** **units you play to battlefields you control enter ready**, so they act the turn they
   land. Riven, Broken Blade and Reckless Innovator trigger when they become exhausted (buff/stun/
@@ -352,6 +360,7 @@ Reactions to win fights after the opponent commits, and bounce.
   [gauntlet guide](../guides/riven-exile-gauntlet.md) predates any Radiance results.
 - **Engine:** exhaust — Riven, Broken Blade and Reckless Innovator pay off becoming exhausted; attacking, moving and Ki Burst feed them.
 - **Sources:** riftbound.gg guide (Radiance theorycraft, 12 Oct 2026): "hold oriented legend", one battlefield controlled; a "Hidden centric" side deck holds more. Read against the tempo label here.
+- **Call (19 Oct 2026):** midrange, not tempo. It develops onto the battlefields it already controls and wins on the value of its exhaust triggers; its Reactions protect a hold rather than race (the guide's "hold oriented"). The tempo reading is the 10-Reaction threshold again — 20 in the Radiance-era lists. A close call, and the most likely to move once Radiance is played.
 
 ## Calm / Fury — Akali alone
 
@@ -530,7 +539,7 @@ when seen on top.
 
 ## Chaos / Order — Kennen alone
 
-### Kennen, Heart of the Tempest — plays-from-elsewhere tempo
+### Kennen, Heart of the Tempest — plays-from-elsewhere midrange
 *measured tempo · 67 placed · u20 s15 g5 · cost 2.8 · E4 15.7*
 - **Plan:** the legend empowers **whenever you play a card from anywhere other than your hand**, then
   disempowers to give a unit Assault 2. So the deck plays from the trash and the top of the deck:
@@ -545,6 +554,7 @@ when seen on top.
 - **From Riven:** it was the best converter at the LA RQ (Vendetta) and won the Haven preview.
 - **Engine:** plays from elsewhere — the legend converts each one into Assault; Flow, Fizz and Matriarch feed it.
 - **Sources:** riftbound.gg guide (Vendetta, 8 Aug 2026): the "Tempo-Miracle list" is the top build, with an "off-tempo approach" beside it. Post-ban (riftbound.gg, 7 Oct 2026): "combo deck": a Rhasa the Sunderer swing turn with Last Rites to bring it back, filling the trash until then.
+- **Call (19 Oct 2026):** midrange, not tempo. Since the ban the deck is the post-ban guide's: fill the trash, hold the scoreboard, one Rhasa the Sunderer turn — Rhasa is in 196 of 231 lists and 66 of the 74 since 10 Oct, Last Rites in 183 and 61. It does not race (tempo) and holds only 5 interaction (control).
 
 ## Fury / Mind — spells and big turns
 
@@ -573,6 +583,7 @@ one, Forecaster gives Vision, both Rumbles boost Mechs, Breakneck Mech gives the
 Jhin, Meticulous Killer is played for one Power after a 4+ spell; Curtain Call, Rocket Barrage.
 - **Engine:** spells — four 4+ spells banished to the legend.
 - **Sources:** riftbound.gg guide (Unleashed, 17 Jul 2026, before Vendetta): "combo oriented legend": wins with Gutter Palace, not points — four units and four cards in hand.
+- **Call (19 Oct 2026):** still ramp. The guide's Gutter Palace combo predates Vendetta: Gutter Palace is in 3 of 37 Jhin lists now, and Time Warp in 20.
 
 ### Ekko, Boy Who Shattered Time — re-buy tempo *(Radiance)*
 *measured midrange · 2 placed / 43 lists · brews* — the legend discounts the next unit by 2 and
