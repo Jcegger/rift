@@ -67,7 +67,7 @@ const cost = (c) => {
 };
 const pad = (s, n) => String(s).padEnd(n);
 
-async function loadState() {
+export async function loadState() {
   if (process.env.RIFT_STATE) {
     const raw = await readJson(process.env.RIFT_STATE);
     return Array.isArray(raw) ? raw[0].data : (raw.data || raw);
@@ -82,7 +82,7 @@ async function loadState() {
   return rows[0].data;
 }
 
-async function loadCatalog() {
+export async function loadCatalog() {
   const cat = await readJson(url("cards.json"));
   let extras = { cards: [] };
   try { extras = await readJson(url("extras.json")); } catch { /* optional */ }

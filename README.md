@@ -1130,6 +1130,35 @@ Finishes are not in Riot's data, because a foil is a print treatment rather than
 a separate card. That is why Normal and Foil are separate counts on each
 printing, tracked on my side.
 
+## Simulator
+
+`scripts/sim.mjs` (launcher `scripts/sim`) plays any deck against nobody, thousands of
+times, with a seeded shuffle so two decks are compared on the same luck:
+
+```
+scripts/sim riven                         # a saved deck
+scripts/sim --legend "rogue assassin"     # the best-placing legal list for a legend
+scripts/sim --field 14                    # the legends with the most top-8s, side by side
+```
+
+It reports Energy spent by turn, units and Might on board, how often a card sits in hand
+for want of its Power domain, how often named `--key` cards have been seen, and a
+**mulligan guide**: the same shuffles replayed with each opening card kept and then
+bottomed, so the difference is the decision and not the luck.
+
+**What it models**, each from `docs/rules.md`: the Chosen Champion in the Champion Zone,
+the 4-card hand and the one mulligan of up to 2, two runes a turn plus one for the second
+player, a draw on every turn including the first player's first, and paying E Energy and
+P Power from max(E, P) runes with P recycled. Card text is read for three things only:
+draws and channels are played out, spells that exhaust, ready or buff a friendly unit
+wait for one, and **interaction** (counters, removal, bounce, stun) is held rather than
+cast, and kept out of the mulligan guide, because its worth is decided by a matchup.
+
+**What it is not.** No opponent, so no matchup result. Points are capped at one per
+battlefield per turn (§470), so an unopposed deck scores on the same clock whatever it
+plays, and "turns to 8" is deliberately not reported: it would be the same number for
+every deck. Board presence by turn 3–4 is the measure of how well a deck can contest.
+
 ## Rules
 
 Riot publishes the rules as two PDFs and nothing else: no API, no HTML edition, no
