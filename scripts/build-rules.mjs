@@ -72,7 +72,9 @@ async function hubDocs() {
     .replace(/\\u003c/g, "<").replace(/\\u003e/g, ">").replace(/\\u0026/g, "&")
     .replace(/\\"/g, '"');
   const out = new Map();
-  const re = /<a[^>]+href="(https:\/\/[^"]+\.pdf)"[^>]*>([^<]+)<\/a>\s*\(([^)]*)\)/g;
+  // Since Oct 2026 the Tournament Rules link is followed by a second, empty anchor to the
+  // same PDF before its "(last updated …)", so empty anchors in between are skipped.
+  const re = /<a[^>]+href="(https:\/\/[^"]+\.pdf)"[^>]*>([^<]+)<\/a>(?:\s*<a[^>]*>\s*<\/a>)*\s*\(([^)]*)\)/g;
   let m;
   while ((m = re.exec(html))) {
     const [, url, label, paren] = m;

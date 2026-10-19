@@ -998,7 +998,9 @@ section('Claimed results');
      a record of where the archetype placed. */
   // Only archetypes whose claim is the thing actually rendered — one with a sized field
   // shows the field instead, which is correct and is not this test's business.
-  const located = withClaim.filter((g) => g.claim.located && !(g.evCount && g.evPlayers));
+  // And only those Meta actually lists: an archetype that has fallen off the table has no
+  // row for the region to appear on (Nine-Tailed Fox and Hand of Noxus, Oct 2026).
+  const located = withClaim.filter((g) => g.claim.located && !(g.evCount && g.evPlayers) && flat.includes(g.name));
   const anyRegion = new RegExp(`unverified · (?:${
     [...new Set(located.flatMap((g) => Object.keys(g.claim.regions)))].join('|') || 'x'})`);
   ok('an archetype with located claims says where they came from',
