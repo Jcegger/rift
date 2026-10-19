@@ -641,6 +641,32 @@ section('Archetypes');
   }
 }
 
+/* ══ research ════════════════════════════════════════════════════════════ */
+section('Research');
+{
+  let R = null, AR = null;
+  try { R = read('data/research.json'); AR = read('data/archetypes.json'); } catch { /* reported below */ }
+  const md = (() => { try { return readFileSync(join(ROOT, 'docs/research.md'), 'utf8'); } catch { return ''; } })();
+  if (!R) ok('research snapshot present', false, 'data/research.json missing — run build-research.mjs');
+  else {
+    ok('every legend has a research row', !AR || AR.legends.every((l) => R.legends[l.name]),
+       `${Object.keys(R.legends).length} legends · ${R.items.length} questions, ${R.answered} answered, ${R.open} open`);
+    // The rule the queue exists for: a skipped card with a question is never offered as an
+    // add until answered "test". A builder change that dropped the id would undo it silently.
+    const ids = new Set(R.items.map((i) => i.id));
+    const orphan = Object.entries(R.legends).flatMap(([n, l]) => Object.entries(l.cards || {}).filter(([, c]) => c.id && !ids.has(c.id)).map(([c]) => `${n}: ${c}`));
+    ok('every questioned card points at a question', !orphan.length, orphan.slice(0, 3).join('; ') || 'all linked');
+    // Answers are hand-written: each needs a verdict the site understands and a reason.
+    const secs = md.replace(/^```[\s\S]*?^```/gm, '').split(/^### /m).slice(1).map((x) => ({ id: x.split('\n')[0].trim(), v: (x.match(/^\*\*Verdict:\*\*\s*(\w+)/m) || [])[1], a: /^\*\*Answer:\*\*\s*\S/m.test(x) }));
+    const bad = secs.filter((x) => !['skip', 'test', 'model'].includes(x.v) || !x.a);
+    ok('every answer in docs/research.md has a verdict (skip/test/model) and an answer', !bad.length,
+       bad.map((x) => x.id).join(', ') || `${secs.length} answers`);
+    // A stale answer is not a lie — its question went away as the data moved — so it is
+    // reported, not failed: re-read it before deleting.
+    console.log(`  info ${R.stale.length ? `stale answers (question no longer asked): ${R.stale.join(', ')}` : 'no stale answers'}`);
+  }
+}
+
 /* ══ synergy ═════════════════════════════════════════════════════════════ */
 section('Synergy');
 {

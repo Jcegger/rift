@@ -5,7 +5,10 @@ author: rift toolchain
 date: 2026-10-19
 ---
 
-**These are leads, not results.** Each one is something the data or the card text says *might*
+**These are leads, not results.** Every lead below has been checked against what the
+winning lists *don't* play: a long-legal card that a legend's winners skip is a research
+question first (see lead 1 and [docs/research.md](../docs/research.md)), and only new cards,
+or cards on legends too thin to tell, are offered as untried. Each one is something the data or the card text says *might*
 be better than what people play, that almost nobody is playing yet. The site can find and rank
 them, and the rules can be checked; only games decide them. Each lead says what would prove it
 wrong, so a few rounds can settle it. Log them in the [match journal](../docs/match-journal.md).
@@ -27,26 +30,25 @@ results, not only upstream's flagged events.
 
 ## Your decks
 
-### 1. Rek'Sai: Karthus, Eternal — the cheapest test here
+### 1. Rek'Sai: the first lead here was wrong, and why that matters
 
-> **Karthus, Eternal** · 3E + 1 Order · 3 Might · *"Your [Deathknell] effects trigger an
-> additional time."*
+The first version of this report led with **Karthus, Eternal** for Rek'Sai: "doubles nine
+Deathknell units, in 0 of 61 placed lists — untried." The 0 of 61 was the warning, not the
+opportunity. Rek'Sai is not a Deathknell deck. It is cheap bodies and a gamble on the top of
+the deck: conquer, reveal two, play one, with Breacher's Accelerate and Undertitan's [Add] 2
+paying off what arrives that way. Its Deathknells are insurance that makes a lost fight cheap.
+Karthus is a 3-Energy body that does nothing when flipped, competes with Manufactor and
+Breacher, and spends the deck's scarcest Power (Order) to double a 1-Might Bird. The winners
+were right. The full answer is in [docs/research.md](../docs/research.md).
 
-- **Evidence.** In **0 of 61** placed Rek'Sai lists, and 89% of LeBlanc lists — the other deck
-  built on Deathknells. Rek'Sai's core runs about nine Deathknell units: Carrion Dredger (Bird,
-  92% of lists), Honest Broker (Gold, 92%), Noxian Emissary (two Recruits once Empowered, 75%).
-  Karthus is Order and legal in Fury/Order.
-- **Why it might be skipped for a reason.** Rek'Sai's Deathknells are small — a 1-Might Bird, a
-  Gold — and a 3-Might body for 3 Energy and a Power is a tempo cost in the fastest deck here
-  (4.2 units on board by turn 3 in the goldfish). Doubling a Bird is not doubling Ruined Rex.
-- **Rules.** Karthus alone: plain. **Karthus with Detonation Amplifier** (the Radiance gear in
-  your Rek'Sai experiment, "Friendly Deathknell effects here trigger an additional time"):
-  **whether two "additional time" effects stack is not stated anywhere in the rules** — the only
-  stacking rule is Repeat's (§820.3), which is a different mechanic. Ask a judge before relying on
-  three triggers; record the answer in `docs/rules-rulings.md`.
-- **Test.** 2 Karthus in for the 2 Vanguard Captain (18% of placed Rek'Sai lists). It is right if the turns it
-  lives produce two extra bodies or Gold you would not otherwise have, and wrong if it is the
-  card you are always cutting from your opening hand.
+**What changed because of it.** A long-legal card that winning lists skip is no longer
+suggested as an "untried" add anywhere on the site or in `scripts/rift ideas`. It is queued as
+a question with its evidence (who else plays it, which engine it feeds, its cost against the
+curve and the Power the list already asks for, what the new set adds to the same engine). It
+stays out until the question is answered. That queue is 30 questions over 20 legends today,
+1 answered. The Rek'Sai "doubled Deathknells" experiment is retired. Radiance adds nothing
+to Rek'Sai's real engine in Fury/Order that the card reader can see, so no Rek'Sai lead
+replaces it yet.
 
 ### 2. Kha'Zix: the Radiance rebuild — see its idea page
 
@@ -73,6 +75,10 @@ questions for him: does Siren's Song do what the isolation plan needs, and is Ca
 slot against the Calm/Chaos Reaction decks.
 
 ### 3. Riven: what Irelia knows that Riven doesn't
+
+*Riven has 9 placed lists, under the 10 the research queue needs before "the winners skip it"
+means anything, and the card reader can't yet read Riven's own legend text. Treat everything
+here as untested, not as something the field missed.*
 
 - **Boots of Swiftness** — in 92 of 93 placed Irelia lists, **0 of 9 placed Riven lists**. Same colours, both
   movement decks. Riven's Battle Preparations readies runes if you Show Off a gear, and Riven's
@@ -122,11 +128,11 @@ Vex (21). **Cataclysm turns off all of their spells for a turn**, Hidden ones to
 none from those decks' opponents yet. Body decks with one turn that must not be answered —
 Rengar's alpha strike, Kha'Zix's isolation, Ambessa's Empowered attack — are the users.
 
-### 8. Karthus in the other Deathknell decks
+### 8. Karthus in the other Deathknell decks — now an open question, not a lead
 
-Mordekaiser (Fury/Order, Radiance) runs Karthus in 1 of 6 placed lists, Viktor (Mind/Order) in 0 of 94,
-though both lean on deaths (Viktor, Leader makes a Recruit whenever another non-Recruit unit dies;
-Mordekaiser's legend eats the trash). As lead 1, but with stronger Deathknells to double.
+Viktor (Mind/Order) skips Karthus in all 50 placed lists, and with it twelve other Deaths
+cards that LeBlanc plays. After Rek'Sai, that is a question to answer before it is a lead to
+test: it is open on Viktor's idea page with its evidence. Mordekaiser is too new to tell.
 
 ---
 

@@ -480,8 +480,13 @@ Weak and Inferna across four legends: tokens, Deathknell value, and Assault.
   hand Accelerate; Undertitan gives the others +2 the turn it lands. Blood Rush and Cleave turn the
   wide board into attackers.
 - **Wins by:** more battlefields contested than the opponent can defend, then Undertitan.
-- **Engine:** deaths — Deathknell payoffs fed by Cull the Weak (each player kills one of their
-  units: you choose a Deathknell unit). The Radiance experiment on its idea page doubles them.
+- **Engine:** reveal — the top of the deck. Conquer, flip two, play one: the legend on conquest,
+  Void Rush any time, Breacher's Accelerate so the flipped unit fights now, Undertitan's [Add] 2 as
+  it is revealed. Every conquest is a gamble on the top two, which is why the deck is all cheap
+  bodies (27 of 40 at 2 or less): almost anything flipped is playable. Legion (Noxus Hopeful,
+  Vanguard Captain) rewards the second card each turn. The Deathknell units are insurance that
+  makes losing a fight cheap, not a plan to build on — winners run none of the Deathknell payoffs
+  (Karthus 0 of 61; docs/research.md).
 - **Fears:** area effects — Bellows Breath, Imperial Decree, Thousand-Tailed Watcher — and Vex,
   Apathetic stunning each unit you play.
 

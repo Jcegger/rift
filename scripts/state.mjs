@@ -41,6 +41,7 @@
 import { readFile } from "node:fs/promises";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, SB_MAX } from "../lib/decks.mjs";
 import { deckEngines } from "../lib/engines.mjs";
+import { annotateEngines, VERDICTS } from "../lib/research.mjs";
 import { pathToFileURL } from "node:url";
 
 const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
@@ -761,9 +762,23 @@ async function cmdIdeas(cat, args) {
   } else if (l.isNew) console.log("\nnew legend: no Vendetta lists to compare");
   // Engines read off the consensus's card text, and what would feed them.
   const fix = (m) => Object.fromEntries(Object.entries(m).map(([k, n]) => [cat.BY.has(k) ? k : (cat.cards.find((c) => c.c.replace(/\/\d+$/, "") === k.replace(/\/\d+$/, ""))?.c || k), n]));
-  for (const e of deckEngines(fix(c.cards), cat.idx, { shares: l.shares || {}, max: 6 }).slice(0, 3)) {
+  // Cards the winners skip are questions, not suggestions (data/research.json).
+  const R = await readJson(url("research.json")).catch(() => null);
+  for (const e of annotateEngines(deckEngines(fix(c.cards), cat.idx, { shares: l.shares || {}, max: 40 }), R, l.name).slice(0, 3)) {
     console.log(`\nENGINE ${e.name.toUpperCase()} · pays off: ${e.payoffs.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}${e.enablers.length ? ` · feeds it: ${e.enablers.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}` : ""}`);
-    for (const k of e.candidates) console.log(`  could add ${pad(k.name, 28)} ${k.set === "RAD" ? "RAD" : "   "} ${pad(k.share != null ? `${Math.round(k.share * 100)}% play it` : "untried", 13)} "${k.text.slice(0, 80)}"`);
+    for (const k of e.candidates.slice(0, 6)) console.log(`  could add ${pad(k.name, 28)} ${k.set === "RAD" ? "RAD" : "   "} ${pad(k.share != null ? `${Math.round(k.share * 100)}% play it` : "untried", 13)} "${k.text.slice(0, 80)}"`);
+    if (e.held.length) console.log(`  winners skip: ${e.held.map((k) => k.name).join(", ")}`);
+  }
+  const Q = (R?.items || []).filter((i) => i.legend === l.name);
+  const RL = R?.legends?.[l.name];
+  if (Q.length || RL?.unread?.length) {
+    console.log(`\nOPEN QUESTIONS (data/research.json; answers in docs/research.md)`);
+    for (const i of Q) {
+      console.log(`  [${i.verdict ? VERDICTS[i.verdict] : "open"}] ${i.title}${i.cards ? `\n      ${i.cards.map((x) => `${x.name} ${x.with}/${RL.placed}`).join(" · ")}` : ""}`);
+      if (i.answer) console.log(`      ${i.answer}`);
+      else for (const h of i.hypotheses) console.log(`      ? ${h}`);
+    }
+    if (RL?.unread?.length) console.log(`  signature cards no engine explains: ${RL.unread.join(", ")}`);
   }
   try {
     const S = await loadState();

@@ -226,6 +226,10 @@ jobs:
       - name: Measure each legend's archetype
         run: node scripts/build-archetypes.mjs
 
+      # After archetypes and synergy. Fetches nothing; reads docs/research.md for answers.
+      - name: Queue what the winners skip as research questions
+        run: node scripts/build-research.mjs
+
       - name: Source report
         id: sources
         run: |

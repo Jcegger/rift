@@ -52,6 +52,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   interaction, goldfish speed, engines, signature package, and a fixed-threshold style label.
 - `data/synergy.json` - which cards are played together more than chance, and each card's
   home legends, counted from the deck snapshot.
+- `data/research.json` - per legend, what the model reads its deck as (engines, signature
+  cards it can't explain) and the research questions: long-legal cards that fit its engine
+  by text, that its winning lists skip. Answers come from `docs/research.md`.
 - `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
   Radiance-format events, a consensus list counted from its placed lists (or brews,
   labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
@@ -67,6 +70,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `scripts/build-guides.mjs` - regenerates the guide manifest. Fetches nothing.
 - `scripts/build-synergy.mjs` - counts which cards are played together. Fetches nothing.
 - `scripts/build-archetypes.mjs` - measures each legend's archetype. Fetches nothing.
+- `scripts/build-research.mjs` - queues what each legend's winners skip as questions, with
+  the evidence that usually explains it. Fetches nothing. See `docs/research.md`.
+- `lib/research.mjs` - reads `data/research.json` for the site and `scripts/rift`: a card
+  the winners skip is held back from suggestions until its question is answered "test".
 - `lib/consensus.mjs` - counting a set of lists into the list they add up to; shared by
   `build-ideas.mjs` and `build-archetypes.mjs`.
 - `lib/engines.mjs` - engines read off card text (payoffs and what triggers them), for
@@ -102,6 +109,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `docs/archetypes.md` - what every legend's deck is trying to do, by colour pair: game plan,
   engine, what it fears, and what each matchup turns on from your decks' side. Hand-written from
   the measured profiles in `data/archetypes.json`; `check.mjs` requires a section per legend.
+- `docs/research.md` - how the research queue works, and the hand-written answers to its
+  questions (verdict skip, test or model). `check.mjs` checks their shape.
 - `docs/strategy.md` - how to choose between two legal lines: the lethal check, roles,
   reading the opponent, pressure, and reviewing a game. Distilled from Mateo Ferreira's
   *The Mathematics of Winning Positions* and applied to Kha'Zix. On the Guides shelf.
