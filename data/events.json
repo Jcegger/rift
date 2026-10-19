@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-18",
+ "generatedAt": "2026-10-19",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2443,
-  "eventsWithDecks": 7,
-  "players": 62714,
-  "playersWithDecks": 4857,
+  "events": 2444,
+  "eventsWithDecks": 12,
+  "players": 62788,
+  "playersWithDecks": 5261,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
    "Mardi - Championship #1",
@@ -31,24 +31,25 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 55,
-  "claimedEventsUnmatched": 49,
+  "claimedEvents": 58,
+  "claimedEventsUnmatched": 52,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "unknown": 163,
-   "Asia": 70,
+   "Asia": 76,
+   "unknown": 176,
+   "Europe": 43,
    "Oceania": 4,
-   "Europe": 37,
    "North America": 6
   },
   "registryEventsByRegion": {
-   "unknown": 2442,
+   "unknown": 2443,
    "Asia": 1
   },
   "unresolvedClaimEvents": [
+   "*BREAK IF MUST",
    "... Always",
    "10K Showdown - Auckland Card Show",
    "36P Tournament",
@@ -68,6 +69,7 @@
    "Fury Mind by will",
    "Harbin City Challenge",
    "Hartford RQ",
+   "Hartord RQ",
    "Los Angeles RQ",
    "Nanjing City Challenge",
    "Nanjing Regional",
@@ -97,18 +99,22 @@
    "Wins Riftbound Showdown Series: Malmö",
    "Wuhan Regional Open",
    "Xi'an Regional",
-   "a Box"
+   "a Box",
+   "for the"
   ],
   "decksByEvent": {
    "CCS Riftbound $10,000 Tournament": 222,
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament": 198,
    "Friday $5,000 Riftbound: League of Legends TCG Tournament": 180,
+   "CCS $25,000 Riftbound Invitational Qualifier #6": 177,
    "Riftbound Regional Qualifier - Singapore": 77,
+   "NovaRiftbound's $2,000 Online Showdown 5": 74,
    "Riftbound $10,000 Cash Tournament @ Pro-Play Summit: Orlando": 70,
    "CCS Riftbound Sunday $1000": 64,
    "League Cup #2 - Cycle 1": 62,
    "Hangzhou City Challenge (China)": 58,
    "Nanning City Challenge (China)": 57,
+   "CCS Sunday $5,000 Riftbound Event #6": 56,
    "Guangzhou City Challenge (China)": 56,
    "Riftbound Regional Qualifier - Barcelona": 52,
    "Hefei City Challenge (China)": 50,
@@ -118,8 +124,10 @@
    "Mardi - championship #2": 35,
    "Riftbound Regional Qualifier - Los Angeles": 30,
    "Mardi - Championship #1": 29,
+   "Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview)": 27,
    "Riftbound $2,500 Cash Tournament @ Pro-Play Summit: Orlando": 21,
    "Riftbound Remote Showdown #3": 20,
+   "WA RIFTBOUND CUP (Vendetta) 11 Oct - 9am AWST": 16,
    "Riftbound Remote Showdown #2": 14,
    "Riftbound Online Tournament": 13,
    "Card Cosmos Denver Riftbound $1K Tourney": 12,
@@ -132,6 +140,15 @@
   }
  },
  "events": [
+  {
+   "name": "NovaRiftbound's $2,000 Online Showdown 5",
+   "dt": "2026-10-18",
+   "players": 74,
+   "format": "Constructed",
+   "winner": "Sithis",
+   "country": null,
+   "slug": "novariftbounds-2000-online-showdown-5"
+  },
   {
    "name": "Nexus Night @ Zen",
    "dt": "2026-10-13",
