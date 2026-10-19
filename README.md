@@ -55,6 +55,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `data/research.json` - per legend, what the model reads its deck as (engines, signature
   cards it can't explain) and the research questions: long-legal cards that fit its engine
   by text, that its winning lists skip. Answers come from `docs/research.md`.
+- `data/brews.json` - a brew for every legend: a legal 40 built by `lib/brew.mjs` from the
+  legend's own cards outward, each card with why it is in, a goldfish run, and how many of
+  its 40 the legend's lists share. Untested by definition. `scripts/rift brew <legend>` prints
+  one; each idea page shows it and the bench can start from it.
 - `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
   Radiance-format events, a consensus list counted from its placed lists (or brews,
   labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
@@ -72,6 +76,17 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `scripts/build-archetypes.mjs` - measures each legend's archetype. Fetches nothing.
 - `scripts/build-research.mjs` - queues what each legend's winners skip as questions, with
   the evidence that usually explains it. Fetches nothing. See `docs/research.md`.
+- `scripts/build-brews.mjs` - builds `data/brews.json`. Fetches nothing; runs after
+  build-research. It computes what `lib/brew.mjs` scores with: card quality (the share of
+  lists that could play a card that do — Radiance cards over Radiance-era lists only), curve
+  templates from real decks of each main archetype, and battlefields.
+- `lib/brew.mjs` - one brew, in the order `lib/infer.mjs` reads a deck: chosen champion (the
+  champion unit that fits best, ×2), signature (3 in total), then the colour pair's legal
+  pool scored by fit to its sub-archetypes and its `docs/archetypes.md` Engine line (payoffs
+  double), quality, and fit to its main archetype — the heading's when it has one — filled
+  to that archetype's curve. Cards the legend's winners skip stay out until answered;
+  `[Unique]` cards are one copy. Never priced. Limits: it caps every card at 3 copies, so a
+  deck of one card (Yasuo's 39 Spiderlings) is out of its reach. Tests: `lib/brew.test.mjs`.
 - `lib/research.mjs` - reads `data/research.json` for the site and `scripts/rift`: a card
   the winners skip is held back from suggestions until its question is answered "test".
 - `lib/consensus.mjs` - counting a set of lists into the list they add up to; shared by

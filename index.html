@@ -339,14 +339,14 @@ const journal = () => {
 };
 
 /* ── data ────────────────────────────────────────────────────────────────── */
-let CAT, IDX, TOP, TIERS, GUIDES, NEWS, IDEAS, ARCHE, RES, MATCH, IMG = "";
+let CAT, IDX, TOP, TIERS, GUIDES, NEWS, IDEAS, ARCHE, RES, BREWS, MATCH, IMG = "";
 const BYNAME = new Map();        // folded legend name "Irelia, Blade Dancer" -> legend card
 const SHORT = new Map();         // "OGN-042" -> "OGN-042/298": the deck feed drops the set size
 const getJSON = (f) => fetch(`data/${f}`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
 
 async function loadData() {
-  const [cards, extras, banned, errata, top, tiers, guides, news, ideas, arche, res] = await Promise.all(
-    ["cards.json", "extras.json", "banned.json", "errata.json", "topdecks.json", "tiers.json", "guides.json", "news.json", "ideas.json", "archetypes.json", "research.json"].map(getJSON));
+  const [cards, extras, banned, errata, top, tiers, guides, news, ideas, arche, res, brews] = await Promise.all(
+    ["cards.json", "extras.json", "banned.json", "errata.json", "topdecks.json", "tiers.json", "guides.json", "news.json", "ideas.json", "archetypes.json", "research.json", "brews.json"].map(getJSON));
   if (!cards) throw new Error("data/cards.json did not load");
   CAT = cards; IMG = cards.imagePrefix || "";
   const all = [...cards.cards, ...((extras && extras.cards) || [])];
@@ -357,7 +357,7 @@ async function loadData() {
   MATCH = matcher(all);
   for (const c of all) if (c.t === "Legend" && !c.v) { const n = IDX.legendName(c); if (!BYNAME.has(n)) BYNAME.set(n, c); }
   for (const c of all) { const k = c.c.replace(/\/\d+$/, ""); if (!SHORT.has(k)) SHORT.set(k, c.c); }
-  TOP = top; TIERS = tiers; GUIDES = guides; NEWS = news; IDEAS = ideas; ARCHE = arche; RES = res;
+  TOP = top; TIERS = tiers; GUIDES = guides; NEWS = news; IDEAS = ideas; ARCHE = arche; RES = res; BREWS = brews;
 }
 
 /* ── helpers ─────────────────────────────────────────────────────────────── */
@@ -1191,7 +1191,20 @@ function profileLine(a) {
     ${a.package?.length ? `<div class="small"><b>Plays far more than its colours:</b> ${a.package.map((k) => `${esc(k.name)}${k.rad ? "*" : ""} ${pctI(k.share)}`).join(" · ")}</div>` : ""}`;
 }
 function gamePlanPanel(name) {
-  return `<section class="panel" id="gameplan"><h2>Game plan</h2>${profileLine(archFor(name))}<div class="guide" data-plan="${esc(name)}"><p class="note">Loading the game plan…</p></div></section>${researchPanel(name)}`;
+  return `<section class="panel" id="gameplan"><h2>Game plan</h2>${profileLine(archFor(name))}<div class="guide" data-plan="${esc(name)}"><p class="note">Loading the game plan…</p></div></section>${researchPanel(name)}${brewPanel(name)}`;
+}
+// A brew (data/brews.json, lib/brew.mjs): a legal 40 built from the legend's own cards
+// outward. Nobody has played it; every card says why it is in.
+const brewFor = (name) => (BREWS?.brews || []).find((b) => b.legend === name) || null;
+function brewPanel(name) {
+  const b = brewFor(name);
+  if (!b) return "";
+  const groups = [["champion", "Chosen champion"], ["signature", "Signature"], ["fit", "Fits the plan"], ["staple", "Good cards in these colours"]];
+  return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · built by rule</span><h2>A brew from the cards: ${esc(b.subName)} ${esc(b.main)}</h2></div>
+      <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=brew">Tweak</a></div></div>
+    <p class="note">${esc(BREWS.note)} ${b.vsLists ? `It shares ${b.vsLists.common} of 40 cards with the ${b.vsLists.lists} lists for this legend.` : "There are no lists for this legend to compare it with."}${b.sim ? ` Goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3.` : ""}${b.radCards ? ` ${b.radCards} Radiance cards.` : ""}</p>
+    ${groups.map(([role, label]) => { const rows = b.rows.filter((r) => r.role === role); return rows.length ? `<div class="lbl" style="margin-top:6px">${label}</div>${rows.map((r) => `<div class="erow"><span class="n">${r.qty} <button class="cardlink" data-card="${esc(codeForName(r.name) || r.code)}">${esc(r.name)}</button>${r.rad ? ` <span class="pill later">RAD</span>` : ""}</span><span class="tiny dim">${esc(r.why)}</span></div>`).join("")}` : ""; }).join("")}
+    <p class="tiny dim" style="margin-top:6px">Runes ${Object.entries(b.runes).map(([d, n]) => `${n} ${esc(d)}`).join(" / ")}${b.runeNote ? ` (${esc(b.runeNote)})` : ""} · battlefields ${b.battlefields.map((x) => esc(x.name)).join(", ")}${b.vsLists?.notInLists.length ? ` · in no list for this legend yet: ${b.vsLists.notInLists.map(esc).join(", ")}` : ""}</p></section>`;
 }
 // What the model of this legend and its winning lists disagree on (data/research.json,
 // answers in docs/research.md). Shown so a suggestion is never read without its doubts.
@@ -1259,6 +1272,8 @@ const benchSources = (name) => {
   const fix = (m) => Object.fromEntries(Object.entries(m || {}).map(([k, n]) => [shortCode(k), n]));
   if (l?.consensus) out.push({ key: "consensus", label: `Consensus of ${l.consensus.from} ${l.basis === "placed" ? "placed lists" : "brews"}`, cards: fix(l.consensus.cards) });
   for (const b of buildsFor(name)) out.push({ key: `build:${b.id}`, label: `Claude build: ${b.title}`, cards: fix(b.cards) });
+  const br = brewFor(name);
+  if (br) out.push({ key: "brew", label: "Brew from the cards (untested)", cards: fix(br.cards) });
   (l?.lists || []).forEach((x, i) => out.push({ key: `list:${i}`, label: x.brew ? `Brew: ${x.h}` : `${placeText(x.pl, x.players)} · ${x.h}`, cards: fix(x.cards) }));
   for (const d of decks()) { const L = deckStats(d, IDX, ROW?.inv || {}).legend; if (L && IDX.legendName(L) === name) out.push({ key: `deck:${d.id}`, label: `Your deck: ${d.name}`, cards: { ...d.cards } }); }
   return out;

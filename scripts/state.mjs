@@ -799,8 +799,32 @@ async function cmdIdeas(cat, args) {
   } catch { /* offline: the consensus stands on its own */ }
 }
 
+// A brew (data/brews.json, scripts/build-brews.mjs): a legal 40 built from a legend's own
+// cards outward. Read-only and offline, like meta: it never touches the live Supabase row.
+async function cmdBrew(args) {
+  const q = args.join(" ").toLowerCase();
+  const B = await readJson(url("brews.json")).catch(() => null);
+  if (!B) { console.error("no data/brews.json — run node scripts/build-brews.mjs"); process.exit(1); }
+  const hits = B.brews.filter((b) => b.legend.toLowerCase().includes(q));
+  if (!q || !hits.length) { console.log(`brews (${B.generatedAt}): ${B.brews.map((b) => b.legend.split(",")[0]).join(", ")}\nscripts/rift brew <legend>`); return; }
+  for (const b of hits.slice(0, 2)) {
+    console.log(`BREW ${b.legend}: ${b.subName} ${b.main}${b.inferredMain !== b.main ? ` (the cards alone say ${b.inferredMain})` : ""} · untested, built by rule\n  ${B.note}`);
+    console.log(`  chosen champion ${b.champion} · ${b.radCards} Radiance cards · ${b.vsLists ? `${b.vsLists.common}/40 shared with ${b.vsLists.lists} ${b.legend.split(",")[0]} lists` : "no lists to compare"}` +
+      (b.sim ? ` · goldfish: ${b.sim.energy} Energy turns 1–4, ${b.sim.units3} units by turn 3` : "") + (b.legal ? "" : " · NOT LEGAL"));
+    for (const role of ["champion", "signature", "fit", "staple"]) {
+      const rows = b.rows.filter((r) => r.role === role);
+      if (!rows.length) continue;
+      console.log(`\n  ${{ champion: "CHAMPION", signature: "SIGNATURE", fit: "FITS THE PLAN", staple: "GOOD CARDS IN THESE COLOURS" }[role]}`);
+      for (const r of rows) console.log(`    ${r.qty} ${pad(r.name, 30)} ${pad(`${r.cost ?? "-"}E ${r.type}`, 10)} ${r.why}`);
+    }
+    console.log(`\n  runes ${Object.entries(b.runes).map(([d, n]) => `${n} ${d}`).join(" / ")}${b.runeNote ? ` (${b.runeNote})` : ""} · battlefields ${b.battlefields.map((x) => x.name).join(", ")}`);
+    if (b.vsLists?.notInLists.length) console.log(`  not in any ${b.legend.split(",")[0]} list: ${b.vsLists.notInLists.join(", ")}`);
+  }
+}
+
 async function main() {
   const [cmd = "summary", ...args] = process.argv.slice(2);
+  if (cmd === "brew" || cmd === "brews") return cmdBrew(args);
   const cat = await loadCatalog();
   if (cmd === "ideas") return cmdIdeas(cat, args);
   // meta reads only the archive and the catalog, so it works offline and never

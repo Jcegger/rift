@@ -230,6 +230,10 @@ jobs:
       - name: Queue what the winners skip as research questions
         run: node scripts/build-research.mjs
 
+      # After research, whose held-back cards it leaves out. Fetches nothing.
+      - name: Build a brew for every legend
+        run: node scripts/build-brews.mjs
+
       - name: Source report
         id: sources
         run: |
