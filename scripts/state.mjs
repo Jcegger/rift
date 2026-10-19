@@ -738,6 +738,9 @@ async function cmdIdeas(cat, args) {
     const p = arch.profile;
     console.log(`ARCHETYPE ${arch.name}: ${sec ? sec.split("\n")[0].split(" — ")[1].replace(/\*.*$/, "").replace(/[\s·]+$/, "") : "not written"}` +
       (p ? ` · measured ${arch.label} (u${p.units} s${p.spells} g${p.gear}, cost ${p.avgCost}, ${p.interaction} interaction)` : ""));
+    const f = arch.inferred;
+    if (f?.main) console.log(`  inferred from the cards: ${f.subName} ${f.main} (${Math.round(f.mainShare * 100)}%, next ${f.runnerUp}) · ` +
+      f.layers.map((l) => `${l.n} ${l.name}: ${l.main[0] || "—"}${l.sub[0] ? `/${l.sub[0]}` : ""}`).join(" · "));
     // Bullets wrap in the source; a continuation line is indented, so fold it back in.
     if (sec) console.log(sec.split("\n").slice(1).join("\n").replace(/\n {2,}(?=\S)/g, " ").split("\n")
       .filter((x) => /^- \*\*/.test(x)).map((x) => "  " + x.replace(/\*\*/g, "")).join("\n"));

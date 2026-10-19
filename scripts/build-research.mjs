@@ -71,7 +71,12 @@ const main = async () => {
   const byLegend = new Map();
   for (const d of usable) { const n = idx.legendName(card(d.lg)); (byLegend.get(n) || byLegend.set(n, []).get(n)).push(d); }
   const legendCards = new Map();
-  for (const c of idx.cards) if (c.t === "Legend" && !c.v && !/ - Starter$/.test(c.n)) { const n = idx.legendName(c); if (!legendCards.has(n)) legendCards.set(n, c); }
+  // A Starter printing folds onto its base legend, but counts when it is the only printing:
+  // Master Yi, Wuju Bladesman exists only in a starter deck and has hundreds of lists.
+  for (const c of idx.cards) if (c.t === "Legend" && !c.v) {
+    const n = idx.legendName(c), had = legendCards.get(n);
+    if (!had || (/ - Starter$/.test(had.n) && !/ - Starter$/.test(c.n))) legendCards.set(n, c);
+  }
 
   // A card is new if it was not legal for the whole window: nobody has had the chance to
   // skip it. Today that is Radiance; the next set arrives the same way.

@@ -1168,10 +1168,21 @@ const guideLink = (u) => {
   const hit = (GUIDES?.guides || []).find((x) => x.file.split("/").pop() === base);
   return hit ? `#/guide/${encodeURIComponent(hit.slug)}` : null;
 };
+// The archetype read off the cards alone (lib/infer.mjs), layer by layer: legend, chosen
+// champion, signature, colour pair, then the cards that should (or can) be in it.
+function inferredLine(a) {
+  const f = a?.inferred;
+  if (!f?.main) return "";
+  return `<details class="small" style="margin:4px 0"><summary><b>Inferred from the cards:</b> ${esc(f.subName || "")} ${esc(f.main)}
+      <span class="dim">(${Math.round(f.mainShare * 100)}% of the vote; next ${esc(f.runnerUp || "—")} · also ${f.subs.slice(1).map((x) => esc(x.name)).join(", ")})</span></summary>
+    <ol class="tiny" style="margin:4px 0 0 18px">${f.layers.map((l) => `<li><b>${esc(l.name)}</b>${l.cards.length ? ` (${esc(l.cards.slice(0, 3).join(", "))})` : ""}: ${esc(l.main.join(" / ") || "—")}${l.sub.length ? ` · ${esc(l.sub.join(", "))}` : ""}
+      ${l.evidence.length ? `<span class="dim"> — ${esc(l.evidence.slice(0, 3).map((e) => `${e.card}: ${e.why.concat(e.sub).slice(0, 3).join(", ")}`).join("; "))}</span>` : ""}</li>`).join("")}</ol>
+    <p class="tiny dim" style="margin:2px 0 0">Pattern-matched from card text, earlier layers weighing more. Good at what a deck is built on; weak at its pace — guides and the heading above are better judges of aggro vs midrange.</p></details>`;
+}
 function profileLine(a) {
-  if (!a?.profile) return `<p class="note">No lists in the snapshot to measure.</p>`;
+  if (!a?.profile) return `<p class="note">No lists in the snapshot to measure.</p>${inferredLine(a)}`;
   const p = a.profile;
-  return `<div class="small" style="display:flex;flex-wrap:wrap;gap:4px 14px">
+  return `${inferredLine(a)}<div class="small" style="display:flex;flex-wrap:wrap;gap:4px 14px">
     <span><b>Measured:</b> ${esc(a.label)}</span>
     <span>${p.units} units · ${p.spells} spells · ${p.gear} gear</span>
     <span>average cost ${p.avgCost}</span><span>${p.interaction} interaction</span><span>${p.draw} draw</span>

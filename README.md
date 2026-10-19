@@ -76,6 +76,13 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   the winners skip is held back from suggestions until its question is answered "test".
 - `lib/consensus.mjs` - counting a set of lists into the list they add up to; shared by
   `build-ideas.mjs` and `build-archetypes.mjs`.
+- `lib/infer.mjs` - a legend's archetype inferred from its cards alone, in the order a deck is
+  built: legend ability and cost, chosen champion, signature, colour pair, then the cards that
+  should (winners' core) or can be in it. Votes a main archetype (aggro, tempo, midrange,
+  control, ramp) and sub-archetypes (engines plus isolation, lone defender, Deploy, bombs…),
+  with each layer's evidence. Written into `data/archetypes.json` as `inferred`; shown on the
+  site and by `scripts/rift ideas`. Good at sub-archetype, weak at main — guides and the
+  hand-written heading outrank it. Tests: `lib/infer.test.mjs`.
 - `lib/engines.mjs` - engines read off card text (payoffs and what triggers them), for
   cards with no lists yet. Tests: `lib/engines.test.mjs`, including the answer key that scores
   every legend's main engine against `docs/archetypes.md`.

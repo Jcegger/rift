@@ -18,6 +18,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { indexCatalog } from "../lib/decks.mjs";
 import { counter } from "../lib/consensus.mjs";
 import { deckEngines } from "../lib/engines.mjs";
+import { inferLegend } from "../lib/infer.mjs";
 import { buildDeck, simulate, classify } from "../lib/sim.mjs";
 
 const MIN_PLACED = 5;     // below this a legend's profile is read from all its lists, labelled
@@ -56,7 +57,12 @@ const main = async () => {
   // Every legend in the catalog gets a row, with no lists if it has none: "no evidence" is
   // an answer. Starter legends fold onto their base (lib/decks.mjs identity).
   const legendCards = new Map();
-  for (const c of idx.cards) if (c.t === "Legend" && !c.v && !/ - Starter$/.test(c.n)) { const n = idx.legendName(c); if (!legendCards.has(n)) legendCards.set(n, c); }
+  // A Starter printing folds onto its base legend, but counts when it is the only printing:
+  // Master Yi, Wuju Bladesman exists only in a starter deck and has hundreds of lists.
+  for (const c of idx.cards) if (c.t === "Legend" && !c.v) {
+    const n = idx.legendName(c), had = legendCards.get(n);
+    if (!had || (/ - Starter$/.test(had.n) && !/ - Starter$/.test(c.n))) legendCards.set(n, c);
+  }
 
   const legends = [];
   for (const [name, L] of legendCards) {
@@ -71,7 +77,9 @@ const main = async () => {
       isNew: (idx.byId.get(idx.identity(L)) || [L]).every((p) => p.s === "RAD"),
       lists: lists.length, placed: placed.length, claimed: placed.filter((d) => !d.tour).length, basis: !lists.length ? "none" : from === placed ? "placed" : "all lists",
       radShare: lists.length ? round(lists.filter((d) => Object.keys(d.cards).some((k) => card(k)?.s === "RAD")).length / lists.length) : 0 };
-    if (!from.length) { legends.push(row); continue; }
+    // The archetype inferred from the cards alone (lib/infer.mjs): legend, chosen champion,
+    // signature, colour pair, then the cards that should (or, with no lists, can) be in it.
+    if (!from.length) { legends.push({ ...row, inferred: inferLegend(L, idx, null) }); continue; }
     const con = consensus(from);
     const mainRows = con.main.map((r) => ({ ...r, c: card(r.code) })).filter((r) => r.c);
     const sum = (f) => mainRows.reduce((a, r) => a + (f(r) ? r.copies : 0), 0);
@@ -102,7 +110,7 @@ const main = async () => {
     const pkg = Object.entries(syn.cards).map(([n, c]) => ({ n, l: c.legends.find((x) => x.name === name), rad: c.rad }))
       .filter((x) => x.l && x.l.share >= 0.5 && x.l.lift >= 2.5).sort((a, b) => b.l.lift * b.l.share - a.l.lift * a.l.share).slice(0, 8)
       .map((x) => ({ name: x.n, share: x.l.share, lift: x.l.lift, rad: x.rad }));
-    legends.push({ ...row, from: from.length, profile, label: lab, why, sim, engines, package: pkg,
+    legends.push({ ...row, from: from.length, profile, label: lab, why, sim, engines, package: pkg, inferred: inferLegend(L, idx, mainRows),
       core: mainRows.filter((r) => r.inc >= 0.75).map((r) => r.name) });
   }
 

@@ -22,6 +22,16 @@ not tested lines. Matchup notes say what a matchup **turns on**, never who is fa
 is no matchup record behind them yet, and the [match journal](match-journal.md) is where one gets
 made.
 
+**Three readings, and where they come from.** Each heading is *sub-archetype + main*, the
+main one of aggro, tempo, midrange, control or ramp. Where an outside guide names the deck, the
+**Sources** line quotes it, with its date and set, and the heading follows it; the riftbound.gg
+guides read for this (Oct 2026) are mostly Unleashed or Vendetta, and the Radiance ones are
+theorycraft. The site also shows the archetype **inferred from the cards alone**
+(`lib/infer.mjs`): legend, chosen champion, signature, colour pair, then the cards that should be
+in it. That reading is good at what a deck is built on and weak at its pace — it matches these
+headings' main word about half the time — so where it differs, the heading wins until a source
+says otherwise. Each **Engine** line is the answer key the engine reader is tested against.
+
 **The data is mostly Vendetta.** The snapshot spans 60 days, so most placed lists predate
 Radiance (legal 2026-10-23); its share is given per legend, and the nine Radiance legends are
 read from brews and online previews. Expect the Radiance entries to move most.
@@ -61,7 +71,7 @@ each pick a different thing to grow — buffs, Equipment, levels, Shield.
   Equipment is moving, beat answers to units.
 - **Engine:** gear — Equipment is the investment; the legend moves it to a fresh carrier.
 
-### Master Yi, Wuju Master — levelling ramp
+### Master Yi, Wuju Master — levelling midrange
 *measured tempo · 3 placed · u19 s18 g3 · cost 3.1 · int 7 · thin*
 - **Plan:** gain XP (Hunt cards: Gemhand Hunter, Wuju Apprentice, Herald of Spring), reach Level 6
   for +1 Might on all units and Level 11 for units entering ready; Master Yi, Unstoppable costs
@@ -69,6 +79,31 @@ each pick a different thing to grow — buffs, Equipment, levels, Shield.
 - **Against it:** XP comes from Hunt triggers and conquests; slowing its early fights slows the
   whole curve.
 - **Engine:** XP — Hunt cards and conquests feed it; the legend's Level 6 and Level 11 are what it buys.
+- **Sources:** riftbound.gg guide (Unleashed, 17 Jul 2026): "midrange, off-tempo play style": Hunt to Level 6, then 11, then overwhelm.
+
+### Master Yi, Wuju Bladesman — lone-defender midrange
+*measured tempo · 111 placed · u17 s21 g2 · cost 2.4 · int 10 · E4 17.2*
+- **Plan:** the legend gives a friendly unit **+2 Might while it defends alone**, so the deck holds
+  battlefields with one unit and wins the combat math around it with 1-Energy tricks: Discipline,
+  En Garde (+1 more if it is the only unit), Punch First. Defy protects the trick that matters,
+  Charm moves an attacker away, Zhonya's Hourglass saves the defender. Master Yi, Tempered banks XP
+  toward Level 6 (Deflect and Ganking); Rengar, Trophy Hunter Ambushes in; Lonely Poro draws if it
+  dies alone.
+- **Wins by:** holds the opponent cannot break profitably, one trick ahead in every combat step.
+- **Against it:** attack with two — the +2 is only for a lone defender. A stunned unit deals no
+  combat damage, however big. Its tricks are cheap non-unit cards, which Sabotage strips.
+- **From Kha'Zix:** "strip the solo-defender +2: move their units so they attack into your hold, or
+  make them hold with more than one unit" (Jun). One of the few matchups where you want to hold.
+- **From Riven:** stun the defender, and attack with two so their pump only saves one fight.
+- **From Rek'Sai:** Punch First means a fight won by 2 is not won; hold Blood Rush.
+- **Sources disagree on its pace**, which is why the heading is the open call on this page: the
+  [Sivir guide](../guides/sivir-anti-meta-midrange.md) calls it "trick-dense combat-math midrange",
+  the [Rek'Sai guide](../guides/reksai-void-burrower.md) "cheap wide aggro-tempo", Jun "develop
+  hard, then hold"; the numbers say tempo (11 Reactions, cost 2.4), the card text midrange.
+- **Engine:** none — tricks around one lone defender; the legend's +2 is a combat bonus, not a loop.
+- **Sources:** Jun (his Master Yi notes, [Kha'Zix — Jun's Notes](../guides/khazix-voidreaver-jun.md) §8);
+  the [Riven gauntlet](../guides/riven-exile-gauntlet.md); riftbound.gg tier list (3 Oct 2026): Tier 1. The
+  only legend here printed solely in a starter deck — the builders skipped it until 19 Oct 2026.
 
 ### K'Sante, Pride of Nazumah — Shield aggro *(Radiance)*
 *measured tempo · 1 placed / 35 lists · u17 s19 g4 · cost 1.9 · thin, brews*
@@ -78,6 +113,7 @@ each pick a different thing to grow — buffs, Equipment, levels, Shield.
 - **Against it:** the cheapest curve in the game here (average cost 1.9). Shield is per combat;
   removal outside combat ignores it.
 - **Engine:** winning fights — the legend converts Shield into Assault, so the Shield cards are fuel for attacks.
+- **Sources:** riftbound.gg guide (Radiance theorycraft, 15 Oct 2026): no label; a "showdown type of legend", good at holding, using Shield offensively. Read against the aggro label here.
 
 ## Body / Chaos — isolate and punish
 
@@ -104,6 +140,7 @@ alone if possible, and win there.
   late game). The deep dive is the [deck guide](../guides/khazix-voidreaver.md) and the
   [matchup guide](../guides/khazix-voidreaver-matchups.md); where they disagree with this page,
   they win.
+- **Sources:** riftbound.gg guide (Unleashed, updated 5 Jul 2026): "midrange strategy", built on units that gain XP with Hidden, Ambush and Chaos disruption; Jun (post-ban): midrange, develop units first.
 
 ### Evelynn, Agony's Embrace — facedown tempo *(Radiance)*
 *measured control · 2 placed / 71 lists · reactive 32 of 40 · brews*
@@ -118,6 +155,7 @@ alone if possible, and win there.
 - **From Kha'Zix:** Scuttle Crab's Deathknell lets you look at their facedown cards that turn —
   information this deck is otherwise built to deny you.
 - **Engine:** facedown — the legend and Evelynn, Consuming pay off playing from face down, and nearly every card is Hidden.
+- **Sources:** riftbound.gg guide (Radiance theorycraft, 14 Oct 2026): no label; "pressure our opponent quickly", revealing Hidden cards on her own turn.
 
 ### Sivir, Battle Mistress — gold aggro
 *measured aggro · 1 placed / 21 lists · thin*
@@ -151,6 +189,7 @@ of units, played every turn, each a little bigger than it should be.
 - **From Riven:** both decks want to act after the other commits; it has more units to commit.
 - **From Rek'Sai:** a race. Both decks win by numbers on the board; theirs arrive mid-combat.
 - **Engine:** winning fights — the legend pumps a unit for every unit you play, and Ambush puts them into the fight.
+- **Sources:** riftbound.gg guide (Vendetta, 30 Aug 2026): "the top aggressive legend", "a very proactive game plan": win the early showdowns, then keep making threats, drawing off Kai'Sa, Survivor, Kinkou Initiate and Nidalee, Cat Form.
 
 ### Lucian, Purifier — equipment aggro
 *measured midrange · 14 placed · u23 s9 g8 · int 2*
@@ -191,6 +230,7 @@ of units, played every turn, each a little bigger than it should be.
 - **From Riven / Rek'Sai:** the race is the plan. Every turn it spends ramping is a battlefield you
   hold.
 - **Engine:** gear — ramp gear the legend readies, into the top end and Gutter Palace.
+- **Sources:** riftbound.gg guide (Vendetta, 14 Sep 2026): no label; "a ton of draw and ramp" and "a bit of early control": Elder Dragon early via Dazzling Aurora and Promising Future; Gutter Palace if it goes long.
 
 ## Body / Order — buffs and Mighty
 
@@ -216,6 +256,7 @@ Deploy gear.
   enemy unit when played.
 - **Against it:** keeping its units below Mighty denies the ramp and the keywords together.
 - **Engine:** Mighty — the legend ramps whenever a unit becomes Mighty; Fiora, Victorious gains her keywords while Mighty.
+- **Sources:** riftbound.gg tier list (3 Oct 2026): Tier 3, "ramp play style" for her best list — extra runes early to reach 8-cost units.
 
 ### Ambessa, Matriarch of War — empower aggro
 *measured aggro · 21 placed · u22 s16 g2 · cost 2.6*
@@ -226,6 +267,7 @@ Deploy gear.
 - **Against it:** the Empower costs are paid up front; answers after the investment are the
   efficient ones.
 - **Engine:** Empower — the legend empowers itself whenever you empower something else, and spends it to ready a unit; the list is Empower cards.
+- **Sources:** riftbound.gg guide (Vendetta, 14 Aug 2026): no label; "built around winning … on the board", with Ambessa, The Wolf as the chosen champion and Empower cards.
 
 ### Poppy, Keeper of the Hammer — XP midrange
 *measured midrange · 3 placed · thin* — XP from holds and Demacian Diplomat, spent to draw (the
@@ -242,6 +284,13 @@ an enemy unit.
 - **Fears:** Deploy gear dies when an opponent **holds** its battlefield (rules.md, Deploy) — the
   deck must keep the battlefields it builds on.
 - **Engine:** gear — Deploy gear; the legend converts each one into a move to that battlefield.
+- **Sources:** riftbound.gg guide (Radiance theorycraft, 14 Oct 2026): no label; a "conquer driven strategy", Pillaged Armory "a core card".
+
+### Garen, Might of Demacia — go-wide midrange
+*measured midrange · 0 placed / 11 lists (Origins starter) · thin* — the legend draws 2 when you
+conquer with four or more units at that battlefield; Recruit the Vanguard, Faithful Manufactor and
+Noxian Drummer make the four, Garen, Commander leads them.
+- **Engine:** winning fights (wide) — the conquest with four units is the payoff; Recruits are the fuel.
 
 ## Calm / Chaos — tempo
 
@@ -274,6 +323,7 @@ Reactions to win fights after the opponent commits, and bounce.
   is at a battlefield is stunned on arrival. Remove or move her before the turn you develop.
 - **From Rek'Sai:** a deck that plays several units a turn into a card that stuns each one.
 - **Engine:** none — Vex, Apathetic's stun lock and removal buy time; Steel Paws empowering itself is not a loop.
+- **Sources:** riftbound.gg guide (14 Sep 2026): "control play style", "hold oriented": take a battlefield early with Vex, Apathetic, deny the comeback with stuns and counters, Astral Heron late. Tier list (3 Oct): Tier 3, "hold oriented".
 
 ### Yasuo, Unforgiven — Spiderling swarm
 *measured combo · 12 placed · 39 Spiderling + Yasuo, Windrider*
@@ -301,6 +351,7 @@ Reactions to win fights after the opponent commits, and bounce.
 - **Deep dive:** the Nova list and the consensus are on Riven's idea page (Find a deck); the
   [gauntlet guide](../guides/riven-exile-gauntlet.md) predates any Radiance results.
 - **Engine:** exhaust — Riven, Broken Blade and Reckless Innovator pay off becoming exhausted; attacking, moving and Ki Burst feed them.
+- **Sources:** riftbound.gg guide (Radiance theorycraft, 12 Oct 2026): "hold oriented legend", one battlefield controlled; a "Hidden centric" side deck holds more. Read against the tempo label here.
 
 ## Calm / Fury — Akali alone
 
@@ -314,6 +365,7 @@ Reactions to win fights after the opponent commits, and bounce.
 - **Wins by:** grinding: card advantage from moves, removal, untouchable threats.
 - **From Rek'Sai:** her pings and Falling Star (3 and 3) are efficient into small units.
 - **Engine:** movement — Akali, Deadly Weapon and Akali, Silent pay off moving; the legend pulls units home to move again.
+- **Sources:** riftbound.gg guide (Vendetta, 14 Sep 2026): no label; "plays more aggressively than the Blade Dancer"; Astral Heron as the late-game anchor, Stellacorn Herder and Kai'Sa, Survivor for cards.
 
 ## Calm / Mind — value engines
 
@@ -335,12 +387,14 @@ across five legends: the most card-flow-heavy pair, each legend building a diffe
   7 Might when Empowered. Thousand-Tailed Watcher and Bellows Breath hold the early board.
 - **Against it:** slow by design (1.9 units by turn 3). Points before its 8-drops arrive.
 - **Engine:** none — big-spell ramp: the legend readies runes for 7+ costs, and nothing loops.
+- **Sources:** riftbound.gg guide (Vendetta, 20 Aug 2026): no label; reach seven runes, then pair a big unit with a cheap spell. Tier list (3 Oct): "depends heavily on" Find Your Center.
 
-### Lillia, Bashful Bloom — Sprite tokens
+### Lillia, Bashful Bloom — Sprite-token midrange
 *measured tempo · 14 placed · u10 s21 g9* — the legend makes ready 3-Might Temporary Sprites,
 cheaper per Temporary unit you have; Sprite Burst makes two; Smoke and Mirrors swaps a Temporary unit
 across battlefields; Unchecked Power deals 12 to everything at battlefields.
 - **Engine:** tokens — the legend makes Sprites, cheaper for each Temporary unit you have.
+- **Sources:** riftbound.gg guide (Unleashed, 12 Jul 2026): "value oriented play style": trade temporary 3-Might Sprites for real units, scaling toward the endgame while it does.
 
 ### Ahri, Nine-Tailed Fox — shrink control
 *measured ramp · 7 placed* — the legend gives enemy attackers −1 Might; Ahri, Inquisitive −2 when
@@ -356,6 +410,7 @@ you shrink an enemy at her battlefield.
   Marvel discounts gear.
 - **Against it:** one gear is a unit at a time; it changes only when she picks another.
 - **Engine:** gear — the legend turns expensive gear into units.
+- **Sources:** riftbound.gg guide (Radiance theorycraft, 15 Oct 2026): no label; "seize the board" with Orianna, Exquisite, then "snowball".
 
 ## Calm / Order — tokens and stuns
 
@@ -406,8 +461,9 @@ keep fights one-sided.
 *measured tempo · 3 placed* — the legend returns a friendly unit to hand for Gold (re-buy play
 effects); Piercing Light, Bewitching Spirit's discard.
 - **Engine:** none — bounce and replay for Gold.
+- **Sources:** riftbound.gg guide (Unleashed, 8 Jul 2026): "a disruptive strategy" and "a value war": Chaos more than Fury; discard and bounce in slow games.
 
-### Ziggs, Hexplosives Expert — bombs *(Radiance)*
+### Ziggs, Hexplosives Expert — bomb tempo *(Radiance)*
 *measured midrange · 2 placed / 73 lists · u12 s18 g10 · brews*
 - **Plan:** the legend, Amateur Demolitionist, Satchel Charge and both Ziggs make **Bomb gear tokens
   at battlefields** (Deploy; when one dies it deals 2 to an enemy there and kills your other Bombs
@@ -415,6 +471,7 @@ effects); Piercing Light, Bewitching Spirit's discard.
   Detonate kills any gear and draws. Ziggs, Short-Fused gives friendly gear abilities 1 bonus damage.
 - **Against it:** the Bombs are gear — they die to gear removal, and to an opponent holding there.
 - **Engine:** tokens (Bomb gear) — made at battlefields, killed on purpose and remade.
+- **Sources:** riftbound.gg guide (Radiance theorycraft, 14 Oct 2026): "tempo deck": Bombs clear the showdown; a "hold oriented" side build.
 
 ### Zed, Master of Shadows — clones
 *measured midrange · 2 placed / 99 lists* — Shadow Clone tokens; Zed, Without a Sound swaps places
@@ -427,6 +484,13 @@ Assault 3.
 Chompers plays itself when discarded, Jinx, Rebel readies when you discard; the legend draws 1 at
 the start of your turn when your hand is down to one card or none.
 - **Engine:** discard — Flame Chompers and Jinx, Rebel pay off discarding; the legend wants an empty hand.
+
+### Annie, Dark Child — burn control
+*measured control · 0 placed / 27 usable lists (Origins starter; most of its 119 lists play since-banned
+cards) · thin* — the legend readies two runes at the end of your turn, so the Energy is up on
+theirs; Firestorm, Incinerate and Disintegrate spend it as burn, with Annie, Stubborn and Tibbers
+behind.
+- **Engine:** none — burn removal on the legend's end-of-turn runes; nothing loops.
 
 ## Chaos / Mind — answers and spells
 
@@ -448,12 +512,14 @@ Singularity across four legends: the interaction-heaviest pair.
 when a showdown starts; Diana, No Longer Human grows per spell; Moonfall pulls an enemy in and
 shrinks them; Hwei moves and filters.
 - **Engine:** spells — showdown spells on the legend's showdown-only Energy.
+- **Sources:** riftbound.gg guide (14 Sep 2026): no label; a "fast-paced legend", or "an attrition war": cheap support spells on the legend's Energy, Ravenbloom Student and Hwei.
 
-### Mel, Soul's Reflection — empowered spells
+### Mel, Soul's Reflection — empowered-spell midrange
 *measured tempo · 5 placed* — Applied Researchers (spells cost less while Empowered), Shock Blast
 (cheaper with anything Empowered), Rebuttal steals a spell; Mel, Defiant Soul banishes a small enemy
 when empowered.
 - **Engine:** Empower and spells — Applied Researchers and Shock Blast are cheaper while something is Empowered.
+- **Sources:** riftbound.gg guide (Vendetta, 8 Aug 2026): "midrange, value oriented play style": removal and early units, then Rebuttal to lock a battlefield.
 
 ### Teemo, Swift Scout — Hidden swarm
 *measured tempo · 3 placed / 47 lists · reactive 26* — the legend hides for [1] instead of [A] and
@@ -464,7 +530,7 @@ when seen on top.
 
 ## Chaos / Order — Kennen alone
 
-### Kennen, Heart of the Tempest — plays from elsewhere
+### Kennen, Heart of the Tempest — plays-from-elsewhere tempo
 *measured tempo · 67 placed · u20 s15 g5 · cost 2.8 · E4 15.7*
 - **Plan:** the legend empowers **whenever you play a card from anywhere other than your hand**, then
   disempowers to give a unit Assault 2. So the deck plays from the trash and the top of the deck:
@@ -478,6 +544,7 @@ when seen on top.
   for your fights.
 - **From Riven:** it was the best converter at the LA RQ (Vendetta) and won the Haven preview.
 - **Engine:** plays from elsewhere — the legend converts each one into Assault; Flow, Fizz and Matriarch feed it.
+- **Sources:** riftbound.gg guide (Vendetta, 8 Aug 2026): the "Tempo-Miracle list" is the top build, with an "off-tempo approach" beside it. Post-ban (riftbound.gg, 7 Oct 2026): "combo deck": a Rhasa the Sunderer swing turn with Last Rites to bring it back, filling the trash until then.
 
 ## Fury / Mind — spells and big turns
 
@@ -505,12 +572,14 @@ one, Forecaster gives Vision, both Rumbles boost Mechs, Breakneck Mech gives the
 *measured control · 3 placed* — banish four 4+ spells with the legend to channel 4 runes and draw;
 Jhin, Meticulous Killer is played for one Power after a 4+ spell; Curtain Call, Rocket Barrage.
 - **Engine:** spells — four 4+ spells banished to the legend.
+- **Sources:** riftbound.gg guide (Unleashed, 17 Jul 2026, before Vendetta): "combo oriented legend": wins with Gutter Palace, not points — four units and four cards in hand.
 
 ### Ekko, Boy Who Shattered Time — re-buy tempo *(Radiance)*
 *measured midrange · 2 placed / 43 lists · brews* — the legend discounts the next unit by 2 and
 kills it at end of turn; Ekko, Ingenious returns a friendly unit as his cost (re-use play effects);
 Chronobreak banishes and replays your units; Temporal Breach. A deck of play effects used twice.
 - **Engine:** none — re-buying play effects, which the reader does not read.
+- **Sources:** riftbound.gg guide (Radiance theorycraft, Oct 2026): "Tempo" for the main build, a "combo oriented play style" beside it, built on Chronobreak.
 
 ## Fury / Order — go wide
 
@@ -554,13 +623,14 @@ Hextech Gauntlets, Vault Breaker (Assault 2 and Ganking), Vi, Peacekeeper stuns 
   of Death is removal that pumps your side.
 - **Against it:** the trash is its mana — what it has banished is gone for good.
 - **Engine:** deaths — every death puts fuel in the trash for the legend's Power.
+- **Sources:** riftbound.gg guide (Radiance theorycraft, 15 Oct 2026): no label; wins "through brute force", Baited Hook to cheat a champion out early.
 
 ## Mind / Order — Deathknell and answers
 
 Hidden Blade, Thousand-Tailed Watcher, Vi, Peacekeeper, Honest Broker, Soaring Scout, Sacrifice
 and Glasc Mixologist across four legends.
 
-### LeBlanc, Deceiver — Deathknell value
+### LeBlanc, Deceiver — Deathknell midrange
 *measured ramp · 57 placed · u30 s7 · cost 4.0 · int 1*
 - **Plan:** thirty units, most with Deathknell (Ruined Rex deals 4, Glasc Mixologist replays a small
   unit from the trash, Black Rose Dignitary and Soaring Scout channel, LeBlanc, Fragmented draws), and
@@ -573,6 +643,7 @@ and Glasc Mixologist across four legends.
   [matchup guide](../guides/khazix-voidreaver-matchups.md).
 - **From Rek'Sai:** your Cull the Weak makes it kill one of its own units too — which it wants.
 - **Engine:** deaths — Deathknell units and Karthus doubling them; the legend's Temporary copy dies and triggers again.
+- **Sources:** riftbound.gg guide (Unleashed, 3 Jul 2026): no single label, "value or tempo": built on Deathknell; a snowball build (Baited Hook) or a slower draw-and-answer one.
 
 ### Viktor, Herald of the Arcane — recruit control
 *measured midrange · 43 placed · u14 s23 · int 11*
@@ -587,7 +658,7 @@ and Glasc Mixologist across four legends.
 Renata Glasc, Mastermind scores a point for a large activation while at a battlefield.
 - **Engine:** none — Gold, which is mana, not an engine.
 
-### Seraphine, Starry-Eyed Songstress — exhaust-three spells *(Radiance)*
+### Seraphine, Starry-Eyed Songstress — exhaust-three control *(Radiance)*
 *measured midrange · 0 placed / 64 lists · u9 s25 · brews*
 - **Plan:** the legend exhausts itself and three friendly units to cut a spell's cost by 2;
   Seraphine, Inspiring draws when you exhaust three units at once; Seraphine, Not Alone makes a
@@ -595,6 +666,13 @@ Renata Glasc, Mastermind scores a point for a large activation while at a battle
   Encore make the bodies; Fanfare draws per unit played.
 - **Against it:** it taps its own board to cast — punish the turn it does.
 - **Engine:** exhaust — the legend exhausts three units to cut a spell's cost; Seraphine, Inspiring draws for it.
+- **Sources:** riftbound.gg guide (Radiance theorycraft, 14 Oct 2026): "token synergy" for the exhaust-three cost, and "control oriented lists" as the only competitive option.
+
+### Lux, Lady of Luminosity — big-spell ramp
+*measured ramp · 0 placed / 22 lists (Origins starter) · thin* — the legend draws when you play a
+spell costing 5 or more, so the deck is 25 spells averaging 4.4: Blast of Power and Falling Comet,
+Lux, Crownguard on top.
+- **Engine:** spells — the legend pays off every big spell.
 
 ---
 
