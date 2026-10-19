@@ -1115,6 +1115,16 @@ Two things it handles that matter for the completion math:
 - **A live, racy feed.** It paginates over a list that reorders between
   requests, so the same card sometimes lands on two pages. The script dedupes on
   the stable id and reports the drift.
+- **Gaps filled from riftbound.gg, marked `df: 1`.** A dropped page means the same
+  drift also *skips* cards (10 short on 19 Oct), and a new set can sit incomplete in
+  Riot's feed for days (Radiance lacked 23 base cards, Riven's legend among them, a
+  week after Pre-Rift). Any printing in a set Riot lists, with a code Riot does not
+  serve, is filled from dotgg's database: base, alternate art, overnumber and signed
+  only, never promos, tokens or runes (those stay in `data/extras.json`). The
+  denominator is copied from Riot's own codes (`OGS-001/024`, not `/24`). Fills are
+  listed in the report and drop out on their own once Riot serves the card.
+- **Lettered runes and tokens.** `R01a` and `T02a` are runes and tokens, not base
+  cards; before 19 Oct the alt-art Radiance runes inflated RAD's base count to 173.
 
 Finishes are not in Riot's data, because a foil is a print treatment rather than
 a separate card. That is why Normal and Foil are separate counts on each

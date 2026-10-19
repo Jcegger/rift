@@ -92,8 +92,8 @@ function variantOf(publicCode, baseSize) {
   if (!m) return "";
   const collector = m[1];
 
-  if (/^T\d+$/i.test(collector)) return "token";
-  if (/^R\d+$/i.test(collector)) return "rune";
+  if (/^T\d+[a-z]*$/i.test(collector)) return "token";
+  if (/^R\d+[a-z]*$/i.test(collector)) return "rune";
   if (/^SP\d+/i.test(collector)) return "promo";
 
   const nm = /^0*(\d+)([a-z]*)(\*?)$/.exec(collector);
@@ -130,6 +130,7 @@ const main = async () => {
   // Keyed by their id form ("OGN-066a"), which is the collector code without the
   // denominator, so it is matched on the way in rather than guessed at later.
   const finishes = new Map();
+  let dgRows = [];
   try {
     process.stdout.write("fetching finishes… ");
     const r = await fetch(FINISHES, {
@@ -138,6 +139,7 @@ const main = async () => {
     if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
     const rows = await r.json();
     if (!Array.isArray(rows)) throw new Error("unexpected payload shape");
+    dgRows = rows;
     for (const x of rows) {
       const hasNormal = String(x.hasNormal) === "1";
       const hasFoil = String(x.hasFoil) === "1";
@@ -242,8 +244,58 @@ const main = async () => {
         if (v === null || v === "" || (Array.isArray(v) && !v.length)) delete card[k];
       }
       return card;
-    })
-    .sort((a, b) => (a.s === b.s ? (a.no - b.no) || a.c.localeCompare(b.c) : a.s.localeCompare(b.s)));
+    });
+
+  /* ── printings Riot's feed has not caught up with ─────────────────────────────
+     After Radiance released, Riot's gallery still lacked 23 of its 167 base cards,
+     Riven's legend among them, while riftbound.gg had every one with its rules text.
+     A card missing from the catalog is missing from every deck check, sim and price,
+     so a printing of a set Riot does list, but which Riot does not serve, is filled
+     from dotgg and marked `df: 1`. It drops out by itself the day Riot publishes it,
+     because only codes Riot lacks are ever filled.
+
+     Only the set's own numbering is filled: base, alternate art (A), overnumber and
+     signed (-STAR). Promos, tokens and runes keep coming from data/extras.json.
+     Names follow fullName's rules: a legend is its epithet, a champion unit is
+     "Name, Epithet", everything else is the card's name.                            */
+  const filled = [];
+  const riotCodes = new Set(cards.map((c) => c.c));
+  // The denominator as Riot writes it, which is not always the set size: OGS is "/024".
+  const denom = {};
+  for (const c of cards) {
+    const d = /\/(\d+)$/.exec(c.c);
+    if (d && !(c.s in denom)) denom[c.s] = d[1];
+  }
+  const DG_ID = /^([A-Z]+)-(\d{3})([A-Za-z]?)(-STAR)?$/;
+  for (const x of dgRows) {
+    const m = DG_ID.exec(String(x.id || ""));
+    if (!m || !(m[1] in denom) || String(x.promo) === "1") continue;
+    const [, setId, digits, letter, star] = m;
+    const code = `${setId}-${digits}${letter.toLowerCase()}${star ? "*" : ""}/${denom[setId]}`;
+    if (riotCodes.has(code)) continue;
+    const type = Array.isArray(x.type) ? x.type[0] : null;
+    const [who, epithet] = String(x.name).split(" - ");
+    const n = !epithet ? x.name : type === "Legend" ? epithet : x.supertype === "Signature" ? who : `${who}, ${epithet}`;
+    const fin = finishes.get(x.id);
+    const numOrNull = (v) => (v === null || v === undefined || v === "" ? null : Number(v));
+    const card = {
+      c: code, n, s: setId, no: Number(digits), v: variantOf(code, baseSize[setId]),
+      t: type, r: x.rarity || null, d: Array.isArray(x.color) ? x.color.filter(Boolean) : [],
+      e: numOrNull(x.cost), m: numOrNull(x.might), p: numOrNull(x.power), mb: numOrNull(x.mightBonus),
+      g: Array.isArray(x.tags) ? x.tags : [], o: type === "Battlefield" ? 1 : null,
+      x: plain(x.effect), i: x.image || null, df: 1,
+    };
+    if (fin && fin.foilOnly) card.fo = 1;
+    if (fin && fin.cost > 0) card.mp = Math.round(fin.cost * 100) / 100;
+    for (const k of Object.keys(card)) {
+      const v = card[k];
+      if (v === null || v === "" || (Array.isArray(v) && !v.length)) delete card[k];
+    }
+    cards.push(card);
+    riotCodes.add(code);
+    filled.push(card);
+  }
+  cards.sort((a, b) => (a.s === b.s ? (a.no - b.no) || a.c.localeCompare(b.c) : a.s.localeCompare(b.s)));
 
   const out = {
     generatedAt: new Date().toISOString().slice(0, 10),
@@ -268,6 +320,11 @@ const main = async () => {
     const bySet = corrected.reduce((m, l) => ((m[l.slice(0, 3)] = (m[l.slice(0, 3)] || 0) + 1), m), {});
     console.log(`\ncorrected ${corrected.length} type/domain values from dotgg, by set:`, bySet);
     for (const l of corrected) console.log(`  ${l}`);
+  }
+  if (filled.length) {
+    const bySet = filled.reduce((m, c) => ((m[c.s] = (m[c.s] || 0) + 1), m), {});
+    console.log(`\nfilled ${filled.length} printings Riot does not serve yet, from dotgg, by set:`, bySet);
+    for (const c of filled) console.log(`  ${c.c} ${c.n}`);
   }
   console.log("\nby variant: ", tally((c) => c.v || "base"));
   console.log("by type:    ", tally((c) => c.t));
