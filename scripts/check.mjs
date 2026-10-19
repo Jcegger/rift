@@ -584,6 +584,37 @@ section('Freshness');
   A.DECKS_AT = keep;
 }
 
+/* ══ deck ideas ══════════════════════════════════════════════════════════ */
+section('Deck ideas');
+{
+  let I = null;
+  try { I = read('data/ideas.json'); } catch { /* reported below */ }
+  if (!I) ok('ideas snapshot present', false, 'data/ideas.json missing — run build-ideas.mjs');
+  else {
+    const withC = I.legends.filter((l) => l.consensus);
+    const sum = (rows) => rows.reduce((a, r) => a + r.copies, 0);
+    // The consensus is a count: it must come out as a deck, and say what it came from.
+    ok('every consensus is a full deck: 40 main, 12 runes, 3 battlefields',
+       withC.every((l) => sum(l.consensus.main) === 40 && sum(l.consensus.runes) === 12 && l.consensus.battlefields.length === 3),
+       withC.filter((l) => !(sum(l.consensus.main) === 40 && sum(l.consensus.runes) === 12 && l.consensus.battlefields.length === 3)).map((l) => l.name).join(', ') || `${withC.length} consensus lists`);
+    ok('no consensus breaks a deck rule',
+       withC.every((l) => !l.consensus.checks.some((k) => k.ok === false)),
+       withC.filter((l) => l.consensus.checks.some((k) => k.ok === false)).map((l) => `${l.name}: ${l.consensus.checks.filter((k) => k.ok === false).map((k) => k.label).join(', ')}`).join('; ') || 'all legal');
+    ok("a 'placed' consensus is counted from at least 3 placed lists, and says how many agree",
+       withC.filter((l) => l.basis === 'placed').every((l) => l.consensus.from >= 3 && l.consensus.from === l.placed && l.close <= l.consensus.from));
+    ok('every consensus row is a share of its lists, between 0 and 1',
+       withC.every((l) => [...l.consensus.main, ...l.consensus.flex].every((r) => r.inc > 0 && r.inc <= 1)));
+    ok('a Radiance-format event is one this snapshot actually holds lists for',
+       I.era.events.every((e) => e.lists > 0 && e.radLists / e.lists >= 0.3), `${I.era.events.length} events`);
+    // build-ideas.mjs already refuses a build whose list is another legend's; this is
+    // the page-level half: a build is shown on its legend's idea page, so that page has
+    // to exist.
+    const orphan = I.builds.filter((b) => !I.legends.some((l) => l.name === b.legend));
+    ok("every Claude build belongs to a legend with Radiance-era evidence", !orphan.length,
+       orphan.length ? orphan.map((b) => b.id).join(', ') : `${I.builds.length} builds`);
+  }
+}
+
 /* ══ news ════════════════════════════════════════════════════════════════ */
 section('News');
 if (!news) ok('news snapshot present', false, 'data/news.json missing — run build-news.mjs');

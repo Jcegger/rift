@@ -212,6 +212,12 @@ jobs:
       - name: Record today in the archive
         run: node scripts/build-history.mjs
 
+      # Derived like the archive row: it fetches nothing, reads the deck snapshot and the
+      # hand-written builds/, and must not fail soft — a build that breaks a deck rule
+      # should stop the commit, not quietly vanish from the site.
+      - name: Count the Radiance-era deck ideas
+        run: node scripts/build-ideas.mjs
+
       - name: Source report
         id: sources
         run: |

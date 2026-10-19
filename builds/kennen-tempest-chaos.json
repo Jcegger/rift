@@ -1,0 +1,58 @@
+{
+ "id": "kennen-tempest-chaos",
+ "legend": "Kennen, Heart of the Tempest",
+ "date": "2026-10-19",
+ "author": "Claude",
+ "title": "Kennen Tempest — the Chaos majority build",
+ "summary": "The build most placed Kennen lists play (17 of 20 are within 70% of the consensus), from its best finish. The Haven winner is a different, Order-heavy deck — see its list below.",
+ "basis": "terrencem - Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview), #5 of 50, Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview). 90% of its main deck matches the consensus. Chosen over the #1 list because that one (35% overlap, Illaoi and Seal of Unity, 8 Order runes) is one player's build; this one is what the field converged on and still finished top 8.",
+ "changes": [
+  {
+   "what": "None",
+   "why": "Kept as played. Copy the #1 list from the lists below if you want the Order build instead."
+  }
+ ],
+ "plan": [
+  "Kennen's legend empowers whenever you play a card from anywhere other than your hand, then disempowers to give a unit Assault 2. The deck is built to do that every turn.",
+  "Lightning Rush looks at 3 and trashes the rest, and has Flow — playable again from the trash. Trifarian Captain looks at 4 and draws a cheap unit or gear. Nocturne, Horrifying can be played for one Power when you see it from the top of your deck. Each of those is a card played from somewhere other than your hand.",
+  "The trash filling up is the second engine: Rhasa the Sunderer costs 1 less for each card in it. Seal of Discord adds Chaos to get there.",
+  "9 Chaos / 3 Order. The simulator suggests bottoming 5+ cost cards in the opener."
+ ],
+ "matchups": [
+  {
+   "vs": "All",
+   "note": "No Radiance-era matchup records yet. The two events show Kennen beside Riven, Yasuo and Kai'Sa at the top; that is a field, not a matchup table."
+  }
+ ],
+ "sim": "Goldfish, 8,000 games: mulligan by bottoming 5+ cost cards; Energy spent turns 1–4 16.3 on the play / 17.4 on the draw; 3.4 units by turn 3; stuck on turn 3 1%; 9/3 runes fine.",
+ "cards": {
+  "OGN-166": 9,
+  "OGN-169": 2,
+  "OGN-173": 2,
+  "OGN-185": 3,
+  "OGN-194": 3,
+  "OGN-195": 3,
+  "OGN-199": 1,
+  "OGN-204": 3,
+  "OGN-214": 3,
+  "OGN-298": 1,
+  "OGS-011": 1,
+  "RAD-101": 1,
+  "RAD-107": 2,
+  "RAD-129": 3,
+  "RAD-166": 1,
+  "SFD-136": 1,
+  "SFD-140": 1,
+  "SFD-145": 2,
+  "SFD-149": 1,
+  "SFD-150": 2,
+  "SFD-212": 1,
+  "UNL-128": 1,
+  "VEN-099": 2,
+  "VEN-104": 2,
+  "VEN-113": 1,
+  "VEN-155": 1,
+  "VEN-156": 3
+ },
+ "sb": {}
+}

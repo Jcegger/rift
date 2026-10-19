@@ -1,0 +1,53 @@
+{
+ "id": "kaisa-void-nova",
+ "legend": "Kai'Sa, Daughter of the Void",
+ "date": "2026-10-19",
+ "author": "Claude",
+ "title": "Kai'Sa Void — the Nova runner-up",
+ "summary": "Second of 74 at NovaRiftbound #5. Every one of the 12 placed Kai'Sa lists is within 70% of the consensus: the most settled deck in the Radiance era so far.",
+ "basis": "YBE piorro - NovaRiftbound's $2,000 Online Showdown 5, #2 of 74, NovaRiftbound's $2,000 Online Showdown 5. 95% consensus overlap.",
+ "changes": [
+  {
+   "what": "None",
+   "why": "Kept as played; the placed lists barely differ from each other."
+  }
+ ],
+ "plan": [
+  "Kai'Sa's legend exhausts to add one Power of any domain, for spells only — the deck is a spell deck with large units behind it.",
+  "The units are the payoff: Thousand-Tailed Watcher gives enemy units -3 Might this turn (to a minimum of 1); Brynhir Thundersong stops opponents playing cards the turn it lands; The Empyrean, new in Radiance, can Show Off a card to Predict and draw 2. Bilgewater Tracker, also new, deals 1 to each of up to 2 units on arrival.",
+  "Temporal Breach is Hidden: it banishes a unit and replays it at the same location, ignoring its cost — a reset for your own play effects as much as an answer."
+ ],
+ "matchups": [
+  {
+   "vs": "All",
+   "note": "No Radiance-era matchup records yet."
+  }
+ ],
+ "sim": "Goldfish, 8,000 games: keep every opener; Energy spent turns 1–4 18.0 on the play / 20.3 on the draw; 3.0 units by turn 3; stuck on turn 3 0%; 7/5 runes fine.",
+ "cards": {
+  "OGN-009": 2,
+  "OGN-012": 3,
+  "OGN-026": 3,
+  "OGN-029": 3,
+  "OGN-039": 1,
+  "OGN-087": 2,
+  "OGN-093": 2,
+  "OGN-095": 3,
+  "OGN-096": 3,
+  "OGN-116": 3,
+  "OGN-122": 2,
+  "OGN-247": 1,
+  "OGN-296": 1,
+  "RAD-003": 3,
+  "RAD-060": 1,
+  "SFD-021": 1,
+  "SFD-080": 2,
+  "SFD-216": 1,
+  "UNL-212": 1,
+  "UNL-222": 3,
+  "UNL-R01": 7,
+  "UNL-R03": 5,
+  "VEN-066": 3
+ },
+ "sb": {}
+}

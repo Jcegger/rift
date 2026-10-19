@@ -46,6 +46,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   with finishes, and each event's Day 1 / Day 2 field by legend.
 - `data/history.json` - the daily archive: deck counts per legend, and tier lists.
 - `data/guides.json` - the manifest of the dossiers in `guides/`. Not their text.
+- `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
+  Radiance-format events, a consensus list counted from its placed lists (or brews,
+  labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
 - `scripts/build-catalog.mjs` - regenerates the catalog from Riot's gallery feed.
 - `scripts/build-decks.mjs` - regenerates the deck snapshot.
 - `scripts/build-banned.mjs` - regenerates the ban list.
@@ -56,6 +59,11 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `scripts/build-topdecks.mjs` - parses Riot's RQ Top Decks articles.
 - `scripts/build-history.mjs` - appends today's row to the archive. Fetches nothing.
 - `scripts/build-guides.mjs` - regenerates the guide manifest. Fetches nothing.
+- `scripts/build-ideas.mjs` - counts the Radiance-era deck ideas from the deck snapshot and
+  checks the builds in `builds/`. Fetches nothing. See "Deck ideas" below.
+- `builds/` - Claude's own builds, one hand-written JSON file each: the list (taken from a
+  placed list), what changed and why, the plan, matchup notes, a goldfish summary. Refused by
+  `build-ideas.mjs` if it breaks a deck rule.
 - `scripts/build-guide` - turns one guide into a Word doc with pandoc. No 's'. With
   `--pdf` it builds an e-ink PDF instead (pandoc + weasyprint), page-sized for a
   reMarkable 2 and styled by `guides/eink.css`; any Markdown path works, so the `docs/`
@@ -1193,8 +1201,9 @@ Collection, Guides, News. It lived at `/app/` while it was built and took the ro
   (matched by heading, e.g. "Irelia, Blade Dancer — …" in `guides/riven-exile-gauntlet.md`).
 - **Editor** — +/−, move to and from the sideboard, search inside the legend's domains,
   other champions' signatures blocked, every check live. Save writes the deck back.
-- **Find a deck** — Riot's RQ field table (Day 1, Day 2, converts, Top 8, riftbound.gg's
-  tier beside it) and every Top 8 / Best-Of list per legend, with "Copy to my decks".
+- **Find a deck** — the Radiance era first (see "Deck ideas"), then Riot's Vendetta RQ field
+  table (Day 1, Day 2, converts, Top 8, riftbound.gg's tier beside it) and every Top 8 /
+  Best-Of list per legend, with "Copy to my decks".
 - **Collection** — four sub-pages. *Cards*: every printing as a grid or a table, filtered
   by what you own, what your decks are short of, wants, spares and the rest; tap a card to
   set Want, Trade and On the way (owned counts come only from riftbound.gg). *Sets*:
@@ -1216,6 +1225,33 @@ localStorage first and send when the row is reachable, so a bad signal at the st
 nothing. Count taps (Want, Trade, On the way) batch into one write a moment later, and any
 not yet sent are laid back over each fresh copy of the row so a pull can't undo them.
 `scripts/rift journal [deck]` prints the record.
+
+## Deck ideas
+
+`scripts/build-ideas.mjs` → `data/ideas.json`, daily, after the deck snapshot. Radiance
+changes every legend, so the era is defined by **format**, not legend: an event is
+Radiance-format when 30% or more of the lists this snapshot holds for it play a Radiance card
+(on 2026-10-19, NovaRiftbound's $2,000 Online Showdown #5, 74 players, and Haven Online
+Challenger #5, 50 players; every October Vendetta event has none). Every placed list from
+those events counts, whichever legend. A **brew** is an unplaced list with a Radiance card
+since 2026-10-09, used only for a legend with fewer than 3 placed lists and always labelled.
+
+The **consensus** is counted, not chosen: each card at the number of copies most lists run,
+highest share first, to 40; runes by average count to 12; the three most-run battlefields.
+Beside it, how many lists sit within 70% of it — a legend can run two different decks (Kennen
+at Haven: an Order Illaoi build won, most lists were Chaos), and a consensus blends them; a
+low agreement says so on the page. **Since Vendetta** compares the same legend's placed lists
+from the 60 days before. No sideboards: the deck feed carries none.
+
+On the site: **Find a deck** opens on the Radiance-era table; each legend has an idea page
+(consensus, flex, what changed, the lists, any Claude build, copy-to-my-decks); each of your
+decks gets a **Radiance update** panel against its legend's consensus. `scripts/rift ideas
+[legend]` prints the same, plus your saved deck's differences.
+
+**Claude builds** (`builds/*.json`) start from a placed list and change it only with a
+reason drawn from the counts; the three of 2026-10-19 keep their source lists unchanged
+and list the options instead. Plans are read off card text; matchup notes say plainly
+where there is no Radiance-era evidence yet.
 
 ## Simulator
 

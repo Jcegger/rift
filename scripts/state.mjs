@@ -711,9 +711,57 @@ function cmdJournal(S, args) {
   }
 }
 
+/* ── ideas: the Radiance-era consensus per legend (data/ideas.json) ─────────── */
+// Offline, like meta. With a legend, it also compares your saved deck for that legend,
+// if the Supabase row can be read.
+async function cmdIdeas(cat, args) {
+  const I = await readJson(url("ideas.json"));
+  const pct = (x) => `${Math.round(x * 100)}%`.padStart(4);
+  const q = args.join(" ").toLowerCase();
+  if (!q) {
+    console.log(`RADIANCE ERA · ${I.era.events.length} events · ${I.era.placed} placed lists · ${I.era.brews} brews · built ${I.generatedAt}`);
+    for (const e of I.era.events) console.log(`  ${e.date}  ${String(e.players ?? "?").padStart(4)} players  ${e.name}`);
+    console.log(`\n  ${pad("legend", 34)} new  placed top8  best      brews  basis`);
+    for (const l of I.legends) console.log(`  ${pad(l.name, 34)} ${l.isNew ? "NEW" : "   "}  ${String(l.placed).padStart(6)} ${String(l.top8).padStart(4)}  ${pad(l.best ? `#${l.best.pl}/${l.best.players ?? "?"}` : "—", 8)} ${String(l.brews).padStart(5)}  ${l.basis}`);
+    const quiet = I.newLegends.filter((n) => !I.legends.some((l) => l.name === n.name));
+    if (quiet.length) console.log(`\n  new legends with no lists yet: ${quiet.map((n) => n.name).join(" · ")}`);
+    return;
+  }
+  const l = I.legends.find((x) => x.name.toLowerCase().includes(q));
+  if (!l) { console.log(`no Radiance-era lists for a legend matching "${q}"`); process.exit(1); }
+  const c = l.consensus;
+  console.log(`${l.name.toUpperCase()}${l.isNew ? " (new in Radiance)" : ""} · ${l.placed} placed · top 8 ×${l.top8} · ${l.brews} brews`);
+  console.log(`finishes: ${l.finishes.map(([p, n]) => `#${p}/${n ?? "?"}`).join(" ") || "none"}`);
+  if (!c) { console.log("too few lists for a consensus"); return; }
+  console.log(`\nCONSENSUS from ${c.from} ${l.basis === "placed" ? "placed lists" : "BREWS (fewer than 3 placed lists)"} · % = share of those lists playing the card`);
+  for (const r of c.main) console.log(`  ${r.copies}  ${pad(r.name, 30)} ${pad(r.type, 8)} ${pct(r.inc)}`);
+  console.log(`  runes: ${c.runes.map((r) => `${r.copies} ${r.name}`).join(", ")}`);
+  console.log(`  battlefields: ${c.battlefields.map((b) => `${b.name} ${pct(b.inc).trim()}`).join(", ")}`);
+  if (c.flex.length) console.log(`  flex: ${c.flex.map((r) => `${r.name} ${pct(r.inc).trim()}`).join(" · ")}`);
+  if (c.checks.length) console.log(`  checks: ${c.checks.map((k) => `${k.label} ${k.val}`).join(" · ")}`);
+  if (l.changes) {
+    console.log(`\nVS ${l.changes.vs} placed Vendetta lists since ${l.changes.since}`);
+    if (l.changes.added.length) console.log(`  in:  ${l.changes.added.map((r) => `${r.name} ${pct(r.before).trim()}→${pct(r.now).trim()}`).join(" · ")}`);
+    if (l.changes.dropped.length) console.log(`  out: ${l.changes.dropped.map((r) => `${r.name} ${pct(r.before).trim()}→${pct(r.now).trim()}`).join(" · ")}`);
+  } else if (l.isNew) console.log("\nnew legend: no Vendetta lists to compare");
+  try {
+    const S = await loadState();
+    const mine = (S.decks || []).filter((d) => Object.keys(d.cards || {}).some((k) => k === l.code || cat.BY.get(k)?.n === cat.BY.get(l.code)?.n && cat.BY.get(k)?.t === "Legend"));
+    for (const d of mine) {
+      const name = (k) => cat.BY.get(k)?.n || k;
+      const have = new Map(); for (const [k, n] of Object.entries(d.cards)) have.set(name(k), (have.get(name(k)) || 0) + n);
+      const add = c.main.filter((r) => (have.get(r.name) || 0) < r.copies).map((r) => `${r.copies - (have.get(r.name) || 0)} ${r.name} (${pct(r.inc).trim()})`);
+      const inc = new Map([...c.main, ...c.flex].map((r) => [r.name, r.inc]));
+      const cut = [...have].filter(([n]) => { const t = cat.BY.get(Object.keys(d.cards).find((k) => name(k) === n))?.t; return t !== "Rune" && t !== "Legend" && t !== "Battlefield" && (inc.get(n) || 0) < 0.2; }).map(([n, k]) => `${k} ${n}`);
+      console.log(`\nYOUR "${d.name}" vs the consensus\n  add: ${add.join(" · ") || "nothing"}\n  played by under 20%: ${cut.join(" · ") || "nothing"}`);
+    }
+  } catch { /* offline: the consensus stands on its own */ }
+}
+
 async function main() {
   const [cmd = "summary", ...args] = process.argv.slice(2);
   const cat = await loadCatalog();
+  if (cmd === "ideas") return cmdIdeas(cat, args);
   // meta reads only the archive and the catalog, so it works offline and never
   // touches the live Supabase row.
   if (cmd === "meta") return cmdMeta(cat, args);
