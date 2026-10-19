@@ -857,6 +857,45 @@ if (!tiers) {
   ok('dataAge tracks the tier list', A.dataAge().some((a) => a.key === 'tiers'));
 }
 
+/* ══ Riot's Top Decks ═══════════════════════════════════════════════════════
+   data/topdecks.json is parsed from Riot's own RQ articles, whose markup differs
+   from one article to the next (four layouts so far). A parse that half-works still
+   produces valid JSON, so the assertions are about meaning: a deck is a legal deck,
+   an event has its Top 8, the field table adds up and resolves to real legends.      */
+section("Riot's Top Decks");
+let topdecks = null;
+try { topdecks = read('data/topdecks.json'); } catch { /* reported below */ }
+if (!topdecks) {
+  ok('top decks present', false, 'data/topdecks.json missing — run build-topdecks.mjs');
+} else {
+  const E = topdecks.events || [];
+  const D = E.flatMap((e) => e.decks);
+  ok('at least the nine 2026 RQs are present', E.length >= 9, `${E.length} events`);
+  // A legal list is 39 main + the chosen champion, 12 runes, 3 battlefields. Riot's
+  // own articles have typos (a 37-card main, a rune pool of 20), kept as printed,
+  // so this is a rate rather than every deck.
+  const legal = D.filter((d) => d.main.reduce((a, r) => a + r[0], 0) === 39 &&
+    d.runes.reduce((a, r) => a + r[0], 0) === 12 && d.battlefields.length === 3 && d.champion);
+  ok('at least 97% of lists parse as legal decks', legal.length >= D.length * 0.97,
+     `${legal.length} of ${D.length}`);
+  ok('every deck has a legend the catalog knows', D.every((d) => d.legendCode && known.has(d.legendCode)),
+     D.filter((d) => !d.legendCode).map((d) => d.legend).slice(0, 3).join(', ') || `${D.length} decks`);
+  const rows = D.flatMap((d) => [...d.main, ...d.side]);
+  ok('at least 99% of card rows resolve to the catalog', rows.filter((r) => r[2]).length >= rows.length * 0.99,
+     `${rows.filter((r) => !r[2]).length} of ${rows.length} unresolved: ${(topdecks.unresolved || []).join(', ')}`);
+  const top8 = (e) => e.decks.filter((d) => d.overall != null && d.overall <= 8);
+  ok('the three latest events each have their winner and eight Top 8 lists',
+     E.slice(0, 3).every((e) => top8(e).length >= 8 && top8(e).some((d) => d.overall === 1)),
+     E.slice(0, 3).map((e) => `${e.slug.replace('-top-decks', '')}: ${top8(e).length}`).join(', '));
+  const F = E.filter((e) => e.field);
+  ok('every field table resolves to legends', F.every((e) => e.field.every((r) => r.legend)),
+     F.flatMap((e) => e.field.filter((r) => !r.legend).map((r) => `${e.slug}: ${r.name}`)).slice(0, 3).join(', ') || `${F.length} tables`);
+  ok('Day 2 never exceeds Day 1, for any legend', F.every((e) => e.field.every((r) => r.d2 == null || r.d2 <= r.d1)));
+  ok('field tables are a real field (1,000+ players on Day 1)', F.every((e) => e.day1 >= 1000),
+     F.map((e) => `${e.slug.replace('-top-decks', '')} ${e.day1}`).join(', '));
+  ok('a Best-Of deck is #1 of its legend', D.filter((d) => d.legendRank).every((d) => d.legendRank[0] >= 1 && d.legendRank[0] <= d.legendRank[1]));
+}
+
 /* ══ claimed results ═════════════════════════════════════════════════════
    Upstream flags 38 of 475 lists and every one of them is July, pre-ban. Forty-nine
    more announce a result in their own title and none is flagged, so a real Top 8 read

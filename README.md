@@ -29,6 +29,8 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `data/events.json` - the tournament archive, with player counts and coverage.
 - `data/news.json` - riftbound.gg's posts: title, date, tag, link.
 - `data/tiers.json` - riftbound.gg's weekly Tier 1-5 list, per Legend, scraped.
+- `data/topdecks.json` - Riot's own RQ "Top Decks" articles: every Top 8 and Best-Of list,
+  with finishes, and each event's Day 1 / Day 2 field by legend.
 - `data/history.json` - the daily archive: deck counts per legend, and tier lists.
 - `data/guides.json` - the manifest of the dossiers in `guides/`. Not their text.
 - `scripts/build-catalog.mjs` - regenerates the catalog from Riot's gallery feed.
@@ -37,6 +39,7 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `scripts/build-events.mjs` - regenerates the tournament archive and its coverage.
 - `scripts/build-news.mjs` - regenerates the news feed.
 - `scripts/build-tiers.mjs` - scrapes the meta tier list off riftbound.gg's page.
+- `scripts/build-topdecks.mjs` - parses Riot's RQ Top Decks articles.
 - `scripts/build-history.mjs` - appends today's row to the archive. Fetches nothing.
 - `scripts/build-guides.mjs` - regenerates the guide manifest. Fetches nothing.
 - `scripts/build-guide` - turns one guide into a Word doc with pandoc. No 's'. With
@@ -831,6 +834,32 @@ the compounding and redundancy tie-breaks, then share. Any tournament entry does
 archetype past the fringe gate in `acquisitionPath`, but that is a yes/no on "is this a
 real deck", not a weighting of how well it did. Changing the primary ordering to weight
 performance is separate work with its own measurement.
+
+### Riot's Top Decks
+
+`data/decks.json` only knows the tournament lists someone uploaded to riftbound.gg.
+RQ Los Angeles, the last RQ of 2026, had **3 of its 8 Top 8 lists** there and not the
+winner's (Rengar). riftdecks.com and Mobalytics carry full standings but sit behind
+Cloudflare and refuse a script. Riot's own "X's Top Decks" article is the primary
+record anyway, so `scripts/build-topdecks.mjs` reads that: every Top 8 list and the best
+finisher on each legend, each with its **overall ranking** and its **rank among that
+legend's players** (`legendRank: [1, 92]`), as text.
+
+Most articles also carry a table of how many players brought each legend to **Day 1**
+and how many of those made **Day 2**. That is the most useful number Riftbound
+publishes: Day 2 share over Day 1 share is a conversion rate, a read of how a deck did
+against the real field rather than how popular it was. LA: Kennen was 8.4% of Day 1
+and 17.0% of Day 2.
+
+What the articles do not say, the file does not say. `published` is the article's date,
+not the event's. `day1` and `day2` are sums of Riot's table, not announced attendance.
+Placings below the ones Riot printed do not exist here. Riot's markup changes between
+articles (four layouts in nine articles: labels with and without `&nbsp;`, colons inside
+and outside the bold, one card per paragraph, legends printed without a count), so
+`check.mjs` asserts meaning: ≥97% of lists are legal 39 + champion / 12 runes / 3
+battlefields (the rest are Riot's own typos, kept as printed), every legend and ≥99% of
+card names resolve, the latest three events each have a full Top 8, and every field-table
+row resolves to a legend ("Master Yi, WB", "Renata", "Kai'sa").
 
 ## Tiers
 

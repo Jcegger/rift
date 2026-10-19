@@ -82,7 +82,7 @@ split into `name` + `subtitle`, a page that stopped linking the report it used t
 Assert the *meaning*, not the status code.
 
 **A single failing source keeps its last-good file and the run stays green.** So read the
-summary line — `Sources rebuilt: N of 8` — on successful runs too. A source that quietly
+summary line — `Sources rebuilt: N of 9` — on successful runs too. A source that quietly
 fails every day is a failure waiting for its shelf life to expire.
 
 **Be polite to upstream.** Several builders share one host and will rate-limit each

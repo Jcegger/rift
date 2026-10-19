@@ -57,7 +57,7 @@ on:
         required: false
         default: '60'
       simulate_failure:
-        description: 'Comma-separated sources to force-fail (catalog,banned,events,decks,news,tiers,rules,errata)'
+        description: 'Comma-separated sources to force-fail (catalog,banned,events,decks,news,tiers,rules,errata,topdecks)'
         required: false
         default: ''
 
@@ -149,6 +149,16 @@ jobs:
           case ",$SIMULATE," in *,tiers,*) echo "simulated failure"; exit 1;; esac
           node scripts/build-tiers.mjs
 
+      # Riot's RQ Top Decks articles, on playriftbound.com. A different host from every
+      # other builder, so it can run anywhere in the order; after the catalog, because
+      # it resolves card names against it. Nine small pages, 1.5s apart.
+      - name: Rebuild Riot's Top Decks
+        id: topdecks
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,topdecks,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-topdecks.mjs
+
       # Cheap on every day but four a year. It reads Riot's Rules Hub page — one small
       # request — and only downloads the two PDFs (57MB) when the date printed there has
       # actually moved, so the steady state is a no-op that exits 0. Placed after the
@@ -209,19 +219,21 @@ jobs:
             [tiers]='${{ steps.tiers.outcome }}'
             [rules]='${{ steps.rules.outcome }}'
             [errata]='${{ steps.errata.outcome }}'
+            [topdecks]='${{ steps.topdecks.outcome }}'
           )
           failed=""; ok_count=0
           {
             echo "| source | result | file |"
             echo "|---|---|---|"
           } >> "$GITHUB_STEP_SUMMARY"
-          for s in catalog banned events decks news tiers rules errata; do
+          for s in catalog banned events decks news tiers rules errata topdecks; do
             case "$s" in
               catalog) f=data/cards.json;; banned) f=data/banned.json;;
               events)  f=data/events.json;; decks) f=data/decks.json;;
               news)    f=data/news.json;;  tiers) f=data/tiers.json;;
               rules)   f=data/rules.json;;
               errata)  f=data/errata.json;;
+              topdecks) f=data/topdecks.json;;
             esac
             at=$(node -e 'process.stdout.write(String(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).generatedAt||"?"))' "$f" 2>/dev/null || echo '?')
             if [ "${outcome[$s]}" = "success" ]; then
@@ -235,14 +247,14 @@ jobs:
           done
           echo "failed=$failed"     >> "$GITHUB_OUTPUT"
           echo "ok_count=$ok_count" >> "$GITHUB_OUTPUT"
-          echo "Sources rebuilt: $ok_count of 8${failed:+ (failed: $failed)}"
+          echo "Sources rebuilt: $ok_count of 9${failed:+ (failed: $failed)}"
 
       # Nothing changed and nothing can be salvaged. Reporting that as a green run is
       # the exact failure mode this whole file is trying to close.
       - name: Fail if every source broke
         if: steps.sources.outputs.ok_count == '0'
         run: |
-          echo "::error title=No source rebuilt::All eight builders failed — the data is entirely unchanged."
+          echo "::error title=No source rebuilt::All nine builders failed — the data is entirely unchanged."
           exit 1
 
       - name: Verify
@@ -336,7 +348,7 @@ jobs:
               `The daily data refresh failed.`,
               ``,
               `- **Sources that did not rebuild:** ${failed}`,
-              `- **Sources rebuilt:** ${{ steps.sources.outputs.ok_count || 0 }} of 8`,
+              `- **Sources rebuilt:** ${{ steps.sources.outputs.ok_count || 0 }} of 9`,
               `- **Run:** ${run}`,
               ``,
               `A single failing source does not reach here — it keeps its last-good file and the`,
