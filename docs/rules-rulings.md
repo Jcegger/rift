@@ -83,3 +83,36 @@ control (§811.1.b). So Hidden removes the safe option, and at 2 Might he lands 
 range with no say in it. He has no Ambush, so battlefields he does not control are not
 available to him either way (§822.1.c). The window then closes on resolution: with a stunned
 enemy at his battlefield he is 4 Might and out of Gust's range for good.
+
+## Mageseeker Warden strands a Thrill of the Hunt target in banishment
+
+**Date:** 2026-10-19
+**Source:** Derived in this repo, not a staff ruling. It composes two published rules, and the second one's own example is Mageseeker Warden. Strong, but ask a judge before relying on it at an event.
+**Rules:** §358.3.a, §806.3
+**Expires:** when Riot rules on it, or a Core Rules or FAQ update covers "banish, then play" against a play-location restriction
+
+**Question.** You control Mageseeker Warden (`OGN-070`, *"While I'm at a battlefield,
+opponents can only play units to their base"*) at a battlefield. Your opponent plays Thrill
+of the Hunt (`Fury/Body`, *"Banish a friendly unit, then its owner plays it to any
+battlefield, ignoring its cost"*). What happens to their unit?
+
+**Derived answer. It is banished and stays banished.** The banish is a legal instruction and
+happens. The play that follows is to a battlefield, which Warden forbids, so it is an
+impossible instruction and is skipped. Nothing returns the unit.
+
+**Why.** §358.3.a: *"If a Game Effect prevents the performance of a game action, that effect
+doesn't prevent cards … that instruct a player to perform that game action from being played
+… On resolution, that game action will be skipped as it is an impossible instruction. Example:
+A player plays Here to Help when their opponent controls a Mageseeker Warden at a battlefield
+… On resolution, no unit will be played."* Thrill is the same shape as Here to Help with a
+banish in front of it, and a skipped later instruction does not undo an earlier one in the
+same effect. The FAQ's Perched Grimwyrm answer states the general principle: *"In Riftbound,
+'can't' beats 'can'."* Warden's "only to their base" is the "can't"; Thrill's "to any
+battlefield" is the "can".
+
+**The same reading covers** Rengar, Trophy Hunter's Ambush onto a battlefield (only base is
+legal, so it comes down at base); LeBlanc, Deceiver's Reflection token "there" at a
+battlefield (no token); and every "ready" in an enemy spell or ability while Warden is at a
+battlefield, from Warden's second line (Irelia's legend, Arise!, Guards!, Ride the Wind,
+Jayce's legend on gear, Akali's empowered ready, Pit Crew). The unit or gear still moves or is
+played where it legally can; only the ready is skipped.

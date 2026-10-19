@@ -26,6 +26,7 @@
 # answers: re-enable with the first real batch of questions
 # /riftbound           update  notes/answers.md
 
+/riftbound/reading   update  guides/riven-exile-gauntlet.md
 /riftbound/reading   update  guides/radiance-pre-rift.md
 /riftbound/reading   update  docs/strategy.md
 /riftbound/reading   update  docs/fundamentals.md

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-13",
+ "generatedAt": "2026-10-19",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -159,6 +159,34 @@
     "Sources and method"
    ],
    "words": 9869
+  },
+  {
+   "slug": "riven-exile-gauntlet",
+   "file": "guides/riven-exile-gauntlet.md",
+   "kicker": null,
+   "title": "Riven, The Exile — Radiance Gauntlet & Sideboard",
+   "subtitle": "Riftbound, Radiance season (from 23 October 2026) — who a local Skirmish will bring, how Riven plays into each, and what to board",
+   "date": "2026-10-19",
+   "legend": "The Exile",
+   "champion": "Riven, Broken Blade",
+   "sections": [
+    "The field, from the evidence",
+    "Your deck in one paragraph",
+    "The sideboard card that matters: Mageseeker Warden",
+    "How to use the boxes",
+    "Irelia, Blade Dancer — Calm/Chaos · LA finalist · the mirror of your colors",
+    "Kennen, Heart of the Tempest — Order/Chaos · best converter at LA",
+    "Rengar, Pridestalker — Fury/Body · won LA",
+    "Master Yi, Wuju Bladesman — Calm/Body · Tier 1",
+    "LeBlanc, Deceiver — Mind/Order · converts 1.35",
+    "Azir, Emperor of the Sands — Calm/Order · 3rd and 4th at LA",
+    "Jayce, Defender of Tomorrow — Mind/Body · ramp",
+    "Vex, Gloomist · Akali, Rogue Assassin · Ornn, Fire Below the Mountain",
+    "Radiance newcomers",
+    "Board at a glance",
+    "What would change this page"
+   ],
+   "words": 2583
   },
   {
    "slug": "sivir-anti-meta-midrange",
