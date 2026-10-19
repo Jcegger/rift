@@ -517,7 +517,9 @@ function loadLocal(){
 // closeThreshold is deliberately absent: it held a card count for "close decks", which is
 // now a dollar figure under a new name. Reinterpreting a stored 5 as $5 would silently
 // select almost nothing, so the old value is left behind rather than migrated.
-const SYNCED = ['inv','decks','tags','playset','nearSpend','ownLegendOnly','noBuy','showIllegal','planBy','syncUrl','autoSync','mirrorTradeWish','lastSyncAt','newq'];
+// `journal` is written by the new app (app/), not this one. It is listed so a save from
+// here carries it through instead of dropping it: syncPush writes the whole row.
+const SYNCED = ['inv','decks','tags','playset','nearSpend','ownLegendOnly','noBuy','showIllegal','planBy','syncUrl','autoSync','mirrorTradeWish','lastSyncAt','newq','journal'];
 // Saving must not blow away the collection stream: typing counts into 1189 cards
 // would reset scroll and focus on every keystroke. Views that show derived totals
 // re-render; the collection view patches the one card that changed instead.

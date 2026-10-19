@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Rift</title>
+<meta name="description" content="Jay's Riftbound decks, matchups, results and guides.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14161B; --ink2:#505766; --ink3:#7A818E; --line:#E3E6EB; --line2:#EEF0F3;
+  --ground:#EDEFF2; --card:#fff; --soft:#F5F6F8; --head:#14161B; --headink:#B9BFCA; --headon:#2A2D35;
+  --accent:#4A35D4; --accent2:#2F1FA8; --short:#B4540A; --shortbg:#FCEBDD;
+  --good:#1E7A46; --goodbg:#E3F3EA; --bad:#B42318; --badbg:#FDE8E6; --later:#8A6A00; --laterbg:#FFF4CC;
+  --Fury:#C8372D; --Calm:#2F8F5B; --Mind:#2F6FD0; --Body:#C9701E; --Chaos:#7D3CBF; --Order:#A8850F; --Colorless:#8B919C;
+  --r:14px; --f-head:'Barlow Condensed',system-ui,sans-serif; --f-body:'IBM Plex Sans',system-ui,sans-serif; --f-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#E8EAEE; --ink2:#A9B0BC; --ink3:#848B97; --line:#2C3038; --line2:#252930;
+    --ground:#0F1115; --card:#181B21; --soft:#1F232A; --head:#0A0B0E; --headon:#23262D;
+    --accent:#8C7BFF; --accent2:#B0A4FF; --short:#F0A15C; --shortbg:#3A2414;
+    --good:#5FCF8F; --goodbg:#15301F; --bad:#FF8A7E; --badbg:#3A1714; --later:#E8C55A; --laterbg:#332A0C;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E8EAEE; --ink2:#A9B0BC; --ink3:#848B97; --line:#2C3038; --line2:#252930;
+  --ground:#0F1115; --card:#181B21; --soft:#1F232A; --head:#0A0B0E; --headon:#23262D;
+  --accent:#8C7BFF; --accent2:#B0A4FF; --short:#F0A15C; --shortbg:#3A2414;
+  --good:#5FCF8F; --goodbg:#15301F; --bad:#FF8A7E; --badbg:#3A1714; --later:#E8C55A; --laterbg:#332A0C;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.45 var(--f-body)}
+a{color:var(--accent)}a:hover{color:var(--accent2)}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--f-head);font-weight:700;letter-spacing:.01em;margin:0}
+h1{font-size:clamp(38px,6vw,56px);line-height:1}
+h2{font-size:28px;line-height:1.1}
+h3{font-size:20px}
+.lbl{font-family:var(--f-head);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:var(--ink2)}
+.num{font-family:var(--f-mono)}
+.dim{color:var(--ink2)}
+.small{font-size:14px}
+.tiny{font-size:13px}
+
+header.top{background:var(--head);color:#fff;position:sticky;top:0;z-index:20}
+.top-in{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;min-height:64px}
+.brand{font-family:var(--f-head);font-weight:700;font-size:26px;letter-spacing:.12em;color:#fff;text-decoration:none}
+nav.main{display:flex;flex-wrap:wrap;gap:2px;flex:1}
+.navlink{font-family:var(--f-head);font-weight:600;font-size:17px;letter-spacing:.03em;text-decoration:none;color:var(--headink);padding:10px 12px;border-radius:8px;min-height:44px;display:flex;align-items:center;gap:6px}
+.navlink:hover{color:#fff;background:var(--headon)}
+.navlink[aria-current="page"]{color:#fff;background:var(--headon)}
+.navlink .ext{font-size:12px;opacity:.7}
+.sync{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--headink)}
+.sync i{width:9px;height:9px;border-radius:50%;background:#888;display:inline-block}
+
+main{max-width:1280px;margin:0 auto;padding:24px;display:flex;flex-direction:column;gap:24px}
+.panel{background:var(--card);border-radius:var(--r);padding:24px 28px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.cols{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.cols>.wide{flex:999 1 560px;min-width:0}
+.cols>.side{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.headrow{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:56px;padding:8px 16px;border-radius:10px;cursor:pointer;font:600 16px var(--f-body);background:var(--card);color:var(--ink);border:1px solid var(--line);text-decoration:none;text-align:left}
+.tab small{font-size:13px;font-weight:500}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.tab.new{justify-content:center;color:var(--accent);border-style:dashed}
+
+.hero{display:flex;flex-wrap:wrap;gap:20px 48px;align-items:flex-end;justify-content:space-between}
+.stats{display:flex;flex-wrap:wrap;gap:28px}
+.stat{display:flex;flex-direction:column;gap:4px}
+.stat b{font-family:var(--f-head);font-weight:700;font-size:34px;line-height:1}
+.stat .num{font-size:28px;font-weight:500;line-height:1.1}
+.dots{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none}
+
+.btn{font:600 15px var(--f-body);min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none;justify-content:center}
+.btn:hover{background:var(--soft)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent2);color:#fff}
+.btn.danger{color:var(--bad)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap}
+
+.grid-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px 36px}
+.group{display:flex;flex-direction:column}
+.group>.lbl{padding-bottom:6px;border-bottom:2px solid var(--ink)}
+.row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line2);font-size:15px;min-height:40px}
+.row .q{width:24px;color:var(--ink2);font-family:var(--f-mono);flex:none}
+.row .n{flex:1;min-width:0}
+.cardlink{background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.cardlink:hover{text-decoration:underline;text-decoration-color:var(--ink3)}
+.cost{font:500 13px var(--f-mono);color:var(--ink3);white-space:nowrap}
+.pill{font:500 13px var(--f-mono);border-radius:6px;padding:2px 8px;white-space:nowrap}
+.pill.short{color:var(--short);background:var(--shortbg)}
+.pill.bad{color:var(--bad);background:var(--badbg)}
+.pill.good{color:var(--good);background:var(--goodbg)}
+.pill.later{color:var(--later);background:var(--laterbg)}
+
+.seg{font:600 15px var(--f-body);border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;min-height:44px;min-width:52px;cursor:pointer}
+.seg:hover{background:var(--soft)}
+.seg.w:active,.seg.w.flash{background:var(--goodbg);border-color:var(--good)}
+.seg.l:active,.seg.l.flash{background:var(--badbg);border-color:var(--bad)}
+.logrow{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--line2)}
+.logrow .n{flex:1;font-size:15px;min-width:0}
+.logrow .rec{font:400 13px var(--f-mono);color:var(--ink3)}
+select,input[type=search],input[type=text]{font:16px var(--f-body);min-height:44px;border:1px solid var(--line);border-radius:10px;padding:0 12px;background:var(--card);color:var(--ink);max-width:100%}
+.today{background:var(--soft);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.today .r{display:flex;gap:10px;font-size:15px}
+.win{font-weight:600;color:var(--good)}.loss{font-weight:600;color:var(--bad)}.draw{font-weight:600;color:var(--ink2)}
+
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.mcard{background:var(--card);border-radius:var(--r);padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.mcard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px}
+.mcard dt{font-size:12px}
+.mcard dd{margin:0}
+
+.check{display:flex;align-items:center;gap:10px;font-size:15px;padding:4px 0}
+.check .n{flex:1}
+.check .d{width:12px;height:12px;border-radius:50%;flex:none}
+.check .why{display:block;font-size:13px;color:var(--ink2)}
+
+.pm{width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:var(--card);font:600 20px var(--f-mono);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+.pm:hover{background:var(--soft)}
+.pm.sm{width:auto;padding:0 10px;font:600 13px var(--f-body)}
+.erow{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line2);font-size:15px}
+.erow .q{width:24px;text-align:center;font:500 17px var(--f-mono)}
+.erow .n{flex:1;min-width:0;padding-left:4px}
+
+table.t{border-collapse:collapse;width:100%;font-size:15px}
+table.t th{font-family:var(--f-head);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:var(--ink2);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink)}
+table.t td{padding:8px 10px;border-bottom:1px solid var(--line2);vertical-align:top}
+table.t td.r,table.t th.r{text-align:right}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+.note{font-size:14px;color:var(--ink2);margin:0}
+.callout{background:var(--soft);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--ink2)}
+.banner{border-radius:10px;padding:12px 14px;font-size:15px}
+.banner.bad{background:var(--badbg);color:var(--bad)}
+.banner.warn{background:var(--shortbg);color:var(--short)}
+
+.guide{max-width:820px}
+.guide h2{font-size:30px;margin:28px 0 8px;scroll-margin-top:84px}
+.guide h3{font-size:22px;margin:22px 0 6px;scroll-margin-top:84px}
+.guide p,.guide li{font-size:16px;line-height:1.6}
+.guide blockquote{margin:12px 0;padding:12px 16px;border-left:4px solid var(--accent);background:var(--soft);border-radius:0 10px 10px 0}
+.guide table{border-collapse:collapse;font-size:14px;width:100%}
+.guide th,.guide td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.guide th{border-bottom:2px solid var(--ink)}
+.guide hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+.guide code{font:14px var(--f-mono);background:var(--soft);padding:1px 5px;border-radius:4px}
+.guide pre{background:var(--soft);padding:12px;border-radius:8px;overflow-x:auto}
+.toc{display:flex;flex-direction:column;gap:2px}
+.toc a{text-decoration:none;padding:6px 0;font-size:15px}
+
+dialog{border:0;border-radius:var(--r);padding:0;max-width:min(560px,94vw);width:100%;background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(10,11,14,.6)}
+.dlg{display:flex;flex-wrap:wrap;gap:18px;padding:22px}
+.dlg img{width:220px;max-width:100%;border-radius:10px;flex:none;background:var(--soft)}
+.dlg .txt{flex:1 1 220px;display:flex;flex-direction:column;gap:8px;white-space:pre-line}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--card);padding:10px 16px;border-radius:10px;font-size:15px;z-index:50;display:flex;gap:12px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.toast button{background:none;border:0;color:var(--accent2);font-weight:600;cursor:pointer;min-height:36px}
+
+nav.bottom{display:none}
+.hide-sm{}
+@media (max-width:720px){
+  main{padding:16px 16px 96px;gap:16px}
+  .panel{padding:18px}
+  .top-in{padding:0 16px;min-height:56px}
+  nav.main{display:none}
+  nav.bottom{display:flex;position:fixed;left:0;right:0;bottom:0;background:var(--head);padding:4px 4px calc(8px + env(safe-area-inset-bottom));z-index:30}
+  nav.bottom a{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;min-height:56px;text-decoration:none;font:600 12px var(--f-body);color:var(--headink)}
+  nav.bottom a[aria-current="page"]{color:#fff}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+  .tab{flex:none;min-height:48px}
+  .stat b{font-size:26px}.stat .num{font-size:22px}
+  .hide-sm{display:none}
+  .toast{bottom:84px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#/decks">RIFT</a>
+    <nav class="main" aria-label="Main" id="nav"></nav>
+    <span class="sync" id="sync" title=""><i></i><span>loading</span></span>
+  </div>
+</header>
+<main id="view"><p class="dim">Loading…</p></main>
+<nav class="bottom" aria-label="Main" id="bnav"></nav>
+<dialog id="dlg"></dialog>
+
+<script type="module">
+import { indexCatalog, deckStats, deckChecks, journalRecord, ownedByIdentity, MAIN_SIZE, SB_MAX } from "../lib/decks.mjs";
+import { mdToHtml, esc, slugify } from "../lib/markdown.mjs";
+
+/* ── sync: the same Supabase row the old app and scripts/rift read ─────────────
+   The row holds everything (collection, decks, settings), so every write here is
+   read-modify-write on a fresh copy: pull, change only what this page owns, write
+   the whole object back. Keys this page has never heard of ride through untouched.
+   A copy of the row is kept in this browser before each write (the last 5). */
+const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
+const SUPA_KEY = "sb_publishable_U9pC2YEA9YB2KxPog6t3SA_T03Jid1g";
+const SUPA_TABLE = "riftbound", SUPA_ID = "jay";
+const H = { apikey: SUPA_KEY, Authorization: `Bearer ${SUPA_KEY}`, "Content-Type": "application/json" };
+
+const ls = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch { return false; } },
+};
+
+let ROW = null;          // the synced data object, as last read
+let SYNC = "loading";    // loading | ok | offline | error
+
+function setSync(state, msg) {
+  SYNC = state;
+  const el = document.getElementById("sync");
+  const c = { loading: "#C9A227", ok: "#3FB37F", offline: "#E07B39", error: "#E5484D" }[state];
+  el.querySelector("i").style.background = c;
+  const q = queue().length;
+  el.querySelector("span").textContent = msg || ({ loading: "syncing", ok: q ? `${q} to send` : "synced", offline: "offline", error: "sync error" })[state];
+  el.title = state === "ok" ? "Saved to the same row the old app and scripts/rift read." :
+    "Can't reach the sync row. Logged rounds wait in this browser and send when it's back; deck edits can't be saved until then.";
+}
+
+async function pull() {
+  const r = await fetch(`${SUPA_URL}/rest/v1/${SUPA_TABLE}?id=eq.${SUPA_ID}&select=data`, { headers: H, cache: "no-store" });
+  if (!r.ok) throw new Error(`sync ${r.status}`);
+  const rows = await r.json();
+  if (!rows.length || !rows[0].data) throw new Error("no state row");
+  return rows[0].data;
+}
+
+function backup(data) {
+  const list = ls.get("rift-app-backups", []);
+  list.unshift({ at: new Date().toISOString(), data });
+  while (list.length > 5) list.pop();
+  if (!ls.set("rift-app-backups", list)) ls.set("rift-app-backups", list.slice(0, 1));
+}
+
+let writing = Promise.resolve();
+function write(mutate) {
+  // Serialized, so two quick taps can't read the same row and drop one another.
+  const run = writing.then(async () => {
+    setSync("loading");
+    const fresh = await pull();
+    backup(fresh);
+    mutate(fresh);
+    const r = await fetch(`${SUPA_URL}/rest/v1/${SUPA_TABLE}`, {
+      method: "POST", headers: { ...H, Prefer: "resolution=merge-duplicates" },
+      body: JSON.stringify({ id: SUPA_ID, data: fresh }),
+    });
+    if (!r.ok) throw new Error(`sync ${r.status}`);
+    ROW = fresh;
+    setSync("ok");
+  });
+  writing = run.catch(() => {});
+  return run;
+}
+
+/* ── the journal queue: a tap is never lost to a bad signal at the store ────── */
+const queue = () => ls.get("rift-app-queue", []);
+async function flushQueue() {
+  const q = queue();
+  if (!q.length) return;
+  try {
+    await write((d) => {
+      const have = new Set((d.journal || []).map((g) => g.id));
+      d.journal = (d.journal || []).concat(q.filter((g) => !have.has(g.id)));
+    });
+    const sent = new Set(q.map((g) => g.id));
+    ls.set("rift-app-queue", queue().filter((g) => !sent.has(g.id)));
+    setSync("ok");
+  } catch { setSync("offline"); }
+}
+const journal = () => {
+  const sent = ROW?.journal || [];
+  const ids = new Set(sent.map((g) => g.id));
+  return sent.concat(queue().filter((g) => !ids.has(g.id)));
+};
+
+/* ── data ────────────────────────────────────────────────────────────────── */
+let CAT, IDX, TOP, TIERS, GUIDES, NEWS, IMG = "";
+const BYNAME = new Map();        // folded legend name "Irelia, Blade Dancer" -> legend card
+const getJSON = (f) => fetch(`../data/${f}`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+
+async function loadData() {
+  const [cards, extras, banned, errata, top, tiers, guides, news] = await Promise.all(
+    ["cards.json", "extras.json", "banned.json", "errata.json", "topdecks.json", "tiers.json", "guides.json", "news.json"].map(getJSON));
+  if (!cards) throw new Error("data/cards.json did not load");
+  CAT = cards; IMG = cards.imagePrefix || "";
+  const all = [...cards.cards, ...((extras && extras.cards) || [])];
+  // Riot's feed carries printed text; errata.json carries the current wording.
+  const fix = new Map(((errata && errata.cards) || []).filter((e) => e.status === "catalog-stale" && e.name && e.new).map((e) => [e.name, e.new]));
+  for (const c of all) if (fix.has(c.n)) { c.x = fix.get(c.n); c.errata = true; }
+  IDX = indexCatalog(all, banned);
+  for (const c of all) if (c.t === "Legend" && !c.v) { const n = IDX.legendName(c); if (!BYNAME.has(n)) BYNAME.set(n, c); }
+  TOP = top; TIERS = tiers; GUIDES = guides; NEWS = news;
+}
+
+/* ── helpers ─────────────────────────────────────────────────────────────── */
+const $ = (s) => document.querySelector(s);
+const money = (n) => (n == null ? "—" : `$${n.toFixed(2)}`);
+const pct = (x) => `${(x * 100).toFixed(1)}%`;
+const today = () => new Date().toLocaleDateString("en-CA");
+const dayOf = (iso) => new Date(iso).toLocaleDateString("en-CA");
+const uid = () => Math.random().toString(36).slice(2, 10);
+const dots = (ds, size = 12) => (ds || []).filter((d) => d !== "Colorless")
+  .map((d) => `<span class="dot" style="background:var(--${d});width:${size}px;height:${size}px" title="${d}"></span>`).join("");
+const champOf = (name) => String(name).split(",")[0];
+const legendCard = (name) => BYNAME.get(name) || null;
+const costOf = (c) => {
+  if (!c || c.e == null) return "";
+  const p = c.p ? ` ${c.p}P` : "";
+  return `${c.e}E${p}`;
+};
+let toastTimer = null;
+function toast(msg, action = null) {
+  document.querySelector(".toast")?.remove();
+  const el = document.createElement("div");
+  el.className = "toast"; el.setAttribute("role", "status");
+  el.innerHTML = `<span>${esc(msg)}</span>${action ? `<button type="button">${esc(action.label)}</button>` : ""}`;
+  if (action) el.querySelector("button").onclick = () => { el.remove(); action.run(); };
+  document.body.appendChild(el);
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.remove(), action ? 6000 : 2600);
+}
+
+function showCard(code) {
+  const c = IDX.BY.get(code);
+  if (!c) return;
+  const own = ownedByIdentity(ROW?.inv || {}, IDX).get(IDX.identity(c)) || 0;
+  const prints = IDX.byId.get(IDX.identity(c)) || [c];
+  const priced = prints.filter((p) => p.mp > 0).sort((a, b) => a.mp - b.mp)[0];
+  const d = $("#dlg");
+  d.innerHTML = `<div class="dlg">
+    ${c.i ? `<img src="${esc(IMG + c.i)}" alt="${esc(c.n)}" loading="lazy">` : ""}
+    <div class="txt">
+      <div class="dots">${dots(c.d)}<span class="lbl">${esc(c.t)}${c.e != null ? ` · ${esc(costOf(c))}` : ""}${c.m != null ? ` · ${c.m} Might` : ""}</span></div>
+      <h2>${esc(c.t === "Legend" ? IDX.legendName(c) : c.n)}</h2>
+      <div>${esc((c.x || "").replace(/:rb_energy_(\d+):/g, "[$1]").replace(/:rb_rune_(\w+):/g, "[$1]").replace(/:rb_might:/g, " Might").replace(/:rb_exhaust:/g, "[Exhaust]"))}</div>
+      ${c.errata ? `<div class="tiny dim">Current wording (errata); the printed card differs.</div>` : ""}
+      <div class="small dim">You own ${own}${prints.length > 1 ? ` across ${prints.length} printings` : ""} · ${priced ? `from ${money(priced.mp)}` : "no market price"}</div>
+      <form method="dialog"><button class="btn">Close</button></form>
+    </div></div>`;
+  d.showModal();
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-card]");
+  if (b) { e.preventDefault(); showCard(b.dataset.card); }
+});
+
+/* ── the field: Riot's latest RQ with a Day 1 / Day 2 table ──────────────── */
+function latestField() {
+  const ev = (TOP?.events || []).find((e) => e.field && e.day1 && e.day2);
+  if (!ev) return null;
+  const rows = ev.field.filter((r) => r.legend).map((r) => ({
+    legend: r.legend, d1: r.d1, d2: r.d2, share: r.d1 / ev.day1,
+    conv: r.d2 != null ? (r.d2 / ev.day2) / (r.d1 / ev.day1) : null,
+    top8: ev.decks.filter((d) => d.legend === r.legend && d.overall != null && d.overall <= 8).map((d) => d.overall).sort((a, b) => a - b),
+  })).sort((a, b) => b.d1 - a.d1);
+  return { ev, rows };
+}
+const eventName = (ev) => ev.title.replace(/[’']s? Top Decks$/i, "").replace(/’/g, "'");
+function tierOf(legend) {
+  const c = legendCard(legend);
+  if (!c || !TIERS?.tiers) return null;
+  const champ = IDX.championOf(c), epi = c.n.replace(/ - Starter$/, "");
+  const hit = TIERS.tiers.find((t) => t.champion === champ && (!t.epithet || t.epithet.replace(/ - Starter$/, "") === epi));
+  return hit ? hit.tier : null;
+}
+
+/* ── routing ─────────────────────────────────────────────────────────────── */
+const OLD = "../";   // the old app, until each of its tabs has a replacement here
+const NAV = [
+  ["decks", "Decks"], ["find", "Find a deck"], ["guides", "Guides"], ["news", "News"],
+  ["old:collection", "Collection"], ["old:import", "Import"],
+];
+function renderNav(cur) {
+  const link = ([k, label]) => k.startsWith("old:")
+    ? `<a class="navlink" href="${OLD}" title="Still in the old app">${label}<span class="ext">↗</span></a>`
+    : `<a class="navlink" href="#/${k}" ${cur === k ? 'aria-current="page"' : ""}>${label}</a>`;
+  $("#nav").innerHTML = NAV.map(link).join("");
+  $("#bnav").innerHTML = [["decks", "Decks"], ["find", "Find"], ["guides", "Guides"], ["news", "News"]]
+    .map(([k, l]) => `<a href="#/${k}" ${cur === k ? 'aria-current="page"' : ""}>${l}</a>`).join("") +
+    `<a href="${OLD}">Collection ↗</a>`;
+}
+
+let DIRTY = null;   // the editor's unsaved working copy, if any
+let lastHash = location.hash;
+window.addEventListener("hashchange", () => {
+  if (DIRTY && !confirm("Leave without saving your deck changes?")) { history.replaceState(null, "", lastHash); return; }
+  DIRTY = null;
+  lastHash = location.hash;
+  route();
+});
+
+function route() {
+  const [, page = "decks", arg = ""] = (location.hash || "#/decks").split("?")[0].split("/");
+  const key = decodeURIComponent(arg);
+  renderNav(page === "deck" || page === "edit" || page === "new" ? "decks" : page === "guide" ? "guides" : page);
+  const v = $("#view");
+  try {
+    if (page === "find") v.innerHTML = viewFind(key);
+    else if (page === "guides") v.innerHTML = viewGuides();
+    else if (page === "guide") { v.innerHTML = `<p class="dim">Loading guide…</p>`; viewGuide(key); }
+    else if (page === "news") v.innerHTML = viewNews();
+    else if (page === "edit" || page === "new") { v.innerHTML = ""; viewEdit(page === "new" ? null : key); }
+    else v.innerHTML = viewDecks(page === "deck" ? key : null);
+  } catch (e) {
+    console.error(e);
+    v.innerHTML = `<div class="banner bad">Something broke rendering this page: ${esc(e.message)}</div>`;
+  }
+  const anchor = new URLSearchParams(location.hash.split("?")[1] || "").get("at");
+  if (anchor) setTimeout(() => document.getElementById(anchor)?.scrollIntoView({ block: "start" }), 50);
+  else window.scrollTo(0, 0);
+}
+
+/* ══ Decks ════════════════════════════════════════════════════════════════ */
+const decks = () => ROW?.decks || [];
+let CURRENT = null;      // the deck on screen, which a logged game belongs to
+function pickDeck(id) {
+  const ds = decks();
+  return ds.find((d) => d.id === id) || ds.find((d) => d.id === ls.get("rift-app-deck")) || ds[ds.length - 1] || null;
+}
+const ZONES = [["Units", (c) => c.t === "Unit"], ["Spells", (c) => c.t === "Spell"], ["Gear", (c) => c.t === "Gear"],
+  ["Battlefields", (c) => c.t === "Battlefield"], ["Runes", (c) => c.t === "Rune"]];
+const sortRows = (a, b) => (a.card?.e ?? 99) - (b.card?.e ?? 99) || (a.card?.n || a.code).localeCompare(b.card?.n || b.code);
+
+function deckTag(d) {
+  const st = deckStats(d, IDX, ROW.inv);
+  const n = st.mainGap.cards;
+  return n ? { text: `${n} short`, short: true } : { text: st.sideGap.cards ? "main ready" : "ready", short: false };
+}
+
+function viewDecks(id) {
+  if (!ROW) return SYNC === "loading" ? `<p class="dim">Loading your decks…</p>`
+    : `<div class="banner bad">Can't reach your saved decks right now. The rest of the site works; try again in a moment.</div>`;
+  const d = pickDeck(id);
+  const tabs = decks().map((x) => {
+    const t = deckTag(x);
+    return `<a class="tab" role="tab" aria-selected="${x === d}" href="#/deck/${encodeURIComponent(x.id)}">
+      <span>${esc(x.name)}</span><small style="color:${x === d ? "inherit" : t.short ? "var(--short)" : "var(--good)"}">${esc(t.text)}</small></a>`;
+  }).join("") + `<a class="tab new" href="#/new">+ New deck</a>`;
+  if (!d) return `<div class="tabs" role="tablist">${tabs}</div><div class="panel"><p>No decks yet.</p></div>`;
+  ls.set("rift-app-deck", d.id);
+  CURRENT = d;
+
+  const st = deckStats(d, IDX, ROW.inv);
+  const checks = deckChecks(d, IDX, st);
+  const L = st.legend;
+  const bad = checks.filter((k) => k.ok === false);
+  const later = checks.find((k) => k.ok === "later");
+  const gap = st.mainGap, sgap = st.sideGap;
+
+  const group = (title, rows) => rows.length ? `<div class="group">
+      <div class="lbl">${title} · ${rows.reduce((a, r) => a + r.qty, 0)}</div>
+      ${rows.sort(sortRows).map((r) => `<div class="row">
+        <span class="q">${r.qty}</span>
+        <span class="n">${r.card ? `<button class="cardlink" data-card="${esc(r.code)}">${esc(r.card.n)}</button>` : `<span class="dim">${esc(r.code)} (not in catalog)</span>`}</span>
+        <span class="cost hide-sm">${esc(costOf(r.card))}</span>
+        ${r.short ? `<span class="pill short">need ${r.short}</span>` : ""}
+      </div>`).join("")}</div>` : "";
+  const main = st.rows.filter((r) => r.card && r.zone !== "legend");
+  const groups = ZONES.map(([t, f]) => group(t, main.filter((r) => f(r.card)))).join("") +
+    group("Sideboard", st.side.slice()) + group("Not in catalog", st.rows.filter((r) => !r.card));
+
+  const buy = [...st.rows.map((r) => ({ ...r, sb: false })), ...st.side.map((r) => ({ ...r, sb: true }))]
+    .filter((r) => r.short && r.card).sort((a, b) => (b.cost ?? -1) - (a.cost ?? -1));
+
+  return `
+  <div class="tabs" role="tablist" aria-label="Your decks">${tabs}</div>
+  <section class="panel hero">
+    <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+      <div class="dots">${dots(L?.d)}<span class="lbl">${esc((L?.d || []).join(" / "))}</span>
+        ${later ? `<span class="pill later">legal ${esc(later.val.replace("from ", ""))}</span>` : ""}</div>
+      <h1>${L ? `<button class="cardlink" data-card="${esc(L.c)}">${esc(IDX.legendName(L))}</button>` : esc(d.name)}</h1>
+      <div class="dim">${esc(d.name)} · ${st.count.main} main · ${st.count.side} sideboard</div>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="lbl">Status</span>
+        <b style="color:${gap.cards ? "var(--short)" : bad.length ? "var(--bad)" : "var(--good)"}">${gap.cards ? `${gap.cards} short` : bad.length ? `${bad.length} rule${bad.length > 1 ? "s" : ""} broken` : "Ready"}</b></div>
+      <div class="stat"><span class="lbl">To finish main</span><span class="num">${gap.cards ? money(gap.total) : "$0.00"}${gap.unpriced ? `<span class="tiny dim"> + ${gap.unpriced} unpriced</span>` : ""}</span></div>
+      ${sgap.cards ? `<div class="stat"><span class="lbl">Sideboard</span><span class="num">${sgap.cards} · ${money(sgap.total)}</span></div>` : ""}
+    </div>
+  </section>
+  ${bad.length ? `<div class="banner bad"><strong>Not a legal deck yet:</strong> ${bad.map((k) => esc(`${k.label} (${k.val})`)).join(" · ")}</div>` : ""}
+
+  <div class="cols">
+    <section class="panel wide">
+      <div class="headrow"><h2>Decklist</h2>
+        <div class="btnrow"><span class="small dim" style="align-self:center">Tap a card to read it</span>
+        <a class="btn primary" href="#/edit/${encodeURIComponent(d.id)}">Edit deck</a></div></div>
+      <div class="grid-list">${groups}</div>
+    </section>
+    <div class="side">
+      ${logPanel(d)}
+      <section class="panel">
+        <div class="headrow"><h2>To get</h2><span class="num small dim">${gap.cards + sgap.cards} cards · ${money(gap.total + sgap.total)}${gap.unpriced + sgap.unpriced ? ` + ${gap.unpriced + sgap.unpriced} unpriced` : ""}</span></div>
+        ${buy.length ? `<div>${buy.map((r) => `<div class="row"><span class="q">${r.short}×</span>
+          <span class="n"><button class="cardlink" data-card="${esc(r.code)}">${esc(r.card.n)}</button>${r.sb ? `<span class="tiny dim"> · side</span>` : ""}</span>
+          <span class="num small">${r.cost == null ? "no price" : money(r.cost)}</span></div>`).join("")}</div>
+          <p class="note">Cheapest printing on riftbound.gg's market (catalog of ${esc(CAT.generatedAt)}). "No price" means none is listed, not free.</p>`
+          : `<p class="note">You own every card in this list.</p>`}
+      </section>
+    </div>
+  </div>
+  ${matchupsPanel(d, L)}`;
+}
+
+/* ── one-tap journal ─────────────────────────────────────────────────────── */
+function opponentsFor(d) {
+  const recent = [];
+  for (const g of journal().slice().reverse()) if (g.deck === d.id && g.opp !== "Other" && !recent.includes(g.opp)) recent.push(g.opp);
+  const field = latestField();
+  const list = [...recent.slice(0, 4)];
+  for (const r of field ? field.rows : []) { if (list.length >= 9) break; if (!list.includes(r.legend)) list.push(r.legend); }
+  return list;
+}
+function shortName(legend, all) {
+  const champ = champOf(legend);
+  return all.filter((x) => champOf(x) === champ).length > 1 ? legend : champ;
+}
+function logPanel(d) {
+  const opps = opponentsFor(d);
+  const rec = journalRecord(journal(), d.id);
+  const all = [...BYNAME.keys()].sort();
+  const mine = journal().filter((g) => g.deck === d.id && dayOf(g.at) === today());
+  const r = (o) => { const x = rec.get(o); return x ? `${x.w}–${x.l}${x.d ? `–${x.d}` : ""}` : ""; };
+  return `<section class="panel" id="log">
+    <div class="headrow"><h2>Log a game</h2><span class="tiny dim">tap who, then W or L</span></div>
+    <div>${opps.map((o) => `<div class="logrow">
+      <span class="n">${esc(shortName(o, opps))} <span class="rec">${r(o)}</span></span>
+      <button class="seg w" data-log="W" data-opp="${esc(o)}" aria-label="Won against ${esc(o)}">W</button>
+      <button class="seg l" data-log="L" data-opp="${esc(o)}" aria-label="Lost to ${esc(o)}">L</button></div>`).join("")}
+      <div class="logrow">
+        <select id="opp-other" aria-label="Another legend" style="flex:1;min-width:0">
+          <option value="">Another legend…</option>
+          ${all.filter((n) => !opps.includes(n)).map((n) => `<option>${esc(n)}</option>`).join("")}
+          <option value="Other">Other / unknown</option>
+        </select>
+        <button class="seg w" data-log="W" data-opp="" aria-label="Won">W</button>
+        <button class="seg l" data-log="L" data-opp="" aria-label="Lost">L</button>
+      </div></div>
+    ${mine.length ? `<div class="today"><span class="lbl">Today</span>
+      ${mine.map((g, i) => `<div class="r"><span class="num dim">${i + 1}</span><span style="flex:1">${esc(shortName(g.opp, [g.opp]))}</span>
+        <span class="${g.res === "W" ? "win" : g.res === "L" ? "loss" : "draw"}">${g.res === "W" ? "Win" : g.res === "L" ? "Loss" : "Draw"}</span></div>`).join("")}
+      <button class="btn" data-undo="${esc(mine[mine.length - 1].id)}" style="align-self:flex-start;min-height:36px">Undo last</button></div>`
+      : `<p class="note">One tap per game. Mistake notes can come later; the record is what matters at the table.</p>`}
+  </section>`;
+}
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-log]");
+  if (b) {
+    const d = CURRENT;
+    if (!d) return;
+    let opp = b.dataset.opp;
+    if (!opp) { opp = $("#opp-other")?.value; if (!opp) { toast("Pick the legend first"); return; } }
+    const entry = { id: uid(), at: new Date().toISOString(), deck: d.id, opp, res: b.dataset.log };
+    ls.set("rift-app-queue", queue().concat(entry));
+    b.classList.add("flash");
+    route();
+    toast(`${b.dataset.log === "W" ? "Win" : "Loss"} vs ${shortName(opp, [opp])} logged`, { label: "Undo", run: () => undo(entry.id) });
+    await flushQueue();
+    if (!DIRTY && (location.hash === "" || location.hash.startsWith("#/deck"))) route();
+    return;
+  }
+  const u = e.target.closest("[data-undo]");
+  if (u) undo(u.dataset.undo);
+});
+async function undo(id) {
+  ls.set("rift-app-queue", queue().filter((g) => g.id !== id));
+  try { await write((d) => { d.journal = (d.journal || []).filter((g) => g.id !== id); }); }
+  catch { setSync("offline"); toast("Couldn't reach sync; try Undo again when online"); }
+  route();
+}
+
+/* ── matchups ────────────────────────────────────────────────────────────── */
+function guidesFor(L) {
+  if (!L || !GUIDES?.guides) return [];
+  return GUIDES.guides.filter((g) => g.legend && g.legend.trim() === L.n.replace(/ - Starter$/, ""));
+}
+function planLinks(guides, legend) {
+  const champ = champOf(legend);
+  const out = [];
+  for (const g of guides) for (const s of g.sections || []) {
+    if (s.startsWith(legend) || s.startsWith(champ + ",") || s.startsWith(champ + " ")) out.push({ g, s });
+  }
+  return out;
+}
+function matchupsPanel(d, L) {
+  const field = latestField();
+  const rec = journalRecord(journal(), d.id);
+  const guides = guidesFor(L);
+  const names = [...new Set([...(field ? field.rows.slice(0, 10).map((r) => r.legend) : []), ...rec.keys()])].filter((n) => n !== "Other");
+  const cards = names.map((n) => {
+    const f = field?.rows.find((r) => r.legend === n);
+    const c = legendCard(n);
+    const r = rec.get(n);
+    const plans = planLinks(guides, n);
+    return `<article class="mcard">
+      <div class="headrow"><h3 style="font-family:var(--f-body);font-weight:600;font-size:18px">${c ? `<button class="cardlink" data-card="${esc(c.c)}">${esc(n)}</button>` : esc(n)}</h3>
+        <span class="num small dim">${f ? pct(f.share) : "—"}</span></div>
+      <div class="dots">${dots(c?.d, 10)}<span class="tiny dim">${esc((c?.d || []).join(" / "))}</span></div>
+      <dl>
+        <dt class="lbl">You</dt><dd class="num">${r ? `${r.w}–${r.l}${r.d ? `–${r.d}` : ""}` : "no games yet"}</dd>
+        <dt class="lbl">Field</dt><dd>${f ? `${f.conv != null ? `converts ${f.conv.toFixed(2)}` : ""}${f.top8.length ? ` · Top 8: ${f.top8.map((x) => `#${x}`).join(", ")}` : ""}` : "not in Riot's table"}</dd>
+        <dt class="lbl">Plan</dt><dd>${plans.length ? plans.map((p) => `<a href="#/guide/${encodeURIComponent(p.g.slug)}?at=${slugify(p.s)}">${esc(p.g.title.split("—")[0].trim())}</a>`).join("<br>") : `<span class="dim">none yet</span>`}</dd>
+      </dl></article>`;
+  }).join("");
+  return `<section style="display:flex;flex-direction:column;gap:14px">
+    <div class="headrow"><h2>Matchups</h2>
+      <span class="small dim">${field ? `Share of Day 1 at ${esc(eventName(field.ev))}, Riot's table · "converts" is Day 2 share ÷ Day 1 share` : "No field table yet"}</span></div>
+    <div class="mgrid">${cards}</div></section>`;
+}
+
+/* ══ Editor ══════════════════════════════════════════════════════════════ */
+function viewEdit(id) {
+  const src = id ? decks().find((d) => d.id === id) : null;
+  if (id && !src) { $("#view").innerHTML = `<div class="banner bad">No deck with that id.</div>`; return; }
+  const W = src ? JSON.parse(JSON.stringify({ id: src.id, name: src.name, cards: src.cards || {}, sb: src.sb || {} }))
+    : { id: "d" + Date.now().toString(36), name: "New deck", cards: {}, sb: {} };
+  const isNew = !src;
+  let q = "";
+  const touch = () => { DIRTY = W; draw(); };
+
+  const set = (zone, code, n) => {
+    const m = zone === "sb" ? W.sb : W.cards;
+    if (n <= 0) delete m[code]; else m[code] = n;
+    touch();
+  };
+  const move = (from, code) => {
+    const a = from === "sb" ? W.sb : W.cards, b = from === "sb" ? W.cards : W.sb;
+    a[code]--; if (a[code] <= 0) delete a[code];
+    b[code] = (b[code] || 0) + 1;
+    touch();
+  };
+  const setLegend = (code) => {
+    for (const k of Object.keys(W.cards)) if (IDX.BY.get(k)?.t === "Legend") delete W.cards[k];
+    W.cards[code] = 1; touch();
+  };
+
+  function results() {
+    const st = deckStats(W, IDX, ROW?.inv || {});
+    const L = st.legend;
+    const ident = new Set(L?.d || []);
+    const champ = L ? IDX.championOf(L) : null;
+    const own = ownedByIdentity(ROW?.inv || {}, IDX);
+    const t = q.trim().toLowerCase();
+    if (!t && L) return `<p class="note">Search by name, tag or rules text. Only cards inside ${esc([...ident].join(" / "))} are shown.</p>`;
+    let pool = IDX.cards.filter((c) => !c.v && c.t !== "Token" && (c.t !== "Legend" || !L || t));
+    if (!L) pool = pool.filter((c) => c.t === "Legend");
+    if (t) pool = pool.filter((c) => `${c.n} ${IDX.legendName(c) || ""} ${(c.g || []).join(" ")} ${c.x || ""}`.toLowerCase().includes(t));
+    if (L) pool = pool.filter((c) => c.t === "Legend" || (c.d || []).every((d) => d === "Colorless" || ident.has(d)));
+    pool.sort((a, b) => (a.n.toLowerCase().startsWith(t) ? 0 : 1) - (b.n.toLowerCase().startsWith(t) ? 0 : 1) || a.n.localeCompare(b.n));
+    pool = pool.slice(0, 30);
+    if (!pool.length) return `<p class="note">No card matches${L ? ` inside ${esc([...ident].join(" / "))}` : ""}.</p>`;
+    return pool.map((c) => {
+      const sig = IDX.signatureOf(c);
+      const blocked = sig && champ && sig !== champ ? `${sig}'s signature, not legal with ${champ}`
+        : IDX.bannedNames.has(c.n) ? "Banned" : null;
+      const later = IDX.notYetStandard(c);
+      const inDeck = (W.cards[c.c] || 0) + (W.sb[c.c] || 0);
+      const note = blocked || [inDeck ? `${inDeck} in deck` : "", `you own ${own.get(IDX.identity(c)) || 0}`, later ? (later.from ? `legal ${later.from}` : "not Standard") : "", costOf(c)].filter(Boolean).join(" · ");
+      const label = c.t === "Legend" ? IDX.legendName(c) : c.n;
+      return `<div class="erow"><span class="n"><button class="cardlink" data-card="${esc(c.c)}">${esc(label)}</button>
+        <span class="tiny" style="display:block;color:${blocked ? "var(--bad)" : "var(--ink2)"}">${dots(c.d, 9)} ${esc(note)}</span></span>
+        ${c.t === "Legend" ? `<button class="pm sm" data-act="legend" data-code="${esc(c.c)}">${L ? "Swap legend" : "Use"}</button>`
+          : `<button class="pm" data-act="add" data-code="${esc(c.c)}" ${blocked ? "disabled" : ""} aria-label="Add ${esc(c.n)} to main">+</button>
+             ${c.t !== "Rune" && c.t !== "Battlefield" ? `<button class="pm sm" data-act="addsb" data-code="${esc(c.c)}" ${blocked ? "disabled" : ""} aria-label="Add ${esc(c.n)} to sideboard">+SB</button>` : ""}`}
+      </div>`;
+    }).join("");
+  }
+
+  function draw() {
+    const st = deckStats(W, IDX, ROW?.inv || {});
+    const checks = deckChecks(W, IDX, st);
+    const L = st.legend;
+    const row = (r, zone) => `<div class="erow">
+      <button class="pm" data-act="dec" data-zone="${zone}" data-code="${esc(r.code)}" aria-label="One fewer ${esc(r.card?.n || r.code)}">−</button>
+      <span class="q">${r.qty}</span>
+      <button class="pm" data-act="inc" data-zone="${zone}" data-code="${esc(r.code)}" aria-label="One more ${esc(r.card?.n || r.code)}">+</button>
+      <span class="n">${r.card ? `<button class="cardlink" data-card="${esc(r.code)}">${esc(r.card.n)}</button>` : esc(r.code)}
+        <span class="cost">${esc(costOf(r.card))}</span></span>
+      ${r.short ? `<span class="pill short">need ${r.short}</span>` : `<span class="tiny dim hide-sm">own ${r.have}</span>`}
+      ${r.card && !["Legend", "Rune", "Battlefield"].includes(r.card.t) ? `<button class="pm sm" data-act="move" data-zone="${zone}" data-code="${esc(r.code)}" title="${zone === "sb" ? "Move one to the main deck" : "Move one to the sideboard"}">${zone === "sb" ? "→ main" : "→ SB"}</button>` : ""}
+    </div>`;
+    const main = st.rows.filter((r) => r.zone !== "legend");
+    const grp = (title, rows, zone) => rows.length ? `<div class="group"><div class="lbl">${title} · ${rows.reduce((a, r) => a + r.qty, 0)}</div>${rows.sort(sortRows).map((r) => row(r, zone)).join("")}</div>` : "";
+    const groups = ZONES.map(([t, f]) => grp(t, main.filter((r) => r.card && f(r.card)), "main")).join("") +
+      grp("Not in catalog", main.filter((r) => !r.card), "main") + grp("Sideboard", st.side.slice(), "sb");
+    const dot = (ok) => `background:${ok === true ? "var(--good)" : ok === "later" ? "var(--later)" : "var(--bad)"}`;
+    $("#view").innerHTML = `
+    <div class="headrow" style="align-items:flex-end">
+      <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+        <a href="${src ? `#/deck/${encodeURIComponent(src.id)}` : "#/decks"}" class="small">‹ Back${src ? ` to ${esc(src.name)}` : ""}</a>
+        <label class="lbl" for="dname">Deck name</label>
+        <input type="text" id="dname" value="${esc(W.name)}" style="font:700 30px var(--f-head);min-width:min(520px,80vw)">
+      </div>
+      <div class="btnrow">
+        ${src ? `<button class="btn danger" data-act="delete">Delete</button><button class="btn" data-act="saveas">Save as copy</button>` : ""}
+        <button class="btn primary" data-act="save" ${DIRTY || isNew ? "" : "disabled"}>Save</button>
+      </div>
+    </div>
+    <div class="cols">
+      <section class="panel wide">
+        <div class="headrow"><h2>${L ? `<button class="cardlink" data-card="${esc(L.c)}">${esc(IDX.legendName(L))}</button>` : "Pick a legend"}</h2>
+          <div class="dots">${dots(L?.d)}</div></div>
+        ${main.length || st.side.length ? `<div style="display:flex;flex-direction:column;gap:18px">${groups}</div>` : `<p class="note">Empty. ${L ? "Search on the right to add cards." : "Start with a legend: search on the right."}</p>`}
+      </section>
+      <div class="side">
+        <section class="panel">
+          <h2>Checks</h2>
+          ${checks.map((k) => `<div class="check"><span class="d" style="${dot(k.ok)}" aria-hidden="true"></span>
+            <span class="n">${esc(k.label)}${k.ok !== true && k.detail && [].concat(k.detail).length ? `<span class="why">${esc([].concat(k.detail).slice(0, 5).join(" · "))}</span>` : ""}</span>
+            <span class="num small">${esc(k.val)}</span></div>`).join("")}
+          <div class="check" style="border-top:1px solid var(--line2);padding-top:10px"><span class="n">Cards you're short</span>
+            <span class="num" style="color:var(--short)">${st.mainGap.cards + st.sideGap.cards}</span></div>
+        </section>
+        <section class="panel">
+          <label style="display:flex;flex-direction:column;gap:6px"><span class="lbl">${L ? "Add a card" : "Find a legend"}</span>
+            <input type="search" id="q" value="${esc(q)}" placeholder="${L ? "Name, tag or text" : "Champion or legend name"}" autocomplete="off"></label>
+          <div id="results">${results()}</div>
+        </section>
+      </div>
+    </div>`;
+    const qi = $("#q");
+    qi.oninput = () => { q = qi.value; $("#results").innerHTML = results(); };
+    $("#dname").oninput = (e) => { W.name = e.target.value; DIRTY = W; $("[data-act=save]").disabled = false; };
+  }
+
+  const view = $("#view");
+  view.onclick = async (e) => {
+    const b = e.target.closest("[data-act]");
+    if (!b) return;
+    const code = b.dataset.code, zone = b.dataset.zone, m = zone === "sb" ? W.sb : W.cards;
+    const act = b.dataset.act;
+    if (act === "inc") set(zone, code, (m[code] || 0) + 1);
+    else if (act === "dec") set(zone, code, (m[code] || 0) - 1);
+    else if (act === "move") move(zone, code);
+    else if (act === "add") { W.cards[code] = (W.cards[code] || 0) + 1; touch(); keepSearch(); }
+    else if (act === "addsb") { W.sb[code] = (W.sb[code] || 0) + 1; touch(); keepSearch(); }
+    else if (act === "legend") { setLegend(code); q = ""; draw(); }
+    else if (act === "save" || act === "saveas") {
+      const out = { ...W, name: (W.name || "").trim() || "Untitled deck" };
+      if (act === "saveas") { out.id = "d" + Date.now().toString(36); out.name = `${out.name} (copy)`; }
+      b.disabled = true;
+      try {
+        await write((data) => {
+          data.decks = data.decks || [];
+          const i = data.decks.findIndex((x) => x.id === out.id);
+          // Keep any field the old app stores on a deck that this editor doesn't know.
+          if (i > -1) data.decks[i] = { ...data.decks[i], name: out.name, cards: out.cards, sb: out.sb };
+          else data.decks.push({ id: out.id, name: out.name, cards: out.cards, sb: out.sb });
+        });
+        DIRTY = null;
+        toast("Saved");
+        location.hash = `#/deck/${encodeURIComponent(out.id)}`;
+      } catch (err) {
+        b.disabled = false;
+        toast(`Not saved: ${err.message}. Your edits are still here.`);
+      }
+    } else if (act === "delete") {
+      if (!confirm(`Delete "${src.name}"? This removes it everywhere, including scripts/rift.`)) return;
+      try {
+        await write((data) => { data.decks = (data.decks || []).filter((x) => x.id !== src.id); });
+        DIRTY = null; toast("Deleted"); location.hash = "#/decks";
+      } catch (err) { toast(`Not deleted: ${err.message}`); }
+    }
+  };
+  function keepSearch() { const qi = $("#q"); if (qi) { qi.focus(); qi.setSelectionRange(qi.value.length, qi.value.length); } }
+  if (isNew) DIRTY = W;
+  draw();
+}
+
+/* ══ Find a deck: results ════════════════════════════════════════════════ */
+function viewFind(legend) {
+  if (!TOP?.events?.length) return `<div class="banner warn">No tournament results loaded.</div>`;
+  if (legend) return viewLists(legend);
+  const f = latestField();
+  const rows = f ? f.rows.filter((r) => r.d1 >= 20) : [];
+  const few = f ? f.rows.filter((r) => r.d1 < 20).length : 0;
+  const lists = (n) => TOP.events.reduce((a, e) => a + e.decks.filter((d) => d.legend === n).length, 0);
+  return `
+  <section class="panel">
+    <div class="headrow"><h1>Find a deck</h1></div>
+    <p class="note">Results first. This is Riot's own record of each Regional Qualifier: who brought what on Day 1, how many made Day 2, and the Top 8.
+      <strong>Converts</strong> is Day 2 share ÷ Day 1 share, so above 1.00 the deck beat the room and below it lost to it.
+      The tier list with consensus lists and Claude's own builds comes next; until then, riftbound.gg's curated tier sits beside the evidence.</p>
+  </section>
+  ${f ? `<section class="panel">
+    <div class="headrow"><h2>${esc(eventName(f.ev))}</h2><span class="small dim">${f.ev.day1} on Day 1 · ${f.ev.day2} on Day 2 · article ${esc(f.ev.published)} · <a href="${esc(f.ev.url)}" target="_blank" rel="noopener">Riot's article</a></span></div>
+    <p class="note">${esc(f.ev.summary || "")}</p>
+    <div class="tablewrap"><table class="t">
+      <thead><tr><th>Legend</th><th class="r">Day 1</th><th class="r">Share</th><th class="r">Day 2</th><th class="r">Converts</th><th>Top 8</th><th class="r hide-sm">riftbound.gg</th><th class="r">Lists</th></tr></thead>
+      <tbody>${rows.map((r) => { const c = legendCard(r.legend); const t = tierOf(r.legend); return `<tr>
+        <td><span class="dots" style="display:inline-flex;margin-right:6px">${dots(c?.d, 9)}</span>${esc(r.legend)}</td>
+        <td class="r num">${r.d1}</td><td class="r num">${pct(r.share)}</td><td class="r num">${r.d2 ?? "—"}</td>
+        <td class="r num" style="font-weight:600;color:${r.conv == null ? "inherit" : r.conv >= 1.2 ? "var(--good)" : r.conv < 0.8 ? "var(--bad)" : "inherit"}">${r.conv != null ? r.conv.toFixed(2) : "—"}</td>
+        <td class="num">${r.top8.length ? r.top8.map((x) => `#${x}`).join(" ") : ""}</td>
+        <td class="r num hide-sm">${t ? `Tier ${t}` : "—"}</td>
+        <td class="r"><a href="#/find/${encodeURIComponent(r.legend)}">${lists(r.legend)}</a></td></tr>`; }).join("")}</tbody>
+    </table></div>
+    <p class="note">Legends with fewer than 20 Day 1 pilots (${few}) are left out: a handful of players converting is noise, not a result. One event is one sample; read a 1.1 against a 0.9 as a tie.</p>
+  </section>` : ""}
+  <section class="panel">
+    <h2>Every RQ Riot has written up</h2>
+    <div class="tablewrap"><table class="t"><thead><tr><th>Event</th><th>Article</th><th class="r">Day 1</th><th>Winner</th><th class="r">Lists</th></tr></thead>
+    <tbody>${TOP.events.map((e) => { const w = e.decks.find((d) => d.overall === 1); return `<tr>
+      <td><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(eventName(e))}</a></td><td class="num">${esc(e.published || "")}</td>
+      <td class="r num">${e.day1 ?? "—"}</td><td>${w ? `<a href="#/find/${encodeURIComponent(w.legend)}">${esc(w.legend)}</a>` : "—"}</td><td class="r num">${e.decks.length}</td></tr>`; }).join("")}</tbody></table></div>
+    <p class="note">Formats change between events (bans, new sets), so an older event's lists may hold cards that are now banned; the list view flags them.</p>
+  </section>`;
+}
+
+function viewLists(legend) {
+  const all = [];
+  for (const e of TOP.events) for (const d of e.decks) if (d.legend === legend) all.push({ e, d });
+  const c = legendCard(legend);
+  const card = (x) => {
+    const banned = x.d.main.concat(x.d.side).filter(([, n]) => IDX.bannedNames.has(n)).map(([, n]) => n);
+    const grp = (rows) => rows.map(([n, name, code]) => `<div class="row"><span class="q">${n}</span><span class="n">${code ? `<button class="cardlink" data-card="${esc(code)}">${esc(name)}</button>` : esc(name)}</span></div>`).join("");
+    return `<article class="panel">
+      <div class="headrow"><h3>${esc(x.d.player)}</h3><span class="num small dim">${x.d.overall ? `#${x.d.overall} overall` : ""}${x.d.legendRank ? ` · #${x.d.legendRank[0]} of ${x.d.legendRank[1]} ${esc(champOf(legend))}` : ""}</span></div>
+      <div class="small dim">${esc(eventName(x.e))} · ${esc(x.e.published || "")} · ${esc(x.d.runes.map(([n, r]) => `${n} ${r.replace(" Rune", "")}`).join(" / "))} · ${esc(x.d.battlefields.join(", "))}</div>
+      ${banned.length ? `<div class="banner bad">Has banned cards now: ${esc(banned.join(", "))}</div>` : ""}
+      <details><summary class="btn" style="width:max-content">Show the list</summary>
+        <div class="grid-list" style="margin-top:12px"><div class="group"><div class="lbl">Main · ${x.d.main.reduce((a, r) => a + r[0], 0)} + ${esc(x.d.champion || "")}</div>${grp(x.d.main)}</div>
+        <div class="group"><div class="lbl">Sideboard · ${x.d.side.reduce((a, r) => a + r[0], 0)}</div>${grp(x.d.side)}</div></div></details>
+      ${ROW ? `<button class="btn" data-copy="${esc(x.e.slug)}|${esc(x.d.player)}|${x.d.overall ?? ""}">Copy to my decks</button>` : ""}
+    </article>`;
+  };
+  return `<div class="headrow"><div style="display:flex;flex-direction:column;gap:6px"><a class="small" href="#/find">‹ All results</a>
+      <h1>${c ? `<button class="cardlink" data-card="${esc(c.c)}">${esc(legend)}</button>` : esc(legend)}</h1>
+      <div class="dots">${dots(c?.d)}<span class="small dim">${all.length} list${all.length === 1 ? "" : "s"} in Riot's articles, newest first</span></div></div></div>
+    ${all.length ? `<div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr))">${all.map(card).join("")}</div>` : `<p class="note">Riot hasn't published a list for this legend.</p>`}`;
+}
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-copy]");
+  if (!b) return;
+  const [slug, player, overall] = b.dataset.copy.split("|");
+  const ev = TOP.events.find((x) => x.slug === slug);
+  const d = ev?.decks.find((x) => x.player === player && String(x.overall ?? "") === overall);
+  if (!d) return;
+  const byName = (name, t) => { const c = IDX.cards.find((x) => !x.v && (x.n === name || IDX.legendName(x) === name) && (!t || x.t === t)); return c?.c || null; };
+  const cards = {}, sb = {}, missing = [];
+  const put = (m, code, n, name) => { if (code) m[code] = (m[code] || 0) + n; else missing.push(name); };
+  put(cards, d.legendCode || byName(d.legend, "Legend"), 1, d.legend);
+  if (d.champion) put(cards, byName(d.champion, "Unit"), 1, d.champion);
+  for (const [n, name, code] of d.main) put(cards, code, n, name);
+  for (const [n, name] of d.runes) put(cards, byName(name, "Rune"), n, name);
+  for (const name of d.battlefields) put(cards, byName(name, "Battlefield"), 1, name);
+  for (const [n, name, code] of d.side) put(sb, code, n, name);
+  const deck = { id: "d" + Date.now().toString(36), name: `${champOf(d.legend)} — ${d.player}, ${eventName(ev)}${d.overall ? ` #${d.overall}` : ""}`, cards, sb };
+  b.disabled = true;
+  try {
+    await write((data) => { data.decks = (data.decks || []).concat(deck); });
+    toast(missing.length ? `Copied; ${missing.length} card name(s) didn't match the catalog: ${missing.join(", ")}` : "Copied to your decks", { label: "Open", run: () => (location.hash = `#/deck/${deck.id}`) });
+  } catch (err) { b.disabled = false; toast(`Not copied: ${err.message}`); }
+});
+
+/* ══ Guides ══════════════════════════════════════════════════════════════ */
+function viewGuides() {
+  const gs = GUIDES?.guides || [];
+  const deckG = gs.filter((g) => g.legend), ref = gs.filter((g) => !g.legend);
+  const item = (g) => `<a class="panel" href="#/guide/${encodeURIComponent(g.slug)}" style="text-decoration:none;color:inherit;gap:6px">
+    <span class="lbl">${esc(g.kicker || (g.legend ? `${g.legend}${g.champion ? " · " + g.champion : ""}` : "Guide"))}</span>
+    <h3 style="font-size:24px">${esc(g.title)}</h3><span class="small dim">${esc(g.subtitle || "")}</span>
+    <span class="tiny dim">${esc(g.date || "")} · ${Math.round((g.words || 0) / 230)} min read</span></a>`;
+  return `<h1>Guides</h1>
+    <h2>Your decks</h2><div class="mgrid">${deckG.map(item).join("")}</div>
+    <h2>Every deck</h2><div class="mgrid">${ref.map(item).join("")}</div>`;
+}
+async function viewGuide(slug) {
+  const g = (GUIDES?.guides || []).find((x) => x.slug === slug);
+  const v = $("#view");
+  if (!g) { v.innerHTML = `<div class="banner bad">No guide called ${esc(slug)}.</div>`; return; }
+  let md;
+  try { const r = await fetch(`../${g.file}`); if (!r.ok) throw new Error(r.status); md = await r.text(); }
+  catch (e) { v.innerHTML = `<div class="banner bad">Couldn't load ${esc(g.file)}: ${esc(e.message)}</div>`; return; }
+  const linkFor = (u) => {
+    const base = u.split("#")[0].split("/").pop();
+    const hit = (GUIDES.guides || []).find((x) => x.file.split("/").pop() === base);
+    return hit ? `#/guide/${encodeURIComponent(hit.slug)}` : null;
+  };
+  const html = mdToHtml(md, { linkFor });
+  const toc = (g.sections || []).map((s) => `<a href="#/guide/${encodeURIComponent(slug)}?at=${slugify(s)}">${esc(s)}</a>`).join("");
+  v.innerHTML = `<div class="cols">
+    <article class="panel wide guide"><a class="small" href="#/guides">‹ Guides</a><h1>${esc(g.title)}</h1>
+      ${g.subtitle ? `<p class="dim">${esc(g.subtitle)}</p>` : ""}${html}</article>
+    <aside class="side hide-sm" style="position:sticky;top:88px"><section class="panel"><span class="lbl">Sections</span><div class="toc">${toc}</div></section></aside></div>`;
+  const at = new URLSearchParams(location.hash.split("?")[1] || "").get("at");
+  if (at) document.getElementById(at)?.scrollIntoView({ block: "start" });
+}
+
+/* ══ News ════════════════════════════════════════════════════════════════ */
+function viewNews() {
+  const posts = (NEWS?.posts || []).slice(0, 60);
+  const riot = (TOP?.events || []).map((e) => ({ title: e.title.replace(/’/g, "'"), dt: e.published, url: e.url, tags: ["Riot · results"] }));
+  const all = [...posts, ...riot].sort((a, b) => String(b.dt).localeCompare(String(a.dt))).slice(0, 70);
+  return `<h1>News</h1><section class="panel">
+    ${all.map((p) => `<div class="row" style="align-items:flex-start"><span class="num tiny dim" style="width:92px;flex:none;padding-top:2px">${esc(p.dt)}</span>
+      <span class="n"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>
+      <span class="tiny dim" style="display:block">${esc((p.tags || []).join(" · "))}</span></span></div>`).join("")}
+    <p class="note">riftbound.gg's posts (titles only; their feed carries no text) and Riot's own results articles.</p></section>`;
+}
+
+/* ── boot ────────────────────────────────────────────────────────────────── */
+(async () => {
+  try { await loadData(); }
+  catch (e) { $("#view").innerHTML = `<div class="banner bad">${esc(e.message)}</div>`; return; }
+  route();
+  try { ROW = await pull(); setSync("ok"); }
+  catch { setSync(navigator.onLine ? "error" : "offline"); }
+  await flushQueue();
+  if (!DIRTY) route();
+  window.addEventListener("online", flushQueue);
+  document.addEventListener("visibilitychange", async () => {
+    if (document.visibilityState !== "visible" || DIRTY) return;
+    try { ROW = await pull(); setSync("ok"); await flushQueue(); route(); } catch { /* keep what we have */ }
+  });
+})();
+</script>
+</body>
+</html>

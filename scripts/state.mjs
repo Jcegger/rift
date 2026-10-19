@@ -39,6 +39,7 @@
 // here without them looks legal when it is not.
 
 import { readFile } from "node:fs/promises";
+import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, SB_MAX } from "../lib/decks.mjs";
 import { pathToFileURL } from "node:url";
 
 const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
@@ -53,9 +54,6 @@ const readJson = async (f) => JSON.parse(await readFile(f, "utf8"));
 const TYPES = ["Legend", "Champion Unit", "Unit", "Spell", "Gear", "Rune", "Battlefield"];
 const typeRank = (t) => { const i = TYPES.indexOf(t); return i < 0 ? 99 : i; };
 
-const SB_MAX = 10;                                        // §601.1.c.1
-const SB_BANNED_TYPES = new Set(["Legend", "Rune", "Battlefield"]);  // §601.1.c.2
-const MAX_COPIES = 3;                                     // §601.1.c.3, runes exempt
 
 const money = (n) => (n == null ? "" : `$${n.toFixed(2)}`);
 // A card's cost as it is paid: Energy, then Power. Power is `p` in the catalog (Riot's
@@ -108,14 +106,14 @@ export async function loadCatalog() {
   }
   const BY = new Map(cards.map((c) => [c.c, c]));
   const bannedNames = new Set((banned.constructed || []).map((b) => b.name));
-  return { cards, BY, sets: cat.sets || [], bannedNames, errataApplied,
+  return { cards, BY, idx: indexCatalog(cards, banned), sets: cat.sets || [], bannedNames, errataApplied,
            errataCards: errataNames.size, errataAt: errata.generatedAt };
 }
 
 const mk = (S) => {
   const inv = (code) => S.inv?.[code] || {};
   const owned = (code) => (inv(code).n || 0) + (inv(code).f || 0);
-  return { inv, owned, want: (c) => inv(c).w || 0, trade: (c) => inv(c).t || 0 };
+  return { S, inv, owned, want: (c) => inv(c).w || 0, trade: (c) => inv(c).t || 0 };
 };
 
 function deckRows(deck, cat) {
@@ -127,58 +125,31 @@ function deckRows(deck, cat) {
       (a.card?.n || a.code).localeCompare(b.card?.n || b.code));
 }
 
+/* Deck maths comes from lib/decks.mjs, the copy the app uses too. Owning is by card
+   identity there (every printing of a name counts), where this file used to count only
+   the exact printing a deck cited — so owning the alt art read as owning none, and the
+   CLI and the app could disagree about the same deck. The shape below is what the
+   commands here print from. */
 function deckStats(deck, cat, q) {
-  const rows = deckRows(deck, cat);
-  const side = deckRows({ cards: deck.sb }, cat);
-  let copies = 0, missing = 0, gap = 0, unknown = 0;
-  let sideCopies = 0, sideMissing = 0, sideGap = 0;
-  const bans = [];
-  const mainByCode = new Map();
-  for (const r of rows) {
-    copies += r.qty;
-    const have = r.card ? q.owned(r.code) : 0;
-    const short = Math.max(0, r.qty - have);
-    r.have = have; r.short = short;
-    missing += short;
-    mainByCode.set(r.code, (mainByCode.get(r.code) || 0) + r.qty);
-    if (!r.card) unknown++;
-    if (r.card && short) gap += (r.card.mp || 0) * short;
-    if (r.card && cat.bannedNames.has(r.card.n)) bans.push(r);
-  }
-  for (const r of side) {
-    sideCopies += r.qty;
-    const own = r.card ? q.owned(r.code) : 0;
-    r.have = Math.max(0, own - (mainByCode.get(r.code) || 0));   // spare after the main deck
-    r.short = Math.max(0, r.qty - r.have);
-    sideMissing += r.short;
-    if (!r.card) unknown++;
-    if (r.card && r.short) sideGap += (r.card.mp || 0) * r.short;
-    if (r.card && cat.bannedNames.has(r.card.n)) bans.push(r);
-  }
-  return { rows, side, copies, distinct: rows.length, missing, gap, unknown, bans,
-           sideCopies, sideDistinct: side.length, sideMissing, sideGap,
-           totalMissing: missing + sideMissing, totalGap: gap + sideGap,
-           issues: deckIssues(rows, side) };
-}
-
-// The rules a hand-entered deck breaks, as sentences. Kept separate from the ban
-// list because a ban is a property of a card and these are properties of the deck.
-function deckIssues(rows, side) {
-  const out = [];
-  const n = side.reduce((a, r) => a + r.qty, 0);
-  if (n > SB_MAX) out.push(`sideboard is ${n} cards, ${n - SB_MAX} over the ${SB_MAX}-card limit`);
-  const bad = side.filter((r) => r.card && SB_BANNED_TYPES.has(r.card.t));
-  if (bad.length) out.push(`cannot be in a sideboard: ${
-    bad.map((r) => `${r.card.n} (${r.card.t.toLowerCase()})`).join(", ")}`);
-  const byName = new Map();
-  for (const r of rows.concat(side)) {
-    if (!r.card || r.card.t === "Rune") continue;
-    byName.set(r.card.n, (byName.get(r.card.n) || 0) + r.qty);
-  }
-  const over = [...byName].filter(([, v]) => v > MAX_COPIES).sort((a, b) => b[1] - a[1]);
-  if (over.length) out.push(`over ${MAX_COPIES} copies across main deck and sideboard: ${
-    over.map(([nm, v]) => `${v}x ${nm}`).join(", ")}`);
-  return out;
+  const st = libDeckStats(deck, cat.idx, q.S.inv || {});
+  const shape = (r) => ({ ...r, card: r.card, have: r.have, short: r.short });
+  const rows = st.rows.map(shape).sort((a, b) =>
+    typeRank(a.card?.t) - typeRank(b.card?.t) || (a.card?.n || a.code).localeCompare(b.card?.n || b.code));
+  const side = st.side.map(shape).sort((a, b) =>
+    typeRank(a.card?.t) - typeRank(b.card?.t) || (a.card?.n || a.code).localeCompare(b.card?.n || b.code));
+  const checks = deckChecks(deck, cat.idx, st);
+  const failing = checks.filter((k) => k.ok === false);
+  const bans = [...rows, ...side].filter((r) => r.card && cat.bannedNames.has(r.card.n));
+  const copies = rows.reduce((a, r) => a + r.qty, 0);
+  const sideCopies = side.reduce((a, r) => a + r.qty, 0);
+  return { rows, side, copies, distinct: rows.length, missing: st.mainGap.cards, gap: st.mainGap.total,
+           unpriced: st.mainGap.unpriced + st.sideGap.unpriced, unknown: st.count.unknown, bans,
+           sideCopies, sideDistinct: side.length, sideMissing: st.sideGap.cards, sideGap: st.sideGap.total,
+           totalMissing: st.mainGap.cards + st.sideGap.cards,
+           totalGap: Math.round((st.mainGap.total + st.sideGap.total) * 100) / 100,
+           checks, issues: failing.filter((k) => k.key !== "banned" && k.key !== "unknown")
+             .map((k) => `${k.label}: ${k.val}${k.detail && [].concat(k.detail).length ? ` (${[].concat(k.detail).slice(0, 6).join(", ")})` : ""}`),
+           later: checks.find((k) => k.key === "standard" && k.ok === "later") || null };
 }
 
 function findDecks(S, needle) {
@@ -260,7 +231,8 @@ function cmdDeck(S, cat, q, args) {
   }
   console.log(`\n  ${st.copies} cards · ${st.distinct} distinct` +
     (st.sideCopies ? ` · +${st.sideCopies} sideboard` : "") +
-    ` · ${st.totalMissing} still to get · gap ${money(st.totalGap)}`);
+    ` · ${st.totalMissing} still to get · gap ${money(st.totalGap)}` +
+    (st.unpriced ? ` + ${st.unpriced} unpriced` : ""));
   if (st.sideMissing) console.log(`  of that: ${st.missing} main + ${st.sideMissing} sideboard`);
   // The Power budget, because Power is the resource a turn runs out of first: the main
   // deck's cards that need it, grouped by how much.
@@ -278,6 +250,7 @@ function cmdDeck(S, cat, q, args) {
   if (st.unknown) console.log(`  ${st.unknown} card(s) not in the catalog`);
   if (st.bans.length) console.log(`  NOT CONSTRUCTED-LEGAL: ${st.bans.map((r) => r.card.n).join(", ")}`);
   for (const x of st.issues) console.log(`  RULES: ${x}`);
+  if (st.later) console.log(`  NOT YET STANDARD: ${st.later.detail.length} card(s), legal ${st.later.val}`);
 }
 
 function cmdCard(S, cat, q, args) {
@@ -719,6 +692,25 @@ function cmdSets(S, cat, q) {
   }
 }
 
+// The one-tap match journal the app (app/) writes: S.journal, [{at, deck, opp, res}].
+// Per deck, the record against each opponent, then the last ten games.
+function cmdJournal(S, args) {
+  const games = S.journal || [];
+  if (!games.length) { console.log("no games logged yet (log them on the Decks page of app/)"); return; }
+  const decks = findDecks(S, args.join(" ").trim());
+  const name = new Map((S.decks || []).map((d) => [d.id, d.name]));
+  const ids = new Set(decks.map((d) => d.id));
+  const pick = games.filter((g) => !args.length || ids.has(g.deck));
+  const by = new Map();
+  for (const g of pick) { if (!by.has(g.deck)) by.set(g.deck, []); by.get(g.deck).push(g); }
+  for (const [id, gs] of by) {
+    const w = gs.filter((g) => g.res === "W").length, l = gs.filter((g) => g.res === "L").length;
+    console.log(`${name.get(id) || `(deleted deck ${id})`}  ${w}-${l}`);
+    for (const [opp, r] of journalRecord(gs)) console.log(`    ${pad(opp, 34)} ${r.w}-${r.l}${r.d ? `-${r.d}` : ""}`);
+    console.log("    last games: " + gs.slice(-10).map((g) => `${g.at.slice(0, 10)} ${g.res} ${g.opp.split(",")[0]}`).join(" · "));
+  }
+}
+
 async function main() {
   const [cmd = "summary", ...args] = process.argv.slice(2);
   const cat = await loadCatalog();
@@ -739,6 +731,7 @@ async function main() {
     sets: () => cmdSets(S, cat, q),
     raw: () => console.log(JSON.stringify(S, null, 2)),
     piltover: () => cmdPiltover(S, cat),
+    journal: () => cmdJournal(S, args),
   };
   const fn = table[cmd];
   if (!fn) { console.error(`unknown command "${cmd}" — try: ${Object.keys(table).join(", ")}`); process.exit(2); }

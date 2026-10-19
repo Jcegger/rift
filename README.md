@@ -19,7 +19,16 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 
 ## Layout
 
-- `index.html` - the whole app. Vanilla JS, no dependencies, no bundler.
+- `index.html` - the old app. Vanilla JS, no dependencies, no bundler. Being replaced
+  tab by tab by `app/`; Collection and Import still live here.
+- `app/index.html` - the new front end (rift.jayegger.com/app/): Decks with readiness, a
+  deck editor, one-tap match journal and matchups; Find a deck (Riot's RQ results); Guides;
+  News. Same Supabase row as the old app, written read-modify-write so keys it does not
+  own ride through. See "The new front end" below.
+- `lib/decks.mjs` - deck maths shared by `app/` and `scripts/state.mjs`: owning by card
+  identity (every printing of a name), cheapest-printing prices (unpriced stays unpriced),
+  the deck rules as checks (§103, TR §601), the journal record. Tests: `lib/decks.test.mjs`.
+- `lib/markdown.mjs` - the guide renderer `app/` uses, with heading anchors.
 - `data/cards.json` - the card catalog, generated and committed. Loaded at boot.
 - `data/extras.json` - printings Riot does not publish, merged in at load. The one
   hand-maintained file, and the only one carrying no `generatedAt`, so it sits outside
@@ -1158,6 +1167,28 @@ Two things it handles that matter for the completion math:
 Finishes are not in Riot's data, because a foil is a print treatment rather than
 a separate card. That is why Normal and Foil are separate counts on each
 printing, tracked on my side.
+
+## The new front end
+
+`app/index.html` is the rebuild Jay asked for in October 2026: Decks first, then Find a
+deck, Guides, News. Collection and Import link to the old app until they are rebuilt.
+
+- **Decks** — readiness against the collection (cards short, cost to finish at the
+  cheapest printing, "+ N unpriced" rather than $0), the list, the deck's rule checks,
+  a **one-tap journal** (opponent, W or L) and matchup cards: Day 1 share and conversion at
+  the latest RQ, your record, and a link to the plan in the deck's guide when one exists
+  (matched by heading, e.g. "Irelia, Blade Dancer — …" in `guides/riven-exile-gauntlet.md`).
+- **Editor** — +/−, move to and from the sideboard, search inside the legend's domains,
+  other champions' signatures blocked, every check live. Save writes the deck back.
+- **Find a deck** — Riot's RQ field table (Day 1, Day 2, converts, Top 8, riftbound.gg's
+  tier beside it) and every Top 8 / Best-Of list per legend, with "Copy to my decks".
+
+**Writes.** The Supabase row holds everything, so each write pulls a fresh copy, changes
+only `decks` or `journal`, and writes the whole object back; the last five pre-write
+copies are kept in the browser's localStorage (`rift-app-backups`). Journal taps queue in
+localStorage first and send when the row is reachable, so a bad signal at the store loses
+nothing. The old app lists `journal` in its `SYNCED` keys so its own saves carry it through.
+`scripts/rift journal [deck]` prints the record.
 
 ## Simulator
 
