@@ -1291,16 +1291,21 @@ move, draw 1") or an **enabler** (Irelia's "ready it", Ganking, "move a friendly
 engine — movement, exhaust triggers, buffs, plays from elsewhere, the top of the deck, the
 trash, tokens, deaths, discards, facedown, spells, gear, winning fights (Assault, pumps,
 "when you win a combat"), Mighty, Empower, Legion, XP and stuns. A list *touches* an engine
-when it holds payoffs for it, but only a **loop** is the deck's engine: the legend in it (its
-own trigger as the payoff outranks it merely feeding one), or four copies each of a payoff
-and a different card feeding it. A deck with no loop — a curve, removal or ramp — reads as
-"no engine", and its stray patterns are shown as incidental; research questions come only
-from loops. The idea page and bench list the legal cards that would feed an engine, Radiance
-cards nobody has tried first, each with the sentence that matched. The test file scores the
-reader against an answer key written from `docs/archetypes.md` — every legend's engine by
-hand — with a short named list of known misses; 49 of 54 legends (1,093 of 1,124 placed
-lists) read right. When engines tie on the legend, the legend's own cards break it: its
-signature spell or gear and champion units, read by their text, were designed for its plan. The first is evidence; the second is a reading by
+when it holds payoffs for it, but only a **loop** is the deck's engine: the legend in it, or
+four copies each of a payoff and a different card feeding it. A deck with no loop — a curve,
+removal or ramp — reads as "no engine", and its stray patterns are shown as incidental;
+research questions come only from loops. A legend is often a **converter** (Kha'Zix turns won
+fights into XP into walking home; Kennen turns plays from elsewhere into Assault), so among
+the loops it is in, the one the rest of the list *pays off* wins: a payoff is dead without
+its engine, so running one is a choice, while most feeders are good cards anyway. Then the
+legend's own signature and champion cards, read by their text. The idea page and bench list
+the legal cards that would feed an engine, Radiance cards nobody has tried first, each with
+the sentence that matched. **The answer key is `docs/archetypes.md`**: every legend has an
+`- **Engine:**` line, hand-written from its plan (`none` for no loop). The test scores the
+reader against it, with a short named list of known misses (49 of 54 legends, 1,093 of 1,124
+placed lists read right), and the research build raises a question wherever the two disagree.
+Either side can be wrong — Kha'Zix's line was right and the reader was not, which Jun's guide
+settled. The first is evidence; the second is a reading by
 pattern — it can't see timing, targets or whether two cards truly combo — and says so.
 
 **Builds that keep up.** Each build file carries a `snapshot` of the field it was written

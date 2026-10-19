@@ -34,7 +34,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { indexCatalog, SET_LEGAL_FROM } from "../lib/decks.mjs";
 import { counter } from "../lib/consensus.mjs";
 import { deckEngines, engineTags, ENGINES } from "../lib/engines.mjs";
-import { MIN_PLACED, SKIP_SHARE, VERDICTS, itemId } from "../lib/research.mjs";
+import { MIN_PLACED, SKIP_SHARE, VERDICTS, itemId, docEngineLine, docEngineKeys } from "../lib/research.mjs";
 
 const ELSEWHERE = 0.3;   // a skipped card is a question only if some legend plays it this much
 const read = async (f) => JSON.parse(await readFile(new URL(`../data/${f}`, import.meta.url), "utf8"));
@@ -54,17 +54,6 @@ export function parseAnswers(md) {
   }
   return out;
 }
-
-// docs/archetypes.md's "- **Engine:** <name> — …" line for a legend, if it has one.
-const docEngine = (md, legend) => {
-  const sec = md.split(/^### /m).find((s) => s.startsWith(`${legend} —`));
-  return sec ? ((sec.match(/^- \*\*Engine:\*\*\s*([^\n]*)/m) || [])[1] || null) : null;
-};
-// Words a hand-written Engine line uses for each engine.
-const ALIASES = { move: /\bmov(e|es|ement|ing)\b/i, exhaust: /\bexhaust/i, buff: /\bbuff/i, offhand: /\bplays? from elsewhere|\bfrom (the )?trash|\boff[- ]hand/i,
-  reveal: /\breveal|\btop of the deck|\btop of (your )?deck/i, trash: /\btrash/i, tokens: /\btoken/i, death: /\bdeath|\bdeathknell|\bdies\b/i,
-  discard: /\bdiscard/i, hidden: /\bhidden|\bface ?down/i, spells: /\bspells?\b/i, gear: /\bgear|equip/i, legion: /\blegion/i, ready: /\bready/i,
-  combat: /\bcombat|\bfights?\b|\bassault/i, mighty: /\bmighty/i, empower: /\bempower/i, xp: /\bxp\b|\blevel/i, stun: /\bstun/i };
 
 const main = async () => {
   const [cat, extras, banned, snap, syn] = await Promise.all([read("cards.json"), read("extras.json"), read("banned.json"), read("decks.json"), read("synergy.json")]);
@@ -94,7 +83,7 @@ const main = async () => {
     const lists = byLegend.get(name) || [];
     const placed = lists.filter((d) => (d.tour && d.pl != null) || Number(d.cp) > 0);
     const legendTags = engineTags(L).map((t) => t.engine);
-    const docLine = docEngine(archMd, name);
+    const docLine = docEngineLine(archMd, name);
     const row = { placed: placed.length, lists: lists.length, legendEngines: [...new Set(legendTags)], doc: docLine, flags: [] };
     legends[name] = row;
     if (!legendTags.length) row.flags.push("legend-unread");
@@ -125,13 +114,16 @@ const main = async () => {
     const avgCost = round(costs.reduce((a, b) => a + b, 0) / (costs.length || 1), 1);
     const atOrBelow = (e) => costs.filter((x) => x <= e).length;
 
-    // Doc vs model: the hand-written engine should name the model's main one.
-    if (docLine && row.main && !(ALIASES[row.main] || /$^/).test(docLine.split(/ — |\. /)[0])) {
+    // Doc vs model: the hand-written engine should name the model's main one, "none"
+    // included — a doc that says a deck has no engine, or a reader that finds none where
+    // the doc names one, is the same disagreement.
+    const want = docEngineKeys(docLine), got = row.main || "none";
+    if (want.length && !want.includes(got)) {
       const id = `${itemId(name, "engine")}`;
       items.push({ id, kind: "doc", legend: name, card: null,
-        title: `docs/archetypes.md says the engine is "${docLine.split(" — ")[0]}"; the cards say ${ENGINES.find((e) => e.key === row.main).name}`,
-        evidence: [`Model's engines, strongest first: ${E.map((e) => e.name).join(" > ")}`, `Legend text: ${L.x ? `"${String(L.x).slice(0, 160)}"` : "none"}`],
-        hypotheses: ["One of the two is wrong: read the legend's text and a winning list before changing either."] });
+        title: `docs/archetypes.md says the engine is "${docLine.split(" — ")[0]}"; the cards say ${got === "none" ? "no engine" : ENGINES.find((e) => e.key === got).name}`,
+        evidence: [`Model's engines, strongest first: ${E.map((e) => e.name + (e.loop ? "" : " (incidental)")).join(" > ") || "none"}`, `Legend text: ${L.x ? `"${String(L.x).slice(0, 160)}"` : "none"}`],
+        hypotheses: ["One of the two is wrong: read the legend's text, a winning list and any guide before changing either. Kha'Zix was settled by Jun's guide: the deck's own payoffs say movement, though the legend's trigger is winning fights."] });
     }
 
     row.cards = {};

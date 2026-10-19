@@ -49,6 +49,7 @@ each pick a different thing to grow — buffs, Equipment, levels, Shield.
 - **Fears:** answers to the one battlefield it stacks; going wide matters less if the buffs sit on
   two units.
 - **Against it:** removal before the buffs accumulate is worth more than removal after.
+- **Engine:** buffs — the legend buffs a unit every turn; Lee Sin, Centered, Wizened Elder and Stand United pay the buffs off.
 
 ### Jax, Grandmaster at Arms — equipment midrange
 *measured midrange · 6 placed · u16 s15 g9 · cost 2.5 · int 7*
@@ -58,6 +59,7 @@ each pick a different thing to grow — buffs, Equipment, levels, Shield.
 - **Wins by:** re-equipping a fresh threat each turn faster than you can remove them.
 - **Against it:** the gear is the real board. Answers to gear, or to the unit at the moment the
   Equipment is moving, beat answers to units.
+- **Engine:** gear — Equipment is the investment; the legend moves it to a fresh carrier.
 
 ### Master Yi, Wuju Master — levelling ramp
 *measured tempo · 3 placed · u19 s18 g3 · cost 3.1 · int 7 · thin*
@@ -66,6 +68,7 @@ each pick a different thing to grow — buffs, Equipment, levels, Shield.
   less at every level.
 - **Against it:** XP comes from Hunt triggers and conquests; slowing its early fights slows the
   whole curve.
+- **Engine:** XP — Hunt cards and conquests feed it; the legend's Level 6 and Level 11 are what it buys.
 
 ### K'Sante, Pride of Nazumah — Shield aggro *(Radiance)*
 *measured tempo · 1 placed / 35 lists · u17 s19 g4 · cost 1.9 · thin, brews*
@@ -74,6 +77,7 @@ each pick a different thing to grow — buffs, Equipment, levels, Shield.
   attack as well as defend. K'Sante, Dauntless doubles a unit's Shield when he attacks or defends.
 - **Against it:** the cheapest curve in the game here (average cost 1.9). Shield is per combat;
   removal outside combat ignores it.
+- **Engine:** winning fights — the legend converts Shield into Assault, so the Shield cards are fuel for attacks.
 
 ## Body / Chaos — isolate and punish
 
@@ -91,10 +95,9 @@ alone if possible, and win there.
   battlefield). Develop first, spells second ([Jun](../guides/khazix-voidreaver-jun.md)).
 - **Wins by:** a stream of won fights that pay XP, then conquests the walk-home keeps from being
   punished.
-- **Engine:** winning fights — the legend pays XP for every combat won. Movement is the means,
-  not the plan: Void Assault and Faefolk drag an enemy in so you choose the fight (and leave it
-  alone for Mutating Horror); Ride the Wind, Tideturner and the legend's walk-home keep the
-  winners safe.
+- **Engine:** movement — in to win the fight, out before the retake. Won fights pay the XP that
+  buys the walk home; the list's payoffs (Shadow Order Disciple, Faefolk, Traveling Merchant) are
+  for moving, and Jun's test for Void Assault is "does my own unit need to move this turn?"
 - **Fears:** decks that never present a lone unit (go-wide boards), and mass shrink (−Might to all
   enemies) that turns its +2 into nothing.
 - **Measured vs. named:** the numbers say aggro; Jun's plan is midrange (develop, then win the
@@ -114,17 +117,20 @@ alone if possible, and win there.
   the battlefield trashes what it hid there.
 - **From Kha'Zix:** Scuttle Crab's Deathknell lets you look at their facedown cards that turn —
   information this deck is otherwise built to deny you.
+- **Engine:** facedown — the legend and Evelynn, Consuming pay off playing from face down, and nearly every card is Hidden.
 
 ### Sivir, Battle Mistress — gold aggro
 *measured aggro · 1 placed / 21 lists · thin*
 - **Plan:** the legend makes Gold when you recycle a rune and readies when enemy units die; Sivir,
   Mercenary gets +2 Might and Ganking once you have spent two Power. A fast, combat-first deck.
+- **Engine:** none — a fast combat curve; Gold and Ganking are not patterns the reader knows.
 
 ### Miss Fortune, Bounty Hunter — open-battlefield tempo
 *measured control · 0 placed in this window / 19 lists · thin*
 - **Plan:** the legend gives Ganking; Miss Fortune, Buccaneer lets units be played to **open**
   battlefields; Miss Fortune, Captain readies something the first time she moves. A movement deck
   that contests battlefields you thought were safe.
+- **Engine:** movement — Ganking from the legend, and Miss Fortune, Captain readies on her first move.
 
 ## Body / Fury — the curve
 
@@ -144,6 +150,7 @@ of units, played every turn, each a little bigger than it should be.
   harder to switch on than usual.
 - **From Riven:** both decks want to act after the other commits; it has more units to commit.
 - **From Rek'Sai:** a race. Both decks win by numbers on the board; theirs arrive mid-combat.
+- **Engine:** winning fights — the legend pumps a unit for every unit you play, and Ambush puts them into the fight.
 
 ### Lucian, Purifier — equipment aggro
 *measured midrange · 14 placed · u23 s9 g8 · int 2*
@@ -151,17 +158,20 @@ of units, played every turn, each a little bigger than it should be.
   conquers; Relentless Pursuit moves and equips in one card. Low interaction (2) — it means to win
   the board, not answer yours.
 - **Against it:** with so little interaction, it cannot stop a big unit it did not race.
+- **Engine:** gear — Equipment is the investment; the legend turns each one into Assault.
 
 ### Renekton, Butcher of the Sands — unit ramp
 *measured midrange · 5 placed · u30 s10 · thin*
 - **Plan:** the legend turns two Power into two Energy for units; Renekton, Rage Fueled deals 2 to
   all enemy units at his battlefield when he attacks, if you control 4 or fewer runes.
+- **Engine:** none — a unit-ramp curve: the legend's Energy is for units, and nothing loops.
 
 ### Volibear, Relentless Storm — big Mighty ramp
 *measured ramp · 0 placed in this window · cost 6.1, 19 cards at 7+ · thin*
 - **Plan:** Mobilize and Mighty units feed the legend's rune channelling into Volibear, Furious (5
   damage split on attack), Kadregrin (draw per Mighty unit) and Sky Splitter. The slowest deck on
   this page by a distance.
+- **Engine:** Mighty — the legend ramps on every Mighty unit, Kadregrin draws per Mighty unit.
 
 ## Body / Mind — Jayce alone
 
@@ -180,6 +190,7 @@ of units, played every turn, each a little bigger than it should be.
   units it does not run.
 - **From Riven / Rek'Sai:** the race is the plan. Every turn it spends ramping is a battlefield you
   hold.
+- **Engine:** gear — ramp gear the legend readies, into the top end and Gutter Palace.
 
 ## Body / Order — buffs and Mighty
 
@@ -196,6 +207,7 @@ Deploy gear.
 - **Fears:** removal that ignores the save (it costs a buff and the legend's exhaust, once).
 - **From Rek'Sai:** a fight of wide boards; its buffs make each unit worth more than your 1-Might
   tokens.
+- **Engine:** buffs — buff everything, then cash the buffs in.
 
 ### Fiora, Grand Duelist — Mighty ramp
 *measured midrange · 31 placed · u21 s16 g3 · cost 3.6*
@@ -203,6 +215,7 @@ Deploy gear.
   Ganking and Shield while Mighty; Riposte counters a spell and pumps; Harnessed Dragon kills an
   enemy unit when played.
 - **Against it:** keeping its units below Mighty denies the ramp and the keywords together.
+- **Engine:** Mighty — the legend ramps whenever a unit becomes Mighty; Fiora, Victorious gains her keywords while Mighty.
 
 ### Ambessa, Matriarch of War — empower aggro
 *measured aggro · 21 placed · u22 s16 g2 · cost 2.6*
@@ -212,11 +225,13 @@ Deploy gear.
   when she attacks while Empowered.
 - **Against it:** the Empower costs are paid up front; answers after the investment are the
   efficient ones.
+- **Engine:** Empower — the legend empowers itself whenever you empower something else, and spends it to ready a unit; the list is Empower cards.
 
 ### Poppy, Keeper of the Hammer — XP midrange
 *measured midrange · 3 placed · thin* — XP from holds and Demacian Diplomat, spent to draw (the
 legend), buff (Enthralling Protector) or discount Poppy, Defender of the Meek; Keeper's Verdict tucks
 an enemy unit.
+- **Engine:** XP — from holds and Demacian Diplomat, spent to draw, buff and discount Poppy.
 
 ### Jarvan IV, Exemplar of Demacia — Deploy aggro *(Radiance)*
 *measured aggro · 1 placed / 34 lists · u25 s6 g9 · brews*
@@ -226,6 +241,7 @@ an enemy unit.
   conquests there.
 - **Fears:** Deploy gear dies when an opponent **holds** its battlefield (rules.md, Deploy) — the
   deck must keep the battlefields it builds on.
+- **Engine:** gear — Deploy gear; the legend converts each one into a move to that battlefield.
 
 ## Calm / Chaos — tempo
 
@@ -257,6 +273,7 @@ Reactions to win fights after the opponent commits, and bounce.
 - **From Riven:** your units entering ready is exactly what she cancels — a unit played while she
   is at a battlefield is stunned on arrival. Remove or move her before the turn you develop.
 - **From Rek'Sai:** a deck that plays several units a turn into a card that stuns each one.
+- **Engine:** none — Vex, Apathetic's stun lock and removal buy time; Steel Paws empowering itself is not a loop.
 
 ### Yasuo, Unforgiven — Spiderling swarm
 *measured combo · 12 placed · 39 Spiderling + Yasuo, Windrider*
@@ -268,6 +285,7 @@ Reactions to win fights after the opponent commits, and bounce.
   location), Imperial Decree, Singularity, Thousand-Tailed Watcher's −3.
 - **From Riven:** Bedeviling Stranger returns an enemy unit when a battlefield has 4 or more units
   — Spiderling battlefields usually do.
+- **Engine:** tokens (Spiderlings, each counting the others) — Hidden lets them land together.
 
 ### Riven, The Exile — exhaust tempo *(Radiance)* · *your deck*
 *measured tempo · 9 placed (online previews) · u21 s13 g6 · reactive 19 · draw 12*
@@ -282,6 +300,7 @@ Reactions to win fights after the opponent commits, and bounce.
   it controls, since that is where the ready-on-entry works.
 - **Deep dive:** the Nova list and the consensus are on Riven's idea page (Find a deck); the
   [gauntlet guide](../guides/riven-exile-gauntlet.md) predates any Radiance results.
+- **Engine:** exhaust — Riven, Broken Blade and Reckless Innovator pay off becoming exhausted; attacking, moving and Ki Burst feed them.
 
 ## Calm / Fury — Akali alone
 
@@ -294,6 +313,7 @@ Reactions to win fights after the opponent commits, and bounce.
   plays the top card on the second).
 - **Wins by:** grinding: card advantage from moves, removal, untouchable threats.
 - **From Rek'Sai:** her pings and Falling Star (3 and 3) are efficient into small units.
+- **Engine:** movement — Akali, Deadly Weapon and Akali, Silent pay off moving; the legend pulls units home to move again.
 
 ## Calm / Mind — value engines
 
@@ -306,6 +326,7 @@ across five legends: the most card-flow-heavy pair, each legend building a diffe
   Snax and Patched Porobot draw; Ornn, Blacksmith finds gear; Ornn, Forge God has +1 Might per
   friendly gear.
 - **Against it:** gear removal is unit removal here.
+- **Engine:** gear — twenty gear; the legend's Power, Pit Crew and Ornn, Forge God pay them off.
 
 ### Nasus, Curator of the Sands — big-spell ramp
 *measured ramp · 25 placed · 8 cards at 7+ · int 12*
@@ -313,16 +334,19 @@ across five legends: the most card-flow-heavy pair, each legend building a diffe
   Nasus, Ascended scores a point when he conquers while Empowered (Empower 8); Steel Paws becomes
   7 Might when Empowered. Thousand-Tailed Watcher and Bellows Breath hold the early board.
 - **Against it:** slow by design (1.9 units by turn 3). Points before its 8-drops arrive.
+- **Engine:** none — big-spell ramp: the legend readies runes for 7+ costs, and nothing loops.
 
 ### Lillia, Bashful Bloom — Sprite tokens
 *measured tempo · 14 placed · u10 s21 g9* — the legend makes ready 3-Might Temporary Sprites,
 cheaper per Temporary unit you have; Sprite Burst makes two; Smoke and Mirrors swaps a Temporary unit
 across battlefields; Unchecked Power deals 12 to everything at battlefields.
+- **Engine:** tokens — the legend makes Sprites, cheaper for each Temporary unit you have.
 
 ### Ahri, Nine-Tailed Fox — shrink control
 *measured ramp · 7 placed* — the legend gives enemy attackers −1 Might; Ahri, Inquisitive −2 when
 she fights; Ahri, Alluring scores a point when she holds; Radiance's Ahri, Confident grows whenever
 you shrink an enemy at her battlefield.
+- **Engine:** none — shrink and removal; nothing loops.
 
 ### Orianna, Lady of Clockwork — gear-to-unit *(Radiance)*
 *measured tempo · 0 placed / 52 lists · u10 s14 g16 · brews*
@@ -331,6 +355,7 @@ you shrink an enemy at her battlefield.
   big units, and Command: Attack (92%) moves Deploy gear or digs for gear. Orianna, Mechanical
   Marvel discounts gear.
 - **Against it:** one gear is a unit at a time; it changes only when she picks another.
+- **Engine:** gear — the legend turns expensive gear into units.
 
 ## Calm / Order — tokens and stuns
 
@@ -346,20 +371,24 @@ legends — the pair with the most hard answers and the most protected bodies.
 - **Wins by:** the turn Arise! turns its gear into a board.
 - **Fears:** gear removal, and area damage into 2-Might soldiers.
 - **From Rek'Sai:** two go-wide decks; its tokens are 2 Might, yours mostly 1.
+- **Engine:** tokens from gear — Equipment makes Sand Soldiers, and Arise! makes one per Equipment.
 
 ### Shen, Eye of Twilight — pair defence
 *measured tempo · 8 placed* — Shen, Kinkou is a Reaction Tank; Shen, Leader **scores a point when he
 holds with exactly one other unit**; Disciple of Shen gets Shield 3 in the same spot; Ki Barrier
 prevents 7. A deck that wins by holding small, very hard battlefields.
+- **Engine:** none — pair defence; it wins by holding, not by a loop.
 
 ### Leona, Radiant Dawn — stun midrange
 *measured tempo · 5 placed* — the legend buffs when you stun; Leona, Determined stuns on attack;
 **Leona, Zealot gives stunned enemies at her battlefield −8 Might** and enters ready late in the game;
 Zenith Blade stuns and moves in.
+- **Engine:** stuns — the legend buffs when you stun; Leona, Zealot gives stunned enemies −8.
 
 ### Ivern, Green Father — tribes
 *measured tempo · 3 placed* — Bird, Cat, Dog, Poro tags; Ivern, Friend to All scores a point on
 conquer or hold if your units have all four; the legend turns battlefields into Brush tokens.
+- **Engine:** none — tribe tags, which the reader does not read.
 
 ## Chaos / Fury — aggression from odd angles
 
@@ -371,10 +400,12 @@ discarding, bombs, banishing.
 *measured aggro · 6 placed* — the legend draws whenever you win a combat; Draven, Showboat has your
 points as extra Might; Spinning Axe and Overzealous Fan (kill it on defence to send an attacker home)
 keep fights one-sided.
+- **Engine:** winning fights — the legend draws for every combat won.
 
 ### Pyke, Bloodharbor Ripper — bounce tempo
 *measured tempo · 3 placed* — the legend returns a friendly unit to hand for Gold (re-buy play
 effects); Piercing Light, Bewitching Spirit's discard.
+- **Engine:** none — bounce and replay for Gold.
 
 ### Ziggs, Hexplosives Expert — bombs *(Radiance)*
 *measured midrange · 2 placed / 73 lists · u12 s18 g10 · brews*
@@ -383,16 +414,19 @@ effects); Piercing Light, Bewitching Spirit's discard.
   there). Hexplosive Minefield kills your own Bombs on purpose and replaces them at end of turn;
   Detonate kills any gear and draws. Ziggs, Short-Fused gives friendly gear abilities 1 bonus damage.
 - **Against it:** the Bombs are gear — they die to gear removal, and to an opponent holding there.
+- **Engine:** tokens (Bomb gear) — made at battlefields, killed on purpose and remade.
 
 ### Zed, Master of Shadows — clones
 *measured midrange · 2 placed / 99 lists* — Shadow Clone tokens; Zed, Without a Sound swaps places
 with a clone; the legend empowers whenever you banish a card you own; Perfect Execution readies with
 Assault 3.
+- **Engine:** tokens (Shadow Clones) — Zed swaps places with them.
 
 ### Jinx, Loose Cannon — discard aggro
 *measured midrange · 0 placed in this window / 31 lists* — Jinx, Demolitionist discards 2, Flame
 Chompers plays itself when discarded, Jinx, Rebel readies when you discard; the legend draws 1 at
 the start of your turn when your hand is down to one card or none.
+- **Engine:** discard — Flame Chompers and Jinx, Rebel pay off discarding; the legend wants an empty hand.
 
 ## Chaos / Mind — answers and spells
 
@@ -407,22 +441,26 @@ Singularity across four legends: the interaction-heaviest pair.
 - **Wins by:** answering everything twice and drawing for it.
 - **From Rek'Sai:** Bellows Breath (1 to up to three units at one location) is built for 1-Might
   tokens.
+- **Engine:** none — answers that choose twice draw a card; removal, not a loop.
 
 ### Diana, Scorn of the Moon — showdown spells
 *measured tempo · 8 placed* — the legend adds Energy only during showdowns; Diana, Lunari Predicts
 when a showdown starts; Diana, No Longer Human grows per spell; Moonfall pulls an enemy in and
 shrinks them; Hwei moves and filters.
+- **Engine:** spells — showdown spells on the legend's showdown-only Energy.
 
 ### Mel, Soul's Reflection — empowered spells
 *measured tempo · 5 placed* — Applied Researchers (spells cost less while Empowered), Shock Blast
 (cheaper with anything Empowered), Rebuttal steals a spell; Mel, Defiant Soul banishes a small enemy
 when empowered.
+- **Engine:** Empower and spells — Applied Researchers and Shock Blast are cheaper while something is Empowered.
 
 ### Teemo, Swift Scout — Hidden swarm
 *measured tempo · 3 placed / 47 lists · reactive 26* — the legend hides for [1] instead of [A] and
 returns Teemos to hand to re-hide; Teemo, Strategist pings for every Hidden card in the top 5;
 Guerilla Warfare rebuys Hidden cards and hides for free; Nocturne, Horrifying is played for one Power
 when seen on top.
+- **Engine:** facedown — Hidden swarm; the legend re-hides Teemos.
 
 ## Chaos / Order — Kennen alone
 
@@ -439,6 +477,7 @@ when seen on top.
 - **From Kha'Zix:** its Gust, Star-Crossed and Switcheroo are the same tricks you use; it holds them
   for your fights.
 - **From Riven:** it was the best converter at the LA RQ (Vendetta) and won the Haven preview.
+- **Engine:** plays from elsewhere — the legend converts each one into Assault; Flow, Fizz and Matriarch feed it.
 
 ## Fury / Mind — spells and big turns
 
@@ -455,19 +494,23 @@ Bellows Breath across four legends.
 - **Fears:** being raced before the 7-drops (3.4 average cost).
 - **From Kha'Zix:** Watcher's −3 lands on their turn's play; Sabotage can strip Time Warp.
 - **From Rek'Sai:** the most removal-dense deck you will face; Watcher blunts your whole board.
+- **Engine:** spells — the legend's Power is for spells; the list is removal into a spell top end.
 
 ### Rumble, Mechanized Menace — mechs
 *measured midrange · 4 placed* — Mech synergies: Bubble Bot readies a Mech, Production Surge makes
 one, Forecaster gives Vision, both Rumbles boost Mechs, Breakneck Mech gives them Deflect and Ganking.
+- **Engine:** none — Mech tribe, which the reader does not read.
 
 ### Jhin, Virtuoso — four-spell ramp
 *measured control · 3 placed* — banish four 4+ spells with the legend to channel 4 runes and draw;
 Jhin, Meticulous Killer is played for one Power after a 4+ spell; Curtain Call, Rocket Barrage.
+- **Engine:** spells — four 4+ spells banished to the legend.
 
 ### Ekko, Boy Who Shattered Time — re-buy tempo *(Radiance)*
 *measured midrange · 2 placed / 43 lists · brews* — the legend discounts the next unit by 2 and
 kills it at end of turn; Ekko, Ingenious returns a friendly unit as his cost (re-use play effects);
 Chronobreak banishes and replays your units; Temporal Breach. A deck of play effects used twice.
+- **Engine:** none — re-buying play effects, which the reader does not read.
 
 ## Fury / Order — go wide
 
@@ -496,10 +539,12 @@ Weak and Inferna across four legends: tokens, Deathknell value, and Assault.
 ### Darius, Hand of Noxus — legion midrange
 *measured midrange · 9 placed* — the legend adds Energy with Legion; Darius, Trifarian grows and
 readies on your second card each turn; Spectral Matron and Baited Hook replay units from the trash.
+- **Engine:** Legion — the legend adds Energy on the second card; Darius, Trifarian grows on it.
 
 ### Vi, Piltover Enforcer — equipment aggro
 *measured aggro · 6 placed* — the legend readies a unit after conquering with 3+ excess damage;
 Hextech Gauntlets, Vault Breaker (Assault 2 and Ganking), Vi, Peacekeeper stuns on attack.
+- **Engine:** gear and winning fights — Equipment with Assault and Ganking; the legend readies on big conquests.
 
 ### Mordekaiser, Iron Revenant — death ramp *(Radiance)*
 *measured ramp · 5 placed (online previews) / 63 lists · u29 s5 g6*
@@ -508,6 +553,7 @@ Hextech Gauntlets, Vault Breaker (Assault 2 and Ganking), Vi, Peacekeeper stuns 
   friendly unit; Mordekaiser, Dominating discards to kill a unit or gear on play and attack. Realm
   of Death is removal that pumps your side.
 - **Against it:** the trash is its mana — what it has banished is gone for good.
+- **Engine:** deaths — every death puts fuel in the trash for the legend's Power.
 
 ## Mind / Order — Deathknell and answers
 
@@ -526,6 +572,7 @@ and Glasc Mixologist across four legends.
 - **From Kha'Zix:** Star-Crossed and Switcheroo-style answers beat it better than damage; see the
   [matchup guide](../guides/khazix-voidreaver-matchups.md).
 - **From Rek'Sai:** your Cull the Weak makes it kill one of its own units too — which it wants.
+- **Engine:** deaths — Deathknell units and Karthus doubling them; the legend's Temporary copy dies and triggers again.
 
 ### Viktor, Herald of the Arcane — recruit control
 *measured midrange · 43 placed · u14 s23 · int 11*
@@ -533,10 +580,12 @@ and Glasc Mixologist across four legends.
   unit of yours dies; **Imperial Decree: when any unit takes damage this turn, kill it**; Cull the
   Weak, Hidden Blade, Wages of Pain. It answers early and wins with tokens.
 - **From Rek'Sai:** Imperial Decree punishes a wide board of small units in one card.
+- **Engine:** tokens — Recruits from the legend and Viktor, Leader.
 
 ### Renata Glasc, Chem-Baroness — gold
 *measured tempo · 2 placed* — Gold everywhere; Hostile Takeover steals an enemy unit for a turn;
 Renata Glasc, Mastermind scores a point for a large activation while at a battlefield.
+- **Engine:** none — Gold, which is mana, not an engine.
 
 ### Seraphine, Starry-Eyed Songstress — exhaust-three spells *(Radiance)*
 *measured midrange · 0 placed / 64 lists · u9 s25 · brews*
@@ -545,6 +594,7 @@ Renata Glasc, Mastermind scores a point for a large activation while at a battle
   Recruit when played or exhausted and has +1 Might per other exhausted unit. Concert Poster and
   Encore make the bodies; Fanfare draws per unit played.
 - **Against it:** it taps its own board to cast — punish the turn it does.
+- **Engine:** exhaust — the legend exhausts three units to cut a spell's cost; Seraphine, Inspiring draws for it.
 
 ---
 
