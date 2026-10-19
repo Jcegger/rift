@@ -196,6 +196,10 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;min-heig
 .ctr .n{flex:1;min-width:0}
 .switch{display:flex;align-items:center;gap:10px;font-size:15px;min-height:36px;cursor:pointer}
 .switch input{width:20px;height:20px;accent-color:var(--accent)}
+.navbadge{background:var(--accent);color:#fff;font:600 11px var(--f-mono);border-radius:9px;padding:1px 6px;line-height:1.4}
+.newdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:1px}
+.pill.riot{color:var(--accent);background:var(--soft)}
+.pill.src{color:var(--ink2);background:var(--soft)}
 nav.bottom{display:none}
 .hide-sm{}
 @media (max-width:720px){
@@ -501,7 +505,9 @@ const NAV = [["decks", "Decks"], ["find", "Find a deck"], ["collection", "Collec
 const BNAV = [["decks", "Decks"], ["find", "Find"], ["collection", "Collection"], ["guides", "Guides"], ["news", "News"]];
 function renderNav(cur) {
   if (SHARE) { $("#nav").innerHTML = ""; $("#bnav").innerHTML = ""; return; }
-  const link = (cls) => ([k, label]) => `<a ${cls} href="#/${k}" ${cur === k ? 'aria-current="page"' : ""}>${label}</a>`;
+  const fresh = cur === "news" ? 0 : newsBadge();
+  const badge = (k) => k === "news" && fresh ? ` <span class="navbadge" aria-label="${fresh} new">${fresh > 99 ? "99+" : fresh}</span>` : "";
+  const link = (cls) => ([k, label]) => `<a ${cls} href="#/${k}" ${cur === k ? 'aria-current="page"' : ""}>${label}${badge(k)}</a>`;
   $("#nav").innerHTML = NAV.map(link('class="navlink"')).join("");
   $("#bnav").innerHTML = BNAV.map(link("")).join("");
 }
@@ -1529,17 +1535,96 @@ async function viewGuide(slug) {
   if (at) document.getElementById(at)?.scrollIntoView({ block: "start" });
 }
 
-/* ══ News ════════════════════════════════════════════════════════════════ */
-function viewNews() {
-  const posts = (NEWS?.posts || []).slice(0, 60);
-  const riot = (TOP?.events || []).map((e) => ({ title: e.title.replace(/’/g, "'"), dt: e.published, url: e.url, tags: ["Riot · results"] }));
-  const all = [...posts, ...riot].sort((a, b) => String(b.dt).localeCompare(String(a.dt))).slice(0, 70);
-  return `<h1>News</h1><section class="panel">
-    ${all.map((p) => `<div class="row" style="align-items:flex-start"><span class="num tiny dim" style="width:92px;flex:none;padding-top:2px">${esc(p.dt)}</span>
-      <span class="n"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>
-      <span class="tiny dim" style="display:block">${esc((p.tags || []).join(" · "))}</span></span></div>`).join("")}
-    <p class="note">riftbound.gg's posts (titles only; their feed carries no text) and Riot's own results articles.</p></section>`;
+/* ══ News ════════════════════════════════════════════════════════════════
+   Three sources in one list: Riot's own news (the only place bans, errata and rules
+   updates are announced), Riot's RQ results articles, and riftbound.gg's posts (titles
+   only; their feed carries no text). "For you" pulls out what changes how you play:
+   recent rules/ban/errata posts, and anything naming a champion from your decks. */
+// "FAQ" alone is not enough: Riot's merch-drawing page is a FAQ too.
+const RULESY = /\b(rules?|errata|bans?|banned|patch notes|changelog|legality)\b|rules faq|faq.*rules/i;
+const normUrl = (u) => String(u || "").replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "").toLowerCase();
+const apos = (t) => String(t).replace(/[’‘]/g, "'").toLowerCase();
+function newsItems() {
+  const seen = new Set(), out = [];
+  const add = (p) => { const k = normUrl(p.url); if (!k || seen.has(k)) return; seen.add(k); out.push(p); };
+  for (const p of NEWS?.riot || []) add({ ...p, src: "Riot", kind: /top decks/i.test(p.title) ? "results" : RULESY.test(p.title) ? "rules" : "riot" });
+  for (const e of TOP?.events || []) add({ title: e.title.replace(/’/g, "'"), dt: e.published, url: e.url, tags: ["Organized Play"], desc: e.summary || null, src: "Riot", kind: "results" });
+  for (const p of NEWS?.posts || []) add({ ...p, src: "riftbound.gg", kind: (p.tags || []).includes("Metagame") ? "meta" : (p.tags || []).some((t) => /guide|legend/i.test(t)) ? "guides" : RULESY.test(p.title) ? "rules" : "news" });
+  return out.sort((a, b) => String(b.dt).localeCompare(String(a.dt)));
 }
+// The champions your decks are built on, by legend; a title naming one is about you.
+function myChampions() {
+  const out = new Map();
+  for (const d of decks()) {
+    const L = deckStats(d, IDX, ROW?.inv || {}).legend;
+    const ch = L && IDX.championOf(L);
+    if (ch) out.set(apos(ch), ch);
+  }
+  return out;
+}
+const aboutMe = (p, champs) => [...champs].filter(([k]) => apos(p.title).includes(k)).map(([, v]) => v);
+// Per-viewer: when you last opened News, so new posts can be marked. Read once a
+// session, then moved to today, so a reload mid-session keeps the marks.
+let NEWS_SEEN;
+function newsSeen() {
+  if (NEWS_SEEN === undefined) {
+    NEWS_SEEN = ls.get("rift-app-news-seen", null);
+    ls.set("rift-app-news-seen", today());
+  }
+  return NEWS_SEEN;
+}
+function newsBadge() {
+  const prev = NEWS_SEEN !== undefined ? NEWS_SEEN : ls.get("rift-app-news-seen", null);
+  if (!prev || !NEWS) return 0;
+  return newsItems().filter((p) => p.dt > prev).length;
+}
+const NF = { k: ls.get("rift-app-news-filter", "all") };
+const NEWS_FILTERS = [["all", "Everything"], ["mine", "Your decks"], ["rules", "Rules & bans"], ["riot", "Riot"], ["results", "Results"], ["meta", "Meta"], ["guides", "Guides"]];
+function viewNews() {
+  const prev = newsSeen();
+  const items = newsItems();
+  const champs = myChampions();
+  const recent = (p, days) => p.dt && (Date.now() - Date.parse(p.dt)) / 86400000 <= days;
+  const forYou = items.filter((p) => recent(p, 30) && ((p.src === "Riot" && p.kind === "rules") || aboutMe(p, champs).length)).slice(0, 8);
+  const pick = (p) => NF.k === "all" ? true : NF.k === "mine" ? aboutMe(p, champs).length > 0
+    : NF.k === "riot" ? p.src === "Riot" : p.kind === NF.k;
+  const shown = items.filter(pick).slice(0, 80);
+  const fresh = prev ? items.filter((p) => p.dt > prev).length : 0;
+  const row = (p) => {
+    const mine = aboutMe(p, champs);
+    const isNew = prev && p.dt > prev;
+    const ext = !/playriftbound\.com|riftbound\.gg/.test(p.url);
+    return `<div class="row news" style="align-items:flex-start">
+      <span class="num tiny dim" style="width:104px;flex:none;padding-top:3px;white-space:nowrap">${isNew ? `<i class="newdot" title="New since your last visit"></i>` : ""}${esc(p.dt || "")}</span>
+      <span class="n"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>${ext ? ` <span class="tiny dim">↗ video</span>` : ""}
+        ${p.desc ? `<span class="small dim" style="display:block">${esc(p.desc)}</span>` : ""}
+        <span class="tiny" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:3px">
+          <span class="pill ${p.src === "Riot" ? "riot" : "src"}">${esc(p.src)}</span>
+          ${p.kind === "rules" ? `<span class="pill bad">rules</span>` : ""}
+          ${mine.map((c) => `<span class="pill good">${esc(c)}</span>`).join("")}
+          <span class="dim">${esc((p.tags || []).join(" · "))}</span></span></span></div>`;
+  };
+  const at = (k) => k === "riot" ? (NEWS?.riot?.[0]?.dt || "—") : (NEWS?.posts?.[0]?.dt || "—");
+  return `<section class="panel hero">
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:0"><h1>News</h1>
+        <span class="small dim">Riot's news and results, and riftbound.gg's posts · checked daily · newest from Riot ${esc(at("riot"))}, riftbound.gg ${esc(at("gg"))}</span></div>
+      <div class="stats"><div class="stat"><span class="lbl">New since last visit</span><b>${prev ? fresh : "—"}</b></div>
+        <div class="stat"><span class="lbl">For you, 30 days</span><b>${forYou.length}</b></div></div></section>
+    ${forYou.length ? `<section class="panel"><div class="headrow"><h2>For you</h2>
+        <span class="small dim">Riot's rules, ban and errata posts, and anything about ${esc([...champs.values()].join(", ") || "your decks")}</span></div>
+      <div>${forYou.map(row).join("")}</div></section>` : ""}
+    <nav class="subnav" aria-label="Filter news">${NEWS_FILTERS.map(([k, l]) => `<a href="#/news" data-nf="${k}" ${NF.k === k ? 'aria-current="page"' : ""}>${l}</a>`).join("")}</nav>
+    <section class="panel">
+      ${shown.length ? shown.map(row).join("") : `<p class="note">Nothing here${NF.k === "mine" ? " mentions your decks' champions" : ""}.</p>`}
+      <p class="note">Riot's posts come from playriftbound.com's news pages, with Riot's own one-line summary. riftbound.gg's feed carries titles only. "Your decks" means the title names a champion one of your decks is built on.</p></section>`;
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-nf]");
+  if (!b) return;
+  e.preventDefault();
+  NF.k = b.dataset.nf; ls.set("rift-app-news-filter", NF.k);
+  KEEP_SCROLL = true; route();
+});
 
 /* ── boot ────────────────────────────────────────────────────────────────── */
 (async () => {

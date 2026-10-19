@@ -205,8 +205,10 @@ function parseErrata(md, source) {
     // Cards. Anything else at ## or ### is a card.
     if ((m = /^## (.+?) Cards$/.exec(line))) { flush(); card = null; set = m[1]; continue; }
     if ((m = /^###? (.+)$/.exec(line))) { flush(); card = m[1]; mode = null; continue; }
-    if (/^\*\*\[NEW TEXT\]\*\*$/i.test(line)) { mode = "new"; continue; }
-    if (/^\*\*\[OLD TEXT\]\*\*$/i.test(line)) { mode = "old"; continue; }
+    // The Radiance page (2026-10-09) runs the arrow into an unbolded marker,
+    // "▲ [OLD TEXT]", where the earlier pages put a bold marker on its own line.
+    if (/^(?:▲\s*)?(?:\*\*)?\[NEW TEXT\](?:\*\*)?$/i.test(line)) { mode = "new"; continue; }
+    if (/^(?:▲\s*)?(?:\*\*)?\[OLD TEXT\](?:\*\*)?$/i.test(line)) { mode = "old"; continue; }
     if (/^(?:#+\s*)?(---|▲)$/.test(line)) {
       if (line.endsWith("---")) { flush(); card = null; }
       mode = null; continue;

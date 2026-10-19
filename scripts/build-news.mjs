@@ -1,9 +1,13 @@
 #!/usr/bin/env node
-// Regenerates data/news.json: riftbound.gg's posts, tagged and dated.
+// Regenerates data/news.json: riftbound.gg's posts, tagged and dated, and Riot's own
+// news from playriftbound.com.
 //
 //   node scripts/build-news.mjs [--pages 8]
 //
-// Source: api.dotgg.gg/cgfw/getposts. No key and no auth.
+// Sources: api.dotgg.gg/cgfw/getposts (no key, no auth), and playriftbound.com's news
+// index pages. Riot's matter more than their count suggests: bans, errata and rules
+// patch notes are published there and nowhere else, and on 2026-10-09 the Radiance
+// errata and rules update went out without the feed here saying a word.
 //
 // Two things about this endpoint are worth knowing before touching it.
 //
@@ -22,6 +26,7 @@
 // ships and the app joins it against the live roster.
 
 import { writeFile, readFile } from "node:fs/promises";
+import { pathToFileURL } from "node:url";
 
 const API = "https://api.dotgg.gg/cgfw/getposts?game=riftbound";
 const SOURCE = "riftbound.gg";
@@ -55,6 +60,45 @@ const tagsOf = (raw) => {
     return Array.isArray(p) ? p.map((t) => String(t).trim()).filter(Boolean) : [];
   } catch { return []; }
 };
+
+/* ── Riot's news ───────────────────────────────────────────────────────────
+   The index pages server-render their newest 12 cards each, as anchors with the title,
+   category, a <time dateTime> and a one-line description. Four pages (the index and its
+   three categories) reach back about a year for rules posts and three weeks for the
+   rest; the daily run merges over the committed file, so the archive only grows. Some
+   cards link off-site (YouTube trailers), and those are kept with their own URL. */
+const RIOT = "https://playriftbound.com";
+const RIOT_PAGES = ["/en-us/news/", "/en-us/news/announcements/", "/en-us/news/organizedplay/", "/en-us/news/rules-and-releases/"];
+const stripTags = (t) => unescape(String(t || "").replace(/<[^>]+>/g, " ").replace(/&#x27;/g, "'")).replace(/\s+/g, " ").trim();
+export function riotCards(html) {
+  const out = [];
+  for (const m of html.matchAll(/<a\b([^>]*data-testid="[a-z]*card-component"[^>]*)>([\s\S]*?)<\/a>/g)) {
+    const [, attrs, body] = m;
+    const href = /href="([^"]+)"/.exec(attrs)?.[1];
+    const title = stripTags(/data-testid="card-title"[^>]*>([\s\S]*?)<\/div>/.exec(body)?.[1]) || unescape(/aria-label="([^"]+)"/.exec(attrs)?.[1]);
+    const dt = /dateTime="(\d{4}-\d{2}-\d{2})/.exec(body)?.[1] || null;
+    const cat = stripTags(/data-testid="card-category"[^>]*>([\s\S]*?)<\/div>/.exec(body)?.[1]);
+    const desc = stripTags(/data-testid="card-description"[^>]*>([\s\S]*?)<\/div><\/div><\/div>/.exec(body)?.[1]);
+    if (!href || !title || !dt) continue;
+    const url = (/^https?:/.test(href) ? href : RIOT + href).replace(/\/$/, "");
+    out.push({ title, dt, url, tags: cat ? [cat] : [], desc: desc || null });
+  }
+  return out;
+}
+async function riotNews() {
+  const got = new Map(), failed = [];
+  for (const path of RIOT_PAGES) {
+    try {
+      const r = await fetch(RIOT + path, { headers: { "User-Agent": "rift.jayegger.com news builder" }, redirect: "follow" });
+      if (!r.ok) { failed.push(`${path} ${r.status}`); continue; }
+      const cards = riotCards(await r.text());
+      if (!cards.length) failed.push(`${path} parsed no cards`);
+      for (const c of cards) if (!got.has(c.url)) got.set(c.url, c);
+    } catch (e) { failed.push(`${path} ${e.message}`); }
+    await sleep(PAGE_PAUSE);
+  }
+  return { posts: [...got.values()], failed };
+}
 
 const main = async () => {
   const pages = Math.max(1, arg("pages", 8));
@@ -127,6 +171,20 @@ const main = async () => {
   }
 
   const list = [...posts.values()].sort((a, b) => b.dt.localeCompare(a.dt) || a.title.localeCompare(b.title));
+
+  // Riot, merged over the committed copy the same way. A page that fails or parses
+  // nothing keeps what was there and is named in `riotFailed`; all four parsing
+  // nothing is the page having changed shape, which the summary says out loud.
+  process.stdout.write("\nplayriftbound.com news… ");
+  const riot = await riotNews();
+  console.log(`${riot.posts.length} posts${riot.failed.length ? `, failed: ${riot.failed.join("; ")}` : ""}`);
+  const riotBy = new Map(riot.posts.map((p) => [p.url, p]));
+  let riotCarried = 0;
+  try {
+    const old = JSON.parse(await readFile(new URL("../data/news.json", import.meta.url), "utf8"));
+    for (const p of old.riot || []) if (p?.url && !riotBy.has(p.url)) { riotBy.set(p.url, p); riotCarried++; }
+  } catch { /* first run */ }
+  const riotList = [...riotBy.values()].sort((a, b) => b.dt.localeCompare(a.dt) || a.title.localeCompare(b.title));
   const byTag = {};
   for (const p of list) for (const t of (p.tags.length ? p.tags : ["Untagged"])) byTag[t] = (byTag[t] || 0) + 1;
 
@@ -142,6 +200,10 @@ const main = async () => {
     carriedFromPrevious: carried,
     tags: byTag,
     posts: list,
+    riotSource: "playriftbound.com/en-us/news/ and its three category pages",
+    riotFailed: riot.failed.length ? riot.failed : null,
+    riotCarried,
+    riot: riotList,
   };
   await writeFile(new URL("../data/news.json", import.meta.url), JSON.stringify(out, null, 1) + "\n");
 
@@ -160,9 +222,14 @@ const main = async () => {
   const untagged = list.filter((p) => !p.tags.length).length;
   if (untagged) console.log(`\nNOTE: ${untagged} posts carry no tag, so they land in the feed but no context panel.`);
   if (list.length < 20) console.log(`\nWARNING: only ${list.length} posts kept. Their feed may have changed shape, or --pages is too low.`);
+  console.log(`\nRiot: ${riotList.length} posts, newest ${riotList[0]?.dt || "none"}${riotCarried ? `, ${riotCarried} carried` : ""}`);
+  for (const p of riotList.slice(0, 5)) console.log(`  ${p.dt}  [${(p.tags[0] || "?").slice(0, 14).padEnd(14)}] ${p.title.slice(0, 60)}`);
+  if (riot.posts.length === 0) console.log("WARNING: no Riot news parsed from any page. playriftbound.com's markup has changed; the committed list was kept.");
 };
 
-main().catch((e) => {
-  console.error("\nbuild-news failed:", e.message);
-  process.exit(1);
-});
+// Only run when executed directly, so check.mjs can import riotCards.
+if (import.meta.url === pathToFileURL(process.argv[1] || "").href)
+  main().catch((e) => {
+    console.error("\nbuild-news failed:", e.message);
+    process.exit(1);
+  });

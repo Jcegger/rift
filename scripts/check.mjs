@@ -597,6 +597,18 @@ else {
   ok('the feed is newest first',
      news.posts.every((p, i) => !i || news.posts[i - 1].dt >= p.dt));
 
+  /* Riot's own news, kept apart in `riot`. It is where bans, errata and rules updates
+     are announced, and missing it is how the 2026-10-09 rules update went unnoticed
+     here for ten days. Riot posts several times a month, so a newest post older than
+     45 days is the index page having changed shape, not a quiet month. */
+  const riot = news.riot || [];
+  const riotAge = riot[0] ? Math.floor((Date.now() - Date.parse(riot[0].dt)) / 86400000) : null;
+  ok("Riot's news is carried, every post dated, titled and linked",
+     riot.length >= 10 && riot.every((p) => p.dt && p.title && p.url),
+     `${riot.length} posts${news.riotFailed ? ` · pages failing: ${news.riotFailed.join('; ')}` : ''}`);
+  ok("Riot's newest post is recent", riotAge != null && riotAge <= 45,
+     riotAge == null ? 'none' : `${riot[0].dt}, ${riotAge} days ago`);
+
   // The join is the reason the feed is worth having. If their title convention changes,
   // this must fail rather than quietly dropping every guide link.
   const legends = news.posts.filter((p) => (p.tags || []).includes('Legends'));

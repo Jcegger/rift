@@ -39,7 +39,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `data/decks.json` - recent decklists, the meta snapshot.
 - `data/banned.json` - cards banned from sanctioned Constructed play.
 - `data/events.json` - the tournament archive, with player counts and coverage.
-- `data/news.json` - riftbound.gg's posts: title, date, tag, link.
+- `data/news.json` - riftbound.gg's posts (title, date, tag, link) and, under `riot`,
+  Riot's own news from playriftbound.com with its one-line summaries.
 - `data/tiers.json` - riftbound.gg's weekly Tier 1-5 list, per Legend, scraped.
 - `data/topdecks.json` - Riot's own RQ "Top Decks" articles: every Top 8 and Best-Of list,
   with finishes, and each event's Day 1 / Day 2 field by legend.
@@ -49,7 +50,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `scripts/build-decks.mjs` - regenerates the deck snapshot.
 - `scripts/build-banned.mjs` - regenerates the ban list.
 - `scripts/build-events.mjs` - regenerates the tournament archive and its coverage.
-- `scripts/build-news.mjs` - regenerates the news feed.
+- `scripts/build-news.mjs` - regenerates the news feed: riftbound.gg's posts and Riot's
+  news index pages.
 - `scripts/build-tiers.mjs` - scrapes the meta tier list off riftbound.gg's page.
 - `scripts/build-topdecks.mjs` - parses Riot's RQ Top Decks articles.
 - `scripts/build-history.mjs` - appends today's row to the archive. Fetches nothing.
@@ -1200,6 +1202,12 @@ Collection, Guides, News. It lived at `/app/` while it was built and took the ro
   plus your decks' shortfalls, less anything on the way), and a comparison against any
   public riftbound.gg profile. `?view=trade` is a read-only copy of it to hand someone.
   *Import*: the pull, file import, the Piltover worklist, foil-only typos, a backup.
+- **News** — Riot's news (bans, errata, rules updates and announcements, with Riot's own
+  summaries), Riot's RQ results articles and riftbound.gg's posts in one list. It opens on
+  **For you**: Riot's rules, ban and errata posts from the last 30 days and anything whose
+  title names a champion one of your decks is built on. Posts newer than your last visit
+  are marked, and the nav shows how many (kept in this browser only). Filters: your decks,
+  rules & bans, Riot, results, meta, guides.
 
 **Writes.** The Supabase row holds everything, so each write pulls a fresh copy, changes
 only `decks` or `journal`, and writes the whole object back; the last five pre-write
