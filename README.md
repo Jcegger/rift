@@ -77,7 +77,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `lib/consensus.mjs` - counting a set of lists into the list they add up to; shared by
   `build-ideas.mjs` and `build-archetypes.mjs`.
 - `lib/engines.mjs` - engines read off card text (payoffs and what triggers them), for
-  cards with no lists yet. Tests: `lib/engines.test.mjs`.
+  cards with no lists yet. Tests: `lib/engines.test.mjs`, including the answer key that scores
+  every legend's main engine against `docs/archetypes.md`.
 - `scripts/build-ideas.mjs` - counts the Radiance-era deck ideas from the deck snapshot and
   checks the builds in `builds/`. Fetches nothing. See "Deck ideas" below.
 - `builds/` - Claude's own builds, one hand-written JSON file each: the list (taken from a
@@ -1287,10 +1288,19 @@ both, so shared colours don't count — and each card's home legends (Stellacorn
 Irelia lists, ×4 its rate). Shown in every card's dialog and as "goes with what's in this
 list" on the bench. *Read*: `lib/engines.mjs` tags each card's text as a **payoff** ("when I
 move, draw 1") or an **enabler** (Irelia's "ready it", Ganking, "move a friendly unit") of an
-engine — movement, exhaust triggers, buffs, plays from elsewhere, the trash, tokens, deaths,
-discards, facedown, spells, gear. A list has an engine when it holds payoffs for it; the
-idea page and bench list the legal cards that would feed it, Radiance cards nobody has tried
-first, each with the sentence that matched. The first is evidence; the second is a reading by
+engine — movement, exhaust triggers, buffs, plays from elsewhere, the top of the deck, the
+trash, tokens, deaths, discards, facedown, spells, gear, winning fights (Assault, pumps,
+"when you win a combat"), Mighty, Empower, Legion, XP and stuns. A list *touches* an engine
+when it holds payoffs for it, but only a **loop** is the deck's engine: the legend in it (its
+own trigger as the payoff outranks it merely feeding one), or four copies each of a payoff
+and a different card feeding it. A deck with no loop — a curve, removal or ramp — reads as
+"no engine", and its stray patterns are shown as incidental; research questions come only
+from loops. The idea page and bench list the legal cards that would feed an engine, Radiance
+cards nobody has tried first, each with the sentence that matched. The test file scores the
+reader against an answer key written from `docs/archetypes.md` — every legend's engine by
+hand — with a short named list of known misses; 49 of 54 legends (1,093 of 1,124 placed
+lists) read right. When engines tie on the legend, the legend's own cards break it: its
+signature spell or gear and champion units, read by their text, were designed for its plan. The first is evidence; the second is a reading by
 pattern — it can't see timing, targets or whether two cards truly combo — and says so.
 
 **Builds that keep up.** Each build file carries a `snapshot` of the field it was written

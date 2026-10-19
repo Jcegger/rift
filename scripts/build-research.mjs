@@ -63,7 +63,8 @@ const docEngine = (md, legend) => {
 // Words a hand-written Engine line uses for each engine.
 const ALIASES = { move: /\bmov(e|es|ement|ing)\b/i, exhaust: /\bexhaust/i, buff: /\bbuff/i, offhand: /\bplays? from elsewhere|\bfrom (the )?trash|\boff[- ]hand/i,
   reveal: /\breveal|\btop of the deck|\btop of (your )?deck/i, trash: /\btrash/i, tokens: /\btoken/i, death: /\bdeath|\bdeathknell|\bdies\b/i,
-  discard: /\bdiscard/i, hidden: /\bhidden|\bface ?down/i, spells: /\bspells?\b/i, gear: /\bgear|equip/i, legion: /\blegion/i, ready: /\bready/i };
+  discard: /\bdiscard/i, hidden: /\bhidden|\bface ?down/i, spells: /\bspells?\b/i, gear: /\bgear|equip/i, legion: /\blegion/i, ready: /\bready/i,
+  combat: /\bcombat|\bfights?\b|\bassault/i, mighty: /\bmighty/i, empower: /\bempower/i, xp: /\bxp\b|\blevel/i, stun: /\bstun/i };
 
 const main = async () => {
   const [cat, extras, banned, snap, syn] = await Promise.all([read("cards.json"), read("extras.json"), read("banned.json"), read("decks.json"), read("synergy.json")]);
@@ -109,7 +110,8 @@ const main = async () => {
     const conRows = con.main.map((r) => ({ ...r, c: card(r.code) })).filter((r) => r.c);
     const E = deckEngines(con.cards, idx, { max: 999 });
     row.engines = E.map((e) => e.key);
-    row.main = E[0]?.key || null;
+    // Only a loop is the deck's engine; a list with none (a curve, removal, ramp) has no main.
+    row.main = E[0]?.loop ? E[0].key : null;
     row.core = conRows.filter((r) => r.inc >= 0.6).map((r) => r.name);
     // Signature cards (played far more here than by the colours) that tag no engine: the
     // deck is doing something with them the reader cannot see.
@@ -153,7 +155,9 @@ const main = async () => {
         // A question only when it could matter: a payoff (what an engine is for), or an
         // enabler of the deck's main engine; and some other legend plays it heavily. A
         // card nobody plays anywhere is skipped without one — the field has answered it.
-        const asks = homes.some((h) => h.share >= ELSEWHERE) && (cand.roles.includes("payoff") || rank === 0);
+        // Only an engine that loops in this list counts: a payoff for a pattern the deck
+        // touches by accident (two stray Empower cards) does not fit the deck.
+        const asks = e.loop && homes.some((h) => h.share >= ELSEWHERE) && (cand.roles.includes("payoff") || rank === 0);
         row.cards[cand.name] = { status: "skipped", share: round(s), ...(asks ? { id: itemId(name, `engine-${e.key}`) } : {}) };
         if (!asks) continue;
         const why = [];

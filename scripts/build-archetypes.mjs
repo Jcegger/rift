@@ -97,7 +97,7 @@ const main = async () => {
       sim = { energy: round(e4(s.play), 1), units3: round(s.play.units[2], 1), might4: round(s.play.might[3], 1) };
     } catch { /* a list the sim cannot read stays unsimulated */ }
     const engines = deckEngines(con.cards, idx, { max: 0 }).slice(0, 3)
-      .map((e) => ({ key: e.key, name: e.name, payoffs: e.payoffs.map((p) => p.legend ? "the legend" : p.name), enablers: e.enablers.map((p) => p.legend ? "the legend" : p.name) }));
+      .map((e) => ({ key: e.key, name: e.name, loop: e.loop, payoffs: e.payoffs.map((p) => p.legend ? "the legend" : p.name), enablers: e.enablers.map((p) => p.legend ? "the legend" : p.name) }));
     // The cards this legend plays far more than its colours do: its package.
     const pkg = Object.entries(syn.cards).map(([n, c]) => ({ n, l: c.legends.find((x) => x.name === name), rad: c.rad }))
       .filter((x) => x.l && x.l.share >= 0.5 && x.l.lift >= 2.5).sort((a, b) => b.l.lift * b.l.share - a.l.lift * a.l.share).slice(0, 8)

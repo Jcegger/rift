@@ -764,8 +764,10 @@ async function cmdIdeas(cat, args) {
   const fix = (m) => Object.fromEntries(Object.entries(m).map(([k, n]) => [cat.BY.has(k) ? k : (cat.cards.find((c) => c.c.replace(/\/\d+$/, "") === k.replace(/\/\d+$/, ""))?.c || k), n]));
   // Cards the winners skip are questions, not suggestions (data/research.json).
   const R = await readJson(url("research.json")).catch(() => null);
-  for (const e of annotateEngines(deckEngines(fix(c.cards), cat.idx, { shares: l.shares || {}, max: 40 }), R, l.name).slice(0, 3)) {
-    console.log(`\nENGINE ${e.name.toUpperCase()} · pays off: ${e.payoffs.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}${e.enablers.length ? ` · feeds it: ${e.enablers.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}` : ""}`);
+  const EN = annotateEngines(deckEngines(fix(c.cards), cat.idx, { shares: l.shares || {}, max: 40 }), R, l.name).slice(0, 3);
+  if (EN.length && !EN[0].loop) console.log(`\nNO ENGINE: no loop of payoff and feeder in this list (a curve, removal or ramp deck). Incidental patterns:`);
+  for (const e of EN) {
+    console.log(`\n${e.loop ? "ENGINE" : "PATTERN"} ${e.name.toUpperCase()} · pays off: ${e.payoffs.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}${e.enablers.length ? ` · feeds it: ${e.enablers.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}` : ""}`);
     for (const k of e.candidates.slice(0, 6)) console.log(`  could add ${pad(k.name, 28)} ${k.set === "RAD" ? "RAD" : "   "} ${pad(k.share != null ? `${Math.round(k.share * 100)}% play it` : "untried", 13)} "${k.text.slice(0, 80)}"`);
     if (e.held.length) console.log(`  winners skip: ${e.held.map((k) => k.name).join(", ")}`);
   }

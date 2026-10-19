@@ -91,7 +91,10 @@ alone if possible, and win there.
   battlefield). Develop first, spells second ([Jun](../guides/khazix-voidreaver-jun.md)).
 - **Wins by:** a stream of won fights that pay XP, then conquests the walk-home keeps from being
   punished.
-- **Engine:** movement — Faefolk, Void Assault, Ride the Wind, Tideturner, the legend's walk-home.
+- **Engine:** winning fights — the legend pays XP for every combat won. Movement is the means,
+  not the plan: Void Assault and Faefolk drag an enemy in so you choose the fight (and leave it
+  alone for Mutating Horror); Ride the Wind, Tideturner and the legend's walk-home keep the
+  winners safe.
 - **Fears:** decks that never present a lone unit (go-wide boards), and mass shrink (−Might to all
   enemies) that turns its +2 into nothing.
 - **Measured vs. named:** the numbers say aggro; Jun's plan is midrange (develop, then win the

@@ -244,7 +244,7 @@ nav.bottom{display:none}
 <script type="module">
 import { indexCatalog, deckStats, deckChecks, journalRecord, ownedByIdentity, MAIN_SIZE, SB_MAX } from "./lib/decks.mjs";
 import { mdToHtml, esc, slugify } from "./lib/markdown.mjs";
-import { deckEngines } from "./lib/engines.mjs";
+import { deckEngines, ENGINES } from "./lib/engines.mjs";
 import { annotateEngines, VERDICTS } from "./lib/research.mjs";
 import { applyImport, matcher, setCount, setSource, foilOnlyProblems, newqRows, newqText, newqCSV,
   spares, readPartner, tradeMatch } from "./lib/collection.mjs";
@@ -1122,10 +1122,14 @@ function enginesBlock(cards, shares, { addable = false, max = 3 } = {}) {
   const legend = L ? IDX.legendName(L) : null;
   const E = annotateEngines(deckEngines(cards, IDX, { shares, max: 40 }), RES, legend).slice(0, max)
     .map((e) => ({ ...e, more: e.more + Math.max(0, e.candidates.length - 6), candidates: e.candidates.slice(0, 6) }));
-  if (!E.length) return `<p class="note">No engine found in this list's text: no card here pays off a repeated event this reader knows (moving, exhausting, buffs, plays from elsewhere, the trash, tokens, deaths, discards, facedown, spells, gear).</p>`;
+  const known = ENGINES.map((e) => e.name.toLowerCase()).join(", ");
+  if (!E.length) return `<p class="note">No engine found in this list's text: no card here pays off a repeated event this reader knows (${esc(known)}).</p>`;
+  // Only a loop (the legend in it, or four copies each of payoff and feeder) is an engine;
+  // a curve, removal or ramp deck has none, and its stray patterns are shown as just that.
+  const none = !E[0].loop ? `<p class="note">No engine: nothing here loops — the legend is in none of these, and none has four copies each of a payoff and something else feeding it. A curve, removal or ramp deck reads this way. The patterns below are incidental.</p>` : "";
   const names = (xs) => xs.map((x) => `${x.qty} ${esc(x.legend ? "the legend" : x.name)}`).join(", ");
-  return E.map((e) => `<div class="engine">
-    <div class="headrow"><h3>${esc(e.name)}</h3><span class="tiny dim">${esc(e.what)}</span></div>
+  return none + E.map((e) => `<div class="engine">
+    <div class="headrow"><h3>${esc(e.name)}${e.loop ? "" : ` <span class="tiny dim">· incidental</span>`}</h3><span class="tiny dim">${esc(e.what)}</span></div>
     <div class="small"><b>Pays off:</b> ${names(e.payoffs)}${e.enablers.length ? ` · <b>Feeds it:</b> ${names(e.enablers)}` : ""}</div>
     ${e.candidates.length ? `<div class="lbl" style="margin-top:6px">Could add</div>${e.candidates.map((c) => `<div class="erow" style="align-items:flex-start">
       <span class="n"><button class="cardlink" data-card="${esc(c.code)}">${esc(c.name)}</button>${c.set === "RAD" ? ` <span class="pill later">RAD</span>` : ""}
