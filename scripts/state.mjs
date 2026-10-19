@@ -728,8 +728,22 @@ async function cmdIdeas(cat, args) {
     if (quiet.length) console.log(`\n  new legends with no lists yet: ${quiet.map((n) => n.name).join(" · ")}`);
     return;
   }
+  // The archetype first: what the deck is for, measured and as written (docs/archetypes.md).
+  const AR = await readJson(url("archetypes.json")).catch(() => null);
+  const arch = AR?.legends.find((x) => x.name.toLowerCase().includes(q));
+  if (arch) {
+    const md = await readFile(new URL("../docs/archetypes.md", import.meta.url), "utf8").catch(() => "");
+    const sec = md.split(/^(?=##+ )/m).find((b) => b.startsWith(`### ${arch.name} —`));
+    const p = arch.profile;
+    console.log(`ARCHETYPE ${arch.name}: ${sec ? sec.split("\n")[0].split(" — ")[1].replace(/\*.*$/, "").replace(/[\s·]+$/, "") : "not written"}` +
+      (p ? ` · measured ${arch.label} (u${p.units} s${p.spells} g${p.gear}, cost ${p.avgCost}, ${p.interaction} interaction)` : ""));
+    // Bullets wrap in the source; a continuation line is indented, so fold it back in.
+    if (sec) console.log(sec.split("\n").slice(1).join("\n").replace(/\n {2,}(?=\S)/g, " ").split("\n")
+      .filter((x) => /^- \*\*/.test(x)).map((x) => "  " + x.replace(/\*\*/g, "")).join("\n"));
+    console.log("");
+  }
   const l = I.legends.find((x) => x.name.toLowerCase().includes(q));
-  if (!l) { console.log(`no Radiance-era lists for a legend matching "${q}"`); process.exit(1); }
+  if (!l) { console.log(`no Radiance-era lists for a legend matching "${q}"`); process.exit(arch ? 0 : 1); }
   const c = l.consensus;
   console.log(`${l.name.toUpperCase()}${l.isNew ? " (new in Radiance)" : ""} · ${l.placed} placed · top 8 ×${l.top8} · ${l.brews} brews`);
   console.log(`finishes: ${l.finishes.map(([p, n]) => `#${p}/${n ?? "?"}`).join(" ") || "none"}`);

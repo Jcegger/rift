@@ -619,6 +619,28 @@ section('Deck ideas');
   }
 }
 
+/* ══ archetypes ══════════════════════════════════════════════════════════ */
+section('Archetypes');
+{
+  let AR = null;
+  try { AR = read('data/archetypes.json'); } catch { /* reported below */ }
+  const md = (() => { try { return readFileSync(join(ROOT, 'docs/archetypes.md'), 'utf8'); } catch { return ''; } })();
+  if (!AR) ok('archetype snapshot present', false, 'data/archetypes.json missing — run build-archetypes.mjs');
+  else {
+    // Every legend gets a written game plan; a new set's legends must not arrive silently
+    // without one. The heading must be the legend's exact name, which is how the site
+    // and scripts/rift find it.
+    const heads = new Set([...md.matchAll(/^### (.+?) —/gm)].map((m) => m[1].trim()));
+    const missing = AR.legends.filter((l) => !heads.has(l.name)).map((l) => l.name);
+    ok('docs/archetypes.md has a game plan for every legend', !missing.length,
+       missing.length ? `${missing.length} without: ${missing.join(', ')}` : `${AR.legends.length} legends over ${AR.pairs.length} colour pairs`);
+    ok('every measured archetype is one of the six labels',
+       AR.legends.filter((l) => l.profile).every((l) => ['aggro', 'tempo', 'midrange', 'control', 'ramp', 'combo'].includes(l.label)));
+    ok('every representative list is 40 cards', AR.legends.filter((l) => l.profile).every((l) => l.profile.units + l.profile.spells + l.profile.gear === 40),
+       AR.legends.filter((l) => l.profile && l.profile.units + l.profile.spells + l.profile.gear !== 40).map((l) => l.name).join(', ') || 'all 40');
+  }
+}
+
 /* ══ synergy ═════════════════════════════════════════════════════════════ */
 section('Synergy');
 {

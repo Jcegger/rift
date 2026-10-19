@@ -48,6 +48,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   with finishes, and each event's Day 1 / Day 2 field by legend.
 - `data/history.json` - the daily archive: deck counts per legend, and tier lists.
 - `data/guides.json` - the manifest of the dossiers in `guides/`. Not their text.
+- `data/archetypes.json` - each legend's measured profile: representative list, mix, curve,
+  interaction, goldfish speed, engines, signature package, and a fixed-threshold style label.
 - `data/synergy.json` - which cards are played together more than chance, and each card's
   home legends, counted from the deck snapshot.
 - `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
@@ -64,6 +66,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `scripts/build-history.mjs` - appends today's row to the archive. Fetches nothing.
 - `scripts/build-guides.mjs` - regenerates the guide manifest. Fetches nothing.
 - `scripts/build-synergy.mjs` - counts which cards are played together. Fetches nothing.
+- `scripts/build-archetypes.mjs` - measures each legend's archetype. Fetches nothing.
+- `lib/consensus.mjs` - counting a set of lists into the list they add up to; shared by
+  `build-ideas.mjs` and `build-archetypes.mjs`.
 - `lib/engines.mjs` - engines read off card text (payoffs and what triggers them), for
   cards with no lists yet. Tests: `lib/engines.test.mjs`.
 - `scripts/build-ideas.mjs` - counts the Radiance-era deck ideas from the deck snapshot and
@@ -94,6 +99,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `schema.sql` - the Supabase table and its policies.
 - `docs/fundamentals.md` - how the game works and what the field actually plays. The
   teaching layer over `docs/rules.md`'s reference layer.
+- `docs/archetypes.md` - what every legend's deck is trying to do, by colour pair: game plan,
+  engine, what it fears, and what each matchup turns on from your decks' side. Hand-written from
+  the measured profiles in `data/archetypes.json`; `check.mjs` requires a section per legend.
 - `docs/strategy.md` - how to choose between two legal lines: the lethal check, roles,
   reading the opponent, pressure, and reviewing a game. Distilled from Mateo Ferreira's
   *The Mathematics of Winning Positions* and applied to Kha'Zix. On the Guides shelf.

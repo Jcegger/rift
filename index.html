@@ -338,14 +338,14 @@ const journal = () => {
 };
 
 /* ── data ────────────────────────────────────────────────────────────────── */
-let CAT, IDX, TOP, TIERS, GUIDES, NEWS, IDEAS, MATCH, IMG = "";
+let CAT, IDX, TOP, TIERS, GUIDES, NEWS, IDEAS, ARCHE, MATCH, IMG = "";
 const BYNAME = new Map();        // folded legend name "Irelia, Blade Dancer" -> legend card
 const SHORT = new Map();         // "OGN-042" -> "OGN-042/298": the deck feed drops the set size
 const getJSON = (f) => fetch(`data/${f}`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
 
 async function loadData() {
-  const [cards, extras, banned, errata, top, tiers, guides, news, ideas] = await Promise.all(
-    ["cards.json", "extras.json", "banned.json", "errata.json", "topdecks.json", "tiers.json", "guides.json", "news.json", "ideas.json"].map(getJSON));
+  const [cards, extras, banned, errata, top, tiers, guides, news, ideas, arche] = await Promise.all(
+    ["cards.json", "extras.json", "banned.json", "errata.json", "topdecks.json", "tiers.json", "guides.json", "news.json", "ideas.json", "archetypes.json"].map(getJSON));
   if (!cards) throw new Error("data/cards.json did not load");
   CAT = cards; IMG = cards.imagePrefix || "";
   const all = [...cards.cards, ...((extras && extras.cards) || [])];
@@ -356,7 +356,7 @@ async function loadData() {
   MATCH = matcher(all);
   for (const c of all) if (c.t === "Legend" && !c.v) { const n = IDX.legendName(c); if (!BYNAME.has(n)) BYNAME.set(n, c); }
   for (const c of all) { const k = c.c.replace(/\/\d+$/, ""); if (!SHORT.has(k)) SHORT.set(k, c.c); }
-  TOP = top; TIERS = tiers; GUIDES = guides; NEWS = news; IDEAS = ideas;
+  TOP = top; TIERS = tiers; GUIDES = guides; NEWS = news; IDEAS = ideas; ARCHE = arche;
 }
 
 /* ── helpers ─────────────────────────────────────────────────────────────── */
@@ -537,13 +537,14 @@ function route() {
   let [, page = "decks", arg = ""] = (location.hash || "#/decks").split("?")[0].split("/");
   if (SHARE) { page = "collection"; arg = "trade"; }
   const key = decodeURIComponent(arg);
-  renderNav(page === "deck" || page === "edit" || page === "new" ? "decks" : page === "guide" ? "guides" : page === "idea" || page === "bench" ? "find" : page);
+  renderNav(page === "deck" || page === "edit" || page === "new" ? "decks" : page === "guide" ? "guides" : page === "idea" || page === "bench" || page === "archetypes" ? "find" : page);
   const v = $("#view");
   v.onclick = null;   // the editor and the bench attach their own; never carry one to the next page
   try {
     if (page === "collection") viewCollection(key || "cards");
     else if (page === "find") v.innerHTML = viewFind(key);
-    else if (page === "idea") v.innerHTML = viewIdea(key);
+    else if (page === "idea") { v.innerHTML = viewIdea(key); fillGamePlan(); }
+    else if (page === "archetypes") { v.innerHTML = viewArchetypes(); if (!ARCH_MD) loadArchMd().then(() => { if (location.hash.startsWith("#/archetypes")) { KEEP_SCROLL = true; route(); } }); }
     else if (page === "bench") viewBench(key);
     else if (page === "guides") v.innerHTML = viewGuides();
     else if (page === "guide") { v.innerHTML = `<p class="dim">Loading guide…</p>`; viewGuide(key); }
@@ -967,7 +968,12 @@ function viewIdea(name) {
   const l = ideaFor(name);
   const card = legendCard(name) || (l && IDX.BY.get(shortCode(l.code)));
   const builds = buildsFor(name);
-  if (!l && !builds.length) return `<a class="small" href="#/find">‹ Find a deck</a><div class="banner warn">No Radiance-era lists for ${esc(name)} yet.</div>`;
+  if (!l && !builds.length) return archFor(name)
+    ? `<a class="small" href="#/archetypes">‹ Archetypes</a><section class="panel hero"><div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+        <div class="dots">${dots(card?.d)}<span class="lbl">${esc((card?.d || []).join(" / "))}</span></div>
+        <h1>${card ? `<button class="cardlink" data-card="${esc(card.c)}">${esc(name)}</button>` : esc(name)}</h1>
+        <div class="dim">No Radiance-era lists yet.</div></div></section>${gamePlanPanel(name)}`
+    : `<a class="small" href="#/find">‹ Find a deck</a><div class="banner warn">No Radiance-era lists for ${esc(name)} yet.</div>`;
   const c = l?.consensus;
   const mine = decks().filter((d) => { const L = deckStats(d, IDX, ROW?.inv || {}).legend; return L && IDX.legendName(L) === name; });
   return `<div style="display:flex;flex-direction:column;gap:6px"><a class="small" href="#/find">‹ Find a deck</a></div>
@@ -979,7 +985,8 @@ function viewIdea(name) {
     </div>
     ${l ? `<div class="stats"><div class="stat"><span class="lbl">Placed lists</span><b>${l.placed}</b></div><div class="stat"><span class="lbl">Top 8</span><b>${l.top8}</b></div><div class="stat"><span class="lbl">Brews</span><b>${l.brews}</b></div></div>` : ""}
   </section>
-  ${IDEAS?.era?.allPreRelease ? `<div class="banner warn">Every finish on this page is from an unsanctioned online event played before Radiance was legal (${esc(IDEAS.era.legalFrom)}). Early signal, not a settled result.</div>` : ""}
+  ${IDEAS?.era?.allPreRelease && l?.placed ? `<div class="banner warn">Every finish on this page is from an unsanctioned online event played before Radiance was legal (${esc(IDEAS.era.legalFrom)}). Early signal, not a settled result.</div>` : ""}
+  ${gamePlanPanel(name)}
   ${builds.map(buildPanel).join("")}
   ${c ? `<div class="cols"><section class="panel wide">
       <div class="headrow"><h2>Consensus list</h2><div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=consensus">Tweak</a>${ROW ? `<button class="btn primary" data-copyidea="${esc(name)}">Copy to my decks</button>` : ""}</div></div>
@@ -1120,6 +1127,75 @@ function enginesBlock(cards, shares, { addable = false, max = 3 } = {}) {
       <span class="num tiny dim" style="white-space:nowrap">${c.share != null ? `${pctI(c.share)} play it` : "untried"}</span>
       ${addable ? `<button class="pm" data-b="add" data-code="${esc(c.code)}" aria-label="Add ${esc(c.name)}">+</button>` : ""}</div>`).join("")}` : ""}
   </div>`).join("") + `<p class="tiny dim" style="margin:0">Read off card text by pattern, not tested: it can't see timing, targets or whether two cards really combo. "Untried" means no list in these events plays it.</p>`;
+}
+
+/* ══ Archetypes ════════════════════════════════════════════════════════════
+   What each legend's deck is for. data/archetypes.json is measured (the representative
+   list's mix, curve, interaction, goldfish speed, engines, signature package);
+   docs/archetypes.md is the hand-written game plan, one "### <legend> — <archetype>"
+   section each, under "## <pair> — <character>". The page shows both side by side. */
+let ARCH_MD = null, ARCH_LOADING = null;
+function loadArchMd() {
+  if (ARCH_MD) return Promise.resolve(ARCH_MD);
+  return ARCH_LOADING || (ARCH_LOADING = fetch("docs/archetypes.md").then((r) => (r.ok ? r.text() : "")).catch(() => "").then((md) => {
+    const legends = new Map(), pairs = new Map();
+    let pair = null;
+    for (const block of md.split(/^(?=##+ )/m)) {
+      const h = /^(##+) (.+)$/m.exec(block);
+      if (!h) continue;
+      const [title, kind] = h[2].split(/ — /);
+      if (h[1] === "##") { pair = title.trim().replace(/\s*\/\s*/g, "/"); pairs.set(pair, { character: (kind || "").trim(), body: block.slice(h[0].length).trim() }); }
+      else legends.set(title.trim(), { archetype: (kind || "").replace(/\*.*$/, "").replace(/[\s·]+$/, "").trim(), body: block.slice(h[0].length).trim(), pair });
+    }
+    return (ARCH_MD = { legends, pairs });
+  }));
+}
+const archFor = (name) => (ARCHE?.legends || []).find((l) => l.name === name) || null;
+const guideLink = (u) => {
+  const base = u.split("#")[0].split("/").pop();
+  const hit = (GUIDES?.guides || []).find((x) => x.file.split("/").pop() === base);
+  return hit ? `#/guide/${encodeURIComponent(hit.slug)}` : null;
+};
+function profileLine(a) {
+  if (!a?.profile) return `<p class="note">No lists in the snapshot to measure.</p>`;
+  const p = a.profile;
+  return `<div class="small" style="display:flex;flex-wrap:wrap;gap:4px 14px">
+    <span><b>Measured:</b> ${esc(a.label)}</span>
+    <span>${p.units} units · ${p.spells} spells · ${p.gear} gear</span>
+    <span>average cost ${p.avgCost}</span><span>${p.interaction} interaction</span><span>${p.draw} draw</span>
+    ${a.sim ? `<span>goldfish: ${a.sim.energy} Energy turns 1–4, ${a.sim.units3} units by turn 3</span>` : ""}
+    <span class="dim">from ${a.from} ${a.basis === "placed" ? "placed lists" : "lists (few placed)"}${a.radShare ? ` · ${Math.round(a.radShare * 100)}% with Radiance cards` : ""}</span></div>
+    ${a.package?.length ? `<div class="small"><b>Plays far more than its colours:</b> ${a.package.map((k) => `${esc(k.name)}${k.rad ? "*" : ""} ${pctI(k.share)}`).join(" · ")}</div>` : ""}`;
+}
+function gamePlanPanel(name) {
+  return `<section class="panel" id="gameplan"><h2>Game plan</h2>${profileLine(archFor(name))}<div class="guide" data-plan="${esc(name)}"><p class="note">Loading the game plan…</p></div></section>`;
+}
+async function fillGamePlan() {
+  const el = document.querySelector("[data-plan]");
+  if (!el) return;
+  const A = await loadArchMd();
+  const g = A.legends.get(el.dataset.plan);
+  if (!document.body.contains(el)) return;
+  el.innerHTML = g ? `<p class="lbl" style="margin:0">${esc(g.archetype)}</p>${mdToHtml(g.body, { linkFor: guideLink })}
+    <p class="tiny dim">From <a href="#/guide/archetypes">Archetypes</a>: a reading of the cards and the measured lists, not a tested line.</p>`
+    : `<p class="note">No game plan written for this legend yet.</p>`;
+}
+function viewArchetypes() {
+  if (!ARCHE) return `<div class="banner warn">The archetype data did not load.</div>`;
+  const mine = myLegends();
+  const pairs = ARCHE.pairs.map((p) => {
+    const g = ARCH_MD?.pairs.get(p.pair);
+    return `<section class="panel">
+      <div class="headrow"><h2><span class="dots" style="display:inline-flex;margin-right:8px">${dots(p.pair.split("/"), 12)}</span>${esc(p.pair.replace("/", " / "))}</h2><span class="small dim">${g ? esc(g.character) : ""} · ${p.placed} placed lists</span></div>
+      ${g ? `<div class="small dim">${mdToHtml(g.body.split(/\n\n/)[0], { linkFor: guideLink })}</div>` : ""}
+      <div>${p.legends.map((l) => { const w = ARCH_MD?.legends.get(l.name); return `<div class="row"><span class="n"><a href="#/idea/${encodeURIComponent(l.name)}">${esc(l.name)}</a>
+        ${l.isNew ? `<span class="pill later">new</span>` : ""}${mine.has(l.name) ? ` <span class="pill good">your deck</span>` : ""}
+        <span class="small dim" style="display:block">${w ? esc(w.archetype) : ""}${l.label && w && !w.archetype.includes(l.label) ? ` · measured ${esc(l.label)}` : ""}</span></span>
+        <span class="num small dim">${l.placed} placed</span></div>`; }).join("")}</div></section>`;
+  }).join("");
+  return `<div style="display:flex;flex-direction:column;gap:6px"><a class="small" href="#/find">‹ Find a deck</a></div>
+    <section class="panel"><h1>Archetypes</h1><p class="note">What every legend's deck is trying to do, by colour pair. Each legend's page has its game plan, engine, what it fears and what the matchup turns on from your decks' side. Archetype names are judgements from the cards and the measured lists; "measured" is the numbers' own reading where it differs. The full write-up is the <a href="#/guide/archetypes">Archetypes guide</a>.</p></section>
+    <div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(360px,1fr))">${pairs}</div>`;
 }
 
 /* ══ Tweak bench ═══════════════════════════════════════════════════════════
@@ -1314,6 +1390,9 @@ function viewFind(legend) {
     <div class="headrow"><h1>Find a deck</h1></div>
     <p class="note">Results first. <b>Radiance</b> is every legend in the events that have played with the set so far${IDEAS?.era?.allPreRelease ? " — online previews only, until it is legal on " + esc(IDEAS.era.legalFrom) : ""}, each with a consensus list counted from its placed lists and, for some, a Claude build. Below it, Riot's own record of the Vendetta Regional Qualifiers: who brought what on Day 1, how many made Day 2, and the Top 8. <strong>Converts</strong> is Day 2 share ÷ Day 1 share, so above 1.00 the deck beat the room and below it lost to it.</p>
   </section>
+  <section class="panel" style="flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+    <span><b>Archetypes</b> <span class="dim">— what every legend's deck is trying to do, by colour pair, with game plans and matchup notes.</span></span>
+    <a class="btn" href="#/archetypes">Browse archetypes</a></section>
   ${radianceSection()}
   ${f ? `<section class="panel">
     <div class="headrow"><h2>${esc(eventName(f.ev))} <span class="lbl">Vendetta</span></h2><span class="small dim">${f.ev.day1} on Day 1 · ${f.ev.day2} on Day 2 · article ${esc(f.ev.published)} · <a href="${esc(f.ev.url)}" target="_blank" rel="noopener">Riot's article</a></span></div>

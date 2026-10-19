@@ -222,6 +222,10 @@ jobs:
       - name: Count which cards are played together
         run: node scripts/build-synergy.mjs
 
+      # After synergy, which it reads for each legend's signature package. Fetches nothing.
+      - name: Measure each legend's archetype
+        run: node scripts/build-archetypes.mjs
+
       - name: Source report
         id: sources
         run: |

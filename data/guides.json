@@ -81,7 +81,7 @@
     "Quick reference",
     "Sources and method"
    ],
-   "words": 36030
+   "words": 36047
   },
   {
    "slug": "khazix-voidreaver",
@@ -109,7 +109,7 @@
     "13. Questions to bring to Jun",
     "Sources and method"
    ],
-   "words": 8916
+   "words": 8925
   },
   {
    "slug": "radiance-pre-rift",
@@ -186,7 +186,7 @@
     "Board at a glance",
     "What would change this page"
    ],
-   "words": 2583
+   "words": 2612
   },
   {
    "slug": "sivir-anti-meta-midrange",
@@ -237,7 +237,7 @@
     "7. Between Thursday and Sunday",
     "Sources"
    ],
-   "words": 3222
+   "words": 3224
   },
   {
    "slug": "fundamentals",
@@ -287,6 +287,35 @@
     "9. What has changed since the book"
    ],
    "words": 4716
+  },
+  {
+   "slug": "archetypes",
+   "file": "docs/archetypes.md",
+   "kicker": "Archetypes · every legend",
+   "title": "Archetypes — What Each Legend Is Trying to Do",
+   "subtitle": "Riftbound, the 15 colour pairs and their legends — game plans, engines, what each fears, and how your decks meet them",
+   "date": "2026-10-19",
+   "legend": null,
+   "champion": null,
+   "sections": [
+    "Body / Calm — protected threats",
+    "Body / Chaos — isolate and punish",
+    "Body / Fury — the curve",
+    "Body / Mind — Jayce alone",
+    "Body / Order — buffs and Mighty",
+    "Calm / Chaos — tempo",
+    "Calm / Fury — Akali alone",
+    "Calm / Mind — value engines",
+    "Calm / Order — tokens and stuns",
+    "Chaos / Fury — aggression from odd angles",
+    "Chaos / Mind — answers and spells",
+    "Chaos / Order — Kennen alone",
+    "Fury / Mind — spells and big turns",
+    "Fury / Order — go wide",
+    "Mind / Order — Deathknell and answers",
+    "What would change this page"
+   ],
+   "words": 5771
   }
  ]
 }

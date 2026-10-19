@@ -23,6 +23,7 @@ const OUT = new URL("../data/guides.json", import.meta.url);
 const EXTRA = [
   { file: "docs/fundamentals.md", kicker: "Reference · every deck" },
   { file: "docs/strategy.md", kicker: "Strategy · every deck" },
+  { file: "docs/archetypes.md", kicker: "Archetypes · every legend" },
 ];
 
 // The frontmatter is pandoc's, so read it rather than inventing a second one.
