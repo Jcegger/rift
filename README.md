@@ -1,34 +1,37 @@
 # rift.jayegger.com
 
-A personal Riftbound TCG decision tool: given what I own, what the meta is
-playing, and what is legal, it says what to acquire next and whether a trade is
-worth taking. It also keeps a collection, a set-completion view and a trade list,
-because those are what the answers are computed from.
+A personal Riftbound TCG site, built around the decks I actually play: whether each
+one is ready and legal, a one-tap match journal, matchups against Riot's own results,
+the guides, and the collection those answers are computed from.
 
-The distinction matters, because the collection half is a mirror. riftbound.gg is
-where cards actually get entered — its scanner beats typing — and every import
-replaces the owned counts, so browsing the catalog here duplicates a site that
-does it better. What that site cannot do is hold the collection and the meta in
-the same hand: it knows the cards and it knows the decks, never both at once.
-Everything downstream of that join is the point of this app, and the app opens on
-it rather than on the card grid.
+The collection half is a mirror. riftbound.gg is where cards actually get entered —
+its scanner beats typing — and the site pulls it on every open, replacing the owned
+counts. What riftbound.gg cannot do is hold the collection, the decks and the results
+in the same hand; that join is the point.
 
-Single self-contained `index.html`, no build step. State caches in localStorage
-and syncs to Supabase (single-user, the same pattern as the LSAT and reading
-trackers). Hosted on GitHub Pages behind Cloudflare.
+`index.html` plus the ES modules in `lib/`, no build step. State lives in one Supabase
+row (single-user, the same pattern as the LSAT and reading trackers), which
+`scripts/rift` reads too. Hosted on GitHub Pages behind Cloudflare.
+
+The first version of the site — a dark, tabbed app that opened on what to buy next —
+is archived read-only at `/old/`. Much of this README describes its engine, which
+`scripts/check.mjs` still runs; "The site" below is the current front end.
 
 ## Layout
 
-- `index.html` - the old app. Vanilla JS, no dependencies, no bundler. Being replaced
-  tab by tab by `app/`; Collection and Import still live here.
-- `app/index.html` - the new front end (rift.jayegger.com/app/): Decks with readiness, a
-  deck editor, one-tap match journal and matchups; Find a deck (Riot's RQ results); Guides;
-  News. Same Supabase row as the old app, written read-modify-write so keys it does not
-  own ride through. See "The new front end" below.
-- `lib/decks.mjs` - deck maths shared by `app/` and `scripts/state.mjs`: owning by card
+- `index.html` - the site (rift.jayegger.com): Decks, Find a deck, Collection, Guides,
+  News. Vanilla JS modules, no bundler. Writes the Supabase row read-modify-write so keys
+  it does not own ride through. See "The site" below.
+- `old/index.html` - the first app, archived read-only: it never writes the row and never
+  pulls riftbound.gg. `scripts/check.mjs` still runs its engine.
+- `app/index.html` - a redirect to the root, for links from when the rebuild lived there.
+- `lib/decks.mjs` - deck maths shared by the site and `scripts/state.mjs`: owning by card
   identity (every printing of a name), cheapest-printing prices (unpriced stays unpriced),
   the deck rules as checks (§103, TR §601), the journal record. Tests: `lib/decks.test.mjs`.
-- `lib/markdown.mjs` - the guide renderer `app/` uses, with heading anchors.
+- `lib/collection.mjs` - the collection maths, ported from the old app: the riftbound.gg /
+  CSV import and its matcher, the Piltover worklist and merge file, foil-only typos, spares
+  and trade matching. Tests: `lib/collection.test.mjs`.
+- `lib/markdown.mjs` - the guide renderer the site uses, with heading anchors.
 - `data/cards.json` - the card catalog, generated and committed. Loaded at boot.
 - `data/extras.json` - printings Riot does not publish, merged in at load. The one
   hand-maintained file, and the only one carrying no `generatedAt`, so it sits outside
@@ -89,6 +92,11 @@ trackers). Hosted on GitHub Pages behind Cloudflare.
 - `fonts/` - Press Start 2P and Syne Mono, self-hosted to match jayegger.com.
 
 ## The views
+
+*The old app's, now archived at `/old/`. Its Collection, Sets, Trade and Import tabs live
+on in the site's Collection page; Next, Meta and Legends were cut — the site ranks decks by
+results, not by what is cheapest to finish. Sections below on Next, Legends, Movement and
+the Meta/Next split describe that engine, which `scripts/check.mjs` still exercises.*
 
 **Collection** filters all 1,197 printings by set, type, rarity, domain, printing
 class, imported tag, and free text over names, codes, ability text, tags, and artists. Each
@@ -591,7 +599,7 @@ node scripts/check.mjs            # the engine
 node scripts/check.mjs --max-age  # ...and whether the data is still current
 ```
 
-Runs `index.html`'s script in node with the DOM stubbed out and asserts against the
+Runs the archived old app's script (`old/index.html`) in node with the DOM stubbed out and asserts against the
 real catalog and the real deck snapshot. No dependencies and no build step, same as
 the rest of `scripts/`.
 
@@ -1027,9 +1035,9 @@ easy to get wrong:
 - **Deck lists use code forms the gallery does not.** `OGN-202-P` is a promo
   printing, `UNL-230-STAR` a signature spelled out, `OGN-263-a` a hyphenated
   variant suffix, and `OGN-166` omits the denominator entirely. All fold to the
-  base card. The parser is duplicated in `scripts/build-decks.mjs` and must stay
-  identical to the one in `index.html`, or the snapshot resolves cards the app
-  cannot.
+  base card. The parser is duplicated in `scripts/build-decks.mjs`, `lib/collection.mjs`
+  (the site's import) and `old/index.html`, and must stay identical across them, or
+  the snapshot resolves cards the app cannot.
 
 - **Buildability goes by card, not printing.** An alt art, signature or
   overnumber satisfies a slot calling for the base card, so a list citing
@@ -1058,19 +1066,21 @@ once riftbound.gg knows about it.
 
 Three ways in, in order of how little work they are:
 
-1. **Automatic.** Deploy `worker/` and paste its URL into the Import tab. Turn on
-   "Pull on every load" and the collection refreshes every time the page opens.
-   See `worker/README.md` for why a proxy is needed at all.
-2. **A file.** Either the JSON a public profile returns, or riftbound.gg's CSV
-   export.
-3. **Paste.** Drop either straight into the Import tab.
+1. **Automatic.** The site pulls through `worker/` every time it opens (Collection →
+   Import, "Pull every time the site opens", on by default). It writes the row only when
+   something changed, refuses an empty collection outright (a profile gone private comes
+   back `200` and empty), and holds back a pull that would drop more than half the cards
+   until "Apply anyway". See `worker/README.md` for why a proxy is needed at all.
+2. **A file.** Either the JSON a public profile returns, or a CSV from riftbound.gg,
+   TCGplayer or Piltover. With pull-on-open on, the next visit puts riftbound.gg's counts
+   back, which the page says.
+3. **Paste.** Drop either straight into Collection → Import.
 
 The JSON is the better source. A public profile carries more than the CSV does:
 `standard` and `foil` counts, `trade` and `wish` counts, and the custom tags used
 to label where a card came from. Tags come across on import, show on each card,
 and get their own filter. Trade and wishlist are ignored unless "Mirror trade and
-wishlist" is on, which is off by default so that "Add shortfall to wants" survives
-a pull.
+wishlist" is on, which is off by default so that Want survives a pull.
 
 Matching tries the most specific key it can: a card id, then set plus collector
 number, then a bare name. Everything normalizes, including zero-padding, letter
@@ -1168,10 +1178,11 @@ Finishes are not in Riot's data, because a foil is a print treatment rather than
 a separate card. That is why Normal and Foil are separate counts on each
 printing, tracked on my side.
 
-## The new front end
+## The site
 
-`app/index.html` is the rebuild Jay asked for in October 2026: Decks first, then Find a
-deck, Guides, News. Collection and Import link to the old app until they are rebuilt.
+`index.html` is the rebuild Jay asked for in October 2026: Decks first, then Find a deck,
+Collection, Guides, News. It lived at `/app/` while it was built and took the root on
+19 Oct, when Collection was rebuilt and the old app was archived.
 
 - **Decks** — readiness against the collection (cards short, cost to finish at the
   cheapest printing, "+ N unpriced" rather than $0), the list, the deck's rule checks,
@@ -1182,12 +1193,20 @@ deck, Guides, News. Collection and Import link to the old app until they are reb
   other champions' signatures blocked, every check live. Save writes the deck back.
 - **Find a deck** — Riot's RQ field table (Day 1, Day 2, converts, Top 8, riftbound.gg's
   tier beside it) and every Top 8 / Best-Of list per legend, with "Copy to my decks".
+- **Collection** — four sub-pages. *Cards*: every printing as a grid or a table, filtered
+  by what you own, what your decks are short of, wants, spares and the rest; tap a card to
+  set Want, Trade and On the way (owned counts come only from riftbound.gg). *Sets*:
+  base-set completion. *Trade*: spares past the playset, what you're looking for (wants
+  plus your decks' shortfalls, less anything on the way), and a comparison against any
+  public riftbound.gg profile. `?view=trade` is a read-only copy of it to hand someone.
+  *Import*: the pull, file import, the Piltover worklist, foil-only typos, a backup.
 
 **Writes.** The Supabase row holds everything, so each write pulls a fresh copy, changes
 only `decks` or `journal`, and writes the whole object back; the last five pre-write
 copies are kept in the browser's localStorage (`rift-app-backups`). Journal taps queue in
 localStorage first and send when the row is reachable, so a bad signal at the store loses
-nothing. The old app lists `journal` in its `SYNCED` keys so its own saves carry it through.
+nothing. Count taps (Want, Trade, On the way) batch into one write a moment later, and any
+not yet sent are laid back over each fresh copy of the row so a pull can't undo them.
 `scripts/rift journal [deck]` prints the record.
 
 ## Simulator
@@ -1472,16 +1491,17 @@ missed, which is exactly how it first shipped.
 
 ## Sync
 
-One Supabase row holds the whole state as JSON, written debounced on every edit
-and read on load, with localStorage as the offline cache. Run `schema.sql` once
-against the project, then check the dot in the header: green is synced, red
-means it saved locally but could not reach Supabase.
+One Supabase row holds the whole state as JSON, read on load and written
+read-modify-write on every change. Run `schema.sql` once against the project, then
+check the dot in the header: green is synced; amber or red means the row could not be
+reached (journal taps wait in the browser and send when it is back).
 
 The publishable key in `index.html` is public by design and row-level security
 is what guards the table. The policies in `schema.sql` allow anonymous reads and
 writes to this one table, which is the same tradeoff the LSAT tracker makes: it
 is a single-user tool with no secrets in it, and the cost of someone finding it
-is a vandalized card list restorable from a backup. Use the Backup button.
+is a vandalized card list restorable from a backup: Collection → Import → Download a
+backup, or one of the five copies the site keeps in the browser before each save.
 
 ## Hosting
 

@@ -299,7 +299,7 @@ async function getAll(filters, max) {
   return { decks: [...seen.values()], stats };
 }
 
-// Kept identical to the copy in index.html: the two must agree or a deck that the
+// Kept identical to the copy in old/index.html: the two must agree or a deck that the
 // snapshot resolves will read as unmatched in the app.
 function normColl(seg) {
   let s = String(seg ?? "").replace(/\s+/g, "");

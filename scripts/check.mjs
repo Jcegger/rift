@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Runs index.html's script in node with the DOM stubbed out, then asserts against the
-// real catalog and the real deck snapshot. No dependencies and no build step, the same
+// Runs the archived old app's script (old/index.html) in node with the DOM stubbed out,
+// then asserts against the real catalog and the real deck snapshot. No dependencies and no build step, the same
 // as the rest of scripts/.
 //
 // This exists because the bugs in this app have not been the kind you spot by reading.
@@ -51,7 +51,7 @@ stub('window', { innerWidth: 1200, innerHeight: 900, addEventListener(){}, scrol
 /* ── load the app, minus its boot call ──────────────────────────────────── */
 // The app is deliberately one scope with no module system, so re-exporting its
 // internals from inside that scope is how a test reaches them.
-const page = readFileSync(join(ROOT, 'index.html'), 'utf8');
+const page = readFileSync(join(ROOT, 'old', 'index.html'), 'utf8');
 const js = page.slice(page.indexOf('<script>') + 8, page.lastIndexOf('</script>'))
                .replace(/\nboot\(\);\s*$/, '\n');
 const NAMED = [
