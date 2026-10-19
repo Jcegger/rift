@@ -31,15 +31,15 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 58,
+  "claimedEvents": 59,
   "claimedEventsUnmatched": 52,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
+   "unknown": 177,
    "Asia": 77,
-   "unknown": 176,
    "Europe": 44,
    "Oceania": 4,
    "North America": 6
