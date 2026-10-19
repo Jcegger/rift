@@ -1,0 +1,149 @@
+{
+ "id": "irelia-movement-radiance",
+ "kind": "experiment",
+ "legend": "Irelia, Blade Dancer",
+ "date": "2026-10-19",
+ "author": "Claude",
+ "title": "Irelia — Lulu in the movement engine",
+ "summary": "An untested idea: the Vendetta RQ list that came second at Los Angeles, with four of its weakest-supported slots spent on two Radiance cards that feed the deck's real engine — moving and re-readying units.",
+ "basis": "Xeno, #2 overall, Riftbound Regional Qualifier — Los Angeles (Vendetta, 1,962 players on Day 1). The Radiance-era evidence for Irelia is thin and poor: 3 placed lists in the online previews, best #21 of 74, so this starts from her last proven list instead.",
+ "changes": [
+  {
+   "what": "−1 Abandon, −1 Pyke, Returned, −1 Twilight Shroud, −1 Not So Fast",
+   "why": "The four slots with least support: Abandon and Pyke are in about a third of placed Vendetta Irelia lists and none of the preview ones; Twilight Shroud and Not So Fast fell from 54% and 64% to 33%."
+  },
+  {
+   "what": "+2 Lulu, Whimsical",
+   "why": "Radiance, untried with Irelia. \"When I move, you may have another unit's base Might become 4 this turn.\" Irelia's legend readies a chosen unit, Tideturner, Ride the Wind and Flash move them; every move is a Lulu trigger, beside Stellacorn Herder's draw."
+  },
+  {
+   "what": "+2 Battle Preparations",
+   "why": "0% before Radiance, 2 of 3 preview Irelia lists. Reaction +2 Might; Show Off one of the list's 5 gear (Boots of Swiftness, Zhonya's Hourglass, Guardian Angel) and it readies up to 2 runes."
+  }
+ ],
+ "plan": [
+  "Unchanged from the Vendetta list: develop Stellacorn Herder and Tideturner, then use the legend to ready a unit you choose so it can move again — each move draws with Herder.",
+  "Lulu turns the same moves into combat: a move sets another unit's base Might to 4 this turn, so a small unit becomes a real attacker, or a defender at a battlefield you are contesting. Whether 'another unit' is best yours or theirs is a judgement per board, and untested here."
+ ],
+ "matchups": [
+  {
+   "vs": "All",
+   "note": "Untested. Nothing in the data plays Lulu with Irelia yet; this is a reading of the cards, to be played and logged."
+  }
+ ],
+ "sim": "Goldfish, 8,000 games, against its base list: Energy spent turns 1–4 17.2 → 17.8 on the play (18.6 → 19.9 on the draw); units on board by turn 3 2.4 → 2.5; stuck on Power turn 3 0% → 0%; mulligan keep all; runes 6/6 fine. Curve and mana only — the engine itself is not simulated.",
+ "cards": {
+  "SFD-195/221": 1,
+  "SFD-057/221": 1,
+  "VEN-038/166": 1,
+  "SFD-133/221": 2,
+  "OGN-043/298": 2,
+  "SFD-196/221": 3,
+  "OGN-045/298": 3,
+  "OGN-058/298": 3,
+  "OGN-046/298": 2,
+  "OGS-011/024": 1,
+  "SFD-051/221": 1,
+  "OGN-169/298": 1,
+  "OGN-173/298": 2,
+  "UNL-053/219": 3,
+  "UNL-128/219": 2,
+  "SFD-048/221": 3,
+  "OGN-199/298": 3,
+  "UNL-150/219": 1,
+  "OGN-077/298": 2,
+  "OGN-042/298": 6,
+  "OGN-166/298": 6,
+  "UNL-205/219": 1,
+  "SFD-218/221": 1,
+  "OGN-289/298": 1,
+  "RAD-032/167": 2,
+  "RAD-110/167": 2
+ },
+ "sb": {
+  "OGN-056/298": 2,
+  "VEN-038/166": 1,
+  "VEN-040/166": 1,
+  "SFD-045/221": 1,
+  "UNL-145/219": 1,
+  "VEN-102/166": 2,
+  "SFD-145/221": 1,
+  "UNL-150/219": 1
+ },
+ "snapshot": {
+  "date": "2026-10-19",
+  "events": [
+   "NovaRiftbound's $2,000 Online Showdown 5",
+   "Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview)"
+  ],
+  "placed": 3,
+  "shares": {
+   "Calm Rune": 1,
+   "Defy": 1,
+   "En Garde": 0.67,
+   "Meditation": 0.33,
+   "Discipline": 1,
+   "Chaos Rune": 1,
+   "Ride the Wind": 1,
+   "Tideturner": 1,
+   "Targon's Peak": 1,
+   "Flash": 1,
+   "Battle Preparations": 0.67,
+   "Hunker Down": 0.33,
+   "Reckless Innovator": 1,
+   "Not So Fast": 0.33,
+   "Stellacorn Herder": 1,
+   "Guardian Angel": 0.67,
+   "Irelia, Fervent": 1,
+   "Boots of Swiftness": 1,
+   "Defiant Dance": 1,
+   "Scuttle Crab": 1,
+   "Star-Crossed": 1,
+   "Vex, Apathetic": 1,
+   "Abandoned Hall": 1,
+   "Gust Monk": 0.33,
+   "Sandswept Tomb": 0.33,
+   "Charm": 0.67,
+   "Find Your Center": 0.33,
+   "Zhonya's Hourglass": 0.67,
+   "Gust": 0.67,
+   "Hard Bargain": 0.33,
+   "Edge of Night": 0.33,
+   "Sunken Temple": 0.67,
+   "Akali, Silent": 0.67,
+   "Adaptatron": 0.33,
+   "Switcheroo": 0.33,
+   "Twilight Shroud": 0.33
+  }
+ },
+ "baseCards": {
+  "SFD-195/221": 1,
+  "SFD-057/221": 1,
+  "UNL-131/219": 1,
+  "VEN-038/166": 1,
+  "SFD-133/221": 2,
+  "OGN-043/298": 2,
+  "SFD-196/221": 3,
+  "OGN-045/298": 3,
+  "OGN-058/298": 3,
+  "OGN-046/298": 2,
+  "OGS-011/024": 1,
+  "SFD-051/221": 1,
+  "OGN-169/298": 1,
+  "SFD-045/221": 1,
+  "UNL-145/219": 1,
+  "OGN-173/298": 2,
+  "UNL-053/219": 3,
+  "UNL-128/219": 2,
+  "SFD-048/221": 3,
+  "OGN-199/298": 3,
+  "VEN-031/166": 1,
+  "UNL-150/219": 1,
+  "OGN-077/298": 2,
+  "OGN-042/298": 6,
+  "OGN-166/298": 6,
+  "UNL-205/219": 1,
+  "SFD-218/221": 1,
+  "OGN-289/298": 1
+ }
+}

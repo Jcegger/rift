@@ -48,6 +48,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   with finishes, and each event's Day 1 / Day 2 field by legend.
 - `data/history.json` - the daily archive: deck counts per legend, and tier lists.
 - `data/guides.json` - the manifest of the dossiers in `guides/`. Not their text.
+- `data/synergy.json` - which cards are played together more than chance, and each card's
+  home legends, counted from the deck snapshot.
 - `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
   Radiance-format events, a consensus list counted from its placed lists (or brews,
   labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
@@ -61,6 +63,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `scripts/build-topdecks.mjs` - parses Riot's RQ Top Decks articles.
 - `scripts/build-history.mjs` - appends today's row to the archive. Fetches nothing.
 - `scripts/build-guides.mjs` - regenerates the guide manifest. Fetches nothing.
+- `scripts/build-synergy.mjs` - counts which cards are played together. Fetches nothing.
+- `lib/engines.mjs` - engines read off card text (payoffs and what triggers them), for
+  cards with no lists yet. Tests: `lib/engines.test.mjs`.
 - `scripts/build-ideas.mjs` - counts the Radiance-era deck ideas from the deck snapshot and
   checks the builds in `builds/`. Fetches nothing. See "Deck ideas" below.
 - `builds/` - Claude's own builds, one hand-written JSON file each: the list (taken from a
@@ -1259,6 +1264,18 @@ search the legend's domains. Live: the deck's rule checks, each card's share of 
 agreement with the consensus, and the goldfish curve (1,500 games in a worker, base vs now).
 Save writes it to your decks; it will not save a list that breaks a rule.
 
+**Combos, two ways.** *Counted*: `scripts/build-synergy.mjs` → `data/synergy.json` finds
+cards played together far more than chance — measured against the lists that could play
+both, so shared colours don't count — and each card's home legends (Stellacorn Herder: 98% of
+Irelia lists, ×4 its rate). Shown in every card's dialog and as "goes with what's in this
+list" on the bench. *Read*: `lib/engines.mjs` tags each card's text as a **payoff** ("when I
+move, draw 1") or an **enabler** (Irelia's "ready it", Ganking, "move a friendly unit") of an
+engine — movement, exhaust triggers, buffs, plays from elsewhere, the trash, tokens, deaths,
+discards, facedown, spells, gear. A list has an engine when it holds payoffs for it; the
+idea page and bench list the legal cards that would feed it, Radiance cards nobody has tried
+first, each with the sentence that matched. The first is evidence; the second is a reading by
+pattern — it can't see timing, targets or whether two cards truly combo — and says so.
+
 **Builds that keep up.** Each build file carries a `snapshot` of the field it was written
 against (events, placed lists, card shares). The daily build compares that with today's: a
 new event, or a card whose share moved by 20 points or more, marks the build out of date on
@@ -1267,7 +1284,11 @@ the site with what moved. That is a prompt for Claude to revise it, never an aut
 **Claude builds** (`builds/*.json`) start from a placed list and change it only with a
 reason drawn from the counts; the three of 2026-10-19 keep their source lists unchanged
 and list the options instead. Plans are read off card text; matchup notes say plainly
-where there is no Radiance-era evidence yet.
+where there is no Radiance-era evidence yet. A build with `"kind": "experiment"` is an
+**untested idea** instead: a proven list with its least-supported slots (by share across that
+legend's placed lists) spent on cards the engine finder and their text say feed the deck,
+shown with a dashed border and never mistaken for evidence. Experiments carry `baseCards` so
+the goldfish line compares the idea with the list it came from.
 
 ## Simulator
 

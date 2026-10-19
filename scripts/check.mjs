@@ -619,6 +619,25 @@ section('Deck ideas');
   }
 }
 
+/* ══ synergy ═════════════════════════════════════════════════════════════ */
+section('Synergy');
+{
+  let Y = null;
+  try { Y = read('data/synergy.json'); } catch { /* reported below */ }
+  if (!Y) ok('synergy snapshot present', false, 'data/synergy.json missing — run build-synergy.mjs');
+  else {
+    const all = Object.values(Y.cards);
+    // A partner is a share of the card's lists and a lift over the lists that could play
+    // both; anything outside those bounds is the arithmetic having gone wrong.
+    ok('every partner is in 30%+ of the card\'s lists and 2x+ its usual rate',
+       all.every((c) => c.with.every((w) => w.share >= 0.3 && w.share <= 1 && w.lift >= 2 && w.co >= 4)),
+       `${all.reduce((a, c) => a + c.with.length, 0)} pairs over ${all.length} cards`);
+    ok('every home legend plays the card in 30%+ of its lists',
+       all.every((c) => c.legends.every((l) => l.share >= 0.3 && l.share <= 1 && l.lists >= 5)));
+    ok('synergy is counted from a real share of the snapshot', Y.lists > 1000, `${Y.lists} lists`);
+  }
+}
+
 /* ══ news ════════════════════════════════════════════════════════════════ */
 section('News');
 if (!news) ok('news snapshot present', false, 'data/news.json missing — run build-news.mjs');

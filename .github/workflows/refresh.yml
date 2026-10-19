@@ -218,6 +218,10 @@ jobs:
       - name: Count the Radiance-era deck ideas
         run: node scripts/build-ideas.mjs
 
+      # Same footing: fetches nothing, reads the deck snapshot.
+      - name: Count which cards are played together
+        run: node scripts/build-synergy.mjs
+
       - name: Source report
         id: sources
         run: |

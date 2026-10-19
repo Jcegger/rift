@@ -40,6 +40,7 @@
 
 import { readFile } from "node:fs/promises";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, SB_MAX } from "../lib/decks.mjs";
+import { deckEngines } from "../lib/engines.mjs";
 import { pathToFileURL } from "node:url";
 
 const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
@@ -744,6 +745,12 @@ async function cmdIdeas(cat, args) {
     if (l.changes.added.length) console.log(`  in:  ${l.changes.added.map((r) => `${r.name} ${pct(r.before).trim()}→${pct(r.now).trim()}`).join(" · ")}`);
     if (l.changes.dropped.length) console.log(`  out: ${l.changes.dropped.map((r) => `${r.name} ${pct(r.before).trim()}→${pct(r.now).trim()}`).join(" · ")}`);
   } else if (l.isNew) console.log("\nnew legend: no Vendetta lists to compare");
+  // Engines read off the consensus's card text, and what would feed them.
+  const fix = (m) => Object.fromEntries(Object.entries(m).map(([k, n]) => [cat.BY.has(k) ? k : (cat.cards.find((c) => c.c.replace(/\/\d+$/, "") === k.replace(/\/\d+$/, ""))?.c || k), n]));
+  for (const e of deckEngines(fix(c.cards), cat.idx, { shares: l.shares || {}, max: 6 }).slice(0, 3)) {
+    console.log(`\nENGINE ${e.name.toUpperCase()} · pays off: ${e.payoffs.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}${e.enablers.length ? ` · feeds it: ${e.enablers.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}` : ""}`);
+    for (const k of e.candidates) console.log(`  could add ${pad(k.name, 28)} ${k.set === "RAD" ? "RAD" : "   "} ${pad(k.share != null ? `${Math.round(k.share * 100)}% play it` : "untried", 13)} "${k.text.slice(0, 80)}"`);
+  }
   try {
     const S = await loadState();
     const mine = (S.decks || []).filter((d) => Object.keys(d.cards || {}).some((k) => k === l.code || cat.BY.get(k)?.n === cat.BY.get(l.code)?.n && cat.BY.get(k)?.t === "Legend"));

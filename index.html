@@ -191,6 +191,9 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;min-heig
 .incbar{display:inline-block;width:56px;height:6px;background:var(--soft);border-radius:3px;overflow:hidden;flex:none}
 .incbar i{display:block;height:100%;background:var(--accent)}
 .panel.build{border:2px solid var(--accent)}
+.panel.build.experiment{border-style:dashed;border-color:var(--later)}
+.engine{display:flex;flex-direction:column;gap:4px;padding:10px 0;border-bottom:1px solid var(--line2)}
+.engine h3{font-size:18px}
 .setrow{display:flex;flex-direction:column;gap:6px;padding:12px 0;border-bottom:1px solid var(--line2)}
 .meter{height:8px;background:var(--soft);border-radius:4px;overflow:hidden}
 .meter i{display:block;height:100%;background:var(--accent)}
@@ -241,6 +244,7 @@ nav.bottom{display:none}
 <script type="module">
 import { indexCatalog, deckStats, deckChecks, journalRecord, ownedByIdentity, MAIN_SIZE, SB_MAX } from "./lib/decks.mjs";
 import { mdToHtml, esc, slugify } from "./lib/markdown.mjs";
+import { deckEngines } from "./lib/engines.mjs";
 import { applyImport, matcher, setCount, setSource, foilOnlyProblems, newqRows, newqText, newqCSV,
   spares, readPartner, tradeMatch } from "./lib/collection.mjs";
 
@@ -449,6 +453,7 @@ function showCard(code) {
       ${c.errata ? `<div class="tiny dim">Current wording (errata); the printed card differs.</div>` : ""}
       <div class="small dim">This printing: ${h.n} normal · ${h.f} foil${prints.length > 1 ? ` · ${own} across all ${prints.length} printings` : ""} · ${priced ? `from ${money(priced.mp)}` : "no market price"}</div>
       ${tags.length ? `<div class="tiny dim">Tags: ${esc(tags.join(", "))}</div>` : ""}
+      <div id="dlg-syn">${goesWithBlock(c.n)}</div>
       ${ROW && !SHARE ? `<div class="ctrs">
         ${ctr("w", "Want", "copies of this printing you're after")}
         ${ctr("t", "Trade", "copies you'd let go")}
@@ -460,6 +465,7 @@ function showCard(code) {
       <form method="dialog"><button class="btn">Close</button></form>
     </div></div>`;
   if (!d.open) d.showModal();
+  if (!SYN) loadSyn().then(() => { if (DLG_CODE === code) { const el = $("#dlg-syn"); if (el) el.innerHTML = goesWithBlock(c.n); } });
 }
 const VLABEL = { alt: "Alt art", sig: "Signature", over: "Overnumber", token: "Token", rune: "Basic rune", promo: "Promo" };
 $("#dlg").addEventListener("click", (e) => {
@@ -919,7 +925,8 @@ function viewEdit(id) {
    says so instead of getting a guess. Claude's own builds sit next to the counts and
    are labelled as builds, not as evidence. */
 const ideaFor = (name) => (IDEAS?.legends || []).find((l) => l.name === name) || null;
-const buildsFor = (name) => (IDEAS?.builds || []).filter((b) => b.legend === name);
+// Data-backed builds first, then experiments (kind "experiment": a reading of the cards, untested).
+const buildsFor = (name) => (IDEAS?.builds || []).filter((b) => b.legend === name).sort((a, b) => (a.kind === "experiment") - (b.kind === "experiment"));
 const myLegends = () => new Set(decks().map((d) => { const L = deckStats(d, IDX, ROW?.inv || {}).legend; return L ? IDX.legendName(L) : null; }).filter(Boolean));
 const shortCode = (code) => IDX.BY.has(code) ? code : (SHORT.get(String(code).replace(/\/\d+$/, "")) || code);
 const placeText = (pl, n) => `#${pl}${n ? ` of ${n}` : ""}`;
@@ -942,7 +949,7 @@ function radianceSection() {
         ${l.isNew ? `<span class="pill later">new</span>` : ""}${mine.has(l.name) ? ` <span class="pill good">your deck</span>` : ""}</td>
       <td class="r num">${l.placed}</td><td class="r num">${l.top8 || ""}</td>
       <td class="num">${l.best ? placeText(l.best.pl, l.best.players) : "—"}</td><td class="r num hide-sm">${l.brews}</td>
-      <td class="small">${l.basis === "placed" ? `consensus of ${l.consensus.from}` : l.basis === "brews" ? `<span class="dim">from ${l.consensus.from} brews</span>` : `<span class="dim">too few lists</span>`}${buildsFor(l.name).length ? ` · <b>Claude build</b>` : ""}</td></tr>`).join("")}</tbody></table></div>
+      <td class="small">${l.basis === "placed" ? `consensus of ${l.consensus.from}` : l.basis === "brews" ? `<span class="dim">from ${l.consensus.from} brews</span>` : `<span class="dim">too few lists</span>`}${buildsFor(l.name).some((b) => b.kind !== "experiment") ? ` · <b>Claude build</b>` : ""}${buildsFor(l.name).some((b) => b.kind === "experiment") ? ` · <b>untested idea</b>` : ""}</td></tr>`).join("")}</tbody></table></div>
     ${quiet.length ? `<p class="note">New legends with no lists yet: ${quiet.map((n) => esc(n.name)).join(" · ")}.</p>` : ""}
   </section>`;
 }
@@ -992,6 +999,7 @@ function viewIdea(name) {
       </section>
       ${mine.length ? mine.map((d) => `<section class="panel">${diffBlock(d, l)}</section>`).join("") : ""}
     </div></div>` : `<div class="banner warn">${l ? `${l.placed} placed list${l.placed === 1 ? "" : "s"} and ${l.brews} brew${l.brews === 1 ? "" : "s"}: too few to count a consensus from.` : ""}</div>`}
+  ${c ? `<section class="panel"><h2>Engines</h2><p class="note">What the consensus is built to do over and over, read off its cards' text, and the legal cards that would feed it — Radiance cards nobody has tried yet included.</p>${enginesBlock(Object.fromEntries(Object.entries(c.cards).map(([k, n]) => [shortCode(k), n])), l.shares || {})}</section>` : ""}
   ${l?.lists?.length ? `<section style="display:flex;flex-direction:column;gap:14px"><h2>The lists</h2>
     <div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">${l.lists.map((x, i) => eraList(name, x, i)).join("")}</div></section>` : ""}`;
 }
@@ -1037,8 +1045,9 @@ function buildPanel(b) {
   const rows = st.rows.filter((r) => r.card && r.zone !== "legend");
   const grp = (t) => rows.filter((r) => r.card.t === t).sort(sortRows);
   const list = (title, rs) => rs.length ? `<div class="group"><div class="lbl">${title} · ${rs.reduce((a, r) => a + r.qty, 0)}</div>${rs.map((r) => `<div class="row"><span class="q">${r.qty}</span><span class="n"><button class="cardlink" data-card="${esc(r.code)}">${esc(r.card.n)}</button></span><span class="cost hide-sm">${esc(costOf(r.card))}</span></div>`).join("")}</div>` : "";
-  return `<section class="panel build">
-    <div class="headrow"><div><span class="lbl">Claude build · ${esc(b.date)}</span><h2>${esc(b.title)}</h2></div><div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(b.legend)}?from=${encodeURIComponent("build:" + b.id)}">Tweak</a>${ROW ? `<button class="btn primary" data-copybuild="${esc(b.id)}">Copy to my decks</button>` : ""}</div></div>
+  const exp = b.kind === "experiment";
+  return `<section class="panel build ${exp ? "experiment" : ""}">
+    <div class="headrow"><div><span class="lbl">${exp ? "Untested idea · Claude" : "Claude build"} · ${esc(b.date)}</span><h2>${esc(b.title)}</h2></div><div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(b.legend)}?from=${encodeURIComponent("build:" + b.id)}">Tweak</a>${ROW ? `<button class="btn primary" data-copybuild="${esc(b.id)}">Copy to my decks</button>` : ""}</div></div>
     ${b.drift?.stale ? `<div class="banner warn"><b>The field has moved since this build (${esc(b.drift.since)}).</b>
       ${b.drift.newEvents.length ? `${b.drift.newEvents.length} new event${b.drift.newEvents.length === 1 ? "" : "s"}: ${b.drift.newEvents.map((e) => `${esc(e.name)} (${e.players ?? "?"} players${e.preRelease ? ", online preview" : ""})`).join("; ")}. ` : ""}
       Placed ${esc(champOf(b.legend))} lists ${b.drift.listsThen} → ${b.drift.listsNow}.
@@ -1078,6 +1087,40 @@ document.addEventListener("click", (e) => {
     saveNewDeck({ id: "d" + Date.now().toString(36), name: `${x.title} (Claude, ${x.date})`, cards: fix(x.cards), sb: fix(x.sb) }, "Build");
   }
 });
+
+/* ══ Combos: what the data says goes together, and what the text says feeds what ═══
+   data/synergy.json (scripts/build-synergy.mjs) is counted: cards played together far
+   more often than lists that could play both would suggest. lib/engines.mjs is read off
+   card text: payoffs and the cards that trigger them, so a new card with no lists can
+   still be found. The first is evidence; the second is a reading, and says so. */
+let SYN = null, SYN_LOADING = null;
+function loadSyn() {
+  if (SYN) return Promise.resolve(SYN);
+  return SYN_LOADING || (SYN_LOADING = getJSON("synergy.json").then((d) => (SYN = d)));
+}
+function goesWithBlock(name) {
+  const s = SYN?.cards?.[name];
+  if (!SYN) return `<p class="tiny dim" style="margin:0">Loading what this goes with…</p>`;
+  if (!s) return `<p class="tiny dim" style="margin:0">Too few lists to say what it goes with.</p>`;
+  return `<div class="tiny" style="display:flex;flex-direction:column;gap:4px">
+    ${s.legends.length ? `<div><b>Played by</b> ${s.legends.map((l) => `${esc(l.name)} ${pctI(l.share)}`).join(" · ")}</div>` : ""}
+    ${s.with.length ? `<div><b>Goes with</b> ${s.with.map((w) => `${esc(w.name)}${w.rad ? "*" : ""} ${pctI(w.share)}`).join(" · ")}</div>` : ""}
+    <div class="dim">Of the ${s.n} lists playing it; only partners at ${2}× their usual rate or more. * = Radiance.</div></div>`;
+}
+function enginesBlock(cards, shares, { addable = false, max = 3 } = {}) {
+  const E = deckEngines(cards, IDX, { shares, max: 6 }).slice(0, max);
+  if (!E.length) return `<p class="note">No engine found in this list's text: no card here pays off a repeated event this reader knows (moving, exhausting, buffs, plays from elsewhere, the trash, tokens, deaths, discards, facedown, spells, gear).</p>`;
+  const names = (xs) => xs.map((x) => `${x.qty} ${esc(x.legend ? "the legend" : x.name)}`).join(", ");
+  return E.map((e) => `<div class="engine">
+    <div class="headrow"><h3>${esc(e.name)}</h3><span class="tiny dim">${esc(e.what)}</span></div>
+    <div class="small"><b>Pays off:</b> ${names(e.payoffs)}${e.enablers.length ? ` · <b>Feeds it:</b> ${names(e.enablers)}` : ""}</div>
+    ${e.candidates.length ? `<div class="lbl" style="margin-top:6px">Could add</div>${e.candidates.map((c) => `<div class="erow" style="align-items:flex-start">
+      <span class="n"><button class="cardlink" data-card="${esc(c.code)}">${esc(c.name)}</button>${c.set === "RAD" ? ` <span class="pill later">RAD</span>` : ""}
+        <span class="tiny dim" style="display:block">${esc(c.roles.includes("payoff") ? "pays off" : "feeds it")}: “${esc(c.text)}”</span></span>
+      <span class="num tiny dim" style="white-space:nowrap">${c.share != null ? `${pctI(c.share)} play it` : "untried"}</span>
+      ${addable ? `<button class="pm" data-b="add" data-code="${esc(c.code)}" aria-label="Add ${esc(c.name)}">+</button>` : ""}</div>`).join("")}` : ""}
+  </div>`).join("") + `<p class="tiny dim" style="margin:0">Read off card text by pattern, not tested: it can't see timing, targets or whether two cards really combo. "Untried" means no list in these events plays it.</p>`;
+}
 
 /* ══ Tweak bench ═══════════════════════════════════════════════════════════
    Start from any real list, a Claude build, the consensus or one of your decks; swap
@@ -1188,7 +1231,7 @@ function viewBench(name) {
       .map(([n, x]) => ({ n, x, code: codeForName(n) })).filter((r) => r.code);
     const t = q.trim().toLowerCase();
     const found = t ? IDX.cards.filter((c) => !c.v && c.t !== "Legend" && c.t !== "Token" && c.n.toLowerCase().includes(t)
-      && (c.d || []).every((dd) => dd === "Colorless" || ident.has(dd))).slice(0, 12) : [];
+      && (c.d || []).every((dd) => dd === "Colorless" || ident.has(dd)) && !(IDX.signatureOf(c) && L && IDX.signatureOf(c) !== IDX.championOf(L))).slice(0, 12) : [];
     const agNow = agreement(W, l), agBase = agreement(src.cards, l);
     v.innerHTML = `<div style="display:flex;flex-direction:column;gap:6px"><a class="small" href="#/idea/${encodeURIComponent(name)}">‹ ${esc(name)}</a></div>
     <section class="panel">
@@ -1209,7 +1252,23 @@ function viewBench(name) {
           ${agNow != null ? `<div class="check" style="border-top:1px solid var(--line2);padding-top:10px"><span class="n">Like the consensus</span><span class="num small">${pctI(agBase)} → <b>${pctI(agNow)}</b></span></div>` : ""}
         </section>
         <section class="panel"><h2>Curve and mana</h2><div id="bench-sim"></div></section>
+        <section class="panel"><h2>Engines</h2>${enginesBlock(W, shares, { addable: true, max: 2 })}</section>
         <section class="panel"><h2>Try</h2>
+          ${(() => {
+            if (!SYN) return `<p class="tiny dim">Loading what goes with this list…</p>`;
+            // Partners of the cards in the list that the list does not run, strongest first.
+            const best = new Map();
+            for (const r of st.rows) for (const w of (SYN.cards[r.card?.n]?.with || [])) {
+              if (inList.has(w.name)) continue;
+              const cur = best.get(w.name);
+              if (!cur || w.share > cur.share) best.set(w.name, { ...w, via: r.card.n });
+            }
+            // Only cards this legend could legally run: its domains, and no other champion's signature.
+            const champ = L ? IDX.championOf(L) : null;
+            const rows = [...best.values()].filter((w) => { const c = IDX.cards.find((x) => x.n === w.name && !x.v); return c && (c.d || []).every((dd) => dd === "Colorless" || ident.has(dd)) && !(IDX.signatureOf(c) && IDX.signatureOf(c) !== champ) && !IDX.bannedNames.has(c.n); })
+              .sort((a, b) => b.share * Math.log(b.lift) - a.share * Math.log(a.lift)).slice(0, 8);
+            return rows.length ? `<div class="lbl">Goes with what's in this list</div>${rows.map((w) => { const code = codeForName(w.name); return `<div class="erow"><span class="n"><button class="cardlink" data-card="${esc(code)}">${esc(w.name)}</button>${w.rad ? ` <span class="pill later">RAD</span>` : ""}<span class="tiny dim" style="display:block">in ${pctI(w.share)} of lists with ${esc(w.via)}</span></span><button class="pm" data-b="add" data-code="${esc(code)}" aria-label="Add ${esc(w.name)}">+</button></div>`; }).join("")}` : "";
+          })()}
           ${field.length ? `<div class="lbl">The field plays, this list doesn't</div>${field.map((r) => `<div class="erow"><span class="n"><button class="cardlink" data-card="${esc(r.code)}">${esc(r.n)}</button></span>${bar(r.x)}<span class="num tiny dim" style="width:34px;text-align:right">${pctI(r.x)}</span><button class="pm" data-b="add" data-code="${esc(r.code)}" aria-label="Add ${esc(r.n)}">+</button></div>`).join("")}` : ""}
           <label class="lbl" style="display:flex;flex-direction:column;gap:6px;margin-top:10px">Any card in these domains<input type="search" id="bench-q" value="${esc(q)}" placeholder="Name" autocomplete="off"></label>
           <div>${found.map((c) => `<div class="erow"><span class="n"><button class="cardlink" data-card="${esc(c.c)}">${esc(c.n)}</button> <span class="cost">${esc(costOf(c))}</span></span><span class="num tiny dim">${pctI(share(c.n))}</span><button class="pm" data-b="add" data-code="${esc(c.c)}" aria-label="Add ${esc(c.n)}">+</button></div>`).join("")}</div>
@@ -1239,6 +1298,7 @@ function viewBench(name) {
   };
   draw();
   runSims(true);
+  if (!SYN) loadSyn().then(() => { if (location.hash.startsWith("#/bench")) draw(); });
 }
 
 /* ══ Find a deck: results ════════════════════════════════════════════════ */

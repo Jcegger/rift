@@ -1,0 +1,135 @@
+{
+ "id": "reksai-deathknell-radiance",
+ "kind": "experiment",
+ "legend": "Rek'Sai, Void Burrower",
+ "date": "2026-10-19",
+ "author": "Claude",
+ "title": "Rek'Sai — doubled Deathknells",
+ "summary": "An untested idea built on your Barcelona list: it already runs nine units with Deathknell (Noxian Emissary's three only once Empowered), and Radiance prints a gear that makes them trigger twice.",
+ "basis": "Your saved deck \"Rek'sai (Best in Barcelona)\" — the Barcelona RQ list. Radiance-era evidence for Rek'Sai is one placed preview list (#20 of 74) and 3 brews, too little to count from.",
+ "changes": [
+  {
+   "what": "−1 Rage Amplifier, −2 Vanguard Captain, −1 Vi, Peacekeeper",
+   "why": "The slots with least support across 52 placed Rek'Sai lists: 8%, 12% and 31%. Everything else in the list is in 73% or more."
+  },
+  {
+   "what": "+2 Detonation Amplifier",
+   "why": "Radiance gear with Deploy, so it goes to a battlefield. \"Friendly [Deathknell] effects here trigger an additional time\" — Honest Broker's Gold, Carrion Dredger's Bird, Noxian Emissary's two Recruits once it is Empowered — twice. Playing it can also kill another friendly unit to draw 1, which is a Deathknell on demand."
+  },
+  {
+   "what": "+2 Mournful Spirit",
+   "why": "Radiance. \"[Deathknell] You may kill a unit or gear here.\" Removal that comes back as a death trigger; at an Amplifier's battlefield, two."
+  }
+ ],
+ "plan": [
+  "The doubling only applies to deaths at the Amplifier's battlefield ('here'), and Deploy gear is killed when an opponent holds there. So it is a battlefield you mean to fight over, not one you leave.",
+  "Cull the Weak makes each player kill one of their units: at the Amplifier's battlefield, choose a Deathknell unit and collect it twice.",
+  "Rek'Sai's legend still wants conquests; the extra Gold and tokens are there to pay for and win them."
+ ],
+ "matchups": [
+  {
+   "vs": "All",
+   "note": "Untested. A reading of the cards, to be played and logged."
+  }
+ ],
+ "sim": "Goldfish, 8,000 games, against its base list: Energy spent turns 1–4 17.7 → 18.0 on the play (19.5 → 19.8 on the draw); units on board by turn 3 4.4 → 4.0; stuck on Power turn 3 2% → 1%; mulligan keep all; runes 6/6 fine. Curve and mana only — the engine itself is not simulated.",
+ "cards": {
+  "OGN-004/298": 2,
+  "OGN-007/298": 6,
+  "OGN-012/298": 3,
+  "OGN-029/298": 3,
+  "OGN-209/298": 3,
+  "OGN-211/298": 3,
+  "OGN-213/298": 1,
+  "OGN-214/298": 6,
+  "OGN-291/298": 1,
+  "OGN-294/298": 1,
+  "SFD-003/221": 3,
+  "SFD-029/221": 1,
+  "SFD-155/221": 3,
+  "SFD-175/221": 3,
+  "SFD-187/221": 1,
+  "SFD-188/221": 3,
+  "UNL-002/219": 2,
+  "UNL-153/219": 3,
+  "UNL-210/219": 1,
+  "VEN-128/166": 3,
+  "RAD-017/167": 2,
+  "RAD-126/167": 2
+ },
+ "sb": {
+  "OGN-212/298": 3,
+  "SFD-001/221": 1,
+  "SFD-021/221": 1,
+  "VEN-003/166": 2,
+  "VEN-131/166": 1,
+  "VEN-135/166": 2
+ },
+ "snapshot": {
+  "date": "2026-10-19",
+  "events": [
+   "NovaRiftbound's $2,000 Online Showdown 5",
+   "Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview)"
+  ],
+  "placed": 1,
+  "shares": {
+   "Cleave": 1,
+   "Legion Rearguard": 0.33,
+   "Noxus Hopeful": 1,
+   "Falling Star": 1,
+   "Cull the Weak": 1,
+   "Faithful Manufactor": 1,
+   "Order Rune": 1,
+   "Salvage": 0.33,
+   "The Candlelit Sanctum": 1,
+   "Banner of Conquest": 0.33,
+   "Rally for War": 0.33,
+   "War Scout": 0.33,
+   "Trifarian Captain": 0.67,
+   "Firelights' Hideout": 0.33,
+   "Blood Rush": 1,
+   "Rek'Sai, Breacher": 1,
+   "Undertitan": 0.67,
+   "Void Rush": 1,
+   "Inferna": 1,
+   "Carrion Dredger": 1,
+   "Forbidding Waste": 0.67,
+   "Fury Rune": 1,
+   "Noxian Emissary": 0.67,
+   "Imperial Decree": 0.33,
+   "Trifarian War Camp": 0.67,
+   "Bilgewater Tracker": 0.67,
+   "Lingering Animus": 0.33,
+   "Black Rose Sanctum": 0.33,
+   "Honest Broker": 0.67,
+   "Hidden Blade": 0.33,
+   "Dune Devourer": 0.33,
+   "Escaped Grayback": 0.33
+  }
+ },
+ "baseCards": {
+  "OGN-004/298": 2,
+  "OGN-007/298": 6,
+  "OGN-012/298": 3,
+  "OGN-029/298": 3,
+  "OGN-209/298": 3,
+  "OGN-211/298": 3,
+  "OGN-213/298": 1,
+  "OGN-214/298": 6,
+  "OGN-218/298": 2,
+  "OGN-291/298": 1,
+  "OGN-294/298": 1,
+  "SFD-003/221": 3,
+  "SFD-029/221": 1,
+  "SFD-155/221": 3,
+  "SFD-175/221": 3,
+  "SFD-187/221": 1,
+  "SFD-188/221": 3,
+  "UNL-002/219": 2,
+  "UNL-153/219": 3,
+  "UNL-176/219": 1,
+  "UNL-210/219": 1,
+  "VEN-018/166": 1,
+  "VEN-128/166": 3
+ }
+}
