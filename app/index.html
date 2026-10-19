@@ -70,7 +70,7 @@ main{max-width:1280px;margin:0 auto;padding:24px;display:flex;flex-direction:col
 .tab[aria-selected="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
 .tab.new{justify-content:center;color:var(--accent);border-style:dashed}
 
-.hero{display:flex;flex-wrap:wrap;gap:20px 48px;align-items:flex-end;justify-content:space-between}
+.hero{display:flex;flex-direction:row;flex-wrap:wrap;gap:20px 48px;align-items:flex-end;justify-content:space-between}
 .stats{display:flex;flex-wrap:wrap;gap:28px}
 .stat{display:flex;flex-direction:column;gap:4px}
 .stat b{font-family:var(--f-head);font-weight:700;font-size:34px;line-height:1}
@@ -119,17 +119,18 @@ select,input[type=search],input[type=text]{font:16px var(--f-body);min-height:44
 .mcard dt{font-size:12px}
 .mcard dd{margin:0}
 
-.check{display:flex;align-items:center;gap:10px;font-size:15px;padding:4px 0}
+.check{display:flex;flex-wrap:wrap;align-items:center;gap:2px 10px;font-size:15px;padding:4px 0}
 .check .n{flex:1}
 .check .d{width:12px;height:12px;border-radius:50%;flex:none}
-.check .why{display:block;font-size:13px;color:var(--ink2)}
+.check .why{flex-basis:100%;padding-left:22px;font-size:13px;color:var(--ink2)}
 
 .pm{width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:var(--card);font:600 20px var(--f-mono);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
 .pm:hover{background:var(--soft)}
 .pm.sm{width:auto;padding:0 10px;font:600 13px var(--f-body)}
 .erow{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line2);font-size:15px}
 .erow .q{width:24px;text-align:center;font:500 17px var(--f-mono)}
-.erow .n{flex:1;min-width:0;padding-left:4px}
+.erow .n{flex:1;min-width:0;padding-left:4px;display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px}
+.erow .n .note{margin-left:auto}
 
 table.t{border-collapse:collapse;width:100%;font-size:15px}
 table.t th{font-family:var(--f-head);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:var(--ink2);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink)}
@@ -389,7 +390,7 @@ function renderNav(cur) {
   $("#nav").innerHTML = NAV.map(link).join("");
   $("#bnav").innerHTML = [["decks", "Decks"], ["find", "Find"], ["guides", "Guides"], ["news", "News"]]
     .map(([k, l]) => `<a href="#/${k}" ${cur === k ? 'aria-current="page"' : ""}>${l}</a>`).join("") +
-    `<a href="${OLD}">Collection ↗</a>`;
+    `<a href="${OLD}" title="Still in the old app">Collection</a>`;
 }
 
 let DIRTY = null;   // the editor's unsaved working copy, if any
@@ -687,8 +688,8 @@ function viewEdit(id) {
       <span class="q">${r.qty}</span>
       <button class="pm" data-act="inc" data-zone="${zone}" data-code="${esc(r.code)}" aria-label="One more ${esc(r.card?.n || r.code)}">+</button>
       <span class="n">${r.card ? `<button class="cardlink" data-card="${esc(r.code)}">${esc(r.card.n)}</button>` : esc(r.code)}
-        <span class="cost">${esc(costOf(r.card))}</span></span>
-      ${r.short ? `<span class="pill short">need ${r.short}</span>` : `<span class="tiny dim hide-sm">own ${r.have}</span>`}
+        <span class="cost">${esc(costOf(r.card))}</span>
+        ${r.short ? `<span class="note pill short">need ${r.short}</span>` : `<span class="note tiny dim hide-sm">own ${r.have}</span>`}</span>
       ${r.card && !["Legend", "Rune", "Battlefield"].includes(r.card.t) ? `<button class="pm sm" data-act="move" data-zone="${zone}" data-code="${esc(r.code)}" title="${zone === "sb" ? "Move one to the main deck" : "Move one to the sideboard"}">${zone === "sb" ? "→ main" : "→ SB"}</button>` : ""}
     </div>`;
     const main = st.rows.filter((r) => r.zone !== "legend");
@@ -718,8 +719,8 @@ function viewEdit(id) {
         <section class="panel">
           <h2>Checks</h2>
           ${checks.map((k) => `<div class="check"><span class="d" style="${dot(k.ok)}" aria-hidden="true"></span>
-            <span class="n">${esc(k.label)}${k.ok !== true && k.detail && [].concat(k.detail).length ? `<span class="why">${esc([].concat(k.detail).slice(0, 5).join(" · "))}</span>` : ""}</span>
-            <span class="num small">${esc(k.val)}</span></div>`).join("")}
+            <span class="n">${esc(k.label)}</span>
+            <span class="num small">${esc(k.val)}</span>${k.ok !== true && k.detail && [].concat(k.detail).length ? `<span class="why">${esc([].concat(k.detail).slice(0, 5).join(" · "))}</span>` : ""}</div>`).join("")}
           <div class="check" style="border-top:1px solid var(--line2);padding-top:10px"><span class="n">Cards you're short</span>
             <span class="num" style="color:var(--short)">${st.mainGap.cards + st.sideGap.cards}</span></div>
         </section>
