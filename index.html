@@ -1199,7 +1199,7 @@ const brewFor = (name) => (BREWS?.brews || []).find((b) => b.legend === name) ||
 function brewPanel(name) {
   const b = brewFor(name);
   if (!b) return "";
-  const groups = [["champion", "Chosen champion"], ["signature", "Signature"], ["fit", "Fits the plan"], ["staple", "Good cards in these colours"]];
+  const groups = [["champion", "Chosen champion"], ["signature", "Signature"], ["fit", "Fits the plan"], ["idea", "Untested ideas — legal all along, rarely picked"], ["staple", "Good cards in these colours"]];
   return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · built by rule</span><h2>A brew from the cards: ${esc(b.subName)} ${esc(b.main)}</h2></div>
       <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=brew">Tweak</a></div></div>
     <p class="note">${esc(BREWS.note)} ${b.vsLists ? `It shares ${b.vsLists.common} of 40 cards with the ${b.vsLists.lists} lists for this legend.` : "There are no lists for this legend to compare it with."}${b.sim ? ` Goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3.` : ""}${b.radCards ? ` ${b.radCards} Radiance cards.` : ""}</p>

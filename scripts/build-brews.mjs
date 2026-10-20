@@ -22,7 +22,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { indexCatalog } from "../lib/decks.mjs";
 import { counter } from "../lib/consensus.mjs";
-import { inferLegend, MAINS } from "../lib/infer.mjs";
+import { inferLegend, headingSubKeys, MAINS } from "../lib/infer.mjs";
 import { brew, BUCKETS, W } from "../lib/brew.mjs";
 import { docEngineLine, docEngineKeys } from "../lib/research.mjs";
 import { buildDeck, simulate, sweepRunes } from "../lib/sim.mjs";
@@ -76,6 +76,7 @@ const main = async () => {
   for (const c of idx.cards) if (c.t === "Legend" && !c.v) { const n = idx.legendName(c), h = legends.get(n); if (!h || (/ - Starter$/.test(h.n) && !/ - Starter$/.test(c.n))) legends.set(n, c); }
   const byLegend = new Map();
   for (const d of usable) { const n = idx.legendName(card(d.lg)); (byLegend.get(n) || byLegend.set(n, []).get(n)).push(d); }
+  const headingLabel = (name) => (md.match(new RegExp(`^### ${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")} — ([^\\n*·]+)`, "m")) || [])[1] || "";
   const headingMain = (name) => {
     const h = (md.match(new RegExp(`^### ${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")} — ([^\\n*·]+)`, "m")) || [])[1] || "";
     return MAINS.find((m) => h.trim().split(/[\s,]+/).includes(m)) || null;
@@ -122,10 +123,10 @@ const main = async () => {
     const bfs = [];
     for (const src of [bfOf(byLegend.get(name) || []), bfOf(pairLists), bfOf(usable)]) for (const b of src) if (bfs.length < 3 && !bfs.some((x) => x.name === b.name)) bfs.push(b);
     const weights = process.env.BREW_W ? Object.fromEntries(process.env.BREW_W.split(",").map((x, i) => [["fit", "quality", "main"][i], Number(x)])) : W;
-    // Its own lists' shares, by name, when it has any.
+    // Its own lists' shares, by name — only from 10 lists up: with five, one list is 20%.
     let own = null;
-    if (core) { own = new Map(); for (const d of core.from) for (const n of new Set(Object.keys(d.cards).map((k) => card(k)?.n).filter(Boolean))) own.set(n, (own.get(n) || 0) + 1 / core.from.length); }
-    const b = brew(L, idx, { inferred, main: headingMain(name) || inferred.main, engine: docEngineKeys(docEngineLine(md, name)), quality, own, templates, research: R, battlefields: bfs, runeCards, weights });
+    if (core && core.from.length >= 10) { own = new Map(); for (const d of core.from) for (const n of new Set(Object.keys(d.cards).map((k) => card(k)?.n).filter(Boolean))) own.set(n, (own.get(n) || 0) + 1 / core.from.length); }
+    const b = brew(L, idx, { inferred, main: headingMain(name) || inferred.main, engine: [...new Set([...docEngineKeys(docEngineLine(md, name)), ...headingSubKeys(headingLabel(name))])], quality, own, templates, research: R, battlefields: bfs, runeCards, weights });
 
     // Runes: take the sweep's split when it plays better.
     let sim = null;

@@ -811,10 +811,10 @@ async function cmdBrew(args) {
     console.log(`BREW ${b.legend}: ${b.subName} ${b.main}${b.inferredMain !== b.main ? ` (the cards alone say ${b.inferredMain})` : ""} · untested, built by rule\n  ${B.note}`);
     console.log(`  chosen champion ${b.champion} · ${b.radCards} Radiance cards · ${b.vsLists ? `${b.vsLists.common}/40 shared with ${b.vsLists.lists} ${b.legend.split(",")[0]} lists` : "no lists to compare"}` +
       (b.sim ? ` · goldfish: ${b.sim.energy} Energy turns 1–4, ${b.sim.units3} units by turn 3` : "") + (b.legal ? "" : " · NOT LEGAL"));
-    for (const role of ["champion", "signature", "fit", "staple"]) {
+    for (const role of ["champion", "signature", "fit", "idea", "staple"]) {
       const rows = b.rows.filter((r) => r.role === role);
       if (!rows.length) continue;
-      console.log(`\n  ${{ champion: "CHAMPION", signature: "SIGNATURE", fit: "FITS THE PLAN", staple: "GOOD CARDS IN THESE COLOURS" }[role]}`);
+      console.log(`\n  ${{ champion: "CHAMPION", signature: "SIGNATURE", fit: "FITS THE PLAN", idea: "UNTESTED IDEAS (legal all along, rarely picked)", staple: "GOOD CARDS IN THESE COLOURS" }[role]}`);
       for (const r of rows) console.log(`    ${r.qty} ${pad(r.name, 30)} ${pad(`${r.cost ?? "-"}E ${r.type}`, 10)} ${r.why}`);
     }
     console.log(`\n  runes ${Object.entries(b.runes).map(([d, n]) => `${n} ${d}`).join(" / ")}${b.runeNote ? ` (${b.runeNote})` : ""} · battlefields ${b.battlefields.map((x) => x.name).join(", ")}`);

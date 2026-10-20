@@ -84,7 +84,12 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   champion unit that fits best, ×2), signature (3 in total), then the colour pair's legal
   pool scored by fit to its sub-archetypes and its `docs/archetypes.md` Engine line (payoffs
   double), quality, and fit to its main archetype — the heading's when it has one — filled
-  to that archetype's curve. Cards the legend's winners skip stay out until answered;
+  to that archetype's curve, as a target: a slot only takes a decent card. It builds toward the
+  sub-archetype the heading names as well as the inference's, so a misread (Vex as movement)
+  is corrected by "stun control". A card legal all along that under 3% of eligible lists pick
+  stays out — the field has answered it — unless it is the legend's own champion unit, a
+  choice 15%+ of the legend's own lists make (10+ lists), or a payoff for its own engine,
+  offered as at most two flagged ideas. Cards the legend's winners skip stay out until answered;
   `[Unique]` cards are one copy. Never priced. Limits: it caps every card at 3 copies, so a
   deck of one card (Yasuo's 39 Spiderlings) is out of its reach. Tests: `lib/brew.test.mjs`.
 - `lib/research.mjs` - reads `data/research.json` for the site and `scripts/rift`: a card
