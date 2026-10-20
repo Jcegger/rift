@@ -18,7 +18,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { indexCatalog } from "../lib/decks.mjs";
 import { counter } from "../lib/consensus.mjs";
 import { deckEngines } from "../lib/engines.mjs";
-import { inferLegend } from "../lib/infer.mjs";
+import { inferLegend, headingSubKeys } from "../lib/infer.mjs";
 import { buildDeck, simulate, classify } from "../lib/sim.mjs";
 
 const MIN_PLACED = 5;     // below this a legend's profile is read from all its lists, labelled
@@ -112,6 +112,16 @@ const main = async () => {
       .map((x) => ({ name: x.n, share: x.l.share, lift: x.l.lift, rad: x.rad }));
     legends.push({ ...row, from: from.length, profile, label: lab, why, sim, engines, package: pkg, inferred: inferLegend(L, idx, mainRows),
       core: mainRows.filter((r) => r.inc >= 0.75).map((r) => r.name) });
+  }
+
+  // Whether the cards' read agrees with the hand-written heading (docs/archetypes.md). The heading
+  // wins — it comes from guides and results — so a page shows a disagreement as one, never as a
+  // second answer (Bladesman's cards read XP, from its champion; its plan is the lone defender).
+  const md = await readFile(new URL("../docs/archetypes.md", import.meta.url), "utf8");
+  const heads = new Map([...md.matchAll(/^### (.+?) — (.+)$/gm)].map((m) => [m[1].trim(), m[2].replace(/\*.*$|·.*$/g, "").trim()]));
+  for (const l of legends) {
+    const subs = headingSubKeys(heads.get(l.name));
+    if (l.inferred?.sub && subs.length) Object.assign(l.inferred, { headingSubs: subs, agrees: subs.includes(l.inferred.sub) });
   }
 
   // Colour pairs: their legends, and the cards most of the pair's lists share regardless

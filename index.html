@@ -1175,8 +1175,11 @@ function inferredLine(a) {
   if (!f?.main) return "";
   // Only the sub-archetype: the inferred MAIN (aggro…ramp) is about half right — pace is how a
   // deck is played, which card text barely shows — so the heading's word stands alone.
-  return `<details class="small" style="margin:4px 0"><summary><b>Built on, from the cards:</b> ${esc(f.subName || "")}
-      <span class="dim">(also ${f.subs.slice(1).map((x) => esc(x.name)).join(", ")})</span></summary>
+  // When the cards' read disagrees with the heading, the heading stands (guides and results);
+  // the read is shown as a disagreement, not a second label.
+  const off = f.agrees === false;
+  return `<details class="small" style="margin:4px 0"><summary><b>${off ? "From the cards alone" : "Built on, from the cards"}:</b> ${esc(f.subName || "")}
+      <span class="dim">(also ${f.subs.slice(1).map((x) => esc(x.name)).join(", ")})${off ? " — the heading above, from guides and results, reads it differently, and wins" : ""}</span></summary>
     <ol class="tiny" style="margin:4px 0 0 18px">${f.layers.map((l) => `<li><b>${esc(l.name)}</b>${l.cards.length ? ` (${esc(l.cards.slice(0, 3).join(", "))})` : ""}${l.sub.length ? `: ${esc(l.sub.join(", "))}` : ""}
       ${l.evidence.length ? `<span class="dim"> — ${esc(l.evidence.slice(0, 3).map((e) => `${e.card}: ${e.why.concat(e.sub).slice(0, 3).join(", ")}`).join("; "))}</span>` : ""}</li>`).join("")}</ol>
     <p class="tiny dim" style="margin:2px 0 0">Pattern-matched from card text, earlier layers weighing more. It reads what a deck is built on; whether it plays aggro or midrange is the heading's call, from guides and results.</p></details>`;
@@ -1185,7 +1188,6 @@ function profileLine(a) {
   if (!a?.profile) return `<p class="note">No lists in the snapshot to measure.</p>${inferredLine(a)}`;
   const p = a.profile;
   return `${inferredLine(a)}<div class="small" style="display:flex;flex-wrap:wrap;gap:4px 14px">
-    <span><b>Measured:</b> ${esc(a.label)}</span>
     <span>${p.units} units · ${p.spells} spells · ${p.gear} gear</span>
     <span>average cost ${p.avgCost}</span><span>${p.interaction} interaction</span><span>${p.draw} draw</span>
     ${a.sim ? `<span>goldfish: ${a.sim.energy} Energy turns 1–4, ${a.sim.units3} units by turn 3</span>` : ""}
@@ -1258,7 +1260,7 @@ function viewArchetypes() {
       ${g ? `<div class="small dim">${mdToHtml(g.body.split(/\n\n/)[0], { linkFor: guideLink })}</div>` : ""}
       <div>${p.legends.map((l) => { const w = ARCH_MD?.legends.get(l.name); return `<div class="row"><span class="n"><a href="#/idea/${encodeURIComponent(l.name)}">${esc(l.name)}</a>
         ${l.isNew ? `<span class="pill later">new</span>` : ""}${mine.has(l.name) ? ` <span class="pill good">your deck</span>` : ""}
-        <span class="small dim" style="display:block">${w ? esc(w.archetype) : ""}${l.label && w && !w.archetype.includes(l.label) ? ` · measured ${esc(l.label)}` : ""}</span></span>
+        <span class="small dim" style="display:block">${w ? esc(w.archetype) : ""}</span></span>
         <span class="num small dim">${l.placed} placed</span></div>`; }).join("")}</div></section>`;
   }).join("");
   return `<div style="display:flex;flex-direction:column;gap:6px"><a class="small" href="#/find">‹ Find a deck</a></div>

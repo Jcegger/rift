@@ -333,7 +333,7 @@ Reactions to win fights after the opponent commits, and bounce.
 - **Engine:** none — Vex, Apathetic's stun lock and removal buy time; Steel Paws empowering itself is not a loop.
 - **Sources:** riftbound.gg guide (14 Sep 2026): "control play style", "hold oriented": take a battlefield early with Vex, Apathetic, deny the comeback with stuns and counters, Astral Heron late. Tier list (3 Oct): Tier 3, "hold oriented".
 
-### Yasuo, Unforgiven — Spiderling swarm
+### Yasuo, Unforgiven — Spiderling-token aggro
 *measured combo · 12 placed · 39 Spiderling + Yasuo, Windrider*
 - **Plan:** Spiderling is Hidden, and has **+1 Might for each other Spiderling you control at its
   battlefield**; its text lets a deck run any number. Hide them, flip them together, and one
@@ -344,6 +344,7 @@ Reactions to win fights after the opponent commits, and bounce.
 - **From Riven:** Bedeviling Stranger returns an enemy unit when a battlefield has 4 or more units
   — Spiderling battlefields usually do.
 - **Engine:** tokens (Spiderlings, each counting the others) — Hidden lets them land together.
+- **Call (20 Oct 2026):** aggro. Forty units and no spells: the swarm flips onto one battlefield together and wins before the answer comes. Everything it fears is area damage, which is what an aggro deck fears. The measured "combo" is just 39 copies of one card. That is the deck's shape, not a combo kill.
 
 ### Riven, The Exile — exhaust midrange *(Radiance)* · *your deck*
 *measured tempo · 9 placed (online previews) · u21 s13 g6 · reactive 19 · draw 12*
@@ -381,13 +382,14 @@ Reactions to win fights after the opponent commits, and bounce.
 Defy, Charm, Scuttle Crab, Discipline, Thousand-Tailed Watcher, Stupefy and Ravenbloom Student
 across five legends: the most card-flow-heavy pair, each legend building a different engine on top.
 
-### Ornn, Fire Below the Mountain — gear engine
+### Ornn, Fire Below the Mountain — gear midrange
 *measured midrange · 26 placed · u15 s5 g20 · cost 2.0*
 - **Plan:** 20 gear. The legend adds Power for gear; Pit Crew readies when you play a gear; Poro
   Snax and Patched Porobot draw; Ornn, Blacksmith finds gear; Ornn, Forge God has +1 Might per
   friendly gear.
 - **Against it:** gear removal is unit removal here.
 - **Engine:** gear — twenty gear; the legend's Power, Pit Crew and Ornn, Forge God pay them off.
+- **Call (20 Oct 2026):** midrange, as measured. Its cheap gear (average cost 2.0) builds a board rather than racing, and it wins on Ornn, Forge God and the cards Poro Snax draws.
 
 ### Nasus, Curator of the Sands — big-spell ramp
 *measured ramp · 25 placed · 8 cards at 7+ · int 12*
@@ -411,7 +413,7 @@ she fights; Ahri, Alluring scores a point when she holds; Radiance's Ahri, Confi
 you shrink an enemy at her battlefield.
 - **Engine:** none — shrink and removal; nothing loops.
 
-### Orianna, Lady of Clockwork — gear-to-unit *(Radiance)*
+### Orianna, Lady of Clockwork — gear-to-unit midrange *(Radiance)*
 *measured tempo · 0 placed / 52 lists · u10 s14 g16 · brews*
 - **Plan:** at the start of your Main Phase the legend turns a gear into a unit with Might equal to
   its cost. So expensive gear — Resplendent Rostrum (8), The Ball (5), Gravity Field (5) — become
@@ -420,13 +422,14 @@ you shrink an enemy at her battlefield.
 - **Against it:** one gear is a unit at a time; it changes only when she picks another.
 - **Engine:** gear — the legend turns expensive gear into units.
 - **Sources:** riftbound.gg guide (Radiance theorycraft, 15 Oct 2026): no label; "seize the board" with Orianna, Exquisite, then "snowball".
+- **Call (20 Oct 2026):** midrange. The guide's plan is "seize the board" and then "snowball". It isn't ramp: the legend turns a gear into a unit of that gear's cost but adds no Energy. The measured tempo comes from counting Hidden and Reaction cards, which also calls Bladesman tempo.
 
 ## Calm / Order — tokens and stuns
 
 Discipline, Defy, Hidden Blade, Back Off, B.F. Sword, Deathgrip and Vi, Peacekeeper across four
 legends — the pair with the most hard answers and the most protected bodies.
 
-### Azir, Emperor of the Sands — soldier tokens
+### Azir, Emperor of the Sands — soldier-token midrange
 *measured tempo · 42 placed · u3 s21 g16 · cost 2.3*
 - **Plan:** three units, sixteen gear. Cheap Equipment (Doran's Shield, Eye of the Herald, Soul
   Sword, Hand Hammer); the legend makes a 2-Might Sand Soldier after you play an Equipment, and Sand
@@ -436,12 +439,14 @@ legends — the pair with the most hard answers and the most protected bodies.
 - **Fears:** gear removal, and area damage into 2-Might soldiers.
 - **From Rek'Sai:** two go-wide decks; its tokens are 2 Might, yours mostly 1.
 - **Engine:** tokens from gear — Equipment makes Sand Soldiers, and Arise! makes one per Equipment.
+- **Call (20 Oct 2026):** midrange. It develops Equipment and wins on the turn Arise! turns that gear into a board. That is a build-up, not a race. The measured tempo is Guards! and the other Hidden cards again.
 
-### Shen, Eye of Twilight — pair defence
+### Shen, Eye of Twilight — pair-defence midrange
 *measured tempo · 8 placed* — Shen, Kinkou is a Reaction Tank; Shen, Leader **scores a point when he
 holds with exactly one other unit**; Disciple of Shen gets Shield 3 in the same spot; Ki Barrier
 prevents 7. A deck that wins by holding small, very hard battlefields.
 - **Engine:** none — pair defence; it wins by holding, not by a loop.
+- **Call (20 Oct 2026):** midrange, the same call as Bladesman's lone defender. It wins by holding small, very hard battlefields, and its Reactions protect a hold rather than trade tempo.
 
 ### Leona, Radiant Dawn — stun midrange
 *measured tempo · 5 placed* — the legend buffs when you stun; Leona, Determined stuns on attack;
@@ -449,10 +454,11 @@ prevents 7. A deck that wins by holding small, very hard battlefields.
 Zenith Blade stuns and moves in.
 - **Engine:** stuns — the legend buffs when you stun; Leona, Zealot gives stunned enemies −8.
 
-### Ivern, Green Father — tribes
+### Ivern, Green Father — tribes midrange
 *measured tempo · 3 placed* — Bird, Cat, Dog, Poro tags; Ivern, Friend to All scores a point on
 conquer or hold if your units have all four; the legend turns battlefields into Brush tokens.
 - **Engine:** none — tribe tags, which the reader does not read.
+- **Call (20 Oct 2026):** midrange, as measured over its 8 placed lists. It builds the four-tribe board for Ivern, Friend to All.
 
 ## Chaos / Fury — aggression from odd angles
 
@@ -482,11 +488,12 @@ effects); Piercing Light, Bewitching Spirit's discard.
 - **Engine:** tokens (Bomb gear) — made at battlefields, killed on purpose and remade.
 - **Sources:** riftbound.gg guide (Radiance theorycraft, 14 Oct 2026): "tempo deck": Bombs clear the showdown; a "hold oriented" side build.
 
-### Zed, Master of Shadows — clones
+### Zed, Master of Shadows — clone midrange
 *measured midrange · 2 placed / 99 lists* — Shadow Clone tokens; Zed, Without a Sound swaps places
 with a clone; the legend empowers whenever you banish a card you own; Perfect Execution readies with
 Assault 3.
 - **Engine:** tokens (Shadow Clones) — Zed swaps places with them.
+- **Call (20 Oct 2026):** midrange, as measured. The clones are a board to swap with, not a race.
 
 ### Jinx, Loose Cannon — discard aggro
 *measured midrange · 0 placed in this window / 31 lists* — Jinx, Demolitionist discards 2, Flame
@@ -516,12 +523,13 @@ Singularity across four legends: the interaction-heaviest pair.
   tokens.
 - **Engine:** none — answers that choose twice draw a card; removal, not a loop.
 
-### Diana, Scorn of the Moon — showdown spells
+### Diana, Scorn of the Moon — showdown-spell tempo
 *measured tempo · 8 placed* — the legend adds Energy only during showdowns; Diana, Lunari Predicts
 when a showdown starts; Diana, No Longer Human grows per spell; Moonfall pulls an enemy in and
 shrinks them; Hwei moves and filters.
 - **Engine:** spells — showdown spells on the legend's showdown-only Energy.
 - **Sources:** riftbound.gg guide (14 Sep 2026): no label; a "fast-paced legend", or "an attrition war": cheap support spells on the legend's Energy, Ravenbloom Student and Hwei.
+- **Call (20 Oct 2026):** tempo. The legend's Energy exists only in showdowns, so the deck spends it mid-fight on cheap spells. The guide calls it "fast-paced", and it measures tempo.
 
 ### Mel, Soul's Reflection — empowered-spell midrange
 *measured tempo · 5 placed* — Applied Researchers (spells cost less while Empowered), Shock Blast
@@ -530,12 +538,13 @@ when empowered.
 - **Engine:** Empower and spells — Applied Researchers and Shock Blast are cheaper while something is Empowered.
 - **Sources:** riftbound.gg guide (Vendetta, 8 Aug 2026): "midrange, value oriented play style": removal and early units, then Rebuttal to lock a battlefield.
 
-### Teemo, Swift Scout — Hidden swarm
+### Teemo, Swift Scout — Hidden-swarm aggro
 *measured tempo · 3 placed / 47 lists · reactive 26* — the legend hides for [1] instead of [A] and
 returns Teemos to hand to re-hide; Teemo, Strategist pings for every Hidden card in the top 5;
 Guerilla Warfare rebuys Hidden cards and hides for free; Nocturne, Horrifying is played for one Power
 when seen on top.
 - **Engine:** facedown — Hidden swarm; the legend re-hides Teemos.
+- **Call (20 Oct 2026):** aggro, the same call as Evelynn: the Hidden cards are cheap threats and pings, not answers. It measures aggro over its 50 lists.
 
 ## Chaos / Order — Kennen alone
 
@@ -573,10 +582,11 @@ Bellows Breath across four legends.
 - **From Rek'Sai:** the most removal-dense deck you will face; Watcher blunts your whole board.
 - **Engine:** spells — the legend's Power is for spells; the list is removal into a spell top end.
 
-### Rumble, Mechanized Menace — mechs
+### Rumble, Mechanized Menace — Mech midrange
 *measured midrange · 4 placed* — Mech synergies: Bubble Bot readies a Mech, Production Surge makes
 one, Forecaster gives Vision, both Rumbles boost Mechs, Breakneck Mech gives them Deflect and Ganking.
 - **Engine:** none — Mech tribe, which the reader does not read.
+- **Call (20 Oct 2026):** midrange, as measured. It builds a Mech board.
 
 ### Jhin, Virtuoso — four-spell ramp
 *measured control · 3 placed* — banish four 4+ spells with the legend to channel 4 runes and draw;
@@ -626,7 +636,7 @@ readies on your second card each turn; Spectral Matron and Baited Hook replay un
 Hextech Gauntlets, Vault Breaker (Assault 2 and Ganking), Vi, Peacekeeper stuns on attack.
 - **Engine:** gear and winning fights — Equipment with Assault and Ganking; the legend readies on big conquests.
 
-### Mordekaiser, Iron Revenant — death ramp *(Radiance)*
+### Mordekaiser, Iron Revenant — sacrifice midrange *(Radiance)*
 *measured ramp · 5 placed (online previews) / 63 lists · u29 s5 g6*
 - **Plan:** the legend banishes a unit or gear from your trash for Power (units and gear only), so
   every death fuels the next play. Mordekaiser, Twice Slain (Assault 3) survives by killing another
@@ -635,6 +645,7 @@ Hextech Gauntlets, Vault Breaker (Assault 2 and Ganking), Vi, Peacekeeper stuns 
 - **Against it:** the trash is its mana — what it has banished is gone for good.
 - **Engine:** deaths — every death puts fuel in the trash for the legend's Power.
 - **Sources:** riftbound.gg guide (Radiance theorycraft, 15 Oct 2026): no label; wins "through brute force", Baited Hook to cheat a champion out early.
+- **Call (20 Oct 2026):** midrange, not ramp. It is LeBlanc's shape (Deathknell midrange, average cost 4.0) at average cost 3.4: a board of fodder that grinds value. Its legend plays units with Power from the trash, which is a resource, but the deck doesn't accelerate into a top end (6 cards at 7+). Both Mordekaiser builds already call it sacrifice.
 
 ## Mind / Order — Deathknell and answers
 
@@ -664,10 +675,11 @@ and Glasc Mixologist across four legends.
 - **From Rek'Sai:** Imperial Decree punishes a wide board of small units in one card.
 - **Engine:** tokens — Recruits from the legend and Viktor, Leader.
 
-### Renata Glasc, Chem-Baroness — gold
+### Renata Glasc, Chem-Baroness — gold midrange
 *measured tempo · 2 placed* — Gold everywhere; Hostile Takeover steals an enemy unit for a turn;
 Renata Glasc, Mastermind scores a point for a large activation while at a battlefield.
 - **Engine:** none — Gold, which is mana, not an engine.
+- **Call (20 Oct 2026):** midrange. The Gold pays for Renata Glasc, Mastermind's big activation, but only 2 cards cost 7 or more, so it isn't ramp in this page's sense. Its 11 interaction includes Hostile Takeover.
 
 ### Seraphine, Starry-Eyed Songstress — exhaust-three control *(Radiance)*
 *measured midrange · 0 placed / 64 lists · u9 s25 · brews*
