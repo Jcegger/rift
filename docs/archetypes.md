@@ -365,7 +365,7 @@ Reactions to win fights after the opponent commits, and bounce.
 
 ## Calm / Fury — Akali alone
 
-### Akali, Rogue Assassin — movement control
+### Akali, Rogue Assassin — movement tempo
 *measured control · 62 placed · u20 s15 g5 · int 12 · draw 15*
 - **Plan:** the legend pulls a unit out of a showdown to base (and readies it if Empowered) —
   escapes, and re-uses of play effects. Akali, Deadly Weapon pings whenever she moves; Akali,
@@ -376,20 +376,21 @@ Reactions to win fights after the opponent commits, and bounce.
 - **From Rek'Sai:** her pings and Falling Star (3 and 3) are efficient into small units.
 - **Engine:** movement — Akali, Deadly Weapon and Akali, Silent pay off moving; the legend pulls units home to move again.
 - **Sources:** riftbound.gg guide (Vendetta, 14 Sep 2026): no label; "plays more aggressively than the Blade Dancer"; Astral Heron as the late-game anchor, Stellacorn Herder and Kai'Sa, Survivor for cards.
+- **Call (20 Oct 2026):** tempo. The riftbound.gg guide (14 Sep 2026), after Vendetta's big events, says Akali "plays more aggressively than the Blade Dancer", and Irelia is tempo here. The 12 interaction that measures control is the Fury removal she uses to fight for the board.
 
 ## Calm / Mind — value engines
 
 Defy, Charm, Scuttle Crab, Discipline, Thousand-Tailed Watcher, Stupefy and Ravenbloom Student
 across five legends: the most card-flow-heavy pair, each legend building a different engine on top.
 
-### Ornn, Fire Below the Mountain — gear midrange
+### Ornn, Fire Below the Mountain — gear aggro
 *measured midrange · 26 placed · u15 s5 g20 · cost 2.0*
 - **Plan:** 20 gear. The legend adds Power for gear; Pit Crew readies when you play a gear; Poro
   Snax and Patched Porobot draw; Ornn, Blacksmith finds gear; Ornn, Forge God has +1 Might per
   friendly gear.
 - **Against it:** gear removal is unit removal here.
 - **Engine:** gear — twenty gear; the legend's Power, Pit Crew and Ornn, Forge God pay them off.
-- **Call (20 Oct 2026):** midrange, as measured. Its cheap gear (average cost 2.0) builds a board rather than racing, and it wins on Ornn, Forge God and the cards Poro Snax draws.
+- **Call (20 Oct 2026):** aggro. The riftbound.gg guide (30 Aug 2026) says Ornn left the midrange build after Unleashed and in Vendetta plays "a super fast-paced strategy" of cheap gear. That fits an average cost of 2.0. This replaces the 20 Oct midrange call, which went by the measured label.
 
 ### Nasus, Curator of the Sands — big-spell ramp
 *measured ramp · 25 placed · 8 cards at 7+ · int 12*
@@ -429,7 +430,7 @@ you shrink an enemy at her battlefield.
 Discipline, Defy, Hidden Blade, Back Off, B.F. Sword, Deathgrip and Vi, Peacekeeper across four
 legends — the pair with the most hard answers and the most protected bodies.
 
-### Azir, Emperor of the Sands — soldier-token midrange
+### Azir, Emperor of the Sands — soldier-token tempo
 *measured tempo · 42 placed · u3 s21 g16 · cost 2.3*
 - **Plan:** three units, sixteen gear. Cheap Equipment (Doran's Shield, Eye of the Herald, Soul
   Sword, Hand Hammer); the legend makes a 2-Might Sand Soldier after you play an Equipment, and Sand
@@ -439,7 +440,7 @@ legends — the pair with the most hard answers and the most protected bodies.
 - **Fears:** gear removal, and area damage into 2-Might soldiers.
 - **From Rek'Sai:** two go-wide decks; its tokens are 2 Might, yours mostly 1.
 - **Engine:** tokens from gear — Equipment makes Sand Soldiers, and Arise! makes one per Equipment.
-- **Call (20 Oct 2026):** midrange. It develops Equipment and wins on the turn Arise! turns that gear into a board. That is a build-up, not a race. The measured tempo is Guards! and the other Hidden cards again.
+- **Call (20 Oct 2026):** tempo. The riftbound.gg guide (8 Sep 2026): Azir "focuses on controlling its opponent's development and pace", making units every turn against slow decks. This replaces the 20 Oct midrange call; the measured tempo was right.
 
 ### Shen, Eye of Twilight — pair-defence midrange
 *measured tempo · 8 placed* — Shen, Kinkou is a Reaction Tank; Shen, Leader **scores a point when he
@@ -466,17 +467,19 @@ Tideturner, Switcheroo, Noxus Hopeful, Kai'Sa, Survivor, Cleave, Falling Star an
 legends: tempo bodies and burn. Each legend has a payoff for something unusual — winning combats,
 discarding, bombs, banishing.
 
-### Draven, Glorious Executioner — combat draw aggro
+### Draven, Glorious Executioner — combat-draw midrange
 *measured aggro · 6 placed* — the legend draws whenever you win a combat; Draven, Showboat has your
 points as extra Might; Spinning Axe and Overzealous Fan (kill it on defence to send an attacker home)
 keep fights one-sided.
 - **Engine:** winning fights — the legend draws for every combat won.
+- **Call (20 Oct 2026):** midrange. The riftbound.gg guide (14 Sep 2026): Draven "stayed true to its midrange play style" in Vendetta; it lacks an early champion unit to race with.
 
-### Pyke, Bloodharbor Ripper — bounce tempo
+### Pyke, Bloodharbor Ripper — bounce control
 *measured tempo · 3 placed* — the legend returns a friendly unit to hand for Gold (re-buy play
 effects); Piercing Light, Bewitching Spirit's discard.
 - **Engine:** none — bounce and replay for Gold.
 - **Sources:** riftbound.gg guide (Unleashed, 8 Jul 2026): "a disruptive strategy" and "a value war": Chaos more than Fury; discard and bounce in slow games.
+- **Call (20 Oct 2026):** control. The riftbound.gg guide (8 Jul 2026) calls it "a disruptive strategy aimed at scaling while controlling the resources available to both players", winning "through sheer value". That is control, not a race.
 
 ### Ziggs, Hexplosives Expert — bomb tempo *(Radiance)*
 *measured midrange · 2 placed / 73 lists · u12 s18 g10 · brews*
@@ -501,19 +504,20 @@ Chompers plays itself when discarded, Jinx, Rebel readies when you discard; the 
 the start of your turn when your hand is down to one card or none.
 - **Engine:** discard — Flame Chompers and Jinx, Rebel pay off discarding; the legend wants an empty hand.
 
-### Annie, Dark Child — burn control
+### Annie, Dark Child — burn aggro
 *measured control · 0 placed / 27 usable lists (Origins starter; most of its 119 lists play since-banned
 cards) · thin* — the legend readies two runes at the end of your turn, so the Energy is up on
 theirs; Firestorm, Incinerate and Disintegrate spend it as burn, with Annie, Stubborn and Tibbers
 behind.
 - **Engine:** none — burn removal on the legend's end-of-turn runes; nothing loops.
+- **Call (20 Oct 2026):** aggro. The riftbound.gg guide (3 Jul 2026) calls it "among the more aggressive legends": it gets ahead on the scoreboard, with the legend's two end-of-turn runes kept for reacting. The burn is reach, not control. The 15 interaction in its 27 posted lists (none placed) is what measures control.
 
 ## Chaos / Mind — answers and spells
 
 Star-Crossed, Stupefy, Gust, Fizz, Vex, Apathetic, Sprite Fountain, Thousand-Tailed Watcher and
 Singularity across four legends: the interaction-heaviest pair.
 
-### Ezreal, Prodigal Explorer — gear control
+### Ezreal, Prodigal Explorer — removal control
 *measured control · 15 placed · int 16 · E4 14.4*
 - **Plan:** the legend draws when you've chosen enemy units/gear twice in a turn. The List (−2 to a
   named tag), Pack of Wonders (bounce your own gear, unit or Hidden card), Treasure Trove, Deadly
@@ -522,6 +526,7 @@ Singularity across four legends: the interaction-heaviest pair.
 - **From Rek'Sai:** Bellows Breath (1 to up to three units at one location) is built for 1-Might
   tokens.
 - **Engine:** none — answers that choose twice draw a card; removal, not a loop.
+- **Call (20 Oct 2026):** control, as before. The sub-archetype is removal, not gear. The riftbound.gg guide (14 Sep 2026): Ezreal stalls to an impasse with "a large kit of removal cards", sure the legend's draw outlasts the opponent. The gear supports that plan.
 
 ### Diana, Scorn of the Moon — showdown-spell tempo
 *measured tempo · 8 placed* — the legend adds Energy only during showdowns; Diana, Lunari Predicts
@@ -570,7 +575,7 @@ when seen on top.
 Thousand-Tailed Watcher, Stupefy, Falling Star, Time Warp, Kai'Sa, Survivor, Noxus Hopeful and
 Bellows Breath across four legends.
 
-### Kai'Sa, Daughter of the Void — spell control
+### Kai'Sa, Daughter of the Void — spell midrange
 *measured control · 44 placed · u20 s20 · int 13 · E4 18.1*
 - **Plan:** the legend adds Power for spells; Falling Star, Hextech Ray, Stupefy, Bellows Breath
   answer early; Watchful Sentry and Lecturing Yordle draw; then the top end — Thousand-Tailed
@@ -581,6 +586,7 @@ Bellows Breath across four legends.
 - **From Kha'Zix:** Watcher's −3 lands on their turn's play; Sabotage can strip Time Warp.
 - **From Rek'Sai:** the most removal-dense deck you will face; Watcher blunts your whole board.
 - **Engine:** spells — the legend's Power is for spells; the list is removal into a spell top end.
+- **Call (20 Oct 2026):** midrange. The riftbound.gg guide (13 Jul 2026): "a midrange proactive play style, supported by spells for a third consecutive set", meaning strong units it tries to stick. The 13 interaction that measures control is those support spells.
 
 ### Rumble, Mechanized Menace — Mech midrange
 *measured midrange · 4 placed* — Mech synergies: Bubble Bot readies a Mech, Production Surge makes
@@ -607,7 +613,7 @@ Chronobreak banishes and replays your units; Temporal Breach. A deck of play eff
 Noxus Hopeful, Falling Star, Carrion Dredger, Faithful Manufactor, Cleave, Honest Broker, Cull the
 Weak and Inferna across four legends: tokens, Deathknell value, and Assault.
 
-### Rek'Sai, Void Burrower — go-wide aggro · *your deck*
+### Rek'Sai, Void Burrower — go-wide midrange · *your deck*
 *measured aggro · 52 placed · u24 s16 g0 · cost 2.6 · int 4 · units T3 4.2*
 - **Plan:** the most units on the board by turn 3 of any deck here (4.2 in the goldfish). Token
   makers (Faithful Manufactor, Noxian Emissary, Vanguard Captain), Deathknell units that leave value
@@ -625,18 +631,20 @@ Weak and Inferna across four legends: tokens, Deathknell value, and Assault.
   (Karthus 0 of 61; docs/research.md).
 - **Fears:** area effects — Bellows Breath, Imperial Decree, Thousand-Tailed Watcher — and Vex,
   Apathetic stunning each unit you play.
+- **Call (20 Oct 2026):** midrange. The riftbound.gg guide (14 Sep 2026): Rek'Sai "looks like an aggressive legend, but actually plays closer to an off-tempo strategy". Fury develops the board, Order disrupts the opponent's, and both serve the legend's conquests. The same guide series uses "off-tempo" for midrange (Master Yi, Wuju Master).
 
-### Darius, Hand of Noxus — legion midrange
+### Darius, Hand of Noxus — legion aggro
 *measured midrange · 9 placed* — the legend adds Energy with Legion; Darius, Trifarian grows and
 readies on your second card each turn; Spectral Matron and Baited Hook replay units from the trash.
 - **Engine:** Legion — the legend adds Energy on the second card; Darius, Trifarian grows on it.
+- **Call (20 Oct 2026):** aggro. The riftbound.gg guide (6 Jul 2026): Darius "plays in a hurry", because Legion's extra rune is worth most early, so it develops as much as it can as fast as it can.
 
 ### Vi, Piltover Enforcer — equipment aggro
 *measured aggro · 6 placed* — the legend readies a unit after conquering with 3+ excess damage;
 Hextech Gauntlets, Vault Breaker (Assault 2 and Ganking), Vi, Peacekeeper stuns on attack.
 - **Engine:** gear and winning fights — Equipment with Assault and Ganking; the legend readies on big conquests.
 
-### Mordekaiser, Iron Revenant — sacrifice midrange *(Radiance)*
+### Mordekaiser, Iron Revenant — sacrifice ramp *(Radiance)*
 *measured ramp · 5 placed (online previews) / 63 lists · u29 s5 g6*
 - **Plan:** the legend banishes a unit or gear from your trash for Power (units and gear only), so
   every death fuels the next play. Mordekaiser, Twice Slain (Assault 3) survives by killing another
@@ -645,7 +653,7 @@ Hextech Gauntlets, Vault Breaker (Assault 2 and Ganking), Vi, Peacekeeper stuns 
 - **Against it:** the trash is its mana — what it has banished is gone for good.
 - **Engine:** deaths — every death puts fuel in the trash for the legend's Power.
 - **Sources:** riftbound.gg guide (Radiance theorycraft, 15 Oct 2026): no label; wins "through brute force", Baited Hook to cheat a champion out early.
-- **Call (20 Oct 2026):** midrange, not ramp. It is LeBlanc's shape (Deathknell midrange, average cost 4.0) at average cost 3.4: a board of fodder that grinds value. Its legend plays units with Power from the trash, which is a resource, but the deck doesn't accelerate into a top end (6 cards at 7+). Both Mordekaiser builds already call it sacrifice.
+- **Call (20 Oct 2026):** ramp. This corrects the 20 Oct midrange call, which wrongly said the deck has no top end: its champions cost 7 and 9, Rift Herald 8 and Ferrous Forerunner 6. The riftbound.gg guide (15 Oct 2026) wins "through brute force", with the legend paying the Power and Baited Hook cheating Twice Slain out early. The sacrifices are how it gets there. Midrange would describe the fodder, but the plan is the big units.
 
 ## Mind / Order — Deathknell and answers
 
