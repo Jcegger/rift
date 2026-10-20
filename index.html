@@ -1208,6 +1208,7 @@ function brewPanel(name) {
     ${ported.length ? `<div class="lbl" style="margin-top:6px">Added for ${esc(name.split(",")[0])}</div>${ported.map((r) => `<div class="erow"><span class="n">${r.qty} <button class="cardlink" data-card="${esc(codeForName(r.name) || r.code)}">${esc(r.name)}</button></span><span class="tiny dim">${esc(r.why)}</span></div>`).join("")}` : ""}
     ${b.swaps.length ? `<div class="lbl" style="margin-top:6px">Swaps</div>${b.swaps.map((s) => `<div class="erow" style="align-items:flex-start"><span class="n">${s.copies} <button class="cardlink" data-card="${esc(codeForName(s.out) || "")}">${esc(s.out)}</button> → <button class="cardlink" data-card="${esc(s.inCode)}">${esc(s.in)}</button>
       <span class="tiny dim" style="display:block">${esc(s.why)}</span></span><span class="pill ${s.kind === "upgrade" ? "later" : ""}">${esc(kinds[s.kind] || s.kind)}</span></div>`).join("")}` : ""}
+    ${b.more?.length ? `<div class="lbl" style="margin-top:6px">Also worth trying</div><p class="tiny dim" style="margin:0">Reasoned, but past the budget or the two-new-card cap: ${b.more.map((s) => `${s.copies} ${esc(s.out)} → ${esc(s.in)} (${esc(kinds[s.kind] || s.kind)})`).join(" · ")}</p>` : ""}
     <p class="tiny dim" style="margin-top:6px">The 40: ${b.rows.map((r) => `${r.qty} ${esc(r.name)}${r.change ? "*" : ""}`).join(", ")} (* changed)${b.runeNote ? ` · ${esc(b.runeNote)}` : ""}</p></section>`;
 }
 async function fillGamePlan() {

@@ -127,12 +127,22 @@ role reader cannot read.
 
 **The backtest.** Run on the Vendetta winning lists of the six older legends that placed in
 the Radiance previews, using only what was known before Radiance, its "new card, same job"
-swaps were adopted by the pros **4 times out of 12 (33%) — against 3.9% for a random
-Radiance card in the same colours** — and found 4 of the 11 cards the pros took up
-(Trifarian Captain for LeBlanc, Reckless Innovator and Battle Preparations for Irelia,
-Bedeviling Stranger for Kennen, Elnuk Herd for Rengar). Eight times chance on a small sample:
-good enough to offer swaps as leads, not to trust one blindly. `lib/swaps.test.mjs` keeps it
-above 4× chance; it is a guard, not a target.
+swaps were adopted by the pros **3 times out of 7 (43%) — against 3.9% for a random
+Radiance card in the same colours** — finding 3 of the 11 cards the pros took up (Reckless
+Innovator and Battle Preparations for Irelia, Elnuk Herd for Rengar). Its misses are as
+telling: pros cut LeBlanc's Watchful Sentry, a payoff of its own death engine, for Trifarian
+Captain — a change the rules here refuse to make. About eleven times chance on a small
+sample: good leads, not verdicts. `lib/swaps.test.mjs` keeps it above 4× chance; it is a
+guard, not a target.
+
+**The audit (19 Oct 2026).** The first pass changed 5 copies over 2.8 swaps — light against
+the 6 winners stray. The causes were caution, not evidence: pros' alternatives were off for
+legends with under 10 lists, had to match by role rather than by slot (61% of real cuts are
+the same type within one Energy), took whole slots instead of splitting them, and could be
+vetoed by the value read. Fixed, plus three misreads (a Reaction replaced by a unit;
+moving an enemy treated as moving your own; Rampage's fight read as a pump), the brews
+change about 5 copies over 4 swaps and offer one or two more beside the list — core cards
+(80%+ of winning lists) only ever among those offered.
 
 ## What the guides say, and where they part from the data
 

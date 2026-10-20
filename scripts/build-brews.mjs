@@ -74,7 +74,7 @@ const main = async () => {
     const era = placed.filter((d) => newEvents.has(d.ev));
     return era.length >= MIN_PLACED ? { ds: era, era: true } : placed.length >= MIN_PLACED ? { ds: placed, era: false } : null;
   };
-  const shareMap = (ds) => { if (!ds || ds.length < 10) return null; const m = new Map(); for (const d of ds) for (const n of names(d)) m.set(n, (m.get(n) || 0) + 1 / ds.length); return m; };
+  const shareMap = (ds) => { if (!ds || ds.length < MIN_PLACED) return null; const m = new Map(); for (const d of ds) for (const n of names(d)) m.set(n, (m.get(n) || 0) + 1 / ds.length); return m; };
   const poolOf = (L) => {
     const ident = new Set((L.d || []).filter((x) => x !== "Colorless")), seen = new Set();
     return idx.cards.filter((c) => !c.v && ["Unit", "Spell", "Gear"].includes(c.t) && (c.d || []).every((x) => x === "Colorless" || ident.has(x)) && !idx.bannedNames.has(c.n)
@@ -92,7 +92,7 @@ const main = async () => {
     const a = anchorLists(name);
     let b;
     if (a) {
-      b = anchorBrew(L, idx, consensus(a.ds), card, { ...ctx, own: shareMap(a.ds) },
+      b = anchorBrew(L, idx, consensus(a.ds), card, { ...ctx, own: shareMap(a.ds), ownLists: a.ds.length },
         { ...meta, basis: `${a.ds.length} placed ${name.split(",")[0]} lists${a.era ? " from Radiance-format events" : ""}`, lists: a.ds.length });
     } else {
       // A port: the same-colour legend whose plan overlaps most, with enough placings.
@@ -102,7 +102,7 @@ const main = async () => {
       const s = shells[0];
       if (!s) { brews.push({ ...meta, kind: "none", why: `no list to anchor on: under ${MIN_PLACED} placed ${name.split(",")[0]} lists and no proven list in its colours`, swaps: [], rows: [] }); continue; }
       const own = byLegend.get(name) || [];
-      b = portBrew(L, idx, { ...s, con: consensus(anchorLists(s.name).ds), engine: engineOf(s.name) }, card, { ...ctx, own: shareMap(own) },
+      b = portBrew(L, idx, { ...s, con: consensus(anchorLists(s.name).ds), engine: engineOf(s.name) }, card, { ...ctx, own: shareMap(own), ownLists: own.length },
         { ...meta, basis: `ported from ${s.lists} placed ${s.name.split(",")[0]} lists (same colours${s.overlap ? ", same plan" : ""})`, lists: own.filter(placedOf).length });
     }
 

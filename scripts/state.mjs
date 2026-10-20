@@ -817,6 +817,7 @@ async function cmdBrew(args) {
     if (ported.length) { console.log(`\n  ADDED FOR ${b.legend.split(",")[0].toUpperCase()}`); for (const r of ported) console.log(`    ${r.qty} ${pad(r.name, 30)} ${r.why}`); }
     if (b.swaps.length) { console.log(`\n  SWAPS (${b.swaps.reduce((a, s) => a + s.copies, 0)} copies)`); for (const s of b.swaps) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}\n            ${s.why}`); }
     if (!b.swaps.length && b.kind === "anchor") console.log("\n  No change has a reason: the consensus stands.");
+    if (b.more?.length) { console.log("\n  ALSO WORTH TRYING (reasoned, past the budget or the two-new-card cap)"); for (const s of b.more) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}\n            ${s.why}`); }
     console.log(`\n  THE 40\n    ${b.rows.map((r) => `${r.qty} ${r.name}${r.change ? "*" : ""}`).join(", ")}\n    (* changed)`);
   }
 }

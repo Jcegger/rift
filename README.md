@@ -86,13 +86,18 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   engine payoffs — replaced with this legend's: one chosen champion, signatures at 3 or none,
   its engine payoffs, then the colours' most-picked cards; then the same swaps). Tests:
   `lib/brew.test.mjs`.
-- `lib/swaps.mjs` - the changes to a winning list, each a role swap with a reason: another
-  winner's choice for the same job (15%+ of the legend's lists), a research answer of
-  "test", or a new-set card that does the job for less (at most two — a set's first wave is
-  small). About 9 copies at most. Never touches the legend's own cards, its engine payoffs,
-  the cards of its heading's plan, or a card the role reader cannot read. Backtested against
-  the Radiance previews in `lib/swaps.test.mjs`: new-card swaps adopted 33% of the time vs
-  3.9% for a random Radiance card.
+- `lib/swaps.mjs` - the changes to a winning list, each with a reason: another winner's
+  choice for the same job or the same slot (type, within one Energy; 15% of the legend's
+  lists and at least two of them), split the way winners split slots (2 + 1); a research
+  answer of "test"; or a new-set card that does the same job for less (at most two — a set's
+  first wave is small). A replacement must be as fast as what it replaces (Reaction, Action,
+  turn). About 9 copies at most — winners stray a median 6; the brews change about 5, with more
+  offered beside them. Never
+  touches the legend's own cards, its engine payoffs, its heading's plan cards, or a core
+  card (80%+): a strong case against one is offered as "also worth trying", with anything
+  past the budget or cap. A card the role reader cannot read is protected where winners rely
+  on it. Backtested against the Radiance previews in `lib/swaps.test.mjs`: new-card swaps
+  adopted 3 of 7 times (43%) vs 3.9% for a random Radiance card.
 - `lib/roles.mjs` - the job a card does (early body, threat, card advantage, removal, area
   damage, counter, trick, protection, disruption, ramp, movement), sized from its text, and a
   rough value net of Energy and Power (Power weighs more). `understood()` says whether the
