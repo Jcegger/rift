@@ -339,14 +339,14 @@ const journal = () => {
 };
 
 /* ── data ────────────────────────────────────────────────────────────────── */
-let CAT, IDX, TOP, TIERS, GUIDES, NEWS, IDEAS, ARCHE, RES, BREWS, MATCH, IMG = "";
+let CAT, IDX, TOP, TIERS, GUIDES, NEWS, IDEAS, ARCHE, RES, BREWS, RISING, MATCH, IMG = "";
 const BYNAME = new Map();        // folded legend name "Irelia, Blade Dancer" -> legend card
 const SHORT = new Map();         // "OGN-042" -> "OGN-042/298": the deck feed drops the set size
 const getJSON = (f) => fetch(`data/${f}`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
 
 async function loadData() {
-  const [cards, extras, banned, errata, top, tiers, guides, news, ideas, arche, res, brews] = await Promise.all(
-    ["cards.json", "extras.json", "banned.json", "errata.json", "topdecks.json", "tiers.json", "guides.json", "news.json", "ideas.json", "archetypes.json", "research.json", "brews.json"].map(getJSON));
+  const [cards, extras, banned, errata, top, tiers, guides, news, ideas, arche, res, brews, rising] = await Promise.all(
+    ["cards.json", "extras.json", "banned.json", "errata.json", "topdecks.json", "tiers.json", "guides.json", "news.json", "ideas.json", "archetypes.json", "research.json", "brews.json", "rising.json"].map(getJSON));
   if (!cards) throw new Error("data/cards.json did not load");
   CAT = cards; IMG = cards.imagePrefix || "";
   const all = [...cards.cards, ...((extras && extras.cards) || [])];
@@ -357,7 +357,7 @@ async function loadData() {
   MATCH = matcher(all);
   for (const c of all) if (c.t === "Legend" && !c.v) { const n = IDX.legendName(c); if (!BYNAME.has(n)) BYNAME.set(n, c); }
   for (const c of all) { const k = c.c.replace(/\/\d+$/, ""); if (!SHORT.has(k)) SHORT.set(k, c.c); }
-  TOP = top; TIERS = tiers; GUIDES = guides; NEWS = news; IDEAS = ideas; ARCHE = arche; RES = res; BREWS = brews;
+  TOP = top; TIERS = tiers; GUIDES = guides; NEWS = news; IDEAS = ideas; ARCHE = arche; RES = res; BREWS = brews; RISING = rising;
 }
 
 /* ── helpers ─────────────────────────────────────────────────────────────── */
@@ -1191,7 +1191,15 @@ function profileLine(a) {
     ${a.package?.length ? `<div class="small"><b>Plays far more than its colours:</b> ${a.package.map((k) => `${esc(k.name)}${k.rad ? "*" : ""} ${pctI(k.share)}`).join(" · ")}</div>` : ""}`;
 }
 function gamePlanPanel(name) {
-  return `<section class="panel" id="gameplan"><h2>Game plan</h2>${profileLine(archFor(name))}<div class="guide" data-plan="${esc(name)}"><p class="note">Loading the game plan…</p></div></section>${researchPanel(name)}${brewPanel(name)}`;
+  return `<section class="panel" id="gameplan"><h2>Game plan</h2>${profileLine(archFor(name))}<div class="guide" data-plan="${esc(name)}"><p class="note">Loading the game plan…</p></div></section>${researchPanel(name)}${risingPanel(name)}${brewPanel(name)}`;
+}
+// What this legend's posted lists are taking up and dropping this week (data/rising.json).
+function risingPanel(name) {
+  const v = RISING?.legends?.[name];
+  if (!v || (!v.rising.length && !v.falling.length)) return "";
+  const row = (xs) => xs.map((r) => `<button class="cardlink" data-card="${esc(codeForName(r.name) || "")}">${esc(r.name)}</button>${r.rad ? ` <span class="pill later">RAD</span>` : ""} <span class="dim">${r.before}→${r.now}%</span>`).join(" · ");
+  return `<section class="panel"><h2>Moving this week</h2><p class="note">${esc(RISING.note)} ${v.lists.now} lists this week, ${v.lists.before} in the two before.</p>
+    ${v.rising.length ? `<p class="small"><b>Up:</b> ${row(v.rising)}</p>` : ""}${v.falling.length ? `<p class="small"><b>Down:</b> ${row(v.falling)}</p>` : ""}</section>`;
 }
 // A brew (data/brews.json, lib/brew.mjs): a winning list changed on purpose — the
 // legend's consensus with reasoned role swaps, or a port of a proven list in its colours.

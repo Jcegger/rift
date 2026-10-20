@@ -1,0 +1,148 @@
+{
+ "id": "mordekaiser-sacrifice",
+ "legend": "Mordekaiser, Iron Revenant",
+ "date": "2026-10-20",
+ "author": "Claude",
+ "title": "Mordekaiser \u2014 the sacrifice engine",
+ "summary": "Iron Revenant as the aristocrats deck you liked at the Pre-Rift: kill your own Deathknell units for value, and let the legend turn the cards they leave in the trash into Power for the big Mordekaisers. Built the repo's way \u2014 anchored on the 5 placed Radiance-preview lists (#70/74, #62/74, #34/74, #23/50, #21/50), with three changes other winners already make. Thin evidence: no top-8 finish yet, and nothing here has been played.",
+ "basis": "Consensus of the 5 placed Mordekaiser lists from the two Radiance-format events (NovaRiftbound's Showdown #5, Haven Radiance Preview), finishes #70/74, #62/74, #34/74, #23/50, #21/50. The 66 posted Mordekaiser lists agree on the core: Realm of Death 85%, Mordekaiser, Dominating 65%, Carrion Dredger 56%, Trifarian Captain 53%. Method: docs/deckbuilding.md; data/brews.json carries the same list.",
+ "changes": [
+  {
+   "what": "\u22121 Vanguard Captain, +1 Soaring Scout",
+   "why": "40% of this legend's winning lists run Soaring Scout; same job (an early body) as Vanguard Captain, in 60%"
+  },
+  {
+   "what": "\u22121 Spectral Matron, +1 Xin Zhao, Vigilant",
+   "why": "40% of this legend's winning lists run Xin Zhao, Vigilant; same job (an early body) as Spectral Matron, in 60%"
+  },
+  {
+   "what": "\u22121 Harnessed Dragon, +1 Rift Herald",
+   "why": "40% of this legend's winning lists run Rift Herald; same slot (a unit, 8 Energy for 8) as Harnessed Dragon, in 60%"
+  },
+  {
+   "what": "Option: 2 Karthus, Eternal",
+   "why": "In 35% of the posted lists, none of the 5 placed ones. \"Your [Deathknell] effects trigger an additional time\" doubles Dredger's Bird, Broker's Gold, Scout's rune and Forerunner's two Mechs. The engine-heavy version \u2014 try it if the base list feels short of value; out for the least-played 2-drops. Note the trend: Karthus is falling in posted Mordekaiser lists this week (47% \u2192 24%, data/rising.json) \u2014 the crowd is moving away from it."
+  },
+  {
+   "what": "Option: Detonation Amplifier",
+   "why": "The Radiance card you won with at the Pre-Rift. Deploy: kill another friendly unit or gear to draw 1, and friendly Deathknells at its battlefield trigger an additional time \u2014 a second Karthus that is also a sacrifice outlet, but stuck to one battlefield and lost if they take it. And the crowd is taking it up: 3% \u2192 21% of posted Mordekaiser lists this week (data/rising.json), alongside Mordekaiser, Twice Slain (28% \u2192 68%) \u2014 the strongest of the options."
+  },
+  {
+   "what": "Option: 2 Deathgrip",
+   "why": "In 45% of the posted lists. A Reaction that kills a friendly unit to pump another and draws 1: a sacrifice outlet you can use in the middle of a fight, which the rest of the outlets (Baited Hook, Grayback, Sacrifice) are not."
+  }
+ ],
+ "plan": [
+  "The legend is the engine: banish a unit or gear from your trash and exhaust it to add one Power, spent only on units or gear. So every friendly card that dies is mana for the next threat \u2014 Mordekaiser, Twice Slain (7 Energy, 1 Power) and Mordekaiser, Dominating (9 Energy, 2 Power) come down early off a full trash.",
+  "Only cards fuel it. A token in any zone off the board except the chain ceases to exist (docs/rules.md, \u00a7186.1), so the Bird, Gold, Mech and Recruit tokens never reach the trash. That is why the fodder is real cards with Deathknell \u2014 Carrion Dredger, Honest Broker, Soaring Scout, Ferrous Forerunner: each one sacrificed triggers, leaves a token behind as the next sacrifice, and puts a card in the trash for the legend.",
+  "The outlets each want different fodder. Baited Hook kills a friendly unit and plays a unit from your top 5 with up to 1 more Might, free \u2014 feed it Ferrous Forerunner (6 Might) to hit Twice Slain or Rift Herald, not a 1-Might token. Sacrifice wants a Mighty unit (5+) and draws 2 and channels a rune. Escaped Grayback empowers by killing one. Twice Slain survives by killing another friendly unit.",
+  "Realm of Death (the signature, at 3) is the removal: \u22122 to an enemy unit, +2 to yours, and they fight. Harnessed Dragon and Dominating kill on arrival. Trifarian Captain and Kai'Sa, Survivor keep the cards coming.",
+  "Against it: answers that do not kill \u2014 bounce, banish \u2014 leave no Deathknell and no card in your trash, and what the legend banished is gone for good (docs/archetypes.md)."
+ ],
+ "matchups": [
+  {
+   "vs": "Kennen, Heart of the Tempest",
+   "note": "The most placed Radiance-preview legend (20). Its post-ban plan is a Rhasa the Sunderer swing turn off a full trash; yours is the same shape off your own trash. No records yet."
+  },
+  {
+   "vs": "Yasuo, Unforgiven (Spiderling)",
+   "note": "12 placed preview lists, a 39-Spiderling board on one battlefield. Realm of Death answers one unit at a time; nothing here hits a battlefield at once. A reading, not a result."
+  },
+  {
+   "vs": "Everything else",
+   "note": "No Radiance-era matchup records exist. Log games in the match journal; the first ten will say more than this box."
+  }
+ ],
+ "sim": "Goldfish, 8,000 games: mulligan policy \"bottom 4+ cost\"; Energy spent turns 1\u20134 18 on the play / 21.3 on the draw; 3.9 units on board by turn 3; stuck on turn 3 2%; rune split already the best. Consistency only \u2014 it plays no opponent, and it does not model the legend's Power.",
+ "cards": {
+  "RAD-143": 1,
+  "RAD-144": 3,
+  "RAD-129": 3,
+  "UNL-153": 2,
+  "RAD-137": 1,
+  "OGN-242": 3,
+  "OGN-039": 3,
+  "VEN-124": 3,
+  "OGN-245": 3,
+  "OGN-218": 2,
+  "OGN-216": 1,
+  "OGN-234": 1,
+  "UNL-179": 1,
+  "SFD-155": 2,
+  "UNL-173": 2,
+  "OGN-226": 2,
+  "SFD-176": 1,
+  "UNL-176": 1,
+  "SFD-021": 3,
+  "RAD-020": 3,
+  "OGN-214": 7,
+  "UNL-R01": 5,
+  "RAD-166": 1,
+  "OGN-298": 1,
+  "OGN-294": 1
+ },
+ "sb": {},
+ "snapshot": {
+  "date": "2026-10-20",
+  "events": [
+   "NovaRiftbound's $2,000 Online Showdown 5",
+   "Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview)"
+  ],
+  "placed": 5,
+  "shares": {
+   "Kai'Sa, Survivor": 0.8,
+   "Order Rune": 1,
+   "Soaring Scout": 0.4,
+   "Harnessed Dragon": 0.6,
+   "Karthus, Eternal": 0.2,
+   "Baited Hook": 0.8,
+   "Zaun Warrens": 0.6,
+   "Forbidden Technique": 0.4,
+   "Mordekaiser, Twice Slain": 0.4,
+   "Trifarian Captain": 1,
+   "Mordekaiser, Dominating": 1,
+   "Iron Revenant": 1,
+   "Realm of Death": 1,
+   "Ruined Monastery": 0.8,
+   "Ferrous Forerunner": 0.4,
+   "Long Sword": 0.4,
+   "Rek'Sai, Breacher": 0.2,
+   "Carrion Dredger": 1,
+   "Sacrifice": 0.6,
+   "Vi, Peacekeeper": 0.6,
+   "Rift Herald": 0.4,
+   "Fury Rune": 1,
+   "Mystic Vortex": 0.2,
+   "Falling Star": 0.2,
+   "Vanguard Captain": 0.6,
+   "Imperial Decree": 0.4,
+   "Spectral Matron": 0.6,
+   "Seal of Unity": 0.6,
+   "Trifarian War Camp": 0.4,
+   "Antagonistic Apparatus": 0.2,
+   "Honest Broker": 0.6,
+   "Xin Zhao, Vigilant": 0.4,
+   "Rockfall Path": 0.2,
+   "Rengar, Unseen": 0.2,
+   "Escaped Grayback": 0.6,
+   "Darius, Trifarian": 0.2,
+   "Burn Away": 0.2,
+   "Dockside Lock-Up": 0.2,
+   "Black Market": 0.2,
+   "Deathgrip": 0.2,
+   "Forgotten Monument": 0.2,
+   "Shadow's Call": 0.4,
+   "Perfect Execution": 0.2,
+   "Kayle, Justified": 0.2,
+   "Forge of the Future": 0.2,
+   "Hidden Blade": 0.2,
+   "Runeblade Anvil": 0.2,
+   "Zaun Punk": 0.2,
+   "Minefield": 0.2,
+   "Treasure Hoard": 0.2,
+   "Safety Inspector": 0.2,
+   "B.F. Sword": 0.2,
+   "Noxian Emissary": 0.2
+  }
+ }
+}

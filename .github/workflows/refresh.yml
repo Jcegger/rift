@@ -234,6 +234,11 @@ jobs:
       - name: Build a brew for every legend
         run: node scripts/build-brews.mjs
 
+      # After brews, whose suggestions it logs and scores. Fetches nothing; data/swaplog.json is
+      # history and is only ever added to.
+      - name: Track rising cards and score the brews' suggestions
+        run: node scripts/build-rising.mjs
+
       - name: Source report
         id: sources
         run: |

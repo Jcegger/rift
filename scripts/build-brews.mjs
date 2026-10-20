@@ -104,7 +104,7 @@ export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", hide 
   for (const c of idx.cards) if (c.t === "Rune" && !c.v && (c.d || []).length === 1 && !runeCards[c.d[0]]) runeCards[c.d[0]] = c.c;
 
 
-  return { idx, card, consensus, legends, byLegend, placedOf, anchorLists, heading, engineOf, usable, usableAll, quality, newEvents,
+  return { idx, card, consensus, legends, byLegend, placedOf, anchorLists, heading, engineOf, usable, usableAll, quality, newEvents, poolOf, isNew, shareMap, R,
     brew: (name, opts = {}) => brewOne(name, opts) };
 
   // noSwaps: the build alone, before any swap — what lib/blind.test.mjs scores (swaps deviate

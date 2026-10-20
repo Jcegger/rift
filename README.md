@@ -60,6 +60,19 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   anchor on, a list built from what its colours' winners play plus its own cards. Each change
   says why; `worth` marks the ones that add something. Untested. `scripts/rift brew <legend>`
   prints one; idea pages show it; the bench can start from it.
+- `scripts/rift tune <your deck>` - the swap logic run on one of your saved decks (read
+  only): what its legend's winners (or crowd) run that you do not, with the reasons and this
+  week's trend for each card; the cards it keeps (80%+ of the lists), the ones yours alone,
+  the ones it cannot judge; a note when a suggested cut feeds your deck's own engine; and a
+  goldfish of yours against the consensus.
+- `data/rising.json` - per legend, each card's share of its posted lists in the last 7 days
+  against the 14 before — what the crowd is taking up and dropping, which tracks winners
+  closely and moves first — and the scoreboard for the brews' suggestions.
+  `scripts/rift rising [legend]`; idea pages show "Moving this week"; `scripts/rift tune`
+  shows the trend beside each suggestion.
+- `data/swaplog.json` - every swap a brew has suggested, from the day it first appeared,
+  scored a week later (adopted = the card in gained 10+ points in the legend's lists). History:
+  never rebuilt, only added to.
 - `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
   Radiance-format events, a consensus list counted from its placed lists (or brews,
   labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
@@ -81,6 +94,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   build-research. `makeBrewer()` holds its inputs — anchor lists (Radiance-format placings
   when there are 5+, else all placings), per-legend card shares, quality — and can HIDE a
   legend's lists from all of them, which is how `lib/blind.test.mjs` builds blind.
+- `scripts/build-rising.mjs` - builds `data/rising.json` and adds to `data/swaplog.json`.
+  Fetches nothing; runs after build-brews.
 - `lib/brew.mjs` - one brew, by `docs/deckbuilding.md`, anchored on the best evidence a
   legend has: its winners' consensus (5+ placings); before that, its CROWD — every posted
   list, its first placings weighted 10× — since a legend's posted lists share 33 of 40 cards

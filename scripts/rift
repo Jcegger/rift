@@ -9,7 +9,9 @@
 #   scripts/rift piltover > collection-piltover.csv   # full Piltover import (Replace mode)
 #   scripts/rift meta [legend] [--since DATE]          # what the legal field plays (no banned lists)
 #   scripts/rift ideas [legend]                        # Radiance-era consensus per legend, vs your deck
-#   scripts/rift brew <legend>                         # an untested 40 built from the legend's own cards
+#   scripts/rift brew <legend>                         # a winning list changed on purpose (or the crowd's)
+#   scripts/rift tune <your deck>                      # reasoned swaps for one of your decks (read only)
+#   scripts/rift rising [legend]                       # cards each legend's lists are taking up; the swap scoreboard
 #   scripts/rift event <locator id>                    # a store event: standings + legends
 #
 # See scripts/state.mjs for the full command list and data sources.
