@@ -120,10 +120,30 @@ an unknown's — **as a tiebreak, not a verdict**; ten players is a small sample
 
 `data/brews.json` (`scripts/build-brews.mjs`, `lib/brew.mjs`, `lib/swaps.mjs`,
 `lib/roles.mjs`) replaces the first, from-scratch brews: each is a legend's winning list
-changed on purpose, or a port of a proven list in its colours, by the rules above —
-role swaps only, about 9 copies at most, one champion, signatures at 3 or none, the legend's
-own cards and its plan's cards never cut, and nothing claimed to outdo a card whose text the
-role reader cannot read.
+changed on purpose, by the rules above — role swaps only, about 9 copies at most, one
+champion, signatures at 3 or none, the legend's own cards and its plan's cards never cut,
+and nothing claimed to outdo a card whose text the role reader cannot read. A legend too
+thin to anchor on is built from what its colours' winners play.
+
+**The blind test.** Hide a legend's lists from everything, build it as if nobody had played
+it, and count what it shares with its real winners' consensus, over the 26 legends with 10+
+placings (`lib/blind.test.mjs`):
+
+| | of 40 |
+|---|---|
+| ceiling — two random halves of the legend's own winning lists | **36.2** |
+| built from its colours: per-legend card shares + its own package and plan | **19.6** |
+| the colours' most popular cards | 17.6 |
+| porting one same-colour legend's list (the first design) | 14.2 |
+
+Three things it taught. **Winners converge** — two halves of a legend's lists share 36 of 40
+— so there is a real list to find. **A winning list is mostly its colours' staples (54% of
+copies are among the colours' 25 most-played cards) plus its legend's own package**, not
+another legend's list, which is why porting lost to plain popularity. And **card text does
+not say which cards winners choose**: weighting other legends by a plan read from text made
+it worse (18.7). The legends it misses worst are the ones built around one idea nobody else
+in their colours plays — Jayce (4 of 40), Yasuo's Spiderlings (0) — where only play finds
+the list. About half the ceiling, blind: a floor to build from, not a deck to copy.
 
 **The backtest.** Run on the Vendetta winning lists of the six older legends that placed in
 the Radiance previews, using only what was known before Radiance, its "new card, same job"

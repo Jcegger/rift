@@ -807,14 +807,13 @@ async function cmdBrew(args) {
   const B = await readJson(url("brews.json")).catch(() => null);
   if (!B) { console.error("no data/brews.json — run node scripts/build-brews.mjs"); process.exit(1); }
   const hits = B.brews.filter((b) => b.legend.toLowerCase().includes(q));
-  if (!q || !hits.length) { console.log(`brews (${B.generatedAt}), ${B.brews.filter((b) => b.worth).length} worth a look: ${B.brews.filter((b) => b.worth).map((b) => `${b.legend.split(",")[0]}${b.kind === "port" ? " (port)" : ""}`).join(", ")}\nscripts/rift brew <legend>`); return; }
+  if (!q || !hits.length) { console.log(`brews (${B.generatedAt}), ${B.brews.filter((b) => b.worth).length} worth a look: ${B.brews.filter((b) => b.worth).map((b) => `${b.legend.split(",")[0]}${b.kind === "colours" ? " (from colours)" : ""}`).join(", ")}\nscripts/rift brew <legend>`); return; }
   for (const b of hits.slice(0, 2)) {
     if (b.kind === "none") { console.log(`BREW ${b.legend}: none — ${b.why}`); continue; }
     console.log(`BREW ${b.legend} (${b.kind}) · ${b.heading || ""} · ${b.basis}${b.legal ? "" : " · NOT LEGAL"}\n  ${B.note}`);
     if (b.sim) console.log(`  goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3${b.runeNote ? ` · ${b.runeNote}` : ""}`);
-    if (b.cut?.length) console.log(`\n  CUT FROM ${b.shell.toUpperCase()}'S LIST (its legend's own package)\n    ${b.cut.join(", ")}`);
-    const ported = b.rows.filter((r) => r.change === "port" || r.change === "champion");
-    if (ported.length) { console.log(`\n  ADDED FOR ${b.legend.split(",")[0].toUpperCase()}`); for (const r of ported) console.log(`    ${r.qty} ${pad(r.name, 30)} ${r.why}`); }
+    const built = b.rows.filter((r) => r.change === "built" || r.change === "champion");
+    if (built.length) { console.log(`\n  BUILT FROM ITS COLOURS AND ITS OWN CARDS`); for (const r of built) console.log(`    ${r.qty} ${pad(r.name, 30)} ${r.why}`); }
     if (b.swaps.length) { console.log(`\n  SWAPS (${b.swaps.reduce((a, s) => a + s.copies, 0)} copies)`); for (const s of b.swaps) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}\n            ${s.why}`); }
     if (!b.swaps.length && b.kind === "anchor") console.log("\n  No change has a reason: the consensus stands.");
     if (b.more?.length) { console.log("\n  ALSO WORTH TRYING (reasoned, past the budget or the two-new-card cap)"); for (const s of b.more) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}\n            ${s.why}`); }

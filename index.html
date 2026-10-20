@@ -1200,12 +1200,11 @@ function brewPanel(name) {
   const b = brewFor(name);
   if (!b || !b.worth) return "";
   const kinds = { alt: "Winners' alternative", test: "Research says test", upgrade: "New card, same job" };
-  const ported = b.rows.filter((r) => r.change === "port" || r.change === "champion");
-  return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · ${b.kind === "port" ? `ported from ${esc(b.shell)}` : "a winning list, changed on purpose"}</span><h2>A brew for ${esc(name.split(",")[0])}</h2></div>
+  const ported = b.kind === "colours" ? b.rows.filter((r) => r.change === "champion" || /signature|own lists/.test(r.why || "")) : b.rows.filter((r) => r.change === "champion");
+  return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · ${b.kind === "colours" ? "built from its colours' winners and its own cards" : "a winning list, changed on purpose"}</span><h2>A brew for ${esc(name.split(",")[0])}</h2></div>
       <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=brew">Tweak</a></div></div>
     <p class="note">${esc(BREWS.note)} Built from ${esc(b.basis)}.${b.sim ? ` Goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3.` : ""} Method: <a href="#/guide/deckbuilding">Deckbuilding</a>.</p>
-    ${b.cut?.length ? `<p class="small"><b>Cut from ${esc(b.shell)}'s list</b> (its legend's own package): ${esc(b.cut.join(", "))}</p>` : ""}
-    ${ported.length ? `<div class="lbl" style="margin-top:6px">Added for ${esc(name.split(",")[0])}</div>${ported.map((r) => `<div class="erow"><span class="n">${r.qty} <button class="cardlink" data-card="${esc(codeForName(r.name) || r.code)}">${esc(r.name)}</button></span><span class="tiny dim">${esc(r.why)}</span></div>`).join("")}` : ""}
+    ${ported.length ? `<div class="lbl" style="margin-top:6px">${esc(name.split(",")[0])}'s own</div>${ported.map((r) => `<div class="erow"><span class="n">${r.qty} <button class="cardlink" data-card="${esc(codeForName(r.name) || r.code)}">${esc(r.name)}</button></span><span class="tiny dim">${esc(r.why)}</span></div>`).join("")}` : ""}
     ${b.swaps.length ? `<div class="lbl" style="margin-top:6px">Swaps</div>${b.swaps.map((s) => `<div class="erow" style="align-items:flex-start"><span class="n">${s.copies} <button class="cardlink" data-card="${esc(codeForName(s.out) || "")}">${esc(s.out)}</button> → <button class="cardlink" data-card="${esc(s.inCode)}">${esc(s.in)}</button>
       <span class="tiny dim" style="display:block">${esc(s.why)}</span></span><span class="pill ${s.kind === "upgrade" ? "later" : ""}">${esc(kinds[s.kind] || s.kind)}</span></div>`).join("")}` : ""}
     ${b.more?.length ? `<div class="lbl" style="margin-top:6px">Also worth trying</div><p class="tiny dim" style="margin:0">Reasoned, but past the budget or the two-new-card cap: ${b.more.map((s) => `${s.copies} ${esc(s.out)} → ${esc(s.in)} (${esc(kinds[s.kind] || s.kind)})`).join(" · ")}</p>` : ""}

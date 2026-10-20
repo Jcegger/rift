@@ -19,8 +19,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { indexCatalog, SET_LEGAL_FROM } from "../lib/decks.mjs";
 import { counter } from "../lib/consensus.mjs";
-import { headingSubKeys } from "../lib/infer.mjs";
-import { anchorBrew, portBrew } from "../lib/brew.mjs";
+import { headingSubKeys, inferLegend } from "../lib/infer.mjs";
+import { anchorBrew, coloursBrew } from "../lib/brew.mjs";
 import { docEngineLine, docEngineKeys } from "../lib/research.mjs";
 import { buildDeck, simulate, sweepRunes } from "../lib/sim.mjs";
 
@@ -28,10 +28,12 @@ const MIN_PLACED = 5, MIN_SHELL = 10, MIN_ELIGIBLE = 5, NEW_DAYS = 30, GAMES = 2
 const read = async (f) => JSON.parse(await readFile(new URL(`../data/${f}`, import.meta.url), "utf8"));
 const round = (x, k = 2) => Math.round(x * 10 ** k) / 10 ** k;
 
-const main = async () => {
-  const only = (process.argv[2] || "").toLowerCase();
-  const [cat, extras, banned, snap, R] = await Promise.all([read("cards.json"), read("extras.json"), read("banned.json"), read("decks.json"), read("research.json").catch(() => null)]);
-  const md = await readFile(new URL("../docs/archetypes.md", import.meta.url), "utf8").catch(() => "");
+// The builder's inputs, with one legend optionally HIDDEN — its lists removed from
+// everything (quality, shells, its own shares) and its research flags dropped — so it can
+// be built blind and compared with what its winners actually play (lib/blind.test.mjs).
+// blindEngine: read the legend's plan from card text alone (lib/infer.mjs), not from
+// docs/archetypes.md, whose Engine lines were written with its lists in view.
+export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", hide = null, blindEngine = false }) {
   const known = new Set(cat.cards.map((c) => c.c));
   const idx = indexCatalog([...cat.cards, ...(extras.cards || []).filter((c) => c.c && !known.has(c.c))], banned);
   const byShort = new Map(idx.cards.map((c) => [c.c.replace(/\/\d+$/, ""), c]));
@@ -39,7 +41,8 @@ const main = async () => {
   const { consensus } = counter(idx, card);
   const today = new Date().toISOString().slice(0, 10);
 
-  const usable = snap.decks.filter((d) => d.lg && card(d.lg) && !Object.keys(d.cards).some((k) => idx.bannedNames.has(card(k)?.n)));
+  const usableAll = snap.decks.filter((d) => d.lg && card(d.lg) && !Object.keys(d.cards).some((k) => idx.bannedNames.has(card(k)?.n)));
+  const usable = hide ? usableAll.filter((d) => idx.legendName(card(d.lg)) !== hide) : usableAll;
   const placedOf = (d) => (d.tour && d.pl != null) || Number(d.cp) > 0;
   const identOf = (L) => (L.d || []).filter((x) => x !== "Colorless").sort().join("/");
   const names = (d) => new Set(Object.keys(d.cards).map((k) => card(k)?.n).filter(Boolean));
@@ -67,14 +70,16 @@ const main = async () => {
   const byLegend = new Map();
   for (const d of usable) { const n = idx.legendName(card(d.lg)); (byLegend.get(n) || byLegend.set(n, []).get(n)).push(d); }
   const heading = (name) => (md.match(new RegExp(`^### ${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")} — ([^\\n*·]+)`, "m")) || [])[1]?.trim() || "";
-  const engineOf = (name) => [...new Set([...docEngineKeys(docEngineLine(md, name)), ...headingSubKeys(heading(name))])].filter((k) => k !== "none");
+  const engineOf = (name) => blindEngine && name === hide
+    ? inferLegend(legends.get(name), idx, null).subs.slice(0, 2).map((x) => x.key)
+    : [...new Set([...docEngineKeys(docEngineLine(md, name)), ...headingSubKeys(heading(name))])].filter((k) => k !== "none");
   // The lists a legend is anchored on: Radiance-format placings if there are enough.
   const anchorLists = (name) => {
     const placed = (byLegend.get(name) || []).filter(placedOf);
     const era = placed.filter((d) => newEvents.has(d.ev));
     return era.length >= MIN_PLACED ? { ds: era, era: true } : placed.length >= MIN_PLACED ? { ds: placed, era: false } : null;
   };
-  const shareMap = (ds) => { if (!ds || ds.length < MIN_PLACED) return null; const m = new Map(); for (const d of ds) for (const n of names(d)) m.set(n, (m.get(n) || 0) + 1 / ds.length); return m; };
+  const shareMap = (ds, min = MIN_PLACED) => { if (!ds || ds.length < min) return null; const m = new Map(); for (const d of ds) for (const n of names(d)) m.set(n, (m.get(n) || 0) + 1 / ds.length); return m; };
   const poolOf = (L) => {
     const ident = new Set((L.d || []).filter((x) => x !== "Colorless")), seen = new Set();
     return idx.cards.filter((c) => !c.v && ["Unit", "Spell", "Gear"].includes(c.t) && (c.d || []).every((x) => x === "Colorless" || ident.has(x)) && !idx.bannedNames.has(c.n)
@@ -83,28 +88,50 @@ const main = async () => {
   const runeCards = {};
   for (const c of idx.cards) if (c.t === "Rune" && !c.v && (c.d || []).length === 1 && !runeCards[c.d[0]]) runeCards[c.d[0]] = c.c;
 
-  const brews = [];
-  for (const [name, L] of legends) {
-    if (only && !name.toLowerCase().includes(only)) continue;
+
+  return { idx, card, consensus, legends, byLegend, placedOf, anchorLists, heading, engineOf, usable, usableAll, quality, newEvents,
+    brew: (name, opts = {}) => brewOne(name, opts) };
+
+  // noSwaps: the build alone, before any swap — what lib/blind.test.mjs scores (swaps deviate
+  // from current winners on purpose; lib/swaps.test.mjs scores those).
+  function brewOne(name, { forcePort = false, noSwaps = false } = {}) {
+    const L = legends.get(name);
     const engine = engineOf(name);
-    const ctx = { pool: poolOf(L), quality, isNew, research: R, engine };
+    const ctx = { pool: poolOf(L), quality, isNew, research: name === hide ? null : R, engine };
     const meta = { legend: name, code: L.c, heading: heading(name), engine };
-    const a = anchorLists(name);
-    let b;
-    if (a) {
-      b = anchorBrew(L, idx, consensus(a.ds), card, { ...ctx, own: shareMap(a.ds), ownLists: a.ds.length },
-        { ...meta, basis: `${a.ds.length} placed ${name.split(",")[0]} lists${a.era ? " from Radiance-format events" : ""}`, lists: a.ds.length });
-    } else {
-      // A port: the same-colour legend whose plan overlaps most, with enough placings.
-      const shells = [...legends].filter(([n, S]) => n !== name && identOf(S) === identOf(L) && anchorLists(n)?.ds.length >= MIN_SHELL)
-        .map(([n, S]) => ({ name: n, legend: S, lists: anchorLists(n).ds.length, overlap: engineOf(n).filter((k) => engine.includes(k)).length }))
-        .sort((x, y) => y.overlap - x.overlap || y.lists - x.lists);
-      const s = shells[0];
-      if (!s) { brews.push({ ...meta, kind: "none", why: `no list to anchor on: under ${MIN_PLACED} placed ${name.split(",")[0]} lists and no proven list in its colours`, swaps: [], rows: [] }); continue; }
-      const own = byLegend.get(name) || [];
-      b = portBrew(L, idx, { ...s, con: consensus(anchorLists(s.name).ds), engine: engineOf(s.name) }, card, { ...ctx, own: shareMap(own), ownLists: own.length },
-        { ...meta, basis: `ported from ${s.lists} placed ${s.name.split(",")[0]} lists (same colours${s.overlap ? ", same plan" : ""})`, lists: own.filter(placedOf).length });
-    }
+    const a = forcePort ? null : anchorLists(name);
+    if (a) return anchorBrew(L, idx, consensus(a.ds), card, { ...ctx, own: shareMap(a.ds), ownLists: a.ds.length },
+      { ...meta, basis: `${a.ds.length} placed ${name.split(",")[0]} lists${a.era ? " from Radiance-format events" : ""}`, lists: a.ds.length });
+    // Too few lists to anchor on: build it from its colours' winners and its own cards.
+    const own = byLegend.get(name) || [];
+    const bfCount = new Map();
+    for (const d of (own.length >= 2 ? own : usable.filter((x) => identOf(card(x.lg)) === identOf(L))))
+      for (const k of Object.keys(d.cards)) { const c = card(k); if (c?.t === "Battlefield" && !idx.bannedNames.has(c.n)) { const e = bfCount.get(c.n) || { name: c.n, code: c.c, n: 0 }; e.n++; bfCount.set(c.n, e); } }
+    const battlefields = [...bfCount.values()].sort((x, y) => y.n - x.n).slice(0, 3);
+    return coloursBrew(L, idx, legendShares(), card, { ...ctx, own: own.length >= 2 ? shareMap(own, 2) : null, ownLists: own.length, runeCards, battlefields, swapBudget: noSwaps ? 0 : undefined },
+      { ...meta, basis: `built from its colours' winning lists${own.length >= 2 ? ` and its own ${own.length} lists` : ""}`, lists: own.filter(placedOf).length });
+  }
+  // Each legend's card shares from its anchor lists, for building from colours.
+  function legendShares() {
+    if (legendShares.cache) return legendShares.cache;
+    // Placed lists when a legend has enough, else all its lists: thin legends' choices count too.
+    const src = (n) => { const all = byLegend.get(n) || [], placed = all.filter(placedOf); return placed.length >= MIN_PLACED ? placed : all.length >= MIN_PLACED ? all : null; };
+    return (legendShares.cache = [...legends].map(([n, S]) => { const ds = src(n); return ds ? { name: n, domains: new Set((S.d || []).filter((d) => d !== "Colorless")), share: shareMap(ds) } : null; }).filter(Boolean));
+  }
+}
+
+const main = async () => {
+  const only = (process.argv[2] || "").toLowerCase();
+  const [cat, extras, banned, snap, R] = await Promise.all([read("cards.json"), read("extras.json"), read("banned.json"), read("decks.json"), read("research.json").catch(() => null)]);
+  const md = await readFile(new URL("../docs/archetypes.md", import.meta.url), "utf8").catch(() => "");
+  const brewer = makeBrewer({ cat, extras, banned, snap, R, md });
+  const { idx, legends, newEvents } = brewer;
+  const today = new Date().toISOString().slice(0, 10);
+  const brews = [];
+  for (const [name] of legends) {
+    if (only && !name.toLowerCase().includes(only)) continue;
+    const b = brewer.brew(name);
+    if (b.kind === "none") { brews.push(b); continue; }
 
     // Goldfish, and whether another rune split plays better (offered, never applied to an
     // anchor — its runes are the winners').
@@ -118,22 +145,21 @@ const main = async () => {
     // Worth showing: a port, a new card doing a job better, or a research answer. Swaps that
     // only pick between the winners' own alternatives are the consensus's flex, which the idea
     // page already shows.
-    b.worth = b.kind === "port" || b.swaps.some((s) => s.kind !== "alt");
+    b.worth = b.kind === "colours" || b.swaps.some((s) => s.kind !== "alt");
     brews.push(b);
   }
 
   const out = {
     generatedAt: today,
     source: "lib/brew.mjs and lib/swaps.mjs over data/decks.json (anchor lists, shells, quality), the catalog, docs/archetypes.md (each legend's plan), data/research.json",
-    note: "Winning lists changed on purpose, not generated: each starts from its legend's winners (or, for a legend too thin to anchor on, a proven list in its colours) and changes only what has a reason — other winners' choices, a research answer, or a new card doing a job for less. Untested: log games with them in the match journal.",
+    note: "Winning lists changed on purpose: each starts from its legend's winners (or, for a legend too thin to anchor on, from what its colours' winners play plus its own cards) and changes only what has a reason — other winners' choices, a research answer, or a new card doing a job for less. Untested: log games with them in the match journal.",
     method: "docs/deckbuilding.md", newEvents: [...newEvents], brews,
   };
   if (!only) await writeFile(new URL("../data/brews.json", import.meta.url), JSON.stringify(out));
   const worth = brews.filter((b) => b.worth);
-  console.log(`${brews.length} legends · ${worth.length} brews worth showing (${brews.filter((b) => b.kind === "port").length} ports, ${brews.filter((b) => b.kind === "anchor" && b.swaps.length).length} anchors with swaps) · ${brews.filter((b) => b.kind === "none").length} with nothing to anchor on`);
+  console.log(`${brews.length} legends · ${worth.length} brews worth showing (${brews.filter((b) => b.kind === "colours").length} built from colours, ${brews.filter((b) => b.kind === "anchor" && b.swaps.length).length} anchors with swaps) · ${brews.filter((b) => b.kind === "none").length} with nothing to anchor on`);
   for (const b of brews) console.log(`  ${b.kind === "none" ? "--" : b.legal ? "  " : "!!"} ${b.legend.slice(0, 32).padEnd(32)} ${b.kind.padEnd(6)} ${String(b.swaps.length).padStart(2)} swaps · ${b.basis || b.why}${b.sim ? ` · E4 ${b.sim.energy}` : ""}${b.kind !== "none" && !b.legal ? ` · ${b.checks.filter((k) => k.ok === false).map((k) => `${k.label}: ${k.val}`).join("; ")}` : ""}`);
   if (only) for (const b of brews) {
-    if (b.cut?.length) console.log(`     cut from the shell: ${b.cut.join(", ")}`);
     for (const r of b.rows.filter((r) => r.change)) console.log(`     ${r.change.padEnd(7)} ${r.qty} ${r.name.padEnd(28)} ${r.why}`);
     for (const s of b.swaps) console.log(`     swap    out ${s.copies} ${s.out} → in ${s.in}: ${s.why}`);
   }

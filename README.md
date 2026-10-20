@@ -56,10 +56,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   cards it can't explain) and the research questions: long-legal cards that fit its engine
   by text, that its winning lists skip. Answers come from `docs/research.md`.
 - `data/brews.json` - for every legend, a winning list changed on purpose (`lib/brew.mjs`):
-  its winners' consensus with the role swaps that have a reason, or, for a legend too thin to
-  anchor on, a port of a proven list in its colours. Each change says why; `worth` marks the
-  ones that add something (a port, a new card for a job, a research answer). Untested.
-  `scripts/rift brew <legend>` prints one; idea pages show it; the bench can start from it.
+  its winners' consensus with the swaps that have a reason, or, for a legend too thin to
+  anchor on, a list built from what its colours' winners play plus its own cards. Each change
+  says why; `worth` marks the ones that add something. Untested. `scripts/rift brew <legend>`
+  prints one; idea pages show it; the bench can start from it.
 - `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
   Radiance-format events, a consensus list counted from its placed lists (or brews,
   labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
@@ -78,14 +78,17 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `scripts/build-research.mjs` - queues what each legend's winners skip as questions, with
   the evidence that usually explains it. Fetches nothing. See `docs/research.md`.
 - `scripts/build-brews.mjs` - builds `data/brews.json`. Fetches nothing; runs after
-  build-research. Picks each legend's anchor lists (Radiance-format placings when there are
-  5+, else all placings) or, under 5, a port shell (the same-colour legend with 10+ placings
-  sharing the most of its plan), and computes card quality for the passed-over rule.
-- `lib/brew.mjs` - one brew, by `docs/deckbuilding.md`: ANCHOR (the consensus plus swaps)
-  or PORT (a proven same-colour list, its legend's own package — champion, signatures,
-  engine payoffs — replaced with this legend's: one chosen champion, signatures at 3 or none,
-  its engine payoffs, then the colours' most-picked cards; then the same swaps). Tests:
-  `lib/brew.test.mjs`.
+  build-research. `makeBrewer()` holds its inputs — anchor lists (Radiance-format placings
+  when there are 5+, else all placings), per-legend card shares, quality — and can HIDE a
+  legend's lists from all of them, which is how `lib/blind.test.mjs` builds blind.
+- `lib/brew.mjs` - one brew, by `docs/deckbuilding.md`: ANCHOR (the consensus plus swaps) or
+  COLOURS (for a legend under 5 placings: the cards its colours' winners pick, averaged per
+  legend, plus one chosen champion, its signature at 3, a lift for its plan's cards and its
+  own few lists' choices; then the same swaps). Tests: `lib/brew.test.mjs`, and
+  `lib/blind.test.mjs` — hide each legend with 10+ placings, build it blind, and count what
+  it shares with its winners: 19.6 of 40, against 17.6 for the colours' most popular cards
+  and a ceiling of 36.2 (two halves of the legend's own lists). Porting one same-colour
+  legend's list, the first design, scored 14.2.
 - `lib/swaps.mjs` - the changes to a winning list, each with a reason: another winner's
   choice for the same job or the same slot (type, within one Energy; 15% of the legend's
   lists and at least two of them), split the way winners split slots (2 + 1); a research
