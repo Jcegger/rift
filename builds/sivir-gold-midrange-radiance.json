@@ -1,0 +1,109 @@
+{
+ "id": "sivir-gold-midrange-radiance",
+ "kind": "experiment",
+ "legend": "Sivir, Battle Mistress",
+ "date": "2026-10-20",
+ "author": "Claude",
+ "title": "Sivir — Gold-fuelled midrange (Radiance)",
+ "summary": "A midrange Sivir for Radiance. It starts from the only legal Sivir result, Randyyy's 146th of 2,165 at the Los Angeles RQ (a Fizz and Matriarch value list with lots of interaction), and changes 7 cards to make it midrange: it trades the cheap aggressive bodies for Radiance cards that make Gold, which turns the legend into a Power engine, plus Graves as a sweeper. Every other placed Sivir list ran Stacked Deck, which is banned, so there is almost nothing to net-deck. This is a reasoned brew and is marked untested.",
+ "basis": "Anchor: Randyyy's list from the Los Angeles RQ (2 Oct 2026, 146th of 2,165), the only placed Sivir list with no banned card; the other 8 placings ran Stacked Deck. 7 in / 7 out from it, inside the 6–9 cards winners usually stray (docs/deckbuilding.md). Graves also appears in a posted Radiance Sivir brew (\"Sivir - RAD\", 9 Oct). No result backs this list.",
+ "changes": [
+  {
+   "what": "−3 Traveling Merchant, +3 Reckless Innovator",
+   "why": "The brew system's top upgrade for Sivir (scripts/rift brew sivir). Same job, card flow, on a 3-Might body with Accelerate, plus a Gold token whenever it exhausts. Gold is next turn's Power, made without recycling a rune. It costs 3 Energy and no Power, so Tail-Cloaked Matriarch can replay it from the trash."
+  },
+  {
+   "what": "−3 Shadow Order Disciple, +2 The Waters' Wage",
+   "why": "Disciple is an aggro 2-drop that burns your own cards to attack. The Waters' Wage is the Gold plan's big turn: hide it for [A] (paid by recycling a rune, so Battle Mistress makes a Gold too), then from the next turn on, on your own turn, play it face up for free for three READY Gold. That's three Power at once: Sivir, Mercenary's +2 Might and Ganking (she needs 2 Power spent this turn) plus Punch First, or Graves a turn early."
+  },
+  {
+   "what": "−1 Acceptable Losses, +2 Graves, Blasting Through (and the third cut is Disciple's)",
+   "why": "The midrange top end. When Graves attacks or defends he deals his Might to every enemy unit there instead of combat damage, so every pump becomes a sweeper: Punch First first, then move him in, and he deals 9 to each enemy. Every enemy that dies readies Battle Mistress for another Gold. Acceptable Losses moves to the sideboard for gear decks."
+  },
+  {
+   "what": "Kept from the anchor",
+   "why": "Punch First, Rampage, Switcheroo, Star-Crossed, Sabotage and Gust: the interaction is the midrange. Fizz, Ezreal and Matriarch: the value engine. Tornado Warrior, Tideturner, Edge of Night and Pyke: the Hidden cards, which also make Gold when you hide them by recycling a rune."
+  },
+  {
+   "what": "Option: Bandle Scouts' Academy for Zaun Warrens",
+   "why": "A Radiance battlefield: when you hide a card there, play a Gold token. This list has 12 Hidden cards. Not applied, because Zaun Warrens' loot on conquer is what the anchor won with."
+  },
+  {
+   "what": "Option: Black Market or Hunters' Circle",
+   "why": "The other Radiance Sivir brew runs both. Black Market is a draw for two Power ([A][A]: draw 1), which Gold pays and which turns on Sivir. Not applied; try it if the deck runs out of cards."
+  }
+ ],
+ "plan": [
+  "The engine is Power. Every Power cost you pay by recycling a rune triggers Battle Mistress for a Gold token, and the legend readies whenever an enemy unit dies. Eighteen of the forty cost Power, and hiding a card costs [A], so it fires almost every turn. Gold enters exhausted: a Gold made this turn is next turn's Power.",
+  "Early, trade and disrupt rather than race. Hide Tornado Warrior, Tideturner or The Waters' Wage, play Reckless Innovator, and Sabotage the trick that would beat you. Ezreal and Fizz dig; Fizz replays Punch First, Rampage or Gust from the trash.",
+  "The turn the deck wants: flip The Waters' Wage for three ready Gold, then Sivir, Mercenary at 6 Might with Ganking, or Graves with Punch First already on him. Matriarch's Empower ([2] plus a Chaos Power, which is another Gold) replays an Innovator, Fizz or Pyke from the trash.",
+  "Watch out for: gear removal doesn't touch Gold in play, but a tempo deck that never lets you hold a battlefield also stops The Waters' Wage, which must be hidden at a battlefield you control. And Graves deals no combat damage himself: the sweep is the damage."
+ ],
+ "matchups": [
+  {
+   "vs": "Kennen, Heart of the Tempest",
+   "note": "The most placed Radiance-preview legend (20). Its plan is one Rhasa the Sunderer turn off a full trash. Keep Sabotage for Last Rites or the spell that sets it up; Hard Bargain comes in. A reading, not a result."
+  },
+  {
+   "vs": "Yasuo, Unforgiven (Spiderling)",
+   "note": "A pile of Spiderlings on one battlefield is what Graves is for: one pumped attack hits every one of them. Bedeviling Stranger comes in, since its bounce needs 4+ units at a battlefield. A reading, not a result."
+  },
+  {
+   "vs": "Gear decks (Mordekaiser's Baited Hook, Ornn, Azir)",
+   "note": "Acceptable Losses and An Offer You Can't Refuse come in. An Offer hands them a Gold, so aim it at the gear that matters."
+  },
+  {
+   "vs": "Aggro (Rengar, Ornn)",
+   "note": "Overzealous Fan comes in to undo an attack; trade early and let Graves end the board."
+  },
+  {
+   "vs": "Everything else",
+   "note": "Sivir has no Radiance-era matchup records. Log games in the journal; ten will say more than this box."
+  }
+ ],
+ "sim": "Goldfish, 8,000 games, against the anchor list: Energy spent turns 1–4 17.4 on the play (anchor 17.6); 2.5 units by turn 3 (anchor 3.3); turn 5 spends 5.9 Energy (anchor 4.6); stuck on turn 3 8% (anchor 6%); 5 Body / 7 Chaos is the best rune split of the nine tried. Slower early and stronger late, which is what midrange buys. Consistency only: it plays no opponent, and it doesn't model Gold, Hidden or the legend.",
+ "cards": {
+  "SFD-203": 1,
+  "SFD-143": 1,
+  "OGN-199": 2,
+  "RAD-105": 3,
+  "VEN-099": 3,
+  "SFD-140": 3,
+  "SFD-149": 3,
+  "UNL-145": 1,
+  "VEN-104": 3,
+  "RAD-085": 2,
+  "RAD-100": 2,
+  "OGN-169": 1,
+  "OGN-156": 2,
+  "SFD-097": 3,
+  "SFD-145": 2,
+  "VEN-083": 3,
+  "UNL-128": 2,
+  "SFD-139": 2,
+  "SFD-150": 1,
+  "UNL-095": 1,
+  "OGN-126": 5,
+  "OGN-166": 7,
+  "OGN-287": 1,
+  "VEN-164": 1,
+  "OGN-298": 1
+ },
+ "sb": {
+  "OGN-179": 1,
+  "RAD-101": 2,
+  "SFD-136": 2,
+  "RAD-107": 2,
+  "UNL-150": 1,
+  "SFD-128": 2
+ },
+ "snapshot": {
+  "date": "2026-10-20",
+  "events": [
+   "NovaRiftbound's $2,000 Online Showdown 5",
+   "Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview)"
+  ],
+  "placed": 0,
+  "shares": {}
+ }
+}
