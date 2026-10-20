@@ -137,6 +137,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `docs/archetypes.md` - what every legend's deck is trying to do, by colour pair: game plan,
   engine, what it fears, and what each matchup turns on from your decks' side. Hand-written from
   the measured profiles in `data/archetypes.json`; `check.mjs` requires a section per legend.
+- `docs/deckbuilding.md` - how winning lists are actually built, measured from the placed
+  lists: copies, core vs flex, how far winners stray from their consensus, how new cards get
+  in (by role), and what the beginner guides get wrong. The basis for suggesting decks.
 - `docs/research.md` - how the research queue works, and the hand-written answers to its
   questions (verdict skip, test or model). `check.mjs` checks their shape.
 - `docs/strategy.md` - how to choose between two legal lines: the lethal check, roles,
