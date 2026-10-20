@@ -1,13 +1,13 @@
 ---
 title: Radiance Pre-Rift — Sealed Prep
-subtitle: Friday 16 October 2026 — building and playing a Radiance sealed deck, from the rules and the cards
+subtitle: Pre-Rift week, 16–22 October 2026 — building and playing a Radiance sealed deck, with every champion pack's contents
 author: rift toolchain
-date: 2026-10-13
+date: 2026-10-20
 ---
 
-**What this is.** Everything for Friday on a few pages: the event rules, a build process that
+**What this is.** Everything for a Pre-Rift night on a few pages: the event rules, a build process that
 fits the 45 minutes, what wins sealed, which Radiance commons and uncommons to play, and what
-to do with each of the nine champion packs. **No one has played Radiance sealed yet.** The
+to do with each of the nine champion packs, and what's in each one (§5a). **It was written before the first Pre-Rift.** The
 rules are checked against Riot's announcement and the Tournament Rules; the card advice is a
 read of the cards, not results. The card text comes from the printed cards: Riot's own preview
 feed has the wrong type or domain on dozens of Radiance cards, so an app or website may show
@@ -85,7 +85,7 @@ These are the parts of Magic's sealed wisdom that carry straight over:
   in constructed.
 - **Your habits still apply.** Spend Power selectively and take rigged fights. Sealed decks
   are slower and clunkier, which rewards patience more, not less.
-- **It's a learning event.** Every Radiance keyword you meet on Friday is one you won't
+- **It's a learning event.** Every Radiance keyword you meet at a Pre-Rift is one you won't
   misplay at the 9 November Skirmish.
 
 ---
@@ -174,7 +174,7 @@ how much it needs from the boosters. Ratings are a read of the cards.
 
 | legend | domains | in sealed | build toward |
 |---|---|---|---|
-| **Riven, The Exile** | Calm/Chaos | **strong, and generic.** Units you play to a battlefield you control enter ready. It works with any units. *Its exact text isn't official yet; read the card* | lots of units; anything that exhausts a unit for value; Fury or Mind removal as the third domain |
+| **Riven, The Exile** | Calm/Chaos | **strong, and generic.** Units you play to a battlefield you control enter ready. It works with any units | lots of units; anything that exhausts a unit for value; Fury or Mind removal as the third domain |
 | **Ziggs, Hexplosives Expert** | Fury/Chaos | **strong.** Pay 1 Energy + 1 Power to make a Bomb: repeatable removal, and sealed is short on removal | Bombs (Amateur Demolitionist, Satchel Charge), Fury removal |
 | **K'Sante, Pride of Nazumah** | Calm/Body | **good** if you have Shield units: Assault equal to Shield | Stoic Ferryman, Consult the Heavens, Wrath of the Freljord, Hold 'Em |
 | **Mordekaiser, Iron Revenant** | Fury/Order | **good** late: Power from units and gear in your trash | big Order and Fury units; Fury removal |
@@ -194,7 +194,218 @@ idea is the same: **units arrive ready at the battlefield you hold.**
 
 ---
 
-## 6. Radiance rules worth knowing before Friday
+## 5a. What's in each champion pack
+
+Each pack is **15 cards**: the Legend, its rare Champion Unit, a Battlefield and **12 support
+cards, one copy each**. Everything else comes from your five boosters. Copies stack: a booster
+copy of a pack card is a second copy in your deck (no copy limit in sealed).
+
+**Riot hasn't published these lists.** They come from two fan sites, riftbound.org and
+riftbound.zone (checked 20 Oct 2026), which agree card for card on all nine. Every card is real
+and in your pack's two domains, checked against the card catalog. If your pack differs, **trust the pack**.
+Card text below is shortened (keyword reminders cut); read the card for exact wording.
+
+### Riven, The Exile — Calm/Chaos
+
+- **Legend:** Units you play to battlefields you control enter ready.
+- **Champion:** Riven, Broken Blade (4, 4 Might): When I become exhausted, choose one that hasn't been chosen this turn — [Buff] me. Spend my buff to [Stun] an enemy unit. Spend my buff to ready me.
+- **Battlefield:** Hunters' Circle: For each player, the first unit or gear they play here on their turn costs [1] less.
+- **The 12:** 7 units, 4 spells, 1 gear. Units by cost: 2-cost ×2, 3-cost ×2, 4-cost ×2, 5-cost ×1
+
+| cost | card | type | dom. | what it does |
+|---|---|---|---|---|
+| 2 | **Siren of the Shallows** | Unit 1M | Ch | [Disarm] [Ganking] |
+| 2 | **Entrenched Boar** | Unit 2M | Ca | You may have me enter ready. If you do, I can't move this turn. |
+| 3 | **Reckless Innovator** | Unit 3M | Ch | [Accelerate] When I become exhausted, choose one — Play a Gold gear token exhausted. Pay [Chaos] to draw 1. |
+| 3 | **Iridescent Avian** | Unit 3M | Ca | [exhaust]: [Buff] a unit. If it's already buffed, give it +2 Might this turn instead. |
+| 4 | **Disposal Expert** | Unit 3M | Ch | I enter ready if you control no other units. [Disarm 2] |
+| 4 | **Stoic Ferryman** | Unit 2M | Ca | [Shield 3] When you play me to a battlefield, you may move another unit you control here to your base. |
+| 5+1P | **Pitiless Stalker** | Unit 5M | Ch | [exhaust]: [Stun] an enemy unit. |
+| 1 | **Hunker Down** | Spell | Ca | [Reaction] Ready a friendly unit. It can't move this turn. Draw 1. |
+| 1 | **Life from Stone** | Spell | Ca | [Reaction] As an additional cost to play this, exhaust a friendly unit. Draw 1 and channel 1 rune exhausted. |
+| 1 | **Ki Burst** | Spell | Ca | [Action] As an additional cost to play this, exhaust a friendly unit. [Stun] a unit. |
+| 1 | **Consult the Heavens** | Spell | Ca | [Reaction] Give a unit [Shield 2] this turn. [Predict]. |
+| 3 | **Invigorating Bloom** | Gear | Ca | When you play this, give a friendly unit +3 Might this turn. Exhaust a friendly [Mighty] unit, [exhaust]: Draw 1. |
+
+### Ziggs, Hexplosives Expert — Fury/Chaos
+
+- **Legend:** [1][A], [exhaust]: Play a Bomb gear token to a battlefield.
+- **Champion:** Ziggs, Explosive (4, 4 Might): [1], [exhaust]: Play a Bomb gear token to a battlefield. When I defend, you may kill a friendly gear to give me +2 Might this turn.
+- **Battlefield:** Rakelstake: For each player, the first time they play a unit or gear here each turn, they [Predict].
+- **The 12:** 8 units, 2 spells, 2 gear. Units by cost: 2-cost ×3, 3-cost ×3, 4-cost ×1, 6-cost ×1
+
+| cost | card | type | dom. | what it does |
+|---|---|---|---|---|
+| 2 | **Amateur Demolitionist** | Unit 1M | Fu | When you play me, play a Bomb gear token to a battlefield. |
+| 2 | **Lingering Animus** | Unit 2M | Fu | I enter ready if a friendly unit or gear died this turn. |
+| 2 | **Siren of the Shallows** | Unit 1M | Ch | [Disarm] [Ganking] |
+| 3 | **Reckless Innovator** | Unit 3M | Ch | [Accelerate] When I become exhausted, choose one — Play a Gold gear token exhausted. Pay [Chaos] to draw 1. |
+| 3 | **Shimmering Swimmer** | Unit 3M | Fu | You may kill a friendly unit or gear as an additional cost to play me. When you play me, if you paid the additional cost, deal 2 to a unit. |
+| 3 | **Suave Negotiator** | Unit 3M | Ch | When you play me, choose an opponent. You and that player each draw 1. |
+| 4 | **Disposal Expert** | Unit 3M | Ch | I enter ready if you control no other units. [Disarm 2] |
+| 6 | **Explosimian** | Unit 6M | Ch | When I hold, play three Bomb gear tokens to a single battlefield. |
+| 3+1P | **Satchel Charge** | Spell | Ch | [Action] Move a friendly unit, then play a Bomb gear token to a battlefield. |
+| 4+1P | **Scorched Earth** | Spell | Fu | [Action] Deal 5 damage split among units at a single battlefield. |
+| 1 | **Runeblade Anvil** | Gear | Fu | When you play this or when this leaves the board, banish the top card of your Main Deck. Until your next Ending Phase, you may play that card. [2][Chaos], [exhaust]: Kill this. |
+| 3+1P | **The Good Stuff** | Gear | Ch | [Deploy] When you play this, discard 1, then draw 3. When you hold here, return this to its owner's hand. |
+
+### K'Sante, Pride of Nazumah — Calm/Body
+
+- **Legend:** [1], [exhaust]: Give a friendly unit "I have [Assault] equal to my [Shield]" this turn.
+- **Champion:** K'Sante, Courageous (5, 4 Might): [Accelerate] [Shield 2] When I hold, channel 1 rune.
+- **Battlefield:** Durand Memorial: When you defend here, choose a unit you control here. Give it [Tank] this combat.
+- **The 12:** 6 units, 3 spells, 3 gear. Units by cost: 2-cost ×1, 4-cost ×2, 6-cost ×2, 9-cost ×1
+
+| cost | card | type | dom. | what it does |
+|---|---|---|---|---|
+| 2 | **Overloaded Traveler** | Unit 2M | Bo | While there's a friendly gear with [Deploy] at my battlefield, I have +1 Might. |
+| 4 | **Stalwart Goatherd** | Unit 2M | Bo | [Shield 2] When you play me, you may kill a gear with Energy cost [4] or less. |
+| 4 | **Stoic Ferryman** | Unit 2M | Ca | [Shield 3] When you play me to a battlefield, you may move another unit you control here to your base. |
+| 6 | **Elnuk Herd** | Unit 5M | Bo | [Hidden] When you play me, give another friendly unit +3 Might this turn, then recycle me if I was played from face down. |
+| 6+1P | **Armored Tusker** | Unit 4M | Bo | [Shield 3] [Tank] When I move, you may deal damage equal to my [Shield] to a unit at a battlefield. |
+| 9 | **Wrath of the Freljord** | Unit 7M | Bo | I enter ready. [Shield 3] |
+| 1 | **Consult the Heavens** | Spell | Ca | [Reaction] Give a unit [Shield 2] this turn. [Predict]. |
+| 2 | **Battle Preparations** | Spell | Ca | [Reaction] [Show Off] a gear. Give a unit +2 Might this turn. If you showed off, ready up to 2 runes. |
+| 3 | **Hold 'Em** | Spell | Bo | [Action] This costs [2] less if you've played a unit or gear to a battlefield this turn. Give a unit +3 Might this turn. |
+| 1 | **Nazuman Ntofo** | Gear | Bo | Equip [1] |
+| 1 | **Pillaged Armory** | Gear | Bo | [Deploy] When you play this or when you conquer here, [Buff] a friendly unit. |
+| 2 | **Blossoming Dreamroot** | Gear | Ca | [Deploy] When you win a combat here, draw 1. |
+
+### Mordekaiser, Iron Revenant — Fury/Order
+
+- **Legend:** [Reaction] Banish a unit or gear from your trash, [exhaust]: [Add] [A]. Spend this Power only to play units or gear.
+- **Champion:** Mordekaiser, Twice Slain (7+1P, 5 Might): [Accelerate] [Assault 3] Once each turn, if I would die, you may kill a friendly unit to heal me, exhaust me, and recall me instead.
+- **Battlefield:** Ruined Monastery: When you conquer here, you may discard 1 and channel 1 rune exhausted.
+- **The 12:** 7 units, 3 spells, 2 gear. Units by cost: 2-cost ×2, 3-cost ×2, 4-cost ×1, 5-cost ×1, 7-cost ×1
+
+| cost | card | type | dom. | what it does |
+|---|---|---|---|---|
+| 2 | **Meticulous Restorationist** | Unit 2M | Or | When you play a card with Energy cost [7] or more, you may play me from your trash for [Order]. |
+| 2 | **Lingering Animus** | Unit 2M | Fu | I enter ready if a friendly unit or gear died this turn. |
+| 3 | **Hunting Dog** | Unit 3M | Or | [Deathknell] Play a 1 Might Bird unit token with [Deflect] to your base. |
+| 3 | **Shimmering Swimmer** | Unit 3M | Fu | You may kill a friendly unit or gear as an additional cost to play me. When you play me, if you paid the additional cost, deal 2 to a unit. |
+| 4 | **Mournful Spirit** | Unit 1M | Or | [Deathknell] You may kill a unit or gear here. |
+| 5 | **Herald of the Emperor** | Unit 3M | Or | When you play me, choose a friendly unit. Its base Might becomes 5 this turn. |
+| 7+1P | **Dune Devourer** | Unit 7M | Or | You may kill a friendly unit as an additional cost to play me. If you do, I cost [2] less. [Deflect] |
+| 3+1P | **Rally for War** | Spell | Fu | Choose an occupied enemy battlefield. Play three 1 Might Recruit unit tokens there. |
+| 3+1P | **Burn Away** | Spell | Or | Banish a unit with 3 Might or less or a gear. [Burn 2]. |
+| 4+1P | **Scorched Earth** | Spell | Fu | [Action] Deal 5 damage split among units at a single battlefield. |
+| 1+1P | **Banner of Conquest** | Gear | Fu | [Deploy] Friendly units here have [Assault]. |
+| 1 | **Concert Poster** | Gear | Or | [Deploy] When you play this or when you conquer here, you may pay [1] to play a 1 Might Recruit unit token to your base. |
+
+### Ekko, Boy Who Shattered Time — Fury/Mind
+
+- **Legend:** [Empower] — [1], [exhaust] Disempower me, [exhaust]: Reduce the cost of the next unit you play this turn by [2][A] and give it "Kill me at end of turn."
+- **Champion:** Ekko, Ingenious (3, 4 Might): As an additional cost to play me, return a friendly unit to its owner's hand. [Ganking]
+- **Battlefield:** Firelights' Hideout: When you conquer here, the next unit you play this turn has [Accelerate].
+- **The 12:** 8 units, 3 spells, 1 gear. Units by cost: 2-cost ×1, 3-cost ×2, 4-cost ×2, 5-cost ×1, 6-cost ×1, 8-cost ×1
+
+| cost | card | type | dom. | what it does |
+|---|---|---|---|---|
+| 2 | **Lingering Animus** | Unit 2M | Fu | I enter ready if a friendly unit or gear died this turn. |
+| 3 | **War Scout** | Unit 2M | Fu | [Accelerate] When you play me, give a unit +2 Might this turn. |
+| 3 | **Bilgewater Tracker** | Unit 3M | Fu | When you play me, deal 1 to each of up to 2 units. |
+| 4+1P | **Riptide Mage** | Unit 3M | Mi | [Accelerate] When you play me, give an enemy unit -3 Might this turn. |
+| 4 | **Industrious Mechsmith** | Unit 1M | Mi | When you play me, play a 3 Might Mech unit token here. |
+| 5 | **Mysterious Chronomancer** | Unit 4M | Mi | When you play me, [Predict 2]. [Disarm 2] |
+| 6+1P | **Antagonistic Apparatus** | Unit 3M | Fu | I enter ready. When you play me, play a ready 3 Might Mech unit token here. |
+| 8 | **The Empyrean** | Unit 8M | Mi | [Show Off] a card. When you play me, if you showed off a card, [Predict] equal to its Power cost, then draw 2. |
+| 2+1P | **Parallel Convergence** | Spell | Mi | As an additional cost to play this, return a friendly unit to its owner's hand. Deal 5 to a unit at a battlefield. |
+| 2 | **Forbidden Technique** | Spell | Fu | Ready a unit. When you play a card with Energy cost [7] or more, you may play this from your trash for [1][Fury][Fury]. Banish this. |
+| 4+1P | **Scorched Earth** | Spell | Fu | [Action] Deal 5 damage split among units at a single battlefield. |
+| 1+1P | **Banner of Conquest** | Gear | Fu | [Deploy] Friendly units here have [Assault]. |
+
+### Jarvan IV, Exemplar of Demacia — Body/Order
+
+- **Legend:** When you play a gear with [Deploy], you may exhaust me and pay [A] to move a friendly unit to that battlefield.
+- **Champion:** Jarvan IV, Royal Heir (7+1P, 7 Might): [Assault] [Tank] When I attack, you may move a unit you control to my battlefield.
+- **Battlefield:** Hunters' Circle: For each player, the first unit or gear they play here on their turn costs [1] less.
+- **The 12:** 6 units, 3 spells, 3 gear. Units by cost: 2-cost ×2, 4-cost ×1, 5-cost ×1, 6-cost ×1, 8-cost ×1
+
+| cost | card | type | dom. | what it does |
+|---|---|---|---|---|
+| 2 | **Overloaded Traveler** | Unit 2M | Bo | While there's a friendly gear with [Deploy] at my battlefield, I have +1 Might. |
+| 2 | **Trifarian Captain** | Unit 1M | Or | When you play me, look at the top 4 cards of your Main Deck. You may reveal from among them a unit or gear with Energy cost no more than [3] and with Power cost no more than [A] and draw it. Recycle the rest. |
+| 4 | **Steadfast Outrider** | Unit 3M | Or | [Tank] While there are 2 or more other friendly units and/or gear at my battlefield, I have +2 Might. |
+| 5 | **Skystrike Squadron** | Unit 4M | Bo | You may return a friendly gear to its owner's hand as an additional cost to play me. If you do, I cost [2] less. [Deflect] |
+| 6+1P | **Armored Tusker** | Unit 4M | Bo | [Shield 3] [Tank] When I move, you may deal damage equal to my [Shield] to a unit at a battlefield. |
+| 8+2P | **Bloodscent Swarm** | Unit 8M | Bo | I cost [2] less for each battlefield you've conquered this turn. |
+| 3 | **Hold 'Em** | Spell | Bo | [Action] This costs [2] less if you've played a unit or gear to a battlefield this turn. Give a unit +3 Might this turn. |
+| 3 | **One-Two Punch** | Spell | Or | [Action] [Buff] a friendly unit and [Stun] an enemy unit. |
+| 3 | **For Demacia!** | Spell | Or | [Reaction] Choose a battlefield. Give friendly units there [Shield 2] this turn. |
+| 1 | **Concert Poster** | Gear | Or | [Deploy] When you play this or when you conquer here, you may pay [1] to play a 1 Might Recruit unit token to your base. |
+| 1 | **Pillaged Armory** | Gear | Bo | [Deploy] When you play this or when you conquer here, [Buff] a friendly unit. |
+| 2+1P | **Protector's Shield** | Gear | Or | [Quick-Draw] [Equip] [1] |
+
+### Seraphine, Starry-Eyed Songstress — Mind/Order
+
+- **Legend:** As an additional cost to play a spell, you may exhaust me and three friendly units to reduce the cost of that spell by [2].
+- **Champion:** Seraphine, Inspiring (4+1P, 3 Might): [Disarm 2] Once each turn, when you exhaust three or more friendly units at the same time, you may draw 1.
+- **Battlefield:** Black Rose Sanctum: For each player, the first time each turn a non-token unit they control dies here, they play a 1 Might Recruit unit token to their base.
+- **The 12:** 7 units, 4 spells, 1 gear. Units by cost: 2-cost ×2, 4-cost ×2, 5-cost ×1, 7-cost ×1, 9-cost ×1
+
+| cost | card | type | dom. | what it does |
+|---|---|---|---|---|
+| 2 | **Meticulous Restorationist** | Unit 2M | Or | When you play a card with Energy cost [7] or more, you may play me from your trash for [Order]. |
+| 2 | **Strigian Oracle** | Unit 2M | Mi | When I become exhausted, [Predict]. |
+| 4 | **Industrious Mechsmith** | Unit 1M | Mi | When you play me, play a 3 Might Mech unit token here. |
+| 4 | **Piltovan Guidebot** | Unit 3M | Mi | When you play a card, you may have my base Might become equal to that card's Energy cost this turn. |
+| 5 | **Herald of the Emperor** | Unit 3M | Or | When you play me, choose a friendly unit. Its base Might becomes 5 this turn. |
+| 7+1P | **Dune Devourer** | Unit 7M | Or | You may kill a friendly unit as an additional cost to play me. If you do, I cost [2] less. [Deflect] |
+| 9+1P | **Party Crasher** | Unit 6M | Or | I cost [1] less for each exhausted unit you control. [Tank] |
+| 3 | **High Note** | Spell | Mi | [Reaction] Give a unit – Might this turn equal to the number of exhausted units you control. |
+| 3 | **Fanfare** | Spell | Mi | The next three times you play a unit this turn, draw 1. |
+| 5 | **Rousing Display** | Spell | Or | [Show Off] a card with Energy cost [7] or more. Play two 1 Might Recruit unit tokens to your base. If you showed off, play four to your base instead.disa |
+| 9+1P | **Supernova** | Spell | Mi | Deal 10 to a unit. Draw 2. |
+| 1 | **Concert Poster** | Gear | Or | [Deploy] When you play this or when you conquer here, you may pay [1] to play a 1 Might Recruit unit token to your base. |
+
+### Evelynn, Agony's Embrace — Body/Chaos
+
+- **Legend:** Once each turn, when you play a card from face down, draw 1. Then, if it's not your turn, discard 1.
+- **Champion:** Evelynn, In Control (4+1P, 4 Might): [Disarm] When I hold, if you control a facedown card here, score 1 point.
+- **Battlefield:** Bandle Scouts' Academy: When you hide a card here, play a Gold gear token exhausted.
+- **The 12:** 8 units, 4 spells, 0 gear. Units by cost: 2-cost ×2, 3-cost ×3, 4-cost ×1, 6-cost ×1, 9-cost ×1
+
+| cost | card | type | dom. | what it does |
+|---|---|---|---|---|
+| 2 | **Sneaky Zeebles** | Unit 1M | Bo | When I conquer, [Add] [A]. |
+| 2 | **Siren of the Shallows** | Unit 1M | Ch | [Disarm] [Ganking] |
+| 3 | **Suave Negotiator** | Unit 3M | Ch | When you play me, choose an opponent. You and that player each draw 1. |
+| 3 | **Reckless Innovator** | Unit 3M | Ch | [Accelerate] When I become exhausted, choose one — Play a Gold gear token exhausted. Pay [Chaos] to draw 1. |
+| 3 | **Gutter Guardian** | Unit 3M | Ch | [Hidden] [Show Off] a card with [Hidden]. When you play me, if you showed off, [Add] [A]. |
+| 4 | **Momentary Companion** | Unit 4M | Ch | [Hidden] When you play me, if it's not your turn, give me [Temporary]. |
+| 6 | **Elnuk Herd** | Unit 5M | Bo | [Hidden] When you play me, give another friendly unit +3 Might this turn, then recycle me if I was played from face down. |
+| 9 | **Wrath of the Freljord** | Unit 7M | Bo | I enter ready. [Shield 3] |
+| 1 | **The Waters' Wage** | Spell | Ch | [Hidden] Play a Gold gear token exhausted. If it's your turn and you played this from face down, play three ready Gold gear tokens instead. |
+| 2 | **Siren's Song** | Spell | Ch | [Reaction] Move an enemy unit that moved this turn. |
+| 3 | **Demon Shade** | Spell | Ch | [Hidden] Choose a friendly unit, then choose one — Move it to an open battlefield. Give it [Ganking] this turn if there are no open battlefields. |
+| 3 | **Hold 'Em** | Spell | Bo | [Action] This costs [2] less if you've played a unit or gear to a battlefield this turn. Give a unit +3 Might this turn. |
+
+### Orianna, Lady of Clockwork — Calm/Mind
+
+- **Legend:** At the start of your Main Phase, you may pay [1] to choose a friendly gear. It becomes a unit gear with Might equal to its Energy cost until you choose another gear with me.
+- **Champion:** Orianna, Exquisite (3, 4 Might): [Shield] I don't deal combat damage unless there's a friendly gear here.
+- **Battlefield:** Hunters' Circle: For each player, the first unit or gear they play here on their turn costs [1] less.
+- **The 12:** 6 units, 3 spells, 3 gear. Units by cost: 2-cost ×1, 3-cost ×2, 4-cost ×2, 5-cost ×1
+
+| cost | card | type | dom. | what it does |
+|---|---|---|---|---|
+| 2 | **Strigian Oracle** | Unit 2M | Mi | When I become exhausted, [Predict]. |
+| 3+1P | **Watchful Curator** | Unit 4M | Ca | Your gear have [Deflect]. |
+| 3 | **Trinket Peddler** | Unit 3M | Mi | [Disarm] |
+| 4 | **Stoic Ferryman** | Unit 2M | Ca | [Shield 3] When you play me to a battlefield, you may move another unit you control here to your base. |
+| 4 | **Industrious Mechsmith** | Unit 1M | Mi | When you play me, play a 3 Might Mech unit token here. |
+| 5 | **Sanctum Conservator** | Unit 5M | Ca | When you play a card with Energy cost [7] or more, ready me. |
+| 1 | **Consult the Heavens** | Spell | Ca | [Reaction] Give a unit [Shield 2] this turn. [Predict]. |
+| 1+1P | **Command: Attack** | Spell | Ca | Choose one — Move a friendly gear with [Deploy] to a battlefield. Look at the top 5 cards of your Main Deck. You may reveal a gear from among them and draw it. Recycle the rest. |
+| 3+1P | **Improvised Projectile** | Spell | Mi | [Action] Choose a friendly gear. Deal damage equal to its Energy cost to a unit at a battlefield. |
+| 1 | **Resource Extractor** | Gear | Mi | [Deploy] At the end of your turn, if you control this battlefield, play a Gold gear token exhausted. |
+| 2 | **Blossoming Dreamroot** | Gear | Ca | [Deploy] When you win a combat here, draw 1. |
+| 3 | **Invigorating Bloom** | Gear | Ca | When you play this, give a friendly unit +3 Might this turn. Exhaust a friendly [Mighty] unit, [exhaust]: Draw 1. |
+
+---
+
+## 6. Radiance rules worth knowing before you play
 
 - **Disarm** (new): the first time a unit with Disarm attacks each combat, an enemy unit there
   gets −1 Might (−2 for Disarm 2). Several Disarm instances add into one trigger.
@@ -223,4 +434,8 @@ overlap, they agree. **Strategy:** riftbound.gg's *Spiritforged Pre-Rift Sealed 
 sealed practice. **Card text:** each card's printed text. Riot's preview feed has wrong
 types and domains on about 45 and 25 Radiance cards respectively, so this page uses the card
 images, plus dotgg's data for 15 cards Riot hasn't published. **Ratings** are this page's own
-read of the cards; no Radiance sealed results existed when it was written.
+read of the cards; no Radiance sealed results existed when it was written. **Champion pack
+contents (§5a):** riftbound.org's *Pre-Rift kits* pages and riftbound.zone's *Radiance Pre-Rift
+Kits: All Nine Seeded Decklists*, both read 20 Oct 2026. They agree on all nine packs, and
+riftbound.gg's *Pre-Rift Sealed Event Strategy Guide for All Kits* (16 Oct) mentions only
+cards from those lists. Riot hasn't published them. Costs and text come from `data/cards.json`.

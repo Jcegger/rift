@@ -134,20 +134,21 @@
    "file": "guides/radiance-pre-rift.md",
    "kicker": null,
    "title": "Radiance Pre-Rift — Sealed Prep",
-   "subtitle": "Friday 16 October 2026 — building and playing a Radiance sealed deck, from the rules and the cards",
-   "date": "2026-10-13",
-   "legend": null,
-   "champion": null,
+   "subtitle": "Pre-Rift week, 16–22 October 2026 — building and playing a Radiance sealed deck, with every champion pack's contents",
+   "date": "2026-10-20",
+   "legend": "Units you play to battlefields you control enter ready.",
+   "champion": "Riven, Broken Blade (4, 4 Might): When I become exhausted, choose one that hasn't been chosen this turn — [Buff] me. Spend my buff to [Stun] an enemy unit. Spend my buff to ready me.",
    "sections": [
     "1. The event in one page",
     "2. Building in 45 minutes",
     "3. What wins sealed",
     "4. The commons and uncommons worth knowing",
     "5. Your champion pack, legend by legend",
-    "6. Radiance rules worth knowing before Friday",
+    "5a. What's in each champion pack",
+    "6. Radiance rules worth knowing before you play",
     "Sources and method"
    ],
-   "words": 2581
+   "words": 6683
   },
   {
    "slug": "reksai-void-burrower",
@@ -333,7 +334,7 @@
     "Mind / Order — Deathknell and answers",
     "What would change this page"
    ],
-   "words": 8451
+   "words": 9258
   },
   {
    "slug": "deckbuilding",
