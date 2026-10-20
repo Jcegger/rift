@@ -167,20 +167,20 @@ const main = async () => {
     // only pick between the winners' own alternatives are the consensus's flex, which the idea
     // page already shows.
     // Worth showing: a legend with no results (the crowd's list or one built from colours —
-    // the only list it has), a new card doing a job better, or a research answer.
-    b.worth = b.kind === "colours" || b.crowd || b.swaps.some((s) => s.kind !== "alt");
+    // the only list it has), or an experiment to try.
+    b.worth = b.kind === "colours" || b.crowd || b.swaps.length > 0;
     brews.push(b);
   }
 
   const out = {
     generatedAt: today,
     source: "lib/brew.mjs and lib/swaps.mjs over data/decks.json (anchor lists, shells, quality), the catalog, docs/archetypes.md (each legend's plan), data/research.json",
-    note: "Winning lists changed on purpose: each starts from its legend's winners (or, for a legend too thin to anchor on, from what its colours' winners play plus its own cards) and changes only what has a reason — other winners' choices, a research answer, or a new card doing a job for less. Untested: log games with them in the match journal.",
+    note: "Net-deck plus experiments: each starts from its legend's winners' consensus (or, before results, the crowd's list) and applies only labelled experiments — a new card doing a job for less, a card rising in posted lists, a research answer. What other winners play instead is listed as options, not applied. Untested: log games in the match journal.",
     method: "docs/deckbuilding.md", newEvents: [...newEvents], brews,
   };
   if (!only) await writeFile(new URL("../data/brews.json", import.meta.url), JSON.stringify(out));
   const worth = brews.filter((b) => b.worth);
-  console.log(`${brews.length} legends · ${worth.length} brews worth showing (${brews.filter((b) => b.crowd).length} from the crowd's lists, ${brews.filter((b) => b.kind === "colours").length} built from colours, ${brews.filter((b) => b.kind === "anchor" && b.swaps.length).length} anchors with swaps) · ${brews.filter((b) => b.kind === "none").length} with nothing to anchor on`);
+  console.log(`${brews.length} legends · ${worth.length} brews worth showing (${brews.filter((b) => b.crowd).length} from the crowd's lists, ${brews.filter((b) => b.kind === "colours").length} built from colours, ${brews.filter((b) => b.swaps.length).length} with experiments) · ${brews.filter((b) => b.kind === "none").length} with nothing to anchor on`);
   for (const b of brews) console.log(`  ${b.kind === "none" ? "--" : b.legal ? "  " : "!!"} ${b.legend.slice(0, 32).padEnd(32)} ${b.kind.padEnd(6)} ${String(b.swaps.length).padStart(2)} swaps · ${b.basis || b.why}${b.sim ? ` · E4 ${b.sim.energy}` : ""}${b.kind !== "none" && !b.legal ? ` · ${b.checks.filter((k) => k.ok === false).map((k) => `${k.label}: ${k.val}`).join("; ")}` : ""}`);
   if (only) for (const b of brews) {
     for (const r of b.rows.filter((r) => r.change)) console.log(`     ${r.change.padEnd(7)} ${r.qty} ${r.name.padEnd(28)} ${r.why}`);

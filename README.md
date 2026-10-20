@@ -55,9 +55,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `data/research.json` - per legend, what the model reads its deck as (engines, signature
   cards it can't explain) and the research questions: long-legal cards that fit its engine
   by text, that its winning lists skip. Answers come from `docs/research.md`.
-- `data/brews.json` - for every legend, a winning list changed on purpose (`lib/brew.mjs`):
-  its winners' consensus with the swaps that have a reason, or, for a legend too thin to
-  anchor on, a list built from what its colours' winners play plus its own cards. Each change
+- `data/brews.json` - for every legend, the net-deck plus experiments (`lib/brew.mjs`): its
+  winners' consensus (or, before results, its crowd's), with only labelled experiments
+  applied — a new card doing a job for less, a card rising in posted lists, a research
+  "test" answer — and what other lists play instead as `options`, not applied. Each change
   says why; `worth` marks the ones that add something. Untested. `scripts/rift brew <legend>`
   prints one; idea pages show it; the bench can start from it.
 - `scripts/rift tune <your deck>` - the swap logic run on one of your saved decks (read

@@ -60,7 +60,7 @@ const main = async () => {
   const today = new Date().toISOString().slice(0, 10);
   const key = (l, s) => `${l}|${s.out}|${s.in}`;
   const have = new Set(log.entries.map((e) => e.key));
-  for (const b of brews?.brews || []) for (const s of (b.swaps || []).concat(b.more || [])) {
+  for (const b of brews?.brews || []) for (const s of (b.swaps || []).concat(b.more || [], b.options || [])) {
     const k = key(b.legend, s);
     if (have.has(k)) continue;
     const t = legends[b.legend]?.cards || {};

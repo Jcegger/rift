@@ -168,6 +168,36 @@ moving an enemy treated as moving your own; Rampage's fight read as a pump), the
 change about 5 copies over 4 swaps and offer one or two more beside the list — core cards
 (80%+ of winning lists) only ever among those offered.
 
+## Net-deck first — and what is fitted to what
+
+At its core this is net-decking: the brew **is** its legend's consensus — its winners', or
+before results its crowd's — and the only changes applied are labelled **experiments** (a
+new card doing a job for less, a card rising in posted lists, a research "test" answer). What
+other winners play instead is listed as **options**, not applied: swapping a majority card
+for a minority one is variation, not improvement, and it was where most of the knobs lived.
+
+The experiments still rest on thresholds, and the evidence behind several is small. Where
+each came from:
+
+| knob | value | set from |
+|---|---|---|
+| core / flex share | 80% / 60% | the measured core–mid–flex split (§2) |
+| change budget | ~9 copies | how far winners stray from each other (§3) |
+| crowd anchor | 8+ lists; first placings ×10 | the blind test (34.9 vs 33.8 at ×10 — a small gain) |
+| new-card swaps per list | at most 2 | the previews' first wave (~3 Radiance copies), **and the backtest** |
+| core cards never changed; plan and engine cards kept; Reaction speed respected | — | **the backtest** and the audit |
+| alternative = 15% of a legend's lists, 2+ lists | — | judgement |
+| passed over = under 3% of 30+ eligible lists | — | judgement |
+| value margins (lib/roles.mjs) | +0.15 flex | judgement; the role reader itself is hand-written |
+| rising = +15 points, 20%+ now, gaining 10 on the card out | — | judgement, untested |
+
+**The backtest has 11 adopted cards behind it, and about five design choices were made
+against it** — that is the overfitting risk, and it is why it now only guards (above 4×
+chance) instead of steering. **The thresholds are frozen as of 20 Oct 2026.** From here a
+knob changes only on the forward scoreboard (`data/swaplog.json`, scored a week after each
+suggestion first appears), once a kind has 30+ scored suggestions — out-of-sample evidence,
+which the backtest never was.
+
 ## What the guides say, and where they part from the data
 
 - riftbound.gg's [Deckbuilding 101](https://riftbound.gg/deckbuilding-101-building-your-first-riftbound-deck/):

@@ -739,8 +739,9 @@ async function cmdIdeas(cat, args) {
     console.log(`ARCHETYPE ${arch.name}: ${sec ? sec.split("\n")[0].split(" — ")[1].replace(/\*.*$/, "").replace(/[\s·]+$/, "") : "not written"}` +
       (p ? ` · measured ${arch.label} (u${p.units} s${p.spells} g${p.gear}, cost ${p.avgCost}, ${p.interaction} interaction)` : ""));
     const f = arch.inferred;
-    if (f?.main) console.log(`  inferred from the cards: ${f.subName} ${f.main} (${Math.round(f.mainShare * 100)}%, next ${f.runnerUp}) · ` +
-      f.layers.map((l) => `${l.n} ${l.name}: ${l.main[0] || "—"}${l.sub[0] ? `/${l.sub[0]}` : ""}`).join(" · "));
+    // The sub-archetype only: the inferred main (aggro…ramp) is about half right.
+    if (f?.subName) console.log(`  built on, from the cards: ${f.subName} (also ${f.subs.slice(1).map((x) => x.name).join(", ")}) · ` +
+      f.layers.map((l) => `${l.n} ${l.name}: ${l.sub[0] || "—"}`).join(" · "));
     // Bullets wrap in the source; a continuation line is indented, so fold it back in.
     if (sec) console.log(sec.split("\n").slice(1).join("\n").replace(/\n {2,}(?=\S)/g, " ").split("\n")
       .filter((x) => /^- \*\*/.test(x)).map((x) => "  " + x.replace(/\*\*/g, "")).join("\n"));
@@ -814,9 +815,11 @@ async function cmdBrew(args) {
     if (b.sim) console.log(`  goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3${b.runeNote ? ` · ${b.runeNote}` : ""}`);
     const built = b.rows.filter((r) => r.change === "built" || r.change === "champion");
     if (built.length) { console.log(`\n  BUILT FROM ITS COLOURS AND ITS OWN CARDS`); for (const r of built) console.log(`    ${r.qty} ${pad(r.name, 30)} ${r.why}`); }
-    if (b.swaps.length) { console.log(`\n  SWAPS (${b.swaps.reduce((a, s) => a + s.copies, 0)} copies)`); for (const s of b.swaps) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}\n            ${s.why}`); }
-    if (!b.swaps.length && b.kind === "anchor") console.log("\n  No change has a reason: the consensus stands.");
-    if (b.more?.length) { console.log("\n  ALSO WORTH TRYING (reasoned, past the budget or the two-new-card cap)"); for (const s of b.more) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}\n            ${s.why}`); }
+    // The net-deck is the consensus; only experiments change it. Options are shown, not applied.
+    if (b.swaps.length) { console.log(`\n  EXPERIMENTS — applied to the net-deck (${b.swaps.reduce((a, s) => a + s.copies, 0)} copies)`); for (const s of b.swaps) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}\n            ${s.why}`); }
+    else if (b.kind === "anchor") console.log("\n  No experiment: the net-deck stands as it is.");
+    if (b.more?.length) { console.log("\n  MORE EXPERIMENTS (past the caps)"); for (const s of b.more) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}\n            ${s.why}`); }
+    if (b.options?.length) { console.log("\n  OPTIONS — what other lists play instead (not applied: variation, not improvement)"); for (const s of b.options.slice(0, 8)) console.log(`    ${s.copies} ${s.out} → ${s.in}: ${s.why}`); }
     console.log(`\n  THE 40\n    ${b.rows.map((r) => `${r.qty} ${r.name}${r.change ? "*" : ""}`).join(", ")}\n    (* changed)`);
   }
 }

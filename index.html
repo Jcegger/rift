@@ -1173,11 +1173,13 @@ const guideLink = (u) => {
 function inferredLine(a) {
   const f = a?.inferred;
   if (!f?.main) return "";
-  return `<details class="small" style="margin:4px 0"><summary><b>Inferred from the cards:</b> ${esc(f.subName || "")} ${esc(f.main)}
-      <span class="dim">(${Math.round(f.mainShare * 100)}% of the vote; next ${esc(f.runnerUp || "—")} · also ${f.subs.slice(1).map((x) => esc(x.name)).join(", ")})</span></summary>
-    <ol class="tiny" style="margin:4px 0 0 18px">${f.layers.map((l) => `<li><b>${esc(l.name)}</b>${l.cards.length ? ` (${esc(l.cards.slice(0, 3).join(", "))})` : ""}: ${esc(l.main.join(" / ") || "—")}${l.sub.length ? ` · ${esc(l.sub.join(", "))}` : ""}
+  // Only the sub-archetype: the inferred MAIN (aggro…ramp) is about half right — pace is how a
+  // deck is played, which card text barely shows — so the heading's word stands alone.
+  return `<details class="small" style="margin:4px 0"><summary><b>Built on, from the cards:</b> ${esc(f.subName || "")}
+      <span class="dim">(also ${f.subs.slice(1).map((x) => esc(x.name)).join(", ")})</span></summary>
+    <ol class="tiny" style="margin:4px 0 0 18px">${f.layers.map((l) => `<li><b>${esc(l.name)}</b>${l.cards.length ? ` (${esc(l.cards.slice(0, 3).join(", "))})` : ""}${l.sub.length ? `: ${esc(l.sub.join(", "))}` : ""}
       ${l.evidence.length ? `<span class="dim"> — ${esc(l.evidence.slice(0, 3).map((e) => `${e.card}: ${e.why.concat(e.sub).slice(0, 3).join(", ")}`).join("; "))}</span>` : ""}</li>`).join("")}</ol>
-    <p class="tiny dim" style="margin:2px 0 0">Pattern-matched from card text, earlier layers weighing more. Good at what a deck is built on; weak at its pace — guides and the heading above are better judges of aggro vs midrange.</p></details>`;
+    <p class="tiny dim" style="margin:2px 0 0">Pattern-matched from card text, earlier layers weighing more. It reads what a deck is built on; whether it plays aggro or midrange is the heading's call, from guides and results.</p></details>`;
 }
 function profileLine(a) {
   if (!a?.profile) return `<p class="note">No lists in the snapshot to measure.</p>${inferredLine(a)}`;
@@ -1207,15 +1209,16 @@ const brewFor = (name) => (BREWS?.brews || []).find((b) => b.legend === name) ||
 function brewPanel(name) {
   const b = brewFor(name);
   if (!b || !b.worth) return "";
-  const kinds = { alt: "Winners' alternative", test: "Research says test", upgrade: "New card, same job", rising: "Rising in posted lists" };
+  const kinds = { alt: "Other lists' choice", test: "Research says test", upgrade: "New card, same job", rising: "Rising in posted lists" };
   const ported = b.kind === "colours" ? b.rows.filter((r) => r.change === "champion" || /signature|own lists/.test(r.why || "")) : b.rows.filter((r) => r.change === "champion");
-  return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · ${b.kind === "colours" ? "built from its colours' winners and its own cards" : b.crowd ? "no results yet: the crowd's list, changed on purpose" : "a winning list, changed on purpose"}</span><h2>A brew for ${esc(name.split(",")[0])}</h2></div>
+  return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · ${b.kind === "colours" ? "built from its colours' winners and its own cards" : b.crowd ? "no results yet: the crowd's list, plus experiments" : "the net-deck, plus experiments"}</span><h2>Experimental ${esc(name.split(",")[0])}</h2></div>
       <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=brew">Tweak</a></div></div>
     <p class="note">${esc(BREWS.note)} Built from ${esc(b.basis)}.${b.sim ? ` Goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3.` : ""} Method: <a href="#/guide/deckbuilding">Deckbuilding</a>.</p>
     ${ported.length ? `<div class="lbl" style="margin-top:6px">${esc(name.split(",")[0])}'s own</div>${ported.map((r) => `<div class="erow"><span class="n">${r.qty} <button class="cardlink" data-card="${esc(codeForName(r.name) || r.code)}">${esc(r.name)}</button></span><span class="tiny dim">${esc(r.why)}</span></div>`).join("")}` : ""}
-    ${b.swaps.length ? `<div class="lbl" style="margin-top:6px">Swaps</div>${b.swaps.map((s) => `<div class="erow" style="align-items:flex-start"><span class="n">${s.copies} <button class="cardlink" data-card="${esc(codeForName(s.out) || "")}">${esc(s.out)}</button> → <button class="cardlink" data-card="${esc(s.inCode)}">${esc(s.in)}</button>
+    ${b.swaps.length ? `<div class="lbl" style="margin-top:6px">Experiments, applied</div>${b.swaps.map((s) => `<div class="erow" style="align-items:flex-start"><span class="n">${s.copies} <button class="cardlink" data-card="${esc(codeForName(s.out) || "")}">${esc(s.out)}</button> → <button class="cardlink" data-card="${esc(s.inCode)}">${esc(s.in)}</button>
       <span class="tiny dim" style="display:block">${esc(s.why)}</span></span><span class="pill ${s.kind === "upgrade" ? "later" : ""}">${esc(kinds[s.kind] || s.kind)}</span></div>`).join("")}` : ""}
-    ${b.more?.length ? `<div class="lbl" style="margin-top:6px">Also worth trying</div><p class="tiny dim" style="margin:0">Reasoned, but past the budget or the two-new-card cap: ${b.more.map((s) => `${s.copies} ${esc(s.out)} → ${esc(s.in)} (${esc(kinds[s.kind] || s.kind)})`).join(" · ")}</p>` : ""}
+    ${b.more?.length ? `<div class="lbl" style="margin-top:6px">More experiments</div><p class="tiny dim" style="margin:0">Past the caps: ${b.more.map((s) => `${s.copies} ${esc(s.out)} → ${esc(s.in)} (${esc(kinds[s.kind] || s.kind)})`).join(" · ")}</p>` : ""}
+    ${b.options?.length ? `<div class="lbl" style="margin-top:6px">Options — what other lists play instead</div><p class="tiny dim" style="margin:0">Not applied: variation, not improvement. ${b.options.slice(0, 8).map((s) => `${esc(s.out)} → ${esc(s.in)}`).join(" · ")}</p>` : ""}
     <p class="tiny dim" style="margin-top:6px">The 40: ${b.rows.map((r) => `${r.qty} ${esc(r.name)}${r.change ? "*" : ""}`).join(", ")} (* changed)${b.runeNote ? ` · ${esc(b.runeNote)}` : ""}</p></section>`;
 }
 async function fillGamePlan() {
