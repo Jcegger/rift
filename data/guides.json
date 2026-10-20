@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-19",
+ "generatedAt": "2026-10-20",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -333,7 +333,29 @@
     "Mind / Order — Deathknell and answers",
     "What would change this page"
    ],
-   "words": 5847
+   "words": 8451
+  },
+  {
+   "slug": "deckbuilding",
+   "file": "docs/deckbuilding.md",
+   "kicker": "Deckbuilding · how winners build",
+   "title": "Deckbuilding — How Winning Lists Are Actually Built",
+   "subtitle": "Riftbound — measured from 1,240 placed lists (20 Aug–19 Oct 2026), against what the guides say, and what it means for building a deck",
+   "date": "2026-10-19",
+   "legend": null,
+   "champion": null,
+   "sections": [
+    "1. A 40 is about 18 cards",
+    "2. Most of a list is settled",
+    "3. How far winners stray",
+    "4. Changes are like for like — by role",
+    "5. Placed and unplaced lists look alike",
+    "6. Pilots matter, a little",
+    "What this means for building a deck",
+    "What was built from this",
+    "What the guides say, and where they part from the data"
+   ],
+   "words": 1461
   }
  ]
 }

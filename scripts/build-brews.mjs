@@ -1,36 +1,30 @@
 #!/usr/bin/env node
-// Regenerates data/brews.json: a brew for every legend — a legal 40 built from its own
-// cards outward by lib/brew.mjs — with why each card is in, a goldfish run, and how far
-// it is from what the legend's lists actually play. Fetches nothing; it reads the deck
-// snapshot, the catalog, docs/archetypes.md and data/research.json, so it runs after
-// build-research in the refresh.
+// Regenerates data/brews.json: for every legend, a winning list changed on purpose
+// (lib/brew.mjs) — its winners' consensus with the role swaps lib/swaps.mjs has a reason
+// for, or, for a legend too thin to anchor on, a port of a proven list in its colours.
+// Fetches nothing; it reads the deck snapshot, the catalog, docs/archetypes.md and
+// data/research.json, so it runs after build-research in the refresh.
 //
 //   node scripts/build-brews.mjs [legend substring]
 //
-// What it computes for lib/brew.mjs:
-// - QUALITY: for each card, the share of lists that could play it (their legend's
-//   colours allow it) that do. A Radiance card is counted only over lists posted since
-//   Radiance was revealed, so its preview adoption counts and its absence from Vendetta
-//   does not. Fewer than MIN_ELIGIBLE such lists is unknown, not zero.
-// - TEMPLATES: the units and cost curve of real decks of each main archetype, averaged
-//   over legends whose heading in docs/archetypes.md names that archetype.
-// - BATTLEFIELDS: the three the legend's lists use most, else its colour pair's, else
-//   the field's.
-// The runes start from the Power the brew asks of each domain and take the simulator's
-// rune sweep when it says a split plays better.
+// The method is docs/deckbuilding.md's; the swap logic is backtested against the Radiance
+// previews in lib/swaps.test.mjs. What it computes here:
+// - ANCHOR LISTS: a legend's placed lists from Radiance-format events when it has
+//   MIN_PLACED of them, else all its placed lists.
+// - SHELLS for ports: the same-colour legend with MIN_SHELL+ placed lists that shares the
+//   most of this legend's plan (Engine line and heading), most placed lists breaking ties.
+// - QUALITY: the share of lists that could play a card that do, for the "passed over" rule.
+// - NEW: a card from a set legal for under NEW_DAYS — no results can have judged it yet.
 
 import { readFile, writeFile } from "node:fs/promises";
-import { indexCatalog } from "../lib/decks.mjs";
+import { indexCatalog, SET_LEGAL_FROM } from "../lib/decks.mjs";
 import { counter } from "../lib/consensus.mjs";
-import { inferLegend, headingSubKeys, MAINS } from "../lib/infer.mjs";
-import { brew, BUCKETS, W } from "../lib/brew.mjs";
+import { headingSubKeys } from "../lib/infer.mjs";
+import { anchorBrew, portBrew } from "../lib/brew.mjs";
 import { docEngineLine, docEngineKeys } from "../lib/research.mjs";
 import { buildDeck, simulate, sweepRunes } from "../lib/sim.mjs";
 
-const MIN_ELIGIBLE = 5;
-const MIN_PLACED = 5;
-const RAD_REVEALED = "2026-09-25";   // Radiance previews began at the Los Angeles RQ
-const GAMES = 2000;
+const MIN_PLACED = 5, MIN_SHELL = 10, MIN_ELIGIBLE = 5, NEW_DAYS = 30, GAMES = 2000;
 const read = async (f) => JSON.parse(await readFile(new URL(`../data/${f}`, import.meta.url), "utf8"));
 const round = (x, k = 2) => Math.round(x * 10 ** k) / 10 ** k;
 
@@ -43,72 +37,48 @@ const main = async () => {
   const byShort = new Map(idx.cards.map((c) => [c.c.replace(/\/\d+$/, ""), c]));
   const card = (code) => idx.BY.get(code) || byShort.get(String(code).replace(/\/\d+$/, "")) || null;
   const { consensus } = counter(idx, card);
+  const today = new Date().toISOString().slice(0, 10);
 
   const usable = snap.decks.filter((d) => d.lg && card(d.lg) && !Object.keys(d.cards).some((k) => idx.bannedNames.has(card(k)?.n)));
-  const identOf = (d) => (card(d.lg).d || []).filter((x) => x !== "Colorless").sort().join("/");
-  const hasRad = (d) => Object.keys(d.cards).some((k) => card(k)?.s === "RAD");
+  const placedOf = (d) => (d.tour && d.pl != null) || Number(d.cp) > 0;
+  const identOf = (L) => (L.d || []).filter((x) => x !== "Colorless").sort().join("/");
+  const names = (d) => new Set(Object.keys(d.cards).map((k) => card(k)?.n).filter(Boolean));
+  const newSet = (s) => { const from = SET_LEGAL_FROM[s] || (banned?.standard?.upcoming || []).find((u) => u.set === s)?.from; return !!from && (from > today || (Date.parse(today) - Date.parse(from)) / 864e5 < NEW_DAYS); };
+  const isNew = (c) => newSet(c.s);
+  // A Radiance-format event: half or more of its lists run a card from the newest set.
+  const evs = new Map();
+  for (const d of usable) { if (!d.ev) continue; const v = evs.get(d.ev) || evs.set(d.ev, { n: 0, nw: 0 }).get(d.ev); v.n++; if (Object.keys(d.cards).some((k) => card(k) && newSet(card(k).s))) v.nw++; }
+  const newEvents = new Set([...evs].filter(([, v]) => v.n >= 8 && v.nw / v.n >= 0.5).map(([e]) => e));
 
-  // QUALITY, counted per colour identity first so each card sums the identities that allow it.
-  const lists = { all: new Map(), era: new Map() }, has = { all: new Map(), era: new Map() };
-  for (const d of usable) {
-    const id = identOf(d);
-    const era = d.dt >= RAD_REVEALED || hasRad(d);
-    for (const k of era ? ["all", "era"] : ["all"]) {
-      lists[k].set(id, (lists[k].get(id) || 0) + 1);
-      for (const n of new Set(Object.keys(d.cards).map((x) => card(x)?.n).filter(Boolean))) {
-        const m = has[k].get(n) || has[k].set(n, new Map()).get(n);
-        m.set(id, (m.get(id) || 0) + 1);
-      }
-    }
-  }
+  // QUALITY: share of the lists whose colours allow a card that run it.
+  const lists = new Map(), has = new Map();
+  for (const d of usable) { const id = identOf(card(d.lg)); lists.set(id, (lists.get(id) || 0) + 1); for (const n of names(d)) { const m = has.get(n) || has.set(n, new Map()).get(n); m.set(id, (m.get(id) || 0) + 1); } }
   const quality = new Map();
   for (const c of idx.cards) {
     if (c.v || quality.has(c.n) || !["Unit", "Spell", "Gear"].includes(c.t)) continue;
-    const k = c.s === "RAD" ? "era" : "all";
     const ds = (c.d || []).filter((x) => x !== "Colorless");
     let n = 0, w = 0;
-    for (const [id, cnt] of lists[k]) if (ds.every((x) => id.split("/").includes(x))) { n += cnt; w += has[k].get(c.n)?.get(id) || 0; }
-    quality.set(c.n, n >= MIN_ELIGIBLE ? { rate: round(w / n, 3), n, era: k === "era" } : { rate: null, n: 0, era: k === "era" });
+    for (const [id, k] of lists) if (ds.every((x) => id.split("/").includes(x))) { n += k; w += has.get(c.n)?.get(id) || 0; }
+    quality.set(c.n, n >= MIN_ELIGIBLE ? { rate: round(w / n, 3), n } : { rate: null, n: 0 });
   }
 
-  // The legends, Starter-only printings included (the Bladesman).
   const legends = new Map();
   for (const c of idx.cards) if (c.t === "Legend" && !c.v) { const n = idx.legendName(c), h = legends.get(n); if (!h || (/ - Starter$/.test(h.n) && !/ - Starter$/.test(c.n))) legends.set(n, c); }
   const byLegend = new Map();
   for (const d of usable) { const n = idx.legendName(card(d.lg)); (byLegend.get(n) || byLegend.set(n, []).get(n)).push(d); }
-  const headingLabel = (name) => (md.match(new RegExp(`^### ${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")} — ([^\\n*·]+)`, "m")) || [])[1] || "";
-  const headingMain = (name) => {
-    const h = (md.match(new RegExp(`^### ${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")} — ([^\\n*·]+)`, "m")) || [])[1] || "";
-    return MAINS.find((m) => h.trim().split(/[\s,]+/).includes(m)) || null;
+  const heading = (name) => (md.match(new RegExp(`^### ${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")} — ([^\\n*·]+)`, "m")) || [])[1]?.trim() || "";
+  const engineOf = (name) => [...new Set([...docEngineKeys(docEngineLine(md, name)), ...headingSubKeys(heading(name))])].filter((k) => k !== "none");
+  // The lists a legend is anchored on: Radiance-format placings if there are enough.
+  const anchorLists = (name) => {
+    const placed = (byLegend.get(name) || []).filter(placedOf);
+    const era = placed.filter((d) => newEvents.has(d.ev));
+    return era.length >= MIN_PLACED ? { ds: era, era: true } : placed.length >= MIN_PLACED ? { ds: placed, era: false } : null;
   };
-  const coreOf = (name) => {
-    const ls = byLegend.get(name) || [];
-    const placed = ls.filter((d) => (d.tour && d.pl != null) || Number(d.cp) > 0);
-    const from = placed.length >= MIN_PLACED ? placed : ls;
-    return from.length ? { from, con: consensus(from) } : null;
-  };
-
-  // TEMPLATES from the consensus lists of legends whose heading names each main archetype.
-  const acc = Object.fromEntries(MAINS.map((m) => [m, { n: 0, units: 0, buckets: BUCKETS.map(() => 0) }]));
-  const cores = new Map();
-  for (const [name] of legends) {
-    const core = coreOf(name); cores.set(name, core);
-    const m = headingMain(name);
-    if (!core || !m || core.from.length < MIN_PLACED) continue;
-    const rows = core.con.main.map((r) => ({ ...r, c: card(r.code) })).filter((r) => r.c && ["Unit", "Spell", "Gear"].includes(r.c.t));
-    const t = acc[m]; t.n++;
-    for (const r of rows) { t.units += r.c.t === "Unit" ? r.copies : 0; t.buckets[BUCKETS.findIndex(([lo, hi]) => (r.c.e ?? 0) >= lo && (r.c.e ?? 0) <= hi)] += r.copies; }
-  }
-  const templates = {};
-  for (const [m, t] of Object.entries(acc)) if (t.n) {
-    const b = t.buckets.map((x) => x / t.n), s = b.reduce((a, x) => a + x, 0);
-    templates[m] = { from: t.n, units: Math.round(t.units / t.n), buckets: b.map((x) => Math.round((x * 40) / s)) };
-  }
-
-  const bfOf = (lsts) => {
-    const cnt = new Map();
-    for (const d of lsts) for (const [k] of Object.entries(d.cards)) { const c = card(k); if (c?.t === "Battlefield" && !idx.bannedNames.has(c.n)) { const e = cnt.get(c.n) || { name: c.n, code: c.c, n: 0 }; e.n++; cnt.set(c.n, e); } }
-    return [...cnt.values()].sort((a, b) => b.n - a.n);
+  const shareMap = (ds) => { if (!ds || ds.length < 10) return null; const m = new Map(); for (const d of ds) for (const n of names(d)) m.set(n, (m.get(n) || 0) + 1 / ds.length); return m; };
+  const poolOf = (L) => {
+    const ident = new Set((L.d || []).filter((x) => x !== "Colorless")), seen = new Set();
+    return idx.cards.filter((c) => !c.v && ["Unit", "Spell", "Gear"].includes(c.t) && (c.d || []).every((x) => x === "Colorless" || ident.has(x)) && !idx.bannedNames.has(c.n)
+      && !(idx.notYetStandard(c) && !idx.notYetStandard(c).from) && !/ - Starter$/.test(c.n) && !seen.has(c.n) && seen.add(c.n));
   };
   const runeCards = {};
   for (const c of idx.cards) if (c.t === "Rune" && !c.v && (c.d || []).length === 1 && !runeCards[c.d[0]]) runeCards[c.d[0]] = c.c;
@@ -116,54 +86,57 @@ const main = async () => {
   const brews = [];
   for (const [name, L] of legends) {
     if (only && !name.toLowerCase().includes(only)) continue;
-    const core = cores.get(name);
-    const coreRows = core ? core.con.main.map((r) => ({ ...r, c: card(r.code) })).filter((r) => r.c) : null;
-    const inferred = inferLegend(L, idx, coreRows);
-    const pairLists = usable.filter((d) => identOf(d) === (L.d || []).filter((x) => x !== "Colorless").sort().join("/"));
-    const bfs = [];
-    for (const src of [bfOf(byLegend.get(name) || []), bfOf(pairLists), bfOf(usable)]) for (const b of src) if (bfs.length < 3 && !bfs.some((x) => x.name === b.name)) bfs.push(b);
-    const weights = process.env.BREW_W ? Object.fromEntries(process.env.BREW_W.split(",").map((x, i) => [["fit", "quality", "main"][i], Number(x)])) : W;
-    // Its own lists' shares, by name — only from 10 lists up: with five, one list is 20%.
-    let own = null;
-    if (core && core.from.length >= 10) { own = new Map(); for (const d of core.from) for (const n of new Set(Object.keys(d.cards).map((k) => card(k)?.n).filter(Boolean))) own.set(n, (own.get(n) || 0) + 1 / core.from.length); }
-    const b = brew(L, idx, { inferred, main: headingMain(name) || inferred.main, engine: [...new Set([...docEngineKeys(docEngineLine(md, name)), ...headingSubKeys(headingLabel(name))])], quality, own, templates, research: R, battlefields: bfs, runeCards, weights });
+    const engine = engineOf(name);
+    const ctx = { pool: poolOf(L), quality, isNew, research: R, engine };
+    const meta = { legend: name, code: L.c, heading: heading(name), engine };
+    const a = anchorLists(name);
+    let b;
+    if (a) {
+      b = anchorBrew(L, idx, consensus(a.ds), card, { ...ctx, own: shareMap(a.ds) },
+        { ...meta, basis: `${a.ds.length} placed ${name.split(",")[0]} lists${a.era ? " from Radiance-format events" : ""}`, lists: a.ds.length });
+    } else {
+      // A port: the same-colour legend whose plan overlaps most, with enough placings.
+      const shells = [...legends].filter(([n, S]) => n !== name && identOf(S) === identOf(L) && anchorLists(n)?.ds.length >= MIN_SHELL)
+        .map(([n, S]) => ({ name: n, legend: S, lists: anchorLists(n).ds.length, overlap: engineOf(n).filter((k) => engine.includes(k)).length }))
+        .sort((x, y) => y.overlap - x.overlap || y.lists - x.lists);
+      const s = shells[0];
+      if (!s) { brews.push({ ...meta, kind: "none", why: `no list to anchor on: under ${MIN_PLACED} placed ${name.split(",")[0]} lists and no proven list in its colours`, swaps: [], rows: [] }); continue; }
+      const own = byLegend.get(name) || [];
+      b = portBrew(L, idx, { ...s, con: consensus(anchorLists(s.name).ds), engine: engineOf(s.name) }, card, { ...ctx, own: shareMap(own) },
+        { ...meta, basis: `ported from ${s.lists} placed ${s.name.split(",")[0]} lists (same colours${s.overlap ? ", same plan" : ""})`, lists: own.filter(placedOf).length });
+    }
 
-    // Runes: take the sweep's split when it plays better.
-    let sim = null;
+    // Goldfish, and whether another rune split plays better (offered, never applied to an
+    // anchor — its runes are the winners').
     try {
       const deck = buildDeck(b.cards, { BY: idx.BY });
       const sw = sweepRunes(deck, { games: 1000 });
-      if (sw?.change) {
-        const [d1, d2] = sw.doms;
-        b.runes = { [d1]: sw.best.k, [d2]: 12 - sw.best.k };
-        for (const [d, n] of Object.entries(b.runes)) if (runeCards[d]) b.cards[runeCards[d]] = n;
-        b.runeNote = `the rune sweep plays ${sw.best.split} better than the Power split`;
-      }
-      const s = simulate(buildDeck(b.cards, { BY: idx.BY }), { games: GAMES, seed: 1 });
-      sim = { energy: round(s.play.spent.slice(0, 4).reduce((a, x) => a + x, 0), 1), units3: round(s.play.units[2], 1), twoUnitsByT3: round(s.play.twoUnitsByT3), noPlayT1T2: round(s.play.noPlayT1T2) };
-    } catch { /* a brew the sim cannot read stays unsimulated */ }
-
-    // How far from what the legend's lists play: copies in common, of 40.
-    let vs = null;
-    if (core) {
-      const have = new Map(coreRows.filter((r) => ["Unit", "Spell", "Gear"].includes(r.c.t)).map((r) => [r.c.n, r.copies]));
-      const common = b.rows.reduce((a, r) => a + Math.min(r.qty, have.get(r.name) || 0), 0);
-      vs = { lists: core.from.length, common, of: 40, notInLists: b.rows.filter((r) => !have.has(r.name)).map((r) => r.name) };
-    }
-    brews.push({ ...b, sim, vsLists: vs, radCards: b.rows.filter((r) => r.rad).reduce((a, r) => a + r.qty, 0),
-      legal: b.checks.every((k) => k.ok === "later"), legalFrom: b.checks.find((k) => k.ok === "later")?.val || null });
+      if (sw?.change) b.runeNote = `the rune sweep plays ${sw.best.split} better`;
+      const s = simulate(deck, { games: GAMES, seed: 1 });
+      b.sim = { energy: round(s.play.spent.slice(0, 4).reduce((x, y) => x + y, 0), 1), units3: round(s.play.units[2], 1), twoUnitsByT3: round(s.play.twoUnitsByT3) };
+    } catch { /* a list the sim cannot read stays unsimulated */ }
+    // Worth showing: a port, a new card doing a job better, or a research answer. Swaps that
+    // only pick between the winners' own alternatives are the consensus's flex, which the idea
+    // page already shows.
+    b.worth = b.kind === "port" || b.swaps.some((s) => s.kind !== "alt");
+    brews.push(b);
   }
 
   const out = {
-    generatedAt: new Date().toISOString().slice(0, 10),
-    source: "lib/brew.mjs over the catalog, data/decks.json (quality, battlefields, templates), docs/archetypes.md (main archetype), data/research.json (held-back cards)",
-    note: "Brews, not results: built by rule from each legend's own cards outward — chosen champion, signature, then the cards that fit its sub-archetypes, weighted by how often players pick them when they can. Nobody has played these lists. Every card says why it is in.",
-    templates, brews,
+    generatedAt: today,
+    source: "lib/brew.mjs and lib/swaps.mjs over data/decks.json (anchor lists, shells, quality), the catalog, docs/archetypes.md (each legend's plan), data/research.json",
+    note: "Winning lists changed on purpose, not generated: each starts from its legend's winners (or, for a legend too thin to anchor on, a proven list in its colours) and changes only what has a reason — other winners' choices, a research answer, or a new card doing a job for less. Untested: log games with them in the match journal.",
+    method: "docs/deckbuilding.md", newEvents: [...newEvents], brews,
   };
   if (!only) await writeFile(new URL("../data/brews.json", import.meta.url), JSON.stringify(out));
-  console.log(`${brews.length} brews · templates: ${Object.entries(templates).map(([m, t]) => `${m} u${t.units} [${t.buckets.join(" ")}] (${t.from})`).join(" · ")}`);
-  for (const b of brews) console.log(`  ${b.legal ? "  " : "!!"} ${b.legend.slice(0, 32).padEnd(32)} ${(b.subName + " " + b.main).padEnd(26)} champ ${String(b.champion).slice(0, 24).padEnd(24)} RAD ${String(b.radCards).padStart(2)} · ${b.vsLists ? `${b.vsLists.common}/40 shared with ${b.vsLists.lists} lists` : "no lists"}${b.sim ? ` · E4 ${b.sim.energy} U3 ${b.sim.units3}` : ""}${b.legal ? "" : ` · ${b.checks.filter((k) => k.ok === false).map((k) => `${k.label}: ${k.val}`).join("; ")}`}`);
-  if (only) for (const b of brews) { for (const r of b.rows) console.log(`     ${r.qty} ${r.name.padEnd(30)} ${String(r.cost).padStart(2)} ${r.type.padEnd(5)} ${r.role.padEnd(9)} ${r.why}`); console.log(`     runes ${JSON.stringify(b.runes)} ${b.runeNote || ""} · battlefields ${b.battlefields.map((x) => x.name).join(", ")}`); }
+  const worth = brews.filter((b) => b.worth);
+  console.log(`${brews.length} legends · ${worth.length} brews worth showing (${brews.filter((b) => b.kind === "port").length} ports, ${brews.filter((b) => b.kind === "anchor" && b.swaps.length).length} anchors with swaps) · ${brews.filter((b) => b.kind === "none").length} with nothing to anchor on`);
+  for (const b of brews) console.log(`  ${b.kind === "none" ? "--" : b.legal ? "  " : "!!"} ${b.legend.slice(0, 32).padEnd(32)} ${b.kind.padEnd(6)} ${String(b.swaps.length).padStart(2)} swaps · ${b.basis || b.why}${b.sim ? ` · E4 ${b.sim.energy}` : ""}${b.kind !== "none" && !b.legal ? ` · ${b.checks.filter((k) => k.ok === false).map((k) => `${k.label}: ${k.val}`).join("; ")}` : ""}`);
+  if (only) for (const b of brews) {
+    if (b.cut?.length) console.log(`     cut from the shell: ${b.cut.join(", ")}`);
+    for (const r of b.rows.filter((r) => r.change)) console.log(`     ${r.change.padEnd(7)} ${r.qty} ${r.name.padEnd(28)} ${r.why}`);
+    for (const s of b.swaps) console.log(`     swap    out ${s.copies} ${s.out} → in ${s.in}: ${s.why}`);
+  }
 };
 
 if (import.meta.url === `file://${process.argv[1]}`) main().catch((e) => { console.error(`build-brews: ${e.message}`); process.exit(1); });

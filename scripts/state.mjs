@@ -799,26 +799,25 @@ async function cmdIdeas(cat, args) {
   } catch { /* offline: the consensus stands on its own */ }
 }
 
-// A brew (data/brews.json, scripts/build-brews.mjs): a legal 40 built from a legend's own
-// cards outward. Read-only and offline, like meta: it never touches the live Supabase row.
+// A brew (data/brews.json, scripts/build-brews.mjs): a winning list changed on purpose —
+// its legend's consensus with reasoned role swaps, or a port of a proven list in its
+// colours. Read-only and offline, like meta: it never touches the live Supabase row.
 async function cmdBrew(args) {
   const q = args.join(" ").toLowerCase();
   const B = await readJson(url("brews.json")).catch(() => null);
   if (!B) { console.error("no data/brews.json — run node scripts/build-brews.mjs"); process.exit(1); }
   const hits = B.brews.filter((b) => b.legend.toLowerCase().includes(q));
-  if (!q || !hits.length) { console.log(`brews (${B.generatedAt}): ${B.brews.map((b) => b.legend.split(",")[0]).join(", ")}\nscripts/rift brew <legend>`); return; }
+  if (!q || !hits.length) { console.log(`brews (${B.generatedAt}), ${B.brews.filter((b) => b.worth).length} worth a look: ${B.brews.filter((b) => b.worth).map((b) => `${b.legend.split(",")[0]}${b.kind === "port" ? " (port)" : ""}`).join(", ")}\nscripts/rift brew <legend>`); return; }
   for (const b of hits.slice(0, 2)) {
-    console.log(`BREW ${b.legend}: ${b.subName} ${b.main}${b.inferredMain !== b.main ? ` (the cards alone say ${b.inferredMain})` : ""} · untested, built by rule\n  ${B.note}`);
-    console.log(`  chosen champion ${b.champion} · ${b.radCards} Radiance cards · ${b.vsLists ? `${b.vsLists.common}/40 shared with ${b.vsLists.lists} ${b.legend.split(",")[0]} lists` : "no lists to compare"}` +
-      (b.sim ? ` · goldfish: ${b.sim.energy} Energy turns 1–4, ${b.sim.units3} units by turn 3` : "") + (b.legal ? "" : " · NOT LEGAL"));
-    for (const role of ["champion", "signature", "fit", "idea", "staple"]) {
-      const rows = b.rows.filter((r) => r.role === role);
-      if (!rows.length) continue;
-      console.log(`\n  ${{ champion: "CHAMPION", signature: "SIGNATURE", fit: "FITS THE PLAN", idea: "UNTESTED IDEAS (legal all along, rarely picked)", staple: "GOOD CARDS IN THESE COLOURS" }[role]}`);
-      for (const r of rows) console.log(`    ${r.qty} ${pad(r.name, 30)} ${pad(`${r.cost ?? "-"}E ${r.type}`, 10)} ${r.why}`);
-    }
-    console.log(`\n  runes ${Object.entries(b.runes).map(([d, n]) => `${n} ${d}`).join(" / ")}${b.runeNote ? ` (${b.runeNote})` : ""} · battlefields ${b.battlefields.map((x) => x.name).join(", ")}`);
-    if (b.vsLists?.notInLists.length) console.log(`  not in any ${b.legend.split(",")[0]} list: ${b.vsLists.notInLists.join(", ")}`);
+    if (b.kind === "none") { console.log(`BREW ${b.legend}: none — ${b.why}`); continue; }
+    console.log(`BREW ${b.legend} (${b.kind}) · ${b.heading || ""} · ${b.basis}${b.legal ? "" : " · NOT LEGAL"}\n  ${B.note}`);
+    if (b.sim) console.log(`  goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3${b.runeNote ? ` · ${b.runeNote}` : ""}`);
+    if (b.cut?.length) console.log(`\n  CUT FROM ${b.shell.toUpperCase()}'S LIST (its legend's own package)\n    ${b.cut.join(", ")}`);
+    const ported = b.rows.filter((r) => r.change === "port" || r.change === "champion");
+    if (ported.length) { console.log(`\n  ADDED FOR ${b.legend.split(",")[0].toUpperCase()}`); for (const r of ported) console.log(`    ${r.qty} ${pad(r.name, 30)} ${r.why}`); }
+    if (b.swaps.length) { console.log(`\n  SWAPS (${b.swaps.reduce((a, s) => a + s.copies, 0)} copies)`); for (const s of b.swaps) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}\n            ${s.why}`); }
+    if (!b.swaps.length && b.kind === "anchor") console.log("\n  No change has a reason: the consensus stands.");
+    console.log(`\n  THE 40\n    ${b.rows.map((r) => `${r.qty} ${r.name}${r.change ? "*" : ""}`).join(", ")}\n    (* changed)`);
   }
 }
 

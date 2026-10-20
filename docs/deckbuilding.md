@@ -116,6 +116,24 @@ an unknown's — **as a tiebreak, not a verdict**; ten players is a small sample
    of adoption is cards that do an existing job better.
 7. **Weight pilots lightly** — a tiebreak between lists, not a reason to copy one.
 
+## What was built from this
+
+`data/brews.json` (`scripts/build-brews.mjs`, `lib/brew.mjs`, `lib/swaps.mjs`,
+`lib/roles.mjs`) replaces the first, from-scratch brews: each is a legend's winning list
+changed on purpose, or a port of a proven list in its colours, by the rules above —
+role swaps only, about 9 copies at most, one champion, signatures at 3 or none, the legend's
+own cards and its plan's cards never cut, and nothing claimed to outdo a card whose text the
+role reader cannot read.
+
+**The backtest.** Run on the Vendetta winning lists of the six older legends that placed in
+the Radiance previews, using only what was known before Radiance, its "new card, same job"
+swaps were adopted by the pros **4 times out of 12 (33%) — against 3.9% for a random
+Radiance card in the same colours** — and found 4 of the 11 cards the pros took up
+(Trifarian Captain for LeBlanc, Reckless Innovator and Battle Preparations for Irelia,
+Bedeviling Stranger for Kennen, Elnuk Herd for Rengar). Eight times chance on a small sample:
+good enough to offer swaps as leads, not to trust one blindly. `lib/swaps.test.mjs` keeps it
+above 4× chance; it is a guard, not a target.
+
 ## What the guides say, and where they part from the data
 
 - riftbound.gg's [Deckbuilding 101](https://riftbound.gg/deckbuilding-101-building-your-first-riftbound-deck/):

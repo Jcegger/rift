@@ -55,10 +55,11 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `data/research.json` - per legend, what the model reads its deck as (engines, signature
   cards it can't explain) and the research questions: long-legal cards that fit its engine
   by text, that its winning lists skip. Answers come from `docs/research.md`.
-- `data/brews.json` - a brew for every legend: a legal 40 built by `lib/brew.mjs` from the
-  legend's own cards outward, each card with why it is in, a goldfish run, and how many of
-  its 40 the legend's lists share. Untested by definition. `scripts/rift brew <legend>` prints
-  one; each idea page shows it and the bench can start from it.
+- `data/brews.json` - for every legend, a winning list changed on purpose (`lib/brew.mjs`):
+  its winners' consensus with the role swaps that have a reason, or, for a legend too thin to
+  anchor on, a port of a proven list in its colours. Each change says why; `worth` marks the
+  ones that add something (a port, a new card for a job, a research answer). Untested.
+  `scripts/rift brew <legend>` prints one; idea pages show it; the bench can start from it.
 - `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
   Radiance-format events, a consensus list counted from its placed lists (or brews,
   labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
@@ -77,21 +78,25 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `scripts/build-research.mjs` - queues what each legend's winners skip as questions, with
   the evidence that usually explains it. Fetches nothing. See `docs/research.md`.
 - `scripts/build-brews.mjs` - builds `data/brews.json`. Fetches nothing; runs after
-  build-research. It computes what `lib/brew.mjs` scores with: card quality (the share of
-  lists that could play a card that do — Radiance cards over Radiance-era lists only), curve
-  templates from real decks of each main archetype, and battlefields.
-- `lib/brew.mjs` - one brew, in the order `lib/infer.mjs` reads a deck: chosen champion (the
-  champion unit that fits best, ×2), signature (3 in total), then the colour pair's legal
-  pool scored by fit to its sub-archetypes and its `docs/archetypes.md` Engine line (payoffs
-  double), quality, and fit to its main archetype — the heading's when it has one — filled
-  to that archetype's curve, as a target: a slot only takes a decent card. It builds toward the
-  sub-archetype the heading names as well as the inference's, so a misread (Vex as movement)
-  is corrected by "stun control". A card legal all along that under 3% of eligible lists pick
-  stays out — the field has answered it — unless it is the legend's own champion unit, a
-  choice 15%+ of the legend's own lists make (10+ lists), or a payoff for its own engine,
-  offered as at most two flagged ideas. Cards the legend's winners skip stay out until answered;
-  `[Unique]` cards are one copy. Never priced. Limits: it caps every card at 3 copies, so a
-  deck of one card (Yasuo's 39 Spiderlings) is out of its reach. Tests: `lib/brew.test.mjs`.
+  build-research. Picks each legend's anchor lists (Radiance-format placings when there are
+  5+, else all placings) or, under 5, a port shell (the same-colour legend with 10+ placings
+  sharing the most of its plan), and computes card quality for the passed-over rule.
+- `lib/brew.mjs` - one brew, by `docs/deckbuilding.md`: ANCHOR (the consensus plus swaps)
+  or PORT (a proven same-colour list, its legend's own package — champion, signatures,
+  engine payoffs — replaced with this legend's: one chosen champion, signatures at 3 or none,
+  its engine payoffs, then the colours' most-picked cards; then the same swaps). Tests:
+  `lib/brew.test.mjs`.
+- `lib/swaps.mjs` - the changes to a winning list, each a role swap with a reason: another
+  winner's choice for the same job (15%+ of the legend's lists), a research answer of
+  "test", or a new-set card that does the job for less (at most two — a set's first wave is
+  small). About 9 copies at most. Never touches the legend's own cards, its engine payoffs,
+  the cards of its heading's plan, or a card the role reader cannot read. Backtested against
+  the Radiance previews in `lib/swaps.test.mjs`: new-card swaps adopted 33% of the time vs
+  3.9% for a random Radiance card.
+- `lib/roles.mjs` - the job a card does (early body, threat, card advantage, removal, area
+  damage, counter, trick, protection, disruption, ramp, movement), sized from its text, and a
+  rough value net of Energy and Power (Power weighs more). `understood()` says whether the
+  roles account for the card's text; when they do not, nothing can be said to outdo it.
 - `lib/research.mjs` - reads `data/research.json` for the site and `scripts/rift`: a card
   the winners skip is held back from suggestions until its question is answered "test".
 - `lib/consensus.mjs` - counting a set of lists into the list they add up to; shared by

@@ -1193,35 +1193,22 @@ function profileLine(a) {
 function gamePlanPanel(name) {
   return `<section class="panel" id="gameplan"><h2>Game plan</h2>${profileLine(archFor(name))}<div class="guide" data-plan="${esc(name)}"><p class="note">Loading the game plan…</p></div></section>${researchPanel(name)}${brewPanel(name)}`;
 }
-// A brew (data/brews.json, lib/brew.mjs): a legal 40 built from the legend's own cards
-// outward. Nobody has played it; every card says why it is in.
+// A brew (data/brews.json, lib/brew.mjs): a winning list changed on purpose — the
+// legend's consensus with reasoned role swaps, or a port of a proven list in its colours.
 const brewFor = (name) => (BREWS?.brews || []).find((b) => b.legend === name) || null;
 function brewPanel(name) {
   const b = brewFor(name);
-  if (!b) return "";
-  const groups = [["champion", "Chosen champion"], ["signature", "Signature"], ["fit", "Fits the plan"], ["idea", "Untested ideas — legal all along, rarely picked"], ["staple", "Good cards in these colours"]];
-  return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · built by rule</span><h2>A brew from the cards: ${esc(b.subName)} ${esc(b.main)}</h2></div>
+  if (!b || !b.worth) return "";
+  const kinds = { alt: "Winners' alternative", test: "Research says test", upgrade: "New card, same job" };
+  const ported = b.rows.filter((r) => r.change === "port" || r.change === "champion");
+  return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · ${b.kind === "port" ? `ported from ${esc(b.shell)}` : "a winning list, changed on purpose"}</span><h2>A brew for ${esc(name.split(",")[0])}</h2></div>
       <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=brew">Tweak</a></div></div>
-    <p class="note">${esc(BREWS.note)} ${b.vsLists ? `It shares ${b.vsLists.common} of 40 cards with the ${b.vsLists.lists} lists for this legend.` : "There are no lists for this legend to compare it with."}${b.sim ? ` Goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3.` : ""}${b.radCards ? ` ${b.radCards} Radiance cards.` : ""}</p>
-    ${groups.map(([role, label]) => { const rows = b.rows.filter((r) => r.role === role); return rows.length ? `<div class="lbl" style="margin-top:6px">${label}</div>${rows.map((r) => `<div class="erow"><span class="n">${r.qty} <button class="cardlink" data-card="${esc(codeForName(r.name) || r.code)}">${esc(r.name)}</button>${r.rad ? ` <span class="pill later">RAD</span>` : ""}</span><span class="tiny dim">${esc(r.why)}</span></div>`).join("")}` : ""; }).join("")}
-    <p class="tiny dim" style="margin-top:6px">Runes ${Object.entries(b.runes).map(([d, n]) => `${n} ${esc(d)}`).join(" / ")}${b.runeNote ? ` (${esc(b.runeNote)})` : ""} · battlefields ${b.battlefields.map((x) => esc(x.name)).join(", ")}${b.vsLists?.notInLists.length ? ` · in no list for this legend yet: ${b.vsLists.notInLists.map(esc).join(", ")}` : ""}</p></section>`;
-}
-// What the model of this legend and its winning lists disagree on (data/research.json,
-// answers in docs/research.md). Shown so a suggestion is never read without its doubts.
-function researchPanel(name) {
-  const L = RES?.legends?.[name];
-  if (!L) return "";
-  const items = (RES.items || []).filter((i) => i.legend === name);
-  const flags = [L.flags.includes("thin") ? `Only ${L.placed} placed list${L.placed === 1 ? "" : "s"}: what the winners skip can't be told from what nobody has tried yet, so nothing here is a question yet.` : "",
-    L.flags.includes("legend-unread") ? "The legend's own text matches no engine the reader knows; its engines come from the other cards only." : "",
-    L.unread?.length ? `Signature cards the reader can't place in an engine: ${L.unread.map(esc).join(", ")}. The deck uses them for something the patterns don't see.` : ""].filter(Boolean);
-  if (!items.length && !flags.length) return "";
-  return `<section class="panel"><h2>Open questions</h2><p class="note">Where what the cards say and what the winning lists play disagree. A card the winners skip is held back from suggestions until it is answered.</p>
-    ${flags.map((f) => `<p class="small">${f}</p>`).join("")}
-    ${items.map((i) => `<div class="engine"><div class="headrow"><h3>${esc(i.title)}</h3><span class="pill ${i.verdict ? "" : "later"}">${i.verdict ? esc(VERDICTS[i.verdict] || i.verdict) : "open"}</span></div>
-      ${i.answer ? `<p class="small">${esc(i.answer)}</p>` : ""}
-      ${(i.cards || []).length ? `<p class="tiny dim" style="margin:4px 0">${i.cards.map((q) => `${esc(q.name)} ${q.with}/${L.placed}${q.homes[0] ? ` (${esc(q.homes[0].name.split(",")[0])} ${pctI(q.homes[0].share)})` : ""}${q.verdict ? ` — ${esc(VERDICTS[q.verdict] || q.verdict)}` : ""}`).join(" · ")}</p>` : ""}
-      ${i.verdict ? "" : `<ul class="tiny">${i.hypotheses.map((h) => `<li>${esc(h)}</li>`).join("")}</ul>`}</div>`).join("")}</section>`;
+    <p class="note">${esc(BREWS.note)} Built from ${esc(b.basis)}.${b.sim ? ` Goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3.` : ""} Method: <a href="#/guide/deckbuilding">Deckbuilding</a>.</p>
+    ${b.cut?.length ? `<p class="small"><b>Cut from ${esc(b.shell)}'s list</b> (its legend's own package): ${esc(b.cut.join(", "))}</p>` : ""}
+    ${ported.length ? `<div class="lbl" style="margin-top:6px">Added for ${esc(name.split(",")[0])}</div>${ported.map((r) => `<div class="erow"><span class="n">${r.qty} <button class="cardlink" data-card="${esc(codeForName(r.name) || r.code)}">${esc(r.name)}</button></span><span class="tiny dim">${esc(r.why)}</span></div>`).join("")}` : ""}
+    ${b.swaps.length ? `<div class="lbl" style="margin-top:6px">Swaps</div>${b.swaps.map((s) => `<div class="erow" style="align-items:flex-start"><span class="n">${s.copies} <button class="cardlink" data-card="${esc(codeForName(s.out) || "")}">${esc(s.out)}</button> → <button class="cardlink" data-card="${esc(s.inCode)}">${esc(s.in)}</button>
+      <span class="tiny dim" style="display:block">${esc(s.why)}</span></span><span class="pill ${s.kind === "upgrade" ? "later" : ""}">${esc(kinds[s.kind] || s.kind)}</span></div>`).join("")}` : ""}
+    <p class="tiny dim" style="margin-top:6px">The 40: ${b.rows.map((r) => `${r.qty} ${esc(r.name)}${r.change ? "*" : ""}`).join(", ")} (* changed)${b.runeNote ? ` · ${esc(b.runeNote)}` : ""}</p></section>`;
 }
 async function fillGamePlan() {
   const el = document.querySelector("[data-plan]");

@@ -24,6 +24,7 @@ const EXTRA = [
   { file: "docs/fundamentals.md", kicker: "Reference · every deck" },
   { file: "docs/strategy.md", kicker: "Strategy · every deck" },
   { file: "docs/archetypes.md", kicker: "Archetypes · every legend" },
+  { file: "docs/deckbuilding.md", kicker: "Deckbuilding · how winners build" },
 ];
 
 // The frontmatter is pandoc's, so read it rather than inventing a second one.
