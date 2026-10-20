@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-19",
+ "generatedAt": "2026-10-20",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -38,10 +38,10 @@
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "unknown": 180,
-   "Asia": 79,
+   "unknown": 183,
+   "Asia": 82,
+   "Europe": 47,
    "North America": 7,
-   "Europe": 44,
    "Oceania": 4
   },
   "registryEventsByRegion": {

@@ -1,21 +1,39 @@
 {
- "generatedAt": "2026-10-19",
+ "generatedAt": "2026-10-20",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 29,
+ "carriedFromPrevious": 30,
  "tags": {
-  "News": 43,
+  "Metagame": 21,
+  "News": 44,
   "Guides": 5,
   "Legends": 24,
-  "Metagame": 20,
   "Events": 21,
   "Sets": 4,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "10 Most Buffed Legends with Radiance",
+   "dt": "2026-10-20",
+   "url": "https://riftbound.gg/10-most-buffed-legends-with-radiance",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Koko Lopez Banned from Competitive Riftbound Until January 1, 2029 for Cheating",
+   "dt": "2026-10-20",
+   "url": "https://riftbound.gg/koko-lopez-banned-from-competitive-riftbound-until-january-1-2029-for-cheating",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
   {
    "title": "Radiance Nexus Night Promos",
    "dt": "2026-10-17",
