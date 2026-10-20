@@ -125,25 +125,29 @@ champion, signatures at 3 or none, the legend's own cards and its plan's cards n
 and nothing claimed to outdo a card whose text the role reader cannot read. A legend too
 thin to anchor on is built from what its colours' winners play.
 
-**The blind test.** Hide a legend's lists from everything, build it as if nobody had played
-it, and count what it shares with its real winners' consensus, over the 26 legends with 10+
-placings (`lib/blind.test.mjs`):
+**The blind test.** Hide a legend's lists, build it, and count what it shares with its
+real winners' consensus, over the 26 legends with 10+ placings (`lib/blind.test.mjs`):
 
 | | of 40 |
 |---|---|
 | ceiling — two random halves of the legend's own winning lists | **36.2** |
-| built from its colours: per-legend card shares + its own package and plan | **19.6** |
+| **the crowd** — placings hidden, its posted lists kept | **33.1** |
+| built blind from its colours: per-legend card shares + its own package | 19.6 |
 | the colours' most popular cards | 17.6 |
 | porting one same-colour legend's list (the first design) | 14.2 |
 
-Three things it taught. **Winners converge** — two halves of a legend's lists share 36 of 40
-— so there is a real list to find. **A winning list is mostly its colours' staples (54% of
-copies are among the colours' 25 most-played cards) plus its legend's own package**, not
-another legend's list, which is why porting lost to plain popularity. And **card text does
-not say which cards winners choose**: weighting other legends by a plan read from text made
-it worse (18.7). The legends it misses worst are the ones built around one idea nobody else
-in their colours plays — Jayce (4 of 40), Yasuo's Spiderlings (0) — where only play finds
-the list. About half the ceiling, blind: a floor to build from, not a deck to copy.
+What it taught. **Winners converge** — two halves of a legend's lists share 36 of 40. **So
+does the crowd**: a legend's unplaced lists share 33–34 of 40 with its winners', and even
+the first 10 lists ever posted share 31.6. Proven pilots' lists did no better than the
+crowd's, view counts slightly worse, and elite finishes (top 8 at 64+ players) agree with
+all placings on 37.6 of 40 — **in this game the strong players and the crowd build nearly
+the same lists**. Where they part, the pros are ahead: Yasuo's 26 posted lists play
+movement; all 12 of its winners play the Spiderling swarm. So the first placings steer the
+crowd — the crowd plus a legend's first two results predicts its later winners (34.9) better
+than the crowd (33.8) or the results alone (30.8). Building blind from colours, with no lists
+at all, reaches only half the ceiling: a winning list is mostly its colours' staples plus its
+legend's own package, and card text does not say which cards winners choose (weighting
+other legends by a plan read from text made it worse, 18.7).
 
 **The backtest.** Run on the Vendetta winning lists of the six older legends that placed in
 the Radiance previews, using only what was known before Radiance, its "new card, same job"

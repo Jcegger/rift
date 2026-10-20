@@ -81,14 +81,15 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   build-research. `makeBrewer()` holds its inputs — anchor lists (Radiance-format placings
   when there are 5+, else all placings), per-legend card shares, quality — and can HIDE a
   legend's lists from all of them, which is how `lib/blind.test.mjs` builds blind.
-- `lib/brew.mjs` - one brew, by `docs/deckbuilding.md`: ANCHOR (the consensus plus swaps) or
-  COLOURS (for a legend under 5 placings: the cards its colours' winners pick, averaged per
-  legend, plus one chosen champion, its signature at 3, a lift for its plan's cards and its
-  own few lists' choices; then the same swaps). Tests: `lib/brew.test.mjs`, and
-  `lib/blind.test.mjs` — hide each legend with 10+ placings, build it blind, and count what
-  it shares with its winners: 19.6 of 40, against 17.6 for the colours' most popular cards
-  and a ceiling of 36.2 (two halves of the legend's own lists). Porting one same-colour
-  legend's list, the first design, scored 14.2.
+- `lib/brew.mjs` - one brew, by `docs/deckbuilding.md`, anchored on the best evidence a
+  legend has: its winners' consensus (5+ placings); before that, its CROWD — every posted
+  list, its first placings weighted 10× — since a legend's posted lists share 33 of 40 cards
+  with its eventual winners' and the first results steer them where pros found something
+  the crowd had not (Yasuo's Spiderlings); only with under 8 lists, COLOURS (its colours'
+  winners' cards plus its own package). Then the swaps. Tests: `lib/brew.test.mjs`, and
+  `lib/blind.test.mjs` — hide a legend's placings and score what is built against its
+  winners: crowd 33.1 of 40 (ceiling 36.2), built blind from colours 19.6, the colours' most
+  popular cards 17.6; porting one same-colour legend's list, the first design, 14.2.
 - `lib/swaps.mjs` - the changes to a winning list, each with a reason: another winner's
   choice for the same job or the same slot (type, within one Energy; 15% of the legend's
   lists and at least two of them), split the way winners split slots (2 + 1); a research

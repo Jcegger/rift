@@ -24,7 +24,9 @@ import { anchorBrew, coloursBrew } from "../lib/brew.mjs";
 import { docEngineLine, docEngineKeys } from "../lib/research.mjs";
 import { buildDeck, simulate, sweepRunes } from "../lib/sim.mjs";
 
-const MIN_PLACED = 5, MIN_SHELL = 10, MIN_ELIGIBLE = 5, NEW_DAYS = 30, GAMES = 2000;
+// MIN_CROWD: with fewer placings, a legend's posted lists are the anchor — the consensus of
+// a legend's unplaced lists shares 34 of 40 cards with its winners' (lib/blind.test.mjs).
+const MIN_PLACED = 5, MIN_CROWD = 8, FIRST_W = 10, MIN_ELIGIBLE = 5, NEW_DAYS = 30, GAMES = 2000;
 const read = async (f) => JSON.parse(await readFile(new URL(`../data/${f}`, import.meta.url), "utf8"));
 const round = (x, k = 2) => Math.round(x * 10 ** k) / 10 ** k;
 
@@ -33,7 +35,9 @@ const round = (x, k = 2) => Math.round(x * 10 ** k) / 10 ** k;
 // be built blind and compared with what its winners actually play (lib/blind.test.mjs).
 // blindEngine: read the legend's plan from card text alone (lib/infer.mjs), not from
 // docs/archetypes.md, whose Engine lines were written with its lists in view.
-export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", hide = null, blindEngine = false }) {
+//   hideMode: "all" hides every list of the legend (blind); "placed" only its placings, as
+//   a legend looks before it has results (its posted lists remain).
+export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", hide = null, hideMode = "all", blindEngine = false }) {
   const known = new Set(cat.cards.map((c) => c.c));
   const idx = indexCatalog([...cat.cards, ...(extras.cards || []).filter((c) => c.c && !known.has(c.c))], banned);
   const byShort = new Map(idx.cards.map((c) => [c.c.replace(/\/\d+$/, ""), c]));
@@ -42,7 +46,8 @@ export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", hide 
   const today = new Date().toISOString().slice(0, 10);
 
   const usableAll = snap.decks.filter((d) => d.lg && card(d.lg) && !Object.keys(d.cards).some((k) => idx.bannedNames.has(card(k)?.n)));
-  const usable = hide ? usableAll.filter((d) => idx.legendName(card(d.lg)) !== hide) : usableAll;
+  const placedOf0 = (d) => (d.tour && d.pl != null) || Number(d.cp) > 0;
+  const usable = hide ? usableAll.filter((d) => idx.legendName(card(d.lg)) !== hide || (hideMode === "placed" && !placedOf0(d))) : usableAll;
   const placedOf = (d) => (d.tour && d.pl != null) || Number(d.cp) > 0;
   const identOf = (L) => (L.d || []).filter((x) => x !== "Colorless").sort().join("/");
   const names = (d) => new Set(Object.keys(d.cards).map((k) => card(k)?.n).filter(Boolean));
@@ -77,7 +82,17 @@ export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", hide 
   const anchorLists = (name) => {
     const placed = (byLegend.get(name) || []).filter(placedOf);
     const era = placed.filter((d) => newEvents.has(d.ev));
-    return era.length >= MIN_PLACED ? { ds: era, era: true } : placed.length >= MIN_PLACED ? { ds: placed, era: false } : null;
+    if (era.length >= MIN_PLACED) return { ds: era, era: true, basis: "placed" };
+    if (placed.length >= MIN_PLACED) return { ds: placed, era: false, basis: "placed" };
+    // No results yet: the crowd's list. Every posted list counts, placed or not — and the
+    // first placings steer it, each worth FIRST_W posted lists: the crowd plus a legend's
+    // first two results predicts its later winners better (34.9 of 40) than either alone
+    // (crowd 33.8, two results 30.8). Pros sometimes find what the crowd has not — Yasuo's
+    // crowd plays movement; every winner plays the Spiderling swarm.
+    const all = byLegend.get(name) || [];
+    if (all.length < MIN_CROWD) return null;
+    const un = all.filter((d) => !placedOf(d));
+    return { ds: [...un, ...placed.flatMap((d) => Array(FIRST_W).fill(d))], era: false, basis: placed.length ? "crowd+results" : "crowd", lists: all.length, placed: placed.length };
   };
   const shareMap = (ds, min = MIN_PLACED) => { if (!ds || ds.length < min) return null; const m = new Map(); for (const d of ds) for (const n of names(d)) m.set(n, (m.get(n) || 0) + 1 / ds.length); return m; };
   const poolOf = (L) => {
@@ -97,11 +112,14 @@ export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", hide 
   function brewOne(name, { forcePort = false, noSwaps = false } = {}) {
     const L = legends.get(name);
     const engine = engineOf(name);
-    const ctx = { pool: poolOf(L), quality, isNew, research: name === hide ? null : R, engine };
+    const ctx = { pool: poolOf(L), quality, isNew, research: name === hide ? null : R, engine, ...(noSwaps ? { swapBudget: 0 } : {}) };
     const meta = { legend: name, code: L.c, heading: heading(name), engine };
     const a = forcePort ? null : anchorLists(name);
-    if (a) return anchorBrew(L, idx, consensus(a.ds), card, { ...ctx, own: shareMap(a.ds), ownLists: a.ds.length },
-      { ...meta, basis: `${a.ds.length} placed ${name.split(",")[0]} lists${a.era ? " from Radiance-format events" : ""}`, lists: a.ds.length });
+    if (a) return anchorBrew(L, idx, consensus(a.ds), card, { ...ctx, own: shareMap(a.ds), ownLists: a.lists ?? a.ds.length, ownLabel: a.basis === "placed" ? "winning lists" : "posted lists" },
+      { ...meta, crowd: a.basis !== "placed",
+        basis: a.basis === "crowd" ? `${a.lists} posted ${name.split(",")[0]} lists — no results yet, so the crowd's list (posted lists predict winners' closely)`
+          : a.basis === "crowd+results" ? `${a.lists} posted ${name.split(",")[0]} lists, its ${a.placed} placing${a.placed === 1 ? "" : "s"} weighted ${FIRST_W}× — the crowd, steered by its first results`
+          : `${a.ds.length} placed ${name.split(",")[0]} lists${a.era ? " from Radiance-format events" : ""}`, lists: a.lists ?? a.ds.length });
     // Too few lists to anchor on: build it from its colours' winners and its own cards.
     const own = byLegend.get(name) || [];
     const bfCount = new Map();
@@ -145,7 +163,9 @@ const main = async () => {
     // Worth showing: a port, a new card doing a job better, or a research answer. Swaps that
     // only pick between the winners' own alternatives are the consensus's flex, which the idea
     // page already shows.
-    b.worth = b.kind === "colours" || b.swaps.some((s) => s.kind !== "alt");
+    // Worth showing: a legend with no results (the crowd's list or one built from colours —
+    // the only list it has), a new card doing a job better, or a research answer.
+    b.worth = b.kind === "colours" || b.crowd || b.swaps.some((s) => s.kind !== "alt");
     brews.push(b);
   }
 
@@ -157,7 +177,7 @@ const main = async () => {
   };
   if (!only) await writeFile(new URL("../data/brews.json", import.meta.url), JSON.stringify(out));
   const worth = brews.filter((b) => b.worth);
-  console.log(`${brews.length} legends · ${worth.length} brews worth showing (${brews.filter((b) => b.kind === "colours").length} built from colours, ${brews.filter((b) => b.kind === "anchor" && b.swaps.length).length} anchors with swaps) · ${brews.filter((b) => b.kind === "none").length} with nothing to anchor on`);
+  console.log(`${brews.length} legends · ${worth.length} brews worth showing (${brews.filter((b) => b.crowd).length} from the crowd's lists, ${brews.filter((b) => b.kind === "colours").length} built from colours, ${brews.filter((b) => b.kind === "anchor" && b.swaps.length).length} anchors with swaps) · ${brews.filter((b) => b.kind === "none").length} with nothing to anchor on`);
   for (const b of brews) console.log(`  ${b.kind === "none" ? "--" : b.legal ? "  " : "!!"} ${b.legend.slice(0, 32).padEnd(32)} ${b.kind.padEnd(6)} ${String(b.swaps.length).padStart(2)} swaps · ${b.basis || b.why}${b.sim ? ` · E4 ${b.sim.energy}` : ""}${b.kind !== "none" && !b.legal ? ` · ${b.checks.filter((k) => k.ok === false).map((k) => `${k.label}: ${k.val}`).join("; ")}` : ""}`);
   if (only) for (const b of brews) {
     for (const r of b.rows.filter((r) => r.change)) console.log(`     ${r.change.padEnd(7)} ${r.qty} ${r.name.padEnd(28)} ${r.why}`);

@@ -1201,7 +1201,7 @@ function brewPanel(name) {
   if (!b || !b.worth) return "";
   const kinds = { alt: "Winners' alternative", test: "Research says test", upgrade: "New card, same job" };
   const ported = b.kind === "colours" ? b.rows.filter((r) => r.change === "champion" || /signature|own lists/.test(r.why || "")) : b.rows.filter((r) => r.change === "champion");
-  return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · ${b.kind === "colours" ? "built from its colours' winners and its own cards" : "a winning list, changed on purpose"}</span><h2>A brew for ${esc(name.split(",")[0])}</h2></div>
+  return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · ${b.kind === "colours" ? "built from its colours' winners and its own cards" : b.crowd ? "no results yet: the crowd's list, changed on purpose" : "a winning list, changed on purpose"}</span><h2>A brew for ${esc(name.split(",")[0])}</h2></div>
       <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=brew">Tweak</a></div></div>
     <p class="note">${esc(BREWS.note)} Built from ${esc(b.basis)}.${b.sim ? ` Goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3.` : ""} Method: <a href="#/guide/deckbuilding">Deckbuilding</a>.</p>
     ${ported.length ? `<div class="lbl" style="margin-top:6px">${esc(name.split(",")[0])}'s own</div>${ported.map((r) => `<div class="erow"><span class="n">${r.qty} <button class="cardlink" data-card="${esc(codeForName(r.name) || r.code)}">${esc(r.name)}</button></span><span class="tiny dim">${esc(r.why)}</span></div>`).join("")}` : ""}
