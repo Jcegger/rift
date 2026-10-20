@@ -31,6 +31,10 @@
   {
    "what": "\u22123 Kai'Sa, Survivor, \u22121 Harnessed Dragon, \u22122 Vanguard Captain, \u22122 Spectral Matron, \u22121 Xin Zhao, Vigilant, \u22121 Vi, Peacekeeper, \u22121 Soaring Scout, \u22121 Seal of Unity, \u22121 Sacrifice, \u22121 Ferrous Forerunner",
    "why": "The slots that do not feed the engine. Kai'Sa, Survivor (56% \u2192 38%) and Sacrifice (41% \u2192 26%) are falling in posted lists anyway; the 8-drop Dragon gives way to Mordekaiser, Dominating and the Spirits as the removal."
+  },
+  {
+   "what": "Option: 2 Hidden Blade",
+   "why": "Why it is not in the list: only 1 of the 5 Radiance-preview placings runs it (2 of 6 placings counting a Vendetta one), under the two-list bar for an option \u2014 though 56% of all posted Mordekaiser lists do, falling this week (63% \u2192 50%, data/rising.json). What it does: [Hidden] [Action], kill a unit at a battlefield, and its controller draws 2. This deck is light on removal (Realm of Death, Dominating, Harnessed Dragon or Mournful Spirit), so it is the cleanest answer to a big unit \u2014 at the price of two cards for them, which a grindy value deck feels. Try it in for the least-used 2-drops if big threats beat you."
   }
  ],
  "plan": [

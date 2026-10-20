@@ -1195,6 +1195,23 @@ function profileLine(a) {
 function gamePlanPanel(name) {
   return `<section class="panel" id="gameplan"><h2>Game plan</h2>${profileLine(archFor(name))}<div class="guide" data-plan="${esc(name)}"><p class="note">Loading the game plan…</p></div></section>${researchPanel(name)}${risingPanel(name)}${brewPanel(name)}`;
 }
+// What the model of this legend and its winning lists disagree on (data/research.json,
+// answers in docs/research.md). Shown so a suggestion is never read without its doubts.
+function researchPanel(name) {
+  const L = RES?.legends?.[name];
+  if (!L) return "";
+  const items = (RES.items || []).filter((i) => i.legend === name);
+  const flags = [L.flags.includes("thin") ? `Only ${L.placed} placed list${L.placed === 1 ? "" : "s"}: what the winners skip can't be told from what nobody has tried yet, so nothing here is a question yet.` : "",
+    L.flags.includes("legend-unread") ? "The legend's own text matches no engine the reader knows; its engines come from the other cards only." : "",
+    L.unread?.length ? `Signature cards the reader can't place in an engine: ${L.unread.map(esc).join(", ")}. The deck uses them for something the patterns don't see.` : ""].filter(Boolean);
+  if (!items.length && !flags.length) return "";
+  return `<section class="panel"><h2>Open questions</h2><p class="note">Where what the cards say and what the winning lists play disagree. A card the winners skip is held back from suggestions until it is answered.</p>
+    ${flags.map((f) => `<p class="small">${f}</p>`).join("")}
+    ${items.map((i) => `<div class="engine"><div class="headrow"><h3>${esc(i.title)}</h3><span class="pill ${i.verdict ? "" : "later"}">${i.verdict ? esc(VERDICTS[i.verdict] || i.verdict) : "open"}</span></div>
+      ${i.answer ? `<p class="small">${esc(i.answer)}</p>` : ""}
+      ${(i.cards || []).length ? `<p class="tiny dim" style="margin:4px 0">${i.cards.map((q) => `${esc(q.name)} ${q.with}/${L.placed}${q.homes[0] ? ` (${esc(q.homes[0].name.split(",")[0])} ${pctI(q.homes[0].share)})` : ""}${q.verdict ? ` — ${esc(VERDICTS[q.verdict] || q.verdict)}` : ""}`).join(" · ")}</p>` : ""}
+      ${i.verdict ? "" : `<ul class="tiny">${i.hypotheses.map((h) => `<li>${esc(h)}</li>`).join("")}</ul>`}</div>`).join("")}</section>`;
+}
 // What this legend's posted lists are taking up and dropping this week (data/rising.json).
 function risingPanel(name) {
   const v = RISING?.legends?.[name];

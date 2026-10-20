@@ -3303,5 +3303,21 @@ section('The documentation');
      'the refresh commits nothing when this file fails');
 }
 
+/* ══ the site's script ═══════════════════════════════════════════════════ */
+// A function called from a page template but defined nowhere fails only when that page
+// renders — 20 Oct 2026: an edit dropped researchPanel and every idea page broke
+// ("researchPanel is not defined"). Every ${name(…)} in index.html's script must exist.
+section("The site's script");
+{
+  const html = readFileSync(join(ROOT, 'index.html'), 'utf8');
+  const js = [...html.matchAll(/<script type="module">([\s\S]*?)<\/script>/g)].map((m) => m[1]).join('\n');
+  const defined = new Set([...js.matchAll(/(?:function\s+|(?:const|let|var)\s+)([A-Za-z_$][\w$]*)/g)].map((m) => m[1]));
+  for (const m of js.matchAll(/import\s*\{([^}]*)\}/g)) for (const n of m[1].split(',')) defined.add(n.trim().split(/\s+as\s+/).pop());
+  const builtins = new Set(['String', 'Number', 'Math', 'JSON', 'Object', 'Array', 'Date', 'Boolean', 'encodeURIComponent', 'decodeURIComponent', 'parseInt', 'parseFloat', 'isNaN']);
+  const called = new Set([...js.matchAll(/\$\{\s*([A-Za-z_$][\w$]*)\(/g)].map((m) => m[1]));
+  const missing = [...called].filter((n) => !defined.has(n) && !builtins.has(n));
+  ok(`every function a template calls is defined (${called.size} checked)`, !missing.length, missing.length ? `not defined: ${missing.join(', ')}` : '');
+}
+
 console.log(failures ? `\n${failures} FAILED` : '\nall checks pass');
 process.exit(failures ? 1 : 0);
