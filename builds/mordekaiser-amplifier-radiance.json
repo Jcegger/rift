@@ -5,7 +5,7 @@
  "date": "2026-10-20",
  "author": "Claude",
  "title": "Mordekaiser \u2014 Amplifier aristocrats (risky Radiance)",
- "summary": "The sacrifice engine pushed all the way into Radiance: every outlet does something when it kills (Shimmering Swimmer deals 2, Deathgrip pumps and draws, Detonation Amplifier draws and doubles Deathknells where it stands), and the fodder hits back when it dies (Mournful Spirit kills a unit or gear, Hunting Dog leaves a Bird). Built ahead of the crowd, not against it: every Radiance card here is rising in posted Mordekaiser lists this week. 14 copies in and 14 out from the anchored list \u2014 past the 6\u20139 winners usually stray, short of the 16 that makes a different deck (docs/deckbuilding.md) \u2014 and nothing backs it yet, so it is marked untested.",
+ "summary": "The sacrifice engine pushed all the way into Radiance: every outlet does something when it kills (Shimmering Swimmer deals 2, Deathgrip pumps and draws, Detonation Amplifier draws and doubles Deathknells where it stands), and the fodder hits back when it dies (Mournful Spirit kills a unit or gear, Hunting Dog leaves a Bird). Built ahead of the crowd, not against it: every Radiance card here is rising in posted Mordekaiser lists this week. 16 copies in and 16 out from the anchored list \u2014 past the 6\u20139 winners usually stray, right at the 16 past which it is a different deck (docs/deckbuilding.md) \u2014 and nothing backs it yet, so it is marked untested.",
  "basis": "Starts from builds/mordekaiser-sacrifice.json (the consensus of the 5 placed preview lists) and changes it toward the week's movement in the 34 posted Mordekaiser lists (data/rising.json, 2026-10-13\u20132026-10-19 against 2026-09-29\u20132026-10-12). No result backs this list.",
  "changes": [
   {
@@ -29,17 +29,17 @@
    "why": "50% \u2192 41% \u2014 the only Reaction outlet: sacrifice mid-fight to pump the survivor and draw."
   },
   {
-   "what": "\u22123 Kai'Sa, Survivor, \u22121 Harnessed Dragon, \u22122 Vanguard Captain, \u22122 Spectral Matron, \u22121 Xin Zhao, Vigilant, \u22121 Vi, Peacekeeper, \u22121 Soaring Scout, \u22121 Seal of Unity, \u22121 Sacrifice, \u22121 Ferrous Forerunner",
-   "why": "The slots that do not feed the engine. Kai'Sa, Survivor (56% \u2192 38%) and Sacrifice (41% \u2192 26%) are falling in posted lists anyway; the 8-drop Dragon gives way to Mordekaiser, Dominating and the Spirits as the removal."
+   "what": "\u22123 Kai'Sa, Survivor, \u22121 Harnessed Dragon, \u22122 Vanguard Captain, \u22122 Spectral Matron, \u22121 Xin Zhao, Vigilant, \u22121 Vi, Peacekeeper, \u22121 Soaring Scout, \u22121 Seal of Unity, \u22122 Sacrifice, \u22121 Honest Broker, \u22121 Ferrous Forerunner",
+   "why": "The slots that do not feed the engine. Kai'Sa, Survivor (56% \u2192 38%) and Sacrifice (41% \u2192 26%) are falling in posted lists anyway; the 8-drop Dragon gives way to Mordekaiser, Dominating and the Spirits as the removal. The second Sacrifice and an Honest Broker (50% \u2192 32%) made room for Hidden Blade (20 Oct)."
   },
   {
-   "what": "Option: 2 Hidden Blade",
-   "why": "Why it is not in the list: only 1 of the 5 Radiance-preview placings runs it (2 of 6 placings counting a Vendetta one), under the two-list bar for an option \u2014 though 56% of all posted Mordekaiser lists do, falling this week (63% \u2192 50%, data/rising.json). What it does: [Hidden] [Action], kill a unit at a battlefield, and its controller draws 2. This deck is light on removal (Realm of Death, Dominating, Harnessed Dragon or Mournful Spirit), so it is the cleanest answer to a big unit \u2014 at the price of two cards for them, which a grindy value deck feels. Try it in for the least-used 2-drops if big threats beat you."
+   "what": "+2 Hidden Blade",
+   "why": "Added 20 Oct, against the evidence bar: only 1 of the 5 Radiance-preview placings runs it, though 56% of all posted Mordekaiser lists do (falling 63% \u2192 50%, data/rising.json). [Hidden] [Action], kill a unit at a battlefield, and its controller draws 2. Here that controller can be you: on your own unit it is a Reaction-speed outlet that triggers a Deathknell, puts a real card in the trash for the legend, and draws you 2 \u2014 Sacrifice without needing a Mighty unit. On theirs it is the clean answer to a big unit this deck lacked, at the price of two cards for them. It reaches only units at a battlefield, never your base."
   }
  ],
  "plan": [
   "Same engine as the anchored list (builds/mordekaiser-sacrifice.json): the legend banishes cards from your trash for Power to play units and gear, and only real cards get there \u2014 tokens off the board cease to exist (\u00a7186.1). So sacrifice cards, keep the tokens as the next sacrifice.",
-  "The difference is that every sacrifice does something twice over. Swimmer kills to deal 2; Deathgrip kills to pump and draw; Amplifier kills to draw and then doubles every Deathknell at its battlefield; Grayback kills to grow; Baited Hook kills to play a bigger unit from the top 5 for free (feed it Ferrous Forerunner for Twice Slain or Rift Herald). Mournful Spirit dying at an Amplifier kills two things.",
+  "The difference is that every sacrifice does something twice over. Swimmer kills to deal 2; Deathgrip kills to pump and draw; Amplifier kills to draw and then doubles every Deathknell at its battlefield; Grayback kills to grow; Hidden Blade kills to draw 2 (aim it at your own unit at a battlefield); Baited Hook kills to play a bigger unit from the top 5 for free (feed it Ferrous Forerunner for Twice Slain or Rift Herald). Mournful Spirit dying at an Amplifier kills two things.",
   "Twice Slain (7 Energy, 1 Power, Accelerate, Assault 3) is the threat the trash pays for, and it survives by killing a friendly unit \u2014 one more outlet. Realm of Death at 3 is the reliable removal.",
   "Watch out for: answers that do not kill (bounce, banish), which leave no Deathknell and no card for the trash; and losing the battlefield your Amplifier is on."
  ],
@@ -65,7 +65,7 @@
   "RAD-129": 3,
   "UNL-153": 3,
   "VEN-128": 2,
-  "SFD-155": 2,
+  "SFD-155": 1,
   "RAD-119": 2,
   "RAD-014": 3,
   "VEN-124": 3,
@@ -73,7 +73,6 @@
   "SFD-021": 2,
   "UNL-179": 1,
   "RAD-144": 3,
-  "UNL-173": 1,
   "SFD-163": 2,
   "OGN-242": 3,
   "RAD-017": 2,
@@ -82,7 +81,8 @@
   "OGN-294": 1,
   "OGN-298": 1,
   "OGN-007": 6,
-  "OGN-214": 6
+  "OGN-214": 6,
+  "OGN-213": 2
  },
  "sb": {},
  "snapshot": {
