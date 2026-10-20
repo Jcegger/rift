@@ -71,8 +71,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   `scripts/rift rising [legend]`; idea pages show "Moving this week"; `scripts/rift tune`
   shows the trend beside each suggestion.
 - `data/swaplog.json` - every swap a brew has suggested, from the day it first appeared,
-  scored a week later (adopted = the card in gained 10+ points in the legend's lists). History:
-  never rebuilt, only added to.
+  scored a week later (adopted = the card in gained 10+ points in the legend's lists), by kind —
+  so RISING, the riskiest, is judged on its own. History: never rebuilt, only added to
+  (started 20 Oct 2026).
 - `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
   Radiance-format events, a consensus list counted from its placed lists (or brews,
   labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
@@ -110,7 +111,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   lists and at least two of them), split the way winners split slots (2 + 1); a research
   answer of "test"; or a new-set card that does the same job for less (at most two — a set's
   first wave is small). A replacement must be as fast as what it replaces (Reaction, Action,
-  turn). About 9 copies at most — winners stray a median 6; the brews change about 5, with more
+  turn). RISING: a card up 15+ points in the legend's posted lists this week (data/rising.json),
+  in 20%+ of them and gaining on the card it replaces — the crowd moves first — at most two,
+  the riskiest kind; and a winners' alternative the crowd is dropping fast is not offered.
+  About 9 copies at most — winners stray a median 6; the brews change about 5, with more
   offered beside them. Never
   touches the legend's own cards, its engine payoffs, its heading's plan cards, or a core
   card (80%+): a strong case against one is offered as "also worth trying", with anything

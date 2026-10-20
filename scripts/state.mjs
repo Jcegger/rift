@@ -847,7 +847,7 @@ async function cmdTune(S, args) {
   const byName = new Map();
   for (const [k, q] of Object.entries(deck.cards)) { const c = card(k); if (c && ["Unit", "Spell", "Gear"].includes(c.t)) { const r = byName.get(c.n) || { c, copies: 0, inc: own.get(c.n) || 0 }; r.copies += q; byName.set(c.n, r); } }
   const rows = [...byName.values()];
-  const swaps = suggestSwaps(rows, { idx, legend: L, pool: m.poolOf(L), quality: m.quality, own, ownLists: ev.ds.length, ownLabel: ev.basis === "placed" ? "winning lists" : "posted lists", isNew: m.isNew, research: R, engine: m.engineOf(name) });
+  const swaps = suggestSwaps(rows, { idx, legend: L, pool: m.poolOf(L), quality: m.quality, own, ownLists: ev.ds.length, ownLabel: ev.basis === "placed" ? "winning lists" : "posted lists", isNew: m.isNew, research: R, engine: m.engineOf(name), trend: rising?.legends?.[name]?.cards || null });
   const label = ev.basis === "placed" ? `${ev.ds.length} placed ${name.split(",")[0]} lists${ev.era ? " from Radiance-format events" : ""}` : `${ev.lists} posted ${name.split(",")[0]} lists (no results yet: the crowd)`;
   const trend = (n) => { const t = rising?.legends?.[name]?.cards?.[n]; return t ? ` [field: ${t.now}% now, ${t.delta >= 0 ? "+" : ""}${t.delta} pts]` : ""; };
   console.log(`TUNE "${deck.name}" (${name}) against ${label}\n  Read only — nothing is changed in your decks. Untested: the journal decides.`);

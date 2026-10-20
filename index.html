@@ -1207,7 +1207,7 @@ const brewFor = (name) => (BREWS?.brews || []).find((b) => b.legend === name) ||
 function brewPanel(name) {
   const b = brewFor(name);
   if (!b || !b.worth) return "";
-  const kinds = { alt: "Winners' alternative", test: "Research says test", upgrade: "New card, same job" };
+  const kinds = { alt: "Winners' alternative", test: "Research says test", upgrade: "New card, same job", rising: "Rising in posted lists" };
   const ported = b.kind === "colours" ? b.rows.filter((r) => r.change === "champion" || /signature|own lists/.test(r.why || "")) : b.rows.filter((r) => r.change === "champion");
   return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · ${b.kind === "colours" ? "built from its colours' winners and its own cards" : b.crowd ? "no results yet: the crowd's list, changed on purpose" : "a winning list, changed on purpose"}</span><h2>A brew for ${esc(name.split(",")[0])}</h2></div>
       <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=brew">Tweak</a></div></div>

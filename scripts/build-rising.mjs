@@ -77,7 +77,7 @@ const main = async () => {
   }
   const scored = log.entries.filter((e) => e.scored);
   const rate = (xs) => (xs.length ? { n: xs.length, adopted: xs.filter((e) => e.adopted).length } : { n: 0, adopted: 0 });
-  const board = { kinds: Object.fromEntries(["alt", "upgrade", "test"].map((k) => [k, rate(scored.filter((e) => e.kind === k))])), logged: log.entries.length, scored: scored.length };
+  const board = { kinds: Object.fromEntries(["alt", "upgrade", "test", "rising"].map((k) => [k, rate(scored.filter((e) => e.kind === k))])), logged: log.entries.length, scored: scored.length };
 
   await writeFile(new URL("../data/swaplog.json", import.meta.url), JSON.stringify({
     note: "Every swap a brew has suggested, from the first day it appeared, scored once a week old: adopted if the card in gained 10+ points in the legend's posted lists since. History: never rebuilt, only added to.",

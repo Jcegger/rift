@@ -37,7 +37,9 @@ const round = (x, k = 2) => Math.round(x * 10 ** k) / 10 ** k;
 // docs/archetypes.md, whose Engine lines were written with its lists in view.
 //   hideMode: "all" hides every list of the legend (blind); "placed" only its placings, as
 //   a legend looks before it has results (its posted lists remain).
-export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", hide = null, hideMode = "all", blindEngine = false }) {
+//   rising: data/rising.json, the crowd's movement this week, for RISING swaps (none when a
+//   legend is hidden: its own lists made the trend).
+export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", rising = null, hide = null, hideMode = "all", blindEngine = false }) {
   const known = new Set(cat.cards.map((c) => c.c));
   const idx = indexCatalog([...cat.cards, ...(extras.cards || []).filter((c) => c.c && !known.has(c.c))], banned);
   const byShort = new Map(idx.cards.map((c) => [c.c.replace(/\/\d+$/, ""), c]));
@@ -112,7 +114,7 @@ export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", hide 
   function brewOne(name, { forcePort = false, noSwaps = false } = {}) {
     const L = legends.get(name);
     const engine = engineOf(name);
-    const ctx = { pool: poolOf(L), quality, isNew, research: name === hide ? null : R, engine, ...(noSwaps ? { swapBudget: 0 } : {}) };
+    const ctx = { pool: poolOf(L), quality, isNew, research: name === hide ? null : R, engine, trend: name === hide ? null : rising?.legends?.[name]?.cards || null, ...(noSwaps ? { swapBudget: 0 } : {}) };
     const meta = { legend: name, code: L.c, heading: heading(name), engine };
     const a = forcePort ? null : anchorLists(name);
     if (a) return anchorBrew(L, idx, consensus(a.ds), card, { ...ctx, own: shareMap(a.ds), ownLists: a.lists ?? a.ds.length, ownLabel: a.basis === "placed" ? "winning lists" : "posted lists" },
@@ -140,9 +142,10 @@ export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", hide 
 
 const main = async () => {
   const only = (process.argv[2] || "").toLowerCase();
-  const [cat, extras, banned, snap, R] = await Promise.all([read("cards.json"), read("extras.json"), read("banned.json"), read("decks.json"), read("research.json").catch(() => null)]);
+  const [cat, extras, banned, snap, R, rising] = await Promise.all([read("cards.json"), read("extras.json"), read("banned.json"), read("decks.json"), read("research.json").catch(() => null), read("rising.json").catch(() => null)]);
   const md = await readFile(new URL("../docs/archetypes.md", import.meta.url), "utf8").catch(() => "");
-  const brewer = makeBrewer({ cat, extras, banned, snap, R, md });
+  // The trend is the last build-rising run's (it runs after this, to log these suggestions).
+  const brewer = makeBrewer({ cat, extras, banned, snap, R, md, rising });
   const { idx, legends, newEvents } = brewer;
   const today = new Date().toISOString().slice(0, 10);
   const brews = [];
