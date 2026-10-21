@@ -15,8 +15,7 @@
 //   node scripts/state.mjs meta diana      # one archetype: card play rates, best finishes
 //   node scripts/state.mjs meta leblanc --since 2026-09-15   # only lists played after a date
 //   node scripts/state.mjs event 660038    # a store event from Riot's locator: standings + legends
-//   node scripts/state.mjs intake start    # before scanning new cards: snapshot what you own (read only)
-//   node scripts/state.mjs intake check riven   # after: what landed, the kit checked card by card, where to file it
+//   node scripts/state.mjs intake riven    # after scanning new cards: what landed, the kit checked, where to file it
 //
 // Where the data comes from. The app keeps everything personal — owned counts,
 // decks, wants, tags, settings — in localStorage under `rb_state`, and mirrors it
@@ -40,7 +39,7 @@
 // are exempt from that limit. This script reports all three, because a deck read
 // here without them looks legal when it is not.
 
-import { readFile, writeFile, readdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, SB_MAX } from "../lib/decks.mjs";
 import { deckEngines } from "../lib/engines.mjs";
@@ -896,103 +895,75 @@ async function cmdRising(args) {
 }
 
 // ── intake: new product into the collection ───────────────────────────────────
-// Cards get entered on riftbound.gg (its scanner beats typing) and reach this app on the
-// next pull, so this never writes anything. It brackets a scan instead: `start` saves what
-// you own now, `check` diffs the live row against it — what landed, a champion pack checked
-// card by card against lib/kits.mjs, scans worth a second look, and where each copy goes in
-// the boxes. The snapshots sit beside the state backups, outside git (personal state).
-const INTAKE_DIR = process.env.RIFT_INTAKE_DIR || `${process.env.HOME}/rift-backups`;
+// Cards get entered on riftbound.gg (its scanner beats typing) and reach the app on its
+// next pull, which banks every gained copy in the Piltover worklist (`newq`) until it is
+// cleared. So "what's new" is already recorded, and this reads it: what landed, a Pre-Rift
+// champion pack checked card by card (lib/kits.mjs), scans worth a second look, and where
+// each copy goes in the boxes. Read only; nothing to run before scanning.
 // The physical layout (decided 2026-10-17): the first PLAYSET copies of a name go in the
 // playset boxes by domain; copies past it go to bulk; legends, signatures, battlefields,
 // runes and tokens are deck pieces.
 const PLAYSET_BOX = { Fury: "playset box 1", Calm: "playset box 1", Mind: "playset box 1", Body: "playset box 2", Chaos: "playset box 2", Order: "playset box 2" };
 
-async function cmdIntake(S, cat, args) {
-  const [sub = "check", ...rest] = args;
-  if (sub === "start") {
-    const label = rest.join("-").toLowerCase().replace(/[^a-z0-9-]+/g, "") || "scan";
-    const file = `${INTAKE_DIR}/intake-${new Date().toISOString().replace(/[:.]/g, "-")}-${label}.json`;
-    await writeFile(file, JSON.stringify({ at: new Date().toISOString(), label, inv: S.inv || {} }));
-    const copies = Object.values(S.inv || {}).reduce((a, e) => a + (e.n || 0) + (e.f || 0), 0);
-    console.log(`INTAKE START  saved what you own now: ${copies} copies → ${file}`);
-    console.log("  Next: scan on riftbound.gg, open the app (it pulls), then `rift intake check <champion>`.");
-    return;
-  }
-  if (sub !== "check") { console.error('intake: "start" or "check [champion]"'); process.exit(2); }
-  const snaps = (await readdir(INTAKE_DIR).catch(() => [])).filter((f) => /^intake-.*\.json$/.test(f)).sort();
-  if (!snaps.length) { console.error("intake: no snapshot yet — run `rift intake start` before scanning"); process.exit(1); }
-  const snap = JSON.parse(await readFile(`${INTAKE_DIR}/${snaps.at(-1)}`, "utf8"));
+function cmdIntake(S, cat, args) {
   const key = (c) => c.replace(/\/\d+$/, "").toUpperCase();
   const byKey = new Map(cat.cards.map((c) => [key(c.c), c]));
-  // A printing the catalog doesn't carry (a promo's -P, riftbound.gg's alt-art letters)
-  // falls back to its base number, as the app's import does.
-  const cardOf = (k) => { const u = k.toUpperCase(); return byKey.get(u) || byKey.get(u.replace(/-P\d*$/, "")) || byKey.get(u.replace(/[A-Z]+$/, "")) || null; };
-  const was = snap.inv || {}, now = S.inv || {};
-  const gained = [], lost = [];
-  for (const k of new Set([...Object.keys(was), ...Object.keys(now)])) {
-    const dn = (now[k]?.n || 0) - (was[k]?.n || 0), df = (now[k]?.f || 0) - (was[k]?.f || 0);
-    const row = { k, c: cardOf(k), dn, df, d: dn + df };
-    if (dn > 0 || df > 0) gained.push(row);
-    if (dn < 0 || df < 0) lost.push(row);
+  const cardOf = (k) => cat.BY.get(k) || byKey.get(key(k)) || byKey.get(key(k).replace(/-P\d*$/, "")) || byKey.get(key(k).replace(/[A-Z]+$/, "")) || null;
+  const gained = Object.entries(S.newq || {}).map(([k, e]) => ({ k: key(k), c: cardOf(k), n: e.q || 0, f: e.f || 0, at: e.at }))
+    .filter((r) => r.n + r.f > 0);
+  if (!gained.length) {
+    console.log("INTAKE  nothing new since the last Piltover clear.");
+    console.log("  Scanned on riftbound.gg? Open the app once so it pulls, then run this again.");
+    return;
   }
   const name = (r) => r.c?.n || `(unknown ${r.k})`;
-  gained.sort((a, b) => (a.c?.t || "").localeCompare(b.c?.t || "") || name(a).localeCompare(name(b)));
-  const total = gained.reduce((a, r) => a + Math.max(0, r.dn) + Math.max(0, r.df), 0);
-  const foils = gained.reduce((a, r) => a + Math.max(0, r.df), 0);
-  console.log(`INTAKE CHECK  since ${snap.at.slice(0, 16).replace("T", " ")} (${snap.label})`);
-  console.log(`  ${total} copies landed (${foils} foil) across ${gained.length} printings. Count the physical stack:`);
-  console.log("  if it isn't the same number, a card was missed or scanned twice.\n");
-  if (!gained.length) { console.log("  Nothing new yet. Scanned on riftbound.gg? Open the app once so it pulls, then run this again."); return; }
-  const by = (f) => { const m = {}; for (const r of gained) m[f(r)] = (m[f(r)] || 0) + Math.max(0, r.dn) + Math.max(0, r.df); return Object.entries(m).map(([k, n]) => `${k} ${n}`).join(" · "); };
-  console.log(`  by set     ${by((r) => r.k.split("-")[0])}`);
-  console.log(`  by rarity  ${by((r) => r.c?.r || "?")}\n`);
+  const total = gained.reduce((a, r) => a + r.n + r.f, 0), foils = gained.reduce((a, r) => a + r.f, 0);
+  const since = gained.map((r) => r.at).filter(Boolean).sort()[0];
+  console.log(`INTAKE  ${total} new copies (${foils} foil)${since ? ` since ${since}` : ""}. If your stack has a different count, a card was missed or scanned twice.`);
+  const by = (f) => { const m = {}; for (const r of gained) m[f(r)] = (m[f(r)] || 0) + r.n + r.f; return Object.entries(m).map(([k, n]) => `${k} ${n}`).join(" · "); };
+  console.log(`  by set ${by((r) => r.k.split("-")[0])} · by rarity ${by((r) => r.c?.r || "?")}\n`);
 
-  // The champion pack, card by card. A kit card counts as landed if any printing of its
-  // name went up — the scanner may file it under an alt art.
-  const champ = rest.join(" ").toLowerCase();
+  // The champion pack, card by card: a kit card counts if any printing of its name landed.
+  const champ = args.join(" ").toLowerCase();
   const kitName = champ && Object.keys(PRE_RIFT_KITS).find((n) => n.toLowerCase().startsWith(champ));
   if (champ && !kitName) console.log(`  No Pre-Rift kit for "${champ}" — kits: ${Object.keys(PRE_RIFT_KITS).join(", ")}\n`);
   if (kitName) {
-    const upBy = new Map();
-    for (const r of gained) if (r.c) upBy.set(r.c.n, (upBy.get(r.c.n) || 0) + r.d);
-    const kit = PRE_RIFT_KITS[kitName].map((k) => cardOf(k));
-    const missing = kit.filter((c) => !(upBy.get(c.n) > 0));
-    console.log(`  ${kitName.toUpperCase()} CHAMPION PACK  ${kit.length - missing.length} of ${kit.length} landed` + (missing.length ? "" : " ✓"));
-    for (const c of missing) console.log(`    missing  ${c.n} (${key(c.c)}) — not scanned, or scanned as something else`);
-    const promo = gained.find((r) => r.k.toUpperCase() === PRE_RIFT_PROMO.id || cardOf(r.k)?.n === byKey.get(PRE_RIFT_PROMO.base)?.n);
-    console.log(`    promo    ${promo ? "Heimerdinger landed" : `Heimerdinger promo not seen — scan it as ${PRE_RIFT_PROMO.id} if you're keeping a record of it`}\n`);
+    const got = new Set(gained.map((r) => r.c?.n));
+    const kit = PRE_RIFT_KITS[kitName].map(cardOf);
+    const missing = kit.filter((c) => !got.has(c.n));
+    console.log(`  ${kitName.toUpperCase()} PACK  ${kit.length - missing.length} of ${kit.length} scanned${missing.length ? "" : " ✓"}`);
+    for (const c of missing) console.log(`    missing  ${c.n} (${key(c.c)})`);
+    console.log("");
   }
 
-  // Worth a second look: cards that aren't from this set, several copies of one rare, a
-  // special printing, and anything that went DOWN.
+  // Worth a second look: an unknown code, another set in a Pre-Rift scan, several of one
+  // rare, a special printing.
   const flags = [];
   for (const r of gained) {
-    if (!r.c) flags.push(`${r.k}: not in the catalog — check the scan`);
-    else if (kitName && !/^RAD-/i.test(r.k)) flags.push(`${name(r)} (${r.k}): not a Radiance card — from somewhere else, or a misread?`);
-    if (r.c && ["Rare", "Epic", "Showcase"].includes(r.c.r) && r.d >= 3) flags.push(`${name(r)}: ${r.d} copies of a ${r.c.r} — a double scan?`);
-    if (!/^[A-Z]+-[A-Z]?\d+$/i.test(r.k)) flags.push(`${name(r)} (${r.k}): a special printing (alt art, promo) — check it's the one in your hand`);
+    if (!r.c) flags.push(`${r.k}: not in the catalog`);
+    else if (kitName && !/^RAD-/.test(r.k)) flags.push(`${name(r)} (${r.k}): not a Radiance card — misread?`);
+    if (r.c && ["Rare", "Epic", "Showcase"].includes(r.c.r) && r.n + r.f >= 3) flags.push(`${name(r)}: ${r.n + r.f} copies of a ${r.c.r} — scanned twice?`);
+    if (!/^[A-Z]+-[A-Z]?\d+$/.test(r.k)) flags.push(`${name(r)} (${r.k}): alt art or promo — the one in your hand?`);
   }
-  for (const r of lost) flags.push(`${name(r)} (${r.k}): went DOWN by ${-Math.min(0, r.dn) - Math.min(0, r.df)} — a correction, or a mis-tap?`);
-  if (flags.length) { console.log("  CHECK THESE"); for (const f of flags) console.log(`    ${f}`); console.log(""); }
+  if (flags.length) { console.log("  CHECK"); for (const f of flags) console.log(`    ${f}`); console.log(""); }
 
-  // Filing: by name across printings, the first PLAYSET copies to the playset boxes.
+  // Filing, by name across printings: copies up to the playset go to the playset boxes.
   const playset = S.playset || 3;
-  const ownedBefore = (n) => Object.entries(was).filter(([k]) => cardOf(k)?.n === n).reduce((a, [, e]) => a + (e.n || 0) + (e.f || 0), 0);
+  const ownedNow = (n) => Object.entries(S.inv || {}).filter(([k]) => cardOf(k)?.n === n).reduce((a, [, e]) => a + (e.n || 0) + (e.f || 0), 0);
   const names = new Map();
-  for (const r of gained) if (r.c) { const g = names.get(r.c.n) || { c: r.c, n: 0 }; g.n += Math.max(0, r.dn) + Math.max(0, r.df); names.set(r.c.n, g); }
+  for (const r of gained) if (r.c) { const g = names.get(r.c.n) || { c: r.c, n: 0 }; g.n += r.n + r.f; names.set(r.c.n, g); }
   const plan = {};
   const put = (where, line) => (plan[where] = plan[where] || []).push(line);
   for (const [n, { c, n: g }] of names) {
-    const piece = ["Legend", "Battlefield", "Rune"].includes(c.t) || /-T\d/i.test(c.c) || cat.idx.signatureOf?.(c);
-    if (piece) { put("deck pieces", `${g} ${n}`); continue; }
+    if (["Legend", "Battlefield", "Rune"].includes(c.t) || /-T\d/i.test(c.c) || cat.idx.signatureOf?.(c)) { put("deck pieces", `${g} ${n}`); continue; }
     const dom = (c.d || []).find((d) => PLAYSET_BOX[d]);
-    const toSet = Math.max(0, Math.min(g, playset - ownedBefore(n)));
+    const toSet = Math.max(0, Math.min(g, playset - (ownedNow(n) - g)));
     if (toSet) put(dom ? `${PLAYSET_BOX[dom]} · ${dom}` : "playset · colourless", `${toSet} ${n}`);
     if (g - toSet) put(dom ? `bulk · ${dom}` : "bulk · colourless", `${g - toSet} ${n}`);
   }
-  console.log(`  FILE TO (playset = ${playset})`);
+  console.log(`  FILE TO`);
   for (const where of Object.keys(plan).sort()) console.log(`    ${where.padEnd(24)} ${plan[where].join(", ")}`);
-  console.log("\n  Then: the app's Piltover worklist already has these. Download for Piltover → Merge → Clear.");
+  console.log("\n  Then the Piltover worklist in the app: Download → Merge → Clear (which also empties this list).");
 }
 
 async function main() {
