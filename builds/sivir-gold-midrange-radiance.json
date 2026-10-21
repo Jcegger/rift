@@ -29,18 +29,19 @@
    "why": "Punch First, Rampage, Switcheroo, Star-Crossed, Sabotage and Gust: the interaction is the midrange. Fizz, Ezreal and Matriarch: the value engine. Tornado Warrior, Tideturner, Edge of Night and Pyke: the Hidden cards, which also make Gold when you hide them by recycling a rune."
   },
   {
-   "what": "Option: Bandle Scouts' Academy for Sandswept Tomb",
-   "why": "A Radiance battlefield: when you hide a card there, play a Gold token. Only one card can be hidden at each battlefield (§811.1.b), so it's at most one Gold per hide there, not one per Hidden card. It replaces Sandswept Tomb, which works against this plan: it makes Power costs on your spells [A] cheaper there, which means fewer recycles for Battle Mistress and makes Sivir's two-Power threshold harder to reach. Not applied, because Tomb is what the anchor won with; it's the first battlefield to test."
+   "what": "Option: Black Market for Sandswept Tomb (the battlefield test)",
+   "why": "Black Market: [A][A]: draw 1, each player once per turn. Spending those two Power switches Sivir on by itself (+2 Might and Ganking). Gold pays for it, so spare Gold turns into a card every turn, and paying with a rune recycle also fires Battle Mistress. The other posted Radiance Sivir brew runs it. The opponent can use it too, but no deck makes spare Power like this one. Sandswept Tomb is the slot because it's symmetric: it also discounts the opponent's 2-Power pumps (Punch First in Rengar, Yi and Kha'Zix). Corrected 21 Oct: it doesn't work against the Gold engine, as an earlier note said, because Battle Mistress fires once until she readies, so the Power it saves is mostly runes kept. One reading to check with a judge: that an ability's cost counts as Power \"spent\" for Sivir. Test it by logging which battlefield each game used (RiftAtlas best-of-1 picks one of your three at random)."
   },
   {
-   "what": "Option: Black Market or Hunters' Circle",
-   "why": "The other Radiance Sivir brew runs both. Black Market is a draw for two Power ([A][A]: draw 1), which Gold pays and which turns on Sivir. Not applied; try it if the deck runs out of cards."
+   "what": "Option: Bandle Scouts' Academy",
+   "why": "Last of the battlefield options. Only one card can be hidden per battlefield (§811.1.b), so it's at most one Gold per hide, and it rewards an opponent's Hidden cards just as much."
   }
  ],
  "plan": [
   "The engine is Power. Every Power cost you pay by recycling a rune triggers Battle Mistress for a Gold token, and the legend readies whenever an enemy unit dies. Nineteen of the forty cost Power, and hiding a card costs [A], so it fires almost every turn. Gold enters exhausted: a Gold made this turn is next turn's Power.",
   "Early, trade and disrupt rather than race. Hide Tornado Warrior, Tideturner or The Waters' Wage, play Reckless Innovator, and Sabotage the trick that would beat you. Ezreal and Fizz dig; Fizz replays Punch First, Rampage or Gust from the trash.",
   "Hidden has a limit: one facedown card per battlefield you control (§811.1.b), so the 12 Hidden cards compete for one or two slots. Give the slot to The Waters' Wage first: it's the one card that's weak from hand (one exhausted Gold instead of three ready). Tornado Warrior, Tideturner, Pyke and Switcheroo all play fine from hand.",
+  "Battlefields: you get one per game, and both players can use it. In a best-of-3 you choose, and each one is retired after a decided game (§488.5.a), so you'll usually play all three. Take Sigil of the Storm first, because it's the one that favours you: your conquer there recycles a rune and Battle Mistress makes a Gold, while theirs just costs them a rune. Zaun Warrens' discard feeds Fizz and Matriarch from the trash.",
   "The turn the deck wants: flip The Waters' Wage for three ready Gold, then Sivir, Mercenary at 6 Might with Ganking, or Graves with Punch First already on him. Matriarch's Empower ([2] plus a Chaos Power, which is another Gold) replays an Innovator, Fizz or Pyke from the trash.",
   "Watch out for: gear removal doesn't touch Gold in play, but a tempo deck that never lets you hold a battlefield also stops The Waters' Wage, which must be hidden at a battlefield you control. And Graves deals no combat damage himself: the sweep is the damage."
  ],

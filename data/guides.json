@@ -244,7 +244,7 @@
    "kicker": null,
    "title": "Sivir — Gold-fuelled midrange (Radiance)",
    "subtitle": "Riftbound, Radiance season (from 23 October 2026) — the list, the plan and the sideboard",
-   "date": "2026-10-20",
+   "date": "2026-10-21",
    "legend": "Battle Mistress",
    "champion": null,
    "sections": [
@@ -252,9 +252,10 @@
     "The plan",
     "What changed from the anchor, and why",
     "Matchups and sideboarding",
-    "Goldfish"
+    "Goldfish",
+    "Testing it"
    ],
-   "words": 1938
+   "words": 2135
   },
   {
    "slug": "skirmish-prep",

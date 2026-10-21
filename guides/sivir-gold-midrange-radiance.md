@@ -2,7 +2,7 @@
 title: Sivir — Gold-fuelled midrange (Radiance)
 subtitle: Riftbound, Radiance season (from 23 October 2026) — the list, the plan and the sideboard
 author: rift toolchain
-date: 2026-10-20
+date: 2026-10-21
 ---
 
 **Untested.** A reasoned brew, not a net-deck: Sivir has one legal placed list since the bans, and no Radiance results yet. The source of truth is `builds/sivir-gold-midrange-radiance.json` (also on the site under Find a deck → Sivir). This page is a reading copy of it.
@@ -57,6 +57,7 @@ A midrange Sivir for Radiance. It starts from the only legal Sivir result, Randy
 - The engine is Power. Every Power cost you pay by recycling a rune triggers Battle Mistress for a Gold token, and the legend readies whenever an enemy unit dies. Nineteen of the forty cost Power, and hiding a card costs [A], so it fires almost every turn. Gold enters exhausted: a Gold made this turn is next turn's Power.
 - Early, trade and disrupt rather than race. Hide Tornado Warrior, Tideturner or The Waters' Wage, play Reckless Innovator, and Sabotage the trick that would beat you. Ezreal and Fizz dig; Fizz replays Punch First, Rampage or Gust from the trash.
 - Hidden has a limit: one facedown card per battlefield you control (§811.1.b), so the 12 Hidden cards compete for one or two slots. Give the slot to The Waters' Wage first: it's the one card that's weak from hand (one exhausted Gold instead of three ready). Tornado Warrior, Tideturner, Pyke and Switcheroo all play fine from hand.
+- Battlefields: you get one per game, and both players can use it. In a best-of-3 you choose, and each one is retired after a decided game (§488.5.a), so you'll usually play all three. Take Sigil of the Storm first, because it's the one that favours you: your conquer there recycles a rune and Battle Mistress makes a Gold, while theirs just costs them a rune. Zaun Warrens' discard feeds Fizz and Matriarch from the trash.
 - The turn the deck wants: flip The Waters' Wage for three ready Gold, then Sivir, Mercenary at 6 Might with Ganking, or Graves with Punch First already on him. Matriarch's Empower ([2] plus a Chaos Power, which is another Gold) replays an Innovator, Fizz or Pyke from the trash.
 - Watch out for: gear removal doesn't touch Gold in play, but a tempo deck that never lets you hold a battlefield also stops The Waters' Wage, which must be hidden at a battlefield you control. And Graves deals no combat damage himself: the sweep is the damage.
 
@@ -69,8 +70,8 @@ Anchor: Randyyy's list from the Los Angeles RQ (2 Oct 2026, 146th of 2,165), the
 - **−1 Acceptable Losses, +2 Graves, Blasting Through (and the third cut is Disciple's).** The midrange top end. When Graves attacks or defends he deals his Might to every enemy unit there instead of combat damage, so every pump becomes a sweeper: Punch First first, then move him in, and he deals 9 to each enemy. Every enemy that dies readies Battle Mistress for another Gold. Acceptable Losses moves to the sideboard for gear decks.
 - **−1 Grim Resolve, +1 Primordial Roar.** Grim Resolve's XP does nothing in a Sivir deck, and the list had no hard removal: Rampage needs a unit to fight, Star-Crossed and Gust only bounce. Primordial Roar shows off a friendly unit and deals that unit's Might to any unit. Its value is locked in when it's played (§832.1.d.1), so a responding shrink doesn't save the target. Show off Sivir at 6 or a unit you just Punch Firsted. It costs 2 Power: that's Sivir's threshold met by itself, plus a Gold from the legend. It plays at turn speed, not mid-fight. 20 Oct, second pass.
 - **Kept from the anchor.** Punch First, Rampage, Switcheroo, Star-Crossed, Sabotage and Gust: the interaction is the midrange. Fizz, Ezreal and Matriarch: the value engine. Tornado Warrior, Tideturner, Edge of Night and Pyke: the Hidden cards, which also make Gold when you hide them by recycling a rune.
-- **Option: Bandle Scouts' Academy for Sandswept Tomb.** A Radiance battlefield: when you hide a card there, play a Gold token. Only one card can be hidden at each battlefield (§811.1.b), so it's at most one Gold per hide there, not one per Hidden card. It replaces Sandswept Tomb, which works against this plan: it makes Power costs on your spells [A] cheaper there, which means fewer recycles for Battle Mistress and makes Sivir's two-Power threshold harder to reach. Not applied, because Tomb is what the anchor won with; it's the first battlefield to test.
-- **Option: Black Market or Hunters' Circle.** The other Radiance Sivir brew runs both. Black Market is a draw for two Power ([A][A]: draw 1), which Gold pays and which turns on Sivir. Not applied; try it if the deck runs out of cards.
+- **Option: Black Market for Sandswept Tomb (the battlefield test).** Black Market: [A][A]: draw 1, each player once per turn. Spending those two Power switches Sivir on by itself (+2 Might and Ganking). Gold pays for it, so spare Gold turns into a card every turn, and paying with a rune recycle also fires Battle Mistress. The other posted Radiance Sivir brew runs it. The opponent can use it too, but no deck makes spare Power like this one. Sandswept Tomb is the slot because it's symmetric: it also discounts the opponent's 2-Power pumps (Punch First in Rengar, Yi and Kha'Zix). Corrected 21 Oct: it doesn't work against the Gold engine, as an earlier note said, because Battle Mistress fires once until she readies, so the Power it saves is mostly runes kept. One reading to check with a judge: that an ability's cost counts as Power "spent" for Sivir. Test it by logging which battlefield each game used (RiftAtlas best-of-1 picks one of your three at random).
+- **Option: Bandle Scouts' Academy.** Last of the battlefield options. Only one card can be hidden per battlefield (§811.1.b), so it's at most one Gold per hide, and it rewards an opponent's Hidden cards just as much.
 
 ## Matchups and sideboarding
 
@@ -83,3 +84,7 @@ Anchor: Randyyy's list from the Los Angeles RQ (2 Oct 2026, 146th of 2,165), the
 ## Goldfish
 
 Goldfish, 8,000 games, against the anchor list: Energy spent turns 1–4 17.3 on the play (anchor 17.6); 2.5 units by turn 3 (anchor 3.3); turn 5 spends 5.9 Energy (anchor 4.6); stuck on turn 3 9% (anchor 6%); 5 Body / 7 Chaos is the best rune split of the nine tried. Slower early and stronger late, which is what midrange buys. Consistency only: it plays no opponent, and it doesn't model Gold, Hidden or the legend.
+
+## Testing it
+
+Log each game in the journal (opponent, W/L), plus three words: **which battlefield** you had, **did the Waters' Wage turn happen**, **did Graves sweep**. After 10–20 games those answer the three open questions: Black Market vs Sandswept Tomb, whether The Waters' Wage earns its slot, and whether Graves wants a third copy.
