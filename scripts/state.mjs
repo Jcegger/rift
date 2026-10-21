@@ -912,7 +912,11 @@ async function cmdPoll(args) {
     const w = Math.max(...P.builds.map((x) => x.season.weight));
     console.log(`POLL · ${P.set}, legal ${P.legalFrom} · built ${P.generatedAt} · ${P.builds.length} builds · ${w < 0.5 ? "a PREDICTION: results carry at most " + Math.round(w * 100) + "% of any score" : "results-led"}
   ×ratio = observed over expected top finishes (×1.00 average) · (range) = 10th–90th percentile rank · % = chance of a top-10 finish`);
-    for (const x of P.builds) console.log(`  ${pad(String(x.rank), 3)}${pad(`(${x.rankRange.join("–")})`, 8)} ${pad(Math.round(x.top10 * 100) + "%", 4)} ${pad(name(x).slice(0, 54), 55)} ×${x.ratio}${flags(x) ? `  [${flags(x)}]` : ""}`);
+    let tier = null;
+    for (const x of P.builds) {
+      if (x.tier && x.tier !== tier) { tier = x.tier; const cut = P.tiers?.[tier]; console.log(`\n  ${tier} TIER${cut ? ` · ×${cut}+` : " · below ×0.65, or too little evidence"}`); }
+      console.log(`  ${pad(String(x.rank), 3)}${pad(`(${x.rankRange.join("–")})`, 8)} ${pad(Math.round(x.top10 * 100) + "%", 4)} ${pad(name(x).slice(0, 54), 55)} ×${x.ratio}${flags(x) ? `  [${flags(x)}]` : ""}`);
+    }
     if (q) console.log(`
 no build matching "${q}"`);
     console.log(`
@@ -922,7 +926,7 @@ scripts/rift poll <legend> for the reasons behind one`);
   for (const x of hits.slice(0, 3)) {
     const R = x.returning;
     console.log(`
-${pad(String(x.rank), 3)}${name(x)} · ×${x.ratio} · ranks ${x.rankRange.join("–")} · top-10 ${Math.round(x.top10 * 100)}%${flags(x) ? ` · ${flags(x)}` : ""}`);
+${pad(String(x.rank), 3)}${name(x)} · ${x.tier ? `${x.tier} tier · ` : ""}×${x.ratio} · ranks ${x.rankRange.join("–")} · top-10 ${Math.round(x.top10 * 100)}%${flags(x) ? ` · ${flags(x)}` : ""}`);
     if (x.build) console.log(`  build: ${Math.round(x.share * 100)}% of its ${x.lists} lists · signature ${x.signature.join(", ")}`);
     const Pp = x.popularity;
     console.log(`  RETURNING  ×${R.ratio} — ${x.isNew ? "new legend, no last format" : `${R.O} top finishes against ${R.E} expected last format, shrunk toward ×${R.lastTarget} (what a legend at ${(R.lastShare * 100).toFixed(1)}% of last format's RQ fields converted)`}${R.buildAdj ? `; this build ${R.buildAdj > 0 ? "+" : ""}${R.buildAdj} vs its legend` : ""} · counts ${Math.round(R.carry * 100)}%`);

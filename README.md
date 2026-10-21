@@ -84,6 +84,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   by agreement. `node scripts/build-preseason.mjs --preview=1 --carryover=0.7 --with-judgment
   [legend]` is a what-if that writes nothing. Each build carries its
   10th–90th percentile rank over simulated seasons and its chance of a top-10 finish.
+  Tiers on the same scale: S ×1.4+, A ×1.0+, B ×0.8+, C ×0.65+, D below (fixed cuts, which
+  fell on the natural breaks on 21 Oct). Popularity is read per legend — the level the fit was
+  measured at — so splitting a legend into builds never splits its popularity.
   `scripts/rift poll [legend]`. The method in prose: `guides/radiance-tier-prediction.md`.
 - `model/preseason-inputs.json` - the model's hand-written judgments, one row per reason:
   component (transfers, schedule, recruiting, hype), points -2..+2, the reason, its cards and

@@ -30,6 +30,11 @@ import { score, rankSim, fitPopularity, pool, logRatio, carryFor, K_RET, K_PRIOR
 
 const COVERAGE = 0.5, MIN_FIELD = 32, TOP = 0.25, RAD_SHARE = 0.3, MARKER_SHARE = 0.5, ERA_PCT = 0.05, ALPHA = 100;
 const NO_BEST_OF = new Set(["OGN", "OGS", "SFD"]);   // Riot, RC prizing, 15 Oct 2026
+// Tiers on the model's own scale, observed over expected top finishes: S converts 40%+ above
+// an average deck, A above average, B within 20% below, C within 35% below, D the rest. Fixed
+// cuts, so a tier means the same thing every day; on 21 Oct they fell on the natural breaks.
+export const TIERS = [["S", 1.4], ["A", 1.0], ["B", 0.8], ["C", 0.65], ["D", 0]];
+const tierOf = (ratio) => TIERS.find(([, cut]) => ratio >= cut)[0];
 const read = async (f) => JSON.parse(await readFile(new URL(`../data/${f}`, import.meta.url), "utf8"));
 const r3 = (x) => Math.round(x * 1000) / 1000;
 
@@ -109,10 +114,13 @@ const main = async () => {
   for (const e of full.filter((e) => e.kind !== "returning")) for (const d of e.ds) { const w = e.kind === "preview" ? previewW : 1; pilotW.set(d, w); pilotN += w; }
   const rqPilots = new Map();                            // season RQ tables: legend-level only
   for (const e of rq.filter((e) => e.published >= legalFrom)) for (const x of e.field) { rqPilots.set(x.legend, (rqPilots.get(x.legend) || 0) + x.d1); pilotN += x.d1; }
-  // A build's pilots: its registered lists, plus its share of its legend's season-RQ pilots.
-  const popOf = (name, lists, share) => {
-    const p = lists.reduce((t, d) => t + (pilotW.get(d) || 0), 0) + share * (rqPilots.get(name) || 0);
-    return { pilots: p, share: (p + ALPHA * share * (posted.get(name) || 0)) / (pilotN + ALPHA) };
+  // Popularity is read per LEGEND, the level the fit was measured at (Riot's tables count
+  // legends): splitting a legend into builds must not split its popularity — Evelynn's two
+  // builds each took half and both fell to the floor. Builds then differ by their own record
+  // and results. (A build's own registrations are still shown, for reading.)
+  const popOf = (name, lists) => {
+    const p = lists.reduce((t, d) => t + (pilotW.get(d) || 0), 0) + (rqPilots.get(name) || 0);
+    return { pilots: p, share: (p + ALPHA * (posted.get(name) || 0)) / (pilotN + ALPHA) };
   };
   // The fit: last format's RQ tables, a legend's share of Day 1 against its Day 2 conversion —
   // what a legend that much of the field registers converts. Capped at the strongest real deck.
@@ -152,7 +160,7 @@ const main = async () => {
       const markerShare = (mk) => b.lists.length ? b.lists.filter((d) => names(d).has(mk)).length / b.lists.length : 0;
       const use = mine.filter((r) => !r.marker || markerShare(r.marker) >= MARKER_SHARE);
       const season = add(seasonRQ, oeFull(pred, ["season", "preview"]));
-      const pp = popOf(name, b.lists.length ? b.lists : lists, builds.length > 1 ? b.share : 1);
+      const pp = popOf(name, lists);
       cases.push({ name, L, b, target: pop.target(pp.share), lastTarget: pop.target(lastShare.get(name) || 0), established: !isNewLegend(L), pp, retLegend, adj, use, season });
     }
   }
@@ -169,7 +177,7 @@ const main = async () => {
     id: b.id, legend: name, build: b.label, signature: b.signature, share: r3(b.share), lists: b.lists.length,
     set: L.c.split("-")[0], isNew: L.c.split("-")[0] === newest, noBestOf: NO_BEST_OF.has(L.c.split("-")[0]), aurora: b.aurora,
     returning: { O: r3(retLegend.O), E: r3(retLegend.E), lastShare: r3(lastShare.get(name) || 0), lastTarget: r3(lastTarget), ratio: r3(Math.exp(s.retLog)), carry: r3(s.carry), buildAdj: r3(adj) },
-    popularity: { share: r3(pp.share), pilots: r3(pp.pilots), posted: r3((posted.get(name) || 0) * b.share), target: r3(target) },
+    popularity: { share: r3(pp.share), pilots: r3(pp.pilots), posted: r3(posted.get(name) || 0), target: r3(target) },
     judgment: { points: r3(s.judgment.total), by: Object.fromEntries(Object.entries(s.judgment.by).map(([k, v]) => [k, r3(v)])),
       applied: withJudgment,
       rows: use.map((r) => ({ component: r.component, points: r.points, verified: r.verified, why: r.why, ...(r.vs ? { vs: r.vs, vsWeight: r3(Math.min(VS_CAP, vsRatio(r.vs))) } : {}) })) },
@@ -178,11 +186,12 @@ const main = async () => {
   }));
   out.sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
   const rr = rankSim(out);
-  out.forEach((x, i) => { x.rank = i + 1; x.rankRange = [rr[i].p10, rr[i].p90]; x.top10 = r3(rr[i].top10); delete x.sd; delete x.post; });
+  out.forEach((x, i) => { x.rank = i + 1; x.rankRange = [rr[i].p10, rr[i].p90]; x.top10 = r3(rr[i].top10); x.tier = tierOf(x.ratio); delete x.sd; delete x.post; });
 
   const file = {
     generatedAt: new Date().toISOString().slice(0, 10), set: newest, legalFrom,
     method: "lib/preseason.mjs; guides/radiance-tier-prediction.md is the method in prose",
+    tiers: Object.fromEntries(TIERS),
     constants: { K_RET, K_PRIOR, K_NEW, VS_CAP, CARRYOVER, CARRY_REG, REG_HALF, carryNow: r3(carry), PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, COVERAGE, MIN_FIELD, TOP, components: COMPONENTS },
     popularity: { legends: pop.n, slope: r3(pop.slope), r: r3(pop.r), cap: r3(cap), pilots: pilotN, postedSince: eraFrom, alpha: ALPHA },
     note: "Data only: the judgment rows are listed per build but not in the score. A prediction until the new format has results, then the results. ratio is observed over expected top finishes (×1.00 = average); lo/hi are an 80% range in logs; rankRange is the 10th–90th percentile rank over simulated seasons and top10 the chance of a top-10 finish. Judgment rows are hand-written in model/preseason-inputs.json.",
@@ -197,7 +206,7 @@ const main = async () => {
   console.log(`${isWhatIf ? `WHAT-IF (nothing written): previews ×${previewW}${whatIf.carryover != null ? `, carryover ${whatIf.carryover}` : ""}${withJudgment ? ", WITH the judgment rows" : ""}\n` : ""}popularity fit: ${pop.n} legends, slope ${r3(pop.slope)}, r ${r3(pop.r)}, cap ×${r3(cap)} · ${r3(pilotN)} pilots (weighted) in ${newest} events + posted lists since ${eraFrom} (worth ${ALPHA} pilots)`);
   console.log(`${out.length} builds of ${legends.size} legends · returning: ${rq.filter((e) => e.published < legalFrom).length} RQ tables + ${ff.returning || 0} full-field events · season: ${rq.filter((e) => e.published >= legalFrom).length} RQ + ${ff.season || 0} full-field + ${ff.preview || 0} previews (×${PREVIEW_W}) · ${rows.length} judgment rows${unmatched.length ? ` · UNMATCHED markers: ${unmatched.join("; ")}` : ""}`);
   for (const x of out.filter((x) => !only || x.legend.toLowerCase().includes(only)).slice(0, only ? 99 : 15))
-    console.log(`  ${String(x.rank).padStart(2)} (${x.rankRange.join("–")}, top-10 ${Math.round(x.top10 * 100)}%) ${x.legend.slice(0, 30)}${x.build ? ` — ${x.build}` : ""} ×${x.ratio}  [ret ×${x.returning.ratio} at ${Math.round(x.returning.carry * 100)}% · pop ×${x.popularity.target} (${(x.popularity.share * 100).toFixed(1)}%) · judg ${x.judgment.points >= 0 ? "+" : ""}${x.judgment.points} · results ${Math.round(x.season.weight * 100)}%]${x.aurora.length ? " AURORA" : ""}`);
+    console.log(`  ${x.tier} ${String(x.rank).padStart(2)} (${x.rankRange.join("–")}, top-10 ${Math.round(x.top10 * 100)}%) ${x.legend.slice(0, 30)}${x.build ? ` — ${x.build}` : ""} ×${x.ratio}  [ret ×${x.returning.ratio} at ${Math.round(x.returning.carry * 100)}% · pop ×${x.popularity.target} (${(x.popularity.share * 100).toFixed(1)}%) · judg ${x.judgment.points >= 0 ? "+" : ""}${x.judgment.points} · results ${Math.round(x.season.weight * 100)}%]${x.aurora.length ? " AURORA" : ""}`);
 };
 
 if (import.meta.url === `file://${process.argv[1]}`) main().catch((e) => { console.error(`build-preseason: ${e.message}`); process.exit(1); });
