@@ -126,6 +126,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   damage, counter, trick, protection, disruption, ramp, movement), sized from its text, and a
   rough value net of Energy and Power (Power weighs more). `understood()` says whether the
   roles account for the card's text; when they do not, nothing can be said to outdo it.
+- `lib/kits.mjs` - the nine Radiance Pre-Rift champion packs, card by card (hand-written:
+  Riot hasn't published them; sources in the file). `scripts/rift intake check <champion>` checks a
+  scanned kit against it; `guides/radiance-pre-rift.md` §5a has the same lists with card text.
 - `lib/research.mjs` - reads `data/research.json` for the site and `scripts/rift`: a card
   the winners skip is held back from suggestions until its question is answered "test".
 - `lib/consensus.mjs` - counting a set of lists into the list they add up to; shared by
@@ -1193,6 +1196,30 @@ Rows that match nothing are listed rather than dropped. The expected cause is a
 card the catalog cannot know about: the **Arcane Box Set**, or a set Riot has
 announced but not released. riftbound.gg's catalog is larger than Riot's gallery
 for exactly that reason.
+
+### New product: the intake
+
+Opening product (a Pre-Rift kit, boosters, a box) goes into the collection the same way as
+everything else — scanned on riftbound.gg — but bracketed, so a missed card, a double scan or a
+misread printing gets caught before it becomes a wrong count. `scripts/rift intake` never writes:
+
+1. **Before scanning:** `scripts/rift intake start pre-rift`. It saves what you own now to
+   `~/rift-backups/intake-<time>-<label>.json` (personal state, outside git).
+2. **Count the stack.** Everything new goes in the physical intake area, sleeved sealed deck
+   unsleeved, tokens and runes included. Write the number down.
+3. **Scan on riftbound.gg**, one pile at a time. Mark foils as foil. Tag them `pre-rift` if you
+   want to remember where they came from (tags come across on the pull). The Heimerdinger promo
+   is `RAD-132-P` there; the catalog here has only the base card, so it counts as one.
+4. **Open the app** so it pulls, then `scripts/rift intake check <champion>`. It prints:
+   - **What landed**, by set and rarity, against your count from step 2.
+   - **The champion pack**, checked card by card against `lib/kits.mjs`.
+   - **What to check:** cards from another set, three or more of one rare, special printings,
+     and any count that went down.
+   - **Where to file each copy:** the first playset copies to the playset box for their
+     domain, copies past that to bulk, legends, signatures and battlefields to deck pieces.
+5. **Fix any misses on riftbound.gg**, open the app again, and re-run `check` until it agrees
+   with the stack.
+6. **File the cards** as `check` says, then do the Piltover worklist: Download → Merge → Clear.
 
 ## Bans
 

@@ -13,6 +13,7 @@
 #   scripts/rift tune <your deck>                      # reasoned swaps for one of your decks (read only)
 #   scripts/rift rising [legend]                       # cards each legend's lists are taking up; the swap scoreboard
 #   scripts/rift event <locator id>                    # a store event: standings + legends
+#   scripts/rift intake start [label] | check [champion] # bracket a scan of new cards: what landed, where to file it
 #
 # See scripts/state.mjs for the full command list and data sources.
 
