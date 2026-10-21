@@ -100,6 +100,10 @@ other. Space requests, back off on 429, and do not fetch twice what you can comp
 - **Distinguish a record from a claim.** `tour`/`ev`/`pl`/`ec` mean upstream vouched for
   it. `cp`/`ce`/`cm` are the deck author's own title claim. When ranking archetypes,
   union both — filtering on `tour` alone hides every RQ result.
+- **Never suggest an Aurora deck.** Any list running Dazzling Aurora is out for Jay — no
+  brew, build, swap or "consider" names one (`lib/avoid.mjs`). It stays in everything about
+  the *field*: matchups, gauntlets, meta tables and scouting must still cover Aurora Jayce,
+  Sivir or whoever is on it, because Jay plays against them.
 - **Correct yourself plainly and move on.** State the correction, fix it, continue. No
   ruminating.
 

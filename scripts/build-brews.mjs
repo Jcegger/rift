@@ -24,6 +24,7 @@ import { anchorBrew, coloursBrew } from "../lib/brew.mjs";
 import { docEngineLine, docEngineKeys } from "../lib/research.mjs";
 import { buildDeck, simulate, sweepRunes } from "../lib/sim.mjs";
 import { isGoodPlacing, riotRows } from "../lib/placing.mjs";
+import { avoidedIn } from "../lib/avoid.mjs";
 
 // MIN_CROWD: with fewer placings, a legend's posted lists are the anchor — the consensus of
 // a legend's unplaced lists shares 34 of 40 cards with its winners' (lib/blind.test.mjs).
@@ -177,6 +178,9 @@ const main = async () => {
     // Worth showing: a legend with no results (the crowd's list or one built from colours —
     // the only list it has), or an experiment to try.
     b.worth = b.kind === "colours" || b.crowd || b.swaps.length > 0;
+    // A deck Jay never plays (lib/avoid.mjs) is kept, for knowing the opponent, but never offered.
+    const avoid = avoidedIn(b.rows.map((r) => r.name));
+    if (avoid.length) { b.avoid = avoid; b.worth = false; }
     brews.push(b);
   }
 

@@ -5,6 +5,11 @@ author: rift toolchain
 date: 2026-09-12
 ---
 
+> **Not for play — an Aurora deck.** This list runs 3 Dazzling Aurora, and Jay never plays
+> Aurora decks (`lib/avoid.mjs`, 21 Oct 2026). Kept as a record and as a read on what an
+> Aurora Sivir does across the table. The Sivir to play is
+> [Gold-fuelled midrange](sivir-gold-midrange-radiance.md).
+
 **Legend:** Battle Mistress (Body/Chaos) · **Champion:** Sivir, Mercenary
 **Registered:** 40 main + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend = 56 · **Sideboard:** 8 of 10
 **Collection status:** complete — 0 cards still to get, $0.00 gap

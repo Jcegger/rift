@@ -814,6 +814,7 @@ async function cmdBrew(args) {
   for (const b of hits.slice(0, 2)) {
     if (b.kind === "none") { console.log(`BREW ${b.legend}: none — ${b.why}`); continue; }
     console.log(`BREW ${b.legend} (${b.kind}) · ${b.heading || ""} · ${b.basis}${b.legal ? "" : " · NOT LEGAL"}\n  ${B.note}`);
+    if (b.avoid?.length) console.log(`\n  NOT FOR YOU — runs ${b.avoid.join(", ")}: an Aurora deck, which you never play (lib/avoid.mjs).\n  Shown so you know what you face, never as a suggestion.`);
     if (b.sim) console.log(`  goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3${b.runeNote ? ` · ${b.runeNote}` : ""}`);
     const built = b.rows.filter((r) => r.change === "built" || r.change === "champion");
     if (built.length) { console.log(`\n  BUILT FROM ITS COLOURS AND ITS OWN CARDS`); for (const r of built) console.log(`    ${r.qty} ${pad(r.name, 30)} ${r.why}`); }
@@ -837,6 +838,7 @@ async function cmdTune(S, args) {
   const deck = ds[0];
   const { makeBrewer } = await import("./build-brews.mjs");
   const { suggestSwaps } = await import("../lib/swaps.mjs");
+  const { avoidedIn } = await import("../lib/avoid.mjs");
   const { understood } = await import("../lib/roles.mjs");
   const { engineTags } = await import("../lib/engines.mjs");
   const { buildDeck, simulate } = await import("../lib/sim.mjs");
@@ -856,6 +858,8 @@ async function cmdTune(S, args) {
   const label = ev.basis === "placed" ? `${ev.ds.length} good ${name.split(",")[0]} placings${ev.era ? " from Radiance-format events" : ""}` : ev.basis === "crowd+results" ? `${ev.lists} posted ${name.split(",")[0]} lists, steered by its ${ev.placed} good placing${ev.placed === 1 ? "" : "s"} (too few to anchor on alone)` : `${ev.lists} posted ${name.split(",")[0]} lists (no good placings yet: the crowd)`;
   const trend = (n) => { const t = rising?.legends?.[name]?.cards?.[n]; return t ? ` [field: ${t.now}% now, ${t.delta >= 0 ? "+" : ""}${t.delta} pts]` : ""; };
   console.log(`TUNE "${deck.name}" (${name}) against ${label}\n  Read only — nothing is changed in your decks. Untested: the journal decides.`);
+  const avoid = avoidedIn(rows.map((r) => r.c.n));
+  if (avoid.length) console.log(`\n  NOTE — this deck runs ${avoid.join(", ")}: an Aurora deck, which you said you never play (lib/avoid.mjs).`);
   const core = rows.filter((r) => r.inc >= 0.8).map((r) => r.c.n), unread = rows.filter((r) => !understood(r.c) && r.inc < 0.8).map((r) => r.c.n);
   const lonely = rows.filter((r) => r.inc === 0).map((r) => `${r.copies} ${r.c.n}`);
   if (core.length) console.log(`\n  KEPT — in 80%+ of those lists: ${core.join(", ")}`);

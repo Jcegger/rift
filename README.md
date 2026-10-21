@@ -113,6 +113,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   rows so a Best Of — a legend's best finisher at an RQ — is judged by the same cut: 330th of
   2,165 is one, 567th of 1,962 is not. Of the 111 lists in the window's three articles, 77
   were already uploaded and are skipped; 31 are added. Tests: `lib/placing.test.mjs`.
+- `lib/avoid.mjs` - decks Jay never plays: anything running Dazzling Aurora. A brew running
+  it is kept (for the field) but never offered — `worth` false, and `scripts/rift brew` says
+  why; a swap never brings it in; `scripts/rift tune` notes it in your own deck. Matchup and
+  meta views are untouched: these are still opponents.
 - `lib/brew.mjs` - one brew, by `docs/deckbuilding.md`, anchored on the best evidence a
   legend has: its winners' consensus (10+ good placings); before that, its CROWD — every posted
   list, its first placings weighted 10× — since a legend's posted lists share 33 of 40 cards
