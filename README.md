@@ -75,9 +75,12 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   `scripts/rift rising [legend]`; idea pages show "Moving this week"; `scripts/rift tune`
   shows the trend beside each suggestion.
 - `data/swaplog.json` - every swap a brew has suggested, from the day it first appeared,
-  scored a week later (adopted = the card in gained 10+ points in the legend's lists), by kind —
-  so RISING, the riskiest, is judged on its own. History: never rebuilt, only added to
-  (started 20 Oct 2026).
+  scored 28 days later against the legend's **good placings** (`lib/placing.mjs`), not its
+  posted lists: adopted = the card in gained 10+ points in them against the 28 days before;
+  left unscored when either window has under 10 good placings, since that is noise. By kind —
+  so RISING, the riskiest, is judged on its own, and no longer grades itself, being read from
+  posted lists and scored on results. History: never rebuilt, only added to (started 20 Oct
+  2026; scored on good placings from 21 Oct).
 - `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
   Radiance-format events, a consensus list counted from its placed lists (or brews,
   labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
@@ -96,13 +99,22 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `scripts/build-research.mjs` - queues what each legend's winners skip as questions, with
   the evidence that usually explains it. Fetches nothing. See `docs/research.md`.
 - `scripts/build-brews.mjs` - builds `data/brews.json`. Fetches nothing; runs after
-  build-research. `makeBrewer()` holds its inputs — anchor lists (Radiance-format placings
-  when there are 5+, else all placings), per-legend card shares, quality — and can HIDE a
+  build-research. `makeBrewer()` holds its inputs — anchor lists (Radiance-format good
+  placings when there are 10+, else all good placings, Riot's Top 8 and Best Of lists from
+  `data/topdecks.json` among them), per-legend card shares, quality — and can HIDE a
   legend's lists from all of them, which is how `lib/blind.test.mjs` builds blind.
 - `scripts/build-rising.mjs` - builds `data/rising.json` and adds to `data/swaplog.json`.
   Fetches nothing; runs after build-brews.
+- `lib/placing.mjs` - what a good placement is, shared by the brews' anchor and the
+  scoreboard: a verified finish in the top 25% of its field or a top 8 of 32+ players; with
+  no field size, a top 8; a claim, top 8 or better (still a claim). Any recorded finish was
+  the old test, and 37% of those were bottom-half — Zed's "first results" were 144th of 206,
+  47th, and two claimed top-512s. `riotRows()` turns Riot's Top Decks articles into snapshot
+  rows so a Best Of — a legend's best finisher at an RQ — is judged by the same cut: 330th of
+  2,165 is one, 567th of 1,962 is not. Of the 111 lists in the window's three articles, 77
+  were already uploaded and are skipped; 31 are added. Tests: `lib/placing.test.mjs`.
 - `lib/brew.mjs` - one brew, by `docs/deckbuilding.md`, anchored on the best evidence a
-  legend has: its winners' consensus (5+ placings); before that, its CROWD — every posted
+  legend has: its winners' consensus (10+ good placings); before that, its CROWD — every posted
   list, its first placings weighted 10× — since a legend's posted lists share 33 of 40 cards
   with its eventual winners' and the first results steer them where pros found something
   the crowd had not (Yasuo's Spiderlings); only with under 8 lists, COLOURS (its colours'

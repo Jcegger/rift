@@ -9,8 +9,8 @@
 //
 // The method is docs/deckbuilding.md's; the swap logic is backtested against the Radiance
 // previews in lib/swaps.test.mjs. What it computes here:
-// - ANCHOR LISTS: a legend's placed lists from Radiance-format events when it has
-//   MIN_PLACED of them, else all its placed lists.
+// - ANCHOR LISTS: a legend's good placings (lib/placing.mjs) from Radiance-format events
+//   when it has MIN_PLACED of them, else all its good placings.
 // - SHELLS for ports: the same-colour legend with MIN_SHELL+ placed lists that shares the
 //   most of this legend's plan (Engine line and heading), most placed lists breaking ties.
 // - QUALITY: the share of lists that could play a card that do, for the "passed over" rule.
@@ -23,10 +23,14 @@ import { headingSubKeys, inferLegend } from "../lib/infer.mjs";
 import { anchorBrew, coloursBrew } from "../lib/brew.mjs";
 import { docEngineLine, docEngineKeys } from "../lib/research.mjs";
 import { buildDeck, simulate, sweepRunes } from "../lib/sim.mjs";
+import { isGoodPlacing, riotRows } from "../lib/placing.mjs";
 
 // MIN_CROWD: with fewer placings, a legend's posted lists are the anchor — the consensus of
 // a legend's unplaced lists shares 34 of 40 cards with its winners' (lib/blind.test.mjs).
-const MIN_PLACED = 5, MIN_CROWD = 8, FIRST_W = 10, MIN_ELIGIBLE = 5, NEW_DAYS = 30, GAMES = 2000;
+// MIN_PLACED: 10 good placings to anchor on them alone. It was 5 when any finish counted;
+// on good placings the crowd (37.1 of 40) beat half of a legend's own good placings (36.4),
+// so a consensus of 5 is noisier than the crowd's (docs/deckbuilding.md, 21 Oct 2026).
+const MIN_PLACED = 10, MIN_CROWD = 8, FIRST_W = 10, MIN_ELIGIBLE = 5, NEW_DAYS = 30, GAMES = 2000;
 const read = async (f) => JSON.parse(await readFile(new URL(`../data/${f}`, import.meta.url), "utf8"));
 const round = (x, k = 2) => Math.round(x * 10 ** k) / 10 ** k;
 
@@ -39,7 +43,7 @@ const round = (x, k = 2) => Math.round(x * 10 ** k) / 10 ** k;
 //   a legend looks before it has results (its posted lists remain).
 //   rising: data/rising.json, the crowd's movement this week, for RISING swaps (none when a
 //   legend is hidden: its own lists made the trend).
-export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", rising = null, hide = null, hideMode = "all", blindEngine = false }) {
+export function makeBrewer({ cat, extras, banned, snap, topdecks = null, R = null, md = "", rising = null, hide = null, hideMode = "all", blindEngine = false }) {
   const known = new Set(cat.cards.map((c) => c.c));
   const idx = indexCatalog([...cat.cards, ...(extras.cards || []).filter((c) => c.c && !known.has(c.c))], banned);
   const byShort = new Map(idx.cards.map((c) => [c.c.replace(/\/\d+$/, ""), c]));
@@ -47,10 +51,14 @@ export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", risin
   const { consensus } = counter(idx, card);
   const today = new Date().toISOString().slice(0, 10);
 
-  const usableAll = snap.decks.filter((d) => d.lg && card(d.lg) && !Object.keys(d.cards).some((k) => idx.bannedNames.has(card(k)?.n)));
-  const placedOf0 = (d) => (d.tour && d.pl != null) || Number(d.cp) > 0;
-  const usable = hide ? usableAll.filter((d) => idx.legendName(card(d.lg)) !== hide || (hideMode === "placed" && !placedOf0(d))) : usableAll;
-  const placedOf = (d) => (d.tour && d.pl != null) || Number(d.cp) > 0;
+  // Riot's Top 8 and Best Of lists join the snapshot's, judged by the same cut (lib/placing.mjs).
+  const byName = new Map();
+  for (const c of idx.cards) if (!c.v && !byName.has(c.n)) byName.set(c.n, c);
+  const riot = topdecks ? riotRows(topdecks, snap, card, byName) : [];
+  const usableAll = [...snap.decks, ...riot].filter((d) => d.lg && card(d.lg) && !Object.keys(d.cards).some((k) => idx.bannedNames.has(card(k)?.n)));
+  // "Placed" means a good placing (lib/placing.mjs), not any recorded finish.
+  const placedOf = isGoodPlacing;
+  const usable = hide ? usableAll.filter((d) => idx.legendName(card(d.lg)) !== hide || (hideMode === "placed" && !placedOf(d))) : usableAll;
   const identOf = (L) => (L.d || []).filter((x) => x !== "Colorless").sort().join("/");
   const names = (d) => new Set(Object.keys(d.cards).map((k) => card(k)?.n).filter(Boolean));
   const newSet = (s) => { const from = SET_LEGAL_FROM[s] || (banned?.standard?.upcoming || []).find((u) => u.set === s)?.from; return !!from && (from > today || (Date.parse(today) - Date.parse(from)) / 864e5 < NEW_DAYS); };
@@ -120,8 +128,8 @@ export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", risin
     if (a) return anchorBrew(L, idx, consensus(a.ds), card, { ...ctx, own: shareMap(a.ds), ownLists: a.lists ?? a.ds.length, ownLabel: a.basis === "placed" ? "winning lists" : "posted lists" },
       { ...meta, crowd: a.basis !== "placed",
         basis: a.basis === "crowd" ? `${a.lists} posted ${name.split(",")[0]} lists — no results yet, so the crowd's list (posted lists predict winners' closely)`
-          : a.basis === "crowd+results" ? `${a.lists} posted ${name.split(",")[0]} lists, its ${a.placed} placing${a.placed === 1 ? "" : "s"} weighted ${FIRST_W}× — the crowd, steered by its first results`
-          : `${a.ds.length} placed ${name.split(",")[0]} lists${a.era ? " from Radiance-format events" : ""}`, lists: a.lists ?? a.ds.length });
+          : a.basis === "crowd+results" ? `${a.lists} posted ${name.split(",")[0]} lists, its ${a.placed} good placing${a.placed === 1 ? "" : "s"} weighted ${FIRST_W}× — the crowd, steered by its first results`
+          : `${a.ds.length} good ${name.split(",")[0]} placings${a.era ? " from Radiance-format events" : ""}`, lists: a.lists ?? a.ds.length });
     // Too few lists to anchor on: build it from its colours' winners and its own cards.
     const own = byLegend.get(name) || [];
     const bfCount = new Map();
@@ -142,10 +150,10 @@ export function makeBrewer({ cat, extras, banned, snap, R = null, md = "", risin
 
 const main = async () => {
   const only = (process.argv[2] || "").toLowerCase();
-  const [cat, extras, banned, snap, R, rising] = await Promise.all([read("cards.json"), read("extras.json"), read("banned.json"), read("decks.json"), read("research.json").catch(() => null), read("rising.json").catch(() => null)]);
+  const [cat, extras, banned, snap, topdecks, R, rising] = await Promise.all([read("cards.json"), read("extras.json"), read("banned.json"), read("decks.json"), read("topdecks.json").catch(() => null), read("research.json").catch(() => null), read("rising.json").catch(() => null)]);
   const md = await readFile(new URL("../docs/archetypes.md", import.meta.url), "utf8").catch(() => "");
   // The trend is the last build-rising run's (it runs after this, to log these suggestions).
-  const brewer = makeBrewer({ cat, extras, banned, snap, R, md, rising });
+  const brewer = makeBrewer({ cat, extras, banned, snap, topdecks, R, md, rising });
   const { idx, legends, newEvents } = brewer;
   const today = new Date().toISOString().slice(0, 10);
   const brews = [];
@@ -174,7 +182,7 @@ const main = async () => {
 
   const out = {
     generatedAt: today,
-    source: "lib/brew.mjs and lib/swaps.mjs over data/decks.json (anchor lists, shells, quality), the catalog, docs/archetypes.md (each legend's plan), data/research.json",
+    source: "lib/brew.mjs and lib/swaps.mjs over data/decks.json and Riot's Top 8 and Best Of lists in data/topdecks.json (anchor lists, shells, quality), the catalog, docs/archetypes.md (each legend's plan), data/research.json",
     note: "Net-deck plus experiments: each starts from its legend's winners' consensus (or, before results, the crowd's list) and applies only labelled experiments — a new card doing a job for less, a card rising in posted lists, a research answer. What other winners play instead is listed as options, not applied. Untested: log games in the match journal.",
     method: "docs/deckbuilding.md", newEvents: [...newEvents], brews,
   };

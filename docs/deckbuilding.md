@@ -168,6 +168,25 @@ moving an enemy treated as moving your own; Rampage's fight read as a pump), the
 change about 5 copies over 4 swaps and offer one or two more beside the list — core cards
 (80%+ of winning lists) only ever among those offered.
 
+**Good placings, not any finish (21 Oct 2026).** Everything above counted a list as "placed"
+if it had any recorded finish — last place included. Of the 562 verified finishes with a
+field size, 209 (37%) were in the bottom half; Zed's four "first results", each weighted 10×
+in its crowd, were 144th of 206, 47th, and two claimed top-512s. The brews' anchor and the
+scoreboard now use `lib/placing.mjs`: a verified finish in the top 25% of its field or a top
+8 of 32+ players; with no field size, a top 8; a claim, top 8 or better, still a claim. The
+§1–6 measurements were taken on all placings and are not re-run. Re-run on good placings,
+the blind test reads: ceiling 36.4 of 40, **crowd 37.1**, built blind 18.4, the colours'
+most popular cards 16.9. The crowd now beats the ceiling — half of a legend's good placings
+is a smaller, noisier sample than all of its posted lists — which says a consensus of 5
+good placings (the anchor's MIN_PLACED) is likely worse than the crowd's. **So MIN_PLACED is
+now 10** — a knob changed on new evidence, against the freeze, by decision on 21 Oct 2026;
+below 10 good placings a legend anchors on its crowd, its good placings weighted 10×.
+Riot's Top Decks articles count too (`riotRows()`): an RQ's Top 8, and its **Best Of** — the
+best finisher on each other legend — when that finish clears the same cut. Of the window's
+three RQs, 77 of Riot's 111 lists were already uploaded; 31 more join. The backtest
+(`lib/swaps.test.mjs`) keeps its own definition of an adopted card (30%+ of the
+Radiance-preview lists), unchanged at 3 of 7.
+
 ## Net-deck first — and what is fitted to what
 
 At its core this is net-decking: the brew **is** its legend's consensus — its winners', or
@@ -184,6 +203,7 @@ each came from:
 | core / flex share | 80% / 60% | the measured core–mid–flex split (§2) |
 | change budget | ~9 copies | how far winners stray from each other (§3) |
 | crowd anchor | 8+ lists; first placings ×10 | the blind test (34.9 vs 33.8 at ×10 — a small gain) |
+| placings to anchor alone | 10 good placings (was 5 of any finish) | the blind test on good placings: crowd 37.1 beats half of them, 36.4 (21 Oct) |
 | new-card swaps per list | at most 2 | the previews' first wave (~3 Radiance copies), **and the backtest** |
 | core cards never changed; plan and engine cards kept; Reaction speed respected | — | **the backtest** and the audit |
 | alternative = 15% of a legend's lists, 2+ lists | — | judgement |
@@ -194,9 +214,11 @@ each came from:
 **The backtest has 11 adopted cards behind it, and about five design choices were made
 against it** — that is the overfitting risk, and it is why it now only guards (above 4×
 chance) instead of steering. **The thresholds are frozen as of 20 Oct 2026.** From here a
-knob changes only on the forward scoreboard (`data/swaplog.json`, scored a week after each
+knob changes only on the forward scoreboard (`data/swaplog.json`, scored on good placings 28 days after each
 suggestion first appears), once a kind has 30+ scored suggestions — out-of-sample evidence,
-which the backtest never was.
+which the backtest never was. It scores 28 days after a suggestion against the legend's good
+placings, and only where both 28-day windows hold 10+ of them — so most of the log will
+never be scored, and the first scores land in mid-November.
 
 ## What the guides say, and where they part from the data
 

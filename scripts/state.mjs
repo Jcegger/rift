@@ -840,9 +840,9 @@ async function cmdTune(S, args) {
   const { understood } = await import("../lib/roles.mjs");
   const { engineTags } = await import("../lib/engines.mjs");
   const { buildDeck, simulate } = await import("../lib/sim.mjs");
-  const [cards, extras, banned, snap, R, rising] = await Promise.all(["cards.json", "extras.json", "banned.json", "decks.json", "research.json", "rising.json"].map((f) => readJson(url(f)).catch(() => null)));
+  const [cards, extras, banned, snap, R, rising, topdecks] = await Promise.all(["cards.json", "extras.json", "banned.json", "decks.json", "research.json", "rising.json", "topdecks.json"].map((f) => readJson(url(f)).catch(() => null)));
   const md = await readFile(new URL("../docs/archetypes.md", import.meta.url), "utf8").catch(() => "");
-  const m = makeBrewer({ cat: cards, extras, banned, snap, R, md });
+  const m = makeBrewer({ cat: cards, extras, banned, snap, topdecks, R, md });
   const { idx, card } = m;
   const L = Object.keys(deck.cards).map(card).find((c) => c?.t === "Legend");
   if (!L) { console.log(`${deck.name}: no legend in the catalog for this deck`); return; }
@@ -853,7 +853,7 @@ async function cmdTune(S, args) {
   for (const [k, q] of Object.entries(deck.cards)) { const c = card(k); if (c && ["Unit", "Spell", "Gear"].includes(c.t)) { const r = byName.get(c.n) || { c, copies: 0, inc: own.get(c.n) || 0 }; r.copies += q; byName.set(c.n, r); } }
   const rows = [...byName.values()];
   const swaps = suggestSwaps(rows, { idx, legend: L, pool: m.poolOf(L), quality: m.quality, own, ownLists: ev.ds.length, ownLabel: ev.basis === "placed" ? "winning lists" : "posted lists", isNew: m.isNew, research: R, engine: m.engineOf(name), trend: rising?.legends?.[name]?.cards || null });
-  const label = ev.basis === "placed" ? `${ev.ds.length} placed ${name.split(",")[0]} lists${ev.era ? " from Radiance-format events" : ""}` : `${ev.lists} posted ${name.split(",")[0]} lists (no results yet: the crowd)`;
+  const label = ev.basis === "placed" ? `${ev.ds.length} good ${name.split(",")[0]} placings${ev.era ? " from Radiance-format events" : ""}` : ev.basis === "crowd+results" ? `${ev.lists} posted ${name.split(",")[0]} lists, steered by its ${ev.placed} good placing${ev.placed === 1 ? "" : "s"} (too few to anchor on alone)` : `${ev.lists} posted ${name.split(",")[0]} lists (no good placings yet: the crowd)`;
   const trend = (n) => { const t = rising?.legends?.[name]?.cards?.[n]; return t ? ` [field: ${t.now}% now, ${t.delta >= 0 ? "+" : ""}${t.delta} pts]` : ""; };
   console.log(`TUNE "${deck.name}" (${name}) against ${label}\n  Read only — nothing is changed in your decks. Untested: the journal decides.`);
   const core = rows.filter((r) => r.inc >= 0.8).map((r) => r.c.n), unread = rows.filter((r) => !understood(r.c) && r.inc < 0.8).map((r) => r.c.n);
@@ -891,7 +891,8 @@ async function cmdRising(args) {
   }
   if (!rows.length) console.log(q ? `\nno trend for "${q}" (needs 5+ lists in each window)` : "");
   const b = Rz.scoreboard;
-  console.log(`\nSCOREBOARD — the brews' suggestions, scored a week after they first appear (adopted = the card gained 10+ points)\n  ${b.logged} logged, ${b.scored} scored${b.scored ? ": " + Object.entries(b.kinds).filter(([, x]) => x.n).map(([k, x]) => `${k} ${x.adopted}/${x.n}`).join(" · ") : " so far — the first are scored a week after logging"}\n  (* = Radiance)`);
+  const settle = b.settle ?? 28, minGood = b.minGood ?? 10;
+  console.log(`\nSCOREBOARD — the brews' suggestions, scored ${settle} days after they first appear, against good placings (lib/placing.mjs): adopted = the card gained 10+ points in them\n  ${b.logged} logged, ${b.scored} scored${b.scored ? ": " + Object.entries(b.kinds).filter(([, x]) => x.n).map(([k, x]) => `${k} ${x.adopted}/${x.n}`).join(" · ") : ` so far — the first are scored ${settle} days after logging`}${b.thin ? ` · ${b.thin} settled with under ${minGood} good placings either side, so not scored` : ""}\n  (* = Radiance)`);
 }
 
 // ── intake: new product into the collection ───────────────────────────────────
