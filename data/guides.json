@@ -151,6 +151,28 @@
    "words": 6248
   },
   {
+   "slug": "radiance-tier-prediction",
+   "file": "guides/radiance-tier-prediction.md",
+   "kicker": null,
+   "title": "Radiance — The Preseason Poll",
+   "subtitle": "Riftbound, 21 Oct 2026, two days before Radiance is legal. Committed predictions for all 58 legends, built like a preseason college football ranking.",
+   "date": "2026-10-21",
+   "legend": null,
+   "champion": null,
+   "sections": [
+    "How the poll was built",
+    "The Top 10",
+    "11–25",
+    "26–45",
+    "46–58",
+    "The sleeper: Annie, Dark Child",
+    "Week one versus steady state",
+    "The scorecard",
+    "Sources"
+   ],
+   "words": 2759
+  },
+  {
    "slug": "reksai-void-burrower",
    "file": "guides/reksai-void-burrower.md",
    "kicker": null,
@@ -236,14 +258,14 @@
     "15. Sideboard",
     "Sources and method"
    ],
-   "words": 8237
+   "words": 8288
   },
   {
    "slug": "sivir-gold-midrange-radiance",
    "file": "guides/sivir-gold-midrange-radiance.md",
    "kicker": null,
    "title": "Sivir — Gold-fuelled midrange (Radiance)",
-   "subtitle": "Riftbound, Radiance season (from 23 October 2026) — the test deck: list, plan, sideboard and what to log",
+   "subtitle": "Riftbound, Radiance season (from 23 October 2026) — the test deck, redone 21 Oct with the Hidden package: list, plan, sideboard and what to log",
    "date": "2026-10-21",
    "legend": "Battle Mistress",
    "champion": null,
@@ -252,10 +274,11 @@
     "The plan",
     "Matchups and sideboarding",
     "Testing it",
-    "What changed from the anchor, and why",
+    "The redo (21 Oct), and why",
+    "Before the redo: from the anchor, and why",
     "Goldfish"
    ],
-   "words": 2469
+   "words": 3183
   },
   {
    "slug": "skirmish-prep",
@@ -378,7 +401,7 @@
     "Net-deck first — and what is fitted to what",
     "What the guides say, and where they part from the data"
    ],
-   "words": 2249
+   "words": 2605
   }
  ]
 }

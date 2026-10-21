@@ -5,88 +5,113 @@
  "date": "2026-10-21",
  "author": "Claude",
  "title": "Sivir — Gold-fuelled midrange (Radiance)",
- "summary": "A midrange Sivir for Radiance, locked in as the test deck on 21 Oct after an audit. It starts from the only legal Sivir result, Randyyy's 146th of 2,165 at the Los Angeles RQ (a Fizz and Matriarch value list with lots of interaction), and changes 7 cards. Reckless Innovator's Gold and Black Market turn the legend into a Power engine, Graves turns every pump into a sweeper, and the early curve is kept because an empty turn 1 costs the battlefield the Gold plan needs. Every other placed Sivir list ran Stacked Deck, which is banned, so there is almost nothing to net-deck. This is a reasoned brew and is marked untested.",
- "basis": "Anchor: Randyyy's list from the Los Angeles RQ (2 Oct 2026, 146th of 2,165), the only placed Sivir list with no banned card; the other 8 placings ran Stacked Deck. 7 in / 7 out from it, inside the 6–9 cards winners usually stray (docs/deckbuilding.md), plus Black Market for Sandswept Tomb. Graves and Black Market also appear in a posted Radiance Sivir brew (\"Sivir - RAD\", 9 Oct). No result backs this list.",
+ "summary": "A midrange Sivir for Radiance, redone on 21 Oct around riftbound.gg's read of the set: Sivir's Gold pays the Power cost of hiding, so the Chaos Hidden package — Momentary Companion first — joins the Fizz and Matriarch value core, Ziggs, Explosive turns gear into defence, and the gear that 'gear removal everywhere' punished is gone. It still starts from the only legal Sivir result, Randyyy's 146th of 2,165 at the Los Angeles RQ. In the Gold simulation it keeps every number the previous list had (Gold, cards, Sivir's threshold, Graves on time) and adds 1.3–2.7 Might a game for free from Companion flips. A reasoned brew, untested.",
+ "basis": "Anchor: Randyyy's list from the Los Angeles RQ (2 Oct 2026, 146th of 2,165), the only placed Sivir list with no banned card; the other 8 placings ran Stacked Deck. 7 in / 7 out from it, inside the 6–9 cards winners usually stray (docs/deckbuilding.md), plus Black Market for Sandswept Tomb. Graves and Black Market also appear in a posted Radiance Sivir brew (\"Sivir - RAD\", 9 Oct). No result backs this list. Redone 21 Oct with riftbound.gg, \"10 Most Buffed Legends with Radiance\" (Den, 20 Oct 2026) as the authority: its Sivir entry (Gold alleviates hiding costs; the best Las Vegas Sivir mixed the best Chaos and Body synergies; Ziggs, Explosive defending on Gold) and its Chaos Hidden-package picks (Momentary Companion above all; Siren's Song with Demon Shade; Bandle Scouts' Academy). Evelynn's 85 Radiance-era lists, the crowd's Body/Chaos Hidden deck, agree: Momentary Companion 71%, Bedeviling Stranger 54%, Siren's Song 44%. riftbound.gg's Sivir legend guide (18 May) is an Unleashed Aurora deck and was not used.",
  "changes": [
   {
-   "what": "−3 Shadow Order Disciple, +3 Reckless Innovator",
+   "what": "Redo (21 Oct): +3 Momentary Companion, −1 Traveling Merchant, −1 Edge of Night, −1 Last Rites",
+   "why": "The article's top Chaos pick: 'a 4/4 for just recycling a rune'. For Sivir that recycle also fires Battle Mistress, so hiding a Companion turns into a Gold as well as a free 4/4 next turn (flipped on your own turn it is permanent; on the opponent's it gets Temporary). 71% of Evelynn's Radiance lists run it. In the Gold simulation (20,000 games a variant) it adds 1.3 free Might a game when you hold a battlefield half the time, 2.7 at 80%, with Gold, cards and Sivir's threshold unchanged. Edge of Night and Last Rites go: both are gear in a format where, in the article's words, 'gear removal was everywhere', and Edge competed for the one hide slot."
+  },
+  {
+   "what": "Redo (21 Oct): +2 Ziggs, Explosive, −1 Rampage, −1 Switcheroo",
+   "why": "The article's 'cute synergy': when Ziggs defends, kill a friendly gear for +2 Might. The stronger line: for [1] and his exhaust he makes a Bomb, which is a gear — kill the Bomb instead of a Gold and its Deathknell deals 2 to an enemy there too (§187.12). An enemy that dies readies Battle Mistress for another Gold. He is a 4/4 holder for the battlefields the hide plan needs. The simulation has no combat, so it cannot see him: he is the first thing to log."
+  },
+  {
+   "what": "Redo (21 Oct): +1 Siren's Song, −1 Star-Crossed",
+   "why": "A 2-Energy Reaction with no Power cost that moves an enemy unit that moved this turn — an answer to an attack, or a cleared battlefield to take. The article pairs it with Demon Shade; 44% of Evelynn lists run it. One Star-Crossed stays for the unit that didn't move."
+  },
+  {
+   "what": "Redo (21 Oct): Bandle Scouts' Academy for Zaun Warrens",
+   "why": "A Gold every time you hide there, and this list has 11 Hidden cards. The article's note is 'gears we can destroy' — Ziggs's defend fodder when no Bomb is out. Simulated: +0.3–0.4 Gold a game; Zaun Warrens' loot isn't modelled, so the swap rests on the Ziggs and hide synergy, not the number. Black Market and Sigil of the Storm stay."
+  },
+  {
+   "what": "Tried and left out (21 Oct)",
+   "why": "Bushwhack Trap (a second hide slot): no measurable effect at 0, 1 or 2 copies in the simulation — you rarely draw it while holding a battlefield with two Hidden cards to place — and it is a gear. Gutter Guardian: the article warns its Power is lost when revealed on the opponent's turn. Demon Shade: the article's pair for rush legends scoring on the opponent's turn, not a midrange hold. The Waters' Wage: cut earlier on the Gold simulation."
+  },
+  {
+   "what": "Earlier: −3 Shadow Order Disciple, +3 Reckless Innovator",
    "why": "Disciple is an aggro 2-drop that burns your own cards to attack. Innovator gives card flow on a 3-Might body with Accelerate, plus a Gold token whenever it exhausts. In the Gold simulation, it and Battle Mistress make nearly all of the deck's Gold. It costs 3 Energy and no Power, so Matriarch can replay it. All 3 Traveling Merchants stay for the curve; their loot also feeds Fizz and Matriarch from the trash."
   },
   {
-   "what": "−1 Tornado Warrior (3 → 2), −1 Edge of Night (2 → 1), +2 Bedeviling Stranger",
+   "what": "Earlier: −1 Tornado Warrior (3 → 2), −1 Edge of Night (2 → 1), +2 Bedeviling Stranger",
    "why": "Only one card can be hidden at each battlefield (§811.1.b), and Tornado (empowers on its flip) and Edge (attaches on its flip) both want that slot. Stranger is a 2-Might 2-drop that is Hidden but plays fine from hand, and bounces an enemy unit wherever 4+ units stand. Midrange boards get there, and against Yasuo's Spiderlings it's the best card you have. A third copy is in the sideboard. Tornado hidden where Matriarch stands empowers her on its flip, which fires her replay."
   },
   {
-   "what": "−1 Acceptable Losses, −1 Grim Resolve, +2 Graves, Blasting Through",
+   "what": "Earlier: −1 Acceptable Losses, −1 Grim Resolve, +2 Graves, Blasting Through",
    "why": "The top end. When Graves attacks or defends he deals his Might to every enemy unit there instead of combat damage, so Punch First him and then move him in for 9 to each enemy. Every death readies Battle Mistress for another Gold. Acceptable Losses moves to the sideboard; Grim Resolve's XP does nothing for Sivir."
   },
   {
-   "what": "Black Market for Sandswept Tomb",
+   "what": "Earlier: Black Market for Sandswept Tomb",
    "why": "Black Market: [A][A]: draw 1, once per turn for each player. Two Power switches Sivir on by herself (+2 Might and Ganking), spare Gold becomes a card every turn, and paying with a rune recycle fires Battle Mistress. In the Gold simulation it adds about 0.5 cards a game (it's in play a third of the time), but that sim can't model the Tomb's discount, so the comparison flatters it. That's why it's the first thing to test. Sandswept Tomb is symmetric too: it discounts the opponent's 2-Power pumps (Punch First in Rengar, Yi and Kha'Zix). One reading to check with a judge: that an ability's cost counts as Power \"spent\" for Sivir."
   },
   {
-   "what": "The audit (21 Oct): curve",
+   "what": "Earlier: The audit (21 Oct): curve",
    "why": "The first draft cut 6 of Randyyy's 8 two-drops and ran 13 three-drops. In goldfish games (10,000 a list) it had 2.5 units down by turn 3 and was stuck on turn 3 9.6% of the time; Randyyy's list had 3.3 and 6.5%. With seven 2-drops this list has 3.2 and 7.1%, and still spends more Energy on turn 5 than Randyyy's (5.6 against 4.6). Primordial Roar came out (6 total cost, turn speed, usually 4 damage) and went to the sideboard."
   },
   {
-   "what": "The audit (21 Oct): Gold, and The Waters' Wage cut",
+   "what": "Earlier: The audit (21 Oct): Gold, and The Waters' Wage cut",
    "why": "Jay's catch: the curve goldfish can't see Gold, Sivir's whole engine. scripts/sim-gold.mjs models it: Power from recycled runes, Battle Mistress, Gold, Hidden and the one-per-battlefield slot, Innovator, Black Market and Sivir's threshold. 20,000 games a variant, holding a battlefield 50% or 80% of the time. The Waters' Wage flipped for three Gold only 0.17–0.37 times a game: it has to be drawn, hidden at a battlefield you hold, and still held next turn. It added about 1 Gold a game and moved nothing else (resources spent, Sivir at 6 Might by turn 5 at 90–92%, Graves by turn 6 at about 52%). So it's out, for a second Tornado and a third Merchant. Sivir's threshold is never the bottleneck. The Gold sim's limits: no opponent, and it assumes Innovator exhausts every turn after it lands."
   },
   {
    "what": "Option: The Waters' Wage",
-   "why": "Cut on the Gold simulation, above. Worth trying back if games show you hold a battlefield nearly every turn."
-  },
-  {
-   "what": "Option: Bandle Scouts' Academy",
-   "why": "The other Gold battlefield. Only one card can be hidden per battlefield, so it's at most one Gold per hide, and it rewards an opponent's Hidden cards just as much. Behind Black Market."
+   "why": "Cut on the Gold simulation. Worth trying back if games show you hold a battlefield nearly every turn — with Bandle Scouts' Academy in, a Wage hidden there is a Gold before it flips."
   },
   {
    "what": "Option: The Good Stuff",
-   "why": "A Radiance gear the other Sivir brew runs. Deploy, then discard 1 and draw 3 (the discard feeds Fizz and Matriarch), and it returns to hand when you hold there. Try it for Edge of Night or Last Rites if the deck runs out of cards."
+   "why": "A Radiance gear the other Sivir brew runs. Deploy, then discard 1 and draw 3 (the discard feeds Fizz and Matriarch), and it returns to hand when you hold there. Try it for Switcheroo if the deck runs out of cards; it is a gear, so expect it to meet removal."
+  },
+  {
+   "what": "Option: Gutter Guardian",
+   "why": "Hidden 3-drop that shows off a Hidden card for a Power of any domain. The article rates it but warns the Power is lost when it is revealed on the opponent's turn. Try it for a Tideturner if Power is short."
   }
  ],
  "plan": [
   "The engine is Power. Every Power cost you pay by recycling a rune lets Battle Mistress exhaust for a Gold token, and she readies whenever an enemy unit dies. Gold enters exhausted: a Gold made this turn is next turn's Power, Power you didn't take from your runes. Eighteen of the forty cost Power, and hiding a card costs [A], so she fires most turns.",
-  "Turns 1–3: develop and take a battlefield. A 2-drop on turn 1 (Tideturner, Merchant, Stranger), then Innovator or Fizz. Holding a battlefield is what gives you a hide slot. Sabotage the trick that would beat you.",
-  "Hidden has a limit: one facedown card per battlefield you control (§811.1.b). Give the slot to Tornado Warrior where Matriarch stands (its flip empowers her, which fires her replay), then Edge of Night. Tideturner, Stranger, Pyke and Switcheroo all play fine from hand.",
+  "Turns 1–3: develop and take a battlefield. A 2-drop on turn 1 (Tideturner, Merchant, Stranger), then Innovator or Fizz. From turn 2, hide a Momentary Companion at a battlefield you hold: one Power, which fires Battle Mistress for a Gold. Sabotage the trick that would beat you.",
+  "Hidden has a limit: one facedown card per battlefield you control (§811.1.b). Give it to Momentary Companion where you need a holder, or Tornado Warrior where Matriarch stands (its flip empowers her, which fires her replay). Flip Companion on your own turn when you can: on the opponent's it gets Temporary and dies at your next Beginning Phase. Tideturner, Stranger, Pyke and Switcheroo all play fine from hand.",
   "The value chain: Matriarch's Empower ([2] plus a Chaos Power) replays a unit costing 3 or less from your trash. Replay Fizz and Fizz replays a spell (Punch First, Rampage, Gust, Star-Crossed), or replay Innovator or Ezreal for more cards.",
+  "Ziggs, Explosive holds the battlefield: for [1] and his exhaust, play a Bomb where he will defend. When he defends, kill that Bomb for +2 Might, and its Deathknell deals 2 to an enemy there (§187.12). An enemy death readies Battle Mistress. With no Bomb out, a Gold works for the +2, at the cost of a Power.",
   "Where the Gold comes from: Battle Mistress (once per turn, and again whenever an enemy unit dies) and Reckless Innovator, each time it exhausts. Spend it on Graves a turn early, Sivir at 6 Might with Ganking plus Punch First, or Black Market for a card.",
-  "Battlefields: you get one per game, and both players can use it. In a best-of-3 you choose, and each is retired after a decided game (§488.5.a), so you'll usually play all three. Take Sigil of the Storm first, because it favours you: your conquer there recycles a rune and Battle Mistress makes a Gold, while theirs just costs them a rune. Zaun Warrens' discard feeds Fizz and Matriarch. Black Market is best in slower matchups.",
-  "Mulligan (goldfish, 10,000 games): keeping everything beats any rule. Most wanted in the opening 4: Tail-Cloaked Matriarch, any 2-drop, Reckless Innovator. Least wanted: spells and Ezreal.",
+  "Battlefields: you get one per game, and both players can use it. In a best-of-3 you choose, and each is retired after a decided game (§488.5.a), so you'll usually play all three. Sigil of the Storm recycles a rune on conquer (a Gold from Battle Mistress); Black Market turns two Gold into a card; Bandle Scouts' Academy makes a Gold for every card you hide there — hide on it first.",
+  "Mulligan (goldfish, 10,000 games): keeping everything beats any rule. Most wanted in the opening 4: Tail-Cloaked Matriarch, any 2-drop, Reckless Innovator. Least wanted: spells and Ezreal. (From the previous list; not re-run for the redo.)",
   "Watch out for: Graves deals no combat damage himself: the sweep is the damage. And Gold enters exhausted, so never plan a turn around Gold you made that turn."
  ],
  "matchups": [
   {
    "vs": "Kennen, Heart of the Tempest",
-   "note": "The most placed Radiance-preview legend (20). Its plan is one Rhasa the Sunderer turn off a full trash. Keep Sabotage for Last Rites or the spell that sets it up; Hard Bargain comes in for Edge of Night and Tornado Warrior. A reading, not a result."
+   "note": "The most placed Radiance-preview legend (20). Its plan is one Rhasa the Sunderer turn off a full trash. Keep Sabotage for the Last Rites or spell that sets it up; Hard Bargain comes in for Siren's Song and a Tornado Warrior. A reading, not a result."
   },
   {
    "vs": "Yasuo, Unforgiven (Spiderling)",
-   "note": "A pile of Spiderlings on one battlefield is what Graves and Bedeviling Stranger are for. Bring in the third Stranger (for Edge of Night). A reading, not a result."
+   "note": "A pile of Spiderlings on one battlefield is what Graves and Bedeviling Stranger are for. Bring in the third Stranger for a Tornado Warrior. A reading, not a result."
+  },
+  {
+   "vs": "Riven, The Exile",
+   "note": "Her units enter ready at battlefields she holds, so the fight is over who holds. Siren's Song answers the unit she moves in; Ziggs and a flipped Companion hold against her. Vex, Apathetic (side) stuns the units she plays — in for Switcheroo. A reading, not a result."
   },
   {
    "vs": "Gear decks (Mordekaiser's Baited Hook, Ornn, Azir)",
-   "note": "Acceptable Losses and both An Offer You Can't Refuse come in for Edge of Night, Tornado Warrior and a Switcheroo. An Offer hands them a Gold, so aim it at the gear that matters."
+   "note": "Acceptable Losses and both An Offer You Can't Refuse come in for a Tornado Warrior, Switcheroo and Siren's Song. An Offer hands them a Gold, so aim it at the gear that matters."
   },
   {
    "vs": "Big units (Jayce's dragons, Baron, Astral Heron)",
-   "note": "Primordial Roar comes in for Edge of Night: show off a pumped unit and deal its Might."
+   "note": "Primordial Roar comes in for Siren's Song: show off a pumped unit and deal its Might."
   },
   {
    "vs": "Aggro (Rengar, Ornn)",
-   "note": "Overzealous Fan ×2 comes in for Edge of Night and a Tornado Warrior. Against a race, a 2-drop that undoes an attack beats a slow hide. Trade early and let Graves end the board."
+   "note": "Overzealous Fan ×2 comes in for a Tornado Warrior and Switcheroo. Against a race, a 2-drop that undoes an attack beats a slow hide; Ziggs is your best defender. Trade early and let Graves end the board."
   },
   {
    "vs": "Everything else",
    "note": "Sivir has no Radiance-era matchup records. Log games in the journal; ten will say more than this box."
   }
  ],
- "sim": "Curve goldfish (lib/sim.mjs), 10,000 games, against Randyyy's: 3.2 units by turn 3 (his 3.3); stuck on turn 3 7.1% (his 6.5%); turn 5 spends 5.6 Energy (his 4.6); 5 Body / 7 Chaos is the best rune split. Gold goldfish (scripts/sim-gold.mjs), 20,000 games: about 6.9 Gold a game; Sivir at 6 Might by turn 5 in 90%; Graves cast by turn 6 in about 52%. Consistency only: neither plays an opponent.",
+ "sim": "Curve goldfish (lib/sim.mjs), 10,000 games, against the previous list: 3.29 units by turn 3 (3.24); 2 units by turn 3 in 98% (97%); 17.3 Energy over turns 1–4 (16.6); turn 5 spends 6.5 (5.6); 5 Body / 7 Chaos still the best rune split. Gold goldfish (scripts/sim-gold.mjs, now modelling Momentary Companion, Bushwhack Trap and Bandle Scouts' Academy), 20,000 games, battlefield drawn from the deck's three: Gold 6.8–7.1 a game (6.9), extra cards 1.39–1.40 (1.42), Sivir at 6 Might by turn 5 89–90% (90%), Graves by turn 6 52% (52%), free Might from Companion flips 1.3–2.7 (0). Consistency only: neither plays an opponent, so Ziggs and Siren's Song are invisible to both.",
  "cards": {
   "SFD-203": 1,
   "SFD-143": 1,
   "OGN-199": 2,
-  "OGN-185": 3,
+  "OGN-185": 2,
   "RAD-107": 2,
   "RAD-105": 3,
   "VEN-099": 2,
@@ -98,16 +123,17 @@
   "OGN-169": 1,
   "OGN-156": 2,
   "SFD-097": 3,
-  "SFD-145": 2,
-  "VEN-083": 3,
-  "UNL-128": 2,
-  "SFD-139": 1,
-  "SFD-150": 1,
+  "SFD-145": 1,
+  "VEN-083": 2,
+  "UNL-128": 1,
   "OGN-126": 5,
   "OGN-166": 7,
   "OGN-287": 1,
-  "OGN-298": 1,
-  "RAD-158": 1
+  "RAD-158": 1,
+  "RAD-095": 3,
+  "RAD-112": 2,
+  "RAD-098": 1,
+  "RAD-157": 1
  },
  "sb": {
   "OGN-179": 1,
