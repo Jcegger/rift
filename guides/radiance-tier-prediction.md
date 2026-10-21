@@ -18,9 +18,11 @@ the scorecard grades them. Where the two differ, the model is the one to use.
 - **The crowd picks the winners among new legends.** The most-registered new legend at the
   first RQ became a top deck three times of three: Draven, LeBlanc, Kennen.
 
-On 21 Oct the model's top six were Kai'Sa, Kennen, LeBlanc, Vex, Yasuo (Spiderling) and Riven.
-On data alone (`--data-only`), without the judgment rows, Riven is 4th; the judgment that Vex
-answers her is what moves her to 6th.
+The model publishes **data only** — measured relationships, no hand scores; its judgment rows are
+shown as reasons to talk through. After its audit on 21 Oct the top six were Kennen, Riven,
+Kai'Sa, LeBlanc, Rengar and Master Yi. The audit fixed one bug: Yasuo had zero pilots at Vendetta's RQs, and the model had read
+that as a blank slate rather than as evidence nobody played it, which put a meme Spiderling list
+— one identical list copied by 12 preview pilots — 5th. It is now 14th.
 
 **These are predictions, and they are meant to be graded.** No sanctioned Radiance event has been
 played yet. This page ranks all 58 legends 1 to 58, names the risers, sleepers and busts, and ends

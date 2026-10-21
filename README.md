@@ -79,9 +79,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   (Day 2 at RQs, the top quarter at full-field events), a prediction from returning strength
   and scored judgments until the new format has results, then the results — the prediction
   counts as pseudo-results, as strong as the evidence behind it (10 expected tops for a full
-  record, 3 for a new legend), previews at half. `node scripts/build-preseason.mjs --preview=1
-  --carryover=0.7 --data-only [legend]` is a what-if that writes nothing; `--data-only` drops
-  the judgment rows, to show which ranks are evidence and which are opinion. Each build carries its
+  record, 3 for a new legend), previews at half. **The published ranking is data only**: the
+  judgment rows are listed beside each build as "not in the score", to talk through and promote
+  by agreement. `node scripts/build-preseason.mjs --preview=1 --carryover=0.7 --with-judgment
+  [legend]` is a what-if that writes nothing. Each build carries its
   10th–90th percentile rank over simulated seasons and its chance of a top-10 finish.
   `scripts/rift poll [legend]`. The method in prose: `guides/radiance-tier-prediction.md`.
 - `model/preseason-inputs.json` - the model's hand-written judgments, one row per reason:
@@ -122,8 +123,13 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   Fetches nothing; runs after build-brews.
 - `scripts/build-preseason.mjs` - builds `data/preseason.json` from data/topdecks.json,
   data/decks.json and `model/preseason-inputs.json`. Fetches nothing; runs after build-rising.
-  The prior is 60% last-format strength and 40% POPULARITY for an established legend, all
-  popularity for a new one — both measured on Riot's nine RQ write-ups: about 60% of a legend's
+  The prior blends last-format strength and POPULARITY for an established legend — 60/40
+  before a format's first RQ, moving to 30/70 as registrations arrive (backtested on Vendetta's
+  three RQs: registration share predicts Day 2 conversion at 0.57–0.79 rank correlation, last
+  format at 0.42–0.59, the best blend 30/70 to 20/80) — and is all popularity for a new one.
+  An established legend's absence is information: none of its pilots at 2,000-player RQs
+  shrinks its returning strength to the popularity floor, with the full prior weight (Yasuo,
+  zero Vendetta RQ pilots, was being read as a blank slate) — both measured on Riot's nine RQ write-ups: about 60% of a legend's
   edge survives a new set (best-finish rank correlation 0.69 and 0.50 across set changes,
   0.84 within one), and at each set's first RQ the share of the field registering a new legend
   predicted its result (0.67, 0.75, 0.32; the most-registered new legend became a top deck

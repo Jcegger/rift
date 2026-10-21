@@ -925,10 +925,10 @@ scripts/rift poll <legend> for the reasons behind one`);
 ${pad(String(x.rank), 3)}${name(x)} · ×${x.ratio} · ranks ${x.rankRange.join("–")} · top-10 ${Math.round(x.top10 * 100)}%${flags(x) ? ` · ${flags(x)}` : ""}`);
     if (x.build) console.log(`  build: ${Math.round(x.share * 100)}% of its ${x.lists} lists · signature ${x.signature.join(", ")}`);
     const Pp = x.popularity;
-    console.log(`  RETURNING  ×${R.ratio} — ${R.O} top finishes against ${R.E} expected last format${R.buildAdj ? `; this build ${R.buildAdj > 0 ? "+" : ""}${R.buildAdj} vs its legend` : ""} · counts ${Math.round(R.carry * 100)}% (about 60% of an edge survives a new set)`);
+    console.log(`  RETURNING  ×${R.ratio} — ${x.isNew ? "new legend, no last format" : `${R.O} top finishes against ${R.E} expected last format, shrunk toward ×${R.lastTarget} (what a legend at ${(R.lastShare * 100).toFixed(1)}% of last format's RQ fields converted)`}${R.buildAdj ? `; this build ${R.buildAdj > 0 ? "+" : ""}${R.buildAdj} vs its legend` : ""} · counts ${Math.round(R.carry * 100)}%`);
     console.log(`  POPULARITY ×${Pp.target} — ${(Pp.share * 100).toFixed(1)}% of the field (${Pp.pilots} pilots at ${P.set} events, plus ${(Pp.posted * 100).toFixed(1)}% of posted lists) · counts ${100 - Math.round(R.carry * 100)}%`);
-    console.log(`  JUDGMENT   ${x.judgment.points >= 0 ? "+" : ""}${x.judgment.points} points (${Object.entries(x.judgment.by).filter(([, v]) => v).map(([k, v]) => `${k} ${v > 0 ? "+" : ""}${v}`).join(", ") || "none"})`);
-    for (const r of x.judgment.rows) console.log(`    ${pad(r.component, 10)} ${r.points > 0 ? "+" : ""}${r.points}${r.verified ? "" : " (unverified, counts half)"}  ${r.why}`);
+    console.log(x.judgment.applied === false ? `  JUDGMENT   not in the score — reasons to talk through (model/preseason-inputs.json):` : `  JUDGMENT   ${x.judgment.points >= 0 ? "+" : ""}${x.judgment.points} points (${Object.entries(x.judgment.by).filter(([, v]) => v).map(([k, v]) => `${k} ${v > 0 ? "+" : ""}${v}`).join(", ") || "none"})`);
+    for (const r of x.judgment.rows) console.log(`    ${pad(r.component, 10)} ${r.points > 0 ? "+" : ""}${r.points}${r.verified ? "" : " (unverified)"}  ${r.why}`);
     console.log(`  RESULTS    ${x.season.O} top finishes against ${x.season.E} expected in ${P.set} (previews at half) — ${Math.round(x.season.weight * 100)}% of the score`);
   }
 }

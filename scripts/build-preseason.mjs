@@ -5,7 +5,11 @@
 //
 //   node scripts/build-preseason.mjs [legend substring]   # a substring prints that legend's detail
 //   node scripts/build-preseason.mjs --preview=1 --carryover=0.8 [legend]   # what-if: writes nothing
-//   node scripts/build-preseason.mjs --data-only                            # ...without the judgment rows
+//   node scripts/build-preseason.mjs --with-judgment                        # ...with the judgment rows
+//
+// The published ranking is DATA ONLY (Jay's call, 21 Oct): measured relationships, no hand
+// scores. The judgment rows in model/preseason-inputs.json are kept, validated and shown beside
+// each build as "not in the score" — reasons to talk through, promoted only by agreement.
 //
 // Sources, all already in data/ or hand-written:
 // - RETURNING strength: Riot's RQ Day 1 / Day 2 tables (data/topdecks.json) from before the
@@ -22,7 +26,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { makeBrewer } from "./build-brews.mjs";
 import { SET_LEGAL_FROM } from "../lib/decks.mjs";
 import { buildsOf } from "../lib/builds.mjs";
-import { score, rankSim, fitPopularity, pool, logRatio, K_RET, K_PRIOR, K_NEW, VS_CAP, PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, COMPONENTS } from "../lib/preseason.mjs";
+import { score, rankSim, fitPopularity, pool, logRatio, carryFor, K_RET, K_PRIOR, K_NEW, VS_CAP, PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, CARRY_REG, REG_HALF, COMPONENTS } from "../lib/preseason.mjs";
 
 const COVERAGE = 0.5, MIN_FIELD = 32, TOP = 0.25, RAD_SHARE = 0.3, MARKER_SHARE = 0.5, ERA_PCT = 0.05, ALPHA = 100;
 const NO_BEST_OF = new Set(["OGN", "OGS", "SFD"]);   // Riot, RC prizing, 15 Oct 2026
@@ -32,8 +36,9 @@ const r3 = (x) => Math.round(x * 1000) / 1000;
 const main = async () => {
   const args = process.argv.slice(2);
   const num = (k) => { const a = args.find((x) => x.startsWith(`--${k}=`)); return a ? Number(a.split("=")[1]) : null; };
-  const whatIf = { preview: num("preview"), carryover: num("carryover"), noJudgment: args.includes("--data-only") };
-  const isWhatIf = whatIf.preview != null || whatIf.carryover != null || whatIf.noJudgment;
+  const withJudgment = args.includes("--with-judgment");
+  const whatIf = { preview: num("preview"), carryover: num("carryover"), noJudgment: !withJudgment };
+  const isWhatIf = whatIf.preview != null || whatIf.carryover != null || withJudgment;
   const previewW = whatIf.preview ?? PREVIEW_W;
   const only = (args.find((a) => !a.startsWith("--")) || "").toLowerCase();
   const [cat, extras, banned, snap, topdecks] = await Promise.all(["cards.json", "extras.json", "banned.json", "decks.json", "topdecks.json"].map(read));
@@ -119,6 +124,9 @@ const main = async () => {
   });
   const cap = Math.max(1, ...fitPts.filter((p) => p.E >= 20).map((p) => Math.exp(logRatio(p.O, p.E, K_RET))));
   const pop = fitPopularity(fitPts, cap);
+  const lastShare = new Map([...legends].filter(([, L]) => !isNewLegend(L)).map(([name], i) => [name, fitPts[i].share]));
+  // Registrations in the new format so far (previews weighted): how far the blend has moved.
+  const carry = whatIf.carryover ?? carryFor(pilotN);
 
   // Every build's inputs (the clustering is the slow part, so it runs once), then the scores.
   const cases = [];
@@ -145,24 +153,25 @@ const main = async () => {
       const use = mine.filter((r) => !r.marker || markerShare(r.marker) >= MARKER_SHARE);
       const season = add(seasonRQ, oeFull(pred, ["season", "preview"]));
       const pp = popOf(name, b.lists.length ? b.lists : lists, builds.length > 1 ? b.share : 1);
-      cases.push({ name, L, b, target: pop.target(pp.share), pp, retLegend, adj, use, season });
+      cases.push({ name, L, b, target: pop.target(pp.share), lastTarget: pop.target(lastShare.get(name) || 0), established: !isNewLegend(L), pp, retLegend, adj, use, season });
     }
   }
   const unknownVs = rows.flatMap((r) => (r.vs || []).filter((v) => !legends.has(v)).map((v) => `${r.legend} vs ${v}`));
   if (unknownVs.length) throw new Error(`model/preseason-inputs.json: unknown vs legends: ${unknownVs.join(", ")}`);
   // Pass 1 scores every build with `vs` rows at face value; pass 2 weights each by how good
   // the decks it answers came out of pass 1 (a legend's best build).
-  const run = (vsRatio) => cases.map((c) => ({ c, s: score({ ret: c.retLegend, target: c.target, adj: c.adj, rows: whatIf.noJudgment ? [] : c.use, season: c.season, vsRatio, ...(whatIf.carryover != null ? { carryover: whatIf.carryover } : {}) }) }));
+  const run = (vsRatio) => cases.map((c) => ({ c, s: score({ ret: c.retLegend, target: c.target, lastTarget: c.lastTarget, established: c.established, adj: c.adj, rows: whatIf.noJudgment ? [] : c.use, season: c.season, vsRatio, carryover: carry }) }));
   const first = run(() => 1);
   const best = new Map();
   for (const { c, s } of first) best.set(c.name, Math.max(best.get(c.name) ?? -Infinity, Math.exp(s.post)));
   const vsRatio = (vs) => vs.reduce((t, v) => t + (best.get(v) ?? 1), 0) / vs.length;
-  const out = run(vsRatio).map(({ c: { name, L, b, target, pp, retLegend, adj, use, season }, s }) => ({
+  const out = run(vsRatio).map(({ c: { name, L, b, target, lastTarget, pp, retLegend, adj, use, season }, s }) => ({
     id: b.id, legend: name, build: b.label, signature: b.signature, share: r3(b.share), lists: b.lists.length,
     set: L.c.split("-")[0], isNew: L.c.split("-")[0] === newest, noBestOf: NO_BEST_OF.has(L.c.split("-")[0]), aurora: b.aurora,
-    returning: { O: r3(retLegend.O), E: r3(retLegend.E), ratio: r3(Math.exp(s.retLog)), carry: r3(s.carry), buildAdj: r3(adj) },
+    returning: { O: r3(retLegend.O), E: r3(retLegend.E), lastShare: r3(lastShare.get(name) || 0), lastTarget: r3(lastTarget), ratio: r3(Math.exp(s.retLog)), carry: r3(s.carry), buildAdj: r3(adj) },
     popularity: { share: r3(pp.share), pilots: r3(pp.pilots), posted: r3((posted.get(name) || 0) * b.share), target: r3(target) },
     judgment: { points: r3(s.judgment.total), by: Object.fromEntries(Object.entries(s.judgment.by).map(([k, v]) => [k, r3(v)])),
+      applied: withJudgment,
       rows: use.map((r) => ({ component: r.component, points: r.points, verified: r.verified, why: r.why, ...(r.vs ? { vs: r.vs, vsWeight: r3(Math.min(VS_CAP, vsRatio(r.vs))) } : {}) })) },
     season: { O: r3(season.O), E: r3(season.E), weight: r3(s.resultsWeight), priorStrength: r3(s.priorStrength) },
     prior: r3(s.prior), score: r3(s.post), ratio: r3(Math.exp(s.post)), lo: r3(s.lo), hi: r3(s.hi), sd: s.sd, post: s.post,
@@ -174,9 +183,9 @@ const main = async () => {
   const file = {
     generatedAt: new Date().toISOString().slice(0, 10), set: newest, legalFrom,
     method: "lib/preseason.mjs; guides/radiance-tier-prediction.md is the method in prose",
-    constants: { K_RET, K_PRIOR, K_NEW, VS_CAP, PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, COVERAGE, MIN_FIELD, TOP, components: COMPONENTS },
+    constants: { K_RET, K_PRIOR, K_NEW, VS_CAP, CARRYOVER, CARRY_REG, REG_HALF, carryNow: r3(carry), PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, COVERAGE, MIN_FIELD, TOP, components: COMPONENTS },
     popularity: { legends: pop.n, slope: r3(pop.slope), r: r3(pop.r), cap: r3(cap), pilots: pilotN, postedSince: eraFrom, alpha: ALPHA },
-    note: "A prediction until the new format has results, then the results. ratio is observed over expected top finishes (×1.00 = average); lo/hi are an 80% range in logs; rankRange is the 10th–90th percentile rank over simulated seasons and top10 the chance of a top-10 finish. Judgment rows are hand-written in model/preseason-inputs.json.",
+    note: "Data only: the judgment rows are listed per build but not in the score. A prediction until the new format has results, then the results. ratio is observed over expected top finishes (×1.00 = average); lo/hi are an 80% range in logs; rankRange is the 10th–90th percentile rank over simulated seasons and top10 the chance of a top-10 finish. Judgment rows are hand-written in model/preseason-inputs.json.",
     sources: {
       rq: rq.map((e) => ({ event: e.title, published: e.published, kind: e.published >= legalFrom ? "season" : "returning" })),
       fullField: full.map((e) => ({ event: e.ev, date: e.dt, players: e.ec, lists: e.lists, kind: e.kind })),
@@ -185,7 +194,7 @@ const main = async () => {
   };
   if (!only && !isWhatIf) await writeFile(new URL("../data/preseason.json", import.meta.url), JSON.stringify(file));
   const rqN = rq.length, ff = full.reduce((t, e) => ({ ...t, [e.kind]: (t[e.kind] || 0) + 1 }), {});
-  console.log(`${isWhatIf ? `WHAT-IF (nothing written): previews ×${previewW}${whatIf.carryover != null ? `, carryover ${whatIf.carryover}` : ""}${whatIf.noJudgment ? ", DATA ONLY (no judgment rows)" : ""}\n` : ""}popularity fit: ${pop.n} legends, slope ${r3(pop.slope)}, r ${r3(pop.r)}, cap ×${r3(cap)} · ${r3(pilotN)} pilots (weighted) in ${newest} events + posted lists since ${eraFrom} (worth ${ALPHA} pilots)`);
+  console.log(`${isWhatIf ? `WHAT-IF (nothing written): previews ×${previewW}${whatIf.carryover != null ? `, carryover ${whatIf.carryover}` : ""}${withJudgment ? ", WITH the judgment rows" : ""}\n` : ""}popularity fit: ${pop.n} legends, slope ${r3(pop.slope)}, r ${r3(pop.r)}, cap ×${r3(cap)} · ${r3(pilotN)} pilots (weighted) in ${newest} events + posted lists since ${eraFrom} (worth ${ALPHA} pilots)`);
   console.log(`${out.length} builds of ${legends.size} legends · returning: ${rq.filter((e) => e.published < legalFrom).length} RQ tables + ${ff.returning || 0} full-field events · season: ${rq.filter((e) => e.published >= legalFrom).length} RQ + ${ff.season || 0} full-field + ${ff.preview || 0} previews (×${PREVIEW_W}) · ${rows.length} judgment rows${unmatched.length ? ` · UNMATCHED markers: ${unmatched.join("; ")}` : ""}`);
   for (const x of out.filter((x) => !only || x.legend.toLowerCase().includes(only)).slice(0, only ? 99 : 15))
     console.log(`  ${String(x.rank).padStart(2)} (${x.rankRange.join("–")}, top-10 ${Math.round(x.top10 * 100)}%) ${x.legend.slice(0, 30)}${x.build ? ` — ${x.build}` : ""} ×${x.ratio}  [ret ×${x.returning.ratio} at ${Math.round(x.returning.carry * 100)}% · pop ×${x.popularity.target} (${(x.popularity.share * 100).toFixed(1)}%) · judg ${x.judgment.points >= 0 ? "+" : ""}${x.judgment.points} · results ${Math.round(x.season.weight * 100)}%]${x.aurora.length ? " AURORA" : ""}`);
