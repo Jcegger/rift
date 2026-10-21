@@ -5,20 +5,16 @@
  "date": "2026-10-21",
  "author": "Claude",
  "title": "Sivir — Gold-fuelled midrange (Radiance)",
- "summary": "A midrange Sivir for Radiance, locked in as the test deck on 21 Oct after an audit. It starts from the only legal Sivir result, Randyyy's 146th of 2,165 at the Los Angeles RQ (a Fizz and Matriarch value list with lots of interaction), and changes 9 cards. Radiance cards that make Gold turn the legend into a Power engine, Graves turns every pump into a sweeper, and the early curve is kept because an empty turn 1 costs the battlefield the Gold plan needs. Every other placed Sivir list ran Stacked Deck, which is banned, so there is almost nothing to net-deck. This is a reasoned brew and is marked untested.",
- "basis": "Anchor: Randyyy's list from the Los Angeles RQ (2 Oct 2026, 146th of 2,165), the only placed Sivir list with no banned card; the other 8 placings ran Stacked Deck. 9 in / 9 out from it, at the top of the 6–9 cards winners usually stray (docs/deckbuilding.md), plus Black Market for Sandswept Tomb. Graves and Black Market also appear in a posted Radiance Sivir brew (\"Sivir - RAD\", 9 Oct). No result backs this list.",
+ "summary": "A midrange Sivir for Radiance, locked in as the test deck on 21 Oct after an audit. It starts from the only legal Sivir result, Randyyy's 146th of 2,165 at the Los Angeles RQ (a Fizz and Matriarch value list with lots of interaction), and changes 7 cards. Reckless Innovator's Gold and Black Market turn the legend into a Power engine, Graves turns every pump into a sweeper, and the early curve is kept because an empty turn 1 costs the battlefield the Gold plan needs. Every other placed Sivir list ran Stacked Deck, which is banned, so there is almost nothing to net-deck. This is a reasoned brew and is marked untested.",
+ "basis": "Anchor: Randyyy's list from the Los Angeles RQ (2 Oct 2026, 146th of 2,165), the only placed Sivir list with no banned card; the other 8 placings ran Stacked Deck. 7 in / 7 out from it, inside the 6–9 cards winners usually stray (docs/deckbuilding.md), plus Black Market for Sandswept Tomb. Graves and Black Market also appear in a posted Radiance Sivir brew (\"Sivir - RAD\", 9 Oct). No result backs this list.",
  "changes": [
   {
-   "what": "−1 Traveling Merchant, +3 Reckless Innovator",
-   "why": "Card flow on a 3-Might body with Accelerate, plus a Gold token whenever it exhausts. The brew system's top upgrade for Sivir (+0.97 by lib/roles.mjs over Merchant). Two Merchants stay for the curve (see the audit below); their loot also feeds Fizz and Matriarch from the trash. Innovator costs 3 Energy and no Power, so Matriarch can replay it."
+   "what": "−3 Shadow Order Disciple, +3 Reckless Innovator",
+   "why": "Disciple is an aggro 2-drop that burns your own cards to attack. Innovator gives card flow on a 3-Might body with Accelerate, plus a Gold token whenever it exhausts. In the Gold simulation, it and Battle Mistress make nearly all of the deck's Gold. It costs 3 Energy and no Power, so Matriarch can replay it. All 3 Traveling Merchants stay for the curve; their loot also feeds Fizz and Matriarch from the trash."
   },
   {
-   "what": "−3 Shadow Order Disciple, +2 Bedeviling Stranger",
-   "why": "Disciple is an aggro 2-drop that burns your own cards to attack. Stranger is a 2-Might 2-drop that is Hidden but plays fine from hand, and bounces an enemy unit wherever 4+ units stand. Midrange boards get there, and against Yasuo's Spiderlings it's the best card you have. A third copy is in the sideboard."
-  },
-  {
-   "what": "−2 Tornado Warrior (3 → 1), −1 Edge of Night (2 → 1), +2 The Waters' Wage",
-   "why": "Only one card can be hidden at each battlefield (§811.1.b), and Tornado (empowers on its flip), Edge (attaches on its flip) and the Wage (three ready Gold on its flip) all want that slot. The Wage gets it: hide it for [A] (a rune recycle, so Battle Mistress makes a Gold too), then from the next turn on, on your own turn, play it face up for free for three ready Gold. That's Graves a turn early, or Sivir at 6 with Ganking plus Punch First. The one Tornado still empowers Matriarch on its flip, which fires her replay."
+   "what": "−1 Tornado Warrior (3 → 2), −1 Edge of Night (2 → 1), +2 Bedeviling Stranger",
+   "why": "Only one card can be hidden at each battlefield (§811.1.b), and Tornado (empowers on its flip) and Edge (attaches on its flip) both want that slot. Stranger is a 2-Might 2-drop that is Hidden but plays fine from hand, and bounces an enemy unit wherever 4+ units stand. Midrange boards get there, and against Yasuo's Spiderlings it's the best card you have. A third copy is in the sideboard. Tornado hidden where Matriarch stands empowers her on its flip, which fires her replay."
   },
   {
    "what": "−1 Acceptable Losses, −1 Grim Resolve, +2 Graves, Blasting Through",
@@ -26,11 +22,19 @@
   },
   {
    "what": "Black Market for Sandswept Tomb",
-   "why": "Black Market: [A][A]: draw 1, once per turn for each player. Two Power switches Sivir on by herself (+2 Might and Ganking), spare Gold becomes a card every turn, and paying with a rune recycle fires Battle Mistress. The opponent can use it too, but no deck makes spare Power like this one. Sandswept Tomb is symmetric too, and it discounts the opponent's 2-Power pumps (Punch First in Rengar, Yi and Kha'Zix). One reading to check with a judge: that an ability's cost counts as Power \"spent\" for Sivir."
+   "why": "Black Market: [A][A]: draw 1, once per turn for each player. Two Power switches Sivir on by herself (+2 Might and Ganking), spare Gold becomes a card every turn, and paying with a rune recycle fires Battle Mistress. In the Gold simulation it adds about 0.5 cards a game (it's in play a third of the time), but that sim can't model the Tomb's discount, so the comparison flatters it. That's why it's the first thing to test. Sandswept Tomb is symmetric too: it discounts the opponent's 2-Power pumps (Punch First in Rengar, Yi and Kha'Zix). One reading to check with a judge: that an ability's cost counts as Power \"spent\" for Sivir."
   },
   {
-   "what": "The audit (21 Oct)",
-   "why": "The first draft cut 6 of Randyyy's 8 two-drops and ran 13 three-drops. In goldfish games (10,000 a list) it had 2.5 units down by turn 3 and was stuck on turn 3 9.6% of the time; Randyyy's list had 3.3 and 6.5%. With six 2-drops this list has 3.1 and 7.8%, and still spends more Energy on turn 5 than Randyyy's (5.2 against 4.6). Primordial Roar came out (6 total cost, turn speed, usually 4 damage) and went to the sideboard. Cutting The Waters' Wage measures slightly smoother (3.2 units by turn 3), but the goldfish can't count Gold, and the Wage is the thing under test."
+   "what": "The audit (21 Oct): curve",
+   "why": "The first draft cut 6 of Randyyy's 8 two-drops and ran 13 three-drops. In goldfish games (10,000 a list) it had 2.5 units down by turn 3 and was stuck on turn 3 9.6% of the time; Randyyy's list had 3.3 and 6.5%. With seven 2-drops this list has 3.2 and 7.1%, and still spends more Energy on turn 5 than Randyyy's (5.6 against 4.6). Primordial Roar came out (6 total cost, turn speed, usually 4 damage) and went to the sideboard."
+  },
+  {
+   "what": "The audit (21 Oct): Gold, and The Waters' Wage cut",
+   "why": "Jay's catch: the curve goldfish can't see Gold, Sivir's whole engine. scripts/sim-gold.mjs models it: Power from recycled runes, Battle Mistress, Gold, Hidden and the one-per-battlefield slot, Innovator, Black Market and Sivir's threshold. 20,000 games a variant, holding a battlefield 50% or 80% of the time. The Waters' Wage flipped for three Gold only 0.17–0.37 times a game: it has to be drawn, hidden at a battlefield you hold, and still held next turn. It added about 1 Gold a game and moved nothing else (resources spent, Sivir at 6 Might by turn 5 at 90–92%, Graves by turn 6 at about 52%). So it's out, for a second Tornado and a third Merchant. Sivir's threshold is never the bottleneck. The Gold sim's limits: no opponent, and it assumes Innovator exhausts every turn after it lands."
+  },
+  {
+   "what": "Option: The Waters' Wage",
+   "why": "Cut on the Gold simulation, above. Worth trying back if games show you hold a battlefield nearly every turn."
   },
   {
    "what": "Option: Bandle Scouts' Academy",
@@ -44,12 +48,12 @@
  "plan": [
   "The engine is Power. Every Power cost you pay by recycling a rune lets Battle Mistress exhaust for a Gold token, and she readies whenever an enemy unit dies. Gold enters exhausted: a Gold made this turn is next turn's Power, Power you didn't take from your runes. Eighteen of the forty cost Power, and hiding a card costs [A], so she fires most turns.",
   "Turns 1–3: develop and take a battlefield. A 2-drop on turn 1 (Tideturner, Merchant, Stranger), then Innovator or Fizz. Holding a battlefield is what gives you a hide slot. Sabotage the trick that would beat you.",
-  "Hidden has a limit: one facedown card per battlefield you control (§811.1.b). Give the slot to The Waters' Wage first, then Tornado Warrior hidden where Matriarch stands (its flip empowers her, which fires her replay). Tideturner, Stranger, Pyke and Switcheroo all play fine from hand.",
+  "Hidden has a limit: one facedown card per battlefield you control (§811.1.b). Give the slot to Tornado Warrior where Matriarch stands (its flip empowers her, which fires her replay), then Edge of Night. Tideturner, Stranger, Pyke and Switcheroo all play fine from hand.",
   "The value chain: Matriarch's Empower ([2] plus a Chaos Power) replays a unit costing 3 or less from your trash. Replay Fizz and Fizz replays a spell (Punch First, Rampage, Gust, Star-Crossed), or replay Innovator or Ezreal for more cards.",
-  "The turn the deck wants: flip The Waters' Wage for three ready Gold, then Sivir at 6 Might with Ganking, or Graves with Punch First already on him. Black Market turns any Gold left over into a card.",
+  "Where the Gold comes from: Battle Mistress (once per turn, and again whenever an enemy unit dies) and Reckless Innovator, each time it exhausts. Spend it on Graves a turn early, Sivir at 6 Might with Ganking plus Punch First, or Black Market for a card.",
   "Battlefields: you get one per game, and both players can use it. In a best-of-3 you choose, and each is retired after a decided game (§488.5.a), so you'll usually play all three. Take Sigil of the Storm first, because it favours you: your conquer there recycles a rune and Battle Mistress makes a Gold, while theirs just costs them a rune. Zaun Warrens' discard feeds Fizz and Matriarch. Black Market is best in slower matchups.",
   "Mulligan (goldfish, 10,000 games): keeping everything beats any rule. Most wanted in the opening 4: Tail-Cloaked Matriarch, any 2-drop, Reckless Innovator. Least wanted: spells and Ezreal.",
-  "Watch out for: a deck that never lets you hold a battlefield also shuts off The Waters' Wage. Graves deals no combat damage himself: the sweep is the damage."
+  "Watch out for: Graves deals no combat damage himself: the sweep is the damage. And Gold enters exhausted, so never plan a turn around Gold you made that turn."
  ],
  "matchups": [
   {
@@ -70,28 +74,27 @@
   },
   {
    "vs": "Aggro (Rengar, Ornn)",
-   "note": "Overzealous Fan ×2 comes in for The Waters' Wage ×2. Against a race, a 2-drop that undoes an attack beats a slow Gold turn. Trade early and let Graves end the board."
+   "note": "Overzealous Fan ×2 comes in for Edge of Night and a Tornado Warrior. Against a race, a 2-drop that undoes an attack beats a slow hide. Trade early and let Graves end the board."
   },
   {
    "vs": "Everything else",
    "note": "Sivir has no Radiance-era matchup records. Log games in the journal; ten will say more than this box."
   }
  ],
- "sim": "Goldfish, 10,000 games a list, against Randyyy's: Energy spent turns 1–4 16.5 on the play (his 16.7); 3.1 units by turn 3 (his 3.3); stuck on turn 3 7.8% (his 6.5%); turn 5 spends 5.2 Energy (his 4.6). 5 Body / 7 Chaos is the best rune split of the nine tried. Consistency only: it plays no opponent, and it doesn't model Gold, Hidden or the legend.",
+ "sim": "Curve goldfish (lib/sim.mjs), 10,000 games, against Randyyy's: 3.2 units by turn 3 (his 3.3); stuck on turn 3 7.1% (his 6.5%); turn 5 spends 5.6 Energy (his 4.6); 5 Body / 7 Chaos is the best rune split. Gold goldfish (scripts/sim-gold.mjs), 20,000 games: about 6.9 Gold a game; Sivir at 6 Might by turn 5 in 90%; Graves cast by turn 6 in about 52%. Consistency only: neither plays an opponent.",
  "cards": {
   "SFD-203": 1,
   "SFD-143": 1,
   "OGN-199": 2,
-  "OGN-185": 2,
+  "OGN-185": 3,
   "RAD-107": 2,
   "RAD-105": 3,
-  "VEN-099": 1,
+  "VEN-099": 2,
   "SFD-140": 3,
   "SFD-149": 3,
   "UNL-145": 1,
   "VEN-104": 3,
   "RAD-085": 2,
-  "RAD-100": 2,
   "OGN-169": 1,
   "OGN-156": 2,
   "SFD-097": 3,

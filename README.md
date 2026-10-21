@@ -33,6 +33,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   and trade matching. Tests: `lib/collection.test.mjs`.
 - `lib/markdown.mjs` - the guide renderer the site uses, with heading anchors.
 - `lib/sim.mjs` - the goldfish simulator's engine, shared by `scripts/sim.mjs` and the site.
+- `scripts/sim-gold.mjs` - a Gold-aware goldfish for Sivir, Battle Mistress (runes recycled for Power,
+  the legend's Gold, Hidden's one-per-battlefield slot, Black Market, Sivir's threshold): the numbers
+  behind `builds/sivir-gold-midrange-radiance.json`, which `lib/sim.mjs` can't see.
   `lib/sim-worker.mjs` runs it in a Web Worker for the tweak bench.
 - `data/cards.json` - the card catalog, generated and committed. Loaded at boot.
 - `data/extras.json` - printings Riot does not publish, merged in at load. The one
