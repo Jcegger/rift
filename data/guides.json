@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-20",
+ "generatedAt": "2026-10-21",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -185,7 +185,7 @@
    "kicker": null,
    "title": "Riven, The Exile — Radiance Gauntlet & Sideboard",
    "subtitle": "Riftbound, Radiance season (from 23 October 2026) — who a local Skirmish will bring, how Riven plays into each, and what to board",
-   "date": "2026-10-19",
+   "date": "2026-10-21",
    "legend": "The Exile",
    "champion": "Riven, Broken Blade",
    "sections": [
@@ -201,11 +201,13 @@
     "Azir, Emperor of the Sands — Calm/Order · 3rd and 4th at LA",
     "Jayce, Defender of Tomorrow — Mind/Body · ramp",
     "Vex, Gloomist · Akali, Rogue Assassin · Ornn, Fire Below the Mountain",
+    "Yasuo, Unforgiven (Spiderling) · Calm/Chaos · 12 placed in the previews",
+    "Kai'Sa, Daughter of the Void · Fury/Mind · 2nd at Nova",
     "Radiance newcomers",
     "Board at a glance",
     "What would change this page"
    ],
-   "words": 2612
+   "words": 3142
   },
   {
    "slug": "sivir-anti-meta-midrange",
