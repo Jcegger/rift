@@ -87,6 +87,12 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   Tiers on the same scale: S ×1.4+, A ×1.0+, B ×0.8+, C ×0.65+, D below (fixed cuts, which
   fell on the natural breaks on 21 Oct). Popularity is read per legend — the level the fit was
   measured at — so splitting a legend into builds never splits its popularity.
+  Like Vicious Syndicate's Hearthstone tiers, the cuts are static, so a tier means the same
+  thing every day. Two flags, per the RiftDecks and riftboundfrance habit of showing
+  confidence: UNCERTAIN when the score's 80% range spans more than ×2.2 (Riven, Kai'Sa, Yasuo
+  on 21 Oct), and NOT ENOUGH DATA, shown apart from D, for an established legend with under 3
+  expected top finishes last format and no pilots at a new-format event (Annie, Teemo, Jinx…).
+  A new legend is always scored: the crowd's choices are its evidence.
   `scripts/rift poll [legend]`. The method in prose: `guides/radiance-tier-prediction.md`.
 - `model/preseason-inputs.json` - the model's hand-written judgments, one row per reason:
   component (transfers, schedule, recruiting, hype), points -2..+2, the reason, its cards and

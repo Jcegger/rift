@@ -34,6 +34,13 @@ const NO_BEST_OF = new Set(["OGN", "OGS", "SFD"]);   // Riot, RC prizing, 15 Oct
 // an average deck, A above average, B within 20% below, C within 35% below, D the rest. Fixed
 // cuts, so a tier means the same thing every day; on 21 Oct they fell on the natural breaks.
 export const TIERS = [["S", 1.4], ["A", 1.0], ["B", 0.8], ["C", 0.65], ["D", 0]];
+// UNCERTAIN: the 80% range of the score spans a factor of e^0.8 ≈ 2.2 or more — on 21 Oct the
+// legends split cleanly at this width (0.65 or less for those with a record, 0.83+ for Riven,
+// Kai'Sa, Yasuo, Lux, Evelynn, Mordekaiser, Viktor). A rank range can't do this: mid-table
+// ranks are always wide. NOT ENOUGH DATA: an established legend with under LITTLE expected top
+// finishes last format and no pilots at a new-format event — no record either way. Its score is
+// kept, but it is shown apart, not as D. A new legend is always scored: the crowd is its evidence.
+const WIDE_LOG = 0.8, LITTLE = 3;
 const tierOf = (ratio) => TIERS.find(([, cut]) => ratio >= cut)[0];
 const read = async (f) => JSON.parse(await readFile(new URL(`../data/${f}`, import.meta.url), "utf8"));
 const r3 = (x) => Math.round(x * 1000) / 1000;
@@ -186,12 +193,15 @@ const main = async () => {
   }));
   out.sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
   const rr = rankSim(out);
-  out.forEach((x, i) => { x.rank = i + 1; x.rankRange = [rr[i].p10, rr[i].p90]; x.top10 = r3(rr[i].top10); x.tier = tierOf(x.ratio); delete x.sd; delete x.post; });
+  out.forEach((x, i) => { x.rank = i + 1; x.rankRange = [rr[i].p10, rr[i].p90]; x.top10 = r3(rr[i].top10); x.tier = tierOf(x.ratio);
+    x.uncertain = x.hi - x.lo >= WIDE_LOG;
+    x.notEnoughData = !x.isNew && x.returning.E < LITTLE && x.popularity.pilots < 1;
+    delete x.sd; delete x.post; });
 
   const file = {
     generatedAt: new Date().toISOString().slice(0, 10), set: newest, legalFrom,
     method: "lib/preseason.mjs; guides/radiance-tier-prediction.md is the method in prose",
-    tiers: Object.fromEntries(TIERS),
+    tiers: Object.fromEntries(TIERS), uncertainWidth: WIDE_LOG, littleData: LITTLE,
     constants: { K_RET, K_PRIOR, K_NEW, VS_CAP, CARRYOVER, CARRY_REG, REG_HALF, carryNow: r3(carry), PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, COVERAGE, MIN_FIELD, TOP, components: COMPONENTS },
     popularity: { legends: pop.n, slope: r3(pop.slope), r: r3(pop.r), cap: r3(cap), pilots: pilotN, postedSince: eraFrom, alpha: ALPHA },
     note: "Data only: the judgment rows are listed per build but not in the score. A prediction until the new format has results, then the results. ratio is observed over expected top finishes (×1.00 = average); lo/hi are an 80% range in logs; rankRange is the 10th–90th percentile rank over simulated seasons and top10 the chance of a top-10 finish. Judgment rows are hand-written in model/preseason-inputs.json.",
