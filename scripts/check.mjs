@@ -667,6 +667,54 @@ section('Research');
   }
 }
 
+/* ══ the preseason model ═════════════════════════════════════════════════ */
+section('The preseason model');
+{
+  // model/preseason-inputs.json is hand-written: every judgment has to stay traceable — a
+  // component the model knows, points in range, a reason, a source, and cards and rule numbers
+  // that resolve. A renamed card or renumbered rule should fail here, not quietly score.
+  let I = null, P = null, cat = null;
+  try { I = JSON.parse(readFileSync(join(ROOT, 'model/preseason-inputs.json'), 'utf8')); } catch { /* reported below */ }
+  try { P = read('data/preseason.json'); cat = read('data/cards.json'); } catch { /* reported below */ }
+  ok('model/preseason-inputs.json is present', !!I?.rows?.length, I ? `${I.rows.length} rows` : 'missing');
+  if (I?.rows && cat) {
+    const extras = (() => { try { return read('data/extras.json').cards || []; } catch { return []; } })();
+    const names = new Set([...cat.cards, ...extras].map((c) => c.n));
+    const rules = (() => { try { return readFileSync(join(ROOT, 'docs/rules-full.md'), 'utf8'); } catch { return ''; } })();
+    const ruleOk = (x) => rules.includes(`**${x}.**`) || new RegExp(`^#+ ${x.replace(/\./g, '\\.')}\\. `, 'm').test(rules);
+    const COMPONENTS = ['transfers', 'schedule', 'recruiting', 'hype'];
+    const legendNames = new Set((() => { try { return read('data/archetypes.json').legends.map((l) => l.name); } catch { return []; } })());
+    const bad = I.rows.flatMap((r, i) => [
+      !COMPONENTS.includes(r.component) && `row ${i}: component ${r.component}`,
+      !(Number.isInteger(r.points) && r.points >= -2 && r.points <= 2) && `row ${i}: points ${r.points}`,
+      !(typeof r.why === 'string' && r.why.length > 10) && `row ${i}: no reason`,
+      !(typeof r.source === 'string' && r.source.length > 3) && `row ${i}: no source`,
+      typeof r.verified !== 'boolean' && `row ${i}: verified not a boolean`,
+      ...(r.cards || []).filter((c) => !names.has(c)).map((c) => `row ${i}: unknown card ${c}`),
+      ...(r.rules || []).filter((x) => !ruleOk(x)).map((x) => `row ${i}: rule ${x} not in docs/rules-full.md`),
+      r.marker && !names.has(r.marker) && `row ${i}: unknown marker ${r.marker}`,
+      ...(r.vs || []).filter((v) => !legendNames.has(v)).map((v) => `row ${i}: unknown vs legend ${v}`),
+    ].filter(Boolean));
+    ok('every judgment row is complete and resolves', !bad.length, bad.slice(0, 4).join('; ') || `${I.rows.length} rows, all cards and rules resolve`);
+  }
+  if (!P) ok('preseason snapshot present', false, 'data/preseason.json missing — run build-preseason.mjs');
+  else {
+    const legends = new Set(P.builds.map((b) => b.legend));
+    let AR = null; try { AR = read('data/archetypes.json'); } catch { /* optional */ }
+    ok('every legend has at least one ranked build', !AR || AR.legends.every((l) => legends.has(l.name)), `${P.builds.length} builds of ${legends.size} legends`);
+    const ranks = P.builds.map((b) => b.rank).sort((a, b) => a - b);
+    ok('ranks run 1..N with no gaps or ties', ranks.every((r, i) => r === i + 1));
+    ok('every build has a range around its rank', P.builds.every((b) => b.rankRange[0] <= b.rank + 1 && b.rankRange[1] >= b.rank - 1 && b.top10 >= 0 && b.top10 <= 1));
+    // The Aurora rule (lib/avoid.mjs) has to reach the model, or the poll suggests one.
+    const jayce = P.builds.filter((b) => b.legend.startsWith('Jayce'));
+    ok('an Aurora build is flagged opponent-only', jayce.some((b) => b.aurora.includes('Dazzling Aurora')), jayce.map((b) => `${b.build || 'one deck'}: ${b.aurora.join(',') || 'none'}`).join(' · '));
+    ok('every judgment marker matched a build', !P.unmatchedMarkers.length, P.unmatchedMarkers.join('; ') || 'all matched');
+    // Until the new format has results the poll is a prediction; say how much results weigh.
+    const w = Math.max(...P.builds.map((b) => b.season.weight));
+    console.log(`  info results carry at most ${Math.round(w * 100)}% of any score · popularity fit r ${P.popularity.r} over ${P.popularity.legends} legends`);
+  }
+}
+
 /* ══ synergy ═════════════════════════════════════════════════════════════ */
 section('Synergy');
 {

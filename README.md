@@ -74,6 +74,21 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   closely and moves first — and the scoreboard for the brews' suggestions.
   `scripts/rift rising [legend]`; idea pages show "Moving this week"; `scripts/rift tune`
   shows the trend beside each suggestion.
+- `data/preseason.json` - the preseason model's ranking (`scripts/build-preseason.mjs`,
+  `lib/preseason.mjs`): every legend's builds ranked by observed over expected top finishes
+  (Day 2 at RQs, the top quarter at full-field events), a prediction from returning strength
+  and scored judgments until the new format has results, then the results — the prediction
+  counts as pseudo-results, as strong as the evidence behind it (10 expected tops for a full
+  record, 3 for a new legend), previews at half. `node scripts/build-preseason.mjs --preview=1
+  --carryover=0.7 --data-only [legend]` is a what-if that writes nothing; `--data-only` drops
+  the judgment rows, to show which ranks are evidence and which are opinion. Each build carries its
+  10th–90th percentile rank over simulated seasons and its chance of a top-10 finish.
+  `scripts/rift poll [legend]`. The method in prose: `guides/radiance-tier-prediction.md`.
+- `model/preseason-inputs.json` - the model's hand-written judgments, one row per reason:
+  component (transfers, schedule, recruiting, hype), points -2..+2, the reason, its cards and
+  rule numbers, verified or not (unverified counts half), source; an optional marker card
+  applies it to one build; an optional `vs` names the legends it answers or fears. Not
+  generated; `check.mjs` enforces every field.
 - `data/swaplog.json` - every swap a brew has suggested, from the day it first appeared,
   scored 28 days later against the legend's **good placings** (`lib/placing.mjs`), not its
   posted lists: adopted = the card in gained 10+ points in them against the 28 days before;
@@ -105,6 +120,26 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   legend's lists from all of them, which is how `lib/blind.test.mjs` builds blind.
 - `scripts/build-rising.mjs` - builds `data/rising.json` and adds to `data/swaplog.json`.
   Fetches nothing; runs after build-brews.
+- `scripts/build-preseason.mjs` - builds `data/preseason.json` from data/topdecks.json,
+  data/decks.json and `model/preseason-inputs.json`. Fetches nothing; runs after build-rising.
+  The prior is 60% last-format strength and 40% POPULARITY for an established legend, all
+  popularity for a new one — both measured on Riot's nine RQ write-ups: about 60% of a legend's
+  edge survives a new set (best-finish rank correlation 0.69 and 0.50 across set changes,
+  0.84 within one), and at each set's first RQ the share of the field registering a new legend
+  predicted its result (0.67, 0.75, 0.32; the most-registered new legend became a top deck
+  three times of three) while new legends did no worse than old — so there is no hype
+  discount. Popularity is a build's share of pilots at new-format events (previews at half),
+  topped up by posted lists worth 100 pilots, mapped through the last format's RQ fit of
+  Day 2 conversion on Day 1 share (r 0.71), capped at the strongest real deck. A judgment row
+  with `vs` counts as much as the decks it answers come out of a first pass.
+- `lib/builds.mjs` - a legend's distinct builds, or one when it is one deck: a 2-medoid split
+  on card overlap, accepted only when each side is 20%+ of the lists, 4+ cards separate them,
+  and the split survives resampling. 18 of 58 legends split (Yasuo's Spiderlings, Jayce's
+  Aurora ramp against a Porobot gear deck). Riot's RQ tables count legends, not builds, so a
+  build's own strength comes from full-field events only.
+- `lib/preseason.mjs` - the model's maths, one scale (ln observed/expected), every constant
+  with its reason; a starting guess to be recalibrated from the scorecard. Tests:
+  `lib/preseason.test.mjs`.
 - `lib/placing.mjs` - what a good placement is, shared by the brews' anchor and the
   scoreboard: a verified finish in the top 25% of its field or a top 8 of 32+ players; with
   no field size, a top 8; a claim, top 8 or better (still a claim). Any recorded finish was

@@ -239,6 +239,10 @@ jobs:
       - name: Track rising cards and score the brews' suggestions
         run: node scripts/build-rising.mjs
 
+      # After rising. Fetches nothing; reads model/preseason-inputs.json (hand-written).
+      - name: Rank every legend's builds (the preseason model)
+        run: node scripts/build-preseason.mjs
+
       - name: Source report
         id: sources
         run: |

@@ -899,6 +899,40 @@ async function cmdRising(args) {
   console.log(`\nSCOREBOARD — the brews' suggestions, scored ${settle} days after they first appear, against good placings (lib/placing.mjs): adopted = the card gained 10+ points in them\n  ${b.logged} logged, ${b.scored} scored${b.scored ? ": " + Object.entries(b.kinds).filter(([, x]) => x.n).map(([k, x]) => `${k} ${x.adopted}/${x.n}`).join(" · ") : ` so far — the first are scored ${settle} days after logging`}${b.thin ? ` · ${b.thin} settled with under ${minGood} good placings either side, so not scored` : ""}\n  (* = Radiance)`);
 }
 
+// poll: the preseason model (data/preseason.json, lib/preseason.mjs) — every legend's builds
+// ranked, a prediction until the new format has results, then the results. Offline, read-only.
+async function cmdPoll(args) {
+  const q = args.join(" ").toLowerCase();
+  const P = await readJson(url("preseason.json")).catch(() => null);
+  if (!P) { console.error("no data/preseason.json — run node scripts/build-preseason.mjs"); process.exit(1); }
+  const flags = (x) => [x.isNew ? "new" : "", x.noBestOf ? "no Best-Of" : "", x.aurora.length ? "AURORA: opponent only" : ""].filter(Boolean).join(", ");
+  const name = (x) => `${x.legend}${x.build ? ` — ${x.build}` : ""}`;
+  const hits = q ? P.builds.filter((x) => name(x).toLowerCase().includes(q)) : [];
+  if (!q || !hits.length) {
+    const w = Math.max(...P.builds.map((x) => x.season.weight));
+    console.log(`POLL · ${P.set}, legal ${P.legalFrom} · built ${P.generatedAt} · ${P.builds.length} builds · ${w < 0.5 ? "a PREDICTION: results carry at most " + Math.round(w * 100) + "% of any score" : "results-led"}
+  ×ratio = observed over expected top finishes (×1.00 average) · (range) = 10th–90th percentile rank · % = chance of a top-10 finish`);
+    for (const x of P.builds) console.log(`  ${pad(String(x.rank), 3)}${pad(`(${x.rankRange.join("–")})`, 8)} ${pad(Math.round(x.top10 * 100) + "%", 4)} ${pad(name(x).slice(0, 54), 55)} ×${x.ratio}${flags(x) ? `  [${flags(x)}]` : ""}`);
+    if (q) console.log(`
+no build matching "${q}"`);
+    console.log(`
+scripts/rift poll <legend> for the reasons behind one`);
+    return;
+  }
+  for (const x of hits.slice(0, 3)) {
+    const R = x.returning;
+    console.log(`
+${pad(String(x.rank), 3)}${name(x)} · ×${x.ratio} · ranks ${x.rankRange.join("–")} · top-10 ${Math.round(x.top10 * 100)}%${flags(x) ? ` · ${flags(x)}` : ""}`);
+    if (x.build) console.log(`  build: ${Math.round(x.share * 100)}% of its ${x.lists} lists · signature ${x.signature.join(", ")}`);
+    const Pp = x.popularity;
+    console.log(`  RETURNING  ×${R.ratio} — ${R.O} top finishes against ${R.E} expected last format${R.buildAdj ? `; this build ${R.buildAdj > 0 ? "+" : ""}${R.buildAdj} vs its legend` : ""} · counts ${Math.round(R.carry * 100)}% (about 60% of an edge survives a new set)`);
+    console.log(`  POPULARITY ×${Pp.target} — ${(Pp.share * 100).toFixed(1)}% of the field (${Pp.pilots} pilots at ${P.set} events, plus ${(Pp.posted * 100).toFixed(1)}% of posted lists) · counts ${100 - Math.round(R.carry * 100)}%`);
+    console.log(`  JUDGMENT   ${x.judgment.points >= 0 ? "+" : ""}${x.judgment.points} points (${Object.entries(x.judgment.by).filter(([, v]) => v).map(([k, v]) => `${k} ${v > 0 ? "+" : ""}${v}`).join(", ") || "none"})`);
+    for (const r of x.judgment.rows) console.log(`    ${pad(r.component, 10)} ${r.points > 0 ? "+" : ""}${r.points}${r.verified ? "" : " (unverified, counts half)"}  ${r.why}`);
+    console.log(`  RESULTS    ${x.season.O} top finishes against ${x.season.E} expected in ${P.set} (previews at half) — ${Math.round(x.season.weight * 100)}% of the score`);
+  }
+}
+
 // ── intake: new product into the collection ───────────────────────────────────
 // Cards get entered on riftbound.gg (its scanner beats typing) and reach the app on its
 // next pull, which banks every gained copy in the Piltover worklist (`newq`) until it is
@@ -975,6 +1009,7 @@ async function main() {
   const [cmd = "summary", ...args] = process.argv.slice(2);
   if (cmd === "brew" || cmd === "brews") return cmdBrew(args);
   if (cmd === "rising") return cmdRising(args);
+  if (cmd === "poll") return cmdPoll(args);
   const cat = await loadCatalog();
   if (cmd === "ideas") return cmdIdeas(cat, args);
   // meta reads only the archive and the catalog, so it works offline and never

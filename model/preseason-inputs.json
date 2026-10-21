@@ -1,0 +1,1663 @@
+{
+ "note": "Hand-written judgments for the preseason model (lib/preseason.mjs, scripts/build-preseason.mjs). One row per scored reason: component is transfers (Radiance cards that fit the legend's existing engine), schedule (matchups against the predicted top decks and the new hate), recruiting (a new legend's raw power with no proven shell) or hype (a discount for buzz over evidence); points run -2..+2, each worth lib/preseason.mjs POINT in ln O/E; verified false counts half. cards must be catalog names, rules must be rule numbers in docs/rules-full.md; marker (optional) applies the row only to builds where that card is in half the lists; vs (optional) names the legends a row answers or fears, and it then counts as much as the model predicts those decks to be good. scripts/check.mjs enforces all of it. Written 2026-10-21 from the interaction hunts and the evidence in guides/radiance-tier-prediction.md.",
+ "set": "RAD",
+ "written": "2026-10-21",
+ "rows": [
+  {
+   "legend": "Kennen, Heart of the Tempest",
+   "component": "transfers",
+   "points": 1,
+   "why": "Trifarian Captain in 100% of its preview lists; Bedeviling Stranger 75%",
+   "cards": [
+    "Trifarian Captain",
+    "Bedeviling Stranger"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "preview adoption, data/rising.json"
+  },
+  {
+   "legend": "Kennen, Heart of the Tempest",
+   "component": "transfers",
+   "points": 1,
+   "why": "Meticulous Restorationist replays from the trash off Rhasa's printed cost 10, empowering the legend; no list runs it",
+   "cards": [
+    "Meticulous Restorationist",
+    "Rhasa the Sunderer"
+   ],
+   "rules": [
+    "206"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Kennen, Heart of the Tempest",
+   "component": "schedule",
+   "points": 0,
+   "why": "No Radiance hate against an opponent's trash; Riven's tempo is the risk before the trash fills",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Kai'Sa, Daughter of the Void",
+   "component": "transfers",
+   "points": 2,
+   "why": "Bilgewater Tracker 100%, The Empyrean 75%, Lost to the Sands 58% of her preview lists: the biggest adopted upgrade of any older legend",
+   "cards": [
+    "Bilgewater Tracker",
+    "The Empyrean",
+    "Lost to the Sands"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "preview adoption, data/rising.json"
+  },
+  {
+   "legend": "Kai'Sa, Daughter of the Void",
+   "component": "transfers",
+   "points": 1,
+   "why": "Kai'Sa, Rebel gives her spells Reaction in showdowns: Falling Star as a combat trick, Time Warp on their turn (4–8% of lists)",
+   "cards": [
+    "Kai'Sa, Rebel",
+    "Time Warp",
+    "Falling Star"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Kai'Sa, Daughter of the Void",
+   "component": "schedule",
+   "points": 1,
+   "why": "Scorched Earth answers the wide boards Riven and Kennen build; she has won big events in two sets",
+   "cards": [
+    "Scorched Earth"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; riftbound.gg post-Dalian tier list",
+   "vs": [
+    "Riven, The Exile",
+    "Kennen, Heart of the Tempest"
+   ]
+  },
+  {
+   "legend": "Riven, The Exile",
+   "component": "recruiting",
+   "points": 2,
+   "why": "The best-supported new legend: preview lists agree on a core (Broken Blade, Reckless Innovator, Blade of the Exile in all 9), Riftbound Insider's #2, tcgtalk's 'deck-building darling', one of the most-posted new legends; flipped Hidden units enter ready under her legend",
+   "cards": [
+    "Riven, Broken Blade",
+    "Reckless Innovator",
+    "Blade of the Exile",
+    "Momentary Companion"
+   ],
+   "rules": [
+    "811.1.d.1",
+    "323.6.a"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; Nova preview; Riftbound Insider ranking of the new legends, 2026-10-09; r/riftboundtcg"
+  },
+  {
+   "legend": "Riven, The Exile",
+   "component": "schedule",
+   "points": -1,
+   "why": "Vex, Apathetic stuns on entry, cancelling enters-ready; gear removal hits Blade of the Exile",
+   "cards": [
+    "Vex, Apathetic",
+    "Blade of the Exile"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21",
+   "vs": [
+    "Vex, Gloomist"
+   ]
+  },
+  {
+   "legend": "LeBlanc, Deceiver",
+   "component": "transfers",
+   "points": 1,
+   "why": "Her consensus already runs 3 Supernova and 3 Rift Herald (7+), each replaying Meticulous Restorationist from the trash; no list runs it",
+   "cards": [
+    "Meticulous Restorationist",
+    "Supernova",
+    "Rift Herald"
+   ],
+   "rules": [
+    "206"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "LeBlanc, Deceiver",
+   "component": "transfers",
+   "points": 1,
+   "why": "Trifarian Captain in 40% of her preview lists",
+   "cards": [
+    "Trifarian Captain"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "preview adoption, data/rising.json"
+  },
+  {
+   "legend": "LeBlanc, Deceiver",
+   "component": "schedule",
+   "points": 1,
+   "why": "Radiance prints little banish, the one thing her Deathknell plan fears",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Rengar, Pridestalker",
+   "component": "transfers",
+   "points": 1,
+   "why": "Elnuk Herd in 100% of his preview lists",
+   "cards": [
+    "Elnuk Herd"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "preview adoption, data/rising.json"
+  },
+  {
+   "legend": "Rengar, Pridestalker",
+   "component": "transfers",
+   "points": 1,
+   "why": "Rally for War plays three Recruits at an enemy battlefield: three legend triggers and an attack with no move; Banner of Conquest adds Assault",
+   "cards": [
+    "Rally for War",
+    "Banner of Conquest"
+   ],
+   "rules": [
+    "190.3.a.1",
+    "466.2.c"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Rengar, Pridestalker",
+   "component": "schedule",
+   "points": -1,
+   "why": "Bilgewater Tracker and Scorched Earth punish his 1-Might bodies",
+   "cards": [
+    "Bilgewater Tracker",
+    "Scorched Earth"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Master Yi, Wuju Bladesman",
+   "component": "transfers",
+   "points": 1,
+   "why": "Hunting Blind on your turn pulls an enemy unit into a lone Shield defender as the attacker; Ntofo Strikes and Staunch Survivor are cheap Calm/Body defence",
+   "cards": [
+    "Hunting Blind",
+    "Ntofo Strikes",
+    "Staunch Survivor"
+   ],
+   "rules": [
+    "190.3.a.1",
+    "466.2.c"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Master Yi, Wuju Bladesman",
+   "component": "schedule",
+   "points": -1,
+   "why": "Go-wide Recruit decks overwhelm a lone defender",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Irelia, Blade Dancer",
+   "component": "transfers",
+   "points": 1,
+   "why": "Reckless Innovator 100% and Battle Preparations 67% of her preview lists",
+   "cards": [
+    "Reckless Innovator",
+    "Battle Preparations"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "preview adoption, data/rising.json"
+  },
+  {
+   "legend": "Irelia, Blade Dancer",
+   "component": "transfers",
+   "points": 1,
+   "why": "Equipping Blade of the Exile chooses Fervent, so the legend readies her; Riven, Broken Blade runs all three exhaust modes in a turn under her",
+   "cards": [
+    "Blade of the Exile",
+    "Riven, Broken Blade"
+   ],
+   "rules": [
+    "818.1.b.1"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Irelia, Blade Dancer",
+   "component": "schedule",
+   "points": -1,
+   "why": "Damage that never chooses (Graves, Bombs, Scorched Earth) gets past Deflect",
+   "cards": [
+    "Graves, Blasting Through",
+    "Scorched Earth"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Azir, Emperor of the Sands",
+   "component": "transfers",
+   "points": 1,
+   "why": "Battle Preparations in 100% of preview lists; Command: Attack finds the Equipment",
+   "cards": [
+    "Battle Preparations",
+    "Command: Attack"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Azir, Emperor of the Sands",
+   "component": "schedule",
+   "points": -2,
+   "why": "Radiance's gear-removal wave: Lost to the Sands, An Offer You Can't Refuse, Burn Away, Stalwart Goatherd",
+   "cards": [
+    "Lost to the Sands",
+    "An Offer You Can't Refuse",
+    "Burn Away",
+    "Stalwart Goatherd"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Azir, Emperor of the Sands",
+   "component": "transfers",
+   "points": 1,
+   "why": "Watchful Curator gives his gear Deflect, taxing that wave; no Azir list runs it",
+   "cards": [
+    "Watchful Curator"
+   ],
+   "rules": [
+    "809.1"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Vex, Gloomist",
+   "component": "schedule",
+   "points": 2,
+   "why": "Vex, Apathetic is the natural answer to Riven and Evelynn, the most-posted new decks in her colours",
+   "cards": [
+    "Vex, Apathetic"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21",
+   "vs": [
+    "Riven, The Exile",
+    "Evelynn, Agony's Embrace"
+   ]
+  },
+  {
+   "legend": "Vex, Gloomist",
+   "component": "transfers",
+   "points": 1,
+   "why": "Pitiless Stalker's stun pulls in Vex, Mocking; Storm Raptor draws when the stunned unit dies",
+   "cards": [
+    "Pitiless Stalker",
+    "Vex, Mocking",
+    "Storm Raptor"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Jayce, Defender of Tomorrow",
+   "component": "schedule",
+   "points": -2,
+   "why": "More gear removal aimed at Aurora and Gutter Palace than at anything else",
+   "cards": [
+    "An Offer You Can't Refuse",
+    "Lost to the Sands",
+    "Burn Away"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Yasuo, Unforgiven",
+   "component": "transfers",
+   "points": 1,
+   "why": "Bushwhack Trap's extra hide slot flips two Spiderlings per battlefield; Bandle Scouts' Academy pays the hides",
+   "cards": [
+    "Bushwhack Trap",
+    "Bandle Scouts' Academy",
+    "Spiderling"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21",
+   "marker": "Spiderling"
+  },
+  {
+   "legend": "Yasuo, Unforgiven",
+   "component": "schedule",
+   "points": -1,
+   "why": "Bedeviling Stranger punishes 4+ units at a battlefield; Graves and Scorched Earth",
+   "cards": [
+    "Bedeviling Stranger",
+    "Graves, Blasting Through"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Ezreal, Prodigal Explorer",
+   "component": "schedule",
+   "points": 1,
+   "why": "The field fills with gear, and his answers (An Offer You Can't Refuse) hit it while drawing",
+   "cards": [
+    "An Offer You Can't Refuse"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Ezreal, Prodigal Explorer",
+   "component": "transfers",
+   "points": 1,
+   "why": "Pitiless Stalker's repeatable stun is an enemy choice every turn",
+   "cards": [
+    "Pitiless Stalker"
+   ],
+   "rules": [],
+   "verified": false,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Kha'Zix, Voidreaver",
+   "component": "transfers",
+   "points": 1,
+   "why": "On defence, Siren's Song moves one attacker out, then Ambush Mutating Horror in against the one left alone; no list runs it",
+   "cards": [
+    "Siren's Song",
+    "Kha'Zix, Mutating Horror"
+   ],
+   "rules": [
+    "466.2.c.3.a",
+    "383.4.e.2.b"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Kha'Zix, Voidreaver",
+   "component": "schedule",
+   "points": -1,
+   "why": "Token-wide decks multiply; Avalanche hits the units his legend walks home",
+   "cards": [
+    "Avalanche"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Mordekaiser, Iron Revenant",
+   "component": "recruiting",
+   "points": 1,
+   "why": "Dune Devourer plus the 7+ chain (Forbidden Technique, Meticulous Restorationist from the trash) is real ramp; Riftbound Insider's #3; Reddit split ('weak as hell' against strong Pre-Rift reports)",
+   "cards": [
+    "Dune Devourer",
+    "Forbidden Technique",
+    "Meticulous Restorationist"
+   ],
+   "rules": [
+    "206"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; Riftbound Insider ranking of the new legends, 2026-10-09; r/riftboundtcg"
+  },
+  {
+   "legend": "Mordekaiser, Iron Revenant",
+   "component": "schedule",
+   "points": -1,
+   "why": "Banish (Dockside Lock-Up) bypasses Twice Slain's replacement",
+   "cards": [
+    "Dockside Lock-Up",
+    "Mordekaiser, Twice Slain"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Diana, Scorn of the Moon",
+   "component": "transfers",
+   "points": 1,
+   "why": "Kai'Sa, Rebel turns her showdown-only Energy into Reaction-speed spells",
+   "cards": [
+    "Kai'Sa, Rebel",
+    "Parallel Convergence"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Evelynn, Agony's Embrace",
+   "component": "recruiting",
+   "points": 2,
+   "why": "Bushwhack Trap plus Evelynn, In Control makes 2-point holds; the Chaos Hidden package is hers; Riftbound Insider's #1",
+   "cards": [
+    "Bushwhack Trap",
+    "Evelynn, In Control",
+    "Momentary Companion"
+   ],
+   "rules": [
+    "473.1.a.1"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; Riftbound Insider ranking of the new legends, 2026-10-09; r/riftboundtcg"
+  },
+  {
+   "legend": "Evelynn, Agony's Embrace",
+   "component": "schedule",
+   "points": -1,
+   "why": "Vex, Apathetic stuns flips; Scuttle Crab reveals facedown cards",
+   "cards": [
+    "Vex, Apathetic",
+    "Scuttle Crab"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21",
+   "vs": [
+    "Vex, Gloomist"
+   ]
+  },
+  {
+   "legend": "Evelynn, Agony's Embrace",
+   "component": "hype",
+   "points": -1,
+   "why": "The most-hyped new legend (Riftbound Insider's #1, tcgtalk's 'most flexible build') ahead of anything its lists have shown",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "Riftbound Insider ranking of the new legends, 2026-10-09; tcgtalk"
+  },
+  {
+   "legend": "Akali, Rogue Assassin",
+   "component": "transfers",
+   "points": 2,
+   "why": "Akali, Brash plus the legend's move to base: a ready Brash, a free card and Power back; 4th and 7th of 74 at Nova",
+   "cards": [
+    "Akali, Brash"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; Nova preview"
+  },
+  {
+   "legend": "Akali, Rogue Assassin",
+   "component": "schedule",
+   "points": -1,
+   "why": "Gravity Field taxes her moves; stun",
+   "cards": [
+    "Gravity Field"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Annie, Dark Child",
+   "component": "transfers",
+   "points": 2,
+   "why": "Annie, Fiery adds 1 Bonus Damage to each Bomb hit; Detonation Amplifier fires each Bomb's Deathknell twice; the Bombs are in her colours",
+   "cards": [
+    "Annie, Fiery",
+    "Detonation Amplifier",
+    "Amateur Demolitionist"
+   ],
+   "rules": [
+    "715.2",
+    "187.12"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Annie, Dark Child",
+   "component": "transfers",
+   "points": 1,
+   "why": "Her legend's two end-of-turn runes pay exactly for Hexplosive Minefield on the opponent's turn",
+   "cards": [
+    "Hexplosive Minefield"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Annie, Dark Child",
+   "component": "schedule",
+   "points": -1,
+   "why": "Burn Away banishes Bombs (no Deathknell); gear removal",
+   "cards": [
+    "Burn Away",
+    "Stalwart Goatherd"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Ekko, Boy Who Shattered Time",
+   "component": "recruiting",
+   "points": 0,
+   "why": "The legend's discount makes Firebrand Raider a ready 6-Might attacker for 4 — one line; Riftbound Insider's #8, Reddit split between 'will end up meta' and 'truly DOA'",
+   "cards": [
+    "Firebrand Raider"
+   ],
+   "rules": [
+    "365.1"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; Riftbound Insider ranking of the new legends, 2026-10-09; r/riftboundtcg"
+  },
+  {
+   "legend": "Viktor, Herald of the Arcane",
+   "component": "transfers",
+   "points": 2,
+   "why": "Heimerdinger, Academy Instructor turns every token he makes into a 3-Might Mech; 4% of lists run him",
+   "cards": [
+    "Heimerdinger, Academy Instructor",
+    "Concert Poster"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Viktor, Herald of the Arcane",
+   "component": "schedule",
+   "points": -1,
+   "why": "Avalanche and Bilgewater Tracker sweep his tokens",
+   "cards": [
+    "Avalanche",
+    "Bilgewater Tracker"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Ziggs, Hexplosives Expert",
+   "component": "recruiting",
+   "points": 1,
+   "why": "Bombs are Deathknell, so Detonation Amplifier fires each twice; Annie, Fiery and Ziggs, Short-Fused add Bonus Damage; Riftbound Insider's #5, Reddit testers: 'all the testing is going horribly'",
+   "cards": [
+    "Detonation Amplifier",
+    "Annie, Fiery",
+    "Ziggs, Short-Fused"
+   ],
+   "rules": [
+    "187.12",
+    "715.2"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; Riftbound Insider ranking of the new legends, 2026-10-09; r/riftboundtcg"
+  },
+  {
+   "legend": "Ziggs, Hexplosives Expert",
+   "component": "schedule",
+   "points": -2,
+   "why": "His threats are fragile gear in a gear-hate format; Burn Away banishes Bombs",
+   "cards": [
+    "Burn Away",
+    "An Offer You Can't Refuse",
+    "Stalwart Goatherd"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Rek'Sai, Void Burrower",
+   "component": "transfers",
+   "points": 1,
+   "why": "Banner of Conquest, Rally for War, Concert Poster for a conquering wide deck",
+   "cards": [
+    "Banner of Conquest",
+    "Rally for War",
+    "Concert Poster"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Rek'Sai, Void Burrower",
+   "component": "schedule",
+   "points": -2,
+   "why": "Radiance's sweepers hit its wide board: Graves, Scorched Earth, Avalanche, Bilgewater Tracker",
+   "cards": [
+    "Graves, Blasting Through",
+    "Scorched Earth",
+    "Avalanche",
+    "Bilgewater Tracker"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Orianna, Lady of Clockwork",
+   "component": "recruiting",
+   "points": 0,
+   "why": "Watchful Curator and Battle Preparations protect and pump the animated gear; Riftbound Insider's #4, Reddit from 'can top 8 an RQ' to 'extremely bad'",
+   "cards": [
+    "Watchful Curator",
+    "Battle Preparations"
+   ],
+   "rules": [
+    "832.1.c"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; Riftbound Insider ranking of the new legends, 2026-10-09; r/riftboundtcg"
+  },
+  {
+   "legend": "Orianna, Lady of Clockwork",
+   "component": "schedule",
+   "points": -2,
+   "why": "Gear removal hits her unit and her engine at once",
+   "cards": [
+    "An Offer You Can't Refuse",
+    "Burn Away",
+    "Lost to the Sands"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Ornn, Fire Below the Mountain",
+   "component": "transfers",
+   "points": 1,
+   "why": "Gold tokens are gear for Ornn, Forge God and Patched Porobot; Battle Preparations is energy-neutral with 20 gear",
+   "cards": [
+    "Ornn, Forge God",
+    "Battle Preparations",
+    "Resource Extractor"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Ornn, Fire Below the Mountain",
+   "component": "schedule",
+   "points": -2,
+   "why": "The deck Radiance's gear hate is aimed at",
+   "cards": [
+    "Lost to the Sands",
+    "Stalwart Goatherd",
+    "Burn Away",
+    "An Offer You Can't Refuse"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Seraphine, Starry-Eyed Songstress",
+   "component": "recruiting",
+   "points": -1,
+   "why": "Seraphine, Inspiring draws on an ordinary three-unit attack, but Riftbound Insider ranks her last (#9) and Pre-Rift players call her 'terrible'",
+   "cards": [
+    "Seraphine, Inspiring",
+    "Party Crasher"
+   ],
+   "rules": [
+    "144.3"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; Riftbound Insider ranking of the new legends, 2026-10-09; r/riftboundtcg"
+  },
+  {
+   "legend": "Seraphine, Starry-Eyed Songstress",
+   "component": "schedule",
+   "points": -2,
+   "why": "Avalanche (3 to every unit in bases) and Firebrand Raider are printed against her tokens",
+   "cards": [
+    "Avalanche",
+    "Firebrand Raider"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Sivir, Battle Mistress",
+   "component": "transfers",
+   "points": 2,
+   "why": "Her legend turns Radiance's Power costs (hiding, Reckless Innovator) into Gold; the old competitive Sivir was an Aurora deck",
+   "cards": [
+    "Reckless Innovator",
+    "Pyke, Returned",
+    "Bedeviling Stranger"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "riftbound.gg Den 2026-10-20; builds/sivir-gold-midrange-radiance.json"
+  },
+  {
+   "legend": "Sivir, Battle Mistress",
+   "component": "schedule",
+   "points": -1,
+   "why": "Hush, Vex, Apathetic, tall Shield decks",
+   "cards": [
+    "Hush",
+    "Vex, Apathetic"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21",
+   "vs": [
+    "Vex, Gloomist"
+   ]
+  },
+  {
+   "legend": "K'Sante, Pride of Nazumah",
+   "component": "recruiting",
+   "points": 0,
+   "why": "The Armored Tusker line is spicy but rules-unverified; Riftbound Insider's #7, Reddit: 'mid, will see play and mediocre results'",
+   "cards": [
+    "Armored Tusker",
+    "Consult the Heavens",
+    "K'Sante, Dauntless"
+   ],
+   "rules": [],
+   "verified": false,
+   "source": "interaction hunt 2026-10-21; Riftbound Insider ranking of the new legends, 2026-10-09; r/riftboundtcg"
+  },
+  {
+   "legend": "K'Sante, Pride of Nazumah",
+   "component": "schedule",
+   "points": -1,
+   "why": "Stun ignores Shield; bounce strips stacked Shield",
+   "cards": [
+    "Bedeviling Stranger"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Teemo, Swift Scout",
+   "component": "transfers",
+   "points": 1,
+   "why": "The Chaos Hidden package (no Teemo card of its own); Strigian Oracle's Predict plays Nocturne, Horrifying for one Power",
+   "cards": [
+    "Strigian Oracle",
+    "Nocturne, Horrifying",
+    "Bushwhack Trap",
+    "Bandle Scouts' Academy"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; riftbound.gg Den 2026-10-20"
+  },
+  {
+   "legend": "Teemo, Swift Scout",
+   "component": "schedule",
+   "points": -1,
+   "why": "Evelynn plays the same package with her own cards; Vex, Apathetic; Scuttle Crab",
+   "cards": [
+    "Vex, Apathetic",
+    "Scuttle Crab"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21",
+   "vs": [
+    "Vex, Gloomist",
+    "Evelynn, Agony's Embrace"
+   ]
+  },
+  {
+   "legend": "Ambessa, Matriarch of War",
+   "component": "schedule",
+   "points": 2,
+   "why": "While Empowered, Ambessa, The Wolf can't be damaged outside combat, and nearly all of Radiance's removal is damage",
+   "cards": [
+    "Ambessa, The Wolf",
+    "Lost to the Sands",
+    "Scorched Earth",
+    "Bilgewater Tracker"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Ambessa, Matriarch of War",
+   "component": "transfers",
+   "points": 1,
+   "why": "Demacian Standard plus Respected and Feared, and Sneaky Zeebles' Power for the legend's ready",
+   "cards": [
+    "Demacian Standard",
+    "Sneaky Zeebles"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Nasus, Curator of the Sands",
+   "component": "transfers",
+   "points": 2,
+   "why": "Heartening Soul readies his legend after its exhaust is paid: two ramps a turn; Radiance adds 7+ density (Rostrum, Clocktower Guardian)",
+   "cards": [
+    "Heartening Soul",
+    "Resplendent Rostrum",
+    "Clocktower Guardian"
+   ],
+   "rules": [
+    "383.3.b"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Nasus, Curator of the Sands",
+   "component": "schedule",
+   "points": -1,
+   "why": "Riven and Kennen tempo before turn 5",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21",
+   "vs": [
+    "Riven, The Exile",
+    "Kennen, Heart of the Tempest"
+   ]
+  },
+  {
+   "legend": "Fiora, Grand Duelist",
+   "component": "transfers",
+   "points": 1,
+   "why": "Herald of the Emperor sets base Might to 5 (Mighty); Hold 'Em pushes past 5 at Action speed",
+   "cards": [
+    "Herald of the Emperor",
+    "Hold 'Em"
+   ],
+   "rules": [
+    "709"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Fiora, Grand Duelist",
+   "component": "schedule",
+   "points": -1,
+   "why": "Riptide Mage and Disarm shrink her units back below 5",
+   "cards": [
+    "Riptide Mage"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Jarvan IV, Exemplar of Demacia",
+   "component": "recruiting",
+   "points": 0,
+   "why": "Martial Paragon gives Deploy gear Action speed (a mid-fight reinforcement); Riftbound Insider's #6, Reddit: 'C tier, possibly dead on arrival', tcgtalk: reviewers 'lukewarm'",
+   "cards": [
+    "Jarvan IV, Martial Paragon",
+    "Pillaged Armory"
+   ],
+   "rules": [
+    "806.1.a",
+    "830.1.b.1"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; Riftbound Insider ranking of the new legends, 2026-10-09; r/riftboundtcg"
+  },
+  {
+   "legend": "Jarvan IV, Exemplar of Demacia",
+   "component": "schedule",
+   "points": -2,
+   "why": "Gear hate and losing holds",
+   "cards": [
+    "An Offer You Can't Refuse",
+    "Stalwart Goatherd"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Miss Fortune, Bounty Hunter",
+   "component": "transfers",
+   "points": 2,
+   "why": "Bloodscent Swarm and Sneaky Zeebles pay off her open-battlefield conquests",
+   "cards": [
+    "Bloodscent Swarm",
+    "Sneaky Zeebles",
+    "Lulu, Whimsical"
+   ],
+   "rules": [
+    "348.2.a",
+    "471.1"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Miss Fortune, Bounty Hunter",
+   "component": "schedule",
+   "points": -1,
+   "why": "Graves, Scorched Earth, Siren's Song against her moves",
+   "cards": [
+    "Graves, Blasting Through",
+    "Siren's Song"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Lillia, Bashful Bloom",
+   "component": "transfers",
+   "points": 1,
+   "why": "Temporary Sprites become free costs for Parallel Convergence and Old Retreat",
+   "cards": [
+    "Parallel Convergence"
+   ],
+   "rules": [
+    "186.1"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Lillia, Bashful Bloom",
+   "component": "schedule",
+   "points": -1,
+   "why": "Bombs, Bilgewater Tracker and Scorched Earth kill Sprites",
+   "cards": [
+    "Bilgewater Tracker",
+    "Scorched Earth"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Vi, Piltover Enforcer",
+   "component": "transfers",
+   "points": 2,
+   "why": "Brawl gives Assault equal to Might: the excess damage her legend wants, then Vi, Destructive ganks a second battlefield",
+   "cards": [
+    "Brawl",
+    "Vi, Destructive"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Vi, Piltover Enforcer",
+   "component": "schedule",
+   "points": -1,
+   "why": "Kennen and Riven stuns; Shield defenders",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21",
+   "vs": [
+    "Kennen, Heart of the Tempest",
+    "Riven, The Exile"
+   ]
+  },
+  {
+   "legend": "Zed, Master of Shadows",
+   "component": "transfers",
+   "points": 2,
+   "why": "Rhasa's printed 7+ cost triggers Forbidden Technique from the trash, readying Rhasa; Ekko, Revolutionary's self-banish empowers the legend",
+   "cards": [
+    "Rhasa the Sunderer",
+    "Forbidden Technique",
+    "Ekko, Revolutionary"
+   ],
+   "rules": [
+    "206"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Zed, Master of Shadows",
+   "component": "schedule",
+   "points": -1,
+   "why": "Bilgewater Tracker and Graves wipe 0-Might Clones",
+   "cards": [
+    "Bilgewater Tracker",
+    "Graves, Blasting Through"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Garen, Might of Demacia",
+   "component": "transfers",
+   "points": 2,
+   "why": "Heimerdinger turns Recruit the Vanguard into four 3-Might Mechs; Raucous Anthem readies the team for a second conquest",
+   "cards": [
+    "Heimerdinger, Academy Instructor",
+    "Recruit the Vanguard",
+    "Raucous Anthem"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Garen, Might of Demacia",
+   "component": "schedule",
+   "points": -1,
+   "why": "Bedeviling Stranger punishes exactly 4+ units",
+   "cards": [
+    "Bedeviling Stranger"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Draven, Glorious Executioner",
+   "component": "transfers",
+   "points": 1,
+   "why": "Pitiless Stalker stuns the defender before Draven, Audacious fights; Siren's Song wins combats on their turn",
+   "cards": [
+    "Pitiless Stalker",
+    "Siren's Song",
+    "Draven, Audacious"
+   ],
+   "rules": [
+    "424.1.b"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Draven, Glorious Executioner",
+   "component": "schedule",
+   "points": -1,
+   "why": "Stun-heavy Riven and Kennen beat him in combat",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21",
+   "vs": [
+    "Riven, The Exile",
+    "Kennen, Heart of the Tempest"
+   ]
+  },
+  {
+   "legend": "Lucian, Purifier",
+   "component": "transfers",
+   "points": 1,
+   "why": "Nazuman Ntofo is a 1-Energy Equipment worth +1 Assault under his legend; his lists run none",
+   "cards": [
+    "Nazuman Ntofo",
+    "Banner of Conquest"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Lucian, Purifier",
+   "component": "schedule",
+   "points": -2,
+   "why": "Every removal deck now carries gear hate",
+   "cards": [
+    "Stalwart Goatherd",
+    "Lost to the Sands",
+    "Burn Away"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Ahri, Nine-Tailed Fox",
+   "component": "transfers",
+   "points": 1,
+   "why": "Ahri, Confident grows off her own shrink effects",
+   "cards": [
+    "Ahri, Confident"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; riftbound.gg Den 2026-10-20"
+  },
+  {
+   "legend": "Ahri, Nine-Tailed Fox",
+   "component": "schedule",
+   "points": -1,
+   "why": "Go-wide 1-Might decks: the minimum of 1 stops her shrink",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Rumble, Mechanized Menace",
+   "component": "transfers",
+   "points": 1,
+   "why": "Clocktower Guardian is Radiance's only Mech; Incorrigible Construct and the rest only make Mech tokens",
+   "cards": [
+    "Clocktower Guardian",
+    "Incorrigible Construct"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21; riftbound.gg Den 2026-10-20"
+  },
+  {
+   "legend": "Rumble, Mechanized Menace",
+   "component": "schedule",
+   "points": -1,
+   "why": "Graves, Lost to the Sands, Vex",
+   "cards": [
+    "Graves, Blasting Through",
+    "Lost to the Sands"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Jinx, Loose Cannon",
+   "component": "transfers",
+   "points": 1,
+   "why": "Ekko, Revolutionary as a discard outlet; Rhasa plus Forbidden Technique",
+   "cards": [
+    "Ekko, Revolutionary",
+    "Forbidden Technique"
+   ],
+   "rules": [
+    "206"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Jinx, Loose Cannon",
+   "component": "schedule",
+   "points": -1,
+   "why": "Graves and Bilgewater Tracker punish low-Might attackers",
+   "cards": [
+    "Graves, Blasting Through",
+    "Bilgewater Tracker"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Jhin, Virtuoso",
+   "component": "transfers",
+   "points": 1,
+   "why": "Kai'Sa, Rebel makes his spells combat tricks; Supernova and Scorched Earth count toward the legend",
+   "cards": [
+    "Kai'Sa, Rebel",
+    "Supernova",
+    "Scorched Earth"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Jhin, Virtuoso",
+   "component": "schedule",
+   "points": -1,
+   "why": "Riven and Kennen tempo before the legend's channel turn",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21",
+   "vs": [
+    "Riven, The Exile",
+    "Kennen, Heart of the Tempest"
+   ]
+  },
+  {
+   "legend": "Leona, Radiant Dawn",
+   "component": "transfers",
+   "points": 1,
+   "why": "Riven, Broken Blade's double-stun loop under her legend; Storm Raptor draws off the stunned dying",
+   "cards": [
+    "Riven, Broken Blade",
+    "Ki Burst",
+    "Storm Raptor"
+   ],
+   "rules": [
+    "424.1.b"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Leona, Radiant Dawn",
+   "component": "schedule",
+   "points": -1,
+   "why": "Deflect taxes the stuns; Hush",
+   "cards": [
+    "Hush"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Pyke, Bloodharbor Ripper",
+   "component": "transfers",
+   "points": 1,
+   "why": "Shimmering Swimmer killing a Gold each turn is a repeatable 2-damage machine",
+   "cards": [
+    "Shimmering Swimmer"
+   ],
+   "rules": [
+    "187.5"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Pyke, Bloodharbor Ripper",
+   "component": "schedule",
+   "points": -1,
+   "why": "A value deck in a tempo format; Firebrand Raider",
+   "cards": [
+    "Firebrand Raider"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Volibear, Relentless Storm",
+   "component": "transfers",
+   "points": 1,
+   "why": "Seraphic Wyvern (50% of posted lists) and Volibear, Furious's double attack via Portable Portal",
+   "cards": [
+    "Seraphic Wyvern",
+    "Portable Portal",
+    "Volibear, Furious"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Volibear, Relentless Storm",
+   "component": "schedule",
+   "points": -1,
+   "why": "Cheap stun on a 10-cost unit; tempo before the ramp pays",
+   "cards": [
+    "Ki Burst",
+    "Pitiless Stalker"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Shen, Eye of Twilight",
+   "component": "transfers",
+   "points": 1,
+   "why": "Ki Burst on defence with an exhausted defender; Life from Stone and Hunker Down",
+   "cards": [
+    "Ki Burst",
+    "Life from Stone",
+    "Hunker Down"
+   ],
+   "rules": [
+    "466.2.c.3"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Shen, Eye of Twilight",
+   "component": "schedule",
+   "points": -1,
+   "why": "Bedeviling Stranger counts all units: two attackers into his pair makes four",
+   "cards": [
+    "Bedeviling Stranger"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Jax, Grandmaster at Arms",
+   "component": "transfers",
+   "points": 1,
+   "why": "Nazuman Ntofo moved onto Jax, Unrelenting each turn is a draw engine; Watchful Curator protects the gear",
+   "cards": [
+    "Nazuman Ntofo",
+    "Jax, Unrelenting",
+    "Watchful Curator"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Jax, Grandmaster at Arms",
+   "component": "schedule",
+   "points": -2,
+   "why": "The gear-hate wave",
+   "cards": [
+    "Stalwart Goatherd",
+    "Lost to the Sands",
+    "Burn Away"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Lux, Lady of Luminosity",
+   "component": "transfers",
+   "points": 1,
+   "why": "Rousing Display shows off her big spells for four Recruits; Meticulous Restorationist recurs off them",
+   "cards": [
+    "Rousing Display",
+    "Meticulous Restorationist"
+   ],
+   "rules": [
+    "206"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Lux, Lady of Luminosity",
+   "component": "schedule",
+   "points": -1,
+   "why": "Hush counters her 2+ Power spells; fast aggro",
+   "cards": [
+    "Hush"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Renata Glasc, Chem-Baroness",
+   "component": "transfers",
+   "points": 1,
+   "why": "Bandle Scouts' Academy refunds her hides as Gold; Dockside Lock-Up steals a unit on her hold",
+   "cards": [
+    "Bandle Scouts' Academy",
+    "Dockside Lock-Up"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Renata Glasc, Chem-Baroness",
+   "component": "schedule",
+   "points": -1,
+   "why": "Aggro before her point engine is online",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Lee Sin, Blind Monk",
+   "component": "transfers",
+   "points": 1,
+   "why": "Pillaged Armory buffs twice; Heartening Soul gives two legend buffs a turn",
+   "cards": [
+    "Pillaged Armory",
+    "Heartening Soul"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Lee Sin, Blind Monk",
+   "component": "schedule",
+   "points": -1,
+   "why": "Bounce wipes buffs (Bedeviling Stranger); stun",
+   "cards": [
+    "Bedeviling Stranger"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Sett, The Boss",
+   "component": "transfers",
+   "points": 1,
+   "why": "Pillaged Armory re-buffs on conquer as the legend readies; Elnuk Herd is a free +3 from face down",
+   "cards": [
+    "Pillaged Armory",
+    "Elnuk Herd"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Sett, The Boss",
+   "component": "schedule",
+   "points": -1,
+   "why": "Removal that isn't death: banish and bounce",
+   "cards": [
+    "Dockside Lock-Up",
+    "Bedeviling Stranger"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Darius, Hand of Noxus",
+   "component": "transfers",
+   "points": 1,
+   "why": "Runeblade Anvil and Concert Poster turn on Darius, Trifarian's second card and the legend's Legion",
+   "cards": [
+    "Runeblade Anvil",
+    "Concert Poster",
+    "Darius, Trifarian"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Darius, Hand of Noxus",
+   "component": "schedule",
+   "points": -1,
+   "why": "Area damage and Kennen stuns",
+   "cards": [
+    "Scorched Earth",
+    "Graves, Blasting Through"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Mel, Soul's Reflection",
+   "component": "transfers",
+   "points": 0,
+   "why": "Radiance prints almost no new Empower sources",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Mel, Soul's Reflection",
+   "component": "schedule",
+   "points": -1,
+   "why": "Hush; go-wide boards",
+   "cards": [
+    "Hush"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Poppy, Keeper of the Hammer",
+   "component": "transfers",
+   "points": 1,
+   "why": "K'Sante, Courageous rewards holding; Dockside Lock-Up exiles a unit on an opponent's hold",
+   "cards": [
+    "K'Sante, Courageous",
+    "Dockside Lock-Up"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Poppy, Keeper of the Hammer",
+   "component": "schedule",
+   "points": -1,
+   "why": "Angler Wyrm and Hunting Blind pull units off her holds",
+   "cards": [
+    "Angler Wyrm",
+    "Hunting Blind"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Renekton, Butcher of the Sands",
+   "component": "transfers",
+   "points": 1,
+   "why": "Brawl on Renekton, Brute reaches 10+ Might for his empower",
+   "cards": [
+    "Brawl"
+   ],
+   "rules": [],
+   "verified": false,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Renekton, Butcher of the Sands",
+   "component": "schedule",
+   "points": -1,
+   "why": "Stun on Brute before the threshold",
+   "cards": [
+    "Ki Burst",
+    "Pitiless Stalker"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Ivern, Green Father",
+   "component": "transfers",
+   "points": 1,
+   "why": "Trifarian Captain finds his cheap tribe units; Heartening Soul readies the legend for a second Brush",
+   "cards": [
+    "Trifarian Captain",
+    "Heartening Soul"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Ivern, Green Father",
+   "component": "schedule",
+   "points": -1,
+   "why": "Avalanche and Bilgewater Tracker against small tribe units",
+   "cards": [
+    "Avalanche",
+    "Bilgewater Tracker"
+   ],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Master Yi, Wuju Master",
+   "component": "transfers",
+   "points": 1,
+   "why": "Heartening Soul's granted +3 ability is pure upside on a legend with no activated ability",
+   "cards": [
+    "Heartening Soul"
+   ],
+   "rules": [
+    "381"
+   ],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  },
+  {
+   "legend": "Master Yi, Wuju Master",
+   "component": "schedule",
+   "points": -1,
+   "why": "Faster aggro punishes the slow levelling; Radiance prints no new XP sources",
+   "cards": [],
+   "rules": [],
+   "verified": true,
+   "source": "interaction hunt 2026-10-21"
+  }
+ ],
+ "revised": "2026-10-21: blanket new-legend hype rows removed (the base rate is now structural: weaker priors and the crowd's popularity), new legends' recruiting re-graded against each other, vs rows added"
+}
