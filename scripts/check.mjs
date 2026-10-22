@@ -720,7 +720,7 @@ section('The preseason model');
   try { FD = read('data/field.json'); } catch { /* reported below */ }
   if (!FD) ok('field forecast present', false, 'data/field.json missing — run build-field.mjs');
   else {
-    const { gradeOf, consensus, MIN_E } = await import('../lib/field.mjs');
+    const { gradeFor, consensus, MIN_E } = await import('../lib/field.mjs');
     const AR = (() => { try { return read('data/archetypes.json'); } catch { return null; } })();
     ok('the field covers every legend', !AR || AR.legends.every((l) => FD.legends.some((x) => x.legend === l.name)), `${FD.legends.length} legends`);
     // Placeholders: Rift Atlas filed Showdown 5's 12 hidden lists as "Yasuo, 12 players".
@@ -736,7 +736,7 @@ section('The preseason model');
     const names = FD.legends.map((l) => l.legend);
     const res = (k) => names.includes(k) ? k : names.filter((n) => n.split(',')[0] === k).length === 1 ? names.find((n) => n.split(',')[0] === k) : null;
     const off = FD.legends.filter((x) => {
-      const v = Xs.flatMap((s) => Object.entries(s.p).filter(([k]) => res(k) === x.legend).map(([, g]) => gradeOf(g))).filter((g) => g != null);
+      const v = Xs.flatMap((s) => Object.entries(s.p).filter(([k]) => res(k) === x.legend).map(([, g]) => gradeFor(g, s.scale))).filter((g) => g != null);
       const c = consensus(v);
       const expert = c && c.n >= 2 ? c.tier : null;
       // Before the handover a tier is the experts' median; after it, a deep-enough results tier.

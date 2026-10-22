@@ -24,7 +24,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 import { indexCatalog } from "../lib/decks.mjs";
 import { NEVER_PLAY } from "../lib/avoid.mjs";
-import { gradeOf, consensus, recordRatio, recordTier, disagreement, groupOf, handedOver, resultsRatio, LETTERS, DISAGREE_TIERS, MIN_E, FORMAT_FROM } from "../lib/field.mjs";
+import { gradeFor, consensus, recordRatio, recordTier, disagreement, groupOf, handedOver, resultsRatio, LETTERS, DISAGREE_TIERS, MIN_E, FORMAT_FROM } from "../lib/field.mjs";
 
 const RA = "https://riftatlas.com";
 const DOTGG = "https://api.dotgg.gg/cgfw/gettournament?game=riftbound&slug=";
@@ -273,9 +273,10 @@ const main = async () => {
   for (const s of experts.sources) for (const [k, g] of Object.entries(s.p || {})) {
     const n = resolve(k); if (!n) continue;
     if (s.id === "jayegger-call") { jay.set(n, g); continue; }
-    const v = s.kind === "strength" ? gradeOf(g) : null;
-    if (v == null) other.get(n).push({ id: s.id, said: g, kind: s.kind });
-    else grades.get(n).push({ id: s.id, said: g, value: r3(v) });
+    const v = s.kind === "strength" ? gradeFor(g, s.scale) : null;
+    const src = { id: s.id, who: s.who, url: s.url, date: s.date };
+    if (v == null) other.get(n).push({ ...src, said: g, kind: s.kind });
+    else grades.get(n).push({ ...src, said: g, value: r3(v) });
   }
 
   // Aurora: how many of the legend's recent lists run a never-play card (lib/avoid.mjs). The

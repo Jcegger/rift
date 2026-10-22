@@ -1430,14 +1430,23 @@ Collection, Guides, News. It lived at `/app/` while it was built and took the ro
 
 - **Decks** — readiness against the collection (cards short, cost to finish at the
   cheapest printing, "+ N unpriced" rather than $0), the list, the deck's rule checks,
-  a **one-tap journal** (opponent, W or L) and matchup cards: Day 1 share and conversion at
-  the latest RQ, your record, and a link to the plan in the deck's guide when one exists
+  a **one-tap journal** (opponent, W or L) and matchup cards for the Radiance field you're likely
+  to face (`data/field.json`, most played first): the tier now, Radiance pilots and top 8s, last
+  set's Day 1 share and conversion as context, your record, and a link to the plan in the deck's
+  guide when one exists
   (matched by heading, e.g. "Irelia, Blade Dancer — …" in `guides/riven-exile-gauntlet.md`).
 - **Editor** — +/−, move to and from the sideboard, search inside the legend's domains,
   other champions' signatures blocked, every check live. Save writes the deck back.
-- **Find a deck** — the Radiance era first (see "Deck ideas"), then Riot's Vendetta RQ field
-  table (Day 1, Day 2, converts, Top 8, riftbound.gg's tier beside it) and every Top 8 /
-  Best-Of list per legend, with "Copy to my decks".
+- **Find a deck** — the **Radiance meta** first (`data/field.json`): a fixed grid, tiers down
+  (how good a legend is now) and how likely you are to face it across (likely / possible / rare
+  or unseen), so strong-and-likely is the top-left corner; each name carries its Radiance
+  pilots, top 16s, ◆ for Aurora builds and ! where last set's record is two tiers away. A name
+  opens `#/meta/<legend>`: the Radiance events, the top 16s, every expert grade with its source,
+  last set's record as context, and (private only) your call and the card reads. Then the
+  Radiance era (see "Deck ideas"), then Riot's Vendetta RQ field table, labelled last set, and
+  every Top 8 / Best-Of list per legend, with "Copy to my decks". `?view=meta` is the same grid
+  read-only for anyone: committed data only (it never reads the row), data and the experts'
+  published grades only, labelled a forecast until Radiance results lead the tiers.
 - **Collection** — four sub-pages. *Cards*: every printing as a grid or a table, filtered
   by what you own, what your decks are short of, wants, spares and the rest; tap a card to
   set Want, Trade and On the way (owned counts come only from riftbound.gg). *Sets*:

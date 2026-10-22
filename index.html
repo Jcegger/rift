@@ -114,6 +114,15 @@ select,input[type=search],input[type=text]{font:16px var(--f-body);min-height:44
 .win{font-weight:600;color:var(--good)}.loss{font-weight:600;color:var(--bad)}.draw{font-weight:600;color:var(--ink2)}
 
 .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.fgrid{display:grid;grid-template-columns:2.2em repeat(3,minmax(0,1fr));gap:8px 14px;align-items:start}
+.fgrid .ftier{font:700 22px var(--f-head);color:var(--ink2);padding-top:2px}
+.fgrid .fcell{display:flex;flex-wrap:wrap;gap:4px 12px;padding:8px 0;border-top:1px solid var(--line2);min-height:2em}
+.fgrid .fitem{white-space:nowrap}
+.fgrid .fitem a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
+.fgrid .fitem a:hover{border-bottom-color:var(--ink)}
+@media (max-width:640px){.fgrid{grid-template-columns:2em minmax(0,1fr)}.fgrid .fhead,.fgrid>div:first-child{display:none}
+  .fgrid .fcell{grid-column:2}.fgrid .fcell::before{content:attr(data-col);display:block;width:100%;font:700 11px var(--f-head);text-transform:uppercase;letter-spacing:.06em;color:var(--ink2)}
+  .fgrid .fcell.empty{display:none}}
 .mcard{background:var(--card);border-radius:var(--r);padding:20px 22px;display:flex;flex-direction:column;gap:10px}
 .mcard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px}
 .mcard dt{font-size:12px}
@@ -205,6 +214,7 @@ details.more summary{cursor:pointer;color:var(--accent);font-weight:600;min-heig
 .navbadge{background:var(--accent);color:#fff;font:600 11px var(--f-mono);border-radius:9px;padding:1px 6px;line-height:1.4}
 .newdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:1px}
 .pill.riot{color:var(--accent);background:var(--soft)}
+a.pill{text-decoration:none;color:var(--ink);background:var(--soft);font-weight:700;align-self:flex-start}
 .pill.src{color:var(--ink2);background:var(--soft)}
 nav.bottom{display:none}
 .hide-sm{}
@@ -261,6 +271,10 @@ const H = { apikey: SUPA_KEY, Authorization: `Bearer ${SUPA_KEY}`, "Content-Type
 // rift.jayegger.com/?view=trade: a read-only trade list to hand someone at the store.
 // It reads the row and never writes it.
 const SHARE = new URLSearchParams(location.search).get("view") === "trade";
+// rift.jayegger.com/?view=meta: the Radiance meta for anyone. Committed data only — it never
+// reads the row — and only data and the experts' published grades: Jay's own call and
+// Claude's card reads stay on the private pages.
+const META = new URLSearchParams(location.search).get("view") === "meta";
 
 const ls = {
   get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
@@ -339,14 +353,14 @@ const journal = () => {
 };
 
 /* ── data ────────────────────────────────────────────────────────────────── */
-let CAT, IDX, TOP, TIERS, GUIDES, NEWS, IDEAS, ARCHE, RES, BREWS, RISING, MATCH, IMG = "";
+let CAT, IDX, TOP, TIERS, GUIDES, NEWS, IDEAS, ARCHE, RES, BREWS, RISING, FIELD, MATCH, IMG = "";
 const BYNAME = new Map();        // folded legend name "Irelia, Blade Dancer" -> legend card
 const SHORT = new Map();         // "OGN-042" -> "OGN-042/298": the deck feed drops the set size
 const getJSON = (f) => fetch(`data/${f}`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
 
 async function loadData() {
-  const [cards, extras, banned, errata, top, tiers, guides, news, ideas, arche, res, brews, rising] = await Promise.all(
-    ["cards.json", "extras.json", "banned.json", "errata.json", "topdecks.json", "tiers.json", "guides.json", "news.json", "ideas.json", "archetypes.json", "research.json", "brews.json", "rising.json"].map(getJSON));
+  const [cards, extras, banned, errata, top, tiers, guides, news, ideas, arche, res, brews, rising, field] = await Promise.all(
+    ["cards.json", "extras.json", "banned.json", "errata.json", "topdecks.json", "tiers.json", "guides.json", "news.json", "ideas.json", "archetypes.json", "research.json", "brews.json", "rising.json", "field.json"].map(getJSON));
   if (!cards) throw new Error("data/cards.json did not load");
   CAT = cards; IMG = cards.imagePrefix || "";
   const all = [...cards.cards, ...((extras && extras.cards) || [])];
@@ -357,7 +371,7 @@ async function loadData() {
   MATCH = matcher(all);
   for (const c of all) if (c.t === "Legend" && !c.v) { const n = IDX.legendName(c); if (!BYNAME.has(n)) BYNAME.set(n, c); }
   for (const c of all) { const k = c.c.replace(/\/\d+$/, ""); if (!SHORT.has(k)) SHORT.set(k, c.c); }
-  TOP = top; TIERS = tiers; GUIDES = guides; NEWS = news; IDEAS = ideas; ARCHE = arche; RES = res; BREWS = brews; RISING = rising;
+  TOP = top; TIERS = tiers; GUIDES = guides; NEWS = news; IDEAS = ideas; ARCHE = arche; RES = res; BREWS = brews; RISING = rising; FIELD = field;
 }
 
 /* ── helpers ─────────────────────────────────────────────────────────────── */
@@ -516,7 +530,7 @@ function tierOf(legend) {
 const NAV = [["decks", "Decks"], ["find", "Find a deck"], ["collection", "Collection"], ["guides", "Guides"], ["news", "News"]];
 const BNAV = [["decks", "Decks"], ["find", "Find"], ["collection", "Collection"], ["guides", "Guides"], ["news", "News"]];
 function renderNav(cur) {
-  if (SHARE) { $("#nav").innerHTML = ""; $("#bnav").innerHTML = ""; return; }
+  if (SHARE || META) { $("#nav").innerHTML = ""; $("#bnav").innerHTML = ""; return; }
   const fresh = cur === "news" ? 0 : newsBadge();
   const badge = (k) => k === "news" && fresh ? ` <span class="navbadge" aria-label="${fresh} new">${fresh > 99 ? "99+" : fresh}</span>` : "";
   const link = (cls) => ([k, label]) => `<a ${cls} href="#/${k}" ${cur === k ? 'aria-current="page"' : ""}>${label}${badge(k)}</a>`;
@@ -537,13 +551,15 @@ window.addEventListener("hashchange", () => {
 function route() {
   let [, page = "decks", arg = ""] = (location.hash || "#/decks").split("?")[0].split("/");
   if (SHARE) { page = "collection"; arg = "trade"; }
+  if (META && page !== "meta") { page = "meta"; arg = ""; }
   const key = decodeURIComponent(arg);
-  renderNav(page === "deck" || page === "edit" || page === "new" ? "decks" : page === "guide" ? "guides" : page === "idea" || page === "bench" || page === "archetypes" ? "find" : page);
+  renderNav(page === "deck" || page === "edit" || page === "new" ? "decks" : page === "guide" ? "guides" : page === "idea" || page === "bench" || page === "archetypes" || page === "meta" ? "find" : page);
   const v = $("#view");
   v.onclick = null;   // the editor and the bench attach their own; never carry one to the next page
   try {
     if (page === "collection") viewCollection(key || "cards");
     else if (page === "find") v.innerHTML = viewFind(key);
+    else if (page === "meta") v.innerHTML = key ? viewMetaLegend(key, META) : viewMetaPage();
     else if (page === "idea") { v.innerHTML = viewIdea(key); fillGamePlan(); }
     else if (page === "archetypes") { v.innerHTML = viewArchetypes(); if (!ARCH_MD) loadArchMd().then(() => { if (location.hash.startsWith("#/archetypes")) { KEEP_SCROLL = true; route(); } }); }
     else if (page === "bench") viewBench(key);
@@ -739,25 +755,30 @@ function matchupsPanel(d, L) {
   const field = latestField();
   const rec = journalRecord(journal(), d.id);
   const guides = guidesFor(L);
-  const names = [...new Set([...(field ? field.rows.slice(0, 10).map((r) => r.legend) : []), ...rec.keys()])].filter((n) => n !== "Other");
+  // Who you'll face: the Radiance field's LIKELY legends, most played first (data/field.json);
+  // Riot's last-set table only where there is no field forecast yet.
+  const likely = FIELD?.legends ? FIELD.legends.filter((x) => x.group === "LIKELY").sort((a, b) => b.pilots - a.pilots || (b.record?.share || 0) - (a.record?.share || 0)).slice(0, 10).map((x) => x.legend) : null;
+  const names = [...new Set([...(likely || (field ? field.rows.slice(0, 10).map((r) => r.legend) : [])), ...rec.keys()])].filter((n) => n !== "Other");
   const cards = names.map((n) => {
     const f = field?.rows.find((r) => r.legend === n);
+    const fx = FIELD?.legends.find((x) => x.legend === n);
     const c = legendCard(n);
     const r = rec.get(n);
     const plans = planLinks(guides, n);
     return `<article class="mcard">
       <div class="headrow"><h3 style="font-family:var(--f-body);font-weight:600;font-size:18px">${c ? `<button class="cardlink" data-card="${esc(c.c)}">${esc(n)}</button>` : esc(n)}</h3>
-        <span class="num small dim">${f ? pct(f.share) : "—"}</span></div>
+        ${fx?.tier ? `<a class="pill" href="#/meta/${encodeURIComponent(n)}" title="${fx.tierFrom === "results" ? "from Radiance results" : "the experts' grade"}">${fx.tier}</a>` : `<span class="num small dim">—</span>`}</div>
       <div class="dots">${dots(c?.d, 10)}<span class="tiny dim">${esc((c?.d || []).join(" / "))}</span></div>
       <dl>
         <dt class="lbl">You</dt><dd class="num">${r ? `${r.w}–${r.l}${r.d ? `–${r.d}` : ""}` : "no games yet"}</dd>
-        <dt class="lbl">Field</dt><dd>${f ? `${f.conv != null ? `converts ${f.conv.toFixed(2)}` : ""}${f.top8.length ? ` · Top 8: ${f.top8.map((x) => `#${x}`).join(", ")}` : ""}` : "not in Riot's table"}</dd>
+        <dt class="lbl">${esc(SET_NAME[FIELD?.set] || "Field")}</dt><dd>${fx ? `${fx.pilots} pilot${fx.pilots === 1 ? "" : "s"} · ${fx.play.reduce((t, p) => t + (p.top8 || 0), 0)} top 8${fx.flags.includes("Aurora builds: opponent only") ? " · Aurora builds" : ""}` : "—"}</dd>
+        <dt class="lbl">${esc(SET_NAME[FIELD?.lastSet] || "Last set")}</dt><dd class="small dim">${f ? `${pct(f.share)} of Day 1${f.conv != null ? ` · converts ${f.conv.toFixed(2)}` : ""}` : "not in Riot's table"}</dd>
         <dt class="lbl">Plan</dt><dd>${plans.length ? plans.map((p) => `<a href="#/guide/${encodeURIComponent(p.g.slug)}?at=${slugify(p.s)}">${esc(p.g.title.split("—")[0].trim())}</a>`).join("<br>") : `<span class="dim">none yet</span>`}</dd>
       </dl></article>`;
   }).join("");
   return `<section style="display:flex;flex-direction:column;gap:14px">
     <div class="headrow"><h2>Matchups</h2>
-      <span class="small dim">${field ? `Share of Day 1 at ${esc(eventName(field.ev))}, Riot's table · "converts" is Day 2 share ÷ Day 1 share` : "No field table yet"}</span></div>
+      <span class="small dim">${likely ? `The ${esc(SET_NAME[FIELD.set] || FIELD.set)} field you're likely to face, most played first · the letter is its tier now · last set's line is ${field ? esc(eventName(field.ev)) : "Riot's table"}, context` : field ? `Share of Day 1 at ${esc(eventName(field.ev))}, Riot's table · "converts" is Day 2 share ÷ Day 1 share` : "No field table yet"}</span></div>
     <div class="mgrid">${cards}</div></section>`;
 }
 
@@ -1460,14 +1481,15 @@ function viewFind(legend) {
   return `
   <section class="panel">
     <div class="headrow"><h1>Find a deck</h1></div>
-    <p class="note">Results first. <b>Radiance</b> is every legend in the events that have played with the set so far${IDEAS?.era?.allPreRelease ? " — online previews only, until it is legal on " + esc(IDEAS.era.legalFrom) : ""}, each with a consensus list counted from its placed lists and, for some, a Claude build. Below it, Riot's own record of the Vendetta Regional Qualifiers: who brought what on Day 1, how many made Day 2, and the Top 8. <strong>Converts</strong> is Day 2 share ÷ Day 1 share, so above 1.00 the deck beat the room and below it lost to it.</p>
+    <p class="note">The <b>Radiance meta</b> first: every legend by how good it is now and how likely you are to face it. Then <b>Radiance</b> decks: every legend in the events that have played with the set so far${IDEAS?.era?.allPreRelease ? " — online previews only, until it is legal on " + esc(IDEAS.era.legalFrom) : ""}, each with a consensus list counted from its placed lists and, for some, a Claude build. Last, as context, Riot's own record of the Vendetta Regional Qualifiers: who brought what on Day 1, how many made Day 2, and the Top 8. <strong>Converts</strong> is Day 2 share ÷ Day 1 share, so above 1.00 the deck beat the room and below it lost to it.</p>
   </section>
   <section class="panel" style="flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
     <span><b>Archetypes</b> <span class="dim">— what every legend's deck is trying to do, by colour pair, with game plans and matchup notes.</span></span>
     <a class="btn" href="#/archetypes">Browse archetypes</a></section>
+  ${metaPanel(false)}
   ${radianceSection()}
   ${f ? `<section class="panel">
-    <div class="headrow"><h2>${esc(eventName(f.ev))} <span class="lbl">Vendetta</span></h2><span class="small dim">${f.ev.day1} on Day 1 · ${f.ev.day2} on Day 2 · article ${esc(f.ev.published)} · <a href="${esc(f.ev.url)}" target="_blank" rel="noopener">Riot's article</a></span></div>
+    <div class="headrow"><h2>${esc(eventName(f.ev))} <span class="lbl">Vendetta · last set</span></h2><span class="small dim">${f.ev.day1} on Day 1 · ${f.ev.day2} on Day 2 · article ${esc(f.ev.published)} · <a href="${esc(f.ev.url)}" target="_blank" rel="noopener">Riot's article</a></span></div>
     <p class="note">${esc(f.ev.summary || "")}</p>
     <div class="tablewrap"><table class="t">
       <thead><tr><th>Legend</th><th class="r">Day 1</th><th class="r">Share</th><th class="r">Day 2</th><th class="r">Converts</th><th>Top 8</th><th class="r hide-sm">riftbound.gg</th><th class="r">Lists</th></tr></thead>
@@ -1489,6 +1511,82 @@ function viewFind(legend) {
       <td class="r num">${e.day1 ?? "—"}</td><td>${w ? `<a href="#/find/${encodeURIComponent(w.legend)}">${esc(w.legend)}</a>` : "—"}</td><td class="r num">${e.decks.length}</td></tr>`; }).join("")}</tbody></table></div>
     <p class="note">Formats change between events (bans, new sets), so an older event's lists may hold cards that are now banned; the list view flags them.</p>
   </section>`;
+}
+
+/* ── the Radiance meta (data/field.json, scripts/build-field.mjs) ─────────── */
+// Strength down, how likely you are to face it across, so strong-and-likely is the top-left
+// corner. The grid's shape is fixed; only names fill its cells. The tier is how good a legend
+// is NOW: the experts' grades until the handover, the new format's results after it. Last
+// set's record is a "!" mark and a line on the legend's page, never the tier.
+const SET_NAME = { RAD: "Radiance", VEN: "Vendetta" };
+const FIELD_COLS = [["LIKELY", "Likely to face"], ["POSSIBLE", "Possible"], ["RARE", "Rare or unseen"]];
+function fieldPhase() {
+  const H = FIELD.handover || { majors: 0, rqTables: 0 }, S = SET_NAME[FIELD.set] || FIELD.set;
+  return FIELD.phase === "results" ? `Results-led: tiers come from ${S} results, the experts' grades beside them.`
+    : `${FIELD.phase === "early" ? "Early results" : "Forecast"}: the tiers are the experts' grades until Riot's first ${S} RQ table or five ${S} events of ${FIELD.rules.major}+ players (${H.majors} so far). Then results take over.`;
+}
+const winRate = (p) => p.winRate != null ? `${Math.round(p.winRate * 100)}%` : "—";
+const metaHref = (n, pub) => `${pub ? "?view=meta" : ""}#/meta/${encodeURIComponent(n)}`;
+function metaPanel(pub) {
+  if (!FIELD?.legends) return "";
+  const S = SET_NAME[FIELD.set] || FIELD.set, last = SET_NAME[FIELD.lastSet] || FIELD.lastSet;
+  const champs = new Map();
+  for (const x of FIELD.legends) champs.set(champOf(x.legend), (champs.get(champOf(x.legend)) || 0) + 1);
+  const label = (n) => champs.get(champOf(n)) > 1 ? `${champOf(n)} (${n.split(", ")[1]})` : champOf(n);
+  const name = (x) => {
+    const t16 = x.top16.filter((t) => t.kind !== "last").length;
+    const warn = x.flags.filter((f) => f.startsWith(`${FIELD.lastSet} record`) || f.startsWith("experts said"));
+    return `<span class="fitem"><a href="${metaHref(x.legend, pub)}">${esc(label(x.legend))}</a>${x.pilots ? ` <span class="num tiny dim">${x.pilots}p</span>` : ""}${t16 ? ` <span class="num tiny dim">▲${t16}</span>` : ""}${x.flags.includes("Aurora builds: opponent only") ? ` <span class="tiny" title="Aurora builds">◆</span>` : ""}${warn.length ? ` <span class="tiny" style="color:var(--later)" title="${esc(warn.join("; "))}">!</span>` : ""}</span>`;
+  };
+  const inCol = (x, c) => c === "RARE" ? x.group === "RARE" || x.group === "UNKNOWN" : x.group === c;
+  const cell = (tier, c) => FIELD.legends.filter((x) => (x.tier || null) === tier && inCol(x, c))
+    .sort((a, b) => b.pilots - a.pilots || (b.experts?.median ?? 0) - (a.experts?.median ?? 0)).map(name).join("");
+  const tiers = ["S", "A", "B", "C", "D", "F"].filter((t) => FIELD.legends.some((x) => x.tier === t)).concat(FIELD.legends.some((x) => !x.tier) ? [null] : []);
+  const ev = FIELD.events.filter((e) => e.kind !== "last"), hidden = ev.reduce((t, e) => t + (e.hidden || 0), 0);
+  return `<section class="panel">
+    <div class="headrow">${pub ? `<h1>${esc(S)} meta</h1>` : `<h2>${esc(S)} meta</h2>`}<span class="small dim">built ${esc(FIELD.generatedAt)} · ${ev.length} ${esc(S)}-format event${ev.length === 1 ? "" : "s"}${hidden ? ` · ${hidden} hidden lists not counted` : ""}</span></div>
+    ${pub ? `<p class="note">Every legend in the ${esc(S)} format: how good it is now, and how likely you are to meet it. Counts and quotes, not a score, refreshed daily. Online and big events only: local store events almost never record decks.</p>` : ""}
+    <div class="banner ${FIELD.phase === "results" ? "" : "warn"}">${esc(fieldPhase())}</div>
+    <div class="fgrid"><div></div>${FIELD_COLS.map(([, l]) => `<div class="lbl fhead">${l}</div>`).join("")}
+      ${tiers.map((t) => `<div class="ftier">${t || "?"}</div>${FIELD_COLS.map(([c, l]) => { const v = cell(t, c); return `<div class="fcell${v ? "" : " empty"}" data-col="${l}">${v || `<span class="dim">·</span>`}</div>`; }).join("")}`).join("")}</div>
+    <p class="note">Down: how good it is now. Across: how likely you are to face it (likely at 3+ ${esc(S)} pilots, or 5%+ of the last RQs' Day 1). <span class="num">27p</span> = ${esc(S)} pilots · ▲ = top 16s at ${esc(S)} events of ${FIELD.rules.major}+ · ◆ = Aurora builds · <span style="color:var(--later)">!</span> = ${esc(last)}'s record two tiers away, as context · ? = fewer than two experts graded it. Tap a name for the evidence.${pub ? "" : ` Public, read-only: <a href="?view=meta" target="_blank" rel="noopener">${esc(location.host || "rift.jayegger.com")}/?view=meta</a>`}</p>
+  </section>`;
+}
+function viewMetaPage() {
+  if (!FIELD) return `<div class="banner warn">The meta hasn't been built yet.</div>`;
+  return metaPanel(true);
+}
+function viewMetaLegend(name, pub) {
+  const S = SET_NAME[FIELD?.set] || FIELD?.set, last = SET_NAME[FIELD?.lastSet] || FIELD?.lastSet;
+  const back = pub ? `<a class="small" href="?view=meta#/">‹ ${esc(S)} meta</a>` : `<a class="small" href="#/find">‹ Find a deck</a>`;
+  const x = FIELD?.legends.find((l) => l.legend === name);
+  if (!x) return `${back}<div class="banner warn">No ${esc(S || "")} meta entry for ${esc(name)}.</div>`;
+  const c = legendCard(name), e = x.experts, r = x.record;
+  const t16 = x.top16.filter((t) => t.kind !== "last"), t16last = x.top16.length - t16.length;
+  const flags = x.flags.filter((f) => pub ? !f.includes("opponent only") : true);
+  return `<div style="display:flex;flex-direction:column;gap:6px">${back}</div>
+  <section class="panel hero"><h1>${c && !pub ? `<button class="cardlink" data-card="${esc(c.c)}">${esc(name)}</button>` : esc(name)}</h1>
+    <div class="dots">${dots(c?.d)}<span class="small dim">${x.isNew ? `new in ${esc(S)} · ` : ""}${x.tier ? `tier <b>${x.tier}</b> from ${x.tierFrom === "results" ? `${esc(S)} results` : `${e.n} expert grades`}` : "not enough grades for a tier"} · ${esc(FIELD_COLS.find(([k]) => k === (x.group === "UNKNOWN" ? "RARE" : x.group))?.[1] || x.group)}</span></div>
+    ${flags.length ? `<div class="banner warn">${esc(flags.join(" · "))}</div>` : ""}</section>
+  <div class="cols"><section class="panel wide"><h2>${esc(S)}</h2>
+    ${x.results?.E > 0 ? `<p>${x.results.O.toFixed(1)} top finishes against ${x.results.E.toFixed(1)} expected, recent weighted — ×${x.results.ratio.toFixed(2)}${x.results.tier ? ` (${x.results.tier})` : ", too few to read yet"}.</p>` : ""}
+    ${x.play.length ? `<div class="tablewrap"><table class="t"><thead><tr><th>Event</th><th class="r">Players</th><th class="r">Pilots</th><th class="r">Top 8</th><th class="r">Won</th></tr></thead><tbody>
+      ${x.play.map((p) => `<tr><td>${esc(p.ev)}<div class="tiny dim">${esc(p.dt)}${p.kind === "preview" ? " · preview, before the legal date" : ""}${p.partial ? ` · ${esc(p.partial)}` : ""}${p.note ? ` · ${esc(p.note)}` : ""}</div></td><td class="r num">${p.players ?? "—"}</td><td class="r num">${p.pilots}</td><td class="r num">${p.top8 ?? "—"}</td><td class="r num">${winRate(p)}${p.rounds && p.winRate != null ? `<div class="tiny dim">${p.rounds} rds</div>` : ""}</td></tr>`).join("")}</tbody></table></div>
+      <p class="note">"Won" is the share of matches its pilots won. With a handful of pilots it swings a lot: read it with the pilot count, never alone.</p>` : `<p class="note">Not played at any ${esc(S)} event yet.</p>`}
+    ${t16.length ? `<h3>Top 16s at events of ${FIELD.rules.major}+</h3>${t16.map((t) => `<div class="small">#${t.pl} of ${t.players} · ${esc(t.ev)} <span class="dim">${esc(t.dt)}</span></div>`).join("")}` : ""}
+  </section>
+  <section class="side"><section class="panel"><h2>Expert grades</h2>
+    ${e ? `<p class="small dim">Median ${x.expertTier || "—"} from ${e.n} · ${e.agreement === "split" ? "they disagree (the middle half spans more than a tier)" : e.agreement === "thin" ? "too few to call agreement" : "they agree"}</p>` : `<p class="note">No expert has graded it.</p>`}
+    ${x.grades.map((g) => `<div class="small"><b>${esc(g.said)}</b> · <a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.who)}</a> <span class="dim">${esc(g.date)}</span></div>`).join("")}
+    ${x.otherCalls.map((g) => `<div class="small dim">${esc(g.said)} · <a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.who)}</a> (${g.kind === "strength" ? "not a grade" : esc(g.kind)}, not counted)</div>`).join("")}
+    ${!pub && x.jay ? `<div class="small" style="margin-top:8px">Your call: <b>${esc(x.jay)}</b> <span class="dim">(kept apart, graded against theirs)</span></div>` : ""}
+  </section>
+  <section class="panel"><h2>${esc(last)} <span class="lbl">last set · context</span></h2>
+    <p class="small">${x.isNew ? `New in ${esc(S)}: no ${esc(last)} record.` : !r?.d1 ? `No pilots at ${esc(last)}'s RQs.` : `${r.d2} Day 2s from ${r.d1} Day 1 pilots at ${r.rqs} RQs, against ${r.E.toFixed(0)} expected — ×${r.ratio.toFixed(2)}${r.tier ? ` (${r.tier})` : ""} · ${pct(r.share)} of Day 1.`}${t16last ? ` ${t16last} top 16s at ${esc(last)} events of ${FIELD.rules.major}+ in the last ${FIELD.rules.windowDays} days.` : ""}</p>
+    <p class="note">How it did last set. About 60% of a legend's edge survives a new set, so this is a hint, not the tier.</p></section>
+  ${x.aurora ? `<section class="panel"><p class="small">${Math.round(x.aurora * 100)}% of its recent lists run Dazzling Aurora.${pub ? "" : " Those builds are opponent-only for you."}</p></section>` : ""}
+  ${!pub && x.notes.length ? `<section class="panel"><h2>What ${esc(S)} added</h2><p class="note">Card reads, not scored.</p>${x.notes.map((n) => `<div class="small">${n.verified ? "" : `<span class="pill later">unverified</span> `}${esc(n.why)}</div>`).join("")}</section>` : ""}
+  </section></div>`;
 }
 
 function viewLists(legend) {
@@ -2179,6 +2277,7 @@ document.addEventListener("click", (e) => {
   try { await loadData(); }
   catch (e) { $("#view").innerHTML = `<div class="banner bad">${esc(e.message)}</div>`; return; }
   route();
+  if (META) { const s = document.getElementById("sync"); if (s) s.style.display = "none"; return; }
   try { adopt(await pull()); setSync("ok"); }
   catch { setSync(navigator.onLine ? "error" : "offline"); }
   if (SHARE) { route(); return; }
