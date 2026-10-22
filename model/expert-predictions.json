@@ -672,6 +672,26 @@
    }
   },
   {
+   "id": "zelonius-vendetta",
+   "who": "Zelonius - Riftbound (Post-LA Tier List)",
+   "url": "https://www.youtube.com/watch?v=UsMOtD53lGI",
+   "date": "2026-09-29",
+   "kind": "context",
+   "scale": "S–D, Vendetta, spoken",
+   "scope": "existing",
+   "note": "Zelonius's last Vendetta tier list, before Radiance: the same creator's before, for the legends Radiance moved. Only grades said out loud and checked against the captions are recorded.",
+   "p": {
+    "Kennen": "S",
+    "Kai'Sa": "B",
+    "Vex": "A"
+   },
+   "at": {
+    "Kennen": 1010,
+    "Kai'Sa": 1405,
+    "Vex": 1105
+   }
+  },
+  {
    "id": "jayegger-call",
    "who": "Jay Egger (jayegger.com, this post's final list)",
    "url": "https://jayegger.com/blog/riftbound-radiance-preseason-tier-list/",

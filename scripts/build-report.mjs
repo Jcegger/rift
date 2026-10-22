@@ -33,7 +33,7 @@ const CHECKPOINTS = [
 ];
 
 const main = async () => {
-  const [F, X, P] = await Promise.all([read("data/field.json"), read("model/expert-predictions.json"), read("data/preseason.json").catch(() => null)]);
+  const [F, X, P, RISE] = await Promise.all([read("data/field.json"), read("model/expert-predictions.json"), read("data/preseason.json").catch(() => null), read("data/rising.json").catch(() => null)]);
   // Only sources with reach or results (lib/field.mjs counted) appear on the page at all.
   const sources = X.sources.filter((s) => s.id !== "jayegger-call" && counted(s));
   const leftOut = X.sources.filter((s) => s.id !== "jayegger-call" && !counted(s)).length;
@@ -89,6 +89,24 @@ const main = async () => {
   const usedHigh = new Set(high.flatMap((t) => [t.legend, t.id]));
   const low = pick(takes.filter((t) => t.gap <= -1 && !usedHigh.has(t.legend) && !usedHigh.has(t.id)).sort((a, b) => a.gap - b.gap), 2);
 
+  // Older legends Radiance moved: on riftbound.gg's most-buffed list, or a new card in 40%+ of its
+  // posted lists. For each: its Vendetta grade(s) against its Radiance grade, its preview play, and
+  // the cards its lists picked up and cut — inside its own lists (7 days against the 14 before), so
+  // a flood of new legends' lists can't pass for players cutting a card.
+  const buffed = new Set(Object.keys(X.sources.find((s) => s.id === "riftboundgg-buffed")?.p || {}));
+  const MIN_LISTS = 10, ADOPT = 40, SHOW_IN = 20, SHOW_MOVE = 15;
+  const movers = legends.filter((l) => !l.isNew).map((l) => {
+    const r = RISE?.legends?.[l.legend];
+    const enough = r && r.lists.now >= MIN_LISTS && r.lists.before >= MIN_LISTS;
+    const cards = enough ? Object.entries(r.cards).filter(([n]) => !n.includes(",")) : [];
+    const inn = cards.filter(([, v]) => v.rad && v.now >= SHOW_IN && v.now - v.before >= SHOW_MOVE).sort((a, b) => b[1].now - a[1].now).slice(0, 3).map(([n, v]) => ({ card: n, before: v.before, now: v.now }));
+    const out = cards.filter(([, v]) => !v.rad && v.before - v.now >= SHOW_MOVE).sort((a, b) => (b[1].before - b[1].now) - (a[1].before - a[1].now)).slice(0, 2).map(([n, v]) => ({ card: n, before: v.before, now: v.now }));
+    const isBuffed = buffed.has(l.champion) || buffed.has(l.legend);
+    return { legend: l.legend, champion: l.champion, buffed: isBuffed, vendetta: l.context, radiance: l.said.n ? { tier: l.said.tier, n: l.said.n } : null,
+      previews: { pilots: l.previews.pilots, top8: l.previews.top8 }, lists: enough ? r.lists : null, inn, out, qualifies: isBuffed || inn.some((c) => c.now >= ADOPT) };
+  }).filter((m) => m.qualifies && (m.inn.length || m.previews.pilots || m.radiance))
+    .sort((a, b) => b.previews.pilots - a.previews.pilots || (b.inn[0]?.now || 0) - (a.inn[0]?.now || 0));
+
   // "Play this weekend": the creators' S, with top 8s at the previews to show for it.
   const playNow = legends.filter((l) => l.said.tier === "S" && l.previews.top8 >= 2 && !l.aurora)
     .sort((a, b) => b.previews.top8 - a.previews.top8).map((l) => ({ legend: l.legend, top8: l.previews.top8, pilots: l.previews.pilots, builds: l.builds }));
@@ -102,7 +120,7 @@ const main = async () => {
     counts: { sources: calls.length, grades: legends.reduce((t, l) => t + l.said.n, 0), legends: legends.length },
     previews: { events: ev.map((e) => ({ name: e.name, dt: e.dt, players: e.players, hidden: e.hidden || 0, creators: isCreatorEvent(e.name) })), hidden: ev.reduce((t, e) => t + (e.hidden || 0), 0) },
     callouts: { agreed, divided: divided ? { legend: divided.legend, lo: letterOf(Math.min(...divided.said.grades.map((g) => g.value))), hi: letterOf(Math.max(...divided.said.grades.map((g) => g.value))), n: divided.said.n } : null, high, low },
-    playNow,
+    playNow, movers,
     checkpoints: CHECKPOINTS,
     legends,
   };
