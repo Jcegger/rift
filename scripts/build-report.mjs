@@ -33,7 +33,7 @@ const CHECKPOINTS = [
 ];
 
 const main = async () => {
-  const [F, X, P, RISE] = await Promise.all([read("data/field.json"), read("model/expert-predictions.json"), read("data/preseason.json").catch(() => null), read("data/rising.json").catch(() => null)]);
+  const [F, X, P] = await Promise.all([read("data/field.json"), read("model/expert-predictions.json"), read("data/preseason.json").catch(() => null)]);
   // Only sources with reach or results (lib/field.mjs counted) appear on the page at all.
   const sources = X.sources.filter((s) => s.id !== "jayegger-call" && counted(s));
   const leftOut = X.sources.filter((s) => s.id !== "jayegger-call" && !counted(s)).length;
@@ -89,29 +89,55 @@ const main = async () => {
   const usedHigh = new Set(high.flatMap((t) => [t.legend, t.id]));
   const low = pick(takes.filter((t) => t.gap <= -1 && !usedHigh.has(t.legend) && !usedHigh.has(t.id)).sort((a, b) => a.gap - b.gap), 2);
 
-  // What Radiance gave older legends, led by the decks: the Radiance cards each returning legend's
-  // own posted lists took up (riftbound.gg's public deck feed, the last 7 days against the 14
-  // before — data/rising.json), with riftbound.gg's "10 Most Buffed Legends" article as the claim
-  // beside it: the cards it pointed to that the lists haven't taken up yet. (Whether a legend can
-  // win a metal card at an RC is left out: players don't build a legend for one, Jay, 22 Oct 2026.)
-  const CAT = await read("data/cards.json");
+  // What Radiance gave older legends: each returning legend's public lists (data/decks.json,
+  // riftbound.gg's feed) in two eras, legal lists only. Vendetta: posted up to VEN_END, before any
+  // Radiance card existed. Radiance: posted from RAD_FROM with a Radiance card in them (every list
+  // from the legal date). Legal = no card on the current ban list: the last bans (Ekko, Recurrent;
+  // Stacked Deck) date from 18 Sep 2026, before both windows, so "legal now" is "legal when posted"
+  // for every list here, and it drops the old pre-ban decks re-dated into the window (1,107 on
+  // 22 Oct). Added: Radiance cards in ADD%+ of its Radiance lists (they start from zero by
+  // definition). Removed: older cards in OUT_FROM%+ of its Vendetta lists that fell CUT points or
+  // more. Main deck only. A legend needs MIN_LISTS lists in each era, or it's listed as thin.
+  const [DECKS, CAT, BANS] = await Promise.all([read("data/decks.json"), read("data/cards.json"), read("data/banned.json")]);
   const catCards = CAT.cards || CAT;
-  const byCode = new Map(catCards.map((c) => [c.c.split("/")[0], c]));
-  const B = X.sources.find((s) => s.id === "riftboundgg-buffed");
-  const MIN_LISTS = 10, SHOW = 20, GAIN = 15, LEAD = 30;
-  const buffs = legends.filter((l) => !l.isNew).map((l) => {
-    const r = RISE?.legends?.[l.legend];
-    const tipped = (B?.cards?.[l.champion] || []).map((id) => byCode.get(id)?.n).filter(Boolean);
-    if (!r || r.lists.now < MIN_LISTS) return tipped.length ? { champion: l.champion, legend: l.legend, lists: r?.lists.now || 0, took: [], notYet: tipped, why: B?.why?.[l.champion] || null, tippedBy: true, thin: true } : null;
-    // Champion units count only when they aren't the legend's own (Kai'Sa, Rebel in Ahri lists does).
-    const took = Object.entries(r.cards).filter(([n, v]) => v.rad && v.now >= SHOW && v.now - v.before >= GAIN && !n.startsWith(l.champion + ","))
-      .sort((a, b) => b[1].now - a[1].now).slice(0, 3).map(([n, v]) => ({ name: n, before: v.before, now: v.now, tipped: tipped.includes(n) }));
-    const notYet = tipped.filter((n) => !took.some((t) => t.name === n) && (r.cards[n]?.now ?? 0) < SHOW);
-    const tippedBy = tipped.length > 0;
-    if (!took.length && !tippedBy) return null;
-    if (!tippedBy && took[0].now < LEAD) return null;
-    return { champion: l.champion, legend: l.legend, lists: r.lists.now, took, notYet, why: B?.why?.[l.champion] || null, tippedBy, thin: false };
-  }).filter(Boolean).sort((a, b) => (b.took[0]?.now || 0) - (a.took[0]?.now || 0) || b.lists - a.lists);
+  const byShort = new Map(catCards.map((c) => [c.c.split("/")[0], c]));
+  const cardOf = (k) => byShort.get(String(k).split("/")[0]) || null;
+  const bannedNames = new Set((BANS.constructed || []).map((b) => b.name));
+  const radNames = new Set(catCards.filter((c) => c.s === F.set).map((c) => c.n));
+  const VEN_END = "2026-09-29", RAD_FROM = "2026-10-09", MIN_LISTS = 10, ADD = 25, OUT_FROM = 30, CUT = 20;
+  const MAIN = new Set(["Unit", "Spell", "Gear"]);
+  const legendOf = (d) => { const L = cardOf(d.lg); if (!L) return null; const champ = (L.g || []).slice(-1)[0]; const sub = L.n.replace(/ - Starter$/, ""); return F.legends.find((l) => l.legend.split(",")[0] === champ && l.legend.endsWith(sub))?.legend || null; };
+  const eras = new Map();
+  let illegal = 0;
+  for (const d of DECKS.decks || []) {
+    if (!d.dt) continue;
+    const name = legendOf(d);
+    const l = name && legends.find((x) => x.legend === name);
+    if (!l || l.isNew) continue;
+    if (Object.keys(d.cards).some((k) => bannedNames.has(cardOf(k)?.n))) { illegal++; continue; }
+    const main = Object.entries(d.cards).map(([k, q]) => [cardOf(k), q]).filter(([c]) => c && MAIN.has(c.t));
+    const hasRad = main.some(([c]) => radNames.has(c.n));
+    const era = d.dt <= VEN_END ? "ven" : d.dt >= RAD_FROM && (hasRad || d.dt >= F.legalFrom) ? "rad" : null;
+    if (!era) continue;
+    const e = eras.get(name) || { ven: [], rad: [] };
+    e[era].push(main); eras.set(name, e);
+  }
+  const share = (lists) => { const m = new Map(); for (const l of lists) for (const n of new Set(l.map(([c]) => c.n))) m.set(n, (m.get(n) || 0) + 1); return m; };
+  const pc = (k, n) => Math.round(100 * k / n);
+  const older = [...eras].map(([name, e]) => {
+    const l = legends.find((x) => x.legend === name);
+    const enough = e.ven.length >= MIN_LISTS && e.rad.length >= MIN_LISTS;
+    const sv = share(e.ven), sr = share(e.rad);
+    const perDeck = e.rad.length ? e.rad.reduce((t, l2) => t + l2.filter(([c]) => radNames.has(c.n)).reduce((u, [, q]) => u + q, 0), 0) / e.rad.length : 0;
+    const added = [...sr].filter(([n]) => radNames.has(n)).map(([n, k]) => ({ card: n, now: pc(k, e.rad.length) })).filter((x) => x.now >= ADD).sort((a, b) => b.now - a.now).slice(0, 4);
+    const removed = [...sv].filter(([n]) => !radNames.has(n)).map(([n, k]) => ({ card: n, was: pc(k, e.ven.length), now: pc(sr.get(n) || 0, e.rad.length) }))
+      .filter((x) => x.was >= OUT_FROM && x.was - x.now >= CUT).sort((a, b) => (b.was - b.now) - (a.was - a.now)).slice(0, 3);
+    return { champion: l.champion, legend: name, lists: { vendetta: e.ven.length, radiance: e.rad.length }, enough, perDeck: Math.round(perDeck * 10) / 10, added, removed };
+  });
+  const olderShown = older.filter((o) => o.enough && (o.added.length || o.removed.length)).sort((a, b) => b.perDeck - a.perDeck);
+  // Two legends of one champion (Master Yi) are told apart by their epithet.
+  const label = (o) => legends.filter((x) => x.champion === o.champion).length > 1 ? o.legend : o.champion;
+  const olderThin = older.filter((o) => !o.enough && o.lists.radiance > 0).map(label).sort();
 
   // "Play this weekend": the creators' S, with top 8s at the previews to show for it.
   const playNow = legends.filter((l) => l.said.tier === "S" && l.previews.top8 >= 2 && !l.aurora)
@@ -126,7 +152,8 @@ const main = async () => {
     counts: { sources: calls.length, grades: legends.reduce((t, l) => t + l.said.n, 0), legends: legends.length },
     previews: { events: ev.map((e) => ({ name: e.name, dt: e.dt, players: e.players, hidden: e.hidden || 0, creators: isCreatorEvent(e.name) })), hidden: ev.reduce((t, e) => t + (e.hidden || 0), 0) },
     callouts: { agreed, divided: divided ? { legend: divided.legend, lo: letterOf(Math.min(...divided.said.grades.map((g) => g.value))), hi: letterOf(Math.max(...divided.said.grades.map((g) => g.value))), n: divided.said.n } : null, high, low },
-    playNow, buffs, buffSource: B ? { who: B.who, url: B.url, date: B.date } : null,
+    playNow,
+    older: { shown: olderShown, thin: olderThin, illegalDropped: illegal, vendettaUntil: VEN_END, radianceFrom: RAD_FROM, rules: { minLists: MIN_LISTS, add: ADD, outFrom: OUT_FROM, cut: CUT } },
     checkpoints: CHECKPOINTS,
     legends,
   };

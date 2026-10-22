@@ -99,9 +99,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `data/report.json` - the Radiance field report's data for jayegger.com (`scripts/build-report.mjs`):
   what the creators said before release (each legend's grades, callouts for the most agreed, the
   most divided and the boldest calls, with quotes and timestamps from `model/expert-predictions.json`),
-  what the previews showed, the older legends Radiance moved (riftbound.gg's most buffed, or a new
-  card in 40%+ of their lists: Vendetta grade against Radiance grade, preview play, cards in and
-  out), the pre-registered checkpoints, and — after the handover — what happened. It compares voices (the creators' consensus, the previews), never individual creators.
+  what the previews showed, what Radiance gave older legends (Radiance cards per deck, the new
+  cards added and the old ones removed, legal lists only, Vendetta era against Radiance era), the
+  pre-registered checkpoints, and — after the handover — what happened. It compares voices (the creators' consensus, the previews), never individual creators.
 - `data/preseason.json` - the preseason model's ranking (`scripts/build-preseason.mjs`,
   `lib/preseason.mjs`): every legend's builds ranked by observed over expected top finishes
   (Day 2 at RQs, the top quarter at full-field events), a prediction from returning strength
@@ -181,8 +181,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   never fetched again. riftdecks.com is not a source: its robots.txt disallows this kind of tool.
   `--offline` rebuilds from the cache.
 - `scripts/build-report.mjs` - builds `data/report.json` from `data/field.json`,
-  `model/expert-predictions.json`, `data/preseason.json` (the main builds) and `data/rising.json`
-  (the cards each older legend's lists picked up and cut, inside its own lists). Fetches nothing;
+  `model/expert-predictions.json`, `data/preseason.json` (the main builds), and `data/decks.json`
+  with `data/banned.json` for what each older legend's legal Vendetta lists (up to 29 Sep) and
+  legal Radiance lists (from 9 Oct, with a Radiance card) added and removed. Fetches nothing;
   runs after build-field. jayegger.com reads a copy as `src/_data/radianceReport.json`.
 - `scripts/build-preseason.mjs` - builds `data/preseason.json` from data/topdecks.json,
   data/decks.json and `model/preseason-inputs.json`. Fetches nothing; runs after build-rising.
