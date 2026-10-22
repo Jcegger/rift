@@ -519,6 +519,11 @@ const main = async () => {
   const fetched = new Set(decks.map((d) => d.s));
   const carried = prior.filter((d) =>
     d && d.s && !fetched.has(d.s) && d.dt && d.dt >= cutoff && (d.sz || 0) >= MIN_SIZE);
+  // A carried deck's event size comes from today's archive, not from the day it was first
+  // seen. The archive grows: on 22 Oct 2026 it re-walked its pages and gained events that
+  // carried decks already named, and those decks stayed unsized against an archive that now
+  // knew them, which check.mjs rightly blocked. Same join as a fresh deck: exact event name.
+  for (const d of carried) if (d.tour && d.ev) d.ec = eventByName.get(d.ev)?.players || null;
   /* Placeholder lists are not decks. A player keeping a list private until a bigger event
      uploads a stand-in: at NovaRiftbound's Showdown 5 (19 Oct 2026) twelve players, the
      3rd-place Kennen among them, posted the same 39 Spiderlings and a Yasuo, and Nova said
