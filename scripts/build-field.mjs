@@ -24,7 +24,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 import { indexCatalog } from "../lib/decks.mjs";
 import { NEVER_PLAY } from "../lib/avoid.mjs";
-import { gradeFor, consensus, recordRatio, recordTier, disagreement, groupOf, handedOver, resultsRatio, LETTERS, DISAGREE_TIERS, MIN_E, FORMAT_FROM } from "../lib/field.mjs";
+import { gradeFor, counted, consensus, recordRatio, recordTier, disagreement, groupOf, handedOver, resultsRatio, LETTERS, DISAGREE_TIERS, MIN_E, FORMAT_FROM } from "../lib/field.mjs";
 
 const RA = "https://riftatlas.com";
 const DOTGG = "https://api.dotgg.gg/cgfw/gettournament?game=riftbound&slug=";
@@ -270,7 +270,8 @@ const main = async () => {
   const resolve = (k) => legendSet.has(k) ? k : (legends.filter((n) => n.split(",")[0] === k).length === 1 ? legends.find((n) => n.split(",")[0] === k) : null);
   const grades = new Map(legends.map((n) => [n, []]));
   const jay = new Map(), other = new Map(legends.map((n) => [n, []]));
-  for (const s of experts.sources) for (const [k, g] of Object.entries(s.p || {})) {
+  const left = experts.sources.filter((s) => s.id !== "jayegger-call" && !counted(s));
+  for (const s of experts.sources.filter((s) => s.id === "jayegger-call" || counted(s))) for (const [k, g] of Object.entries(s.p || {})) {
     const n = resolve(k); if (!n) continue;
     if (s.id === "jayegger-call") { jay.set(n, g); continue; }
     const v = s.kind === "strength" ? gradeFor(g, s.scale) : null;
@@ -347,6 +348,8 @@ const main = async () => {
     handover: { rqTables: seasonRQ.length, majors: seasonMajors.length },
     note: "Counts and quotes, no score (lib/field.mjs). TIER is the experts' median grade; RECORD is last format's RQ Day 2 conversion and top-16s at 40+ player events; PLAY is the new format's events. Placeholder lists count as hidden, never as a legend.",
     rules: { minPlayers: MIN_PLAYERS, major: MAJOR, windowDays: WINDOW_DAYS },
+    // Sources below the reach rule (lib/field.mjs counted): named here, not counted anywhere.
+    leftOut: left.map((s) => ({ id: s.id, who: s.who, reach: s.reach })),
     sources: { rq: rq.map((e) => e.title), events: events.length, newFormat: newFormat.length, majors: majors.length, fetched: log.fetched, cached: log.cached, failed: log.failed.length },
     legends: out,
     events: events.sort((a, b) => b.dt.localeCompare(a.dt)),

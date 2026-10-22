@@ -12,7 +12,7 @@
 // main builds, from lib/builds.mjs).
 
 import { readFile, writeFile } from "node:fs/promises";
-import { letterOf } from "../lib/field.mjs";
+import { letterOf, counted, REACH } from "../lib/field.mjs";
 
 const read = async (p) => JSON.parse(await readFile(new URL(`../${p}`, import.meta.url), "utf8"));
 const r2 = (x) => Math.round(x * 100) / 100;
@@ -34,7 +34,9 @@ const CHECKPOINTS = [
 
 const main = async () => {
   const [F, X, P] = await Promise.all([read("data/field.json"), read("model/expert-predictions.json"), read("data/preseason.json").catch(() => null)]);
-  const sources = X.sources.filter((s) => s.id !== "jayegger-call");
+  // Only sources with reach or results (lib/field.mjs counted) appear on the page at all.
+  const sources = X.sources.filter((s) => s.id !== "jayegger-call" && counted(s));
+  const leftOut = X.sources.filter((s) => s.id !== "jayegger-call" && !counted(s)).length;
   // Context sources (a previous format's tier list) inform the rows but are not Radiance calls.
   const calls = sources.filter((s) => s.kind !== "context");
   const byId = new Map(sources.map((s) => [s.id, s]));
@@ -96,6 +98,7 @@ const main = async () => {
     generatedAt: F.generatedAt, set: F.set, legalFrom: F.legalFrom, phase: F.phase, handover: F.handover,
     frozen: X.collected,
     sources: sources.map((s) => ({ id: s.id, who: s.who, url: s.url, date: s.date, kind: s.kind, scale: s.scale, scope: s.scope, note: s.note || null, panel: s.panel || [] })),
+    rule: { reach: REACH, leftOut },
     counts: { sources: calls.length, grades: legends.reduce((t, l) => t + l.said.n, 0), legends: legends.length },
     previews: { events: ev.map((e) => ({ name: e.name, dt: e.dt, players: e.players, hidden: e.hidden || 0, creators: isCreatorEvent(e.name) })), hidden: ev.reduce((t, e) => t + (e.hidden || 0), 0) },
     callouts: { agreed, divided: divided ? { legend: divided.legend, lo: letterOf(Math.min(...divided.said.grades.map((g) => g.value))), hi: letterOf(Math.max(...divided.said.grades.map((g) => g.value))), n: divided.said.n } : null, high, low },

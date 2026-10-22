@@ -68,6 +68,12 @@
     "Lux": "F",
     "Shen": "F",
     "Renata Glasc": "F"
+   },
+   "reach": {
+    "subscribers": 9120,
+    "views": 28760,
+    "asOf": "2026-10-22",
+    "via": "https://www.youtube.com/watch?v=xzmRYzsrCZY"
    }
   },
   {
@@ -146,7 +152,12 @@
      "result": "won RQ Barcelona and made the top 8 at RQ Los Angeles, both on Ornn",
      "source": "Riot's Top Decks articles (data/topdecks.json)"
     }
-   ]
+   ],
+   "reach": {
+    "subscribers": null,
+    "views": 54160,
+    "asOf": "2026-10-22"
+   }
   },
   {
    "id": "takolandia",
@@ -185,7 +196,12 @@
      "result": "finished 5th at RQ Barcelona on Kennen",
      "source": "Riot's Top Decks articles (data/topdecks.json)"
     }
-   ]
+   ],
+   "reach": {
+    "subscribers": 503,
+    "views": 2491,
+    "asOf": "2026-10-22"
+   }
   },
   {
    "id": "digi-slots",
@@ -215,6 +231,17 @@
     "Ekko": "2.5",
     "Seraphine": "2.5",
     "Yasuo": "2.5"
+   },
+   "reach": {
+    "subscribers": 2190,
+    "views": 1665,
+    "asOf": "2026-10-22"
+   },
+   "at": {
+    "Ziggs": 1322
+   },
+   "quotes": {
+    "Ziggs": "[Ziggs] is as well for me tier two… I think he stays in tier two, 100 percent, right now."
    }
   },
   {
@@ -236,6 +263,11 @@
     "K'Sante": "7",
     "Ekko": "8",
     "Seraphine": "9"
+   },
+   "reach": {
+    "subscribers": 3620,
+    "views": 17507,
+    "asOf": "2026-10-22"
    }
   },
   {
@@ -257,6 +289,11 @@
     "K'Sante": "C",
     "Ekko": "C",
     "Seraphine": "D"
+   },
+   "reach": {
+    "subscribers": null,
+    "views": 11436,
+    "asOf": "2026-10-22"
    }
   },
   {
@@ -278,6 +315,11 @@
     "Mordekaiser": "B",
     "Ziggs": "C",
     "Seraphine": "C"
+   },
+   "reach": {
+    "subscribers": 11500,
+    "views": 15038,
+    "asOf": "2026-10-22"
    }
   },
   {
@@ -305,6 +347,11 @@
    "quotes": {
     "K'Sante": "I am a little bit controversially hot on K'Sante… I'd be comfortable putting him in A and letting myself eat my words later if I'm wrong.",
     "Orianna": "I guess I'd put her in C, unless you disagree. — No, I don't disagree."
+   },
+   "reach": {
+    "subscribers": null,
+    "views": 801,
+    "asOf": "2026-10-22"
    }
   },
   {
@@ -329,6 +376,11 @@
    },
    "quotes": {
     "Riven": "I'm not going to give something S tier until it's proved itself… I think Riven's gonna be the best legend of the set."
+   },
+   "reach": {
+    "subscribers": 294,
+    "views": 3882,
+    "asOf": "2026-10-22"
    }
   },
   {
@@ -356,6 +408,11 @@
    },
    "quotes": {
     "Jarvan IV": "Looking at Jarvan I go, I think Ambessa is better than this… which is a real shame, because I was looking forward to playing him."
+   },
+   "reach": {
+    "subscribers": 807,
+    "views": 643,
+    "asOf": "2026-10-22"
    }
   },
   {
@@ -404,6 +461,17 @@
    "said": {
     "Jarvan IV": "'zwischen Oriana und Echo' — between Orianna and Ekko, both B",
     "Seraphine": "'wahrscheinlich die schlechteste Legend in ganz Radiance'"
+   },
+   "reach": {
+    "subscribers": 4440,
+    "views": 772,
+    "asOf": "2026-10-22"
+   },
+   "at": {
+    "K'Sante": 775
+   },
+   "quotes": {
+    "K'Sante": "He's got really good colours, orange-green is just very, very strong… You'll probably always play Master Yi over K'Sante. But I actually think he's low A. (translated from German)"
    }
   },
   {
@@ -433,6 +501,11 @@
    },
    "quotes": {
     "Ekko": "I'm putting Ekko in A. I think people are rating him really, really badly, and he's not that bad… It's the legend I want to play. (translated from Spanish)"
+   },
+   "reach": {
+    "subscribers": 33,
+    "views": 22,
+    "asOf": "2026-10-22"
    }
   },
   {
@@ -459,6 +532,11 @@
     "Riven": "'the best legend of the set is Riven ... going into the A tier'",
     "Ziggs": "'my top pick for the Btier'",
     "Seraphine": "'the legend I think is the worst of the set'"
+   },
+   "reach": {
+    "subscribers": 248,
+    "views": 396,
+    "asOf": "2026-10-22"
    }
   },
   {
@@ -487,6 +565,11 @@
    "quotes": {
     "Jarvan IV": "It gives you movement, and that's really broken. (translated from Spanish)",
     "Seraphine": "When I saw her I was sad… but the more I've seen, the more synergy and potential I see. (translated from Spanish)"
+   },
+   "reach": {
+    "subscribers": 398,
+    "views": 1872,
+    "asOf": "2026-10-22"
    }
   },
   {
@@ -505,6 +588,11 @@
     "Jarvan IV": "2/5",
     "K'Sante": "1/5",
     "Seraphine": "1/5"
+   },
+   "reach": {
+    "subscribers": 10300,
+    "views": 29881,
+    "asOf": "2026-10-22"
    }
   },
   {
@@ -518,6 +606,11 @@
    "note": "A gameplay video titled 'This Is The BEST LEGEND In Radiance'; the pick is the title's, not a ranking.",
    "p": {
     "Orianna": "best legend"
+   },
+   "reach": {
+    "subscribers": null,
+    "views": 16713,
+    "asOf": "2026-10-22"
    }
   },
   {
