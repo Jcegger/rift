@@ -714,6 +714,47 @@ section('The preseason model');
     ok('every expert call is sourced, dated and names one legend', !bad.length,
        bad.slice(0, 4).join('; ') || `${X.sources.reduce((t, s) => t + Object.keys(s.p).length, 0)} calls`);
   }
+  // data/field.json: the field forecast (build-field.mjs, lib/field.mjs). Each assertion is a
+  // way it went wrong while it was built, 22 Oct 2026.
+  let FD = null;
+  try { FD = read('data/field.json'); } catch { /* reported below */ }
+  if (!FD) ok('field forecast present', false, 'data/field.json missing — run build-field.mjs');
+  else {
+    const { gradeOf, consensus, MIN_E } = await import('../lib/field.mjs');
+    const AR = (() => { try { return read('data/archetypes.json'); } catch { return null; } })();
+    ok('the field covers every legend', !AR || AR.legends.every((l) => FD.legends.some((x) => x.legend === l.name)), `${FD.legends.length} legends`);
+    // Placeholders: Rift Atlas filed Showdown 5's 12 hidden lists as "Yasuo, 12 players".
+    const leak = [];
+    for (const e of FD.events.filter((e) => e.hidden)) for (const n of e.hiddenAs) {
+      const x = FD.legends.find((l) => l.legend === n);
+      if (x?.play.some((p) => p.ev === e.name && (p.top8 != null || p.winRate != null))) leak.push(`${n} at ${e.name}: placeholder top 8s or win rate`);
+      if (x?.top16.some((t) => t.ev === e.name)) leak.push(`${n} at ${e.name}: a placeholder's placing`);
+    }
+    ok('no placeholder list is counted as a legend', !leak.length, leak.slice(0, 3).join('; ') || `${FD.events.reduce((t, e) => t + (e.hidden || 0), 0)} hidden`);
+    // Every tier is the experts' median, recomputed here from the hand-written file.
+    const Xs = read('model/expert-predictions.json').sources.filter((s) => s.kind === 'strength' && s.id !== 'jayegger-call');
+    const names = FD.legends.map((l) => l.legend);
+    const res = (k) => names.includes(k) ? k : names.filter((n) => n.split(',')[0] === k).length === 1 ? names.find((n) => n.split(',')[0] === k) : null;
+    const off = FD.legends.filter((x) => {
+      const v = Xs.flatMap((s) => Object.entries(s.p).filter(([k]) => res(k) === x.legend).map(([, g]) => gradeOf(g))).filter((g) => g != null);
+      const c = consensus(v);
+      const expert = c && c.n >= 2 ? c.tier : null;
+      // Before the handover a tier is the experts' median; after it, a deep-enough results tier.
+      if (x.tierFrom === 'results') return !(FD.phase === 'results' && x.results?.tier === x.tier && x.results.E >= MIN_E);
+      return expert !== x.tier || (x.tier && x.tierFrom !== 'experts');
+    }).map((x) => x.legend);
+    ok('every tier is the experts\' median grade or, after the handover, a deep-enough result', !off.length, off.slice(0, 4).join(', ') || `${FD.legends.filter((x) => x.tier).length} tiered (${FD.phase})`);
+    // How good a legend is NOW: last set's record never sets a tier (Jay, 22 Oct 2026).
+    ok('last set\'s record never sets a tier', FD.legends.every((x) => [null, 'experts', 'results'].includes(x.tierFrom)));
+    // Kennen's 43% at Showdown 5 must never move it: only a big-sample record flags.
+    const thinFlag = FD.legends.filter((x) => x.flags.some((f) => f.startsWith(`${FD.lastSet} record`)) && !(x.record?.E >= MIN_E)).map((x) => x.legend);
+    ok('no legend is flagged on a thin sample', !thinFlag.length, thinFlag.join(', ') || 'flags rest on records');
+    const team = FD.events.filter((e) => /\b(2v2|team|trios)\b/i.test(e.name)).map((e) => e.name);
+    ok('only one-on-one events are read', !team.length, team.slice(0, 2).join('; ') || `${FD.events.length} events`);
+    const prize = FD.events.filter((e) => e.kind === 'preview' && ![...(e.meta || []), ...e.standings].some((s) => s.legend && FD.legends.find((l) => l.legend === s.legend)?.isNew)).map((e) => e.name);
+    ok('a preview event is one the new legends played', !prize.length, prize.slice(0, 2).join('; ') || `${FD.events.filter((e) => e.kind === 'preview').length} previews`);
+    ok('Aurora builds are flagged opponent-only in the field', FD.legends.some((x) => x.legend.startsWith('Jayce') && x.flags.includes('Aurora builds: opponent only')));
+  }
   if (!P) ok('preseason snapshot present', false, 'data/preseason.json missing — run build-preseason.mjs');
   else {
     const legends = new Set(P.builds.map((b) => b.legend));

@@ -61,7 +61,9 @@ const main = async () => {
     kept = Array.isArray(prev.events) ? prev.events : [];
   } catch { /* first run */ }
   const key = (e) => e.slug || `${e.name}|${e.dt}`;
-  const have = new Set(kept.map(key));
+  // A row counts as had once it carries its top legends too (added 22 Oct 2026), so the
+  // first crawl after that change re-walks the pages upstream still serves to fill them in.
+  const have = new Set(kept.filter((e) => Array.isArray(e.top)).map(key));
 
   /* The workflow runs this twice: once as a source, and again after build-decks so the
      coverage figures see the new snapshot. That second pass used to be "cheap, one
@@ -119,6 +121,10 @@ const main = async () => {
       winner: e.winner_name || null,
       country: e.winner_country || null,
       slug: e.slug || null,
+      // Upstream's most-played legends at the event, up to six, as [legend code, players]:
+      // build-field.mjs reads it to find the new format's events before their names say so
+      // (League Cup #4 — Cycle 3 ran Radiance with no "Radiance" in its name).
+      top: Array.isArray(e.top_legends) ? e.top_legends.filter((l) => l?.key).map((l) => [String(l.key), int(l.n)]) : [],
     }))
     .filter((e) => e.name && e.dt);
 

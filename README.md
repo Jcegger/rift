@@ -46,7 +46,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   are not decks; they sit apart in `hidden` (slug, event, place, date), so a field can say how many
   of its lists are unknown, and count for no legend anywhere.
 - `data/banned.json` - cards banned from sanctioned Constructed play.
-- `data/events.json` - the tournament archive, with player counts and coverage.
+- `data/events.json` - the tournament archive, with player counts and coverage, and each event's
+  most-played legends (`top`, up to six) — how `build-field.mjs` finds the new format's events.
 - `data/news.json` - riftbound.gg's posts (title, date, tag, link) and, under `riot`,
   Riot's own news from playriftbound.com with its one-line summaries.
 - `data/tiers.json` - riftbound.gg's weekly Tier 1-5 list, per Legend, scraped.
@@ -77,6 +78,24 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   closely and moves first — and the scoreboard for the brews' suggestions.
   `scripts/rift rising [legend]`; idea pages show "Moving this week"; `scripts/rift tune`
   shows the trend beside each suggestion.
+- `data/field.json` - the field forecast (`scripts/build-field.mjs`, `lib/field.mjs`): for every
+  legend, how good it is NOW and who plays it in the new format — counts and quotes, never one
+  score, refreshed daily. TIER is the median of the experts' published grades
+  (`model/expert-predictions.json`; letters and tier numbers count, a rank or a card score does
+  not) until the HANDOVER — Riot's first RQ table in the new format, or five 40+ player events
+  since the legal date — and from then on the new format's results (top 8s against pilots, Day 2
+  against Day 1, halving every 14 days) wherever they are deep enough, with the experts' grade
+  as the cross-check. Last set's record never sets a tier; it is one labelled column of context
+  (Jay, 22 Oct 2026: "the idea was how they'll be NOW"). RECORD is last format's RQ Day 2 rate against an average deck and its share of Day 1,
+  plus top-16 finishes at 40+ player one-on-one events in 60 days. PLAY is the new format's
+  events: pilots, top 8s and match win rates, each with its count. A record two tiers from the
+  experts' (on 5+ expected Day 2s) is flagged; a preview sample never flags anything, because
+  Kennen's 43% across 14 Showdown 5 pilots was the field teching against the most-played deck,
+  not Kennen being weak. Placeholder lists are counted as hidden at every source (Rift Atlas
+  files them under Yasuo). Built on the Vendetta backtest in `model/expert-backtest.json`.
+  `scripts/rift field` (what you will face) · `field --tiers` · `field <legend>` (the evidence,
+  with the card reads as notes) · `field --for <legend>` (a gauntlet of the LIKELY field, with
+  that legend's matchup guides).
 - `data/preseason.json` - the preseason model's ranking (`scripts/build-preseason.mjs`,
   `lib/preseason.mjs`): every legend's builds ranked by observed over expected top finishes
   (Day 2 at RQs, the top quarter at full-field events), a prediction from returning strength
@@ -147,6 +166,14 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   legend's lists from all of them, which is how `lib/blind.test.mjs` builds blind.
 - `scripts/build-rising.mjs` - builds `data/rising.json` and adds to `data/swaplog.json`.
   Fetches nothing; runs after build-brews.
+- `scripts/build-field.mjs` - builds `data/field.json` from Rift Atlas event pages (riftatlas.com,
+  data from TopDeck.gg: metagame with win rates, top 32 with legends; robots allows the pages),
+  riftbound.gg's single-tournament standings (`gettournament`, each player's legend, usually the
+  top half) and the files above. Fetches the majors, the new format's events and any event whose
+  top legends include a new-set legend — not all 871 store events — biggest and newest-format
+  first, 3s and 2s apart, at most 60 pages a run; finished events are cached in the output and
+  never fetched again. riftdecks.com is not a source: its robots.txt disallows this kind of tool.
+  `--offline` rebuilds from the cache.
 - `scripts/build-preseason.mjs` - builds `data/preseason.json` from data/topdecks.json,
   data/decks.json and `model/preseason-inputs.json`. Fetches nothing; runs after build-rising.
   The prior blends last-format strength and POPULARITY for an established legend — 80/20
@@ -173,6 +200,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   and the split survives resampling. 18 of 58 legends split (Yasuo's Spiderlings, Jayce's
   Aurora ramp against a Porobot gear deck). Riot's RQ tables count legends, not builds, so a
   build's own strength comes from full-field events only.
+- `lib/field.mjs` - the field forecast's rules on one page: how a grade is read, agreement on
+  the middle half of the grades, the record's tiers, when a record is flagged, the LIKELY /
+  POSSIBLE / RARE / UNKNOWN groups, and each format's legal date. Tests: `lib/field.test.mjs`.
 - `lib/preseason.mjs` - the model's maths, one scale (ln observed/expected), every constant
   with its reason; a starting guess to be recalibrated from the scorecard. Tests:
   `lib/preseason.test.mjs`.
@@ -597,7 +627,13 @@ final place and record, and the per-round standings, which carry each player's
 unrecorded legend prints as unrecorded. `--scout <ids…>` cross-references the event's
 players against other events by locator user id, and `--scout-near [miles]` finds every
 Summoner Skirmish within that radius over the previous 60 days through the locator's own
-search and prints the recorded local meta. Nothing is cached or committed. Requests are
+search and prints the recorded local meta. Nothing is cached or committed.
+**How much it records, measured 22 Oct 2026** within 15 miles of Sip & Play over 60 days: 387
+finished Riftbound events at 49 stores, 4,106 player entries, and a legend recorded for **149
+(4%)** — all at Summoner Skirmishes (about a fifth of Skirmish players, at 8 stores; Sip & Play
+recorded none in 17 events), none at a Nexus Night. Too thin for a local meta, and why
+`data/field.json` reads the online and global field; what the locator is good for is scouting a
+registered field by player. Requests are
 paced at half a second and back off on 429, so a 58-event scout takes about two minutes.
 
 **Power is in the catalog.** Riot's feed carries it, and `build-catalog.mjs` writes it as

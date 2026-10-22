@@ -84,7 +84,7 @@ identical lists of 39 Spiderlings at a Radiance preview were players hiding thei
 and read as a deck they made Yasuo a top legend for a day (`isPlaceholder`, 22 Oct 2026).
 
 **A single failing source keeps its last-good file and the run stays green.** So read the
-summary line — `Sources rebuilt: N of 9` — on successful runs too. A source that quietly
+summary line — `Sources rebuilt: N of 10` — on successful runs too. A source that quietly
 fails every day is a failure waiting for its shelf life to expire.
 
 **Be polite to upstream.** Several builders share one host and will rate-limit each

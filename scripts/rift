@@ -13,6 +13,7 @@
 #   scripts/rift tune <your deck>                      # reasoned swaps for one of your decks (read only)
 #   scripts/rift rising [legend]                       # cards each legend's lists are taking up; the swap scoreboard
 #   scripts/rift poll [legend]                         # the preseason model: every build ranked, and why
+#   scripts/rift field [--tiers | <legend> | --for <legend>]  # what you will face: experts, record, play
 #   scripts/rift event <locator id>                    # a store event: standings + legends
 #   scripts/rift intake [champion]                     # after scanning new cards: what landed, where to file it
 #

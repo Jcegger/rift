@@ -941,6 +941,117 @@ ${pad(String(x.rank), 3)}${name(x)} · ${x.tier ? `${x.tier} tier · ` : ""}×${
   }
 }
 
+// field: what Jay will face and how good it is (data/field.json, lib/field.mjs). Counts and
+// quotes, no score: the tier is the experts' median grade, the record and the new format's
+// play sit beside it, and a thin sample is shown with its count, never used to move a tier.
+async function cmdField(args) {
+  const F = await readJson(url("field.json")).catch(() => null);
+  if (!F) { console.error("no data/field.json — run node scripts/build-field.mjs"); process.exit(1); }
+  const tiersView = args.includes("--tiers");
+  const forAt = args.indexOf("--for");
+  const forQ = forAt > -1 ? args.slice(forAt + 1).join(" ").toLowerCase() : "";
+  const q = args.filter((a, i) => !a.startsWith("--") && (forAt < 0 || i < forAt)).join(" ").toLowerCase();
+  const short = (n) => n.split(",")[0];
+  const pct = (x) => x == null ? "—" : `${Math.round(x * 100)}%`;
+  const newFmt = F.events.filter((e) => e.kind !== "last");
+  const hidden = newFmt.reduce((t, e) => t + (e.hidden || 0), 0);
+  // The new format's evidence leads; last set's record is one labelled column at the end.
+  const top16 = (x) => { const n = x.top16.filter((t) => t.kind !== "last").length; return n ? String(n) : "—"; };
+  const rec = (x) => x.isNew ? "new" : !x.record?.d1 ? "0 pilots" : x.record.tier ? `${x.record.tier} ${pct(x.record.share)}` : `thin ${pct(x.record.share)}`;
+  const exp = (x) => !x.tier ? `? ${x.experts ? `${x.experts.n}×` : "no grades"}` : x.tierFrom === "results" ? `${x.tier} results` : `${x.tier} ${x.experts.n}× ${x.experts.agreement}`;
+  const play = (x) => x.pilots ? `${x.pilots}p ${x.play.reduce((t, p) => t + (p.top8 || 0), 0)}t8` : "—";
+  const flags = (x) => x.flags.length ? `  [${x.flags.join("; ")}]` : "";
+  const H = F.handover || { rqTables: 0, majors: 0 };
+  const phase = F.phase === "results" ? "RESULTS-LED: tiers from " + F.set + " results, experts as the cross-check"
+    : `${F.phase === "early" ? "EARLY RESULTS" : "a FORECAST"}: tiers are the experts' until the first ${F.set} RQ table or 5 ${F.set} events of ${F.rules.major}+ (${H.majors} so far)`;
+  console.log(`FIELD · ${F.set}, legal ${F.legalFrom} · built ${F.generatedAt} · ${phase}
+  ${newFmt.length} ${F.set}-format events (${newFmt.map((e) => `${e.name.slice(0, 24)} ${e.players}`).join(" · ")})${hidden ? ` · ${hidden} placeholder lists counted as hidden, not as a legend` : ""}
+  tier = ${F.phase === "results" ? `${F.set} results where deep enough, else ` : ""}the experts' median grade · top16 = ${F.set} finishes at ${F.rules.major}+ player events · play = ${F.set} pilots and top 8s · ${F.lastSet} = last set's RQ record and Day 1 share, context only`);
+  const head = () => console.log(`  ${pad("legend", 30)} ${pad("tier", 14)} ${pad("top16", 6)} ${pad("play", 9)} ${pad("group", 9)} ${F.lastSet}`);
+  const row = (x) => console.log(`  ${pad(x.legend.slice(0, 29), 30)} ${pad(exp(x), 14)} ${pad(top16(x), 6)} ${pad(play(x), 9)} ${pad(x.group, 9)} ${pad(rec(x), 9)}${flags(x)}`);
+  const order = ["S", "A", "B", "C", "D", "F"];
+  const nTop16 = (x) => x.top16.filter((t) => t.kind !== "last").length;
+  const byTier = (a, b) => order.indexOf(a.tier) - order.indexOf(b.tier) || (b.experts?.median ?? 0) - (a.experts?.median ?? 0) || nTop16(b) - nTop16(a) || b.pilots - a.pilots;
+
+  if (forQ) {
+    const me = F.legends.find((x) => x.legend.toLowerCase().includes(forQ));
+    if (!me) { console.log(`\nno legend matching "${forQ}"`); return; }
+    const guides = await guideHeadings();
+    const mine = short(me.legend).toLowerCase().replace(/[^a-z0-9]/g, "");
+    const opp = F.legends.filter((x) => x.group === "LIKELY" && x !== me).sort((a, b) => b.pilots - a.pilots || (b.record?.share || 0) - (a.record?.share || 0));
+    console.log(`\nGAUNTLET for ${me.legend} — the LIKELY field, most played first`);
+    for (const x of opp) {
+      // Only guides written for the legend being prepared (its file is named after it).
+      const g = guides.filter((h) => h.file.includes(mine) && h.text.includes(short(x.legend))).map((h) => h.file);
+      console.log(`  ${pad(x.legend.slice(0, 32), 33)} ${pad(play(x), 9)} ${pad(pct(x.record?.share), 5)} tier ${x.tier || "?"}  ${g.length ? `guide: ${[...new Set(g)].join(", ")}` : "no matchup guide"}${x.flags.includes("Aurora builds: opponent only") ? "  (Aurora builds)" : ""}`);
+    }
+    return;
+  }
+
+  const hits = q ? F.legends.filter((x) => x.legend.toLowerCase().includes(q)) : [];
+  if (q && hits.length) {
+    for (const x of hits.slice(0, 2)) {
+      console.log(`\n${x.legend}${x.isNew ? ` · new in ${F.set}` : ""} · tier ${x.tier || "not enough grades"} · ${x.group}${flags(x)}`);
+      const e = x.experts;
+      console.log(`  EXPERTS  ${e ? `median ${e.median.toFixed(2)} (${x.tier || "?"}) from ${e.n}, middle half ${e.q1.toFixed(1)}–${e.q3.toFixed(1)}, range ${e.lo.toFixed(1)}–${e.hi.toFixed(1)} · ${e.agreement}` : "none graded it"}`);
+      for (const g of x.grades) console.log(`    ${pad(g.id, 22)} ${g.said}`);
+      for (const g of x.otherCalls) console.log(`    ${pad(g.id, 22)} ${g.said}  (${g.kind === "strength" ? "not a grade" : g.kind}, not counted)`);
+      if (x.jay) console.log(`    ${pad("your call", 22)} ${x.jay}  (kept apart, graded against the experts)`);
+      if (x.results?.E > 0) console.log(`  RESULTS  ${x.results.O.toFixed(1)} top finishes against ${x.results.E.toFixed(1)} expected in ${F.set}, recent weighted — ×${x.results.ratio.toFixed(2)}${x.results.tier ? ` (${x.results.tier})` : ", too few to read yet"}${x.tierFrom === "results" ? " · sets the tier" : ""}`);
+      const r = x.record;
+      console.log(`  ${pad(F.lastSet, 8)} ${x.isNew ? "new legend, no last format" : !r.d1 ? `no pilots at last format's ${r.rqs} RQs` : `${r.d2} Day 2s from ${r.d1} Day 1 pilots at ${r.rqs} RQs, against ${r.E.toFixed(0)} expected — ×${r.ratio.toFixed(2)}${r.tier ? ` (${r.tier})` : ", too few to read"} · ${pct(r.share)} of Day 1`}`);
+      const t = x.top16.filter((f) => f.kind !== "last"), tl = x.top16.length - t.length;
+      console.log(`  TOP 16   ${t.length} at ${F.set} events of ${F.rules.major}+ players${t.length ? ":" : ""}${tl ? `  (and ${tl} at ${F.lastSet} events in the last ${F.rules.windowDays} days — last set's, context only)` : ""}`);
+      for (const f of t.slice(0, 8)) console.log(`    ${f.dt} ${pad(`#${f.pl}`, 4)} of ${pad(f.players, 5)} ${f.ev.slice(0, 60)}${f.kind === "preview" ? "  (preview)" : ""}`);
+      if (t.length > 8) console.log(`    … ${t.length - 8} more`);
+      console.log(`  ${pad(F.set, 8)} ${x.pilots ? `${x.pilots} pilots:` : "not played at any event yet"}`);
+      for (const p of x.play) console.log(`    ${p.dt} ${pad(p.pilots + "p", 4)} ${p.top8 != null ? `${p.top8} top 8` : "top 8 —"}  ${p.winRate != null ? `${pct(p.winRate)} of matches (${p.rounds} rounds)` : ""} ${p.ev.slice(0, 50)} (${p.players})${p.partial ? ` · ${p.partial}` : ""}${p.note ? ` · ${p.note}` : ""}`);
+      if (x.aurora) console.log(`  AURORA   ${pct(x.aurora)} of its recent lists run Dazzling Aurora — those are opponent-only (lib/avoid.mjs)`);
+      if (x.notes.length) {
+        console.log(`  RADIANCE ADDED  card reads, not scored (model/preseason-inputs.json):`);
+        for (const n of x.notes) console.log(`    ${n.verified ? "verified  " : "unverified"} ${n.why}`);
+      }
+    }
+    return;
+  }
+
+  if (tiersView) {
+    console.log(`\nTIERS — ${F.phase === "results" ? `${F.set} results, experts beside them` : `the experts' grades, ${F.set} play beside them`}; "${F.lastSet} record: X" marks last set's record two tiers away, as context`);
+    head();
+    let t = null;
+    for (const x of F.legends.filter((x) => x.tier).sort(byTier)) {
+      if (x.tier !== t) { t = x.tier; console.log(`\n  ${t}`); }
+      row(x);
+    }
+    const thin = F.legends.filter((x) => !x.tier);
+    if (thin.length) { console.log(`\n  NOT ENOUGH GRADES · under two experts graded it`); thin.sort((a, b) => b.pilots - a.pilots).forEach(row); }
+  } else {
+    console.log(`\nWHAT YOU WILL FACE — LIKELY at 3+ ${F.set} pilots or 5%+ of last Day 1; POSSIBLE 1–2 pilots or 2–5%`);
+    head();
+    for (const g of ["LIKELY", "POSSIBLE", "RARE", "UNKNOWN"]) {
+      const xs = F.legends.filter((x) => x.group === g).sort((a, b) => b.pilots - a.pilots || (b.record?.share || 0) - (a.record?.share || 0));
+      if (!xs.length) continue;
+      console.log(`\n  ${g} (${xs.length})`);
+      (g === "RARE" ? xs.slice(0, 8) : xs).forEach(row);
+      if (g === "RARE" && xs.length > 8) console.log(`  … ${xs.length - 8} more`);
+    }
+  }
+  if (q) console.log(`\nno legend matching "${q}"`);
+  console.log(`\nscripts/rift field --tiers · field <legend> for the evidence · field --for <your legend> for a gauntlet`);
+}
+
+// Headings in guides/*.md, for matching an opponent to a guide that covers it.
+async function guideHeadings() {
+  const { readdir } = await import("node:fs/promises");
+  const dir = new URL("../guides/", import.meta.url);
+  const out = [];
+  for (const f of (await readdir(dir)).filter((f) => f.endsWith(".md"))) {
+    const text = await readFile(new URL(f, dir), "utf8");
+    for (const line of text.split("\n")) if (/^#{1,4} /.test(line)) out.push({ file: `guides/${f}`, text: line });
+  }
+  return out;
+}
+
 // ── intake: new product into the collection ───────────────────────────────────
 // Cards get entered on riftbound.gg (its scanner beats typing) and reach the app on its
 // next pull, which banks every gained copy in the Piltover worklist (`newq`) until it is
@@ -1018,6 +1129,7 @@ async function main() {
   if (cmd === "brew" || cmd === "brews") return cmdBrew(args);
   if (cmd === "rising") return cmdRising(args);
   if (cmd === "poll") return cmdPoll(args);
+  if (cmd === "field") return cmdField(args);
   const cat = await loadCatalog();
   if (cmd === "ideas") return cmdIdeas(cat, args);
   // meta reads only the archive and the catalog, so it works offline and never
