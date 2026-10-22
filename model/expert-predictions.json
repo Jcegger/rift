@@ -350,6 +350,12 @@
     "Ziggs": "C",
     "Jarvan IV": "D",
     "Seraphine": "D"
+   },
+   "at": {
+    "Jarvan IV": 93
+   },
+   "quotes": {
+    "Jarvan IV": "Looking at Jarvan I go, I think Ambessa is better than this… which is a real shame, because I was looking forward to playing him."
    }
   },
   {
@@ -421,6 +427,12 @@
    },
    "said": {
     "Evelynn": "'va a ser un sólido A, incluso ... si no se convierte en un S'"
+   },
+   "at": {
+    "Ekko": 189
+   },
+   "quotes": {
+    "Ekko": "I'm putting Ekko in A. I think people are rating him really, really badly, and he's not that bad… It's the legend I want to play. (translated from Spanish)"
    }
   },
   {
@@ -506,6 +518,64 @@
    "note": "A gameplay video titled 'This Is The BEST LEGEND In Radiance'; the pick is the title's, not a ranking.",
    "p": {
     "Orianna": "best legend"
+   }
+  },
+  {
+   "id": "eclipse-vendetta",
+   "who": "Team Eclipse (riftbound.zone)",
+   "url": "https://riftbound.zone/en/meta/",
+   "date": "2026-10-13",
+   "kind": "context",
+   "scale": "S–D by deck, Vendetta",
+   "scope": "existing",
+   "note": "An Italian competitive team's last Vendetta tier list, ten days before Radiance; no Radiance legends. Context for the returning legends (where a proven team had them before the new cards), never a Radiance call. Best deck per legend; Master Yi's Midrange deck is Wuju Bladesman, his Exp deck Wuju Master.",
+   "p": {
+    "Irelia": "S",
+    "Master Yi, Wuju Bladesman": "S",
+    "Rengar": "A",
+    "Azir": "A",
+    "Jayce": "A",
+    "Akali": "A",
+    "Diana": "A",
+    "LeBlanc": "A",
+    "Kennen": "A",
+    "Kha'Zix": "A",
+    "Rek'Sai": "A",
+    "Vex": "B",
+    "Nasus": "B",
+    "Fiora": "B",
+    "Ornn": "B",
+    "Lucian": "B",
+    "Viktor": "B",
+    "Kai'Sa": "B",
+    "Ezreal": "B",
+    "Draven": "B",
+    "Mel": "C",
+    "Lillia": "C",
+    "Sivir": "C",
+    "Shen": "C",
+    "Volibear": "C",
+    "Annie": "C",
+    "Pyke": "C",
+    "Zed": "D",
+    "Lux": "D",
+    "Rumble": "D",
+    "Poppy": "D",
+    "Renekton": "D",
+    "Miss Fortune": "D",
+    "Jax": "D",
+    "Jhin": "D",
+    "Ivern": "D",
+    "Ambessa": "D",
+    "Renata Glasc": "D",
+    "Master Yi, Wuju Master": "D",
+    "Vi": "D",
+    "Yasuo": "D",
+    "Ahri": "D",
+    "Darius": "D",
+    "Garen": "D",
+    "Leona": "D",
+    "Sett": "D"
    }
   },
   {
