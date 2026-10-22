@@ -1882,6 +1882,13 @@ a Jekyll site only added ways to fail. Pages builds here also fail intermittentl
 with an empty error message; requesting another build
 (`gh api repos/Jcegger/rift/pages/builds -X POST`) has cleared it every time.
 
+**The field report on jayegger.com** (`/riftbound/radiance-field-report/`) reads a copy of
+`data/report.json`. The refresh's last data step sends it to the private `Jcegger/jayegger-site`
+repo as "rift bot", with a write deploy key that repo holds ("rift refresh") and whose private
+half is this repo's `SITE_DEPLOY_KEY` secret. The step never fails the refresh; if it stops
+sending, the page's "Updated" date stops moving. To rotate the key: a new ed25519 pair,
+`gh repo deploy-key add … --allow-write` on the site, `gh secret set SITE_DEPLOY_KEY` here.
+
 Not affiliated with or endorsed by Riot Games. Card galleries and deck builders
 are permitted under Riot's policy on fan projects; automated gameplay tools are
 not, and this is neither.

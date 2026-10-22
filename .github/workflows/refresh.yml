@@ -385,6 +385,36 @@ jobs:
           git push
           echo "Committed: ${summary}"
 
+      # jayegger.com's Riftbound Radiance field report reads a copy of data/report.json
+      # (src/_data/radianceReport.json there). Send it when it changed, as "rift bot",
+      # with the deploy key the site repo holds for this job (secret SITE_DEPLOY_KEY;
+      # cfb-rankings writes to the site the same way). Never fails the refresh: if the
+      # push can't happen, the site keeps yesterday's copy and the log says why.
+      - name: Send the field report to jayegger.com
+        continue-on-error: true
+        env:
+          SITE_DEPLOY_KEY: ${{ secrets.SITE_DEPLOY_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "$SITE_DEPLOY_KEY" ]; then echo "No SITE_DEPLOY_KEY; skipping."; exit 0; fi
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SITE_DEPLOY_KEY" > ~/.ssh/site_key && chmod 600 ~/.ssh/site_key
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts 2>/dev/null
+          export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/site_key -o IdentitiesOnly=yes"
+          git clone -q --depth 1 git@github.com:Jcegger/jayegger-site.git "$RUNNER_TEMP/site"
+          cp data/report.json "$RUNNER_TEMP/site/src/_data/radianceReport.json"
+          cd "$RUNNER_TEMP/site"
+          if git diff --quiet; then echo "Field report unchanged; nothing to send."; exit 0; fi
+          git -c user.name="rift bot" -c user.email="rift-bot@users.noreply.github.com" \
+            commit -qam "Riftbound field report: data for $(date -u +%F)"
+          # The cfb-rankings bot pushes here too; rebase onto whatever it just sent.
+          for attempt in 1 2 3; do
+            if git pull -q --rebase && git push -q; then echo "Sent the field report."; exit 0; fi
+            sleep 10
+          done
+          echo "::warning title=Field report not sent::Couldn't push to jayegger-site after 3 tries; the site keeps its last copy."
+          exit 1
+
       # After the commit, deliberately: whatever did refresh should reach the site even
       # on the day we notice that something else has been rotting for three weeks.
       - name: Fail if any source is past its shelf life
