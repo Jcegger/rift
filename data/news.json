@@ -5,10 +5,10 @@
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 32,
+ "carriedFromPrevious": 33,
  "tags": {
+  "Metagame": 22,
   "News": 45,
-  "Metagame": 21,
   "Guides": 5,
   "Legends": 24,
   "Events": 21,
@@ -16,6 +16,15 @@
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Radiance Day 1 Best Decks & Meta Report",
+   "dt": "2026-10-22",
+   "url": "https://riftbound.gg/radiance-day-1-best-decks-meta-report",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
   {
    "title": "Riftbound x K/DA: Couture Collection: How to Enter Draw & Complete Draw Schedule",
    "dt": "2026-10-21",
