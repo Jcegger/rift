@@ -105,9 +105,16 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   generated; `check.mjs` enforces every field.
 - `model/expert-predictions.json` - published Radiance predictions collected before release
   (22 Oct 2026): LotharHS's sheet, video tier lists (Zelonius × TheManLand, Riftbound Insider,
-  Into the Rift, Riftlab and others) and riftbound.gg's most-buffed list, each with its URL, date
+  Into the Rift, Riftlab, BigZig, Jutariko in German, tcg Jonm and Miguel Challenger in Spanish,
+  and others), Challenger TCG's legend-ability scores (`kind: card`), one title pick
+  (`kind: pick`) and riftbound.gg's most-buffed list, each with its URL, date
   and placements exactly as given. Not an input to the score: kept to grade the model, the experts
   and the readers on the same calls. Hand-written; `check.mjs` enforces the fields.
+- `model/expert-backtest.json` - the same kind of calls one set back: what eight creators said
+  about Vendetta's nine new legends in videos before Vendetta was legal (31 Jul 2026), read
+  from the captions, plus the one preview event's published top 32 — kept to grade them on
+  Barcelona, Vendetta's first RQ. A placement shown on screen but never said is null.
+  Hand-written.
 - `data/swaplog.json` - every swap a brew has suggested, from the day it first appeared,
   scored 28 days later against the legend's **good placings** (`lib/placing.mjs`), not its
   posted lists: adopted = the card in gained 10+ points in them against the 28 days before;

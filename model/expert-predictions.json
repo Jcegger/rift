@@ -346,6 +346,131 @@
    }
   },
   {
+   "id": "jutariko",
+   "who": "Jutariko",
+   "url": "https://www.youtube.com/watch?v=OqYSquviB2w",
+   "date": "2026-10-12",
+   "kind": "strength",
+   "scale": "S–D, new legends",
+   "scope": "new",
+   "note": "German; placements from auto-captions.",
+   "p": {
+    "Riven": "S",
+    "Evelynn": "S",
+    "Mordekaiser": "A",
+    "K'Sante": "low A",
+    "Orianna": "high B",
+    "Jarvan IV": "B",
+    "Ekko": "B",
+    "Ziggs": "C",
+    "Seraphine": "D"
+   },
+   "said": {
+    "Jarvan IV": "'zwischen Oriana und Echo' — between Orianna and Ekko, both B",
+    "Seraphine": "'wahrscheinlich die schlechteste Legend in ganz Radiance'"
+   }
+  },
+  {
+   "id": "tcgjonm",
+   "who": "tcg Jonm",
+   "url": "https://www.youtube.com/watch?v=rFW9_onLHKQ",
+   "date": "2026-10-15",
+   "kind": "strength",
+   "scale": "S–C, new legends",
+   "scope": "new",
+   "note": "Spanish; placements from auto-captions. Says his picks are 'guided by what I want to play'. Jarvan IV discussed but given no tier.",
+   "p": {
+    "Orianna": "S",
+    "Riven": "S",
+    "Mordekaiser": "A",
+    "Ekko": "A",
+    "Evelynn": "A",
+    "Ziggs": "B",
+    "Seraphine": "B",
+    "K'Sante": "C"
+   },
+   "said": {
+    "Evelynn": "'va a ser un sólido A, incluso ... si no se convierte en un S'"
+   }
+  },
+  {
+   "id": "bigzig",
+   "who": "BigZig - Riftbound",
+   "url": "https://www.youtube.com/watch?v=vuDzaCXYCHI",
+   "date": "2026-10-15",
+   "kind": "strength",
+   "scale": "top 8 / A = top 32 / B = Day 2 / C = misses Day 2, every legend",
+   "scope": "new",
+   "note": "Placed the returning legends on screen only; the new legends are said. No new legend in his top-8 group.",
+   "p": {
+    "Riven": "A",
+    "Evelynn": "A",
+    "Ziggs": "high B",
+    "Mordekaiser": "B",
+    "Orianna": "B",
+    "Jarvan IV": "C",
+    "Ekko": "C",
+    "K'Sante": "C",
+    "Seraphine": "C"
+   },
+   "said": {
+    "Riven": "'the best legend of the set is Riven ... going into the A tier'",
+    "Ziggs": "'my top pick for the Btier'",
+    "Seraphine": "'the legend I think is the worst of the set'"
+   }
+  },
+  {
+   "id": "miguelchallenger",
+   "who": "Miguel Challenger",
+   "url": "https://www.youtube.com/watch?v=uVEbEpha5QY",
+   "date": "2026-10-07",
+   "kind": "strength",
+   "scale": "S–C, legend ability alone, before every card was revealed",
+   "scope": "new",
+   "note": "Spanish; placements from auto-captions. Rates 'only the legend by itself'. Riven and Evelynn are put in a group above Jarvan IV's A ('te dan movimiento y robo gratis') without a letter said; Orianna placed without one.",
+   "p": {
+    "Riven": "top group",
+    "Evelynn": "top group",
+    "Jarvan IV": "high A",
+    "Seraphine": "A",
+    "Ekko": "low A",
+    "Mordekaiser": "B",
+    "K'Sante": "C",
+    "Ziggs": "C"
+   }
+  },
+  {
+   "id": "challengertcg",
+   "who": "Challenger TCG",
+   "url": "https://www.youtube.com/watch?v=6kZGolhtyIo",
+   "date": "2026-10-10",
+   "kind": "card",
+   "scale": "legend ability 1–5 (champions and signatures rated separately)",
+   "scope": "new",
+   "note": "Rates cards, not decks: these are the legend-ability scores only. Ziggs and Orianna's legend scores are not separable from their cards'; Mordekaiser not covered.",
+   "p": {
+    "Riven": "4/5",
+    "Evelynn": "3/5",
+    "Ekko": "2/5",
+    "Jarvan IV": "2/5",
+    "K'Sante": "1/5",
+    "Seraphine": "1/5"
+   }
+  },
+  {
+   "id": "respite",
+   "who": "Respite | Riftbound",
+   "url": "https://www.youtube.com/watch?v=UxMWI2iwcYU",
+   "date": "2026-10-06",
+   "kind": "pick",
+   "scale": "one pick (video title), before every card was revealed",
+   "scope": "new",
+   "note": "A gameplay video titled 'This Is The BEST LEGEND In Radiance'; the pick is the title's, not a ranking.",
+   "p": {
+    "Orianna": "best legend"
+   }
+  },
+  {
    "id": "jayegger-call",
    "who": "Jay Egger (jayegger.com, this post's final list)",
    "url": "https://jayegger.com/blog/riftbound-radiance-preseason-tier-list/",
@@ -414,6 +539,32 @@
     "Shen": "D",
     "Vi": "D"
    }
+  }
+ ],
+ "notRead": [
+  {
+   "url": "https://www.youtube.com/watch?v=ZsUVWQIDkpo",
+   "why": "Champion Select, 16 Oct: no captions"
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=R7wjc8VJnAE",
+   "why": "Turns & Conditions EP 6: hosts disagree, no settled grade"
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=KOPWWLClJXQ",
+   "why": "Arcane Academy: ratings shown on screen, not said"
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=iRTeT42-rPQ",
+   "why": "Chai TCG: deck guides, not a strength call"
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=8H-0XGd5lq4",
+   "why": "Boba Riftbound: deck guides, not a strength call"
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=DmmTuUINBEQ",
+   "why": "Zelonius solo, 8 Oct: superseded by his 13 Oct list with TheManLand, already a source"
   }
  ]
 }

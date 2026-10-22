@@ -1,0 +1,108 @@
+{
+ "note": "Pre-Vendetta predictions for Vendetta's nine new legends, from videos published before Vendetta was legal (31 Jul 2026), kept to grade the experts on a set whose results are known: Barcelona RQ (data/topdecks.json, published 2026-08-26), Vendetta's first. Placements are what the creator SAID in the video, read from YouTube's captions on 22 Oct 2026 (visual-only tier lists are not readable that way, so a legend placed without being said is null, not guessed). 'low'/'high' as spoken. Hand-written.",
+ "collected": "2026-10-22",
+ "set": "VEN",
+ "legalFrom": "2026-07-31",
+ "gradedOn": "Barcelona's Top Decks",
+ "legends": ["Akali", "Ambessa", "Jayce", "Kennen", "Mel", "Nasus", "Renekton", "Shen", "Zed"],
+ "sources": [
+  {
+   "id": "lotharhs-0721",
+   "who": "LotharHS Riftbound",
+   "url": "https://www.youtube.com/watch?v=sB4WYWOSIu4",
+   "date": "2026-07-21",
+   "kind": "strength",
+   "scale": "S–F, new legends",
+   "radiance": "lotharhs-sheet",
+   "p": { "Kennen": "A", "Ambessa": "A", "Mel": "A", "Zed": "B", "Akali": "B", "Shen": "high C", "Nasus": "C", "Jayce": "C", "Renekton": "F" },
+   "said": { "Kennen": "I would put Canon into the A tier ... he's probably going to be S", "Mel": "wavers from C; settles 'put this deck into a A tier ... the lowest I will ever put Mel is going to be a B tier'", "Renekton": "Renekton is definitely the worst" }
+  },
+  {
+   "id": "zelonius-0729",
+   "who": "Zelonius - Riftbound",
+   "url": "https://www.youtube.com/watch?v=a3W3VpwPaOI",
+   "date": "2026-07-29",
+   "kind": "strength",
+   "scale": "S–D, every legend",
+   "radiance": "zelonius-themanland",
+   "p": { "Kennen": "S", "Mel": "high A", "Jayce": "A", "Ambessa": "low A", "Nasus": "B", "Zed": "B", "Shen": "D", "Renekton": "D", "Akali": null },
+   "said": { "Ambessa": "first A, then 'I've rated Ambessa too high ... low A tier bordering B'", "Jayce": "'Jace Aurora, I'm going to put this into A tier'", "Shen": "'D tier to be honest ... He might be C tier'" }
+  },
+  {
+   "id": "alexshans-0722",
+   "who": "Alex Shans Riftbound",
+   "url": "https://www.youtube.com/watch?v=1iUp4GA22hc",
+   "date": "2026-07-22",
+   "kind": "strength",
+   "scale": "S / A / low A / B / C / 'medal card gaming' (bottom), every legend",
+   "p": { "Kennen": "S", "Mel": "A", "Ambessa": "A", "Jayce": "A", "Akali": "low A", "Renekton": "C or B", "Nasus": "C", "Shen": "bottom", "Zed": null },
+   "said": { "Shen": "'Shen is definitely a metal car gaming' — played only for the Best-Of medal card, his bottom group", "Nasus": "'I kind of want to say it's Ctier, but'" }
+  },
+  {
+   "id": "elcee-0721",
+   "who": "Elcee",
+   "url": "https://www.youtube.com/watch?v=RQI4mOVULCo",
+   "date": "2026-07-21",
+   "kind": "strength",
+   "scale": "S–F, new legends",
+   "p": { "Kennen": "S", "Mel": "A", "Jayce": "A", "Akali": "low A", "Ambessa": "B", "Renekton": "B", "Nasus": "C", "Shen": "F", "Zed": null },
+   "said": { "Kennen": "probably the only S tier legend in this set", "Zed": "placed visually: 'better than Nasis ... worse than Pike'; no tier said", "Shen": "'Shen definitely the worst legend in this set'" }
+  },
+  {
+   "id": "gghaven-0710",
+   "who": "GG Haven (player and official judge)",
+   "url": "https://www.youtube.com/watch?v=sQwrIx58cEc",
+   "date": "2026-07-10",
+   "kind": "strength",
+   "scale": "S–D, new legends; recorded before every signature was revealed",
+   "p": { "Akali": "low S", "Kennen": "low S or high A", "Mel": "A", "Renekton": "B", "Jayce": "B", "Ambessa": "C", "Zed": "C", "Nasus": "low C", "Shen": "low C" },
+   "said": { "Zed": "'put it with [Ambessa] at C'; the hosts settle 'I don't think there's any D tiers'" }
+  },
+  {
+   "id": "silentknight-0711",
+   "who": "Silent Knight - Riftbound",
+   "url": "https://www.youtube.com/watch?v=odhvIYsEzfs",
+   "date": "2026-07-11",
+   "kind": "strength",
+   "scale": "S–D, new legends",
+   "p": { "Kennen": "S", "Akali": "A", "Zed": "B", "Nasus": "D", "Renekton": null, "Ambessa": null, "Mel": null, "Shen": null, "Jayce": null },
+   "said": { "Renekton": "a 'sleeper pick' that 'could really move up to that A tier'; current tier not said", "Ambessa": "the other sleeper pick, same words" }
+  },
+  {
+   "id": "megamogwai-0718",
+   "who": "MegaMogwai",
+   "url": "https://www.youtube.com/watch?v=i7Ro9m16CCM",
+   "date": "2026-07-18",
+   "kind": "strength",
+   "scale": "S–D, new legends",
+   "p": { "Zed": "S", "Akali": "B", "Mel": "low B", "Shen": "C", "Nasus": "D", "Renekton": "D", "Kennen": null, "Jayce": null, "Ambessa": null },
+   "said": { "Renekton": "'placing Shen in C above Renekton and Nasus'; Nasus said D", "Mel": "C, then 'probably like low B tier still'" }
+  },
+  {
+   "id": "intotherift-0713",
+   "who": "Into the Rift Podcast #33",
+   "url": "https://www.youtube.com/watch?v=6xHzUUgJrfQ",
+   "date": "2026-07-13",
+   "kind": "strength",
+   "scale": "no grades: a bottom group only, with half the set revealed",
+   "radiance": "into-the-rift-43",
+   "p": { "Zed": "bottom", "Shen": "bottom", "Mel": "bottom", "Nasus": "bottom", "Renekton": "bottom" },
+   "said": { "all": "'Zed and Shen and even Mel, I think might be near the bottom.' / 'Nasus, Renekton maybe.'" }
+  }
+ ],
+ "preview": {
+  "event": "Sideways Showdown: CN vs World (TCG Arena)",
+  "url": "https://riftbound.gg/?p=3751",
+  "date": "2026-07-28",
+  "players": 240,
+  "note": "Only the top 32 was published. New legends in it: Kennen 7, Akali 2, Nasus 2, Zed 1, Jayce 1 (the article also says 'four Kennens finished in the top 32' in one place).",
+  "top32": { "Kennen": 7, "Akali": 2, "Nasus": 2, "Zed": 1, "Jayce": 1, "Shen": 0, "Mel": 0, "Ambessa": 0, "Renekton": 0 }
+ },
+ "notRead": [
+  { "url": "https://www.youtube.com/watch?v=CdQQ3UMXAQ0", "why": "Boba Riftbound rates cards 1–5, not legends" },
+  { "url": "https://www.youtube.com/watch?v=3HLKO2dKQYg", "why": "X0 Riftbound: visual tiers; only 'Kennen best, tier one' and 'Zed really up there' are said" },
+  { "url": "https://www.youtube.com/watch?v=XVThr9N7DwQ", "why": "Challenger TCG: no placements said" },
+  { "url": "https://www.youtube.com/watch?v=Uo1LhNYE2Rc", "why": "The Stacked Deck: several hosts disagreeing, no settled grade but Kennen S" },
+  { "url": "https://www.youtube.com/watch?v=g7brveUHOPY", "why": "GrappLr: no captions" }
+ ]
+}
