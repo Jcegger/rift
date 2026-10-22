@@ -89,23 +89,29 @@ const main = async () => {
   const usedHigh = new Set(high.flatMap((t) => [t.legend, t.id]));
   const low = pick(takes.filter((t) => t.gap <= -1 && !usedHigh.has(t.legend) && !usedHigh.has(t.id)).sort((a, b) => a.gap - b.gap), 2);
 
-  // Older legends Radiance moved: on riftbound.gg's most-buffed list, or a new card in 40%+ of its
-  // posted lists. For each: its Vendetta grade(s) against its Radiance grade, its preview play, and
-  // the cards its lists picked up and cut — inside its own lists (7 days against the 14 before), so
-  // a flood of new legends' lists can't pass for players cutting a card.
-  const buffed = new Set(Object.keys(X.sources.find((s) => s.id === "riftboundgg-buffed")?.p || {}));
-  const MIN_LISTS = 10, ADOPT = 40, SHOW_IN = 20, SHOW_MOVE = 15;
-  const movers = legends.filter((l) => !l.isNew).map((l) => {
+  // What Radiance gave older legends, led by the decks: the Radiance cards each returning legend's
+  // own posted lists took up (riftbound.gg's public deck feed, the last 7 days against the 14
+  // before — data/rising.json), with riftbound.gg's "10 Most Buffed Legends" article as the claim
+  // beside it: the cards it pointed to that the lists haven't taken up yet. (Whether a legend can
+  // win a metal card at an RC is left out: players don't build a legend for one, Jay, 22 Oct 2026.)
+  const CAT = await read("data/cards.json");
+  const catCards = CAT.cards || CAT;
+  const byCode = new Map(catCards.map((c) => [c.c.split("/")[0], c]));
+  const B = X.sources.find((s) => s.id === "riftboundgg-buffed");
+  const MIN_LISTS = 10, SHOW = 20, GAIN = 15, LEAD = 30;
+  const buffs = legends.filter((l) => !l.isNew).map((l) => {
     const r = RISE?.legends?.[l.legend];
-    const enough = r && r.lists.now >= MIN_LISTS && r.lists.before >= MIN_LISTS;
-    const cards = enough ? Object.entries(r.cards).filter(([n]) => !n.includes(",")) : [];
-    const inn = cards.filter(([, v]) => v.rad && v.now >= SHOW_IN && v.now - v.before >= SHOW_MOVE).sort((a, b) => b[1].now - a[1].now).slice(0, 3).map(([n, v]) => ({ card: n, before: v.before, now: v.now }));
-    const out = cards.filter(([, v]) => !v.rad && v.before - v.now >= SHOW_MOVE).sort((a, b) => (b[1].before - b[1].now) - (a[1].before - a[1].now)).slice(0, 2).map(([n, v]) => ({ card: n, before: v.before, now: v.now }));
-    const isBuffed = buffed.has(l.champion) || buffed.has(l.legend);
-    return { legend: l.legend, champion: l.champion, buffed: isBuffed, vendetta: l.context, radiance: l.said.n ? { tier: l.said.tier, n: l.said.n } : null,
-      previews: { pilots: l.previews.pilots, top8: l.previews.top8 }, lists: enough ? r.lists : null, inn, out, qualifies: isBuffed || inn.some((c) => c.now >= ADOPT) };
-  }).filter((m) => m.qualifies && (m.inn.length || m.previews.pilots || m.radiance))
-    .sort((a, b) => b.previews.pilots - a.previews.pilots || (b.inn[0]?.now || 0) - (a.inn[0]?.now || 0));
+    const tipped = (B?.cards?.[l.champion] || []).map((id) => byCode.get(id)?.n).filter(Boolean);
+    if (!r || r.lists.now < MIN_LISTS) return tipped.length ? { champion: l.champion, legend: l.legend, lists: r?.lists.now || 0, took: [], notYet: tipped, why: B?.why?.[l.champion] || null, tippedBy: true, thin: true } : null;
+    // Champion units count only when they aren't the legend's own (Kai'Sa, Rebel in Ahri lists does).
+    const took = Object.entries(r.cards).filter(([n, v]) => v.rad && v.now >= SHOW && v.now - v.before >= GAIN && !n.startsWith(l.champion + ","))
+      .sort((a, b) => b[1].now - a[1].now).slice(0, 3).map(([n, v]) => ({ name: n, before: v.before, now: v.now, tipped: tipped.includes(n) }));
+    const notYet = tipped.filter((n) => !took.some((t) => t.name === n) && (r.cards[n]?.now ?? 0) < SHOW);
+    const tippedBy = tipped.length > 0;
+    if (!took.length && !tippedBy) return null;
+    if (!tippedBy && took[0].now < LEAD) return null;
+    return { champion: l.champion, legend: l.legend, lists: r.lists.now, took, notYet, why: B?.why?.[l.champion] || null, tippedBy, thin: false };
+  }).filter(Boolean).sort((a, b) => (b.took[0]?.now || 0) - (a.took[0]?.now || 0) || b.lists - a.lists);
 
   // "Play this weekend": the creators' S, with top 8s at the previews to show for it.
   const playNow = legends.filter((l) => l.said.tier === "S" && l.previews.top8 >= 2 && !l.aurora)
@@ -120,7 +126,7 @@ const main = async () => {
     counts: { sources: calls.length, grades: legends.reduce((t, l) => t + l.said.n, 0), legends: legends.length },
     previews: { events: ev.map((e) => ({ name: e.name, dt: e.dt, players: e.players, hidden: e.hidden || 0, creators: isCreatorEvent(e.name) })), hidden: ev.reduce((t, e) => t + (e.hidden || 0), 0) },
     callouts: { agreed, divided: divided ? { legend: divided.legend, lo: letterOf(Math.min(...divided.said.grades.map((g) => g.value))), hi: letterOf(Math.max(...divided.said.grades.map((g) => g.value))), n: divided.said.n } : null, high, low },
-    playNow, movers,
+    playNow, buffs, buffSource: B ? { who: B.who, url: B.url, date: B.date } : null,
     checkpoints: CHECKPOINTS,
     legends,
   };

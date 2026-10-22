@@ -436,6 +436,85 @@
     "Rek'Sai": "listed",
     "Sivir": "listed",
     "Vex": "listed"
+   },
+   "cards": {
+    "Rumble": [
+     "RAD-055",
+     "RAD-011"
+    ],
+    "Kai'Sa": [
+     "RAD-013",
+     "RAD-006",
+     "RAD-051",
+     "RAD-003",
+     "RAD-001"
+    ],
+    "Jinx": [
+     "RAD-095",
+     "RAD-103",
+     "RAD-110",
+     "RAD-008",
+     "RAD-014"
+    ],
+    "Teemo": [
+     "RAD-095",
+     "RAD-103",
+     "RAD-110",
+     "RAD-008",
+     "RAD-014"
+    ],
+    "Annie": [
+     "RAD-098",
+     "RAD-102"
+    ],
+    "Ahri": [
+     "RAD-028",
+     "RAD-024",
+     "RAD-044",
+     "RAD-058",
+     "RAD-063"
+    ],
+    "Leona": [
+     "RAD-036"
+    ],
+    "Viktor": [
+     "RAD-116",
+     "RAD-051",
+     "RAD-048",
+     "RAD-119",
+     "RAD-125"
+    ],
+    "Rek'Sai": [
+     "RAD-002",
+     "RAD-007",
+     "RAD-008",
+     "RAD-119",
+     "RAD-125"
+    ],
+    "Sivir": [
+     "RAD-112"
+    ],
+    "Vex": [
+     "RAD-095",
+     "RAD-025",
+     "RAD-028",
+     "RAD-094",
+     "RAD-113",
+     "RAD-109"
+    ]
+   },
+   "why": {
+    "Rumble": "Two Mech upgrades: a Disarm unit that helps him win showdowns, and a sturdier four-cost Mech.",
+    "Kai'Sa": "Spells with power costs she gets to ignore, and early units with the might her Vendetta deck lacked.",
+    "Jinx": "The new Chaos Hidden cards, built for Evelynn, suit a legend who wants an empty hand at the end of her turn.",
+    "Teemo": "More cards to hide, which is exactly what the scout wants.",
+    "Annie": "Siren's Song, which she can cast with the runes her ability readies.",
+    "Ahri": "A new champion unit for going first, and support for holding a battlefield.",
+    "Leona": "A draw engine at last, the thing her kit has lacked for a year.",
+    "Viktor": "A gear that works like a second legend ability each turn: two tokens, two battlefields to conquer.",
+    "Rek'Sai": "A conquer-every-turn package, though the new Fury–Order legend, Mordekaiser, may take those cards.",
+    "Sivir": "Gold tokens that pay the power costs of the new Hidden cards, and a cute defensive synergy with Ziggs, Explosive.",
+    "Vex": "Calm cards for holding a battlefield, plus Momentary Companion from the Chaos Hidden package."
    }
   },
   {
