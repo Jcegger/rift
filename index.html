@@ -767,7 +767,7 @@ function matchupsPanel(d, L) {
     const plans = planLinks(guides, n);
     return `<article class="mcard">
       <div class="headrow"><h3 style="font-family:var(--f-body);font-weight:600;font-size:18px">${c ? `<button class="cardlink" data-card="${esc(c.c)}">${esc(n)}</button>` : esc(n)}</h3>
-        ${fx?.tier ? `<a class="pill" href="#/meta/${encodeURIComponent(n)}" title="${fx.tierFrom === "results" ? "from Radiance results" : "the experts' grade"}">${fx.tier}</a>` : `<span class="num small dim">—</span>`}</div>
+        ${fx?.tier ? `<a class="pill" href="#/meta/${encodeURIComponent(n)}" title="${fx.tierFrom === "results" ? "from Radiance results" : "the creators' grade"}">${fx.tier}</a>` : `<span class="num small dim">—</span>`}</div>
       <div class="dots">${dots(c?.d, 10)}<span class="tiny dim">${esc((c?.d || []).join(" / "))}</span></div>
       <dl>
         <dt class="lbl">You</dt><dd class="num">${r ? `${r.w}–${r.l}${r.d ? `–${r.d}` : ""}` : "no games yet"}</dd>
@@ -1522,8 +1522,8 @@ const SET_NAME = { RAD: "Radiance", VEN: "Vendetta" };
 const FIELD_COLS = [["LIKELY", "Likely to face"], ["POSSIBLE", "Possible"], ["RARE", "Rare or unseen"]];
 function fieldPhase() {
   const H = FIELD.handover || { majors: 0, rqTables: 0 }, S = SET_NAME[FIELD.set] || FIELD.set;
-  return FIELD.phase === "results" ? `Results-led: tiers come from ${S} results, the experts' grades beside them.`
-    : `${FIELD.phase === "early" ? "Early results" : "Forecast"}: the tiers are the experts' grades until Riot's first ${S} RQ table or five ${S} events of ${FIELD.rules.major}+ players (${H.majors} so far). Then results take over.`;
+  return FIELD.phase === "results" ? `Results-led: tiers come from ${S} results, the creators' grades beside them.`
+    : `${FIELD.phase === "early" ? "Early results" : "Forecast"}: the tiers are the creators' grades until Riot's first ${S} RQ table or five ${S} events of ${FIELD.rules.major}+ players (${H.majors} so far). Then results take over.`;
 }
 const winRate = (p) => p.winRate != null ? `${Math.round(p.winRate * 100)}%` : "—";
 const metaHref = (n, pub) => `${pub ? "?view=meta" : ""}#/meta/${encodeURIComponent(n)}`;
@@ -1535,7 +1535,7 @@ function metaPanel(pub) {
   const label = (n) => champs.get(champOf(n)) > 1 ? `${champOf(n)} (${n.split(", ")[1]})` : champOf(n);
   const name = (x) => {
     const t16 = x.top16.filter((t) => t.kind !== "last").length;
-    const warn = x.flags.filter((f) => f.startsWith(`${FIELD.lastSet} record`) || f.startsWith("experts said"));
+    const warn = x.flags.filter((f) => f.startsWith(`${FIELD.lastSet} record`) || f.startsWith("creators said"));
     return `<span class="fitem"><a href="${metaHref(x.legend, pub)}">${esc(label(x.legend))}</a>${x.pilots ? ` <span class="num tiny dim">${x.pilots}p</span>` : ""}${t16 ? ` <span class="num tiny dim">▲${t16}</span>` : ""}${x.flags.includes("Aurora builds: opponent only") ? ` <span class="tiny" title="Aurora builds">◆</span>` : ""}${warn.length ? ` <span class="tiny" style="color:var(--later)" title="${esc(warn.join("; "))}">!</span>` : ""}</span>`;
   };
   const inCol = (x, c) => c === "RARE" ? x.group === "RARE" || x.group === "UNKNOWN" : x.group === c;
@@ -1549,7 +1549,7 @@ function metaPanel(pub) {
     <div class="banner ${FIELD.phase === "results" ? "" : "warn"}">${esc(fieldPhase())}</div>
     <div class="fgrid"><div></div>${FIELD_COLS.map(([, l]) => `<div class="lbl fhead">${l}</div>`).join("")}
       ${tiers.map((t) => `<div class="ftier">${t || "?"}</div>${FIELD_COLS.map(([c, l]) => { const v = cell(t, c); return `<div class="fcell${v ? "" : " empty"}" data-col="${l}">${v || `<span class="dim">·</span>`}</div>`; }).join("")}`).join("")}</div>
-    <p class="note">Down: how good it is now. Across: how likely you are to face it (likely at 3+ ${esc(S)} pilots, or 5%+ of the last RQs' Day 1). <span class="num">27p</span> = ${esc(S)} pilots · ▲ = top 16s at ${esc(S)} events of ${FIELD.rules.major}+ · ◆ = Aurora builds · <span style="color:var(--later)">!</span> = ${esc(last)}'s record two tiers away, as context · ? = fewer than two experts graded it. Tap a name for the evidence.${pub ? "" : ` Public, read-only: <a href="?view=meta" target="_blank" rel="noopener">${esc(location.host || "rift.jayegger.com")}/?view=meta</a>`}</p>
+    <p class="note">Down: how good it is now. Across: how likely you are to face it (likely at 3+ ${esc(S)} pilots, or 5%+ of the last RQs' Day 1). <span class="num">27p</span> = ${esc(S)} pilots · ▲ = top 16s at ${esc(S)} events of ${FIELD.rules.major}+ · ◆ = Aurora builds · <span style="color:var(--later)">!</span> = ${esc(last)}'s record two tiers away, as context · ? = fewer than two creators graded it. Tap a name for the evidence.${pub ? "" : ` Public, read-only: <a href="?view=meta" target="_blank" rel="noopener">${esc(location.host || "rift.jayegger.com")}/?view=meta</a>`}</p>
   </section>`;
 }
 function viewMetaPage() {
@@ -1566,7 +1566,7 @@ function viewMetaLegend(name, pub) {
   const flags = x.flags.filter((f) => pub ? !f.includes("opponent only") : true);
   return `<div style="display:flex;flex-direction:column;gap:6px">${back}</div>
   <section class="panel hero"><h1>${c && !pub ? `<button class="cardlink" data-card="${esc(c.c)}">${esc(name)}</button>` : esc(name)}</h1>
-    <div class="dots">${dots(c?.d)}<span class="small dim">${x.isNew ? `new in ${esc(S)} · ` : ""}${x.tier ? `tier <b>${x.tier}</b> from ${x.tierFrom === "results" ? `${esc(S)} results` : `${e.n} expert grades`}` : "not enough grades for a tier"} · ${esc(FIELD_COLS.find(([k]) => k === (x.group === "UNKNOWN" ? "RARE" : x.group))?.[1] || x.group)}</span></div>
+    <div class="dots">${dots(c?.d)}<span class="small dim">${x.isNew ? `new in ${esc(S)} · ` : ""}${x.tier ? `tier <b>${x.tier}</b> from ${x.tierFrom === "results" ? `${esc(S)} results` : `${e.n} creator grades`}` : "not enough grades for a tier"} · ${esc(FIELD_COLS.find(([k]) => k === (x.group === "UNKNOWN" ? "RARE" : x.group))?.[1] || x.group)}</span></div>
     ${flags.length ? `<div class="banner warn">${esc(flags.join(" · "))}</div>` : ""}</section>
   <div class="cols"><section class="panel wide"><h2>${esc(S)}</h2>
     ${x.results?.E > 0 ? `<p>${x.results.O.toFixed(1)} top finishes against ${x.results.E.toFixed(1)} expected, recent weighted — ×${x.results.ratio.toFixed(2)}${x.results.tier ? ` (${x.results.tier})` : ", too few to read yet"}.</p>` : ""}
@@ -1575,8 +1575,8 @@ function viewMetaLegend(name, pub) {
       <p class="note">"Won" is the share of matches its pilots won. With a handful of pilots it swings a lot: read it with the pilot count, never alone.</p>` : `<p class="note">Not played at any ${esc(S)} event yet.</p>`}
     ${t16.length ? `<h3>Top 16s at events of ${FIELD.rules.major}+</h3>${t16.map((t) => `<div class="small">#${t.pl} of ${t.players} · ${esc(t.ev)} <span class="dim">${esc(t.dt)}</span></div>`).join("")}` : ""}
   </section>
-  <section class="side"><section class="panel"><h2>Expert grades</h2>
-    ${e ? `<p class="small dim">Median ${x.expertTier || "—"} from ${e.n} · ${e.agreement === "split" ? "they disagree (the middle half spans more than a tier)" : e.agreement === "thin" ? "too few to call agreement" : "they agree"}</p>` : `<p class="note">No expert has graded it.</p>`}
+  <section class="side"><section class="panel"><h2>Creator grades</h2>
+    ${e ? `<p class="small dim">Median ${x.expertTier || "—"} from ${e.n} · ${e.agreement === "split" ? "they disagree (the middle half spans more than a tier)" : e.agreement === "thin" ? "too few to call agreement" : "they agree"}</p>` : `<p class="note">No creator has graded it.</p>`}
     ${x.grades.map((g) => `<div class="small"><b>${esc(g.said)}</b> · <a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.who)}</a> <span class="dim">${esc(g.date)}</span></div>`).join("")}
     ${x.otherCalls.map((g) => `<div class="small dim">${esc(g.said)} · <a href="${esc(g.url)}" target="_blank" rel="noopener">${esc(g.who)}</a> (${g.kind === "strength" ? "not a grade" : esc(g.kind)}, not counted)</div>`).join("")}
     ${!pub && x.jay ? `<div class="small" style="margin-top:8px">Your call: <b>${esc(x.jay)}</b> <span class="dim">(kept apart, graded against theirs)</span></div>` : ""}

@@ -254,6 +254,10 @@ jobs:
           case ",$SIMULATE," in *,field,*) echo "simulated failure"; exit 1;; esac
           node scripts/build-field.mjs
 
+      # After the field. Fetches nothing: the field report's data for jayegger.com.
+      - name: Build the field report data
+        run: node scripts/build-report.mjs
+
       - name: Source report
         id: sources
         run: |

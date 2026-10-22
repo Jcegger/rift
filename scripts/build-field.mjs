@@ -321,7 +321,7 @@ const main = async () => {
     const flags = [];
     const dis = tierFrom === "experts" ? disagreement(tier, rec) : null;
     if (dis) flags.push(`${lastSet} record: ${dis.says}`);
-    if (tierFrom === "results" && expertTier && Math.abs(LETTERS.indexOf(expertTier) - LETTERS.indexOf(tier)) >= DISAGREE_TIERS) flags.push(`experts said ${expertTier}`);
+    if (tierFrom === "results" && expertTier && Math.abs(LETTERS.indexOf(expertTier) - LETTERS.indexOf(tier)) >= DISAGREE_TIERS) flags.push(`creators said ${expertTier}`);
     if (!tier) flags.push(con && con.n ? "not enough grades" : "no grades");
     if ((auroraShare.get(name) || 0) >= 0.3) flags.push("Aurora builds: opponent only");
     return {

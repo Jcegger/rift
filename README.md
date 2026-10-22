@@ -96,6 +96,11 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   `scripts/rift field` (what you will face) · `field --tiers` · `field <legend>` (the evidence,
   with the card reads as notes) · `field --for <legend>` (a gauntlet of the LIKELY field, with
   that legend's matchup guides).
+- `data/report.json` - the Radiance field report's data for jayegger.com (`scripts/build-report.mjs`):
+  what the creators said before release (each legend's grades, callouts for the most agreed, the
+  most divided and the boldest calls, with quotes and timestamps from `model/expert-predictions.json`),
+  what the previews showed, the pre-registered checkpoints, and — after the handover — what
+  happened. It compares voices (the creators' consensus, the previews), never individual creators.
 - `data/preseason.json` - the preseason model's ranking (`scripts/build-preseason.mjs`,
   `lib/preseason.mjs`): every legend's builds ranked by observed over expected top finishes
   (Day 2 at RQs, the top quarter at full-field events), a prediction from returning strength
@@ -174,6 +179,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   first, 3s and 2s apart, at most 60 pages a run; finished events are cached in the output and
   never fetched again. riftdecks.com is not a source: its robots.txt disallows this kind of tool.
   `--offline` rebuilds from the cache.
+- `scripts/build-report.mjs` - builds `data/report.json` from `data/field.json`,
+  `model/expert-predictions.json` and `data/preseason.json` (the main builds). Fetches nothing;
+  runs after build-field. jayegger.com reads a copy as `src/_data/radianceReport.json`.
 - `scripts/build-preseason.mjs` - builds `data/preseason.json` from data/topdecks.json,
   data/decks.json and `model/preseason-inputs.json`. Fetches nothing; runs after build-rising.
   The prior blends last-format strength and POPULARITY for an established legend — 80/20

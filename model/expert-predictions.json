@@ -138,7 +138,15 @@
     "Renata Glasc": "D",
     "Shen": "D",
     "Garen": "D"
-   }
+   },
+   "panel": [
+    {
+     "name": "TheManLand",
+     "team": "MICE",
+     "result": "won RQ Barcelona and made the top 8 at RQ Los Angeles, both on Ornn",
+     "source": "Riot's Top Decks articles (data/topdecks.json)"
+    }
+   ]
   },
   {
    "id": "takolandia",
@@ -169,7 +177,15 @@
     "Ezreal": "2",
     "Mordekaiser": "2.5",
     "Ziggs": "2.5"
-   }
+   },
+   "panel": [
+    {
+     "name": "Mosik",
+     "team": "ECL",
+     "result": "finished 5th at RQ Barcelona on Kennen",
+     "source": "Riot's Top Decks articles (data/topdecks.json)"
+    }
+   ]
   },
   {
    "id": "digi-slots",
@@ -281,6 +297,14 @@
     "Orianna": "C",
     "Ziggs": "C",
     "Ekko": "C"
+   },
+   "at": {
+    "K'Sante": 847,
+    "Orianna": 1108
+   },
+   "quotes": {
+    "K'Sante": "I am a little bit controversially hot on K'Sante… I'd be comfortable putting him in A and letting myself eat my words later if I'm wrong.",
+    "Orianna": "I guess I'd put her in C, unless you disagree. — No, I don't disagree."
    }
   },
   {
@@ -299,6 +323,12 @@
     "Orianna": "B",
     "Ekko": "C",
     "Jarvan IV": "C"
+   },
+   "at": {
+    "Riven": 2229
+   },
+   "quotes": {
+    "Riven": "I'm not going to give something S tier until it's proved itself… I think Riven's gonna be the best legend of the set."
    }
   },
   {
@@ -437,6 +467,14 @@
     "Mordekaiser": "B",
     "K'Sante": "C",
     "Ziggs": "C"
+   },
+   "at": {
+    "Seraphine": 854,
+    "Jarvan IV": 1187
+   },
+   "quotes": {
+    "Jarvan IV": "It gives you movement, and that's really broken. (translated from Spanish)",
+    "Seraphine": "When I saw her I was sad… but the more I've seen, the more synergy and potential I see. (translated from Spanish)"
    }
   },
   {

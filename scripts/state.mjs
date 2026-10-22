@@ -942,7 +942,7 @@ ${pad(String(x.rank), 3)}${name(x)} · ${x.tier ? `${x.tier} tier · ` : ""}×${
 }
 
 // field: what Jay will face and how good it is (data/field.json, lib/field.mjs). Counts and
-// quotes, no score: the tier is the experts' median grade, the record and the new format's
+// quotes, no score: the tier is the creators' median grade, the record and the new format's
 // play sit beside it, and a thin sample is shown with its count, never used to move a tier.
 async function cmdField(args) {
   const F = await readJson(url("field.json")).catch(() => null);
@@ -962,11 +962,11 @@ async function cmdField(args) {
   const play = (x) => x.pilots ? `${x.pilots}p ${x.play.reduce((t, p) => t + (p.top8 || 0), 0)}t8` : "—";
   const flags = (x) => x.flags.length ? `  [${x.flags.join("; ")}]` : "";
   const H = F.handover || { rqTables: 0, majors: 0 };
-  const phase = F.phase === "results" ? "RESULTS-LED: tiers from " + F.set + " results, experts as the cross-check"
-    : `${F.phase === "early" ? "EARLY RESULTS" : "a FORECAST"}: tiers are the experts' until the first ${F.set} RQ table or 5 ${F.set} events of ${F.rules.major}+ (${H.majors} so far)`;
+  const phase = F.phase === "results" ? "RESULTS-LED: tiers from " + F.set + " results, creators as the cross-check"
+    : `${F.phase === "early" ? "EARLY RESULTS" : "a FORECAST"}: tiers are the creators' until the first ${F.set} RQ table or 5 ${F.set} events of ${F.rules.major}+ (${H.majors} so far)`;
   console.log(`FIELD · ${F.set}, legal ${F.legalFrom} · built ${F.generatedAt} · ${phase}
   ${newFmt.length} ${F.set}-format events (${newFmt.map((e) => `${e.name.slice(0, 24)} ${e.players}`).join(" · ")})${hidden ? ` · ${hidden} placeholder lists counted as hidden, not as a legend` : ""}
-  tier = ${F.phase === "results" ? `${F.set} results where deep enough, else ` : ""}the experts' median grade · top16 = ${F.set} finishes at ${F.rules.major}+ player events · play = ${F.set} pilots and top 8s · ${F.lastSet} = last set's RQ record and Day 1 share, context only`);
+  tier = ${F.phase === "results" ? `${F.set} results where deep enough, else ` : ""}the creators' median grade · top16 = ${F.set} finishes at ${F.rules.major}+ player events · play = ${F.set} pilots and top 8s · ${F.lastSet} = last set's RQ record and Day 1 share, context only`);
   const head = () => console.log(`  ${pad("legend", 30)} ${pad("tier", 14)} ${pad("top16", 6)} ${pad("play", 9)} ${pad("group", 9)} ${F.lastSet}`);
   const row = (x) => console.log(`  ${pad(x.legend.slice(0, 29), 30)} ${pad(exp(x), 14)} ${pad(top16(x), 6)} ${pad(play(x), 9)} ${pad(x.group, 9)} ${pad(rec(x), 9)}${flags(x)}`);
   const order = ["S", "A", "B", "C", "D", "F"];
@@ -993,10 +993,10 @@ async function cmdField(args) {
     for (const x of hits.slice(0, 2)) {
       console.log(`\n${x.legend}${x.isNew ? ` · new in ${F.set}` : ""} · tier ${x.tier || "not enough grades"} · ${x.group}${flags(x)}`);
       const e = x.experts;
-      console.log(`  EXPERTS  ${e ? `median ${e.median.toFixed(2)} (${x.tier || "?"}) from ${e.n}, middle half ${e.q1.toFixed(1)}–${e.q3.toFixed(1)}, range ${e.lo.toFixed(1)}–${e.hi.toFixed(1)} · ${e.agreement}` : "none graded it"}`);
+      console.log(`  CREATORS ${e ? `median ${e.median.toFixed(2)} (${x.tier || "?"}) from ${e.n}, middle half ${e.q1.toFixed(1)}–${e.q3.toFixed(1)}, range ${e.lo.toFixed(1)}–${e.hi.toFixed(1)} · ${e.agreement}` : "none graded it"}`);
       for (const g of x.grades) console.log(`    ${pad(g.id, 22)} ${g.said}`);
       for (const g of x.otherCalls) console.log(`    ${pad(g.id, 22)} ${g.said}  (${g.kind === "strength" ? "not a grade" : g.kind}, not counted)`);
-      if (x.jay) console.log(`    ${pad("your call", 22)} ${x.jay}  (kept apart, graded against the experts)`);
+      if (x.jay) console.log(`    ${pad("your call", 22)} ${x.jay}  (kept apart, graded against the creators)`);
       if (x.results?.E > 0) console.log(`  RESULTS  ${x.results.O.toFixed(1)} top finishes against ${x.results.E.toFixed(1)} expected in ${F.set}, recent weighted — ×${x.results.ratio.toFixed(2)}${x.results.tier ? ` (${x.results.tier})` : ", too few to read yet"}${x.tierFrom === "results" ? " · sets the tier" : ""}`);
       const r = x.record;
       console.log(`  ${pad(F.lastSet, 8)} ${x.isNew ? "new legend, no last format" : !r.d1 ? `no pilots at last format's ${r.rqs} RQs` : `${r.d2} Day 2s from ${r.d1} Day 1 pilots at ${r.rqs} RQs, against ${r.E.toFixed(0)} expected — ×${r.ratio.toFixed(2)}${r.tier ? ` (${r.tier})` : ", too few to read"} · ${pct(r.share)} of Day 1`}`);
@@ -1016,7 +1016,7 @@ async function cmdField(args) {
   }
 
   if (tiersView) {
-    console.log(`\nTIERS — ${F.phase === "results" ? `${F.set} results, experts beside them` : `the experts' grades, ${F.set} play beside them`}; "${F.lastSet} record: X" marks last set's record two tiers away, as context`);
+    console.log(`\nTIERS — ${F.phase === "results" ? `${F.set} results, creators beside them` : `the creators' grades, ${F.set} play beside them`}; "${F.lastSet} record: X" marks last set's record two tiers away, as context`);
     head();
     let t = null;
     for (const x of F.legends.filter((x) => x.tier).sort(byTier)) {
@@ -1024,7 +1024,7 @@ async function cmdField(args) {
       row(x);
     }
     const thin = F.legends.filter((x) => !x.tier);
-    if (thin.length) { console.log(`\n  NOT ENOUGH GRADES · under two experts graded it`); thin.sort((a, b) => b.pilots - a.pilots).forEach(row); }
+    if (thin.length) { console.log(`\n  NOT ENOUGH GRADES · under two creators graded it`); thin.sort((a, b) => b.pilots - a.pilots).forEach(row); }
   } else {
     console.log(`\nWHAT YOU WILL FACE — LIKELY at 3+ ${F.set} pilots or 5%+ of last Day 1; POSSIBLE 1–2 pilots or 2–5%`);
     head();
