@@ -103,7 +103,12 @@ const main = async () => {
   const byShort = new Map(catCards.map((c) => [c.c.split("/")[0], c]));
   const cardOf = (k) => byShort.get(String(k).split("/")[0]) || null;
   const bannedNames = new Set((BANS.constructed || []).map((b) => b.name));
-  const radNames = new Set(catCards.filter((c) => c.s === F.set).map((c) => c.n));
+  // New to the set: every printing of the name is from it. Radiance reprints older cards (Sett,
+  // Kingpin from Origins; Yone, Blademaster from Spiritforged), and a reprint is not a new card —
+  // it neither makes a list a Radiance list nor counts as "added" (Jay caught Yone, 22 Oct 2026).
+  const setsOf = new Map();
+  for (const c of catCards) (setsOf.get(c.n) || setsOf.set(c.n, new Set()).get(c.n)).add(c.s);
+  const radNames = new Set([...setsOf].filter(([, ss]) => ss.size === 1 && ss.has(F.set)).map(([n]) => n));
   const VEN_END = "2026-09-29", RAD_FROM = "2026-10-09", MIN_LISTS = 10, ADD = 25, OUT_FROM = 30, CUT = 20;
   const MAIN = new Set(["Unit", "Spell", "Gear"]);
   const legendOf = (d) => { const L = cardOf(d.lg); if (!L) return null; const champ = (L.g || []).slice(-1)[0]; const sub = L.n.replace(/ - Starter$/, ""); return F.legends.find((l) => l.legend.split(",")[0] === champ && l.legend.endsWith(sub))?.legend || null; };
