@@ -52,6 +52,10 @@ const main = async () => {
         top16Rate: majorPilots >= 5 ? r2(top16 / majorPilots) : null, majorPilots, events: pre.length },
       happened: x.tierFrom === "results" ? { tier: x.tier, ratio: x.results.ratio } : null,
       builds: buildsOf(x.legend),
+      // A source that ranks rather than grades ("rank 1–9"): shown on the row as it was given,
+      // never turned into a letter (any cut would decide its grades for it).
+      ranks: x.otherCalls.filter((o) => /rank/i.test(byId.get(o.id)?.scale || "") && /^\d+$/.test(String(o.said)))
+        .map((o) => ({ id: o.id, who: o.who, rank: Number(o.said), of: Object.keys(byId.get(o.id).p || {}).length, url: linkFor(o.id, x.legend) })),
       aurora: (x.aurora || 0) >= 0.3,
     };
   });
