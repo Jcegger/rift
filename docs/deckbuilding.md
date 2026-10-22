@@ -141,10 +141,19 @@ does the crowd**: a legend's unplaced lists share 33–34 of 40 with its winners
 the first 10 lists ever posted share 31.6. Proven pilots' lists did no better than the
 crowd's, view counts slightly worse, and elite finishes (top 8 at 64+ players) agree with
 all placings on 37.6 of 40 — **in this game the strong players and the crowd build nearly
-the same lists**. Where they part, the pros are ahead: Yasuo's 26 posted lists play
-movement; all 12 of its winners play the Spiderling swarm. So the first placings steer the
-crowd — the crowd plus a legend's first two results predicts its later winners (34.9) better
-than the crowd (33.8) or the results alone (30.8). Building blind from colours, with no lists
+the same lists**. Where they part, the first placings steer the crowd — the crowd plus a
+legend's first two results predicts its later winners (34.9) better than the crowd (33.8) or
+the results alone (30.8). *(22 Oct 2026: the example that stood here, Yasuo's "winners" all
+playing a Spiderling swarm, was 12 placeholder lists from players hiding their decks before
+the RC; `build-decks.mjs` now holds those apart. These three numbers were measured with them
+in, and before good placings replaced any finish. **Rerun on 22 Oct, on good placings**, over the
+15 legends with 12+ of them and 8+ unplaced lists (first two placings against the consensus of
+the rest): the crowd alone 36.7, the crowd plus the first two at ×10 36.5 (×1 36.6, ×3 36.7,
+×20 35.9), the first two alone 32.4. With and without the placeholders the same to 0.1. So the
+steering no longer earns its weight; `FIRST_W` stays at 10 because this page freezes thresholds
+until the forward scoreboard has 30+ scored suggestions, and that is where to settle it. The
+blind test, rerun the same day over the 15 legends with 10+ good placings: ceiling 36.3, the
+crowd 37.1, built from colours 18.2, most popular 16.5.)* Building blind from colours, with no lists
 at all, reaches only half the ceiling: a winning list is mostly its colours' staples plus its
 legend's own package, and card text does not say which cards winners choose (weighting
 other legends by a plan read from text made it worse, 18.7).

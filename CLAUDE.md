@@ -79,7 +79,9 @@ invariant is.
 September 2026. A feed can return `200 OK`, well-formed, the right row count, and mean
 something entirely different: an endpoint that quietly became paginated, a card name
 split into `name` + `subtitle`, a page that stopped linking the report it used to.
-Assert the *meaning*, not the status code.
+Assert the *meaning*, not the status code. The same goes for what players upload: 12
+identical lists of 39 Spiderlings at a Radiance preview were players hiding their decks,
+and read as a deck they made Yasuo a top legend for a day (`isPlaceholder`, 22 Oct 2026).
 
 **A single failing source keeps its last-good file and the run stays green.** So read the
 summary line — `Sources rebuilt: N of 9` — on successful runs too. A source that quietly

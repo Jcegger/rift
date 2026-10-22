@@ -73,7 +73,7 @@
    "legend": "Kai'Sa, Daughter of the Void",
    "component": "schedule",
    "points": 1,
-   "why": "Scorched Earth answers the wide boards Riven and Kennen build; she has won big events in two sets",
+   "why": "Scorched Earth answers the wide boards Riven and Kennen build; she won big events in both Origins and Spiritforged",
    "cards": [
     "Scorched Earth"
    ],
@@ -123,10 +123,10 @@
    "legend": "LeBlanc, Deceiver",
    "component": "transfers",
    "points": 1,
-   "why": "Her consensus already runs 3 Supernova and 3 Rift Herald (7+), each replaying Meticulous Restorationist from the trash; no list runs it",
+   "why": "Her consensus already runs 3 Harnessed Dragon and 3 Rift Herald (both cost 8), each replaying Meticulous Restorationist from the trash; no list runs it",
    "cards": [
     "Meticulous Restorationist",
-    "Supernova",
+    "Harnessed Dragon",
     "Rift Herald"
    ],
    "rules": [
@@ -189,14 +189,19 @@
    "legend": "Rengar, Pridestalker",
    "component": "schedule",
    "points": -1,
-   "why": "Bilgewater Tracker and Scorched Earth punish his 1-Might bodies",
+   "why": "Irresistible Faefolk and Inferna (1 Might) are in all 35 of his good placings, and Bilgewater Tracker kills both in one play; Avalanche hits the units he stages in base",
    "cards": [
     "Bilgewater Tracker",
-    "Scorched Earth"
+    "Irresistible Faefolk",
+    "Inferna",
+    "Avalanche"
    ],
    "rules": [],
    "verified": true,
-   "source": "interaction hunt 2026-10-21"
+   "source": "card text + data/decks.json, 22 Oct 2026",
+   "vs": [
+    "Kai'Sa, Daughter of the Void"
+   ]
   },
   {
    "legend": "Master Yi, Wuju Bladesman",
@@ -298,7 +303,7 @@
    "legend": "Azir, Emperor of the Sands",
    "component": "transfers",
    "points": 1,
-   "why": "Watchful Curator gives his gear Deflect, taxing that wave; no Azir list runs it",
+   "why": "Watchful Curator gives his gear Deflect, taxing that wave; only one Azir list (unplaced) runs it",
    "cards": [
     "Watchful Curator"
    ],
@@ -364,8 +369,7 @@
    ],
    "rules": [],
    "verified": true,
-   "source": "interaction hunt 2026-10-21",
-   "marker": "Spiderling"
+   "source": "interaction hunt 2026-10-21"
   },
   {
    "legend": "Yasuo, Unforgiven",
@@ -827,8 +831,8 @@
   {
    "legend": "Teemo, Swift Scout",
    "component": "transfers",
-   "points": 1,
-   "why": "The Chaos Hidden package (no Teemo card of its own); Strigian Oracle's Predict plays Nocturne, Horrifying for one Power",
+   "points": 2,
+   "why": "His legend hides for 1 Energy instead of a rune, and Radiance is the Hidden set: Evelynn's package (Evelynn, In Control 33%, Momentary Companion, The Waters' Wage, Bushwhack Trap 22% each of his lists, 22 Oct) comes cheaper under him; Strigian Oracle's Predict plays Nocturne, Horrifying for one Power",
    "cards": [
     "Strigian Oracle",
     "Nocturne, Horrifying",

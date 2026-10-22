@@ -321,6 +321,20 @@ function keyOf(code) {
   return n ? `${m[1].toUpperCase()}|${n}` : null;
 }
 
+// One card is this share of the main deck (units, spells, gear): a placeholder, not a list.
+// Real Spiderling decks, the one card with no copy limit, top out at 31 of 40.
+const PLACEHOLDER = 0.9;
+function isPlaceholder(cards, lookup) {
+  const by = new Map();
+  let total = 0;
+  for (const [code, q] of Object.entries(cards || {})) {
+    const c = lookup(code);
+    if (!c || !["Unit", "Spell", "Gear"].includes(c.t)) continue;
+    by.set(c.n, (by.get(c.n) || 0) + q);
+    total += q;
+  }
+  return total > 0 && Math.max(...by.values()) >= PLACEHOLDER * total;
+}
 const deckSize = (d) => Object.values(d.deck || {}).reduce((a, q) => a + (Number(q) || 0), 0);
 const deckDate = (d) => (d.date ? new Date(Number(d.date) * 1000).toISOString().slice(0, 10) : null);
 
@@ -496,15 +510,28 @@ const main = async () => {
      time, because no single request can reach that far any more. It also means the
      archive's depth is now a function of how many days this has run since the change,
      which `span` reports honestly rather than papering over. */
-  let prior = [];
+  let prior = [], priorHidden = [];
   try {
     const old = JSON.parse(await readFile(new URL("../data/decks.json", import.meta.url), "utf8"));
     if (Array.isArray(old.decks)) prior = old.decks;
+    if (Array.isArray(old.hidden)) priorHidden = old.hidden;
   } catch { /* first run, or no file yet */ }
   const fetched = new Set(decks.map((d) => d.s));
   const carried = prior.filter((d) =>
     d && d.s && !fetched.has(d.s) && d.dt && d.dt >= cutoff && (d.sz || 0) >= MIN_SIZE);
-  const merged = [...decks, ...carried];
+  /* Placeholder lists are not decks. A player keeping a list private until a bigger event
+     uploads a stand-in: at NovaRiftbound's Showdown 5 (19 Oct 2026) twelve players, the
+     3rd-place Kennen among them, posted the same 39 Spiderlings and a Yasuo, and Nova said
+     so. Counted, they made Yasuo a top preview legend and a "meme deck" nobody plays. They
+     leave the deck list but are kept apart in `hidden`, carried like the decks, so an
+     event's field still says how many of its lists are unknown. */
+  const hiddenNow = [...decks, ...carried].filter((d) => isPlaceholder(d.cards, lookup));
+  const hiddenSlugs = new Set(hiddenNow.map((d) => d.s));
+  const hidden = [
+    ...hiddenNow.map((d) => ({ s: d.s, ev: d.ev, pl: d.pl, dt: d.dt, ln: d.ln })),
+    ...priorHidden.filter((h) => h && h.s && !hiddenSlugs.has(h.s) && h.dt && h.dt >= cutoff),
+  ];
+  const merged = [...decks, ...carried].filter((d) => !hiddenSlugs.has(d.s));
   merged.sort((a, b) => (b.tour - a.tour) || (b.dt || "").localeCompare(a.dt || ""));
 
   /* The window above is *declared* — computed from the newest deck and the day count,
@@ -526,6 +553,7 @@ const main = async () => {
       carried: carried.length, fetchedRows: decks.length,
     },
     decks: merged,
+    hidden,
   };
   await writeFile(new URL("../data/decks.json", import.meta.url), JSON.stringify(out) + "\n");
 
@@ -536,6 +564,12 @@ const main = async () => {
   console.log(`${merged.length} decks kept: ${tourN} tournament, ${merged.length - tourN} public` +
     `${clones ? `, ${clones} clones collapsed` : ""}`);
   console.log(`  ${decks.length} from this crawl, ${carried.length} carried from the committed file`);
+  if (hidden.length) {
+    const byEv = {};
+    for (const h of hidden) byEv[h.ev || "no event"] = (byEv[h.ev || "no event"] || 0) + 1;
+    console.log(`  ${hidden.length} placeholder lists held apart as hidden: ` +
+      Object.entries(byEv).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([e, n]) => `${e.slice(0, 40)} ${n}`).join(", "));
+  }
 
   /* Printed every run, not only on failure. The whole reason the 2026-09-16 degradation
      went a week unnoticed is that nothing said out loud how much of the feed a crawl had
@@ -644,7 +678,7 @@ const main = async () => {
 /* Exported so scripts/check.mjs can test the title parser against known shapes rather
    than against whatever the feed happens to contain today. main() is guarded so the
    import does not kick off a network build. */
-export { claimFromTitle, placeOf };
+export { claimFromTitle, placeOf, isPlaceholder };
 
 if (import.meta.url === pathToFileURL(process.argv[1] || "").href) {
   main().catch((e) => {

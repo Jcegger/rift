@@ -98,8 +98,10 @@ export function makeBrewer({ cat, extras, banned, snap, topdecks = null, R = nul
     // No results yet: the crowd's list. Every posted list counts, placed or not — and the
     // first placings steer it, each worth FIRST_W posted lists: the crowd plus a legend's
     // first two results predicts its later winners better (34.9 of 40) than either alone
-    // (crowd 33.8, two results 30.8). Pros sometimes find what the crowd has not — Yasuo's
-    // crowd plays movement; every winner plays the Spiderling swarm.
+    // (crowd 33.8, two results 30.8) — measured on any finish. Rerun on good placings
+    // (22 Oct) it no longer helps: crowd 36.7, steered 36.5 (docs/deckbuilding.md). Frozen
+    // until the scoreboard settles it. (The Yasuo Spiderling "winners" once cited here were
+    // placeholder lists.)
     const all = byLegend.get(name) || [];
     if (all.length < MIN_CROWD) return null;
     const un = all.filter((d) => !placedOf(d));

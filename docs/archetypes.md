@@ -333,18 +333,20 @@ Reactions to win fights after the opponent commits, and bounce.
 - **Engine:** none — Vex, Apathetic's stun lock and removal buy time; Steel Paws empowering itself is not a loop.
 - **Sources:** riftbound.gg guide (14 Sep 2026): "control play style", "hold oriented": take a battlefield early with Vex, Apathetic, deny the comeback with stuns and counters, Astral Heron late. Tier list (3 Oct): Tier 3, "hold oriented".
 
-### Yasuo, Unforgiven — Spiderling-token aggro
-*measured combo · 12 placed · 39 Spiderling + Yasuo, Windrider*
-- **Plan:** Spiderling is Hidden, and has **+1 Might for each other Spiderling you control at its
-  battlefield**; its text lets a deck run any number. Hide them, flip them together, and one
-  battlefield holds a pile of units that grow with each other. Yasuo, Windrider has Ganking and
-  scores a point the third time he moves in a turn; the legend moves a unit to or from base.
-- **Fears:** anything that hits a whole battlefield: Bellows Breath (1 to up to three units at a
-  location), Imperial Decree, Singularity, Thousand-Tailed Watcher's −3.
-- **From Riven:** Bedeviling Stranger returns an enemy unit when a battlefield has 4 or more units
-  — Spiderling battlefields usually do.
-- **Engine:** tokens (Spiderlings, each counting the others) — Hidden lets them land together.
-- **Call (20 Oct 2026):** aggro. Forty units and no spells: the swarm flips onto one battlefield together and wins before the answer comes. Everything it fears is area damage, which is what an aggro deck fears. The measured "combo" is just 39 copies of one card. That is the deck's shape, not a combo kill.
+### Yasuo, Unforgiven — movement tempo
+*measured tempo · 0 placed · 28 lists · u14 s24 g2 · reactive 18*
+- **Plan:** Calm/Chaos spells move units and protect them: Ride the Wind, Charm, Tideturner,
+  Discipline and Defy in nearly every list. The legend moves a friendly unit to or from base,
+  Yasuo, Windrider has Ganking and scores a point the third time he moves in a turn, and the
+  movement payoffs are Stellacorn Herder, Treasure Hunter and Traveling Merchant.
+- **Fears:** removal on its few units. riftbound.gg: the units "tend to be fragile, limiting our
+  ability to thrive without continuously using support cards".
+- **Engine:** movement (Yasuo, Windrider, Ride the Wind, Tideturner, the legend).
+- **Sources:** riftbound.gg guide (updated 21 Apr 2026): Calm/Chaos "to take the tempo rapidly".
+- **Call (22 Oct 2026):** tempo. This heading said Spiderling-token aggro from 12 "placed" lists of
+  39 Spiderlings and a Yasuo at NovaRiftbound's Showdown 5. They were placeholders: players hiding
+  their real lists before the RC (Nova said so; one was the 3rd-place Kennen). `build-decks.mjs`
+  now holds such lists apart, and Yasuo has no good placings left.
 
 ### Riven, The Exile — exhaust midrange *(Radiance)* · *your deck*
 *measured tempo · 9 placed (online previews) · u21 s13 g6 · reactive 19 · draw 12*

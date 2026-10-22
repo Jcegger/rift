@@ -13,7 +13,7 @@
 //   node scripts/check.mjs
 
 import { readdirSync, readFileSync } from 'node:fs';
-import { claimFromTitle, placeOf } from './build-decks.mjs';
+import { claimFromTitle, placeOf, isPlaceholder } from './build-decks.mjs';
 import { bannedNameSet, deckIsLegal, standardNameSet } from './state.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -697,6 +697,23 @@ section('The preseason model');
     ].filter(Boolean));
     ok('every judgment row is complete and resolves', !bad.length, bad.slice(0, 4).join('; ') || `${I.rows.length} rows, all cards and rules resolve`);
   }
+  // model/expert-predictions.json: other people's published calls, kept to be graded beside the
+  // model's. A call nobody can trace, or a legend name that matches no legend (or two), is no
+  // use on grading day.
+  let X = null;
+  try { X = JSON.parse(readFileSync(join(ROOT, 'model/expert-predictions.json'), 'utf8')); } catch { /* reported below */ }
+  ok('model/expert-predictions.json is present', !!X?.sources?.length, X ? `${X.sources.length} sources` : 'missing');
+  if (X?.sources) {
+    const all = (() => { try { return read('data/archetypes.json').legends.map((l) => l.name); } catch { return []; } })();
+    const resolves = (k) => all.includes(k) || all.filter((n) => n.split(',')[0] === k).length === 1;
+    const bad = X.sources.flatMap((s) => [
+      !(s.id && s.who && /^https:\/\//.test(s.url || '') && /^\d{4}-\d{2}-\d{2}$/.test(s.date || '') && s.kind && s.scale) && `${s.id || '?'}: missing who/url/date/kind/scale`,
+      s.date > X.collected && `${s.id}: dated after collection`,
+      ...Object.keys(s.p || {}).filter((k) => !resolves(k)).map((k) => `${s.id}: ${k} is not one legend`),
+    ].filter(Boolean));
+    ok('every expert call is sourced, dated and names one legend', !bad.length,
+       bad.slice(0, 4).join('; ') || `${X.sources.reduce((t, s) => t + Object.keys(s.p).length, 0)} calls`);
+  }
   if (!P) ok('preseason snapshot present', false, 'data/preseason.json missing — run build-preseason.mjs');
   else {
     const legends = new Set(P.builds.map((b) => b.legend));
@@ -1197,6 +1214,24 @@ section('Claimed results');
   ok('the Meta blind spot names the scene the archive misses',
      !events?.coverage?.claimedEventsUnmatched || /North American and online/.test(flat),
      `${events?.coverage?.claimedEventsUnmatched ?? 0} events the archive has never carried`);
+}
+
+/* ══ placeholder lists ═══════════════════════════════════════════════════
+   At NovaRiftbound's Showdown 5 twelve players hid their decks behind the same 39
+   Spiderlings and a Yasuo. Read as lists, they made a meme deck a top preview legend and
+   the example the deckbuilding doc was built around. A placeholder is not a deck, so the
+   snapshot holds none; they are kept apart in `hidden`, where an event's dark share lives. */
+section('Placeholder lists');
+{
+  const byCode = new Map(cat.cards.map((c) => [String(c.c).split('/')[0], c]));
+  const look = (code) => byCode.get(String(code).split('/')[0]) || null;
+  const stray = A.DECKS.filter((d) => isPlaceholder(d.cards, look));
+  ok('the deck snapshot holds no placeholder list', stray.length === 0,
+     stray.length ? stray.slice(0, 3).map((d) => d.h).join(' | ') : `${(snap.hidden || []).length} held apart as hidden`);
+  ok('every hidden list keeps its slug, event and date',
+     (snap.hidden || []).every((h) => h.s && 'ev' in h && h.dt));
+  ok('a real Spiderling deck is not a placeholder, 39 of one card is',
+     !isPlaceholder({ X: 31, Y: 9 }, (k) => ({ t: 'Unit', n: k })) && isPlaceholder({ X: 39, Y: 1 }, (k) => ({ t: 'Unit', n: k })));
 }
 
 /* ══ movement ════════════════════════════════════════════════════════════

@@ -18,11 +18,17 @@ the scorecard grades them. Where the two differ, the model is the one to use.
 - **The crowd picks the winners among new legends.** The most-registered new legend at the
   first RQ became a top deck three times of three: Draven, LeBlanc, Kennen.
 
-The model publishes **data only** — measured relationships, no hand scores; its judgment rows are
-shown as reasons to talk through. After its audit on 21 Oct the top six were Kennen, Riven,
+The model published **data only** until 22 Oct; since then its card reads (the judgment rows)
+count at a third, with the data-only score kept beside them for grading. After its audit on 21 Oct the top six were Kennen, Riven,
 Kai'Sa, LeBlanc, Rengar and Master Yi. The audit fixed one bug: Yasuo had zero pilots at Vendetta's RQs, and the model had read
 that as a blank slate rather than as evidence nobody played it, which put a meme Spiderling list
 — one identical list copied by 12 preview pilots — 5th. It is now 14th.
+
+**22 Oct: that list was never a deck.** NovaRiftbound said after Showdown 5 that every all-Spiderling
+list came from a player who asked to keep their real list private until the RC; the 3rd-place one
+was Kennen. `build-decks.mjs` now holds such placeholders apart (12 of Nova's 74), so they count for
+no legend, and Yasuo, with no real preview pilots, is NOT ENOUGH DATA. The hand poll's #11 below
+stays as written, because the scorecard grades it, and it will likely miss.
 
 **These are predictions, and they are meant to be graded.** No sanctioned Radiance event has been
 played yet. This page ranks all 58 legends 1 to 58, names the risers, sleepers and busts, and ends
@@ -85,7 +91,7 @@ the calls I would stake something on, and 20–45 is mostly noise.
   Falling Star a combat trick, and lets Time Warp be cast on the opponent's turn, so you take two
   turns in a row while holding up interaction.
 - **Schedule:** Scorched Earth answers the wide boards Riven and Kennen build.
-- **History:** she is the only legend to win big events in two different sets. Expect her to beat
+- **History:** she won big events in both Origins and Spiritforged (Azir has since won RQs in two formats too). Expect her to beat
   her play rate; the Best-Of rule keeps her numbers low at RCs.
 
 **3. Riven, The Exile** — *the best newcomer, discounted for hype* · *your deck*
@@ -94,12 +100,15 @@ the calls I would stake something on, and 20–45 is mostly noise.
   card can only be played to its own battlefield (§811.1.d.1), and hidden cards on battlefields you
   don't control are removed (§323.6.a), so every flip lands where Riven's ability applies. Momentary
   Companion (in 72% of Evelynn lists, not in Riven's) becomes a free, ready 4-Might body.
-- **Counters:** Vex, Apathetic, whose stun on entry cancels "enters ready", and gear removal on
-  Blade of the Exile.
+- **Counters:** Rockfall Path ("Units can't be played here"), which switches her legend off on
+  that battlefield and is in 27 of the 30 Kai'Sa lists running Radiance cards (22 Oct); gear
+  removal on Blade of the Exile; and Vex, Apathetic, which stuns a unit played at her battlefield
+  and stops it moving that turn. A stunned unit contributes no Might to combat damage
+  (§424.1.b); nothing in §424 exhausts it, so the ready unit stays ready for exhaust costs.
 
 **4. LeBlanc, Deceiver**
 - **Returning strength:** ×1.35, steady across all three RQs.
-- **The new line:** her consensus list already runs 3 Supernova and 3 Rift Herald, all 7+ cost, and
+- **The new line:** her consensus list already runs 3 Harnessed Dragon and 3 Rift Herald, both cost 8, and
   each one lets you replay Meticulous Restorationist from the trash. No LeBlanc list runs it.
 - **Also new:** Mournful Spirit's Deathknell doubles under Karthus.
 - **Schedule:** Radiance prints little banish, the one thing her Deathknell plan fears.
@@ -112,7 +121,7 @@ the calls I would stake something on, and 20–45 is mostly noise.
 - **The risk:** splash damage (Bilgewater Tracker, Scorched Earth) against his 1-Might bodies.
 
 **6. Master Yi, Wuju Bladesman** *(nB)*
-- **Returning strength:** ×1.27, and the most good Vendetta placings of any legend (39).
+- **Returning strength:** ×1.27, and 89 Day 2s across Vendetta's three RQs, third behind Kennen (202) and Irelia (105).
 - **The new line:** Hunting Blind, deployed on your own turn, moves an enemy unit into your lone
   Shield 2 defender. That unit made the battlefield contested, so it is the attacker, and the fight
   effectively removes it. Ntofo Strikes and Staunch Survivor are cheap Calm/Body defence.
@@ -127,7 +136,7 @@ the calls I would stake something on, and 20–45 is mostly noise.
 - **Returning strength:** ×1.36.
 - **Schedule:** Radiance is a wave of gear removal: Lost to the Sands, An Offer You Can't Refuse,
   Burn Away and Stalwart Goatherd.
-- **The patch:** Watchful Curator gives his gear Deflect, and no Azir list runs it.
+- **The patch:** Watchful Curator gives his gear Deflect, and only one Azir list, unplaced, runs it (22 Oct).
 
 **9. Vex, Gloomist** — *the riser nobody's talking about*
 - **Returning strength:** ×1.10.
@@ -234,7 +243,7 @@ Vendetta, and she is ranked here at 18. The reasons:
   (§715.2). A Bomb's Deathknell is your ability (§187.12), so every Bomb hits for 3. Detonation
   Amplifier fires each Bomb twice.
 - **Radiance prints the Bombs in her colours.** Amateur Demolitionist, Hexplosive Minefield and
-  Satchel Charge are all Fury or Fury/Chaos, and Bilgewater Tracker deals 2 to each of two units.
+  Satchel Charge are all Fury or Fury/Chaos, and Bilgewater Tracker deals 1 to each of up to two units.
 - **Her legend pays for Minefield on the opponent's turn.** Annie readies two runes at the end of
   your turn, which is exactly Hexplosive Minefield (2 Energy + 1 Power, Action speed). Cast it in a
   showdown on their turn to pop your Bombs where they attack, then replant them at end of turn.

@@ -58,12 +58,14 @@ own game.
 
 **What the Radiance previews add.** Two online events played Radiance before release
 (NovaRiftbound's Showdown #5, 74 players; Haven's Challenger #5, 50). Placings there: **Kennen 20**
-(won Haven), **Yasuo 12** (the Spiderling deck, 3rd at Nova), **Kai'Sa 12** (2nd at Nova),
-**Riven 9** (won Nova), LeBlanc and Mordekaiser 5 each. Two small online events, before the
-cards were legal, so they're a hint, not a field. Yasuo and Kai'Sa get their own boxes below.
+(won Haven), **Kai'Sa 12** (2nd at Nova), **Riven 9** (won Nova), LeBlanc and Mordekaiser 5
+each. Two small online events, before the cards were legal, so they're a hint, not a field.
+Kai'Sa gets her own box below. **The "Yasuo Spiderling deck" isn't one:** the 12 identical lists
+of 39 Spiderlings at Nova were placeholders from players hiding their real decks before the RC
+(Nova said so; the 3rd-place one was Kennen). So 12 of Nova's 74 decks are unknown.
 
 **The gauntlet, in the order you're most likely to face it:** Irelia, Kennen, Rengar, Master
-Yi, LeBlanc, Azir, Jayce, then Vex, Akali and Ornn, plus Yasuo, Kai'Sa and the Riven mirror
+Yi, LeBlanc, Azir, Jayce, then Vex, Akali and Ornn, plus Kai'Sa and the Riven mirror
 from the previews, with Seraphine and Evelynn mixed in from day one.
 
 ---
@@ -85,8 +87,7 @@ Reckless Innovator and Stellacorn Herder; bottom Blade of the Exile and Battle P
 first.**
 
 **What beats you:** decks that **take the battlefield away** before the engine runs (aggro with
-pump: Rengar, Yi), decks that **ready their own units better than you do** (Irelia), and a pile
-of units on one battlefield that your one-at-a-time answers can't keep up with (Yasuo).
+pump: Rengar, Yi), and decks that **ready their own units better than you do** (Irelia).
 
 ---
 
@@ -276,23 +277,6 @@ Hourglass.
 - **Ornn (Calm/Mind gear).** Board +Acceptable Losses, +Mageseeker Warden → −Zhonya's
   Hourglass, −Zhonya's Hourglass.
 
-## Yasuo, Unforgiven (Spiderling) · Calm/Chaos · 12 placed in the previews
-
-**Their plan.** Thirty-nine Spiderlings, each Hidden and **+1 Might for each other Spiderling
-there**. They hide them, flip them together, and one battlefield holds a pile that grows with
-itself. Yasuo, Windrider scores the third time he moves in a turn.
-
-**Respect.** The flip turn: a pile appears mid-combat at Reaction speed.
-
-**Your plan.** **This is the matchup your answers are worst at:** they hit one unit at a time,
-and the pile is many. What works: **Bedeviling Stranger is at its best here**, since a Spiderling
-battlefield always has 4+ units. **Blitzcrank pulls one Spiderling to his battlefield**, away
-from the others' bonus. Every Spiderling bounced or moved makes the rest smaller. Hold the
-battlefield they aren't on and race the points rather than fighting the pile. A reading, not a
-result: log it.
-
-**Board.** +Gust, +Gust → −Zhonya's Hourglass, −Battle Preparations. Keep all three Strangers.
-
 ## Kai'Sa, Daughter of the Void · Fury/Mind · 2nd at Nova
 
 **Their plan.** The legend's Power goes to spells: removal (Falling Star, Hextech Ray, Stupefy,
@@ -334,10 +318,9 @@ Preparations.
 | Vex | Hush ×2, Not So Fast | Stranger, Battle Prep, Zhonya |
 | Akali | Hush ×2, Warden | Scuttle ×2, Stranger |
 | Ornn | Acceptable Losses, Warden | Zhonya ×2 |
-| Yasuo | Gust ×2 | Zhonya, Battle Prep |
 | Kai'Sa | Hush ×2, Not So Fast | Stranger ×2, Battle Prep |
 
-**How many matchups each board card comes in for:** Warden 7, Hush 7, Gust 5, Acceptable Losses 3,
+**How many matchups each board card comes in for:** Warden 7, Hush 7, Gust 4, Acceptable Losses 3,
 Not So Fast 3, Vex 1, Ki Burst 1.
 
 ## What would change this page

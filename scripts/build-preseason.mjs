@@ -5,11 +5,12 @@
 //
 //   node scripts/build-preseason.mjs [legend substring]   # a substring prints that legend's detail
 //   node scripts/build-preseason.mjs --preview=1 --carryover=0.8 [legend]   # what-if: writes nothing
-//   node scripts/build-preseason.mjs --with-judgment                        # ...with the judgment rows
+//   node scripts/build-preseason.mjs --with-judgment                        # ...card reads at full weight
+//   node scripts/build-preseason.mjs --data-only                            # ...without them
 //
-// The published ranking is DATA ONLY (Jay's call, 21 Oct): measured relationships, no hand
-// scores. The judgment rows in model/preseason-inputs.json are kept, validated and shown beside
-// each build as "not in the score" — reasons to talk through, promoted only by agreement.
+// The published ranking counts the judgment rows (what the new cards do) at CARD_W, a third:
+// it was data only until 22 Oct, when Jay asked for card-based predictions at a light weight.
+// Each build also carries its data-only score (`dataOnly`), so the scorecard can grade both.
 //
 // Sources, all already in data/ or hand-written:
 // - RETURNING strength: Riot's RQ Day 1 / Day 2 tables (data/topdecks.json) from before the
@@ -26,7 +27,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { makeBrewer } from "./build-brews.mjs";
 import { SET_LEGAL_FROM } from "../lib/decks.mjs";
 import { buildsOf } from "../lib/builds.mjs";
-import { score, rankSim, fitPopularity, pool, logRatio, carryFor, K_RET, K_PRIOR, K_NEW, VS_CAP, PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, CARRY_REG, REG_HALF, COMPONENTS } from "../lib/preseason.mjs";
+import { score, rankSim, fitPopularity, pool, logRatio, carryFor, K_RET, K_PRIOR, K_NEW, VS_CAP, PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, CARRY_PRE, CARRY_REG, REG_HALF, COMPONENTS, CARD_W } from "../lib/preseason.mjs";
 
 const COVERAGE = 0.5, MIN_FIELD = 32, TOP = 0.25, RAD_SHARE = 0.3, MARKER_SHARE = 0.5, ERA_PCT = 0.05, ALPHA = 100;
 const NO_BEST_OF = new Set(["OGN", "OGS", "SFD"]);   // Riot, RC prizing, 15 Oct 2026
@@ -48,9 +49,12 @@ const r3 = (x) => Math.round(x * 1000) / 1000;
 const main = async () => {
   const args = process.argv.slice(2);
   const num = (k) => { const a = args.find((x) => x.startsWith(`--${k}=`)); return a ? Number(a.split("=")[1]) : null; };
-  const withJudgment = args.includes("--with-judgment");
-  const whatIf = { preview: num("preview"), carryover: num("carryover"), noJudgment: !withJudgment };
-  const isWhatIf = whatIf.preview != null || whatIf.carryover != null || withJudgment;
+  // Published: the card reads at CARD_W, with the data-only score beside each build.
+  // --with-judgment: what-if at full weight; --data-only: what-if without them.
+  const withJudgment = args.includes("--with-judgment"), dataOnly = args.includes("--data-only");
+  const cardW = dataOnly ? 0 : withJudgment ? 1 : CARD_W;
+  const whatIf = { preview: num("preview"), carryover: num("carryover") };
+  const isWhatIf = whatIf.preview != null || whatIf.carryover != null || withJudgment || dataOnly;
   const previewW = whatIf.preview ?? PREVIEW_W;
   const only = (args.find((a) => !a.startsWith("--")) || "").toLowerCase();
   const [cat, extras, banned, snap, topdecks] = await Promise.all(["cards.json", "extras.json", "banned.json", "decks.json", "topdecks.json"].map(read));
@@ -68,6 +72,11 @@ const main = async () => {
   // can be read against its share of the field.
   const evs = new Map();
   for (const d of m.usable) if (d.tour && d.pl != null && d.ec && d.ev) (evs.get(d.ev) || evs.set(d.ev, []).get(d.ev)).push(d);
+  // Placeholder lists (build-decks.mjs holds them apart): players whose deck is unknown. They
+  // are left out of an event's lists and its top quarter alike, so each legend is read
+  // against the lists that are real; the count is kept to say how much of a field is dark.
+  const hiddenBy = new Map();
+  for (const h of snap.hidden || []) if (h.ev) hiddenBy.set(h.ev, (hiddenBy.get(h.ev) || 0) + 1);
   const full = [];
   for (const [ev, ds] of evs) {
     const ec = ds[0].ec;
@@ -76,7 +85,7 @@ const main = async () => {
     const rad = ds.filter((d) => mainOf(d).some(([c]) => c.s === newest)).length / ds.length;
     const kind = dt >= legalFrom ? "season" : rad >= RAD_SHARE ? "preview" : "returning";
     const cut = Math.ceil(ec * TOP), T = ds.filter((d) => d.pl <= cut).length;
-    full.push({ ev, dt, ec, lists: ds.length, kind, cut, T, ds });
+    full.push({ ev, dt, ec, lists: ds.length, hidden: hiddenBy.get(ev) || 0, kind, cut, T, ds });
   }
   // O/E for a set of lists at full-field events of the given kinds.
   const oeFull = (pred, kinds) => {
@@ -175,7 +184,7 @@ const main = async () => {
   if (unknownVs.length) throw new Error(`model/preseason-inputs.json: unknown vs legends: ${unknownVs.join(", ")}`);
   // Pass 1 scores every build with `vs` rows at face value; pass 2 weights each by how good
   // the decks it answers came out of pass 1 (a legend's best build).
-  const run = (vsRatio) => cases.map((c) => ({ c, s: score({ ret: c.retLegend, target: c.target, lastTarget: c.lastTarget, established: c.established, adj: c.adj, rows: whatIf.noJudgment ? [] : c.use, season: c.season, vsRatio, carryover: carry }) }));
+  const run = (vsRatio, cw = cardW) => cases.map((c) => ({ c, s: score({ ret: c.retLegend, target: c.target, lastTarget: c.lastTarget, established: c.established, adj: c.adj, rows: cw ? c.use : [], season: c.season, vsRatio, carryover: carry, cardWeight: cw }) }));
   const first = run(() => 1);
   const best = new Map();
   for (const { c, s } of first) best.set(c.name, Math.max(best.get(c.name) ?? -Infinity, Math.exp(s.post)));
@@ -186,11 +195,14 @@ const main = async () => {
     returning: { O: r3(retLegend.O), E: r3(retLegend.E), lastShare: r3(lastShare.get(name) || 0), lastTarget: r3(lastTarget), ratio: r3(Math.exp(s.retLog)), carry: r3(s.carry), buildAdj: r3(adj) },
     popularity: { share: r3(pp.share), pilots: r3(pp.pilots), posted: r3(posted.get(name) || 0), target: r3(target) },
     judgment: { points: r3(s.judgment.total), by: Object.fromEntries(Object.entries(s.judgment.by).map(([k, v]) => [k, r3(v)])),
-      applied: withJudgment,
+      weight: r3(cardW),
       rows: use.map((r) => ({ component: r.component, points: r.points, verified: r.verified, why: r.why, ...(r.vs ? { vs: r.vs, vsWeight: r3(Math.min(VS_CAP, vsRatio(r.vs))) } : {}) })) },
     season: { O: r3(season.O), E: r3(season.E), weight: r3(s.resultsWeight), priorStrength: r3(s.priorStrength) },
     prior: r3(s.prior), score: r3(s.post), ratio: r3(Math.exp(s.post)), lo: r3(s.lo), hi: r3(s.hi), sd: s.sd, post: s.post,
   }));
+  // The data-only score, kept beside the published one for grading: did the card reads help?
+  const dataRun = new Map(run(vsRatio, 0).map(({ c, s }) => [c.b.id, Math.exp(s.post)]));
+  out.forEach((x) => { const r = dataRun.get(x.id); x.dataOnly = { ratio: r3(r), tier: tierOf(r) }; });
   out.sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
   const rr = rankSim(out);
   out.forEach((x, i) => { x.rank = i + 1; x.rankRange = [rr[i].p10, rr[i].p90]; x.top10 = r3(rr[i].top10); x.tier = tierOf(x.ratio);
@@ -202,18 +214,18 @@ const main = async () => {
     generatedAt: new Date().toISOString().slice(0, 10), set: newest, legalFrom,
     method: "lib/preseason.mjs; guides/radiance-tier-prediction.md is the method in prose",
     tiers: Object.fromEntries(TIERS), uncertainWidth: WIDE_LOG, littleData: LITTLE,
-    constants: { K_RET, K_PRIOR, K_NEW, VS_CAP, CARRYOVER, CARRY_REG, REG_HALF, carryNow: r3(carry), PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, COVERAGE, MIN_FIELD, TOP, components: COMPONENTS },
+    constants: { K_RET, K_PRIOR, K_NEW, VS_CAP, CARRYOVER, CARRY_PRE, CARRY_REG, REG_HALF, carryNow: r3(carry), PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, COVERAGE, MIN_FIELD, TOP, components: COMPONENTS },
     popularity: { legends: pop.n, slope: r3(pop.slope), r: r3(pop.r), cap: r3(cap), pilots: pilotN, postedSince: eraFrom, alpha: ALPHA },
-    note: "Data only: the judgment rows are listed per build but not in the score. A prediction until the new format has results, then the results. ratio is observed over expected top finishes (×1.00 = average); lo/hi are an 80% range in logs; rankRange is the 10th–90th percentile rank over simulated seasons and top10 the chance of a top-10 finish. Judgment rows are hand-written in model/preseason-inputs.json.",
+    note: "The judgment rows (card reads) count at judgment.weight; dataOnly is the score without them. A prediction until the new format has results, then the results. ratio is observed over expected top finishes (×1.00 = average); lo/hi are an 80% range in logs; rankRange is the 10th–90th percentile rank over simulated seasons and top10 the chance of a top-10 finish. Judgment rows are hand-written in model/preseason-inputs.json.",
     sources: {
       rq: rq.map((e) => ({ event: e.title, published: e.published, kind: e.published >= legalFrom ? "season" : "returning" })),
-      fullField: full.map((e) => ({ event: e.ev, date: e.dt, players: e.ec, lists: e.lists, kind: e.kind })),
+      fullField: full.map((e) => ({ event: e.ev, date: e.dt, players: e.ec, lists: e.lists, hidden: e.hidden, kind: e.kind })),
     },
     unmatchedMarkers: unmatched, builds: out,
   };
   if (!only && !isWhatIf) await writeFile(new URL("../data/preseason.json", import.meta.url), JSON.stringify(file));
   const rqN = rq.length, ff = full.reduce((t, e) => ({ ...t, [e.kind]: (t[e.kind] || 0) + 1 }), {});
-  console.log(`${isWhatIf ? `WHAT-IF (nothing written): previews ×${previewW}${whatIf.carryover != null ? `, carryover ${whatIf.carryover}` : ""}${withJudgment ? ", WITH the judgment rows" : ""}\n` : ""}popularity fit: ${pop.n} legends, slope ${r3(pop.slope)}, r ${r3(pop.r)}, cap ×${r3(cap)} · ${r3(pilotN)} pilots (weighted) in ${newest} events + posted lists since ${eraFrom} (worth ${ALPHA} pilots)`);
+  console.log(`${isWhatIf ? `WHAT-IF (nothing written): previews ×${previewW}${whatIf.carryover != null ? `, carryover ${whatIf.carryover}` : ""}${withJudgment ? ", card reads at FULL weight" : ""}${dataOnly ? ", DATA ONLY" : ""}\n` : ""}popularity fit: ${pop.n} legends, slope ${r3(pop.slope)}, r ${r3(pop.r)}, cap ×${r3(cap)} · ${r3(pilotN)} pilots (weighted) in ${newest} events + posted lists since ${eraFrom} (worth ${ALPHA} pilots)`);
   console.log(`${out.length} builds of ${legends.size} legends · returning: ${rq.filter((e) => e.published < legalFrom).length} RQ tables + ${ff.returning || 0} full-field events · season: ${rq.filter((e) => e.published >= legalFrom).length} RQ + ${ff.season || 0} full-field + ${ff.preview || 0} previews (×${PREVIEW_W}) · ${rows.length} judgment rows${unmatched.length ? ` · UNMATCHED markers: ${unmatched.join("; ")}` : ""}`);
   for (const x of out.filter((x) => !only || x.legend.toLowerCase().includes(only)).slice(0, only ? 99 : 15))
     console.log(`  ${x.tier} ${String(x.rank).padStart(2)} (${x.rankRange.join("–")}, top-10 ${Math.round(x.top10 * 100)}%) ${x.legend.slice(0, 30)}${x.build ? ` — ${x.build}` : ""} ×${x.ratio}  [ret ×${x.returning.ratio} at ${Math.round(x.returning.carry * 100)}% · pop ×${x.popularity.target} (${(x.popularity.share * 100).toFixed(1)}%) · judg ${x.judgment.points >= 0 ? "+" : ""}${x.judgment.points} · results ${Math.round(x.season.weight * 100)}%]${x.aurora.length ? " AURORA" : ""}`);

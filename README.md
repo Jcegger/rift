@@ -41,7 +41,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `data/extras.json` - printings Riot does not publish, merged in at load. The one
   hand-maintained file, and the only one carrying no `generatedAt`, so it sits outside
   the freshness system on purpose: nothing upstream refreshes it.
-- `data/decks.json` - recent decklists, the meta snapshot.
+- `data/decks.json` - recent decklists, the meta snapshot. Placeholder lists (one card is 90%+
+  of the main deck: a player hiding their real list, like the 39 Spiderlings at Nova's Showdown 5)
+  are not decks; they sit apart in `hidden` (slug, event, place, date), so a field can say how many
+  of its lists are unknown, and count for no legend anywhere.
 - `data/banned.json` - cards banned from sanctioned Constructed play.
 - `data/events.json` - the tournament archive, with player counts and coverage.
 - `data/news.json` - riftbound.gg's posts (title, date, tag, link) and, under `riot`,
@@ -79,9 +82,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   (Day 2 at RQs, the top quarter at full-field events), a prediction from returning strength
   and scored judgments until the new format has results, then the results — the prediction
   counts as pseudo-results, as strong as the evidence behind it (10 expected tops for a full
-  record, 3 for a new legend), previews at half. **The published ranking is data only**: the
-  judgment rows are listed beside each build as "not in the score", to talk through and promote
-  by agreement. `node scripts/build-preseason.mjs --preview=1 --carryover=0.7 --with-judgment
+  record, 3 for a new legend), previews at half. **The judgment rows (card reads) count at a third**
+  (`CARD_W`; data only until 22 Oct 2026), and each build also carries its data-only score
+  (`dataOnly`) so the scorecard can grade whether the card reads helped.
+  `node scripts/build-preseason.mjs --preview=1 --carryover=0.7 --with-judgment|--data-only
   [legend]` is a what-if that writes nothing. Each build carries its
   10th–90th percentile rank over simulated seasons and its chance of a top-10 finish.
   Tiers on the same scale: S ×1.4+, A ×1.0+, B ×0.8+, C ×0.65+, D below (fixed cuts, which
@@ -99,6 +103,11 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   rule numbers, verified or not (unverified counts half), source; an optional marker card
   applies it to one build; an optional `vs` names the legends it answers or fears. Not
   generated; `check.mjs` enforces every field.
+- `model/expert-predictions.json` - published Radiance predictions collected before release
+  (22 Oct 2026): LotharHS's sheet, video tier lists (Zelonius × TheManLand, Riftbound Insider,
+  Into the Rift, Riftlab and others) and riftbound.gg's most-buffed list, each with its URL, date
+  and placements exactly as given. Not an input to the score: kept to grade the model, the experts
+  and the readers on the same calls. Hand-written; `check.mjs` enforces the fields.
 - `data/swaplog.json` - every swap a brew has suggested, from the day it first appeared,
   scored 28 days later against the legend's **good placings** (`lib/placing.mjs`), not its
   posted lists: adopted = the card in gained 10+ points in them against the 28 days before;
@@ -110,7 +119,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   Radiance-format events, a consensus list counted from its placed lists (or brews,
   labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
 - `scripts/build-catalog.mjs` - regenerates the catalog from Riot's gallery feed.
-- `scripts/build-decks.mjs` - regenerates the deck snapshot.
+- `scripts/build-decks.mjs` - regenerates the deck snapshot, holding placeholder lists apart
+  (`isPlaceholder`; `check.mjs` asserts none is left among the decks).
 - `scripts/build-banned.mjs` - regenerates the ban list.
 - `scripts/build-events.mjs` - regenerates the tournament archive and its coverage.
 - `scripts/build-news.mjs` - regenerates the news feed: riftbound.gg's posts and Riot's
@@ -132,10 +142,14 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   Fetches nothing; runs after build-brews.
 - `scripts/build-preseason.mjs` - builds `data/preseason.json` from data/topdecks.json,
   data/decks.json and `model/preseason-inputs.json`. Fetches nothing; runs after build-rising.
-  The prior blends last-format strength and POPULARITY for an established legend — 60/40
-  before a format's first RQ, moving to 30/70 as registrations arrive (backtested on Vendetta's
-  three RQs: registration share predicts Day 2 conversion at 0.57–0.79 rank correlation, last
-  format at 0.42–0.59, the best blend 30/70 to 20/80) — and is all popularity for a new one.
+  The prior blends last-format strength and POPULARITY for an established legend — 80/20
+  before a format's first RQ (`CARRY_PRE`), moving to 30/70 as registrations arrive (backtested on
+  Vendetta's three RQs: registration share predicts Day 2 conversion at 0.57–0.79 rank correlation,
+  last format at 0.42–0.59, the best blend 30/70 to 20/80) — and is all popularity for a new one.
+  Before registrations, popularity is mostly posted lists, which tracked the LA RQ's registrations
+  at only r 0.53 in a settled Vendetta week, and flattened: brewers spread out, registrants bunch
+  on the best decks, and an unchanged deck gets no new posts. It was 60/40 until 22 Oct 2026,
+  which squeezed every proven deck (Irelia, Yi) toward the middle during the brewing week.
   An established legend's absence is information: none of its pilots at 2,000-player RQs
   shrinks its returning strength to the popularity floor, with the full prior weight (Yasuo,
   zero Vendetta RQ pilots, was being read as a blank slate) — both measured on Riot's nine RQ write-ups: about 60% of a legend's

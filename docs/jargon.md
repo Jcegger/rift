@@ -126,6 +126,19 @@ any source checked. If Jay uses one, read it the LoL way:
 | snowball | an early lead that keeps growing | point tempo, XP buffs |
 | lane / jungle | map areas | battlefields / the Unleashed jungle set |
 
+## 9. Colours and card nicknames
+
+| term | means | Riftbound mapping | evidence |
+|---|---|---|---|
+| **red / green / blue / orange / purple / yellow** | domains by card colour | Fury, Calm, Mind, Body, Chaos, Order. "Green-purple" is Calm/Chaos (Riven, Irelia, Vex, Yasuo); "purple gear hate" is a Chaos gear answer | cardsrealm, *best cards in each domain to deal with Vex, Apathetic* ([link](https://riftbound.cardsrealm.com/en-us/articles/riftbound-best-cards-in-each-domain-to-deal-with-vex-apathetic)); Ultimate Guard top 10 ([link](https://ultimateguard.com/en/blog/riftbound-radiance-top-10-cards-from-the-new-set)): "green-purple solidifies its position as the best colour combination", "the purple gear hate of choice" (An Offer You Can't Refuse) |
+| **faefolk killer** | Bilgewater Tracker | Fury, 3 Energy, 3 Might: "When you play me, deal 1 to each of up to 2 units". Irresistible Faefolk is a 1-Might two-drop in every placed Rengar and Kha'Zix list of Aug–Sep 2026, so Tracker on curve kills it, often with a second 1-Might unit (Inferna, Trifarian Captain, Treasure Hunter) | Jay. The phrase itself was not found online; the closest is Ultimate Guard: "cruelly on curve, killing Faefolk or Treasure Hunter when you go second" |
+| **"Faefolk"** | Irresistible Faefolk, not the Fae tag | the one card; "Fae" tags 19 | Ultimate Guard (as above) |
+| **Rebuke two-drop** | Bedeviling Stranger | Chaos, 2 Energy, Hidden: returns an enemy unit at a battlefield with 4+ units | Ultimate Guard #1 ("aka Rebuke two-drop") |
+| **X on steroids** | a strictly bigger version of a known card | Reckless Innovator = "Treasure Hunter on steroids" | Ultimate Guard #2 |
+| **the Chaos domain's Punch First** | Momentary Companion, a hidden 4-Might body | | riftbound.gg Evelynn guide |
+| **smash-mouth** | straightforward fight-and-hold aggro | Rengar and Master Yi, Kennen's worst matchups | riftbound.gg, *Playing and building Kennen in the post-ban metagame* ([link](https://riftbound.gg/playing-building-kennen-in-the-post-ban-metagame/)) |
+| **placeholder list / hidden list** | a stand-in uploaded by a player keeping their deck private | e.g. 39 Spiderlings and a Yasuo at Nova's Showdown 5; `build-decks.mjs` holds these apart | NovaRiftbound, after Showdown 5 (via search summary) |
+
 ## Unconfirmed: plausible, but not seen in a Riftbound source
 
 blowout · chump (block or attack) · 2-for-1 · top-deck · brick / bricked · flood / screw ·
