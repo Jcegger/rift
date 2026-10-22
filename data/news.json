@@ -1117,8 +1117,17 @@
  ],
  "riotSource": "playriftbound.com/en-us/news/ and its three category pages",
  "riotFailed": null,
- "riotCarried": 1,
+ "riotCarried": 2,
  "riot": [
+  {
+   "title": "Riftbound’s 2026 Drawings",
+   "dt": "2026-10-22",
+   "url": "https://playriftbound.com/en-us/news/announcements/riftbounds-2026-drawings",
+   "tags": [
+    "Announcements"
+   ],
+   "desc": "Everything about the K/DA Collection, T1 Player Bundle, 2026 Worlds Bundle, and Gift of the Rift."
+  },
   {
    "title": "Riftbound x K/DA Couture Collection",
    "dt": "2026-10-21",
