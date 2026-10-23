@@ -98,6 +98,19 @@ Body and Mercenary's Accelerate (§356.4.c, §356.4.f.1); equipment adds its Mig
 attached (§137.3) — Edge of Night and Last Rites are +2; Tornado empowering Matriarch triggers
 her (§442.2.a); a hidden card is played ignoring Energy and Power (§811.1.b, §204.1.a).
 
+**Decided before section 2** (Jay, 23 Oct 2026):
+- **Format: best-of-three.** The sideboard matters, and battlefields follow the game-1 /
+  going-first / going-second method.
+- **Flexible, not fragile.** Complexity is welcome; dependence is not. No card or combo the
+  plan needs to see: every card must be good on its own (the four-job test), every engine
+  needs more than one way to switch on, and the deck must win games where Matriarch never
+  shows up.
+- **Chosen Champion: Sivir, Mercenary** (4 Energy, 1 Power; Accelerate; 6 Might with Ganking
+  after 2 Power spent) — the cheap, mobile closer, over Sivir, Ambitious (6 Energy, 3 Power,
+  7 Might, Deflect 2).
+- **Sivir's signature, On the Hunt** (1 Energy, 2 Power: ready your units), is a real
+  candidate in the fights slot. Winning lists run signatures at 3 or none; Randyyy ran none.
+
 ---
 
 ## 2. Roles and slots — in progress
