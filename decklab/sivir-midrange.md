@@ -347,6 +347,76 @@ Games, results, and every change with its reason go here.
 
 ---
 
+## Every legal unit, re-read — 23 Oct 2026 (still testing; nothing here is decided)
+
+Jay's point: every card is up for debate, and the earlier unit bench grouped eleven cards under
+one line that did not hold for Ziggs. This pass reads all 178 legal Body/Chaos/colourless units
+not in the list (`data/cards.json`, errata applied, bans and Standard checked) against the four
+jobs and the hold-behind-a-hide plan. Results are not used to rank Radiance cards, which have
+none yet.
+
+**Worth arguing against a slot in the list**, strongest case first:
+
+| card | what it does for this plan | slot it competes with |
+|---|---|---|
+| **Evelynn, In Control** (RAD 4E 1P, 4 Might, Chaos; Disarm) | *when I hold, if you control a facedown card here, score 1 point.* A hold effect (§383.4.d) and not a Conquer, so ungated (§473.1.a.1): a held battlefield with a hide pays **2 a turn**. Tier 0, the only unit here that scores. Tension: flipping the hide to defend removes the point | a 4-drop or a 2-drop (Matriarch, Staunch Survivor) |
+| **Ziggs, Explosive** (RAD 4E, 4 Might) | `[1]`, exhaust: a Bomb to **their** held battlefield (§830.1.b.1); when they hold, it dies and deals 2 there (§187.12). Defends at 6 by killing a spare Gold | the second Edge of Night |
+| **Windsinger** (SFD 2E, 1 Might, Hidden) | *return another unit at a battlefield with 3 Might or less to hand* — Gust on a body, unconditional, at Reaction speed from face down | Bedeviling Stranger (its bounce needs 4 units there) |
+| **Loyal Pup** (SFD 3E, 3 Might) | *when you defend at a battlefield, you may move me there* — reinforces any hold from base, no hide needed (late arrivals defend, §466.2.c.3.a) | a 2-drop body or Tideturner |
+| **Pitiless Stalker** (RAD 5E 1P, 5 Might) | exhaust: stun an enemy unit, every turn (our turn only; a stunned unit deals no combat damage, §424.1.b) — breaks holds | Graves (the other 5-drop) |
+| **Momentary Companion** (RAD 4E, 4 Might, Hidden) | a free 4-Might body from face down on our turn; Temporary if flipped on theirs | Tornado Warrior |
+| **Reckless Innovator** (RAD 3E, 3 Might, Accelerate) | each time it exhausts: a Gold, or pay Chaos to draw 1 | Traveling Merchant |
+| **Overzealous Fan** (SFD 2E, 2 Might) | when it defends, kill it to send an attacker home | a 2-drop |
+| **Annie, Stubborn** (OGS 4E 1P, 3 Might) | *return a spell from your trash to hand* — a second Fizz that keeps the spell for later | Fizz, or a 4-drop |
+
+Spells and gear the earlier 110-card pass benched too quickly, for the same treatment:
+**Challenge** (Rampage's effect at Action speed, so it works inside a fight; 2E 1 Body),
+**The Good Stuff** (Deploy gear: discard 1, draw 3, and back to hand each time you hold there),
+**Pack of Wonders** (exhaust: return a friendly unit, gear or **facedown card** to hand —
+rescues a hide from a battlefield you are about to lose, and resets Matriarch), **Heedless
+Resurrection** (Reaction: trade a dying unit for one from the trash).
+
+**Out, by why** (the remaining 170):
+- **Payoffs this deck doesn't feed:** XP and Level (Gemhand Hunter, Crowd Favorite, Mister Root,
+  Master Yi, Tempered, Megatusk, Targonian Visionary, Voracious Gromp, Vicious Snapjaws, Demacian
+  Diplomat, Nilah, Wily Newtfish, Arachnoid Horror, Insightful Investigator, Kha'Zix, Evolving
+  Hunter); buffs (Cithria, Pit Rookie, Kinkou Monk, Wildclaw Shaman, Kraken Hunter, Sett, Brawler,
+  Bilgewater Bully, Lee Sin, Centered, Udyr, Fae Dragon, Sea Monkey, Buhru Captain); Weaponmaster
+  and equipment (Veteran Poro, Combat Chef, Master Bingwen, Jax, Unrelenting, Lucian, Merciless,
+  Yone, Akshan); Dragons (Herald of Scales, Direwing, Gentle Gemdragon); Deploy (Overloaded
+  Traveler, Jarvan IV); Mighty (Jaull-Fish, Raving Witness); Flow and burn (Stargazer, Kennen,
+  Storm of Shuriken); token counts (Illaoi); same-name (Spiderling, Shadowblade Lurker).
+- **Gold makers, redundant with the legend:** Treasure Hunter, Black Market Broker, Pyke, Returned,
+  Sneaky Zeebles, Dragonsoul Sage. The Waters' Wage (three ready Gold) is the only burst; noted.
+- **Top end that doesn't fit a 2.5-cost deck** (7+ Energy): Elder Dragon, Baron Nashor, Corrupted
+  Dragon, Rhasa, Mountain Drake, Volibear, Soulgorger, Deadbloom Predator, Ocean Drake, Beast
+  Below, Anivia, Mindsplitter, Wrath of the Freljord, Seraphic Wyvern, Angler Wyrm, Bloodscent
+  Swarm, Stormclaw Ursine, Master Yi, Honed, Maduli, Direwing, Gentle Gemdragon, Kharox.
+- **Hurts our own board:** Angler Beast (bounces every unit at 2 Might or less), Kog'Maw (4 to all
+  units at its battlefield), Bewitching Spirit and Minah (symmetric discard), Suave Negotiator
+  (they draw too), Walking Roost (gives them a body).
+- **Plain bodies outclassed at their cost** (Staunch Survivor, Tornado and Matriarch do more):
+  Shipyard Skulker, Pakaa Cub, Determined Sentry, Towering Combatant, Garen, Rugged, Laurent
+  Bladekeeper, Ruin Runner, Dune Drake, Fretful Feline, Harpoon Squad, Crescent Guardian, Ancient
+  Warmonger, Disposal Expert, Legion Marauder, Kinkou Lifeblade, Brutal Hunter, Baccai Witherclaw,
+  Ambessa, The Wolf, Dame the Despoiler, Renekton, Brute, Gangplank, Naval, Profiteer, Jayce,
+  Hammer in Hand, Kato the Arm, Dauntless Vanguard, Ember Monk, Twisted Fate, Gambler, Mystic
+  Poro, Sai Scout, Sneaky Deckhand, Miss Fortune (both), Yasuo, Windrider, Kayn, Warwick, Qiyana,
+  Fiora, Peerless, Irelia, Graceful, Jae Medarda, Vex, Cheerless, Diana, No Longer Human, Zed,
+  Without a Sound, Draven, Audacious, Yordle Explorer, Fae Porter, Lulu, Whimsical, Gust Monk,
+  Corrupt Enforcer, Evershade Stalker, Undercover Agent, Jinx, Rebel, Armored Tusker, Skystrike
+  Squadron, Stalwart Goatherd (a sideboard gear answer), Sinister Poro, Irresistible Faefolk,
+  Imposing Challenger, Poppy, Paragon, Nidalee, Cat Form, Kha'Zix, Mutating Horror, Riven,
+  Deserter, K'Sante, Courageous, Explosimian, Transpositionist, Neeko, Cemetery Attendant, Mel,
+  Defiant Soul, Zaunite Bouncer, Crackshot Corsair, First Mate, Noxian Demolitionist, Siren of
+  the Shallows, Syndra, Transcendent, Maddened Marauder, Carnivorous Snapvine, Teemo, Scout, Gutter
+  Guardian, Evelynn, Entrancing, Evelynn, Consuming, Mask Mother, Kinkou Initiate, Nocturne,
+  Repair Specialist, Shadow Order Disciple, Rengar, Trophy Hunter, Sivir, Ambitious (the other
+  champion choice, decided in section 1).
+
+Not counted: tokens (Recruit, Sprite), Elnuk Herd (benched in the log) and Ravenbloom Prefect
+(sideboard). The "outclassed" group is a judgement per card at its cost, not a rule; any of it can be argued.
+
 ## Sources and candidates (not decisions)
 
 - **Randyyy's Los Angeles RQ list** (Riot's Top Decks, #146 of 2,165, the best Sivir there):
