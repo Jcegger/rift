@@ -1519,6 +1519,8 @@ function viewFind(legend) {
 // is NOW: the experts' grades until the handover, the new format's results after it. Last
 // set's record is a "!" mark and a line on the legend's page, never the tier.
 const SET_NAME = { RAD: "Radiance", VEN: "Vendetta" };
+// A set's field report on jayegger.com: the creators' preseason calls, checked against results.
+const FIELD_REPORT = { RAD: "https://jayegger.com/riftbound/radiance-field-report/" };
 const FIELD_COLS = [["LIKELY", "Likely to face"], ["POSSIBLE", "Possible"], ["RARE", "Rare or unseen"]];
 function fieldPhase() {
   const H = FIELD.handover || { majors: 0, rqTables: 0 }, S = SET_NAME[FIELD.set] || FIELD.set;
@@ -1545,7 +1547,7 @@ function metaPanel(pub) {
   const ev = FIELD.events.filter((e) => e.kind !== "last"), hidden = ev.reduce((t, e) => t + (e.hidden || 0), 0);
   return `<section class="panel">
     <div class="headrow">${pub ? `<h1>${esc(S)} meta</h1>` : `<h2>${esc(S)} meta</h2>`}<span class="small dim">built ${esc(FIELD.generatedAt)} · ${ev.length} ${esc(S)}-format event${ev.length === 1 ? "" : "s"}${hidden ? ` · ${hidden} hidden lists not counted` : ""}</span></div>
-    ${pub ? `<p class="note">Every legend in the ${esc(S)} format: how good it is now, and how likely you are to meet it. Counts and quotes, not a score, refreshed daily. Online and big events only: local store events almost never record decks.</p>` : ""}
+    ${pub ? `<p class="note">Every legend in the ${esc(S)} format: how good it is now, and how likely you are to meet it. Counts and quotes, not a score, refreshed daily. Online and big events only: local store events almost never record decks.${FIELD_REPORT[FIELD.set] ? ` What the creators called before ${esc(S)} was legal, and how it holds up: <a href="${FIELD_REPORT[FIELD.set]}">the ${esc(S)} field report</a>.` : ""}</p>` : ""}
     <div class="banner ${FIELD.phase === "results" ? "" : "warn"}">${esc(fieldPhase())}</div>
     <div class="fgrid"><div></div>${FIELD_COLS.map(([, l]) => `<div class="lbl fhead">${l}</div>`).join("")}
       ${tiers.map((t) => `<div class="ftier">${t || "?"}</div>${FIELD_COLS.map(([c, l]) => { const v = cell(t, c); return `<div class="fcell${v ? "" : " empty"}" data-col="${l}">${v || `<span class="dim">·</span>`}</div>`; }).join("")}`).join("")}</div>
