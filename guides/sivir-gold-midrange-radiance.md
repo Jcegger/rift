@@ -5,7 +5,7 @@ author: rift toolchain
 date: 2026-10-21
 ---
 
-> *Retired 23 Oct 2026:* the build file (`builds/sivir-gold-midrange-radiance.json`) and `scripts/sim-gold.mjs` behind this guide were swept with the brews, and are in git history. Its counts were taken from lists missing every alt-art card. Sivir has no Radiance net deck or crowd's list yet (5 posted Radiance lists); check its idea page before playing from this.
+> *Retired 23 Oct 2026:* the build file (`builds/sivir-gold-midrange-radiance.json`) and `scripts/sim-gold.mjs` behind this guide were swept with the brews, and are in git history. Its counts were taken from lists missing every alt-art card. Superseded by [Sivir Midrange](sivir-midrange.md), built 23 Oct.
 
 **Untested; the test deck, redone 21 Oct.** A reasoned brew, not a net-deck: Sivir has one legal placed list since the bans, and no Radiance results yet. The source of truth is `builds/sivir-gold-midrange-radiance.json` (also on the site under Find a deck → Sivir). This page is a reading copy of it.
 

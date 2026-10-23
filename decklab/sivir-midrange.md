@@ -2,7 +2,7 @@
 title: Sivir Midrange — deckbuilding worksheet
 subtitle: Sivir, Battle Mistress (Body/Chaos), Radiance. Built together, step by step; nothing here is automatic.
 started: 2026-10-23
-status: section 1 agreed (revised 23 Oct) · section 2 in progress
+status: list complete 23 Oct 2026 (sections 1–4) · section 5 logs games
 ---
 
 How this worksheet works (see `decklab/README.md`): five sections, filled in order. Each one
@@ -60,7 +60,9 @@ that work.
   cost recycles 2 cards from the trash, competing for it.
 - **Hidden (the switch, and the defence).** A hidden Tornado Warrior flipped next to Matriarch
   empowers her for free; becoming Empowered by the Empower action triggers her (§442.2.a), and
-  Tornado's empower ends at end of turn (§443), so it can happen again later. Tideturner,
+  Tornado's own text disempowers her at end of turn, so it can happen again later. (Corrected
+  in section 3: otherwise Empowered is permanent, §443, and she revives once per time on the
+  board. Tornado was later benched.) Tideturner,
   Pyke, Returned, Switcheroo and Edge of Night defend a held battlefield for the 1 Power to
   hide, then are played ignoring their base cost (§811.1.b, §204.1.a).
 - **Gold (the fuel).** The legend makes one Gold each time it is ready and you recycle a rune
@@ -87,7 +89,7 @@ that work.
    hold that is hard to break: a facedown card at a battlefield you lose goes to the trash
    with the Power spent on it (§323.6.a).
 3. **Fights:** tricks win them; kills ready the legend for another Gold that turn.
-4. **Mid-game:** Matriarch is the engine — switched on by a hidden Tornado or by Power —
+4. **Mid-game:** Matriarch is the engine — switched on by her own Empower (Tornado was benched) —
    bringing back Fizz (who recasts a trick), Ezreal, or a fallen body. Then refocus on one
    battlefield: Sivir, Mercenary (6 Might with Ganking after 2 Power spent, 11 with Punch
    First) takes the second, since the attacker must kill every defender (§468.1.a).
@@ -127,7 +129,7 @@ her (§442.2.a); a hidden card is played ignoring Energy and Power (§811.1.b, �
 
 ---
 
-## 2. Roles and slots — in progress
+## 2. Roles and slots — agreed 2026-10-23
 
 Slots are built from the four jobs, before any card is named. **Method:** Randyyy's LA list
 is the reference: its counts per role are the starting point, overridden only for a stated
@@ -176,8 +178,11 @@ Two-drops 11, three-drops 5, four and up 5, plus Mercenary. Hidden: 10 — 6 uni
 the top of its budget: fights and denial come from the spells, and no more draw goes in.
 
 **Benched, with reasons:**
-- **Tornado Warrior** — a free 3-Might body from face down and Matriarch's free switch, but
-  the switch was only a tie-breaker (her own Empower is always available); out for Elnuk Herd.
+- **Tornado Warrior** — a free 3-Might body from face down and Matriarch's free switch; out
+  for Elnuk Herd. **The reason given was wrong** (Jay, 23 Oct): her own Empower is *not* always
+  available, because Empowered is permanent (§443) and she empowers only if not Empowered.
+  Tornado's "Disempower it at end of turn" is the reset that makes her a second revive. Under
+  review: see the log.
 - **Shadow Order Disciple** — an engine piece, but only 3 Might when it moves and its burn is
   random; the trash already fills with chosen cards. First back if the trash runs dry.
 - **Kennen, Storm of Shuriken** — its 7 winners are Kennen's decks, where the burn feeds
@@ -203,8 +208,7 @@ Assault is Kha'Zix's). B = Body/Chaos good finishes of 7; W = Chaos-colour Radia
 | 2 Edge of Night | a lasting +2 that attaches free from face down | 1 | 3 | Hidden; keeps the 4 Hidden spells or gear |
 
 Fizz can recast all four spells. Every card pays Power, so the Gold keeps coming without a
-dedicated engine card. Sandswept Tomb discounts Punch First, Rampage and Ride the Wind on our
-units there — a battlefield consideration.
+dedicated engine card. (Battlefields: Emperor's Dais took Sandswept Tomb's slot, below.)
 
 **Benched:** On the Hunt (Sivir's signature: readies all units, but has no Action or Reaction,
 so it can't be played in a fight — Ride the Wind does the job at Action speed; and
@@ -217,32 +221,104 @@ signature and not legal.
 2 gear; Matriarch revives 6 different units; Fizz recasts every spell. Open: the rune split
 (goldfish ~13% stuck, pessimistic), battlefields. Full audit after denial.
 
-### Still to settle, by job
+**Denial: 6 main, sized to the field; the sideboard carries the rest** (23 Oct 2026).
+Randyyy's budget was 6 (2 Sabotage, 2 Star-Crossed, 1 Gust, 1 Acceptable Losses).
 
-- **Staying power:** draw and recursion (Ezreal, Merchant, Fizz, Matriarch) and whether any
-  Gold maker beyond the legend earns a slot.
-- **Denial:** interaction for the expected field (his 6: Star-Crossed, Gust, Sabotage,
-  Acceptable Losses), and hold tools (Vex, Apathetic main deck?).
-- **The closer:** Sivir, Mercenary.
-- **Battlefields:** one low-impact for game 1, one for going first, one for going second
-  (Ultimate Guard's method).
-- **Runes:** set by the Power counts, checked with `sweepRunes`.
+| card | job | W | B | why |
+|---|---|---|---|---|
+| 3 Star-Crossed | denial and fights, at Reaction speed | 13 | — | returns a friendly and an enemy unit: saves ours from removal, takes a defender out of a fight, and resets our own Fizz, Ezreal or Matriarch to replay |
+| 2 Gust | denial, at Reaction speed | 10 | — | 1 Energy, no Power: bounces a unit of 3 Might or less at a battlefield, ours or theirs; answers a hidden unit's play effect by removing its source (§811.1.d.3.a) |
+| 1 Sabotage | information and denial | — | 7 of 7 | sees the hand and recycles a non-unit card from it; one copy, the second in the sideboard for spell-heavy and gear decks |
 
-Shape targets from winning lists (good finishes, 23 Oct): about 20 units, 22 cards at 2
-Energy or less, 3–5 at 5+, average cost about 2.8. Randyyy's: 22 units, 18 at 2 or less,
-none at 5+, average 2.48.
+Rampage (fights table) is the fourth piece of removal, and Graves the answer to wide boards.
+**Acceptable Losses is out:** each player kills a gear, and ours is Edge of Night.
 
-## 3. Card by card — not started
+**Sideboard: 10**, mapped to who we expect. The Body/Chaos colours were searched in full;
+each card answers a sequence a likely opponent depends on, not one card.
 
-## 4. Checks — not started
+| card | brings it in against | what it does there |
+|---|---|---|
+| 2 Vex, Apathetic | Rengar, Rek'Sai, Riven, Evelynn, LeBlanc | stuns any unit they play while she is at a battlefield, hidden and Ambush units included, and they can't move it that turn; Deflect taxes their answer |
+| 2 An Offer You Can't Refuse | Jayce, Riven (Blade of the Exile), Kennen (Last Rites), Akali | kills a gear at Action speed; they get an exhausted Gold |
+| 1 Ravenbloom Prefect | Jayce, Riven | banishes itself to banish a gear they play |
+| 1 Graves, Blasting Through | Rek'Sai, Rengar, LeBlanc | the third copy against wide boards (41% to see one of 2 by turn 5, 56% with 3) |
+| 1 Disposal Order | Kennen, Mordekaiser, LeBlanc | at Reaction speed, recycles 3 cards from their trash: Rhasa's discount, Mordekaiser's Power, LeBlanc's replays |
+| 1 Flash | Kai'Sa, Akali | at Reaction speed, moves 2 of our units home out of removal or a fight we are losing |
+| 1 Unyielding Spirit | Kai'Sa, Akali, LeBlanc, Jayce | prevents all spell and ability damage this turn: Falling Star, Bellows Breath, Hextech Ray, Akali's pings, Ruined Rex, Elder Dragon's ping |
+| 1 Sabotage | Kai'Sa (Time Warp), Jayce (Gutter Palace, Aurora), Kennen | the second copy |
 
-Deck rules, curve against winners, the goldfish and the rune sweep (`lib/sim.mjs`). The
-simulator does not model the legend's Gold or the cost of hiding, so its "stuck on colour"
-figure is pessimistic for this deck.
+Kai'Sa's Thousand-Tailed Watcher gives −3 Might **to a minimum of 1**: it does not kill on its
+own, it makes their fight that turn lopsided. Unyielding Spirit does not stop it, and Flash is
+the answer (pull the units home before the combat).
 
-## 5. Log — not started
+**Battlefields** (23 Oct 2026, reviewed against Radiance's): best-of-three uses each one once
+in decided games (§488.5).
 
-Games, results, and every change with its reason.
+| game | battlefield | why |
+|---|---|---|
+| 1 | **Zaun Warrens** | low impact for both players; for us, conquer → discard 1, draw 1 stocks the trash for Fizz and Matriarch |
+| going first | **Emperor's Dais** (replaces Sandswept Tomb) | conquer → pay 1, return a unit there to hand, leave a 2-Might Sand Soldier holding. The bounce replays Ezreal (draw 2), Fizz (another recast) or Matriarch (a second revive, since Empowered is permanent, §443). The strongest evidence of any battlefield among this format's good finishes: 7 of 22 Radiance, 61 overall |
+| going second | **Sigil of the Storm** | conquer → the conqueror must recycle a rune. For us that is a Gold (the legend), for them a lost rune. We go second with the extra rune (§487.7), so their early conquests cost more |
+
+Sandswept Tomb (Randyyy's) discounts our spells there, but only on our units at it, and the
+Dais does more for a deck that replays play effects. Bandle Scouts' Academy (Gold on hiding)
+is the legend's job again.
+
+**Runes: 5 Body / 7 Chaos**, confirmed by `sweepRunes` (below). Printed Power: Body 12, Chaos 8
+(Punch First is 6 of the Body), but the Chaos-only cards (Fizz, Ezreal, Mercenary,
+Matriarch's Empower, Edge of Night's Equip, Switcheroo) are the ones played early and often.
+
+### Shape, against winners
+
+| | this list | good finishes (median) | Randyyy |
+|---|---|---|---|
+| units / spells / gear | 22 / 16 / 2 | ~20 units | 22 / 16 / 2 |
+| cards at 2 Energy or less | 21 | 22 | 18 |
+| cards at 5+ Energy | 3 (2 Graves, Elnuk) | 3–5 | 0 |
+| average cost | 2.58 | ~2.8 | 2.48 |
+| Hidden | 10 | — | 10 |
+
+## 3. Card by card — written into the guide
+
+Each card's role, rules and the competitors for its slot are in sections 2 above and in the
+deck guide's card-by-card section ([guides/sivir-midrange.md](../guides/sivir-midrange.md)). Two
+corrections came out of writing it, both checked in the handbook and the verbatim rules:
+
+- **Empowered is permanent** (§442, §443: it lasts until the card leaves the board or something
+  disempowers it). Matriarch's Empower is "only if not Empowered", so **she revives once per time
+  on the board.** A second revive needs her to leave and come back: Star-Crossed on her, or
+  Emperor's Dais. Tornado Warrior's empower ending at end of turn is that card's own text
+  ("Disempower it at end of turn"), not §443; section 1 cited it wrongly.
+- **Rampage has no Action:** it is main-phase removal on our turn, never a trick in a showdown.
+  The fights tricks are Punch First, Switcheroo, Ride the Wind and, from face down, Elnuk Herd
+  and Edge of Night.
+
+## 4. Checks — 23 Oct 2026
+
+- **Deck rules:** all 11 pass (`lib/decks.mjs` `deckChecks`): one legend, 40 main, a Sivir
+  champion, 12 runes, 3 different battlefields, inside Body/Chaos, 3-copy limit across main and
+  sideboard, no other champion's signature, sideboard 10 of 10, nothing banned, Standard-legal.
+- **Goldfish** (`lib/sim.mjs`, 20,000 games, seed 1). Energy spent turns 1–4: **15.8 on the play,
+  17.5 on the draw** (Randyyy 16.7). Units on board by turn 3: 3.4 / 3.7. Two units by turn 3:
+  97% / 99%. No play on turns 1–2: 0%. Best mulligan policy: keep all.
+- **Stuck on colour by turn 3:** 11% on the play, 9% on the draw (Randyyy 6%). Pessimistic: the
+  simulator does not make the legend's Gold, which pays any colour.
+- **Rune sweep:** 5 Body / 7 Chaos is the best split (16.6 Energy, 10% stuck); 4/8 and 6/6 are
+  within 0.1 Energy but stick more often (14%, 12%).
+- **What the simulator cannot see:** the legend's Gold, the cost of hiding, any fight. Its
+  per-card keep values are goldfish Energy only.
+
+**Watch list, from the audit:** Staunch Survivor (its Body Power on turn 1–2), Elnuk Herd (a
+6-drop from hand), the single Sabotage. Cut first if the deck plays clunky: the second Edge of
+Night, then Elnuk.
+
+## 5. Log
+
+- **23 Oct 2026 — the list is complete.** Saved to the Decks tab as `Sivir — Midrange
+  (decklab, 23 Oct)`; the guide is [guides/sivir-midrange.md](../guides/sivir-midrange.md).
+  Emperor's Dais replaced Sandswept Tomb as the going-first battlefield. No games yet.
+
+Games, results, and every change with its reason go here.
 
 ---
 

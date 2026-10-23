@@ -277,7 +277,35 @@
     "Before the redo: from the anchor, and why",
     "Goldfish"
    ],
-   "words": 3239
+   "words": 3224
+  },
+  {
+   "slug": "sivir-midrange",
+   "file": "guides/sivir-midrange.md",
+   "kicker": null,
+   "title": "Sivir Midrange — Deck Guide",
+   "subtitle": "Riftbound, Radiance season (from 23 October 2026) — the list built together in decklab, how to play it, the rules it runs on, and the field it meets",
+   "date": "2026-10-23",
+   "legend": "Battle Mistress",
+   "champion": "Sivir, Mercenary",
+   "sections": [
+    "The short version",
+    "1. What the deck is trying to do",
+    "2. The game in four stages",
+    "3. Your turn, in order",
+    "4. The legend and the Gold",
+    "5. Hidden, precisely",
+    "6. Card by card",
+    "7. Lines that win games",
+    "8. The numbers",
+    "9. Mulligans",
+    "10. Matchups and sideboarding",
+    "11. Mistakes that lose games",
+    "12. Errata and open questions",
+    "Sources and method",
+    "What this guide does not claim"
+   ],
+   "words": 9092
   },
   {
    "slug": "skirmish-prep",
