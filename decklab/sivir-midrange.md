@@ -168,13 +168,13 @@ reason. Candidates, new or old, must show which job they do better than what the
 | 2 Tideturner | presence, fights (1) | a body, or a hidden swap (the Graves trick) | 9 |
 | 3 Ezreal, Prodigy | staying power (2) | discard 1, draw 2; discounts Rampage's +2 and Mercenary's Accelerate | 5 · 2 |
 | 2 Fizz, Trickster | staying power (2), recast fights (1) | recasts a spell of 3 Energy or less, paying its Power | 7 · 6 |
-| ~~1 Elnuk Herd~~ → **1 Tornado Warrior** (23 Oct, see log) | fights (1), at Reaction speed | hidden: +3 Might on a friendly unit at that battlefield for the 1 Power to hide (§811.1.b, .d.3), then recycles to the deck to come again; drawn without a hide, a 6-Energy 5-Might body with no Power — the top end we lacked. Replaced Tornado Warrior (fights slot, 23 Oct). One copy, not two: it is cheap only when hidden, hides are limited (one per battlefield you control, behind a strong hold), and from hand it is the worst Hidden card to hold — a second copy cost early board (cheap cards 22 → 21, units by turn 3 3.4 → 3.2) | none; adopted by pros early in the backtest (Rengar) |
+| ~~1 Elnuk Herd~~ → **2 Tornado Warrior** (23 Oct, see log) | fights (1), at Reaction speed | hidden: +3 Might on a friendly unit at that battlefield for the 1 Power to hide (§811.1.b, .d.3), then recycles to the deck to come again; drawn without a hide, a 6-Energy 5-Might body with no Power — the top end we lacked. Replaced Tornado Warrior (fights slot, 23 Oct). One copy, not two: it is cheap only when hidden, hides are limited (one per battlefield you control, behind a strong hold), and from hand it is the worst Hidden card to hold — a second copy cost early board (cheap cards 22 → 21, units by turn 3 3.4 → 3.2) | none; adopted by pros early in the backtest (Rengar) |
 | 2 Tail-Cloaked Matriarch | staying power (2), a 4-Might body | revives a unit of 3 Energy / 1 Power or less; her own Empower is always available, so nothing depends on Tornado | 5 · 3 |
 | 2 Graves, Blasting Through | fights, denial against wide boards (1, 3) | LeBlanc, Rengar decks and Rek'Sai are likely; a 3rd belongs in the sideboard for them (41% to see one of 2 by turn 5, 56% with 3) | none yet |
 | Sivir, Mercenary (Champion Zone) | presence, fights (1): the closer | always available, never drawn | — |
 
 Two-drops 11, three-drops 5, four and up 5, plus Mercenary. Hidden: 10 — 6 units
-(3 Stranger, 2 Tideturner, 1 Tornado) and 4 spells or gear. Staying power uses 10 unit slots,
+(3 Stranger, 2 Tideturner, 2 Tornado; 11 in all from 23 Oct) and 4 spells or gear. Staying power uses 10 unit slots,
 the top of its budget: fights and denial come from the spells, and no more draw goes in.
 
 **Benched, with reasons:**
@@ -204,7 +204,7 @@ Assault is Kha'Zix's). B = Body/Chaos good finishes of 7; W = Chaos-colour Radia
 | 3 Punch First | win the fight; Mercenary to 11 | 7 | — | +5 for 1 Energy, 2 Body Power |
 | 3 Rampage | fight and removal (also counts toward denial) | 7 | — | units deal their Might to each other; +2 if Body paid, free with Ezreal |
 | 2 Switcheroo | swap Might; the Graves trick | 6 | 11 | Hidden; Reaction speed from face down |
-| 2 Ride the Wind | the conquer turn: move a unit and ready it | 3 | 11 | Action speed, unlike On the Hunt |
+| ~~2 Ride the Wind~~ (out 23 Oct, see log) | the conquer turn: move a unit and ready it | 3 | 11 | Action speed, unlike On the Hunt |
 | 2 Edge of Night | a lasting +2 that attaches free from face down | 1 | 3 | Hidden; keeps the 4 Hidden spells or gear |
 
 Fizz can recast all four spells. Every card pays Power, so the Gold keeps coming without a
@@ -228,7 +228,7 @@ Randyyy's budget was 6 (2 Sabotage, 2 Star-Crossed, 1 Gust, 1 Acceptable Losses)
 |---|---|---|---|---|
 | 3 Star-Crossed | denial and fights, at Reaction speed | 13 | — | returns a friendly and an enemy unit: saves ours from removal, takes a defender out of a fight, and resets our own Fizz, Ezreal or Matriarch to replay |
 | 2 Gust | denial, at Reaction speed | 10 | — | 1 Energy, no Power: bounces a unit of 3 Might or less at a battlefield, ours or theirs; answers a hidden unit's play effect by removing its source (§811.1.d.3.a) |
-| 1 Sabotage | information and denial | — | 7 of 7 | sees the hand and recycles a non-unit card from it; one copy, the second in the sideboard for spell-heavy and gear decks |
+| 2 Sabotage (1 until 23 Oct) | information and denial | — | 7 of 7 | sees the hand and recycles a non-unit card from it; Randyyy's two, the third in the sideboard for spell-heavy and gear decks |
 
 Rampage (fights table) is the fourth piece of removal, and Graves the answer to wide boards.
 **Acceptable Losses is out:** each player kills a gear, and ours is Edge of Night.
@@ -245,7 +245,7 @@ each card answers a sequence a likely opponent depends on, not one card.
 | 1 Disposal Order | Kennen, Mordekaiser, LeBlanc | at Reaction speed, recycles 3 cards from their trash: Rhasa's discount, Mordekaiser's Power, LeBlanc's replays |
 | 1 Flash | Kai'Sa, Akali | at Reaction speed, moves 2 of our units home out of removal or a fight we are losing |
 | 1 Unyielding Spirit | Kai'Sa, Akali, LeBlanc, Jayce | prevents all spell and ability damage this turn: Falling Star, Bellows Breath, Hextech Ray, Akali's pings, Ruined Rex, Elder Dragon's ping |
-| 1 Sabotage | Kai'Sa (Time Warp), Jayce (Gutter Palace, Aurora), Kennen | the second copy |
+| 1 Sabotage | Kai'Sa (Time Warp), Jayce (Gutter Palace, Aurora), Kennen, Riven | the third copy |
 
 Kai'Sa's Thousand-Tailed Watcher gives −3 Might **to a minimum of 1**: it does not kill on its
 own, it makes their fight that turn lopsided. Unyielding Spirit does not stop it, and Flash is
@@ -273,10 +273,10 @@ Matriarch's Empower, Edge of Night's Equip, Switcheroo) are the ones played earl
 | | this list | good finishes (median) | Randyyy |
 |---|---|---|---|
 | units / spells / gear | 22 / 16 / 2 | ~20 units | 22 / 16 / 2 |
-| cards at 2 Energy or less | 21 | 22 | 18 |
+| cards at 2 Energy or less | 20 | 22 | 18 |
 | cards at 5+ Energy | 2 (2 Graves) | 3–5 | 0 |
 | average cost | 2.50 | ~2.8 | 2.48 |
-| Hidden | 10 | — | 10 |
+| Hidden | 11 | — | 10 |
 
 ## 3. Card by card — written into the guide
 
@@ -290,7 +290,7 @@ corrections came out of writing it, both checked in the handbook and the verbati
   Emperor's Dais. Tornado Warrior's empower ending at end of turn is that card's own text
   ("Disempower it at end of turn"), not §443; section 1 cited it wrongly.
 - **Rampage has no Action:** it is main-phase removal on our turn, never a trick in a showdown.
-  The fights tricks are Punch First, Switcheroo, Ride the Wind and, from face down, Tornado
+  The fights tricks are Punch First, Switcheroo and, from face down, Tornado
   Warrior and Edge of Night.
 
 ## 4. Checks — 23 Oct 2026
@@ -325,7 +325,17 @@ clunky: the second Edge of Night.
   not 6), so the Matriarch reset breaks it. **Results were set aside:** Tornado's 36 good
   finishes against Elnuk's 0 only measure that Elnuk is a Radiance card legal today. Shape:
   5+ Energy cards 3 → 2, average cost 2.58 → 2.50; goldfish unchanged (15.9 Energy on the
-  play). The list is frozen until games give a reason.
+  play).
+- **23 Oct 2026 — −2 Ride the Wind, +1 Sabotage, +1 Tornado Warrior** (Jay's point). Ride the
+  Wind is everywhere in Kennen and Irelia, but those decks win on movement and on units big
+  enough not to need a pump. Here its two jobs were already covered: Mercenary takes the second
+  battlefield with Ganking, and a hidden Tideturner or Star-Crossed reinforces a hold. Randyyy,
+  building the same kind of deck, ran none. Sabotage is the better fit for a deck whose small
+  units win on pumps: it strips the answer to the pump (Defy, Discipline, a held Star-Crossed)
+  and the plans that aren't units (Time Warp, Gutter Palace, Arise!). The second slot is a second
+  Tornado, not a third Sabotage, to keep denial at 6. Shape: 20 cards at 2 Energy or less (was
+  21), average cost 2.50, 11 Hidden (4 spells or gear); goldfish 15.9 Energy on the play, units
+  by turn 3 3.5. **Final until tested.**
 
 Games, results, and every change with its reason go here.
 

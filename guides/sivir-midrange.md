@@ -10,7 +10,7 @@ date: 2026-10-23
 **Shuffled library:** 39. The Champion starts outside the deck (§103.3.a.1, §108.3.d)
 **Collection status:** 10 to get, all Radiance cards: 3 Bedeviling Stranger, 3 Staunch Survivor, 2 Graves, Blasting Through; sideboard 1 Graves, 1 An Offer You Can't Refuse
 **The list:** built a section at a time on 23 October in [decklab/sivir-midrange.md](../decklab/sivir-midrange.md), saved in the app as `Sivir — Midrange (decklab, 23 Oct)`
-**Its results:** **none yet. Untested.** Its reference is Randyyy's list at the Los Angeles RQ (146th of 2,165, the only legal non-Aurora Sivir result in the data), which shares **43 of these 56 cards**: 28 of the 40, all 12 runes, the legend and two battlefields
+**Its results:** **none yet. Untested.** Its reference is Randyyy's list at the Los Angeles RQ (146th of 2,165, the only legal non-Aurora Sivir result in the data), which shares **45 of these 56 cards**: 30 of the 40, all 12 runes, the legend and two battlefields
 **Good until:** the first Radiance results, or Riot's Radiance FAQ, whichever comes first. Re-read the rules sections when the FAQ lands, because it outranks the Core Rules.
 
 **Companions.** [The worksheet](../decklab/sivir-midrange.md) is why each card is in. [strategy.md](../docs/strategy.md) is how to think about any turn, and [archetypes.md](../docs/archetypes.md) is what every opponent is trying to do. This page is how to play *this deck*.
@@ -60,14 +60,14 @@ Every deck values a position differently ([strategy.md §2](../docs/strategy.md#
 | tier | job | the cards |
 |---|---|---|
 | 0 | **win: points from holding and conquering** | everything below serves this |
-| 1 | **presence and fights:** bodies on battlefields, winning fights there | Staunch Survivor, Bedeviling Stranger, Tideturner, Tornado Warrior, Graves, Mercenary; Punch First, Rampage, Switcheroo, Ride the Wind, Edge of Night |
+| 1 | **presence and fights:** bodies on battlefields, winning fights there | Staunch Survivor, Bedeviling Stranger, Tideturner, Tornado Warrior, Graves, Mercenary; Punch First, Rampage, Switcheroo, Edge of Night |
 | 2 | **staying power:** replacing what was spent | Ezreal, Traveling Merchant, Fizz, Matriarch; the legend's Gold |
 | 3 | **denial:** breaking their plan or their scoring | Star-Crossed, Gust, Sabotage, Rampage, Graves; most of the sideboard |
 | 4 | **engine perks** | no dedicated slots. Trash synergy and extra Gold are tie-breakers only |
 
 **Three engines, none required.**
 - **Trash and recursion.** The trash fills with choices: Traveling Merchant discards when it moves, Ezreal on play, Zaun Warrens on conquer, and units die in fights. A spell in the trash is ammunition for Fizz; a cheap unit is a revive for Matriarch. Matriarch reviving Fizz, who recasts a Punch First, is one chain.
-- **Hidden.** Ten cards can hide. They defend a held battlefield for the `[A]` it costs to hide them, and are then played for nothing on the opponent's turn. Four are spells or gear, so an opponent's Vex, Apathetic (which stuns units we play, hidden ones included) does not shut the package off.
+- **Hidden.** Eleven cards can hide. They defend a held battlefield for the `[A]` it costs to hide them, and are then played for nothing on the opponent's turn. Four are spells or gear, so an opponent's Vex, Apathetic (which stuns units we play, hidden ones included) does not shut the package off.
 - **Gold.** The legend's Gold pays hides, Punch First's Body Power, Matriarch's Chaos, Fizz's recasts and Mercenary's Accelerate. Every one of the 40 except Traveling Merchant, Gust and the Energy-only units can spend Power, so the Gold never sits idle.
 
 **Why midrange, and why these bodies.** Riftbound pays a point per battlefield per turn, held or conquered (§471, §472), so a 2-Might body that takes an open battlefield on turn 2 is already scoring. Midrange wins on cards that are good on their own and on attrition, having bodies and tricks left when the opponent does not. That is what the recursion is for: the game is long enough for Matriarch and Fizz to matter only if the early bodies kept you level on points.
@@ -154,7 +154,7 @@ Before your Main Phase, three things happen on their own: you **ready everything
 | speed | cards | when |
 |---|---|---|
 | **Reaction** | Star-Crossed, Gust; every Hidden card once face down; Gold | any time, including on the chain (§813) |
-| **Action** | Punch First, Switcheroo, Ride the Wind | your turn, and any showdown, either player's (§806) |
+| **Action** | Punch First, Switcheroo | your turn, and any showdown, either player's (§806) |
 | **No keyword** | Rampage, Sabotage, all units from hand, Matriarch's Empower, Edge of Night's Equip, hiding | your turn, Open State, no showdown |
 
 ---
@@ -199,13 +199,13 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **If you lose the battlefield, the card is trashed** at the next cleanup, revealed (§323.6.a). That is why you hide only behind strong holds. The trashed card is not wasted entirely: a Switcheroo there is Fizz ammunition, a Tideturner or Stranger a Matriarch revive.
 
-**The ten Hidden cards, and what each does from face down:**
+**The eleven Hidden cards, and what each does from face down:**
 
 | card | from face down | best against |
 |---|---|---|
 | 3 Bedeviling Stranger | a 2-Might body there; if 4+ units are there, return an enemy unit there to hand | go-wide attacks (Rek'Sai, Rengar) |
 | 2 Tideturner | swaps with a unit you control elsewhere: brings Graves, Mercenary or Staunch Survivor into the fight | any attack into a hold |
-| 1 Tornado Warrior | a 3-Might body there; you may empower something there, disempowered at end of turn | a close fight; Matriarch standing there |
+| 2 Tornado Warrior | a 3-Might body there; you may empower something there, disempowered at end of turn | a close fight; Matriarch standing there |
 | 2 Switcheroo | swap Might of two units there, this turn | their pumped unit; Graves's trigger |
 | 2 Edge of Night | attaches to a unit you control there: +2 Might, kept | a fight you will win by 1 or 2 |
 
@@ -227,7 +227,7 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **Bedeviling Stranger** (2 Energy, Chaos; 2 Might; Hidden) — a body either way. Its bounce needs **4 or more units at the chosen battlefield, both sides counted**, itself included once it is there. From hand, it chooses any battlefield; from face down, its own (§811.1.d.3).
 
-**Traveling Merchant** (2 Energy, Chaos; 2 Might) — *when I move, discard 1, then draw 1*. Every move, standard or by effect, filters a card and stocks the trash. Tideturner's swap and Ride the Wind are moves too.
+**Traveling Merchant** (2 Energy, Chaos; 2 Might) — *when I move, discard 1, then draw 1*. Every move, standard or by effect, filters a card and stocks the trash. Tideturner's swap is a move too.
 
 **Tideturner** (2 Energy, Chaos; 2 Might; Hidden) — swaps places with a unit you control at another location. From face down: Graves into a fight. From hand: play it to a battlefield you control and bring an exhausted unit home, or revive it with Matriarch and swap a battlefield unit back to base.
 
@@ -243,7 +243,7 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **Graves, Blasting Through** (5 Energy, 1 Body; 4 Might) — *when I attack or defend, deal damage equal to my Might to all enemy units here; I don't deal combat damage.* The damage is read when the trigger resolves (§359.3.f.2), so everything that raises his Might before then multiplies across their board. While the trigger is on the chain, only Reactions can be played (§310). A unit moved into a fight late gets its designation and its trigger (§466.2.c.3.a, §383.4.e): that is what Tideturner exploits. Against Deathknell decks, his blast fires their triggers too.
 
-**Tornado Warrior** (3 Energy, Chaos; 3 Might; Hidden) — *when you play me from face down, you may empower something here; disempower it at end of turn.* From face down it is a free 3-Might defender at Reaction speed. **With Matriarch at that battlefield it is her switch and her reset:** if she is not yet Empowered, Tornado empowers her and she revives now (§442.2.a), then the end-of-turn disempower leaves her own Empower live for a second revive next turn. If she has already been used, the empower does nothing (§442.1.c) but the disempower should still happen, resetting her: that reading rests on §359.3.e.14.b (a negated instruction does not stop the next one) and has no ruling, so confirm it with a judge. From hand it is a plain 3-Energy, 3-Might body. One copy: it replaced Elnuk Herd on 23 Oct, and the reset is a tie-breaker, not a plan.
+**Tornado Warrior** (3 Energy, Chaos; 3 Might; Hidden) — *when you play me from face down, you may empower something here; disempower it at end of turn.* From face down it is a free 3-Might defender at Reaction speed. **With Matriarch at that battlefield it is her switch and her reset:** if she is not yet Empowered, Tornado empowers her and she revives now (§442.2.a), then the end-of-turn disempower leaves her own Empower live for a second revive next turn. If she has already been used, the empower does nothing (§442.1.c) but the disempower should still happen, resetting her: that reading rests on §359.3.e.14.b (a negated instruction does not stop the next one) and has no ruling, so confirm it with a judge. From hand it is a plain 3-Energy, 3-Might body. Two copies (23 Oct): one replaced Elnuk Herd, one a Ride the Wind. The reset is a tie-breaker, not a plan; two copies make a Tornado next to Matriarch likelier.
 
 ### Fights
 
@@ -253,8 +253,6 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **Switcheroo** (2 Energy, 2 Chaos; Hidden; Action) — swaps the Might of two units at the same battlefield, this turn. Best target: the unit they just pumped. From face down, at Reaction speed, in response to Graves's trigger: Graves takes their biggest unit's Might and blasts with it. Defy cannot counter it either (two Power).
 
-**Ride the Wind** (2 Energy, 1 Chaos; Action) — moves a friendly unit and readies it. The card names no destination limit (§451.1), so it moves battlefield to battlefield, into a fight already running (the late arrival defends or attacks, §466.2.c.3.a), or home. It is the double-conquest turn: conquer with a unit, then send it to the other battlefield, ready.
-
 **Edge of Night** (3 Energy, Chaos gear; +2 Might attached; Hidden; Equip Chaos) — from face down it attaches to a unit you control there for free (the errata's "(here)", Spiritforged errata). From hand it goes to your base and Equips for one Chaos on your turn. The +2 stays while attached (§137.3) and returns home if the unit dies (§459.1).
 
 ### Denial
@@ -263,7 +261,7 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **Gust** (1 Energy, Chaos; Reaction) — returns a unit at a battlefield with 3 Might or less to its owner's hand. Theirs or yours. Against a hidden unit's play effect, Gust the unit in response and the effect does nothing (§811.1.d.3.a).
 
-**Sabotage** (1 Energy, 1 Body; no timing keyword) — they reveal their hand and you recycle a non-unit card from it. It must be cast before the fight opens. Decide whether you want their answer removed or spent ([strategy.md §5](../docs/strategy.md#5-pressure-is-the-removal-of-good-choices)).
+**Sabotage** (1 Energy, 1 Body; no timing keyword; two copies) — they reveal their hand and you recycle a non-unit card from it. Our units are small and win fights with pumps, so the cards that beat a pump are the targets: Riven's Defy and Discipline, Kennen's held Star-Crossed and Last Rites, Kai'Sa's Time Warp, Jayce's Gutter Palace, Azir's Arise!. Side it out against the unit decks (Rengar, LeBlanc, Rek'Sai). It must be cast before the fight opens. Decide whether you want their answer removed or spent ([strategy.md §5](../docs/strategy.md#5-pressure-is-the-removal-of-good-choices)).
 
 ### Battlefields
 
@@ -289,7 +287,7 @@ Before your Main Phase, three things happen on their own: you **ready everything
 
 **5. Dais replay.** Conquer Emperor's Dais with Ezreal there. Pay 1, return Ezreal, a Sand Soldier holds the battlefield. Replay Ezreal: discard 1, draw 2. With Matriarch instead, the replay is a fresh Empower and a second revive.
 
-**6. The double conquest.** One unit takes battlefield A (a Conquer). Ride the Wind moves it to B and readies it. If B is open, a second Conquer; if it is held, that unit plus whatever else you moved attacks. With Traveling Merchant as the unit, each move also filters a card.
+**6. Sabotage, then the pump.** On your turn, before you move: Sabotage, see their hand, and recycle the answer to your fight (Defy, Discipline, a held Star-Crossed). Then buff and move. They meet your Punch First with their best answer gone. Ride the Wind left the deck on 23 Oct because Mercenary already takes the second battlefield.
 
 **7. The Stranger blowout.** A hidden Bedeviling Stranger at a battlefield where they attack wide. If the fight puts 4 or more units there (theirs plus yours plus the Stranger), flip it and return their best attacker to hand before damage.
 
@@ -304,7 +302,7 @@ Before your Main Phase, three things happen on their own: you **ready everything
 | card or group | copies | opening 4 | by turn 1 | turn 2 | turn 3 | turn 4 | turn 5 |
 |---|---|---|---|---|---|---|---|
 | a unit at 2 Energy | 11 | 75% | 83% | 88% | 92% | 95% | 97% |
-| a Hidden card | 10 | 71% | 79% | 85% | 90% | 93% | 95% |
+| a Hidden card | 11 | 75% | 83% | 88% | 92% | 95% | 97% |
 | Star-Crossed or Gust | 5 | 44% | 52% | 59% | 65% | 70% | 75% |
 | Fizz or Matriarch | 4 | 36% | 44% | 50% | 56% | 62% | 67% |
 | Ezreal | 3 | 28% | 35% | 40% | 46% | 51% | 56% |
@@ -318,13 +316,13 @@ Ezreal and Traveling Merchant draw beyond this, so the real figures are higher b
 
 | | on the play | on the draw |
 |---|---|---|
-| Energy spent, turns 1–4 | 15.9 | 17.6 |
-| units on board by turn 3 | 3.4 | 3.8 |
+| Energy spent, turns 1–4 | 15.9 | 17.7 |
+| units on board by turn 3 | 3.5 | 3.9 |
 | two units by turn 3 | 98% | 99% |
 | no play on turns 1–2 | 0% | 0% |
-| a card stuck on its colour, turn 3 | 11% | 9% |
+| a card stuck on its colour, turn 3 | 11% | 10% |
 
-The stuck figure is pessimistic: a ready Gold pays either colour. **Runes: 5 Body / 7 Chaos** was the best of every split from 3/9 to 9/3 on the same shuffles (16.7 Energy over turns 1–4, 10% stuck; 4/8 and 6/6 within 0.1 Energy but stuck 14% and 11%).
+The stuck figure is pessimistic: a ready Gold pays either colour. **Runes: 5 Body / 7 Chaos** was the best of every split from 3/9 to 9/3 on the same shuffles (16.7 Energy over turns 1–4, 10% stuck; 6/6 is a tie within the noise, 4/8 sticks more, 15%).
 
 **The rune formula.** To cast something costing E Energy and P Power you need **max(E, P) runes on the board, at least E of them ready** (rules.md, Resources): the same rune can be exhausted for Energy and then recycled for Power. Gold pays Power without a rune. Examples:
 
@@ -360,13 +358,12 @@ You set aside up to 2, draw that many, and the set-aside cards go to the bottom 
 
 | keep | Energy | | keep | Energy |
 |---|---|---|---|---|
-| Tail-Cloaked Matriarch | +1.5 | | Ezreal, Prodigy | +0.2 |
-| Tornado Warrior | +0.9 | | Fizz, Trickster | +0.1 |
-| Graves | +0.9 | | Ride the Wind | −0.1 |
+| Tail-Cloaked Matriarch | +1.4 | | Edge of Night | +0.6 |
+| Tornado Warrior | +0.9 | | Ezreal, Prodigy | +0.2 |
+| Graves | +0.8 | | Fizz, Trickster | +0.2 |
 | Tideturner | +0.7 | | Staunch Survivor | −0.4 |
-| Bedeviling Stranger | +0.7 | | Switcheroo | −0.4 |
-| Traveling Merchant | +0.7 | | Sabotage | −0.7 |
-| Edge of Night | +0.7 | | Punch First | −0.7 |
+| Traveling Merchant | +0.7 | | Switcheroo | −0.4 |
+| Bedeviling Stranger | +0.7 | | Punch First, Sabotage | −0.7 |
 
 **How to read it.** The simulator measures only Energy spent, and charges every Power as a recycled rune with no Gold back. It undervalues every card that pays Power early, which is why Staunch Survivor shows negative when it is the deck's best turn-1 play. Treat it as "cheap Energy-only bodies and the curve's 4s and 5s are keeps".
 
@@ -408,7 +405,7 @@ You set aside up to 2, draw that many, and the set-aside cards go to the bottom 
 | 1 Disposal Order | Reaction: recycle 3 cards from their trash, then draw 1 | Kennen, Mordekaiser, LeBlanc |
 | 1 Flash | Reaction: move 2 of your units to base | Kai'Sa, Akali |
 | 1 Unyielding Spirit | Reaction: prevent all spell and ability damage this turn | Kai'Sa, Akali, LeBlanc, Jayce |
-| 1 Sabotage | the second Sabotage | Kai'Sa, Jayce, Kennen |
+| 1 Sabotage | the third Sabotage | Kai'Sa, Jayce, Kennen, Riven |
 
 ### Kennen, Heart of the Tempest — attack early
 
@@ -416,7 +413,7 @@ You set aside up to 2, draw that many, and the set-aside cards go to the bottom 
 
 **The plan.** It fears early pressure before the trash fills. Take both battlefields early with cheap bodies, make it answer on its own turn, and keep the points coming before Rhasa. Its Star-Crossed and Gust are your tricks too: buff before you move, so a bounce in response does not strand a pump.
 
-**Board.** In: Disposal Order, Sabotage, 1 Vex, Apathetic (its trash plays are plays). Out: 1 Graves, 1 Ride the Wind, 1 Edge of Night. Disposal Order in response to Rhasa's cast is not possible (the cost is set when it is played), so cast it at the end of their turn or in response to a Flow play, while the trash is its fuel.
+**Board.** In: Disposal Order, Sabotage, 1 Vex, Apathetic (its trash plays are plays). Out: 1 Graves, 2 Edge of Night. Disposal Order in response to Rhasa's cast is not possible (the cost is set when it is played), so cast it at the end of their turn or in response to a Flow play, while the trash is its fuel.
 
 ### Kai'Sa, Daughter of the Void — attack early
 
@@ -424,7 +421,7 @@ You set aside up to 2, draw that many, and the set-aside cards go to the bottom 
 
 **The plan.** It is slow (3.5 average cost) and fears being raced. Pressure from turn 1 and make every removal spell a one-for-one on a 2-drop. **Don't overcommit**: Watcher does not kill, it makes their fight that turn lopsided, so the units you committed are the ones you lose. On the turn it can play Brynhir, your hidden cards and Reactions are off: play around it by not needing them that turn.
 
-**Board.** In: Unyielding Spirit, Flash, Sabotage. Out: 1 Bedeviling Stranger (four units at one battlefield is rare against this much removal), 1 Ride the Wind, 1 Edge of Night. Sabotage's best target is Time Warp or the sweeper.
+**Board.** In: Unyielding Spirit, Flash, Sabotage. Out: 1 Bedeviling Stranger (four units at one battlefield is rare against this much removal), 1 Tornado Warrior, 1 Edge of Night. Sabotage's best target is Time Warp or the sweeper.
 
 ### Riven, The Exile — hold
 
@@ -432,7 +429,7 @@ You set aside up to 2, draw that many, and the set-aside cards go to the bottom 
 
 **The plan.** Its engine works on battlefields it already controls, so **deny it the hold** and make it attack into yours. Hide behind your hold; flip when it commits. **Punch First and Switcheroo dodge Defy** (it counters spells with at most one Power), so they are the tricks to lean on; Star-Crossed, Gust and Rampage can be countered.
 
-**Board.** In: 2 Vex, Apathetic, 1 An Offer You Can't Refuse, Ravenbloom Prefect. Out: 1 Gust (its key units are 4 Might), 1 Bedeviling Stranger, 1 Sabotage, 1 Traveling Merchant. Vex stuns the units it plays and stops them moving that turn, which is most of what "enter ready" buys.
+**Board.** In: 2 Vex, Apathetic, 1 An Offer You Can't Refuse, Ravenbloom Prefect. Out: 1 Gust (its key units are 4 Might), 1 Bedeviling Stranger, 1 Traveling Merchant, 1 Edge of Night. Keep both Sabotage: Defy and Discipline are what beat your pumps. Vex stuns the units it plays and stops them moving that turn, which is most of what "enter ready" buys.
 
 ### Rengar, Pridestalker — hold
 
@@ -440,7 +437,7 @@ You set aside up to 2, draw that many, and the set-aside cards go to the bottom 
 
 **The plan.** Its fights are planned from hand. Hold, and make it attack into a hidden card. A battlefield where it has no units cannot be Ambushed. Graves is the punish for a wide attack, and Bedeviling Stranger's four-unit bounce turns on easily here.
 
-**Board.** In: 2 Vex, Apathetic, 1 Graves. Out: 1 Sabotage (ten spells, few worth it), 1 Ride the Wind, 1 Edge of Night.
+**Board.** In: 2 Vex, Apathetic, 1 Graves. Out: 2 Sabotage (ten spells, few worth it), 1 Edge of Night.
 
 ### LeBlanc, Deceiver — hold, and bounce rather than kill
 
@@ -448,7 +445,7 @@ You set aside up to 2, draw that many, and the set-aside cards go to the bottom 
 
 **The plan.** It wants its units to die. Star-Crossed and Gust remove without killing, so no Deathknell fires. Graves's blast fires every Deathknell at once: use it when the board after the triggers still favours you. Each enemy death readies your legend, so the trades at least pay Gold.
 
-**Board.** In: Disposal Order (Mixologist's targets), Unyielding Spirit (Ruined Rex's 4), 1 Vex, Apathetic. Out: 1 Sabotage (seven spells), 1 Ride the Wind, 1 Rampage (a kill).
+**Board.** In: Disposal Order (Mixologist's targets), Unyielding Spirit (Ruined Rex's 4), 1 Vex, Apathetic. Out: 2 Sabotage (seven spells), 1 Rampage (a kill).
 
 ### Jayce, Defender of Tomorrow — attack early
 
@@ -464,7 +461,7 @@ You set aside up to 2, draw that many, and the set-aside cards go to the bottom 
 
 **The plan.** Hold, and let Graves and the Stranger punish the width. A conquest is its engine, so a hold it cannot break is also denial.
 
-**Board.** In: 1 Graves, 2 Vex, Apathetic (its revealed units are played, so Vex stuns them). Out: 1 Sabotage, 1 Ride the Wind, 1 Edge of Night.
+**Board.** In: 1 Graves, 2 Vex, Apathetic (its revealed units are played, so Vex stuns them). Out: 2 Sabotage, 1 Edge of Night.
 
 ### Mordekaiser, Iron Revenant — attack early
 
@@ -480,7 +477,7 @@ You set aside up to 2, draw that many, and the set-aside cards go to the bottom 
 
 **The plan.** Its hidden cards can only act at their own battlefield, and **taking that battlefield trashes them** (§323.6.a). Attack the battlefield it hid at. Gust its hidden units in response to their play effects (§811.1.d.3.a).
 
-**Board.** In: 2 Vex, Apathetic (units played from face down are played). Out: 1 Ride the Wind, 1 Sabotage.
+**Board.** In: 2 Vex, Apathetic (units played from face down are played). Out: 1 Sabotage, 1 Edge of Night.
 
 ### Akali, Rogue Assassin — hold
 
