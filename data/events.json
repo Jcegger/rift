@@ -3,12 +3,11 @@
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2464,
-  "eventsWithDecks": 17,
-  "players": 63508,
-  "playersWithDecks": 5788,
+  "events": 2465,
+  "eventsWithDecks": 18,
+  "players": 63517,
+  "playersWithDecks": 5797,
   "unresolvedDeckEvents": [
-   "Club9 Riftbound Clash #3",
    "Runes & Rift Open 19",
    "Mardi - Championship #1",
    "Nightcup League Cup #1 — Cycle 1",
@@ -41,7 +40,7 @@
    "Oceania": 4
   },
   "registryEventsByRegion": {
-   "unknown": 2458,
+   "unknown": 2459,
    "Asia": 6
   },
   "unresolvedClaimEvents": [
@@ -139,6 +138,16 @@
   }
  },
  "events": [
+  {
+   "name": "Club9 Riftbound Clash #3",
+   "dt": "2026-10-23",
+   "players": 9,
+   "format": "Constructed",
+   "winner": "el",
+   "country": null,
+   "slug": "club9-riftbound-clash-3",
+   "top": []
+  },
   {
    "name": "Fast Cup Radiance #2",
    "dt": "2026-10-20",
