@@ -329,3 +329,41 @@ two-for-one. Big units are covered for now by 2 Rampage with a tall unit, 3 Star
 **The list stays the step-2a list.** Bench additions: Wind and Ghosts (big units), Challenge
 (if fights on their turn are the problem), Bushwhack Trap (Evelynn's hide), The Good Stuff,
 Pack of Wonders, Marching Orders.
+
+### Step 2c — battlefields and sideboard (draft, 23 Oct 2026)
+
+**Battlefields: all 71 legal ones read** (good finishes: all 358 / Radiance-era 22). Each player
+brings one per game, so ours helps whoever controls it; in a best-of-three each is used once in
+decided games (§488.5). "You" on a battlefield means its controller (§190.6.d).
+
+| battlefield | for this plan | verdict |
+|---|---|---|
+| **Bandle Tree** (OGN; 6 / 0) | *"You may hide an additional card here."* Two facedown cards at the battlefield we hold: one kept for Evelynn's point, one to flip in defence — the tension the audit found, solved by the battlefield instead of a card slot. We are the deck with 11 Hidden; the opponent gains it only if they take it | **in, game 1** (replaces Zaun Warrens) |
+| Emperor's Dais (SFD; 61 / 7) | bounce-and-replay Ezreal, Fizz or Matriarch; a Sand Soldier keeps the hold | **keep, going first** |
+| Sigil of the Storm (OGN; 53 / 3) | the conqueror recycles a rune: a lost rune for them, a Gold for us | **keep, going second** |
+| Zaun Warrens (OGN; 40 / 7) | filter on conquer | out: low impact was its job; Bandle Tree does more for us |
+| Hallowed Tomb (OGN; 5 / 0) | hold: return the Chosen Champion from the trash | bench: Mercenary insurance, but symmetric |
+| Forbidding Waste (UNL; 74 / 3) | a lone defender has −2 | bench: punishes Irelia and Master Yi, Bladesman, who defend alone; we hold with two |
+| Grove of the God-Willow (OGN; 29 / 0) | hold: draw 1 | bench: staying power at target |
+| Star Spring (UNL; 85 / 6) | first unit played here each turn lets another walk home | out: helps the deck that leaves, we stay |
+| Power Nexus (SFD; 3 / 0) | hold: pay four Power for a point | out: four Power a turn is more than the Gold makes |
+| Rockfall Path · Mystic Vortex · Vaults of Helia | stop units played there (our hidden units) · tax Reactions there (our flips) · tax the holder | out: each hurts this deck most |
+| the other 59 | payoffs for Mighty, buffs, XP, Dragons, gear, equipment, Repeat or Temporary; card draw on conquest that a holder rarely uses; symmetric effects with no edge for us | out |
+
+**Sideboard (10), rebuilt for the store** (meta decks, Irelia among them, no Aurora; casual decks
+beside them):
+
+| card | in against | why |
+|---|---|---|
+| 2 Vex, Apathetic | Rengar, Rek'Sai, Riven, Evelynn, Kennen, Irelia | stuns every unit they play while she's at a battlefield, ambush and hidden ones included |
+| **2 Existential Dread** (new) | Irelia, Rengar, Rek'Sai, Riven | 1 Energy, 1 Power, Action: stun an attacker (no combat damage); repeat for 2 to stun another or bounce the stunned one. Irelia fears stuns most |
+| **1 Wind and Ghosts** (new) | Kai'Sa, Mordekaiser, Kennen (Rhasa), LeBlanc | big units bounced, small ones banished (no Deathknell) |
+| 1 Unyielding Spirit | Kai'Sa, Akali, LeBlanc, Fury removal (Bilgewater Tracker, Scorched Earth) | prevents all spell and ability damage this turn |
+| 1 An Offer You Can't Refuse | Jayce, Riven (Blade of the Exile), Kennen (Last Rites) | kills a gear at Action speed |
+| 1 Sabotage | Kai'Sa, Riven, Irelia, Jayce | the second copy |
+| 1 Graves, Blasting Through | Rek'Sai, Rengar, LeBlanc | the third copy against width |
+| 1 Disposal Order | Kennen, Mordekaiser, LeBlanc | recycles 3 cards from their trash at Reaction speed |
+
+Out of the old sideboard: the second Offer and Ravenbloom Prefect (no Aurora Jayce at the store,
+so one gear answer), and Flash (Unyielding Spirit and Wind and Ghosts cover what it covered).
+Copy limits hold: Graves 2 + 1, Sabotage 1 + 1.
