@@ -159,3 +159,35 @@ Warrior; +2 Evelynn, In Control, +2 Windsinger, +1 Irresistible Faefolk.**
 - Shape: 23 units, 13 at 2 Energy or less, 22 cards at 2 or less (target 22–24), average 2.48,
   11 Hidden, 2 at 5+. Goldfish: 15.8 Energy over turns 1–4 on the play, 3.6 units by turn 3
   (3.9 on the draw). Runes stay 6 / 6, still the sweep's best.
+
+### Revised with Jay, 23 Oct 2026 — midrange: hold early, go tall later (draft)
+
+**Two objections from Jay, both right:**
+- **1-Might bodies are fragile in this field.** Radiance's Fury removal kills them for almost
+  nothing: Bilgewater Tracker (3 Energy: 1 damage to each of up to 2 units) and Scorched Earth
+  (5 damage split among units at one battlefield). Irresistible Faefolk and Windsinger are both
+  1 Might. Both go to the bench; Bedeviling Stranger (2 Might) keeps its slot.
+- **Stay midrange.** Section 1's "beatdown by default" is replaced: **hold early, go tall
+  later.** Take the open battlefields early and hold them with two bodies and a hide each; from
+  the midgame, put the resources into one big threat (Mercenary, a unit wearing Edge of Night,
+  Graves) that breaks their last hold. This is the first worksheet's plan, kept.
+
+**How that still meets the clock.** Holding is scoring: a held battlefield pays every turn, and
+holding both wins in four. The new piece is **Evelynn, In Control**, whose point at a held
+battlefield with a hide makes that battlefield pay 2. That is how a hold deck scores fast enough
+to finish in 16 minutes a game.
+
+**Targets move back to midrange medians** (good finishes, measured midrange: 26 units, 18 cards
+at 2 Energy or less, 3 at 5+, average 2.75): job 1 becomes 18–22 cheap cards, which the base list
+already meets. Job 5 (staying power) goes back to 8–10: hold games run longer than beatdown ones.
+
+**Proposal (draft): +2 Evelynn, In Control; −1 Rampage, −1 Traveling Merchant.**
+- Evelynn is the only scorer in the pool, and a hold-with-a-hide deck is exactly what she
+  rewards. She is also a 4-Might body for the tall phase.
+- Traveling Merchant draws when it moves. A deck that holds moves less, so it is the staying-power
+  card the new role weakens most (10 → 9).
+- Rampage is main-phase removal on our turn; Star-Crossed, Gust and Graves cover defenders, and
+  two copies stay.
+- Shape: 22 units, 19 cards at 2 Energy or less (midrange median 18), average 2.58, 11 Hidden,
+  2 at 5+. Goldfish: 15.8 Energy over turns 1–4 on the play, 3.3 units by turn 3, Might by turn 4
+  14.4. Runes stay 6 / 6.
