@@ -168,21 +168,21 @@ reason. Candidates, new or old, must show which job they do better than what the
 | 2 Tideturner | presence, fights (1) | a body, or a hidden swap (the Graves trick) | 9 |
 | 3 Ezreal, Prodigy | staying power (2) | discard 1, draw 2; discounts Rampage's +2 and Mercenary's Accelerate | 5 · 2 |
 | 2 Fizz, Trickster | staying power (2), recast fights (1) | recasts a spell of 3 Energy or less, paying its Power | 7 · 6 |
-| 1 Elnuk Herd | fights (1), at Reaction speed | hidden: +3 Might on a friendly unit at that battlefield for the 1 Power to hide (§811.1.b, .d.3), then recycles to the deck to come again; drawn without a hide, a 6-Energy 5-Might body with no Power — the top end we lacked. Replaced Tornado Warrior (fights slot, 23 Oct). One copy, not two: it is cheap only when hidden, hides are limited (one per battlefield you control, behind a strong hold), and from hand it is the worst Hidden card to hold — a second copy cost early board (cheap cards 22 → 21, units by turn 3 3.4 → 3.2) | none; adopted by pros early in the backtest (Rengar) |
+| ~~1 Elnuk Herd~~ → **1 Tornado Warrior** (23 Oct, see log) | fights (1), at Reaction speed | hidden: +3 Might on a friendly unit at that battlefield for the 1 Power to hide (§811.1.b, .d.3), then recycles to the deck to come again; drawn without a hide, a 6-Energy 5-Might body with no Power — the top end we lacked. Replaced Tornado Warrior (fights slot, 23 Oct). One copy, not two: it is cheap only when hidden, hides are limited (one per battlefield you control, behind a strong hold), and from hand it is the worst Hidden card to hold — a second copy cost early board (cheap cards 22 → 21, units by turn 3 3.4 → 3.2) | none; adopted by pros early in the backtest (Rengar) |
 | 2 Tail-Cloaked Matriarch | staying power (2), a 4-Might body | revives a unit of 3 Energy / 1 Power or less; her own Empower is always available, so nothing depends on Tornado | 5 · 3 |
 | 2 Graves, Blasting Through | fights, denial against wide boards (1, 3) | LeBlanc, Rengar decks and Rek'Sai are likely; a 3rd belongs in the sideboard for them (41% to see one of 2 by turn 5, 56% with 3) | none yet |
 | Sivir, Mercenary (Champion Zone) | presence, fights (1): the closer | always available, never drawn | — |
 
 Two-drops 11, three-drops 5, four and up 5, plus Mercenary. Hidden: 10 — 6 units
-(3 Stranger, 2 Tideturner, 1 Elnuk) and 4 spells or gear. Staying power uses 10 unit slots,
+(3 Stranger, 2 Tideturner, 1 Tornado) and 4 spells or gear. Staying power uses 10 unit slots,
 the top of its budget: fights and denial come from the spells, and no more draw goes in.
 
 **Benched, with reasons:**
 - **Tornado Warrior** — a free 3-Might body from face down and Matriarch's free switch; out
   for Elnuk Herd. **The reason given was wrong** (Jay, 23 Oct): her own Empower is *not* always
   available, because Empowered is permanent (§443) and she empowers only if not Empowered.
-  Tornado's "Disempower it at end of turn" is the reset that makes her a second revive. Under
-  review: see the log.
+  Tornado's "Disempower it at end of turn" is the reset that makes her a second revive. Back in
+  for Elnuk Herd: see the log.
 - **Shadow Order Disciple** — an engine piece, but only 3 Might when it moves and its burn is
   random; the trash already fills with chosen cards. First back if the trash runs dry.
 - **Kennen, Storm of Shuriken** — its 7 winners are Kennen's decks, where the burn feeds
@@ -195,7 +195,7 @@ the top of its budget: fights and denial come from the spells, and no more draw 
   Evelynn, In Control, Repair Specialist, Black Market Broker, Treasure Hunter** — none does
   a tier-1 or tier-2 job better than what is in; Gold makers are redundant with the legend.
 
-**Fights: 12 spells and gear, plus Elnuk Herd's role** (23 Oct 2026). Checked against all
+**Fights: 12 spells and gear, plus the hidden units' role** (Elnuk Herd, then Tornado Warrior) (23 Oct 2026). Checked against all
 110 spells and gear legal for Sivir (colours, bans, and other champions' signatures — Void
 Assault is Kha'Zix's). B = Body/Chaos good finishes of 7; W = Chaos-colour Radiance winners of 15.
 
@@ -274,8 +274,8 @@ Matriarch's Empower, Edge of Night's Equip, Switcheroo) are the ones played earl
 |---|---|---|---|
 | units / spells / gear | 22 / 16 / 2 | ~20 units | 22 / 16 / 2 |
 | cards at 2 Energy or less | 21 | 22 | 18 |
-| cards at 5+ Energy | 3 (2 Graves, Elnuk) | 3–5 | 0 |
-| average cost | 2.58 | ~2.8 | 2.48 |
+| cards at 5+ Energy | 2 (2 Graves) | 3–5 | 0 |
+| average cost | 2.50 | ~2.8 | 2.48 |
 | Hidden | 10 | — | 10 |
 
 ## 3. Card by card — written into the guide
@@ -290,33 +290,42 @@ corrections came out of writing it, both checked in the handbook and the verbati
   Emperor's Dais. Tornado Warrior's empower ending at end of turn is that card's own text
   ("Disempower it at end of turn"), not §443; section 1 cited it wrongly.
 - **Rampage has no Action:** it is main-phase removal on our turn, never a trick in a showdown.
-  The fights tricks are Punch First, Switcheroo, Ride the Wind and, from face down, Elnuk Herd
-  and Edge of Night.
+  The fights tricks are Punch First, Switcheroo, Ride the Wind and, from face down, Tornado
+  Warrior and Edge of Night.
 
 ## 4. Checks — 23 Oct 2026
 
 - **Deck rules:** all 11 pass (`lib/decks.mjs` `deckChecks`): one legend, 40 main, a Sivir
   champion, 12 runes, 3 different battlefields, inside Body/Chaos, 3-copy limit across main and
   sideboard, no other champion's signature, sideboard 10 of 10, nothing banned, Standard-legal.
-- **Goldfish** (`lib/sim.mjs`, 20,000 games, seed 1). Energy spent turns 1–4: **15.8 on the play,
-  17.5 on the draw** (Randyyy 16.7). Units on board by turn 3: 3.4 / 3.7. Two units by turn 3:
-  97% / 99%. No play on turns 1–2: 0%. Best mulligan policy: keep all.
+- **Goldfish** (`lib/sim.mjs`, 20,000 games, seed 1). Energy spent turns 1–4: **15.9 on the play,
+  17.6 on the draw** (Randyyy 16.7). Units on board by turn 3: 3.4 / 3.8. Two units by turn 3:
+  98% / 99%. No play on turns 1–2: 0%. Best mulligan policy: keep all.
 - **Stuck on colour by turn 3:** 11% on the play, 9% on the draw (Randyyy 6%). Pessimistic: the
   simulator does not make the legend's Gold, which pays any colour.
-- **Rune sweep:** 5 Body / 7 Chaos is the best split (16.6 Energy, 10% stuck); 4/8 and 6/6 are
-  within 0.1 Energy but stick more often (14%, 12%).
+- **Rune sweep:** 5 Body / 7 Chaos is the best split (16.7 Energy, 10% stuck); 4/8 and 6/6 are
+  within 0.1 Energy but stick more often (14%, 11%).
 - **What the simulator cannot see:** the legend's Gold, the cost of hiding, any fight. Its
   per-card keep values are goldfish Energy only.
 
-**Watch list, from the audit:** Staunch Survivor (its Body Power on turn 1–2), Elnuk Herd (a
-6-drop from hand), the single Sabotage. Cut first if the deck plays clunky: the second Edge of
-Night, then Elnuk.
+**Watch list, from the audit:** Staunch Survivor (its Body Power on turn 1–2), Tornado Warrior (its
+reset needs Matriarch at its battlefield), the single Sabotage. Cut first if the deck plays
+clunky: the second Edge of Night.
 
 ## 5. Log
 
 - **23 Oct 2026 — the list is complete.** Saved to the Decks tab as `Sivir — Midrange
   (decklab, 23 Oct)`; the guide is [guides/sivir-midrange.md](../guides/sivir-midrange.md).
   Emperor's Dais replaced Sandswept Tomb as the going-first battlefield. No games yet.
+- **23 Oct 2026 — Tornado Warrior in for Elnuk Herd** (Jay's point). Tornado was benched on a
+  wrong premise: Matriarch's own Empower is not always available (Empowered is permanent,
+  §443), and Tornado's end-of-turn disempower is what makes her a second revive. On the tiers:
+  fights are a tie (both add about 3 Might there from face down; Elnuk's +3 is targeted at
+  Reaction speed and out of Gust's range, Tornado's 3 stays as a body and costs 3 from hand,
+  not 6), so the Matriarch reset breaks it. **Results were set aside:** Tornado's 36 good
+  finishes against Elnuk's 0 only measure that Elnuk is a Radiance card legal today. Shape:
+  5+ Energy cards 3 → 2, average cost 2.58 → 2.50; goldfish unchanged (15.9 Energy on the
+  play). The list is frozen until games give a reason.
 
 Games, results, and every change with its reason go here.
 
