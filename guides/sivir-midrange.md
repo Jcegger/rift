@@ -6,11 +6,11 @@ date: 2026-10-23
 ---
 
 **Legend:** Battle Mistress (Body/Chaos) · **Champion:** Sivir, Mercenary
-**Registered:** 40 main (Champion included) + 12 runes (5 Body / 7 Chaos) + 3 battlefields + 1 legend = 56 · **Sideboard:** 10 of 10
+**Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend = 56 · **Sideboard:** 10 of 10
 **Shuffled library:** 39. The Champion starts outside the deck (§103.3.a.1, §108.3.d)
 **Collection status:** 10 to get, all Radiance cards: 3 Bedeviling Stranger, 3 Staunch Survivor, 2 Graves, Blasting Through; sideboard 1 Graves, 1 An Offer You Can't Refuse
 **The list:** built a section at a time on 23 October in [decklab/sivir-midrange.md](../decklab/sivir-midrange.md), saved in the app as `Sivir — Midrange (decklab, 23 Oct)`
-**Its results:** **none yet. Untested.** Its reference is Randyyy's list at the Los Angeles RQ (146th of 2,165, the only legal non-Aurora Sivir result in the data), which shares **45 of these 56 cards**: 30 of the 40, all 12 runes, the legend and two battlefields
+**Its results:** **none yet. Untested.** Its reference is Randyyy's list at the Los Angeles RQ (146th of 2,165, the only legal non-Aurora Sivir result in the data), which shares **44 of these 56 cards**: 30 of the 40, 11 of the 12 runes, the legend and two battlefields
 **Good until:** the first Radiance results, or Riot's Radiance FAQ, whichever comes first. Re-read the rules sections when the FAQ lands, because it outranks the Core Rules.
 
 **Companions.** [The worksheet](../decklab/sivir-midrange.md) is why each card is in. [strategy.md](../docs/strategy.md) is how to think about any turn, and [archetypes.md](../docs/archetypes.md) is what every opponent is trying to do. This page is how to play *this deck*.
@@ -316,13 +316,20 @@ Ezreal and Traveling Merchant draw beyond this, so the real figures are higher b
 
 | | on the play | on the draw |
 |---|---|---|
-| Energy spent, turns 1–4 | 15.9 | 17.7 |
+| Energy spent, turns 1–4 | 15.8 | 17.7 |
 | units on board by turn 3 | 3.5 | 3.9 |
-| two units by turn 3 | 98% | 99% |
+| two units by turn 3 | 98% | 100% |
 | no play on turns 1–2 | 0% | 0% |
-| a card stuck on its colour, turn 3 | 11% | 10% |
+| a card stuck on its colour, turn 3 | 11% | 9% |
 
-The stuck figure is pessimistic: a ready Gold pays either colour. **Runes: 5 Body / 7 Chaos** was the best of every split from 3/9 to 9/3 on the same shuffles (16.7 Energy over turns 1–4, 10% stuck; 6/6 is a tie within the noise, 4/8 sticks more, 15%).
+The stuck figure is pessimistic: a ready Gold pays either colour. **Runes: 6 Body / 6 Chaos.** In the sweep of every split from 3/9 to 9/3 on the same shuffles, 6/6 and 5/7 tie on Energy (16.7 over turns 1–4) and 6/6 sticks slightly less (9.7% against 10.1%). The tie is broken by the turns before your first Gold, when only runes pay Power. **Body is the colour that runs short**: Staunch Survivor on turn 1 (the one turn with no Gold possible) and Punch First's two Body. Chaos needs one at a time, and 6 is enough:
+
+| with no Gold, going first / second | 5 Body / 7 Chaos | **6 Body / 6 Chaos** |
+|---|---|---|
+| a Body rune on turn 1 (Staunch Survivor) | 68% / 84% | **77% / 91%** |
+| 2 Body by turn 2 (Punch First) | 58% / 75% | **73% / 88%** |
+| 2 Body by turn 3 | 88% / 95% | **96% / 99%** |
+| 2 Chaos by turn 3 (Switcheroo, Mercenary with Accelerate) | 99% / 100% | 96% / 99% |
 
 **The rune formula.** To cast something costing E Energy and P Power you need **max(E, P) runes on the board, at least E of them ready** (rules.md, Resources): the same rune can be exhausted for Energy and then recycled for Power. Gold pays Power without a rune. Examples:
 
@@ -359,8 +366,8 @@ You set aside up to 2, draw that many, and the set-aside cards go to the bottom 
 | keep | Energy | | keep | Energy |
 |---|---|---|---|---|
 | Tail-Cloaked Matriarch | +1.4 | | Edge of Night | +0.6 |
-| Tornado Warrior | +0.9 | | Ezreal, Prodigy | +0.2 |
-| Graves | +0.8 | | Fizz, Trickster | +0.2 |
+| Tornado Warrior | +1.0 | | Ezreal, Prodigy | +0.2 |
+| Graves | +0.9 | | Fizz, Trickster | +0.2 |
 | Tideturner | +0.7 | | Staunch Survivor | −0.4 |
 | Traveling Merchant | +0.7 | | Switcheroo | −0.4 |
 | Bedeviling Stranger | +0.7 | | Punch First, Sabotage | −0.7 |

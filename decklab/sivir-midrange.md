@@ -264,7 +264,7 @@ Sandswept Tomb (Randyyy's) discounts our spells there, but only on our units at 
 Dais does more for a deck that replays play effects. Bandle Scouts' Academy (Gold on hiding)
 is the legend's job again.
 
-**Runes: 5 Body / 7 Chaos**, confirmed by `sweepRunes` (below). Printed Power: Body 12, Chaos 8
+**Runes: 6 Body / 6 Chaos** (5 / 7 until 23 Oct; see the log). Printed Power: Body 12, Chaos 8
 (Punch First is 6 of the Body), but the Chaos-only cards (Fizz, Ezreal, Mercenary,
 Matriarch's Empower, Edge of Night's Equip, Switcheroo) are the ones played early and often.
 
@@ -298,13 +298,13 @@ corrections came out of writing it, both checked in the handbook and the verbati
 - **Deck rules:** all 11 pass (`lib/decks.mjs` `deckChecks`): one legend, 40 main, a Sivir
   champion, 12 runes, 3 different battlefields, inside Body/Chaos, 3-copy limit across main and
   sideboard, no other champion's signature, sideboard 10 of 10, nothing banned, Standard-legal.
-- **Goldfish** (`lib/sim.mjs`, 20,000 games, seed 1). Energy spent turns 1–4: **15.9 on the play,
-  17.6 on the draw** (Randyyy 16.7). Units on board by turn 3: 3.4 / 3.8. Two units by turn 3:
-  98% / 99%. No play on turns 1–2: 0%. Best mulligan policy: keep all.
+- **Goldfish** (`lib/sim.mjs`, 20,000 games, seed 1). Energy spent turns 1–4: **15.8 on the play,
+  17.7 on the draw** (Randyyy 16.7), final list at 6/6. Units on board by turn 3: 3.5 / 3.9. Two
+  units by turn 3: 98% / 100%. No play on turns 1–2: 0%. Best mulligan policy: keep all.
 - **Stuck on colour by turn 3:** 11% on the play, 9% on the draw (Randyyy 6%). Pessimistic: the
   simulator does not make the legend's Gold, which pays any colour.
-- **Rune sweep:** 5 Body / 7 Chaos is the best split (16.7 Energy, 10% stuck); 4/8 and 6/6 are
-  within 0.1 Energy but stick more often (14%, 11%).
+- **Rune sweep** (final list): 5/7 and 6/6 tie on Energy (16.7); 6/6 sticks less (9.7% against
+  10.1%). The sweep's tie-break favours the split already listed, which is why it first printed 5/7.
 - **What the simulator cannot see:** the legend's Gold, the cost of hiding, any fight. Its
   per-card keep values are goldfish Energy only.
 
@@ -335,7 +335,13 @@ clunky: the second Edge of Night.
   and the plans that aren't units (Time Warp, Gutter Palace, Arise!). The second slot is a second
   Tornado, not a third Sabotage, to keep denial at 6. Shape: 20 cards at 2 Energy or less (was
   21), average cost 2.50, 11 Hidden (4 spells or gear); goldfish 15.9 Energy on the play, units
-  by turn 3 3.5. **Final until tested.**
+  by turn 3 3.5.
+- **23 Oct 2026 — runes 5 Body / 7 Chaos → 6 / 6** (Jay asked what happens without Gold). The
+  simulator makes no Gold, so its sweep is the no-Gold case, and on the final list 5/7 and 6/6
+  tie (16.74 against 16.71 Energy; 6/6 stuck 9.7% against 10.1%). Exact odds break the tie: Body
+  is the colour that runs short (Staunch Survivor on turn 1, before any Gold exists; Punch First's
+  two Body; Sabotage now two copies). 2 Body by turn 2 rises from 58% to 73% going first, while
+  2 Chaos by turn 3 only falls from 99% to 96%. **Final until tested.**
 
 Games, results, and every change with its reason go here.
 
