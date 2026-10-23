@@ -301,3 +301,31 @@ Switcheroo, Star-Crossed, Gust, Rampage, Sabotage, Edge of Night.
   3.4 units by turn 3. Printed Power Body 13, Chaos 17. Rune sweep: 5/7 and 6/6 tie on Energy
   (16.9); 5/7 sticks 8.4% against 9.8%. Kept at 6/6 for turn 1's Staunch Survivor (no Gold yet);
   re-check once the list is final.
+
+### Step 2b decided — 23 Oct 2026: no changes; both proposed swaps reversed
+
+**Rampage stays (Jay).** The proposal undersold its optional cost. Exactly:
+- Rampage's optional Body gives our unit **+2 before the exchange**, so it wins trades Challenge
+  only draws: a 6-Might Mercenary with Rampage kills a 6-Might unit and survives; with Challenge
+  both die. Against a 7-Might unit, Rampage kills it and survives at 8; Challenge kills nothing.
+- **Ezreal makes that +2 free** (an optional additional cost, §356.4.c). Challenge's Body is its
+  base cost, which Ezreal doesn't touch.
+- **Gold:** paying Rampage's Body by recycling a rune makes a Gold. Challenge's Body is
+  mandatory, so it always makes one; the real difference is the +2, not the Gold.
+- Challenge's only edge is timing (Action), and this deck already has Action and Reaction answers
+  for fights: 3 Star-Crossed, 2 Gust, 3 Punch First, 2 Switcheroo and 11 Hidden cards. Rampage's
+  +2 is the thing nothing else gives.
+
+**Sabotage stays (Jay: a staple).** It is, in these colours: all 7 of 7 Body/Chaos good finishes
+run it, an older card with a real record. Its job, stripping the Reaction that beats our pump
+before the tall phase's fight, matters against Irelia (Defiant Dance, En Garde) at Jay's store.
+
+**Wind and Ghosts goes to the bench, first in for big units.** Every slot it could take costs
+something the plan needs: for a Gust, cheap cards fall to 17 (target 18–22); for an Edge of Night,
+Hidden spells and gear fall to 3 (the Vex rule says 4); for a Star-Crossed, the deck's best
+two-for-one. Big units are covered for now by 2 Rampage with a tall unit, 3 Star-Crossed and
+2 Switcheroo. Bring it in if games show 6+ Might units walking through.
+
+**The list stays the step-2a list.** Bench additions: Wind and Ghosts (big units), Challenge
+(if fights on their turn are the problem), Bushwhack Trap (Evelynn's hide), The Good Stuff,
+Pack of Wonders, Marching Orders.
