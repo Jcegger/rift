@@ -367,3 +367,100 @@ beside them):
 Out of the old sideboard: the second Offer and Ravenbloom Prefect (no Aurora Jayce at the store,
 so one gear answer), and Flash (Unyielding Spirit and Wind and Ghosts cover what it covered).
 Copy limits hold: Graves 2 + 1, Sabotage 1 + 1.
+
+---
+
+## 4. Full audit — 23 Oct 2026
+
+**The list audited.** Main (40): 3 Staunch Survivor, 3 Bedeviling Stranger, 2 Traveling Merchant,
+2 Tideturner, 3 Ezreal, Prodigy, 2 Fizz, Trickster, 2 Tornado Warrior, 2 Tail-Cloaked Matriarch,
+3 Evelynn, In Control, 2 Graves, Blasting Through, Sivir, Mercenary; 3 Punch First, 2 Rampage,
+3 Star-Crossed, 2 Switcheroo, 2 Gust, 1 Sabotage; 2 Edge of Night. Runes 6 Body / 6 Chaos.
+Battlefields: Bandle Tree, Emperor's Dais, Sigil of the Storm. Sideboard (10): 2 Vex, Apathetic,
+2 Existential Dread, 1 Wind and Ghosts, 1 Unyielding Spirit, 1 An Offer You Can't Refuse,
+1 Sabotage, 1 Graves, Blasting Through, 1 Disposal Order.
+
+**Deck rules:** all 11 pass (`deckChecks`), sideboard included; Graves 2 + 1 and Sabotage 1 + 1
+inside the 3-copy limit.
+
+**Shape, against the targets:**
+
+| | this list | target | |
+|---|---|---|---|
+| units / spells / gear | 25 / 13 / 2 | midrange median 26 units | ok |
+| cards at 2 Energy or less | 18 (10 units) | 18–22 | ok, at the floor |
+| 5+ Energy | 2 | 2–4 | ok |
+| average cost | 2.65 | 2.5–2.75 | ok |
+| curve (1 / 2 / 3 / 4 / 5) | 6 / 12 / 14 / 6 / 2 | | the 3s are the deck's centre |
+| Hidden (spells or gear) | 11 (4), plus Bandle Tree's second slot | 10–12 (4+) | ok |
+| Reactions from hand | 5 (3 Star-Crossed, 2 Gust) | 4–6 | ok |
+| pumps and swaps | 7 + 2 Tornado | 7–9 | ok |
+| hold-breakers / scorers | 9 + Mercenary / 3 Evelynn | 8–10 / 2–3 | ok |
+| staying power | 9 | 8–10 | ok |
+| flexible denial | 1 Sabotage + the removal | 2–3 | **thin**, the sideboard's second Sabotage comes in often |
+
+**Goldfish** (`lib/sim.mjs`, 20,000 games): Energy turns 1–4 15.9 on the play, 17.9 on the draw;
+units 3.4 / 3.8 by turn 3, two units by turn 3 98% / 99%; Might by turn 4 14.6 / 16.0; no play on
+turns 1–2 0%; stuck on colour by turn 3 11% / 9% (no Gold modelled). Best mulligan: keep all.
+Per-card keep values run Matriarch +1.1 to Sabotage −0.7; Staunch Survivor reads −0.5 because the
+sim charges its Body Power with no Gold back.
+
+**Runes: 6 / 6 confirmed.** The sweep ties 5/7 and 6/6 on Energy (16.9); 5/7 sticks 9.0% against
+10.5%, because the Chaos cards recycle more Chaos over a game. The exact odds before any Gold
+still favour 6/6 where it matters, the first turns:
+
+| with no Gold, going first / second | 5 Body / 7 Chaos | 6 Body / 6 Chaos |
+|---|---|---|
+| 1 Body by turn 1 (Staunch Survivor) | 68% / 84% | **77% / 91%** |
+| 2 Body by turn 2 (Punch First) | 58% / 75% | **73% / 88%** |
+| 2 Chaos by turn 3 (Switcheroo from hand) | 99% / 100% | 96% / 99% |
+| 2 Chaos by turn 4 (Mercenary with Accelerate) | 100% / 100% | 100% / 100% |
+| 2 Body and 2 Chaos by turn 3 | 87% / 95% | **92% / 98%** |
+
+Late Chaos is what the Gold covers, so 6/6 stays.
+
+**Draw odds** (39-card library, no draws counted): a 2-drop unit in the opening 4 71%, by turn 2
+85%; Evelynn by turn 5 56%; a Hidden card by turn 2 85%.
+
+**New rules this list relies on, checked verbatim:** Evelynn's point is gaining points, not gated
+(§470.2, §473.1.a.1), checked when she holds (§383.2.a.1, §383.4.d); Bandle Tree's "you" is its
+controller (§190.6.d), and a Facedown Zone's size can change (§107.3.b.1); a stunned unit deals no
+combat damage (Existential Dread, §424.1.b); Wind and Ghosts banishes, which is not a death, so no
+Deathknell (§428.2).
+
+**What the audit found:**
+1. **Bandle Tree doubles the stake.** Two facedown cards there means losing it trashes both
+   (§323.6.a). Play rule: the second hide only when the hold is safe.
+2. **Bedeviling Stranger is the weakest card against the store's top decks.** Its bounce needs 4
+   units at the battlefield, and Irelia (2.5 units by turn 3), Riven (2.9), Master Yi, Bladesman
+   (holds alone) and Kai'Sa rarely put that many there. Against them it is a 2-Might Hidden body,
+   which still does jobs 1 and 2. It is the first card out in most sideboard plans below. Not cut:
+   the alternatives are 1-Might bodies the Fury pings kill.
+3. **Flexible denial is one card.** One main-deck Sabotage; the second comes in against most of
+   the meta decks.
+4. **Turn 4 is crowded:** 2 Matriarch and 3 Evelynn, with Mercenary waiting. A choice, not a clog,
+   but a hand of two 4-drops and no 2-drop is a mulligan.
+5. **Gaps still open, by design:** saving a hidden card (Pack of Wonders on the bench), big units
+   (Wind and Ghosts in the sideboard), and the clock is now Evelynn's 3 copies.
+
+**Matchups at the store** (role, what decides it, and the sideboard plan, 1 for 1):
+
+| opponent | role | what decides it | in | out |
+|---|---|---|---|---|
+| Irelia (S) | hold, attack with two | she fields few units and wins fights with Reactions (Defiant Dance, En Garde); stuns beat her readied units | 2 Existential Dread, 1 Sabotage | 2 Bedeviling Stranger, 1 Rampage |
+| Kennen (S) | press early | pressure before the trash fills and Rhasa lands | Disposal Order, Wind and Ghosts, 1 Vex | 1 Graves, 1 Edge of Night, 1 Tideturner |
+| Riven (S) | hold; deny her holds | her units enter ready on battlefields she controls; Defy can't counter Punch First or Switcheroo | 2 Vex, 1 Offer, 1 Sabotage | 1 Gust, 1 Bedeviling Stranger, 1 Traveling Merchant, 1 Edge of Night |
+| Master Yi, Bladesman (S) | attack with two | the +2 is only for a lone defender; his tricks are 1-Energy Reactions | 1 Sabotage, 1 Wind and Ghosts | 2 Bedeviling Stranger |
+| Kai'Sa (A) | press; don't overcommit | removal and Watcher (−3, minimum 1); Time Warp | Unyielding Spirit, Wind and Ghosts, Sabotage | 1 Bedeviling Stranger, 1 Tornado Warrior, 1 Edge of Night |
+| Rengar (A) | hold | ambushes need their units already there | 2 Vex, 2 Existential Dread, 1 Graves | 1 Sabotage, 2 Edge of Night, 1 Fizz, 1 Matriarch |
+| Rek'Sai (B) | hold | the widest board; conquests feed its engine | 2 Vex, 2 Existential Dread, 1 Graves | 1 Sabotage, 2 Edge of Night, 1 Fizz, 1 Matriarch |
+| LeBlanc (A) | hold; bounce, banish | it wants its units to die | Disposal Order, Wind and Ghosts, Unyielding Spirit | 1 Sabotage, 2 Rampage |
+| Evelynn (A) | press her hide spots | taking a battlefield trashes her facedown cards | 2 Vex | 1 Sabotage, 1 Edge of Night |
+| Vex, Gloomist (A) | remove Vex first | Vex, Apathetic stuns our units played, hidden ones too; our 4 Hidden spells and gear still work | Wind and Ghosts, Sabotage | 1 Bedeviling Stranger, 1 Tornado Warrior |
+| Akali (B) | hold | pings and Falling Star on small bodies | Unyielding Spirit | 1 Traveling Merchant |
+| Jayce, non-Aurora (A) | press | nothing on board for three turns; Gutter Palace | Offer, Sabotage | 2 Graves |
+
+These plans are starting points from the cards, not tested. Log what changes.
+
+**Verdict:** legal, on every shape target, runes confirmed, every card read. The list is ready to
+test. Card by card (section 3) and the guide follow once Jay agrees.
