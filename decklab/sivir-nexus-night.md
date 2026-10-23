@@ -2,7 +2,7 @@
 title: Sivir for Nexus Night — deckbuilding worksheet
 subtitle: Sivir, Battle Mistress (Body/Chaos), Radiance. A 3-0 at a Nexus Night, rebuilt from the decklab Sivir Midrange list. Built together, step by step.
 started: 2026-10-23
-status: section 1 drafted, not yet agreed
+status: section 1 agreed 23 Oct 2026 · section 2 next
 ---
 
 The second Sivir worksheet. The first, [sivir-midrange.md](sivir-midrange.md), is the base: its
@@ -24,7 +24,7 @@ Warrens, Emperor's Dais, Sigil of the Storm.
 
 ---
 
-## 1. How it wins — draft, 23 Oct 2026
+## 1. How it wins — agreed 2026-10-23
 
 **The goal: three match wins at a Nexus Night.** Jay's store: 3 rounds, best of three, 50-minute
 rounds, a mixed and casual field, low OPL (TR §205.2).
@@ -43,7 +43,7 @@ rounds, a mixed and casual field, low OPL (TR §205.2).
 3. **Consistency over up to nine games.** Three matches is up to nine games. The deck has to
    work when its engine (Matriarch, the Gold) doesn't show up.
 
-**How it wins, in one paragraph (draft).** Cheap bodies take **both** battlefields early and keep
+**How it wins, in one paragraph.** Cheap bodies take **both** battlefields early and keep
 them: a player holding both wins in four turns, and that clock is what finishes games inside 16
 minutes. Hidden cards defend the holds, pumps win the fights, and the recursion keeps bodies
 coming. **The default role is the beatdown.** Against a mixed field most opponents will be
@@ -52,7 +52,7 @@ reading of what casual fields bring, not data, so it gets checked against Jay's 
 switches to holding only against decks that are faster than us (Rengar, Rek'Sai and other
 go-wide decks).
 
-**Goal tiers (draft).** Each card earns its slot on its highest tier; lower tiers only break ties.
+**Goal tiers.** Each card earns its slot on its highest tier; lower tiers only break ties.
 
 | tier | goal | changed from the first build |
 |---|---|---|
@@ -66,8 +66,28 @@ go-wide decks).
 curve and colours that work; **and decisions fast enough to finish games** — complexity is
 welcome where it wins fights, not where it only adds thinking time.
 
-**Questions to settle before section 2:**
-- Is beatdown-by-default right for Jay's store? Jay knows the room; this draft guesses.
-- How much of the hold plan (11 Hidden, Graves defence) survives a beatdown role, or does the
-  Hidden package become the tool for keeping both battlefields once taken?
-- Champion: Mercenary still fits a faster plan (6 Might, Ganking, enters ready). Keep?
+**Settled with Jay** (23 Oct 2026):
+- **Beatdown by default: yes.** The store does bring meta decks (Irelia, for one), but nothing
+  like Aurora. So the online field is a fair guide to the threats, minus Aurora, and breadth still
+  matters for the homebrews and precons beside it.
+- **Champion: Sivir, Mercenary,** unchanged.
+- **How wide: two bodies a battlefield, and the hidden card is the third** (Jay asked Claude to
+  decide). Measured on the same goldfish (`data/archetypes.json`, units on board by turn 3):
+
+  | deck | units by turn 3 | Might by turn 4 | kind |
+  |---|---|---|---|
+  | Rek'Sai | 4.2 | 13.3 | truly wide |
+  | Mordekaiser · Rengar · Kha'Zix · LeBlanc | 3.6–3.9 | 13.8–16.9 | wide-ish |
+  | **this base list** | **3.5** | **14.3** | |
+  | Kennen · Master Yi, Bladesman · Riven · Akali | 2.9–3.2 | 13.2–13.7 | hold and tempo |
+  | Kai'Sa · Irelia | 2.5–2.8 | 11.9–14.4 | few, strong units |
+
+  Sivir sits between the hold decks and the swarm: wider than Riven or Irelia, narrower than
+  Rek'Sai, with more Might per body (Staunch Survivor fights at 4). Going wider than that is the
+  wrong direction. The Gold pays Power, never Energy, so it adds no bodies. 2-Might bodies are what
+  Kai'Sa's and Akali's area damage kill. And Body/Chaos has no go-wide payoff in the list's style.
+  **So the target is enough bodies to contest both battlefields (about two each by turn 3–4), and
+  the hidden card is the third defender at each.** It is width the opponent can't see or sweep
+  until it flips, and the reason the Hidden package survives the beatdown role. Against Irelia,
+  who fields the fewest units here (2.5 by turn 3), two battlefields of pressure make every turn
+  two fights, which is the Kha'Zix guide's advice against her too.
