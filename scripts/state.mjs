@@ -41,7 +41,7 @@
 
 import { readFile } from "node:fs/promises";
 import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
-import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, SB_MAX } from "../lib/decks.mjs";
+import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, SB_MAX } from "../lib/decks.mjs";
 import { pathToFileURL } from "node:url";
 
 const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
@@ -1066,6 +1066,12 @@ async function main() {
     summary: () => cmdSummary(S, cat, q),
     deck: () => cmdDeck(S, cat, q, args),
     decks: () => cmdDeck(S, cat, q, args),
+    // The deck page's "Copy list": Piltover Archive's paste format, to stdout.
+    export: () => {
+      const ds = findDecks(S, args.join(" ").trim());
+      if (ds.length !== 1) { console.log(ds.length ? `${ds.length} decks match — narrow it: ${ds.map((d) => d.name).join(" · ")}` : "no deck matching that"); return; }
+      process.stdout.write(deckText(ds[0], cat.idx));
+    },
     card: () => cmdCard(S, cat, q, args),
     want: () => cmdWant(S, cat, q),
     wants: () => cmdWant(S, cat, q),

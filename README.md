@@ -1407,6 +1407,10 @@ Collection, Guides, News. It lived at `/app/` while it was built and took the ro
   set's Day 1 share and conversion as context, your record, and a link to the plan in the deck's
   guide when one exists
   (matched by heading, e.g. "Irelia, Blade Dancer — …" in `guides/riven-exile-gauntlet.md`).
+  **Copy list** and **Download .txt** export it in Piltover Archive's paste format (Legend,
+  Champion, MainDeck of 39, Battlefields, Runes, Sideboard; `lib/decks.mjs` `deckText`), the
+  same text as `scripts/rift export <deck>`. The editor has the same two buttons, unsaved edits
+  included.
 - **Editor** — +/−, move to and from the sideboard, search inside the legend's domains,
   other champions' signatures blocked, every check live. Save writes the deck back.
 - **Find a deck** — the **Radiance meta** first (`data/field.json`): a fixed grid, tiers down

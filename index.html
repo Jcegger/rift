@@ -252,7 +252,7 @@ nav.bottom{display:none}
 <dialog id="dlg"></dialog>
 
 <script type="module">
-import { indexCatalog, deckStats, deckChecks, journalRecord, ownedByIdentity, MAIN_SIZE, SB_MAX } from "./lib/decks.mjs";
+import { indexCatalog, deckStats, deckChecks, journalRecord, ownedByIdentity, deckText, MAIN_SIZE, SB_MAX } from "./lib/decks.mjs";
 import { mdToHtml, esc, slugify } from "./lib/markdown.mjs";
 import { avoidedIn } from "./lib/avoid.mjs";
 import { applyImport, matcher, setCount, setSource, foilOnlyProblems, newqRows, newqText, newqCSV,
@@ -651,6 +651,8 @@ function viewDecks(id) {
     <section class="panel wide">
       <div class="headrow"><h2>Decklist</h2>
         <div class="btnrow"><span class="small dim" style="align-self:center">Tap a card to read it</span>
+        <button class="btn" data-export="copy" title="The paste format Piltover Archive imports">Copy list</button>
+        <button class="btn" data-export="file">Download .txt</button>
         <a class="btn primary" href="#/edit/${encodeURIComponent(d.id)}">Edit deck</a></div></div>
       <div class="grid-list">${groups}</div>
     </section>
@@ -711,6 +713,12 @@ function logPanel(d) {
       : `<p class="note">One tap per game. Mistake notes can come later; the record is what matters at the table.</p>`}
   </section>`;
 }
+document.addEventListener("click", (e) => {
+  const x = e.target.closest("[data-export]");
+  if (!x || !CURRENT) return;
+  if (x.dataset.export === "copy") copyText(deckText(CURRENT, IDX), "Deck list");
+  else download(`${slugify(CURRENT.name || "deck") || "deck"}.txt`, deckText(CURRENT, IDX), "text/plain");
+});
 document.addEventListener("click", async (e) => {
   const b = e.target.closest("[data-log]");
   if (b) {
@@ -865,6 +873,7 @@ function viewEdit(id) {
         <input type="text" id="dname" value="${esc(W.name)}" style="font:700 30px var(--f-head);min-width:min(520px,80vw)">
       </div>
       <div class="btnrow">
+        ${main.length ? `<button class="btn" data-act="export-copy" title="The paste format Piltover Archive imports">Copy list</button><button class="btn" data-act="export-file">Download .txt</button>` : ""}
         ${src ? `<button class="btn danger" data-act="delete">Delete</button><button class="btn" data-act="saveas">Save as copy</button>` : ""}
         <button class="btn primary" data-act="save" ${DIRTY || isNew ? "" : "disabled"}>Save</button>
       </div>
@@ -908,6 +917,9 @@ function viewEdit(id) {
     else if (act === "add") { W.cards[code] = (W.cards[code] || 0) + 1; touch(); keepSearch(); }
     else if (act === "addsb") { W.sb[code] = (W.sb[code] || 0) + 1; touch(); keepSearch(); }
     else if (act === "legend") { setLegend(code); q = ""; draw(); }
+    // Exports what is on screen, unsaved edits included.
+    else if (act === "export-copy") copyText(deckText(W, IDX), "Deck list");
+    else if (act === "export-file") download(`${slugify(W.name || "deck") || "deck"}.txt`, deckText(W, IDX), "text/plain");
     else if (act === "save" || act === "saveas") {
       const out = { ...W, name: (W.name || "").trim() || "Untitled deck" };
       if (act === "saveas") { out.id = "d" + Date.now().toString(36); out.name = `${out.name} (copy)`; }
