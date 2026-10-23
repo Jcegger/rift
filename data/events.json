@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-22",
+ "generatedAt": "2026-10-23",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -8,6 +8,7 @@
   "players": 63508,
   "playersWithDecks": 5788,
   "unresolvedDeckEvents": [
+   "Club9 Riftbound Clash #3",
    "Runes & Rift Open 19",
    "Mardi - Championship #1",
    "Nightcup League Cup #1 — Cycle 1",
@@ -26,16 +27,16 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 60,
-  "claimedEventsUnmatched": 53,
+  "claimedEvents": 61,
+  "claimedEventsUnmatched": 54,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Europe": 50,
-   "Asia": 88,
-   "unknown": 186,
+   "Asia": 90,
+   "unknown": 188,
+   "Europe": 51,
    "North America": 7,
    "Oceania": 4
   },
@@ -72,6 +73,7 @@
    "RiftAtlas Convergence #2",
    "Riftbound Showdown Series Germany",
    "Riftbound Showdown Series: Malmö",
+   "Runes & Rift Open 25",
    "S3 Guangzhou City Challenge",
    "S4 Beijing City Challenge",
    "S4 Guangzhou City Challenge",
@@ -127,6 +129,7 @@
    "Riftbound Remote Showdown #2": 14,
    "Riftbound Online Tournament": 13,
    "Card Cosmos Denver Riftbound $1K Tourney": 12,
+   "Club9 Riftbound Clash #3": 9,
    "Runes & Rift Open 19": 8,
    "Triple Win-A-Box | Vendetta Tournament": 8,
    "Riftbound Remote Showdown #4": 8,

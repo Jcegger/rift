@@ -8,7 +8,7 @@
    "v": "promo",
    "t": "Unit",
    "r": "Showcase",
-   "n": "Vi - Destructive",
+   "n": "Vi, Destructive",
    "d": [
     "Fury"
    ],
@@ -24,7 +24,7 @@
    "v": "promo",
    "t": "Unit",
    "r": "Showcase",
-   "n": "Caitlyn - Patrolling",
+   "n": "Caitlyn, Patrolling",
    "d": [
     "Calm"
    ],
@@ -40,7 +40,7 @@
    "v": "promo",
    "t": "Unit",
    "r": "Showcase",
-   "n": "Heimerdinger - Inventor",
+   "n": "Heimerdinger, Inventor",
    "d": [
     "Mind"
    ],
@@ -56,7 +56,7 @@
    "v": "promo",
    "t": "Unit",
    "r": "Showcase",
-   "n": "Warwick - Hunter",
+   "n": "Warwick, Hunter",
    "d": [
     "Body"
    ],
@@ -72,7 +72,7 @@
    "v": "promo",
    "t": "Unit",
    "r": "Showcase",
-   "n": "Jinx - Rebel",
+   "n": "Jinx, Rebel",
    "d": [
     "Chaos"
    ],
@@ -88,7 +88,7 @@
    "v": "promo",
    "t": "Unit",
    "r": "Showcase",
-   "n": "Viktor - Leader",
+   "n": "Viktor, Leader",
    "d": [
     "Order"
    ],

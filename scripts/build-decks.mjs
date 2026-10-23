@@ -299,14 +299,14 @@ async function getAll(filters, max) {
   return { decks: [...seen.values()], stats };
 }
 
-// Kept identical to the copy in old/index.html: the two must agree or a deck that the
-// snapshot resolves will read as unmatched in the app.
+// Was kept identical to the copy in old/index.html, which is archived and no longer read.
+// The live app needs no copy: this file now writes every list under catalog codes.
 function normColl(seg) {
   let s = String(seg ?? "").replace(/\s+/g, "");
   if (!s) return null;
-  // "-P" marks a promo printing and "-STAR" a signature, spelled out. A promo Annie
-  // is still Annie, so both fold to the base printing.
-  s = s.replace(/[-_]P$/i, "");
+  // "-P" (or "-P2", a second promo) marks a promo printing and "-STAR" a signature, spelled
+  // out. A promo Annie is still Annie, so both fold to the base printing.
+  s = s.replace(/[-_]P\d*$/i, "");
   s = s.replace(/\/\d+$/, "");
   const star = /\*/.test(s) || /star$/i.test(s);
   s = s.replace(/\*/g, "").replace(/[-_]?star$/i, "");
@@ -379,6 +379,18 @@ const main = async () => {
     const [set, coll] = k.split("|");
     const m = /^([A-Za-z]*\d+)[A-Za-z]+(\*?)$/.exec(coll);
     return m ? byKey.get(`${set}|${m[1]}${m[2]}`) || null : null;
+  };
+  /* Every list is written under the catalog's own codes. The feed spells printings its own
+     way — "UNL-150A" for the catalog's "UNL-150a", "RAD-002-P", "UNL-120-P-Champion" — and
+     this file used to keep them as cited, so every reader downstream, looking codes up
+     exactly, dropped them: on 23 Oct 2026 22% of the good placings were missing cards
+     (3,271 entries, Vex, Apathetic's alt art in 178 lists), they read as 37–39-card
+     decks, and a champion in alt art read as "no champion". `lookup` above always knew
+     them. A code it cannot place is kept as cited and reported below. */
+  const resolveCards = (cards) => {
+    const out = {};
+    for (const [code, q] of Object.entries(cards || {})) { const k = lookup(code)?.c || code; out[k] = (out[k] || 0) + q; }
+    return out;
   };
 
   process.stdout.write("fetching public decks… ");
@@ -478,7 +490,7 @@ const main = async () => {
       // The archive event this claim names, under whichever spelling. Null when the
       // archive has never carried it, which is 22 of the 23 claimed events.
       cm,
-      cards,
+      cards: resolveCards(cards),
       _unknown: unknown,
     };
   };
@@ -524,6 +536,9 @@ const main = async () => {
   // carried decks already named, and those decks stayed unsized against an archive that now
   // knew them, which check.mjs rightly blocked. Same join as a fresh deck: exact event name.
   for (const d of carried) if (d.tour && d.ev) d.ec = eventByName.get(d.ev)?.players || null;
+  // Carried rows were written as cited before codes were resolved, and the feed cannot be
+  // asked for them again: resolve them here too, so the whole archive reads one way.
+  for (const d of carried) d.cards = resolveCards(d.cards);
   /* Placeholder lists are not decks. A player keeping a list private until a bigger event
      uploads a stand-in: at NovaRiftbound's Showdown 5 (19 Oct 2026) twelve players, the
      3rd-place Kennen among them, posted the same 39 Spiderlings and a Yasuo, and Nova said

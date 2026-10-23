@@ -2499,10 +2499,13 @@ function identityOf(card){
   // them. Left unfolded, owning a legend failed to satisfy a deck citing another of
   // its printings, which inflated 74 of 490 decks by the one card a legend costs.
   if (card.t === 'Legend') return 'legend:' + gameName(card);
-  // Anything else reaching us under the dash name is the comma-named card. CANON is
-  // prebuilt so this stays a map lookup: identityOf runs per card per deck.
+  // Anything else reaching us under the dash name is the comma-named card, and any other
+  // printing (a promo, an overnumber in another set: VEN-167 is OGN-036's Vi, Destructive)
+  // is its base card, which no numeric fold reaches. The Arcane promos were renamed to
+  // their comma names in data/extras.json on 23 Oct 2026. CANON is prebuilt so this stays
+  // a map lookup: identityOf runs per card per deck.
   const canon = gameName(card);
-  if (canon !== card.n){
+  if (canon !== card.n || card.v){
     const twin = CANON.get(card.t + '|' + canon);
     if (twin && twin.c !== card.c) return identityOf(twin);
   }

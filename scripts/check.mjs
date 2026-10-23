@@ -1309,6 +1309,29 @@ section('Placeholder lists');
      !isPlaceholder({ X: 31, Y: 9 }, (k) => ({ t: 'Unit', n: k })) && isPlaceholder({ X: 39, Y: 1 }, (k) => ({ t: 'Unit', n: k })));
 }
 
+/* ══ card codes ══════════════════════════════════════════════════════════
+   The deck feed spells printings its own way ("UNL-150A", "RAD-002-P"); build-decks.mjs
+   writes the catalog's code. Until 23 Oct 2026 it kept the feed's, every reader looked
+   codes up exactly, and 22% of the good placings silently lost cards — a champion in alt
+   art read as "no champion". So: a placed list's every card is a catalog code, and it is a
+   whole deck. */
+section('Card codes');
+{
+  const { isGoodPlacing } = await import('../lib/placing.mjs');
+  const all = [...cat.cards, ...(read('data/extras.json').cards || [])].filter((c) => c.c);
+  const BY = new Map(all.map((c) => [c.c, c]));
+  const good = snap.decks.filter(isGoodPlacing);
+  const odd = good.filter((d) => Object.keys(d.cards).some((k) => !BY.has(k)));
+  ok('every card in a good placing is a catalog code', !odd.length,
+     odd.length ? `${odd.length} of ${good.length}: ${[...new Set(odd.flatMap((d) => Object.keys(d.cards).filter((k) => !BY.has(k))))].slice(0, 8).join(', ')}` : `${good.length} placed lists`);
+  const zone = (d, f) => Object.entries(d.cards).reduce((a, [k, q]) => a + (f(BY.get(k)) ? q : 0), 0);
+  const short = good.filter((d) => zone(d, (c) => ['Unit', 'Spell', 'Gear'].includes(c?.t)) !== 40 || zone(d, (c) => c?.t === 'Rune') !== 12);
+  ok('every good placing is a whole deck: 40 main, 12 runes', short.length <= good.length * 0.01,
+     `${short.length} of ${good.length} short${short.length ? `: ${short.slice(0, 3).map((d) => d.h).join(' | ')}` : ''}`);
+  const rest = new Set(snap.decks.flatMap((d) => Object.keys(d.cards)).filter((k) => !BY.has(k)));
+  ok('codes no list can place are few (a printing the catalog lacks)', rest.size <= 20, `${rest.size}: ${[...rest].slice(0, 8).join(', ') || 'none'}`);
+}
+
 /* ══ movement ════════════════════════════════════════════════════════════
    The archive is the only file that remembers, and the one mistake it exists to avoid
    is measuring its own construction: the oldest snapshot in git holds 250 decks against
