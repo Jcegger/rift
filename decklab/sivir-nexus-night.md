@@ -94,7 +94,7 @@ welcome where it wins fights, not where it only adds thinking time.
 
 ---
 
-## 2. Roles and slots — step 1, jobs and targets (draft, 23 Oct 2026)
+## 2. Roles and slots — step 1, jobs and targets (agreed 23 Oct 2026)
 
 Jobs come from section 1's plan, not from a reference list. Targets start from what winning
 lists look like and bend to the plan. **Good finishes by measured style** (`lib/placing.mjs`
@@ -117,3 +117,45 @@ Cards count toward every job they do, so the column does not sum to 40.
 **What the gaps say before any card is named:** move 2–4 slots from staying power (job 5) to
 cheap bodies (job 1) and to scoring (job 4). An open question for step 2: whether protecting a
 hidden card from a lost battlefield is a job of its own (Pack of Wonders) or a play rule.
+
+### Step 2a — the two gaps, every candidate read (draft, 23 Oct 2026)
+
+The legal pool for Sivir: 188 units and 110 spells and gear (colours, bans, Standard, other
+champions' signatures; `data/cards.json`, errata applied).
+
+**Job 1, cheap bodies: every legal unit at 2 Energy or less** (tokens excluded):
+
+| card | what it does here | verdict |
+|---|---|---|
+| Staunch Survivor · Bedeviling Stranger · Traveling Merchant · Tideturner | in the base list | see below |
+| **Windsinger** (SFD, 1 Might, Hidden) | returns another unit at a battlefield with 3 Might or less to hand. From hand on our turn it clears a defender so a battlefield can be taken; from face down it does it at Reaction speed. Body, hold-breaker and Hidden in one | **in, 2** |
+| **Irresistible Faefolk** (UNL, 1 Might) | when it moves to a battlefield, move an enemy unit to that battlefield. Pulls their only defender off the other battlefield so it can be taken, or into a fight we win. Jun's Kha'Zix turn-1 play | **in, 1** |
+| Evelynn, Entrancing (UNL, 2 Might, Hidden, Backline) | flipped on our turn, pulls an enemy unit from elsewhere to her battlefield. Faefolk's job, but needs a hide spot first | bench: first back if Faefolk works |
+| Sinister Poro (UNL, 1 Might, 1 Power) | when it attacks, pay 1 to send an enemy unit there home | bench: a 1-Might attacker |
+| Teemo, Scout (OGN, 1 Might, Hidden) | +3 Might the turn it is played: a 4-Might defender from face down, a 1-Might body after | bench: Tornado's 3 stays |
+| Pit Rookie (OGN, 2 Might) · Legion Marauder (VEN, 2 Might, Empower to 3) · Sea Monkey (SFD, 2 Might, 3 for an extra Energy) | plain bodies, a little bigger | out: Staunch Survivor fights at 4 for the same cost |
+| Siren of the Shallows (RAD, 1 Might, Disarm, Ganking) | a 2-drop that changes battlefields | out: 1 Might loses the fight it Ganks into |
+| Overzealous Fan (SFD, 2 Might) | sacrifices itself to send an attacker home | out: a hold card, and the role is beatdown |
+| Dragonsoul Sage (UNL, 1 Might) | exhaust: 1 Energy | out: ramp is not a job |
+| Shadow Order Disciple · Mystic Poro · Cithria · Sneaky Zeebles · Treasure Hunter · Noxian Demolitionist · Gust Monk · Determined Sentry · Veteran Poro · Overloaded Traveler · Demacian Diplomat · Gemhand Hunter · Mister Root | 1–2 Might with a payoff this deck doesn't feed (XP, buffs, Deploy, equipment, Gold) or no effect | out |
+
+**Job 4, scoring: every legal card that scores or pays on a hold or conquer:**
+
+| card | what it does here | verdict |
+|---|---|---|
+| **Evelynn, In Control** (RAD 4E 1P, 4 Might, Disarm) | when she holds with a facedown card of ours there, +1 point (a hold effect, §383.4.d; not gated, §473.1.a.1). A held battlefield with a hide pays 2 a turn | **in, 2** |
+| Draven, Audacious (SFD 6E 1P, 6 Might, Deflect) | +1 point the first time he wins a combat each turn; the opponent gets 1 if he dies in combat | bench: a 6-drop whose loss is a point for them |
+| Yasuo, Windrider (OGN 5E 1P) | a point on his third move in a turn | out: three moves a turn is not this deck |
+| Explosimian (RAD 6E, 6 Might) | when he holds, three Bombs to one battlefield | out: a hold payoff at 6 |
+| The Good Stuff (RAD gear) · K'Sante · Qiyana · Sett, Brawler · Zed · Illaoi · Jarvan IV · Pillaged Armory · Yone · Kennen, Storm of Shuriken · Sivir, Ambitious · Corrupted Dragon · the Hunt units | pay off a hold or conquer with cards, runes, buffs or XP, not points | out of this job (The Good Stuff is read again under job 5) |
+
+**Proposal (draft): −1 Ezreal, −1 Matriarch, −1 Rampage, −1 Bedeviling Stranger, −1 Tornado
+Warrior; +2 Evelynn, In Control, +2 Windsinger, +1 Irresistible Faefolk.**
+- Staying power 10 → 8 (the target's top): one Ezreal and one Matriarch, the slowest of it.
+- Stranger out for Windsinger: the same Hidden 2-drop slot, an unconditional bounce instead of
+  one that needs 4 units there.
+- One Tornado out: with one Matriarch its reset is rarer; Hidden stays at 11.
+- One Rampage out: hold-breakers go up anyway (Windsinger, Faefolk).
+- Shape: 23 units, 13 at 2 Energy or less, 22 cards at 2 or less (target 22–24), average 2.48,
+  11 Hidden, 2 at 5+. Goldfish: 15.8 Energy over turns 1–4 on the play, 3.6 units by turn 3
+  (3.9 on the draw). Runes stay 6 / 6, still the sweep's best.
