@@ -25,6 +25,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `old/index.html` - the first app, archived read-only: it never writes the row and never
   pulls riftbound.gg. `scripts/check.mjs` still runs its engine.
 - `app/index.html` - a redirect to the root, for links from when the rebuild lived there.
+- `decklab/` - deckbuilding worksheets, one per deck project, built with Jay a section at a
+  time: how it wins, roles and slots, card by card, checks, log. Hand-written; not on the
+  site, never generated. See `decklab/README.md`.
 - `lib/decks.mjs` - deck maths shared by the site and `scripts/state.mjs`: owning by card
   identity (every printing of a name), cheapest-printing prices (unpriced stays unpriced),
   the deck rules as checks (§103, TR §601), the journal record. Tests: `lib/decks.test.mjs`.
