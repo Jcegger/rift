@@ -162,18 +162,18 @@ reason. Candidates, new or old, must show which job they do better than what the
 |---|---|---|---|
 | 3 Staunch Survivor | presence, fights (1) | 4 Might in every fight; turn-1 Gold is a bonus; Matriarch can revive it | none yet — no Body-colour Radiance winners; video's premise. Body Power: the colour cost to watch |
 | 3 Bedeviling Stranger | presence (1), bounce with 4+ units there, both sides counted (3) | Hidden; a body either way | 11 |
-| 2 Traveling Merchant | staying power (2), a 2-Might body | cycles a card each move, the discard chosen; 3 → 2 for Elnuk Herd | 6 |
+| 3 Traveling Merchant | staying power (2), a 2-Might body | cycles a card each move, the discard chosen | 6 |
 | 2 Tideturner | presence, fights (1) | a body, or a hidden swap (the Graves trick) | 9 |
 | 3 Ezreal, Prodigy | staying power (2) | discard 1, draw 2; discounts Rampage's +2 and Mercenary's Accelerate | 5 · 2 |
 | 2 Fizz, Trickster | staying power (2), recast fights (1) | recasts a spell of 3 Energy or less, paying its Power | 7 · 6 |
-| 2 Elnuk Herd | fights (1), at Reaction speed | hidden: +3 Might on a friendly unit at that battlefield for the 1 Power to hide (§811.1.b, .d.3), then recycles to the deck to come again; drawn without a hide, a 6-Energy 5-Might body with no Power — the top end we lacked. Replaced Tornado Warrior and a Merchant (fights slot, 23 Oct) | none; adopted by pros early in the backtest (Rengar) |
+| 1 Elnuk Herd | fights (1), at Reaction speed | hidden: +3 Might on a friendly unit at that battlefield for the 1 Power to hide (§811.1.b, .d.3), then recycles to the deck to come again; drawn without a hide, a 6-Energy 5-Might body with no Power — the top end we lacked. Replaced Tornado Warrior (fights slot, 23 Oct). One copy, not two: it is cheap only when hidden, hides are limited (one per battlefield you control, behind a strong hold), and from hand it is the worst Hidden card to hold — a second copy cost early board (cheap cards 22 → 21, units by turn 3 3.4 → 3.2) | none; adopted by pros early in the backtest (Rengar) |
 | 2 Tail-Cloaked Matriarch | staying power (2), a 4-Might body | revives a unit of 3 Energy / 1 Power or less; her own Empower is always available, so nothing depends on Tornado | 5 · 3 |
 | 2 Graves, Blasting Through | fights, denial against wide boards (1, 3) | LeBlanc, Rengar decks and Rek'Sai are likely; a 3rd belongs in the sideboard for them (41% to see one of 2 by turn 5, 56% with 3) | none yet |
 | Sivir, Mercenary (Champion Zone) | presence, fights (1): the closer | always available, never drawn | — |
 
-Two-drops 10, three-drops 5, four and up 6, plus Mercenary. Hidden: 11 — 7 units
-(3 Stranger, 2 Tideturner, 2 Elnuk) and 4 spells or gear. Staying power uses 9 unit slots,
-within its budget: fights and denial come from the spells, and no more draw goes in.
+Two-drops 11, three-drops 5, four and up 5, plus Mercenary. Hidden: 10 — 6 units
+(3 Stranger, 2 Tideturner, 1 Elnuk) and 4 spells or gear. Staying power uses 10 unit slots,
+the top of its budget: fights and denial come from the spells, and no more draw goes in.
 
 **Benched, with reasons:**
 - **Tornado Warrior** — a free 3-Might body from face down and Matriarch's free switch, but
@@ -215,7 +215,7 @@ signature and not legal.
 
 **Checked on the current 40** (denial placeholders): all deck rules pass; 22 units, 16 spells,
 2 gear; Matriarch revives 6 different units; Fizz recasts every spell. Open: the rune split
-(goldfish ~13% stuck, pessimistic), Elnuk at 2 vs 1, battlefields.
+(goldfish ~13% stuck, pessimistic), battlefields. Full audit after denial.
 
 ### Still to settle, by job
 
