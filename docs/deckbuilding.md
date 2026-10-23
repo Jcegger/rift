@@ -25,9 +25,11 @@ get in.
 - **17.8 distinct cards per 40.** Of the names in a placed list, **45% are 3-ofs, 29%
   2-ofs, 26% 1-ofs.** "If a card is good enough, run three" is how winners build; 1-ofs
   are the hedges and the champion.
-- **Champion units: one.** 77% of placed lists run exactly one copy across all of their
-  champion's units — the Chosen Champion in its zone and nothing else. 2+ is rare (11%); the
-  11% with none are incomplete uploads, since a legal deck must have one. Guides that suggest "up to 4" describe what is
+- **Champion units: one.** 93% of good finishes run exactly one copy across all of their
+  champion's units — the Chosen Champion in its zone and nothing else — and 7% run 2+.
+  *(Corrected 23 Oct 2026: this read 77%, with "11% with none are incomplete uploads". They
+  were complete; their champion was printed in alt art, whose code the readers could not
+  place — see "Re-measured" below.)* Guides that suggest "up to 4" describe what is
   legal, not what wins.
 - **Signature cards: all or nothing.** 43% of lists run 3, 35% run none, 22% in between. A
   signature is either part of the plan or not worth the slot.
@@ -56,6 +58,28 @@ established deck in the format.
   room pros give each other.
 - **Top-8 finishes stay slightly closer to the consensus** (33.8 shared) than other placed
   lists (32.2). Straying is not rewarded on average, so a change needs a reason.
+
+**Re-measured 23 Oct 2026, on complete lists.** §1–3 were counted on any recorded finish
+(last place included), with claimed results counted once per repost, and with every card
+printed in alt art missing — 22% of placed lists were short a card or more, because the deck
+snapshot kept the feed's codes ("UNL-150A") and nothing downstream could place them. On the
+364 distinct good finishes (lib/placing.mjs `goodFinishes`) of 23 Oct:
+
+| | was | now |
+|---|---|---|
+| distinct cards per 40 | 17.8 | 18.4 |
+| 3-ofs / 2-ofs / 1-ofs | 45 / 29 / 26% | 45 / 27 / 28% |
+| exactly one champion unit / none | 77% / 11% | **93% / 0%** |
+| signatures at 3 / none / between | 43 / 35 / 22% | 44 / 31 / 25% |
+| core / mid / flex copies (legends with 15+) | 27.9 / 7.6 / 4.5 | 30.5 / 5.3 / 4.2 |
+| a winner shares with its consensus (median) | 34 | 35 |
+| two winners differ by (median copies) | 9 | 8 |
+| top-8 lists vs other placings, shared with consensus | 33.8 vs 32.2 | **32.9 vs 34.2** |
+
+The shape holds. One finding reverses: **top-8 lists now sit further from the consensus
+than other good finishes**, not closer, so "straying is not rewarded" in §3 is not supported
+— on good finishes, the best ones stray a little more. A change still needs a reason; it is
+no longer evidence against changing.
 
 ## 4. Changes are like for like — by role
 
@@ -255,28 +279,35 @@ each group's list rather than a name.
    Mordekaiser — is not its list's finish. Only good placings count (§ "Good placings").
 2. **Never-play lists partitioned first** (`lib/avoid.mjs`): an Aurora build can neither
    lend its results to a clean group nor hide inside one. Its group is kept for the field.
-3. **Split where lists are half a deck apart**: average linkage on changed copies, merging
-   while two groups average 20 or fewer apart. Density clustering needs more lists than most
-   legends have.
+3. **Split where lists are more than half a deck apart**: average linkage on changed copies,
+   merging while two groups average 24 or fewer apart. Density clustering needs more lists
+   than most legends have.
 4. **Counted with `lib/consensus.mjs`**, the brews' counter, not Karsten's method — see below.
 
 **The measurement** (`lib/netdeck.test.mjs`): hide each of a legend's distinct good finishes
 in turn, build from the rest, and count the hidden list's 40 the result gets — the blind
-test's yardstick — over the 15 legends with 8+. The control deals the same lists into random
+test's yardstick — over the 16 legends with 8+. The control deals the same lists into random
 groups of the same sizes, so a gain from merely having more options to pick from in
 hindsight does not pass for structure.
 
 | cut | legends split | one count | grouped | random groups |
 |---|---|---|---|---|
-| 16 (§3's "different deck") | 8 | 31.2 | 32.7 | 31.8 |
-| **20** | **5** | **29.8** | **31.5** | **30.4** |
-| 24 | 4 | 29.8 | 31.0 | 30.3 |
+| 16 (§3's "different deck") | 9 | 31.6 | 32.7 | 32.3 |
+| 20 | 5 | 30.2 | 31.1 | 30.8 |
+| **24** | **4** | **30.3** | **31.7** | **31.0** |
+| 28 | 3 | 29.1 | 30.4 | 29.9 |
 
-At 16 most of the gain is choice; at 20 the groups beat random by the most, 1.1 cards, on
-the five legends that really are two decks (Kennen, Master Yi, Viktor, Vex, Fiora).
-Legends that are one deck lose nothing (33.9 either way). **Karsten's aggregate tied the
-median count** — 32.5 of 40 each over all 15 — because once lists are grouped there is
-little left to blend; the test keeps it as the comparison.
+**The structure is real but small.** Grouping beats one count by about a card and a half
+where a legend splits, but most of that is having a choice: over random groups it gains
+0.4–0.7 cards. The margin is largest at 24, where four legends split — Kennen, Master Yi,
+Viktor and Fiora, the same four at every cut tried — so those four are two decks, and the
+rest are one. Legends that are one deck lose nothing either way. **Karsten's aggregate tied
+the median count** (32.9 of 40 each), because once lists are grouped there is little left to
+blend; the test keeps it as the comparison.
+
+*The first run of this (earlier on 23 Oct) put the cut at 20 with a 1.1-card margin. That was
+measured on lists missing their alt-art cards, which made lists look further apart than they
+are: the cut had been fitted to the gaps. Re-run on complete lists, it moved to 24.*
 
 **What qualifies.** A group is a **net deck** only when all of these hold:
 
@@ -290,8 +321,8 @@ little left to blend; the test keeps it as the comparison.
 
 A group that misses a bar is **early**, and the page names the miss. Preview events are
 labelled as previews. This format's net decks come first; the last format's follow, still
-legal, because on Radiance's release day it is nearly all the evidence: one Radiance net
-deck (Kennen), two early (Riven and Kai'Sa, 4 finishes each but one event), 24 Vendetta.
+legal, because on Radiance's release day it is nearly all the evidence: three Radiance net
+decks and 25 Vendetta ones (23 Oct, with that day's lists).
 
 These bars are judgement against the sources above, not fitted; they join the frozen
 thresholds and change on the same terms.

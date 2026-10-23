@@ -231,7 +231,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   were already uploaded and are skipped; 31 are added. `oneFinishEach()` counts a finish
   once: deck sites' "copy" button reposts a list under its author's title, and on 23 Oct 2026
   127 of 656 good placings were reposts of a claimed finish (Azir's "Top 4 Barcelona RQ"
-  eight times). Used by the net decks; the brews and scoreboard do not use it yet.
+  eight times). `finishesMaker()` wraps it with the good-placing cut and drops a claim
+  titled for another champion: `goodFinishes()` is what the net decks, brews, rising
+  scoreboard, archetypes and research count. The preseason model keeps every recorded finish
+  at sized events, which it needs to measure a legend against the whole field.
   Tests: `lib/placing.test.mjs`.
 - `lib/avoid.mjs` - decks Jay never plays: anything running Dazzling Aurora. A brew running
   it is kept (for the field) but never offered — `worth` false, and `scripts/rift brew` says
@@ -272,16 +275,16 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   the winners skip is held back from suggestions until its question is answered "test".
 - `lib/consensus.mjs` - counting a set of lists into the list they add up to; shared by
   `build-ideas.mjs`, `build-archetypes.mjs` and `lib/netdeck.mjs`.
-- `lib/netdeck.mjs` - a legend's net decks: its good finishes, one per finish (claims titled
-  for another champion dropped), Aurora lists partitioned off for the field, split where
-  lists are on average 20 copies apart (average linkage), and each group counted by
+- `lib/netdeck.mjs` - a legend's net decks: its good finishes (`lib/placing.mjs`
+  `finishesMaker`), Aurora lists partitioned off for the field, split where lists are on
+  average more than 24 copies apart (average linkage), and each group counted by
   `lib/consensus.mjs`. A group is a **net** deck with 3+ finishes from 2+ events, 2+ of them
   recorded, its lists a median 9 copies or fewer from the count, and a legal 40; otherwise
   **early** (each miss named) or, under 3 finishes, the best list **as played**. Tests and
-  measurement: `lib/netdeck.test.mjs` — leave-one-out over the 15 legends with 8+ distinct
-  good finishes: where legends split, the groups get 31.5 of a hidden winner's 40 against
-  29.8 for one count and 30.4 for the same lists dealt into random groups. See
-  `docs/deckbuilding.md`, "Net decks".
+  measurement: `lib/netdeck.test.mjs` — leave-one-out over the 16 legends with 8+ distinct
+  good finishes, against the same lists dealt into random groups. The split is real but
+  small (0.7 of 40 over random), and only four legends split: Kennen, Master Yi, Viktor and
+  Fiora. See `docs/deckbuilding.md`, "Net decks".
 - `lib/infer.mjs` - a legend's archetype inferred from its cards alone, in the order a deck is
   built: legend ability and cost, chosen champion, signature, colour pair, then the cards that
   should (winners' core) or can be in it. Votes a main archetype (aggro, tempo, midrange,

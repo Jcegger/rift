@@ -1092,7 +1092,7 @@ function netDecksSection(name) {
       ${one.length ? `<div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">${one.map(({ g, i }) => netSingle(name, f, g, i, gs.length > 1)).join("")}</div>` : ""}</section>`;
   };
   return `${part("now")}${part("last")}
-    <p class="note">How these are made: every good finish (top 25% of the field, or a top 8 of 32+), one per finish — reposts of a claimed result count once — split where lists are half a deck apart, and counted. <b>Net deck</b> means 3+ finishes, from 2+ events, 2+ of them recorded rather than claimed, and lists within 9 copies of the count. <a href="#/guide/deckbuilding">Deckbuilding</a> has the measurements.</p>`;
+    <p class="note">How these are made: every good finish (top 25% of the field, or a top 8 of 32+), one per finish — reposts of a claimed result count once — split where lists are more than half a deck apart, and counted. <b>Net deck</b> means 3+ finishes, from 2+ events, 2+ of them recorded rather than claimed, and lists within 9 copies of the count. <a href="#/guide/deckbuilding">Deckbuilding</a> has the measurements.</p>`;
 }
 function netPanel(name, f, g, i, open, many) {
   const [cls, label] = NET_LABEL[g.status], c = g.count, mine = !g.avoid.length;

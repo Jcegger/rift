@@ -22,7 +22,7 @@
 
 import { readFile, writeFile } from "node:fs/promises";
 import { indexCatalog } from "../lib/decks.mjs";
-import { isGoodPlacing, riotRows } from "../lib/placing.mjs";
+import { finishesMaker, riotRows } from "../lib/placing.mjs";
 
 const RECENT = 7, PRIOR = 14, MIN = 5, SHOW = 5, KEEP = 0.05, SETTLE = 28, ADOPT = 0.1, MIN_GOOD = 10;
 const read = async (f) => JSON.parse(await readFile(new URL(`../data/${f}`, import.meta.url), "utf8"));
@@ -69,7 +69,8 @@ const main = async () => {
   for (const c of idx.cards) if (!c.v && !byName.has(c.n)) byName.set(c.n, c);
   const riot = riotRows(topdecks, snap, card, byName).filter((d) => !Object.keys(d.cards).some((k) => idx.bannedNames.has(card(k)?.n)));
   const good = new Map();
-  for (const d of [...usable, ...riot]) if (isGoodPlacing(d)) { const n = idx.legendName(card(d.lg)); (good.get(n) || good.set(n, []).get(n)).push(d); }
+  // Good finishes (lib/placing.mjs): one per finish, so a repost cannot score a swap twice.
+  for (const d of finishesMaker(idx, card).goodFinishes([...usable, ...riot])) { const n = idx.legendName(card(d.lg)); (good.get(n) || good.set(n, []).get(n)).push(d); }
   // A card's share of a legend's good placings dated in [from, until).
   const goodShare = (legend, from, until, inn, out) => {
     const ds = (good.get(legend) || []).filter((d) => d.dt >= from && d.dt < until);

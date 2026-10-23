@@ -17,6 +17,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { indexCatalog } from "../lib/decks.mjs";
 import { counter } from "../lib/consensus.mjs";
+import { finishesMaker } from "../lib/placing.mjs";
 import { deckEngines } from "../lib/engines.mjs";
 import { inferLegend, headingSubKeys } from "../lib/infer.mjs";
 import { buildDeck, simulate, classify } from "../lib/sim.mjs";
@@ -48,6 +49,7 @@ const main = async () => {
   const idx = indexCatalog(all, banned);
   const byShort = new Map(idx.cards.map((c) => [c.c.replace(/\/\d+$/, ""), c]));
   const card = (code) => idx.BY.get(code) || byShort.get(String(code).replace(/\/\d+$/, "")) || null;
+  const { goodFinishes } = finishesMaker(idx, card);
   const { consensus } = counter(idx, card);
 
   const usable = snap.decks.filter((d) => d.lg && card(d.lg) && !Object.keys(d.cards).some((k) => idx.bannedNames.has(card(k)?.n)));
@@ -67,10 +69,11 @@ const main = async () => {
   const legends = [];
   for (const [name, L] of legendCards) {
     const lists = byLegend.get(name) || [];
-    // A placed list is upstream's record (tour + place) OR a place the author claims in the
-    // title (cp) — filtering on tour alone hides every RQ result (README "Results the flag
-    // does not carry"); Kha'Zix's Barcelona and Utrecht finishes are claims.
-    const placed = lists.filter((d) => (d.tour && d.pl != null) || Number(d.cp) > 0);
+    // A placed list is a good finish (lib/placing.mjs goodFinishes): upstream's record or a
+    // place the author claims in the title — filtering on tour alone hides every RQ result
+    // (README "Results the flag does not carry") — in the top of its field, once per finish.
+    // Any recorded finish counted until 23 Oct 2026, last place and reposts included.
+    const placed = goodFinishes(lists);
     const from = placed.length >= MIN_PLACED ? placed : lists;
     const domains = (L.d || []).filter((d) => d !== "Colorless").sort();
     const row = { name, code: L.c, champion: idx.championOf(L), domains, pair: domains.join("/"), legendText: L.x || "",
@@ -130,7 +133,7 @@ const main = async () => {
   for (const l of legends) (pairs.get(l.pair) || pairs.set(l.pair, []).get(l.pair)).push(l);
   const pairRows = [];
   for (const [pair, ls] of [...pairs].sort()) {
-    const lists = ls.flatMap((l) => (byLegend.get(l.name) || []).filter((d) => (d.tour && d.pl != null) || Number(d.cp) > 0));
+    const lists = ls.flatMap((l) => goodFinishes(byLegend.get(l.name) || []));
     const has = new Map();
     for (const d of lists) for (const n of new Set(Object.keys(d.cards).map((k) => card(k)).filter((c) => c && !["Legend", "Rune", "Battlefield"].includes(c.t)).map((c) => c.n)))
       has.set(n, (has.get(n) || 0) + 1);

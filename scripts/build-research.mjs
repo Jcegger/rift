@@ -33,6 +33,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { indexCatalog, SET_LEGAL_FROM } from "../lib/decks.mjs";
 import { counter } from "../lib/consensus.mjs";
+import { finishesMaker } from "../lib/placing.mjs";
 import { deckEngines, engineTags, ENGINES } from "../lib/engines.mjs";
 import { MIN_PLACED, SKIP_SHARE, VERDICTS, itemId, docEngineLine, docEngineKeys } from "../lib/research.mjs";
 
@@ -63,6 +64,7 @@ const main = async () => {
   const idx = indexCatalog(all, banned);
   const byShort = new Map(idx.cards.map((c) => [c.c.replace(/\/\d+$/, ""), c]));
   const card = (code) => idx.BY.get(code) || byShort.get(String(code).replace(/\/\d+$/, "")) || null;
+  const { goodFinishes } = finishesMaker(idx, card);
   const byName = new Map(idx.cards.filter((c) => !c.v).map((c) => [c.n, c]));
   const { consensus } = counter(idx, card);
   const answers = parseAnswers(resMd);
@@ -86,7 +88,8 @@ const main = async () => {
   const legends = {}, items = [];
   for (const [name, L] of legendCards) {
     const lists = byLegend.get(name) || [];
-    const placed = lists.filter((d) => (d.tour && d.pl != null) || Number(d.cp) > 0);
+    // Good finishes (lib/placing.mjs), not any finish: "what the winners skip" is about winners.
+    const placed = goodFinishes(lists);
     const legendTags = engineTags(L).map((t) => t.engine);
     const docLine = docEngineLine(archMd, name);
     const row = { placed: placed.length, lists: lists.length, legendEngines: [...new Set(legendTags)], doc: docLine, flags: [] };

@@ -23,7 +23,7 @@ import { headingSubKeys, inferLegend } from "../lib/infer.mjs";
 import { anchorBrew, coloursBrew } from "../lib/brew.mjs";
 import { docEngineLine, docEngineKeys } from "../lib/research.mjs";
 import { buildDeck, simulate, sweepRunes } from "../lib/sim.mjs";
-import { isGoodPlacing, riotRows } from "../lib/placing.mjs";
+import { finishesMaker, riotRows } from "../lib/placing.mjs";
 import { avoidedIn } from "../lib/avoid.mjs";
 
 // MIN_CROWD: with fewer placings, a legend's posted lists are the anchor — the consensus of
@@ -57,8 +57,10 @@ export function makeBrewer({ cat, extras, banned, snap, topdecks = null, R = nul
   for (const c of idx.cards) if (!c.v && !byName.has(c.n)) byName.set(c.n, c);
   const riot = topdecks ? riotRows(topdecks, snap, card, byName) : [];
   const usableAll = [...snap.decks, ...riot].filter((d) => d.lg && card(d.lg) && !Object.keys(d.cards).some((k) => idx.bannedNames.has(card(k)?.n)));
-  // "Placed" means a good placing (lib/placing.mjs), not any recorded finish.
-  const placedOf = isGoodPlacing;
+  // "Placed" means a good finish (lib/placing.mjs goodFinishes): a good placing, one per
+  // finish — a repost of a claimed result is a posted list, not a second result.
+  const goodSlugs = new Set(finishesMaker(idx, card).goodFinishes(usableAll).map((d) => d.s));
+  const placedOf = (d) => goodSlugs.has(d.s);
   const usable = hide ? usableAll.filter((d) => idx.legendName(card(d.lg)) !== hide || (hideMode === "placed" && !placedOf(d))) : usableAll;
   const identOf = (L) => (L.d || []).filter((x) => x !== "Colorless").sort().join("/");
   const names = (d) => new Set(Object.keys(d.cards).map((k) => card(k)?.n).filter(Boolean));
