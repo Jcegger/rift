@@ -237,3 +237,67 @@ Sabotage goes, because Evelynn is tier 0 and Sabotage tier 3 (the third copy sta
 sideboard for Riven, Kai'Sa, Jayce and Irelia's Reactions). Gust stays: a 1-Energy Reaction is a
 hold card. This reverses the earlier second Sabotage; the goal changed under it (a clock now
 matters).
+
+### Decided — 23 Oct 2026: +3 Evelynn, In Control; −1 Traveling Merchant, −1 Rampage, −1 Sabotage
+
+**The list after step 2a (40):** 3 Staunch Survivor, 3 Bedeviling Stranger, 2 Traveling Merchant,
+2 Tideturner, 3 Ezreal, Prodigy, 2 Fizz, Trickster, 2 Tornado Warrior, 2 Tail-Cloaked Matriarch,
+3 Evelynn, In Control, 2 Graves, Blasting Through, Sivir, Mercenary; 3 Punch First, 2 Rampage,
+3 Star-Crossed, 2 Switcheroo, 2 Gust, 1 Sabotage; 2 Edge of Night. Runes 6 / 6; battlefields
+unchanged so far. Sideboard unchanged until step 2b.
+
+### Step 2b — the other jobs, all 110 spells and gear read (draft, 23 Oct 2026)
+
+Read against jobs 2 (keep both), 3 (win the fight), 5 (keep cards coming), 6 (flexible denial)
+and the two known gaps (save a hide; answer a 6+ Might unit). In the list: Punch First,
+Switcheroo, Star-Crossed, Gust, Rampage, Sabotage, Edge of Night.
+
+**Worth a slot or a bench place:**
+
+| card | what it does here | verdict |
+|---|---|---|
+| **Challenge** (OGN 2E 1 Body, Action) | your unit and theirs deal their Might to each other — Rampage's effect at **Action speed**, so it works inside a fight and on their turn when they attack your hold; the friendly unit can be anywhere, so a tall unit in base shoots into a battlefield | **in for both Rampage** |
+| **Wind and Ghosts** (VEN 3E, Action) | a unit at a battlefield: 3 Might or less is **banished** (no Deathknell, no recursion), bigger is returned to hand. Answers anything, big units included, without needing a unit of ours | **in for Sabotage** |
+| Marching Orders (SFD 3E, Action, Repeat 3) | Challenge's effect with no Power and a repeat for 3 more | bench: Challenge is a turn cheaper |
+| Existential Dread (UNL 1E 1P, Action, Repeat 2) | stun an attacker; repeat to bounce it | sideboard candidate against attackers (Rengar, Rek'Sai, Irelia) |
+| Bushwhack Trap (RAD 1E gear, Deploy) | a second facedown card at a battlefield you control — fixes Evelynn's tension (keep one hide for her point, flip the other) | bench: first in if her point keeps getting spent on defence |
+| The Good Stuff (RAD 3E 1P gear, Deploy) | discard 1, draw 3; returns to hand when you hold there, to do it again | bench: staying power is at target (9) |
+| Pack of Wonders (OGN 2E gear) | exhaust: return a friendly unit, gear or facedown card to hand — saves a hide, resets Matriarch | bench: the hide-protection gap, if games show it |
+| Repulse (UNL 1E 1P, Reaction) | counters a spell that targets one friendly unit — protects Evelynn or Mercenary | sideboard candidate against removal decks |
+| Cannon Barrage (OGN 2E 1P, Reaction) | 2 to every enemy unit in combat | sideboard candidate against go-wide attacks |
+| Siren's Song (RAD 2E, Reaction) | moves an enemy unit that moved this turn — sends an attacker home | bench: Gust does it for 1 |
+| Grim Resolve · Hold 'Em · Guttural Roar | +3, +3, +2 (+4 Empowered), no Power | bench: Punch First's +5 wins more fights; useful only if Body Power runs short |
+| Lunar Boon · Spoils of War | Reaction draw | out: staying power at target |
+
+**Out, by why:**
+- **Equipment that only adds Might** (Doran's Blade, Doran's Ring, Hexdrinker, Warmog's Armor,
+  Trinity Force, Boneshiver, Boots of Swiftness, Cull, Hunter's Machete, Jagged Cutlass, Last
+  Rites): Edge of Night does the same from face down, at Reaction speed, for nothing.
+- **Payoffs we don't feed:** buffs (Arena Bar, Mistfall, Overt Operation, Wallop, Pillaged
+  Armory, Pirate's Haven), XP (Blood Rose, Concentrate, Conscription, Scryer's Bloom), Mighty
+  (Show of Strength, Titanic Shrine), Deploy and Bombs (Satchel Charge, Hexplosive pieces,
+  Portable Portal, Nazuman Ntofo), Empower gear (Tools of Empire, Hextech Disc), Flow (Twilight
+  Step, Onslaught, Up from the Deep).
+- **Ramp and mana:** Seal of Strength, Seal of Discord, Ancient Henge, Platewyrm Egg, Mobilize,
+  Catalyst of Aeons, Treasure Trove, The Waters' Wage — the legend's Gold already does this.
+- **Hurts us or is symmetric:** Flurry of Blades (1 to every unit at battlefields), Avalanche,
+  Whirlwind, Invert Timelines, Downwell, Cataclysmic Duel, Clash of Giants, Acceptable Losses
+  (kills our Edge), Temptation, Call to Battle, Bone Skewer.
+- **Narrow or slow:** Decree of Strength (Mind cards only), Decree of Discord (Order units only),
+  The List, Factory Recall, Confront, Isolate, Stare Down, Strike Down, Fading Memories,
+  Cataclysm, Primal Strength, Primordial Roar, Gentlemen's Duel, Possession, The Harrowing,
+  Morbid Return, Shadows of the Past, Cursed Sarcophagus, Forgotten Relic, Mechanical Bandit,
+  Blast Cone, Spirit Wheel, Petricite Monument, The Syren, Demon Shade, Here to Help, Rebuke
+  (Wind and Ghosts does it and banishes small units), Hard Bargain, Abandon, Wild Claw, Ride the
+  Wind (out on 23 Oct), On the Hunt (no Action).
+- **Never:** Dazzling Aurora (`lib/avoid.mjs`).
+
+**Proposal (draft): −2 Rampage, +2 Challenge; −1 Sabotage, +1 Wind and Ghosts.**
+- Rampage was our-turn-only removal; Challenge does it inside fights and on their turn, which a
+  hold deck needs, for 1 Energy less. The tall unit still makes it removal: Mercenary at 6 deals 6.
+- Wind and Ghosts fills the "answer a 6+ Might unit" gap without needing a unit of ours, and
+  banishes small ones so they don't come back. Sabotage keeps its sideboard copy.
+- Shape: rules pass; 19 cards at 2 Energy or less; average 2.65; 15.8 Energy over turns 1–4;
+  3.4 units by turn 3. Printed Power Body 13, Chaos 17. Rune sweep: 5/7 and 6/6 tie on Energy
+  (16.9); 5/7 sticks 8.4% against 9.8%. Kept at 6/6 for turn 1's Staunch Survivor (no Gold yet);
+  re-check once the list is final.
