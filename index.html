@@ -254,8 +254,6 @@ nav.bottom{display:none}
 <script type="module">
 import { indexCatalog, deckStats, deckChecks, journalRecord, ownedByIdentity, MAIN_SIZE, SB_MAX } from "./lib/decks.mjs";
 import { mdToHtml, esc, slugify } from "./lib/markdown.mjs";
-import { deckEngines, ENGINES } from "./lib/engines.mjs";
-import { annotateEngines, VERDICTS } from "./lib/research.mjs";
 import { avoidedIn } from "./lib/avoid.mjs";
 import { applyImport, matcher, setCount, setSource, foilOnlyProblems, newqRows, newqText, newqCSV,
   spares, readPartner, tradeMatch } from "./lib/collection.mjs";
@@ -354,14 +352,14 @@ const journal = () => {
 };
 
 /* ── data ────────────────────────────────────────────────────────────────── */
-let CAT, IDX, TOP, TIERS, GUIDES, NEWS, IDEAS, ARCHE, RES, BREWS, RISING, FIELD, MATCH, IMG = "";
+let CAT, IDX, TOP, TIERS, GUIDES, NEWS, IDEAS, ARCHE, RISING, FIELD, MATCH, IMG = "";
 const BYNAME = new Map();        // folded legend name "Irelia, Blade Dancer" -> legend card
 const SHORT = new Map();         // "OGN-042" -> "OGN-042/298": the deck feed drops the set size
 const getJSON = (f) => fetch(`data/${f}`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
 
 async function loadData() {
-  const [cards, extras, banned, errata, top, tiers, guides, news, ideas, arche, res, brews, rising, field] = await Promise.all(
-    ["cards.json", "extras.json", "banned.json", "errata.json", "topdecks.json", "tiers.json", "guides.json", "news.json", "ideas.json", "archetypes.json", "research.json", "brews.json", "rising.json", "field.json"].map(getJSON));
+  const [cards, extras, banned, errata, top, tiers, guides, news, ideas, arche, rising, field] = await Promise.all(
+    ["cards.json", "extras.json", "banned.json", "errata.json", "topdecks.json", "tiers.json", "guides.json", "news.json", "ideas.json", "archetypes.json", "rising.json", "field.json"].map(getJSON));
   if (!cards) throw new Error("data/cards.json did not load");
   CAT = cards; IMG = cards.imagePrefix || "";
   const all = [...cards.cards, ...((extras && extras.cards) || [])];
@@ -372,7 +370,7 @@ async function loadData() {
   MATCH = matcher(all);
   for (const c of all) if (c.t === "Legend" && !c.v) { const n = IDX.legendName(c); if (!BYNAME.has(n)) BYNAME.set(n, c); }
   for (const c of all) { const k = c.c.replace(/\/\d+$/, ""); if (!SHORT.has(k)) SHORT.set(k, c.c); }
-  TOP = top; TIERS = tiers; GUIDES = guides; NEWS = news; IDEAS = ideas; ARCHE = arche; RES = res; BREWS = brews; RISING = rising; FIELD = field;
+  TOP = top; TIERS = tiers; GUIDES = guides; NEWS = news; IDEAS = ideas; ARCHE = arche; RISING = rising; FIELD = field;
 }
 
 /* ── helpers ─────────────────────────────────────────────────────────────── */
@@ -943,14 +941,11 @@ function viewEdit(id) {
 }
 
 /* ══ Deck ideas: the Radiance era ════════════════════════════════════════
-   data/ideas.json (scripts/build-ideas.mjs) counts what each legend plays in
-   Radiance-format events and builds the list those counts add up to. Everything on
-   these pages is a count with its sample size beside it; a legend with too few lists
-   says so instead of getting a guess. Claude's own builds sit next to the counts and
-   are labelled as builds, not as evidence. */
+   data/ideas.json (scripts/build-ideas.mjs) counts what each legend plays: its net decks
+   from good finishes, or where it has none, the crowd's list from posted lists, labelled.
+   Everything on these pages is a count with its sample size beside it; a legend with too
+   few lists says so instead of getting a guess. */
 const ideaFor = (name) => (IDEAS?.legends || []).find((l) => l.name === name) || null;
-// Data-backed builds first, then experiments (kind "experiment": a reading of the cards, untested).
-const buildsFor = (name) => (IDEAS?.builds || []).filter((b) => b.legend === name).sort((a, b) => (a.kind === "experiment") - (b.kind === "experiment"));
 const myLegends = () => new Set(decks().map((d) => { const L = deckStats(d, IDX, ROW?.inv || {}).legend; return L ? IDX.legendName(L) : null; }).filter(Boolean));
 const shortCode = (code) => IDX.BY.has(code) ? code : (SHORT.get(String(code).replace(/\/\d+$/, "")) || code);
 const placeText = (pl, n) => `#${pl}${n ? ` of ${n}` : ""}`;
@@ -964,16 +959,16 @@ function radianceSection() {
   const rows = IDEAS.legends.filter((l) => l.placed || l.brews >= 3)
     .sort((a, b) => (mine.has(b.name) ? 1 : 0) - (mine.has(a.name) ? 1 : 0) || 0);
   return `<section class="panel">
-    <div class="headrow"><h2>Radiance${E.allPreRelease ? " — online previews" : " era"}</h2><span class="small dim">${E.events.length} Radiance-format event${E.events.length === 1 ? "" : "s"} · ${E.placed} placed lists · ${E.brews} brews · built ${esc(IDEAS.generatedAt)}</span></div>
+    <div class="headrow"><h2>Radiance${E.allPreRelease ? " — online previews" : " era"}</h2><span class="small dim">${E.events.length} Radiance-format event${E.events.length === 1 ? "" : "s"} · ${E.placed} placed lists · ${E.brews} posted Radiance lists · built ${esc(IDEAS.generatedAt)}</span></div>
     ${E.events.some((e) => e.preRelease) ? `<div class="banner warn"><b>${E.allPreRelease ? "These are not tournament results yet." : "Some of these are pre-release events."}</b> Radiance is not legal for sanctioned play until ${esc(E.legalFrom)}. ${E.allPreRelease ? "Every list here" : "Lists marked preview"} come${E.allPreRelease ? "s" : ""} from unsanctioned online events that played the set early, on platforms that may not implement every new card correctly, in its first week. Real games, and the earliest signal there is — not a settled format.</div>` : ""}
-    <p class="note">Radiance changes every legend, not just its nine new ones, so these are the lists from events that played with it: ${E.events.map((e) => `${esc(e.name)} (${e.players ?? "?"} players, ${esc(e.date)}${e.preRelease ? ", online preview" : ""})`).join("; ") || "none yet"}. ${E.events.length < 4 ? "That is a small sample, so read 9 lists as 9 lists." : ""} Brews are unplaced lists with Radiance cards, a weaker kind of evidence.</p>
-    <div class="tablewrap"><table class="t"><thead><tr><th>Legend</th><th class="r">Placed</th><th class="r">Top 8</th><th>Best</th><th class="r hide-sm">Brews</th><th>Idea</th></tr></thead>
+    <p class="note">Radiance changes every legend, not just its nine new ones, so these are the lists from events that played with it: ${E.events.map((e) => `${esc(e.name)} (${e.players ?? "?"} players, ${esc(e.date)}${e.preRelease ? ", online preview" : ""})`).join("; ") || "none yet"}. ${E.events.length < 4 ? "That is a small sample, so read 9 lists as 9 lists." : ""} Posted lists are unplaced lists with Radiance cards: what is being tried, not what wins.</p>
+    <div class="tablewrap"><table class="t"><thead><tr><th>Legend</th><th class="r">Placed</th><th class="r">Top 8</th><th>Best</th><th class="r hide-sm">Posted</th><th>Idea</th></tr></thead>
     <tbody>${rows.map((l) => `<tr>
       <td><span class="dots" style="display:inline-flex;margin-right:6px">${dots(l.domains, 9)}</span><a href="#/idea/${encodeURIComponent(l.name)}">${esc(l.name)}</a>
         ${l.isNew ? `<span class="pill later">new</span>` : ""}${mine.has(l.name) ? ` <span class="pill good">your deck</span>` : ""}</td>
       <td class="r num">${l.placed}</td><td class="r num">${l.top8 || ""}</td>
       <td class="num">${l.best ? placeText(l.best.pl, l.best.players) : "—"}</td><td class="r num hide-sm">${l.brews}</td>
-      <td class="small">${netSummary(l.name)}${buildsFor(l.name).some((b) => b.kind !== "experiment") ? ` · <b>Claude build</b>` : ""}${buildsFor(l.name).some((b) => b.kind === "experiment") ? ` · <b>untested idea</b>` : ""}</td></tr>`).join("")}</tbody></table></div>
+      <td class="small">${netSummary(l.name)}</td></tr>`).join("")}</tbody></table></div>
     ${quiet.length ? `<p class="note">New legends with no lists yet: ${quiet.map((n) => esc(n.name)).join(" · ")}.</p>` : ""}
   </section>`;
 }
@@ -981,11 +976,13 @@ function radianceSection() {
 // One line for a legend's best playable net deck: this format's, else the last one's.
 function netSummary(name) {
   const N = netFor(name);
+  const RANK = ["net", "early", "crowd", "single"];
   for (const f of ["now", "last"]) {
-    const g = (N?.[f] || []).find((x) => !x.avoid.length);
+    const g = (N?.[f] || []).filter((x) => !x.avoid.length).sort((a, b) => RANK.indexOf(a.status) - RANK.indexOf(b.status))[0];
     if (!g) continue;
     const fmt = f === "last" ? ` <span class="dim">(${esc(IDEAS.formats.last.name)})</span>` : "";
-    return g.status === "net" ? `<b>net deck</b>, ${g.lists} finishes${fmt}` : g.status === "early" ? `early net deck, ${g.lists} finishes${fmt}` : `<span class="dim">${g.lists} finish${g.lists === 1 ? "" : "es"}${fmt}</span>`;
+    return g.status === "net" ? `<b>net deck</b>, ${g.lists} finishes${fmt}` : g.status === "early" ? `early net deck, ${g.lists} finishes${fmt}`
+      : g.status === "crowd" ? `<span class="dim">crowd's list, ${g.lists} posted${fmt}</span>` : `<span class="dim">${g.lists} finish${g.lists === 1 ? "" : "es"}${fmt}</span>`;
   }
   return `<span class="dim">no good finish yet</span>`;
 }
@@ -1002,17 +999,14 @@ function consensusBlock(c) {
 function viewIdea(name) {
   const l = ideaFor(name);
   const card = legendCard(name) || (l && IDX.BY.get(shortCode(l.code)));
-  const builds = buildsFor(name);
   const N = netFor(name);
-  if (!l && !builds.length && !N) return archFor(name)
+  if (!l && !N) return archFor(name)
     ? `<a class="small" href="#/archetypes">‹ Archetypes</a><section class="panel hero"><div style="display:flex;flex-direction:column;gap:10px;min-width:0">
         <div class="dots">${dots(card?.d)}<span class="lbl">${esc((card?.d || []).join(" / "))}</span></div>
         <h1>${card ? `<button class="cardlink" data-card="${esc(card.c)}">${esc(name)}</button>` : esc(name)}</h1>
         <div class="dim">No Radiance-era lists yet.</div></div></section>${gamePlanPanel(name)}`
     : `<a class="small" href="#/find">‹ Find a deck</a><div class="banner warn">No Radiance-era lists for ${esc(name)} yet.</div>`;
   const mine = decks().filter((d) => { const L = deckStats(d, IDX, ROW?.inv || {}).legend; return L && IDX.legendName(L) === name; });
-  // The deck the engines are read from: the leading playable net deck, this format's first.
-  const lead = ["now", "last"].map((f) => (N?.[f] || []).find((g) => g.count && !g.avoid.length)).find(Boolean);
   return `<div style="display:flex;flex-direction:column;gap:6px"><a class="small" href="#/find">‹ Find a deck</a></div>
   <section class="panel hero">
     <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
@@ -1020,23 +1014,21 @@ function viewIdea(name) {
       <h1>${card ? `<button class="cardlink" data-card="${esc(card.c)}">${esc(name)}</button>` : esc(name)}</h1>
       <div class="dim">${l ? `${l.finishes.length ? `Finishes: ${l.finishes.slice(0, 8).map(([p, n]) => placeText(p, n)).join(", ")}` : "No placed finishes yet"}` : ""}</div>
     </div>
-    ${l ? `<div class="stats"><div class="stat"><span class="lbl">Placed lists</span><b>${l.placed}</b></div><div class="stat"><span class="lbl">Top 8</span><b>${l.top8}</b></div><div class="stat"><span class="lbl">Brews</span><b>${l.brews}</b></div></div>` : ""}
+    ${l ? `<div class="stats"><div class="stat"><span class="lbl">Placed lists</span><b>${l.placed}</b></div><div class="stat"><span class="lbl">Top 8</span><b>${l.top8}</b></div><div class="stat"><span class="lbl">Posted</span><b>${l.brews}</b></div></div>` : ""}
   </section>
   ${IDEAS?.era?.allPreRelease && l?.placed ? `<div class="banner warn">Every finish on this page is from an unsanctioned online event played before Radiance was legal (${esc(IDEAS.era.legalFrom)}). Early signal, not a settled result.</div>` : ""}
   ${netDecksSection(name)}
   ${mine.length || l ? `<div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">
       ${mine.map((d) => `<section class="panel">${diffBlock(d, name)}</section>`).join("")}
       ${l ? `<section class="panel"><h2>Since Vendetta</h2>
-        ${l.changes ? `<p class="note">Against ${l.changes.vs} placed Vendetta lists of ${esc(champOf(name))} since ${esc(l.changes.since)}.</p>
+        ${l.changes ? `<p class="note">The share of good finishes playing each card: ${l.changes.now} ${esc(IDEAS.formats.now.name)} against ${l.changes.vs} ${esc(IDEAS.formats.last.name)}.</p>
           ${l.changes.added.length ? `<div class="lbl">In</div>${l.changes.added.map((r) => `<div class="row"><span class="n"><button class="cardlink" data-card="${esc(shortCode(r.code))}">${esc(r.name)}</button>${r.radiance ? ` <span class="pill later">RAD</span>` : ""}</span><span class="num tiny">${pctI(r.before)} → <b>${pctI(r.now)}</b></span></div>`).join("")}` : ""}
           ${l.changes.dropped.length ? `<div class="lbl" style="margin-top:8px">Out</div>${l.changes.dropped.map((r) => `<div class="row"><span class="n"><button class="cardlink" data-card="${esc(shortCode(r.code))}">${esc(r.name)}</button></span><span class="num tiny">${pctI(r.before)} → <b>${pctI(r.now)}</b></span></div>`).join("")}` : ""}
           ${!l.changes.added.length && !l.changes.dropped.length ? `<p class="note">Nothing moved by much.</p>` : ""}`
-          : `<p class="note">${l.isNew ? "A new legend: there are no Vendetta lists to compare." : `Fewer than 3 placed Vendetta lists of ${esc(champOf(name))} to compare against.`}</p>`}
+          : `<p class="note">${l.isNew ? "A new legend: there are no Vendetta lists to compare." : `Fewer than 3 good finishes of ${esc(champOf(name))} in one format or the other to compare.`}</p>`}
       </section>` : ""}
     </div>` : ""}
   ${gamePlanPanel(name)}
-  ${builds.map(buildPanel).join("")}
-  ${lead ? `<section class="panel"><h2>Engines</h2><p class="note">What the leading net deck is built to do over and over, read off its cards' text, and the legal cards that would feed it — Radiance cards nobody has tried yet included.</p>${enginesBlock(Object.fromEntries(Object.entries(lead.cards).map(([k, n]) => [shortCode(k), n])), l?.shares || {})}</section>` : ""}
   ${l?.lists?.length ? `<section style="display:flex;flex-direction:column;gap:14px"><h2>Every ${esc(IDEAS.formats?.now?.name || "Radiance")}-format list</h2><p class="note">Any recorded finish, good or not, as the events posted them.</p>
     <div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">${l.lists.map((x, i) => eraList(name, x, i)).join("")}</div></section>` : ""}`;
 }
@@ -1063,7 +1055,7 @@ function eraList(name, x, i) {
    real lists. This format first, then the last one's, still legal. A group running a
    never-play card (lib/avoid.mjs) is shown for the field, never offered. */
 const netFor = (name) => IDEAS?.netdecks?.[name] || null;
-const NET_LABEL = { net: ["good", "Net deck"], early: ["later", "Early"], single: ["src", "As played"] };
+const NET_LABEL = { net: ["good", "Net deck"], early: ["later", "Early"], single: ["src", "As played"], crowd: ["src", "Crowd's list"] };
 const finishText = (p) => (p.pl != null ? placeText(p.pl, p.players) : p.cp ? `claimed top ${p.cp}` : "");
 // A list's main deck by card name, as lib/netdeck.mjs counts it.
 const mainByName = (cards) => { const m = new Map(); for (const [k, q] of Object.entries(cards || {})) { const c = IDX.BY.get(shortCode(k)); if (c && !["Legend", "Rune", "Battlefield"].includes(c.t)) m.set(c.n, (m.get(c.n) || 0) + q); } return m; };
@@ -1086,13 +1078,15 @@ function netDecksSection(name) {
     const big = gs.map((g, i) => ({ g, i })).filter((x) => x.g.status !== "single" || x.g.avoid.length);
     const one = gs.map((g, i) => ({ g, i })).filter((x) => x.g.status === "single" && !x.g.avoid.length);
     const head = f === "now" ? `${esc(fmt)} net decks` : `${esc(fmt)} net decks <span class="lbl">last format · still legal</span>`;
-    if (!gs.length) return f === "now" ? `<section class="panel"><h2>${head}</h2><p class="note">No good ${esc(fmt)} finish for ${champ} yet. A good finish is the top 25% of its field, or a top 8 of 32+ players.</p></section>` : "";
+    const none = `<p class="note">No good ${esc(fmt)} finish for ${champ} yet. A good finish is the top 25% of its field, or a top 8 of 32+ players.</p>`;
+    if (!gs.length) return f === "now" ? `<section class="panel"><h2>${head}</h2>${none}</section>` : "";
     return `<section style="display:flex;flex-direction:column;gap:14px"><h2>${head}</h2>
+      ${gs.every((g) => g.status === "crowd") ? none : ""}
       ${big.map(({ g, i }, k) => netPanel(name, f, g, i, k === 0 && !g.avoid.length, gs.length > 1)).join("")}
       ${one.length ? `<div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">${one.map(({ g, i }) => netSingle(name, f, g, i, gs.length > 1)).join("")}</div>` : ""}</section>`;
   };
   return `${part("now")}${part("last")}
-    <p class="note">How these are made: every good finish (top 25% of the field, or a top 8 of 32+), one per finish — reposts of a claimed result count once — split where lists are more than half a deck apart, and counted. <b>Net deck</b> means 3+ finishes, from 2+ events, 2+ of them recorded rather than claimed, and lists within 9 copies of the count. <a href="#/guide/deckbuilding">Deckbuilding</a> has the measurements.</p>`;
+    <p class="note">How these are made: every good finish (top 25% of the field, or a top 8 of 32+), one per finish — reposts of a claimed result count once — split where lists are more than half a deck apart, and counted. <b>Net deck</b> means 3+ finishes, from 2+ events, 2+ of them recorded rather than claimed, and lists within 9 copies of the count. Where a format has none, the <b>crowd's list</b> counts posted lists the same way, and says so. <a href="#/guide/deckbuilding">Deckbuilding</a> has the measurements.</p>`;
 }
 function netPanel(name, f, g, i, open, many) {
   const [cls, label] = NET_LABEL[g.status], c = g.count, mine = !g.avoid.length;
@@ -1101,11 +1095,13 @@ function netPanel(name, f, g, i, open, many) {
     <div class="headrow"><div><span class="pill ${cls}">${label}</span>${g.preview ? ` <span class="pill later">online preview</span>` : ""}${!mine ? ` <span class="pill bad">never play</span>` : ""}
       <h3 style="margin-top:6px">${esc(champOf(name))} — ${title}</h3></div>
       ${mine && g.cards ? `<div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=${encodeURIComponent(`net:${f}:${i}`)}">Tweak</a>${ROW ? `<button class="btn${open ? " primary" : ""}" data-copynet="${esc(name)}|${f}|${i}">Copy to my decks</button>` : ""}</div>` : ""}</div>
-    <p class="small dim" style="margin:0">${g.lists} finish${g.lists === 1 ? "" : "es"} · ${g.events} event${g.events === 1 ? "" : "s"} · ${g.records} recorded${g.claims ? `, ${g.claims} claimed` : ""} · best ${esc(finishText(g.best))}${g.best.ev ? ` at ${esc(g.best.ev)}` : ""} · latest ${esc(g.through || "")}</p>
+    <p class="small dim" style="margin:0">${g.status === "crowd" ? `${g.lists} posted lists, ${g.copies} titled as copies of another · posted ${esc(g.from || "")} to ${esc(g.through || "")}`
+      : `${g.lists} finish${g.lists === 1 ? "" : "es"} · ${g.events} event${g.events === 1 ? "" : "s"} · ${g.records} recorded${g.claims ? `, ${g.claims} claimed` : ""} · best ${esc(finishText(g.best))}${g.best.ev ? ` at ${esc(g.best.ev)}` : ""} · latest ${esc(g.through || "")}`}</p>
+    ${g.status === "crowd" ? `<p class="note"><b>What people are posting, not what wins.</b> Counted from posted lists because there is no good finish to count. Where a legend has both, its posted lists share 36 of 40 cards with its winners' list (35 leaving out copies) — but that is measured on legends with results, not on this one.</p>` : ""}
     ${!mine ? `<div class="banner warn">Runs ${g.avoid.map(esc).join(", ")}: never suggested to you. Here because you will face it.</div>` : ""}
     ${g.misses.length ? `<p class="note"><b>Not a net deck yet:</b> ${g.misses.map(esc).join("; ")}.</p>` : ""}
     ${c ? `<details${open ? " open" : ""}><summary class="btn" style="width:max-content">${open ? "The list" : "Show the list"}</summary><div style="margin-top:10px">
-      <p class="note">Each card at the copies most of these lists run, highest share first, to 40; the bar is the share of lists playing it. Closest real list: ${esc(g.closest.h || "")} (${esc(finishText(g.closest))}), ${g.closest.changed} cop${g.closest.changed === 1 ? "y" : "ies"} off.</p>
+      <p class="note">Each card at the copies most of these lists run, highest share first, to 40; the bar is the share of lists playing it. Closest real list: ${esc(g.closest.h || "")}${g.status === "crowd" ? "" : ` (${esc(finishText(g.closest))})`}, ${g.closest.changed} cop${g.closest.changed === 1 ? "y" : "ies"} off.</p>
       ${consensusBlock(c)}
       ${c.flex?.length ? `<p class="tiny dim">Flex, in 20%+ of these lists but outside the 40: ${c.flex.slice(0, 10).map((r) => `${esc(r.name)} ${pctI(r.inc)}`).join(" · ")}</p>` : ""}</div></details>` : ""}
   </section>`;
@@ -1137,36 +1133,11 @@ function diffBlock(d, name) {
   const typeOf = (n) => IDX.cards.find((x) => x.n === n)?.t;
   const cut = [...have].filter(([n]) => !["Rune", "Legend", "Battlefield"].includes(typeOf(n)) && (inc.get(n) || 0) < 0.2);
   return `<div class="headrow"><h2>Against the net deck</h2><span class="small dim">${esc(d.name)}</span></div>
-    <p class="note">Against the nearest ${esc(fmt)} net deck${g.marks.length ? ` (with ${g.marks.map(esc).join(" · ")})` : ""}: ${g.lists} good finishes${g.status === "net" ? "" : `, <b>${g.status === "early" ? "early" : "too few to count"}</b>`}${g.preview ? ", online previews" : ""}. Your main deck is ${near.off} cop${near.off === 1 ? "y" : "ies"} off it. A count, not a verdict — your list may be built for a different plan.</p>
+    <p class="note">Against the nearest ${esc(fmt)} ${g.status === "crowd" ? "crowd's list" : "net deck"}${g.marks.length ? ` (with ${g.marks.map(esc).join(" · ")})` : ""}: ${g.status === "crowd" ? `${g.lists} posted lists, <b>no results behind it</b>` : `${g.lists} good finishes${g.status === "net" ? "" : `, <b>early</b>`}`}${g.preview ? ", online previews" : ""}. Your main deck is ${near.off} cop${near.off === 1 ? "y" : "ies"} off it. A count, not a verdict — your list may be built for a different plan.</p>
     ${add.length ? `<div class="lbl">Most lists play, you don't (or fewer)</div>${add.map(({ r, n }) => `<div class="row"><span class="q">+${n}</span><span class="n"><button class="cardlink" data-card="${esc(shortCode(r.code))}">${esc(r.name)}</button></span><span class="num tiny dim">${pctI(r.inc)}</span></div>`).join("")}` : `<p class="note">You already run everything at least half the lists play.</p>`}
     ${cut.length ? `<div class="lbl" style="margin-top:8px">You play, under 20% of lists do</div>${cut.map(([n, q]) => `<div class="row"><span class="q">${q}</span><span class="n">${esc(n)}</span><span class="num tiny dim">${pctI(inc.get(n) || 0)}</span></div>`).join("")}` : ""}
     <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=${encodeURIComponent("deck:" + d.id)}">Tweak this deck</a>
       <a class="btn" href="#/idea/${encodeURIComponent(name)}">Net decks and lists</a></div>`;
-}
-
-function buildPanel(b) {
-  const st = deckStats({ cards: Object.fromEntries(Object.entries(b.cards).map(([k, n]) => [shortCode(k), n])), sb: b.sb || {} }, IDX, ROW?.inv || {});
-  const rows = st.rows.filter((r) => r.card && r.zone !== "legend");
-  const grp = (t) => rows.filter((r) => r.card.t === t).sort(sortRows);
-  const list = (title, rs) => rs.length ? `<div class="group"><div class="lbl">${title} · ${rs.reduce((a, r) => a + r.qty, 0)}</div>${rs.map((r) => `<div class="row"><span class="q">${r.qty}</span><span class="n"><button class="cardlink" data-card="${esc(r.code)}">${esc(r.card.n)}</button></span><span class="cost hide-sm">${esc(costOf(r.card))}</span></div>`).join("")}</div>` : "";
-  const exp = b.kind === "experiment";
-  return `<section class="panel build ${exp ? "experiment" : ""}">
-    <div class="headrow"><div><span class="lbl">${exp ? "Untested idea · Claude" : "Claude build"} · ${esc(b.date)}</span><h2>${esc(b.title)}</h2></div><div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(b.legend)}?from=${encodeURIComponent("build:" + b.id)}">Tweak</a>${ROW ? `<button class="btn primary" data-copybuild="${esc(b.id)}">Copy to my decks</button>` : ""}</div></div>
-    ${b.drift?.stale ? `<div class="banner warn"><b>The field has moved since this build (${esc(b.drift.since)}).</b>
-      ${b.drift.newEvents.length ? `${b.drift.newEvents.length} new event${b.drift.newEvents.length === 1 ? "" : "s"}: ${b.drift.newEvents.map((e) => `${esc(e.name)} (${e.players ?? "?"} players${e.preRelease ? ", online preview" : ""})`).join("; ")}. ` : ""}
-      Placed ${esc(champOf(b.legend))} lists ${b.drift.listsThen} → ${b.drift.listsNow}.
-      ${b.drift.moved.length ? `Moved: ${b.drift.moved.map((r) => `${esc(r.name)} ${pctI(r.was)} → ${pctI(r.now)}${r.inBuild ? "" : " (not in this build)"}`).join(", ")}.` : ""}
-      It is due a revision; until then it is the list as written.</div>` : b.drift ? `<p class="tiny dim" style="margin:0">Checked against today's lists: the field has not moved since this was written.</p>` : ""}
-    <p>${esc(b.summary)}</p>
-    <div class="cols"><div class="wide" style="flex:999 1 420px;min-width:0"><div class="grid-list">${list("Units", grp("Unit"))}${list("Spells", grp("Spell"))}${list("Gear", grp("Gear"))}${list("Runes", grp("Rune"))}${list("Battlefields", grp("Battlefield"))}</div></div>
-      <div class="side" style="gap:12px">
-        <div><div class="lbl">Built from</div><p class="small">${esc(b.basis)}</p></div>
-        ${b.changes?.length ? `<div><div class="lbl">Changes, and why</div>${b.changes.map((x) => `<p class="small"><b>${esc(x.what)}</b> — ${esc(x.why)}</p>`).join("")}</div>` : ""}
-        <div><div class="lbl">Plan</div>${b.plan.map((x) => `<p class="small">${esc(x)}</p>`).join("")}</div>
-        ${b.matchups?.length ? `<div><div class="lbl">Matchups</div>${b.matchups.map((m) => `<p class="small"><b>${esc(m.vs)}</b> — ${esc(m.note)}</p>`).join("")}</div>` : ""}
-        ${b.sim ? `<div><div class="lbl">Goldfish (scripts/sim)</div><p class="small">${esc(b.sim)}</p></div>` : ""}
-      </div></div>
-  </section>`;
 }
 
 async function saveNewDeck(deck, label) {
@@ -1176,29 +1147,24 @@ async function saveNewDeck(deck, label) {
   } catch (err) { toast(`Not copied: ${err.message}`); }
 }
 document.addEventListener("click", (e) => {
-  const a = e.target.closest("[data-copynet]"), b = e.target.closest("[data-copyera]"), c = e.target.closest("[data-copybuild]");
+  const a = e.target.closest("[data-copynet]"), b = e.target.closest("[data-copyera]");
   if (a) {
     const [name, f, i] = a.dataset.copynet.split("|"), g = netFor(name)?.[f]?.[Number(i)];
     if (!g || g.avoid.length) return;   // never-play groups have no button; never copy one
     const cards = Object.fromEntries(Object.entries(g.cards).map(([code, n]) => [shortCode(code), n]));
-    const what = g.count ? `${IDEAS.formats[f].name} net deck${g.status === "early" ? " (early)" : ""}, ${g.lists} finishes` : `${finishText(g.best)}, ${g.best.ev || g.best.h || ""}`;
+    const what = g.status === "crowd" ? `${IDEAS.formats[f].name} crowd's list, ${g.lists} posted` : g.count ? `${IDEAS.formats[f].name} net deck${g.status === "early" ? " (early)" : ""}, ${g.lists} finishes` : `${finishText(g.best)}, ${g.best.ev || g.best.h || ""}`;
     saveNewDeck({ id: "d" + Date.now().toString(36), name: `${champOf(name)} — ${what} (${IDEAS.generatedAt})`.slice(0, 90), cards, sb: {} }, g.count ? "Net deck" : "List");
   } else if (b) {
     const [name, i] = b.dataset.copyera.split("|"), x = ideaFor(name).lists[Number(i)];
     const cards = Object.fromEntries(Object.entries(x.cards).map(([code, n]) => [shortCode(code), n]));
     saveNewDeck({ id: "d" + Date.now().toString(36), name: `${champOf(name)} — ${x.brew ? "brew" : placeText(x.pl, x.players)}, ${x.ev || x.h || ""}`.slice(0, 90), cards, sb: {} }, "List");
-  } else if (c) {
-    const x = (IDEAS.builds || []).find((y) => y.id === c.dataset.copybuild);
-    const fix = (m) => Object.fromEntries(Object.entries(m || {}).map(([code, n]) => [shortCode(code), n]));
-    saveNewDeck({ id: "d" + Date.now().toString(36), name: `${x.title} (Claude, ${x.date})`, cards: fix(x.cards), sb: fix(x.sb) }, "Build");
   }
 });
 
-/* ══ Combos: what the data says goes together, and what the text says feeds what ═══
+/* ══ Combos: what the data says goes together ═══════════════════════════════
    data/synergy.json (scripts/build-synergy.mjs) is counted: cards played together far
-   more often than lists that could play both would suggest. lib/engines.mjs is read off
-   card text: payoffs and the cards that trigger them, so a new card with no lists can
-   still be found. The first is evidence; the second is a reading, and says so. */
+   more often than lists that could play both would suggest. (The engine reader's "could
+   add" suggestions that sat here were retired with the brews on 23 Oct 2026.) */
 let SYN = null, SYN_LOADING = null;
 function loadSyn() {
   if (SYN) return Promise.resolve(SYN);
@@ -1213,32 +1179,6 @@ function goesWithBlock(name) {
     ${s.with.length ? `<div><b>Goes with</b> ${s.with.map((w) => `${esc(w.name)}${w.rad ? "*" : ""} ${pctI(w.share)}`).join(" · ")}</div>` : ""}
     <div class="dim">Of the ${s.n} lists playing it; only partners at ${2}× their usual rate or more. * = Radiance.</div></div>`;
 }
-function enginesBlock(cards, shares, { addable = false, max = 3 } = {}) {
-  // A long-legal card the legend's winners skip is a question, not a suggestion
-  // (data/research.json): it is listed apart, with its answer if it has one.
-  const L = Object.keys(cards).map((k) => IDX.BY.get(k)).find((c) => c?.t === "Legend");
-  const legend = L ? IDX.legendName(L) : null;
-  const E = annotateEngines(deckEngines(cards, IDX, { shares, max: 40 }), RES, legend).slice(0, max)
-    .map((e) => ({ ...e, more: e.more + Math.max(0, e.candidates.length - 6), candidates: e.candidates.slice(0, 6) }));
-  const known = ENGINES.map((e) => e.name.toLowerCase()).join(", ");
-  if (!E.length) return `<p class="note">No engine found in this list's text: no card here pays off a repeated event this reader knows (${esc(known)}).</p>`;
-  // Only a loop (the legend in it, or four copies each of payoff and feeder) is an engine;
-  // a curve, removal or ramp deck has none, and its stray patterns are shown as just that.
-  const none = !E[0].loop ? `<p class="note">No engine: nothing here loops — the legend is in none of these, and none has four copies each of a payoff and something else feeding it. A curve, removal or ramp deck reads this way. The patterns below are incidental.</p>` : "";
-  const names = (xs) => xs.map((x) => `${x.qty} ${esc(x.legend ? "the legend" : x.name)}`).join(", ");
-  return none + E.map((e) => `<div class="engine">
-    <div class="headrow"><h3>${esc(e.name)}${e.loop ? "" : ` <span class="tiny dim">· incidental</span>`}</h3><span class="tiny dim">${esc(e.what)}</span></div>
-    <div class="small"><b>Pays off:</b> ${names(e.payoffs)}${e.enablers.length ? ` · <b>Feeds it:</b> ${names(e.enablers)}` : ""}</div>
-    ${e.candidates.length ? `<div class="lbl" style="margin-top:6px">Could add</div>${e.candidates.map((c) => `<div class="erow" style="align-items:flex-start">
-      <span class="n"><button class="cardlink" data-card="${esc(c.code)}">${esc(c.name)}</button>${c.set === "RAD" ? ` <span class="pill later">RAD</span>` : ""}
-        <span class="tiny dim" style="display:block">${esc(c.roles.includes("payoff") ? "pays off" : "feeds it")}: “${esc(c.text)}”</span></span>
-      <span class="num tiny dim" style="white-space:nowrap">${c.share != null ? `${pctI(c.share)} play it` : "untried"}</span>
-      ${addable ? `<button class="pm" data-b="add" data-code="${esc(c.code)}" aria-label="Add ${esc(c.name)}">+</button>` : ""}</div>`).join("")}` : ""}
-    ${e.held.length ? `<div class="lbl" style="margin-top:6px">Winners skip these</div><p class="tiny dim" style="margin:0">${e.held.map((c) => `<button class="cardlink" data-card="${esc(c.code)}">${esc(c.name)}</button> ${Math.round(c.research.share * c.research.placed)}/${c.research.placed}`).join(" · ")}
-      — ${(() => { const a = e.held.find((c) => c.research.answer); return a ? `${esc(VERDICTS[a.research.verdict] || "")}: ${esc(a.research.answer)}` : e.held.some((c) => c.research.id) ? `an <a href="#/idea/${encodeURIComponent(legend)}">open question</a>: the placed lists know something the text doesn't.` : "nobody plays them anywhere much."; })()}</p>` : ""}
-  </div>`).join("") + `<p class="tiny dim" style="margin:0">Read off card text by pattern, not tested: it can't see timing, targets or whether two cards really combo. "Untried" means no list in these events plays it.</p>`;
-}
-
 /* ══ Archetypes ════════════════════════════════════════════════════════════
    What each legend's deck is for. data/archetypes.json is measured (the representative
    list's mix, curve, interaction, goldfish speed, engines, signature package);
@@ -1293,50 +1233,19 @@ function profileLine(a) {
     ${a.package?.length ? `<div class="small"><b>Plays far more than its colours:</b> ${a.package.map((k) => `${esc(k.name)}${k.rad ? "*" : ""} ${pctI(k.share)}`).join(" · ")}</div>` : ""}`;
 }
 function gamePlanPanel(name) {
-  return `<section class="panel" id="gameplan"><h2>Game plan</h2>${profileLine(archFor(name))}<div class="guide" data-plan="${esc(name)}"><p class="note">Loading the game plan…</p></div></section>${researchPanel(name)}${risingPanel(name)}${brewPanel(name)}`;
+  return `<section class="panel" id="gameplan"><h2>Game plan</h2>${profileLine(archFor(name))}<div class="guide" data-plan="${esc(name)}"><p class="note">Loading the game plan…</p></div></section>${risingPanel(name)}`;
 }
-// What the model of this legend and its winning lists disagree on (data/research.json,
-// answers in docs/research.md). Shown so a suggestion is never read without its doubts.
-function researchPanel(name) {
-  const L = RES?.legends?.[name];
-  if (!L) return "";
-  const items = (RES.items || []).filter((i) => i.legend === name);
-  const flags = [L.flags.includes("thin") ? `Only ${L.placed} placed list${L.placed === 1 ? "" : "s"}: what the winners skip can't be told from what nobody has tried yet, so nothing here is a question yet.` : "",
-    L.flags.includes("legend-unread") ? "The legend's own text matches no engine the reader knows; its engines come from the other cards only." : "",
-    L.unread?.length ? `Signature cards the reader can't place in an engine: ${L.unread.map(esc).join(", ")}. The deck uses them for something the patterns don't see.` : ""].filter(Boolean);
-  if (!items.length && !flags.length) return "";
-  return `<section class="panel"><h2>Open questions</h2><p class="note">Where what the cards say and what the winning lists play disagree. A card the winners skip is held back from suggestions until it is answered.</p>
-    ${flags.map((f) => `<p class="small">${f}</p>`).join("")}
-    ${items.map((i) => `<div class="engine"><div class="headrow"><h3>${esc(i.title)}</h3><span class="pill ${i.verdict ? "" : "later"}">${i.verdict ? esc(VERDICTS[i.verdict] || i.verdict) : "open"}</span></div>
-      ${i.answer ? `<p class="small">${esc(i.answer)}</p>` : ""}
-      ${(i.cards || []).length ? `<p class="tiny dim" style="margin:4px 0">${i.cards.map((q) => `${esc(q.name)} ${q.with}/${L.placed}${q.homes[0] ? ` (${esc(q.homes[0].name.split(",")[0])} ${pctI(q.homes[0].share)})` : ""}${q.verdict ? ` — ${esc(VERDICTS[q.verdict] || q.verdict)}` : ""}`).join(" · ")}</p>` : ""}
-      ${i.verdict ? "" : `<ul class="tiny">${i.hypotheses.map((h) => `<li>${esc(h)}</li>`).join("")}</ul>`}</div>`).join("")}</section>`;
-}
-// What this legend's posted lists are taking up and dropping this week (data/rising.json).
+// What this legend's posted lists are taking up and dropping (data/rising.json), with what
+// the windows actually hold: posting dates, a 5-list minimum, and days the snapshot missed.
 function risingPanel(name) {
   const v = RISING?.legends?.[name];
   if (!v || (!v.rising.length && !v.falling.length)) return "";
+  const W = RISING.window, cov = W.coverage;
   const row = (xs) => xs.map((r) => `<button class="cardlink" data-card="${esc(codeForName(r.name) || "")}">${esc(r.name)}</button>${r.rad ? ` <span class="pill later">RAD</span>` : ""} <span class="dim">${r.before}→${r.now}%</span>`).join(" · ");
-  return `<section class="panel"><h2>Moving this week</h2><p class="note">${esc(RISING.note)} ${v.lists.now} lists this week, ${v.lists.before} in the two before.</p>
+  const span = (w, c) => `${esc(w[0].slice(5))}–${esc(w[1].slice(5))}${c && c.days < c.of ? ` (lists on ${c.days} of ${c.of} days; none captured ${esc(c.missing[0].slice(5))}${c.missing.length > 1 ? `–${esc(c.missing.at(-1).slice(5))}` : ""})` : ""}`;
+  return `<section class="panel"><h2>Moving in posted lists</h2>
+    <p class="note">Each card's share of ${esc(champOf(name))}'s posted lists, ${span(W.recent, cov?.recent)} (<b>${v.lists.now}</b> lists) against ${span(W.prior, cov?.prior)} (<b>${v.lists.before}</b>), by the day a list was posted, not played. ${v.lists.now < 10 || v.lists.before < 10 ? `<b>Few lists:</b> one list moves a card ${Math.round(100 / Math.min(v.lists.now, v.lists.before))} points. ` : ""}Posted lists move first; a change is a signal, not a result.${IDEAS?.era?.from && W.prior[0] < IDEAS.era.from && IDEAS.era.from <= W.recent[1] ? ` These windows straddle ${esc(IDEAS.formats.now.name)}'s reveal (${esc(IDEAS.era.from)}), so most of what rises is the new set arriving.` : ""}</p>
     ${v.rising.length ? `<p class="small"><b>Up:</b> ${row(v.rising)}</p>` : ""}${v.falling.length ? `<p class="small"><b>Down:</b> ${row(v.falling)}</p>` : ""}</section>`;
-}
-// A brew (data/brews.json, lib/brew.mjs): a winning list changed on purpose — the
-// legend's consensus with reasoned role swaps, or a port of a proven list in its colours.
-const brewFor = (name) => (BREWS?.brews || []).find((b) => b.legend === name) || null;
-function brewPanel(name) {
-  const b = brewFor(name);
-  if (!b || !b.worth) return "";
-  const kinds = { alt: "Other lists' choice", test: "Research says test", upgrade: "New card, same job", rising: "Rising in posted lists" };
-  const ported = b.kind === "colours" ? b.rows.filter((r) => r.change === "champion" || /signature|own lists/.test(r.why || "")) : b.rows.filter((r) => r.change === "champion");
-  return `<section class="panel"><div class="headrow"><div><span class="lbl">Untested · ${b.kind === "colours" ? "built from its colours' winners and its own cards" : b.crowd ? "no results yet: the crowd's list, plus experiments" : "the net-deck, plus experiments"}</span><h2>Experimental ${esc(name.split(",")[0])}</h2></div>
-      <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=brew">Tweak</a></div></div>
-    <p class="note">${esc(BREWS.note)} Built from ${esc(b.basis)}.${b.sim ? ` Goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3.` : ""} Method: <a href="#/guide/deckbuilding">Deckbuilding</a>.</p>
-    ${ported.length ? `<div class="lbl" style="margin-top:6px">${esc(name.split(",")[0])}'s own</div>${ported.map((r) => `<div class="erow"><span class="n">${r.qty} <button class="cardlink" data-card="${esc(codeForName(r.name) || r.code)}">${esc(r.name)}</button></span><span class="tiny dim">${esc(r.why)}</span></div>`).join("")}` : ""}
-    ${b.swaps.length ? `<div class="lbl" style="margin-top:6px">Experiments, applied</div>${b.swaps.map((s) => `<div class="erow" style="align-items:flex-start"><span class="n">${s.copies} <button class="cardlink" data-card="${esc(codeForName(s.out) || "")}">${esc(s.out)}</button> → <button class="cardlink" data-card="${esc(s.inCode)}">${esc(s.in)}</button>
-      <span class="tiny dim" style="display:block">${esc(s.why)}</span></span><span class="pill ${s.kind === "upgrade" ? "later" : ""}">${esc(kinds[s.kind] || s.kind)}</span></div>`).join("")}` : ""}
-    ${b.more?.length ? `<div class="lbl" style="margin-top:6px">More experiments</div><p class="tiny dim" style="margin:0">Past the caps: ${b.more.map((s) => `${s.copies} ${esc(s.out)} → ${esc(s.in)} (${esc(kinds[s.kind] || s.kind)})`).join(" · ")}</p>` : ""}
-    ${b.options?.length ? `<div class="lbl" style="margin-top:6px">Options — what other lists play instead</div><p class="tiny dim" style="margin:0">Not applied: variation, not improvement. ${b.options.slice(0, 8).map((s) => `${esc(s.out)} → ${esc(s.in)}`).join(" · ")}</p>` : ""}
-    <p class="tiny dim" style="margin-top:6px">The 40: ${b.rows.map((r) => `${r.qty} ${esc(r.name)}${r.change ? "*" : ""}`).join(", ")} (* changed)${b.runeNote ? ` · ${esc(b.runeNote)}` : ""}</p></section>`;
 }
 async function fillGamePlan() {
   const el = document.querySelector("[data-plan]");
@@ -1367,9 +1276,9 @@ function viewArchetypes() {
 }
 
 /* ══ Tweak bench ═══════════════════════════════════════════════════════════
-   Start from any real list, a Claude build, the consensus or one of your decks; swap
+   Start from a net deck, a crowd's list, any real list or one of your decks; swap
    cards in and out and watch what it does: the deck's rules, how much of the field
-   plays each card, how close it stays to the consensus, and the goldfish curve, which
+   plays each card, how close it stays to the net deck, and the goldfish curve, which
    runs in a worker (lib/sim-worker.mjs) so a tap never freezes the page. */
 let SIMW = null, SIMSEQ = 0;
 const simWaiting = new Map();
@@ -1388,12 +1297,10 @@ const benchSources = (name) => {
   const N = netFor(name);
   for (const f of ["now", "last"]) (N?.[f] || []).forEach((g, i) => {
     if (g.avoid.length) return;
-    out.push({ key: `net:${f}:${i}`, label: g.count ? `${IDEAS.formats[f].name} ${g.status === "net" ? "net deck" : "early net deck"} · ${g.lists} finishes${g.marks.length ? ` · with ${g.marks.join(" · ")}` : ""}` : `${IDEAS.formats[f].name} · ${finishText(g.best)} · ${g.best.h || ""}`, cards: fix(g.cards) });
+    const kind = { net: "net deck", early: "early net deck", crowd: "crowd's list" }[g.status];
+    out.push({ key: `net:${f}:${i}`, label: g.count ? `${IDEAS.formats[f].name} ${kind} · ${g.lists} ${g.status === "crowd" ? "posted lists" : "finishes"}${g.marks.length ? ` · with ${g.marks.join(" · ")}` : ""}` : `${IDEAS.formats[f].name} · ${finishText(g.best)} · ${g.best.h || ""}`, cards: fix(g.cards) });
   });
-  for (const b of buildsFor(name)) out.push({ key: `build:${b.id}`, label: `Claude build: ${b.title}`, cards: fix(b.cards) });
-  const br = brewFor(name);
-  if (br) out.push({ key: "brew", label: "Brew from the cards (untested)", cards: fix(br.cards) });
-  (l?.lists || []).forEach((x, i) => avoidedIn(Object.keys(x.cards).map((k) => IDX.BY.get(shortCode(k))?.n)).length || out.push({ key: `list:${i}`, label: x.brew ? `Brew: ${x.h}` : `${placeText(x.pl, x.players)} · ${x.h}`, cards: fix(x.cards) }));
+  (l?.lists || []).forEach((x, i) => avoidedIn(Object.keys(x.cards).map((k) => IDX.BY.get(shortCode(k))?.n)).length || out.push({ key: `list:${i}`, label: x.brew ? `Posted: ${x.h}` : `${placeText(x.pl, x.players)} · ${x.h}`, cards: fix(x.cards) }));
   for (const d of decks()) { const L = deckStats(d, IDX, ROW?.inv || {}).legend; if (L && IDX.legendName(L) === name) out.push({ key: `deck:${d.id}`, label: `Your deck: ${d.name}`, cards: { ...d.cards } }); }
   return out;
 };
@@ -1494,7 +1401,7 @@ function viewBench(name) {
     </section>
     <div class="cols">
       <section class="panel wide">
-        <div class="headrow"><h2>${L ? esc(IDX.legendName(L)) : "No legend"}</h2><span class="small dim">bar = share of ${l?.consensus ? `${l.consensus.from} ${l.basis === "placed" ? "placed lists" : "brews"}` : "lists"} playing the card</span></div>
+        <div class="headrow"><h2>${L ? esc(IDX.legendName(L)) : "No legend"}</h2><span class="small dim">bar = share of ${l?.sharesFrom === "good" ? "this format's good finishes" : l ? "posted lists" : "lists"} playing the card</span></div>
         <div style="display:flex;flex-direction:column;gap:16px">${["Unit", "Spell", "Gear", "Rune", "Battlefield"].map(grp).join("")}</div>
       </section>
       <div class="side">
@@ -1503,7 +1410,7 @@ function viewBench(name) {
           ${agNow != null ? `<div class="check" style="border-top:1px solid var(--line2);padding-top:10px"><span class="n">Like the net deck</span><span class="num small">${pctI(agBase)} → <b>${pctI(agNow)}</b></span></div>` : ""}
         </section>
         <section class="panel"><h2>Curve and mana</h2><div id="bench-sim"></div></section>
-        <section class="panel"><h2>Engines</h2>${enginesBlock(W, shares, { addable: true, max: 2 })}</section>
+
         <section class="panel"><h2>Try</h2>
           ${(() => {
             if (!SYN) return `<p class="tiny dim">Loading what goes with this list…</p>`;

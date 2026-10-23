@@ -24,8 +24,7 @@
 //   cards, rules and source. check.mjs enforces the fields.
 
 import { readFile, writeFile } from "node:fs/promises";
-import { makeBrewer } from "./build-brews.mjs";
-import { SET_LEGAL_FROM } from "../lib/decks.mjs";
+import { SET_LEGAL_FROM, indexCatalog } from "../lib/decks.mjs";
 import { buildsOf } from "../lib/builds.mjs";
 import { score, rankSim, fitPopularity, pool, logRatio, carryFor, K_RET, K_PRIOR, K_NEW, VS_CAP, PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, CARRY_PRE, CARRY_REG, REG_HALF, COMPONENTS, CARD_W } from "../lib/preseason.mjs";
 
@@ -59,8 +58,17 @@ const main = async () => {
   const only = (args.find((a) => !a.startsWith("--")) || "").toLowerCase();
   const [cat, extras, banned, snap, topdecks] = await Promise.all(["cards.json", "extras.json", "banned.json", "decks.json", "topdecks.json"].map(read));
   const inputs = JSON.parse(await readFile(new URL("../model/preseason-inputs.json", import.meta.url), "utf8"));
-  const m = makeBrewer({ cat, extras, banned, snap });
-  const { idx, card, legends, byLegend } = m;
+  // The catalog, the deck snapshot's legal lists, and both by legend. These came from the
+  // brews' builder until it was retired (23 Oct 2026); the definitions are unchanged.
+  const known = new Set(cat.cards.map((c) => c.c));
+  const idx = indexCatalog([...cat.cards, ...(extras.cards || []).filter((c) => c.c && !known.has(c.c))], banned);
+  const byShort = new Map(idx.cards.map((c) => [c.c.replace(/\/\d+$/, ""), c]));
+  const card = (code) => idx.BY.get(code) || byShort.get(String(code).replace(/\/\d+$/, "")) || null;
+  const m = { usable: snap.decks.filter((d) => d.lg && card(d.lg) && !Object.keys(d.cards).some((k) => idx.bannedNames.has(card(k)?.n))) };
+  const legends = new Map();
+  for (const c of idx.cards) if (c.t === "Legend" && !c.v) { const n = idx.legendName(c), h = legends.get(n); if (!h || (/ - Starter$/.test(h.n) && !/ - Starter$/.test(c.n))) legends.set(n, c); }
+  const byLegend = new Map();
+  for (const d of m.usable) { const n = idx.legendName(card(d.lg)); (byLegend.get(n) || byLegend.set(n, []).get(n)).push(d); }
   const newest = Object.keys(SET_LEGAL_FROM).sort((a, b) => SET_LEGAL_FROM[b].localeCompare(SET_LEGAL_FROM[a]))[0];
   const legalFrom = SET_LEGAL_FROM[newest];
   const mainOf = (d) => Object.keys(d.cards).map((k) => [card(k), d.cards[k]]).filter(([c]) => c && ["Unit", "Spell", "Gear"].includes(c.t));

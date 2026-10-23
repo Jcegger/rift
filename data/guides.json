@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-21",
+ "generatedAt": "2026-10-23",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -19,7 +19,7 @@
     "What the finish data hints at — weakest evidence",
     "How to run the tests"
    ],
-   "words": 1842
+   "words": 1891
   },
   {
    "slug": "khazix-voidreaver-jun",
@@ -170,7 +170,7 @@
     "The scorecard",
     "Sources"
    ],
-   "words": 2759
+   "words": 2976
   },
   {
    "slug": "reksai-void-burrower",
@@ -223,13 +223,12 @@
     "Azir, Emperor of the Sands — Calm/Order · 3rd and 4th at LA",
     "Jayce, Defender of Tomorrow — Mind/Body · ramp",
     "Vex, Gloomist · Akali, Rogue Assassin · Ornn, Fire Below the Mountain",
-    "Yasuo, Unforgiven (Spiderling) · Calm/Chaos · 12 placed in the previews",
     "Kai'Sa, Daughter of the Void · Fury/Mind · 2nd at Nova",
     "Radiance newcomers",
     "Board at a glance",
     "What would change this page"
    ],
-   "words": 3142
+   "words": 2988
   },
   {
    "slug": "sivir-anti-meta-midrange",
@@ -278,7 +277,7 @@
     "Before the redo: from the anchor, and why",
     "Goldfish"
    ],
-   "words": 3183
+   "words": 3239
   },
   {
    "slug": "skirmish-prep",
@@ -378,7 +377,7 @@
     "Mind / Order — Deathknell and answers",
     "What would change this page"
    ],
-   "words": 9258
+   "words": 9818
   },
   {
    "slug": "deckbuilding",
@@ -399,9 +398,10 @@
     "What this means for building a deck",
     "What was built from this",
     "Net-deck first — and what is fitted to what",
+    "Net decks — what earns the name (23 Oct 2026)",
     "What the guides say, and where they part from the data"
    ],
-   "words": 2605
+   "words": 3904
   }
  ]
 }

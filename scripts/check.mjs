@@ -591,39 +591,20 @@ section('Deck ideas');
   try { I = read('data/ideas.json'); } catch { /* reported below */ }
   if (!I) ok('ideas snapshot present', false, 'data/ideas.json missing — run build-ideas.mjs');
   else {
-    const withC = I.legends.filter((l) => l.consensus);
-    const sum = (rows) => rows.reduce((a, r) => a + r.copies, 0);
-    // The consensus is a count: it must come out as a deck, and say what it came from.
-    ok('every consensus is a full deck: 40 main, 12 runes, 3 battlefields',
-       withC.every((l) => sum(l.consensus.main) === 40 && sum(l.consensus.runes) === 12 && l.consensus.battlefields.length === 3),
-       withC.filter((l) => !(sum(l.consensus.main) === 40 && sum(l.consensus.runes) === 12 && l.consensus.battlefields.length === 3)).map((l) => l.name).join(', ') || `${withC.length} consensus lists`);
-    ok('no consensus breaks a deck rule',
-       withC.every((l) => !l.consensus.checks.some((k) => k.ok === false)),
-       withC.filter((l) => l.consensus.checks.some((k) => k.ok === false)).map((l) => `${l.name}: ${l.consensus.checks.filter((k) => k.ok === false).map((k) => k.label).join(', ')}`).join('; ') || 'all legal');
-    ok("a 'placed' consensus is counted from at least 3 placed lists, and says how many agree",
-       withC.filter((l) => l.basis === 'placed').every((l) => l.consensus.from >= 3 && l.consensus.from === l.placed && l.close <= l.consensus.from));
-    ok('every consensus row is a share of its lists, between 0 and 1',
-       withC.every((l) => [...l.consensus.main, ...l.consensus.flex].every((r) => r.inc > 0 && r.inc <= 1)));
+    // The one-blend consensus and Claude's hand-written builds were retired on 23 Oct 2026;
+    // they must not creep back into the file the site reads.
+    ok('no legend carries the retired consensus, and there are no hand-written builds',
+       I.legends.every((l) => !('consensus' in l)) && !('builds' in I),
+       I.legends.filter((l) => 'consensus' in l).map((l) => l.name).join(', ') || 'none');
     ok('a Radiance-format event is one this snapshot actually holds lists for',
        I.era.events.every((e) => e.lists > 0 && e.radLists / e.lists >= 0.3), `${I.era.events.length} events`);
-    // build-ideas.mjs already refuses a build whose list is another legend's; this is
-    // the page-level half: a build is shown on its legend's idea page, so that page has
-    // to exist.
-    // A build without a snapshot can never be told it is out of date.
-    ok('every Claude build records the field it was written against',
-       I.builds.every((b) => b.snapshot && Array.isArray(b.snapshot.events) && b.snapshot.shares && b.drift),
-       I.builds.filter((b) => !(b.snapshot && b.snapshot.shares)).map((b) => b.id).join(', ') || `${I.builds.filter((b) => b.drift?.stale).length} of ${I.builds.length} out of date`);
-    const orphan = I.builds.filter((b) => !I.legends.some((l) => l.name === b.legend));
-    ok("every Claude build belongs to a legend with Radiance-era evidence", !orphan.length,
-       orphan.length ? orphan.map((b) => b.id).join(', ') : `${I.builds.length} builds`);
-
     // Net decks (lib/netdeck.mjs). What the label promises, checked on the output: a "net"
     // deck met every bar, a counted one is a whole legal deck, no finish is in two groups,
     // and nothing offered runs a never-play card (CLAUDE.md, "Never suggest an Aurora deck").
     const ND = I.netdecks ? Object.entries(I.netdecks).flatMap(([n, x]) => ['now', 'last'].flatMap((f) => (x[f] || []).map((g) => ({ n, f, g })))) : null;
     ok('ideas carry net decks, for this format and the last', !!ND && !!I.formats?.now && !!I.formats?.last, ND ? `${ND.length} groups over ${Object.keys(I.netdecks).length} legends` : 'none — run build-ideas.mjs');
     if (ND) {
-      const { MIN_LISTS, MIN_EVENTS, MIN_RECORDS, NEAR } = await import('../lib/netdeck.mjs');
+      const { MIN_LISTS, MIN_EVENTS, MIN_RECORDS, NEAR, MIN_CROWD } = await import('../lib/netdeck.mjs');
       const { NEVER_PLAY } = await import('../lib/avoid.mjs');
       // The catalog plus extras (Unleashed's runes, UNL-R01…, are only in extras).
       const cards = [...read('data/cards.json').cards, ...(read('data/extras.json').cards || [])].filter((c) => c.c);
@@ -638,10 +619,16 @@ section('Deck ideas');
       ok('every counted net deck is a whole deck: 40 main, 12 runes, 3 battlefields, a legend', !short.length, short.map(({ n, f }) => `${n} (${f})`).join(', ') || 'all whole');
       const unexplained = ND.filter(({ g }) => g.status === 'early' && !g.misses.length);
       ok('an "early" net deck names what it misses', !unexplained.length, unexplained.map(({ n }) => n).join(', ') || 'all named');
-      const twice = Object.entries(I.netdecks).filter(([, x]) => ['now', 'last'].some((f) => { const s = (x[f] || []).flatMap((g) => g.members.map((m) => m.s)); return new Set(s).size !== s.length; }));
+      const twice = Object.entries(I.netdecks).filter(([, x]) => ['now', 'last'].some((f) => { const s = (x[f] || []).flatMap((g) => (g.members || []).map((m) => m.s)); return new Set(s).size !== s.length; }));
       ok('no finish is counted in two groups', !twice.length, twice.map(([n]) => n).join(', ') || 'none');
       const sneaky = ND.filter(({ g }) => !g.avoid.length && Object.keys(g.cards).some((k) => NEVER_PLAY.has(C(k)?.n)));
       ok('no group offered as playable runs a never-play card', !sneaky.length, sneaky.map(({ n, f }) => `${n} (${f})`).join(', ') || `${ND.filter(({ g }) => g.avoid.length).length} never-play groups kept for the field only`);
+      // The crowd's list is the fallback, never a rival: only where a format has no counted,
+      // playable net deck, and only from MIN_CROWD+ posted lists.
+      const crowdWrong = Object.entries(I.netdecks).flatMap(([n, x]) => ['now', 'last'].filter((f) => (x[f] || []).some((g) => g.status === 'crowd')
+        && ((x[f] || []).some((g) => g.status !== 'crowd' && g.count && !g.avoid.length) || (x[f] || []).some((g) => g.status === 'crowd' && g.lists < MIN_CROWD))).map((f) => `${n} (${f})`));
+      ok("a crowd's list appears only where there is no net deck, from 8+ posted lists", !crowdWrong.length,
+         crowdWrong.join(', ') || `${ND.filter(({ g }) => g.status === 'crowd').length} crowd lists`);
       const lateNow = ND.filter(({ f, g }) => f === 'last' && g.preview);
       ok("a preview event's lists are only ever this format's", !lateNow.length, lateNow.map(({ n }) => n).join(', ') || 'none');
       // The last format's groups cannot hold this format's cards (a claim names no event to
@@ -672,32 +659,6 @@ section('Archetypes');
        AR.legends.filter((l) => l.profile).every((l) => ['aggro', 'tempo', 'midrange', 'control', 'ramp', 'combo'].includes(l.label)));
     ok('every representative list is 40 cards', AR.legends.filter((l) => l.profile).every((l) => l.profile.units + l.profile.spells + l.profile.gear === 40),
        AR.legends.filter((l) => l.profile && l.profile.units + l.profile.spells + l.profile.gear !== 40).map((l) => l.name).join(', ') || 'all 40');
-  }
-}
-
-/* ══ research ════════════════════════════════════════════════════════════ */
-section('Research');
-{
-  let R = null, AR = null;
-  try { R = read('data/research.json'); AR = read('data/archetypes.json'); } catch { /* reported below */ }
-  const md = (() => { try { return readFileSync(join(ROOT, 'docs/research.md'), 'utf8'); } catch { return ''; } })();
-  if (!R) ok('research snapshot present', false, 'data/research.json missing — run build-research.mjs');
-  else {
-    ok('every legend has a research row', !AR || AR.legends.every((l) => R.legends[l.name]),
-       `${Object.keys(R.legends).length} legends · ${R.items.length} questions, ${R.answered} answered, ${R.open} open`);
-    // The rule the queue exists for: a skipped card with a question is never offered as an
-    // add until answered "test". A builder change that dropped the id would undo it silently.
-    const ids = new Set(R.items.map((i) => i.id));
-    const orphan = Object.entries(R.legends).flatMap(([n, l]) => Object.entries(l.cards || {}).filter(([, c]) => c.id && !ids.has(c.id)).map(([c]) => `${n}: ${c}`));
-    ok('every questioned card points at a question', !orphan.length, orphan.slice(0, 3).join('; ') || 'all linked');
-    // Answers are hand-written: each needs a verdict the site understands and a reason.
-    const secs = md.replace(/^```[\s\S]*?^```/gm, '').split(/^### /m).slice(1).map((x) => ({ id: x.split('\n')[0].trim(), v: (x.match(/^\*\*Verdict:\*\*\s*(\w+)/m) || [])[1], a: /^\*\*Answer:\*\*\s*\S/m.test(x) }));
-    const bad = secs.filter((x) => !['skip', 'test', 'model'].includes(x.v) || !x.a);
-    ok('every answer in docs/research.md has a verdict (skip/test/model) and an answer', !bad.length,
-       bad.map((x) => x.id).join(', ') || `${secs.length} answers`);
-    // A stale answer is not a lie — its question went away as the data moved — so it is
-    // reported, not failed: re-read it before deleting.
-    console.log(`  info ${R.stale.length ? `stale answers (question no longer asked): ${R.stale.join(', ')}` : 'no stale answers'}`);
   }
 }
 

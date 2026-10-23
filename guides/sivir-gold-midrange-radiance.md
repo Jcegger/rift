@@ -5,6 +5,8 @@ author: rift toolchain
 date: 2026-10-21
 ---
 
+> *Retired 23 Oct 2026:* the build file (`builds/sivir-gold-midrange-radiance.json`) and `scripts/sim-gold.mjs` behind this guide were swept with the brews, and are in git history. Its counts were taken from lists missing every alt-art card. Sivir has no Radiance net deck or crowd's list yet (5 posted Radiance lists); check its idea page before playing from this.
+
 **Untested; the test deck, redone 21 Oct.** A reasoned brew, not a net-deck: Sivir has one legal placed list since the bans, and no Radiance results yet. The source of truth is `builds/sivir-gold-midrange-radiance.json` (also on the site under Find a deck → Sivir). This page is a reading copy of it.
 
 A midrange Sivir for Radiance, redone around riftbound.gg's read of the set ("10 Most Buffed Legends with Radiance", Den, 20 Oct). Sivir's Gold pays the Power cost of hiding, so the Chaos Hidden package — **Momentary Companion** first, "a 4/4 for just recycling a rune" — joins the Fizz and Matriarch value core. **Ziggs, Explosive** turns gear into defence. And the gear that "gear removal everywhere" punished is gone. It still starts from the only legal Sivir result, Randyyy's 146th of 2,165 at the Los Angeles RQ. In the Gold simulation it keeps every number the previous list had and adds 1.3–2.7 Might a game for free.

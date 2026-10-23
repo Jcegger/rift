@@ -33,9 +33,6 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   and trade matching. Tests: `lib/collection.test.mjs`.
 - `lib/markdown.mjs` - the guide renderer the site uses, with heading anchors.
 - `lib/sim.mjs` - the goldfish simulator's engine, shared by `scripts/sim.mjs` and the site.
-- `scripts/sim-gold.mjs` - a Gold-aware goldfish for Sivir, Battle Mistress (runes recycled for Power,
-  the legend's Gold, Hidden's one-per-battlefield slot, Black Market, Sivir's threshold): the numbers
-  behind `builds/sivir-gold-midrange-radiance.json`, which `lib/sim.mjs` can't see.
   `lib/sim-worker.mjs` runs it in a Web Worker for the tweak bench.
 - `data/cards.json` - the card catalog, generated and committed. Loaded at boot.
 - `data/extras.json` - printings Riot does not publish, merged in at load. The one
@@ -59,25 +56,11 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   interaction, goldfish speed, engines, signature package, and a fixed-threshold style label.
 - `data/synergy.json` - which cards are played together more than chance, and each card's
   home legends, counted from the deck snapshot.
-- `data/research.json` - per legend, what the model reads its deck as (engines, signature
-  cards it can't explain) and the research questions: long-legal cards that fit its engine
-  by text, that its winning lists skip. Answers come from `docs/research.md`.
-- `data/brews.json` - for every legend, the net-deck plus experiments (`lib/brew.mjs`): its
-  winners' consensus (or, before results, its crowd's), with only labelled experiments
-  applied — a new card doing a job for less, a card rising in posted lists, a research
-  "test" answer — and what other lists play instead as `options`, not applied. Each change
-  says why; `worth` marks the ones that add something. Untested. `scripts/rift brew <legend>`
-  prints one; idea pages show it; the bench can start from it.
-- `scripts/rift tune <your deck>` - the swap logic run on one of your saved decks (read
-  only): what its legend's winners (or crowd) run that you do not, with the reasons and this
-  week's trend for each card; the cards it keeps (80%+ of the lists), the ones yours alone,
-  the ones it cannot judge; a note when a suggested cut feeds your deck's own engine; and a
-  goldfish of yours against the consensus.
 - `data/rising.json` - per legend, each card's share of its posted lists in the last 7 days
-  against the 14 before — what the crowd is taking up and dropping, which tracks winners
-  closely and moves first — and the scoreboard for the brews' suggestions.
-  `scripts/rift rising [legend]`; idea pages show "Moving this week"; `scripts/rift tune`
-  shows the trend beside each suggestion.
+  against the 14 before, by posting date — what the crowd is taking up and dropping. It
+  records the days each window actually holds (`window.coverage`: no posted list was
+  captured for 12–16 Oct 2026) and each legend's list counts, since 5 lists per window is
+  the bar. `scripts/rift rising [legend]`; idea pages show "Moving in posted lists".
 - `data/field.json` - the field forecast (`scripts/build-field.mjs`, `lib/field.mjs`): for every
   legend, how good it is NOW and who plays it in the new format — counts and quotes, never one
   score, refreshed daily. TIER is the median of the experts' published grades
@@ -140,20 +123,13 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   from the captions, plus the one preview event's published top 32 — kept to grade them on
   Barcelona, Vendetta's first RQ. A placement shown on screen but never said is null.
   Hand-written.
-- `data/swaplog.json` - every swap a brew has suggested, from the day it first appeared,
-  scored 28 days later against the legend's **good placings** (`lib/placing.mjs`), not its
-  posted lists: adopted = the card in gained 10+ points in them against the 28 days before;
-  left unscored when either window has under 10 good placings, since that is noise. By kind —
-  so RISING, the riskiest, is judged on its own, and no longer grades itself, being read from
-  posted lists and scored on results. History: never rebuilt, only added to (started 20 Oct
-  2026; scored on good placings from 21 Oct).
-- `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
-  Radiance-format events, a consensus list counted from its placed lists (or brews,
-  labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
-  `netdecks` holds every legend with a good finish (`lib/netdeck.mjs`): this format's net
-  decks and the last format's, Riot's Top 8 and Best Of lists included. The idea page, the
-  bench, "Against the net deck" on a deck page and `scripts/rift ideas` read these; the older
-  `consensus` (every Radiance-format finish, good or not) stays for the archetypes and checks.
+- `data/ideas.json` - per legend: its Radiance-format record (finishes, top 8s, posted lists,
+  what changed in its good finishes against the last format's, and every Radiance-format
+  list), and `netdecks` (`lib/netdeck.mjs`) for every legend with a list: this format's net
+  decks and the last format's from good finishes, Riot's Top 8 and Best Of lists included,
+  and the crowd's list from posted lists where a format has none. The idea page, the bench,
+  "Against the net deck" on a deck page and `scripts/rift ideas` read these. The one-blend
+  consensus and Claude's hand-written builds were retired on 23 Oct 2026.
 - `scripts/build-catalog.mjs` - regenerates the catalog from Riot's gallery feed.
 - `scripts/build-decks.mjs` - regenerates the deck snapshot, holding placeholder lists apart
   (`isPlaceholder`; `check.mjs` asserts none is left among the decks).
@@ -167,15 +143,7 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `scripts/build-guides.mjs` - regenerates the guide manifest. Fetches nothing.
 - `scripts/build-synergy.mjs` - counts which cards are played together. Fetches nothing.
 - `scripts/build-archetypes.mjs` - measures each legend's archetype. Fetches nothing.
-- `scripts/build-research.mjs` - queues what each legend's winners skip as questions, with
-  the evidence that usually explains it. Fetches nothing. See `docs/research.md`.
-- `scripts/build-brews.mjs` - builds `data/brews.json`. Fetches nothing; runs after
-  build-research. `makeBrewer()` holds its inputs — anchor lists (Radiance-format good
-  placings when there are 10+, else all good placings, Riot's Top 8 and Best Of lists from
-  `data/topdecks.json` among them), per-legend card shares, quality — and can HIDE a
-  legend's lists from all of them, which is how `lib/blind.test.mjs` builds blind.
-- `scripts/build-rising.mjs` - builds `data/rising.json` and adds to `data/swaplog.json`.
-  Fetches nothing; runs after build-brews.
+- `scripts/build-rising.mjs` - builds `data/rising.json`. Fetches nothing.
 - `scripts/build-field.mjs` - builds `data/field.json` from Rift Atlas event pages (riftatlas.com,
   data from TopDeck.gg: metagame with win rates, top 32 with legends; robots allows the pages),
   riftbound.gg's single-tournament standings (`gettournament`, each player's legend, usually the
@@ -221,8 +189,7 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `lib/preseason.mjs` - the model's maths, one scale (ln observed/expected), every constant
   with its reason; a starting guess to be recalibrated from the scorecard. Tests:
   `lib/preseason.test.mjs`.
-- `lib/placing.mjs` - what a good placement is, shared by the brews' anchor and the
-  scoreboard: a verified finish in the top 25% of its field or a top 8 of 32+ players; with
+- `lib/placing.mjs` - what a good placement is: a verified finish in the top 25% of its field or a top 8 of 32+ players; with
   no field size, a top 8; a claim, top 8 or better (still a claim). Any recorded finish was
   the old test, and 37% of those were bottom-half — Zed's "first results" were 144th of 206,
   47th, and two claimed top-512s. `riotRows()` turns Riot's Top Decks articles into snapshot
@@ -232,47 +199,17 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   once: deck sites' "copy" button reposts a list under its author's title, and on 23 Oct 2026
   127 of 656 good placings were reposts of a claimed finish (Azir's "Top 4 Barcelona RQ"
   eight times). `finishesMaker()` wraps it with the good-placing cut and drops a claim
-  titled for another champion: `goodFinishes()` is what the net decks, brews, rising
-  scoreboard, archetypes and research count. The preseason model keeps every recorded finish
+  titled for another champion: `goodFinishes()` is what the net decks and archetype
+  profiles count. The preseason model keeps every recorded finish
   at sized events, which it needs to measure a legend against the whole field.
   Tests: `lib/placing.test.mjs`.
-- `lib/avoid.mjs` - decks Jay never plays: anything running Dazzling Aurora. A brew running
-  it is kept (for the field) but never offered — `worth` false, and `scripts/rift brew` says
-  why; a swap never brings it in; `scripts/rift tune` notes it in your own deck. Matchup and
-  meta views are untouched: these are still opponents.
-- `lib/brew.mjs` - one brew, by `docs/deckbuilding.md`, anchored on the best evidence a
-  legend has: its winners' consensus (10+ good placings); before that, its CROWD — every posted
-  list, its first placings weighted 10× — since a legend's posted lists share 33 of 40 cards
-  with its eventual winners' and the first results steer them where pros found something
-  the crowd had not (Yasuo's Spiderlings); only with under 8 lists, COLOURS (its colours'
-  winners' cards plus its own package). Then the swaps. Tests: `lib/brew.test.mjs`, and
-  `lib/blind.test.mjs` — hide a legend's placings and score what is built against its
-  winners: crowd 33.1 of 40 (ceiling 36.2), built blind from colours 19.6, the colours' most
-  popular cards 17.6; porting one same-colour legend's list, the first design, 14.2.
-- `lib/swaps.mjs` - the changes to a winning list, each with a reason: another winner's
-  choice for the same job or the same slot (type, within one Energy; 15% of the legend's
-  lists and at least two of them), split the way winners split slots (2 + 1); a research
-  answer of "test"; or a new-set card that does the same job for less (at most two — a set's
-  first wave is small). A replacement must be as fast as what it replaces (Reaction, Action,
-  turn). RISING: a card up 15+ points in the legend's posted lists this week (data/rising.json),
-  in 20%+ of them and gaining on the card it replaces — the crowd moves first — at most two,
-  the riskiest kind; and a winners' alternative the crowd is dropping fast is not offered.
-  About 9 copies at most — winners stray a median 6; the brews change about 5, with more
-  offered beside them. Never
-  touches the legend's own cards, its engine payoffs, its heading's plan cards, or a core
-  card (80%+): a strong case against one is offered as "also worth trying", with anything
-  past the budget or cap. A card the role reader cannot read is protected where winners rely
-  on it. Backtested against the Radiance previews in `lib/swaps.test.mjs`: new-card swaps
-  adopted 3 of 7 times (43%) vs 3.9% for a random Radiance card.
-- `lib/roles.mjs` - the job a card does (early body, threat, card advantage, removal, area
-  damage, counter, trick, protection, disruption, ramp, movement), sized from its text, and a
-  rough value net of Energy and Power (Power weighs more). `understood()` says whether the
-  roles account for the card's text; when they do not, nothing can be said to outdo it.
+- `lib/avoid.mjs` - decks Jay never plays: anything running Dazzling Aurora. Net decks and
+  crowd lists that run it are partitioned off and kept for the field — no Copy or Tweak, on the
+  page or in the bench — and a raw list running it loses its buttons too. Matchup and meta
+  views are untouched: these are still opponents.
 - `lib/kits.mjs` - the nine Radiance Pre-Rift champion packs, card by card (hand-written:
   Riot hasn't published them; sources in the file). `scripts/rift intake <champion>` checks a
   scanned kit against it; `guides/radiance-pre-rift.md` §5a has the same lists with card text.
-- `lib/research.mjs` - reads `data/research.json` for the site and `scripts/rift`: a card
-  the winners skip is held back from suggestions until its question is answered "test".
 - `lib/consensus.mjs` - counting a set of lists into the list they add up to; shared by
   `build-ideas.mjs`, `build-archetypes.mjs` and `lib/netdeck.mjs`.
 - `lib/netdeck.mjs` - a legend's net decks: its good finishes (`lib/placing.mjs`
@@ -284,7 +221,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   measurement: `lib/netdeck.test.mjs` — leave-one-out over the 16 legends with 8+ distinct
   good finishes, against the same lists dealt into random groups. The split is real but
   small (0.7 of 40 over random), and only four legends split: Kennen, Master Yi, Viktor and
-  Fiora. See `docs/deckbuilding.md`, "Net decks".
+  Fiora. Where a format has no counted net deck, `crowdDecks()` counts the legend's posted lists
+  the same way (8+ per group), labelled the crowd's list: they share 36.1 of 40 cards with
+  winners' lists where both exist, 34.8 leaving out copies — measured in the same test, which
+  replaced the brews' blind test. See `docs/deckbuilding.md`, "Net decks".
 - `lib/infer.mjs` - a legend's archetype inferred from its cards alone, in the order a deck is
   built: legend ability and cost, chosen champion, signature, colour pair, then the cards that
   should (winners' core) or can be in it. Votes a main archetype (aggro, tempo, midrange,
@@ -292,14 +232,13 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   with each layer's evidence. Written into `data/archetypes.json` as `inferred`; shown on the
   site and by `scripts/rift ideas`. Good at sub-archetype, weak at main — guides and the
   hand-written heading outrank it. Tests: `lib/infer.test.mjs`.
-- `lib/engines.mjs` - engines read off card text (payoffs and what triggers them), for
-  cards with no lists yet. Tests: `lib/engines.test.mjs`, including the answer key that scores
-  every legend's main engine against `docs/archetypes.md`.
-- `scripts/build-ideas.mjs` - counts the Radiance-era deck ideas from the deck snapshot and
-  checks the builds in `builds/`. Fetches nothing. See "Deck ideas" below.
-- `builds/` - Claude's own builds, one hand-written JSON file each: the list (taken from a
-  placed list), what changed and why, the plan, matchup notes, a goldfish summary. Refused by
-  `build-ideas.mjs` if it breaks a deck rule.
+- `lib/engines.mjs` - engines read off card text (payoffs and what triggers them), which
+  `lib/infer.mjs` reads a legend's archetype from, and `docEngineLine`/`docEngineKeys`, which
+  read each legend's Engine line in `docs/archetypes.md`. Tests: `lib/engines.test.mjs`,
+  including the answer key that scores every legend's main engine against that doc. (Its
+  "could add" suggestions on the idea page and bench were retired on 23 Oct 2026.)
+- `scripts/build-ideas.mjs` - counts each legend's net decks and Radiance-format record from
+  the deck snapshot. Fetches nothing. See "Deck ideas" below.
 - `scripts/build-guide` - turns one guide into a Word doc with pandoc. No 's'. With
   `--pdf` it builds an e-ink PDF instead (pandoc + weasyprint), page-sized for a
   reMarkable 2 and styled by `guides/eink.css`; any Markdown path works, so the `docs/`
@@ -329,8 +268,6 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `docs/deckbuilding.md` - how winning lists are actually built, measured from the placed
   lists: copies, core vs flex, how far winners stray from their consensus, how new cards get
   in (by role), and what the beginner guides get wrong. The basis for suggesting decks.
-- `docs/research.md` - how the research queue works, and the hand-written answers to its
-  questions (verdict skip, test or model). `check.mjs` checks their shape.
 - `docs/strategy.md` - how to choose between two legal lines: the lethal check, roles,
   reading the opponent, pressure, and reviewing a game. Distilled from Mateo Ferreira's
   *The Mathematics of Winning Positions* and applied to Kha'Zix. On the Guides shelf.
@@ -1511,66 +1448,45 @@ Challenger #5, 50 players; every October Vendetta event has none). Every placed 
 those events counts, whichever legend. **Both are unsanctioned online events played before
 Radiance was legal (2026-10-23)** — real games on platforms that had the set early, not the
 format's results. `build-ideas.mjs` marks every event dated before release `preRelease`, and
-while all of them are, the site says so on the table, every idea page and the builds. A **brew** is an unplaced list with a Radiance card
-since 2026-10-09, used only for a legend with fewer than 3 placed lists and always labelled.
+while all of them are, the site says so on the table and every idea page. A **posted** list
+here is an unplaced one with a Radiance card since 2026-10-09: what is being tried.
 
-The **consensus** is counted, not chosen: each card at the number of copies most lists run,
-highest share first, to 40; runes by average count to 12; the three most-run battlefields.
-Beside it, how many lists sit within 70% of it — a legend can run two different decks (Kennen
-at Haven: an Order Illaoi build won, most lists were Chaos), and a consensus blends them; a
-low agreement says so on the page. **Since Vendetta** compares the same legend's placed lists
-from the 60 days before. No sideboards: the deck feed carries none.
+**Net decks** (`lib/netdeck.mjs`) are what an idea page leads with. A legend's good finishes
+(top 25% of the field or a top 8 of 32+, once per finish — reposts of a claimed result count
+once), this format's and the last one's apart, Aurora lists partitioned off for the field,
+split where lists are more than half a deck apart, and each group counted: each card at the
+copies most of its lists run, highest share first, to 40. A **net** deck has 3+ finishes from
+2+ events, 2+ of them recorded, and lists within 9 copies of the count; one that misses a bar
+is **early**, with the miss named; under 3 finishes it is the best list as played. Where a
+format has none, the **crowd's list** counts the legend's posted lists the same way, labelled
+as what people post, not what wins. **Since Vendetta** compares the share of good finishes
+playing each card, this format against the last. No sideboards: the deck feed carries none.
 
 On the site: **Find a deck** opens on the Radiance-era table; each legend has an idea page
-(consensus, flex, what changed, the lists, any Claude build, copy-to-my-decks); each of your
-decks gets a **Radiance update** panel against its legend's consensus. `scripts/rift ideas
-[legend]` prints the same, plus your saved deck's differences.
+(net decks or the crowd's list, what changed, the game plan, what is moving in posted lists,
+every Radiance-format list, copy-to-my-decks); each of your decks gets an **Against the net
+deck** panel against its nearest one. `scripts/rift ideas [legend]` prints the same, plus your
+saved deck's differences.
 
-**Tweak bench** (`#/bench/<legend>`): start from the consensus, a Claude build, any shown
-list or one of your decks; − / + any card, add what the field plays that the list doesn't, or
-search the legend's domains. Live: the deck's rule checks, each card's share of the lists,
-agreement with the consensus, and the goldfish curve (1,500 games in a worker, base vs now).
+**Tweak bench** (`#/bench/<legend>`): start from a net deck, a crowd's list, any shown list or
+one of your decks; − / + any card, add what the field plays that the list doesn't, or search
+the legend's domains. Live: the deck's rule checks, each card's share of the lists, agreement
+with the nearest net deck, and the goldfish curve (1,500 games in a worker, base vs now).
 Save writes it to your decks; it will not save a list that breaks a rule.
 
-**Combos, two ways.** *Counted*: `scripts/build-synergy.mjs` → `data/synergy.json` finds
-cards played together far more than chance — measured against the lists that could play
-both, so shared colours don't count — and each card's home legends (Stellacorn Herder: 98% of
-Irelia lists, ×4 its rate). Shown in every card's dialog and as "goes with what's in this
-list" on the bench. *Read*: `lib/engines.mjs` tags each card's text as a **payoff** ("when I
-move, draw 1") or an **enabler** (Irelia's "ready it", Ganking, "move a friendly unit") of an
-engine — movement, exhaust triggers, buffs, plays from elsewhere, the top of the deck, the
-trash, tokens, deaths, discards, facedown, spells, gear, winning fights (Assault, pumps,
-"when you win a combat"), Mighty, Empower, Legion, XP and stuns. A list *touches* an engine
-when it holds payoffs for it, but only a **loop** is the deck's engine: the legend in it, or
-four copies each of a payoff and a different card feeding it. A deck with no loop — a curve,
-removal or ramp — reads as "no engine", and its stray patterns are shown as incidental;
-research questions come only from loops. A legend is often a **converter** (Kha'Zix turns won
-fights into XP into walking home; Kennen turns plays from elsewhere into Assault), so among
-the loops it is in, the one the rest of the list *pays off* wins: a payoff is dead without
-its engine, so running one is a choice, while most feeders are good cards anyway. Then the
-legend's own signature and champion cards, read by their text. The idea page and bench list
-the legal cards that would feed an engine, Radiance cards nobody has tried first, each with
-the sentence that matched. **The answer key is `docs/archetypes.md`**: every legend has an
-`- **Engine:**` line, hand-written from its plan (`none` for no loop). The test scores the
-reader against it, with a short named list of known misses (49 of 54 legends, 1,093 of 1,124
-placed lists read right), and the research build raises a question wherever the two disagree.
-Either side can be wrong — Kha'Zix's line was right and the reader was not, which Jun's guide
-settled. The first is evidence; the second is a reading by
-pattern — it can't see timing, targets or whether two cards truly combo — and says so.
+**Combos.** `scripts/build-synergy.mjs` → `data/synergy.json` finds cards played together far
+more than chance — measured against the lists that could play both, so shared colours don't
+count — and each card's home legends (Stellacorn Herder: 98% of Irelia lists, ×4 its rate).
+Shown in every card's dialog and as "goes with what's in this list" on the bench.
 
-**Builds that keep up.** Each build file carries a `snapshot` of the field it was written
-against (events, placed lists, card shares). The daily build compares that with today's: a
-new event, or a card whose share moved by 20 points or more, marks the build out of date on
-the site with what moved. That is a prompt for Claude to revise it, never an automatic edit.
-
-**Claude builds** (`builds/*.json`) start from a placed list and change it only with a
-reason drawn from the counts; the three of 2026-10-19 keep their source lists unchanged
-and list the options instead. Plans are read off card text; matchup notes say plainly
-where there is no Radiance-era evidence yet. A build with `"kind": "experiment"` is an
-**untested idea** instead: a proven list with its least-supported slots (by share across that
-legend's placed lists) spent on cards the engine finder and their text say feed the deck,
-shown with a dashed border and never mistaken for evidence. Experiments carry `baseCards` so
-the goldfish line compares the idea with the list it came from.
+**Retired on 23 Oct 2026**, after the deck snapshot turned out to have been missing every
+alt-art card and counting reposts as results: the brews (`lib/brew.mjs`, `lib/swaps.mjs`,
+`lib/roles.mjs` — a winning list changed by reasoned swaps, whose backtest found 2 of the 11
+cards pros adopted on clean data), their swap scoreboard, the research queue
+(`build-research.mjs`, `docs/research.md`), the engine reader's "could add" suggestions, the
+one-blend consensus, and Claude's hand-written builds (`builds/`, written against the old
+counts). They are in git history. What survived the re-measurement — net decks, the crowd's
+list, rising cards, the archetype game plans and the meta — is above.
 
 ## Simulator
 

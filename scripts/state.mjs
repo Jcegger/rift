@@ -42,8 +42,6 @@
 import { readFile } from "node:fs/promises";
 import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, SB_MAX } from "../lib/decks.mjs";
-import { deckEngines } from "../lib/engines.mjs";
-import { annotateEngines, VERDICTS } from "../lib/research.mjs";
 import { pathToFileURL } from "node:url";
 
 const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
@@ -765,16 +763,17 @@ async function cmdIdeas(cat, args) {
     const gs = N?.[f] || [], fmt = I.formats.now && I.formats[f].name;
     console.log(`\n${fmt.toUpperCase()} NET DECKS${f === "last" ? " (last format, still legal)" : ""}${gs.length ? "" : ": no good finish yet"}`);
     for (const g of gs) {
-      const tag = g.avoid.length ? `NOT FOR YOU — runs ${g.avoid.join(", ")} (lib/avoid.mjs); shown for the field` : { net: "NET DECK", early: "EARLY", single: "AS PLAYED" }[g.status];
+      const tag = g.avoid.length ? `NOT FOR YOU — runs ${g.avoid.join(", ")} (lib/avoid.mjs); shown for the field` : { net: "NET DECK", early: "EARLY", single: "AS PLAYED", crowd: "CROWD'S LIST — what people post, not what wins" }[g.status];
       console.log(`  ${tag}${g.preview ? " · online preview" : ""}${g.marks.length ? ` · with ${g.marks.join(" · ")}` : ""}`);
-      console.log(`    ${g.lists} finishes · ${g.events} events · ${g.records} recorded${g.claims ? `, ${g.claims} claimed` : ""} · best ${finish(g.best)}${g.best.ev ? ` at ${g.best.ev}` : ""} · latest ${g.through}`);
+      console.log(g.status === "crowd" ? `    ${g.lists} posted lists, ${g.copies} titled as copies · posted ${g.from} to ${g.through}`
+        : `    ${g.lists} finishes · ${g.events} events · ${g.records} recorded${g.claims ? `, ${g.claims} claimed` : ""} · best ${finish(g.best)}${g.best.ev ? ` at ${g.best.ev}` : ""} · latest ${g.through}`);
       for (const m of g.misses) if (g.status === "early") console.log(`    not a net deck yet: ${m}`);
       if (g.avoid.length) continue;
       if (g.count) {
         console.log(`    ${g.count.main.map((r) => `${r.copies} ${r.name} ${pct(r.inc).trim()}`).join(" · ")}`);
         console.log(`    runes: ${g.count.runes.map((r) => `${r.copies} ${r.name}`).join(", ")} · battlefields: ${g.count.battlefields.map((b) => b.name).join(", ")}`);
         if (g.count.flex.length) console.log(`    flex: ${g.count.flex.map((r) => `${r.name} ${pct(r.inc).trim()}`).join(" · ")}`);
-        console.log(`    closest real list: ${g.closest.h} (${finish(g.closest)}), ${g.closest.changed} copies off`);
+        console.log(`    closest real list: ${g.closest.h}${g.status === "crowd" ? "" : ` (${finish(g.closest)})`}, ${g.closest.changed} copies off`);
       } else console.log(`    ${g.best.h}`);
     }
   }
@@ -783,32 +782,10 @@ async function cmdIdeas(cat, args) {
   const c = lead?.count ? { ...lead.count, cards: lead.cards } : null;
   if (!c) return;
   if (l?.changes) {
-    console.log(`\nVS ${l.changes.vs} placed Vendetta lists since ${l.changes.since}`);
+    console.log(`\nSINCE ${I.formats.last.name.toUpperCase()} · share of good finishes, ${l.changes.now} ${I.formats.now.name} against ${l.changes.vs} ${I.formats.last.name}`);
     if (l.changes.added.length) console.log(`  in:  ${l.changes.added.map((r) => `${r.name} ${pct(r.before).trim()}→${pct(r.now).trim()}`).join(" · ")}`);
     if (l.changes.dropped.length) console.log(`  out: ${l.changes.dropped.map((r) => `${r.name} ${pct(r.before).trim()}→${pct(r.now).trim()}`).join(" · ")}`);
   } else if (l?.isNew) console.log("\nnew legend: no Vendetta lists to compare");
-  // Engines read off the leading net deck's card text, and what would feed them.
-  const fix = (m) => Object.fromEntries(Object.entries(m).map(([k, n]) => [cat.BY.has(k) ? k : (cat.cards.find((c) => c.c.replace(/\/\d+$/, "") === k.replace(/\/\d+$/, ""))?.c || k), n]));
-  // Cards the winners skip are questions, not suggestions (data/research.json).
-  const R = await readJson(url("research.json")).catch(() => null);
-  const EN = annotateEngines(deckEngines(fix(c.cards), cat.idx, { shares: l?.shares || {}, max: 40 }), R, lname).slice(0, 3);
-  if (EN.length && !EN[0].loop) console.log(`\nNO ENGINE: no loop of payoff and feeder in this list (a curve, removal or ramp deck). Incidental patterns:`);
-  for (const e of EN) {
-    console.log(`\n${e.loop ? "ENGINE" : "PATTERN"} ${e.name.toUpperCase()} · pays off: ${e.payoffs.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}${e.enablers.length ? ` · feeds it: ${e.enablers.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}` : ""}`);
-    for (const k of e.candidates.slice(0, 6)) console.log(`  could add ${pad(k.name, 28)} ${k.set === "RAD" ? "RAD" : "   "} ${pad(k.share != null ? `${Math.round(k.share * 100)}% play it` : "untried", 13)} "${k.text.slice(0, 80)}"`);
-    if (e.held.length) console.log(`  winners skip: ${e.held.map((k) => k.name).join(", ")}`);
-  }
-  const Q = (R?.items || []).filter((i) => i.legend === lname);
-  const RL = R?.legends?.[lname];
-  if (Q.length || RL?.unread?.length) {
-    console.log(`\nOPEN QUESTIONS (data/research.json; answers in docs/research.md)`);
-    for (const i of Q) {
-      console.log(`  [${i.verdict ? VERDICTS[i.verdict] : "open"}] ${i.title}${i.cards ? `\n      ${i.cards.map((x) => `${x.name} ${x.with}/${RL.placed}`).join(" · ")}` : ""}`);
-      if (i.answer) console.log(`      ${i.answer}`);
-      else for (const h of i.hypotheses) console.log(`      ? ${h}`);
-    }
-    if (RL?.unread?.length) console.log(`  signature cards no engine explains: ${RL.unread.join(", ")}`);
-  }
   try {
     const S = await loadState();
     const mine = (S.decks || []).filter((d) => Object.keys(d.cards || {}).some((k) => cat.BY.get(k)?.t === "Legend" && cat.idx.legendName(cat.BY.get(k)) === lname));
@@ -829,91 +806,14 @@ async function cmdIdeas(cat, args) {
   } catch { /* offline: the net decks stand on their own */ }
 }
 
-// A brew (data/brews.json, scripts/build-brews.mjs): a winning list changed on purpose —
-// its legend's consensus with reasoned role swaps, or a port of a proven list in its
-// colours. Read-only and offline, like meta: it never touches the live Supabase row.
-async function cmdBrew(args) {
-  const q = args.join(" ").toLowerCase();
-  const B = await readJson(url("brews.json")).catch(() => null);
-  if (!B) { console.error("no data/brews.json — run node scripts/build-brews.mjs"); process.exit(1); }
-  const hits = B.brews.filter((b) => b.legend.toLowerCase().includes(q));
-  if (!q || !hits.length) { console.log(`brews (${B.generatedAt}), ${B.brews.filter((b) => b.worth).length} worth a look: ${B.brews.filter((b) => b.worth).map((b) => `${b.legend.split(",")[0]}${b.kind === "colours" ? " (from colours)" : ""}`).join(", ")}\nscripts/rift brew <legend>`); return; }
-  for (const b of hits.slice(0, 2)) {
-    if (b.kind === "none") { console.log(`BREW ${b.legend}: none — ${b.why}`); continue; }
-    console.log(`BREW ${b.legend} (${b.kind}) · ${b.heading || ""} · ${b.basis}${b.legal ? "" : " · NOT LEGAL"}\n  ${B.note}`);
-    if (b.avoid?.length) console.log(`\n  NOT FOR YOU — runs ${b.avoid.join(", ")}: an Aurora deck, which you never play (lib/avoid.mjs).\n  Shown so you know what you face, never as a suggestion.`);
-    if (b.sim) console.log(`  goldfish: ${b.sim.energy} Energy over turns 1–4, ${b.sim.units3} units by turn 3${b.runeNote ? ` · ${b.runeNote}` : ""}`);
-    const built = b.rows.filter((r) => r.change === "built" || r.change === "champion");
-    if (built.length) { console.log(`\n  BUILT FROM ITS COLOURS AND ITS OWN CARDS`); for (const r of built) console.log(`    ${r.qty} ${pad(r.name, 30)} ${r.why}`); }
-    // The net-deck is the consensus; only experiments change it. Options are shown, not applied.
-    if (b.swaps.length) { console.log(`\n  EXPERIMENTS — applied to the net-deck (${b.swaps.reduce((a, s) => a + s.copies, 0)} copies)`); for (const s of b.swaps) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}\n            ${s.why}`); }
-    else if (b.kind === "anchor") console.log("\n  No experiment: the net-deck stands as it is.");
-    if (b.more?.length) { console.log("\n  MORE EXPERIMENTS (past the caps)"); for (const s of b.more) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}\n            ${s.why}`); }
-    if (b.options?.length) { console.log("\n  OPTIONS — what other lists play instead (not applied: variation, not improvement)"); for (const s of b.options.slice(0, 8)) console.log(`    ${s.copies} ${s.out} → ${s.in}: ${s.why}`); }
-    console.log(`\n  THE 40\n    ${b.rows.map((r) => `${r.qty} ${r.name}${r.change ? "*" : ""}`).join(", ")}\n    (* changed)`);
-  }
-}
-
-// tune: the swap logic (lib/swaps.mjs) run on one of YOUR decks, with its legend's evidence —
-// winners' lists, or the crowd's before results — as what "other winners run" means. Your
-// deck is read, never written. Each suggestion carries its reason, and, once data/rising.json
-// has a trend for the card, whether the field is moving toward it.
-async function cmdTune(S, args) {
-  const needle = args.join(" ").trim();
-  const ds = findDecks(S, needle);
-  if (!needle || ds.length !== 1) { console.log(ds.length ? `name one deck: ${ds.map((d) => d.name).join(" · ")}` : `no deck matching "${needle}"`); return; }
-  const deck = ds[0];
-  const { makeBrewer } = await import("./build-brews.mjs");
-  const { suggestSwaps } = await import("../lib/swaps.mjs");
-  const { avoidedIn } = await import("../lib/avoid.mjs");
-  const { understood } = await import("../lib/roles.mjs");
-  const { engineTags } = await import("../lib/engines.mjs");
-  const { buildDeck, simulate } = await import("../lib/sim.mjs");
-  const [cards, extras, banned, snap, R, rising, topdecks] = await Promise.all(["cards.json", "extras.json", "banned.json", "decks.json", "research.json", "rising.json", "topdecks.json"].map((f) => readJson(url(f)).catch(() => null)));
-  const md = await readFile(new URL("../docs/archetypes.md", import.meta.url), "utf8").catch(() => "");
-  const m = makeBrewer({ cat: cards, extras, banned, snap, topdecks, R, md });
-  const { idx, card } = m;
-  const L = Object.keys(deck.cards).map(card).find((c) => c?.t === "Legend");
-  if (!L) { console.log(`${deck.name}: no legend in the catalog for this deck`); return; }
-  const name = idx.legendName(L), ev = m.anchorLists(name);
-  if (!ev) { console.log(`${deck.name}: no lists for ${name} to tune against yet`); return; }
-  const own = m.shareMap(ev.ds, 1);
-  const byName = new Map();
-  for (const [k, q] of Object.entries(deck.cards)) { const c = card(k); if (c && ["Unit", "Spell", "Gear"].includes(c.t)) { const r = byName.get(c.n) || { c, copies: 0, inc: own.get(c.n) || 0 }; r.copies += q; byName.set(c.n, r); } }
-  const rows = [...byName.values()];
-  const swaps = suggestSwaps(rows, { idx, legend: L, pool: m.poolOf(L), quality: m.quality, own, ownLists: ev.ds.length, ownLabel: ev.basis === "placed" ? "winning lists" : "posted lists", isNew: m.isNew, research: R, engine: m.engineOf(name), trend: rising?.legends?.[name]?.cards || null });
-  const label = ev.basis === "placed" ? `${ev.ds.length} good ${name.split(",")[0]} placings${ev.era ? " from Radiance-format events" : ""}` : ev.basis === "crowd+results" ? `${ev.lists} posted ${name.split(",")[0]} lists, steered by its ${ev.placed} good placing${ev.placed === 1 ? "" : "s"} (too few to anchor on alone)` : `${ev.lists} posted ${name.split(",")[0]} lists (no good placings yet: the crowd)`;
-  const trend = (n) => { const t = rising?.legends?.[name]?.cards?.[n]; return t ? ` [field: ${t.now}% now, ${t.delta >= 0 ? "+" : ""}${t.delta} pts]` : ""; };
-  console.log(`TUNE "${deck.name}" (${name}) against ${label}\n  Read only — nothing is changed in your decks. Untested: the journal decides.`);
-  const avoid = avoidedIn(rows.map((r) => r.c.n));
-  if (avoid.length) console.log(`\n  NOTE — this deck runs ${avoid.join(", ")}: an Aurora deck, which you said you never play (lib/avoid.mjs).`);
-  const core = rows.filter((r) => r.inc >= 0.8).map((r) => r.c.n), unread = rows.filter((r) => !understood(r.c) && r.inc < 0.8).map((r) => r.c.n);
-  const lonely = rows.filter((r) => r.inc === 0).map((r) => `${r.copies} ${r.c.n}`);
-  if (core.length) console.log(`\n  KEPT — in 80%+ of those lists: ${core.join(", ")}`);
-  if (lonely.length) console.log(`  YOURS ALONE — in none of them: ${lonely.join(", ")}`);
-  if (unread.length) console.log(`  NOT JUDGED — the role reader cannot read what these do, so only what other lists actually run replaces them, never a card that merely "outvalues" them: ${unread.join(", ")}`);
-  // A card yours alone that feeds the deck's own engine is probably a choice, not an
-  // oversight: say so beside any suggestion to cut it.
-  const keys = new Set(m.engineOf(name));
-  const feeds = (n) => { const c = byName.get(n)?.c; const e = c && engineTags(c).find((t) => keys.has(t.engine)); return e ? `\n            note: ${n} feeds the deck's ${e.engine} engine (${e.role}) — cutting it trades your plan for the field's` : ""; };
-  if (swaps.length) { console.log(`\n  SWAPS (${swaps.reduce((a, s) => a + s.copies, 0)} copies)`); for (const s of swaps) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out}${trend(s.out)} → ${s.in}${trend(s.in)}\n            ${s.why}${feeds(s.out)}`); }
-  else console.log("\n  No swap has a reason: your list already plays what the evidence does, or changes only what it cannot judge.");
-  if (swaps.more?.length) { console.log("\n  ALSO WORTH TRYING"); for (const s of swaps.more) console.log(`    ${pad(s.kind, 7)} out ${s.copies} ${s.out} → ${s.in}${trend(s.in)}\n            ${s.why}${feeds(s.out)}`); }
-  // Goldfish: yours against the evidence's consensus.
-  try {
-    const con = m.consensus(ev.ds), cs = Object.fromEntries(Object.entries(con.cards));
-    const sim = (c) => { const r = simulate(buildDeck(c, { BY: idx.BY }), { games: 4000, seed: 1 }); return `${Math.round(r.play.spent.slice(0, 4).reduce((a, b) => a + b, 0) * 10) / 10} Energy turns 1–4, ${Math.round(r.play.units[2] * 10) / 10} units by turn 3, stuck on turn 3 ${Math.round(r.play.stuck[2] * 100)}%`; };
-    console.log(`\n  GOLDFISH  yours: ${sim(deck.cards)}\n            the consensus: ${sim(cs)}`);
-  } catch { /* a list the sim cannot read */ }
-}
-
 // rising: which cards each legend's posted lists are taking up or dropping (data/rising.json),
-// and the scoreboard for the brews' suggestions (data/swaplog.json). Offline, read-only.
+// with the days each window really holds. Offline, read-only.
 async function cmdRising(args) {
   const q = args.join(" ").toLowerCase();
   const Rz = await readJson(url("rising.json")).catch(() => null);
   if (!Rz) { console.error("no data/rising.json — run node scripts/build-rising.mjs"); process.exit(1); }
-  console.log(`RISING · ${Rz.window.recent.join("–")} against ${Rz.window.prior.join("–")} · posted lists, placed or not\n  ${Rz.note}`);
+  const cov = Rz.window.coverage, held = (c) => (c && c.days < c.of ? ` (lists on ${c.days} of ${c.of} days; none captured ${c.missing.join(", ")})` : "");
+  console.log(`RISING · ${Rz.window.recent.join("–")}${held(cov?.recent)} against ${Rz.window.prior.join("–")}${held(cov?.prior)} · posted lists, by posting date\n  ${Rz.note}`);
   const rows = Object.entries(Rz.legends).filter(([n]) => !q || n.toLowerCase().includes(q)).sort((a, b) => b[1].lists.now - a[1].lists.now);
   for (const [n, v] of rows.slice(0, q ? 3 : 15)) {
     console.log(`\n${n} · ${v.lists.now} lists this week, ${v.lists.before} before`);
@@ -921,9 +821,7 @@ async function cmdRising(args) {
     if (v.falling.length) console.log(`  down: ${v.falling.map((r) => `${r.name}${r.rad ? "*" : ""} ${r.before}→${r.now}%`).join(" · ")}`);
   }
   if (!rows.length) console.log(q ? `\nno trend for "${q}" (needs 5+ lists in each window)` : "");
-  const b = Rz.scoreboard;
-  const settle = b.settle ?? 28, minGood = b.minGood ?? 10;
-  console.log(`\nSCOREBOARD — the brews' suggestions, scored ${settle} days after they first appear, against good placings (lib/placing.mjs): adopted = the card gained 10+ points in them\n  ${b.logged} logged, ${b.scored} scored${b.scored ? ": " + Object.entries(b.kinds).filter(([, x]) => x.n).map(([k, x]) => `${k} ${x.adopted}/${x.n}`).join(" · ") : ` so far — the first are scored ${settle} days after logging`}${b.thin ? ` · ${b.thin} settled with under ${minGood} good placings either side, so not scored` : ""}\n  (* = Radiance)`);
+  console.log("\n  (* = Radiance)");
 }
 
 // poll: the preseason model (data/preseason.json, lib/preseason.mjs) — every legend's builds
@@ -1153,7 +1051,6 @@ function cmdIntake(S, cat, args) {
 
 async function main() {
   const [cmd = "summary", ...args] = process.argv.slice(2);
-  if (cmd === "brew" || cmd === "brews") return cmdBrew(args);
   if (cmd === "rising") return cmdRising(args);
   if (cmd === "poll") return cmdPoll(args);
   if (cmd === "field") return cmdField(args);
@@ -1177,7 +1074,6 @@ async function main() {
     raw: () => console.log(JSON.stringify(S, null, 2)),
     piltover: () => cmdPiltover(S, cat),
     journal: () => cmdJournal(S, args),
-    tune: () => cmdTune(S, args),
     intake: () => cmdIntake(S, cat, args),
   };
   const fn = table[cmd];

@@ -142,6 +142,8 @@ an unknown's — **as a tiebreak, not a verdict**; ten players is a small sample
 
 ## What was built from this
 
+> *Retired 23 Oct 2026:* everything in this section and the next — the brews, swaps, roles, blind test, backtest and scoreboard — was swept, and is in git history. On complete lists the swaps' backtest found 2 of the 11 cards pros adopted, below its own bar, and the brews' crowd anchor lives on as the crowd's list in the net decks ("Net decks", below). The sections are kept as the record of what was measured and why.
+
 `data/brews.json` (`scripts/build-brews.mjs`, `lib/brew.mjs`, `lib/swaps.mjs`,
 `lib/roles.mjs`) replaces the first, from-scratch brews: each is a legend's winning list
 changed on purpose, by the rules above — role swaps only, about 9 copies at most, one

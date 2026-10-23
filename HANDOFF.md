@@ -1,5 +1,7 @@
 # Handoff — 19 Oct 2026
 
+> *Retired 23 Oct 2026:* the research queue, the brews and the engine reader's suggestions described here were swept on 23 Oct 2026 (README, "Deck ideas"). The engine reader itself stays, as the archetype inference's base. This file is kept as the record of 19 Oct.
+
 You were right about Rek'Sai, and fixing it turned into the system you asked for.
 
 ## What was wrong

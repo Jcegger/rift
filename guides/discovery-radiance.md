@@ -5,6 +5,8 @@ author: rift toolchain
 date: 2026-10-19
 ---
 
+> *Retired 23 Oct 2026:* the research queue and `docs/research.md` this report leans on were swept with the brews (git history), and the counts behind its leads were taken from lists missing every alt-art card. Read the leads as ideas to re-check against the net decks, not as findings.
+
 **These are leads, not results.** Every lead below has been checked against what the
 winning lists *don't* play: a long-legal card that a legend's winners skip is a research
 question first (see lead 1 and [docs/research.md](../docs/research.md)), and only new cards,
