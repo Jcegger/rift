@@ -2,7 +2,7 @@
 title: Sivir for Nexus Night — deckbuilding worksheet
 subtitle: Sivir, Battle Mistress (Body/Chaos), Radiance. A 3-0 at a Nexus Night, rebuilt from the decklab Sivir Midrange list. Built together, step by step.
 started: 2026-10-23
-status: list complete 23 Oct 2026 (sections 1, 2, 4) · section 3 and the full guide next
+status: list complete 23 Oct 2026 (sections 1–4) · full guide written · section 5 logs games
 ---
 
 The second Sivir worksheet. The first, [sivir-midrange.md](sivir-midrange.md), is the base: its
@@ -370,6 +370,14 @@ Copy limits hold: Graves 2 + 1, Sabotage 1 + 1.
 
 ---
 
+## 3. Card by card — written into the guide (23 Oct 2026)
+
+Each card's job, rules and competitors are in step 2 above and in the guide's card-by-card
+section ([guides/sivir-nexus-night.md](../guides/sivir-nexus-night.md), §7), with the lines that
+use them (§8). Every rule cited there was checked against the verbatim rules.
+
+---
+
 ## 4. Full audit — 23 Oct 2026
 
 **The list audited.** Main (40): 3 Staunch Survivor, 3 Bedeviling Stranger, 2 Traveling Merchant,
@@ -469,6 +477,9 @@ test. Card by card (section 3) and the guide follow once Jay agrees.
 
 - **23 Oct 2026 — the list is complete and saved** to the Decks tab as `Sivir — Nexus Night
   (decklab, 23 Oct)`. A table guide is at [guides/sivir-nexus-night.md](../guides/sivir-nexus-night.md)
-  for the first night; section 3 (card by card) and the full guide follow. 12 cards to get, all
+  for the first night.
+- **23 Oct 2026 — the full guide replaces the table guide** at the same path (and on the
+  reMarkable): the clock, Evelynn and Bandle Tree play rules, card by card, ten lines that win,
+  the numbers, mulligans, and the store's matchups with sideboard plans. 12 cards to get, all
   Radiance plus Bandle Tree. First night: Sip & Play, 23 Oct. Log each match: opponent, result,
   and whether Evelynn's point landed, the early game held, and big units walked through.
