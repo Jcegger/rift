@@ -378,6 +378,16 @@ Games, results, and every change with its reason go here.
   Broker (Gold on each face-down play), Mask Mother (a +2 when discarded), Pack of Wonders
   (return a gear, unit or Hidden card to hand), Heedless Resurrection (Reaction-speed swap
   with the trash).
+- **Ziggs, Explosive — the first card to test if the list needs it** (re-read 23 Oct, after
+  the list was frozen). Benched earlier with a blanket line, which undersold him. 4 Energy, 4
+  Might; `[1]`, exhaust: play a Bomb gear token to a battlefield; when he defends, kill a friendly
+  gear for +2 Might. A Bomb has Deploy, so it can go to **their** held battlefield (§830.1.b.1),
+  and it dies when they hold there; its Deathknell then deals 2 to an enemy unit there (§187.12).
+  That is 1 Energy a turn for 2 damage at their hold, and each kill readies our legend. Gold is
+  gear too, so a spare Gold is +2 on defence. Costs: no Action, so our turn only; he must be ready
+  to use it; a 4-drop where Matriarch and Mercenary already sit. Best against small units
+  (Rengar, Rek'Sai, Kennen's early bodies). Try him if games show the deck can't break or punish
+  their holds; the first cut for him is the second Edge of Night.
 - **Draft lists so far** (chat, 23 Oct): v3 is Randyyy's list with Staunch Survivor,
   Bedeviling Stranger, Graves and Ride the Wind in, 5 Body / 7 Chaos runes. Written before
   the recursion engine was understood; an input, not the answer.
