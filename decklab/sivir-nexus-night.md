@@ -191,3 +191,49 @@ already meets. Job 5 (staying power) goes back to 8–10: hold games run longer 
 - Shape: 22 units, 19 cards at 2 Energy or less (midrange median 18), average 2.58, 11 Hidden,
   2 at 5+. Goldfish: 15.8 Energy over turns 1–4 on the play, 3.3 units by turn 3, Might by turn 4
   14.4. Runes stay 6 / 6.
+
+### Audit of the proposal — 23 Oct 2026 (Jay: "audit it strongly")
+
+**Rules Evelynn depends on, verbatim:**
+- Her point is **gaining points**, not Scoring (§470.2: "Score X points" means gaining), so the
+  final-point gate never applies to it (§473.1.a.1).
+- "When I hold, if you control a facedown card here" is a hold effect (§383.4.d), and the "if"
+  right after the condition is part of the condition (§383.2.a.1). **The facedown card has to be
+  there in your Beginning Phase**, so it has to survive their turn unflipped.
+- So **at 6 points, a held battlefield with Evelynn and a hide wins at the start of your turn**:
+  the hold makes 7, her point makes 8. Nothing else in the list closes without a fight.
+
+**What the audit found:**
+1. **Two copies is too few for the deck's only scorer.** 2 copies: 41% to have seen one by
+   turn 5; 3 copies: 56% (39-card library, no draw effects counted). The clock is tier 0 and
+   "enough copies to be consistent" is an always-on rule. **Three.**
+2. **Cutting Rampage widens a known gap.** "Answer a 6+ Might unit" is thin, and in the tall
+   phase Rampage *is* that answer: a 6-Might Mercenary with its Body paid deals 8. Keep two at
+   least; the proposal's cut takes it from 3 to 2, and a third Evelynn should not take another.
+3. **The tension at her battlefield.** Flipping the hide there to defend costs her point that
+   turn. Hold her battlefield with bodies strong enough not to need the flip, and fight with the
+   hide at the other one.
+4. **Fragility, Jay's test:** at 4 Might she survives Bilgewater Tracker, Hextech Ray (3) and
+   Bellows Breath; she dies to Lost to the Sands (4), Falling Star (3+3) and Scorched Earth. She
+   will draw removal — which is removal not spent on the 2-drops.
+5. **The turn-4 crowd:** Matriarch, Evelynn and Mercenary all want turn 4. Mercenary waits in
+   the Champion Zone, so it is a choice, not a clog; 3-drops (3 Ezreal, 2 Fizz, 2 Tornado) keep
+   turn 3 full.
+6. **One Merchant out holds up:** cheap units 11 → 10; a 2-drop in the opening 4 75% → 71%, by
+   turn 2 88% → 85%. Staying power 10 → 9, inside the 8–10 target.
+
+**Variants, same 20,000 shuffles** (the goldfish can't see Evelynn's points; it checks the
+curve didn't break):
+
+| variant | cheap cards | 4-drops | Energy T1–4 (play) | units T3 | Might T4 |
+|---|---|---|---|---|---|
+| A: +2 Eve −Rampage −Merchant | 19 | 4 | 15.8 | 3.3 | 14.4 |
+| B: +2 Eve −Merchant −Sabotage | 18 | 4 | 15.8 | 3.4 | 14.5 |
+| **C: +3 Eve −Merchant −Sabotage −Rampage** | 18 | 5 | 15.9 | 3.4 | 14.6 |
+| D: +3 Eve −Merchant −Sabotage −Gust | 17 | 5 | 15.9 | 3.4 | 14.6 |
+
+**Recommendation: C.** Three Evelynn for the clock; Rampage 3 → 2, kept for big units; the second
+Sabotage goes, because Evelynn is tier 0 and Sabotage tier 3 (the third copy stays in the
+sideboard for Riven, Kai'Sa, Jayce and Irelia's Reactions). Gust stays: a 1-Energy Reaction is a
+hold card. This reverses the earlier second Sabotage; the goal changed under it (a clock now
+matters).
