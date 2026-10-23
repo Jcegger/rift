@@ -355,7 +355,27 @@ not in the list (`data/cards.json`, errata applied, bans and Standard checked) a
 jobs and the hold-behind-a-hide plan. Results are not used to rank Radiance cards, which have
 none yet.
 
-**Worth arguing against a slot in the list**, strongest case first:
+**Gaps against the plan** (23 Oct, after Jay asked what the deck is missing). The slot method
+(Randyyy's slots, "which card does this job better") cannot find a card for a job his list had no
+slot for; this checks the plan's steps instead.
+
+| step in the plan | cards that do it | covered? |
+|---|---|---|
+| cheap bodies take battlefields early | 11 two-drops | yes |
+| hide behind a strong hold | 11 Hidden | yes |
+| win the fight there | 3 Punch First, 2 Switcheroo, 2 Edge of Night, 2 Tornado | yes |
+| remove a defender | 3 Star-Crossed, 2 Gust, 3 Rampage, 2 Graves | yes |
+| keep cards coming | 3 Ezreal, 3 Merchant, 2 Fizz, 2 Matriarch | yes |
+| take the second battlefield to close | Mercenary, and any unit attacking from base (base to battlefield needs no Ganking, §144) | yes |
+| don't lose the hidden card with its battlefield | none; play discipline only | **gap** |
+| answer a 6+ Might unit | Star-Crossed (a bounce), Switcheroo (in a fight) | **thin** |
+| score faster than 1 a battlefield against slow decks | none | **gap** (Kai'Sa, Jayce) |
+
+**Test triggers, not changes:** hidden cards trashed with lost battlefields → Pack of Wonders;
+games stalling against slow decks → Evelynn, In Control; big units walking through holds →
+Pitiless Stalker or Ziggs. Change only when games show the gap.
+
+**The bench** (23 Oct): worth arguing against a slot, strongest case first:
 
 | card | what it does for this plan | slot it competes with |
 |---|---|---|
