@@ -91,3 +91,29 @@ welcome where it wins fights, not where it only adds thinking time.
   until it flips, and the reason the Hidden package survives the beatdown role. Against Irelia,
   who fields the fewest units here (2.5 by turn 3), two battlefields of pressure make every turn
   two fights, which is the Kha'Zix guide's advice against her too.
+
+---
+
+## 2. Roles and slots — step 1, jobs and targets (draft, 23 Oct 2026)
+
+Jobs come from section 1's plan, not from a reference list. Targets start from what winning
+lists look like and bend to the plan. **Good finishes by measured style** (`lib/placing.mjs`
+`goodFinishes`, medians): aggro (44 lists) 22 units, 24 cards at 2 Energy or less, 4 at 5+,
+average 2.67; midrange (48) 26 units, 18 cheap, 3 at 5+, 2.75; tempo (138) 18 units, 24 cheap,
+5 at 5+, 2.67. A beatdown deck that holds both battlefields sits nearest aggro.
+
+Cards count toward every job they do, so the column does not sum to 40.
+
+| job (tier) | target | base list | gap |
+|---|---|---|---|
+| **1. Take both battlefields early** (1): units at 2 Energy or less; units in all | 12–14 cheap units; 22–24 units; 22–24 cards at 2 Energy or less | 11 cheap units; 22 units; 20 cards at 2 or less | **1–3 cheap cards short** |
+| **2. Keep both** (1): Hidden cards (two battlefields to hide at now); Reactions from hand | 10–12 Hidden; 4–6 Reactions | 11 Hidden; 5 (3 Star-Crossed, 2 Gust) | none |
+| **3. Win the fight there** (1): pumps and swaps, Action or Reaction | 7–9 | 7 (3 Punch First, 2 Switcheroo, 2 Edge of Night), plus 2 Tornado | none |
+| **4. Close inside the clock** (0): ways to break a hold; ways to score more than 1 a battlefield | 8–10 breakers; **2–3 scorers** | 10 breakers (3 Star-Crossed, 3 Rampage, 2 Graves, 2 Gust) and Mercenary; **0 scorers** | **2–3 scorers** |
+| **5. Keep cards coming** (2): draw and recursion | 6–8 (games are shorter now) | 10 (3 Ezreal, 3 Merchant, 2 Fizz, 2 Matriarch) | **2–4 over** |
+| **6. Flexible denial** (3): answers and information that work against anything | 2–3, narrow answers to the sideboard | 2 Sabotage | none |
+| curve | average 2.5–2.7; 2–4 at 5+ | 2.50; 2 at 5+ | none |
+
+**What the gaps say before any card is named:** move 2–4 slots from staying power (job 5) to
+cheap bodies (job 1) and to scoring (job 4). An open question for step 2: whether protecting a
+hidden card from a lost battlefield is a job of its own (Pack of Wonders) or a play rule.
