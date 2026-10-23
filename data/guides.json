@@ -308,6 +308,27 @@
    "words": 9362
   },
   {
+   "slug": "sivir-nexus-night",
+   "file": "guides/sivir-nexus-night.md",
+   "kicker": null,
+   "title": "Sivir for Nexus Night — Table Guide",
+   "subtitle": "Riftbound, Radiance — the decklab list for a 3-0 at a Nexus Night (best of three, 50-minute rounds). The short version, for tonight; the full guide follows",
+   "date": "2026-10-23",
+   "legend": "Battle Mistress",
+   "champion": "Sivir, Mercenary",
+   "sections": [
+    "The list",
+    "The plan in five lines",
+    "The clock (50-minute rounds)",
+    "Your turn, in order",
+    "Rules that catch people",
+    "Mulligans",
+    "Matchups and sideboarding",
+    "What to log tonight"
+   ],
+   "words": 1182
+  },
+  {
    "slug": "skirmish-prep",
    "file": "guides/skirmish-prep.md",
    "kicker": null,

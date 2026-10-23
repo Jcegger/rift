@@ -2,7 +2,7 @@
 title: Sivir for Nexus Night — deckbuilding worksheet
 subtitle: Sivir, Battle Mistress (Body/Chaos), Radiance. A 3-0 at a Nexus Night, rebuilt from the decklab Sivir Midrange list. Built together, step by step.
 started: 2026-10-23
-status: section 1 agreed 23 Oct 2026 · section 2 next
+status: list complete 23 Oct 2026 (sections 1, 2, 4) · section 3 and the full guide next
 ---
 
 The second Sivir worksheet. The first, [sivir-midrange.md](sivir-midrange.md), is the base: its
@@ -464,3 +464,11 @@ These plans are starting points from the cards, not tested. Log what changes.
 
 **Verdict:** legal, on every shape target, runes confirmed, every card read. The list is ready to
 test. Card by card (section 3) and the guide follow once Jay agrees.
+
+## 5. Log
+
+- **23 Oct 2026 — the list is complete and saved** to the Decks tab as `Sivir — Nexus Night
+  (decklab, 23 Oct)`. A table guide is at [guides/sivir-nexus-night.md](../guides/sivir-nexus-night.md)
+  for the first night; section 3 (card by card) and the full guide follow. 12 cards to get, all
+  Radiance plus Bandle Tree. First night: Sip & Play, 23 Oct. Log each match: opponent, result,
+  and whether Evelynn's point landed, the early game held, and big units walked through.
