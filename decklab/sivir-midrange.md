@@ -33,6 +33,20 @@ of these it produces:
 3. **Staying power** — replace what was spent, so 1 and 2 continue (draw, recursion, Gold).
 4. **Denial** — break their plan or their scoring (interaction).
 
+**Goal tiers — the rule for picking cards.** A card must earn its slot on its highest tier;
+lower tiers only break ties. Budgets keep any one goal from getting everything thrown at it.
+
+| tier | goal | budget (Randyyy's) |
+|---|---|---|
+| 0 | **win: points from holding and conquering** | — |
+| 1 | **presence and fights:** bodies on battlefields, winning fights there | bodies ~11–13, fights ~8–10 (9 tricks) |
+| 2 | **staying power:** draw and recursion | ~8–10 (12) |
+| 3 | **denial:** stop their points and plans, sized to the field; best-of-three lets the sideboard carry much of it | ~5–7 (6) |
+| 4 | **engine perks:** extra Gold, trash synergy, Hidden extras | **0 dedicated slots** — tie-breakers only |
+
+Always on: no single point of failure, enough copies to be consistent, a curve and colours
+that work.
+
 **The three engines, and what each is for.** Read from Randyyy's LA list, card by card.
 
 - **Trash and recursion (staying power).** Filling the trash: Shadow Order Disciple burns
@@ -142,10 +156,40 @@ reason. Candidates, new or old, must show which job they do better than what the
 - **Spare Hidden cards cost little:** most play from hand as normal cards.
 - **At least 4 spells or gear:** Vex, Apathetic stuns units we play, hidden ones included.
 
+**Presence: 22 units, Randyyy's count** (23 Oct 2026; leaves 18 cards for fights and denial).
+
+| card | job (tier) | why | evidence (Chaos-colour Radiance winners /15; Body/Chaos finishes /7) |
+|---|---|---|---|
+| 3 Staunch Survivor | presence, fights (1) | 4 Might in every fight; turn-1 Gold is a bonus; Matriarch can revive it | none yet — no Body-colour Radiance winners; video's premise. Body Power: the colour cost to watch |
+| 3 Bedeviling Stranger | presence (1), bounce with 4+ units there, both sides counted (3) | Hidden; a body either way | 11 |
+| 3 Traveling Merchant | staying power (2), a 2-Might body | cycles a card each move, the discard chosen | 6 |
+| 2 Tideturner | presence, fights (1) | a body, or a hidden swap (the Graves trick) | 9 |
+| 3 Ezreal, Prodigy | staying power (2) | discard 1, draw 2; discounts Rampage's +2 and Mercenary's Accelerate | 5 · 2 |
+| 2 Fizz, Trickster | staying power (2), recast fights (1) | recasts a spell of 3 Energy or less, paying its Power | 7 · 6 |
+| 1 Tornado Warrior | presence (1) | a free 3-Might body from face down; Matriarch's free switch is a tie-breaker | 3 · 2 |
+| 2 Tail-Cloaked Matriarch | staying power (2), a 4-Might body | revives a unit of 3 Energy / 1 Power or less; her own Empower is always available, so nothing depends on Tornado | 5 · 3 |
+| 2 Graves, Blasting Through | fights, denial against wide boards (1, 3) | LeBlanc, Rengar decks and Rek'Sai are likely; a 3rd belongs in the sideboard for them (41% to see one of 2 by turn 5, 56% with 3) | none yet |
+| Sivir, Mercenary (Champion Zone) | presence, fights (1): the closer | always available, never drawn | — |
+
+Two-drops 11, three-drops 6, four and up 4, plus Mercenary. Hidden: 10 with Switcheroo and
+Edge of Night (pending the fights slot). Staying power already uses 10 unit slots, the top
+of its budget: fights and denial must come from the spells, and no more draw goes in.
+
+**Benched, with reasons:**
+- **Shadow Order Disciple** — an engine piece, but only 3 Might when it moves and its burn is
+  random; the trash already fills with chosen cards. First back if the trash runs dry.
+- **Kennen, Storm of Shuriken** — its 7 winners are Kennen's decks, where the burn feeds
+  Rhasa; none of the Body/Chaos finishes. For us a 4-Might 3-drop that mills our own cards.
+- **Rengar, Trophy Hunter** (5 of 7 Body/Chaos finishes) — a surprise 6-Might body at
+  Reaction speed (Ambush, §822.1.b, .d), but Sivir, Mercenary already does that job from the
+  Champion Zone. Strong for Kha'Zix, which has no Mercenary.
+- **Vex, Apathetic** — sideboard: a matchup card against Hidden, ambush and go-wide decks.
+- **Kinkou Initiate, Nocturne, Pyke, Reckless Innovator, Momentary Companion, Ziggs,
+  Evelynn, In Control, Repair Specialist, Black Market Broker, Treasure Hunter** — none does
+  a tier-1 or tier-2 job better than what is in; Gold makers are redundant with the legend.
+
 ### Still to settle, by job
 
-- **Presence:** cheap bodies for going wide (Randyyy: 8 two-drops — 3 Traveling Merchant,
-  3 Shadow Order Disciple, 2 Tideturner); mid units (his 13 three- and four-drops).
 - **Fights:** tricks for fights and the conquer turn (his 9: Punch First, Rampage,
   Switcheroo, Grim Resolve); top end, if any (he has none).
 - **Staying power:** draw and recursion (Ezreal, Merchant, Fizz, Matriarch) and whether any
