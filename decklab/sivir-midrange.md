@@ -162,20 +162,22 @@ reason. Candidates, new or old, must show which job they do better than what the
 |---|---|---|---|
 | 3 Staunch Survivor | presence, fights (1) | 4 Might in every fight; turn-1 Gold is a bonus; Matriarch can revive it | none yet — no Body-colour Radiance winners; video's premise. Body Power: the colour cost to watch |
 | 3 Bedeviling Stranger | presence (1), bounce with 4+ units there, both sides counted (3) | Hidden; a body either way | 11 |
-| 3 Traveling Merchant | staying power (2), a 2-Might body | cycles a card each move, the discard chosen | 6 |
+| 2 Traveling Merchant | staying power (2), a 2-Might body | cycles a card each move, the discard chosen; 3 → 2 for Elnuk Herd | 6 |
 | 2 Tideturner | presence, fights (1) | a body, or a hidden swap (the Graves trick) | 9 |
 | 3 Ezreal, Prodigy | staying power (2) | discard 1, draw 2; discounts Rampage's +2 and Mercenary's Accelerate | 5 · 2 |
 | 2 Fizz, Trickster | staying power (2), recast fights (1) | recasts a spell of 3 Energy or less, paying its Power | 7 · 6 |
-| 1 Tornado Warrior | presence (1) | a free 3-Might body from face down; Matriarch's free switch is a tie-breaker | 3 · 2 |
+| 2 Elnuk Herd | fights (1), at Reaction speed | hidden: +3 Might on a friendly unit at that battlefield for the 1 Power to hide (§811.1.b, .d.3), then recycles to the deck to come again; drawn without a hide, a 6-Energy 5-Might body with no Power — the top end we lacked. Replaced Tornado Warrior and a Merchant (fights slot, 23 Oct) | none; adopted by pros early in the backtest (Rengar) |
 | 2 Tail-Cloaked Matriarch | staying power (2), a 4-Might body | revives a unit of 3 Energy / 1 Power or less; her own Empower is always available, so nothing depends on Tornado | 5 · 3 |
 | 2 Graves, Blasting Through | fights, denial against wide boards (1, 3) | LeBlanc, Rengar decks and Rek'Sai are likely; a 3rd belongs in the sideboard for them (41% to see one of 2 by turn 5, 56% with 3) | none yet |
 | Sivir, Mercenary (Champion Zone) | presence, fights (1): the closer | always available, never drawn | — |
 
-Two-drops 11, three-drops 6, four and up 4, plus Mercenary. Hidden: 10 with Switcheroo and
-Edge of Night (pending the fights slot). Staying power already uses 10 unit slots, the top
-of its budget: fights and denial must come from the spells, and no more draw goes in.
+Two-drops 10, three-drops 5, four and up 6, plus Mercenary. Hidden: 11 — 7 units
+(3 Stranger, 2 Tideturner, 2 Elnuk) and 4 spells or gear. Staying power uses 9 unit slots,
+within its budget: fights and denial come from the spells, and no more draw goes in.
 
 **Benched, with reasons:**
+- **Tornado Warrior** — a free 3-Might body from face down and Matriarch's free switch, but
+  the switch was only a tie-breaker (her own Empower is always available); out for Elnuk Herd.
 - **Shadow Order Disciple** — an engine piece, but only 3 Might when it moves and its burn is
   random; the trash already fills with chosen cards. First back if the trash runs dry.
 - **Kennen, Storm of Shuriken** — its 7 winners are Kennen's decks, where the burn feeds
@@ -188,10 +190,35 @@ of its budget: fights and denial must come from the spells, and no more draw goe
   Evelynn, In Control, Repair Specialist, Black Market Broker, Treasure Hunter** — none does
   a tier-1 or tier-2 job better than what is in; Gold makers are redundant with the legend.
 
+**Fights: 12 spells and gear, plus Elnuk Herd's role** (23 Oct 2026). Checked against all
+110 spells and gear legal for Sivir (colours, bans, and other champions' signatures — Void
+Assault is Kha'Zix's). B = Body/Chaos good finishes of 7; W = Chaos-colour Radiance winners of 15.
+
+| card | job | B | W | why |
+|---|---|---|---|---|
+| 3 Punch First | win the fight; Mercenary to 11 | 7 | — | +5 for 1 Energy, 2 Body Power |
+| 3 Rampage | fight and removal (also counts toward denial) | 7 | — | units deal their Might to each other; +2 if Body paid, free with Ezreal |
+| 2 Switcheroo | swap Might; the Graves trick | 6 | 11 | Hidden; Reaction speed from face down |
+| 2 Ride the Wind | the conquer turn: move a unit and ready it | 3 | 11 | Action speed, unlike On the Hunt |
+| 2 Edge of Night | a lasting +2 that attaches free from face down | 1 | 3 | Hidden; keeps the 4 Hidden spells or gear |
+
+Fizz can recast all four spells. Every card pays Power, so the Gold keeps coming without a
+dedicated engine card. Sandswept Tomb discounts Punch First, Rampage and Ride the Wind on our
+units there — a battlefield consideration.
+
+**Benched:** On the Hunt (Sivir's signature: readies all units, but has no Action or Reaction,
+so it can't be played in a fight — Ride the Wind does the job at Action speed; and
+signatures run at 3 or none), Grim Resolve (its XP does nothing here), Last Rites (6 winners,
+but its Equip eats 2 trash cards and it isn't Hidden), Onslaught, Hold 'Em, Primal Strength,
+Guttural Roar, Challenge (to denial), Primordial Roar, Demon Shade. Void Assault is Kha'Zix's
+signature and not legal.
+
+**Checked on the current 40** (denial placeholders): all deck rules pass; 22 units, 16 spells,
+2 gear; Matriarch revives 6 different units; Fizz recasts every spell. Open: the rune split
+(goldfish ~13% stuck, pessimistic), Elnuk at 2 vs 1, battlefields.
+
 ### Still to settle, by job
 
-- **Fights:** tricks for fights and the conquer turn (his 9: Punch First, Rampage,
-  Switcheroo, Grim Resolve); top end, if any (he has none).
 - **Staying power:** draw and recursion (Ezreal, Merchant, Fizz, Matriarch) and whether any
   Gold maker beyond the legend earns a slot.
 - **Denial:** interaction for the expected field (his 6: Star-Crossed, Gust, Sabotage,
