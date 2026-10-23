@@ -256,6 +256,7 @@ import { indexCatalog, deckStats, deckChecks, journalRecord, ownedByIdentity, MA
 import { mdToHtml, esc, slugify } from "./lib/markdown.mjs";
 import { deckEngines, ENGINES } from "./lib/engines.mjs";
 import { annotateEngines, VERDICTS } from "./lib/research.mjs";
+import { avoidedIn } from "./lib/avoid.mjs";
 import { applyImport, matcher, setCount, setSource, foilOnlyProblems, newqRows, newqText, newqCSV,
   spares, readPartner, tradeMatch } from "./lib/collection.mjs";
 
@@ -657,7 +658,7 @@ function viewDecks(id) {
     </section>
     <div class="side">
       ${logPanel(d)}
-      ${L && IDEAS ? `<section class="panel">${diffBlock(d, ideaFor(IDX.legendName(L)))}</section>` : ""}
+      ${L && IDEAS ? `<section class="panel">${diffBlock(d, IDX.legendName(L))}</section>` : ""}
       <section class="panel">
         <div class="headrow"><h2>To get</h2><span class="num small dim">${gap.cards + sgap.cards} cards · ${money(gap.total + sgap.total)}${gap.unpriced + sgap.unpriced ? ` + ${gap.unpriced + sgap.unpriced} unpriced` : ""}</span></div>
         ${buy.length ? `<div>${buy.map((r) => `<div class="row"><span class="q">${r.short}×</span>
@@ -972,9 +973,21 @@ function radianceSection() {
         ${l.isNew ? `<span class="pill later">new</span>` : ""}${mine.has(l.name) ? ` <span class="pill good">your deck</span>` : ""}</td>
       <td class="r num">${l.placed}</td><td class="r num">${l.top8 || ""}</td>
       <td class="num">${l.best ? placeText(l.best.pl, l.best.players) : "—"}</td><td class="r num hide-sm">${l.brews}</td>
-      <td class="small">${l.basis === "placed" ? `consensus of ${l.consensus.from}` : l.basis === "brews" ? `<span class="dim">from ${l.consensus.from} brews</span>` : `<span class="dim">too few lists</span>`}${buildsFor(l.name).some((b) => b.kind !== "experiment") ? ` · <b>Claude build</b>` : ""}${buildsFor(l.name).some((b) => b.kind === "experiment") ? ` · <b>untested idea</b>` : ""}</td></tr>`).join("")}</tbody></table></div>
+      <td class="small">${netSummary(l.name)}${buildsFor(l.name).some((b) => b.kind !== "experiment") ? ` · <b>Claude build</b>` : ""}${buildsFor(l.name).some((b) => b.kind === "experiment") ? ` · <b>untested idea</b>` : ""}</td></tr>`).join("")}</tbody></table></div>
     ${quiet.length ? `<p class="note">New legends with no lists yet: ${quiet.map((n) => esc(n.name)).join(" · ")}.</p>` : ""}
   </section>`;
+}
+
+// One line for a legend's best playable net deck: this format's, else the last one's.
+function netSummary(name) {
+  const N = netFor(name);
+  for (const f of ["now", "last"]) {
+    const g = (N?.[f] || []).find((x) => !x.avoid.length);
+    if (!g) continue;
+    const fmt = f === "last" ? ` <span class="dim">(${esc(IDEAS.formats.last.name)})</span>` : "";
+    return g.status === "net" ? `<b>net deck</b>, ${g.lists} finishes${fmt}` : g.status === "early" ? `early net deck, ${g.lists} finishes${fmt}` : `<span class="dim">${g.lists} finish${g.lists === 1 ? "" : "es"}${fmt}</span>`;
+  }
+  return `<span class="dim">no good finish yet</span>`;
 }
 
 function consensusBlock(c) {
@@ -990,14 +1003,16 @@ function viewIdea(name) {
   const l = ideaFor(name);
   const card = legendCard(name) || (l && IDX.BY.get(shortCode(l.code)));
   const builds = buildsFor(name);
-  if (!l && !builds.length) return archFor(name)
+  const N = netFor(name);
+  if (!l && !builds.length && !N) return archFor(name)
     ? `<a class="small" href="#/archetypes">‹ Archetypes</a><section class="panel hero"><div style="display:flex;flex-direction:column;gap:10px;min-width:0">
         <div class="dots">${dots(card?.d)}<span class="lbl">${esc((card?.d || []).join(" / "))}</span></div>
         <h1>${card ? `<button class="cardlink" data-card="${esc(card.c)}">${esc(name)}</button>` : esc(name)}</h1>
         <div class="dim">No Radiance-era lists yet.</div></div></section>${gamePlanPanel(name)}`
     : `<a class="small" href="#/find">‹ Find a deck</a><div class="banner warn">No Radiance-era lists for ${esc(name)} yet.</div>`;
-  const c = l?.consensus;
   const mine = decks().filter((d) => { const L = deckStats(d, IDX, ROW?.inv || {}).legend; return L && IDX.legendName(L) === name; });
+  // The deck the engines are read from: the leading playable net deck, this format's first.
+  const lead = ["now", "last"].map((f) => (N?.[f] || []).find((g) => g.count && !g.avoid.length)).find(Boolean);
   return `<div style="display:flex;flex-direction:column;gap:6px"><a class="small" href="#/find">‹ Find a deck</a></div>
   <section class="panel hero">
     <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
@@ -1008,28 +1023,21 @@ function viewIdea(name) {
     ${l ? `<div class="stats"><div class="stat"><span class="lbl">Placed lists</span><b>${l.placed}</b></div><div class="stat"><span class="lbl">Top 8</span><b>${l.top8}</b></div><div class="stat"><span class="lbl">Brews</span><b>${l.brews}</b></div></div>` : ""}
   </section>
   ${IDEAS?.era?.allPreRelease && l?.placed ? `<div class="banner warn">Every finish on this page is from an unsanctioned online event played before Radiance was legal (${esc(IDEAS.era.legalFrom)}). Early signal, not a settled result.</div>` : ""}
-  ${gamePlanPanel(name)}
-  ${builds.map(buildPanel).join("")}
-  ${c ? `<div class="cols"><section class="panel wide">
-      <div class="headrow"><h2>Consensus list</h2><div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=consensus">Tweak</a>${ROW ? `<button class="btn primary" data-copyidea="${esc(name)}">Copy to my decks</button>` : ""}</div></div>
-      <p class="note">${l.basis === "placed" ? `Counted from ${c.from} placed lists${IDEAS.era.allPreRelease ? " from online preview events (unsanctioned, before release)" : ""}` : `<b>From ${c.from} brews</b>: fewer than 3 placed lists exist, so these are unplaced lists, a weaker kind of evidence`}. Each card at the number of copies most of them run, highest share first, until 40; the bar is the share of lists playing it. No sideboard: the deck feed has none.
-        <b>${l.close} of ${c.from}</b> lists are within 70% of it${l.close / c.from < 0.4 ? ` — <b style="color:var(--short)">these lists disagree, so this is a blend of different decks, not a deck anyone played</b>` : ""}.${c.checks.filter((k) => k.ok === false).length ? ` <b style="color:var(--bad)">Breaks: ${esc(c.checks.filter((k) => k.ok === false).map((k) => `${k.label} (${k.val})`).join(", "))}</b>` : ""}${c.checks.some((k) => k.ok === "later") ? " Radiance cards are legal from 2026-10-23." : ""}</p>
-      ${consensusBlock(c)}
-    </section>
-    <div class="side">
-      ${c.flex.length ? `<section class="panel"><h2>Flex</h2><p class="note">Played by at least 20% of the lists but outside the 40.</p>
-        <div>${c.flex.slice(0, 14).map((r) => `<div class="row"><span class="n"><button class="cardlink" data-card="${esc(shortCode(r.code))}">${esc(r.name)}</button></span>${bar(r.inc)}<span class="num tiny dim" style="width:34px;text-align:right">${pctI(r.inc)}</span></div>`).join("")}</div></section>` : ""}
-      <section class="panel"><h2>Since Vendetta</h2>
+  ${netDecksSection(name)}
+  ${mine.length || l ? `<div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">
+      ${mine.map((d) => `<section class="panel">${diffBlock(d, name)}</section>`).join("")}
+      ${l ? `<section class="panel"><h2>Since Vendetta</h2>
         ${l.changes ? `<p class="note">Against ${l.changes.vs} placed Vendetta lists of ${esc(champOf(name))} since ${esc(l.changes.since)}.</p>
           ${l.changes.added.length ? `<div class="lbl">In</div>${l.changes.added.map((r) => `<div class="row"><span class="n"><button class="cardlink" data-card="${esc(shortCode(r.code))}">${esc(r.name)}</button>${r.radiance ? ` <span class="pill later">RAD</span>` : ""}</span><span class="num tiny">${pctI(r.before)} → <b>${pctI(r.now)}</b></span></div>`).join("")}` : ""}
           ${l.changes.dropped.length ? `<div class="lbl" style="margin-top:8px">Out</div>${l.changes.dropped.map((r) => `<div class="row"><span class="n"><button class="cardlink" data-card="${esc(shortCode(r.code))}">${esc(r.name)}</button></span><span class="num tiny">${pctI(r.before)} → <b>${pctI(r.now)}</b></span></div>`).join("")}` : ""}
           ${!l.changes.added.length && !l.changes.dropped.length ? `<p class="note">Nothing moved by much.</p>` : ""}`
           : `<p class="note">${l.isNew ? "A new legend: there are no Vendetta lists to compare." : `Fewer than 3 placed Vendetta lists of ${esc(champOf(name))} to compare against.`}</p>`}
-      </section>
-      ${mine.length ? mine.map((d) => `<section class="panel">${diffBlock(d, l)}</section>`).join("") : ""}
-    </div></div>` : `<div class="banner warn">${l ? `${l.placed} placed list${l.placed === 1 ? "" : "s"} and ${l.brews} brew${l.brews === 1 ? "" : "s"}: too few to count a consensus from.` : ""}</div>`}
-  ${c ? `<section class="panel"><h2>Engines</h2><p class="note">What the consensus is built to do over and over, read off its cards' text, and the legal cards that would feed it — Radiance cards nobody has tried yet included.</p>${enginesBlock(Object.fromEntries(Object.entries(c.cards).map(([k, n]) => [shortCode(k), n])), l.shares || {})}</section>` : ""}
-  ${l?.lists?.length ? `<section style="display:flex;flex-direction:column;gap:14px"><h2>The lists</h2>
+      </section>` : ""}
+    </div>` : ""}
+  ${gamePlanPanel(name)}
+  ${builds.map(buildPanel).join("")}
+  ${lead ? `<section class="panel"><h2>Engines</h2><p class="note">What the leading net deck is built to do over and over, read off its cards' text, and the legal cards that would feed it — Radiance cards nobody has tried yet included.</p>${enginesBlock(Object.fromEntries(Object.entries(lead.cards).map(([k, n]) => [shortCode(k), n])), l?.shares || {})}</section>` : ""}
+  ${l?.lists?.length ? `<section style="display:flex;flex-direction:column;gap:14px"><h2>Every ${esc(IDEAS.formats?.now?.name || "Radiance")}-format list</h2><p class="note">Any recorded finish, good or not, as the events posted them.</p>
     <div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">${l.lists.map((x, i) => eraList(name, x, i)).join("")}</div></section>` : ""}`;
 }
 
@@ -1037,22 +1045,89 @@ function eraList(name, x, i) {
   const rows = Object.entries(x.cards).map(([code, n]) => ({ code: shortCode(code), n, c: IDX.BY.get(shortCode(code)) })).filter((r) => r.c && r.c.t !== "Legend")
     .sort((a, b) => ["Unit", "Spell", "Gear", "Rune", "Battlefield"].indexOf(a.c.t) - ["Unit", "Spell", "Gear", "Rune", "Battlefield"].indexOf(b.c.t) || (a.c.e ?? 99) - (b.c.e ?? 99));
   const rad = rows.filter((r) => r.c.s === "RAD").reduce((a, r) => a + r.n, 0);
+  const never = avoidedIn(rows.map((r) => r.c.n));   // lib/avoid.mjs: shown for the field, never offered
   return `<article class="panel">
     <div class="headrow"><h3>${esc(x.brew ? "Brew" : placeText(x.pl, x.players))}</h3><span class="small dim">${esc(x.dt || "")}</span></div>
-    <div class="small dim">${esc(x.h || "")}${x.ev ? ` · ${esc(x.ev)}` : ""} · ${rad} Radiance card${rad === 1 ? "" : "s"}${x.overlap != null ? ` · ${pctI(x.overlap)} like the consensus` : ""}</div>
-    ${x.overlap != null && x.overlap < 0.5 ? `<div class="pill later" style="align-self:flex-start">a different build</div>` : ""}
+    <div class="small dim">${esc(x.h || "")}${x.ev ? ` · ${esc(x.ev)}` : ""} · ${rad} Radiance card${rad === 1 ? "" : "s"}</div>
     ${!x.runes ? `<div class="banner warn">The feed carries this list without its runes.</div>` : ""}
     <details><summary class="btn" style="width:max-content">Show the list</summary>
       <div style="margin-top:10px">${rows.map((r) => `<div class="row"><span class="q">${r.n}</span><span class="n"><button class="cardlink" data-card="${esc(r.code)}">${esc(r.c.n)}</button>${r.c.s === "RAD" ? ` <span class="pill later">RAD</span>` : ""}</span></div>`).join("")}</div></details>
-    <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=${encodeURIComponent("list:" + i)}">Tweak</a>${ROW ? `<button class="btn" data-copyera="${esc(name)}|${i}">Copy to my decks</button>` : ""}</div>
+    ${never.length ? `<p class="tiny dim" style="margin:0"><span class="pill bad">never play</span> Runs ${never.map(esc).join(", ")}.</p>`
+      : `<div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=${encodeURIComponent("list:" + i)}">Tweak</a>${ROW ? `<button class="btn" data-copyera="${esc(name)}|${i}">Copy to my decks</button>` : ""}</div>`}
+  </article>`;
+}
+
+/* ── Net decks (data/ideas.json `netdecks`, lib/netdeck.mjs) ───────────────
+   A legend's good placings split into the decks they are, each counted and judged: "net"
+   has earned the name, "early" is counted but misses a test (named), "single" is one or two
+   real lists. This format first, then the last one's, still legal. A group running a
+   never-play card (lib/avoid.mjs) is shown for the field, never offered. */
+const netFor = (name) => IDEAS?.netdecks?.[name] || null;
+const NET_LABEL = { net: ["good", "Net deck"], early: ["later", "Early"], single: ["src", "As played"] };
+const finishText = (p) => (p.pl != null ? placeText(p.pl, p.players) : p.cp ? `claimed top ${p.cp}` : "");
+// A list's main deck by card name, as lib/netdeck.mjs counts it.
+const mainByName = (cards) => { const m = new Map(); for (const [k, q] of Object.entries(cards || {})) { const c = IDX.BY.get(shortCode(k)); if (c && !["Legend", "Rune", "Battlefield"].includes(c.t)) m.set(c.n, (m.get(c.n) || 0) + q); } return m; };
+const copiesOff = (a, b) => { let s = 0, t = 0; for (const [n, q] of a) { t += q; s += Math.min(q, b.get(n) || 0); } return Math.max(t, 40) - s; };
+// The playable net deck nearest a list: this format's first, else the last's.
+function nearestNet(name, cards) {
+  const N = netFor(name), m = mainByName(cards);
+  for (const f of ["now", "last"]) {
+    const gs = (N?.[f] || []).map((g, i) => ({ g, i, f })).filter((x) => x.g.count && !x.g.avoid.length);
+    if (gs.length) return gs.map((x) => ({ ...x, off: copiesOff(m, mainByName(x.g.cards)) })).sort((a, b) => a.off - b.off)[0];
+  }
+  return null;
+}
+function netDecksSection(name) {
+  const N = netFor(name);
+  if (!N) return "";
+  const F = IDEAS.formats, champ = esc(champOf(name));
+  const part = (f) => {
+    const gs = N[f] || [], fmt = F[f].name;
+    const big = gs.map((g, i) => ({ g, i })).filter((x) => x.g.status !== "single" || x.g.avoid.length);
+    const one = gs.map((g, i) => ({ g, i })).filter((x) => x.g.status === "single" && !x.g.avoid.length);
+    const head = f === "now" ? `${esc(fmt)} net decks` : `${esc(fmt)} net decks <span class="lbl">last format · still legal</span>`;
+    if (!gs.length) return f === "now" ? `<section class="panel"><h2>${head}</h2><p class="note">No good ${esc(fmt)} finish for ${champ} yet. A good finish is the top 25% of its field, or a top 8 of 32+ players.</p></section>` : "";
+    return `<section style="display:flex;flex-direction:column;gap:14px"><h2>${head}</h2>
+      ${big.map(({ g, i }, k) => netPanel(name, f, g, i, k === 0 && !g.avoid.length, gs.length > 1)).join("")}
+      ${one.length ? `<div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">${one.map(({ g, i }) => netSingle(name, f, g, i, gs.length > 1)).join("")}</div>` : ""}</section>`;
+  };
+  return `${part("now")}${part("last")}
+    <p class="note">How these are made: every good finish (top 25% of the field, or a top 8 of 32+), one per finish — reposts of a claimed result count once — split where lists are half a deck apart, and counted. <b>Net deck</b> means 3+ finishes, from 2+ events, 2+ of them recorded rather than claimed, and lists within 9 copies of the count. <a href="#/guide/deckbuilding">Deckbuilding</a> has the measurements.</p>`;
+}
+function netPanel(name, f, g, i, open, many) {
+  const [cls, label] = NET_LABEL[g.status], c = g.count, mine = !g.avoid.length;
+  const title = many && g.marks.length ? `with ${g.marks.map(esc).join(" · ")}` : g.lists === 1 ? "one list" : "the build";
+  return `<section class="panel">
+    <div class="headrow"><div><span class="pill ${cls}">${label}</span>${g.preview ? ` <span class="pill later">online preview</span>` : ""}${!mine ? ` <span class="pill bad">never play</span>` : ""}
+      <h3 style="margin-top:6px">${esc(champOf(name))} — ${title}</h3></div>
+      ${mine && g.cards ? `<div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=${encodeURIComponent(`net:${f}:${i}`)}">Tweak</a>${ROW ? `<button class="btn${open ? " primary" : ""}" data-copynet="${esc(name)}|${f}|${i}">Copy to my decks</button>` : ""}</div>` : ""}</div>
+    <p class="small dim" style="margin:0">${g.lists} finish${g.lists === 1 ? "" : "es"} · ${g.events} event${g.events === 1 ? "" : "s"} · ${g.records} recorded${g.claims ? `, ${g.claims} claimed` : ""} · best ${esc(finishText(g.best))}${g.best.ev ? ` at ${esc(g.best.ev)}` : ""} · latest ${esc(g.through || "")}</p>
+    ${!mine ? `<div class="banner warn">Runs ${g.avoid.map(esc).join(", ")}: never suggested to you. Here because you will face it.</div>` : ""}
+    ${g.misses.length ? `<p class="note"><b>Not a net deck yet:</b> ${g.misses.map(esc).join("; ")}.</p>` : ""}
+    ${c ? `<details${open ? " open" : ""}><summary class="btn" style="width:max-content">${open ? "The list" : "Show the list"}</summary><div style="margin-top:10px">
+      <p class="note">Each card at the copies most of these lists run, highest share first, to 40; the bar is the share of lists playing it. Closest real list: ${esc(g.closest.h || "")} (${esc(finishText(g.closest))}), ${g.closest.changed} cop${g.closest.changed === 1 ? "y" : "ies"} off.</p>
+      ${consensusBlock(c)}
+      ${c.flex?.length ? `<p class="tiny dim">Flex, in 20%+ of these lists but outside the 40: ${c.flex.slice(0, 10).map((r) => `${esc(r.name)} ${pctI(r.inc)}`).join(" · ")}</p>` : ""}</div></details>` : ""}
+  </section>`;
+}
+function netSingle(name, f, g, i, many) {
+  const rows = Object.entries(g.cards).map(([code, n]) => ({ code: shortCode(code), n, c: IDX.BY.get(shortCode(code)) })).filter((r) => r.c && r.c.t !== "Legend")
+    .sort((a, b) => ["Unit", "Spell", "Gear", "Rune", "Battlefield"].indexOf(a.c.t) - ["Unit", "Spell", "Gear", "Rune", "Battlefield"].indexOf(b.c.t) || (a.c.e ?? 99) - (b.c.e ?? 99));
+  return `<article class="panel">
+    <div class="headrow"><h3>${esc(finishText(g.best))}</h3><span class="pill src">${g.lists === 1 ? "As played" : `${g.lists} lists`}</span></div>
+    <div class="small dim">${esc(g.best.h || "")}${g.best.ev ? ` · ${esc(g.best.ev)}` : ""}${g.preview ? " · online preview" : ""}${many && g.marks.length ? ` · with ${g.marks.map(esc).join(" · ")}` : ""}</div>
+    <details><summary class="btn" style="width:max-content">Show the list</summary>
+      <div style="margin-top:10px">${rows.map((r) => `<div class="row"><span class="q">${r.n}</span><span class="n"><button class="cardlink" data-card="${esc(r.code)}">${esc(r.c.n)}</button></span></div>`).join("")}</div></details>
+    <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=${encodeURIComponent(`net:${f}:${i}`)}">Tweak</a>${ROW ? `<button class="btn" data-copynet="${esc(name)}|${f}|${i}">Copy to my decks</button>` : ""}</div>
   </article>`;
 }
 
 // Your deck against the consensus for its legend: what most lists play that you don't,
 // and what you play that few of them do. Names, not printings, so an alt art counts.
-function diffBlock(d, l) {
-  const c = l?.consensus;
-  if (!c) return `<h2>Radiance update</h2><p class="note">Not enough Radiance-era lists of this legend to compare against yet.</p>`;
+function diffBlock(d, name) {
+  const near = nearestNet(name, d.cards);
+  if (!near) return `<h2>Against the net deck</h2><p class="note">No good finishes of this legend to count a net deck from yet.</p>`;
+  const g = near.g, c = g.count, fmt = IDEAS.formats[near.f].name;
   const nameOf = (code) => IDX.BY.get(code)?.n;
   const have = new Map();
   for (const [code, q] of Object.entries(d.cards || {})) { const n = nameOf(code); if (n) have.set(n, (have.get(n) || 0) + q); }
@@ -1061,12 +1136,12 @@ function diffBlock(d, l) {
     .map((r) => ({ r, n: r.copies - (have.get(r.name) || 0) }));
   const typeOf = (n) => IDX.cards.find((x) => x.n === n)?.t;
   const cut = [...have].filter(([n]) => !["Rune", "Legend", "Battlefield"].includes(typeOf(n)) && (inc.get(n) || 0) < 0.2);
-  return `<div class="headrow"><h2>Radiance update</h2><span class="small dim">${esc(d.name)}</span></div>
-    <p class="note">Against ${c.from} ${l.basis === "placed" ? "placed" : "brewed"} Radiance-era lists of this legend. A count, not a verdict — your list may be built for a different plan.</p>
+  return `<div class="headrow"><h2>Against the net deck</h2><span class="small dim">${esc(d.name)}</span></div>
+    <p class="note">Against the nearest ${esc(fmt)} net deck${g.marks.length ? ` (with ${g.marks.map(esc).join(" · ")})` : ""}: ${g.lists} good finishes${g.status === "net" ? "" : `, <b>${g.status === "early" ? "early" : "too few to count"}</b>`}${g.preview ? ", online previews" : ""}. Your main deck is ${near.off} cop${near.off === 1 ? "y" : "ies"} off it. A count, not a verdict — your list may be built for a different plan.</p>
     ${add.length ? `<div class="lbl">Most lists play, you don't (or fewer)</div>${add.map(({ r, n }) => `<div class="row"><span class="q">+${n}</span><span class="n"><button class="cardlink" data-card="${esc(shortCode(r.code))}">${esc(r.name)}</button></span><span class="num tiny dim">${pctI(r.inc)}</span></div>`).join("")}` : `<p class="note">You already run everything at least half the lists play.</p>`}
     ${cut.length ? `<div class="lbl" style="margin-top:8px">You play, under 20% of lists do</div>${cut.map(([n, q]) => `<div class="row"><span class="q">${q}</span><span class="n">${esc(n)}</span><span class="num tiny dim">${pctI(inc.get(n) || 0)}</span></div>`).join("")}` : ""}
-    <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(l.name)}?from=${encodeURIComponent("deck:" + d.id)}">Tweak this deck</a>
-      <a class="btn" href="#/idea/${encodeURIComponent(l.name)}">Consensus and lists</a></div>`;
+    <div class="btnrow"><a class="btn" href="#/bench/${encodeURIComponent(name)}?from=${encodeURIComponent("deck:" + d.id)}">Tweak this deck</a>
+      <a class="btn" href="#/idea/${encodeURIComponent(name)}">Net decks and lists</a></div>`;
 }
 
 function buildPanel(b) {
@@ -1101,11 +1176,13 @@ async function saveNewDeck(deck, label) {
   } catch (err) { toast(`Not copied: ${err.message}`); }
 }
 document.addEventListener("click", (e) => {
-  const a = e.target.closest("[data-copyidea]"), b = e.target.closest("[data-copyera]"), c = e.target.closest("[data-copybuild]");
+  const a = e.target.closest("[data-copynet]"), b = e.target.closest("[data-copyera]"), c = e.target.closest("[data-copybuild]");
   if (a) {
-    const l = ideaFor(a.dataset.copyidea), k = l.consensus;
-    const cards = Object.fromEntries(Object.entries(k.cards).map(([code, n]) => [shortCode(code), n]));
-    saveNewDeck({ id: "d" + Date.now().toString(36), name: `${champOf(l.name)} — Radiance consensus (${k.from} lists, ${IDEAS.generatedAt})`, cards, sb: {} }, "Consensus");
+    const [name, f, i] = a.dataset.copynet.split("|"), g = netFor(name)?.[f]?.[Number(i)];
+    if (!g || g.avoid.length) return;   // never-play groups have no button; never copy one
+    const cards = Object.fromEntries(Object.entries(g.cards).map(([code, n]) => [shortCode(code), n]));
+    const what = g.count ? `${IDEAS.formats[f].name} net deck${g.status === "early" ? " (early)" : ""}, ${g.lists} finishes` : `${finishText(g.best)}, ${g.best.ev || g.best.h || ""}`;
+    saveNewDeck({ id: "d" + Date.now().toString(36), name: `${champOf(name)} — ${what} (${IDEAS.generatedAt})`.slice(0, 90), cards, sb: {} }, g.count ? "Net deck" : "List");
   } else if (b) {
     const [name, i] = b.dataset.copyera.split("|"), x = ideaFor(name).lists[Number(i)];
     const cards = Object.fromEntries(Object.entries(x.cards).map(([code, n]) => [shortCode(code), n]));
@@ -1308,11 +1385,15 @@ function simRun(list) {
 const benchSources = (name) => {
   const l = ideaFor(name), out = [];
   const fix = (m) => Object.fromEntries(Object.entries(m || {}).map(([k, n]) => [shortCode(k), n]));
-  if (l?.consensus) out.push({ key: "consensus", label: `Consensus of ${l.consensus.from} ${l.basis === "placed" ? "placed lists" : "brews"}`, cards: fix(l.consensus.cards) });
+  const N = netFor(name);
+  for (const f of ["now", "last"]) (N?.[f] || []).forEach((g, i) => {
+    if (g.avoid.length) return;
+    out.push({ key: `net:${f}:${i}`, label: g.count ? `${IDEAS.formats[f].name} ${g.status === "net" ? "net deck" : "early net deck"} · ${g.lists} finishes${g.marks.length ? ` · with ${g.marks.join(" · ")}` : ""}` : `${IDEAS.formats[f].name} · ${finishText(g.best)} · ${g.best.h || ""}`, cards: fix(g.cards) });
+  });
   for (const b of buildsFor(name)) out.push({ key: `build:${b.id}`, label: `Claude build: ${b.title}`, cards: fix(b.cards) });
   const br = brewFor(name);
   if (br) out.push({ key: "brew", label: "Brew from the cards (untested)", cards: fix(br.cards) });
-  (l?.lists || []).forEach((x, i) => out.push({ key: `list:${i}`, label: x.brew ? `Brew: ${x.h}` : `${placeText(x.pl, x.players)} · ${x.h}`, cards: fix(x.cards) }));
+  (l?.lists || []).forEach((x, i) => avoidedIn(Object.keys(x.cards).map((k) => IDX.BY.get(shortCode(k))?.n)).length || out.push({ key: `list:${i}`, label: x.brew ? `Brew: ${x.h}` : `${placeText(x.pl, x.players)} · ${x.h}`, cards: fix(x.cards) }));
   for (const d of decks()) { const L = deckStats(d, IDX, ROW?.inv || {}).legend; if (L && IDX.legendName(L) === name) out.push({ key: `deck:${d.id}`, label: `Your deck: ${d.name}`, cards: { ...d.cards } }); }
   return out;
 };
@@ -1321,12 +1402,11 @@ function codeForName(name) {
   if (!nameCode.size) for (const c of IDX.cards) if (!c.v && !nameCode.has(c.n)) nameCode.set(c.n, c.c);
   return nameCode.get(name) || null;
 }
-// Share of the consensus a list keeps, by card name and copies (same measure as the builder).
-function agreement(cards, l) {
-  const c = l?.consensus;
-  if (!c) return null;
+// Share of a net deck a list keeps, by card name and copies (same measure as the builder).
+function agreement(cards, ref) {
+  if (!ref) return null;
   const by = (m) => { const o = new Map(); for (const [k, q] of Object.entries(m)) { const x = IDX.BY.get(shortCode(k)); if (x && !["Legend", "Rune", "Battlefield"].includes(x.t)) o.set(x.n, (o.get(x.n) || 0) + q); } return o; };
-  const a = by(cards), b = by(c.cards);
+  const a = by(cards), b = by(ref);
   let shared = 0, total = 0;
   for (const [n, q] of a) { total += q; shared += Math.min(q, b.get(n) || 0); }
   return total ? shared / Math.max(total, 40) : 0;
@@ -1401,7 +1481,9 @@ function viewBench(name) {
     const t = q.trim().toLowerCase();
     const found = t ? IDX.cards.filter((c) => !c.v && c.t !== "Legend" && c.t !== "Token" && c.n.toLowerCase().includes(t)
       && (c.d || []).every((dd) => dd === "Colorless" || ident.has(dd)) && !(IDX.signatureOf(c) && L && IDX.signatureOf(c) !== IDX.championOf(L))).slice(0, 12) : [];
-    const agNow = agreement(W, l), agBase = agreement(src.cards, l);
+    // Measured against the net deck nearest the list the bench started from, so it holds still.
+    const ref = nearestNet(name, src.cards)?.g.cards;
+    const agNow = agreement(W, ref), agBase = agreement(src.cards, ref);
     v.innerHTML = `<div style="display:flex;flex-direction:column;gap:6px"><a class="small" href="#/idea/${encodeURIComponent(name)}">‹ ${esc(name)}</a></div>
     <section class="panel">
       <div class="headrow"><h1 style="font-size:clamp(30px,5vw,44px)">Tweak bench</h1>
@@ -1418,7 +1500,7 @@ function viewBench(name) {
       <div class="side">
         <section class="panel"><h2>Checks</h2>
           ${checks.map((k) => `<div class="check"><span class="d" style="background:${k.ok === true ? "var(--good)" : k.ok === "later" ? "var(--later)" : "var(--bad)"}"></span><span class="n">${esc(k.label)}</span><span class="num small">${esc(k.val)}</span></div>`).join("")}
-          ${agNow != null ? `<div class="check" style="border-top:1px solid var(--line2);padding-top:10px"><span class="n">Like the consensus</span><span class="num small">${pctI(agBase)} → <b>${pctI(agNow)}</b></span></div>` : ""}
+          ${agNow != null ? `<div class="check" style="border-top:1px solid var(--line2);padding-top:10px"><span class="n">Like the net deck</span><span class="num small">${pctI(agBase)} → <b>${pctI(agNow)}</b></span></div>` : ""}
         </section>
         <section class="panel"><h2>Curve and mana</h2><div id="bench-sim"></div></section>
         <section class="panel"><h2>Engines</h2>${enginesBlock(W, shares, { addable: true, max: 2 })}</section>
@@ -1481,7 +1563,7 @@ function viewFind(legend) {
   return `
   <section class="panel">
     <div class="headrow"><h1>Find a deck</h1></div>
-    <p class="note">The <b>Radiance meta</b> first: every legend by how good it is now and how likely you are to face it. Then <b>Radiance</b> decks: every legend in the events that have played with the set so far${IDEAS?.era?.allPreRelease ? " — online previews only, until it is legal on " + esc(IDEAS.era.legalFrom) : ""}, each with a consensus list counted from its placed lists and, for some, a Claude build. Last, as context, Riot's own record of the Vendetta Regional Qualifiers: who brought what on Day 1, how many made Day 2, and the Top 8. <strong>Converts</strong> is Day 2 share ÷ Day 1 share, so above 1.00 the deck beat the room and below it lost to it.</p>
+    <p class="note">The <b>Radiance meta</b> first: every legend by how good it is now and how likely you are to face it. Then <b>Radiance</b> decks: every legend in the events that have played with the set so far${IDEAS?.era?.allPreRelease ? " — online previews only, until it is legal on " + esc(IDEAS.era.legalFrom) : ""}, each with its net decks — its good finishes split into the decks they are and counted, this format's and the last one's — and, for some, a Claude build. Last, as context, Riot's own record of the Vendetta Regional Qualifiers: who brought what on Day 1, how many made Day 2, and the Top 8. <strong>Converts</strong> is Day 2 share ÷ Day 1 share, so above 1.00 the deck beat the room and below it lost to it.</p>
   </section>
   <section class="panel" style="flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
     <span><b>Archetypes</b> <span class="dim">— what every legend's deck is trying to do, by colour pair, with game plans and matchup notes.</span></span>

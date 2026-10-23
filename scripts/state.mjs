@@ -725,8 +725,12 @@ async function cmdIdeas(cat, args) {
   if (!q) {
     console.log(`RADIANCE ERA · ${I.era.events.length} events · ${I.era.placed} placed lists · ${I.era.brews} brews · built ${I.generatedAt}`);
     for (const e of I.era.events) console.log(`  ${e.date}  ${String(e.players ?? "?").padStart(4)} players  ${e.name}`);
-    console.log(`\n  ${pad("legend", 34)} new  placed top8  best      brews  basis`);
-    for (const l of I.legends) console.log(`  ${pad(l.name, 34)} ${l.isNew ? "NEW" : "   "}  ${String(l.placed).padStart(6)} ${String(l.top8).padStart(4)}  ${pad(l.best ? `#${l.best.pl}/${l.best.players ?? "?"}` : "—", 8)} ${String(l.brews).padStart(5)}  ${l.basis}`);
+    // The best playable net deck per legend: this format's, else the last one's (lib/netdeck.mjs).
+    const net = (name) => { for (const f of ["now", "last"]) { const g = (I.netdecks?.[name]?.[f] || []).find((x) => !x.avoid.length); if (g) return `${g.status} ${g.lists}${f === "last" ? ` (${I.formats.last.name})` : ""}`; } return "—"; };
+    console.log(`\n  ${pad("legend", 34)} new  placed top8  best      brews  net deck`);
+    for (const l of I.legends) console.log(`  ${pad(l.name, 34)} ${l.isNew ? "NEW" : "   "}  ${String(l.placed).padStart(6)} ${String(l.top8).padStart(4)}  ${pad(l.best ? `#${l.best.pl}/${l.best.players ?? "?"}` : "—", 8)} ${String(l.brews).padStart(5)}  ${net(l.name)}`);
+    const older = Object.keys(I.netdecks || {}).filter((n) => !I.legends.some((l) => l.name === n));
+    if (older.length) console.log(`\n  only ${I.formats.last.name} finishes: ${older.map((n) => `${n.split(",")[0]} (${net(n)})`).join(" · ")}`);
     const quiet = I.newLegends.filter((n) => !I.legends.some((l) => l.name === n.name));
     if (quiet.length) console.log(`\n  new legends with no lists yet: ${quiet.map((n) => n.name).join(" · ")}`);
     return;
@@ -749,36 +753,53 @@ async function cmdIdeas(cat, args) {
       .filter((x) => /^- \*\*/.test(x)).map((x) => "  " + x.replace(/\*\*/g, "")).join("\n"));
     console.log("");
   }
-  const l = I.legends.find((x) => x.name.toLowerCase().includes(q));
-  if (!l) { console.log(`no Radiance-era lists for a legend matching "${q}"`); process.exit(arch ? 0 : 1); }
-  const c = l.consensus;
-  console.log(`${l.name.toUpperCase()}${l.isNew ? " (new in Radiance)" : ""} · ${l.placed} placed · top 8 ×${l.top8} · ${l.brews} brews`);
-  console.log(`finishes: ${l.finishes.map(([p, n]) => `#${p}/${n ?? "?"}`).join(" ") || "none"}`);
-  if (!c) { console.log("too few lists for a consensus"); return; }
-  console.log(`\nCONSENSUS from ${c.from} ${l.basis === "placed" ? "placed lists" : "BREWS (fewer than 3 placed lists)"} · % = share of those lists playing the card`);
-  for (const r of c.main) console.log(`  ${r.copies}  ${pad(r.name, 30)} ${pad(r.type, 8)} ${pct(r.inc)}`);
-  console.log(`  runes: ${c.runes.map((r) => `${r.copies} ${r.name}`).join(", ")}`);
-  console.log(`  battlefields: ${c.battlefields.map((b) => `${b.name} ${pct(b.inc).trim()}`).join(", ")}`);
-  if (c.flex.length) console.log(`  flex: ${c.flex.map((r) => `${r.name} ${pct(r.inc).trim()}`).join(" · ")}`);
-  if (c.checks.length) console.log(`  checks: ${c.checks.map((k) => `${k.label} ${k.val}`).join(" · ")}`);
-  if (l.changes) {
+  // A legend with Radiance-era lists, or with only good finishes in the last format.
+  const lname = [...new Set([...I.legends.map((x) => x.name), ...Object.keys(I.netdecks || {})])].sort().find((n) => n.toLowerCase().includes(q));
+  const l = I.legends.find((x) => x.name === lname) || null, N = I.netdecks?.[lname] || null;
+  if (!l && !N) { console.log(`no lists for a legend matching "${q}"`); process.exit(arch ? 0 : 1); }
+  console.log(`${lname.toUpperCase()}${l?.isNew ? " (new in Radiance)" : ""}${l ? ` · ${l.placed} Radiance-format finishes (any) · top 8 ×${l.top8} · ${l.brews} brews` : ""}`);
+  if (l) console.log(`finishes: ${l.finishes.map(([p, n]) => `#${p}/${n ?? "?"}`).join(" ") || "none"}`);
+  // Net decks (lib/netdeck.mjs): good finishes, one per finish, split into the decks they are.
+  const finish = (p) => (p.pl != null ? `#${p.pl}/${p.players ?? "?"}` : p.cp ? `claimed top ${p.cp}` : "?");
+  for (const f of ["now", "last"]) {
+    const gs = N?.[f] || [], fmt = I.formats.now && I.formats[f].name;
+    console.log(`\n${fmt.toUpperCase()} NET DECKS${f === "last" ? " (last format, still legal)" : ""}${gs.length ? "" : ": no good finish yet"}`);
+    for (const g of gs) {
+      const tag = g.avoid.length ? `NOT FOR YOU — runs ${g.avoid.join(", ")} (lib/avoid.mjs); shown for the field` : { net: "NET DECK", early: "EARLY", single: "AS PLAYED" }[g.status];
+      console.log(`  ${tag}${g.preview ? " · online preview" : ""}${g.marks.length ? ` · with ${g.marks.join(" · ")}` : ""}`);
+      console.log(`    ${g.lists} finishes · ${g.events} events · ${g.records} recorded${g.claims ? `, ${g.claims} claimed` : ""} · best ${finish(g.best)}${g.best.ev ? ` at ${g.best.ev}` : ""} · latest ${g.through}`);
+      for (const m of g.misses) if (g.status === "early") console.log(`    not a net deck yet: ${m}`);
+      if (g.avoid.length) continue;
+      if (g.count) {
+        console.log(`    ${g.count.main.map((r) => `${r.copies} ${r.name} ${pct(r.inc).trim()}`).join(" · ")}`);
+        console.log(`    runes: ${g.count.runes.map((r) => `${r.copies} ${r.name}`).join(", ")} · battlefields: ${g.count.battlefields.map((b) => b.name).join(", ")}`);
+        if (g.count.flex.length) console.log(`    flex: ${g.count.flex.map((r) => `${r.name} ${pct(r.inc).trim()}`).join(" · ")}`);
+        console.log(`    closest real list: ${g.closest.h} (${finish(g.closest)}), ${g.closest.changed} copies off`);
+      } else console.log(`    ${g.best.h}`);
+    }
+  }
+  // The leading playable net deck — this format's, else the last one's — is what the rest reads.
+  const lead = ["now", "last"].map((f) => (N?.[f] || []).find((g) => g.count && !g.avoid.length)).find(Boolean);
+  const c = lead?.count ? { ...lead.count, cards: lead.cards } : null;
+  if (!c) return;
+  if (l?.changes) {
     console.log(`\nVS ${l.changes.vs} placed Vendetta lists since ${l.changes.since}`);
     if (l.changes.added.length) console.log(`  in:  ${l.changes.added.map((r) => `${r.name} ${pct(r.before).trim()}→${pct(r.now).trim()}`).join(" · ")}`);
     if (l.changes.dropped.length) console.log(`  out: ${l.changes.dropped.map((r) => `${r.name} ${pct(r.before).trim()}→${pct(r.now).trim()}`).join(" · ")}`);
-  } else if (l.isNew) console.log("\nnew legend: no Vendetta lists to compare");
-  // Engines read off the consensus's card text, and what would feed them.
+  } else if (l?.isNew) console.log("\nnew legend: no Vendetta lists to compare");
+  // Engines read off the leading net deck's card text, and what would feed them.
   const fix = (m) => Object.fromEntries(Object.entries(m).map(([k, n]) => [cat.BY.has(k) ? k : (cat.cards.find((c) => c.c.replace(/\/\d+$/, "") === k.replace(/\/\d+$/, ""))?.c || k), n]));
   // Cards the winners skip are questions, not suggestions (data/research.json).
   const R = await readJson(url("research.json")).catch(() => null);
-  const EN = annotateEngines(deckEngines(fix(c.cards), cat.idx, { shares: l.shares || {}, max: 40 }), R, l.name).slice(0, 3);
+  const EN = annotateEngines(deckEngines(fix(c.cards), cat.idx, { shares: l?.shares || {}, max: 40 }), R, lname).slice(0, 3);
   if (EN.length && !EN[0].loop) console.log(`\nNO ENGINE: no loop of payoff and feeder in this list (a curve, removal or ramp deck). Incidental patterns:`);
   for (const e of EN) {
     console.log(`\n${e.loop ? "ENGINE" : "PATTERN"} ${e.name.toUpperCase()} · pays off: ${e.payoffs.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}${e.enablers.length ? ` · feeds it: ${e.enablers.map((x) => `${x.qty} ${x.legend ? "legend" : x.name}`).join(", ")}` : ""}`);
     for (const k of e.candidates.slice(0, 6)) console.log(`  could add ${pad(k.name, 28)} ${k.set === "RAD" ? "RAD" : "   "} ${pad(k.share != null ? `${Math.round(k.share * 100)}% play it` : "untried", 13)} "${k.text.slice(0, 80)}"`);
     if (e.held.length) console.log(`  winners skip: ${e.held.map((k) => k.name).join(", ")}`);
   }
-  const Q = (R?.items || []).filter((i) => i.legend === l.name);
-  const RL = R?.legends?.[l.name];
+  const Q = (R?.items || []).filter((i) => i.legend === lname);
+  const RL = R?.legends?.[lname];
   if (Q.length || RL?.unread?.length) {
     console.log(`\nOPEN QUESTIONS (data/research.json; answers in docs/research.md)`);
     for (const i of Q) {
@@ -790,16 +811,22 @@ async function cmdIdeas(cat, args) {
   }
   try {
     const S = await loadState();
-    const mine = (S.decks || []).filter((d) => Object.keys(d.cards || {}).some((k) => k === l.code || cat.BY.get(k)?.n === cat.BY.get(l.code)?.n && cat.BY.get(k)?.t === "Legend"));
+    const mine = (S.decks || []).filter((d) => Object.keys(d.cards || {}).some((k) => cat.BY.get(k)?.t === "Legend" && cat.idx.legendName(cat.BY.get(k)) === lname));
     for (const d of mine) {
       const name = (k) => cat.BY.get(k)?.n || k;
       const have = new Map(); for (const [k, n] of Object.entries(d.cards)) have.set(name(k), (have.get(name(k)) || 0) + n);
+      // Against the playable net deck nearest this deck (this format's first), not one blend.
+      const mainHave = new Map([...have].filter(([n]) => !/^(Rune|Legend|Battlefield)$/.test(cat.BY.get(Object.keys(d.cards).find((k) => name(k) === n))?.t || "")));
+      const off = (g) => { let s = 0, t = 0; for (const [n, q] of mainHave) { t += q; s += Math.min(q, g.count.main.find((r) => r.name === n)?.copies || 0); } return Math.max(t, 40) - s; };
+      const near = ["now", "last"].map((f) => (N?.[f] || []).filter((g) => g.count && !g.avoid.length).map((g) => ({ g, f, off: off(g) })).sort((a, b) => a.off - b.off)[0]).find(Boolean);
+      if (!near) continue;
+      const c = near.g.count;
       const add = c.main.filter((r) => (have.get(r.name) || 0) < r.copies).map((r) => `${r.copies - (have.get(r.name) || 0)} ${r.name} (${pct(r.inc).trim()})`);
       const inc = new Map([...c.main, ...c.flex].map((r) => [r.name, r.inc]));
       const cut = [...have].filter(([n]) => { const t = cat.BY.get(Object.keys(d.cards).find((k) => name(k) === n))?.t; return t !== "Rune" && t !== "Legend" && t !== "Battlefield" && (inc.get(n) || 0) < 0.2; }).map(([n, k]) => `${k} ${n}`);
-      console.log(`\nYOUR "${d.name}" vs the consensus\n  add: ${add.join(" · ") || "nothing"}\n  played by under 20%: ${cut.join(" · ") || "nothing"}`);
+      console.log(`\nYOUR "${d.name}" vs the nearest ${I.formats[near.f].name} net deck${near.g.marks.length ? ` (with ${near.g.marks.join(" · ")})` : ""}, ${near.off} copies off\n  add: ${add.join(" · ") || "nothing"}\n  played by under 20%: ${cut.join(" · ") || "nothing"}`);
     }
-  } catch { /* offline: the consensus stands on its own */ }
+  } catch { /* offline: the net decks stand on their own */ }
 }
 
 // A brew (data/brews.json, scripts/build-brews.mjs): a winning list changed on purpose —

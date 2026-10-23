@@ -26,8 +26,12 @@
 import { readFile, writeFile, readdir } from "node:fs/promises";
 import { indexCatalog, deckStats, deckChecks } from "../lib/decks.mjs";
 import { counter } from "../lib/consensus.mjs";
+import { isGoodPlacing, riotRows } from "../lib/placing.mjs";
+import { netdeckMaker } from "../lib/netdeck.mjs";
 
 const ERA_SET = "RAD";
+const LAST_SET = { set: "VEN", name: "Vendetta" };   // the format before it, for net decks
+const ERA_NAME = "Radiance";
 const ERA_FROM = "2026-10-09";   // Radiance revealed in full (Riot's errata and rules, 9 Oct)
 const ERA_LEGAL = "2026-10-23";  // Radiance's release, TR §601.3.c.6.a. Kept here, not read from
                                  // lib/decks.mjs, whose entry is deleted once the set is legal
@@ -41,7 +45,7 @@ const read = async (f) => JSON.parse(await readFile(new URL(`../data/${f}`, impo
 const round = (x) => Math.round(x * 100) / 100;
 
 const main = async () => {
-  const [cat, extras, banned, snap] = await Promise.all([read("cards.json"), read("extras.json"), read("banned.json"), read("decks.json")]);
+  const [cat, extras, banned, snap, topdecks] = await Promise.all([read("cards.json"), read("extras.json"), read("banned.json"), read("decks.json"), read("topdecks.json").catch(() => null)]);
   const known = new Set(cat.cards.map((c) => c.c));
   const idx = indexCatalog([...cat.cards, ...(extras.cards || []).filter((c) => c.c && !known.has(c.c))], banned);
   // The feed cites "OGN-042" for "OGN-042/298"; resolve both.
@@ -154,6 +158,33 @@ const main = async () => {
   const newLegends = idx.cards.filter((c) => c.t === "Legend" && c.s === ERA_SET && !c.v)
     .map((c) => ({ name: idx.legendName(c), code: c.c, domains: c.d || [] }));
 
+  /* ── net decks ───────────────────────────────────────────────────────────
+     Every legend with a good placing (lib/placing.mjs), not only the ones above: its lists
+     split into the decks they are and counted, each judged on whether it has earned the
+     name (lib/netdeck.mjs). Two formats, never mixed: this one's events, and the last
+     format's — still legal, and for most legends all the evidence there is today. Riot's
+     Top 8 and Best Of lists count, as they do for the brews. */
+  const byName = new Map();
+  for (const c of idx.cards) if (!c.v && !byName.has(c.n)) byName.set(c.n, c);
+  const riot = topdecks ? riotRows(topdecks, snap, card, byName).filter((d) => card(d.lg)) : [];
+  const good = [...decks, ...riot].filter(isGoodPlacing).filter((d) => !bannedNow(d));
+  const preRelease = new Map(events.map((e) => [e.name, e.preRelease]));
+  const { netdecks } = netdeckMaker(idx, card);
+  const netByLegend = {};
+  for (const name of [...new Set(good.map(legendOf))].sort()) {
+    const mine = good.filter((d) => legendOf(d) === name);
+    // A list with a Radiance card — the legend included — is a Radiance list whatever its
+    // event: a claim carries no event to classify it by, and "Riven wins NovaRiftbound's
+    // Showdown 5" had filed a Radiance legend under Vendetta. Claims before the legal date
+    // are previews, like the events they name.
+    const isNow = (d) => eraEvents.has(d.ev) || Object.keys(d.cards).some(isEra);
+    const now = mine.filter(isNow), last = mine.filter((d) => !isNow(d));
+    netByLegend[name] = {
+      now: netdecks(now, { preview: (d) => (d.ev && preRelease.has(d.ev) ? preRelease.get(d.ev) : d.dt < ERA_LEGAL) }),
+      last: netdecks(last),
+    };
+  }
+
   /* ── Claude's builds ─────────────────────────────────────────────────────
      Hand-written, one JSON file each in builds/. They are carried into ideas.json so
      the site makes one request, and checked on the way: a build that breaks a deck
@@ -197,6 +228,8 @@ const main = async () => {
     newLegends,
     legends,
     builds,
+    formats: { now: { set: ERA_SET, name: ERA_NAME }, last: LAST_SET },
+    netdecks: netByLegend,
   };
   await writeFile(new URL("../data/ideas.json", import.meta.url), JSON.stringify(out) + "\n");
 
@@ -206,6 +239,9 @@ const main = async () => {
   console.log(`\n${legends.length} legends · ${legends.filter((l) => l.basis === "placed").length} with a placed consensus, ${legends.filter((l) => l.basis === "brews").length} from brews`);
   for (const l of legends.slice(0, 14))
     console.log(`  ${l.name.padEnd(34)} ${l.isNew ? "NEW" : "   "} placed ${String(l.placed).padStart(2)} · top8 ${l.top8} · best ${l.best ? `#${l.best.pl}/${l.best.players ?? "?"}` : "—"} · brews ${String(l.brews).padStart(3)} · ${l.basis}${l.consensus?.checks.filter((k) => k.ok === false).length ? " · CONSENSUS BREAKS A RULE" : ""}`);
+  const nd = Object.values(netByLegend).flatMap((x) => [...x.now.map((g) => ({ ...g, f: "now" })), ...x.last.map((g) => ({ ...g, f: "last" }))]);
+  const byStatus = (f) => ["net", "early", "single"].map((s) => `${nd.filter((g) => g.f === f && g.status === s && !g.avoid.length).length} ${s}`).join(", ");
+  console.log(`\nnet decks over ${Object.keys(netByLegend).length} legends · ${ERA_NAME}: ${byStatus("now")} · ${LAST_SET.name}: ${byStatus("last")} · ${nd.filter((g) => g.avoid.length).length} never-play groups kept for the field`);
   console.log(`\n${builds.length} Claude build${builds.length === 1 ? "" : "s"}: ${builds.map((b) => b.title).join(" · ") || "none"}`);
   if (!events.length) console.log("\nNOTE: no Radiance-format event in the snapshot. Consensus comes from brews only.");
 };

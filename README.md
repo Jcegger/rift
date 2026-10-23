@@ -150,6 +150,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `data/ideas.json` - the Radiance-era deck ideas: per legend, its results in
   Radiance-format events, a consensus list counted from its placed lists (or brews,
   labelled), what changed against its Vendetta lists, and Claude's builds from `builds/`.
+  `netdecks` holds every legend with a good finish (`lib/netdeck.mjs`): this format's net
+  decks and the last format's, Riot's Top 8 and Best Of lists included. The idea page, the
+  bench, "Against the net deck" on a deck page and `scripts/rift ideas` read these; the older
+  `consensus` (every Radiance-format finish, good or not) stays for the archetypes and checks.
 - `scripts/build-catalog.mjs` - regenerates the catalog from Riot's gallery feed.
 - `scripts/build-decks.mjs` - regenerates the deck snapshot, holding placeholder lists apart
   (`isPlaceholder`; `check.mjs` asserts none is left among the decks).
@@ -224,7 +228,11 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   47th, and two claimed top-512s. `riotRows()` turns Riot's Top Decks articles into snapshot
   rows so a Best Of — a legend's best finisher at an RQ — is judged by the same cut: 330th of
   2,165 is one, 567th of 1,962 is not. Of the 111 lists in the window's three articles, 77
-  were already uploaded and are skipped; 31 are added. Tests: `lib/placing.test.mjs`.
+  were already uploaded and are skipped; 31 are added. `oneFinishEach()` counts a finish
+  once: deck sites' "copy" button reposts a list under its author's title, and on 23 Oct 2026
+  127 of 656 good placings were reposts of a claimed finish (Azir's "Top 4 Barcelona RQ"
+  eight times). Used by the net decks; the brews and scoreboard do not use it yet.
+  Tests: `lib/placing.test.mjs`.
 - `lib/avoid.mjs` - decks Jay never plays: anything running Dazzling Aurora. A brew running
   it is kept (for the field) but never offered — `worth` false, and `scripts/rift brew` says
   why; a swap never brings it in; `scripts/rift tune` notes it in your own deck. Matchup and
@@ -263,7 +271,17 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `lib/research.mjs` - reads `data/research.json` for the site and `scripts/rift`: a card
   the winners skip is held back from suggestions until its question is answered "test".
 - `lib/consensus.mjs` - counting a set of lists into the list they add up to; shared by
-  `build-ideas.mjs` and `build-archetypes.mjs`.
+  `build-ideas.mjs`, `build-archetypes.mjs` and `lib/netdeck.mjs`.
+- `lib/netdeck.mjs` - a legend's net decks: its good finishes, one per finish (claims titled
+  for another champion dropped), Aurora lists partitioned off for the field, split where
+  lists are on average 20 copies apart (average linkage), and each group counted by
+  `lib/consensus.mjs`. A group is a **net** deck with 3+ finishes from 2+ events, 2+ of them
+  recorded, its lists a median 9 copies or fewer from the count, and a legal 40; otherwise
+  **early** (each miss named) or, under 3 finishes, the best list **as played**. Tests and
+  measurement: `lib/netdeck.test.mjs` — leave-one-out over the 15 legends with 8+ distinct
+  good finishes: where legends split, the groups get 31.5 of a hidden winner's 40 against
+  29.8 for one count and 30.4 for the same lists dealt into random groups. See
+  `docs/deckbuilding.md`, "Net decks".
 - `lib/infer.mjs` - a legend's archetype inferred from its cards alone, in the order a deck is
   built: legend ability and cost, chosen champion, signature, colour pair, then the cards that
   should (winners' core) or can be in it. Votes a main archetype (aggro, tempo, midrange,

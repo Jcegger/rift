@@ -229,6 +229,73 @@ which the backtest never was. It scores 28 days after a suggestion against the l
 placings, and only where both 28-day windows hold 10+ of them — so most of the log will
 never be scored, and the first scores land in mid-November.
 
+## Net decks — what earns the name (23 Oct 2026)
+
+The idea page used to show one consensus per legend: every Radiance-format list with any
+recorded finish, counted together. Three things were wrong with that, and the net decks
+(`lib/netdeck.mjs`) fix each.
+
+**How others do it.** Frank Karsten's aggregate lists ([ChannelFireball, 2015](https://web.archive.org/web/20201111223914/https://www.channelfireball.com/articles/magic-math-a-new-way-to-determine-an-aggregate-deck-list-rg-dragons/))
+showed why an average deck fails — it takes inferior cards, loses each plan's synergy when
+two builds are mixed ("an awkward mess"), and lands on fractions — and counted every copy
+as its own entry instead. [ManaVault](https://manavault.gg/blog/archetypes-forest-from-trees)
+groups decks by density clustering on weighted card vectors, wants 5–10 similar lists before
+calling a group real, leaves the rest unclassified, and prefers a real list (the medoid) to a
+synthetic one. HSReplay defines an archetype by a core of cards with inclusion rates, and
+academic Hearthstone work clusters decks on shared cards (DBSCAN, k-means, fuzzy multisets).
+[thoughtscour](https://thoughtscour.bearblog.dev/deck-archetypes-are-hurting-mtg-metagame-reporting/)
+argues labels hide the version differences that matter — which is the case for showing
+each group's list rather than a name.
+
+**What this does, and what the data changed.**
+
+1. **One finish, one list.** 127 of 656 good placings were reposts of a claimed finish
+   through deck sites' "copy" button; measured on distinct finishes, they were 26% of the
+   lists. A claim titled for another champion — a copied Rek'Sai top 4 rebuilt as
+   Mordekaiser — is not its list's finish. Only good placings count (§ "Good placings").
+2. **Never-play lists partitioned first** (`lib/avoid.mjs`): an Aurora build can neither
+   lend its results to a clean group nor hide inside one. Its group is kept for the field.
+3. **Split where lists are half a deck apart**: average linkage on changed copies, merging
+   while two groups average 20 or fewer apart. Density clustering needs more lists than most
+   legends have.
+4. **Counted with `lib/consensus.mjs`**, the brews' counter, not Karsten's method — see below.
+
+**The measurement** (`lib/netdeck.test.mjs`): hide each of a legend's distinct good finishes
+in turn, build from the rest, and count the hidden list's 40 the result gets — the blind
+test's yardstick — over the 15 legends with 8+. The control deals the same lists into random
+groups of the same sizes, so a gain from merely having more options to pick from in
+hindsight does not pass for structure.
+
+| cut | legends split | one count | grouped | random groups |
+|---|---|---|---|---|
+| 16 (§3's "different deck") | 8 | 31.2 | 32.7 | 31.8 |
+| **20** | **5** | **29.8** | **31.5** | **30.4** |
+| 24 | 4 | 29.8 | 31.0 | 30.3 |
+
+At 16 most of the gain is choice; at 20 the groups beat random by the most, 1.1 cards, on
+the five legends that really are two decks (Kennen, Master Yi, Viktor, Vex, Fiora).
+Legends that are one deck lose nothing (33.9 either way). **Karsten's aggregate tied the
+median count** — 32.5 of 40 each over all 15 — because once lists are grouped there is
+little left to blend; the test keeps it as the comparison.
+
+**What qualifies.** A group is a **net deck** only when all of these hold:
+
+| bar | why |
+|---|---|
+| 3+ good finishes | under 3 there is nothing to count; the best list is shown as played |
+| from 2+ events | one event's lists can be one team's list |
+| 2+ of them recorded | claims are the authors' own titles (CLAUDE.md) |
+| its lists a median 9 or fewer copies from the count | the room two winners give each other (§3); further, the count describes no list |
+| a legal 40 | lib/decks.mjs |
+
+A group that misses a bar is **early**, and the page names the miss. Preview events are
+labelled as previews. This format's net decks come first; the last format's follow, still
+legal, because on Radiance's release day it is nearly all the evidence: one Radiance net
+deck (Kennen), two early (Riven and Kai'Sa, 4 finishes each but one event), 24 Vendetta.
+
+These bars are judgement against the sources above, not fitted; they join the frozen
+thresholds and change on the same terms.
+
 ## What the guides say, and where they part from the data
 
 - riftbound.gg's [Deckbuilding 101](https://riftbound.gg/deckbuilding-101-building-your-first-riftbound-deck/):

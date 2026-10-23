@@ -616,6 +616,40 @@ section('Deck ideas');
     const orphan = I.builds.filter((b) => !I.legends.some((l) => l.name === b.legend));
     ok("every Claude build belongs to a legend with Radiance-era evidence", !orphan.length,
        orphan.length ? orphan.map((b) => b.id).join(', ') : `${I.builds.length} builds`);
+
+    // Net decks (lib/netdeck.mjs). What the label promises, checked on the output: a "net"
+    // deck met every bar, a counted one is a whole legal deck, no finish is in two groups,
+    // and nothing offered runs a never-play card (CLAUDE.md, "Never suggest an Aurora deck").
+    const ND = I.netdecks ? Object.entries(I.netdecks).flatMap(([n, x]) => ['now', 'last'].flatMap((f) => (x[f] || []).map((g) => ({ n, f, g })))) : null;
+    ok('ideas carry net decks, for this format and the last', !!ND && !!I.formats?.now && !!I.formats?.last, ND ? `${ND.length} groups over ${Object.keys(I.netdecks).length} legends` : 'none — run build-ideas.mjs');
+    if (ND) {
+      const { MIN_LISTS, MIN_EVENTS, MIN_RECORDS, NEAR } = await import('../lib/netdeck.mjs');
+      const { NEVER_PLAY } = await import('../lib/avoid.mjs');
+      // The catalog plus extras (Unleashed's runes, UNL-R01…, are only in extras).
+      const cards = [...read('data/cards.json').cards, ...(read('data/extras.json').cards || [])].filter((c) => c.c);
+      const byShort = new Map(cards.map((c) => [c.c.replace(/\/\d+$/, ''), c]));
+      const C = (k) => byShort.get(String(k).replace(/\/\d+$/, ''));
+      const zone = (g, t) => Object.entries(g.cards).reduce((a, [k, q]) => a + (C(k)?.t === t ? q : 0), 0);
+      const mainN = (g) => Object.entries(g.cards).reduce((a, [k, q]) => a + (['Unit', 'Spell', 'Gear'].includes(C(k)?.t) ? q : 0), 0);
+      const fake = ND.filter(({ g }) => g.status === 'net' && !(g.lists >= MIN_LISTS && g.events >= MIN_EVENTS && g.records >= MIN_RECORDS && g.near <= NEAR && !g.misses.length));
+      ok('a "net" deck met every bar: 3+ finishes, 2+ events, 2+ recorded, lists within 9 copies, nothing missed', !fake.length,
+         fake.map(({ n, f }) => `${n} (${f})`).join(', ') || `${ND.filter(({ g }) => g.status === 'net').length} net decks`);
+      const short = ND.filter(({ g }) => g.status !== 'single' && !(mainN(g) === 40 && zone(g, 'Rune') === 12 && zone(g, 'Battlefield') === 3 && zone(g, 'Legend') === 1));
+      ok('every counted net deck is a whole deck: 40 main, 12 runes, 3 battlefields, a legend', !short.length, short.map(({ n, f }) => `${n} (${f})`).join(', ') || 'all whole');
+      const unexplained = ND.filter(({ g }) => g.status === 'early' && !g.misses.length);
+      ok('an "early" net deck names what it misses', !unexplained.length, unexplained.map(({ n }) => n).join(', ') || 'all named');
+      const twice = Object.entries(I.netdecks).filter(([, x]) => ['now', 'last'].some((f) => { const s = (x[f] || []).flatMap((g) => g.members.map((m) => m.s)); return new Set(s).size !== s.length; }));
+      ok('no finish is counted in two groups', !twice.length, twice.map(([n]) => n).join(', ') || 'none');
+      const sneaky = ND.filter(({ g }) => !g.avoid.length && Object.keys(g.cards).some((k) => NEVER_PLAY.has(C(k)?.n)));
+      ok('no group offered as playable runs a never-play card', !sneaky.length, sneaky.map(({ n, f }) => `${n} (${f})`).join(', ') || `${ND.filter(({ g }) => g.avoid.length).length} never-play groups kept for the field only`);
+      const lateNow = ND.filter(({ f, g }) => f === 'last' && g.preview);
+      ok("a preview event's lists are only ever this format's", !lateNow.length, lateNow.map(({ n }) => n).join(', ') || 'none');
+      // The last format's groups cannot hold this format's cards (a claim names no event to
+      // sort it by; Riven's Showdown win was once filed under Vendetta).
+      const set = I.formats?.now?.set;
+      const misfiled = ND.filter(({ f, g }) => f === 'last' && Object.keys(g.cards).some((k) => C(k)?.s === set || String(k).startsWith(`${set}-`)));
+      ok(`no ${I.formats?.last?.name || 'last-format'} net deck runs a ${I.formats?.now?.name || 'new'} card`, !misfiled.length, misfiled.map(({ n }) => n).join(', ') || 'none');
+    }
   }
 }
 
