@@ -1,22 +1,57 @@
 # decklab — building decks together
 
 One worksheet per deck project. Not on the site and not generated: a deck here is argued
-out with Jay, a step at a time.
+out with Jay, a step at a time. Jay owns the calls, the taste and the plan; Claude brings the
+reads and the data, says how sure it is, and doesn't reverse a call without new evidence.
 
-Each worksheet has five sections, filled in order, each agreed before the next:
+## The stages
 
-1. **How it wins** — the plan: how it scores, what it does early, its engine, how it closes,
-   and its role in each likely matchup.
-2. **Roles and slots** — the jobs the plan needs, with target counts, before any card is
-   named. Targets start from what winning lists look like and bend to the plan.
-3. **Card by card** — each card's role, why it is there, its rules checked, its evidence,
-   and what competes for its slot.
-4. **Checks** — deck rules, curve against winners, the goldfish and rune sweep
-   (`lib/sim.mjs`). Tools check what was picked; they never pick.
-5. **Log** — games, results, and each change with its reason.
+Each worksheet runs in order, each stage agreed before the next.
+
+| stage | what happens | who leads |
+|---|---|---|
+| **1. Identity** | the legend, its colours and champion, the archetype: what the deck *is*, and why it's worth playing | Jay, with Claude's reads of the legend and the field |
+| **2. How it wins** | the plan (how it scores, what it does early, its engine, how it closes), the **goal tiers** that rank what a card is for, and its role in each likely matchup | together |
+| **3. Jobs and targets** | the jobs the plan needs, with target counts, before any card is named. Targets start from what winning lists look like and bend to the plan | together; Claude brings the measured shapes (`lib/placing.mjs`, `data/archetypes.json`) |
+| **4. Card by card** | every legal card read against the jobs: its role, its rules checked, its evidence, what it competes with | Claude reads, Jay decides |
+| **5. Test** | every change measured the same way, whoever proposed it (below) | the tools |
+| **6. Freeze and play** | the list goes out to test; it changes only when a logged game trips one of its watch items | Jay's games, in the match journal |
+
+## Testing a change: `scripts/rift try`
+
+```
+scripts/rift try --deck "nexus night" "-Edge of Night" "+Elnuk Herd"
+scripts/rift try --deck "nexus night" "-2 Rampage" "+2 Rebuke" "sb+2 Rampage" "sb-2 Rebuke"
+```
+
+Before and after, side by side (`lib/decklab.mjs`):
+
+- **rules** — the eleven deck checks the app runs;
+- **shape** — curve, Hidden, printed Power by colour;
+- **goldfish** — `lib/sim.mjs` with the legend's Gold and hiding on: units by turn 2 and 3,
+  stuck on colour, cards face down, and **an answer usable on their turn** (face down, or paid
+  from what developing left), not cards in hand;
+- **field** — the S and A tiers of `data/field.json`, each legend's legal lists weighted two
+  ways (popularity: lists; results: placings): spells Defy would counter, answers per regular
+  6+ Might unit and how many are free from face down, exposure to Might-limited removal, and
+  a blast's reach when the deck has one.
+
+Then read it against the deck's goal tiers from stage 2. The tools test what was picked;
+they never pick. For one matchup in detail, `scripts/rift versus <legend> --deck "<name>"`.
+
+## Working rules
+
+- **Every proposed change goes through `try`**, Jay's or Claude's. Nothing is in because of
+  who suggested it.
+- **Start from what breaks the plan**, then look for the card that fixes it, not card against
+  card.
+- **Each change logs a decision record** in section 5: what it fixes, the evidence, how sure
+  (high, moderate, none), and the result that would reverse it.
+- **Label every number**: in hand or usable, goldfish or field, popularity or results.
+- **No 100%.** An untested list is untested.
 
 Rules claims follow CLAUDE.md: handbook first, verbatim where it is load-bearing. Evidence
 follows the repo's standing rules: no invented numbers, cost is never the axis, and no deck
 running Dazzling Aurora.
 
-Worksheets: [sivir-midrange.md](sivir-midrange.md) (the base), [sivir-nexus-night.md](sivir-nexus-night.md) (a 3-0 at Nexus Night).
+Worksheets: [sivir-midrange.md](sivir-midrange.md) (the base), [sivir-nexus-night.md](sivir-nexus-night.md) (a 3-0 at Nexus Night; frozen for testing 24 Oct 2026).

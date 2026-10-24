@@ -611,3 +611,10 @@ tokens, made in play, so they are not in the lists and not in his numbers.
     (+2 per flip, but a 4-drop and not hidden), Momentary Companion, Teemo, Scout.
   - Saved to the Decks tab (row backed up first). Sideboard plans: Kai'Sa takes out Elnuk with
     the two Graves.
+- **24 Oct 2026 — one Elnuk, not two** (Jay asked, comparing Kha'Zix's two Rengar). Rengar
+  was Kha'Zix's only big unit; here Mercenary is that unit, always available. Elnuk's job is the
+  +3 flip, its best line needs one of two Graves, and as a 6-Energy card in hand it is the
+  deck's worst keep after Switcheroo. A second copy would replace a Tornado Warrior, which adds
+  the same ~3 Might on defence but stays as a body and resets Matriarch. **Watch:** if games
+  show the Graves + Elnuk line winning fights, or Tornado's body stunned or blocked at Rockfall
+  Path, go −1 Tornado Warrior, +1 Elnuk Herd.

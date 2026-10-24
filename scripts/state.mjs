@@ -11,6 +11,7 @@
 //   node scripts/state.mjs sets            # base-set completion
 //   node scripts/state.mjs raw             # the raw state JSON, pretty-printed
 //   node scripts/state.mjs versus kennen --deck "nexus night"   # head to head, card by card
+//   node scripts/state.mjs try --deck "nexus night" "-Edge of Night" "+Elnuk Herd"   # test a change
 //   node scripts/state.mjs meta            # archetype shares over sanctioned-legal lists
 //   node scripts/state.mjs meta diana      # one archetype: card play rates, best finishes
 //   node scripts/state.mjs meta leblanc --since 2026-09-15   # only lists played after a date
@@ -44,6 +45,7 @@ import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, SB_MAX } from "../lib/decks.mjs";
 import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive } from "../lib/versus.mjs";
+import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf } from "../lib/decklab.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
 
 const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
@@ -1061,6 +1063,109 @@ async function cmdVersus(S, cat, args) {
   if (unread.length) console.log(`\n  NOT READ (looks like interaction; check by hand): ${named(unread)}`);
 }
 
+// ── try: one proposed change, measured the same way whoever proposed it ───────
+// lib/decklab.mjs. Before and after, side by side: rules, shape, the goldfish with the
+// legend's Gold and hiding (what you can use, not what you hold), and the field: the S and
+// A tiers of data/field.json, each legend's legal lists since --since, weighted by
+// popularity (lists) and by results (placings). Changes: "+Name", "-2 Name", "sb+Name".
+async function cmdTry(S, cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const since = opt("--since") || "2026-10-16";
+  const games = Number(opt("--games") || 20000);
+  const flags = new Set(["--since", "--deck", "--games"]);
+  const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]));
+  const decks = findDecks(S, opt("--deck") || "\u0000");
+  if (decks.length !== 1 || !specs.length) {
+    console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--games 20000]');
+    if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
+    return;
+  }
+  const before = decks[0];
+  let changes, after;
+  try { changes = parseChanges(specs, cat.cards); after = applyChanges(before, changes, cat.cards, cat.BY); }
+  catch (e) { console.log(`try: ${e.message}`); return; }
+
+  // The field: S and A tiers, as data/field.json grades them today.
+  const field = await readJson(url("field.json"));
+  const tiers = field.legends.filter((l) => l.tier === "S" || l.tier === "A");
+  const snap = await readJson(url("decks.json"));
+  const banned = await readJson(url("banned.json")).catch(() => ({ constructed: [] }));
+  const bn = bannedNameSet(banned), std = standardNameSet(banned, cat.cards);
+  const byName = new Map();
+  for (const c of cat.cards) if (!byName.has(c.n) || (!c.v && byName.get(c.n).v)) byName.set(c.n, c);
+  const legendOf = (d) => (d.lg && cat.BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
+  const pool = snap.decks.filter((d) => (d.dt || "") >= since && deckIsLegal(d, cat.BY, bn, std));
+  const fieldDecks = tiers.map((t) => {
+    const title = t.legend.replace(/ - Starter$/, "");
+    const lists = pool.filter((d) => { const l = legendOf(d); const n = (l?.n || d.ln || "").replace(/ - Starter$/, ""); return title === n || title.endsWith(`, ${n}`); });
+    const theirs = [...weigh(lists, (code) => codeName(cat.BY, code))].map(([n, w]) => ({ card: byName.get(n), ...w }))
+      .filter((r) => r.card && !/Legend|Rune|Battlefield/.test(r.card.t) && (r.share >= 0.25 || (effectsOf(r.card).length && r.share >= 0.125)));
+    return { label: `${title} (${t.tier})`, n: lists.length, placed: lists.filter((d) => d.tour && d.pl != null).length, theirs };
+  }).filter((fd) => fd.n);
+
+  const keys = [...new Set([...answerNames(before, cat.BY), ...answerNames(after, cat.BY)])];
+  const gold = (deck) => {
+    const d = buildDeck(deck.cards, cat);
+    const out = {};
+    for (const side of ["play", "draw"]) {
+      const r = rng(1); const gs = [];
+      for (let i = 0; i < games / 2; i++) gs.push(playGame(d, r, side === "draw", POLICIES["keep all"], keys, null, { hide: true }));
+      const avg = (f) => gs.reduce((a, g) => a + f(g), 0) / gs.length;
+      out[side] = { energy: avg((g) => g.spent.slice(0, 4).reduce((a, b) => a + b, 0)), u2: avg((g) => g.units[1]), u3: avg((g) => g.units[2]),
+        two3: avg((g) => (g.units[2] >= 2 ? 1 : 0)), stuck: avg((g) => (g.stuck[2] ? 1 : 0)), down4: avg((g) => g.facedown[3]),
+        ans3: avg((g) => (g.answer[2] ? 1 : 0)), ans5: avg((g) => (g.answer[4] ? 1 : 0)) };
+    }
+    return out;
+  };
+  const rows = [];
+  const add = (label, b, a, fmt, better = 0) => rows.push({ label, b, a, fmt, better });
+  const pc = (x) => (x == null ? "—" : `${Math.round(100 * x)}%`), n1 = (x) => (x == null ? "—" : x.toFixed(1)), n2 = (x) => (x == null ? "—" : x.toFixed(2)), n0 = (x) => String(x);
+
+  const chB = deckChecks(before, cat.idx).filter((k) => k.ok === false).map((k) => k.label);
+  const chA = deckChecks(after, cat.idx).filter((k) => k.ok === false).map((k) => k.label);
+  const sB = shapeOf(before, cat.BY), sA = shapeOf(after, cat.BY);
+  const gB = gold(before), gA = gold(after);
+  const fB = fieldOf(before, cat.BY, fieldDecks), fA = fieldOf(after, cat.BY, fieldDecks);
+
+  console.log(`TRY  ${before.name}\n  ${changes.map((c) => `${c.qty > 0 ? "+" : ""}${c.qty} ${c.name}${c.side === "sb" ? " (sideboard)" : ""}`).join(" · ")}`);
+  console.log(`  rules: before ${chB.length ? "FAIL " + chB.join(", ") : "all pass"} · after ${chA.length ? "FAIL " + chA.join(", ") : "all pass"}`);
+  console.log(`  answers the goldfish tracks (any size, usable on their turn): ${keys.join(", ") || "none"}`);
+  console.log(`  field: ${fieldDecks.length} S/A legends, ${fieldDecks.reduce((a, f) => a + f.n, 0)} lists since ${since} (${fieldDecks.reduce((a, f) => a + f.placed, 0)} placed)\n`);
+
+  add("SHAPE  main cards / sideboard", `${sB.cards} / ${sB.side}`, `${sA.cards} / ${sA.side}`, n0);
+  add("  units · spells · gear", `${sB.units} · ${sB.spells} · ${sB.gear}`, `${sA.units} · ${sA.spells} · ${sA.gear}`, n0);
+  add("  cheap (≤2 Energy)", sB.cheap, sA.cheap, n0, 1);
+  add("  5+ Energy", sB.big, sA.big, n0, -1);
+  add("  average cost", sB.avg, sA.avg, n2);
+  add("  Hidden (spells and gear)", `${sB.hidden} (${sB.hiddenNonUnit})`, `${sA.hidden} (${sA.hiddenNonUnit})`, n0);
+  add("  printed Power", JSON.stringify(sB.power).replace(/[{}"]/g, ""), JSON.stringify(sA.power).replace(/[{}"]/g, ""), n0);
+  for (const side of ["play", "draw"]) {
+    const B = gB[side], A = gA[side];
+    add(`GOLDFISH ${side}  Energy turns 1–4`, B.energy, A.energy, n1, 1);
+    add("  units by turn 2 / 3", `${n1(B.u2)} / ${n1(B.u3)}`, `${n1(A.u2)} / ${n1(A.u3)}`, n0);
+    add("  two units by turn 3", B.two3, A.two3, pc, 1);
+    add("  stuck on colour, turn 3", B.stuck, A.stuck, pc, -1);
+    add("  face down by turn 4", B.down4, A.down4, n1, 1);
+    add("  an answer usable on their turn, t3 / t5", `${pc(B.ans3)} / ${pc(B.ans5)}`, `${pc(A.ans3)} / ${pc(A.ans5)}`, n0);
+  }
+  const both = (x, f) => `${f(x.pop)} · ${f(x.res)}`;
+  add("FIELD (popularity · results)  Defy-countered spells, expected", both(fB.defyHits, n1), both(fA.defyHits, n1), n0);
+  add("  answer copies per regular 6+ unit", both(fB.bigAns, n1), both(fA.bigAns, n1), n0);
+  add("    of which free from face down", both(fB.bigFree, n1), both(fA.bigFree, n1), n0);
+  add("  unit exposure to Might-limited removal", both(fB.exposed, pc), both(fA.exposed, pc), n0);
+  if (fB.blastAlone.pop != null || fA.blastAlone.pop != null) add("  their unit copies a blast kills alone", both(fB.blastAlone, pc), both(fA.blastAlone, pc), n0);
+
+  const w = Math.max(...rows.map((r) => r.label.length)) + 2;
+  console.log(`  ${pad("", w)}${pad("before", 22)}${pad("after", 22)}`);
+  for (const r of rows) {
+    const f = (v) => (typeof v === "number" ? r.fmt(v) : v);
+    // An arrow only where the shown value moved: below display precision is noise.
+    const delta = typeof r.b === "number" && typeof r.a === "number" && f(r.a) !== f(r.b) ? `  ${r.a > r.b ? "▲" : "▼"}` : "";
+    console.log(`  ${pad(r.label, w)}${pad(f(r.b), 22)}${pad(f(r.a), 22)}${delta}`);
+  }
+  console.log(`\n  Card text and counts only: nothing here is a win rate. Read it against the deck's goal tiers in its worksheet.`);
+}
+
 // ── intake: new product into the collection ───────────────────────────────────
 // Cards get entered on Piltover Archive and reach the app on its next pull, which banks
 // every gained copy in the list of new copies to file (`newq`) until it is cleared. So "what's new" is already recorded, and this reads it: what landed, a Pre-Rift
@@ -1164,6 +1269,7 @@ async function main() {
     journal: () => cmdJournal(S, args),
     intake: () => cmdIntake(S, cat, args),
     versus: () => cmdVersus(S, cat, args),
+    try: () => cmdTry(S, cat, args),
   };
   const fn = table[cmd];
   if (!fn) { console.error(`unknown command "${cmd}" — try: ${Object.keys(table).join(", ")}`); process.exit(2); }

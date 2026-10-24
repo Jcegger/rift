@@ -13,6 +13,7 @@
 #   scripts/rift field [--tiers | <legend> | --for <legend>]  # what you will face: experts, record, play
 #   scripts/rift event <locator id>                    # a store event: standings + legends
 #   scripts/rift versus <legend> --deck "<name>"       # head to head, card by card, vs that legend's lists
+#   scripts/rift try --deck "<name>" "-Card" "+Card"   # test one change: rules, shape, goldfish, field
 #   scripts/rift intake [champion]                     # after adding cards on Piltover: what landed, where to file it
 #
 # See scripts/state.mjs for the full command list and data sources.

@@ -40,6 +40,11 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   what of theirs answers each of my units and spells, and what of mine answers each of
   their units, Might by Might, with every card of theirs weighted by the share of their
   lists that run it. Not a game simulator and never a win rate. Tests: `lib/versus.test.mjs`.
+- `lib/decklab.mjs` - decklab's test bench (`scripts/rift try --deck "<name>" "-Card" "+Card"`):
+  one proposed change measured before and after, the same way whoever proposed it. Rules,
+  shape, the goldfish with Gold and hiding (answers usable on their turn, not in hand), and
+  the field: the S and A tiers weighted by popularity and by results. The stages it serves
+  are in `decklab/README.md`. Tests: `lib/decklab.test.mjs`.
 - `lib/markdown.mjs` - the guide renderer the site uses, with heading anchors.
 - `lib/sim.mjs` - the goldfish simulator's engine, shared by `scripts/sim.mjs` and the site.
   `lib/sim-worker.mjs` runs it in a Web Worker for the tweak bench.
