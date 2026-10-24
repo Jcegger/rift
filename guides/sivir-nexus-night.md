@@ -2,15 +2,16 @@
 title: Sivir for Nexus Night — Deck Guide
 subtitle: Riftbound, Radiance — the decklab list for a 3-0 at a Nexus Night (best of three, 50-minute rounds): how it wins, how to play it inside the clock, the rules it runs on, and the store's field
 author: rift toolchain
-date: 2026-10-23
+date: 2026-10-24
 ---
 
 **Legend:** Battle Mistress (Body/Chaos) · **Champion:** Sivir, Mercenary
 **Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend = 56 · **Sideboard:** 10 of 10
 **Shuffled library:** 39. The Champion starts outside the deck (§103.3.a.1, §108.3.d)
-**Collection status:** 12 to get: 3 Bedeviling Stranger, 3 Staunch Survivor, 2 Evelynn, In Control, 2 Graves, Blasting Through, 1 Bandle Tree; sideboard 1 Graves
+**Collection status:** 13 to get by the app's count: 3 Bedeviling Stranger, 3 Staunch Survivor, 2 Evelynn, In Control, 2 Graves, Blasting Through, 1 Elnuk Herd (Jay has copies, not yet entered on Piltover), 1 Bandle Tree; sideboard 1 Graves
 **The list:** built a step at a time on 23 October in [decklab/sivir-nexus-night.md](../decklab/sivir-nexus-night.md), from the first decklab Sivir ([its guide](sivir-midrange.md)). Saved in the app as `Sivir — Nexus Night (decklab, 23 Oct)`; the deck page's **Copy list** exports it
 **Its results:** **none yet. Untested.** Every Radiance card in it is too new to have a record
+**Changed 24 Oct** (a head to head against the S/A tiers, `scripts/rift versus`, and the simulator with Gold and hiding): −2 Edge of Night, +1 Switcheroo, +1 Elnuk Herd; sideboard −2 Existential Dread, +2 Rebuke; matchup plans redone (§11); what you're up against (§11a)
 **Good until:** the first results, or Riot's Radiance FAQ, which outranks the Core Rules where they differ
 
 **Companions.** [The worksheet](../decklab/sivir-nexus-night.md) is why each card is in and what was benched. [strategy.md](../docs/strategy.md) is how to think about any turn; [archetypes.md](../docs/archetypes.md) is what each opponent is doing. This page is how to play *this deck* at *this event*.
@@ -21,15 +22,17 @@ date: 2026-10-23
 
 *Read before every round. Everything below expands it.*
 
-**What the deck does.** It is midrange that **holds early and goes tall later.** Cheap bodies take the open battlefields; each held battlefield gets two bodies and a hidden card, so the opponent attacks into something it can't see. Holding is scoring: a point per battlefield every turn. **Evelynn, In Control** turns a held battlefield with a hide into two points a turn, which is how a hold deck finishes inside a 50-minute round. From the midgame, the resources go into one big threat (Mercenary, Graves, a unit wearing Edge of Night) that breaks their last hold.
+**What the deck does.** It is midrange that **holds early and goes tall later.** Cheap bodies take the open battlefields; each held battlefield gets two bodies and a hidden card, so the opponent attacks into something it can't see. Holding is scoring: a point per battlefield every turn. **Evelynn, In Control** turns a held battlefield with a hide into two points a turn, which is how a hold deck finishes inside a 50-minute round. From the midgame, the resources go into one big threat (Mercenary, or Graves with a pump) that breaks their last hold.
 
 **The rule that wins games.** Evelynn: *"When I hold, if you control a facedown card here, score 1 point."* That point is **gaining** points, not Scoring, so the final-point gate never applies to it (§470.2, §473.1.a.1). **At 6 points, a held battlefield with Evelynn and a hidden card wins at the start of your turn**: the hold makes 7, her point makes 8.
 
 **The rule that loses games.** A hidden card at a battlefield you lose is **trashed** (§323.6.a). At Bandle Tree that can be two cards.
 
+**The rule that defends.** **Hide Switcheroo first.** One big unit attacking into your hold is what beats this deck (a 6+ Might unit is a regular in 95% of the S/A field), and a face-down Switcheroo is the answer you can actually use: it's free to flip on their turn. Cast from hand, it needs 2 Energy and 2 Chaos left over after developing, which you almost never have (§9). When you expect a big attacker and can't hide one, keep 3 runes up for Star-Crossed.
+
 **The clock.** About 16 minutes a game if three are played. At time, the active player finishes the turn, three more turns are played, and a game still going is won only by a player **2 or more points ahead**; otherwise it is a draw, and no new game starts between games (TR §408.2). **A drawn match is not a 3-0.**
 
-**Your turn, in order:** lethal check, both players → count Power and Gold → take the open battlefields → buff before you move → develop onto the battlefields you hold → hide (at Evelynn's battlefield, a card you won't need to flip) → fight.
+**Your turn, in order:** lethal check, both players → count Power and Gold → take the open battlefields → buff before you move → develop onto the battlefields you hold → hide (Switcheroo first; at Rockfall Path a spell, never a unit) → fight.
 
 **Five facts about Hidden.**
 
@@ -57,7 +60,7 @@ date: 2026-10-23
 | tier | goal | the cards |
 |---|---|---|
 | 0 | **win inside the clock: points every turn** | Evelynn, In Control; every hold |
-| 1 | **presence and fights**: bodies on battlefields, winning fights there | Staunch Survivor, Bedeviling Stranger, Tideturner, Tornado Warrior, Graves, Mercenary; Punch First, Rampage, Switcheroo, Edge of Night |
+| 1 | **presence and fights**: bodies on battlefields, winning fights there | Staunch Survivor, Bedeviling Stranger, Tideturner, Tornado Warrior, Graves, Mercenary, Elnuk Herd; Punch First, Rampage, Switcheroo |
 | 2 | **staying power** | Ezreal, Traveling Merchant, Fizz, Matriarch; the legend's Gold |
 | 3 | **flexible denial** | Star-Crossed, Gust, Sabotage, Rampage, Graves |
 | 4 | **engine perks** | no dedicated slots |
@@ -91,7 +94,7 @@ date: 2026-10-23
 
 ### Going tall (turn 5 on)
 
-Stop spreading. Pick the threat: **Mercenary** (with Accelerate she enters ready at 6 Might with Ganking, and can be played to the battlefield you hold and move straight to the other, §805, §810), **Graves** (his attack trigger deals his Might to every enemy unit there), or **a unit wearing Edge of Night**. Pump it before it moves; the attacker must kill every defender or be recalled (§468.1.a).
+Stop spreading. Pick the threat: **Mercenary** (with Accelerate she enters ready at 6 Might with Ganking, and can be played to the battlefield you hold and move straight to the other, §805, §810), **Graves** (his attack trigger deals his Might to every enemy unit there), or **Elnuk Herd** from hand (5 Might, no Power). Pump it before it moves; the attacker must kill every defender or be recalled (§468.1.a).
 
 ### Closing (6–8 points)
 
@@ -137,7 +140,7 @@ Before your Main Phase: you **ready everything** (the legend and last turn's Gol
 
 **Step 2 — take the open battlefields first.** Before you play anything.
 
-**Step 3 — buff before you move into a fight.** Attack triggers go on the chain before anyone has focus, and a showdown is Action or Reaction only (§466.2.d.1, §310). Edge of Night's Equip has no Action: your turn, Open State (§381).
+**Step 3 — buff before you move into a fight.** Attack triggers go on the chain before anyone has focus, and a showdown is Action or Reaction only (§466.2.d.1, §310). Matriarch's Empower has no Action: your turn, Open State (§381).
 
 **Step 4 — develop onto the battlefields you hold.** Units enter exhausted (§143.4) and still defend (§466.2.c.3).
 
@@ -150,8 +153,8 @@ Before your Main Phase: you **ready everything** (the legend and last turn's Gol
 | speed | cards | when |
 |---|---|---|
 | **Reaction** | Star-Crossed, Gust, Unyielding Spirit, Disposal Order; every Hidden card once face down; Gold | any time, including on the chain (§813) |
-| **Action** | Punch First, Switcheroo, Existential Dread, Wind and Ghosts, An Offer You Can't Refuse | your turn, and any showdown (§806) |
-| **No keyword** | Rampage, Sabotage, units from hand, Matriarch's Empower, Edge of Night's Equip, hiding | your turn, Open State, no showdown |
+| **Action** | Punch First, Switcheroo, Rebuke, Wind and Ghosts, An Offer You Can't Refuse | your turn, and any showdown (§806) |
+| **No keyword** | Rampage, Sabotage, units from hand, Matriarch's Empower, hiding | your turn, Open State, no showdown |
 
 ---
 
@@ -194,8 +197,12 @@ Gold is never Energy. **Sigil of the Storm** (*the conqueror must recycle a rune
 | 3 Bedeviling Stranger | a 2-Might body; with 4+ units there, return an enemy unit there to hand | a wide attack |
 | 2 Tideturner | swaps with a unit you control elsewhere: Graves, Mercenary or Evelynn into the fight | any attack into a hold |
 | 2 Tornado Warrior | a 3-Might body; empower something there, disempowered at end of turn | Matriarch standing there (a second revive) |
-| 2 Switcheroo | swap the Might of two units there, this turn | their pumped unit; Graves's trigger |
-| 2 Edge of Night | attaches to a unit you control there: +2, kept | a fight decided by 1 or 2; **the best keeper under Evelynn**, since it costs nothing to leave down |
+| 3 Switcheroo | swap the Might of two units there, this turn | **a bigger attacker**: their 7 becomes your 2 and yours their 7; their pumped unit; Graves's trigger. Free from face down (§811.1.b, §204.1.a), past Defy and past stuns. A good keeper under Evelynn |
+| 1 Elnuk Herd | +3 Might to a unit you control there this turn, then it goes to the bottom of your deck | **Graves's trigger: he blasts for 7**, which kills the 7-Might units (Astral Heron, Thousand-Tailed Watcher, Rift Herald); a defender that needs +3 |
+
+**Why three Switcheroo and Elnuk, no Edge of Night** (24 Oct, the head to head): the hold is the plan's defence, and a single big attacker is what beats it: Astral Heron, Thousand-Tailed Watcher, Ruined Rex, Rhasa or Baron are in 7 of the 11 S/A decks. Of the hidden cards, only Switcheroo turns that fight; the others add 2 or 3 Might, or bounce only when 4 units are there. It also works through Watcher's −3 (it swaps whatever the Might is), and stuns on play don't touch a spell. Elnuk took Edge's slot: weighted over the field, Graves's blast kills 97% of their unit copies with Elnuk's +3 against 92% with Edge's +2, the difference being exactly the 7-Might units; its +3 still lands if it's stunned; and from hand it is a 5-Might body with no Power cost. Edge's permanence and gear status were the cost.
+
+**Hidden units can't be flipped at Rockfall Path** ("Units can't be played here"), Kai'Sa's battlefield in 78% of her lists. There, hide Switcheroo.
 
 **Opponents' Hidden.** Taking the battlefield trashes it (§323.6.a). Against Evelynn decks, conquering is denial.
 
@@ -229,7 +236,7 @@ Gold is never Energy. **Sigil of the Storm** (*the conqueror must recycle a rune
 
 **Fizz, Trickster** (3 Energy, 1 Chaos; 3 Might) — casts a spell from the trash with Energy 3 or less, ignoring its Energy, **paying its Power**, then recycles it. Every spell in the main deck qualifies.
 
-**Tornado Warrior** (3 Energy, Chaos; 3 Might; Hidden) — a free 3-Might body from face down. With Matriarch at that battlefield it empowers her (she revives now) and disempowers her at end of turn, so her own Empower is live again next turn. Whether it resets a Matriarch who has *already* revived rests on a reading (§442.1.c with §359.3.e.14.b), not a ruling: ask a judge.
+**Tornado Warrior** (3 Energy, Chaos; 3 Might; Hidden) — a free 3-Might body from face down, which stays. With Matriarch at that battlefield it empowers her (she revives now) and disempowers her at end of turn, so her own Empower is live again next turn. Whether it resets a Matriarch who has *already* revived rests on a reading (§442.1.c with §359.3.e.14.b), not a ruling: ask a judge.
 
 ### The engine
 
@@ -245,9 +252,9 @@ Gold is never Energy. **Sigil of the Storm** (*the conqueror must recycle a rune
 
 **Rampage** (3 Energy, Body; **no timing keyword**) — your unit and theirs deal their Might to each other; **paying the optional Body gives yours +2 first**, so it wins trades that would otherwise be even. Free with Ezreal. Your turn only. With a 6-Might Mercenary it kills a 7-Might unit and she survives at 8.
 
-**Switcheroo** (2 Energy, 2 Chaos; Hidden; Action) — swaps Might at one battlefield this turn. In response to Graves's trigger: he blasts with their biggest unit's Might.
+**Switcheroo** (2 Energy, 2 Chaos; Hidden; Action; **3 copies**) — swaps Might at one battlefield this turn. The answer to a unit bigger than your defenders: flipped from face down for free, or cast from hand during their attack (Action works in any showdown, §806), which keeps your facedown card down. In response to Graves's trigger: he blasts with their biggest unit's Might. Defy can't counter it (two Power); Irelia's Not So Fast (80%) can, when it chooses her unit.
 
-**Edge of Night** (3 Energy, Chaos gear; +2 attached; Hidden; Equip Chaos) — from face down, attaches free to a unit you control there (Spiritforged errata "(here)"). The +2 stays while attached (§137.3).
+**Elnuk Herd** (6 Energy, Body; 5 Might; Hidden; **1 copy**) — *when you play me, give a friendly unit +3 Might this turn, then recycle me if I was played from face down* (errata). From face down it is a free +3 at Reaction speed, and the card goes to the bottom of your deck rather than the trash. Its play effect is pinned to that battlefield (§811.1.d.3), so the unit must be there. **Flip it in response to Graves's trigger: the +3 resolves first, and he blasts for 7** (§359.3.f.2). A stun on it doesn't stop the +3 (a stun only stops combat damage, §424.1.b). From hand: a 5-Might body for 6 Energy and no Power, top end for the tall phase. Can't be flipped at Rockfall Path.
 
 ### Denial
 
@@ -271,13 +278,15 @@ A battlefield used in a decided game is removed for the match (§488.5); after a
 
 ## 8. Lines that win games
 
-**1. The Evelynn close.** At 5–6 points, hold a battlefield with Evelynn and two bodies; hide Edge of Night or another card you won't flip. Defend that battlefield with the bodies and Reactions from hand (Star-Crossed, Gust): the other battlefield's hide can't help here, because a flipped card acts only at its own battlefield (§811.1.d). At 6, the start of your turn wins.
+**1. The Evelynn close.** At 5–6 points, hold a battlefield with Evelynn and two bodies, with a facedown card there. Defend that battlefield with the bodies and cards from hand (Star-Crossed; Switcheroo cast from hand in their attack, Action): the other battlefield's hide can't help here, because a flipped card acts only at its own battlefield (§811.1.d). **Flip hers when the battlefield would otherwise fall**: it costs only that turn's point, where losing the battlefield trashes the card and costs the hold too. **Then hide again on your turn**: her point checks for a facedown card at your Beginning Phase, so she scores again the turn after. At 6, the start of your turn wins; if they forced the flip, you hold at 7 and win the turn after unless they take it.
 
 **2. Bandle Tree's two hides.** Hold Bandle Tree with Evelynn. Hide twice: a keeper for her point, and a fighter (Tideturner, Tornado, Switcheroo) to flip when they attack. She scores either way.
 
-**3. The Graves defence.** Graves at base, a hidden Tideturner at the battlefield you hold. They attack; flip Tideturner; Graves arrives as a defender and blasts every attacker for his Might. Equip Edge of Night on him the turn before for 6.
+**3. The Graves defence.** Graves at base, a hidden Tideturner at the battlefield you hold. They attack; flip Tideturner; Graves arrives as a defender and blasts every attacker for his Might. Keep a Switcheroo or Elnuk face down there for their biggest attacker (lines 4 and 4a).
 
 **4. Graves with Switcheroo.** Graves defends; his trigger goes on the chain; flip Switcheroo and swap his Might with their biggest attacker before it resolves (§359.3.f.2).
+
+**4a. Graves with Elnuk.** Same shape: flip Elnuk in response to his trigger, give him +3, and he blasts for 7. Their Reactions can still answer (a Discipline on their unit, a −Might on him), so against Riven, Irelia, Master Yi, Vex and Azir, Switcheroo is the safer of the two.
 
 **5. The Mercenary close.** At 6 holding A: Beginning Phase, 7. Play Mercenary with Accelerate to A (ready, 6 Might, Ganking), Punch First on her, move to B as an 11-Might attacker. Star-Crossed their last defender if she can't kill it. Conquering B with A scored this turn is the eighth point (§473.1.b).
 
@@ -303,26 +312,33 @@ A battlefield used in a decided game is removed for the match (§488.5); after a
 | a Hidden card | 11 | 75% | 83% | 88% | 92% | 95% | 97% |
 | Evelynn, In Control | 3 | 28% | 35% | 40% | 46% | 51% | 56% |
 | Star-Crossed or Gust | 5 | 44% | 52% | 59% | 65% | 70% | 75% |
+| Switcheroo | 3 | 28% | 35% | 40% | 46% | 51% | 56% |
+| Switcheroo or Star-Crossed | 6 | 50% | 59% | 66% | 72% | 77% | 82% |
 | Fizz or Matriarch | 4 | 36% | 44% | 50% | 56% | 62% | 67% |
 | Ezreal | 3 | 28% | 35% | 40% | 46% | 51% | 56% |
 | Punch First | 3 | 28% | 35% | 40% | 46% | 51% | 56% |
 | Graves | 2 | 20% | 24% | 29% | 33% | 37% | 41% |
 | Sabotage | 1 | 10% | 13% | 15% | 18% | 21% | 23% |
 
-Ezreal and Merchant draw beyond this.
+Ezreal and Merchant draw beyond this. **These are cards in hand, not cards you can pay for.** The goldfish below counts what you can use.
 
-**The goldfish** (`lib/sim.mjs`, 20,000 games; no Gold, no hiding, no fights, no Evelynn points):
+**The goldfish** (`lib/sim.mjs`, 20,000 games, 24 Oct): the legend's Gold made on your first recycle each turn and spent ahead of runes; **one hide a turn** from turn 2 with what developing left (Gold first, else a recycled rune); no fights, no Evelynn points.
 
 | | on the play | on the draw |
 |---|---|---|
-| Energy spent, turns 1–4 | 15.9 | 17.9 |
-| units on board by turn 3 | 3.4 | 3.8 |
-| two units by turn 3 | 98% | 99% |
-| Might on board by turn 4 | 14.6 | 16.0 |
-| no play on turns 1–2 | 0% | 0% |
-| a card stuck on its colour, turn 3 | 11% | 9% |
+| Energy spent, turns 1–4 | 14.6 | 16.7 |
+| units on board by turn 2 / 3 | 1.9 / 3.1 | 2.3 / 3.7 |
+| two units by turn 2 / 3 | 74% / 97% | 94% / 99% |
+| Might on board by turn 4 | 13.5 | 15.4 |
+| no play on turns 1–2 | 0.2% | 0% |
+| a card stuck on its colour, turn 3 | 12% | 6% |
+| cards face down, turn 3 / 4 | 1.0 / 1.1 | 0.8 / 0.9 |
+| **an answer you can use on their turn** (Switcheroo or Star-Crossed), turn 3 / 4 / 5 | **40% / 44% / 55%** | **41% / 49% / 64%** |
+| of which, turn 4: face down / paid from hand | 42% / 3% | 43% / 10% |
 
-**Runes: 6 Body / 6 Chaos.** The sweep ties 5/7 and 6/6 on Energy; the exact odds before any Gold favour 6/6 where it matters:
+Hiding costs about 1 Energy over turns 1–4 and 0.3 units by turn 3; without it the same deck spends 16.0 / 18.1 and fields 3.4 / 3.9 units, but an answer is usable on their turn in only 2–6% of games by turn 4. **That gap is the whole case for hiding Switcheroo first.** "Usable" means paid from the runes still ready after developing and from Gold; a player who holds runes up instead will do better from hand.
+
+**Runes: 6 Body / 6 Chaos.** Re-swept with Gold and hiding (8,000 games a split): every split from 4/8 to 7/5 is within 0.1 Energy, and 6/6 sticks least (10.1% by turn 3; 5/7 10.5%, 7/5 12.3%). The exact odds before any Gold favour 6/6 where it matters:
 
 | with no Gold, going first / second | 5 Body / 7 Chaos | 6 Body / 6 Chaos |
 |---|---|---|
@@ -343,13 +359,13 @@ Ezreal and Merchant draw beyond this.
 
 **Combat sizes** (two totals; lethal is damage at or above Might, §142.4.b):
 
-| unit | in a fight | + Punch First | + Edge of Night | + Rampage's +2 |
+| unit | in a fight | + Punch First | + Elnuk Herd | + Rampage's +2 |
 |---|---|---|---|---|
-| Merchant, Stranger, Tideturner | 2 | 7 | 4 | 4 |
-| Ezreal, Fizz, Tornado | 3 | 8 | 5 | 5 |
-| Staunch Survivor | **4** | 9 | 6 | 6 |
-| Evelynn, Matriarch, Graves | 4 | 9 | 6 | 6 |
-| Mercenary, two Power spent | **6** | **11** | 8 | 8 |
+| Merchant, Stranger, Tideturner | 2 | 7 | 5 | 4 |
+| Ezreal, Fizz, Tornado | 3 | 8 | 6 | 5 |
+| Staunch Survivor | **4** | 9 | 7 | 6 |
+| Evelynn, Matriarch, Graves | 4 | 9 | 7 (Graves blasts for 7) | 6 |
+| Mercenary, two Power spent | **6** | **11** | 9 | 8 |
 
 ---
 
@@ -357,12 +373,12 @@ Ezreal and Merchant draw beyond this.
 
 Set aside up to 2, draw that many, the set-aside cards go to the bottom (§117).
 
-**The goldfish says keep all.** Keep values (Energy over turns 1–4, kept against bottomed): Matriarch +1.1, Tornado +0.8, Stranger +0.8, Tideturner +0.8, Merchant +0.8, Graves +0.6, Edge of Night +0.5, Ezreal −0.1, Fizz −0.1, Evelynn −0.1, Staunch Survivor −0.5, Switcheroo −0.6, Punch First −0.7, Sabotage −0.7. It charges every Power as a lost rune with no Gold back, which is why Staunch Survivor reads negative; read it as "the curve's bodies are keeps".
+**The goldfish says keep all** (with Gold and hiding, 24 Oct). Keep values (Energy over turns 1–4, kept against bottomed): Matriarch +1.2, Graves +0.6, Merchant +0.6, Fizz +0.6, Stranger +0.5, Tideturner +0.5, Ezreal +0.5, Tornado +0.4, Evelynn +0.3, Staunch Survivor 0.0, Sabotage −0.2, Punch First −0.6, Elnuk Herd −1.0, Switcheroo −1.1. **Never bottom a Switcheroo or Elnuk for that number**: a keep value counts Energy spent, and hiding spends Power, not Energy. Their value is defence, which it can't see.
 
 **The working rule** (a reading of the plan, not tested):
 - **Keep** a 2-drop plus any of: a second 2-drop, Ezreal, Evelynn, a Hidden card.
 - **Bottom up to two** from a hand with no 2-drop (29% of hands), or with two 4-drops and nothing cheaper.
-- **Bottom** a second situational spell (Sabotage, Punch First, Switcheroo) when the hand has no early body.
+- **Bottom** a second situational spell (Sabotage, Punch First) when the hand has no early body. **Keep Switcheroo**: it's the defence.
 - Against Irelia, Master Yi or Riven (few units), Graves is a weaker keep than a second body; against Rengar or Rek'Sai, Graves and a Hidden card are keeps.
 
 ---
@@ -371,37 +387,61 @@ Set aside up to 2, draw that many, the set-aside cards go to the bottom (§117).
 
 **The store.** Meta decks (Irelia named) beside casual ones, no Aurora. The online forecast (`data/field.json`) is a fair guide to the meta decks' threats; the casual ones get the default plan, hold early and read their plan.
 
-**Sideboarding.** Swaps are 1 for 1 between games; you may count their sideboard at any time (TR §403.6); runes, legend and battlefields never change (TR §403.4.b). **These plans are starting points from the cards, not tested.** Log what you change.
+**Sideboarding.** Swaps are 1 for 1 between games; you may count their sideboard at any time (TR §403.6); runes, legend and battlefields never change (TR §403.4.b). **These plans are starting points from the cards, not tested.** Log what you change. The numbers behind them are the head to head (`scripts/rift versus <legend> --deck "nexus night"`, and the worksheet's section of the same name): shares are of each legend's legal lists since 16 October.
+
+**Two rules run through every plan:**
+- **Defy decks** (Riven 93%, Irelia 98%, Master Yi 84%, Vex 86%, Azir 91%): Defy counters Gust, Star-Crossed, Rampage and Sabotage, never Punch First, Switcheroo or Rebuke (two Power, §206), units, Graves's blast or Evelynn's point. **Rebuke comes in for Rampage.**
+- **Graves**: out against the big-unit decks (LeBlanc, Jayce, Kai'Sa), the third copy in against small boards (Kennen, Rengar, Evelynn, Rek'Sai). Wherever he plays, he plays with a facedown card at his battlefield or a pump cast before he attacks: ten of the eleven S/A decks run a Reaction that turns his blast.
 
 **The sideboard:**
 
 | card | what it does | in against |
 |---|---|---|
-| 2 Vex, Apathetic | stuns every unit they play while she is at a battlefield (hidden and Ambush ones too); they can't move it that turn; Deflect | Rengar, Rek'Sai, Riven, Evelynn, Kennen, Irelia |
-| 2 Existential Dread | 1 Energy, 1 Power, Action: stun an attacking enemy unit (it deals no combat damage, §424.1.b); Repeat 2 (§820): stun another, or return the stunned one to hand | Irelia, Rengar, Rek'Sai, Riven |
-| 1 Wind and Ghosts | Action: a unit at a battlefield with 3 Might or less is banished (not a death, so no Deathknell, §428.2), a bigger one returns to hand | Kai'Sa, Mordekaiser, Kennen's Rhasa, LeBlanc, Vex |
-| 1 Unyielding Spirit | Reaction: prevent all spell and ability damage this turn | Kai'Sa, Akali, LeBlanc, Fury removal (Bilgewater Tracker, Scorched Earth) |
-| 1 An Offer You Can't Refuse | Action: kill a gear; they get an exhausted Gold | Jayce, Riven's Blade of the Exile, Kennen's Last Rites |
-| 1 Sabotage | the second copy | Kai'Sa, Riven, Irelia, Jayce, Master Yi |
-| 1 Graves, Blasting Through | the third copy | Rek'Sai, Rengar, LeBlanc |
-| 1 Disposal Order | Reaction, **choose one**: recycle up to 3 cards from their trash, **or** draw 1 | Kennen, Mordekaiser, LeBlanc |
+| 2 Vex, Apathetic | stuns every unit they play while she is at a battlefield (hidden and Ambush ones too); they can't move it that turn; Deflect. A unit, so Defy can't counter it | Riven, Irelia, Rengar, Rek'Sai, Evelynn |
+| 2 Rebuke | 2 Energy, 2 Chaos, Action: return a unit at a battlefield to its owner's hand. Any size, no unit of yours needed, and **Defy can't counter it** (Not So Fast still can) | the Defy decks: Riven, Master Yi, Vex, Azir |
+| 1 Wind and Ghosts | Action: a unit at a battlefield with 3 Might or less is banished (not a death, so no Deathknell, §428.2), a bigger one returns to hand | Kai'Sa, Kennen's Rhasa, LeBlanc, Mordekaiser |
+| 1 Unyielding Spirit | Reaction: prevent all spell and ability damage this turn | Kai'Sa (Hextech Ray 98%, Falling Star 96%), Akali |
+| 1 An Offer You Can't Refuse | Action: kill a gear; they get an exhausted Gold | Riven's Blade of the Exile (88%), Azir's equipment, Jayce |
+| 1 Sabotage | the second copy | Kai'Sa, Master Yi, Vex, Jayce |
+| 1 Graves, Blasting Through | the third copy | Kennen, Rengar, Rek'Sai, Evelynn, Irelia |
+| 1 Disposal Order | Reaction, **choose one**: recycle up to 3 cards from their trash, **or** draw 1 | Kennen, LeBlanc, Mordekaiser |
 
 | opponent | role | what decides it | in | out |
 |---|---|---|---|---|
-| **Irelia** | hold; attack with two | few units (2.5 by turn 3); she wins fights with Reactions (Defiant Dance, En Garde) and readies units; stuns beat her | 2 Existential Dread, 1 Sabotage | 2 Bedeviling Stranger, 1 Rampage |
-| **Kennen** | press early | before the trash fills and Rhasa lands; it holds Gust, Star-Crossed and Switcheroo for your fights, so buff before you move | Disposal Order, Wind and Ghosts, 1 Vex | 1 Graves, 1 Edge of Night, 1 Tideturner |
-| **Riven** | hold; deny her holds | her units enter ready on battlefields she controls; **Defy can't counter Punch First or Switcheroo** | 2 Vex, 1 Offer, 1 Sabotage | 1 Gust, 1 Bedeviling Stranger, 1 Traveling Merchant, 1 Edge of Night |
-| **Master Yi, Bladesman** | attack with two | his +2 is only for a lone defender; 1-Energy tricks and Defy protect it | 1 Sabotage, 1 Wind and Ghosts | 2 Bedeviling Stranger |
-| **Kai'Sa** | press; don't overcommit | cheap removal; Thousand-Tailed Watcher (−3, minimum 1) makes their fight that turn lopsided; Time Warp | Unyielding Spirit, Wind and Ghosts, Sabotage | 1 Bedeviling Stranger, 1 Tornado Warrior, 1 Edge of Night |
-| **Rengar** | hold | Ambush needs their units already at the battlefield (§822.1.b) | 2 Vex, 2 Existential Dread, 1 Graves | 1 Sabotage, 2 Edge of Night, 1 Fizz, 1 Matriarch |
-| **Rek'Sai** | hold | the widest board; conquests feed its engine | 2 Vex, 2 Existential Dread, 1 Graves | 1 Sabotage, 2 Edge of Night, 1 Fizz, 1 Matriarch |
-| **LeBlanc** | hold; bounce and banish | it wants its units to die | Disposal Order, Wind and Ghosts, Unyielding Spirit | 1 Sabotage, 2 Rampage |
-| **Evelynn** | press her hide spots | taking a battlefield trashes her facedown cards; Gust her hidden units in response to their play effects (§811.1.d.3.a) | 2 Vex | 1 Sabotage, 1 Edge of Night |
-| **Vex, Gloomist** | remove Vex first | Vex, Apathetic stuns our units played, hidden ones too; our 4 Hidden spells and gear still work | Wind and Ghosts, Sabotage | 1 Bedeviling Stranger, 1 Tornado Warrior |
-| **Akali** | hold | pings and Falling Star on small bodies | Unyielding Spirit | 1 Traveling Merchant |
-| **Jayce** (no Aurora) | press | nothing on board for three turns; Gutter Palace wins with exactly 4 cards in hand and 4 units at battlefields | Offer, Sabotage | 2 Graves |
+| **Riven** (S) | hold; deny her holds | her units enter ready on battlefields she controls; Astral Heron (56%), Baron (42%); Defy 93%, Discipline 93% | 2 Rebuke, 2 Vex, 1 Offer | 2 Rampage, 1 Gust, 1 Bedeviling Stranger, 1 Traveling Merchant |
+| **Kennen** (S) | press early | Rhasa (6, in 77%) is the one unit Graves can't blast alone (Elnuk or a swap fixes it); their Switcheroo (82%) can turn his blast | 1 Graves, Disposal Order, Wind and Ghosts | 1 Tideturner, 1 Traveling Merchant, 1 Bedeviling Stranger |
+| **Irelia** (S) | hold; attack with two | few units (2.5 by turn 3); she wins fights with Reactions (Discipline 98%, Defiant Dance 95%); Defy 98% **and** Not So Fast 80% hit your targeted spells, so the uncounterable cards come in | 2 Vex, 1 Graves | 2 Bedeviling Stranger, 1 Rampage |
+| **Master Yi, Bladesman** (S) | attack with two | his +2 is only for a lone defender; Discipline (82%) and Defy (84%) protect it | 2 Rebuke, 1 Sabotage | 2 Bedeviling Stranger, 1 Rampage |
+| **Kai'Sa** (A) | press; don't overcommit | Hextech Ray kills your 2s and 3s, Falling Star your 4s, and her Void Gate (95%) adds 1 damage; Thousand-Tailed Watcher (95%) gives your board −3 (minimum 1); **at her Rockfall Path (78%) your hidden units can't flip: hide Switcheroo there** | Unyielding Spirit, Wind and Ghosts, Sabotage | 2 Graves, 1 Elnuk Herd |
+| **Rengar** (A) | hold | the fastest deck here (3.5 units by turn 3); Ambush needs their units already at the battlefield (§822.1.b); no counters | 2 Vex, 1 Graves | 1 Sabotage, 1 Fizz, 1 Traveling Merchant |
+| **LeBlanc** (A) | hold; bounce and banish | it wants its units to die; Ruined Rex (6, 100%), Rift Herald and Watcher (7): Graves blasts only half its units alone; Hidden Blade (83%) | Disposal Order, Wind and Ghosts | 2 Graves |
+| **Evelynn** (A) | press her hide spots | taking a battlefield trashes her facedown cards; Gust her hidden units in response to their play effects (§811.1.d.3.a) | 2 Vex, 1 Graves | 1 Sabotage, 1 Tideturner, 1 Traveling Merchant |
+| **Vex, Gloomist** (A) | remove Vex first | Vex, Apathetic (95%) and Back Off (93%) stun your units played, hidden ones too; your hidden spells and gear still work; Defy 86% | 2 Rebuke, Sabotage | 2 Rampage, 1 Tornado Warrior |
+| **Azir** (A) | press before the equipment lands | B.F. Sword (94%) and friends; Hidden Blade (81%); Defy 91%; Sand Soldiers are tokens, so not in the numbers | 2 Rebuke, 1 Offer | 2 Rampage, 1 Bedeviling Stranger |
+| **Jayce** (A, no Aurora) | press | nothing on board for three turns; Elder Dragon (10) and Jayce (6) are past Graves; Gutter Palace wins with exactly 4 cards in hand and 4 units at battlefields | Offer, Sabotage | 2 Graves |
+| **Rek'Sai** (B) | hold | the widest board; conquests feed its engine | 2 Vex, 1 Graves | 1 Sabotage, 1 Fizz, 1 Traveling Merchant |
+| **Akali** (B) | hold | pings and Falling Star on small bodies | Unyielding Spirit | 1 Traveling Merchant |
 | **Kha'Zix** | hold with two | its Mutating Horror gets +2 only against a lone enemy unit; two bodies a battlefield deny it | — | — |
 | **casual or unknown** | hold early, read their plan | ask what they do if nothing happens ([strategy.md §2](../docs/strategy.md#2-every-deck-is-solving-a-different-problem)) | — | — |
+
+### 11a. What you're up against
+
+The S and A tiers as of 24 October: 607 legal lists since 16 October, 56 with a recorded placing. Two weightings, because they disagree: **by popularity** (lists posted) Riven 20%, Evelynn 15%, Vex 12%, Kennen 10%, Kai'Sa 9%; **by results** (placings) Kennen 25%, Riven 23%, Kai'Sa 23%. Expect Riven, Kennen and Kai'Sa most at anything competitive. Online data; the store's casual decks are not in it.
+
+| what threatens the plan | share of the field (popularity · results) | your answer |
+|---|---|---|
+| a 6+ Might unit, regular in their lists | 95% · 96% | Switcheroo face down; Graves with Elnuk or a swap; Star-Crossed with 3 runes up |
+| a 7+ Might unit, regular | 56% · 61% | the same; Rampage reaches it only through Mercenary or a Punch First first |
+| a Reaction that turns Graves's blast | 73% · 79% | a facedown card under him, or a pump cast before he attacks |
+| removal that reaches your 4-drops | 68% · 80% | mostly any-unit bounce; spread the threats |
+| Defy | 46% · 33% | Rebuke from the sideboard; Punch First and Switcheroo are out of its reach |
+| stuns on the units you play or flip | 42% · 30% | hidden spells; Elnuk's +3 lands even if stunned |
+| Gust-type removal on your 2s | 40% · 57% | Staunch Survivor fights at 4; bounce is tempo, not a card |
+| Rockfall Path (no units played there) | 7% · 18% | hide Switcheroo there |
+
+**Their legends, in one line each:** Riven's units enter ready on battlefields she controls; Kennen empowers when cards come from anywhere but hand, then gives Assault 2; Kai'Sa adds a Power for spells at Reaction speed; Irelia readies a unit she chooses; Master Yi's lone defender gets +2; Evelynn draws when she flips; Vex draws when she holds; Rengar's unit plays give +1; LeBlanc copies a unit on conquer or hold; Azir makes Sand Soldiers once he plays equipment; Jayce readies gear.
+
+**Their battlefields that touch your plan:** Star Spring (32% of S/A lists: Rengar 100%, Riven 83%, LeBlanc 74%) lets them pull a unit home when they play another there; Rockfall Path (Kai'Sa 78%) blocks your hidden units; Void Gate (Kai'Sa 95%) adds 1 to spell and ability damage, so her Hextech Ray kills your 4s and Graves blasts harder there too; Frozen Fortress (Kai'Sa 73%) pings every unit there each Beginning Phase; Fortified Position (Vex 42%) gives their defender Shield 2; Trifarian War Camp (Azir 94%) gives everyone there +1; Bandle Tree (Evelynn 77%, Vex 47%) gives them the extra hide too.
 
 ---
 
@@ -411,7 +451,10 @@ Types from [strategy.md §8](../docs/strategy.md#8-reviewing-a-game), so the mat
 
 | mistake | type | instead |
 |---|---|---|
-| flipping the hide at Evelynn's battlefield when the bodies would have held | conversion | defend her battlefield with bodies and Reactions from hand. **But flip it if the battlefield is otherwise lost**: losing it trashes the hide anyway and costs the hold point too, so the flip only gives up her one point |
+| flipping the hide at Evelynn's battlefield when the bodies would have held | conversion | defend her battlefield with bodies and Reactions from hand. **But flip it if the battlefield is otherwise lost**: losing it trashes the hide anyway and costs the hold point too, so the flip only gives up her one point; then hide again on your turn |
+| holding Switcheroo in hand instead of hiding it | conversion | hide it: from hand it needs 2 Energy and 2 Chaos on their turn, which developing almost never leaves |
+| a hidden unit at Kai'Sa's Rockfall Path | state | units can't be played there, so it can never flip; hide a spell |
+| Graves into open Reactions with nothing under him | state | Graves with a facedown card at his battlefield, or a pump cast before he attacks: ten of the eleven S/A decks carry a Reaction that turns his blast |
 | a second hide at Bandle Tree behind a weak hold | conversion | the second hide only when the hold is safe; losing it trashes both |
 | hiding at a battlefield you then lose | conversion | hide only behind a hold that is hard to break |
 | starting game 3 with no chance to finish | terminal | past the 30-minute mark in game 2, play game 2 to win it outright |
@@ -429,7 +472,7 @@ Types from [strategy.md §8](../docs/strategy.md#8-reviewing-a-game), so the mat
 
 ## 13. Errata, rulings and open questions
 
-**Errata that touches the deck:** Edge of Night (Spiritforged: "attach it to a unit you control (here)"); Tideturner (Vendetta FAQ: a unit you control, at another location); Emperor's Dais (Vendetta: pay-to-do).
+**Errata that touches the deck:** Elnuk Herd (Radiance: "then recycle me if I was played from face down"); Tideturner (Vendetta FAQ: a unit you control, at another location); Emperor's Dais (Vendetta: pay-to-do).
 
 **Open questions for a judge, or the Radiance FAQ:**
 1. **Tornado Warrior on an already-Empowered Matriarch**: does its end-of-turn disempower still reset her? This guide's reading says yes (§442.1.c, §359.3.e.14.b); no ruling.

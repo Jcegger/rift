@@ -473,6 +473,64 @@ These plans are starting points from the cards, not tested. Log what changes.
 **Verdict:** legal, on every shape target, runes confirmed, every card read. The list is ready to
 test. Card by card (section 3) and the guide follow once Jay agrees.
 
+## Head to head: the S and A tiers — 24 Oct 2026
+
+Jay's two concerns: Graves may be matchup-specific (good against small units, not against
+big ones like Astral Heron), and the deck may be short of small bodies that survive. Checked
+with `scripts/rift versus <legend> --deck "nexus night"` (`lib/versus.mjs`): every legal list
+of each legend since 16 Oct, each card weighted by the share of lists running it. **Card by
+card, read off the text; not a game simulation and not a win rate.** Thin samples: Master Yi
+and Jayce have no recorded placings; Irelia, LeBlanc, Evelynn, Vex and Azir have 2–3 each.
+
+| legend (tier) | lists (placed) | Graves alone / with +2 | kills your 2s | kills your 4s | any-unit removal | Defy | turns Graves's blast | big units (5+ Might, in 25%+) |
+|---|---|---|---|---|---|---|---|---|
+| Kennen (S) | 62 (14) | 86% / 99% | Gust 76% | — | Star-Crossed 84% | — | Switcheroo 82% | Rhasa 6 (77%) |
+| Riven (S) | 121 (13) | 79% / 88% | Gust 41% | — | Star-Crossed 65% | 93% | Discipline 93% | Heron 7, Blitzcrank 5, Baron 12, Riven 5 |
+| Irelia (S) | 41 (3) | 93% / 94% | Gust 41% | — | Star-Crossed 61% | 98% | Discipline 98% | Heron 7 (27%) |
+| Master Yi (S) | 44 (0) | 69% / 94% | — | — | — | 84% | Discipline 82% | Ruin Runner 5, Rengar 6 |
+| Kai'Sa (A) | 55 (13) | 67% / 84% | Hextech Ray 98% | Falling Star 96% | — | — | Stupefy 100% | Watcher 7 (95%), Brynhir 5, Empyrean 8, Forerunner 6 |
+| Jayce (A) | 17 (0) | 55% / 76% | Singularity 18% | Singularity 18% | — | — | Stupefy 35% | Jayce 6, Elder Dragon 10, Jayce 5 |
+| LeBlanc (A) | 35 (3) | 51% / 87% | — | — | Hidden Blade 83% | — | — | Rex 6 (100%), Mixologist 5, Vi 5, Watcher 7 |
+| Evelynn (A) | 91 (2) | 87% / 99% | Gust 34% | — | Star-Crossed 49% | — | Switcheroo 62% | Evelynn 5, Elnuk Herd 5, Rengar 6 |
+| Rengar (A) | 36 (4) | 88% / 100% | — | — | Rampage 94% (a fight) | — | — | Rengar 6, Forerunner 6, Darius 5, Elnuk 5 |
+| Vex (A) | 73 (2) | 84% / 92% | Gust 48% | — | Star-Crossed 67% | 86% | Discipline 82% | Heron 7 (49%), Kharox 5 |
+| Azir (A) | 32 (2) | 73% / 98% | — | — | Hidden Blade 81% | 91% | Discipline 81% | Vi 5 (38%) |
+
+"Graves alone / with +2": the share of their unit copies his blast kills at 4, and at 6 with
+Edge of Night flipped under him. "Turns the blast": their most-played Reaction that changes it
+in response (a hidden swap, a pump on their unit, a −Might on him). Azir's Sand Soldiers are
+tokens, made in play, so they are not in the lists and not in his numbers.
+
+**Concern 1, Graves: right about the big-unit decks, but his real weakness is Reactions.**
+- His blast kills 51–93% of their unit copies alone and 76–100% with Edge of Night under him.
+  Weakest alone against **LeBlanc (51%), Jayce (55%) and Kai'Sa (67%)**, the three big-unit decks.
+- **Ten of the eleven run a Reaction that turns the blast**: a hidden Switcheroo (Kennen 82%),
+  a +2 on their unit (Discipline: Riven 93%, Irelia 98%), or −Might on him (Stupefy, Kai'Sa 100%).
+  Only Rengar has none.
+- **The blast can't be countered.** It chooses nothing, so Defy and Not So Fast can't touch it.
+  That matters most against Irelia, where Defy and Not So Fast hit the deck's other removal.
+- **Play rule:** Graves with a facedown card at his battlefield, or a pump cast before he
+  attacks. **Sideboard:** the third copy in against Kennen, Rengar and Evelynn (small boards);
+  Graves out against LeBlanc, Jayce and Kai'Sa.
+
+**Concern 2, small bodies: size buys little in this field.**
+- The removal limited by Might is mostly **Gust** (Kennen 76%, Vex 48%, Riven and Irelia 41%),
+  which reaches a 2- or 3-Might body. Staunch Survivor is out of its reach while fighting (4).
+- **Most removal here ignores Might:** Star-Crossed (49–84%), Hidden Blade (LeBlanc 83%, Azir
+  81%), Rengar's Rampage (94%). A bigger body doesn't dodge these.
+- **Kai'Sa is the exception, and size doesn't save you there either:** Hextech Ray (98%) kills
+  every 2 and 3, Falling Star (96%) every 4, and Thousand-Tailed Watcher (95%) gives your whole
+  board −3. That matchup is about not over-committing, which the guide already says.
+- Speed (goldfish, units by turn 3 / Might by turn 4): yours 3.4 / 14.7. Only Rengar (3.5 /
+  16.3) and Kai'Sa's Might (15.3) are ahead. **No change to the body count.**
+
+**What the head to head found that nobody asked:**
+- **Defy is in 84–98% of five S/A decks** (Riven, Irelia, Master Yi, Vex, Azir). It counters
+  Gust, Star-Crossed, Rampage and Sabotage, but not Punch First or Switcheroo (two Power, §206).
+  Against those five the uncounterable plays are Graves's blast, Evelynn's point, pumps and swaps.
+- Edge of Night is gear: Kennen (An Offer 31%, Salvage 27%), Kai'Sa (Lost to the Sands 35%) and
+  Azir (Salvage 16%) can kill it.
+
 ## 5. Log
 
 - **23 Oct 2026 — the list is complete and saved** to the Decks tab as `Sivir — Nexus Night
@@ -497,3 +555,59 @@ test. Card by card (section 3) and the guide follow once Jay agrees.
   is answered by §383.2.a.1's Sona example (the point resolves once triggered); with Ezreal, take
   his discount off Accelerate's `[1]`; and in games 2–3, after a win, assume the battlefield is
   chosen blind (default Emperor's Dais). There are still no Radiance results for Sivir anywhere.
+- **24 Oct 2026 — head to head against the S and A tiers** (section above). No list change.
+  Graves stays at 2, played with a facedown card or a pre-cast pump; the sideboard plans gain
+  "Graves out against LeBlanc, Jayce and Kai'Sa; third Graves in against Kennen, Rengar and
+  Evelynn". Small bodies unchanged: most removal in this field ignores Might.
+- **24 Oct 2026 — −1 Edge of Night, +1 Switcheroo; sideboard −2 Existential Dread, +2 Rebuke.**
+  Worked from what breaks the plan, not card against card. The plan's defence is a hidden card
+  behind a hold, and the breaker is **one big unit attacking into it** (Astral Heron, Thousand-
+  Tailed Watcher, Ruined Rex, Rhasa, Baron: in 7 of the 11 S/A decks). Nine of the eleven hidden
+  cards can't stop a 6–7 Might attacker; Switcheroo can, from face down for free (§811.1.b,
+  §204.1.a), past Defy (two Power) and past stuns on play (a spell). Answers castable on their
+  turn go from 5 to 6: 65% → 72% to have one by turn 3, 75% → 82% by turn 5.
+  - **Against the tiers:** tier 0 (the clock) — protects the holds that score and, cast from
+    hand in their attack (Action), keeps Evelynn's facedown card down; tier 1 (fights) — wins the
+    fights the plan loses, against bigger units, and turns Graves's blast on a big unit; tier 2 —
+    Fizz recasts it (Edge, a gear, he can't); tier 3 — it shrinks their unit as denial; tier 4 —
+    neutral (both pay Power). Always-on: Switcheroo at 3; Edge becomes a 1-of, but no line needs it
+    specifically (its job is shared with 3 Punch First, 3 Switcheroo, 2 Tornado).
+  - **Checks** (`deckChecks`, `lib/sim.mjs` 20,000 games): all 11 rules pass; Hidden 11 (4 spells
+    or gear, the Vex rule); cheap cards 18 → 19; average cost 2.65 → 2.63; goldfish units by
+    turn 3 3.4 → 3.3, Might by turn 4 14.6 → 14.4 (the sim plays Edge as Might and holds
+    Switcheroo as interaction). Printed Chaos 16 → 18: 6/6 sticks on colour 10.5% → 11.6% with no
+    Gold modelled; 5/7 is 10.1%. **Runes stay 6/6** for turn 1's Staunch Survivor, and a hidden
+    Switcheroo costs no Chaos at all.
+  - **Costs, honestly:** the permanent +2 for a tall unit (Punch First covers most of it), and
+    Irelia's Not So Fast (80%) can counter a Switcheroo that chooses her unit, as it can Gust,
+    Star-Crossed and Rampage.
+  - **Rebuke in the sideboard, not the main deck:** it beats Rampage only against the five Defy
+    decks, so it comes in after game 1 shows Defy, two for two, with no 1-ofs. Existential Dread
+    went because Defy and Not So Fast counter it in the matchups it was meant for.
+  - **Rejected:** Rebuke main (matchup-dependent; the field splits about half and half on Defy);
+    Mel, Defiant Soul (her banish is 3 Might or less); Gentlemen's Duel and Clash of Giants (6
+    Energy). Saved to the Decks tab the same day; the row was backed up first.
+- **24 Oct 2026 — the simulator learns Power, and a full recheck; −1 Edge of Night, +1 Elnuk
+  Herd.** Jay asked for Power everywhere. `lib/sim.mjs` now makes the legend's Gold, hides
+  (opt-in), and reports whether an answer is *usable* on their turn, not just in hand.
+  - **What moved:** the old "72% to have an answer by turn 3" counted Switcheroo or
+    Star-Crossed in hand. Usable on their turn: 40% by turn 3, 55–64% by turn 5, nearly all of
+    it a face-down Switcheroo (42% by turn 4 against 3–10% from hand after developing). New
+    first rule: hide Switcheroo first.
+  - **Rechecked with Gold and hiding:** runes 6/6 still best (10.1% stuck; 4/8–7/5 within 0.1
+    Energy); keep all; Staunch Survivor's keep value 0.0 (was −0.5 with no Gold); two units by
+    turn 3 97–99%, by turn 2 74% on the play and 94% on the draw.
+  - **The field, completed:** the S/A legends' abilities and battlefields read (guide §11a).
+    New for the plan: Kai'Sa's Rockfall Path (78%) blocks hidden units, so hide spells there;
+    Void Gate (95%) lets Hextech Ray kill 4s. Weighted over the field (popularity · results):
+    a regular 6+ Might unit 95% · 96%, 7+ 56% · 61%; a Reaction that turns Graves's blast
+    73% · 79%; Defy 46% · 33%; stuns 42% · 30%; Rockfall 7% · 18%.
+  - **Elnuk Herd for Edge of Night, judged on the field, not on the suggestion:** the slot must
+    be a hidden card (hand cards are rarely usable on their turn), and every legal hidden card
+    was read. Graves kills 97% of their unit copies with +3 against 92% with +2 (the 7-Might
+    units); +3 on a defender; the +3 lands through a stun; a 5-Might body with no Power from
+    hand. Edge's case: permanence, Rockfall Path, cheaper from hand. Confidence moderate; Edge
+    comes back against Kai'Sa if she is common at the store. Also read and rejected: Ember Monk
+    (+2 per flip, but a 4-drop and not hidden), Momentary Companion, Teemo, Scout.
+  - Saved to the Decks tab (row backed up first). Sideboard plans: Kai'Sa takes out Elnuk with
+    the two Graves.
