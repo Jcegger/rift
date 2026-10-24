@@ -4,10 +4,10 @@ A personal Riftbound TCG site, built around the decks I actually play: whether e
 one is ready and legal, a one-tap match journal, matchups against Riot's own results,
 the guides, and the collection those answers are computed from.
 
-The collection half is a mirror. riftbound.gg is where cards actually get entered —
-its scanner beats typing — and the site pulls it on every open, replacing the owned
-counts. What riftbound.gg cannot do is hold the collection, the decks and the results
-in the same hand; that join is the point.
+The collection half is a mirror. Piltover Archive is where cards actually get entered,
+and the site pulls it on every open, replacing the owned counts. (It was riftbound.gg
+until 24 Oct 2026: see **Import**.) What Piltover cannot do is hold the collection, the
+decks and the results in the same hand; that join is the point.
 
 `index.html` plus the ES modules in `lib/`, no build step. State lives in one Supabase
 row (single-user, the same pattern as the LSAT and reading trackers), which
@@ -31,9 +31,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `lib/decks.mjs` - deck maths shared by the site and `scripts/state.mjs`: owning by card
   identity (every printing of a name), cheapest-printing prices (unpriced stays unpriced),
   the deck rules as checks (§103, TR §601), the journal record. Tests: `lib/decks.test.mjs`.
-- `lib/collection.mjs` - the collection maths, ported from the old app: the riftbound.gg /
-  CSV import and its matcher, the Piltover worklist and merge file, foil-only typos, spares
-  and trade matching. Tests: `lib/collection.test.mjs`.
+- `lib/collection.mjs` - the collection maths, ported from the old app: the Piltover pull,
+  riftbound.gg JSON and CSV imports and their matcher, the list of new copies to file,
+  spares and trade matching. Tests: `lib/collection.test.mjs`.
 - `lib/markdown.mjs` - the guide renderer the site uses, with heading anchors.
 - `lib/sim.mjs` - the goldfish simulator's engine, shared by `scripts/sim.mjs` and the site.
   `lib/sim-worker.mjs` runs it in a Web Worker for the tweak bench.
@@ -282,7 +282,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   a finished thing, and nothing in the app reads it.
 - `guides/` - the deck dossiers, in Markdown. The source of truth for the Guides
   tab and for `guides/out/*.docx`, which is build output and gitignored.
-- `worker/` - the Cloudflare Worker that proxies the riftbound.gg profile.
+- `worker/` - the Cloudflare Worker that proxies the Piltover Archive collection (`/piltover`,
+  the pull) and riftbound.gg profiles (the trade checker).
 - `fonts/` - Press Start 2P and Syne Mono, self-hosted to match jayegger.com.
 
 ## The views
@@ -310,8 +311,8 @@ held past the playset target, which is what can be traded away without breaking 
 deck, derived from the collection so it stays right without setting a single Trade
 count by hand. Basic runes are excluded, since lists happily run nine of one.
 
-**Trade opportunities** reads any public riftbound.gg profile the same way it
-reads mine, so a partner's username works out both directions at once: their
+**Trade opportunities** reads any public riftbound.gg profile, which is what most
+players keep, so a partner's username works out both directions at once: their
 spares that fill my gaps, and my spares on their wishlist. Most people never fill
 in a trade list, so their surplus past a playset stands in for it. My side of
 "what I need" is explicit wants first, then the gap in the archetypes I am closest
@@ -375,8 +376,8 @@ a manifest and the app fetches the body when you open one. Everywhere else this
 app reports data; here it argues, and the sourcing at the foot of each dossier is
 there so the argument can be checked.
 
-**Import** pulls the collection in from riftbound.gg, which is where cards
-actually get entered because its scanner beats typing.
+**Import** pulls the collection in from Piltover Archive, which is where cards
+actually get entered.
 
 ## Next: what to acquire
 
@@ -1252,35 +1253,37 @@ and says so, because an empty section teaches nothing.
 
 ## Import
 
-riftbound.gg is the source of truth for what I own, because its card scanner beats
-typing. This tool mirrors it and adds what it does not do. Every import replaces
-the owned counts, so a correction over there lands here too, while Want, Trade and
-On the way are left alone because they exist only in this tool. Re-importing the same
-data is a verified no-op.
+Piltover Archive is the source of truth for what I own (since 24 Oct 2026). This tool
+mirrors it and adds what it does not do. Every import replaces the owned counts, so a
+correction over there lands here too, while Want, Trade and On the way are left alone
+because they exist only in this tool. Re-importing the same data is a verified no-op.
+
+**Why Piltover, and what it cost.** riftbound.gg was the source until 24 Oct 2026, with
+Piltover kept as a carbon copy by a merge file. Piltover is the one more of the community
+uses, and making it the source leaves one place to enter cards and nothing to keep in step.
+The price is the foil split: Piltover's public collection has one count per printing, so
+every copy now reads as normal and the foil-only typo check went with it. Deck checks and
+"to get" never read the split. Per-set rune printings fold into the base rune the same way.
 
 On the way is the one field an import does more than preserve: a rise in a card's owned
 count is a copy arriving, so the inbound record is reduced by exactly that much and the
 import reports what landed. That is the whole reason the field can be trusted — nothing
 on that list is ticked off by hand, and a card bought outside the app still clears itself
-once riftbound.gg knows about it.
+once Piltover knows about it.
 
 Three ways in, in order of how little work they are:
 
-1. **Automatic.** The site pulls through `worker/` every time it opens (Collection →
+1. **Automatic.** The site pulls `worker/`'s `/piltover` every time it opens (Collection →
    Import, "Pull every time the site opens", on by default). It writes the row only when
-   something changed, refuses an empty collection outright (a profile gone private comes
-   back `200` and empty), and holds back a pull that would drop more than half the cards
-   until "Apply anyway". See `worker/README.md` for why a proxy is needed at all.
-2. **A file.** Either the JSON a public profile returns, or a CSV from riftbound.gg,
-   TCGplayer or Piltover. With pull-on-open on, the next visit puts riftbound.gg's counts
-   back, which the page says.
+   something changed, refuses an empty collection or anything that isn't Piltover's, and
+   holds back a pull that would drop more than half the cards until "Apply anyway". See
+   `worker/README.md` for why a proxy is needed at all.
+2. **A file.** A CSV from Piltover, riftbound.gg or TCGplayer, or riftbound.gg's JSON.
+   With pull-on-open on, the next visit puts Piltover's counts back, which the page says.
 3. **Paste.** Drop either straight into Collection → Import.
 
-The JSON is the better source. A public profile carries more than the CSV does:
-`standard` and `foil` counts, `trade` and `wish` counts, and the custom tags used
-to label where a card came from. Tags come across on import, show on each card,
-and get their own filter. Trade and wishlist are ignored unless "Mirror trade and
-wishlist" is on, which is off by default so that Want survives a pull.
+A Piltover pull is compared by each printing's total, so the first one, which moved every
+foil count onto normal, read as no change at all. Gains are banked by total too.
 
 Matching tries the most specific key it can: a card id, then set plus collector
 number, then a bare name. Everything normalizes, including zero-padding, letter
@@ -1292,21 +1295,21 @@ same-numbered base card, and the report says which rows did that.
 
 Rows that match nothing are listed rather than dropped. The expected cause is a
 card the catalog cannot know about: the **Arcane Box Set**, or a set Riot has
-announced but not released. riftbound.gg's catalog is larger than Riot's gallery
-for exactly that reason.
+announced but not released. Piltover's and riftbound.gg's catalogs are larger than
+Riot's gallery for exactly that reason.
 
 ### New product: the intake
 
 Opening product (a Pre-Rift kit, boosters) goes in like everything else, with one check after:
 
-1. **Scan it on riftbound.gg.** Mark foils as foil.
+1. **Add it on Piltover Archive.**
 2. **Open the app** (it pulls), then run `scripts/rift intake <champion>` or ask Claude to check
-   the scan. It reads the Piltover worklist, which already holds every copy gained since the last
-   clear, and prints how many copies landed (compare with your stack), the champion pack checked
+   the scan. It reads the list of new copies to file, which already holds every copy gained since
+   the last clear, and prints how many copies landed (compare with your stack), the champion pack checked
    card by card against `lib/kits.mjs`, scans worth a second look (another set, three of one
    rare, alt arts and promos), and where each copy goes: playset box by domain, bulk past the
    playset, legends, signatures and battlefields to deck pieces. It never writes.
-3. **File the cards, then the Piltover worklist:** Download → Merge → Clear.
+3. **File the cards, then Clear the list** (Collection → Import → New, to file).
 
 The Heimerdinger promo is `RAD-132-P` on riftbound.gg; the catalog here has only the base card,
 so it counts as one.
@@ -1425,11 +1428,11 @@ Collection, Guides, News. It lived at `/app/` while it was built and took the ro
   published grades only, labelled a forecast until Radiance results lead the tiers.
 - **Collection** — four sub-pages. *Cards*: every printing as a grid or a table, filtered
   by what you own, what your decks are short of, wants, spares and the rest; tap a card to
-  set Want, Trade and On the way (owned counts come only from riftbound.gg). *Sets*:
+  set Want, Trade and On the way (owned counts come only from Piltover Archive). *Sets*:
   base-set completion. *Trade*: spares past the playset, what you're looking for (wants
   plus your decks' shortfalls, less anything on the way), and a comparison against any
   public riftbound.gg profile. `?view=trade` is a read-only copy of it to hand someone.
-  *Import*: the pull, file import, the Piltover worklist, foil-only typos, a backup.
+  *Import*: the pull, the new copies to file, file import, a backup.
 - **News** — Riot's news (bans, errata, rules updates and announcements, with Riot's own
   summaries), Riot's RQ results articles and riftbound.gg's posts in one list. It opens on
   **For you**: Riot's rules, ban and errata posts from the last 30 days and anything whose

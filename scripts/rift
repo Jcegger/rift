@@ -6,14 +6,13 @@
 #   scripts/rift deck sivir      # one deck (main + sideboard) vs. the collection
 #   scripts/rift card body rune  # catalog lookup with owned/want/trade
 #   scripts/rift want | trade | sets | raw
-#   scripts/rift piltover > collection-piltover.csv   # full Piltover import (Replace mode)
 #   scripts/rift meta [legend] [--since DATE]          # what the legal field plays (no banned lists)
 #   scripts/rift ideas [legend]                        # net decks per legend (or the crowd's list), vs your deck
 #   scripts/rift rising [legend]                       # cards each legend's posted lists are taking up
 #   scripts/rift poll [legend]                         # the preseason model: every build ranked, and why
 #   scripts/rift field [--tiers | <legend> | --for <legend>]  # what you will face: experts, record, play
 #   scripts/rift event <locator id>                    # a store event: standings + legends
-#   scripts/rift intake [champion]                     # after scanning new cards: what landed, where to file it
+#   scripts/rift intake [champion]                     # after adding cards on Piltover: what landed, where to file it
 #
 # See scripts/state.mjs for the full command list and data sources.
 

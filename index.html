@@ -255,7 +255,7 @@ nav.bottom{display:none}
 import { indexCatalog, deckStats, deckChecks, journalRecord, ownedByIdentity, deckText, MAIN_SIZE, SB_MAX } from "./lib/decks.mjs";
 import { mdToHtml, esc, slugify } from "./lib/markdown.mjs";
 import { avoidedIn } from "./lib/avoid.mjs";
-import { applyImport, matcher, setCount, setSource, foilOnlyProblems, newqRows, newqText, newqCSV,
+import { applyImport, matcher, setCount, setSource, newqRows, newqText,
   spares, readPartner, tradeMatch } from "./lib/collection.mjs";
 
 /* ── sync: the same Supabase row scripts/rift reads ─────────────────────────────
@@ -404,7 +404,7 @@ function toast(msg, action = null) {
 }
 
 /* ── hand-kept counts: Want, Trade, On the way ──────────────────────────────
-   Owned counts come from riftbound.gg and are replaced on every pull, so the app never
+   Owned counts come from Piltover Archive and are replaced on every pull, so the app never
    edits them. These three it does. Taps apply to ROW at once and go out as one write a
    moment later; anything not yet sent is laid back over every fresh copy of the row. */
 const PENDING = new Map();     // code -> { w?, t?, o?, os? }
@@ -474,7 +474,7 @@ function showCard(code) {
         ${ctr("o", "On the way", "bought, not arrived; clears itself on a pull")}
         ${h.o ? `<label class="tiny dim" style="display:flex;flex-direction:column;gap:4px">From where
           <input type="text" data-src value="${esc(h.os)}" placeholder="TCGplayer order, trade with…" maxlength="40"></label>` : ""}
-        <p class="tiny dim" style="margin:0">Owned counts come from riftbound.gg. Change them there and they land here on the next pull.</p>
+        <p class="tiny dim" style="margin:0">Owned counts come from Piltover Archive. Change them there and they land here on the next pull.</p>
       </div>` : ""}
       <form method="dialog"><button class="btn">Close</button></form>
     </div></div>`;
@@ -1639,11 +1639,14 @@ document.addEventListener("click", async (e) => {
 });
 
 /* ══ Collection ══════════════════════════════════════════════════════════
-   A mirror of riftbound.gg, where cards get entered (its scanner beats typing). Owned
-   counts arrive by a pull on every load; this page browses them, keeps the three counts
-   riftbound.gg doesn't (Want, Trade, On the way), and carries the Piltover worklist. */
-const DEFAULT_SYNC_URL = "https://rift-sync.jcegger.workers.dev";   // worker/, in front of the public profile
+   A mirror of Piltover Archive, where cards get entered (the source of truth since
+   24 Oct 2026; riftbound.gg before). Owned counts arrive by a pull on every load; this
+   page browses them, keeps the three counts Piltover doesn't (Want, Trade, On the way),
+   and lists the new copies to file. */
+const DEFAULT_SYNC_URL = "https://rift-sync.jcegger.workers.dev";   // worker/, in front of both public sources
 const syncUrl = () => ROW?.syncUrl || DEFAULT_SYNC_URL;
+// The pull reads /piltover; the bare URL is riftbound.gg, which the trade checker still reads.
+const pullUrl = () => syncUrl().replace(/[?#].*$/, "").replace(/\/+$/, "") + "/piltover";
 const playset = () => ROW?.playset || 3;
 const stamp = () => new Date().toISOString().slice(0, 16).replace("T", " ");   // UTC, the old app's format
 const ago = (t) => {
@@ -1672,14 +1675,15 @@ async function pullCollection({ force = false } = {}) {
   if (!ROW || SHARE || PULL.state === "pulling") return;
   PULL = { state: "pulling" }; paintPull();
   try {
-    const r = await fetch(syncUrl(), { cache: "no-store" });
+    const r = await fetch(pullUrl(), { cache: "no-store" });
     const body = await r.text();
     if (!r.ok) throw new Error(body.trim().slice(0, 200) || `HTTP ${r.status}`);
     const payload = JSON.parse(body);
-    // A private profile or a renamed account comes back 200 with an empty collection.
-    // Applied, that would zero every owned count, so it is refused outright.
+    // A private collection is an error from worker/; an empty one would zero every owned
+    // count if applied, so it is refused outright. So is anything that isn't Piltover's.
+    if (payload.source !== "piltover") throw new Error("The worker didn't answer with Piltover's collection (is worker/ deployed with /piltover?). Nothing was changed.");
     if (!Array.isArray(payload.collection) || !payload.collection.length)
-      throw new Error("riftbound.gg sent back an empty collection (is the profile still public?). Nothing was changed.");
+      throw new Error("Piltover Archive sent back an empty collection (is it still public?). Nothing was changed.");
     const trial = JSON.parse(JSON.stringify({ inv: ROW.inv || {}, tags: ROW.tags || {}, newq: ROW.newq || {}, mirrorTradeWish: ROW.mirrorTradeWish }));
     let rep = applyImport(trial, body, MATCH);
     const before = copiesIn(ROW.inv), after = copiesIn(trial.inv);
@@ -1687,7 +1691,7 @@ async function pullCollection({ force = false } = {}) {
     if (!force && before > 50 && after < before / 2) { PULL = { state: "held", at: new Date(), before, after }; paintPull(); return; }
     const changed = stable(trial.inv) !== stable(ROW.inv || {}) || stable(trial.tags) !== stable(ROW.tags || {}) || stable(trial.newq) !== stable(ROW.newq || {});
     if (changed) await write((d) => { rep = applyImport(d, body, MATCH); d.lastSyncAt = stamp(); });
-    LAST = { ...rep, via: "riftbound.gg", at: new Date() };
+    LAST = { ...rep, via: "Piltover Archive", at: new Date() };
     PULL = { state: "ok", at: new Date(), changed };
   } catch (e) {
     PULL = { state: "error", at: new Date(), error: e.message };
@@ -1696,13 +1700,13 @@ async function pullCollection({ force = false } = {}) {
 }
 function pullLine() {
   const P = PULL;
-  if (P.state === "pulling") return `<span class="dim">Pulling from riftbound.gg…</span>`;
-  if (P.state === "error") return `<span style="color:var(--bad)">riftbound.gg pull failed: ${esc(P.error)}</span>`;
-  if (P.state === "held") return `<span style="color:var(--short)">riftbound.gg says ${P.after} cards, down from ${P.before}. Not applied.</span>
+  if (P.state === "pulling") return `<span class="dim">Pulling from Piltover Archive…</span>`;
+  if (P.state === "error") return `<span style="color:var(--bad)">Piltover pull failed: ${esc(P.error)}</span>`;
+  if (P.state === "held") return `<span style="color:var(--short)">Piltover says ${P.after} cards, down from ${P.before}. Not applied.</span>
     <button class="btn" data-pull="force" style="min-height:36px">Apply anyway</button>`;
   const last = ROW?.lastSyncAt ? `last change pulled ${ago(ROW.lastSyncAt)}` : "never pulled";
-  if (P.state === "ok") return `<span class="dim">riftbound.gg checked ${ago(P.at)} · ${P.changed && LAST ? `${LAST.added} new, ${LAST.changed} changed, ${LAST.cleared} gone` : "no changes"}</span>`;
-  return `<span class="dim">${ROW?.autoSync === false ? "Pull on load is off" : "Mirrors riftbound.gg"} · ${last}</span>`;
+  if (P.state === "ok") return `<span class="dim">Piltover checked ${ago(P.at)} · ${P.changed && LAST ? `${LAST.added} new, ${LAST.changed} changed, ${LAST.cleared} gone` : "no changes"}</span>`;
+  return `<span class="dim">${ROW?.autoSync === false ? "Pull on load is off" : "Mirrors Piltover Archive"} · ${last}</span>`;
 }
 function paintPull() {
   for (const el of document.querySelectorAll("[data-pullline]")) el.innerHTML = pullLine();
@@ -1732,7 +1736,6 @@ function collStats() {
 }
 function collHead() {
   const st = collStats();
-  const typos = foilOnlyProblems(ROW.inv, IDX.BY);
   return `<section class="panel hero">
       <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
         <h1>Collection</h1>
@@ -1742,9 +1745,7 @@ function collHead() {
         <div class="stat"><span class="lbl">Cards</span><b>${st.copies.toLocaleString()}</b></div>
         <div class="stat"><span class="lbl">Unique</span><b>${st.names.toLocaleString()}</b></div>
         <div class="stat"><span class="lbl">Printings</span><b>${st.printings.toLocaleString()}</b></div>
-        <div class="stat"><span class="lbl">Foils</span><b>${st.foils.toLocaleString()}</b></div>
-      </div></section>
-    ${typos.length ? `<div class="banner warn">${typos.length} foil-only printing${typos.length === 1 ? " is" : "s are"} recorded as Normal on riftbound.gg. <a href="#/collection/import">See which</a></div>` : ""}`;
+      </div></section>`;
 }
 function paintCollHead() { const el = $("#chead"); if (el && ROW) el.innerHTML = collHead(); }
 function viewCollection(sub) {
@@ -1995,12 +1996,12 @@ function viewTrade() {
       </section>
       ${comingRows.length ? `<section class="panel"><h2>On the way</h2>
         <div>${comingRows.map((r) => tradeRow(r.card, `${r.q}×${r.from ? ` · ${esc(r.from)}` : ""}`)).join("")}</div>
-        <p class="note">Clears itself as the copies show up on riftbound.gg.</p></section>` : ""}
+        <p class="note">Clears itself as the copies show up on Piltover Archive.</p></section>` : ""}
     </div>
   </div>
   ${SHARE ? "" : `<section class="panel">
     <div class="headrow"><h2>Trade with someone</h2><span class="small dim">Read-only link for them: <a href="?view=trade" target="_blank" rel="noopener">${esc(location.host || "rift.jayegger.com")}/?view=trade</a></span></div>
-    <p class="note">Any public riftbound.gg profile can be read the same way yours is. Put in their username and this works out both directions: their spares you're looking for, and your spares on their wishlist. Without a trade list on their side, their copies past ${playset()} stand in for one.</p>
+    <p class="note">Most players keep a public riftbound.gg profile, so that is what this reads. Put in their username and this works out both directions: their spares you're looking for, and your spares on their wishlist. Without a trade list on their side, their copies past ${playset()} stand in for one.</p>
     <form class="filters" data-trade-form><input type="search" id="partner" placeholder="Their riftbound.gg username" value="${esc(PARTNER?.user || "")}" autocomplete="off" style="flex:1 1 220px">
       <button class="btn primary" type="submit">Compare</button>${PARTNER ? `<button class="btn" type="button" data-trade="clear">Clear</button>` : ""}</form>
     ${PARTNER_ERR ? `<div class="banner bad">${esc(PARTNER_ERR)}</div>` : ""}
@@ -2054,7 +2055,7 @@ function lastReport() {
   const L = LAST;
   if (!L) return "";
   return `<div class="today"><span class="lbl">Last import · ${esc(L.via)} · ${ago(L.at)}</span>
-    <div class="r">${L.copies.toLocaleString()} cards across ${L.matched} printings · ${L.added} new · ${L.changed} changed · ${L.cleared} gone${L.queued ? ` · ${L.queued} for Piltover` : ""}${L.arrived ? ` · ${L.arrived} on the way arrived` : ""}</div>
+    <div class="r">${L.copies.toLocaleString()} cards across ${L.matched} printings · ${L.added} new · ${L.changed} changed · ${L.cleared} gone${L.queued ? ` · ${L.queued} to file` : ""}${L.arrived ? ` · ${L.arrived} on the way arrived` : ""}</div>
     ${L.approx.length ? `<div class="tiny">Matched to the base printing, since Riot doesn't publish these exact ones: ${esc(L.approx.slice(0, 30).join(", "))}</div>` : ""}
     ${L.unmatched.length ? `<div class="tiny" style="color:var(--short)">Not in the catalog (${L.unmatched.length}): ${esc(L.unmatched.slice(0, 40).join("; "))}${L.unmatched.length > 40 ? "…" : ""}</div>` : ""}</div>`;
 }
@@ -2063,41 +2064,33 @@ function viewImport() {
   const pqCopies = pq.reduce((a, r) => a + r.q, 0);
   const days = [];
   for (const r of pq.slice(0, 16)) { if (!days.length || days[days.length - 1].at !== r.at) days.push({ at: r.at, rows: [] }); days[days.length - 1].rows.push(r); }
-  const typos = foilOnlyProblems(ROW.inv, IDX.BY);
   const toggle = (key, label, on) => `<label class="switch"><input type="checkbox" data-setting="${key}" ${on ? "checked" : ""}> ${label}</label>`;
   return `<div class="cols">
     <div class="wide" style="display:flex;flex-direction:column;gap:24px;flex:999 1 560px;min-width:0">
       <section class="panel">
-        <div class="headrow"><h2>riftbound.gg</h2><button class="btn primary" data-pull="1">Pull now</button></div>
+        <div class="headrow"><h2>Piltover Archive</h2><button class="btn primary" data-pull="1">Pull now</button></div>
         <div class="small" data-pullline style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">${pullLine()}</div>
-        <p class="note">Cards get entered on riftbound.gg; this mirrors it. Every pull replaces owned counts, so a fix made there lands here. Want, Trade and On the way are kept here and a pull leaves them alone.</p>
+        <p class="note">Cards get entered on Piltover Archive; this mirrors it. Every pull replaces owned counts, so a fix made there lands here. Piltover's public collection has one count per printing, so foils count as normal copies. Want, Trade and On the way are kept here and a pull leaves them alone.</p>
         ${lastReport()}
         <div style="display:flex;flex-direction:column;gap:8px">
           ${toggle("autoSync", "Pull every time the site opens", ROW.autoSync !== false)}
-          ${toggle("mirrorTradeWish", "Copy riftbound.gg's trade and wishlist counts over Trade and Want", !!ROW.mirrorTradeWish)}
         </div>
         <details><summary class="small dim" style="cursor:pointer">Where it pulls from</summary>
-          <p class="note" style="margin:8px 0">riftbound.gg only answers its own site, so a small Cloudflare Worker (<code>worker/</code>) reads the public profile and passes it on.</p>
+          <p class="note" style="margin:8px 0">Piltover Archive doesn't let other sites read its data, so a small Cloudflare Worker (<code>worker/</code>) reads the public collection and passes it on. Its bare URL reads riftbound.gg profiles, for trades.</p>
           <form class="filters" data-syncurl><input type="text" id="syncurl" value="${esc(syncUrl())}" style="flex:1 1 280px" aria-label="Worker URL"><button class="btn" type="submit">Save</button></form></details>
       </section>
       ${pq.length ? `<section class="panel">
-        <div class="headrow"><h2>Not yet in Piltover</h2><span class="num small dim">${pqCopies} cop${pqCopies === 1 ? "y" : "ies"}</span></div>
-        <p class="note">Copies riftbound.gg has gained since you last cleared this. Download the file, then in Piltover Archive: Collection → Import → upload as a <b>merge</b>. Once it's in, come back and clear the list; nothing clears it for you.</p>
-        <div class="btnrow"><button class="btn primary" data-imp="pa-file">Download for Piltover</button><button class="btn" data-imp="pa-copy">Copy the list</button><button class="btn" data-imp="pa-clear">Clear</button></div>
+        <div class="headrow"><h2>New, to file</h2><span class="num small dim">${pqCopies} cop${pqCopies === 1 ? "y" : "ies"}</span></div>
+        <p class="note">Copies Piltover has gained since you last cleared this: the stack to put away (<code>scripts/rift intake</code> says where each goes). Clear it once they're filed; nothing clears it for you.</p>
+        <div class="btnrow"><button class="btn" data-imp="pa-copy">Copy the list</button><button class="btn" data-imp="pa-clear">Clear</button></div>
         <div>${days.map((g) => `<div class="lbl" style="margin-top:10px">Added ${esc(g.at || "earlier")}</div>${g.rows.map((r) => tradeRow(r.card, `${r.n ? r.n : ""}${r.n && r.f ? " · " : ""}${r.f ? `${r.f} foil` : ""}`)).join("")}`).join("")}</div>
-        ${pq.length > 16 ? `<p class="note">+${pq.length - 16} more printings; the file and the copied list cover all ${pq.length}.</p>` : ""}
-      </section>` : ""}
-      ${typos.length ? `<section class="panel">
-        <div class="headrow"><h2>Foil only, recorded as Normal</h2><span class="num small dim">${typos.length}</span></div>
-        <p class="note">These printings only exist in foil, so a Normal count on them is almost always a quick-add on riftbound.gg that defaulted to Normal. Fix them there; a fix here would be undone by the next pull.</p>
-        <div>${typos.map((p) => tradeRow(p.card, `${p.normal} normal${p.foil ? ` · ${p.foil} foil` : ""}`)).join("")}</div>
-        <div class="btnrow"><button class="btn" data-imp="typo-copy">Copy the list</button></div>
+        ${pq.length > 16 ? `<p class="note">+${pq.length - 16} more printings; the copied list covers all ${pq.length}.</p>` : ""}
       </section>` : ""}
     </div>
     <div class="side">
       <section class="panel">
         <h2>Import a file</h2>
-        <p class="note">A CSV from riftbound.gg, TCGplayer or Piltover, or riftbound.gg's JSON. It replaces owned counts, the same as a pull.${ROW.autoSync !== false ? " <b>With pull-on-open on, the next visit puts riftbound.gg's counts back</b>, so turn that off first if this file should stick." : ""}</p>
+        <p class="note">A CSV from Piltover, riftbound.gg or TCGplayer, or riftbound.gg's JSON. It replaces owned counts, the same as a pull.${ROW.autoSync !== false ? " <b>With pull-on-open on, the next visit puts Piltover's counts back</b>, so turn that off first if this file should stick." : ""}</p>
         <input type="file" id="impfile" accept=".csv,.json,.txt,text/csv,application/json">
         <textarea id="imptext" rows="5" placeholder="Or paste it here&#10;cardid,name,normal,foil&#10;OGN-001/298,Blazing Scorcher,3,1" style="font:14px var(--f-mono);border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--card);color:var(--ink);width:100%"></textarea>
         <div class="btnrow"><button class="btn primary" data-imp="paste">Import</button></div>
@@ -2140,12 +2133,11 @@ document.addEventListener("click", async (e) => {
   const b = e.target.closest("[data-imp]");
   if (!b) return;
   const k = b.dataset.imp;
-  if (k === "pa-file") download(`piltover-merge-${today()}.csv`, newqCSV(newqRows(ROW, IDX.BY)), "text/csv");
-  else if (k === "pa-copy") copyText(newqText(newqRows(ROW, IDX.BY)), "List");
+  if (k === "pa-copy") copyText(newqText(newqRows(ROW, IDX.BY)), "List");
   else if (k === "pa-clear") {
-    if (!confirm("Clear the Piltover list? Only do this once the file is merged in.")) return;
+    if (!confirm("Clear the list of new copies? Only do this once they're filed.")) return;
     try { await write((d) => { d.newq = {}; }); toast("Cleared"); KEEP_SCROLL = true; route(); } catch (err) { toast(`Not cleared: ${err.message}`); }
-  } else if (k === "typo-copy") copyText(["FOIL-ONLY PRINTINGS RECORDED AS NORMAL", "", ...foilOnlyProblems(ROW.inv, IDX.BY).map((p) => `${p.code}  ${p.card.n}  normal ${p.normal}${p.foil ? `, foil ${p.foil}` : ""}`)].join("\n"), "List");
+  }
   else if (k === "paste") { const t = $("#imptext").value; if (t.trim()) importText(t, "pasted text"); else toast("Paste something first"); }
   else if (k === "backup") download(`rift-backup-${today()}.json`, JSON.stringify(ROW, null, 1), "application/json");
 });
@@ -2286,7 +2278,7 @@ document.addEventListener("click", (e) => {
   if (SHARE) { route(); return; }
   await flushQueue();
   if (!DIRTY) { KEEP_SCROLL = true; route(); }
-  // riftbound.gg is where cards get entered, so its counts win over the row's on every
+  // Piltover Archive is where cards get entered, so its counts win over the row's on every
   // open. scripts/rift reads the row and never pulls, so this is what keeps it current.
   if (ROW && ROW.autoSync !== false) pullCollection();
   window.addEventListener("online", () => { flushQueue(); flushCounts(); });

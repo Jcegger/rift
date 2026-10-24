@@ -10,7 +10,6 @@
 //   node scripts/state.mjs trade           # copies flagged for trade
 //   node scripts/state.mjs sets            # base-set completion
 //   node scripts/state.mjs raw             # the raw state JSON, pretty-printed
-//   node scripts/state.mjs piltover        # full Piltover Archive import CSV (Replace mode)
 //   node scripts/state.mjs meta            # archetype shares over sanctioned-legal lists
 //   node scripts/state.mjs meta diana      # one archetype: card play rates, best finishes
 //   node scripts/state.mjs meta leblanc --since 2026-09-15   # only lists played after a date
@@ -651,40 +650,6 @@ function cmdTrade(S, cat, q) {
   console.log(`\n  ${rows.length} cards flagged`);
 }
 
-// Piltover Archive import CSV — a full carbon-copy snapshot of the collection.
-// Jay's Piltover binder is never edited directly, so re-importing with Piltover's
-// "Replace" mode (not "Merge") each time keeps it in sync with no drift to track.
-const PILTOVER_HEADER = "Variant Number,Card Name,Set,Set Prefix,Rarity,Variant Type,Variant Label,Foil,Quantity,Language,Condition,Grading Company,Grading Value,Grading Label,Notes";
-
-function csvEsc(s) {
-  if (s == null) return "";
-  const str = String(s);
-  return /[",\n]/.test(str) ? `"${str.replace(/"/g, '""')}"` : str;
-}
-
-function cmdPiltover(S, cat) {
-  const rows = [];
-  for (const [code, e] of Object.entries(S.inv || {})) {
-    let n = e.n || 0;
-    let f = e.f || 0;
-    if (n + f <= 0) continue;
-    const card = cat.BY.get(code);
-    if (!card) continue; // not in catalog — nothing to map to a Piltover variant
-    if (card.t === "Rune") continue;
-    if (/-T\d/.test(code)) continue;
-    if (card.fo && n > 0) { f += n; n = 0; } // foil-only printing recorded as Normal
-    const num = code.replace(/\/\d+$/, "");
-    if (n > 0) rows.push([num, card.n, false, n]);
-    if (f > 0) rows.push([num, card.n, true, f]);
-  }
-  rows.sort((a, b) => a[0].localeCompare(b[0], undefined, { numeric: true }));
-  const lines = [PILTOVER_HEADER];
-  for (const [num, name, foil, qty] of rows) {
-    lines.push([num, name, "", "", "", "", "", foil, qty, "English", "", "", "", "", ""].map(csvEsc).join(","));
-  }
-  process.stdout.write(lines.join("\r\n") + "\r\n");
-}
-
 function cmdSets(S, cat, q) {
   for (const set of cat.sets) {
     const base = cat.cards.filter((c) => c.s === set.id && c.no <= set.base);
@@ -978,9 +943,8 @@ async function guideHeadings() {
 }
 
 // ── intake: new product into the collection ───────────────────────────────────
-// Cards get entered on riftbound.gg (its scanner beats typing) and reach the app on its
-// next pull, which banks every gained copy in the Piltover worklist (`newq`) until it is
-// cleared. So "what's new" is already recorded, and this reads it: what landed, a Pre-Rift
+// Cards get entered on Piltover Archive and reach the app on its next pull, which banks
+// every gained copy in the list of new copies to file (`newq`) until it is cleared. So "what's new" is already recorded, and this reads it: what landed, a Pre-Rift
 // champion pack checked card by card (lib/kits.mjs), scans worth a second look, and where
 // each copy goes in the boxes. Read only; nothing to run before scanning.
 // The physical layout (decided 2026-10-17): the first PLAYSET copies of a name go in the
@@ -995,8 +959,8 @@ function cmdIntake(S, cat, args) {
   const gained = Object.entries(S.newq || {}).map(([k, e]) => ({ k: key(k), c: cardOf(k), n: e.q || 0, f: e.f || 0, at: e.at }))
     .filter((r) => r.n + r.f > 0);
   if (!gained.length) {
-    console.log("INTAKE  nothing new since the last Piltover clear.");
-    console.log("  Scanned on riftbound.gg? Open the app once so it pulls, then run this again.");
+    console.log("INTAKE  nothing new since the list was last cleared.");
+    console.log("  Added on Piltover Archive? Open the app once so it pulls, then run this again.");
     return;
   }
   const name = (r) => r.c?.n || `(unknown ${r.k})`;
@@ -1046,7 +1010,7 @@ function cmdIntake(S, cat, args) {
   }
   console.log(`  FILE TO`);
   for (const where of Object.keys(plan).sort()) console.log(`    ${where.padEnd(24)} ${plan[where].join(", ")}`);
-  console.log("\n  Then the Piltover worklist in the app: Download → Merge → Clear (which also empties this list).");
+  console.log("\n  Then Clear the list in the app (Collection → Import → New, to file), which also empties this one.");
 }
 
 async function main() {
@@ -1078,7 +1042,6 @@ async function main() {
     trade: () => cmdTrade(S, cat, q),
     sets: () => cmdSets(S, cat, q),
     raw: () => console.log(JSON.stringify(S, null, 2)),
-    piltover: () => cmdPiltover(S, cat),
     journal: () => cmdJournal(S, args),
     intake: () => cmdIntake(S, cat, args),
   };

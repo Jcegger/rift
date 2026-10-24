@@ -6,5 +6,8 @@ compatibility_date = "2026-08-01"
 # Origins allowed to read the proxied JSON. First entry is the fallback.
 ALLOW_ORIGIN = "https://rift.jayegger.com,https://jcegger.github.io,http://localhost:8791"
 DOTGG_GAME = "riftbound"
-# The riftbound.gg profile to read. Public data, so no secret is involved.
+# The Piltover Archive collection GET /piltover reads: the Clerk user id (the profile
+# API lists it as the owner id on the user's decks), not the username. Public data.
+PILTOVER_USER = "user_3IbJcBlxtt3tK7GtwCBfHrOly4q"
+# The riftbound.gg profile GET / reads by default (trades pass ?user=). Public data.
 DOTGG_USER = "skrtseason"
