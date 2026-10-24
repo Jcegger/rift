@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-23",
+ "generatedAt": "2026-10-24",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 34,
+ "carriedFromPrevious": 36,
  "tags": {
   "News": 47,
   "Metagame": 22,

@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-23",
+ "generatedAt": "2026-10-24",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2465,
-  "eventsWithDecks": 18,
-  "players": 63517,
-  "playersWithDecks": 5797,
+  "events": 2466,
+  "eventsWithDecks": 19,
+  "players": 63525,
+  "playersWithDecks": 5805,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
    "Mardi - Championship #1",
@@ -33,14 +33,14 @@
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "unknown": 190,
-   "Europe": 54,
+   "Europe": 56,
+   "unknown": 193,
    "Asia": 90,
    "North America": 7,
    "Oceania": 4
   },
   "registryEventsByRegion": {
-   "unknown": 2459,
+   "unknown": 2460,
    "Asia": 6
   },
   "unresolvedClaimEvents": [
@@ -132,6 +132,7 @@
    "Runes & Rift Open 19": 8,
    "Triple Win-A-Box | Vendetta Tournament": 8,
    "Riftbound Remote Showdown #4": 8,
+   "LDXP Sacramento - 2 v 2 Constructed": 6,
    "THE SCRUB CUP 10/2/26 6 PM": 1,
    "Showdown Series Bristol by Organized Play Events": 1,
    "Riftbound Remote Showdown Pop Up Cup": 1
@@ -146,6 +147,16 @@
    "winner": "el",
    "country": null,
    "slug": "club9-riftbound-clash-3",
+   "top": []
+  },
+  {
+   "name": "LDXP Sacramento - 2 v 2 Constructed",
+   "dt": "2026-10-23",
+   "players": 8,
+   "format": "2v2",
+   "winner": "Liam Hinzman",
+   "country": null,
+   "slug": "ldxp-sacramento-2-v-2-constructed",
    "top": []
   },
   {
