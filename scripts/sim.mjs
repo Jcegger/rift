@@ -18,6 +18,8 @@
 //   - how often a card sits in hand for want of the right Power domain
 //   - how much board (units, Might) it has to contest battlefields with by turn 3–4
 //   - how often named key cards have been seen by a given turn
+//   - with a Gold-making legend, its Gold; with lib/sim.mjs's opts.hide, hiding, and whether a
+//     key answer could be used on the opponent's turn (face down, or paid from what's left)
 // It does NOT say who wins a matchup. Points are capped at one per battlefield per turn
 // (§472), so an unopposed deck scores on the same clock whatever it plays; a "turns to
 // 8" figure would be the same number for every deck and is deliberately not reported.

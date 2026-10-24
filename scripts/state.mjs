@@ -10,6 +10,7 @@
 //   node scripts/state.mjs trade           # copies flagged for trade
 //   node scripts/state.mjs sets            # base-set completion
 //   node scripts/state.mjs raw             # the raw state JSON, pretty-printed
+//   node scripts/state.mjs versus kennen --deck "nexus night"   # head to head, card by card
 //   node scripts/state.mjs meta            # archetype shares over sanctioned-legal lists
 //   node scripts/state.mjs meta diana      # one archetype: card play rates, best finishes
 //   node scripts/state.mjs meta leblanc --since 2026-09-15   # only lists played after a date
@@ -42,6 +43,8 @@ import { readFile } from "node:fs/promises";
 import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, SB_MAX } from "../lib/decks.mjs";
 import { pathToFileURL } from "node:url";
+import { versus, weigh, effectsOf, looksInteractive } from "../lib/versus.mjs";
+import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
 
 const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
 const SUPA_KEY = "sb_publishable_U9pC2YEA9YB2KxPog6t3SA_T03Jid1g";
@@ -942,6 +945,122 @@ async function guideHeadings() {
   return out;
 }
 
+// ── versus: one of my decks against a legend's field, card by card ─────────────
+// lib/versus.mjs reads what each card does; this picks the lists and prints. Their pool
+// is the legal lists played since --since (default: Radiance's first online events),
+// optionally one event (--event nova). Shares are over that pool, so a card "in 76%" is in
+// three lists of four. Speed is the goldfish (lib/sim.mjs, keep-all, on the play): units
+// and Might on board, the same numbers the deck worksheets quote. Nothing here is a win rate.
+async function cmdVersus(S, cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const since = opt("--since") || "2026-10-16";
+  const event = (opt("--event") || "").toLowerCase();
+  const min = Number(opt("--min") || 0.25);
+  const deckName = opt("--deck");
+  const flags = new Set(["--since", "--event", "--min", "--deck"]);
+  const terms = args.filter((a, i) => !a.startsWith("--") && !flags.has(args[i - 1])).map((t) => t.toLowerCase());
+  const decks = findDecks(S, deckName || "\u0000");
+  if (!terms.length || decks.length !== 1) {
+    console.log('usage: versus <legend words> --deck "<one of your decks>" [--event nova] [--since YYYY-MM-DD] [--min 0.25]');
+    if (deckName && decks.length !== 1) console.log(`  --deck "${deckName}" matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
+    return;
+  }
+  const deck = decks[0];
+  const snap = await readJson(url("decks.json"));
+  const banned = await readJson(url("banned.json")).catch(() => ({ constructed: [] }));
+  const bn = bannedNameSet(banned), std = standardNameSet(banned, cat.cards);
+  const { BY } = cat;
+  const byName = new Map();
+  for (const c of cat.cards) if (!byName.has(c.n) || (!c.v && byName.get(c.n).v)) byName.set(c.n, c);
+  const legendOf = (d) => (d.lg && BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
+  const words = (d) => { const l = legendOf(d); return `${d.ln || ""} ${(l?.g || []).join(" ")} ${l?.n || ""}`.toLowerCase(); };
+  const lists = snap.decks.filter((d) => (d.dt || "") >= since && deckIsLegal(d, BY, bn, std)
+    && terms.every((t) => words(d).includes(t)) && (!event || (d.ev || "").toLowerCase().includes(event)));
+  if (!lists.length) { console.log(`No legal lists for "${terms.join(" ")}" since ${since}${event ? ` at "${event}"` : ""}.`); return; }
+  const legend = legendOf(lists[0]);
+  const champ = (legend?.g || []).find((t) => cat.cards.some((c) => c.n.startsWith(`${t}, `))) || "";
+  const vouched = lists.filter((d) => d.tour && d.pl != null);
+  const best = vouched.slice().sort((a, b) => a.pl / (a.ec || 1e9) - b.pl / (b.ec || 1e9))[0];
+
+  const weights = weigh(lists, (code) => codeName(BY, code));
+  const theirs = [...weights].map(([n, w]) => ({ card: byName.get(n), ...w })).filter((r) => r.card && !/Legend|Rune|Battlefield/.test(r.card.t));
+  const ours = [
+    ...Object.entries(deck.cards || {}).map(([code, qty]) => ({ card: BY.get(code), qty, share: 1 })),
+    ...Object.entries(deck.sb || {}).map(([code, qty]) => ({ card: BY.get(code), qty, share: 1, sb: true })),
+  ].filter((r) => r.card && !/Legend|Rune|Battlefield/.test(r.card.t));
+  const V = versus(ours, theirs.filter((r) => r.share >= min || effectsOf(r.card).length && r.share >= min / 2));
+  const pct = (x) => `${Math.round(100 * x)}%`.padStart(4);
+  const named = (rows) => rows.map((h) => `${h.card.n} ${pct(h.share).trim()}`).join(" · ");
+
+  console.log(`VERSUS  ${deck.name}\n  against ${champ ? champ + ", " : ""}${legend?.n || lists[0].ln} · ${lists.length} legal lists since ${since}${event ? ` at "${event}"` : ""} · ${vouched.length} with a recorded placing${best ? ` (best ${best.pl} of ${best.ec}, ${best.ev})` : ""}`);
+  console.log(`  their cards shown when in ${pct(min).trim()}+ of lists (interaction from ${pct(min / 2).trim()}). Card by card; nothing here is a win rate.\n`);
+
+  // Speed: the goldfish on the play, ours against the average of theirs.
+  const gold = (list, games) => {
+    const d = buildDeck(list, cat); const r = rng(7); let u = 0, m = 0;
+    for (let i = 0; i < games; i++) { const g = playGame(d, r, false, POLICIES["keep all"], []); u += g.units[2]; m += g.might[3]; }
+    return { u: u / games, m: m / games };
+  };
+  const me = gold(deck.cards, 4000);
+  const sample = lists.slice(0, 30);
+  const them = sample.map((d) => gold(d.cards, 600)).reduce((a, x) => ({ u: a.u + x.u / sample.length, m: a.m + x.m / sample.length }), { u: 0, m: 0 });
+  console.log(`  SPEED (goldfish, on the play)   units by turn 3   Might by turn 4`);
+  console.log(`    yours                         ${me.u.toFixed(1).padStart(4)}              ${me.m.toFixed(1).padStart(4)}`);
+  console.log(`    theirs (${sample.length} lists)${" ".repeat(Math.max(1, 19 - String(sample.length).length))}${them.u.toFixed(1).padStart(4)}              ${them.m.toFixed(1).padStart(4)}\n`);
+
+  const reach = (h) => h.kind === "gearkill" ? "a gear" : h.kind === "stun" ? "stun a unit" : h.kind === "move" ? "move a unit"
+    : h.kind === "fight" ? `fight: ${h.reachNote}`
+    : h.kind === "edict" ? "each player kills one of theirs (you choose yours)"
+    : `${h.kind === "damage" ? `${h.max} damage${h.split ? " split" : ""} to` : h.kind} ${h.max == null ? "any unit" : h.kind === "damage" ? "a unit" : `a unit ≤${h.max} Might`}${h.battlefield ? " at a battlefield" : ""}`;
+  const speedWord = (s) => (s === "main" ? "their turn" : s === "hidden" ? "from face down" : s);
+  console.log(`  THEIR REMOVAL  (in their lists)`);
+  for (const h of V.suite) console.log(`    ${pct(h.share)} ${pad(h.card.n, 28)} ${pad(reach(h), 38)} ${speedWord(h.speed)}`);
+  console.log(`\n  YOUR UNITS AGAINST IT  (Might outside a fight / in one; any-unit answers above reach every unit)`);
+  for (const r of V.theirAnswers) {
+    const b = r.body;
+    const lim = r.hits.filter((h) => h.limited);
+    const outside = lim.filter((h) => h.when !== "always"), always = lim.filter((h) => h.when === "always");
+    const safe = V.suite.filter((h) => h.max != null && h.kind !== "gearkill" && !lim.some((x) => x.card.n === h.card.n));
+    const parts = [];
+    if (always.length) parts.push(`hit by ${named(always)}`);
+    if (outside.length) parts.push(`hit outside a fight only by ${named(outside)}`);
+    if (safe.length) parts.push(`out of reach of ${safe.map((h) => h.card.n).join(", ")}`);
+    console.log(`    ${r.qty}x ${pad(r.card.n, 28)} ${pad(b.might === Math.max(b.attack, b.defend) ? `${b.might}` : `${b.might} / ${Math.max(b.attack, b.defend)}`, 6)} ${parts.join(" · ") || "only the any-unit answers"}`);
+  }
+  const gk = V.suite.filter((h) => h.kind === "gearkill");
+  if (V.ourGear.length) console.log(`    ${V.ourGear.map((r) => `${r.qty}x ${r.card.n}`).join(", ")} (gear): ${gk.length ? `killed by ${named(gk)}` : "no gear removal in their lists"}`);
+  console.log(`\n  THEIR COUNTERS TO YOUR SPELLS`);
+  for (const r of V.theirCounters) {
+    console.log(`    ${r.qty}x ${pad(`${r.card.n} [${r.card.e}E ${r.card.p || 0}P]`, 34)} ${r.hits.length ? r.hits.map((h) => `${h.card.n} ${pct(h.share).trim()} (${h.how})`).join(" · ") : "—"}`);
+  }
+
+  console.log(`\n  YOUR ANSWERS TO THEIR UNITS  (biggest first; ✗ = the card can't, sb = sideboard)`);
+  for (const r of V.ourAnswers.filter((r) => r.share >= min).sort((a, b) => b.body.might - a.body.might || b.share - a.share)) {
+    const b = r.body;
+    const tags = [b.deflect ? `Deflect ${b.deflect}` : "", b.tank ? "Tank" : "", b.hidden ? "Hidden" : "", b.ambush ? "Ambush" : ""].filter(Boolean).join(", ");
+    const seen = new Set();
+    const fmt = (a) => `${a.ok === false ? "✗ " : ""}${a.card.n}${a.note ? ` (${a.note})` : ""}`;
+    const uniq = r.answers.filter((a) => { const k = a.card.n + (a.sb ? "|sb" : ""); if (seen.has(k)) return false; seen.add(k); return true; });
+    const main = uniq.filter((a) => !a.sb), sb = uniq.filter((a) => a.sb && !main.some((m) => m.card.n === a.card.n));
+    console.log(`    ${pct(r.share)} ×${r.avg.toFixed(1)} ${r.card.n} · ${b.might} Might${b.defend > b.might ? ` (${b.defend} defending)` : ""}${tags ? ` · ${tags}` : ""}`);
+    console.log(`         ${main.map(fmt).join(" · ") || "nothing in the main deck"}`);
+    if (sb.length) console.log(`         sb: ${sb.map((a) => a.card.n).join(" · ")}`);
+  }
+  console.log(`\n  THEIR FIGHT TRICKS  (what a fight of yours has to beat)`);
+  const byCard = new Map();
+  for (const t of V.tricks.filter((t) => t.share >= min / 2)) {
+    const what = t.kind === "pump" ? `+${t.n}${t.equip ? " (equipment)" : ""}` : t.kind === "minus" ? `-${t.n}${t.all ? " to all your units" : ""}`
+      : t.kind === "redeploy" ? (t.same ? "blinks a unit (saves or resets it)" : "replays a unit to any battlefield") : t.kind === "protect" ? "protects a unit" : t.kind;
+    const r = byCard.get(t.card.n) || { t, what: [] };
+    r.what.push(what); byCard.set(t.card.n, r);
+  }
+  for (const { t, what } of byCard.values())
+    console.log(`    ${pct(t.share)} ${pad(t.card.n, 28)} ${pad(what.join(" / "), 34)} ${t.speed === "main" ? "their turn only" : speedWord(t.speed)}`);
+
+  const unread = theirs.filter((r) => r.share >= min && looksInteractive(r.card) && !effectsOf(r.card).length && !/Unit/.test(r.card.t));
+  if (unread.length) console.log(`\n  NOT READ (looks like interaction; check by hand): ${named(unread)}`);
+}
+
 // ── intake: new product into the collection ───────────────────────────────────
 // Cards get entered on Piltover Archive and reach the app on its next pull, which banks
 // every gained copy in the list of new copies to file (`newq`) until it is cleared. So "what's new" is already recorded, and this reads it: what landed, a Pre-Rift
@@ -1044,6 +1163,7 @@ async function main() {
     raw: () => console.log(JSON.stringify(S, null, 2)),
     journal: () => cmdJournal(S, args),
     intake: () => cmdIntake(S, cat, args),
+    versus: () => cmdVersus(S, cat, args),
   };
   const fn = table[cmd];
   if (!fn) { console.error(`unknown command "${cmd}" — try: ${Object.keys(table).join(", ")}`); process.exit(2); }

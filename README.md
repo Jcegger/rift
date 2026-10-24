@@ -34,6 +34,12 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `lib/collection.mjs` - the collection maths, ported from the old app: the Piltover pull,
   riftbound.gg JSON and CSV imports and their matcher, the list of new copies to file,
   spares and trade matching. Tests: `lib/collection.test.mjs`.
+- `lib/versus.mjs` - head to head, card by card: one of my decks against a legend's legal
+  lists (`scripts/rift versus <legend> --deck "<name>"`). It reads each card's interaction
+  off its text (bounce, damage, kills, stuns, counters, fight tricks) and checks both ways:
+  what of theirs answers each of my units and spells, and what of mine answers each of
+  their units, Might by Might, with every card of theirs weighted by the share of their
+  lists that run it. Not a game simulator and never a win rate. Tests: `lib/versus.test.mjs`.
 - `lib/markdown.mjs` - the guide renderer the site uses, with heading anchors.
 - `lib/sim.mjs` - the goldfish simulator's engine, shared by `scripts/sim.mjs` and the site.
   `lib/sim-worker.mjs` runs it in a Web Worker for the tweak bench.
@@ -1531,7 +1537,18 @@ itself, and nothing that needs an opponent:
   on the board.
 - **Legend abilities that make a unit** ("1 Energy, exhaust: play a Recruit", Viktor,
   Azir, Lillia) are used once a turn. Conditions after the cost are not checked, so those
-  decks read as a ceiling. Other legend text is not modelled.
+  decks read as a ceiling.
+- **A legend that makes Gold on a recycle** (Battle Mistress) does it once a turn: the first
+  rune recycled for Power makes a Gold that readies at your next Awaken, and from then on
+  Gold pays Power ahead of runes, since a rune kept is an Energy next turn. Other legend
+  text is not modelled.
+- **Hiding** (`opts.hide`, off by default so the builders' numbers don't move): once a turn
+  from turn 2 while a unit is on board, at most two face down, paid with Gold or a recycled
+  rune after developing. Answers named as key cards are hidden first.
+- **Their turn** (every game): whether an answer can be used against an attack, face down
+  (free) or from hand (paid from the runes still ready and Gold). This is the number to
+  read for a reactive deck, not "in hand" draw odds: on the Sivir Nexus Night list, hiding
+  takes a usable answer by turn 4 from 2–6% of games to 44–49%.
 
 **The rune split** is tested, not assumed: every split from 3/9 to 9/3 on the same
 shuffles. A different split is suggested only when it improves Energy by 0.2 or stuck

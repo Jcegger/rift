@@ -67,5 +67,37 @@ ok("same seed, same result", JSON.stringify(a) === JSON.stringify(b));
 const r1 = playGame(deck, rng(5), false, POLICIES["keep all"], []);
 ok("turn-1 Energy on the play is at most 2", r1.spent[0] <= 2);
 
+console.log("\nGold, hiding and their turn");
+ok("Battle Mistress makes Gold on a recycle", deckFor("Battle Mistress").legendGold === true);
+ok("other legends don't", deckFor("The Exile").legendGold === false);
+// A Body/Chaos deck under Battle Mistress, from real cards: Power-heavy, with Hidden cards.
+const bm = cat.cards.find((c) => c.t === "Legend" && c.n === "Battle Mistress");
+const bc = cat.cards.filter((c) => !c.v && ["Unit", "Spell"].includes(c.t) && c.d?.length === 1 && ["Body", "Chaos"].includes(c.d[0]) && (c.e || 0) <= 4);
+const glist = { [bm.c]: 1 };
+for (const c of [...bc.filter((c) => c.p).slice(0, 8), ...bc.filter((c) => /\[Hidden\]/.test(c.x || "")).slice(0, 5)]) glist[c.c] = 3;
+glist[rune("Body").c] = 6; glist[rune("Chaos").c] = 6;
+const gd = buildDeck(glist, cat, {});
+const noGold = { ...gd, legendGold: false };
+const energy = (d, opts) => { const r = rng(3); let e = 0; for (let i = 0; i < 2000; i++) e += playGame(d, r, false, POLICIES["keep all"], [], null, opts).spent.slice(0, 4).reduce((x, y) => x + y, 0); return e / 2000; };
+ok("the legend's Gold never costs Energy", energy(gd, {}) >= energy(noGold, {}) - 0.01, `${energy(gd, {}).toFixed(2)} vs ${energy(noGold, {}).toFixed(2)}`);
+let gbad = { gold: 0, down: 0, early: 0, spend: 0 };
+const hiddenNames = gd.main.filter((c) => c.hidden).map((c) => c.n);
+for (const onDraw of [false, true]) {
+  const r = rng(11);
+  for (let i = 0; i < 2000; i++) {
+    const g = playGame(gd, r, onDraw, POLICIES["keep all"], hiddenNames.slice(0, 1), null, { hide: true });
+    if (g.gold.some((x) => x < 0)) gbad.gold++;
+    if (g.facedown.some((x) => x > 2)) gbad.down++;
+    if (g.facedown[0] > 0) gbad.early++;
+    g.spent.forEach((e, t) => { if (e > g.runes[t]) gbad.spend++; });
+  }
+}
+ok("Gold never goes negative", gbad.gold === 0);
+ok("never more than two face down, one per battlefield", gbad.down === 0);
+ok("nothing is hidden on turn 1 (no battlefield held yet)", gbad.early === 0);
+ok("hiding never spends Energy the board cannot make", gbad.spend === 0);
+const off = playGame(gd, rng(5), false, POLICIES["keep all"], []);
+ok("hiding is off unless asked", off.facedown.every((x) => x === 0));
+
 console.log(fails ? `\n${fails} FAILED` : "\nall sim tests pass");
 process.exit(fails ? 1 : 0);
