@@ -43,7 +43,7 @@ date: 2026-10-23
 
 **The three ways this deck loses:**
 1. Hiding at a battlefield you then lose (two cards, at Bandle Tree).
-2. Flipping the hide at Evelynn's battlefield to defend, and losing her point.
+2. Flipping the hide at Evelynn's battlefield when the bodies would have held, and losing her point. (If the battlefield is otherwise lost, flip: the hide is trashed with it anyway.)
 3. A draw on time: a slow game 2, or a game 3 started that can't finish.
 
 ---
@@ -207,7 +207,7 @@ Gold is never Energy. **Sigil of the Storm** (*the conqueror must recycle a rune
 
 **Battle Mistress** — §5.
 
-**Sivir, Mercenary** (4 Energy, 1 Chaos; 4 Might; Accelerate; *+2 Might and Ganking if you've spent two Power this turn*). Always available from the Champion Zone. **With Accelerate she pays two Power herself** and enters ready at 6 Might with Ganking (§805, §810). Any Power counts, a hide or a Gold included. Ezreal's discount can take Accelerate's Chaos away; then pay another. Star-Crossed or Emperor's Dais returns her to hand to replay.
+**Sivir, Mercenary** (4 Energy, 1 Chaos; 4 Might; Accelerate; *+2 Might and Ganking if you've spent two Power this turn*). Always available from the Champion Zone. **With Accelerate she pays two Power herself** and enters ready at 6 Might with Ganking (§805, §810). Any Power counts, a hide or a Gold included. **With Ezreal out, take his discount on Accelerate's `[1]`, not its Chaos** (his text is "`[1]` or `[A]` less", your choice): the Chaos stays paid, so she still reaches two Power by herself. Star-Crossed or Emperor's Dais returns her to hand to replay.
 
 ### The clock
 
@@ -271,7 +271,7 @@ A battlefield used in a decided game is removed for the match (§488.5); after a
 
 ## 8. Lines that win games
 
-**1. The Evelynn close.** At 5–6 points, hold a battlefield with Evelynn and two bodies; hide Edge of Night or another card you won't flip. Defend that battlefield with the bodies and the other battlefield's hide. At 6, the start of your turn wins.
+**1. The Evelynn close.** At 5–6 points, hold a battlefield with Evelynn and two bodies; hide Edge of Night or another card you won't flip. Defend that battlefield with the bodies and Reactions from hand (Star-Crossed, Gust): the other battlefield's hide can't help here, because a flipped card acts only at its own battlefield (§811.1.d). At 6, the start of your turn wins.
 
 **2. Bandle Tree's two hides.** Hold Bandle Tree with Evelynn. Hide twice: a keeper for her point, and a fighter (Tideturner, Tornado, Switcheroo) to flip when they attack. She scores either way.
 
@@ -384,7 +384,7 @@ Set aside up to 2, draw that many, the set-aside cards go to the bottom (§117).
 | 1 An Offer You Can't Refuse | Action: kill a gear; they get an exhausted Gold | Jayce, Riven's Blade of the Exile, Kennen's Last Rites |
 | 1 Sabotage | the second copy | Kai'Sa, Riven, Irelia, Jayce, Master Yi |
 | 1 Graves, Blasting Through | the third copy | Rek'Sai, Rengar, LeBlanc |
-| 1 Disposal Order | Reaction: recycle 3 cards from their trash, then draw 1 | Kennen, Mordekaiser, LeBlanc |
+| 1 Disposal Order | Reaction, **choose one**: recycle up to 3 cards from their trash, **or** draw 1 | Kennen, Mordekaiser, LeBlanc |
 
 | opponent | role | what decides it | in | out |
 |---|---|---|---|---|
@@ -411,7 +411,7 @@ Types from [strategy.md §8](../docs/strategy.md#8-reviewing-a-game), so the mat
 
 | mistake | type | instead |
 |---|---|---|
-| flipping the hide at Evelynn's battlefield to defend | conversion | defend her battlefield with bodies; flip the other battlefield's hide |
+| flipping the hide at Evelynn's battlefield when the bodies would have held | conversion | defend her battlefield with bodies and Reactions from hand. **But flip it if the battlefield is otherwise lost**: losing it trashes the hide anyway and costs the hold point too, so the flip only gives up her one point |
 | a second hide at Bandle Tree behind a weak hold | conversion | the second hide only when the hold is safe; losing it trashes both |
 | hiding at a battlefield you then lose | conversion | hide only behind a hold that is hard to break |
 | starting game 3 with no chance to finish | terminal | past the 30-minute mark in game 2, play game 2 to win it outright |
@@ -434,8 +434,8 @@ Types from [strategy.md §8](../docs/strategy.md#8-reviewing-a-game), so the mat
 **Open questions for a judge, or the Radiance FAQ:**
 1. **Tornado Warrior on an already-Empowered Matriarch**: does its end-of-turn disempower still reset her? This guide's reading says yes (§442.1.c, §359.3.e.14.b); no ruling.
 2. **Mercenary on the opponent's turn**: "this turn" read as whichever turn it is, so two Power spent on their turn makes her a 6-Might defender. Plain on the card, not ruled.
-3. **Evelynn and a removed facedown card**: her condition is checked when she holds (§383.2.a.1). If the facedown card leaves after the trigger and before it resolves, the reading is that the point is still gained (the condition was met). Not ruled.
-4. **Battlefield order in games 2 and 3**: the loser of a game chooses who plays first (TR §407.4), and battlefields are chosen at setup (§488.5). The plan assumes you know the order first.
+3. ~~**Evelynn and a removed facedown card**~~ — **answered by the rules' own example**: the "if" is part of the trigger condition, checked once when she holds; §383.2.a.1's Sona example says that if the thing the condition checked is removed in response, the trigger "will still resolve". So once her trigger is on the chain, killing her or removing the facedown card doesn't stop the point. The opponent has to break it on their own turn.
+4. **Battlefield order in games 2 and 3**: the loser of a game chooses who plays first (TR §407.4), and battlefields are chosen at setup (§488.5). Setup sets battlefields aside before turn order is fixed (§113, §115), and the Bo1 procedure picks battlefields before the play-first choice (TR §406.1.h), so assume you choose blind. **After a game you lost, you choose the order, so the going-first / going-second split works. After a game you won, ask the judge; if the battlefield comes first, take Emperor's Dais**, the one with the stronger record, which is fine either way.
 
 ---
 

@@ -342,6 +342,9 @@ clunky: the second Edge of Night.
   is the colour that runs short (Staunch Survivor on turn 1, before any Gold exists; Punch First's
   two Body; Sabotage now two copies). 2 Body by turn 2 rises from 58% to 73% going first, while
   2 Chaos by turn 3 only falls from 99% to 96%. **Final until tested.**
+- **24 Oct 2026 — retired as a separate deck** in favour of [sivir-nexus-night.md](sivir-nexus-night.md),
+  this list plus three Evelynn, In Control (see that log). Kept as the fallback if her point rarely
+  lands.
 
 Games, results, and every change with its reason go here.
 

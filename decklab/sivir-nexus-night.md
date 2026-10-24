@@ -483,3 +483,17 @@ test. Card by card (section 3) and the guide follow once Jay agrees.
   the numbers, mulligans, and the store's matchups with sideboard plans. 12 cards to get, all
   Radiance plus Bandle Tree. First night: Sip & Play, 23 Oct. Log each match: opponent, result,
   and whether Evelynn's point landed, the early game held, and big units walked through.
+- **24 Oct 2026 — this is the Sivir deck; the Midrange list is retired as a separate deck.** The
+  two mains differ by three cards (+3 Evelynn, In Control; −1 Traveling Merchant, −1 Rampage,
+  −1 Sabotage), plus Bandle Tree and a sideboard built for the store. Evelynn adds no enablers:
+  the 11 Hidden and the Gold that pays for them were already the hold plan, and she fills the
+  Midrange worksheet's own "score faster than 1 a battlefield" gap. **Revert trigger:** if her
+  point rarely lands across logged matches, the three Midrange cards come back.
+- **24 Oct 2026 — audit of the guide against the cards and the verbatim rules.** The saved deck
+  matches this list. Every card's text was re-read with errata applied. No Radiance FAQ is out
+  yet, and none of the 9 Oct patch-note rulings touch these cards. Six fixes to the guide:
+  Disposal Order is *choose one*; the Evelynn close can't use the other battlefield's hide
+  (§811.1.d); flip the hide under Evelynn when the battlefield is otherwise lost; open question 3
+  is answered by §383.2.a.1's Sona example (the point resolves once triggered); with Ezreal, take
+  his discount off Accelerate's `[1]`; and in games 2–3, after a win, assume the battlefield is
+  chosen blind (default Emperor's Dais). There are still no Radiance results for Sivir anywhere.
