@@ -787,3 +787,12 @@ tokens, made in play, so they are not in the lists and not in his numbers.
   −1 Shadow Order Disciple −1 Sabotage +2 Staunch Survivor), and Vex and Rengar from Jun's
   lists. The journal decides after a night or two. Bigger picture (Jay): play Sivir now, build
   an S or A tier deck once the meta settles.
+- **25 Oct 2026 — the deck to play: Randyyy + Radiance.** Jay: tired of losing, doesn't want the
+  top of the meta (boring), no Kennen, no Calm. Randyyy's LA list with seven changes: −Acceptable
+  Losses −Grim Resolve +2 Graves; −1 Shadow Order Disciple −1 Sabotage +2 Staunch Survivor;
+  −Pyke −1 Disciple +2 Vex, Apathetic; −1 Edge of Night +1 Rengar, Trophy Hunter. His engine
+  (3 Merchant, 3 Ezreal, 3 Fizz, 3 Matriarch, 3 Tornado), tricks, battlefields and 5 Body / 7
+  Chaos split kept (the goldfish's rune sweep agrees: 5.8% stuck on colour against 4.6% at 6/6,
+  under its threshold). Sideboard proposed (his isn't recorded). Saved as `Sivir — Randyyy +
+  Radiance (25 Oct)`, guide `guides/sivir-randyyy.md`. The movement list stays saved for a fun
+  night. Plan: three Nexus Nights with this deck, every game logged, then tune from the journal.
