@@ -133,5 +133,24 @@ ok("Gold never goes negative with the engine on", ebad.gold === 0);
 ok("the engine runs: Fizz recasts, Matriarch revives, Ezreal and Merchant draw", fizzSeen > 0 && revived > 0 && drew > 0);
 ok("the engine is off unless asked", playGame(ed, rng(5), false, POLICIES["keep all"], []).engine === undefined);
 
+console.log("\nloops, their turn, and the clock");
+ok("Star-Crossed reads as returning your own unit", eng("Star-Crossed").ownBounce === true && !eng("Gust").ownBounce);
+ok("Evelynn, In Control reads as a hold point", eng("Evelynn, In Control").holdPoint === true);
+ok("Tornado empowers when flipped; Tideturner's swap moves the other unit; Elnuk recycles when flipped",
+  eng("Tornado Warrior").flipEmpower && eng("Tideturner").swapMove && eng("Elnuk Herd").flipRecycle);
+const lp = { ...elist, [byN("Evelynn, In Control")]: 3, [byN("Tornado Warrior")]: 3 };
+const ld = buildDeck(lp, cat, {});
+const runL = (sc, n = 1200) => { const A = { dais: 0, eve: 0, ans: 0, att: 0, hand: 0, bad: 0, u: 0 }; const r = rng(31);
+  for (let i = 0; i < n; i++) { const g = playGame(ld, r, i % 2 === 1, POLICIES["keep all"], ["Switcheroo", "Star-Crossed"], null, { hide: true, turns: 8, engine: sc }), e = g.engine;
+    A.dais += e.daisReplays; A.eve += e.evelynnPoints; A.ans += e.answered; A.att += e.attacks; A.hand += e.answeredHand; if (g.units.some((x) => x < 0) || e.answered > e.attacks) A.bad++; A.u += g.units[7]; }
+  return A; };
+const q = runL({}), dais = runL({ dais: true }), att = runL({ attacksPerTurn: 1 }), keep = runL({ attacksPerTurn: 1, keepForEvelynn: true }), hold = runL({ attacksPerTurn: 1, holdUp: 3 });
+ok("Emperor's Dais replays a unit when on", dais.dais > 0 && q.dais === 0);
+ok("Evelynn scores in a quiet game", q.eve > 0);
+ok("keeping a face-down card for Evelynn scores more under attack than flipping it", keep.eve > att.eve, `${keep.eve} vs ${att.eve}`);
+ok("holding Energy up answers more attacks from hand", hold.hand > att.hand, `${hold.hand} vs ${att.hand}`);
+ok("never more answers than attacks, never negative units", [q, dais, att, keep, hold].every((x) => x.bad === 0));
+ok("eight turns are played when asked", playGame(ld, rng(3), false, POLICIES["keep all"], [], null, { turns: 8, engine: {} }).units.length === 8);
+
 console.log(fails ? `\n${fails} FAILED` : "\nall sim tests pass");
 process.exit(fails ? 1 : 0);

@@ -1576,6 +1576,16 @@ itself, and nothing that needs an opponent:
   for, Empowers skipped). On the Sivir Nexus Night list the answer was **Energy, not Power**:
   the Gold covers every Power sink with about 0.75 to spare a game, while developing leaves no
   Energy for the two tricks a game you'd like to cast.
+- **Loops, their turn, and the clock** (engine options): the loops `scripts/rift loops` found
+  and the rules allow — Star-Crossed returning your own unit to replay, Emperor's Dais
+  (`dais`), a flipped Tornado empowering Matriarch, Tideturner's swap moving Traveling
+  Merchant, Bandle Tree's third face-down slot (`bandleTree`); their attacks
+  (`attacksPerTurn`), answered face down, from hand (`holdUp` keeps Energy for it) or by
+  flipping a hidden unit, with `keepForEvelynn` keeping her face-down card; Evelynn, In
+  Control's points; `opts.turns` for games longer than the curve (her points come on turns
+  5–8). `scripts/rift try` prints this as an eight-turn engine report under all three
+  scenarios, and `try --sweep "<card>" --with "<a>, <b>"` runs one slot against many
+  candidates the same way.
 
 **The rune split** is tested, not assumed: every split from 3/9 to 9/3 on the same
 shuffles. A different split is suggested only when it improves Energy by 0.2 or stuck

@@ -46,7 +46,7 @@ import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, SB_MAX } from "../lib/decks.mjs";
 import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive } from "../lib/versus.mjs";
-import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf } from "../lib/decklab.mjs";
+import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS } from "../lib/decklab.mjs";
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
 
@@ -1074,15 +1074,23 @@ async function cmdTry(S, cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   const since = opt("--since") || "2026-10-16";
   const games = Number(opt("--games") || 20000);
-  const flags = new Set(["--since", "--deck", "--games"]);
-  const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]));
+  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with"]);
+  const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine");
+  // --policy "holdUp=3,dais,bandleTree,keepForEvelynn=false": how you play, for the engine report.
+  const policy = {};
+  for (const kv of (opt("--policy") || "").split(",").map((x) => x.trim()).filter(Boolean)) {
+    const [k, v] = kv.split("="); policy[k] = v == null ? true : v === "false" ? false : isNaN(Number(v)) ? v : Number(v);
+  }
+  const sweepCard = opt("--sweep"), sweepWith = (opt("--with") || "").split(",").map((x) => x.trim()).filter(Boolean);
   const decks = findDecks(S, opt("--deck") || "\u0000");
-  if (decks.length !== 1 || !specs.length) {
-    console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--games 20000]');
+  if (decks.length !== 1 || (!specs.length && !sweepCard)) {
+    console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine]');
+    console.log('       try --deck "<one of your decks>" --sweep "Card in the deck" --with "Candidate A, Candidate B" [--policy …]');
     if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
     return;
   }
   const before = decks[0];
+  if (sweepCard) return trySweep(before, cat, sweepCard, sweepWith, policy, Number(opt("--games") || 3000));
   let changes, after;
   try { changes = parseChanges(specs, cat.cards); after = applyChanges(before, changes, cat.cards, cat.BY); }
   catch (e) { console.log(`try: ${e.message}`); return; }
@@ -1165,7 +1173,50 @@ async function cmdTry(S, cat, args) {
     const delta = typeof r.b === "number" && typeof r.a === "number" && f(r.a) !== f(r.b) ? `  ${r.a > r.b ? "▲" : "▼"}` : "";
     console.log(`  ${pad(r.label, w)}${pad(f(r.b), 22)}${pad(f(r.a), 22)}${delta}`);
   }
+  if (!args.includes("--no-engine")) {
+    const eg = Math.max(2000, Math.round(games / 4));
+    const rb = engineReport(before, cat, { games: eg, policy }), ra = engineReport(after, cat, { games: eg, policy });
+    printEngine(rb, ra, policy, eg);
+  }
   console.log(`\n  Card text and counts only: nothing here is a win rate. Read it against the deck's goal tiers in its worksheet.`);
+}
+
+// The engine report, before and after: eight turns, all three scenarios, the same policy.
+function printEngine(rb, ra, policy, games) {
+  const pc = (x) => (x == null ? "—" : `${Math.round(100 * x)}%`), n1 = (x) => (x == null ? "—" : x.toFixed(1)), n2 = (x) => (x == null ? "—" : x.toFixed(2));
+  console.log(`\n  ENGINE (lib/sim.mjs, ${games} games a scenario, 8 turns, hiding on; policy ${JSON.stringify({ keepForEvelynn: true, holdUp: 0, dais: false, ...policy }).replace(/[{}"]/g, "")})`);
+  const rows = [["units by turn 5", "u5", n1], ["Might by turn 5", "m5", n1], ["attacks answered (Switcheroo, Star-Crossed…)", "answered", pc],
+    ["Evelynn's points by turn 8", "evelynn", n2], ["Fizz finds a spell", "fizz", pc], ["Matriarch revives a game", "revives", n2],
+    ["replays a game (Star-Crossed, Dais)", "replays", n2], ["tricks crowded out by Energy", "tricksBlocked", n2], ["extra cards drawn", "drawn", n1]];
+  console.log(`  ${"".padEnd(46)}${["quiet", "normal", "heavy"].map((x) => x.padEnd(22)).join("")}`);
+  for (const [label, key, f] of rows) {
+    const cells = ["quiet", "normal", "heavy"].map((s) => { const b = rb.scenarios[s][key], a = ra.scenarios[s][key]; const fb = f(b), fa = f(a);
+      return `${fb === fa ? fb : `${fb} → ${fa}`}`.padEnd(22); });
+    console.log(`  ${label.padEnd(46)}${cells.join("")}`);
+  }
+  console.log(`  scenarios: ${Object.entries(SCENARIOS).map(([k, v]) => `${k} ${JSON.stringify(v).replace(/[{}"]/g, "") || "no pressure"}`).join(" · ")}`);
+}
+
+// One slot, many candidates: the same engine report for each, compact, against the deck as is.
+function trySweep(deck, cat, card, candidates, policy, games) {
+  const inDeck = Object.entries(deck.cards || {}).filter(([k]) => cat.BY.get(k)?.n.toLowerCase().startsWith(card.toLowerCase()));
+  if (!inDeck.length) { console.log(`try --sweep: the main deck has no "${card}"`); return; }
+  const name = cat.BY.get(inDeck[0][0]).n, qty = inDeck.reduce((a, [, q]) => a + q, 0);
+  const base = engineReport(deck, cat, { games, policy });
+  const pc = (x) => (x == null ? "—" : `${Math.round(100 * x)}%`);
+  const line = (label, r) => { const N = r.scenarios.normal, H = r.scenarios.heavy, Q = r.scenarios.quiet;
+    return `  ${label.padEnd(34)} ${Q.energy.toFixed(1).padStart(6)} ${pc(Q.two2).padStart(6)} ${N.u5.toFixed(1).padStart(6)} ${H.u5.toFixed(1).padStart(6)} ${pc(N.answered).padStart(7)} ${pc(H.answered).padStart(7)} ${N.evelynn.toFixed(2).padStart(7)} ${pc(N.fizz).padStart(6)} ${N.revives.toFixed(2).padStart(6)} ${N.tricksBlocked.toFixed(2).padStart(6)}`; };
+  console.log(`SWEEP  ${deck.name}: ${qty} ${name} → each candidate (${games} games a scenario, 8 turns; policy ${JSON.stringify({ keepForEvelynn: true, ...policy }).replace(/[{}"]/g, "")})`);
+  console.log(`  ${"".padEnd(34)} ${"Energy".padStart(6)} ${"2u t2".padStart(6)} ${"u5 nrm".padStart(6)} ${"u5 hvy".padStart(6)} ${"ans nrm".padStart(7)} ${"ans hvy".padStart(7)} ${"Eve pts".padStart(7)} ${"Fizz".padStart(6)} ${"revive".padStart(6)} ${"crowd".padStart(6)}`);
+  console.log(line(`as is (${qty} ${name})`, base));
+  for (const cand of candidates) {
+    let after;
+    try { after = applyChanges(deck, parseChanges([`-${qty} ${name}`, `+${qty} ${cand}`], cat.cards), cat.cards, cat.BY); }
+    catch (e) { console.log(`  ${cand}: ${e.message}`); continue; }
+    const rules = deckChecks(after, cat.idx).filter((x) => x.ok === false).map((x) => x.label);
+    console.log(line(`${qty} ${parseChanges([`+${cand}`], cat.cards)[0].name}${rules.length ? " (rules: " + rules.join(", ") + ")" : ""}`, engineReport(after, cat, { games, policy })));
+  }
+  console.log(`  Energy = spent turns 1–4 (quiet) · 2u t2 = two units by turn 2 · u5 = units by turn 5 · ans = attacks answered · Eve pts = Evelynn's points by turn 8 (normal) · crowd = tricks crowded out by Energy (normal). Not win rates.`);
 }
 
 // ── loops: a deck's interactions and loops, derived from card text ─────────────
