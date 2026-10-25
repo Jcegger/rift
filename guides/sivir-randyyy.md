@@ -1,6 +1,6 @@
 ---
 title: Sivir, Randyyy + Radiance — Deck Guide
-subtitle: Riftbound, Radiance — Randyyy's trash-and-recursion Sivir from the LA Regional Qualifier, with seven Radiance-era changes. How it wins, how to play it, the rules it runs on, and what to log
+subtitle: Riftbound, Radiance — Randyyy's trash-and-recursion Sivir from the LA Regional Qualifier, with five Radiance-era changes. How it wins, how to play it, the rules it runs on, and what to log
 author: rift toolchain
 date: 2026-10-25
 ---
@@ -8,7 +8,7 @@ date: 2026-10-25
 **Legend:** Battle Mistress (Body/Chaos) · **Champion:** Sivir, Mercenary
 **Registered:** 40 main (Champion included) + 12 runes (5 Body / 7 Chaos, Randyyy's split, checked in the goldfish) + 3 battlefields + 1 legend · **Sideboard:** 10 of 10
 **Shuffled library:** 39. The Champion starts in the Champion Zone and is playable from there (§103.3.a.1, §108.3.d)
-**Where it came from:** "Body Chaos by Randyyy", the LA Regional Qualifier (2 Oct, before Radiance), the one Sivir engine with a tournament record. **Seven cards changed for Radiance**, listed below; the engine is his. Saved in the app as `Sivir — Randyyy + Radiance (25 Oct)`
+**Where it came from:** "Body Chaos by Randyyy", the LA Regional Qualifier (2 Oct, before Radiance), the one Sivir engine with a tournament record. **Five cards changed for Radiance**, listed below; the engine, every main-deck spell, the battlefields and the runes are his. Saved in the app as `Sivir — Randyyy + Radiance (25 Oct)`
 **Collection status:** 1 to get by the app's count: Last Rites
 **The plan:** stick with this deck for three Nexus Nights and log every game; the journal decides changes after that (worksheet log, 25 Oct)
 
@@ -20,21 +20,22 @@ date: 2026-10-25
 
 | | |
 |---|---|
-| **Units (26 + champion)** | 3 Traveling Merchant · 2 Tideturner · 3 Fizz, Trickster · 3 Ezreal, Prodigy · 2 Shadow Order Disciple · 3 Tornado Warrior · 3 Tail-Cloaked Matriarch · 2 Staunch Survivor · 2 Graves, Blasting Through · 2 Vex, Apathetic · 1 Elnuk Herd · *Sivir, Mercenary* |
-| **Spells (12)** | 3 Punch First · 3 Rampage · 2 Star-Crossed · 2 Switcheroo · 1 Sabotage · 1 Gust |
+| **Units (24 + champion)** | 3 Traveling Merchant · 2 Tideturner · 3 Fizz, Trickster · 3 Ezreal, Prodigy · 2 Shadow Order Disciple · 3 Tornado Warrior · 3 Tail-Cloaked Matriarch · 2 Staunch Survivor · 2 Vex, Apathetic · 1 Elnuk Herd · *Sivir, Mercenary* |
+| **Spells (14)** | 3 Punch First · 3 Rampage · 2 Star-Crossed · 2 Switcheroo · 2 Sabotage · 1 Gust · 1 Grim Resolve |
 | **Gear (1)** | 1 Last Rites |
 | **Battlefields** | Sigil of the Storm · Zaun Warrens · Sandswept Tomb |
 | **Runes** | 5 Body · 7 Chaos |
-| **Sideboard** | 1 Acceptable Losses · 1 Sabotage · 1 Gust · 2 Unyielding Spirit · 2 An Offer You Can't Refuse · 2 Rebuke · 1 Siren's Song |
+| **Sideboard** | 2 Graves, Blasting Through · 2 Rebuke · 2 Unyielding Spirit · 2 An Offer You Can't Refuse · 1 Siren's Song · 1 Gust |
 
-**The seven changes from Randyyy's list**
+**The five changes from Randyyy's list** (everything else is his)
 
 | out | in | why |
 |---|---|---|
-| Acceptable Losses, Grim Resolve | 2 Graves | Acceptable Losses only kills gear (sideboard); Grim Resolve's XP does nothing here. Graves is the big unit, and his blast kills: kills fill the trash and ready the legend |
-| 1 Shadow Order Disciple, 1 Sabotage | 2 Staunch Survivor | Radiance's best 2-drop: attacks and defends at 4. The second Sabotage goes to the sideboard |
-| Pyke, 1 Edge of Night | 2 Vex | stuns every unit they play while Vex is at a battlefield (both of Jun's Radiance lists run it) |
-| the other Edge of Night | Elnuk Herd | a free +3 from face down that recycles instead of dying; with Graves it makes a 7-Might blast (fight check: Graves with Elnuk face down held against every S/A big unit and trick); from hand, a 5-Might body |
+| 1 Shadow Order Disciple, Acceptable Losses | 2 Staunch Survivor | Radiance's best 2-drop: attacks and defends at 4. Acceptable Losses only kills gear, so it's sideboard material (An Offer You Can't Refuse covers that there) |
+| Pyke, 1 Edge of Night | 2 Vex, Apathetic | stuns every unit they play while Vex is at a battlefield (both of Jun's Radiance lists run it) |
+| the other Edge of Night | Elnuk Herd | a free +3 from face down that recycles instead of dying; from hand, a 5-Might body |
+
+**Shape against Randyyy's:** average cost 2.59 (his 2.44) · 18 cards at 2 Energy or less (his 18) · 7 free turn-1 units (his 8) · 14 spells for Fizz (his 15) · Defy-proof spells (2 Power): Punch First, Switcheroo, and Rebuke in the sideboard.
 
 ---
 
@@ -44,9 +45,9 @@ date: 2026-10-25
 
 **What the deck does: it outlasts them.** Every card you trade or discard comes back. Merchant, Ezreal and Disciple fill the trash with **choices**: a spell for Fizz, a unit for Matriarch. **Fizz** recasts a spell from the trash. **Matriarch** plays a unit from the trash for free. **Tornado** switches Matriarch on without paying. In a long game you still have bodies and tricks when they've run out. That's the midrange: attack slower decks, hold against faster ones, and win the attrition either way.
 
-**The legend's part: renewable Power.** Fizz's recasts, Matriarch's Empower, Punch First, Switcheroo, Star-Crossed, Ezreal and Mercenary all cost Power. Battle Mistress makes it renewable. **Energy is what runs out**, so spend Gold freely on the Power side.
+**The legend's part: renewable Power.** Fizz's recasts, Matriarch's Empower, Punch First, Switcheroo, Sabotage, Star-Crossed, Ezreal, Fizz, Staunch, every hide and Mercenary all cost Power, and kills (Rampage, won fights) ready the legend for a second Gold. Battle Mistress makes it renewable. **Energy is what runs out**, so spend Gold freely on the Power side.
 
-**Your turn, in order:** lethal check, both players → count Gold and runes → **pump before you move** (Punch First on Graves before he goes in) → take open battlefields → develop (Fizz and Matriarch when the trash has targets) → hide (Switcheroo first when a big attacker is coming; Tornado where Matriarch will be) → fight.
+**Your turn, in order:** lethal check, both players → count Gold and runes → **pump before you move** (Punch First on the attacker in your main phase; in a fight only Reactions can answer a trigger) → take open battlefields → develop (Fizz and Matriarch when the trash has targets) → hide (Switcheroo first when a big attacker is coming; Tornado where Matriarch will be) → fight.
 
 **The four rules that matter most:**
 1. **Pay Power with Gold first; recycle a rune only for the rest.** The legend starts every turn ready, so your first recycle makes a Gold. A second recycle makes nothing, unless an enemy unit died in between: **recycle, kill, recycle.**
@@ -82,9 +83,7 @@ date: 2026-10-25
 
 **Staunch Survivor** (2 Energy, 1 Body): Assault 2 and Shield 2, so it attacks and defends at 4. On turn 1, a free 2-drop (Merchant, Tideturner) is better; play Staunch on turn 2 off the Gold, unless it's your only play.
 
-**Graves, Blasting Through** (5 Energy, 1 Power): when he attacks or defends, he deals damage equal to his Might to every enemy unit there, and deals no combat damage himself.
-- **Pump him before the fight.** His trigger goes on the chain when combat starts, and while it's there only Reactions can be played; Punch First is an Action. So cast it in your main phase, before he moves: +5 makes the blast 9.
-- The damage is read when the trigger resolves (§359.3.f.2), so a Reaction in response still counts.
+**Grim Resolve** (2 Energy, no Power; Action): +3 to a friendly unit this turn (its XP rider does nothing here). **It costs no Power, so a Fizz recast of it is completely free.** Cast it before combat, or in a showdown.
 
 **Vex, Apathetic** (4 Energy; Deflect): when an opponent plays a unit while Vex is at a battlefield, stun it, and they can't move it this turn.
 - Any battlefield counts, and a hidden card played from face down counts as played.
@@ -95,14 +94,14 @@ date: 2026-10-25
 **Mercenary** (4 Energy, 1 Power, from the Champion Zone): once you've spent two Power this turn, she has **6 Might and Ganking**.
 - **Punch First alone switches her on** (2 Power), then adds +5.
 - With Accelerate she pays two Power herself and arrives ready.
-- She closes best with a partner beside her: Staunch, Graves or a pump.
+- She closes best with a partner beside her: Staunch, Vex, or a pump.
 
 **Last Rites** (gear): Equip costs a Chaos plus recycling 2 cards from your trash, for +2 Might while attached (§137.3). It competes with Fizz and Matriarch for the trash, so equip it late, when the trash is full. **It outlives the unit:** when the unit dies, the gear isn't lost; unattached gear at a battlefield is recalled to your base in the next cleanup (§149.3, §323.6), ready to equip again.
 
 **Elnuk Herd** (Hidden; 6 Energy, 5 Might): *"When you play me, give another friendly unit +3 Might this turn, then recycle me if I was played from face down."*
 - **From face down it's a free +3 at Reaction speed,** and the card goes to the bottom of your deck instead of the trash, so it can come back.
 - **Its +3 is pinned to that battlefield** (§811.1.d.3): the unit has to be there.
-- **Flip it in response to Graves's trigger:** the +3 resolves first, so he blasts for 7 (§359.3.f.2). A stun on Elnuk doesn't stop the +3, because a stun only stops combat damage (§424.1.b).
+- **In a fight it's a surprise +3 on any unit of yours there,** after they've committed. A stun on Elnuk doesn't stop the +3, because a stun only stops combat damage (§424.1.b). With Graves sided in, flip it in response to his trigger: the +3 resolves first, so he blasts for 7 (§359.3.f.2).
 - **From hand** it's a 5-Might body for the late game.
 
 ---
@@ -112,7 +111,7 @@ date: 2026-10-25
 - **Turn 1:** a free 2-drop (Merchant, Tideturner). Staunch only if it's your only play.
 - **Turns 2–3:** take the open battlefields. Ezreal and Merchant start filling the trash, so discard with Fizz and Matriarch in mind. Hide from turn 2 where you hold.
 - **Turns 3–5:** Fizz when there's a good spell in the trash. Matriarch, with a Tornado hidden beside her if you have one. Vex onto a battlefield.
-- **Closing:** hold one battlefield, break the other. Mercenary (Punch First), or Graves (pumped first, or with Elnuk face down).
+- **Closing:** hold one battlefield, break the other: Mercenary (Punch First switches her on and adds +5), or a unit pumped with Punch First or Grim Resolve, with Elnuk face down for the surprise +3.
 
 ---
 
@@ -122,8 +121,8 @@ date: 2026-10-25
 - **Big breakers** (Astral Heron decks: Irelia, Vex): Switcheroo or Elnuk face down; Star-Crossed held up (3 Energy, 1 Power); from the sideboard, **Siren's Song** (sends their attacker away before damage; it only hits a unit that *moved*) and Rebuke.
 - **Kai'Sa:** lots of removal, often aimed at Matriarch. Lean on Fizz and Ezreal, don't put everything on one battlefield, and side in **Unyielding Spirit** (prevents a turn of spell and ability damage).
 - **Kennen:** Jun warns that Kennen abuses Zaun Warrens, so pick Sandswept Tomb or Sigil of the Storm as your battlefield.
-- **Jayce and gear decks:** side in **An Offer You Can't Refuse** and **Acceptable Losses**.
-- **Spell-heavy decks:** the second **Sabotage** (look at their hand, take the trick before the big fight).
+- **Go-wide and token decks** (Azir's Sand Soldiers, Rengar, LeBlanc, swarm homebrews): side in **2 Graves**. When he attacks or defends he deals his Might to *every* enemy unit there (and deals no combat damage). Pump him in your main phase before he moves (Punch First makes the blast 9), because his trigger can only be answered by Reactions; Elnuk face down adds +3 in response. **Leave him out against few-big-unit decks** (Irelia, Kai'Sa, Jayce): a lone 4-damage blast doesn't kill a 7-Might Heron, and he can't win that fight on his own.
+- **Jayce and gear decks:** side in **An Offer You Can't Refuse** (kill a gear; they get a Gold).
 
 ---
 
@@ -131,7 +130,7 @@ date: 2026-10-25
 
 1. **Fizz:** did he have a spell to recast? Which one?
 2. **Matriarch:** how often did she revive, and did Tornado set it up? Did she die before doing anything?
-3. **Graves, Vex, Elnuk:** did the top end matter? Enough of it?
+3. **Vex, Elnuk, Mercenary:** did the top end matter? Enough of it?
 4. **Cards:** did you run out, or flood?
 5. **Losses:** what beat you? Use [strategy.md](../docs/strategy.md)'s seven mistake types.
 

@@ -806,3 +806,15 @@ tokens, made in play, so they are not in the lists and not in his numbers.
   16 cards at 2 Energy or less, 9 two-drop units, 7 free turn-1 units (a free 2-drop in the first
   five cards about 65%, against about 70% at Randyyy's 3 Disciples). Rengar heads the watch list
   ("short on finishers"). Seven changes from Randyyy's list in all.
+- **25 Oct 2026 — final list (Jay: "push it").** Graves is matchup-specific, not engine-specific
+  (a sweeper against wide boards, weak against one big unit), and the added units had cut Fizz's
+  targets from Randyyy's 15 spells to 12. So: main −2 Graves +1 Sabotage +1 Grim Resolve (both
+  Randyyy's; Grim Resolve costs no Power, so a Fizz recast of it is free); sideboard −Acceptable
+  Losses −Sabotage +2 Graves (for go-wide and token decks). Rebuke considered for the main (Defy-
+  proof, answers any size) but neither Randyyy nor Jun runs it main, so it stays in the sideboard.
+  Rengar considered over the third Matriarch and left out: Matriarch is the engine and pairs with
+  3 Tornado (Randyyy's pairing); Rengar heads the watch list. **Five changes from Randyyy's list
+  now** (−1 Disciple −Acceptable Losses +2 Staunch; −Pyke −1 Edge of Night +2 Vex; −1 Edge of
+  Night +1 Elnuk); every main-deck spell is his. Shape: average 2.59 (his 2.44), 18 cards at 2
+  Energy or less (his 18), 7 free turn-1 units (his 8), 14 spells for Fizz (his 15). Frozen for
+  three Nexus Nights.
