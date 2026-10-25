@@ -1593,7 +1593,8 @@ itself, and nothing that needs an opponent:
   flipping a hidden unit, with `keepForEvelynn` keeping her face-down card; Evelynn, In
   Control's points; `opts.turns` for games longer than the curve (her points come on turns
   5–8). `scripts/rift try` prints this as an eight-turn engine report under all three
-  scenarios, and `try --sweep "<card>" --with "<a>, <b>"` runs one slot against many
+  scenarios (with how often a turn from 4 on spends 2+ Power, Sivir, Mercenary's condition, and
+  the kills and Gold the legend sees), and `try --sweep "<card>" --with "<a>, <b>"` runs one slot against many
   candidates the same way (`--qty N` swaps N copies; `;` separates candidates whose names
   have commas), each scored tier by tier when the deck has goal tiers.
 

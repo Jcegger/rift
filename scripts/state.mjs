@@ -1220,7 +1220,8 @@ function printEngine(rb, ra, policy, games) {
   console.log(`\n  ENGINE (lib/sim.mjs, ${games} games a scenario, 8 turns, hiding on; policy ${JSON.stringify({ keepForEvelynn: true, holdUp: 0, dais: false, ...policy }).replace(/[{}"]/g, "")})`);
   const rows = [["units by turn 5", "u5", n1], ["Might by turn 5", "m5", n1], ["attacks answered (Switcheroo, Star-Crossed…)", "answered", pc],
     ["Evelynn's points by turn 8", "evelynn", n2], ["Fizz finds a spell", "fizz", pc], ["Matriarch revives a game", "revives", n2],
-    ["replays a game (Star-Crossed, Dais)", "replays", n2], ["tricks crowded out by Energy", "tricksBlocked", n2], ["extra cards drawn", "drawn", n1]];
+    ["replays a game (Star-Crossed, Dais)", "replays", n2], ["tricks crowded out by Energy", "tricksBlocked", n2], ["extra cards drawn", "drawn", n1],
+    ["Mercenary on: turns 4–8, 2+ Power spent", "merc", pc], ["kills a game (readies the legend)", "kills", n2], ["Gold made a game", "goldMade", n2]];
   console.log(`  ${"".padEnd(46)}${["quiet", "normal", "heavy"].map((x) => x.padEnd(22)).join("")}`);
   for (const [label, key, f] of rows) {
     const cells = ["quiet", "normal", "heavy"].map((s) => { const b = rb.scenarios[s][key], a = ra.scenarios[s][key]; const fb = f(b), fa = f(a);
