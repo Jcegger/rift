@@ -41,7 +41,10 @@ Then read it against the deck's goal tiers from stage 2: when a worksheet has a
 direction), `try` scores the change tier by tier, counting a change only when it beats the
 shuffle's noise. Other tools for the same stage: `scripts/rift loops` (interactions and
 loops from card text), `scripts/rift fight` (one combat, best play both sides), and
-`try --sweep "<card>" --with "<a>, <b>"` (one slot against many candidates). The tools test what was picked;
+`try --sweep "<card>" --with "<a>, <b>"` (one slot against many candidates; `--with all` for
+every legal card), and `try --grid "<slots>" --with "<leads>"` (many slots against many leads).
+Points come from `lib/match.mjs`: whole model games against the field's real lists, holds,
+conquers and stopped holds scored by the rules; tier 0 reads them. The tools test what was picked;
 they never pick. For one matchup in detail, `scripts/rift versus <legend> --deck "<name>"`.
 
 ## Working rules

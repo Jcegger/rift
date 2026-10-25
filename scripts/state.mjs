@@ -48,6 +48,25 @@ import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, dec
 import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive } from "../lib/versus.mjs";
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf } from "../lib/decklab.mjs";
+import { matchReport } from "../lib/match.mjs";
+
+// The S/A field's lists as opponents for lib/match.mjs, in a fixed shuffled order, so a before
+// and an after play the same opponents in the same order (paired games).
+function foeLists(fieldDecks) {
+  const out = fieldDecks.flatMap((f) => f.lists.map((d) => ({ label: f.label.replace(/ \([SA]\)$/, "").split(",")[0], cards: d.cards })));
+  const r = rng(5); for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
+  return out;
+}
+function printPoints(pb, pa, games) {
+  const n2 = (x) => (x == null ? "—" : x.toFixed(2)), pc = (x) => (x == null ? "—" : `${Math.round(100 * x)}%`);
+  console.log(`\n  POINTS (lib/match.mjs: ${games} model games against real S/A lists, the same games before and after)`);
+  const rows = [["our points by turn 8", "points8", n2], ["their points by turn 8", "theirPoints8", n2], ["  ours from holds / conquers", null],
+    ["holds a game", "holds", n2], ["conquers a game", "conquers", n2], ["their holds stopped (taken, traded, cleared)", "stops", n2],
+    ["Evelynn's points a game", "eve", n2], ["eighth point gated (drew instead)", "gated", n2], ["their holds a game", "theirHolds", n2],
+    ["our holds they stopped", "theirStops", n2], ["Mercenary on (turns 4+)", "merc", pc]];
+  for (const [label, key, f] of rows) { if (!key) continue; const b = f(pb[key]), a = f(pa[key]); console.log(`  ${label.padEnd(46)}${(b === a ? b : `${b} → ${a}`).padEnd(22)}`); }
+  console.log("  Model games, both sides on one plain policy; card text beyond the reader's effects is not played, which favours unit-heavy decks. Points and how they're made, not win rates.");
+}
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { fight } from "../lib/fight.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
@@ -1076,7 +1095,7 @@ async function cmdTry(S, cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   const since = opt("--since") || "2026-10-16";
   const games = Number(opt("--games") || 20000);
-  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty"]);
+  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games", "--top", "--grid"]);
   const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine");
   // --policy "holdUp=3,dais,bandleTree,keepForEvelynn=false": how you play, for the engine report.
   const policy = {};
@@ -1085,14 +1104,16 @@ async function cmdTry(S, cat, args) {
   }
   const sweepCard = opt("--sweep"), sweepWith = (opt("--with") || "").split(/;/.test(opt("--with") || "") ? ";" : ",").map((x) => x.trim()).filter(Boolean);
   const decks = findDecks(S, opt("--deck") || "\u0000");
-  if (decks.length !== 1 || (!specs.length && !sweepCard)) {
+  if (decks.length !== 1 || (!specs.length && !sweepCard && !opt("--grid"))) {
     console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine]');
     console.log('       try --deck "<one of your decks>" --sweep "Card in the deck" --with "Candidate A, Candidate B" (or "A; B" when a name has a comma) [--policy …]');
     if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
     return;
   }
   const before = decks[0];
-  if (sweepCard) return trySweep(before, cat, sweepCard, sweepWith, policy, Number(opt("--games") || 3000), opt("--qty") ? Number(opt("--qty")) : null, since);
+  if (opt("--grid")) return tryGrid(before, cat, opt("--grid"), sweepWith, since, { pointsGames: Number(opt("--points-games")) || 1200, top: Number(opt("--top")) || 40 });
+  if (sweepCard) return trySweep(before, cat, sweepCard, sweepWith, policy, Number(opt("--games") || 3000), opt("--qty") ? Number(opt("--qty")) : null, since,
+    { pointsGames: Number(opt("--points-games")) || null, top: Number(opt("--top")) || null });
   let changes, after;
   try { changes = parseChanges(specs, cat.cards); after = applyChanges(before, changes, cat.cards, cat.BY); }
   catch (e) { console.log(`try: ${e.message}`); return; }
@@ -1182,10 +1203,16 @@ async function cmdTry(S, cat, args) {
     ra = engineReport(after, cat, { games: eg, policy, foes: foesOf(after, cat, fieldDecks) });
     printEngine(rb, ra, policy, eg);
   }
+  let pb = null, pa = null;
+  if (!args.includes("--no-points")) {
+    const pg = Number(opt("--points-games")) || 600, foes = foeLists(fieldDecks);
+    pb = matchReport(before, cat, foes, { games: pg }); pa = matchReport(after, cat, foes, { games: pg });
+    printPoints(pb, pa, pg);
+  }
   // The deck's goal tiers, if its worksheet has a tiers file: the change read against the plan.
   const spec = await loadTiers(before.name);
   if (spec) {
-    const tb = scoreTiers(spec, { shape: sB, field: fB, engine: rb?.scenarios }, { shape: sA, field: fA, engine: ra?.scenarios });
+    const tb = scoreTiers(spec, { shape: sB, field: fB, engine: rb?.scenarios, points: pb }, { shape: sA, field: fA, engine: ra?.scenarios, points: pa });
     printTiers(tb, spec);
   }
   console.log(`\n  Card text and counts only: nothing here is a win rate. Read it against the deck's goal tiers in its worksheet.`);
@@ -1234,41 +1261,80 @@ function printEngine(rb, ra, policy, games) {
   if (rb.foes) console.log(`  normal and heavy play one of ${rb.foes} real S/A lists: its removal goes at Evelynn, its big unit at her battlefield (foesOf)`);
 }
 
-// One slot, many candidates: the same engine report for each, compact, against the deck as is.
-async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, since) {
-  const inDeck = Object.entries(deck.cards || {}).filter(([k]) => cat.BY.get(k)?.n.toLowerCase().startsWith(card.toLowerCase()));
-  if (!inDeck.length) { console.log(`try --sweep: the main deck has no "${card}"`); return; }
-  const name = cat.BY.get(inDeck[0][0]).n, have = inDeck.reduce((a, [, q]) => a + q, 0), qty = Math.min(qtyOpt || have, have);
-  // The field is the same S/A field try uses: the opponents under pressure, and the tiers' field measures.
-  const spec = await loadTiers(deck.name);
-  let fieldDecks = null;
-  {
+// The S and A legends' legal lists since `since`, with their weighted cards (try and its sweeps).
+async function fieldDecksFor(cat, since) {
     const field = await readJson(url("field.json")), snap = await readJson(url("decks.json"));
     const banned = await readJson(url("banned.json")).catch(() => ({ constructed: [] }));
     const bn = bannedNameSet(banned), std = standardNameSet(banned, cat.cards);
     const byName = new Map(); for (const c of cat.cards) if (!byName.has(c.n) || (!c.v && byName.get(c.n).v)) byName.set(c.n, c);
     const legendOf = (d) => (d.lg && cat.BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
     const pool = snap.decks.filter((d) => (d.dt || "") >= since && deckIsLegal(d, cat.BY, bn, std));
-    fieldDecks = field.legends.filter((l) => l.tier === "S" || l.tier === "A").map((t) => {
+    return field.legends.filter((l) => l.tier === "S" || l.tier === "A").map((t) => {
       const title = t.legend.replace(/ - Starter$/, "");
       const lists = pool.filter((d) => { const n = (legendOf(d)?.n || d.ln || "").replace(/ - Starter$/, ""); return title === n || title.endsWith(`, ${n}`); });
       const theirs = [...weigh(lists, (code) => codeName(cat.BY, code))].map(([n, w]) => ({ card: byName.get(n), ...w }))
         .filter((r) => r.card && !/Legend|Rune|Battlefield/.test(r.card.t) && (r.share >= 0.25 || (effectsOf(r.card).length && r.share >= 0.125)));
       return { label: title, n: lists.length, placed: lists.filter((d) => d.tour && d.pl != null).length, theirs, lists };
     }).filter((fd) => fd.n);
+}
+
+// Many slots × many candidates on points (lib/widesweep.mjs gridSweep): "all" slots means every
+// card in the main deck. One copy out, one in, each on the same paired model games.
+async function tryGrid(deck, cat, slotsArg, cands, since, { pointsGames, top }) {
+  const fieldDecks = await fieldDecksFor(cat, since);
+  const inDeck = [...new Set(Object.keys(deck.cards || {}).map((k) => cat.BY.get(k)).filter((c) => c && /Unit|Spell|Gear/.test(c.t)).map((c) => c.n))];
+  const slots = slotsArg.toLowerCase() === "all" ? inDeck : slotsArg.split(";").map((x) => x.trim()).filter(Boolean);
+  const { gridSweep } = await import("../lib/widesweep.mjs");
+  const res = await gridSweep({ deck, cat, slots, cands, foes: foeLists(fieldDecks), games: pointsGames, catalogUrl: import.meta.url,
+    onProgress: (d, n) => process.stderr.write(`\r  ${d} of ${n} pairs`) });
+  process.stderr.write("\n");
+  const f2 = (x) => x.toFixed(2);
+  console.log(`GRID  ${deck.name}: ${slots.length} slots × ${cands.length} candidates = ${res.pairs} legal swaps (${pointsGames} paired model games each, lib/match.mjs)`);
+  console.log(`  as is: our points by turn 8 ${f2(res.base.points8)}, theirs ${f2(res.base.theirPoints8)}`);
+  console.log(`  ${"-1 slot → +1 candidate".padEnd(50)} ${"margin Δ".padStart(9)} ${"± SE".padStart(6)} ${"stops".padStart(6)}`);
+  for (const r of res.rows.slice(0, top)) console.log(`  ${r.name.slice(0, 50).padEnd(50)} ${((r.margin >= 0 ? "+" : "") + f2(r.margin)).padStart(9)} ${f2(r.se).padStart(6)} ${f2(r.stops).padStart(6)}`);
+  console.log("  margin Δ = change in (our − their points by turn 8), same games. Beyond 2 SE is a lead to test, not a pick (the model favours units).");
+}
+
+// One slot, many candidates: the same engine report for each, compact, against the deck as is.
+async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, since, { pointsGames = null, top: topOpt = null } = {}) {
+  const inDeck = Object.entries(deck.cards || {}).filter(([k]) => cat.BY.get(k)?.n.toLowerCase().startsWith(card.toLowerCase()));
+  if (!inDeck.length) { console.log(`try --sweep: the main deck has no "${card}"`); return; }
+  const name = cat.BY.get(inDeck[0][0]).n, have = inDeck.reduce((a, [, q]) => a + q, 0), qty = Math.min(qtyOpt || have, have);
+  // The field is the same S/A field try uses: the opponents under pressure, and the tiers' field measures.
+  const spec = await loadTiers(deck.name);
+  const fieldDecks = await fieldDecksFor(cat, since);
+  if (candidates.length === 1 && candidates[0].toLowerCase() === "all") {
+    // Every legal card, on points only (lib/widesweep.mjs): paired model games, many threads.
+    const { wideSweep } = await import("../lib/widesweep.mjs");
+    const g = pointsGames || 2400;
+    const res = await wideSweep({ deck, cat, card: name, qty, foes: foeLists(fieldDecks), games: g, catalogUrl: import.meta.url,
+      onProgress: (d, n) => process.stderr.write(`\r  ${d} of ${n} candidates`) });
+    process.stderr.write("\n");
+    const top = topOpt || 40, f2 = (x) => x.toFixed(2);
+    console.log(`WIDE SWEEP  ${deck.name}: ${qty} of ${have} ${name} → each of ${res.candidates} legal cards (${g} paired model games each, lib/match.mjs)`);
+    console.log(`  as is: our points by turn 8 ${f2(res.base.points8)}, theirs ${f2(res.base.theirPoints8)}, holds stopped ${f2(res.base.stops)}, Evelynn ${f2(res.base.eve)}`);
+    console.log(`  ${"candidate".padEnd(34)} ${"margin Δ".padStart(9)} ${"± SE".padStart(6)} ${"pts8".padStart(6)} ${"thr8".padStart(6)} ${"stops".padStart(6)}`);
+    const show = [...res.rows.slice(0, top), ...(res.rows.length > top ? [null, ...res.rows.slice(-5)] : [])];
+    for (const r of show) console.log(r ? `  ${r.name.slice(0, 34).padEnd(34)} ${(r.margin >= 0 ? "+" : "") + f2(r.margin)}`.padEnd(46) + ` ${f2(r.se).padStart(6)} ${f2(r.points8).padStart(6)} ${f2(r.theirPoints8).padStart(6)} ${f2(r.stops).padStart(6)}` : "  …");
+    console.log("  margin Δ = change in (our − their points by turn 8) against the deck as is, same games. Beyond 2 SE is a lead to test, not a pick: the model plays bodies and the reader's effects, not all card text, and favours units.");
+    return;
   }
   const base = engineReport(deck, cat, { games, policy, foes: foesOf(deck, cat, fieldDecks) });
-  const tierWord = (after, rep) => {
+  const pgames = Math.max(300, Math.round(games / 10)), foes = foeLists(fieldDecks);
+  const basePts = matchReport(deck, cat, foes, { games: pgames });
+  const tierWord = (after, rep, pts) => {
     if (!spec) return "";
-    const tb = scoreTiers(spec, { shape: shapeOf(deck, cat.BY), field: fieldOf(deck, cat.BY, fieldDecks), engine: base.scenarios },
-      { shape: shapeOf(after, cat.BY), field: fieldOf(after, cat.BY, fieldDecks), engine: rep.scenarios });
+    const tb = scoreTiers(spec, { shape: shapeOf(deck, cat.BY), field: fieldOf(deck, cat.BY, fieldDecks), engine: base.scenarios, points: basePts },
+      { shape: shapeOf(after, cat.BY), field: fieldOf(after, cat.BY, fieldDecks), engine: rep.scenarios, points: pts });
     return "  " + tb.map((t) => { const b = t.rows.filter((r) => r.verdict === "better").length, w = t.rows.filter((r) => r.verdict === "worse").length; return `t${t.tier === "always" ? "*" : t.tier}:${b ? "+" + b : ""}${w ? "−" + w : ""}${!b && !w ? "=" : ""}`; }).join(" ");
   };
   const pc = (x) => (x == null ? "—" : `${Math.round(100 * x)}%`);
   const line = (label, r) => { const N = r.scenarios.normal, H = r.scenarios.heavy, Q = r.scenarios.quiet;
-    return `  ${label.padEnd(34)} ${Q.energy.toFixed(1).padStart(6)} ${pc(Q.two2).padStart(6)} ${N.u5.toFixed(1).padStart(6)} ${H.u5.toFixed(1).padStart(6)} ${pc(N.answered).padStart(7)} ${pc(H.answered).padStart(7)} ${N.evelynn.toFixed(2).padStart(7)} ${pc(N.fizz).padStart(6)} ${N.revives.toFixed(2).padStart(6)} ${N.tricksBlocked.toFixed(2).padStart(6)}`; };
+    return `  ${label.padEnd(34)} ${r.pts.points8.toFixed(2).padStart(6)} ${r.pts.theirPoints8.toFixed(2).padStart(6)} ${Q.energy.toFixed(1).padStart(6)} ${pc(Q.two2).padStart(6)} ${N.u5.toFixed(1).padStart(6)} ${H.u5.toFixed(1).padStart(6)} ${pc(N.answered).padStart(7)} ${pc(H.answered).padStart(7)} ${N.evelynn.toFixed(2).padStart(7)} ${pc(N.fizz).padStart(6)} ${N.revives.toFixed(2).padStart(6)} ${N.tricksBlocked.toFixed(2).padStart(6)}`; };
   console.log(`SWEEP  ${deck.name}: ${qty} of ${have} ${name} → each candidate (${games} games a scenario, 8 turns; policy ${JSON.stringify({ keepForEvelynn: true, ...policy }).replace(/[{}"]/g, "")})`);
-  console.log(`  ${"".padEnd(34)} ${"Energy".padStart(6)} ${"2u t2".padStart(6)} ${"u5 nrm".padStart(6)} ${"u5 hvy".padStart(6)} ${"ans nrm".padStart(7)} ${"ans hvy".padStart(7)} ${"Eve pts".padStart(7)} ${"Fizz".padStart(6)} ${"revive".padStart(6)} ${"crowd".padStart(6)}`);
+  console.log(`  ${"".padEnd(34)} ${"pts8".padStart(6)} ${"thr8".padStart(6)} ${"Energy".padStart(6)} ${"2u t2".padStart(6)} ${"u5 nrm".padStart(6)} ${"u5 hvy".padStart(6)} ${"ans nrm".padStart(7)} ${"ans hvy".padStart(7)} ${"Eve pts".padStart(7)} ${"Fizz".padStart(6)} ${"revive".padStart(6)} ${"crowd".padStart(6)}`);
+  base.pts = basePts;
   console.log(line(`as is (${qty} ${name})`, base));
   for (const cand of candidates) {
     let after;
@@ -1276,9 +1342,10 @@ async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, sinc
     catch (e) { console.log(`  ${cand}: ${e.message}`); continue; }
     const rules = deckChecks(after, cat.idx).filter((x) => x.ok === false).map((x) => x.label);
     const rep = engineReport(after, cat, { games, policy, foes: foesOf(after, cat, fieldDecks) });
-    console.log(line(`${qty} ${parseChanges([`+${cand}`], cat.cards)[0].name}${rules.length ? " (rules: " + rules.join(", ") + ")" : ""}`, rep) + tierWord(after, rep));
+    const pts = rep.pts = matchReport(after, cat, foes, { games: pgames });
+    console.log(line(`${qty} ${parseChanges([`+${cand}`], cat.cards)[0].name}${rules.length ? " (rules: " + rules.join(", ") + ")" : ""}`, rep) + tierWord(after, rep, pts));
   }
-  console.log(`  Energy = spent turns 1–4 (quiet) · 2u t2 = two units by turn 2 · u5 = units by turn 5 · ans = attacks answered · Eve pts = Evelynn's points by turn 8 (normal) · crowd = tricks crowded out by Energy (normal). Not win rates.`);
+  console.log(`  pts8 / thr8 = our and their points by turn 8 (lib/match.mjs, ${pgames} model games) · Energy = spent turns 1–4 (quiet) · 2u t2 = two units by turn 2 · u5 = units by turn 5 · ans = attacks answered · Eve pts = Evelynn's points by turn 8 (normal) · crowd = tricks crowded out by Energy (normal). Not win rates.`);
   if (spec) console.log(`  t0…t4, t* = the goal tiers (${spec.file}): measures better (+) or worse (−) past the noise, = for no change.`);
 }
 

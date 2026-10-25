@@ -64,6 +64,20 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   swap a unit in from base, whose defend trigger still fires). Simplified: each play resolves
   before the next. For the board states a matchup turns on, never a win rate. Tests:
   `lib/fight.test.mjs`.
+- `lib/match.mjs` - the points model: our deck plays whole games against real S/A lists, both
+  sides on one plain policy, scored by the rules (Hold at the Beginning Phase, Conquer once per
+  battlefield per turn, the gated eighth point, a win at 8 and ahead). Combat is the fight
+  calculator; removal that kills a battlefield's last defender stops the hold, a lost
+  battlefield trashes its hidden card, counters (Defy, Not So Fast) answer removal, token
+  makers and token legends develop, Kai'Sa's spell Power and Battle Mistress's Gold pay.
+  `scripts/rift try` prints it as POINTS and goal tier 0 reads it (our and their points by turn
+  8). What it leaves out favours unit-heavy decks (a field deck in our seat checks it: the
+  mirror splits about evenly, spell-reliant Irelia does worst), so its numbers are points and
+  how they're made, never a win rate. Tests: `lib/match.test.mjs`.
+- `lib/widesweep.mjs` - `try --sweep "<card>" --qty N --with all`: the slot against every card
+  the deck could legally run (never Dazzling Aurora), each on the same paired model games, the
+  margin change with its standard error, on worker threads. `try --grid "<a>; <b>" --with
+  "<x>; <y>"` crosses many slots with many candidates the same way. Leads to test, never picks.
 - `lib/markdown.mjs` - the guide renderer the site uses, with heading anchors.
 - `lib/sim.mjs` - the goldfish simulator's engine, shared by `scripts/sim.mjs` and the site.
   `lib/sim-worker.mjs` runs it in a Web Worker for the tweak bench.

@@ -1,38 +1,151 @@
 {
   "deck": "Sivir — Nexus Night",
-  "note": "The worksheet's goal tiers (sections 1–2 and the 24–25 Oct log), for scripts/rift try. Targets are only the ones the worksheet set; everything else is a direction. Hand-written: change it when the worksheet's plan changes.",
+  "note": "The worksheet's goal tiers (sections 1–2 and the 24–25 Oct log), for scripts/rift try. Targets are only the ones the worksheet set; everything else is a direction. Hand-written: change it when the worksheet's plan changes. Tier 0 is points from lib/match.mjs since 25 Oct 2026 (Jay: the sim decides points, holds, conquers and stopped holds); Evelynn's points count inside it, not on their own.",
   "tiers": [
-    { "tier": 0, "goal": "win inside the clock: points every turn",
+    {
+      "tier": 0,
+      "goal": "win inside the clock: points every turn",
       "measures": [
-        { "key": "engine.normal.evelynn", "label": "Evelynn's points by turn 8, under attack", "dir": "up" },
-        { "key": "engine.quiet.evelynn", "label": "Evelynn's points by turn 8, quiet", "dir": "up" } ] },
-    { "tier": 1, "goal": "presence and fights: bodies on battlefields, winning fights there",
+        {
+          "key": "points.points8",
+          "label": "our points by turn 8 (holds, conquers, Evelynn)",
+          "dir": "up"
+        },
+        {
+          "key": "points.theirPoints8",
+          "label": "their points by turn 8",
+          "dir": "down"
+        }
+      ]
+    },
+    {
+      "tier": 1,
+      "goal": "presence and fights: bodies on battlefields, winning fights there",
       "measures": [
-        { "key": "shape.cheap", "label": "cards at 2 Energy or less", "min": 18, "max": 22 },
-        { "key": "engine.quiet.two2", "label": "two units by turn 2", "dir": "up" },
-        { "key": "engine.normal.u5", "label": "units by turn 5, normal pressure", "dir": "up" },
-        { "key": "engine.normal.answered", "label": "attacks answered, normal", "dir": "up" },
-        { "key": "engine.heavy.answered", "label": "attacks answered, heavy", "dir": "up" },
-        { "key": "field.bigAns.pop", "label": "answer copies per regular 6+ unit", "dir": "up" },
-        { "key": "shape.hidden", "label": "Hidden cards", "min": 10, "max": 12 } ] },
-    { "tier": 2, "goal": "staying power: replace what was spent",
+        {
+          "key": "shape.cheap",
+          "label": "cards at 2 Energy or less",
+          "min": 18,
+          "max": 22
+        },
+        {
+          "key": "engine.quiet.two2",
+          "label": "two units by turn 2",
+          "dir": "up"
+        },
+        {
+          "key": "engine.normal.u5",
+          "label": "units by turn 5, normal pressure",
+          "dir": "up"
+        },
+        {
+          "key": "engine.normal.answered",
+          "label": "attacks answered, normal",
+          "dir": "up"
+        },
+        {
+          "key": "engine.heavy.answered",
+          "label": "attacks answered, heavy",
+          "dir": "up"
+        },
+        {
+          "key": "field.bigAns.pop",
+          "label": "answer copies per regular 6+ unit",
+          "dir": "up"
+        },
+        {
+          "key": "shape.hidden",
+          "label": "Hidden cards",
+          "min": 10,
+          "max": 12
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "goal": "staying power: replace what was spent",
       "measures": [
-        { "key": "engine.heavy.u5", "label": "units by turn 5, heavy pressure", "dir": "up" },
-        { "key": "engine.normal.fizz", "label": "Fizz finds a spell", "dir": "up" },
-        { "key": "engine.normal.revives", "label": "Matriarch revives a game", "dir": "up" },
-        { "key": "engine.normal.drawn", "label": "extra cards drawn", "dir": "up" } ] },
-    { "tier": 3, "goal": "denial, flexible only",
+        {
+          "key": "engine.heavy.u5",
+          "label": "units by turn 5, heavy pressure",
+          "dir": "up"
+        },
+        {
+          "key": "engine.normal.fizz",
+          "label": "Fizz finds a spell",
+          "dir": "up"
+        },
+        {
+          "key": "engine.normal.revives",
+          "label": "Matriarch revives a game",
+          "dir": "up"
+        },
+        {
+          "key": "engine.normal.drawn",
+          "label": "extra cards drawn",
+          "dir": "up"
+        }
+      ]
+    },
+    {
+      "tier": 3,
+      "goal": "denial, flexible only",
       "measures": [
-        { "key": "field.defyHits.pop", "label": "spells Defy would counter (expected)", "dir": "down" },
-        { "key": "field.exposed.pop", "label": "exposure to Might-limited removal", "dir": "down" } ] },
-    { "tier": 4, "goal": "engine perks: tie-breakers only",
+        {
+          "key": "points.stops",
+          "label": "their holds stopped a game",
+          "dir": "up"
+        },
+        {
+          "key": "field.defyHits.pop",
+          "label": "spells Defy would counter (expected)",
+          "dir": "down"
+        },
+        {
+          "key": "field.exposed.pop",
+          "label": "exposure to Might-limited removal",
+          "dir": "down"
+        }
+      ]
+    },
+    {
+      "tier": 4,
+      "goal": "engine perks: tie-breakers only",
       "measures": [
-        { "key": "engine.normal.replays", "label": "replays a game (Star-Crossed, Dais)", "dir": "up" } ] },
-    { "tier": "always", "goal": "a curve and colours that work; Energy is the squeeze",
+        {
+          "key": "engine.normal.replays",
+          "label": "replays a game (Star-Crossed, Dais)",
+          "dir": "up"
+        }
+      ]
+    },
+    {
+      "tier": "always",
+      "goal": "a curve and colours that work; Energy is the squeeze",
       "measures": [
-        { "key": "shape.avg", "label": "average cost", "min": 2.5, "max": 2.75 },
-        { "key": "shape.big", "label": "cards at 5+ Energy", "min": 2, "max": 4 },
-        { "key": "engine.quiet.stuck3", "label": "stuck on colour by turn 3", "dir": "down" },
-        { "key": "engine.normal.tricksBlocked", "label": "tricks crowded out by Energy", "dir": "down" } ] }
+        {
+          "key": "shape.avg",
+          "label": "average cost",
+          "min": 2.5,
+          "max": 2.75
+        },
+        {
+          "key": "shape.big",
+          "label": "cards at 5+ Energy",
+          "min": 2,
+          "max": 4
+        },
+        {
+          "key": "engine.quiet.stuck3",
+          "label": "stuck on colour by turn 3",
+          "dir": "down"
+        },
+        {
+          "key": "engine.normal.tricksBlocked",
+          "label": "tricks crowded out by Energy",
+          "dir": "down"
+        }
+      ]
+    }
   ]
 }
