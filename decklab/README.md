@@ -36,7 +36,12 @@ Before and after, side by side (`lib/decklab.mjs`):
   6+ Might unit and how many are free from face down, exposure to Might-limited removal, and
   a blast's reach when the deck has one.
 
-Then read it against the deck's goal tiers from stage 2. The tools test what was picked;
+Then read it against the deck's goal tiers from stage 2: when a worksheet has a
+`decklab/<deck>.tiers.json` (its tiers' measures, with the worksheet's own targets or a
+direction), `try` scores the change tier by tier, counting a change only when it beats the
+shuffle's noise. Other tools for the same stage: `scripts/rift loops` (interactions and
+loops from card text), `scripts/rift fight` (one combat, best play both sides), and
+`try --sweep "<card>" --with "<a>, <b>"` (one slot against many candidates). The tools test what was picked;
 they never pick. For one matchup in detail, `scripts/rift versus <legend> --deck "<name>"`.
 
 ## Working rules
@@ -54,4 +59,4 @@ Rules claims follow CLAUDE.md: handbook first, verbatim where it is load-bearing
 follows the repo's standing rules: no invented numbers, cost is never the axis, and no deck
 running Dazzling Aurora.
 
-Worksheets: [sivir-midrange.md](sivir-midrange.md) (the base), [sivir-nexus-night.md](sivir-nexus-night.md) (a 3-0 at Nexus Night; frozen for testing 24 Oct 2026).
+Worksheets: [sivir-midrange.md](sivir-midrange.md) (the base), [sivir-nexus-night.md](sivir-nexus-night.md) (a 3-0 at Nexus Night; frozen for testing 24 Oct 2026), [kaisa.md](kaisa.md) (the strong second deck; stage 1).

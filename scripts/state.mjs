@@ -47,7 +47,7 @@ import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, SB_MAX } from "../lib/decks.mjs";
 import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive } from "../lib/versus.mjs";
-import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS } from "../lib/decklab.mjs";
+import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers } from "../lib/decklab.mjs";
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { fight } from "../lib/fight.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
@@ -1175,12 +1175,43 @@ async function cmdTry(S, cat, args) {
     const delta = typeof r.b === "number" && typeof r.a === "number" && f(r.a) !== f(r.b) ? `  ${r.a > r.b ? "▲" : "▼"}` : "";
     console.log(`  ${pad(r.label, w)}${pad(f(r.b), 22)}${pad(f(r.a), 22)}${delta}`);
   }
+  let rb = null, ra = null;
   if (!args.includes("--no-engine")) {
     const eg = Math.max(2000, Math.round(games / 4));
-    const rb = engineReport(before, cat, { games: eg, policy }), ra = engineReport(after, cat, { games: eg, policy });
+    rb = engineReport(before, cat, { games: eg, policy }); ra = engineReport(after, cat, { games: eg, policy });
     printEngine(rb, ra, policy, eg);
   }
+  // The deck's goal tiers, if its worksheet has a tiers file: the change read against the plan.
+  const spec = await loadTiers(before.name);
+  if (spec) {
+    const tb = scoreTiers(spec, { shape: sB, field: fB, engine: rb?.scenarios }, { shape: sA, field: fA, engine: ra?.scenarios });
+    printTiers(tb, spec);
+  }
   console.log(`\n  Card text and counts only: nothing here is a win rate. Read it against the deck's goal tiers in its worksheet.`);
+}
+
+// decklab/<deck>.tiers.json whose "deck" names this deck.
+async function loadTiers(deckName) {
+  const { readdir } = await import("node:fs/promises");
+  const dir = new URL("../decklab/", import.meta.url);
+  for (const f of (await readdir(dir).catch(() => [])).filter((x) => x.endsWith(".tiers.json"))) {
+    const spec = await readJson(new URL(f, dir)).catch(() => null);
+    if (spec && deckName.toLowerCase().includes(String(spec.deck).toLowerCase())) return { ...spec, file: `decklab/${f}` };
+  }
+  return null;
+}
+function printTiers(tiers, spec) {
+  const f = (v, m) => (v == null ? "—" : /answered|fizz|two2|stuck|exposed/.test(m.key) ? `${Math.round(100 * v)}%` : Number.isInteger(v) ? String(v) : v.toFixed(2));
+  console.log(`\n  GOAL TIERS (${spec.file}): read the change against the plan, top tier first`);
+  for (const t of tiers) {
+    const better = t.rows.filter((r) => r.verdict === "better").length, worse = t.rows.filter((r) => r.verdict === "worse").length;
+    console.log(`    tier ${t.tier} — ${t.goal}: ${better} better, ${worse} worse`);
+    for (const r of t.rows) {
+      const target = r.min != null || r.max != null ? ` (target ${r.min ?? ""}–${r.max ?? ""}${r.inAfter === false ? ", OUT" : ""})` : "";
+      const mark = r.verdict === "better" ? "▲" : r.verdict === "worse" ? "▼" : " ";
+      console.log(`      ${mark} ${r.label.padEnd(44)} ${f(r.before, r).padStart(7)} → ${f(r.after, r).padEnd(7)}${target}`);
+    }
+  }
 }
 
 // The engine report, before and after: eight turns, all three scenarios, the same policy.
