@@ -1076,23 +1076,23 @@ async function cmdTry(S, cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   const since = opt("--since") || "2026-10-16";
   const games = Number(opt("--games") || 20000);
-  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with"]);
+  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty"]);
   const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine");
   // --policy "holdUp=3,dais,bandleTree,keepForEvelynn=false": how you play, for the engine report.
   const policy = {};
   for (const kv of (opt("--policy") || "").split(",").map((x) => x.trim()).filter(Boolean)) {
     const [k, v] = kv.split("="); policy[k] = v == null ? true : v === "false" ? false : isNaN(Number(v)) ? v : Number(v);
   }
-  const sweepCard = opt("--sweep"), sweepWith = (opt("--with") || "").split(",").map((x) => x.trim()).filter(Boolean);
+  const sweepCard = opt("--sweep"), sweepWith = (opt("--with") || "").split(/;/.test(opt("--with") || "") ? ";" : ",").map((x) => x.trim()).filter(Boolean);
   const decks = findDecks(S, opt("--deck") || "\u0000");
   if (decks.length !== 1 || (!specs.length && !sweepCard)) {
     console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine]');
-    console.log('       try --deck "<one of your decks>" --sweep "Card in the deck" --with "Candidate A, Candidate B" [--policy …]');
+    console.log('       try --deck "<one of your decks>" --sweep "Card in the deck" --with "Candidate A, Candidate B" (or "A; B" when a name has a comma) [--policy …]');
     if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
     return;
   }
   const before = decks[0];
-  if (sweepCard) return trySweep(before, cat, sweepCard, sweepWith, policy, Number(opt("--games") || 3000));
+  if (sweepCard) return trySweep(before, cat, sweepCard, sweepWith, policy, Number(opt("--games") || 3000), opt("--qty") ? Number(opt("--qty")) : null, since);
   let changes, after;
   try { changes = parseChanges(specs, cat.cards); after = applyChanges(before, changes, cat.cards, cat.BY); }
   catch (e) { console.log(`try: ${e.message}`); return; }
@@ -1231,15 +1231,39 @@ function printEngine(rb, ra, policy, games) {
 }
 
 // One slot, many candidates: the same engine report for each, compact, against the deck as is.
-function trySweep(deck, cat, card, candidates, policy, games) {
+async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, since) {
   const inDeck = Object.entries(deck.cards || {}).filter(([k]) => cat.BY.get(k)?.n.toLowerCase().startsWith(card.toLowerCase()));
   if (!inDeck.length) { console.log(`try --sweep: the main deck has no "${card}"`); return; }
-  const name = cat.BY.get(inDeck[0][0]).n, qty = inDeck.reduce((a, [, q]) => a + q, 0);
+  const name = cat.BY.get(inDeck[0][0]).n, have = inDeck.reduce((a, [, q]) => a + q, 0), qty = Math.min(qtyOpt || have, have);
   const base = engineReport(deck, cat, { games, policy });
+  // Tiers, when the deck has them: the field is the same S/A field try uses.
+  const spec = await loadTiers(deck.name);
+  let fieldDecks = null;
+  if (spec) {
+    const field = await readJson(url("field.json")), snap = await readJson(url("decks.json"));
+    const banned = await readJson(url("banned.json")).catch(() => ({ constructed: [] }));
+    const bn = bannedNameSet(banned), std = standardNameSet(banned, cat.cards);
+    const byName = new Map(); for (const c of cat.cards) if (!byName.has(c.n) || (!c.v && byName.get(c.n).v)) byName.set(c.n, c);
+    const legendOf = (d) => (d.lg && cat.BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
+    const pool = snap.decks.filter((d) => (d.dt || "") >= since && deckIsLegal(d, cat.BY, bn, std));
+    fieldDecks = field.legends.filter((l) => l.tier === "S" || l.tier === "A").map((t) => {
+      const title = t.legend.replace(/ - Starter$/, "");
+      const lists = pool.filter((d) => { const n = (legendOf(d)?.n || d.ln || "").replace(/ - Starter$/, ""); return title === n || title.endsWith(`, ${n}`); });
+      const theirs = [...weigh(lists, (code) => codeName(cat.BY, code))].map(([n, w]) => ({ card: byName.get(n), ...w }))
+        .filter((r) => r.card && !/Legend|Rune|Battlefield/.test(r.card.t) && (r.share >= 0.25 || (effectsOf(r.card).length && r.share >= 0.125)));
+      return { label: title, n: lists.length, placed: lists.filter((d) => d.tour && d.pl != null).length, theirs };
+    }).filter((fd) => fd.n);
+  }
+  const tierWord = (after, rep) => {
+    if (!spec) return "";
+    const tb = scoreTiers(spec, { shape: shapeOf(deck, cat.BY), field: fieldOf(deck, cat.BY, fieldDecks), engine: base.scenarios },
+      { shape: shapeOf(after, cat.BY), field: fieldOf(after, cat.BY, fieldDecks), engine: rep.scenarios });
+    return "  " + tb.map((t) => { const b = t.rows.filter((r) => r.verdict === "better").length, w = t.rows.filter((r) => r.verdict === "worse").length; return `t${t.tier === "always" ? "*" : t.tier}:${b ? "+" + b : ""}${w ? "−" + w : ""}${!b && !w ? "=" : ""}`; }).join(" ");
+  };
   const pc = (x) => (x == null ? "—" : `${Math.round(100 * x)}%`);
   const line = (label, r) => { const N = r.scenarios.normal, H = r.scenarios.heavy, Q = r.scenarios.quiet;
     return `  ${label.padEnd(34)} ${Q.energy.toFixed(1).padStart(6)} ${pc(Q.two2).padStart(6)} ${N.u5.toFixed(1).padStart(6)} ${H.u5.toFixed(1).padStart(6)} ${pc(N.answered).padStart(7)} ${pc(H.answered).padStart(7)} ${N.evelynn.toFixed(2).padStart(7)} ${pc(N.fizz).padStart(6)} ${N.revives.toFixed(2).padStart(6)} ${N.tricksBlocked.toFixed(2).padStart(6)}`; };
-  console.log(`SWEEP  ${deck.name}: ${qty} ${name} → each candidate (${games} games a scenario, 8 turns; policy ${JSON.stringify({ keepForEvelynn: true, ...policy }).replace(/[{}"]/g, "")})`);
+  console.log(`SWEEP  ${deck.name}: ${qty} of ${have} ${name} → each candidate (${games} games a scenario, 8 turns; policy ${JSON.stringify({ keepForEvelynn: true, ...policy }).replace(/[{}"]/g, "")})`);
   console.log(`  ${"".padEnd(34)} ${"Energy".padStart(6)} ${"2u t2".padStart(6)} ${"u5 nrm".padStart(6)} ${"u5 hvy".padStart(6)} ${"ans nrm".padStart(7)} ${"ans hvy".padStart(7)} ${"Eve pts".padStart(7)} ${"Fizz".padStart(6)} ${"revive".padStart(6)} ${"crowd".padStart(6)}`);
   console.log(line(`as is (${qty} ${name})`, base));
   for (const cand of candidates) {
@@ -1247,9 +1271,11 @@ function trySweep(deck, cat, card, candidates, policy, games) {
     try { after = applyChanges(deck, parseChanges([`-${qty} ${name}`, `+${qty} ${cand}`], cat.cards), cat.cards, cat.BY); }
     catch (e) { console.log(`  ${cand}: ${e.message}`); continue; }
     const rules = deckChecks(after, cat.idx).filter((x) => x.ok === false).map((x) => x.label);
-    console.log(line(`${qty} ${parseChanges([`+${cand}`], cat.cards)[0].name}${rules.length ? " (rules: " + rules.join(", ") + ")" : ""}`, engineReport(after, cat, { games, policy })));
+    const rep = engineReport(after, cat, { games, policy });
+    console.log(line(`${qty} ${parseChanges([`+${cand}`], cat.cards)[0].name}${rules.length ? " (rules: " + rules.join(", ") + ")" : ""}`, rep) + tierWord(after, rep));
   }
   console.log(`  Energy = spent turns 1–4 (quiet) · 2u t2 = two units by turn 2 · u5 = units by turn 5 · ans = attacks answered · Eve pts = Evelynn's points by turn 8 (normal) · crowd = tricks crowded out by Energy (normal). Not win rates.`);
+  if (spec) console.log(`  t0…t4, t* = the goal tiers (${spec.file}): measures better (+) or worse (−) past the noise, = for no change.`);
 }
 
 // ── loops: a deck's interactions and loops, derived from card text ─────────────

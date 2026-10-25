@@ -1594,7 +1594,8 @@ itself, and nothing that needs an opponent:
   Control's points; `opts.turns` for games longer than the curve (her points come on turns
   5–8). `scripts/rift try` prints this as an eight-turn engine report under all three
   scenarios, and `try --sweep "<card>" --with "<a>, <b>"` runs one slot against many
-  candidates the same way.
+  candidates the same way (`--qty N` swaps N copies; `;` separates candidates whose names
+  have commas), each scored tier by tier when the deck has goal tiers.
 
 **The rune split** is tested, not assumed: every split from 3/9 to 9/3 on the same
 shuffles. A different split is suggested only when it improves Energy by 0.2 or stuck
