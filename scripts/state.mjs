@@ -47,7 +47,7 @@ import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, SB_MAX } from "../lib/decks.mjs";
 import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive } from "../lib/versus.mjs";
-import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers } from "../lib/decklab.mjs";
+import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf } from "../lib/decklab.mjs";
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { fight } from "../lib/fight.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
@@ -1112,7 +1112,7 @@ async function cmdTry(S, cat, args) {
     const lists = pool.filter((d) => { const l = legendOf(d); const n = (l?.n || d.ln || "").replace(/ - Starter$/, ""); return title === n || title.endsWith(`, ${n}`); });
     const theirs = [...weigh(lists, (code) => codeName(cat.BY, code))].map(([n, w]) => ({ card: byName.get(n), ...w }))
       .filter((r) => r.card && !/Legend|Rune|Battlefield/.test(r.card.t) && (r.share >= 0.25 || (effectsOf(r.card).length && r.share >= 0.125)));
-    return { label: `${title} (${t.tier})`, n: lists.length, placed: lists.filter((d) => d.tour && d.pl != null).length, theirs };
+    return { label: `${title} (${t.tier})`, n: lists.length, placed: lists.filter((d) => d.tour && d.pl != null).length, theirs, lists };
   }).filter((fd) => fd.n);
 
   const keys = [...new Set([...answerNames(before, cat.BY), ...answerNames(after, cat.BY)])];
@@ -1178,7 +1178,8 @@ async function cmdTry(S, cat, args) {
   let rb = null, ra = null;
   if (!args.includes("--no-engine")) {
     const eg = Math.max(2000, Math.round(games / 4));
-    rb = engineReport(before, cat, { games: eg, policy }); ra = engineReport(after, cat, { games: eg, policy });
+    rb = engineReport(before, cat, { games: eg, policy, foes: foesOf(before, cat, fieldDecks) });
+    ra = engineReport(after, cat, { games: eg, policy, foes: foesOf(after, cat, fieldDecks) });
     printEngine(rb, ra, policy, eg);
   }
   // The deck's goal tiers, if its worksheet has a tiers file: the change read against the plan.
@@ -1221,6 +1222,7 @@ function printEngine(rb, ra, policy, games) {
   const rows = [["units by turn 5", "u5", n1], ["Might by turn 5", "m5", n1], ["attacks answered (Switcheroo, Star-Crossed…)", "answered", pc],
     ["Evelynn's points by turn 8", "evelynn", n2], ["Fizz finds a spell", "fizz", pc], ["Matriarch revives a game", "revives", n2],
     ["replays a game (Star-Crossed, Dais)", "replays", n2], ["tricks crowded out by Energy", "tricksBlocked", n2], ["extra cards drawn", "drawn", n1],
+    ["Evelynn taken off the board a game", "eveRemoved", n2], ["her battlefield lost a game", "eveLost", n2],
     ["Mercenary on: turns 4–8, 2+ Power spent", "merc", pc], ["kills a game (readies the legend)", "kills", n2], ["Gold made a game", "goldMade", n2]];
   console.log(`  ${"".padEnd(46)}${["quiet", "normal", "heavy"].map((x) => x.padEnd(22)).join("")}`);
   for (const [label, key, f] of rows) {
@@ -1229,6 +1231,7 @@ function printEngine(rb, ra, policy, games) {
     console.log(`  ${label.padEnd(46)}${cells.join("")}`);
   }
   console.log(`  scenarios: ${Object.entries(SCENARIOS).map(([k, v]) => `${k} ${JSON.stringify(v).replace(/[{}"]/g, "") || "no pressure"}`).join(" · ")}`);
+  if (rb.foes) console.log(`  normal and heavy play one of ${rb.foes} real S/A lists: its removal goes at Evelynn, its big unit at her battlefield (foesOf)`);
 }
 
 // One slot, many candidates: the same engine report for each, compact, against the deck as is.
@@ -1236,11 +1239,10 @@ async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, sinc
   const inDeck = Object.entries(deck.cards || {}).filter(([k]) => cat.BY.get(k)?.n.toLowerCase().startsWith(card.toLowerCase()));
   if (!inDeck.length) { console.log(`try --sweep: the main deck has no "${card}"`); return; }
   const name = cat.BY.get(inDeck[0][0]).n, have = inDeck.reduce((a, [, q]) => a + q, 0), qty = Math.min(qtyOpt || have, have);
-  const base = engineReport(deck, cat, { games, policy });
-  // Tiers, when the deck has them: the field is the same S/A field try uses.
+  // The field is the same S/A field try uses: the opponents under pressure, and the tiers' field measures.
   const spec = await loadTiers(deck.name);
   let fieldDecks = null;
-  if (spec) {
+  {
     const field = await readJson(url("field.json")), snap = await readJson(url("decks.json"));
     const banned = await readJson(url("banned.json")).catch(() => ({ constructed: [] }));
     const bn = bannedNameSet(banned), std = standardNameSet(banned, cat.cards);
@@ -1252,9 +1254,10 @@ async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, sinc
       const lists = pool.filter((d) => { const n = (legendOf(d)?.n || d.ln || "").replace(/ - Starter$/, ""); return title === n || title.endsWith(`, ${n}`); });
       const theirs = [...weigh(lists, (code) => codeName(cat.BY, code))].map(([n, w]) => ({ card: byName.get(n), ...w }))
         .filter((r) => r.card && !/Legend|Rune|Battlefield/.test(r.card.t) && (r.share >= 0.25 || (effectsOf(r.card).length && r.share >= 0.125)));
-      return { label: title, n: lists.length, placed: lists.filter((d) => d.tour && d.pl != null).length, theirs };
+      return { label: title, n: lists.length, placed: lists.filter((d) => d.tour && d.pl != null).length, theirs, lists };
     }).filter((fd) => fd.n);
   }
+  const base = engineReport(deck, cat, { games, policy, foes: foesOf(deck, cat, fieldDecks) });
   const tierWord = (after, rep) => {
     if (!spec) return "";
     const tb = scoreTiers(spec, { shape: shapeOf(deck, cat.BY), field: fieldOf(deck, cat.BY, fieldDecks), engine: base.scenarios },
@@ -1272,7 +1275,7 @@ async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, sinc
     try { after = applyChanges(deck, parseChanges([`-${qty} ${name}`, `+${qty} ${cand}`], cat.cards), cat.cards, cat.BY); }
     catch (e) { console.log(`  ${cand}: ${e.message}`); continue; }
     const rules = deckChecks(after, cat.idx).filter((x) => x.ok === false).map((x) => x.label);
-    const rep = engineReport(after, cat, { games, policy });
+    const rep = engineReport(after, cat, { games, policy, foes: foesOf(after, cat, fieldDecks) });
     console.log(line(`${qty} ${parseChanges([`+${cand}`], cat.cards)[0].name}${rules.length ? " (rules: " + rules.join(", ") + ")" : ""}`, rep) + tierWord(after, rep));
   }
   console.log(`  Energy = spent turns 1–4 (quiet) · 2u t2 = two units by turn 2 · u5 = units by turn 5 · ans = attacks answered · Eve pts = Evelynn's points by turn 8 (normal) · crowd = tricks crowded out by Energy (normal). Not win rates.`);

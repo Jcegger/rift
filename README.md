@@ -1594,7 +1594,11 @@ itself, and nothing that needs an opponent:
   Control's points; `opts.turns` for games longer than the curve (her points come on turns
   5–8). `scripts/rift try` prints this as an eight-turn engine report under all three
   scenarios (with how often a turn from 4 on spends 2+ Power, Sivir, Mercenary's condition, and
-  the kills and Gold the legend sees), and `try --sweep "<card>" --with "<a>, <b>"` runs one slot against many
+  the kills and Gold the legend sees). Under normal and heavy pressure the opponent is a real S/A
+  list (`foesOf` in `lib/decklab.mjs`): it draws 4 and 1 a turn, its cards that take a unit of
+  the scorer's Might off the board go at Evelynn, and its big unit attacks her battlefield, where
+  the fight calculator decides whether her bodies hold. Without that, her points read as if
+  nothing ever touched her. `try --sweep "<card>" --with "<a>, <b>"` runs one slot against many
   candidates the same way (`--qty N` swaps N copies; `;` separates candidates whose names
   have commas), each scored tier by tier when the deck has goal tiers.
 
