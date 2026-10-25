@@ -155,6 +155,41 @@ Bandle Scouts' Academy (a Gold for each hide there: the engine pays for itself) 
 Amphitheater (champion units +1 Might; we run 11 champion-unit copies). Each is used once a
 match (§488.5.a).
 
+### Stage 3 v2 — jobs and targets (draft, 25 Oct 2026)
+
+**The principle** (agreed with Jay): **every card is a body or an answer; the engine is how we
+pay for them, not extra cards.** The legend's edge is a cost structure, not a combo, so it
+needs no payoff cards: it needs cards that are good alone *and* cheaper with our Power. A
+hidden unit is still a unit; Kraken Hunter (3 Energy, 2 Power, 5 Might) is still a 5-Might body.
+The cut test for every slot: **is it good when nothing else goes right?** This grounds v1's
+"engine perks: 0 dedicated slots".
+
+**On the Hunt is out** (Jay: "seems worth not using it"). Sivir's signature (1 Energy, 2 Power:
+ready your units) does three things in this plan — switches Mercenary on, lets a fresh or
+flipped unit attack the turn it arrives, readies Ganking units for a second conquer — but it
+does nothing alone, it is main-phase only, a readied unit at a battlefield can only go back to
+base without Ganking, and two hides switch Mercenary on without spending a card. 7 of 33
+Sivir lists ran it; none of the 14 with a record or a claim. Win-more; no signature copies.
+
+**Targets** start from good midrange finishes (`lib/placing.mjs`: 26 units, 18 cards at 2
+Energy or less, 3 at 5+, average 2.75) and from Jun's two Radiance Kha'Zix lists (Hidden: 26
+units, 10 Hidden, 8 of them units; midrange: 25 units, 3 Hidden), bent to the plan:
+
+| job (tier) | target | now | note |
+|---|---|---|---|
+| **Bodies** (1) | 25–27 units | 26 | most of the deck; break ties toward hidden units and Power-priced bodies |
+| ↳ hidden units: development for a Power (2) | 8–10 | 8 | Jun's Hidden list runs 8; they must be good bodies from hand too |
+| ↳ cards at 2 Energy or less (1) | 18–22 | 19 | turn 1–2 plays (v1 target, kept) |
+| ↳ cards at 5+ Energy (always) | 2–4 | 3 | |
+| **Answers usable on their turn** (1, 4) | 6+ copies, 3+ of them free from face down | 9 (Switcheroo 3, Star-Crossed 3, Punch First 3) | the Astral Heron plan: an answer face down once a breaker can come down |
+| **Face-down cards in all** (2) | 10–12 | 11 | hidden units plus face-down answers |
+| **Energy relief** (2) | 2–4, each also a body or a battlefield | 0 | K'Sante, Reckless Innovator; Bandle Scouts' Academy; Here to Help only if it tests as more than a combo |
+| **Staying power** (3) | 8–10 | 9 | Merchant, Ezreal, Fizz, Matriarch (v1) |
+| **The closer** | Mercenary | Mercenary | Champion Zone, no deck slot; hides switch her on |
+| **Battlefields** | 3 | Bandle Tree, Dais, Sigil | decided once the model plays battlefield effects |
+
+Cards count toward every job they do, so the column does not sum to 40.
+
 ---
 
 ## 2. Roles and slots — step 1, jobs and targets (agreed 23 Oct 2026)
@@ -732,3 +767,10 @@ tokens, made in play, so they are not in the lists and not in his numbers.
   Temporary, hold or exhaust triggers, or battlefields). Next: stage 3 jobs and targets, and
   the model fixes. Reverses if: the fixed model or Jay's games show hidden development losing
   to plain bodies.
+- **25 Oct 2026 — On the Hunt out; stage 3 v2 drafted (§1b).** Sivir's signature reads well
+  for the new plan (switches Mercenary on, readies fresh and flipped units, a second conquer
+  with Ganking), but Jay asked why almost nobody plays it: no winning Sivir list does (7 of 33
+  lists, 0 of the 14 with a record or a claim), it does nothing alone, and hides already switch
+  Mercenary on. Principle agreed: every card is a body or an answer, the engine is how we pay
+  for them. Jobs and targets drafted from good midrange finishes and Jun's two lists. How sure:
+  high on On the Hunt staying out (results and reading agree); the targets are a draft.
