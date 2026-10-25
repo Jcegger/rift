@@ -20,12 +20,12 @@ date: 2026-10-25
 
 | | |
 |---|---|
-| **Units (25 + champion)** | 3 Traveling Merchant · 2 Tideturner · 3 Fizz, Trickster · 3 Ezreal, Prodigy · 1 Shadow Order Disciple · 3 Tornado Warrior · 3 Tail-Cloaked Matriarch · 2 Staunch Survivor · 2 Graves, Blasting Through · 2 Vex, Apathetic · 1 Rengar, Trophy Hunter · *Sivir, Mercenary* |
+| **Units (26 + champion)** | 3 Traveling Merchant · 2 Tideturner · 3 Fizz, Trickster · 3 Ezreal, Prodigy · 2 Shadow Order Disciple · 3 Tornado Warrior · 3 Tail-Cloaked Matriarch · 2 Staunch Survivor · 2 Graves, Blasting Through · 2 Vex, Apathetic · 1 Elnuk Herd · *Sivir, Mercenary* |
 | **Spells (12)** | 3 Punch First · 3 Rampage · 2 Star-Crossed · 2 Switcheroo · 1 Sabotage · 1 Gust |
-| **Gear (2)** | 1 Last Rites · 1 Edge of Night |
+| **Gear (1)** | 1 Last Rites |
 | **Battlefields** | Sigil of the Storm · Zaun Warrens · Sandswept Tomb |
 | **Runes** | 5 Body · 7 Chaos |
-| **Sideboard** | 1 Acceptable Losses · 1 Sabotage · 1 Gust · 2 Unyielding Spirit · 2 An Offer You Can't Refuse · 2 Rebuke · 1 Pyke, Returned |
+| **Sideboard** | 1 Acceptable Losses · 1 Sabotage · 1 Gust · 2 Unyielding Spirit · 2 An Offer You Can't Refuse · 2 Rebuke · 1 Siren's Song |
 
 **The seven changes from Randyyy's list**
 
@@ -33,8 +33,8 @@ date: 2026-10-25
 |---|---|---|
 | Acceptable Losses, Grim Resolve | 2 Graves | Acceptable Losses only kills gear (sideboard); Grim Resolve's XP does nothing here. Graves is the big unit, and his blast kills: kills fill the trash and ready the legend |
 | 1 Shadow Order Disciple, 1 Sabotage | 2 Staunch Survivor | Radiance's best 2-drop: attacks and defends at 4. The second Sabotage goes to the sideboard |
-| Pyke, 1 Shadow Order Disciple | 2 Vex | stuns every unit they play while Vex is at a battlefield (both of Jun's Radiance lists run it) |
-| 1 Edge of Night | Rengar | a real 6-Might body that ambushes in (Jun runs it too) |
+| Pyke, 1 Edge of Night | 2 Vex | stuns every unit they play while Vex is at a battlefield (both of Jun's Radiance lists run it) |
+| the other Edge of Night | Elnuk Herd | a free +3 from face down that recycles instead of dying; with Graves it makes a 7-Might blast (fight check: Graves with Elnuk face down held against every S/A big unit and trick); from hand, a 5-Might body |
 
 ---
 
@@ -90,10 +90,6 @@ date: 2026-10-25
 - Any battlefield counts, and a hidden card played from face down counts as played.
 - It shuts down Ambush, units that enter ready, and surprise flips. Keep Vex on a battlefield.
 
-**Rengar, Trophy Hunter** (5 Energy, 1 Power; 6 Might; Ambush): he can be played to a battlefield where you have units, with Reaction speed (§822.1.b), or, by his own text, where **they** have units.
-- So he can drop into their attack as a 6-Might defender, or into their battlefield to start a fight.
-- Against Mageseeker Warden he can only come down at base (rulings).
-
 **Switcheroo** (Hidden): swap the Might of two units at the same battlefield this turn. **Hide it first when a big attacker is coming.** From face down it's free; from hand it's 2 Energy and 2 Chaos.
 
 **Mercenary** (4 Energy, 1 Power, from the Champion Zone): once you've spent two Power this turn, she has **6 Might and Ganking**.
@@ -101,9 +97,13 @@ date: 2026-10-25
 - With Accelerate she pays two Power herself and arrives ready.
 - She closes best with a partner beside her: Staunch, Graves or a pump.
 
-**Last Rites** (gear): Equip costs a Chaos plus recycling 2 cards from your trash, for +2 Might while attached (§137.3). It competes with Fizz and Matriarch for the trash, so equip it late, when the trash is full.
+**Last Rites** (gear): Equip costs a Chaos plus recycling 2 cards from your trash, for +2 Might while attached (§137.3). It competes with Fizz and Matriarch for the trash, so equip it late, when the trash is full. **It outlives the unit:** when the unit dies, the gear isn't lost; unattached gear at a battlefield is recalled to your base in the next cleanup (§149.3, §323.6), ready to equip again.
 
-**Edge of Night** (Hidden gear): from face down, attach it to a unit of yours there for a surprise +2.
+**Elnuk Herd** (Hidden; 6 Energy, 5 Might): *"When you play me, give another friendly unit +3 Might this turn, then recycle me if I was played from face down."*
+- **From face down it's a free +3 at Reaction speed,** and the card goes to the bottom of your deck instead of the trash, so it can come back.
+- **Its +3 is pinned to that battlefield** (§811.1.d.3): the unit has to be there.
+- **Flip it in response to Graves's trigger:** the +3 resolves first, so he blasts for 7 (§359.3.f.2). A stun on Elnuk doesn't stop the +3, because a stun only stops combat damage (§424.1.b).
+- **From hand** it's a 5-Might body for the late game.
 
 ---
 
@@ -112,14 +112,14 @@ date: 2026-10-25
 - **Turn 1:** a free 2-drop (Merchant, Tideturner). Staunch only if it's your only play.
 - **Turns 2–3:** take the open battlefields. Ezreal and Merchant start filling the trash, so discard with Fizz and Matriarch in mind. Hide from turn 2 where you hold.
 - **Turns 3–5:** Fizz when there's a good spell in the trash. Matriarch, with a Tornado hidden beside her if you have one. Vex onto a battlefield.
-- **Closing:** hold one battlefield, break the other. Mercenary (Punch First), Graves (pumped first) or a Rengar ambush.
+- **Closing:** hold one battlefield, break the other. Mercenary (Punch First), or Graves (pumped first, or with Elnuk face down).
 
 ---
 
 ## Matchups (reading only; untested)
 
 - **Ambush and hidden decks** (Rengar, Kha'Zix, Evelynn): Vex on a battlefield. Keep a face-down card where they'll attack.
-- **Big breakers** (Astral Heron decks: Irelia, Vex): Switcheroo face down; Star-Crossed held up (3 Energy, 1 Power); Rebuke from the sideboard.
+- **Big breakers** (Astral Heron decks: Irelia, Vex): Switcheroo or Elnuk face down; Star-Crossed held up (3 Energy, 1 Power); from the sideboard, **Siren's Song** (sends their attacker away before damage; it only hits a unit that *moved*) and Rebuke.
 - **Kai'Sa:** lots of removal, often aimed at Matriarch. Lean on Fizz and Ezreal, don't put everything on one battlefield, and side in **Unyielding Spirit** (prevents a turn of spell and ability damage).
 - **Kennen:** Jun warns that Kennen abuses Zaun Warrens, so pick Sandswept Tomb or Sigil of the Storm as your battlefield.
 - **Jayce and gear decks:** side in **An Offer You Can't Refuse** and **Acceptable Losses**.
@@ -131,8 +131,15 @@ date: 2026-10-25
 
 1. **Fizz:** did he have a spell to recast? Which one?
 2. **Matriarch:** how often did she revive, and did Tornado set it up? Did she die before doing anything?
-3. **Graves, Vex, Rengar:** did the top end matter? Enough of it?
+3. **Graves, Vex, Elnuk:** did the top end matter? Enough of it?
 4. **Cards:** did you run out, or flood?
 5. **Losses:** what beat you? Use [strategy.md](../docs/strategy.md)'s seven mistake types.
 
-After three nights the journal decides what to change.
+After three nights the journal decides what to change. **The first swaps to try,** each tied to what the logs might show (from riftbound.gg's Radiance Sivir picks, 21 Oct):
+
+| if the journal shows… | try |
+|---|---|
+| big attackers breaking your holds | Siren's Song (from the sideboard) for Gust |
+| Fizz or Matriarch lacking targets, or running out of cards | Reckless Innovator for the Shadow Order Disciple |
+| Kennen everywhere at your store | Bandle Scouts' Academy for Zaun Warrens |
+| short on finishers | Rengar, Trophy Hunter (6 Might, Ambush) for a Shadow Order Disciple |

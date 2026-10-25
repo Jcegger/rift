@@ -796,3 +796,13 @@ tokens, made in play, so they are not in the lists and not in his numbers.
   under its threshold). Sideboard proposed (his isn't recorded). Saved as `Sivir — Randyyy +
   Radiance (25 Oct)`, guide `guides/sivir-randyyy.md`. The movement list stays saved for a fun
   night. Plan: three Nexus Nights with this deck, every game logged, then tune from the journal.
+- **25 Oct 2026 — final tweaks: Elnuk in, Rengar out.** From riftbound.gg's Radiance Sivir picks
+  (21 Oct): −1 Edge of Night +1 Elnuk Herd (a free +3 from face down that recycles; with Graves a
+  7-Might blast, a board that held against every S/A big unit and trick in the fight check);
+  sideboard −Pyke +Siren's Song. Jay noted equipment outlives its unit (checked: unattached gear
+  at a battlefield is recalled to base, §149.3, §323.6), so Edge is better than first credited;
+  Elnuk still wins the slot. Then the curve against Randyyy's (average 2.44; ours was 2.85 with
+  6 free turn-1 units against his 8): −Rengar +1 Shadow Order Disciple. Now 2.77 average,
+  16 cards at 2 Energy or less, 9 two-drop units, 7 free turn-1 units (a free 2-drop in the first
+  five cards about 65%, against about 70% at Randyyy's 3 Disciples). Rengar heads the watch list
+  ("short on finishers"). Seven changes from Randyyy's list in all.
