@@ -15,6 +15,7 @@
 #   scripts/rift versus <legend> --deck "<name>"       # head to head, card by card, vs that legend's lists
 #   scripts/rift try --deck "<name>" "-Card" "+Card"   # test one change: rules, shape, goldfish, field
 #   scripts/rift loops --deck "<name>" [--bridges]     # interactions and loops, read from card text
+#   scripts/rift fight --attack "<units>" --defend "<units>" [--down …] [--their …]   # one combat, best play both sides
 #   scripts/rift intake [champion]                     # after adding cards on Piltover: what landed, where to file it
 #
 # See scripts/state.mjs for the full command list and data sources.

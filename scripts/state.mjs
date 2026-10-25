@@ -13,6 +13,7 @@
 //   node scripts/state.mjs versus kennen --deck "nexus night"   # head to head, card by card
 //   node scripts/state.mjs try --deck "nexus night" "-Edge of Night" "+Elnuk Herd"   # test a change
 //   node scripts/state.mjs loops --deck "nexus night"   # every interaction and loop, from card text
+//   node scripts/state.mjs fight --attack "Astral Heron" --defend "Staunch Survivor, Traveling Merchant" --down Switcheroo --their Discipline --their-budget 2/0
 //   node scripts/state.mjs meta            # archetype shares over sanctioned-legal lists
 //   node scripts/state.mjs meta diana      # one archetype: card play rates, best finishes
 //   node scripts/state.mjs meta leblanc --since 2026-09-15   # only lists played after a date
@@ -48,6 +49,7 @@ import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive } from "../lib/versus.mjs";
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS } from "../lib/decklab.mjs";
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
+import { fight } from "../lib/fight.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
 
 const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
@@ -1267,6 +1269,43 @@ async function cmdLoops(S, cat, args) {
   }
 }
 
+// ── fight: one combat at one battlefield, both sides playing their best line ────
+// lib/fight.mjs. You defend (the usual question for a hold deck); --you-attack flips it.
+// Names are comma-separated, exact or a unique prefix. Budgets are Energy/Power you can
+// still pay on that turn: "3/1". Face-down cards are free.
+function cmdFight(cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const names = [...new Set(cat.cards.map((c) => c.n))];
+  const find = (q) => {
+    const l = q.trim().toLowerCase(); const ex = names.find((n) => n.toLowerCase() === l);
+    if (ex) return cat.cards.find((c) => c.n === ex && !c.v) || cat.cards.find((c) => c.n === ex);
+    const pre = names.filter((n) => n.toLowerCase().startsWith(l));
+    if (pre.length !== 1) throw new Error(pre.length ? `"${q}" matches ${pre.slice(0, 5).join(", ")}` : `no card called "${q}"`);
+    return cat.cards.find((c) => c.n === pre[0] && !c.v) || cat.cards.find((c) => c.n === pre[0]);
+  };
+  const list = (k) => (opt(k) || "").split(",").map((x) => x.trim()).filter(Boolean).map(find);
+  const budget = (k) => { const [e, p] = (opt(k) || "0/0").split("/").map(Number); return { e: e || 0, p: p || 0 }; };
+  let them, you;
+  try {
+    them = { units: list("--attack"), hand: list("--their"), budget: budget("--their-budget") };
+    you = { units: list("--defend"), hand: list("--hand"), faceDown: list("--down"), base: list("--base"), budget: budget("--budget") };
+  } catch (e) { console.log(`fight: ${e.message}`); return; }
+  if (!them.units.length || !you.units.length) {
+    console.log('usage: fight --attack "<their units>" --defend "<your units>" [--down "<your face-down cards>"] [--hand "<your hand>"] [--budget E/P]');
+    console.log('             [--base "<your units elsewhere>"] [--their "<their hand>"] [--their-budget E/P] [--you-attack]');
+    return;
+  }
+  const youAttack = args.includes("--you-attack");
+  const r = youAttack ? fight({ units: you.units, hand: you.hand, budget: you.budget }, { units: them.units, hand: them.hand, budget: them.budget })
+    : fight(them, you);
+  const word = youAttack ? { hold: "THEY HOLD", conquer: "YOU CONQUER", trade: "TRADE (both wiped; the battlefield is left uncontrolled)" }
+    : { hold: "YOU HOLD", conquer: "THEY CONQUER", trade: "TRADE (both wiped; the battlefield is left uncontrolled)" };
+  console.log(`FIGHT  ${(youAttack ? you : them).units.map((c) => c.n).join(" + ")} attack ${(youAttack ? them : you).units.map((c) => c.n).join(" + ")}`);
+  console.log(`  → ${word[r.outcome]}`);
+  console.log(`  best line, both sides: ${r.line.length ? r.line.join(" · ") : "nobody needs to play anything"}`);
+  console.log(`  Rules: totals with Assault and Shield, lethal one unit at a time, attackers recalled if a defender stands; triggers on the chain take Reactions only; each play resolves before the next (simplified).`);
+}
+
 // ── intake: new product into the collection ───────────────────────────────────
 // Cards get entered on Piltover Archive and reach the app on its next pull, which banks
 // every gained copy in the list of new copies to file (`newq`) until it is cleared. So "what's new" is already recorded, and this reads it: what landed, a Pre-Rift
@@ -1349,6 +1388,7 @@ async function main() {
   // touches the live Supabase row.
   if (cmd === "meta") return cmdMeta(cat, args);
   if (cmd === "event") return cmdEvent(args);
+  if (cmd === "fight") return cmdFight(cat, args);
   const S = await loadState();
   const q = mk(S);
   const table = {

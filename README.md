@@ -55,6 +55,15 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   the Fizz/Star-Crossed loop and Tideturner moving Traveling Merchant without being told, and
   flags a loop the rules break (a revived unit arrives face up). `--bridges` reads the legal
   pool for cards that would link into the deck. Tests: `lib/interactions.test.mjs`.
+- `lib/fight.mjs` - the fight calculator (`scripts/rift fight --attack "<their units>" --defend
+  "<yours>" [--down …] [--hand …] [--budget E/P] [--base …] [--their …] [--their-budget E/P]`):
+  one combat at one battlefield played out by the rules, both sides choosing their best line.
+  Totals with Assault and Shield, lethal one unit at a time, attackers recalled while a
+  defender stands; Graves-style triggers on the chain take Reactions only, then the showdown
+  alternates from the attacker. Face-down cards are free; hidden units flip in (Tideturner can
+  swap a unit in from base, whose defend trigger still fires). Simplified: each play resolves
+  before the next. For the board states a matchup turns on, never a win rate. Tests:
+  `lib/fight.test.mjs`.
 - `lib/markdown.mjs` - the guide renderer the site uses, with heading anchors.
 - `lib/sim.mjs` - the goldfish simulator's engine, shared by `scripts/sim.mjs` and the site.
   `lib/sim-worker.mjs` runs it in a Web Worker for the tweak bench.
