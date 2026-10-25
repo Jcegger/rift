@@ -1096,7 +1096,7 @@ async function cmdTry(S, cat, args) {
   const since = opt("--since") || "2026-10-16";
   const games = Number(opt("--games") || 20000);
   const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games", "--top", "--grid"]);
-  const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine");
+  const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine" && a !== "--no-points");
   // --policy "holdUp=3,dais,bandleTree,keepForEvelynn=false": how you play, for the engine report.
   const policy = {};
   for (const kv of (opt("--policy") || "").split(",").map((x) => x.trim()).filter(Boolean)) {
