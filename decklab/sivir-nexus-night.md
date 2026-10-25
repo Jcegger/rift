@@ -618,3 +618,33 @@ tokens, made in play, so they are not in the lists and not in his numbers.
   the same ~3 Might on defence but stays as a body and resets Matriarch. **Watch:** if games
   show the Graves + Elnuk line winning fights, or Tornado's body stunned or blocked at Rockfall
   Path, go −1 Tornado Warrior, +1 Elnuk Herd.
+- **25 Oct 2026 — the engine and the Power budget, from the legend down.** Jay asked whether a
+  trash engine on top of a hold plan is too much, and pushed back on reading Randyyy's engine
+  (3 Shadow Order Disciple, 3 Traveling Merchant, 3 Fizz, 3 Matriarch) as noise. `lib/sim.mjs`
+  now models the trash (spells cast, chosen discards, burns, deaths), move triggers, Ezreal's
+  draw (the goldfish had never resolved a unit's draw), Fizz's recast and Matriarch's revive,
+  with the opponent as labelled scenarios, and a Power budget.
+  - **Start from the legend.** Battle Mistress rewards spending Power (Gold) and enemy deaths
+    (a second Gold). The hidden package and the engine are both Gold sinks — hiding, Fizz's
+    recast, Matriarch's Empower, Mercenary, Punch First and Switcheroo — so "hold plus engine"
+    is one economy with several places to spend it. That's the midrange: choose where the Power
+    goes each turn.
+  - **The budget answered it: Energy, not Power.** Normal pressure, per game, turns 1–5: 7.6
+    Power spent (develop 5.7, hide 1.25, recasts 0.3, Empower 0.3), Gold made 3.0 with about
+    0.75 unspent, hides blocked 0.00 — but about 2 tricks a game crowded out by Energy (2.8 under
+    heavy pressure). The deck has more good things to do with Energy than Energy. Play rule:
+    spare Gold on Power-only things (hide, recast); Energy is the turn's real choice.
+  - **Fizz stays, for a measured reason:** his recast costs Power, never Energy. A played Fizz
+    finds a spell about half the time (ours 51%, Randyyy's 68%; the gap is how fast the trash
+    fills, not spell count: 14 spells at 3 or less against his 15). Star-Crossed and Emperor's
+    Dais replays of Fizz aren't modelled, so he is better than that.
+  - **Shadow Order Disciple doesn't fix it:** one copy changes nothing measurable; three (for all
+    three Strangers) add 3–5 points of Fizz hits, attacking or not. Randyyy's engine works by
+    density — it was his plan; ours is a hold deck with the engine as its staying power.
+  - **Kill against bounce doesn't move the economy:** −2 Gust +2 Challenge or −1 Star-Crossed +1
+    Rampage made almost no extra Gold (a kill only pays if a rune is recycled after it that
+    turn). Bounce stays: Star-Crossed's resets of your own Fizz and Matriarch matter more.
+  - **Turns 1 and 2:** a turn-1 unit 76% going first (94% second), a new turn-2 unit 96% (99%).
+  - **No list change.** The Shadow Order Disciple test for the first night (the slot of the
+    missing Stranger) still stands as a live check; log "Fizz had nothing to recast" and "Fizz
+    got reused". Next: the plan against Astral Heron decks, using the budget (holding Energy up).

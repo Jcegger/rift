@@ -32,6 +32,8 @@ date: 2026-10-24
 
 **The clock.** About 16 minutes a game if three are played. At time, the active player finishes the turn, three more turns are played, and a game still going is won only by a player **2 or more points ahead**; otherwise it is a draw, and no new game starts between games (TR §408.2). **A drawn match is not a 3-0.**
 
+**Energy is the scarce resource, not Power.** Measured with the engine on, the legend's Gold covers every Power cost with room to spare; what runs out is Energy. So spend spare Gold on the things that cost **Power and no Energy** — hiding, then Fizz's recast — and treat each turn's Energy as the real choice: develop, or hold it up for a trick (Star-Crossed when a big attacker is coming).
+
 **Your turn, in order:** lethal check, both players → count Power and Gold → take the open battlefields → buff before you move → develop onto the battlefields you hold → hide (Switcheroo first; at Rockfall Path a spell, never a unit) → fight.
 
 **Five facts about Hidden.**
@@ -202,6 +204,8 @@ Gold is never Energy. **Sigil of the Storm** (*the conqueror must recycle a rune
 
 **Why three Switcheroo and Elnuk, no Edge of Night** (24 Oct, the head to head): the hold is the plan's defence, and a single big attacker is what beats it: Astral Heron, Thousand-Tailed Watcher, Ruined Rex, Rhasa or Baron are in 7 of the 11 S/A decks. Of the hidden cards, only Switcheroo turns that fight; the others add 2 or 3 Might, or bounce only when 4 units are there. It also works through Watcher's −3 (it swaps whatever the Might is), and stuns on play don't touch a spell. Elnuk took Edge's slot: weighted over the field, Graves's blast kills 97% of their unit copies with Elnuk's +3 against 92% with Edge's +2, the difference being exactly the 7-Might units; its +3 still lands if it's stunned; and from hand it is a 5-Might body with no Power cost. Edge's permanence and gear status were the cost.
 
+**Stranger and Tideturner are bodies first.** Five of your ten 2-drops are hidden units. On turns 1–3, play them as bodies; hide one only when you hold a battlefield and have nothing better to put face down. Measured, their Hidden costs your early board nothing (units by turn 3 3.1 against 3.2 without it) and cuts "nothing face down by turn 4" from 32% to 25% on the play. They are not the defence: a 2-Might flip doesn't stop a big attacker, and stuns and Rockfall Path stop it.
+
 **Hidden units can't be flipped at Rockfall Path** ("Units can't be played here"), Kai'Sa's battlefield in 78% of her lists. There, hide Switcheroo.
 
 **Opponents' Hidden.** Taking the battlefield trashes it (§323.6.a). Against Evelynn decks, conquering is denial.
@@ -234,7 +238,7 @@ Gold is never Energy. **Sigil of the Storm** (*the conqueror must recycle a rune
 
 **Ezreal, Prodigy** (3 Energy, 1 Chaos; 3 Might) — discard 1, draw 2; optional additional costs cost `[1]` or `[A]` less: **Rampage's +2 for free.**
 
-**Fizz, Trickster** (3 Energy, 1 Chaos; 3 Might) — casts a spell from the trash with Energy 3 or less, ignoring its Energy, **paying its Power**, then recycles it. Every spell in the main deck qualifies.
+**Fizz, Trickster** (3 Energy, 1 Chaos; 3 Might) — casts a spell from the trash with Energy 3 or less, ignoring its Energy, **paying its Power**, then recycles it. Every spell in the main deck qualifies. **Why he fits:** his recast costs Power, never Energy, so he turns the deck's spare Gold into a free spell without touching the Energy it's short of. Modelled, a played Fizz finds a spell about half the time (the trash is the limit, not the spell count); Star-Crossed on your own Fizz, or Emperor's Dais, replays him for another go, which the model doesn't count. Cast your tricks when they're good anyway, and give Ezreal a spell to discard while the trash has none.
 
 **Tornado Warrior** (3 Energy, Chaos; 3 Might; Hidden) — a free 3-Might body from face down, which stays. With Matriarch at that battlefield it empowers her (she revives now) and disempowers her at end of turn, so her own Empower is live again next turn. Whether it resets a Matriarch who has *already* revived rests on a reading (§442.1.c with §359.3.e.14.b), not a ruling: ask a judge.
 
@@ -322,21 +326,23 @@ A battlefield used in a decided game is removed for the match (§488.5); after a
 
 Ezreal and Merchant draw beyond this. **These are cards in hand, not cards you can pay for.** The goldfish below counts what you can use.
 
-**The goldfish** (`lib/sim.mjs`, 20,000 games, 24 Oct): the legend's Gold made on your first recycle each turn and spent ahead of runes; **one hide a turn** from turn 2 with what developing left (Gold first, else a recycled rune); no fights, no Evelynn points.
+**The goldfish** (`lib/sim.mjs`, 20,000 games, 25 Oct): the legend's Gold made on your first recycle each turn, and banked Gold spent before any rune is recycled; **one hide a turn** from turn 2 with what developing left (Gold first, else a recycled rune); no fights, no Evelynn points.
 
 | | on the play | on the draw |
 |---|---|---|
-| Energy spent, turns 1–4 | 14.6 | 16.7 |
+| Energy spent, turns 1–4 | 14.8 | 17.0 |
 | units on board by turn 2 / 3 | 1.9 / 3.1 | 2.3 / 3.7 |
 | two units by turn 2 / 3 | 74% / 97% | 94% / 99% |
-| Might on board by turn 4 | 13.5 | 15.4 |
+| Might on board by turn 4 | 13.7 | 15.6 |
 | no play on turns 1–2 | 0.2% | 0% |
-| a card stuck on its colour, turn 3 | 12% | 6% |
+| a unit on turn 1 / a new unit on turn 2 | 76% / 96% | 94% / 99% |
+| a card stuck on its colour, turn 1 / 2 / 3 | 23% / 16% / 8% | 20% / 11% / 5% |
+| runes on board, turn 1 / 2 / 3 / 4 | 2.0 / 3.8 / 4.6 / 5.7 | 3.0 / 4.5 / 5.3 / 6.3 |
 | cards face down, turn 3 / 4 | 1.0 / 1.1 | 0.8 / 0.9 |
-| **an answer you can use on their turn** (Switcheroo or Star-Crossed), turn 3 / 4 / 5 | **40% / 44% / 55%** | **41% / 49% / 64%** |
-| of which, turn 4: face down / paid from hand | 42% / 3% | 43% / 10% |
+| **an answer you can use on their turn** (Switcheroo or Star-Crossed), turn 3 / 4 / 5 | **40% / 45% / 56%** | **41% / 50% / 66%** |
+| of which, turn 4: face down / paid from hand | 42% / 4% | 43% / 12% |
 
-Hiding costs about 1 Energy over turns 1–4 and 0.3 units by turn 3; without it the same deck spends 16.0 / 18.1 and fields 3.4 / 3.9 units, but an answer is usable on their turn in only 2–6% of games by turn 4. **That gap is the whole case for hiding Switcheroo first.** "Usable" means paid from the runes still ready after developing and from Gold; a player who holds runes up instead will do better from hand.
+**Power use:** about one rune a turn is recycled from turn 2 on (Staunch's Body, Ezreal and Fizz's Chaos, Punch First, hiding), which is why the board reads 5.7 runes by turn 4 rather than 8; Energy is still almost fully spent every turn. **Turn 1 is the tight one, turn 2 is solid**: going first, a turn-1 unit 76% of the time (a Staunch Survivor with no Body rune is most of the rest; play another 2-drop then), and a new unit on turn 2 96% of the time. Hiding costs about 1 Energy over turns 1–4 and 0.3 units by turn 3; without it the same deck spends 16.0 / 18.1 and fields 3.4 / 3.9 units, but an answer is usable on their turn in only 2–6% of games by turn 4. **That gap is the whole case for hiding Switcheroo first.** "Usable" means paid from the runes still ready after developing and from Gold; a player who holds runes up instead will do better from hand.
 
 **Runes: 6 Body / 6 Chaos.** Re-swept with Gold and hiding (8,000 games a split): every split from 4/8 to 7/5 is within 0.1 Energy, and 6/6 sticks least (10.1% by turn 3; 5/7 10.5%, 7/5 12.3%). The exact odds before any Gold favour 6/6 where it matters:
 
