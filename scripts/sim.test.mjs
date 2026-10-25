@@ -2,7 +2,7 @@
 // Tests for scripts/sim.mjs: the rules it claims to model, and the card-text reads it
 // relies on, checked against real cards. Run: node scripts/sim.test.mjs
 import { loadCatalog } from "./state.mjs";
-import { tokensOf, classify, buildDeck, playGame, POLICIES, rng, simulate } from "./sim.mjs";
+import { tokensOf, classify, engineOf, buildDeck, playGame, POLICIES, rng, simulate } from "./sim.mjs";
 
 let fails = 0;
 const ok = (name, cond, detail = "") => {
@@ -98,6 +98,40 @@ ok("nothing is hidden on turn 1 (no battlefield held yet)", gbad.early === 0);
 ok("hiding never spends Energy the board cannot make", gbad.spend === 0);
 const off = playGame(gd, rng(5), false, POLICIES["keep all"], []);
 ok("hiding is off unless asked", off.facedown.every((x) => x === 0));
+
+console.log("\nthe trash-and-recursion engine, and the Power budget");
+const eng = (n) => engineOf(cat.cards.find((c) => c.n === n && !c.v));
+ok("Ezreal discards 1 and draws 2 on play", eng("Ezreal, Prodigy").playDiscard === 1 && eng("Ezreal, Prodigy").playDraw === 2);
+ok("Traveling Merchant discards and draws when it moves", eng("Traveling Merchant").moveDiscard === 1 && eng("Traveling Merchant").moveDraw === 1);
+ok("Shadow Order Disciple burns 1 when it moves", eng("Shadow Order Disciple").moveBurn === 1);
+ok("Fizz recasts a spell of 3 Energy or less", eng("Fizz, Trickster").recastMax === 3);
+ok("Matriarch's Empower is 2 Energy and a Chaos, reviving 3 or less", JSON.stringify(eng("Tail-Cloaked Matriarch").revive) === JSON.stringify({ e: 2, d: "Chaos", max: 3 }));
+ok("Rampage kills; Star-Crossed and Gust only bounce", eng("Rampage").kills && !eng("Star-Crossed").kills && !eng("Gust").kills && eng("Gust").trick);
+ok("Battle Mistress readies when enemy units die", deckFor("Battle Mistress").readyOnDeath === true);
+const byN = (n) => cat.cards.find((c) => c.n === n && !c.v).c;
+const elist = { [bm.c]: 1, [rune("Body").c]: 6, [rune("Chaos").c]: 6 };
+for (const [n, q] of [["Ezreal, Prodigy", 3], ["Traveling Merchant", 3], ["Shadow Order Disciple", 3], ["Fizz, Trickster", 3], ["Tail-Cloaked Matriarch", 3],
+  ["Punch First", 3], ["Gust", 3], ["Rampage", 3], ["Star-Crossed", 3], ["Switcheroo", 3], ["Staunch Survivor", 3], ["Tideturner", 3], ["Tornado Warrior", 1]]) elist[byN(n)] = q;
+const ed = buildDeck(elist, cat, {});
+let ebad = { trash: 0, fizz: 0, books: 0, gold: 0 }, fizzSeen = 0, revived = 0, drew = 0;
+for (const onDraw of [false, true]) {
+  const r = rng(21);
+  for (let i = 0; i < 1500; i++) {
+    const g = playGame(ed, r, onDraw, POLICIES["keep all"], [], null, { hide: true, engine: { tricksPerTurn: 0.7, deathsPerTurn: 0.7 } }), e = g.engine;
+    if (g.trashSpells.some((x) => x < 0) || g.trashUnits.some((x) => x < 0)) ebad.trash++;
+    if (e.fizzHits + e.fizzUnpaid > e.fizzPlays) ebad.fizz++;
+    const spent = Object.values(e.pay).reduce((a, b) => a + b, 0);
+    if (spent !== e.fromRunes + e.fromGold) ebad.books++;
+    if (g.gold.some((x) => x < 0)) ebad.gold++;
+    fizzSeen += e.fizzHits; revived += e.matHits; drew += e.drawn;
+  }
+}
+ok("the trash never goes negative", ebad.trash === 0);
+ok("Fizz never hits more than he's played", ebad.fizz === 0);
+ok("every Power spent is paid by exactly one rune or one Gold", ebad.books === 0, `${ebad.books} games off`);
+ok("Gold never goes negative with the engine on", ebad.gold === 0);
+ok("the engine runs: Fizz recasts, Matriarch revives, Ezreal and Merchant draw", fizzSeen > 0 && revived > 0 && drew > 0);
+ok("the engine is off unless asked", playGame(ed, rng(5), false, POLICIES["keep all"], []).engine === undefined);
 
 console.log(fails ? `\n${fails} FAILED` : "\nall sim tests pass");
 process.exit(fails ? 1 : 0);

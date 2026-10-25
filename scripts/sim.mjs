@@ -39,8 +39,8 @@ import { loadState, loadCatalog, bannedNameSet, standardNameSet, deckIsLegal } f
 
 const url = (f) => new URL(`../data/${f}`, import.meta.url);
 const readJson = async (f) => JSON.parse(await readFile(f, "utf8"));
-import { rng, tokensOf, classify, buildDeck, playGame, POLICIES, simulate, sweepRunes, TURNS } from "../lib/sim.mjs";
-export { rng, tokensOf, classify, buildDeck, playGame, POLICIES, simulate, sweepRunes };
+import { rng, tokensOf, classify, engineOf, buildDeck, playGame, POLICIES, simulate, sweepRunes, TURNS } from "../lib/sim.mjs";
+export { rng, tokensOf, classify, engineOf, buildDeck, playGame, POLICIES, simulate, sweepRunes };
 
 // ── where decks come from ────────────────────────────────────────────────────
 async function fieldLists(cat, since, allSets) {

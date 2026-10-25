@@ -1554,6 +1554,18 @@ itself, and nothing that needs an opponent:
   (free) or from hand (paid from the runes still ready and Gold). This is the number to
   read for a reactive deck, not "in hand" draw odds: on the Sivir Nexus Night list, hiding
   takes a usable answer by turn 4 from 2–6% of games to 44–49%.
+- **The trash-and-recursion engine** (`opts.engine`, off by default): a trash filled by spells
+  cast, chosen discards, burns and units that die; move triggers (a unit played to base moves
+  out the next turn); Ezreal-style "discard, then draw"; Fizz recasting a spell from the trash
+  when its Power can be paid; Matriarch's Empower as a play option that revives the best unit
+  in the trash. The opponent is a labelled scenario (`extraMoves`, `tricksPerTurn`,
+  `deathsPerTurn`), never a guess. Without it the goldfish never resolves a unit's draw effect.
+- **The Power budget** (with the engine): Power spent by sink (developing, hiding, recasts,
+  Empower, tricks), paid from recycled runes or Gold, Gold made and how much came from kills
+  (a kill readies Battle Mistress), and what was crowded out (hides or tricks you couldn't pay
+  for, Empowers skipped). On the Sivir Nexus Night list the answer was **Energy, not Power**:
+  the Gold covers every Power sink with about 0.75 to spare a game, while developing leaves no
+  Energy for the two tricks a game you'd like to cast.
 
 **The rune split** is tested, not assumed: every split from 3/9 to 9/3 on the same
 shuffles. A different split is suggested only when it improves Energy by 0.2 or stuck
