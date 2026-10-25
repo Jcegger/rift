@@ -774,3 +774,16 @@ tokens, made in play, so they are not in the lists and not in his numbers.
   Mercenary on. Principle agreed: every card is a body or an answer, the engine is how we pay
   for them. Jobs and targets drafted from good midrange finishes and Jun's two lists. How sure:
   high on On the Hunt staying out (results and reading agree); the targets are a draft.
+- **25 Oct 2026 — the model stopped; a found list to play.** The whole-list comparison was
+  too sensitive to trust: modelling Fizz's pump recast and Star-Crossed's own-unit return
+  swung the old list from +0.44 to −0.30 against the trash rebuild, so the points model is not
+  fit to rank decks (README notes it). What stands from the day: the rules work, the guide's Gold
+  rules, the plan (pay Power, not Energy), and fight checks of single boards. Jay's call: play a
+  found Radiance list exactly as written for a night or two — "everything moves" (3 Ride the
+  Wind, 3 Tideturner, 2 Portable Portal, 2 Siren's Song, 3 Merchant looting off every move,
+  2 Vex, 1 Rengar, 2 Graves; 7 Body / 5 Chaos) — saved as `Sivir — Movement midrange (found
+  list, 25 Oct)`, guide `guides/sivir-movement.md`. Its author and record are unknown. The
+  fallback is Randyyy's list with four swaps (−Acceptable Losses −Grim Resolve +2 Graves;
+  −1 Shadow Order Disciple −1 Sabotage +2 Staunch Survivor), and Vex and Rengar from Jun's
+  lists. The journal decides after a night or two. Bigger picture (Jay): play Sivir now, build
+  an S or A tier deck once the meta settles.

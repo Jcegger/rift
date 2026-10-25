@@ -30,6 +30,7 @@
 /riftbound/reading   update  guides/radiance-pre-rift.md
 /riftbound/reading   update  guides/sivir-midrange.md
 /riftbound/reading   update  guides/sivir-nexus-night.md
+/riftbound/reading   update  guides/sivir-movement.md
 /riftbound/reading   update  docs/strategy.md
 /riftbound/reading   update  docs/fundamentals.md
 /riftbound/reading   update  docs/rules.md

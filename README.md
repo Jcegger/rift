@@ -73,7 +73,11 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   `scripts/rift try` prints it as POINTS and goal tier 0 reads it (our and their points by turn
   8). What it leaves out favours unit-heavy decks (a field deck in our seat checks it: the
   mirror splits about evenly, spell-reliant Irelia does worst), so its numbers are points and
-  how they're made, never a win rate. Tests: `lib/match.test.mjs`.
+  how they're made, never a win rate. **Not fit to rank whole decks** (25 Oct 2026): adding one
+  mechanic (Fizz's pump recast, Star-Crossed's own-unit return) swung a list from best by 0.44
+  to worst by 0.30, so a whole-list ranking says as much about what's modelled as about the
+  decks. Use it for one question at a time, alongside results, experts and fight checks. Tests:
+  `lib/match.test.mjs`.
 - `lib/widesweep.mjs` - `try --sweep "<card>" --qty N --with all`: the slot against every card
   the deck could legally run (never Dazzling Aurora), each on the same paired model games, the
   margin change with its standard error, on worker threads. `try --grid "<a>; <b>" --with
