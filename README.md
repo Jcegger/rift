@@ -45,6 +45,16 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   shape, the goldfish with Gold and hiding (answers usable on their turn, not in hand), and
   the field: the S and A tiers weighted by popularity and by results. The stages it serves
   are in `decklab/README.md`. Tests: `lib/decklab.test.mjs`.
+- `lib/interactions.mjs` - interactions and loops derived from card text (`scripts/rift loops
+  --deck "<name>" [--bridges]`). Each card (legend, champion and battlefields included) is
+  tagged with the resources it produces and consumes: your own unit back to hand, a play
+  effect, a unit or spell in the trash, recasts and revives, Empowered and its resets, Power
+  spent, runes recycled, Gold, enemy deaths, moves, face-down cards, optional additional
+  costs. Edges join a producer to a consumer; cycles are loops, ranked by their weakest link
+  so the everywhere-links (any Power payment) don't drown the real ones. Built blind: it finds
+  the Fizz/Star-Crossed loop and Tideturner moving Traveling Merchant without being told, and
+  flags a loop the rules break (a revived unit arrives face up). `--bridges` reads the legal
+  pool for cards that would link into the deck. Tests: `lib/interactions.test.mjs`.
 - `lib/markdown.mjs` - the guide renderer the site uses, with heading anchors.
 - `lib/sim.mjs` - the goldfish simulator's engine, shared by `scripts/sim.mjs` and the site.
   `lib/sim-worker.mjs` runs it in a Web Worker for the tweak bench.

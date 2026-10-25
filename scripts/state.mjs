@@ -12,6 +12,7 @@
 //   node scripts/state.mjs raw             # the raw state JSON, pretty-printed
 //   node scripts/state.mjs versus kennen --deck "nexus night"   # head to head, card by card
 //   node scripts/state.mjs try --deck "nexus night" "-Edge of Night" "+Elnuk Herd"   # test a change
+//   node scripts/state.mjs loops --deck "nexus night"   # every interaction and loop, from card text
 //   node scripts/state.mjs meta            # archetype shares over sanctioned-legal lists
 //   node scripts/state.mjs meta diana      # one archetype: card play rates, best finishes
 //   node scripts/state.mjs meta leblanc --since 2026-09-15   # only lists played after a date
@@ -46,6 +47,7 @@ import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, dec
 import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive } from "../lib/versus.mjs";
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf } from "../lib/decklab.mjs";
+import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
 
 const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
@@ -1166,6 +1168,54 @@ async function cmdTry(S, cat, args) {
   console.log(`\n  Card text and counts only: nothing here is a win rate. Read it against the deck's goal tiers in its worksheet.`);
 }
 
+// ── loops: a deck's interactions and loops, derived from card text ─────────────
+// lib/interactions.mjs. Built blind (from the cards and the rules), so it finds loops nobody
+// listed; every one is for a rules check before anything is built on it. --bridges also reads
+// the legal pool for cards outside the deck that would link to two or more cards in it.
+async function cmdLoops(S, cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const decks = findDecks(S, opt("--deck") || "\u0000");
+  if (decks.length !== 1) { console.log('usage: loops --deck "<one of your decks>" [--bridges]'); return; }
+  const deck = decks[0];
+  const rows = [...Object.entries(deck.cards || {}).map(([k, q]) => ({ card: cat.BY.get(k), qty: q })),
+    ...Object.entries(deck.sb || {}).map(([k, q]) => ({ card: cat.BY.get(k), qty: q, sb: true }))].filter((r) => r.card && r.card.t !== "Rune");
+  const g = graphOf(rows);
+  const loops = loopsOf(g);
+  const mainNames = new Set(rows.filter((r) => !r.sb).map((r) => r.card.n));
+  const sbNames = new Set(rows.filter((r) => r.sb && !mainNames.has(r.card.n)).map((r) => r.card.n));
+  const mark = (n) => (sbNames.has(n) ? `${n} (sb)` : n);
+  const spec = (k) => ["", "low", "mid", "high"][k];
+  console.log(`LOOPS  ${deck.name}\n  ${g.nodes.length} cards (legend, champion, battlefields, sideboard included) · ${g.edges.length} links · ${loops.length} loops`);
+  console.log(`  Read from card text, not from a list of known combos. Rules-check each before building on it.\n`);
+  console.log(`  LOOPS (strongest first; a link is as strong as its weaker end)`);
+  for (const l of loops) {
+    console.log(`    [${spec(l.weakest)}] ${l.links.map((e) => `${mark(e.from)} —${e.res}→`).join(" ")} ${mark(l.links[0].from)}`);
+    for (const f of l.flags) console.log(`          ⚠ ${f}`);
+  }
+  console.log(`\n  STRONG LINKS (one card makes what another uses)`);
+  const by = new Map();
+  for (const e of linksOf(g)) { const k = `${e.from}|${e.res}`; (by.get(k) || by.set(k, []).get(k)).push(e.to); }
+  for (const [k, tos] of by) { const [from, res] = k.split("|"); console.log(`    ${mark(from)} —${res}→ ${tos.map(mark).join(", ")}`); }
+  console.log(`\n  HUBS (the legend and the champion, every strength)`);
+  const legend = rows.find((r) => r.card.t === "Legend")?.card.n;
+  const champ = rows.find((r) => r.card.t === "Unit" && legend && (cat.cards.find((c) => c.n === legend)?.g || []).some((t) => r.card.n.startsWith(`${t}, `)))?.card.n;
+  for (const h of hubsOf(g, [legend, champ].filter(Boolean))) {
+    console.log(`    ${h.card.n}`);
+    const show = (xs, dir) => xs.forEach((x) => console.log(`      ${dir} [${x.spec}] ${RESOURCES[x.res] || x.res}: ${x.cards.length > 10 ? x.cards.slice(0, 10).map(mark).join(", ") + ` +${x.cards.length - 10} more` : x.cards.map(mark).join(", ")}`));
+    show(h.fedBy, "fed by"); show(h.feeds, "feeds ");
+  }
+  if (args.includes("--bridges")) {
+    const banned = await readJson(url("banned.json")).catch(() => ({ constructed: [] }));
+    const bn = bannedNameSet(banned), std = standardNameSet(banned, cat.cards);
+    const doms = new Set([...(cat.cards.find((c) => c.n === legend)?.d || []), "Colorless"]);
+    const seen = new Set();
+    const pool = cat.cards.filter((c) => !c.v && /Unit|Spell|Gear/.test(c.t || "") && !seen.has(c.n) && seen.add(c.n) && (c.d || []).every((d) => doms.has(d))
+      && !bn.has(c.n) && (!std || std.has(std.fold(c.n))) && !/\[Signature\]/.test(c.x || ""));
+    console.log(`\n  BRIDGES (legal cards outside the deck that link strongly to 2+ cards in it)`);
+    for (const b of bridgesOf(g, pool).slice(0, 25)) console.log(`    ${b.card.n.padEnd(30)} ${b.touches.length}: ${b.touches.map(mark).join(", ")}`);
+  }
+}
+
 // ── intake: new product into the collection ───────────────────────────────────
 // Cards get entered on Piltover Archive and reach the app on its next pull, which banks
 // every gained copy in the list of new copies to file (`newq`) until it is cleared. So "what's new" is already recorded, and this reads it: what landed, a Pre-Rift
@@ -1270,6 +1320,7 @@ async function main() {
     intake: () => cmdIntake(S, cat, args),
     versus: () => cmdVersus(S, cat, args),
     try: () => cmdTry(S, cat, args),
+    loops: () => cmdLoops(S, cat, args),
   };
   const fn = table[cmd];
   if (!fn) { console.error(`unknown command "${cmd}" — try: ${Object.keys(table).join(", ")}`); process.exit(2); }
