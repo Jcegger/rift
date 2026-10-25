@@ -1,6 +1,6 @@
 {
   "deck": "Sivir — Nexus Night",
-  "note": "The worksheet's goal tiers (sections 1–2 and the 24–25 Oct log), for scripts/rift try. Targets are only the ones the worksheet set; everything else is a direction. Hand-written: change it when the worksheet's plan changes. Tier 0 is points from lib/match.mjs since 25 Oct 2026 (Jay: the sim decides points, holds, conquers and stopped holds); Evelynn's points count inside it, not on their own.",
+  "note": "The worksheet's goal tiers, v2 (§1b, agreed 25 Oct 2026): tier 0 is points from lib/match.mjs; tier 2 is the engine (Power turned into board or answers). Stage 3 resets the targets (the Hidden count target is off until then); the engine tier gains 'units played from face down' when the model plays own-turn flips. Hand-written: change it when the plan changes.",
   "tiers": [
     {
       "tier": 0,
@@ -20,7 +20,7 @@
     },
     {
       "tier": 1,
-      "goal": "presence and fights: bodies on battlefields, winning fights there",
+      "goal": "presence: bodies on battlefields, winning fights there (units from face down count)",
       "measures": [
         {
           "key": "shape.cheap",
@@ -52,27 +52,37 @@
           "key": "field.bigAns.pop",
           "label": "answer copies per regular 6+ unit",
           "dir": "up"
-        },
-        {
-          "key": "shape.hidden",
-          "label": "Hidden cards",
-          "min": 10,
-          "max": 12
         }
       ]
     },
     {
       "tier": 2,
-      "goal": "staying power: replace what was spent",
+      "goal": "the engine: Power turned into board or answers",
       "measures": [
         {
-          "key": "engine.heavy.u5",
-          "label": "units by turn 5, heavy pressure",
+          "key": "engine.normal.merc",
+          "label": "Mercenary on (turns 4–8, 2+ Power spent)",
           "dir": "up"
         },
         {
           "key": "engine.normal.fizz",
           "label": "Fizz finds a spell",
+          "dir": "up"
+        },
+        {
+          "key": "engine.normal.goldMade",
+          "label": "Gold made a game",
+          "dir": "up"
+        }
+      ]
+    },
+    {
+      "tier": 3,
+      "goal": "staying power: replace what was spent",
+      "measures": [
+        {
+          "key": "engine.heavy.u5",
+          "label": "units by turn 5, heavy pressure",
           "dir": "up"
         },
         {
@@ -88,7 +98,7 @@
       ]
     },
     {
-      "tier": 3,
+      "tier": 4,
       "goal": "denial, flexible only",
       "measures": [
         {
@@ -109,8 +119,8 @@
       ]
     },
     {
-      "tier": 4,
-      "goal": "engine perks: tie-breakers only",
+      "tier": 5,
+      "goal": "perks: tie-breakers only",
       "measures": [
         {
           "key": "engine.normal.replays",

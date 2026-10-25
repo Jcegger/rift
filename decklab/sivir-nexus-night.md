@@ -94,6 +94,69 @@ welcome where it wins fights, not where it only adds thinking time.
 
 ---
 
+## 1b. How it wins, v2 — agreed 25 Oct 2026 (replaces the plan above)
+
+**Why a v2.** The points model (`lib/match.mjs`) put Evelynn's point at about 0.4 a game
+against the field, not the clock the v1 plan assumed. Then Jun's Radiance Kha'Zix update
+(24 Oct) said Evelynn's own legend "does not help with the main drawback of hiding: your rune
+economy", and that hidden units are cheap development: hide one early, play it next turn for a
+Power and no Energy. Battle Mistress is exactly the missing piece. Stage 1 stands (legend,
+champion, Body/Chaos, midrange); this redoes stage 2.
+
+**The core: pay Power, not Energy** (Jay: "the big perk of Sivir"). The legend makes Power
+renewable (each turn's first recycle makes a Gold), and Hidden turns Power into board and
+answers: hide for `[A]`, and from the next turn on play it ignoring its cost (§811.1.b). Our
+Energy goes to bodies while our Power builds a second line face down; the opponent pays Energy
+for everything.
+
+**The game:**
+1. **Turns 1–3, take and hold.** Cheap bodies to the open battlefields (turn 1: a free 2-drop).
+   From turn 2, hide at a battlefield you hold, **a unit first** (Jay: Jun's logic). Most decks
+   can't contest an early hold, and a hidden unit is both a surprise defender on their turn and
+   free development on yours.
+2. **Turns 3–5, develop for free.** Flip hidden units on your own turn: a unit for one Power.
+   Switch the face-down card to an answer once a breaker (a 5+ Might unit) is on their board or
+   can come down: that is the Astral Heron plan.
+3. **Turns 5 and on, break and close.** Mercenary (two Power spent: 6 Might, Ganking) or a
+   pumped fighter takes their last battlefield; close by holding one and conquering the other
+   (§473.1.b).
+
+**Rules this leans on** (handbook, §811): hide only on your turn, Open State, at a battlefield
+you control, one card each (Bandle Tree: two there); from the next turn on it has Reaction and
+plays ignoring its whole cost, Power included; a hidden unit, and any unit a hidden card
+plays, must go to that battlefield (§811.1.d.1, §811.1.d.5); lose the battlefield and the card
+is trashed (§323.6.a). So the engine runs at one or two face-down cards, only where we hold.
+
+**Evelynn, In Control: no longer planned around** (Jay: skeptical — flipping hides to cheat out
+units fights her point, and Jun doesn't run her even in his Hidden list). She competes for her
+slots in stage 4 like any card; the keep-a-card habit applies only while she is on board.
+
+**What the plan wants from the pool** (stage 3 sets the counts): hidden units worth cheating out
+(Momentary Companion 4 Might, permanent when flipped on your turn; Ember Monk; Gutter Guardian,
+which refunds the Power; Pyke, Returned; Tornado Warrior; Stranger and Tideturner); **Here to
+Help** (from face down: play a unit from hand to that battlefield 3 Energy cheaper — one Power
+turned into three Energy); Energy relief (K'Sante, Courageous: a hold channels a ready rune;
+Reckless Innovator: a Gold or a card when he exhausts); answers face down for the breakers.
+
+**Goal tiers v2** (`decklab/sivir-nexus-night.tiers.json`):
+
+| tier | goal |
+|---|---|
+| 0 | win inside the clock: points by turn 8, ours up and theirs down (`lib/match.mjs`) |
+| 1 | presence: bodies on battlefields, winning fights there (units from face down count) |
+| 2 | **the engine: Power turned into board or answers** (hidden units, Here to Help, Fizz's recast, Gold makers) |
+| 3 | staying power: replace what was spent |
+| 4 | denial, flexible only |
+| 5 | perks |
+
+**Battlefields** (Jay: "whatever makes sense"): a stage 3 job, decided once the model plays
+battlefield effects. Candidates beside ours (Bandle Tree, Emperor's Dais, Sigil of the Storm):
+Bandle Scouts' Academy (a Gold for each hide there: the engine pays for itself) and Packed
+Amphitheater (champion units +1 Might; we run 11 champion-unit copies). Each is used once a
+match (§488.5.a).
+
+---
+
 ## 2. Roles and slots — step 1, jobs and targets (agreed 23 Oct 2026)
 
 Jobs come from section 1's plan, not from a reference list. Targets start from what winning
@@ -656,3 +719,16 @@ tokens, made in play, so they are not in the lists and not in his numbers.
   turn 2 69% against 74%; going second, worse on everything (Energy 17.1 against 17.7). Rule:
   a free 2-drop on turn 1 when you have one, Staunch on turn 2 off the Gold; Staunch on turn 1
   only when it's the only play. −1 Staunch +1 Merchant measured neutral: no list change.
+- **25 Oct 2026 — stage 2 redone: how it wins, v2 (§1b).** The points model put Evelynn's
+  point at about 0.4 a game against the field; her slots against all 269 legal cards, then the
+  leads rechecked on fresh games with Disarm and her keep modelled: Nilah ties her, Jayce
+  +0.10 ± 0.06 (not significant), plain bodies lose by 0.18–0.20. Then Jun's Kha'Zix update:
+  Hidden's drawback is the rune economy, which our legend fixes, and hidden units are cheap
+  development. Agreed with Jay: the core is **pay Power, not Energy**; hidden units first, an
+  answer face down once a breaker can come down; Evelynn no longer planned around (she competes
+  in stage 4); the engine is goal tier 2, below presence; battlefields are a stage 3 job.
+  How sure: high on the core (an expert reached it independently, and it is what our legend
+  does), none yet on any card (the model doesn't yet flip hidden units on our turn, play
+  Temporary, hold or exhaust triggers, or battlefields). Next: stage 3 jobs and targets, and
+  the model fixes. Reverses if: the fixed model or Jay's games show hidden development losing
+  to plain bodies.
