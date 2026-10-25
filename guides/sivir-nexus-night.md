@@ -138,7 +138,7 @@ Before your Main Phase: you **ready everything** (the legend and last turn's Gol
 
 **Step 0 — lethal, both players.** At 6 with Evelynn and a hide on a held battlefield, you have already won at the start of this turn. Otherwise: a line to 8 now? Are they at 7 and holding?
 
-**Step 1 — count your Power.** Ready runes by colour, ready Gold, the legend (ready after Awaken). **One rune recycled a turn makes the next Gold; pay the rest with Gold.**
+**Step 1 — count your Power.** Ready runes by colour, ready Gold, the legend (ready after Awaken). **Pay Power with banked Gold first; recycle a rune only for what the Gold can't cover.** That recycle still makes a Gold, because the legend starts the turn ready.
 
 **Step 2 — take the open battlefields first.** Before you play anything.
 
@@ -164,16 +164,16 @@ Before your Main Phase: you **ready everything** (the legend and last turn's Gol
 
 *When you recycle a rune, you may exhaust me to play a Gold gear token exhausted. When one or more enemy units die, ready me.* A Gold is *"[Reaction] Kill this, exhaust: Add [A]"* (§187.5): one Power of any colour.
 
-Paying Power means recycling a rune (§164.2.b), which shrinks your board. The legend turns the first recycle each turn into a Gold that pays a Power **next** turn without recycling anything.
+Paying Power means recycling a rune (§164.2.b), which shrinks your board. The legend is ready at the start of every turn, so the first rune you recycle each turn makes a Gold that pays a Power **next** turn.
 
-| Power spent each turn | runes recycled, without the legend | with the legend, once a Gold is banked |
+| Power spent this turn | runes recycled, without the legend | with the legend, one Gold banked |
 |---|---|---|
-| 1 | 1 | 1 (recycle, to keep the Gold coming) |
-| 2 | 2 | **1** |
-| 3 | 3 | 2, or 1 if an enemy unit died between recycles |
+| 1 | 1 | **0** (the Gold pays) |
+| 2 | 2 | **1** (and that recycle makes next turn's Gold) |
+| 3 | 3 | 2; a kill between the two recycles makes a second Gold for next turn |
 
-1. **Recycle at least once a turn**, or the Gold stops.
-2. **Kills mid-turn are a second Gold**: the legend readies when enemy units die.
+1. **Pay with Gold first; recycle only for the rest.** Recycling every turn "to keep the Gold coming" was this guide's old rule, and it loses: measured (goldfish, 8,000 games), it makes 1.5 more Gold a game, but about 2 of it is still unspent at turn 8, and it costs 0.4 Energy over turns 1–4 and Might on the board. Energy is what this deck runs short of.
+2. **Recycle, kill, recycle.** A kill readies her for a second Gold, but she starts the turn ready, so a kill before your first recycle is wasted. If you'll pay Power twice this turn, put the kill (Rampage, a Graves blast, a won fight) between the two.
 3. **Gold is next turn's Power, at Reaction speed**, so it pays for flips and Star-Crossed on their turn too.
 
 Gold is never Energy. **Sigil of the Storm** (*the conqueror must recycle a rune*) is a lost rune for them and a Gold for you.
