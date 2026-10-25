@@ -648,3 +648,11 @@ tokens, made in play, so they are not in the lists and not in his numbers.
   - **No list change.** The Shadow Order Disciple test for the first night (the slot of the
     missing Stranger) still stands as a live check; log "Fizz had nothing to recast" and "Fizz
     got reused". Next: the plan against Astral Heron decks, using the budget (holding Energy up).
+- **25 Oct 2026 — turn 1 without spending a rune?** (Jay: if Energy is the squeeze, don't
+  recycle on turn 1.) Measured (`opts.t1NoPower`): preferring a free 2-drop is what the
+  simulator already does, and it's right. Strict "never spend Power on turn 1" when Staunch
+  Survivor is the only play: going first, Energy even (15.1), runes on turn 2 4.0 against 3.8,
+  answers usable on turn 4 50% against 47%, but a turn-1 unit 64% against 76% and two units by
+  turn 2 69% against 74%; going second, worse on everything (Energy 17.1 against 17.7). Rule:
+  a free 2-drop on turn 1 when you have one, Staunch on turn 2 off the Gold; Staunch on turn 1
+  only when it's the only play. −1 Staunch +1 Merchant measured neutral: no list change.

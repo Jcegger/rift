@@ -80,7 +80,7 @@ date: 2026-10-24
 
 ### Opening (turns 1–2)
 
-**Turn 1: a 2-drop.** Staunch Survivor is the best one: 2 Energy and one Body Power, and **recycling that Body rune makes your first Gold** (exhausted; it readies at your next Awaken). Traveling Merchant, Bedeviling Stranger or Tideturner keep the runes on the board. A unit plays to your base or a battlefield you control (§355.2.a), so on turn 1 it goes to base.
+**Turn 1: a 2-drop, and a free one if you have it.** Traveling Merchant, Bedeviling Stranger or Tideturner keep both runes on the board, and turn 2's Energy is what this deck runs short of; Staunch Survivor then comes down on turn 2 with its Body paid from the Gold. **If Staunch is your only turn-1 play, play it**: going first, passing to keep the rune measured even on Energy but thinner on turn 2 (two units by turn 2 69% against 74%), and the 4-Might fighter is what takes turn 2's battlefield; going second, always play it. Its recycle makes your first Gold either way. A unit plays to your base or a battlefield you control (§355.2.a), so on turn 1 it goes to base.
 
 **Turn 2: take the open battlefield, then develop.** Move first: a Conquer, and a battlefield to play onto and hide at. Then a second body there, or a hide behind the first.
 
