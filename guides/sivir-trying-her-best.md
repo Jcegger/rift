@@ -14,7 +14,7 @@ date: 2026-10-27
 **Collection status:** everything owned, sideboard included
 **Status:** locked on 27 October. Changes come from the journal, one at a time (§13)
 
-**Companions.** [strategy.md](../docs/strategy.md) is how to think about any turn; this guide is how *this deck* thinks. [archetypes.md](../docs/archetypes.md) is what each opponent is doing. [The Nexus Night guide](sivir-nexus-night.md) has the store's clock and format.
+**Companions.** [strategy.md](../docs/strategy.md) is how to think about any turn; this guide is how *this deck* thinks. [archetypes.md](../docs/archetypes.md) is what each opponent is doing.
 
 ---
 
@@ -547,7 +547,7 @@ Types from [strategy.md §8](../docs/strategy.md#8-reviewing-a-game), so the jou
 
 ## Sources and method
 
-- **The list:** Jay's sessions of 25–27 October, from Randyyy's LA Regional Qualifier list. The change log is in [decklab/sivir-nexus-night.md](../decklab/sivir-nexus-night.md).
+- **The list:** Jay's sessions of 25–27 October, from Randyyy's LA Regional Qualifier list. What changed and why is §2; the worksheet behind it, `decklab/sivir-nexus-night.md`, was retired on 26 Oct 2026 (git history).
 - **Rules:** [rules.md](../docs/rules.md) first, then the verbatim [rules-full.md](../docs/rules-full.md), the [FAQ](../docs/rules-faq.md) and [rulings](../docs/rules-rulings.md). Core Rules and Tournament Rules of 2026-10-09.
 - **Card text:** `data/cards.json`, errata-corrected where the app notes it.
 - **Numbers:**

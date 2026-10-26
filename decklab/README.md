@@ -64,4 +64,4 @@ Rules claims follow CLAUDE.md: handbook first, verbatim where it is load-bearing
 follows the repo's standing rules: no invented numbers, cost is never the axis, and no deck
 running Dazzling Aurora.
 
-Worksheets: [sivir-midrange.md](sivir-midrange.md) (the base), [sivir-nexus-night.md](sivir-nexus-night.md) (a 3-0 at Nexus Night; frozen for testing 24 Oct 2026), [kaisa.md](kaisa.md) (the strong second deck; stage 1).
+Worksheets: none open. The Sivir and Kai'Sa worksheets were retired on 26 Oct 2026 (git history); the deck in play is `guides/sivir-trying-her-best.md`.

@@ -308,7 +308,7 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   (`questions.pdf` from `scripts/build-journal`), batch by batch; synced as `answers`.
 - `scripts/build-journal` - renders the match journal's blank pages to PDFs in
   `guides/out/journal/`, sized 3:4 (fits a Kindle Scribe or a reMarkable 2), plus a between-games matchup card
-  printed from the matchup table in the current deck's guide (`guides/sivir-randyyy.md`; the script's `MATCHUPS` names it). Fetches
+  printed from the matchup table in the current deck's guide (`guides/sivir-trying-her-best.md`; the script's `MATCHUPS` names it). Fetches
   nothing.
 - `scripts/check.mjs` - the regression checks; run it after touching the engine.
 - `.github/workflows/refresh.yml` - rebuilds all of the above daily and commits.

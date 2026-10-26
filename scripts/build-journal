@@ -173,8 +173,8 @@ def review_page(pdf):
 
 # The deck being played. Change both lines when the deck changes; the table's first column
 # names the opponent and every other column is printed under its own header.
-MATCHUPS = ROOT / "guides" / "sivir-randyyy.md"
-CARD_HEADING = "## Matchups and the sideboard"
+MATCHUPS = ROOT / "guides" / "sivir-trying-her-best.md"
+CARD_HEADING = "## 10. Matchups"
 
 
 def card_rows():

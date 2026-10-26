@@ -2,10 +2,10 @@
 # Turns a Markdown guide in guides/ into a Word doc (default) or an e-ink PDF in guides/out/.
 #
 #   scripts/build-guide                    # list available guides
-#   scripts/build-guide sivir-randyyy
-#   scripts/build-guide guides/sivir-randyyy.md
+#   scripts/build-guide sivir-trying-her-best
+#   scripts/build-guide guides/sivir-trying-her-best.md
 #   scripts/build-guide --all              # rebuild every guide
-#   scripts/build-guide --pdf sivir-randyyy
+#   scripts/build-guide --pdf sivir-trying-her-best
 #   scripts/build-guide --pdf docs/fundamentals.md
 #   scripts/build-guide --pdf --all
 #
