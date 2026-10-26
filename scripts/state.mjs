@@ -46,7 +46,7 @@ import { readFile } from "node:fs/promises";
 import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, SB_MAX } from "../lib/decks.mjs";
 import { pathToFileURL } from "node:url";
-import { versus, weigh, effectsOf, looksInteractive } from "../lib/versus.mjs";
+import { versus, weigh, effectsOf, looksInteractive, unreadSentences } from "../lib/versus.mjs";
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf } from "../lib/decklab.mjs";
 import { matchReport } from "../lib/match.mjs";
 
@@ -1096,7 +1096,7 @@ async function cmdTry(S, cat, args) {
   const since = opt("--since") || "2026-10-16";
   const games = Number(opt("--games") || 20000);
   const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games", "--top", "--grid"]);
-  const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine" && a !== "--no-points");
+  const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine" && a !== "--points");
   // --policy "holdUp=3,dais,bandleTree,keepForEvelynn=false": how you play, for the engine report.
   const policy = {};
   for (const kv of (opt("--policy") || "").split(",").map((x) => x.trim()).filter(Boolean)) {
@@ -1105,7 +1105,7 @@ async function cmdTry(S, cat, args) {
   const sweepCard = opt("--sweep"), sweepWith = (opt("--with") || "").split(/;/.test(opt("--with") || "") ? ";" : ",").map((x) => x.trim()).filter(Boolean);
   const decks = findDecks(S, opt("--deck") || "\u0000");
   if (decks.length !== 1 || (!specs.length && !sweepCard && !opt("--grid"))) {
-    console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine]');
+    console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine] [--points]');
     console.log('       try --deck "<one of your decks>" --sweep "Card in the deck" --with "Candidate A, Candidate B" (or "A; B" when a name has a comma) [--policy …]');
     if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
     return;
@@ -1196,6 +1196,7 @@ async function cmdTry(S, cat, args) {
     const delta = typeof r.b === "number" && typeof r.a === "number" && f(r.a) !== f(r.b) ? `  ${r.a > r.b ? "▲" : "▼"}` : "";
     console.log(`  ${pad(r.label, w)}${pad(f(r.b), 22)}${pad(f(r.a), 22)}${delta}`);
   }
+  printAnswerDelta(before, after, cat, fieldDecks);
   let rb = null, ra = null;
   if (!args.includes("--no-engine")) {
     const eg = Math.max(2000, Math.round(games / 4));
@@ -1203,8 +1204,10 @@ async function cmdTry(S, cat, args) {
     ra = engineReport(after, cat, { games: eg, policy, foes: foesOf(after, cat, fieldDecks) });
     printEngine(rb, ra, policy, eg);
   }
+  // The points model is opt-in: it plays whole games on a plain policy and is not fit to rank
+  // decks (README, lib/match.mjs). Its goal-tier rows read "—" without it.
   let pb = null, pa = null;
-  if (!args.includes("--no-points")) {
+  if (args.includes("--points")) {
     const pg = Number(opt("--points-games")) || 600, foes = foeLists(fieldDecks);
     pb = matchReport(before, cat, foes, { games: pg }); pa = matchReport(after, cat, foes, { games: pg });
     printPoints(pb, pa, pg);
@@ -1216,6 +1219,66 @@ async function cmdTry(S, cat, args) {
     printTiers(tb, spec);
   }
   console.log(`\n  Card text and counts only: nothing here is a win rate. Read it against the deck's goal tiers in its worksheet.`);
+}
+
+// The change read as answers (lib/versus.mjs): for each S/A legend's units in 25%+ of its
+// lists, the main-deck answer copies before and after. Shown only where the count moved, and
+// any unit left with none. Card text, no score.
+function printAnswerDelta(before, after, cat, fieldDecks) {
+  const rowsOf = (deck) => [
+    ...Object.entries(deck.cards || {}).map(([code, qty]) => ({ card: cat.BY.get(code), qty, share: 1 })),
+    ...Object.entries(deck.sb || {}).map(([code, qty]) => ({ card: cat.BY.get(code), qty, share: 1, sb: true })),
+  ].filter((r) => r.card && !/Legend|Rune|Battlefield/.test(r.card.t));
+  const copies = (deck, theirs) => {
+    const qty = new Map(); for (const r of rowsOf(deck)) if (!r.sb) qty.set(r.card.n, (qty.get(r.card.n) || 0) + r.qty);
+    const V = versus(rowsOf(deck), theirs);
+    return new Map(V.ourAnswers.filter((r) => r.share >= 0.25).map((r) => {
+      const live = new Set(r.answers.filter((a) => !a.sb && a.ok !== false).map((a) => a.card.n));
+      return [r.card.n, { n: [...live].reduce((s, n) => s + (qty.get(n) || 0), 0), share: r.share }];
+    }));
+  };
+  // One line per legend and move ("9 → 10: Riven, Broken Blade, Astral Heron"), so a swap that
+  // touches every unit reads as one line, not twenty.
+  const lines = [];
+  for (const fd of fieldDecks) {
+    const B = copies(before, fd.theirs), A = copies(after, fd.theirs);
+    const groups = new Map();
+    for (const [n, a] of A) {
+      const b = B.get(n)?.n ?? 0;
+      if (a.n === b && a.n > 0) continue;
+      const k = `${b} → ${a.n}${a.n === 0 ? " NO ANSWER" : a.n > b ? " ▲" : a.n < b ? " ▼" : ""}`;
+      groups.set(k, [...(groups.get(k) || []), `${n} ${Math.round(100 * a.share)}%`]);
+    }
+    for (const [k, units] of groups) lines.push(`    ${pad(fd.label, 34)} ${pad(k, 16)} ${units.slice(0, 3).join(", ")}${units.length > 3 ? ` +${units.length - 3} more` : ""}`);
+  }
+  console.log(`\n  ANSWERS  main-deck copies that answer each S/A unit in 25%+ of its lists (lib/versus.mjs); only what moved, or has none`);
+  console.log(lines.length ? lines.join("\n") : "    no change");
+}
+
+// ── gaps: what the card readers don't act on ─────────────────────────────────
+// Every card the S/A field runs (25%+ of a legend's lists), with each sentence that looks
+// like it changes a fight, a target or the board and that lib/versus.mjs reads as nothing.
+// A gap here is a place a versus or try answer can be silently wrong. Unknown, printed.
+async function cmdGaps(cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const since = opt("--since") || "2026-10-16", top = Number(opt("--top")) || 40;
+  const fieldDecks = await fieldDecksFor(cat, since);
+  const by = new Map();
+  for (const fd of fieldDecks) for (const r of fd.theirs) {
+    if (r.share < 0.25) continue;
+    const g = by.get(r.card.n) || { card: r.card, share: 0, legends: [] };
+    g.legends.push(`${fd.label.split(",")[0]} ${Math.round(100 * r.share)}%`);
+    g.share = Math.max(g.share, r.share); by.set(r.card.n, g);
+  }
+  const rows = [...by.values()].map((g) => ({ ...g, unread: unreadSentences(g.card) })).filter((g) => g.unread.length)
+    .sort((a, b) => b.share - a.share);
+  console.log(`GAPS  ${by.size} cards in 25%+ of an S/A legend's lists since ${since}: ${rows.length} with a sentence the readers don't act on`);
+  console.log(`  (lib/versus.mjs unreadSentences: looks like it changes a fight, a target or the board; check by hand before trusting versus or try on it)\n`);
+  for (const g of rows.slice(0, top)) {
+    console.log(`  ${g.card.n}  · ${g.legends.slice(0, 3).join(", ")}${g.legends.length > 3 ? ` +${g.legends.length - 3}` : ""}`);
+    for (const s of g.unread) console.log(`      ${s.length > 150 ? s.slice(0, 147) + "…" : s}`);
+  }
+  if (rows.length > top) console.log(`\n  … ${rows.length - top} more (--top N)`);
 }
 
 // decklab/<deck>.tiers.json whose "deck" names this deck.
@@ -1517,6 +1580,7 @@ async function main() {
   if (cmd === "meta") return cmdMeta(cat, args);
   if (cmd === "event") return cmdEvent(args);
   if (cmd === "fight") return cmdFight(cat, args);
+  if (cmd === "gaps") return cmdGaps(cat, args);
   const S = await loadState();
   const q = mk(S);
   const table = {
@@ -1542,7 +1606,7 @@ async function main() {
     loops: () => cmdLoops(S, cat, args),
   };
   const fn = table[cmd];
-  if (!fn) { console.error(`unknown command "${cmd}" — try: ${Object.keys(table).join(", ")}`); process.exit(2); }
+  if (!fn) { console.error(`unknown command "${cmd}" — try: ${Object.keys(table).join(", ")}, fight, gaps`); process.exit(2); }
   await fn();
 }
 

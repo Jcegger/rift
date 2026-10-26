@@ -39,7 +39,11 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   off its text (bounce, damage, kills, stuns, counters, fight tricks) and checks both ways:
   what of theirs answers each of my units and spells, and what of mine answers each of
   their units, Might by Might, with every card of theirs weighted by the share of their
-  lists that run it. Not a game simulator and never a win rate. Tests: `lib/versus.test.mjs`.
+  lists that run it. Not a game simulator and never a win rate. An effect that chooses its
+  unit (§355.7) can't reach one that "can't be chosen" (Baron Nashor). `scripts/rift gaps`
+  lists, for the cards in 25%+ of an S/A legend's lists, every sentence that looks like it
+  changes a fight, a target or the board and that the readers act on as nothing: where a
+  versus or try answer can be silently wrong. Tests: `lib/versus.test.mjs`.
 - `lib/decklab.mjs` - decklab's test bench (`scripts/rift try --deck "<name>" "-Card" "+Card"`):
   one proposed change measured before and after, the same way whoever proposed it. Rules,
   shape, the goldfish with Gold and hiding (answers usable on their turn, not in hand), and
@@ -70,13 +74,15 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   calculator; removal that kills a battlefield's last defender stops the hold, a lost
   battlefield trashes its hidden card, counters (Defy, Not So Fast) answer removal, token
   makers and token legends develop, Kai'Sa's spell Power and Battle Mistress's Gold pay.
-  `scripts/rift try` prints it as POINTS and goal tier 0 reads it (our and their points by turn
+  `scripts/rift try --points` prints it as POINTS (opt-in since 26 Oct 2026) and goal tier 0 reads it (our and their points by turn
   8). What it leaves out favours unit-heavy decks (a field deck in our seat checks it: the
   mirror splits about evenly, spell-reliant Irelia does worst), so its numbers are points and
   how they're made, never a win rate. **Not fit to rank whole decks** (25 Oct 2026): adding one
   mechanic (Fizz's pump recast, Star-Crossed's own-unit return) swung a list from best by 0.44
   to worst by 0.30, so a whole-list ranking says as much about what's modelled as about the
-  decks. Use it for one question at a time, alongside results, experts and fight checks. Tests:
+  decks. Use it for one question at a time, alongside results, experts and fight checks. It
+  gains a mechanic only when one such question needs it, never for completeness (Baron's
+  third battlefield is deliberately not modelled). Tests:
   `lib/match.test.mjs`.
 - `lib/widesweep.mjs` - `try --sweep "<card>" --qty N --with all`: the slot against every card
   the deck could legally run (never Dazzling Aurora), each on the same paired model games, the

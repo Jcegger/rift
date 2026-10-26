@@ -34,7 +34,9 @@ Before and after, side by side (`lib/decklab.mjs`):
 - **field** — the S and A tiers of `data/field.json`, each legend's legal lists weighted two
   ways (popularity: lists; results: placings): spells Defy would counter, answers per regular
   6+ Might unit and how many are free from face down, exposure to Might-limited removal, and
-  a blast's reach when the deck has one.
+  a blast's reach when the deck has one;
+- **answers** — for each S/A legend's units in 25%+ of its lists, the main-deck copies that
+  answer them (`lib/versus.mjs`), shown only where the change moved the count, or left none.
 
 Then read it against the deck's goal tiers from stage 2: when a worksheet has a
 `decklab/<deck>.tiers.json` (its tiers' measures, with the worksheet's own targets or a
@@ -43,8 +45,9 @@ shuffle's noise. Other tools for the same stage: `scripts/rift loops` (interacti
 loops from card text), `scripts/rift fight` (one combat, best play both sides), and
 `try --sweep "<card>" --with "<a>, <b>"` (one slot against many candidates; `--with all` for
 every legal card), and `try --grid "<slots>" --with "<leads>"` (many slots against many leads).
-Points come from `lib/match.mjs`: whole model games against the field's real lists, holds,
-conquers and stopped holds scored by the rules; tier 0 reads them. The tools test what was picked;
+Points come from `lib/match.mjs` and only with `--points`: whole model games against the
+field's real lists on one plain policy. It is not fit to rank decks (README), so tier 0 reads
+"—" without it, and the answer is the table, not the model. The tools test what was picked;
 they never pick. For one matchup in detail, `scripts/rift versus <legend> --deck "<name>"`.
 
 ## Working rules
