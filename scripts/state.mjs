@@ -1062,14 +1062,14 @@ async function cmdVersus(S, cat, args) {
   console.log(`\n  YOUR ANSWERS TO THEIR UNITS  (biggest first; ✗ = the card can't, sb = sideboard)`);
   for (const r of V.ourAnswers.filter((r) => r.share >= min).sort((a, b) => b.body.might - a.body.might || b.share - a.share)) {
     const b = r.body;
-    const tags = [b.deflect ? `Deflect ${b.deflect}` : "", b.tank ? "Tank" : "", b.hidden ? "Hidden" : "", b.ambush ? "Ambush" : ""].filter(Boolean).join(", ");
+    const tags = [b.deflect ? `Deflect ${b.deflect}` : "", b.tank ? "Tank" : "", b.hidden ? "Hidden" : "", b.ambush ? "Ambush" : "", b.untargetable ? "can't be chosen" : ""].filter(Boolean).join(", ");
     const seen = new Set();
     const fmt = (a) => `${a.ok === false ? "✗ " : ""}${a.card.n}${a.note ? ` (${a.note})` : ""}`;
     const uniq = r.answers.filter((a) => { const k = a.card.n + (a.sb ? "|sb" : ""); if (seen.has(k)) return false; seen.add(k); return true; });
     const main = uniq.filter((a) => !a.sb), sb = uniq.filter((a) => a.sb && !main.some((m) => m.card.n === a.card.n));
     console.log(`    ${pct(r.share)} ×${r.avg.toFixed(1)} ${r.card.n} · ${b.might} Might${b.defend > b.might ? ` (${b.defend} defending)` : ""}${tags ? ` · ${tags}` : ""}`);
     console.log(`         ${main.map(fmt).join(" · ") || "nothing in the main deck"}`);
-    if (sb.length) console.log(`         sb: ${sb.map((a) => a.card.n).join(" · ")}`);
+    if (sb.length) console.log(`         sb: ${sb.map((a) => a.ok === false ? fmt(a) : a.card.n).join(" · ")}`);
   }
   console.log(`\n  THEIR FIGHT TRICKS  (what a fight of yours has to beat)`);
   const byCard = new Map();
