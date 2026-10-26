@@ -84,10 +84,6 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   gains a mechanic only when one such question needs it, never for completeness (Baron's
   third battlefield is deliberately not modelled). Tests:
   `lib/match.test.mjs`.
-- `lib/widesweep.mjs` - `try --sweep "<card>" --qty N --with all`: the slot against every card
-  the deck could legally run (never Dazzling Aurora), each on the same paired model games, the
-  margin change with its standard error, on worker threads. `try --grid "<a>; <b>" --with
-  "<x>; <y>"` crosses many slots with many candidates the same way. Leads to test, never picks.
 - `lib/markdown.mjs` - the guide renderer the site uses, with heading anchors.
 - `lib/sim.mjs` - the goldfish simulator's engine, shared by `scripts/sim.mjs` and the site.
   `lib/sim-worker.mjs` runs it in a Web Worker for the tweak bench.
@@ -162,7 +158,7 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   on 21 Oct), and NOT ENOUGH DATA, shown apart from D, for an established legend with under 3
   expected top finishes last format and no pilots at a new-format event (Annie, Teemo, Jinx…).
   A new legend is always scored: the crowd's choices are its evidence.
-  `scripts/rift poll [legend]`. The method in prose: `guides/radiance-tier-prediction.md`.
+  `scripts/rift poll [legend]`. The method in prose was `guides/radiance-tier-prediction.md` (retired 26 Oct 2026; git history).
 - `model/preseason-inputs.json` - the model's hand-written judgments, one row per reason:
   component (transfers, schedule, recruiting, hype), points -2..+2, the reason, its cards and
   rule numbers, verified or not (unverified counts half), source; an optional marker card
@@ -266,7 +262,7 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   views are untouched: these are still opponents.
 - `lib/kits.mjs` - the nine Radiance Pre-Rift champion packs, card by card (hand-written:
   Riot hasn't published them; sources in the file). `scripts/rift intake <champion>` checks a
-  scanned kit against it; `guides/radiance-pre-rift.md` §5a has the same lists with card text.
+  scanned kit against it; the same lists with card text were in `guides/radiance-pre-rift.md` §5a (retired 26 Oct 2026; git history).
 - `lib/consensus.mjs` - counting a set of lists into the list they add up to; shared by
   `build-ideas.mjs`, `build-archetypes.mjs` and `lib/netdeck.mjs`.
 - `lib/netdeck.mjs` - a legend's net decks: its good finishes (`lib/placing.mjs`
@@ -312,7 +308,7 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   (`questions.pdf` from `scripts/build-journal`), batch by batch; synced as `answers`.
 - `scripts/build-journal` - renders the match journal's blank pages to PDFs in
   `guides/out/journal/`, sized 3:4 (fits a Kindle Scribe or a reMarkable 2), plus a between-games matchup card
-  printed from the pocket-card table in `guides/khazix-voidreaver-matchups.md`. Fetches
+  printed from the matchup table in the current deck's guide (`guides/sivir-randyyy.md`; the script's `MATCHUPS` names it). Fetches
   nothing.
 - `scripts/check.mjs` - the regression checks; run it after touching the engine.
 - `.github/workflows/refresh.yml` - rebuilds all of the above daily and commits.
@@ -328,6 +324,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `docs/strategy.md` - how to choose between two legal lines: the lethal check, roles,
   reading the opponent, pressure, and reviewing a game. Distilled from Mateo Ferreira's
   *The Mathematics of Winning Positions* and applied to Kha'Zix. On the Guides shelf.
+- `docs/jun.md` - notes on Jun's Kha'Zix guide (Metafy), kept for his general play advice, which
+  `docs/strategy.md` cites; the Kha'Zix deck guides it once corrected are retired.
 - `docs/jargon.md` - how players talk ("chase the queen", "double conquer", "NN") mapped
   onto what the rules call it, each term with its evidence. The bridge from a question in
   players' words to the concept to search the handbook for.
@@ -1463,7 +1461,7 @@ Collection, Guides, News. It lived at `/app/` while it was built and took the ro
   to face (`data/field.json`, most played first): the tier now, Radiance pilots and top 8s, last
   set's Day 1 share and conversion as context, your record, and a link to the plan in the deck's
   guide when one exists
-  (matched by heading, e.g. "Irelia, Blade Dancer — …" in `guides/riven-exile-gauntlet.md`).
+  (matched by heading in the guide).
   **Copy list** and **Download .txt** export it in Piltover Archive's paste format (Legend,
   Champion, MainDeck of 39, Battlefields, Runes, Sideboard; `lib/decks.mjs` `deckText`), the
   same text as `scripts/rift export <deck>`. The editor has the same two buttons, unsaved edits

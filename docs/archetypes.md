@@ -113,12 +113,12 @@ each pick a different thing to grow — buffs, Equipment, levels, Shield.
 - **From Riven:** stun the defender, and attack with two so their pump only saves one fight.
 - **From Rek'Sai:** Punch First means a fight won by 2 is not won; hold Blood Rush.
 - **Sources disagree on its pace:** the
-  [Sivir guide](../guides/sivir-anti-meta-midrange.md) calls it "trick-dense combat-math midrange",
-  the [Rek'Sai guide](../guides/reksai-void-burrower.md) "cheap wide aggro-tempo", Jun "develop
+  Sivir guide (retired guide, in git history) calls it "trick-dense combat-math midrange",
+  the Rek'Sai guide (retired guide, in git history) "cheap wide aggro-tempo", Jun "develop
   hard, then hold"; the numbers say tempo (11 Reactions, cost 2.4), the card text midrange.
 - **Engine:** none — tricks around one lone defender; the legend's +2 is a combat bonus, not a loop.
-- **Sources:** Jun (his Master Yi notes, [Kha'Zix — Jun's Notes](../guides/khazix-voidreaver-jun.md) §8);
-  the [Riven gauntlet](../guides/riven-exile-gauntlet.md); riftbound.gg tier list (3 Oct 2026): Tier 1. The
+- **Sources:** Jun (his Master Yi notes, [Jun's Notes](jun.md) §8);
+  the Riven gauntlet (retired guide, in git history); riftbound.gg tier list (3 Oct 2026): Tier 1. The
   only legend here printed solely in a starter deck — the builders skipped it until 19 Oct 2026.
 - **Call (19 Oct 2026):** midrange. Jun, who plays against it, and the Sivir guide both describe develop-then-hold; the tempo reading is the measured label's 10-Reaction threshold, which also calls Vex and Leona tempo. Radiance adds nothing that changes the plan, and its first Radiance-era results are weak (#26 and #46 of 50).
 
@@ -146,7 +146,7 @@ alone if possible, and win there.
   exhausted friendly unit home** from a battlefield. Kha'Zix, Mutating Horror gets +2 Might and 2
   XP when an enemy unit is **alone** at his battlefield — so the deck moves enemies into lonely
   spots (Void Assault moves a friendly then an enemy; Irresistible Faefolk drags an enemy to its
-  battlefield). Develop first, spells second ([Jun](../guides/khazix-voidreaver-jun.md)).
+  battlefield). Develop first, spells second ([Jun](jun.md)).
 - **Wins by:** a stream of won fights that pay XP, then conquests the walk-home keeps from being
   punished.
 - **Engine:** movement — in to win the fight, out before the retake. Won fights pay the XP that
@@ -155,8 +155,8 @@ alone if possible, and win there.
 - **Fears:** decks that never present a lone unit (go-wide boards), and mass shrink (−Might to all
   enemies) that turns its +2 into nothing.
 - **Measured vs. named:** the numbers say aggro; Jun's plan is midrange (develop, then win the
-  late game). The deep dive is the [deck guide](../guides/khazix-voidreaver.md) and the
-  [matchup guide](../guides/khazix-voidreaver-matchups.md); where they disagree with this page,
+  late game). The deep dive is the deck guide (retired guide, in git history) and the
+  matchup guide (retired guide, in git history); where they disagree with this page,
   they win.
 - **Sources:** riftbound.gg guide (Unleashed, updated 5 Jul 2026): "midrange strategy", built on units that gain XP with Hidden, Ambush and Chaos disruption; Jun (post-ban): midrange, develop units first.
 
@@ -372,7 +372,7 @@ Reactions to win fights after the opponent commits, and bounce.
 - **Fears:** Vex, Apathetic (see above); mass shrink; anything that keeps it off the battlefields
   it controls, since that is where the ready-on-entry works.
 - **Deep dive:** the Nova list and the consensus are on Riven's idea page (Find a deck); the
-  [gauntlet guide](../guides/riven-exile-gauntlet.md) predates any Radiance results.
+  gauntlet guide (retired guide, in git history) predates any Radiance results.
 - **Engine:** exhaust — Riven, Broken Blade and Reckless Innovator pay off becoming exhausted; attacking, moving and Ki Burst feed them.
 - **Sources:** riftbound.gg guide (Radiance theorycraft, 12 Oct 2026): "hold oriented legend", one battlefield controlled; a "Hidden centric" side deck holds more. Read against the tempo label here.
 - **Call (19 Oct 2026):** midrange, not tempo. It develops onto the battlefields it already controls and wins on the value of its exhaust triggers; its Reactions protect a hold rather than race (the guide's "hold oriented"). The tempo reading is the 10-Reaction threshold again — 20 in the Radiance-era lists. A close call, and the most likely to move once Radiance is played.
@@ -684,7 +684,7 @@ and Glasc Mixologist across four legends.
 - **Wins by:** trading every unit for more than it is worth.
 - **Fears:** answers that don't kill — bounce, Banish — so no Deathknell fires.
 - **From Kha'Zix:** Star-Crossed and Switcheroo-style answers beat it better than damage; see the
-  [matchup guide](../guides/khazix-voidreaver-matchups.md).
+  matchup guide (retired guide, in git history).
 - **From Rek'Sai:** your Cull the Weak makes it kill one of its own units too — which it wants.
 - **Engine:** deaths — Deathknell units and Karthus doubling them; the legend's Temporary copy dies and triggers again.
 - **Sources:** riftbound.gg guide (Unleashed, 3 Jul 2026): no single label, "value or tempo": built on Deathknell; a snowball build (Baited Hook) or a slower draw-and-answer one.

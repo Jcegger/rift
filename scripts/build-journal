@@ -9,14 +9,14 @@ Writes four files, kept separate on purpose:
     match-night.pdf   blank match pages -- the only one open during games (TR 416.4)
     trouble-list.pdf  the running trouble list -- read between games, never during one
     review.pdf        the ten-match review
-    matchup-card.pdf  the Kha'Zix pocket card -- between games only, like the trouble list
+    matchup-card.pdf  the deck's matchup table -- between games only, like the trouble list
     questions.pdf     numbered slots for questions to answer later -- never open during a game
 
 Sized 3:4 (6 x 8 in) for a Kindle Scribe; prints fine scaled to A4 or Letter. The pages
 carry field labels only -- no shorthand key, no advice -- because anything more is a note
 from outside the match. Source of truth is docs/match-journal.md; guides/out/ is build
 output (gitignored). The matchup card is the exception: it carries advice, so it is
-printed from the "pocket card" table in guides/khazix-voidreaver-matchups.md and is never
+printed from the matchup table in the current deck's guide (MATCHUPS below) and is never
 open during a game. Drawn with matplotlib, so it needs no browser.
 """
 import argparse
@@ -171,33 +171,36 @@ def review_page(pdf):
     p.done()
 
 
-MATCHUPS = ROOT / "guides" / "khazix-voidreaver-matchups.md"
-CARD_HEADING = "## Between games: the pocket card"
+# The deck being played. Change both lines when the deck changes; the table's first column
+# names the opponent and every other column is printed under its own header.
+MATCHUPS = ROOT / "guides" / "sivir-randyyy.md"
+CARD_HEADING = "## Matchups and the sideboard"
 
 
 def card_rows():
-    """The pocket-card table from the matchup guide, as dicts keyed by its header."""
+    """The matchup table from the deck's guide, as dicts keyed by its header."""
     src = MATCHUPS.read_text(encoding="utf-8")
     at = src.index(CARD_HEADING)  # fail loudly if the section is renamed
     rows = [ln for ln in src[at:].splitlines() if ln.startswith("|")]
     plain = lambda c: re.sub(r"\*\*|`|\[([^\]]+)\]\([^)]*\)", lambda m: m.group(1) or "", c).strip()
     cells = [[plain(c) for c in r.strip("|").split("|")] for r in rows]
     head, body = cells[0], [r for r in cells[2:] if len(r) == len(cells[0])]
-    if len(body) < 10:
-        raise SystemExit(f"pocket card has {len(body)} rows; expected the Tier 1-2 field")
-    return [dict(zip(head, r)) for r in body]
+    if len(body) < 5:
+        raise SystemExit(f"matchup table has {len(body)} rows; expected the field's main decks")
+    return head, [dict(zip(head, r)) for r in body]
 
 
 def card_pages(pdf):
     """Opponent blocks, flowed down the page and onto the next as needed."""
-    rows, wrap = card_rows(), textwrap.TextWrapper(width=88)
-    labels = [("plan", "plan"), ("flips", "flips"), ("never", "never"), ("board", "board"), ("BF", "battlefield")]
+    head, rows = card_rows()
+    wrap = textwrap.TextWrapper(width=80)
+    labels = [(k, k) for k in head[1:]]
     p, y = None, 0.0
 
     def fresh():
         page = Page(pdf)
         page.text(L, 0.45, "MATCHUP CARD — BETWEEN GAMES ONLY", size=10)
-        page.text(L, 0.68, "Kha'Zix Midrange (Jun) · from guides/khazix-voidreaver-matchups.md", size=6, bold=False)
+        page.text(L, 0.68, f"from {MATCHUPS.relative_to(ROOT)}", size=6, bold=False)
         return page, 0.95
 
     for row in rows:
@@ -208,13 +211,13 @@ def card_pages(pdf):
                 p.done()
             p, y = fresh()
         y += 0.2
-        p.text(L, y, f"{row['opponent'].upper()}  ·  Jun: {row['Jun']}", size=7)
+        p.text(L, y, row[head[0]].split(" (")[0].upper(), size=7)
         for lab, text in lines:
             for i, t in enumerate(text):
                 y += 0.15
                 if i == 0:
                     p.text(L, y, lab, size=6)
-                p.text(L + 0.55, y, t, size=6, bold=False)
+                p.text(L + 0.8, y, t, size=6, bold=False)
         y += 0.06
         p.line(L, R, y, lw=0.4, color=FAINT)
     p.done()

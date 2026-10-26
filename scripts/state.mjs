@@ -1095,7 +1095,7 @@ async function cmdTry(S, cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   const since = opt("--since") || "2026-10-16";
   const games = Number(opt("--games") || 20000);
-  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games", "--top", "--grid"]);
+  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games"]);
   const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine" && a !== "--points");
   // --policy "holdUp=3,dais,bandleTree,keepForEvelynn=false": how you play, for the engine report.
   const policy = {};
@@ -1104,16 +1104,14 @@ async function cmdTry(S, cat, args) {
   }
   const sweepCard = opt("--sweep"), sweepWith = (opt("--with") || "").split(/;/.test(opt("--with") || "") ? ";" : ",").map((x) => x.trim()).filter(Boolean);
   const decks = findDecks(S, opt("--deck") || "\u0000");
-  if (decks.length !== 1 || (!specs.length && !sweepCard && !opt("--grid"))) {
+  if (decks.length !== 1 || (!specs.length && !sweepCard)) {
     console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine] [--points]');
     console.log('       try --deck "<one of your decks>" --sweep "Card in the deck" --with "Candidate A, Candidate B" (or "A; B" when a name has a comma) [--policy …]');
     if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
     return;
   }
   const before = decks[0];
-  if (opt("--grid")) return tryGrid(before, cat, opt("--grid"), sweepWith, since, { pointsGames: Number(opt("--points-games")) || 1200, top: Number(opt("--top")) || 40 });
-  if (sweepCard) return trySweep(before, cat, sweepCard, sweepWith, policy, Number(opt("--games") || 3000), opt("--qty") ? Number(opt("--qty")) : null, since,
-    { pointsGames: Number(opt("--points-games")) || null, top: Number(opt("--top")) || null });
+  if (sweepCard) return trySweep(before, cat, sweepCard, sweepWith, policy, Number(opt("--games") || 3000), opt("--qty") ? Number(opt("--qty")) : null, since);
   let changes, after;
   try { changes = parseChanges(specs, cat.cards); after = applyChanges(before, changes, cat.cards, cat.BY); }
   catch (e) { console.log(`try: ${e.message}`); return; }
@@ -1341,48 +1339,14 @@ async function fieldDecksFor(cat, since) {
     }).filter((fd) => fd.n);
 }
 
-// Many slots × many candidates on points (lib/widesweep.mjs gridSweep): "all" slots means every
-// card in the main deck. One copy out, one in, each on the same paired model games.
-async function tryGrid(deck, cat, slotsArg, cands, since, { pointsGames, top }) {
-  const fieldDecks = await fieldDecksFor(cat, since);
-  const inDeck = [...new Set(Object.keys(deck.cards || {}).map((k) => cat.BY.get(k)).filter((c) => c && /Unit|Spell|Gear/.test(c.t)).map((c) => c.n))];
-  const slots = slotsArg.toLowerCase() === "all" ? inDeck : slotsArg.split(";").map((x) => x.trim()).filter(Boolean);
-  const { gridSweep } = await import("../lib/widesweep.mjs");
-  const res = await gridSweep({ deck, cat, slots, cands, foes: foeLists(fieldDecks), games: pointsGames, catalogUrl: import.meta.url,
-    onProgress: (d, n) => process.stderr.write(`\r  ${d} of ${n} pairs`) });
-  process.stderr.write("\n");
-  const f2 = (x) => x.toFixed(2);
-  console.log(`GRID  ${deck.name}: ${slots.length} slots × ${cands.length} candidates = ${res.pairs} legal swaps (${pointsGames} paired model games each, lib/match.mjs)`);
-  console.log(`  as is: our points by turn 8 ${f2(res.base.points8)}, theirs ${f2(res.base.theirPoints8)}`);
-  console.log(`  ${"-1 slot → +1 candidate".padEnd(50)} ${"margin Δ".padStart(9)} ${"± SE".padStart(6)} ${"stops".padStart(6)}`);
-  for (const r of res.rows.slice(0, top)) console.log(`  ${r.name.slice(0, 50).padEnd(50)} ${((r.margin >= 0 ? "+" : "") + f2(r.margin)).padStart(9)} ${f2(r.se).padStart(6)} ${f2(r.stops).padStart(6)}`);
-  console.log("  margin Δ = change in (our − their points by turn 8), same games. Beyond 2 SE is a lead to test, not a pick (the model favours units).");
-}
-
 // One slot, many candidates: the same engine report for each, compact, against the deck as is.
-async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, since, { pointsGames = null, top: topOpt = null } = {}) {
+async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, since) {
   const inDeck = Object.entries(deck.cards || {}).filter(([k]) => cat.BY.get(k)?.n.toLowerCase().startsWith(card.toLowerCase()));
   if (!inDeck.length) { console.log(`try --sweep: the main deck has no "${card}"`); return; }
   const name = cat.BY.get(inDeck[0][0]).n, have = inDeck.reduce((a, [, q]) => a + q, 0), qty = Math.min(qtyOpt || have, have);
   // The field is the same S/A field try uses: the opponents under pressure, and the tiers' field measures.
   const spec = await loadTiers(deck.name);
   const fieldDecks = await fieldDecksFor(cat, since);
-  if (candidates.length === 1 && candidates[0].toLowerCase() === "all") {
-    // Every legal card, on points only (lib/widesweep.mjs): paired model games, many threads.
-    const { wideSweep } = await import("../lib/widesweep.mjs");
-    const g = pointsGames || 2400;
-    const res = await wideSweep({ deck, cat, card: name, qty, foes: foeLists(fieldDecks), games: g, catalogUrl: import.meta.url,
-      onProgress: (d, n) => process.stderr.write(`\r  ${d} of ${n} candidates`) });
-    process.stderr.write("\n");
-    const top = topOpt || 40, f2 = (x) => x.toFixed(2);
-    console.log(`WIDE SWEEP  ${deck.name}: ${qty} of ${have} ${name} → each of ${res.candidates} legal cards (${g} paired model games each, lib/match.mjs)`);
-    console.log(`  as is: our points by turn 8 ${f2(res.base.points8)}, theirs ${f2(res.base.theirPoints8)}, holds stopped ${f2(res.base.stops)}, Evelynn ${f2(res.base.eve)}`);
-    console.log(`  ${"candidate".padEnd(34)} ${"margin Δ".padStart(9)} ${"± SE".padStart(6)} ${"pts8".padStart(6)} ${"thr8".padStart(6)} ${"stops".padStart(6)}`);
-    const show = [...res.rows.slice(0, top), ...(res.rows.length > top ? [null, ...res.rows.slice(-5)] : [])];
-    for (const r of show) console.log(r ? `  ${r.name.slice(0, 34).padEnd(34)} ${(r.margin >= 0 ? "+" : "") + f2(r.margin)}`.padEnd(46) + ` ${f2(r.se).padStart(6)} ${f2(r.points8).padStart(6)} ${f2(r.theirPoints8).padStart(6)} ${f2(r.stops).padStart(6)}` : "  …");
-    console.log("  margin Δ = change in (our − their points by turn 8) against the deck as is, same games. Beyond 2 SE is a lead to test, not a pick: the model plays bodies and the reader's effects, not all card text, and favours units.");
-    return;
-  }
   const base = engineReport(deck, cat, { games, policy, foes: foesOf(deck, cat, fieldDecks) });
   const pgames = Math.max(300, Math.round(games / 10)), foes = foeLists(fieldDecks);
   const basePts = matchReport(deck, cat, foes, { games: pgames });

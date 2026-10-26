@@ -104,7 +104,7 @@ Six phases, but only one of them is open (§315–317):
 
 ### Plan the whole turn before the first action
 
-Jun lists sequencing among the five mistakes every new player makes ([Jun's notes §10](../guides/khazix-voidreaver-jun.md#10-jun-on-video)). Showdowns can happen at any point in a turn, and more than once, so think it through before committing to any move or play. Ask three things:
+Jun lists sequencing among the five mistakes every new player makes ([Jun's notes §10](jun.md#10-jun-on-video)). Showdowns can happen at any point in a turn, and more than once, so think it through before committing to any move or play. Ask three things:
 
 1. **Am I going to force a showdown?**
 2. **Am I going to play a unit?**
@@ -493,6 +493,6 @@ The two rules that hold in every matchup: **never hold zero battlefields, and ne
 
 **The previous edition** used a 506-deck slice dated 18–20 September, because the archive was mid-rebuild at the time. Its numbers sit within a few points of these; the gear figure was the one real error (see [§2](#2-your-deck)).
 
-**Strategy material** in [§7](#7-points-holds-and-roles) is distilled in [strategy.md](strategy.md) (Mateo Ferreira) and [Jun's notes](../guides/khazix-voidreaver-jun.md). Both are paid sources, read in full and summarised in our own words.
+**Strategy material** in [§7](#7-points-holds-and-roles) is distilled in [strategy.md](strategy.md) (Mateo Ferreira) and [Jun's notes](jun.md). Both are paid sources, read in full and summarised in our own words.
 
 **What this page does not do** is explain the three Radiance keywords. `[Deploy]`, `[Disarm]` and `[Show Off]` are printed on cards, but the Core Rules define none of them. Radiance releases **23 October 2026**, and this page will need its shares, staples and keywords redone after it. See **Printed, but not yet in the rules** in [rules.md](rules.md).

@@ -220,7 +220,7 @@ const main = async () => {
 
   const file = {
     generatedAt: new Date().toISOString().slice(0, 10), set: newest, legalFrom,
-    method: "lib/preseason.mjs; guides/radiance-tier-prediction.md is the method in prose",
+    method: "lib/preseason.mjs; the method in prose is in git history (guides/radiance-tier-prediction.md)",
     tiers: Object.fromEntries(TIERS), uncertainWidth: WIDE_LOG, littleData: LITTLE,
     constants: { K_RET, K_PRIOR, K_NEW, VS_CAP, CARRYOVER, CARRY_PRE, CARRY_REG, REG_HALF, carryNow: r3(carry), PREVIEW_W, POINT, UNVERIFIED, POP_FLOOR, CARRYOVER, COVERAGE, MIN_FIELD, TOP, components: COMPONENTS },
     popularity: { legends: pop.n, slope: r3(pop.slope), r: r3(pop.r), cap: r3(cap), pilots: pilotN, postedSince: eraFrom, alpha: ALPHA },

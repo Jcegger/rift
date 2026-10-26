@@ -1,13 +1,13 @@
 ---
-title: Kha'Zix Voidreaver — Jun's Notes
-subtitle: Riftbound, Vendetta season — what Jun's Metafy guide says about playing the deck, read against the post-ban list
+title: Jun's Notes
+subtitle: Riftbound, Vendetta season — what Jun's Metafy guide on Kha'Zix says about playing, read against the post-ban list. Kept for its general play advice, which docs/strategy.md cites; the Kha'Zix deck guides it corrected were retired on 26 Oct 2026.
 author: rift toolchain
 date: 2026-10-02
 ---
 
 **Legend:** Voidreaver (Body/Chaos) · **Champion:** Kha'Zix, Mutating Horror
 **Source:** Jun (JunTCG, ASC JUN on Aspirant's Climb), *Complete Kha'Zix Voidreaver Guide* on metafy.gg, last updated 24 September 2026. These are notes in our own words on the parts that change how you play. **Buy the guide** for the card-by-card detail and the gameplay videos.
-**Companion to:** the [deck guide](khazix-voidreaver.md), which covers how to play the list and the rules it runs on, and the [matchup guide](khazix-voidreaver-matchups.md), which covers the field. Where Jun and those pages disagree, **Jun wins** and the page has been corrected. [§9](#9-where-this-corrected-the-other-guides) lists each correction.
+**Companion to:** the deck guide (retired 26 Oct 2026; in git history), which covers how to play the list and the rules it runs on, and the matchup guide (retired likewise), which covers the field. Where Jun and those pages disagree, **Jun wins** and the page has been corrected. [§9](#9-where-this-corrected-the-other-guides) lists each correction.
 
 **His record on the deck,** as he lists it: RQ Utrecht 10-3, 53rd, Best-Of-Kha'Zix winner. RQ Hartford 9-3-1, 92nd, Best-Of second. **RQ Barcelona 10-2-1, 28th, Best-Of-Kha'Zix winner.** RQ Singapore 9-2-2, 75th. He has never missed top 128 at an RQ on Kha'Zix. These are his claims, not records in our archive.
 
@@ -180,12 +180,12 @@ His six write-ups, written against the pre-ban list, with his post-ban read in [
 
 | page | it said | Jun says | now |
 |---|---|---|---|
-| [matchup guide](khazix-voidreaver-matchups.md), battlefields | Sandswept Tomb is "the default pick" | Zaun Warrens in game 1; Tomb mostly on the draw in games 2–3 | corrected |
+| matchup guide (retired), battlefields | Sandswept Tomb is "the default pick" | Zaun Warrens in game 1; Tomb mostly on the draw in games 2–3 | corrected |
 | matchup guide, battlefields | Star Spring: never against Rek'Sai or LeBlanc | also risky against Rengar, who has ten-plus Reaction-speed ways to trigger it | added |
 | matchup guide, Irelia board | −1 Switcheroo: "nothing to swap into against a flat board" | Switcheroo comes **in** here. Its swap target is the unit they just pumped, not their natural biggest. He cuts Punch First instead | corrected |
 | matchup guide, Master Yi board | −1 Switcheroo (flat board) | Switcheroo comes in; cut Up from the Deep | corrected |
 | matchup guide, Azir plan | take both battlefields before Arise! | let them have the early game; develop and claw back with removal | corrected |
-| [deck guide](khazix-voidreaver.md), turn order | ends "hold up everything" | do not keep Energy open to Ambush on their turn at the cost of developing; good players just develop past it | clarified: hold up what is **free** (facedown cards) or spare, never instead of developing |
+| deck guide (retired), turn order | ends "hold up everything" | do not keep Energy open to Ambush on their turn at the cost of developing; good players just develop past it | clarified: hold up what is **free** (facedown cards) or spare, never instead of developing |
 
 **Two that are not corrections:**
 - **Hard Bargain.** He holds it for his own turn. The deck guide boards it in to protect flips, which can happen on their turn. He wrote that before he ran Hidden cards, so the two do not really conflict. The flip-protection case is new.
@@ -199,7 +199,7 @@ Three of Jun's YouTube videos, transcribed from their auto-generated captions an
 
 ### "Top 5 mistakes Riftbound players make" (29 November 2025)
 
-His first video, and general rather than Kha'Zix-specific. It is consistent with [strategy.md](../docs/strategy.md) point for point.
+His first video, and general rather than Kha'Zix-specific. It is consistent with [strategy.md](strategy.md) point for point.
 
 1. **Actions and Reactions.** Reactions are the stronger tool, because they answer anything that opens a chain, so spend them sparingly. **Casting a spell pre-emptively, before the fight, can win you information.** His example: removal on their unit before you attack. If they answer it with a pump, you change your attacks. If they don't, you attack and keep your own trick for their response.
 2. **Sequencing.** Before any move or play, think the whole turn through: am I forcing a showdown, am I playing a unit, am I holding runes for Actions or Reactions? **Moving and conquering before you play units keeps more options open, and shows the opponent less** before they have to decide on interaction.

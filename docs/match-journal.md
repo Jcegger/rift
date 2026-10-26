@@ -119,7 +119,7 @@ words**.
 | `?` | rules question to look up | `7? Hidden + Star Spring` |
 | `d` | my Conquer drew instead of scoring (missed the 7+ gate, §473.1.b) | `8d` |
 
-Three more for the ways [Kha'Zix](../guides/khazix-voidreaver.md#the-short-version)
+Three more for the ways Kha'Zix (retired guide, in git history)
 loses, so the review page can count them:
 
 | mark | means | example |
@@ -157,7 +157,7 @@ next time I'll ____________________________________________________________
 whatever you choose to note, and one line after.
 
 **The score log is the sheet's main job.** At a Summoner Skirmish, which Riot's OP page
-puts at Competitive (see the [Skirmish prep](../guides/skirmish-prep.md)), **both
+puts at Competitive (see the Skirmish prep (retired guide, in git history)), **both
 players must track both scores in writing** (TR §415.1, §415.3), announcing every change
 (TR §415.2). Dice or an app only stand in at low OPL (TR §415.3.a). One box per point,
 **C** for a conquest, **H** for a hold, **E** for anything else (a card effect such as
@@ -286,7 +286,7 @@ one question for Jun, or one test  ______________________
 - **One change to your play, and one question for Jun or one test**, and only one of
   each. The list is Jun's, and the standing rule is to pick between his lists, not edit
   them. So a deck idea from ten matches is a question to bring him (the
-  [deck guide's §13](../guides/khazix-voidreaver.md#13-questions-to-bring-to-jun) keeps
+  deck guide's §13 (retired guide, in git history) keeps
   the open ones), or a test to run in practice, not a change to the 56. If you do switch
   to another of his lists, **switch only here**, not mid-block. Write the list version
   on the review page; that is the record.
@@ -296,7 +296,7 @@ one question for Jun, or one test  ______________________
 - **`top trouble card`** comes straight off the trouble list: the one with the most marks
   and no answer that works yet.
 - **`card I kept wanting`** is how a real conclusion about a deck arrives from play rather
-  than from simulation. The [deck guide](../guides/khazix-voidreaver.md)'s Switcheroo
+  than from simulation. The deck guide (retired guide, in git history)'s Switcheroo
   question is exactly that kind of finding: a simulation rated the card low against small
   boards, and Jun's play showed the target is the unit they just pumped. Ten matches
   settle what a Monte Carlo cannot.
@@ -360,7 +360,7 @@ device may replace paper at low OPL only at the head judge's discretion (TR §41
 
 **Building them:** `scripts/build-journal` writes all four to `guides/out/journal/`
 (`--pages N` for more match pages). **The matchup card is printed from the pocket-card
-table in the [matchup guide](../guides/khazix-voidreaver-matchups.md#between-games-the-pocket-card)**,
+table in the matchup guide (retired guide, in git history)**,
 so it carries advice. That is exactly why it stays closed during games. Rebuild it
 whenever that table changes. They are 6 × 8 in, the Scribe's 3:4, and print fine
 scaled to A4 or Letter.

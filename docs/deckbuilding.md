@@ -340,7 +340,7 @@ thresholds and change on the same terms.
 - **Where the data parts from them:** winners run **fewer units (18.7)** and **one
   champion copy**, and signatures at 3 or none. The guides are for a first deck; the
   numbers above are for a winning one.
-- Jun ([his notes](../guides/khazix-voidreaver-jun.md) §7) agrees with the data on
+- Jun ([his notes](jun.md) §7) agrees with the data on
   sideboarding: curve first, keep the unit-to-spell balance, **variety beats copies** in
   the flex.
 

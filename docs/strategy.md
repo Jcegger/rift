@@ -21,7 +21,7 @@ without them. Buy the book for the full argument.
 its place on its content. It does. The advice is consistent with what this repo found
 independently: the matchup guide's "which game is this" table is the book's role
 question, arrived at from the numbers. It also agrees with Jun, who has the RQ results
-([Jun's notes](../guides/khazix-voidreaver-jun.md)), on most points where the two overlap.
+([Jun's notes](jun.md)), on most points where the two overlap.
 
 **What is dated.** The book reflects the July 2026 field. Several of its example cards
 are now banned, and those examples have been re-anchored to today's field. See
@@ -358,7 +358,7 @@ add hidden hands, find the same structure in a second matchup, then do it in rea
 
 ## 7. Applied to Kha'Zix Voidreaver
 
-The book is general; Jun is specific. Where they meet, the advice is as solid as this repo has. **Where they differ, Jun wins.** The detail lives in the [deck guide](../guides/khazix-voidreaver.md), the [matchup guide](../guides/khazix-voidreaver-matchups.md) and [Jun's notes](../guides/khazix-voidreaver-jun.md). This section is the map between them.
+The book is general; Jun is specific. Where they meet, the advice is as solid as this repo has. **Where they differ, Jun wins.** The detail lives in the deck guide (retired guide, in git history), the matchup guide (retired guide, in git history) and [Jun's notes](jun.md). This section is the map between them.
 
 | the book says | Jun says, for this deck | so at the table |
 |---|---|---|
@@ -410,7 +410,7 @@ and the type tally on the ten-match review page. For Kha'Zix it also counts the 
 own failure modes as marks: `h` a hidden card lost with its battlefield, `n` a No Result,
 `f` a flip blown out. Those are conversion and information mistakes with a name on them.
 
-**Jun's version of the same discipline** ([Jun's notes §10](../guides/khazix-voidreaver-jun.md#10-jun-on-video)):
+**Jun's version of the same discipline** ([Jun's notes §10](jun.md#10-jun-on-video)):
 in his Irelia commentary he stops on his own error, says what he should have done (buff
 before the fight), and says why (a second Defiant Dance was likely). That is a review in
 one breath: the state, the alternative line, and the evidence that should have changed
@@ -431,7 +431,7 @@ cards in the examples do not:
 | **Diana vs. Irelia** | Irelia is Tier 1.1, Diana Tier 4.2 | unchanged |
 | **Master Yi** open-rune reads, Sabotage before the fight | Master Yi is Tier 2.6 | unchanged |
 
-Tiers are from the [matchup guide](../guides/khazix-voidreaver-matchups.md), riftbound.gg
+Tiers are from the matchup guide (retired guide, in git history), riftbound.gg
 as of 1 October, and will drift. The bans are from `data/banned.json`.
 
 **One sentence to keep:** *a play is good when it moves the game into futures your deck

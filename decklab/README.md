@@ -42,9 +42,8 @@ Then read it against the deck's goal tiers from stage 2: when a worksheet has a
 `decklab/<deck>.tiers.json` (its tiers' measures, with the worksheet's own targets or a
 direction), `try` scores the change tier by tier, counting a change only when it beats the
 shuffle's noise. Other tools for the same stage: `scripts/rift loops` (interactions and
-loops from card text), `scripts/rift fight` (one combat, best play both sides), and
-`try --sweep "<card>" --with "<a>, <b>"` (one slot against many candidates; `--with all` for
-every legal card), and `try --grid "<slots>" --with "<leads>"` (many slots against many leads).
+loops from card text), `scripts/rift fight` (one combat, best play both sides),
+and `try --sweep "<card>" --with "<a>, <b>"` (one slot against the named candidates).
 Points come from `lib/match.mjs` and only with `--points`: whole model games against the
 field's real lists on one plain policy. It is not fit to rank decks (README), so tier 0 reads
 "—" without it, and the answer is the table, not the model. The tools test what was picked;

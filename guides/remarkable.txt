@@ -16,7 +16,7 @@
 @pull     notes/sheets
 @css      guides/eink.css
 @prebuild scripts/build-journal
-@watch    docs/match-journal.md scripts/build-journal guides/khazix-voidreaver-matchups.md
+@watch    docs/match-journal.md scripts/build-journal guides/sivir-trying-her-best.md
 
 /riftbound/table     once    guides/out/journal/match-night.pdf
 /riftbound/table     once    guides/out/journal/trouble-list.pdf
@@ -26,11 +26,6 @@
 # answers: re-enable with the first real batch of questions
 # /riftbound           update  notes/answers.md
 
-/riftbound/reading   update  guides/riven-exile-gauntlet.md
-/riftbound/reading   update  guides/radiance-pre-rift.md
-/riftbound/reading   update  guides/sivir-midrange.md
-/riftbound/reading   update  guides/sivir-nexus-night.md
-/riftbound/reading   update  guides/sivir-movement.md
 /riftbound/reading   update  guides/sivir-trying-her-best.md
 /riftbound/reading   update  docs/strategy.md
 /riftbound/reading   update  docs/fundamentals.md
