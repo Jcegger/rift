@@ -135,3 +135,25 @@ battlefield (no token); and every "ready" in an enemy spell or ability while War
 battlefield, from Warden's second line (Irelia's legend, Arise!, Guards!, Ride the Wind,
 Jayce's legend on gear, Akali's empowered ready, Pit Crew). The unit or gear still moves or is
 played where it legally can; only the ready is negated (§358.3.a's Flash example).
+
+## Switcheroo fizzles if the other unit leaves in response; a resolved swap stays
+
+**Date:** 2026-10-25
+**Source:** Derived in this repo, not a staff ruling; the second half rests on the rules FAQ (the Gangplank, Naval answer, which names Switcheroo). Seen at the table on 2026-10-25: an opponent answered Switcheroo with Sacrifice on their Thousand-Tailed Watcher, and no Might moved. Ask a judge before relying on the first half at an event.
+**Rules:** §359.3.e.12, §359.3.e.5, §359.3.e.6
+**Expires:** when Riot rules on it, or a Core Rules or FAQ update defines the swap game action
+
+**Question.** You play Switcheroo (*"Swap the Might of two units at the same battlefield this
+turn"*) on your unit and theirs. (1) They kill or sacrifice their unit in response. (2) They
+do it after Switcheroo has resolved. Does your unit get the Might?
+
+**Derived answer.** (1) **No swap.** At resolution their unit is off the board, so its Might
+reads null (§359.3.e.12) and the swap computed from it is ignored; it is also no longer a legal
+target (§359.3.e.5, §359.3.e.6). Your unit keeps its own Might; the spell is spent. (2) **Your
+unit keeps it for the turn.** The FAQ: a swap "calculates the difference in Might and generates
+two effects: an increase, and a decrease". Each is its own "this turn" effect, already applied,
+so the other unit leaving afterwards changes nothing.
+
+**Why.** The test from the handbook's section on a source leaving the board: does the
+instruction have to read anything off the departed unit? A swap reads both Mights, so in case
+(1) it does, and the read is null. In case (2) the reading is done.

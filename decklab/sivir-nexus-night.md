@@ -818,3 +818,16 @@ tokens, made in play, so they are not in the lists and not in his numbers.
   Night +1 Elnuk); every main-deck spell is his. Shape: average 2.59 (his 2.44), 18 cards at 2
   Energy or less (his 18), 7 free turn-1 units (his 8), 14 spells for Fizz (his 15). Frozen for
   three Nexus Nights.
+- **25 Oct 2026 — locked in after a night of testing.** Played at the table: losses to Riven
+  (small units out-sized) and Ziggs control (pings plus Void Gate), a win against a Thousand-
+  Tailed Watcher deck, an Ekko who left. What the games showed: small bodies die to small
+  damage, hands ran dry while Gold piled up. Changes, one at a time: +3 Reckless Innovator (Gold
+  into cards; the change the games backed) for Last Rites, 1 Tornado, 1 Matriarch; Kraken Hunter
+  tried and dropped (its cost cut needs buffs); Elnuk dropped (from face down a one-shot +3);
+  +1 Shadow Order Disciple and +1 Grim Resolve back (free turn-1 play; a free Fizz recast).
+  Sideboard gear hate: 2 An Offer You Can't Refuse, Acceptable Losses, Ravenbloom Prefect (a
+  banished Bomb doesn't explode). **Final: seven changes from Randyyy's list** (−1 Disciple,
+  −1 Tornado, −1 Matriarch, −Pyke, −Acceptable Losses, −Last Rites, −1 Edge of Night; +2
+  Staunch, +2 Vex, +3 Innovator). Average 2.49, 18 cards at 2 Energy or less, 7 free turn-1
+  units, 14 spells for Fizz; everything owned. Guide rewritten (`guides/sivir-randyyy.md`); the
+  Switcheroo-and-sacrifice ruling recorded in `docs/rules-rulings.md`.
