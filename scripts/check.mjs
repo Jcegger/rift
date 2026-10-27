@@ -1015,15 +1015,23 @@ if (!tiers) {
   // So assert the mechanism instead: every played Wuju archetype lands on the tier of the
   // entry whose epithet names its legend, whichever ones people are playing and wherever
   // riftbound.gg moves them.
-  const yi = [...map.entries()].filter(([n]) => /wuju/i.test(n));
+  //
+  // It still required a Wuju archetype to be played, which is the same fact about last
+  // week's data one level down: a quiet week for Yi would fail the refresh with nothing
+  // wrong. Now it covers every champion with more than one tier entry (only Yi today), and
+  // a week where none of them is played says so instead of failing.
+  const epithetRe = (r) => new RegExp(r.epithet.replace(/[^A-Za-z]+/g, '[^A-Za-z]*'), 'i');
   const epithetTier = (name) => {
-    const hits = T.filter((r) => r.epithet &&
-      new RegExp(r.epithet.replace(/[^A-Za-z]+/g, '[^A-Za-z]*'), 'i').test(name));
+    const hits = T.filter((r) => r.epithet && epithetRe(r).test(name));
     return hits.length === 1 ? hits[0].tier : null;
   };
-  ok('each played Master Yi archetype lands on its own legend\'s tier',
-     yi.length >= 1 && yi.every(([n, v]) => v.tier === epithetTier(n)),
-     yi.map(([n, v]) => `${n}=T${v.tier}, epithet says T${epithetTier(n)}`).join('; ') || 'none');
+  const split = new Set(T.map((r) => r.champion).filter((c, i, a) => a.indexOf(c) !== i));
+  const splitEntries = T.filter((r) => split.has(r.champion) && r.epithet);
+  const splitPlayed = [...map.entries()].filter(([n]) => splitEntries.some((r) => epithetRe(r).test(n)));
+  ok('each played archetype of a champion with two tier entries lands on its own legend\'s tier',
+     splitPlayed.every(([n, v]) => v.tier === epithetTier(n)),
+     splitPlayed.map(([n, v]) => `${n}=T${v.tier}, epithet says T${epithetTier(n)}`).join('; ') ||
+       `none played this week (${[...split].join(', ') || 'no champion has two entries'})`);
 
   // Meta renders the raw list; Next renders it crossed with the collection, tier-first.
   A.S.inv = collections['deep'];
@@ -1104,8 +1112,13 @@ if (!topdecks) {
   ok('at least 99% of card rows resolve to the catalog', rows.filter((r) => r[2]).length >= rows.length * 0.99,
      `${rows.filter((r) => !r[2]).length} of ${rows.length} unresolved: ${(topdecks.unresolved || []).join(', ')}`);
   const top8 = (e) => e.decks.filter((d) => d.overall != null && d.overall <= 8);
-  ok('the three latest events each have their winner and eight Top 8 lists',
-     E.slice(0, 3).every((e) => top8(e).length >= 8 && top8(e).some((d) => d.overall === 1)),
+  /* Riot does not always publish a full Top 8: Vegas (Mar 2026) has three. Requiring eight
+     of every one of the latest three would fail the refresh the day the next short article
+     lands. What a broken parser looks like is placings gone, so: each of the three has its
+     winner, and at most one of them is short of eight. */
+  ok('the three latest events each have their winner, and at most one a short Top 8',
+     E.slice(0, 3).every((e) => top8(e).some((d) => d.overall === 1)) &&
+       E.slice(0, 3).filter((e) => top8(e).length < 8).length <= 1,
      E.slice(0, 3).map((e) => `${e.slug.replace('-top-decks', '')}: ${top8(e).length}`).join(', '));
   const F = E.filter((e) => e.field);
   ok('every field table resolves to legends', F.every((e) => e.field.every((r) => r.legend)),
@@ -2622,14 +2635,17 @@ section('Rendering');
   // The legendless count is rendered, so it must be derived rather than written down.
   const legendless = A.legendlessChampions();
   const withLegend = new Set(grouped.map((c) => c.champ));
+  // Not `length > 0`: a set that gives every champion a legend makes the honest count zero,
+  // and that is the catalog growing, not the count breaking. The note then disappears.
   ok('legendless champions are counted, not hardcoded',
-     legendless.length > 0 && legendless.every((t) => !withLegend.has(t)),
+     legendless.every((t) => !withLegend.has(t)),
      `${legendless.length} champions have units but no legend`);
   ok('no champion is both in the roster and counted as legendless',
      !legendless.some((t) => grouped.some((c) => c.champ === t)));
   A.renderLegends();
   ok('the rendered legendless count matches the computed one',
-     els.get('v-legends').innerHTML.includes(`${legendless.length} further`));
+     legendless.length ? els.get('v-legends').innerHTML.includes(`${legendless.length} further`)
+                       : !/\d+ further\s+champions?/.test(els.get('v-legends').innerHTML));
   // Holding either of Master Yi's legends plus a unit must make him playable.
   for (const l of yi.legends){
     A.S.inv = { [l.rep.c]: { n: 1 }, [yi.units[0].card.c]: { n: 1 } };
@@ -3419,6 +3435,17 @@ section('The guide renderer');
   // The shelf labels a page by its kicker, then its legend. A page with neither reads
   // "Dossier", which is wrong for a reference page — so the manifest has to carry one.
   const manifest = read('data/guides.json').guides;
+  /* The manifest is generated but guides are hand-edited, so it can fall behind: a renamed
+     guide (sivir-randyyy.md became sivir-trying-her-best.md on 27 Oct 2026) leaves the
+     shelf listing a page that 404s. The refresh rebuilds it daily; this catches the gap. */
+  const onDisk = readdirSync(join(ROOT, 'guides')).filter((f) => f.endsWith('.md')).map((f) => `guides/${f}`);
+  const listed = manifest.map((g) => g.file);
+  const gone = listed.filter((f) => { try { readFileSync(join(ROOT, f)); return false; } catch { return true; } });
+  const unlisted = onDisk.filter((f) => !listed.includes(f));
+  ok('data/guides.json lists exactly the guides that exist — run scripts/build-guides.mjs',
+     gone.length === 0 && unlisted.length === 0,
+     [gone.length && `listed but gone: ${gone.join(', ')}`, unlisted.length && `not listed: ${unlisted.join(', ')}`]
+       .filter(Boolean).join('; ') || `${listed.length} listed`);
   ok('every shelf entry has a title that is not its filename',
      manifest.every((g) => g.title && !g.title.endsWith('.md')),
      manifest.map((g) => g.slug).join(', '));

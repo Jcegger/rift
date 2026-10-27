@@ -157,7 +157,12 @@ const finish = async (events) => {
     const byName = new Map(events.map((e) => [e.name, e]));
     const matched = [...named.keys()].filter((n) => byName.has(n));
     const players = events.reduce((a, e) => a + e.players, 0);
-    const seen = events.filter((e) => named.has(e.name)).reduce((a, e) => a + e.players, 0);
+    // Seen is per run: a weekly series reuses its name, and only the runs with decks count.
+    // Decks carry the run's slug as `es`; one without it counts by name (see eventIndex).
+    const runs = new Set((snap.decks || []).map((d) => d.es).filter(Boolean));
+    const bare = new Set((snap.decks || []).filter((d) => d.ev && !d.es).map((d) => d.ev));
+    const seenEvents = events.filter((e) => runs.has(e.slug) || bare.has(e.name));
+    const seen = seenEvents.reduce((a, e) => a + e.players, 0);
 
     /* ── the blind spot ────────────────────────────────────────────────────────
        unresolvedDeckEvents only ever looked at `ev`, the event upstream vouches for,
@@ -187,7 +192,7 @@ const finish = async (events) => {
 
     coverage = {
       events: events.length,
-      eventsWithDecks: matched.length,
+      eventsWithDecks: seenEvents.length,
       players,
       playersWithDecks: seen,
       unresolvedDeckEvents: [...named.keys()].filter((n) => !byName.has(n)),

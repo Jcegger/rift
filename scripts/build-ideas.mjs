@@ -61,28 +61,31 @@ const main = async () => {
   const legendOf = (d) => idx.legendName(card(d.lg));
 
   /* ── which events were Radiance-format ─────────────────────────────────── */
+  // An event is its run, not its name: a weekly series reuses one name, and a run before
+  // the set and a run after it are two different formats (see eventIndex, build-decks.mjs).
+  const runOf = (d) => d.es || d.ev;
   const byEvent = new Map();
-  for (const d of decks) if (d.tour && d.ev) (byEvent.get(d.ev) || byEvent.set(d.ev, []).get(d.ev)).push(d);
+  for (const d of decks) if (d.tour && d.ev) (byEvent.get(runOf(d)) || byEvent.set(runOf(d), []).get(runOf(d))).push(d);
   const events = [];
-  for (const [name, ls] of byEvent) {
+  for (const [run, ls] of byEvent) {
     const rad = ls.filter((d) => Object.keys(d.cards).some(isEra)).length;
     if (rad / ls.length >= ERA_SHARE)
-      events.push({ name, players: ls[0].ec || null, lists: ls.length, radLists: rad, date: ls.map((d) => d.dt).sort()[0] });
+      events.push({ run, name: ls[0].ev, players: ls[0].ec || null, lists: ls.length, radLists: rad, date: ls.map((d) => d.dt).sort()[0] });
   // Played before the set was legal: unsanctioned, online, on a platform that had the
   // cards early. Real games, not the results of the format — the pages say which.
   // (The date is when the lists were posted, the nearest thing the feed has.)
   for (const e of events) e.preRelease = e.date < ERA_LEGAL;
   }
   events.sort((a, b) => b.date.localeCompare(a.date) || (b.players || 0) - (a.players || 0));
-  const eraEvents = new Set(events.map((e) => e.name));
+  const eraEvents = new Set(events.map((e) => e.run));
   const firstEra = events.map((e) => e.date).sort()[0] || ERA_FROM;
   const beforeFrom = new Date(Date.parse(firstEra) - BEFORE_DAYS * 86400000).toISOString().slice(0, 10);
 
   const skipped = { banned: 0 };
   const keep = (d) => { if (bannedNow(d)) { skipped.banned++; return false; } return true; };
-  const placed = decks.filter((d) => d.tour && eraEvents.has(d.ev) && d.pl != null).filter(keep);
+  const placed = decks.filter((d) => d.tour && eraEvents.has(runOf(d)) && d.pl != null).filter(keep);
   const brews = decks.filter((d) => !d.tour && d.dt >= ERA_FROM && Object.keys(d.cards).some(isEra)).filter(keep);
-  const before = decks.filter((d) => d.tour && d.ev && !eraEvents.has(d.ev) && d.pl != null && d.dt >= beforeFrom && d.dt < firstEra).filter(keep);
+  const before = decks.filter((d) => d.tour && d.ev && !eraEvents.has(runOf(d)) && d.pl != null && d.dt >= beforeFrom && d.dt < firstEra).filter(keep);
 
   const { tally } = counter(idx, card);
 
@@ -99,9 +102,9 @@ const main = async () => {
   const legal = [...decks, ...riot].filter((d) => !bannedNow(d));
   const { goodFinishes } = finishesMaker(idx, card);
   const good = goodFinishes(legal), goodSlugs = new Set(good.map((d) => d.s));
-  const isNow = (d) => eraEvents.has(d.ev) || Object.keys(d.cards).some(isEra);
-  const preRelease = new Map(events.map((e) => [e.name, e.preRelease]));
-  const preview = (d) => (d.ev && preRelease.has(d.ev) ? preRelease.get(d.ev) : d.dt < ERA_LEGAL);
+  const isNow = (d) => eraEvents.has(runOf(d)) || Object.keys(d.cards).some(isEra);
+  const preRelease = new Map(events.map((e) => [e.run, e.preRelease]));
+  const preview = (d) => (d.ev && preRelease.has(runOf(d)) ? preRelease.get(runOf(d)) : d.dt < ERA_LEGAL);
   const goodOf = (name, f) => good.filter((d) => legendOf(d) === name && (f === "now") === isNow(d));
 
   /* ── net decks, and the crowd's list where there are none ──────────────────

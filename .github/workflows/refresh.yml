@@ -248,6 +248,11 @@ jobs:
       - name: Build the field report data
         run: node scripts/build-report.mjs
 
+      # Fetches nothing: the shelf's manifest of guides/*.md. Guides are hand-edited and
+      # renamed between runs, and a manifest left behind lists a page that is gone.
+      - name: Rebuild the guides manifest
+        run: node scripts/build-guides.mjs
+
       - name: Source report
         id: sources
         run: |
