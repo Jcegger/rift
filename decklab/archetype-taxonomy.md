@@ -2,7 +2,7 @@
 title: Archetype taxonomy — worksheet
 subtitle: Overarching archetypes, sub-archetypes, and where every legend and net deck sits. Built with Jay a section at a time; the result rewrites docs/archetypes.md.
 started: 2026-10-27
-status: §1 agreed 27 Oct 2026; §2 (the families) drafted for Jay
+status: §1 and §2 agreed 27 Oct 2026; §3 (placements) next
 ---
 
 How this works: like a deck worksheet ([README.md](README.md)), each section agreed before
@@ -118,7 +118,23 @@ control**, judged, with the measured profile as evidence; **Ramp** joins the fam
 
 ---
 
-## 2. The families — draft, for Jay
+## 2. The families — agreed 27 Oct 2026
+
+**Agreed** (Jay: "feels pretty good", on Claude auditing it first). **The audit**, against the
+27 Oct data:
+- all 18 engines the reader knows map to exactly one family;
+- 49 of 58 legends have every loop the reader finds inside one family, and the cross-family
+  pairs are scattered (2 at most), so no two families want merging;
+- 2 to 11 legends per family; the small ones (Facedown, Extra resources) fill by judgment in
+  §3, since the reader has no Gold key;
+- **one move: Empower to Fights.** Both legends with an Empower loop (Ambessa, Mel) pair it
+  with movement, not spells, and Empower is mostly a unit mechanic (Tail-Cloaked Matriarch,
+  Gangplank, Legion Marauder) about units getting stronger, like Mighty and buffs. Mel's
+  empowered spells can still place her in Spells by judgment.
+
+**Follow-ups for the reader** (lib/engines.mjs), not blocking §3: a Gold key (Sivir is a known
+miss because of it) and a Ramp key (channel extra, cost reduction).
+
 
 *Revised 27 Oct 2026 after §1, by Claude: Facedown split from Spells (4 legends' top loop, and
 it hides units and gear too); Gold joins XP as Extra resources (the doc already labels
@@ -126,12 +142,12 @@ Renata and Sivir "gold"); ramp out of No engine, now that it is a family.*
 
 | family | engines (lib/engines.mjs keys) | what it is |
 |---|---|---|
-| **Fights** | combat, mighty, buff, legion, stun | wins battlefields by winning combats: bigger units, pumps, buffs, stuns |
+| **Fights** | combat, mighty, buff, legion, stun, empower | wins battlefields by winning combats: bigger units, pumps, buffs, Mighty, Empowered, stuns |
 | **Movement** | move, exhaust | units that pay off for moving or exhausting, and ways to move again |
 | **Gear** | gear | equipment and gear as the threat |
 | **Go-wide** | tokens, death | many bodies; tokens, and payoffs for units dying |
 | **Card flow** | offhand, trash, reveal, discard | value from the trash, the top of the deck, discards, playing from elsewhere |
-| **Spells** | spells, empower | spell count and spell payoffs; Empowered |
+| **Spells** | spells | spell count and spell payoffs |
 | **Facedown** | hidden | cards hidden at your battlefields and played free later: units and gear as well as spells. Its own family since Radiance made Hidden common |
 | **Ramp** | *none yet: the reader has no ramp loop* | reaching the 12-rune cap early (rune ramp) or making big cards cheap (cost ramp), to land them turns ahead |
 | **Extra resources** | xp; Gold *(no reader key yet)* | a second resource the deck builds and spends: XP (Poppy, Master Yi, Wuju Master), Gold (Sivir, Renata Glasc) |
@@ -249,6 +265,7 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **27 Oct 2026:** §2 agreed after Claude's audit; Empower moved from Spells to Fights.
 - **27 Oct 2026:** §1 agreed: judged overarching archetype with the measurement as evidence;
   aggro, tempo, midrange, control; ramp a family; combo a tag.
 - **27 Oct 2026:** §1 research on ramp (Jay asked whether it is a subtype): ramp moved to a
