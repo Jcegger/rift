@@ -334,6 +334,14 @@ partitions them by policy), so a legend with Aurora lists gets an Aurora row, ta
 its clean one: Jayce, Miss Fortune, Wuju Yi, Fiora and Volibear at least. A variant Jay knows from play that the
 lists do not yet show goes here by hand, marked as judged.
 
+**Rows by hand:**
+
+| deck | placed | family | why |
+|---|---|---|---|
+| **Sivir Is Trying Her Best** (Jay's) | **Midrange** | Extra resources | Measured with the field's own rule (build-archetypes `label`): cost 2.8, 14 cards at 2 or less, 25 units / 13 spells, 9 draw, interaction 6, so midrange. The field's Sivir (25 lists, cost 2.5, 19 cheap, 6 draw) reads aggro: a different deck, the Randyyy-style curve Jay rebuilt away from after 0-3 on 26 Oct ("early leads faded"). Its matchup plans press some opponents (Riven, Kennen): that is a role, not the archetype (strategy.md §2). Gold into cards is the payoff |
+| Sivir, Battle Mistress, Aurora | *to place* | Ramp, *Aurora* | 10 of 36 lists |
+| Kha'Zix, Voidreaver: Jun's Aggro and Midrange | *to place* | Movement | two known lists (in the app); the lists do not split yet |
+
 ---
 
 ## 5. The doc scan — after §4
@@ -348,6 +356,8 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **27 Oct 2026:** Jay's Sivir measured, not felt (Jay: "aren't we calling Sivir midrange?"):
+  midrange by the field's own rule; the field's Sivir is aggro, a different deck. §4 row added.
 - **27 Oct 2026:** §3 chunk 1 (aggro) drafted: 11 placed, 3 moved out; §4 gets Kha'Zix and
   Sivir by hand.
 - **27 Oct 2026:** §2 audit re-run and the §2 grid and §3 table regenerated with the current
