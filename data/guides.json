@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-23",
+ "generatedAt": "2026-10-27",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -308,12 +308,31 @@
    "words": 9362
   },
   {
+   "slug": "sivir-movement",
+   "file": "guides/sivir-movement.md",
+   "kicker": null,
+   "title": "Sivir Movement Midrange — Deck Guide",
+   "subtitle": "Riftbound, Radiance — a found list, played as written: everything moves. How it wins, how to play it, the rules its tricks run on, and what to log",
+   "date": "2026-10-25",
+   "legend": "Battle Mistress",
+   "champion": "Sivir, Mercenary",
+   "sections": [
+    "The list",
+    "The short version",
+    "The tricks, and the rules they run on",
+    "Turns",
+    "Matchups (reading only; untested)",
+    "What to log (the questions this list has to answer)"
+   ],
+   "words": 1757
+  },
+  {
    "slug": "sivir-nexus-night",
    "file": "guides/sivir-nexus-night.md",
    "kicker": null,
    "title": "Sivir for Nexus Night — Deck Guide",
    "subtitle": "Riftbound, Radiance — the decklab list for a 3-0 at a Nexus Night (best of three, 50-minute rounds): how it wins, how to play it inside the clock, the rules it runs on, and the store's field",
-   "date": "2026-10-23",
+   "date": "2026-10-24",
    "legend": "Battle Mistress",
    "champion": "Sivir, Mercenary",
    "sections": [
@@ -334,7 +353,36 @@
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 6297
+   "words": 8806
+  },
+  {
+   "slug": "sivir-trying-her-best",
+   "file": "guides/sivir-trying-her-best.md",
+   "kicker": null,
+   "title": "Sivir Is Trying Her Best — Deck Guide",
+   "subtitle": "Riftbound, Radiance — Jay's own Sivir, built from Randyyy's LA list over 25–27 October. The game plan on one page, then how to sequence every turn, every card's job, the matchups and the rules it runs on",
+   "date": "2026-10-27",
+   "legend": "Battle Mistress",
+   "champion": "Sivir, Mercenary",
+   "sections": [
+    "Executive summary: the game plan",
+    "1. The list",
+    "2. How it got here",
+    "3. Sequencing",
+    "4. The game, turn by turn",
+    "5. Card by card",
+    "6. Mulligans",
+    "7. Power and Energy, by the numbers",
+    "8. The rules this deck leans on",
+    "9. The sideboard",
+    "10. Matchups",
+    "11. Mistakes that lose games",
+    "12. Open questions for a judge",
+    "13. What to log, and what changes next",
+    "Sources and method",
+    "What this guide does not claim"
+   ],
+   "words": 7423
   },
   {
    "slug": "skirmish-prep",

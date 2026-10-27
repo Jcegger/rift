@@ -794,7 +794,7 @@ tokens, made in play, so they are not in the lists and not in his numbers.
   (3 Merchant, 3 Ezreal, 3 Fizz, 3 Matriarch, 3 Tornado), tricks, battlefields and 5 Body / 7
   Chaos split kept (the goldfish's rune sweep agrees: 5.8% stuck on colour against 4.6% at 6/6,
   under its threshold). Sideboard proposed (his isn't recorded). Saved as `Sivir — Randyyy +
-  Radiance (25 Oct)`, guide `guides/sivir-randyyy.md`. The movement list stays saved for a fun
+  Radiance (25 Oct)`, guide `guides/sivir-trying-her-best.md`. The movement list stays saved for a fun
   night. Plan: three Nexus Nights with this deck, every game logged, then tune from the journal.
 - **25 Oct 2026 — final tweaks: Elnuk in, Rengar out.** From riftbound.gg's Radiance Sivir picks
   (21 Oct): −1 Edge of Night +1 Elnuk Herd (a free +3 from face down that recycles; with Graves a
@@ -829,5 +829,18 @@ tokens, made in play, so they are not in the lists and not in his numbers.
   banished Bomb doesn't explode). **Final: seven changes from Randyyy's list** (−1 Disciple,
   −1 Tornado, −1 Matriarch, −Pyke, −Acceptable Losses, −Last Rites, −1 Edge of Night; +2
   Staunch, +2 Vex, +3 Innovator). Average 2.49, 18 cards at 2 Energy or less, 7 free turn-1
-  units, 14 spells for Fizz; everything owned. Guide rewritten (`guides/sivir-randyyy.md`); the
+  units, 14 spells for Fizz; everything owned. Guide rewritten (`guides/sivir-trying-her-best.md`); the
   Switcheroo-and-sacrifice ruling recorded in `docs/rules-rulings.md`.
+- **26–27 Oct 2026 — rebuilt into Jay's own deck, renamed "Sivir is trying her best".** Jay's own
+  edit first (−1 Tideturner +1 Matriarch +2 Rengar), then, one at a time: −2 Shadow Order
+  Disciple +2 Staunch Survivor; −1 Gust +1 Edge of Night; −1 Grim Resolve +1 Rebuke (swapped with
+  the sideboard); −1 Tideturner +1 Evelynn, Entrancing. What drove it: Jay's games showed no
+  turn-1 problem (the goldfish agrees: no turn 1–2 without a play), so "never cut early drops"
+  was dropped, and his testing gave the rule that now defines the deck: **cheap in Energy, paid
+  in Power** (the legend's Gold is renewable). Identity: Gold pays for card advantage. Rejected
+  on the way: ramp (nothing to ramp into), Black Market (2 Power a card), Rhasa, Mindsplitter (a
+  hand-attack shell feels mean at a Nexus Night), Onslaught (no Power). The engine model
+  (`scripts/rift try`) found ~1.8 tricks a game crowded out by Energy; sweeps showed cheaper
+  units don't move it (1.77 → 1.75) and cheaper tricks only a little (2 Gust for 2 Star-Crossed:
+  1.51, fewer attacks answered), so it is taught as sequencing. First game: W against Kennen on
+  RiftAtlas (26 Oct). Guide rewritten as `guides/sivir-trying-her-best.md`.
