@@ -2,7 +2,7 @@
 title: Archetype taxonomy — worksheet
 subtitle: Overarching archetypes, sub-archetypes, and where every legend and net deck sits. Built with Jay a section at a time; the result rewrites docs/archetypes.md.
 started: 2026-10-27
-status: stage 1 (the two axes) drafted — the questions below are Jay's
+status: §1 agreed 27 Oct 2026; §2 (the families) drafted for Jay
 ---
 
 How this works: like a deck worksheet ([README.md](README.md)), each section agreed before
@@ -24,7 +24,18 @@ that plays more than one deck.
 
 ---
 
-## 1. The two axes — draft
+## 1. The two axes — agreed 27 Oct 2026
+
+**Agreed (Jay, 27 Oct 2026):**
+- **Four overarching archetypes: aggro, tempo, midrange, control.** Judged legend by legend
+  (and deck by deck where a legend splits), with the measured profile beside each as
+  evidence. The measured label (build-archetypes.mjs) stays as a cross-check; a disagreement
+  is something to look at, not an error.
+- **Ramp is a family** (§2), not an overarching archetype: a ramp deck is placed by what it
+  ramps into.
+- **Combo is a tag** a deck can carry on top of its place, not a level.
+
+The reasoning and the research it rests on, as drafted:
 
 **Overarching: how the deck wins the race.** The five words the repo already uses: *aggro*
 (fast, cheap, wide, little interaction), *tempo* (cheap, reactive, wins exchanges), *midrange*
@@ -107,7 +118,11 @@ control**, judged, with the measured profile as evidence; **Ramp** joins the fam
 
 ---
 
-## 2. The families — draft, after §1
+## 2. The families — draft, for Jay
+
+*Revised 27 Oct 2026 after §1, by Claude: Facedown split from Spells (4 legends' top loop, and
+it hides units and gear too); Gold joins XP as Extra resources (the doc already labels
+Renata and Sivir "gold"); ramp out of No engine, now that it is a family.*
 
 | family | engines (lib/engines.mjs keys) | what it is |
 |---|---|---|
@@ -116,10 +131,11 @@ control**, judged, with the measured profile as evidence; **Ramp** joins the fam
 | **Gear** | gear | equipment and gear as the threat |
 | **Go-wide** | tokens, death | many bodies; tokens, and payoffs for units dying |
 | **Card flow** | offhand, trash, reveal, discard | value from the trash, the top of the deck, discards, playing from elsewhere |
-| **Spells** | spells, hidden, empower | spell count, facedown cards, Empowered |
+| **Spells** | spells, empower | spell count and spell payoffs; Empowered |
+| **Facedown** | hidden | cards hidden at your battlefields and played free later: units and gear as well as spells. Its own family since Radiance made Hidden common |
 | **Ramp** | *none yet: the reader has no ramp loop* | reaching the 12-rune cap early (rune ramp) or making big cards cheap (cost ramp), to land them turns ahead |
-| **Levelling** | xp | XP as the resource |
-| **No engine** | none | a curve, removal or ramp with no loop; the overarching word carries it |
+| **Extra resources** | xp; Gold *(no reader key yet)* | a second resource the deck builds and spends: XP (Poppy, Master Yi, Wuju Master), Gold (Sivir, Renata Glasc) |
+| **No engine** | none | a curve or a removal suite with no loop; the overarching word carries it |
 
 **Known reader limits that will show in §3:** Sivir, Battle Mistress reads *hidden* (Gold and
 Ganking are not patterns the reader knows; on engines.test's known misses); Rek'Sai reads
@@ -233,6 +249,8 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **27 Oct 2026:** §1 agreed: judged overarching archetype with the measurement as evidence;
+  aggro, tempo, midrange, control; ramp a family; combo a tag.
 - **27 Oct 2026:** §1 research on ramp (Jay asked whether it is a subtype): ramp moved to a
   family; four overarching archetypes proposed.
 - **27 Oct 2026:** opened. Data from the snapshot of 27 Oct (LDXP Sacramento 25k included).
