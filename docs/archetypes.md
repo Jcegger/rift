@@ -467,7 +467,7 @@ prevents 7. A deck that wins by holding small, very hard battlefields.
 *measured tempo · 1 placed · u21 s17 g2 · cost 2.9 · int 9 · thin · E4 17.1* — the legend buffs when you stun; Leona, Determined stuns on attack;
 **Leona, Zealot gives stunned enemies at her battlefield −8 Might** and enters ready late in the game;
 Zenith Blade stuns and moves in.
-- **Engine:** stuns — the legend buffs when you stun; Leona, Zealot gives stunned enemies −8.
+- **Engine:** stuns into buffs — the legend buffs a unit whenever you stun, and Call to Glory (3 in the lists) spends the buffs; Leona, Zealot gives stunned enemies −8. (27 Oct 2026: written from one list; the 69 lists since play both loops.)
 
 ### Ivern, Green Father — tribes midrange
 *measured tempo · 2 placed · u24 s16 g0 · cost 3.1 · int 8 · thin · E4 17.1* — Bird, Cat, Dog, Poro tags; Ivern, Friend to All scores a point on
@@ -656,7 +656,7 @@ readies on your second card each turn; Spectral Matron and Baited Hook replay un
 ### Vi, Piltover Enforcer — equipment aggro
 *measured aggro · 1 placed · u24 s11 g5 · cost 2.5 · int 2 · thin · E4 17.6* — the legend readies a unit after conquering with 3+ excess damage;
 Hextech Gauntlets, Vault Breaker (Assault 2 and Ganking), Vi, Peacekeeper stuns on attack.
-- **Engine:** gear and winning fights — Equipment with Assault and Ganking; the legend readies on big conquests.
+- **Engine:** gear, winning fights and moving on — Assault wins the fight, Ganking (Vault Breaker, Gem Jammer, Rengar, Unseen, Jhin) moves the winner to the next battlefield, and the legend readies it after a big conquest. (27 Oct 2026: written from one list; the 100 lists since lean on Ganking.)
 
 ### Mordekaiser, Iron Revenant — sacrifice ramp *(Radiance)*
 *measured midrange · 0 placed · u30 s10 g0 · cost 3.5 · int 7 · thin · E4 17.8*

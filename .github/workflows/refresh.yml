@@ -309,6 +309,22 @@ jobs:
       - name: Verify
         run: node scripts/check.mjs
 
+      # The unit tests measure the models against the live lists, so the field moving can
+      # turn one red without anything being broken. Report, never block: fresh data still
+      # lands, and the run summary says which test drifted. (They ran nowhere until 27 Oct
+      # 2026, and two had gone red unnoticed.)
+      - name: Unit tests (report only)
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node --test lib/*.test.mjs scripts/*.test.mjs 2>&1 | tee /tmp/tests.log | tail -5
+          fails=$(grep -c '^not ok' /tmp/tests.log || true)
+          if [ "$fails" != "0" ]; then
+            echo "::warning title=Unit tests drifted::$fails test file(s) failing; see the step log"
+            { echo; echo "**Unit tests:** $fails file(s) failing:"; grep '^not ok' /tmp/tests.log | sed 's/^/- /'; } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
       - name: Commit if anything changed
         env:
           FAILED_SOURCES: ${{ steps.sources.outputs.failed }}
