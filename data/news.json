@@ -1,14 +1,14 @@
 {
- "generatedAt": "2026-10-24",
+ "generatedAt": "2026-10-27",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 36,
+ "carriedFromPrevious": 37,
  "tags": {
-  "News": 47,
-  "Metagame": 22,
+  "Metagame": 23,
+  "News": 51,
   "Guides": 5,
   "Legends": 24,
   "Events": 21,
@@ -16,6 +16,51 @@
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Best Decks for Every Legend for Early Radiance",
+   "dt": "2026-10-26",
+   "url": "https://riftbound.gg/best-decks-for-every-legend-for-early-radiance",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Radiance Rules FAQ and Clarifications",
+   "dt": "2026-10-26",
+   "url": "https://riftbound.gg/radiance-rules-faq-and-clarifications",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
+  {
+   "title": "Riftbound 2027 Local Play",
+   "dt": "2026-10-26",
+   "url": "https://riftbound.gg/riftbound-2027-local-play",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
+  {
+   "title": "Riftbound 2027 Premier Play",
+   "dt": "2026-10-26",
+   "url": "https://riftbound.gg/riftbound-2027-premier-play",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
+  {
+   "title": "The Most Expensive Riftbound Radiance Cards Right Now",
+   "dt": "2026-10-26",
+   "url": "https://riftbound.gg/most-expensive-riftbound-radiance-cards",
+   "tags": [
+    "News"
+   ],
+   "author": "Theo-74825"
+  },
   {
    "title": "How to Enter the T1 2025 Worlds Champion Player Bundle Draw",
    "dt": "2026-10-23",
@@ -1144,8 +1189,53 @@
  ],
  "riotSource": "playriftbound.com/en-us/news/ and its three category pages",
  "riotFailed": null,
- "riotCarried": 2,
+ "riotCarried": 7,
  "riot": [
+  {
+   "title": "All Eyes on RC Europe",
+   "dt": "2026-10-27",
+   "url": "https://playriftbound.com/en-us/news/organizedplay/all-eyes-on-rc-europe",
+   "tags": [
+    "Organized Play"
+   ],
+   "desc": "The best of Riftbound gather in Stuttgart, Germany!"
+  },
+  {
+   "title": "Riftbound x K/DA: Behind the Scenes with Fortiche",
+   "dt": "2026-10-27",
+   "url": "https://youtu.be/egXq3n8UHfE",
+   "tags": [
+    "Announcements"
+   ],
+   "desc": "Here’s how Fortiche designed Evelynn for the Riftbound x K/DA Couture Collection. Drawing live now!"
+  },
+  {
+   "title": "Radiance Rules FAQ and Clarifications",
+   "dt": "2026-10-26",
+   "url": "https://playriftbound.com/en-us/news/organizedplay/radiance-rules-faq-and-clarifications",
+   "tags": [
+    "Organized Play"
+   ],
+   "desc": "Answers for some frequent questions about Radiance interactions."
+  },
+  {
+   "title": "Riftbound 2027 Local Play",
+   "dt": "2026-10-26",
+   "url": "https://playriftbound.com/en-us/news/organizedplay/riftbound-2027-local-play",
+   "tags": [
+    "Organized Play"
+   ],
+   "desc": "The revamped 2027 Local Play program, including Nexus Cups, Challenge Series, and unused Byes."
+  },
+  {
+   "title": "Riftbound 2027 Premier Play",
+   "dt": "2026-10-26",
+   "url": "https://playriftbound.com/en-us/news/organizedplay/riftbound-2027-premier-play",
+   "tags": [
+    "Organized Play"
+   ],
+   "desc": "An overview of the revamped Premier Play program for 2027."
+  },
   {
    "title": "Riftbound’s 2026 Drawings",
    "dt": "2026-10-22",
