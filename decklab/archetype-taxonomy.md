@@ -127,10 +127,15 @@ control**, judged, with the measured profile as evidence; **Ramp** joins the fam
   pairs are scattered (2 at most), so no two families want merging;
 - 2 to 11 legends per family; the small ones (Facedown, Extra resources) fill by judgment in
   §3, since the reader has no Gold key;
-- **one move: Empower to Fights.** Both legends with an Empower loop (Ambessa, Mel) pair it
-  with movement, not spells, and Empower is mostly a unit mechanic (Tail-Cloaked Matriarch,
-  Gangplank, Legion Marauder) about units getting stronger, like Mighty and buffs. Mel's
-  empowered spells can still place her in Spells by judgment.
+- **Empower is in no family** (corrected the same day; Jay: "empower is pretty wide open… we
+  use empower with Matriarch to bring back a unit"). The audit first moved it to Fights as
+  "units getting stronger", from the 2 legends whose top loop it is, without reading the
+  cards. The cards: 55 mention Empower, in all six domains and every card type, and what
+  Empowered does ranges from Might (Steel Paws) to keywords (Shadow Fiend), interaction
+  (Mel, Defiant Soul), cards (Questionable Tome), the trash (Tail-Cloaked Matriarch's revive)
+  and scoring (Nasus, Ascended); Tornado Warrior, Sanction and Kennen's legend flip it.
+  **Empower is a switch, not a plan**: a deck whose loop is Empower is placed by what its
+  Empowered cards do, by judgment, in §3 (Ambessa, Mel).
 
 **Follow-ups for the reader** (lib/engines.mjs), not blocking §3: a Gold key (Sivir is a known
 miss because of it) and a Ramp key (channel extra, cost reduction).
@@ -142,7 +147,7 @@ Renata and Sivir "gold"); ramp out of No engine, now that it is a family.*
 
 | family | engines (lib/engines.mjs keys) | what it is |
 |---|---|---|
-| **Fights** | combat, mighty, buff, legion, stun, empower | wins battlefields by winning combats: bigger units, pumps, buffs, Mighty, Empowered, stuns |
+| **Fights** | combat, mighty, buff, legion, stun | wins battlefields by winning combats: bigger units, pumps, buffs, Mighty, stuns |
 | **Movement** | move, exhaust | units that pay off for moving or exhausting, and ways to move again |
 | **Gear** | gear | equipment and gear as the threat |
 | **Go-wide** | tokens, death | many bodies; tokens, and payoffs for units dying |
@@ -265,7 +270,8 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
-- **27 Oct 2026:** §2 agreed after Claude's audit; Empower moved from Spells to Fights.
+- **27 Oct 2026:** §2 agreed after Claude's audit. Empower first moved to Fights, then, on Jay's
+  check and a read of all 55 Empower cards, out of every family: a switch, placed by what it does.
 - **27 Oct 2026:** §1 agreed: judged overarching archetype with the measurement as evidence;
   aggro, tempo, midrange, control; ramp a family; combo a tag.
 - **27 Oct 2026:** §1 research on ramp (Jay asked whether it is a subtype): ramp moved to a
