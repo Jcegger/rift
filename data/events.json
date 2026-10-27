@@ -6,7 +6,7 @@
   "events": 2473,
   "eventsWithDecks": 21,
   "players": 64516,
-  "playersWithDecks": 6686,
+  "playersWithDecks": 6585,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
    "Mardi - Championship #1",
@@ -33,7 +33,7 @@
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Europe": 62,
+   "Europe": 63,
    "Asia": 93,
    "unknown": 195,
    "North America": 7,
