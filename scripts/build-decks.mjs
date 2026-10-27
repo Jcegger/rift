@@ -224,6 +224,23 @@ const resolveClaim = (event, deckDate, eventByName) => {
   return hits.length === 1 ? hits[0].name : null;    // ambiguous resolves to nothing
 };
 
+/* Which archive row a tournament deck's event is. The join used to be by exact name, and
+   names are not unique: a store's weekly series reuses one. LDXP Sacramento's
+   Radiance-Win-A-Case ran on 23, 24 and 25 Oct 2026 at 63, 25 and 38 players, and the 13
+   decks from the 25-player run were given 63. The feed names the run by
+   `tournament_slug`, which is the archive's own `slug`, so join on that. A deck with no
+   slug (rows carried from before it was kept) falls back to the name, and only when the
+   name is unique; anything else stays unsized rather than borrowing another run's field. */
+export const eventIndex = (events) => {
+  const bySlug = new Map(), byName = new Map(), repeated = new Set();
+  for (const e of events || []){
+    if (e.slug) bySlug.set(e.slug, e);
+    if (byName.has(e.name)) repeated.add(e.name); else byName.set(e.name, e);
+  }
+  return (slug, name) => slug ? bySlug.get(slug) || null
+    : name && !repeated.has(name) ? byName.get(name) || null : null;
+};
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // Their API rate limits, and a full run is dozens of requests, so pace it and back
@@ -349,11 +366,13 @@ const main = async () => {
 
   // Event sizes, so a tournament deck can carry how big its event was. Optional: the
   // snapshot is still usable without it, the decks just lose their credibility weight.
-  // The join is by exact event name, which holds today and is reported on if it stops.
+  // The join is by the run's slug (eventIndex above); claims still resolve by name.
   let eventByName = new Map();
+  let eventOf = eventIndex([]);
   try {
     const ev = JSON.parse(await readFile(new URL("../data/events.json", import.meta.url), "utf8"));
     eventByName = new Map((ev.events || []).map((e) => [e.name, e]));
+    eventOf = eventIndex(ev.events);
   } catch {
     console.log("  (no data/events.json yet; run build-events.mjs for credibility weights)");
   }
@@ -462,10 +481,12 @@ const main = async () => {
       lg: legend ? legend.c : null,
       ln: legend ? legend.n : null,
       ev: t.tournament_name || null,
+      // Which run of the event: names repeat across a weekly series, slugs do not.
+      es: t.tournament_slug || null,
       pl: t.place ?? null,
       // How many players the event drew. A 9-player local and a 433-player major used
       // to weigh the same, which is the whole reason this is carried through.
-      ec: (eventByName.get(t.tournament_name || "") || {}).players || null,
+      ec: eventOf(t.tournament_slug, t.tournament_name)?.players || null,
       /* Upstream's `date`, a real posting timestamp — not, as an earlier version of
          this comment claimed, the day the feed was read. What it is not is evenly
          spread: a bulk import on 2026-09-23 stamped 720+ tournament decks inside five
@@ -534,8 +555,8 @@ const main = async () => {
   // A carried deck's event size comes from today's archive, not from the day it was first
   // seen. The archive grows: on 22 Oct 2026 it re-walked its pages and gained events that
   // carried decks already named, and those decks stayed unsized against an archive that now
-  // knew them, which check.mjs rightly blocked. Same join as a fresh deck: exact event name.
-  for (const d of carried) if (d.tour && d.ev) d.ec = eventByName.get(d.ev)?.players || null;
+  // knew them, which check.mjs rightly blocked. Same join as a fresh deck: eventIndex.
+  for (const d of carried) if (d.tour && d.ev) d.ec = eventOf(d.es, d.ev)?.players || null;
   // Carried rows were written as cited before codes were resolved, and the feed cannot be
   // asked for them again: resolve them here too, so the whole archive reads one way.
   for (const d of carried) d.cards = resolveCards(d.cards);

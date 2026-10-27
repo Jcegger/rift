@@ -1044,9 +1044,13 @@ convention it fails loudly instead of quietly dropping every guide link.
 `data/events.json` is the tournament archive from `api.dotgg.gg/cgfw/gettournaments`:
 30 events, May to August, with player counts. Deck entries already carried an event name
 and a finishing place but nothing about how big the event was, so a 9-player local and a
-433-player major weighed the same. The join is by exact event name, and it holds — every
-event named on a deck matches a row, asserted in the checks because if it ever breaks the
-credibility numbers silently become zero.
+433-player major weighed the same. The join was by exact event name until 27 Oct 2026, when a
+store's weekly series reused one name for three runs (LDXP Sacramento's Radiance-Win-A-Case:
+63, 25 and 38 players) and 13 decks were given another run's field. The feed names the run by
+`tournament_slug`, which is the archive's `slug`; decks now keep it as `es` and join on it
+(`eventIndex` in `build-decks.mjs`). A deck without a slug joins by name only when one run
+uses that name; anything else stays unsized. The app's credibility counts runs, not names.
+The checks assert both, because if the join breaks the credibility numbers silently go wrong.
 
 Making the join possible is how the real problem became visible. Of 480 decks only **38
 are tournament-flagged**, covering **12 of 30 events** — 1,567 of 2,615 players. Convergence

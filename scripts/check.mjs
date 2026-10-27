@@ -13,7 +13,7 @@
 //   node scripts/check.mjs
 
 import { readdirSync, readFileSync } from 'node:fs';
-import { claimFromTitle, placeOf, isPlaceholder } from './build-decks.mjs';
+import { claimFromTitle, placeOf, isPlaceholder, eventIndex } from './build-decks.mjs';
 import { bannedNameSet, deckIsLegal, standardNameSet } from './state.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -874,9 +874,13 @@ else {
   ok('an event a deck names but the archive lacks is recorded, not dropped',
      unresolved.every((n) => (events.coverage?.unresolvedDeckEvents || []).includes(n)),
      `${unresolved.length} of ${deckEvents.size} deck event names have no registry row`);
+  // Sized means the deck's own run is in the archive: by slug, or by a name only one run uses.
+  const eventOf = eventIndex(events.events);
   ok('a tournament deck is either sized by the archive or explicitly unsized',
-     A.DECKS.filter((d) => d.tour && d.ev).every((d) =>
-       byName.has(d.ev) ? Number(d.ec) > 0 : d.ec == null),
+     A.DECKS.filter((d) => d.tour && d.ev).every((d) => {
+       const e = eventOf(d.es, d.ev);
+       return e ? Number(d.ec) === e.players : d.ec == null;
+     }),
      `${A.DECKS.filter((d) => d.tour && d.ec == null).length} unsized of ` +
      `${A.DECKS.filter((d) => d.tour).length} tournament decks`);
   ok('an unsized tournament deck never reports a field of zero',
@@ -892,9 +896,10 @@ else {
   // Three lists out of one 433-player event must not claim 1,299 players of support.
   ok('players are never double counted across lists from one event',
      withEv.every((g) => {
-       const evs = new Set(g.rows.filter((r) => r.deck.tour && r.deck.ev).map((r) => r.deck.ev));
+       const runs = new Map(g.rows.filter((r) => r.deck.tour && r.deck.ev)
+         .map((r) => [r.deck.es || r.deck.ev, r.deck]));
        let cap = 0;
-       for (const n of evs){ const e = events.events.find((x) => x.name === n); cap += e ? e.players : 0; }
+       for (const d of runs.values()) cap += eventOf(d.es, d.ev)?.players || 0;
        return g.evPlayers === cap;
      }));
   ok('an archetype with no tournament lists claims no evidence',
@@ -2450,13 +2455,36 @@ section('Deck options');
     ok(`[${label}] legendPicks: 1-3 deduped lens picks per legend, each a real list`,
        bad.length === 0, bad.slice(0, 3).join('; ') || `${groups.length} legends`);
   }
-  ok('the snapshot has both multi-pick and single-pick legends',
-     multiSeen > 0 && singleSeen > 0, `${multiSeen} multi, ${singleSeen} single (summed over fixtures)`);
 
   // 8. A single-pick legend's expansion has no picks header.
   A.S.inv = collections['deep'];
-  const single = A.metaArchetypes(A.metaPool())
+  const DECKS0 = A.DECKS;
+  let single = A.metaArchetypes(A.metaPool())
     .find((g) => A.legendPicks(g).length === 1 && g.rows.length >= 2 && A.tierByArchetype().has(g.name));
+  /* Live data used to hold both shapes, and this asserted that it did. By 27 Oct 2026 every
+     legend had enough lists that its lenses disagreed (295 multi, 0 single), the single-pick
+     path went untested, and the refresh failed on growth rather than a fault. So when live
+     data has none, make one: a tiered legend cut down to its most viewed tournament list and
+     one quieter, pricier, unplaced list, which every lens resolves to the first. */
+  let fixture = null;
+  if (!single){
+    for (const g of A.metaArchetypes(A.metaPool()).filter((x) => A.tierByArchetype().has(x.name))){
+      const priced = g.rows.filter((r) => !r.illegal && r.deck.pr > 0);
+      const top = priced.filter((r) => r.deck.tour)
+                        .sort((a, b) => (b.deck.vw || 0) - (a.deck.vw || 0))[0];
+      const quiet = top && priced.find((r) => !r.deck.tour && r.deck.pl == null &&
+        r.deck.cp == null && !r.deck.ce && (r.deck.vw || 0) < (top.deck.vw || 0) && r.deck.pr >= top.deck.pr);
+      if (!quiet) continue;
+      const theirs = new Set(g.rows.map((r) => r.deck));
+      A.DECKS = DECKS0.filter((d) => !theirs.has(d) || d === top.deck || d === quiet.deck);
+      single = A.metaArchetypes(A.metaPool()).find((x) => x.name === g.name && A.legendPicks(x).length === 1);
+      if (single){ fixture = g.name; break; }
+      A.DECKS = DECKS0;
+    }
+  }
+  ok('legendPicks yields both shapes: multi-pick live, single-pick live or from a cut-down legend',
+     multiSeen > 0 && !!single,
+     `${multiSeen} multi live; single ${fixture ? `from ${fixture} cut to 2 lists` : singleSeen ? 'live' : 'none found'}`);
   if (single){
     A.S.expand = [single.name];
     A.renderNext();
@@ -2470,6 +2498,7 @@ section('Deck options');
   } else {
     ok('a single-pick legend shows no picks header and no divider', true, 'none shown to test');
   }
+  A.DECKS = DECKS0;
 
   A.S.expand = [];
   A.S.pick = null;

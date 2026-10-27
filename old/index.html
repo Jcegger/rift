@@ -2703,14 +2703,16 @@ function legendPicks(g){
 
    Players are summed over distinct events, not over decks. Three lists out of one
    433-player event are one event's worth of evidence, and summing per deck would
-   claim 1,299 players of support for it.                                          */
+   claim 1,299 players of support for it. An event is its run (`es`), not its name:
+   a weekly series reuses one name, and two of its runs are two fields.            */
 function credibility(g){
   const byEvent = new Map();
   let newest = null;
   for (const row of (g.rows || [])){
     const d = row.deck;
     if (!d.tour || !d.ev) continue;
-    if (!byEvent.has(d.ev)) byEvent.set(d.ev, Number(d.ec) || 0);
+    const k = d.es || d.ev;
+    if (!byEvent.has(k)) byEvent.set(k, Number(d.ec) || 0);
     if (d.dt && (!newest || d.dt > newest)) newest = d.dt;
   }
   let players = 0;
