@@ -283,7 +283,10 @@ each group's list rather than a name.
    lend its results to a clean group nor hide inside one. Its group is kept for the field.
 3. **Split where lists are more than half a deck apart**: average linkage on changed copies,
    merging while two groups average 24 or fewer apart. Density clustering needs more lists
-   than most legends have.
+   than most legends have. **The split is kept only where that legend's own lists earn it**
+   (since 27 Oct 2026): the measurement below, run per legend, must beat random groups by
+   half a card. Otherwise, or under 8 lists, the legend is counted as one deck, and the
+   group records the edge it measured (`split`).
 4. **Counted with `lib/consensus.mjs`**, the brews' counter, not Karsten's method — see below.
 
 **The measurement** (`lib/netdeck.test.mjs`): hide each of a legend's distinct good finishes
@@ -310,6 +313,13 @@ blend; the test keeps it as the comparison.
 *The first run of this (earlier on 23 Oct) put the cut at 20 with a 1.1-card margin. That was
 measured on lists missing their alt-art cards, which made lists look further apart than they
 are: the cut had been fitted to the gaps. Re-run on complete lists, it moved to 24.*
+
+*27 Oct 2026, with the LDXP Sacramento 25k's lists in: across the legends that split, grouped
+beat random by 0.1, not 0.7. The average hid two stories. Per legend: Fiora +1.8 and Master
+Yi, Wuju Bladesman +1.2 (that one was the Aurora pair, which policy already separates), while
+Kennen −1.9, LeBlanc −0.5, Viktor −0.3 and Vex −0.1 split no better than chance, or worse. So
+the half-card bar moved inside `netdecks()`, per legend, and the test asserts it both ways.
+Some legends do have several decks; this says which ones the lists can show.*
 
 **What qualifies.** A group is a **net deck** only when all of these hold:
 

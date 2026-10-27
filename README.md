@@ -273,8 +273,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   **early** (each miss named) or, under 3 finishes, the best list **as played**. Tests and
   measurement: `lib/netdeck.test.mjs` — leave-one-out over the 16 legends with 8+ distinct
   good finishes, against the same lists dealt into random groups. The split is real but
-  small (0.7 of 40 over random), and only four legends split: Kennen, Master Yi, Viktor and
-  Fiora. Where a format has no counted net deck, `crowdDecks()` counts the legend's posted lists
+  small, and since 27 Oct 2026 it is kept per legend only where that legend's own
+  leave-one-out beats random by half a card (`SPLIT_EDGE`; each group carries the `split` it
+  measured) — on that day Fiora, and Kennen in Vendetta; the rest are one deck. Where a format has no counted net deck, `crowdDecks()` counts the legend's posted lists
   the same way (8+ per group), labelled the crowd's list: they share 36.1 of 40 cards with
   winners' lists where both exist, 34.8 leaving out copies — measured in the same test, which
   replaced the brews' blind test. See `docs/deckbuilding.md`, "Net decks".
