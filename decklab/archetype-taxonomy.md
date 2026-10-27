@@ -2,7 +2,7 @@
 title: Archetype taxonomy — worksheet
 subtitle: Overarching archetypes, sub-archetypes, and where every legend and net deck sits. Built with Jay a section at a time; the result rewrites docs/archetypes.md.
 started: 2026-10-27
-status: §1, §2, §3 chunks 1–2 agreed 27 Oct 2026; chunk 3 next
+status: §1, §2, §3 chunks 1–2 agreed 27 Oct 2026; chunk 3 (the last 21) drafted for Jay
 ---
 
 How this works: like a deck worksheet ([README.md](README.md)), each section agreed before
@@ -389,6 +389,52 @@ now pass; the shape decides instead.
   being control. Worth watching in the control chunk.
 - **§4:** a Miss Fortune Aurora row (67 of 101 lists).
 
+
+### Chunk 3: midrange and control, the last 21 — drafted 27 Oct 2026, for Jay
+
+Every legend not yet placed: those the measurement or the doc calls midrange, control or
+ramp. The seven measured *ramp* are placed by what they ramp into (§1).
+
+**A rule sharpened on the way:** LeBlanc's and Ivern's legends trigger on "conquer **or**
+hold". Every deck conquers or holds, so that trigger does not separate a family; the rest of
+the deck's payoffs do. LeBlanc's are Deathknell (Go-wide). Ivern stays Holds on Jay's knowledge
+of how he plays, *not* on his legend's text, and is marked so.
+
+**Midrange (12)**
+
+| legend | family | why |
+|---|---|---|
+| **LeBlanc, Deceiver** | Go-wide | 31 units, Deathknell, and Karthus doubling it; the legend's Temporary copy dies and triggers again. Measured ramp on 8 big cards: what it ramps into is a board. 32 placed |
+| **Fiora, Grand Duelist** | Ramp | Legend channels a rune whenever a unit becomes Mighty, into 8 big cards: rune ramp into big bodies. **27 of 156 Aurora**: a §4 row; in Vendetta her lists split into two decks (§4). 15 placed |
+| **Sett, The Boss** | Fights | Buff everything; the legend recalls a buffed unit instead of letting it die. 6 placed |
+| **Mordekaiser, Iron Revenant** | Go-wide | 30 units; the legend banishes from the trash for Power, so every death fuels the next play. 5 placed |
+| **Renekton, Butcher of the Sands** | Ramp | Legend's Energy is for units only: cost ramp into a 29-unit curve. Interaction 2. 4 placed |
+| **Poppy, Keeper of the Hammer** | Holds | XP on every hold, spent to draw (§2). Cost 2.8, 22 units. **Aurora: 6 of 44 lists** (14%). Jay knows Poppy as an Aurora deck; the lists here say a variant, not the deck. *Thin (3)* |
+| **Jax, Grandmaster at Arms** | Gear | Legend moves Equipment to a fresh carrier; 14 draw. *Thin (2)* |
+| **Lee Sin, Blind Monk** | Fights | Legend buffs a unit every turn; cost 3.1, 25 units. *Thin (1)* |
+| **Rumble, Mechanized Menace** | Fights | Legend gives Mechs Shield: a tribe that wins combats. *Thin (1)* |
+| **Volibear, Relentless Storm** | Ramp | Legend channels on every Mighty unit; 16 big cards. **25 of 64 Aurora**: a §4 row. *Thin (0)* |
+| **Garen, Might of Demacia** | Go-wide | Legend draws 2 on a conquest with 4+ units there; 29 units, interaction 0. *Thin (0)* |
+| **Zed, Master of Shadows** | Go-wide | Shadow Clones, which Zed swaps places with (doc; a known reader miss). *Thin (0, 151 lists)* |
+
+Plus **Ornn, Fire Below the Mountain · Gear** from chunk 1.
+
+**Control (9)**
+
+| legend | family | why |
+|---|---|---|
+| **Kai'Sa, Daughter of the Void** | Spells | Legend's Power is only for spells; interaction 12, removal into a spell top end. Orb: "Spell-Based Control". Measured ramp on 6 big spells. 31 placed |
+| **Viktor, Herald of the Arcane** | Go-wide | Legend makes Recruits; 24 spells, interaction 11. The tokens hold the board while removal works. riftbound.gg: "Control Viktor". 17 placed |
+| **Nasus, Curator of the Sands** | Ramp | Legend readies 2 runes on every 7+ cost play: big-spell ramp. Interaction 11, 17 reactive, 13 draw. 12 placed |
+| **Ezreal, Prodigal Explorer** | No engine | Interaction 16; the legend draws for choosing enemies twice: removal, not a loop. 7 placed |
+| **Jayce, Defender of Tomorrow** (clean), *combo* | Ramp | 4 units, 26 spells: the legend readies ramp gear into the top end and **Gutter Palace, an alternate win** (61% of lists): the combo tag. Slowest start in the field (1.7 units by turn 3). **104 of 159 lists run Aurora**, so the Aurora row (§4) is the majority deck. 20 placed |
+| **Jhin, Virtuoso** | Spells | 26 spells, interaction 14; the legend banishes four big spells to channel 4 and draw. *Thin (3)* |
+| **Seraphine, Starry-Eyed Songstress** | Spells | Legend exhausts three units to make a spell cheaper: the payoff is spells (the reader says exhaust). *Thin (2)* |
+| **Lux, Lady of Luminosity** | Spells | 25 spells, cost 4.5; the legend draws on every big spell. *Thin (0)* |
+| **Renata Glasc, Chem-Baroness** | Holds | Gold on every hold (§2); interaction 11, 17 reactive. *Thin (0)* |
+
+Plus **Annie, Dark Child · No engine** from chunk 1.
+
 ---
 
 ## 4. Legends with several decks — after §3
@@ -409,6 +455,9 @@ lists do not yet show goes here by hand, marked as judged.
 | Sivir, Battle Mistress, Aurora | *to place* | Ramp, *Aurora* | 10 of 36 lists |
 | Kha'Zix, Voidreaver: Jun's Aggro and Midrange | *to place* | Movement | two known lists (in the app); the lists do not split yet |
 | Miss Fortune, Bounty Hunter, Aurora | *to place* | Ramp, *Aurora* | 67 of 101 lists; Orb's "Midrange Ramp" |
+| Jayce, Defender of Tomorrow, Aurora | *to place* | Ramp, *Aurora* | 104 of 159 lists: the majority Jayce |
+| Fiora, Grand Duelist, Aurora | *to place* | Ramp, *Aurora* | 27 of 156 |
+| Volibear, Relentless Storm, Aurora | *to place* | Ramp, *Aurora* | 25 of 64 |
 
 ---
 
@@ -424,6 +473,8 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **27 Oct 2026:** chunk 3 drafted (12 midrange, 9 control); "conquer or hold" triggers do not pick a
+  family; Jayce, Fiora and Volibear Aurora rows to §4.
 - **27 Oct 2026:** chunk 2 agreed; Riven Holds, Holds' definition sharpened to "controlling or holding".
 - **27 Oct 2026:** chunk 2 (tempo) drafted: 10 tempo, 4 control (all Holds), 9 midrange, Draven
   back to aggro; Miss Fortune Aurora to §4.
