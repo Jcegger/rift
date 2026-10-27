@@ -99,7 +99,7 @@ Do not promote one without a sighting.
 | term | means | evidence |
 |---|---|---|
 | **NN / Nexus Night** | the weekly casual store event (low OPL) | Jay ("0-3 at nn"); playriftbound OP page; ultimateguard ("Nexus Night Master") |
-| **Skirmish / Summoner Skirmish** | the top store event tier (Bo3, Swiss + cut). **Not** the rules' "Skirmish" (§489, three-player FFA) | skirmish-prep.md |
+| **Skirmish / Summoner Skirmish** | the top store event tier (Bo3, Swiss + cut). **Not** the rules' "Skirmish" (§489, three-player FFA) | guides/skirmish-prep.md (retired 26 Oct 2026; git history) |
 | **RQ / RO / CC** | Regional Qualifier / Chinese Regional Open / City Challenge | events.json names; tacter "Regional Open" |
 | **0-3, 3-0, X-1, 4-1-1** | match record: wins-losses-draws | Swiss standings (store locator) |
 | **Day 2 / conversion** | made the second day / the share of an archetype's pilots who did | Gamer Tag Mythras LA table (matchup guide) |
