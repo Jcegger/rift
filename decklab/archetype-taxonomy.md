@@ -52,10 +52,58 @@ units, interaction, reactive cards, big cards). The measured rule stays as a cro
 and a disagreement is a thing to look at, not an error. The alternative, fixing the
 thresholds until the rule agrees with our judgment, is fitting the rule to the answer.
 
+### Is ramp an overarching archetype? Research, 27 Oct 2026 (Jay: "I wonder if ramp is a subtype")
+
+**Riftbound caps ramp, structurally.** The Rune Deck is exactly 12 runes (§103.4), everyone
+channels 2 a turn (§315.3.b), and with fewer than 2 left you channel what remains
+(§315.3.b.1, §431.3). So **every player has all 12 runes by turn 6, ramp or not**. Ramp
+cannot build a bigger mana base than the opponent's, only reach the same one a turn or two
+sooner. The cards are written for that ceiling: Mobilize and Catalyst of Aeons say "if you
+can't, draw 1". (Recycling a rune for Power sends it back to the Rune Deck, so a deck can
+fall below 12 and channel back up, but never above.) In Magic, ramp is a whole plan because
+lands keep coming; here it is a few turns of acceleration.
+
+**There are two kinds of "ramp" in the cards, and neither is a plan by itself:**
+- **Rune ramp:** channel extra (Mobilize, Catalyst of Aeons, Stormclaw Ursine, K'Sante,
+  Courageous; legends Grand Duelist and Relentless Storm). Body-heavy: Riot's own deckbuilding
+  primer has the word "ramp" exactly once, as a Body trait: "Body decks often ramp their
+  resources, play efficient and high impact units, and dominate combats".
+- **Cost ramp:** cards that get cheaper (Astral Heron, Rhasa, Hunters' Circle). That is an
+  engine, closer to what lib/engines.mjs reads than to an overall plan.
+
+**The community doesn't use ramp as a top level either.**
+- [RiftCompare](https://riftcompare.com/guides/riftbound-deck-archetypes-guide) (Sep 2026):
+  three pillars, aggro, tempo and midrange, with tags layered on (combo, disruption, value,
+  gear, spell, reach). No control, no ramp.
+- [Riftbound Zone](https://riftbound.zone/en/guide/riftbound-deck-identity/) (Jun 2026):
+  aggro, control, midrange, combo. Acceleration is one of a deck's engines, not an archetype.
+- [riftbound.gg](https://riftbound.gg/riftbound-tcg-deck-archetypes-how-to-find-your-playstyle/)
+  (Jul 2026): aggro, control, combo, "officially" with no source given; Riot's primer uses no
+  archetype words at all.
+- [Orb's tier list](https://orbtradingcards.com/store/blog/riftbound-tier-list-best-decks-2026)
+  (Mar 2026): two-part labels almost everywhere, **"Buff-Based Midrange", "Token-Based
+  Midrange", "Spell-Based Control", "Equipment Aggro", "Stun Control"**, and ramp once, as
+  "Midrange Ramp" (Miss Fortune). That is this worksheet's two axes, in the wild.
+- **Players' own titles** (7,614 lists in data/decks.json): archetype words are rare
+  (midrange 14, control 13, tempo 11, aggro 8) and "ramp" appears twice. Decks are named by
+  legend (docs/jargon.md).
+
+**What follows for this map:** ramp is a **family** (§2), the way to get there, not where you
+are going. A ramp deck is ramping *into* something: a midrange body, a control finisher.
+The measured "ramp" label (7 legends today, e.g. Fiora, Kai'Sa, LeBlanc, Jayce) gets re-judged
+as the macro it ramps into, with **Ramp** as its family where the acceleration is the deck's
+loop. *Combo* is the same kind of word (a tag in every source above), and nothing measures
+as combo today.
+
+**Claude's recommendation:** four overarching archetypes, **aggro, tempo, midrange,
+control**, judged, with the measured profile as evidence; **Ramp** joins the families in §2
+(rune ramp and cost ramp); **combo** is a tag a deck can carry, not a level.
+
 **Questions for Jay**
 1. Judged with the measurement as evidence (recommended), or measured only?
-2. Are the five words the right five? (The classifier also has *combo*, for 12+ copies of one
-   card; nothing reads combo today.)
+2. Four overarching (aggro, tempo, midrange, control), with ramp a family and combo a tag?
+   RiftCompare would drop control too; the field has real control decks (Kai'Sa, Jhin,
+   Ezreal), so Claude would keep it.
 
 ---
 
@@ -69,6 +117,7 @@ thresholds until the rule agrees with our judgment, is fitting the rule to the a
 | **Go-wide** | tokens, death | many bodies; tokens, and payoffs for units dying |
 | **Card flow** | offhand, trash, reveal, discard | value from the trash, the top of the deck, discards, playing from elsewhere |
 | **Spells** | spells, hidden, empower | spell count, facedown cards, Empowered |
+| **Ramp** | *none yet: the reader has no ramp loop* | reaching the 12-rune cap early (rune ramp) or making big cards cheap (cost ramp), to land them turns ahead |
 | **Levelling** | xp | XP as the resource |
 | **No engine** | none | a curve, removal or ramp with no loop; the overarching word carries it |
 
@@ -184,5 +233,7 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **27 Oct 2026:** §1 research on ramp (Jay asked whether it is a subtype): ramp moved to a
+  family; four overarching archetypes proposed.
 - **27 Oct 2026:** opened. Data from the snapshot of 27 Oct (LDXP Sacramento 25k included).
   The split rule (lib/netdeck.mjs) and the Leona and Vi Engine lines went in the same day.
