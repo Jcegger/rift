@@ -291,7 +291,9 @@ Placements are judged from these, chunk by chunk, each with its reason.
 A legend is shown as several net decks only where its own lists earn it
 (lib/netdeck.mjs SPLIT_EDGE, 27 Oct 2026). Today that is **none in Radiance**; in Vendetta,
 **Fiora, Grand Duelist** and **Kennen, Heart of the Tempest**. Each split deck gets its own
-row in §3 as it appears, placed on its own engine. A variant Jay knows from play that the
+row in §3 as it appears, placed on its own engine. **Aurora versions** are separate decks too (lib/netdeck.mjs
+partitions them by policy), so a legend with Aurora lists gets an Aurora row, tagged, beside
+its clean one: Jayce, Miss Fortune, Wuju Yi, Fiora and Volibear at least. A variant Jay knows from play that the
 lists do not yet show goes here by hand, marked as judged.
 
 ---
