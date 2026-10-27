@@ -101,8 +101,9 @@ The deck started as Randyyy's list with seven changes (25 Oct) and was rebuilt o
 |---|---|
 | +3 Reckless Innovator (for Last Rites, a Tornado, a Matriarch) | Gold was piling up and hands ran dry; Innovator turns Gold into cards |
 | +2 Vex, Apathetic (for Pyke, an Edge) | stuns everything they play while she's at a battlefield; cancels Riven's "enters ready" |
-| −1 Tideturner, +1 Matriarch, +2 Rengar (Jay's own edit) | a finisher; Rengar's Ambush answers being out-sized |
-| −2 Shadow Order Disciple, +2 Staunch Survivor | **the rule that defines the deck:** cheap in Energy and paid in Power beats cheap in both. Disciple costs no Power, so he leaves Gold idle |
+| +2 Staunch Survivor (for a Shadow Order Disciple, Acceptable Losses) | Radiance's best 2-drop: attacks and defends at 4. Acceptable Losses moved to the sideboard (gear hate) |
+| −1 Tideturner, −2 Staunch Survivor, +1 Matriarch, +2 Rengar (Jay's own edit) | a finisher; Rengar's Ambush answers being out-sized. Staunch fed neither Fizz nor Matriarch |
+| −2 Shadow Order Disciple, +2 Staunch Survivor (back in) | **the rule that defines the deck:** cheap in Energy and paid in Power beats cheap in both. Disciple costs no Power, so he leaves Gold idle |
 | −1 Gust, +1 Edge of Night (2 now) | a pump paid in Power (hide for a Gold, re-equip for a Chaos) that also keeps 2-drops out of ping range |
 | −1 Grim Resolve, +1 Rebuke (swapped with the sideboard) | paid in Power; bounces any unit at a battlefield; Fizz can recast it; can't be Defied |
 | −1 Tideturner, +1 Evelynn, Entrancing | the only card that opens *their* battlefield for the eighth point |
