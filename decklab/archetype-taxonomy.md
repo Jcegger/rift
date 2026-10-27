@@ -2,7 +2,7 @@
 title: Archetype taxonomy — worksheet
 subtitle: Overarching archetypes, sub-archetypes, and where every legend and net deck sits. Built with Jay a section at a time; the result rewrites docs/archetypes.md.
 started: 2026-10-27
-status: §1, §2 and §3 chunk 1 (aggro) agreed 27 Oct 2026; chunk 2 (tempo) drafted for Jay
+status: §1, §2, §3 chunks 1–2 agreed 27 Oct 2026; chunk 3 next
 ---
 
 How this works: like a deck worksheet ([README.md](README.md)), each section agreed before
@@ -187,7 +187,7 @@ Renata and Sivir "gold"); ramp out of No engine, now that it is a family.*
 | **Card flow** | offhand, trash, reveal, discard | value from the trash, the top of the deck, discards, playing from elsewhere |
 | **Spells** | spells | spell count and spell payoffs |
 | **Facedown** | hidden | cards hidden at your battlefields and played free later: units and gear as well as spells. Its own family since Radiance made Hidden common |
-| **Holds** | *no reader key yet* | rewarded for keeping battlefields, with Hidden tricks and interaction to protect them. Legends: Vex, Gloomist (draw on hold), Ivern, Green Father (Brush on hold), Renata Glasc, Chem-Baroness (Gold on hold), Poppy, Keeper of the Hammer (XP on hold); 42 other cards pay off holding |
+| **Holds** | *no reader key yet* | rewarded for controlling or holding battlefields (Riven's legend counts: units enter ready only where she controls), with Hidden tricks and interaction to protect them. Legends: Vex, Gloomist (draw on hold), Ivern, Green Father (Brush on hold), Renata Glasc, Chem-Baroness (Gold on hold), Poppy, Keeper of the Hammer (XP on hold); 42 other cards pay off holding |
 | **Ramp** | *none yet: the reader has no ramp loop* | reaching the 12-rune cap early (rune ramp) or making big cards cheap (cost ramp), to land them turns ahead |
 | **Extra resources** | xp; Gold *(no reader key yet)* | a second resource the deck builds and spends: XP (Poppy, Master Yi, Wuju Master), Gold (Sivir, Renata Glasc) |
 | **No engine** | none | a curve or a removal suite with no loop; the overarching word carries it |
@@ -328,7 +328,11 @@ The profile numbers are the representative list's (data/archetypes.json). *Borde
   Holds is different because holding is a choice to stop attacking.
 
 
-### Chunk 2: tempo — drafted 27 Oct 2026, for Jay
+### Chunk 2: tempo — agreed 27 Oct 2026
+
+*Jay left the calls to Claude ("whatever you think"). **Riven stays Midrange · Holds**: her legend
+makes battlefields she controls into launchpads, which is still being rewarded for keeping
+them; Holds' definition is sharpened to say so. **Ziggs stays tempo.***
 
 Candidates: every legend left that the measurement or the doc calls tempo, plus Evelynn from
 chunk 1 (24). **Tempo** is §1's: cheap and reactive, staying ahead by winning exchanges.
@@ -420,6 +424,7 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **27 Oct 2026:** chunk 2 agreed; Riven Holds, Holds' definition sharpened to "controlling or holding".
 - **27 Oct 2026:** chunk 2 (tempo) drafted: 10 tempo, 4 control (all Holds), 9 midrange, Draven
   back to aggro; Miss Fortune Aurora to §4.
 - **27 Oct 2026:** chunk 1 agreed; Teemo and Darius aggro, Claude's calls.
