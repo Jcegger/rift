@@ -64,4 +64,4 @@ Rules claims follow CLAUDE.md: handbook first, verbatim where it is load-bearing
 follows the repo's standing rules: no invented numbers, cost is never the axis, and no deck
 running Dazzling Aurora.
 
-Worksheets: none open. The Sivir and Kai'Sa worksheets were retired on 26 Oct 2026 (git history); the deck in play is `guides/sivir-trying-her-best.md`.
+Worksheets: [archetype-taxonomy.md](archetype-taxonomy.md), the archetype map (stage 1, opened 27 Oct 2026; not a deck, run the same way). The Sivir and Kai'Sa worksheets were retired on 26 Oct 2026 (git history); the deck in play is `guides/sivir-trying-her-best.md`.
