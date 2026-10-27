@@ -2,7 +2,7 @@
 title: Archetype taxonomy — worksheet
 subtitle: Overarching archetypes, sub-archetypes, and where every legend and net deck sits. Built with Jay a section at a time; the result rewrites docs/archetypes.md.
 started: 2026-10-27
-status: §1 and §2 agreed 27 Oct 2026; §3 (placements) next
+status: §1 and §2 agreed 27 Oct 2026; §3 chunk 1 (aggro) drafted for Jay
 ---
 
 How this works: like a deck worksheet ([README.md](README.md)), each section agreed before
@@ -284,6 +284,44 @@ Placements are judged from these, chunk by chunk, each with its reason.
 | Annie, Dark Child | At the end of your turn, ready 2 runes. | control (doc: aggro) | none → No engine | — | burn aggro | 0 placed / 40 lists · **thin** |
 | Renata Glasc, Chem-Baroness | When you or an ally hold, you may exhaust me to play a Gold gear token exhausted. While your score is within 3 points of the Victory Score, your Gold [Add] an additional 1E. | midrange | none → No engine | — | gold midrange | 0 placed / 31 lists · **thin** |
 
+
+### Chunk 1: aggro — drafted 27 Oct 2026, for Jay
+
+Candidates: every legend the measurement *or* the doc calls aggro (14). **Aggro** here means
+§1's: a cheap curve, many units, little interaction, closing before the opponent stabilizes.
+The profile numbers are the representative list's (data/archetypes.json). *Borderline* and
+*thin* (under 3 good placings) are flagged; those are the calls most worth your eye.
+
+| legend | placed | family | why |
+|---|---|---|---|
+| **Rengar, Pridestalker** | Aggro | Fights | 30 units, interaction 5, the fastest deck in the field by turn 4 (`versus`: 16.1 Might). Measured midrange only because its average cost is 2.8, just over the rule's 2.7. Legend: +1 Might per unit played |
+| **Rek'Sai, Void Burrower** | Aggro | Go-wide | 27 cards at 2 or less, interaction 3, the most units by turn 3 (4.2). The reader says *reveal* (its legend), but the deck's payoffs are tokens and Deathknell value (Carrion Dredger, Honest Broker). Doc said midrange |
+| **Kha'Zix, Voidreaver** | Aggro | Movement | Cost 2.6, 23 units, interaction 7. Legend: won fights pay XP, spent to walk an exhausted unit home, "in to win the fight, out before the retake" (doc, settled by Jun). **Jun has two lists, Aggro and Midrange**: a §4 row by hand. Doc said midrange |
+| **Lucian, Purifier** | Aggro | Gear | Interaction 2, 21 cards at 2 or less; the 8 Equipment lift the average to 2.8. Legend: every Equipment gives Assault |
+| **Vi, Piltover Enforcer** | Aggro | Movement | Cost 2.6, 25 units, interaction 2. Legend readies a unit after a big conquest; Ganking moves it on (Engine line fixed today) |
+| **Ambessa, Matriarch of War** | Aggro | Fights | Cost 2.4, 23 cards at 2 or less. Empower is a switch (§2), so placed by what Empowered does here: Legion Marauder, Kayle, Guttural Roar (+4 to an Empowered unit): bigger units |
+| **Jarvan IV, Exemplar of Demacia** | Aggro | Gear | Cost 2.7, interaction 2, 10 Deploy gear; the legend moves a unit to each one. *Thin (2)* |
+| **Sivir, Battle Mistress** | Aggro | Extra resources | Cost 2.5, 19 cards at 2 or less: the *field's* Sivir is a fast combat curve. Gold is the payoff the reader cannot see. *Thin (1)*. **Aurora in 10 of 36 lists**: an Aurora row. **Jay's own deck** (Sivir Is Trying Her Best) plays longer, "outlasts them": a §4 row by hand, placed with Jay |
+| **Darius, Hand of Noxus** | Aggro | Fights | 27 units, interaction 4; Legion (the legend adds Energy on the second card). *Borderline*: cost 2.9 and 16 cheap cards could read midrange. *Thin (3)* |
+| **Jinx, Loose Cannon** | Aggro | Card flow | Legend draws only with one card or fewer in hand, so the deck empties its hand fast; Flame Chompers and Jinx, Rebel pay off discarding. *Thin (0 placed, 41 lists)* |
+| **Teemo, Swift Scout** | Aggro | Facedown | 25 cards at 2 or less, interaction 5: a swarm. *Borderline*: 26 Hidden or Reaction cards are why it measures tempo, and his Hidden cards win exchanges (Switcheroo, Tideturner). *Thin (2)* |
+
+**Moved out of aggro, to their own chunks:**
+- **Evelynn, Agony's Embrace → Tempo · Facedown.** Average 3.2 and only 8 cards at 2 or less:
+  not a cheap curve. 21 reactive cards, played from face down on either turn.
+- **Ornn, Fire Below the Mountain → Midrange · Gear.** Only 15 units and 13 draw: it builds
+  an engine of 19 gear rather than rushing; the low average (1.9) is cheap gear.
+- **Annie, Dark Child → Control · No engine.** 19 interaction and 21 spells; the legend readies
+  2 runes at the end of your turn, which is mana for answers on theirs. *Thin (0)*.
+
+**What this chunk sends back up:**
+- **§4 gets rows by hand**: Kha'Zix (Jun's Aggro and Midrange lists) and Sivir (Jay's own
+  deck, and the Aurora lists). The lists do not split them yet (lib/netdeck.mjs), but they
+  are known decks.
+- **Legends that reward conquering** (Rek'Sai, Vi) went to their deck's payoffs, not to a
+  "Conquer" family: conquering is what every aggro deck does, so it does not separate them.
+  Holds is different because holding is a choice to stop attacking.
+
 ---
 
 ## 4. Legends with several decks — after §3
@@ -310,6 +348,8 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **27 Oct 2026:** §3 chunk 1 (aggro) drafted: 11 placed, 3 moved out; §4 gets Kha'Zix and
+  Sivir by hand.
 - **27 Oct 2026:** §2 audit re-run and the §2 grid and §3 table regenerated with the current
   families (Jay: "do you need to re-do the other steps?"); legend text added to §3.
 - **27 Oct 2026:** Holds added as the eleventh family (Vex, Ivern, Renata, Poppy); Aurora a tag
