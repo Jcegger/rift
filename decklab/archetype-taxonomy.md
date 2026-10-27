@@ -122,9 +122,13 @@ control**, judged, with the measured profile as evidence; **Ramp** joins the fam
 
 **Agreed** (Jay: "feels pretty good", on Claude auditing it first). **The audit**, against the
 27 Oct data:
-- all 18 engines the reader knows map to exactly one family;
-- 49 of 58 legends have every loop the reader finds inside one family, and the cross-family
-  pairs are scattered (2 at most), so no two families want merging;
+- 17 of the reader's 18 engines map to exactly one family, and Empower to none on purpose
+  (below); *re-run after Holds and the payoff rule*;
+- 51 of 58 legends have every loop the reader finds inside one family (49 before Facedown
+  split from Spells), and the cross-family pairs are scattered, so no two families want
+  merging;
+- **the reader's family is a hint, not a placement**: it counts cards, and the payoff rule
+  below can overrule it (Vex reads Hidden and is Holds); Holds and Ramp have no reader key;
 - 2 to 11 legends per family; the small ones (Facedown, Extra resources) fill by judgment in
   §3, since the reader has no Gold key;
 - **Empower is in no family** (corrected the same day; Jay: "empower is pretty wide open… we
@@ -193,88 +197,92 @@ Ganking are not patterns the reader knows; on engines.test's known misses); Rek'
 *reveal* where the doc says go-wide; Kennen reads *offhand* (plays from elsewhere), which is
 right. Placements fix these by judgment, with the reason written down.
 
-**The grid as the data has it today** (measured word × the reader's family; *not* a
-proposal, the input to §3):
+**The grid as the data has it today** (measured word × the reader's family *hint*, regenerated
+27 Oct 2026 with the current families; the input to §3, not a proposal):
 
-| family | aggro | tempo | midrange | control | ramp |
+| reader family hint | aggro | tempo | midrange | control | ramp |
 |---|---|---|---|---|---|
 | **Fights** |  | K'Sante, Leona, Draven | Lee Sin, Rengar, Renekton, Sett, Garen, Darius |  | Volibear, Fiora |
 | **Movement** | Kha'Zix, Vi | Riven, Irelia, Yasuo, Pyke, Diana | Seraphine | Miss Fortune, Akali |  |
 | **Gear** | Jarvan IV | Orianna, Azir | Jax, Lucian, Ornn |  | Jayce |
 | **Go-wide** |  | Lillia | Ziggs, Mordekaiser, Viktor |  | LeBlanc |
 | **Card flow** | Rek'Sai | Kennen | Jinx, Zed |  |  |
-| **Spells** | Sivir, Ambessa | Evelynn, Vex, Teemo, Mel |  | Jhin | Kai'Sa, Lux |
-| **Levelling** |  | Master Yi | Poppy |  |  |
+| **Spells** |  |  |  | Jhin | Kai'Sa, Lux |
+| **Facedown** | Sivir | Evelynn, Vex, Teemo |  |  |  |
+| **Extra resources** |  | Master Yi | Poppy |  |  |
+| **(switch: by payoff)** | Ambessa | Mel |  |  |  |
 | **No engine** |  | Master Yi, Ahri, Ivern, Shen, Ekko | Rumble, Renata Glasc | Annie, Ezreal | Nasus |
 
 ---
 
-## 3. Placements — raw input, after §2
+## 3. Placements — raw input, regenerated 27 Oct 2026 with the current families
 
-One row per legend: the measured word (the doc's in brackets where it differs), the reader's
-engine and family, the other loops it found, the doc's label today, and the evidence. **Thin**
-= under 3 good placings: the profile is read from posted lists, not winners.
+One row per legend. **The legend text comes first, because it is usually the payoff** (the
+placement rule, §2). Then the measured word (the doc's in brackets where it differs), the
+reader's engine and the family it hints at, the other loops it found, the doc's label today,
+and the evidence. **Thin** = under 3 good placings: read from posted lists, not winners.
+Placements are judged from these, chunk by chunk, each with its reason.
 
-| legend | macro (measured) | family | engine (reader) | other loops | doc label today | evidence |
+| legend | legend text (the usual payoff) | measured | reader → family hint | other loops | doc label today | evidence |
 |---|---|---|---|---|---|---|
-| Rengar, Pridestalker | midrange (doc: aggro) | Fights | combat | — | ambush aggro | 34 placed / 190 lists |
-| Sett, The Boss | midrange | Fights | buff | — | buff midrange | 6 placed / 103 lists |
-| Renekton, Butcher of the Sands | midrange (doc: ramp) | Fights | combat | — | unit ramp | 4 placed / 61 lists |
-| Darius, Hand of Noxus | midrange (doc: aggro) | Fights | legion | — | legion aggro | 3 placed / 25 lists |
-| Lee Sin, Blind Monk | midrange | Fights | buff | — | buff midrange | 1 placed / 37 lists · **thin** |
-| Garen, Might of Demacia | midrange | Fights | combat | — | go-wide midrange | 0 placed / 16 lists · **thin** |
-| Fiora, Grand Duelist | ramp | Fights | mighty | — | Mighty ramp | 15 placed / 156 lists |
-| Volibear, Relentless Storm | ramp | Fights | mighty | — | big Mighty ramp | 0 placed / 48 lists · **thin** |
-| Draven, Glorious Executioner | tempo (doc: midrange) | Fights | combat | — | combat-draw midrange | 6 placed / 31 lists |
-| Leona, Radiant Dawn | tempo (doc: midrange) | Fights | buff | stun, combat | stun midrange | 2 placed / 61 lists · **thin** |
-| K'Sante, Pride of Nazumah | tempo (doc: midrange) | Fights | combat | — | Shield midrange | 1 placed / 95 lists · **thin** |
-| Kha'Zix, Voidreaver | aggro (doc: midrange) | Movement | move | combat, xp | isolation midrange | 8 placed / 91 lists |
-| Vi, Piltover Enforcer | aggro | Movement | move | combat | equipment aggro | 4 placed / 98 lists |
-| Akali, Rogue Assassin | control (doc: tempo) | Movement | move | — | movement tempo | 32 placed / 252 lists |
-| Miss Fortune, Bounty Hunter | control (doc: tempo) | Movement | move | — | open-battlefield tempo | 0 placed / 31 lists · **thin** |
-| Seraphine, Starry-Eyed Songstress | midrange (doc: control) | Movement | exhaust | — | exhaust-three control | 2 placed / 167 lists · **thin** |
-| Riven, The Exile | tempo (doc: midrange) | Movement | exhaust | — | exhaust midrange | 52 placed / 250 lists |
-| Irelia, Blade Dancer | tempo | Movement | move | — | movement tempo | 19 placed / 180 lists |
-| Diana, Scorn of the Moon | tempo | Movement | move | — | showdown-spell tempo | 8 placed / 87 lists |
-| Pyke, Bloodharbor Ripper | tempo (doc: control) | Movement | move | — | bounce control | 1 placed / 52 lists · **thin** |
-| Yasuo, Unforgiven | tempo | Movement | move | — | movement tempo | 0 placed / 38 lists · **thin** |
-| Jarvan IV, Exemplar of Demacia | aggro | Gear | gear | — | Deploy aggro | 2 placed / 91 lists · **thin** |
-| Ornn, Fire Below the Mountain | midrange (doc: aggro) | Gear | gear | — | gear aggro | 9 placed / 110 lists |
-| Lucian, Purifier | midrange (doc: aggro) | Gear | gear | — | equipment aggro | 5 placed / 60 lists |
-| Jax, Grandmaster at Arms | midrange | Gear | gear | — | equipment midrange | 2 placed / 30 lists · **thin** |
-| Jayce, Defender of Tomorrow | ramp | Gear | gear | — | gear ramp, with an alternate win | 20 placed / 159 lists |
-| Azir, Emperor of the Sands | tempo | Gear | gear | tokens | soldier-token tempo | 19 placed / 180 lists |
-| Orianna, Lady of Clockwork | tempo (doc: midrange) | Gear | gear | — | gear-to-unit midrange | 2 placed / 140 lists · **thin** |
-| Viktor, Herald of the Arcane | midrange (doc: control) | Go-wide | tokens | death | recruit control | 17 placed / 212 lists |
-| Mordekaiser, Iron Revenant | midrange (doc: ramp) | Go-wide | death | — | sacrifice ramp | 5 placed / 165 lists |
-| Ziggs, Hexplosives Expert | midrange (doc: tempo) | Go-wide | tokens | — | bomb tempo | 2 placed / 179 lists · **thin** |
-| LeBlanc, Deceiver | ramp (doc: midrange) | Go-wide | death | tokens | Deathknell midrange | 32 placed / 208 lists |
-| Lillia, Bashful Bloom | tempo (doc: midrange) | Go-wide | tokens | — | Sprite-token midrange | 8 placed / 145 lists |
-| Rek'Sai, Void Burrower | aggro (doc: midrange) | Card flow | reveal | death, combat | go-wide midrange | 21 placed / 172 lists |
-| Jinx, Loose Cannon | midrange (doc: aggro) | Card flow | discard | combat | discard aggro | 0 placed / 41 lists · **thin** |
-| Zed, Master of Shadows | midrange | Card flow | trash | move | clone midrange | 0 placed / 151 lists · **thin** |
-| Kennen, Heart of the Tempest | tempo (doc: midrange) | Card flow | offhand | move | plays-from-elsewhere midrange | 62 placed / 237 lists |
-| Ambessa, Matriarch of War | aggro | Spells | empower | move | empower aggro | 4 placed / 78 lists |
-| Sivir, Battle Mistress | aggro | Spells | hidden | — | gold aggro | 1 placed / 25 lists · **thin** |
-| Jhin, Virtuoso | control (doc: ramp) | Spells | spells | — | four-spell ramp | 3 placed / 60 lists |
-| Kai'Sa, Daughter of the Void | ramp (doc: midrange) | Spells | spells | — | spell midrange | 31 placed / 190 lists |
-| Lux, Lady of Luminosity | ramp | Spells | spells | — | big-spell ramp | 0 placed / 26 lists · **thin** |
-| Vex, Gloomist | tempo (doc: control) | Spells | hidden | — | stun control | 17 placed / 278 lists |
-| Evelynn, Agony's Embrace | tempo (doc: aggro) | Spells | hidden | — | facedown aggro | 6 placed / 217 lists |
-| Teemo, Swift Scout | tempo (doc: aggro) | Spells | hidden | — | Hidden-swarm aggro | 2 placed / 76 lists · **thin** |
-| Mel, Soul's Reflection | tempo (doc: midrange) | Spells | empower | move | empowered-spell midrange | 1 placed / 59 lists · **thin** |
-| Poppy, Keeper of the Hammer | midrange | Levelling | xp | — | XP midrange | 3 placed / 43 lists |
-| Master Yi, Wuju Master | tempo (doc: midrange) | Levelling | xp | — | levelling midrange | 4 placed / 63 lists |
-| Ezreal, Prodigal Explorer | control | No engine | none | — | removal control | 7 placed / 86 lists |
-| Annie, Dark Child | control (doc: aggro) | No engine | none | — | burn aggro | 0 placed / 40 lists · **thin** |
-| Rumble, Mechanized Menace | midrange | No engine | none | — | Mech midrange | 1 placed / 64 lists · **thin** |
-| Renata Glasc, Chem-Baroness | midrange | No engine | none | — | gold midrange | 0 placed / 31 lists · **thin** |
-| Nasus, Curator of the Sands | ramp | No engine | none | — | big-spell ramp | 12 placed / 102 lists |
-| Master Yi, Wuju Bladesman | tempo (doc: midrange) | No engine | none | — | lone-defender midrange | 37 placed / 256 lists |
-| Ekko, Boy Who Shattered Time | tempo | No engine | none | — | re-buy tempo | 4 placed / 111 lists |
-| Ivern, Green Father | tempo (doc: midrange) | No engine | none | — | tribes midrange | 2 placed / 95 lists · **thin** |
-| Shen, Eye of Twilight | tempo (doc: midrange) | No engine | none | — | pair-defence midrange | 2 placed / 112 lists · **thin** |
-| Ahri, Nine-Tailed Fox | tempo (doc: control) | No engine | none | — | shrink control | 0 placed / 75 lists · **thin** |
+| Rengar, Pridestalker | When you play a unit, give a unit +1 Might this turn. | midrange (doc: aggro) | combat → Fights | — | ambush aggro | 34 placed / 190 lists |
+| Fiora, Grand Duelist | When one of your units becomes [Mighty], you may exhaust me to channel 1 rune exhausted. | ramp | mighty → Fights | — | Mighty ramp | 15 placed / 156 lists |
+| Sett, The Boss | When a buffed unit you control would die, you may pay 1P and exhaust me to spend its buff and recall it exhausted instead. When you conquer, ready me. | midrange | buff → Fights | — | buff midrange | 6 placed / 103 lists |
+| Draven, Glorious Executioner | When you win a combat, draw 1. | tempo (doc: midrange) | combat → Fights | — | combat-draw midrange | 6 placed / 31 lists |
+| Renekton, Butcher of the Sands | [Reaction][>] 1P1P, exhaust: [Add] ·. Spend this Energy only to play units or activated abilities of units. | midrange (doc: ramp) | combat → Fights | — | unit ramp | 4 placed / 61 lists |
+| Darius, Hand of Noxus | exhaust: [Reaction], [Legion] — [Add] 1E. | midrange (doc: aggro) | legion → Fights | — | legion aggro | 3 placed / 25 lists |
+| Leona, Radiant Dawn | When you stun one or more enemy units, buff a friendly unit. | tempo (doc: midrange) | buff → Fights | stun, combat | stun midrange | 2 placed / 61 lists · **thin** |
+| Lee Sin, Blind Monk | 1E, exhaust: Buff a friendly unit. | midrange | buff → Fights | — | buff midrange | 1 placed / 37 lists · **thin** |
+| K'Sante, Pride of Nazumah | 1E, exhaust: Give a friendly unit "I have [Assault] equal to my [Shield]" this turn. | tempo (doc: midrange) | combat → Fights | — | Shield midrange | 1 placed / 95 lists · **thin** |
+| Volibear, Relentless Storm | When you play a [Mighty] unit, you may exhaust me to channel 1 rune exhausted. | ramp | mighty → Fights | — | big Mighty ramp | 0 placed / 48 lists · **thin** |
+| Garen, Might of Demacia | When you conquer, if you have 4+ units at that battlefield, draw 2. | midrange | combat → Fights | — | go-wide midrange | 0 placed / 16 lists · **thin** |
+| Riven, The Exile | Units you play to battlefields you control enter ready. | tempo (doc: midrange) | exhaust → Movement | — | exhaust midrange | 52 placed / 250 lists |
+| Akali, Rogue Assassin | [Empower] ·1P [Action][>] exhaust: If it's your turn, move a friendly unit in a showdown to base and if I'm [Empowered], ready it. | control (doc: tempo) | move → Movement | — | movement tempo | 32 placed / 252 lists |
+| Irelia, Blade Dancer | When you choose a friendly unit, you may exhaust me and pay 1P to ready it. When you conquer, you may pay 1E to ready me. | tempo | move → Movement | — | movement tempo | 19 placed / 180 lists |
+| Kha'Zix, Voidreaver | When you win a combat, gain 1 XP. Spend 1 XP, exhaust: [Buff] a unit. Spend 2 XP, exhaust: Move an exhausted friendly unit from a battlefield to its base. | aggro (doc: midrange) | move → Movement | combat, xp | isolation midrange | 8 placed / 91 lists |
+| Diana, Scorn of the Moon | [Reaction][>] exhaust: [Add] 1E. Spend this Energy only during showdowns. | tempo | move → Movement | — | showdown-spell tempo | 8 placed / 87 lists |
+| Vi, Piltover Enforcer | When you conquer, if you assigned 3 or more excess damage, you may exhaust me to ready a unit. | aggro | move → Movement | combat | equipment aggro | 4 placed / 98 lists |
+| Seraphine, Starry-Eyed Songstress | As an additional cost to play a spell, you may exhaust me and three friendly units to reduce the cost of that spell by ·. | midrange (doc: control) | exhaust → Movement | — | exhaust-three control | 2 placed / 167 lists · **thin** |
+| Pyke, Bloodharbor Ripper | 1E, exhaust: Return a friendly unit at a battlefield to its owner's hand. Play a Gold gear token exhausted. | tempo (doc: control) | move → Movement | — | bounce control | 1 placed / 52 lists · **thin** |
+| Miss Fortune, Bounty Hunter | exhaust: Give a unit [Ganking] this turn. | control (doc: tempo) | move → Movement | — | open-battlefield tempo | 0 placed / 31 lists · **thin** |
+| Yasuo, Unforgiven | ·, exhaust: Move a friendly unit to or from your base. | tempo | move → Movement | — | movement tempo | 0 placed / 38 lists · **thin** |
+| Jayce, Defender of Tomorrow | [Empower] ·1P1P 1E, exhaust: Ready a gear. [Empowered][>] 1E, exhaust: Ready 2 gear. | ramp | gear → Gear | — | gear ramp, with an alternate win | 20 placed / 159 lists |
+| Azir, Emperor of the Sands | Your Sand Soldiers have [Weaponmaster]. 1E, exhaust: Play a 2 Might Sand Soldier unit token to your base. Use only if you've played an Equipment this turn. | tempo | gear → Gear | tokens | soldier-token tempo | 19 placed / 180 lists |
+| Ornn, Fire Below the Mountain | exhaust: [Reaction] — [Add] 1P. Use only to play gear or use gear abilities. | midrange (doc: aggro) | gear → Gear | — | gear aggro | 9 placed / 110 lists |
+| Lucian, Purifier | Your Equipment each give [Assault]. | midrange (doc: aggro) | gear → Gear | — | equipment aggro | 5 placed / 60 lists |
+| Jax, Grandmaster at Arms | 1E, exhaust: Attach a detached Equipment you control to a unit you control. exhaust: Attach an attached Equipment you control to a unit you control. | midrange | gear → Gear | — | equipment midrange | 2 placed / 30 lists · **thin** |
+| Jarvan IV, Exemplar of Demacia | When you play a gear with [Deploy], you may exhaust me and pay 1P to move a friendly unit to that battlefield. | aggro | gear → Gear | — | Deploy aggro | 2 placed / 91 lists · **thin** |
+| Orianna, Lady of Clockwork | At the start of your Main Phase, you may pay 1E to choose a friendly gear. It becomes a unit gear with Might equal to its Energy cost until you choose another gear with me. | tempo (doc: midrange) | gear → Gear | — | gear-to-unit midrange | 2 placed / 140 lists · **thin** |
+| LeBlanc, Deceiver | When you conquer or hold, you may discard 1 and exhaust me to play a ready Reflection unit token there. It becomes a copy of another unit there. Give it [Temporary]. | ramp (doc: midrange) | death → Go-wide | tokens | Deathknell midrange | 32 placed / 208 lists |
+| Viktor, Herald of the Arcane | 1E, exhaust: Play a 1 Might Recruit unit token. | midrange (doc: control) | tokens → Go-wide | death | recruit control | 17 placed / 212 lists |
+| Lillia, Bashful Bloom | ·, exhaust: Play a ready 3 Might Sprite unit token with [Temporary]. This ability costs 1E less for each friendly unit with [Temporary]. | tempo (doc: midrange) | tokens → Go-wide | — | Sprite-token midrange | 8 placed / 145 lists |
+| Mordekaiser, Iron Revenant | [Reaction][>] Banish a unit or gear from your trash, exhaust: [Add] 1P. Spend this Power only to play units or gear. | midrange (doc: ramp) | death → Go-wide | — | sacrifice ramp | 5 placed / 165 lists |
+| Ziggs, Hexplosives Expert | 1E1P, exhaust: Play a Bomb gear token to a battlefield. | midrange (doc: tempo) | tokens → Go-wide | — | bomb tempo | 2 placed / 179 lists · **thin** |
+| Kennen, Heart of the Tempest | When you play a card from anywhere other than your hand, empower me. [Action][>] Disempower me, exhaust: Give a unit [Assault 2] this turn. | tempo (doc: midrange) | offhand → Card flow | move | plays-from-elsewhere midrange | 62 placed / 237 lists |
+| Rek'Sai, Void Burrower | When you conquer, you may exhaust me to reveal the top 2 cards of your Main Deck. You may play one. Then recycle the rest. | aggro (doc: midrange) | reveal → Card flow | death, combat | go-wide midrange | 21 placed / 172 lists |
+| Jinx, Loose Cannon | At start of your Beginning Phase, draw 1 if you have one or fewer cards in your hand. | midrange (doc: aggro) | discard → Card flow | combat | discard aggro | 0 placed / 41 lists · **thin** |
+| Zed, Master of Shadows | When you banish a card you own, empower me. [Action][>] Disempower me, exhaust: Discard 1, then draw 1. | midrange | trash → Card flow | move | clone midrange | 0 placed / 151 lists · **thin** |
+| Kai'Sa, Daughter of the Void | exhaust: [Reaction] — [Add] 1P. Use only to play spells. | ramp (doc: midrange) | spells → Spells | — | spell midrange | 31 placed / 190 lists |
+| Jhin, Virtuoso | When you play a spell, if you spent · or more, you may banish it. Then, if there are four spells banished with me, put each in its trash, channel 4 runes, and draw 1. | control (doc: ramp) | spells → Spells | — | four-spell ramp | 3 placed / 60 lists |
+| Lux, Lady of Luminosity | When you play a spell that costs · or more, draw 1. | ramp | spells → Spells | — | big-spell ramp | 0 placed / 26 lists · **thin** |
+| Vex, Gloomist | When you or an ally hold, you may exhaust me to draw 1. | tempo (doc: control) | hidden → Facedown | — | stun control | 17 placed / 278 lists |
+| Evelynn, Agony's Embrace | Once each turn, when you play a card from face down, draw 1. Then, if it's not your turn, discard 1. | tempo (doc: aggro) | hidden → Facedown | — | facedown aggro | 6 placed / 217 lists |
+| Teemo, Swift Scout | You may pay 1E to hide a card with [Hidden] instead of 1P. 1E, exhaust: Put a Teemo unit you own into your hand from your Champion Zone or the board. | tempo (doc: aggro) | hidden → Facedown | — | Hidden-swarm aggro | 2 placed / 76 lists · **thin** |
+| Sivir, Battle Mistress | When you recycle a rune, you may exhaust me to play a Gold gear token exhausted. When one or more enemy units die, ready me. | aggro | hidden → Facedown | — | gold aggro | 1 placed / 25 lists · **thin** |
+| Master Yi, Wuju Master | [Level 6][>] Your units have +1 Might. [Level 11][>] Your units enter ready. | tempo (doc: midrange) | xp → Extra resources | — | levelling midrange | 4 placed / 63 lists |
+| Poppy, Keeper of the Hammer | When you hold, gain 1 XP. Spend 3 XP, exhaust: Draw 1. | midrange | xp → Extra resources | — | XP midrange | 3 placed / 43 lists |
+| Ambessa, Matriarch of War | When you empower something else, empower me. Disempower me, 1P, exhaust: Ready a unit. | aggro | empower → (switch: by payoff) | move | empower aggro | 4 placed / 78 lists |
+| Mel, Soul's Reflection | When you empower something else, empower me. Disempower me, exhaust: Give a unit at a battlefield -2 Might this turn. | tempo (doc: midrange) | empower → (switch: by payoff) | move | empowered-spell midrange | 1 placed / 59 lists · **thin** |
+| Master Yi, Wuju Bladesman | While a friendly unit defends alone, it gets +2 Might. | tempo (doc: midrange) | none → No engine | — | lone-defender midrange | 37 placed / 256 lists |
+| Nasus, Curator of the Sands | When you play a unit, gear, or activated ability with Energy cost · or more, you may exhaust me to ready up to 2 runes. | ramp | none → No engine | — | big-spell ramp | 12 placed / 102 lists |
+| Ezreal, Prodigal Explorer | exhaust: [Reaction] — Draw 1. Use only if you've chosen enemy units and/or gear twice this turn with spells or unit abilities. | control | none → No engine | — | removal control | 7 placed / 86 lists |
+| Ekko, Boy Who Shattered Time | [Empower] — 1E, exhaust Disempower me, exhaust: Reduce the cost of the next unit you play this turn by ·1P and give it "Kill me at end of turn." | tempo | none → No engine | — | re-buy tempo | 4 placed / 111 lists |
+| Ivern, Green Father | When you conquer or hold, you may exhaust me to replace that battlefield with a Brush battlefield token. | tempo (doc: midrange) | none → No engine | — | tribes midrange | 2 placed / 95 lists · **thin** |
+| Shen, Eye of Twilight | [Action][>] exhaust: Give a friendly unit [Tank] this turn. | tempo (doc: midrange) | none → No engine | — | pair-defence midrange | 2 placed / 112 lists · **thin** |
+| Rumble, Mechanized Menace | Your Mechs have [Shield]. | midrange | none → No engine | — | Mech midrange | 1 placed / 64 lists · **thin** |
+| Ahri, Nine-Tailed Fox | When an enemy unit attacks a battlefield you control, give it -1 Might this turn, to a minimum of 1 Might. | tempo (doc: control) | none → No engine | — | shrink control | 0 placed / 75 lists · **thin** |
+| Annie, Dark Child | At the end of your turn, ready 2 runes. | control (doc: aggro) | none → No engine | — | burn aggro | 0 placed / 40 lists · **thin** |
+| Renata Glasc, Chem-Baroness | When you or an ally hold, you may exhaust me to play a Gold gear token exhausted. While your score is within 3 points of the Victory Score, your Gold [Add] an additional 1E. | midrange | none → No engine | — | gold midrange | 0 placed / 31 lists · **thin** |
 
 ---
 
@@ -300,6 +308,8 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **27 Oct 2026:** §2 audit re-run and the §2 grid and §3 table regenerated with the current
+  families (Jay: "do you need to re-do the other steps?"); legend text added to §3.
 - **27 Oct 2026:** Holds added as the eleventh family (Vex, Ivern, Renata, Poppy); Aurora a tag
   (Jay: Poppy is an Aurora deck), usually on Ramp.
 - **27 Oct 2026:** placement rule added (Jay: "question everything… Teemo runs a lot of hidden"):
