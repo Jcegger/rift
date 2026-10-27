@@ -2,7 +2,7 @@
 title: Archetype taxonomy — worksheet
 subtitle: Overarching archetypes, sub-archetypes, and where every legend and net deck sits. Built with Jay a section at a time; the result rewrites docs/archetypes.md.
 started: 2026-10-27
-status: §1 and §2 agreed 27 Oct 2026; §3 chunk 1 (aggro) drafted for Jay
+status: §1, §2 and §3 chunk 1 (aggro) agreed 27 Oct 2026; chunk 2 (tempo) next
 ---
 
 How this works: like a deck worksheet ([README.md](README.md)), each section agreed before
@@ -285,7 +285,12 @@ Placements are judged from these, chunk by chunk, each with its reason.
 | Renata Glasc, Chem-Baroness | When you or an ally hold, you may exhaust me to play a Gold gear token exhausted. While your score is within 3 points of the Victory Score, your Gold [Add] an additional 1E. | midrange | none → No engine | — | gold midrange | 0 placed / 31 lists · **thin** |
 
 
-### Chunk 1: aggro — drafted 27 Oct 2026, for Jay
+### Chunk 1: aggro — agreed 27 Oct 2026
+
+*Jay left the two borderline calls to Claude ("whatever makes sense"): **Teemo aggro**, since his
+Hidden cards mostly deploy (Sprite Call, Teemo, Scout, Consult the Past) rather than answer,
+with interaction 5; **Darius aggro**, since Legion pays for two cheap cards a turn and, with
+interaction 4 and no big cards, nothing trades into a better late board.*
 
 Candidates: every legend the measurement *or* the doc calls aggro (14). **Aggro** here means
 §1's: a cheap curve, many units, little interaction, closing before the opponent stabilizes.
@@ -356,6 +361,7 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **27 Oct 2026:** chunk 1 agreed; Teemo and Darius aggro, Claude's calls.
 - **27 Oct 2026:** Jay's Sivir measured, not felt (Jay: "aren't we calling Sivir midrange?"):
   midrange by the field's own rule; the field's Sivir is aggro, a different deck. §4 row added.
 - **27 Oct 2026:** §3 chunk 1 (aggro) drafted: 11 placed, 3 moved out; §4 gets Kha'Zix and
