@@ -137,6 +137,21 @@ control**, judged, with the measured profile as evidence; **Ramp** joins the fam
   **Empower is a switch, not a plan**: a deck whose loop is Empower is placed by what its
   Empowered cards do, by judgment, in §3 (Ambessa, Mel).
 
+**The placement rule (from questioning Empower and Hidden, 27 Oct 2026): a deck is in a family
+for its payoffs, not its card counts.** A mechanic is the deck's family only when something
+in the deck, usually the legend, rewards it beyond the card itself. Checked on the four
+legends whose top loop the reader calls Hidden:
+
+| legend | Hidden cards | what rewards being face down | so |
+|---|---|---|---|
+| Teemo, Swift Scout | 27 | his legend hides for 1 Energy instead of 1 Power; Guerilla Warfare returns Hidden cards from the trash | **Facedown**: the legend is why he runs so many |
+| Evelynn, Agony's Embrace | 18 | legend draws on every face-down play; Ember Monk, Gutter Guardian; Evelynn, In Control scores with a face-down card | **Facedown** |
+| Vex, Gloomist | 12 | nothing; her legend draws on holds | Hidden is free tricks protecting holds: placed on the hold plan, not Facedown |
+| Sivir, Battle Mistress | 9 | nothing | hiding is where Gold goes: **Extra resources** |
+
+Most Radiance decks run some Hidden as free tricks, so a Hidden count alone says nothing.
+The same rule covers Empower above and any mechanic that turns up in §3.
+
 **Follow-ups for the reader** (lib/engines.mjs), not blocking §3: a Gold key (Sivir is a known
 miss because of it) and a Ramp key (channel extra, cost reduction).
 
@@ -270,6 +285,8 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **27 Oct 2026:** placement rule added (Jay: "question everything… Teemo runs a lot of hidden"):
+  a family needs a payoff, not a card count. Teemo's legend is why he runs 27 Hidden.
 - **27 Oct 2026:** §2 agreed after Claude's audit. Empower first moved to Fights, then, on Jay's
   check and a read of all 55 Empower cards, out of every family: a switch, placed by what it does.
 - **27 Oct 2026:** §1 agreed: judged overarching archetype with the measurement as evidence;
