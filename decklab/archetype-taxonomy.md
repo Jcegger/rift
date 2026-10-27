@@ -2,7 +2,7 @@
 title: Archetype taxonomy — worksheet
 subtitle: Overarching archetypes, sub-archetypes, and where every legend and net deck sits. Built with Jay a section at a time; the result rewrites docs/archetypes.md.
 started: 2026-10-27
-status: §1, §2 and §3 chunk 1 (aggro) agreed 27 Oct 2026; chunk 2 (tempo) next
+status: §1, §2 and §3 chunk 1 (aggro) agreed 27 Oct 2026; chunk 2 (tempo) drafted for Jay
 ---
 
 How this works: like a deck worksheet ([README.md](README.md)), each section agreed before
@@ -327,6 +327,64 @@ The profile numbers are the representative list's (data/archetypes.json). *Borde
   "Conquer" family: conquering is what every aggro deck does, so it does not separate them.
   Holds is different because holding is a choice to stop attacking.
 
+
+### Chunk 2: tempo — drafted 27 Oct 2026, for Jay
+
+Candidates: every legend left that the measurement or the doc calls tempo, plus Evelynn from
+chunk 1 (24). **Tempo** is §1's: cheap and reactive, staying ahead by winning exchanges.
+Two things decided most rows. **Control, in Riftbound, is holding**: riftbound.gg defines it
+as "grinds out points by holding Battlefields over time", and Orb's tier list calls Wuju Yi
+"Defensive Control", so the defensive Holds decks with interaction are Control, not tempo.
+And the measured rule's tempo is a Hidden-and-Reaction count (§1), which most Radiance decks
+now pass; the shape decides instead.
+
+**Tempo (10)**
+
+| legend | family | why |
+|---|---|---|
+| **Irelia, Blade Dancer** | Movement | Cost 2.6, 26 cheap, 21 reactive. Legend readies a unit you choose; ready, move, draw (Stellacorn Herder). 19 placed |
+| **Akali, Rogue Assassin** | Movement | Legend pulls a unit home from a showdown and readies it; Akali, Deadly Weapon deals damage on each move. Measures control only because those move-damage cards count as interaction (12). 32 placed |
+| **Diana, Scorn of the Moon** | Spells | Legend's Energy is spendable only in showdowns: the payoff is showdown spells. 22 spells. 8 placed |
+| **Lillia, Bashful Bloom** | Go-wide | Legend makes ready 3-Might Sprites, cheaper per Temporary unit: efficient bodies that act at once. 31 cheap. 8 placed |
+| **Evelynn, Agony's Embrace** | Facedown | From chunk 1: cost 3.2, 21 reactive, played from face down on either turn |
+| **Miss Fortune, Bounty Hunter** (clean) | Movement | Cost 2.3, 25 cheap; legend gives Ganking. *Thin (0)*. **67 of her 101 lists run Aurora**: a separate §4 row |
+| **Yasuo, Unforgiven** | Movement | Cost 2.2, 32 cheap, 18 reactive; legend moves a unit to or from base. *Thin (0)* |
+| **K'Sante, Pride of Nazumah** | Fights | Cost 2.4, 31 cheap; legend turns Shield into Assault, so defensive cards attack. *Thin (1)* |
+| **Pyke, Bloodharbor Ripper** | Extra resources | Legend bounces your own unit for a Gold, so play effects repeat and Gold piles up. *Thin (1)* |
+| **Ziggs, Hexplosives Expert** | Gear | Legend makes Bomb gear at battlefields, killed on purpose and remade. *Borderline*: the Bombs are removal, which could read control. *Thin (2)* |
+
+**Control (4): the hold decks**
+
+| legend | family | why |
+|---|---|---|
+| **Vex, Gloomist** | Holds | Legend draws on holds; Vex, Apathetic stuns, Hidden tricks protect the holds (§2 table). 17 placed |
+| **Master Yi, Wuju Bladesman** | Holds | Legend: +2 to a unit defending alone. Cheap tricks around one defender; Orb: "Defensive Control". 37 placed |
+| **Ahri, Nine-Tailed Fox** | Holds | Legend shrinks every attacker of a battlefield you control. *Thin (0)* |
+| **Shen, Eye of Twilight** | Holds | Legend gives Tank; "pair defence; it wins by holding" (doc). *Thin (2)* |
+
+**Midrange (9)**
+
+| legend | family | why |
+|---|---|---|
+| **Riven, The Exile** | Holds | **The chunk's biggest call.** Cost 2.9, 4 big (Astral Heron, Baron), 11 draw: a midrange shape. Her legend pays off battlefields **she controls** (units played there enter ready), which is why denying them is the plan against her (her matchup guide). The exhaust loop (Riven, Broken Blade, Innovator, Ki Burst) is the engine inside it. *Borderline family*: Movement, on that loop. 52 placed |
+| **Kennen, Heart of the Tempest** | Card flow | Legend empowers on every card played from elsewhere (Flow, Fizz, Matriarch) and turns it into Assault; Rhasa late. Interaction only 3: value, not answers. 62 placed |
+| **Azir, Emperor of the Sands** | Go-wide | 3 units and 16 Equipment: the legend's Sand Soldiers are the board, made per Equipment. Slow start (2.1 units by turn 3), strong late. Orb: "Token-Based Midrange". 19 placed |
+| **Ekko, Boy Who Shattered Time** | Card flow | Legend makes a unit cheap and kills it at end of turn: re-buying play effects, value the reader cannot see. 26 units, cost 3. 4 placed |
+| **Leona, Radiant Dawn** | Fights | Cost 3, 16 cheap: bigger bodies. Stuns into buffs. *Thin (2)* |
+| **Ivern, Green Father** | Holds | Legend makes a Brush on conquest or hold; tribes. Cost 3.1, 5 big. Jay: known as a hold deck. *Thin (2)* |
+| **Orianna, Lady of Clockwork** | Gear | 7 units, 18 gear, 15 draw: the legend turns a gear into a unit. An engine, not a rush. *Thin (2)* |
+| **Master Yi, Wuju Master** | Extra resources | Levels (XP) into +1 Might and units entering ready: grows into a late board. *Thin (4)* |
+| **Mel, Soul's Reflection** | Spells | Empower placed by what it does: Shock Blast and Applied Researchers get cheaper while something is Empowered. 22 spells, 13 draw. *Thin (1)* |
+
+**Aggro (1), back to chunk 1:** **Draven, Glorious Executioner · Fights.** 25 units, interaction
+6, legend draws for every combat won. Orb: "Aggressive Midrange". 6 placed.
+
+**What this chunk sends back up:**
+- **Holds is now the largest home for control** (4 of 4) and takes Riven and Ivern in midrange.
+  Holds and Control overlap a lot but are not the same axis: Riven and Ivern hold without
+  being control. Worth watching in the control chunk.
+- **§4:** a Miss Fortune Aurora row (67 of 101 lists).
+
 ---
 
 ## 4. Legends with several decks — after §3
@@ -346,6 +404,7 @@ lists do not yet show goes here by hand, marked as judged.
 | **Sivir Is Trying Her Best** (Jay's) | **Midrange** | Extra resources | Measured with the field's own rule (build-archetypes `label`): cost 2.8, 14 cards at 2 or less, 25 units / 13 spells, 9 draw, interaction 6, so midrange. The field's Sivir (25 lists, cost 2.5, 19 cheap, 6 draw) reads aggro: a different deck, the Randyyy-style curve Jay rebuilt away from after 0-3 on 26 Oct ("early leads faded"). Its matchup plans press some opponents (Riven, Kennen): that is a role, not the archetype (strategy.md §2). Gold into cards is the payoff |
 | Sivir, Battle Mistress, Aurora | *to place* | Ramp, *Aurora* | 10 of 36 lists |
 | Kha'Zix, Voidreaver: Jun's Aggro and Midrange | *to place* | Movement | two known lists (in the app); the lists do not split yet |
+| Miss Fortune, Bounty Hunter, Aurora | *to place* | Ramp, *Aurora* | 67 of 101 lists; Orb's "Midrange Ramp" |
 
 ---
 
@@ -361,6 +420,8 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **27 Oct 2026:** chunk 2 (tempo) drafted: 10 tempo, 4 control (all Holds), 9 midrange, Draven
+  back to aggro; Miss Fortune Aurora to §4.
 - **27 Oct 2026:** chunk 1 agreed; Teemo and Darius aggro, Claude's calls.
 - **27 Oct 2026:** Jay's Sivir measured, not felt (Jay: "aren't we calling Sivir midrange?"):
   midrange by the field's own rule; the field's Sivir is aggro, a different deck. §4 row added.
