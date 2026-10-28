@@ -2,7 +2,7 @@
 title: Sivir v2 — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. The same deck's identity, rebuilt on the job structure winning midrange decks share. Built with Jay a stage at a time.
 started: 2026-10-28
-status: stage 3 agreed 28 Oct 2026; stage 4 (card by card) next — v1 stays sleeved and in play
+status: stage 3 agreed 28 Oct 2026; stage 4 under way (job 4 read; Baron out on the rune board) — v1 stays sleeved and in play
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
@@ -144,13 +144,53 @@ and "keep in mind what is within purple and orange… we may not have a true sav
 - **Job 3's mix is lopsided**: kill and bounce are 6 copies, lock 2, pull 1. Spreading the kinds
   points at more Rebuke or Vex, not more Rampage.
 
-## 4. Card by card — next
+## 4. Card by card — job 4 (top end) read, 28 Oct 2026
+
+**The candidates** (Body or Chaos, legal, not Aurora; spec in §3):
+
+| card | cost | spec | the read |
+|---|---|---|---|
+| Beast Below (Chaos) | 7E 2P, 8 Might | fully | when played, returns another friendly unit and an enemy unit to hand: bounces their threat, replays your Ezreal or Matriarch. Unproven (12 lists, 3 recorded) |
+| Baron Nashor (Chaos) | 10E 3P, 12 Might | fully | can't be chosen; others +2; a 3-Power Gold sink. 101 recorded results (Riven). **Out: see the rune board below** |
+| Rengar, Trophy Hunter (Body) | 5E 1P, 6 Might | half | Ambush; 141 recorded; the winners run 3 |
+| Graves, Blasting Through (Body) | 5E 1P, 4 Might | half | the sweeper: 4 to every enemy unit at his battlefield on attack or defence (9 with Punch First); 46 recorded |
+| Ocean Drake (Chaos) | 8E 2P, 7 Might | fully | can be played onto an open battlefield; optional bounce on play |
+| Anivia, Primal (Body) | 7E 2P, 8 Might | half | 3 to every enemy unit there when she attacks |
+| Ruin Runner (Body) | 6E, 5 Might | half | can't be chosen; no effect of its own |
+
+**The rune board caps the top end at about 7 Energy** (Jay: "I'm worried about energy production,
+because I still need to generate Gold"). The legend's Gold comes from recycling runes, which
+keeps the board small. lib/sim.mjs engine games, normal pressure, 6,000 a deck, the v2 candidate
+(−2 Staunch, −1 Rampage, +Beast Below, +Graves, +Baron):
+
+| runes on the board | turn 4 | turn 5 | turn 6 | turn 8 |
+|---|---|---|---|---|
+| average | 6.5 | 7.3 | 7.8 | 9.0 |
+| 5+ (Rengar, Graves) | 94% | 95% | 96% | 98% |
+| 7+ (Beast Below, Anivia) | 54% | 71% | 78% | 90% |
+| 8+ (Ocean Drake) | 22% | 48% | 58% | 79% |
+| **10+ (Baron)** | **0%** | **7%** | **17%** | **42%** |
+
+v1 is the same within a point. **Baron is out**: a 10-cost card fights the legend; Riven casts
+him because Astral Heron discounts him. **Gold does not suffer from a bigger top end**: 4.18 → 4.32
+Gold a game, because expensive cards make the deck recycle more; Energy on turns 1–4 is unchanged
+(15.3 → 15.2). The cost is a slightly slower board (units by turn 5: 4.9 → 4.6) and 14 → 12 cheap
+cards. *Caveat: the model recycles whenever it needs Power; a player saving runes for a big turn
+does somewhat better, but the tension is structural.*
+
+**Shortlist for the five slots beside Sivir** (Jay decides): Rengar, Trophy Hunter ×2–3 · Graves ×1–2
+· Beast Below ×1, with Anivia, Primal as the alternative 7-drop.
+
+## 4. Card by card — jobs 1–3 next
 
 To find first: what top end Body and Chaos actually have, and whether any of it suits a Gold
 deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** stage 4, job 4: the rune board caps the top end at ~7 Energy (10+ runes on 7% of
+  turn 5s), so Baron is out; Gold rises with a bigger top end (4.18 → 4.32). Shortlist: Rengar, Graves,
+  Beast Below (Anivia the alternative).
 - **28 Oct 2026:** sweepers measured against the S and A tiers (mostly small units): a preference in
   the top end and the pool, not a fifth job. Earlier stages checked: unchanged.
 - **28 Oct 2026:** specs checked against the meta and the colours: job 1 asks for value on death, not
