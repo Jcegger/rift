@@ -13,7 +13,7 @@ site, and docs/archetypes.md is not touched until the placements (§3) are agree
 sub-archetypes under them, and which legends and decks fit where — with room for a legend
 that plays more than one deck.
 
-**The sections.**
+**The sections.** (6: the rewrite, added 28 Oct 2026.)
 1. **The two axes:** what the overarching archetype means and where it comes from, and what
    the sub-archetype is.
 2. **The families:** the sub-archetypes, and which engines go in each.
@@ -586,8 +586,83 @@ hand-copied snapshots from 19–20 Oct and stale: the rewrite should not hand-co
 
 ---
 
+---
+
+## 6. The rewrite of docs/archetypes.md — preview, for Jay
+
+### The outline
+
+```
+Archetypes — what each legend's deck is for
+  How to read this page        the taxonomy (§1–§2), evidence labels, the source precedence (§5)
+  The map                      one table: archetype × family, every legend (§3), variant rows (§4)
+  ## Aggro                     a paragraph on what aggro is here
+       Fights · Movement · Gear · Go-wide · Card flow · Facedown · Extra resources   (a short
+       line per family, then its legends as ### entries, most-played first)
+  ## Tempo        (same shape)
+  ## Midrange     (same shape)
+  ## Control      (same shape)
+  What would change this page
+```
+
+**What changes and what stays:**
+- **Order**, from colour pairs to archetype → family. Each entry keeps its colour pair as a
+  line, so looking a legend up by colours still works; every legend stays a `### Legend —
+  label` heading, which engines.test and the shelf parse.
+- **Heading label**, from "exhaust midrange" to **"Midrange · Holds"**: the agreed two axes.
+  Tags in italics after it (*combo*, *Aurora*).
+- **No hand-copied stats.** The "*measured tempo · 8 placed · u18 …*" line goes; an **Evidence**
+  line says what the entry stands on and as of when, in words: "Radiance results, 46 from 2
+  events (28 Oct 2026)" or "Vendetta only". Live numbers are on the legend's page in the app.
+- **Your deck, not the old ones.** The "*your deck*" marks (Riven, Rek'Sai) and the "From
+  Kha'Zix / Riven / Rek'Sai" lines were written for decks Jay no longer plays. They become one
+  **From Sivir** line per legend, from guides/sivir-trying-her-best.md §10. The old lines go to
+  git history.
+- **Kept as they are:** Plan, Wins by, Fears, Engine (the answer key; it can differ from the
+  family, as Riven's does), Sources, and Calls (dated, with the §5 reversals as new Calls).
+
+### One entry, rewritten: Riven
+
+> ### Riven, The Exile — Midrange · Holds *(Radiance)*
+> *Calm / Chaos.* **Evidence:** Radiance results, 46 good finishes from 2 events (LDXP
+> Sacramento 25k; Club9 Clash #3), as of 28 Oct 2026 — the most of any legend.
+> - **Plan:** **units you play to battlefields you control enter ready**, so a battlefield she
+>   holds is a launchpad: play there, act at once. Riven, Broken Blade (100% of results) and
+>   Reckless Innovator (98%) pay off becoming exhausted; Blade of the Exile (100%, ×3) equips by
+>   exhausting a unit. Cheap bodies to take battlefields: Bedeviling Stranger and Tideturner
+>   (96%), Stellacorn Herder (89%) drawing as they move. The top end is **Astral Heron (91%, ×3)
+>   into Baron Nashor (80%)**: Heron discounts the next card by 2 Energy and 2 Power.
+> - **Interaction behind it:** Defy and Discipline in every list; Star-Crossed 89%, Rebuke 87%,
+>   Switcheroo 83%, Zhonya's Hourglass 93%, Blitzcrank, Impassive 83% (pulls a unit to her
+>   battlefield). Ki Burst is in only 33% of results, Riven, Deserter 9%.
+> - **Wins by:** holding the battlefields it develops onto, then Heron and Baron outsizing the
+>   board late. Baron can't be chosen, and his Baron Pit is a third battlefield.
+> - **Fears:** Vex, Apathetic (stuns what she plays and stops it moving, cancelling "enter
+>   ready"); being kept off battlefields she controls, which is where the engine works.
+> - **From Sivir:** press, and deny her battlefields. Rebuke the first Heron the turn after it
+>   lands, before it pays for Baron. Once the Baron Pit exists, the final point by conquer needs
+>   all three battlefields (§473.1.b.1): win by holding at 7. (Guide §10; the Riven plan update
+>   is pending.)
+> - **Engine:** exhaust — Riven, Broken Blade and Reckless Innovator pay off becoming exhausted;
+>   attacking, moving and Blade of the Exile's equip feed them.
+> - **Sources:** riftbound.gg (Radiance theorycraft, 12 Oct 2026): "hold oriented legend".
+> - **Call (28 Oct 2026):** Midrange · Holds. The shape is midrange (Heron and Baron, 11 draw);
+>   the legend pays off battlefields she controls (the family, §2's Holds). The measured tempo is
+>   the Hidden-and-Reaction count (§1). Replaces the 19 Oct call's heading ("exhaust midrange"),
+>   which agreed on midrange.
+
+**Against the current entry:** Ki Burst and Riven, Deserter lose their billing; the top end
+(Heron, Baron), the cheap bodies and Blitzcrank arrive; the Baron Pit rule and a From Sivir line
+are new; the stale header and the Kha'Zix and Rek'Sai lines go.
+
+**Noticed on the way, for the Sivir guide:** its Riven row (§10) counts all legal lists (Heron
+53%, Baron 41%, Ki Burst 60%). Her tournament results play Heron 91%, Baron 80%, Ki Burst 33%:
+the winners lean harder on the top end than the average list, which supports the pending Riven
+plan (Rebuke for Heron, Downwell for Baron).
+
 ## Log
 
+- **28 Oct 2026:** §6 rewrite preview: the outline and Riven rewritten, for Jay.
 - **28 Oct 2026:** entry scan, A and B tiers. Source precedence added (an expert-sourced Call stands over
   Claude's profile inference unless Radiance results contradict it): Ornn aggro, Draven midrange,
   K'Sante midrange, Azir tempo; Kai'Sa and Evelynn kept on their results. Named cards at 0% listed.
