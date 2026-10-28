@@ -668,6 +668,9 @@ plan (Rebuke for Heron, Downwell for Baron).
 
 ## Log
 
+- **28 Oct 2026:** Rengar, Pridestalker moved Aggro → **Midrange · Fights**, from the LA RQ winner's list
+  (30 bodies, draw on 8 units, 3–4-drop core) and his 10 Radiance results (all midrange); against the
+  riftbound.gg guide's "top aggressive legend" under source precedence. Done in docs/archetypes.md.
 - **28 Oct 2026:** docs/archetypes.md rewritten (§6). Open: the Sivir guide's Riven row and the pending
   Riven plan; a check that flags a named card at 0% of a legend's results; the per-list two-speed
   measure in the daily refresh.

@@ -67,7 +67,7 @@ Every legend, by its representative list. Variants (two speeds, Aurora builds) a
 
 | family | Aggro | Tempo | Midrange | Control |
 |---|---|---|---|---|
-| **Fights** | Ambessa, Darius, Rengar |  | Draven, K'Sante, Lee Sin, Leona, Rumble, Sett |  |
+| **Fights** | Ambessa, Darius |  | Draven, K'Sante, Lee Sin, Leona, Rengar, Rumble, Sett |  |
 | **Movement** | Kha'Zix, Vi | Irelia, Miss Fortune, Yasuo |  | Akali |
 | **Gear** | Jarvan IV, Lucian, Ornn | Ziggs | Jax, Orianna |  |
 | **Go-wide** | Rek'Sai | Azir, Lillia | Garen, LeBlanc, Mordekaiser, Zed | Viktor |
@@ -81,20 +81,7 @@ Every legend, by its representative list. Variants (two speeds, Aurora builds) a
 
 ## Aggro — a cheap curve, many units, little interaction: close before they stabilize
 
-**Aggro · Fights:** Rengar, Pridestalker, Ambessa, Matriarch of War, Darius, Hand of Noxus.
-
-### Rengar, Pridestalker — Aggro · Fights
-*Body / Fury.* **Evidence:** Radiance results, 10 good finishes from 1 event (LDXP Sacramento - Riftbound Showdown 25k), as of 28 Oct 2026.
-- **Plan:** 30 units. The legend gives +1 Might whenever you play a unit, and the units arrive
-  where it hurts — Ambush (Inferna, Grim Apothecary, Nidalee, Cat Form, Rengar, Trophy Hunter, which
-  can be played to a battlefield with enemy units) and Reaction (Rengar, Pouncing (*in none of the 10 Radiance results*), into a
-  battlefield you are attacking). Thrill of the Hunt replays a unit at any battlefield.
-- **Also in nearly every Radiance result** (90%+, not named above): Noxus Hopeful, First Mate, Pit Rookie, Sabotage, Punch First, Irresistible Faefolk, Rampage, Ferrous Forerunner.
-- **Wins by:** fights the opponent cannot plan for, because the attackers are still in hand.
-- **Fears:** answers held for the moment Ambush units land; mass shrink.
-- **From Sivir:** *hold.* The fastest deck here (16.1 Might by turn 4); Rampage 93%; no counters; Noxus Hopeful in 98%. Bring in 2 Graves; take out 2 Sabotage. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
-- **Engine:** winning fights — the legend pumps a unit for every unit you play, and Ambush puts them into the fight.
-- **Sources:** riftbound.gg guide (Vendetta, 30 Aug 2026): "the top aggressive legend", "a very proactive game plan": win the early showdowns, then keep making threats, drawing off Kai'Sa, Survivor, Kinkou Initiate and Nidalee, Cat Form.
+**Aggro · Fights:** Ambessa, Matriarch of War, Darius, Hand of Noxus.
 
 ### Ambessa, Matriarch of War — Aggro · Fights
 *Body / Order.* **Evidence:** **No one-on-one Radiance results yet** (28 Oct 2026): the plan below is Vendetta evidence and the cards' text.
@@ -336,7 +323,21 @@ The legend returns a friendly unit to hand for Gold (re-buy play effects); Pierc
 
 ## Midrange — bigger bodies and value: trade into a better late board
 
-**Midrange · Fights:** K'Sante, Pride of Nazumah, Draven, Glorious Executioner, Lee Sin, Blind Monk, Leona, Radiant Dawn, Rumble, Mechanized Menace, Sett, The Boss.
+**Midrange · Fights:** Rengar, Pridestalker, K'Sante, Pride of Nazumah, Draven, Glorious Executioner, Lee Sin, Blind Monk, Leona, Radiant Dawn, Rumble, Mechanized Menace, Sett, The Boss.
+
+### Rengar, Pridestalker — Midrange · Fights
+*Body / Fury.* **Evidence:** Radiance results, 10 good finishes from 1 event (LDXP Sacramento - Riftbound Showdown 25k), as of 28 Oct 2026.
+- **Plan:** 30 units. The legend gives +1 Might whenever you play a unit, and the units arrive
+  where it hurts — Ambush (Inferna, Grim Apothecary, Nidalee, Cat Form, Rengar, Trophy Hunter, which
+  can be played to a battlefield with enemy units) and Reaction (Rengar, Pouncing (*in none of the 10 Radiance results*), into a
+  battlefield you are attacking). Thrill of the Hunt replays a unit at any battlefield.
+- **Also in nearly every Radiance result** (90%+, not named above): Noxus Hopeful, First Mate, Pit Rookie, Sabotage, Punch First, Irresistible Faefolk, Rampage, Ferrous Forerunner.
+- **Wins by:** fights the opponent cannot plan for, because the attackers are still in hand.
+- **Fears:** answers held for the moment Ambush units land; mass shrink.
+- **From Sivir:** *hold.* The fastest deck here (16.1 Might by turn 4); Rampage 93%; no counters; Noxus Hopeful in 98%. Bring in 2 Graves; take out 2 Sabotage. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **Engine:** winning fights — the legend pumps a unit for every unit you play, and Ambush puts them into the fight.
+- **Sources:** riftbound.gg guide (Vendetta, 30 Aug 2026): "the top aggressive legend", "a very proactive game plan": win the early showdowns, then keep making threats, drawing off Kai'Sa, Survivor, Kinkou Initiate and Nidalee, Cat Form.
+- **Call (28 Oct 2026):** Midrange · Fights, replacing the taxonomy's first aggro call. The LA RQ winner (Prismaticism, 1,962 players, 30 Sep 2026) is a 30-body value deck: mostly 3- and 4-drops, draw on 8 of its units (Kai'Sa, Survivor; Kinkou Initiate; Nidalee, Cat Form), Noxus Hopeful, Darius and Ferrous Forerunner on top, and all 10 Radiance results measure midrange. This goes against the riftbound.gg guide's "the top aggressive legend" (Vendetta, 30 Aug) under source precedence, because the Radiance results contradict it; the guide's "very proactive game plan" still describes how it plays: a proactive midrange deck. The aggro reading had rested on its goldfish speed; fast with bodies is not the same as racing.
 
 ### K'Sante, Pride of Nazumah — Midrange · Fights *(Radiance)*
 *Body / Calm.* **Evidence:** Radiance results, 1 good finish from 1 event (LDXP Sacramento - Riftbound Showdown 25k), as of 28 Oct 2026. **Thin**: card shares below are indicative.
@@ -762,7 +763,7 @@ The aggressive pair: Pit Rookie, First Mate, Kinkou Initiate, Noxus Hopeful, Fer
 Inferna and Kai'Sa, Survivor turn up across all four legends, with Punch First and Sabotage. Lots
 of units, played every turn, each a little bigger than it should be.
 
-Legends: Rengar, Pridestalker (Aggro · Fights); Lucian, Purifier (Aggro · Gear); Renekton, Butcher of the Sands (Midrange · Ramp); Volibear, Relentless Storm (Midrange · Ramp).
+Legends: Rengar, Pridestalker (Midrange · Fights); Lucian, Purifier (Aggro · Gear); Renekton, Butcher of the Sands (Midrange · Ramp); Volibear, Relentless Storm (Midrange · Ramp).
 
 ## Body / Mind — Jayce alone
 
