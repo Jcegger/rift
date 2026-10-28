@@ -2,7 +2,7 @@
 title: Sivir v1 and v2 against the field — one matchup at a time
 subtitle: Battle Mistress (Body/Chaos). Each S-to-B legend read from its tournament lists and card text, with both versions played through. Readings, not results.
 started: 2026-10-28
-status: S and A tiers done; B to come, one at a time
+status: done 28 Oct 2026 — every S, A and B legend read; summary at the end
 ---
 
 How this works: one opponent per section, built from its **Radiance one-on-one tournament results**
@@ -760,3 +760,129 @@ Discipline or Zhonya's.
 
 **Reading: v1 slightly better**, the Kennen pattern: v2's changes aim at Calm decks, and this one answers
 a sweeper at fight speed and doesn't blank Rampage. **How sure:** low-medium (5 results).
+
+### Ezreal, Prodigal Explorer (B) — Control · No engine
+
+**Evidence:** 26 posted lists. **What he plays:** removal that chooses twice a turn (the legend draws when
+it does): Wages of Pain ×2.9 (Hidden, 3 damage and a Gold), Deadly Flourish ×3 (3), Bellows Breath,
+Singularity 69% (6 to each of two units), The List (−2), Stupefy ×3, Gust 92%, Star-Crossed 85%,
+Thousand-Tailed Watcher 77%; Fizz, Ezreal, Bewitching Spirit (you discard). No Defy.
+
+**What decides it:** Kai'Sa's pattern: one-for-one removal that your value bodies are built to absorb.
+Graves dies to most of it; Beast Below survives a single 3- or 6-damage spell. Rampage is clean.
+
+**Reading: about the same, perhaps v1 slightly** (attrition favours more cheap value threats).
+**How sure:** low.
+
+### Teemo, Swift Scout (B) — Aggro · Facedown
+
+**Evidence:** 37 posted lists. **What he plays:** Hidden everywhere (the legend hides for Energy): Teemo,
+Strategist (punishes on defence or a face-down flip), Teemo, Scout, Consult the Past, Sprite Call (a 3-Might
+token), Switcheroo 78%, Temporal Breach, Windsinger (returns a unit at 3 Might or less), Guerilla Warfare;
+Nocturne, Sprite Fountain, Singularity 49%, Watcher 43%.
+
+**What decides it:** Evelynn's pattern: face-down flips land after Graves's attack trigger, so **Graves
+attacks poorly into his hide spots and defends well**; Sprites and his small Teemos die to a blast. Taking
+his battlefield trashes what he hid there. Windsinger and Gust-like effects can't reach Graves (4).
+
+**Reading: v2 slightly better.** **How sure:** low.
+
+### Rumble, Mechanized Menace (B) — Midrange · Fights
+
+**Evidence:** 30 posted lists (one 13th of 25). **What he plays:** Mechs: 3-Might Mech tokens (Production
+Surge, Ferrous Forerunner's two), Bubble Bot, Forecaster, Rumble, Hotheaded (Mechs get Assault) and
+Scrapper (+1, more Mechs), Breakneck Mech (8); the legend gives Mechs **Shield** (bigger when they defend);
+Danger Zone (+1 to all Mechs, Reaction), Stupefy, Falling Star 53%, Singularity, Void Seeker.
+
+**What decides it:** a board of 3- and 4-Might Mechs, a little bigger defending: Graves's 4 kills most,
+Danger Zone in response saves them, Punch First (9) makes sure. Bouncing a Mech token removes it.
+
+**Reading: v2 better.** **How sure:** low.
+
+### Rek'Sai, Void Burrower (B) — Aggro · Go-wide
+
+**Evidence:** 54 posted lists (a 17th of 25, a 20th of 74). **What he plays:** the widest board: Faithful
+Manufactor (a Recruit), Noxian Emissary (Recruits), Carrion Dredger (a Bird on death), Inferna, Noxus Hopeful,
+Rek'Sai, Breacher, Undertitan (+2 to the rest), Honest Broker; **Cull the Weak 94%** (each player kills one of
+their own), Falling Star 93%, Cleave, Blood Rush, Void Rush, **Imperial Decree 56%** (any unit damaged this
+turn dies), Hidden Blade 39%.
+
+**What decides it:** the board Graves was always meant for (v1's sideboard plan): 1- and 2-Might bodies and
+tokens. **Imperial Decree** turns every fight you take that turn into deaths for both sides; don't fight into
+an open 5 Energy and 2 Power. Cull the Weak lets you pick your worst unit. Rampage is clean.
+
+**Reading: v2 better.** **How sure:** low (posted lists).
+
+### Mordekaiser, Iron Revenant (B) — Midrange · Go-wide
+
+**Evidence:** 5 Radiance results, one event; best #89 of 755.
+
+**What he plays:** the legend banishes a unit or gear from his trash for Power, so every death fuels him;
+Deathknell value (Honest Broker, Carrion Dredger, Soaring Scout, Ferrous Forerunner's Mechs), **Mordekaiser,
+Dominating** (9; discards to kill a unit or gear when played or attacking), Realm of Death ×3, Vi, Peacekeeper,
+Hidden Blade 80%, Falling Star 60%, Shen, Kinkou, Bilgewater Tracker, Deathgrip, Kai'Sa, Survivor.
+
+**What decides it:** LeBlanc's pattern, milder (no Karthus): kills feed his trash and his Deathknells, so
+sweeping his board pays him; **bouncing doesn't**. Beast Below on Mordekaiser, Dominating undoes a 9-Energy
+play.
+
+**Reading: about the same in game 1; v2 better after sideboarding Graves out** (as against LeBlanc).
+**How sure:** low-medium (5 results).
+
+### Darius, Hand of Noxus (B) — Aggro · Fights
+
+**Evidence:** 8 posted lists. **What he plays:** Legion (the legend adds Energy on the second card): Vanguard
+Captain (two 1-Might Recruits), Trifarian Gloryseeker, Noxus Hopeful, Darius, Trifarian, Spectral Matron, Machine
+Evangel (Recruits on death); Hidden Blade 75%, Cleave, Baited Hook, Falling Star 50%, Seal of Unity.
+
+**What decides it:** Recruits and small Legion bodies: a blast clears them; bouncing a Recruit removes it.
+
+**Reading: v2 better.** **How sure:** very low.
+
+### Viktor, Herald of the Arcane (B) — Control · Go-wide
+
+**Evidence:** 82 posted lists (a 23rd of 25 among them). **What he plays:** the legend makes 1-Might
+**Recruits**; Viktor, Leader makes one whenever another non-Recruit of his dies; **Hidden Blade 91%, Cull the
+Weak 90%, Imperial Decree 70%**, Stupefy, Bellows, Wages of Pain, Singularity, Shadow's Call, Dragon Form;
+Carrion Dredger, Vi, Xin Zhao, Plundering Poro, Sprite Fountain.
+
+**What decides it:** his board is Recruits: **one Graves blast is the best card you have against him**, and
+Beast Below or Rebuke on a Recruit removes it. Hidden Blade on Graves pays you 2 cards. Imperial Decree
+punishes fighting that turn. Rampage is clean (no Defy).
+
+**Reading: v2 better.** **How sure:** low.
+
+---
+
+## The whole field at a glance (28 Oct 2026)
+
+| | v2 better | about the same | v1 better |
+|---|---|---|---|
+| **S** | Riven, Master Yi (modestly) | Irelia (perhaps v1) | Kennen (slightly) |
+| **A** | Rengar, Vex, Azir | Evelynn, Jayce, Kai'Sa (perhaps v1), LeBlanc (v2 after sideboarding) | — |
+| **B** | Lucian, Fiora, Jarvan IV, Lillia, Rumble, Rek'Sai, Darius, Viktor; slightly: Kha'Zix, Sivir, Sett, Akali, Ornn, Draven, Teemo | Ambessa, Orianna, Leona, Pyke, Annie (perhaps v1), Ezreal (perhaps v1), Mordekaiser (v2 after sideboarding) | Diana (slightly) |
+
+**The pattern, which matters more than any single row:**
+1. **v2 is better against the Calm decks** (Riven, Vex, Akali, Master Yi, Azir): their Defy, Discipline and
+   Zhonya's blank Rampage, the card v2 cuts, and their small boards and Herons are what Graves and Beast
+   Below answer.
+2. **v2 is better against wide boards of small units and tokens** (Rengar, Lillia, Jarvan, Rek'Sai, Darius,
+   Viktor, Rumble), where a Graves blast is a 2- or 3-for-1 and bouncing a token removes it.
+3. **v1 is better, slightly, against non-Calm decks with fight-speed answers to a sweeper** (Kennen, Diana):
+   Switcheroo, Flash, −4 shrinks and bounce at Reaction speed blunt Graves, and their lack of Defy makes the
+   cut Rampage good.
+4. **Removal-control and burn (Kai'Sa, Annie, Ezreal) lean slightly v1**: attrition favours more cheap value
+   threats; Beast Below is the exception, the best card in either list against them.
+5. **Against decks that want their units to die (LeBlanc, Mordekaiser), Graves comes out after game 1**; v2's
+   Beast Below and its cut Rampage are then exactly right.
+6. **Graves attacks poorly into Hidden and Ambush decks** (Evelynn, Teemo, Rengar): units arrive after his
+   trigger. Defending, he is strong against all of them.
+
+**Overall: v2 is better placed against most of the field that matters**, and where it isn't, the gap is
+small and has a sideboard answer. It gives the deck its first real tools against the two things the meta
+is made of: Calm protection and small boards. **None of it is played.** These are readings from tournament
+lists and card text, with the rules checked where they decide something; the journal turns them into
+evidence.
+
+**Open rules questions found on the way:** whether Ambessa, The Wolf counts as in combat when Graves's
+attack trigger deals its damage; Overzealous Fan's defence trigger against Graves's attack trigger.
