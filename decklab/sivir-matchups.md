@@ -509,3 +509,69 @@ its third Rampage, which pays her too), and v2's main is better shaped than v1's
 (8 results; the Karthus arithmetic is certain, the rest is reading).
 
 **For the journal:** how often a kill handed her value; whether bouncing won.
+
+---
+
+## B tier
+
+*Most B-tier legends have few or no one-on-one Radiance results, so these sections read their posted
+legal lists (since 16 Oct) and say so. Shorter where the evidence is thin; the same questions each time.*
+
+### Kha'Zix, Voidreaver (B) — Aggro · Movement
+
+**Evidence:** no Radiance results to speak of; 29 posted legal lists (and Jun's two lists in the app,
+Aggro and Midrange). **What he plays:** Kha'Zix, Mutating Horror (+2 and XP when an enemy unit is
+**alone** where he fights); isolation through Irresistible Faefolk ×3 (pulls your unit to it) and Void
+Assault ×3 (moves one of his and one of yours); Star-Crossed 100%, Punch First 93%, Rampage 90%,
+Sabotage 90%, **his own Vex 79%**, Rengar 72%, Switcheroo 62%. No Calm protection. Small bodies
+(Faefolk, Merchant, Disciple, Fizz, Kinkou) plus Matriarch, Rengar and Zed.
+
+**What decides it:** he wants your units **alone**; you want two at every fight (Jun: "strip the
+lone-unit +2"). His movement can pull a lone Graves away from his battlefield, or isolate one of your
+bodies to fight. Graves's blast meets a small board; Rampage, Star-Crossed and Sabotage are clean
+against him (no Defy).
+
+**Reading: v2 slightly better**: Graves defending clears his small attackers and pairs with another
+unit so nothing is alone; the cost is a clean Rampage. **How sure:** low.
+
+### Sivir, Battle Mistress (B) — the mirror
+
+**Evidence:** 5 posted lists; **40% run Aurora and Elder Dragon**. The field's Sivir is mostly the fast
+curve (§3 of the taxonomy), and these few lists lean big. **What decides it:** the same tricks on both
+sides (Punch First, Switcheroo, Star-Crossed, Rampage, Edge), plus their Hard Bargain (counter unless you
+pay 2) and Gust. Against the Aurora build, Beast Below bounces Elder Dragon or Aurora's free units.
+
+**Reading: v2 slightly better** (Graves against their cheap bodies, Beast against their top end).
+**How sure:** very low: five lists.
+
+### Lucian, Purifier (B) — Aggro · Gear
+
+**Evidence:** 12 posted lists. **What he plays:** Equipment gives Assault (the legend), and lots of it
+(Doran's Blade, Long Sword, Blighted Battleaxe +4, Skyfall, Trinity Force); First Mate, Lucian, Merciless
+(readies after his first conquest), Kai'Sa, Survivor, Faefolk, Noxus Hopeful, Pit Rookie; **Ruin Runner
+58%** (unchoosable), Graves 42%, Rengar 42%; Falling Star 50%, Punch First, Relentless Pursuit (move and
+equip). No Calm.
+
+**What decides it:** equipped units climb out of Graves's 4 (a Battleaxe makes a 3-Might unit 7): Punch
+First on Graves (9) fixes it. **Ruin Runner** again: Graves with Punch First is the one way through that
+doesn't choose. Offer (sideboard) kills an equipment; Rampage is clean.
+
+**Reading: v2 better** (the Ruin Runner answer and a sweeper for his board). **How sure:** low.
+
+### Fiora, Grand Duelist (B) — Midrange · Ramp
+
+**Evidence:** 49 posted lists; some are the Aurora build (Elder Dragon 31%). **What she plays:** the legend
+ramps whenever a unit becomes Mighty (5+ Might); Pit Rookie, First Mate, Fiora, Worthy and Victorious,
+Unsung Hero, Kayle, Sett, Brawler, Rengar; Harnessed Dragon 41% and Rift Herald 39% on top. **Riposte
+96%** (counters a spell that chooses her unit, and pumps it), Punch First 92%, Rampage 61%, Hidden Blade
+47%, Challenge, Call to Glory, Sacrifice, B.F. Sword.
+
+**What decides it:**
+1. **Riposte counters your *spells* aimed at her units**: Rebuke, Star-Crossed, Switcheroo and Rampage all
+   meet it. **Beast Below's bounce is an ability, not a spell, so Riposte can't touch it**; Graves's blast
+   isn't a spell either.
+2. **Her units grow to 5+** (Mighty) and out of Graves's 4; Punch First (9) brings them back into range.
+3. Harnessed Dragon and Rift Herald (8 Energy) are the units Beast Below is for.
+
+**Reading: v2 better**: both its new cards get around Riposte, the card that shuts down most of v1's
+interaction. **How sure:** low-medium (49 lists, the Riposte rule is certain).
