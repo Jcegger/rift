@@ -270,12 +270,34 @@ watch item for stage 5; Hidden depth 5; the Tornado line.
 Every change measured the same way: v2 against v1 in `scripts/rift try` and `versus`, then at the
 table. Watch: turn 3 (two 3-drops), Beast Below's real value, Graves against the small-unit field.
 
+**Jay plays v2 at Nexus Night** (28 Oct 2026; the swap from v1 is moving Graves ×2 from the sideboard
+into the main and Tornado ×2 and a Rampage out, plus one Beast Below). Log every game under "Sivir v2
+(draft)". After about three nights the journal decides.
+
+**Beast Below, the hypothesis** (Jay: "idk if this is dumb or if we unlocked something"): its drawback
+(returning your own unit) is an upside only for decks whose units do something on arrival, and its 2 Power
+is cheap for a legend that makes Gold, so it may be underplayed tech for exactly this shape, or tested and
+dropped by players we can't see. **Three questions per game it's drawn:**
+1. Did it land on turns 5–6, or sit in hand?
+2. When it landed, what did it bounce, and what did you replay?
+3. Did they answer it (Not So Fast, a bounce) before it paid off?
+
+**If it earns its slot: a second Beast Below for the second Rengar** is the first follow-up. Not before:
+Rengar is the deck's only big threat at Reaction speed (Ambush), which lets a held-up turn still develop,
+and he is castable a turn earlier (94–96% from turn 4 against Beast's 71% on turn 5).
+
+**Graves:** defend with him; attack into face-down cards and Ambush decks only with Punch First ready.
+Against LeBlanc and Mordekaiser he comes out after game 1; against Kennen and Diana the third Rampage
+comes in and Repulse stays ready for their Switcheroo.
+
 
 To find first: what top end Body and Chaos actually have, and whether any of it suits a Gold
 deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** v2 to Nexus Night; Beast Below's three test questions; second Beast for the second
+  Rengar only if it earns it (`sivir-matchups.md` has the field reading).
 - **28 Oct 2026:** jobs 1–3: −1 Rampage; four body cuts measured, B (−2 Tornado) agreed tentatively;
   "Sivir v2 (draft)" written to the app (row backed up; v1 untouched).
 - **28 Oct 2026:** job 4 agreed: Sivir, Rengar ×2, Graves ×2, Beast Below.
