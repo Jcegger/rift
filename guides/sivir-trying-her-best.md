@@ -77,7 +77,7 @@ date: 2026-10-27
 | **Gear (2)** | 2 Edge of Night |
 | **Battlefields** | Zaun Warrens · Sigil of the Storm · Sandswept Tomb |
 | **Runes** | 5 Body · 7 Chaos |
-| **Sideboard** | 2 Graves, Blasting Through · 1 Ravenbloom Prefect · 1 Acceptable Losses · 2 An Offer You Can't Refuse · 1 Grim Resolve · 1 Siren's Song · 2 Unyielding Spirit |
+| **Sideboard** | 2 Graves, Blasting Through · 1 Ravenbloom Prefect · 2 An Offer You Can't Refuse · 1 Rebuke · 1 Repulse · 1 Siren's Song · 2 Unyielding Spirit |
 
 **Shape.**
 - Average cost 2.77; 14 cards at 2 Energy or less; 2 at 5.
@@ -107,6 +107,7 @@ The deck started as Randyyy's list with seven changes (25 Oct) and was rebuilt o
 | −1 Gust, +1 Edge of Night (2 now) | a pump paid in Power (hide for a Gold, re-equip for a Chaos) that also keeps 2-drops out of ping range |
 | −1 Grim Resolve, +1 Rebuke (swapped with the sideboard) | paid in Power; bounces any unit at a battlefield; Fizz can recast it; can't be Defied |
 | −1 Tideturner, +1 Evelynn, Entrancing | the only card that opens *their* battlefield for the eighth point |
+| sideboard: −Acceptable Losses, −Grim Resolve, +1 Rebuke, +1 Repulse (28 Oct) | **the Riven plan** (§10): Rebuke is the clean answer to Astral Heron (91% of her tournament lists); Repulse protects Vex and a pumped attacker from her stuns and bounces. Offer already covered gear |
 
 **The premise that turned out wrong.** The early plan treated turn-1 units as essential, because Randyyy had 8 of them. Jay's games never showed a turn-1 problem. The goldfish agrees: the deck always has a play on turns 1–2.
 
@@ -419,6 +420,7 @@ None of these are win rates. The model can't rank decks ([README](../README.md),
 | §443 | Empowered is permanent until disempowered or the card leaves |
 | §468.1.a, §468.3.d, §468.5.b | attackers must kill every defender; a mutual wipe leaves it uncontrolled |
 | §473.1.a.1, §473.1.b | hold points aren't gated; the eighth by conquer needs both battlefields scored |
+| §187.8, §187.9, §473.1.b.1 | once Baron Nashor's Pit is on the board, the eighth by conquer needs all **three** scored: against Baron, win by holding (derived; docs/rules-rulings.md) |
 | §488.5 | a battlefield used in a decided game is retired for the match |
 | §811 (and .1.b, .1.d.1) | Hidden: your turn, a battlefield you control, one each, played free from next turn |
 | Defy | counters a spell costing 4 Energy or less **and** 1 Power or less; your 2-Power cards are out of reach |
@@ -433,9 +435,9 @@ None of these are win rates. The model can't rank decks ([README](../README.md),
 | 2 Unyielding Spirit | Reaction: prevent all spell and ability damage this turn | ping and burn: Kai'Sa, Ziggs, Akali, Viktor |
 | 2 An Offer You Can't Refuse | Action: kill a gear; its controller gets an exhausted Gold | gear: Kennen (Last Rites, Seal of Discord), Azir, Jayce, Riven's Blade of the Exile |
 | 1 Ravenbloom Prefect | when an opponent plays a gear, banish him to banish it. A banished Bomb doesn't explode (§428.2) | Ziggs, Azir, Jayce, Kennen |
-| 1 Acceptable Losses | Action: each player kills one of their gear | a single key gear, when you have a spare one |
+| 1 Rebuke | Action, 2 Energy 2 Power: return a unit at a battlefield to its owner's hand. Defy can't counter it; Fizz can recast it | Riven (Astral Heron), and any big unit you can't fight |
 | 1 Siren's Song | Reaction: move an enemy unit that moved this turn | big breakers: Astral Heron decks, Riven, Vex |
-| 1 Grim Resolve | Action: +3 to a friendly unit this turn; Fizz recasts it free | when you need more pump and Power is short |
+| 1 Repulse | Reaction, 1 Energy 1 Power: counter an enemy spell or ability that chooses one friendly unit of yours at a battlefield. Defy *can* counter it | Riven (her stun, Star-Crossed, Rebuke on Vex), and Hidden Blade decks (LeBlanc, Azir, Viktor) |
 
 **How sideboarding works.** Swaps are 1 for 1 between games. You may count their sideboard at any time (TR §403.6). Runes, legend and battlefields never change (TR §403.4.b).
 
@@ -458,7 +460,7 @@ From `scripts/rift versus <legend> --deck "trying her best"`: each legend's lega
 
 | opponent | speed | role | what decides it | bring in | take out |
 |---|---|---|---|---|---|
-| **Riven** (S) | 3.0 | hold; deny her holds | her units enter ready on battlefields she controls; Astral Heron (53%, 7 Might), Baron Nashor (41%, 12); Star-Crossed 66%, Ki Burst 60%, Rebuke 51% | 2 Offer, Siren's Song | 2 Sabotage, 1 Rampage |
+| **Riven** (S) | 3.0 | **press**; deny her battlefields | her units enter ready only on battlefields she controls. **From her tournament results** (46, 28 Oct): Astral Heron 91% (×3) into Baron Nashor 80% (12, can't be chosen); Defy and Discipline in every list; Zhonya's 93%; Ki Burst only 33% | Rebuke, Repulse, 2 Offer | 3 Rampage, 1 Sabotage |
 | **Kennen** (S) | 3.2 | **press early** | the trash engine; Rhasa (79%, 6 Might, cheap late); Star-Crossed 85%, Gust 77%; Switcheroo in most lists; their Offer and Salvage reach your Edge | 2 Offer, Prefect | 2 Sabotage, 1 Tornado |
 | **Irelia** (S) | 2.5 | press; attack with two | the slowest S deck on board (10.9 Might by turn 4); she wins fights with Reactions; Defy 98% **and** Not So Fast 80% hit your targeted spells | 1 Graves, Siren's Song | 2 Sabotage, 1 Rampage |
 | **Master Yi** (S) | 2.9 | **attack with two** | his +2 is for a lone defender; cheap tricks protect it; Charm 64%, Defy 75% | — (Sabotage stays: it strips his tricks) | — |
@@ -478,7 +480,18 @@ From `scripts/rift versus <legend> --deck "trying her best"`: each legend's lega
 | **casual or unknown** | — | hold early, read their plan | ask what they do if nothing happens ([strategy.md §2](../docs/strategy.md#2-every-deck-is-solving-a-different-problem)) | — | — |
 
 **The S tier in one line each:**
-- **Riven:** keep Vex down, and Rebuke whatever she ramps into.
+- **Riven:** press her battlefields, Vex first, Rebuke the first Heron; once Baron's Pit is down, win by holding at 7. The full plan is below.
+
+### Against Riven, in detail (28 Oct 2026)
+
+She is the most-played deck in the field (89 of 701 lists at the LDXP Sacramento 25k) and her tournament lists (46 results) are what this is built on. A plan from the cards, not yet tested: log every Riven game.
+
+1. **Press, and deny her battlefields.** The Exile's whole engine, units entering ready, works only on battlefields she controls. Contest them early; you are bigger by turn 4 (15.9 Might against her 13.7). Her late game (Heron into Baron) is better than yours, so quiet turns are hers (strategy.md §2).
+2. **Vex, Apathetic is the card.** At a battlefield she stuns every unit Riven plays, and they can't move that turn, which cancels "enter ready". Riven answers her with Star-Crossed or Rebuke, each paying 1 more Power for Deflect; **Repulse** counters either.
+3. **Rebuke the first Astral Heron the turn after it lands.** Heron discounts only while at a battlefield, so it is always where you can reach it, and 2 Energy for her 7 is the best trade in the matchup; Defy can't touch Rebuke. Do it before the discount pays for Baron (10 Energy 3 Power becomes 8 and 1). Switcheroo in a fight there is the backup.
+4. **Don't pump one attacker into a stun.** Her Riven, Broken Blade stuns when she becomes exhausted, and Ki Burst (33% of her results) is an Action that needs her to exhaust a ready unit. A stunned unit deals no combat damage, so a lone pumped attacker can lose the fight and the 2 Power. Attack with two, or hold Repulse for the stun.
+5. **If Baron lands, stop conquering for the win.** His Baron Pit is a third battlefield, and the final point by conquer needs every battlefield scored that turn: hold one, conquer the other at 7, and you only draw a card. **A hold at 7 still wins** (§473.1.a.1; docs/rules-rulings.md, "The Baron Pit is a battlefield"). Hold your two and outscore the Pit, 2 a turn to 1. Nothing in the deck can choose Baron.
+6. **Rampage is the worst card here:** Defy counters it, Discipline (in every list) flips the damage trade as a Reaction, and Zhonya's turns the kill into a recall, so the legend doesn't ready. Sabotage stays: before a fight it shows her hand and strips a Discipline, Defy or Blade of the Exile, and if she Defies it she has traded her counter for your 1-drop.
 - **Kennen:** be ahead before Rhasa is cheap. His trash is public, so count it.
 - **Irelia:** spend only Power-paid tricks into her.
 - **Master Yi:** never let him defend alone and win.
@@ -541,7 +554,9 @@ Types from [strategy.md §8](../docs/strategy.md#8-reviewing-a-game), so the jou
 | Star-Crossed too expensive to hold up | 2 Gust for 2 Star-Crossed (the engine model's best-scoring cheap trick; it loses some of your answer to attacks) |
 | late game out of cards with runes to spare | Black Market for Sandswept Tomb (2 Power a card is cheap once all 12 runes are out) |
 | the third Matriarch clunky | a Tideturner for it |
-| Sabotage doing nothing | a Gust, or Grim Resolve, for one |
+| Sabotage doing nothing | a Gust, or Grim Resolve (no longer in the sideboard), for one |
+| **Riven: Baron Nashor landing and winning** | **Downwell** (8 Energy 2 Power, "return all units and gear to their owners' hands"): it chooses nothing, so Baron can't refuse it, and Defy can't reach an 8-cost spell. Your units cost less to replay and do something when they do (Ezreal, Fizz, Matriarch). You own 1; in for a Graves or Siren's Song. Hush (in Riven's sideboard) can counter it |
+| **Riven: her wide board of small units holding** | **Stare Down** (Body, 2 Energy): every enemy unit there with less Might than your chosen unit goes to base. With Rengar, or a unit after Punch First, it clears a battlefield of everything but Heron and Baron. Not So Fast can't counter it; Defy can |
 | small bodies still dying to pings | Unyielding Spirit main, for a Sabotage |
 
 ---

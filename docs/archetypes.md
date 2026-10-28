@@ -505,8 +505,7 @@ Sacramento 25k; Club9 Clash #3), as of 28 Oct 2026 — the most of any legend.
   ready"); being kept off battlefields she controls, which is where the engine works.
 - **From Sivir:** press, and deny her battlefields. Rebuke the first Heron the turn after it
   lands, before it pays for Baron. Once the Baron Pit exists, the final point by conquer needs
-  all three battlefields (§473.1.b.1): win by holding at 7. (Guide §10; the Riven plan update
-  is pending.)
+  all three battlefields (§473.1.b.1): win by holding at 7. ([Sivir guide](../guides/sivir-trying-her-best.md) §10, "Against Riven, in detail".)
 - **Engine:** exhaust — Riven, Broken Blade and Reckless Innovator pay off becoming exhausted;
   attacking, moving and Blade of the Exile's equip feed them.
 - **Sources:** riftbound.gg (Radiance theorycraft, 12 Oct 2026): "hold oriented legend".

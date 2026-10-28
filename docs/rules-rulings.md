@@ -157,3 +157,25 @@ so the other unit leaving afterwards changes nothing.
 **Why.** The test from the handbook's section on a source leaving the board: does the
 instruction have to read anything off the departed unit? A swap reads both Mights, so in case
 (1) it does, and the read is null. In case (2) the reading is done.
+
+## The Baron Pit is a battlefield: once it is on the board, the final point by conquer needs all three
+
+**Date:** 2026-10-28
+**Source:** Derived in this repo, not a staff ruling. Ask a judge before relying on it at an event. It matters against Riven, The Exile, whose tournament lists run Baron Nashor (80% of her Radiance results, 28 Oct 2026).
+**Rules:** §187.8, §187.9, §471.1, §471.2, §473.1.a.1, §473.1.b.1
+**Expires:** when Riot rules on it, or a Core Rules or FAQ update says how battlefield tokens count for the Final Point
+
+**Question.** Baron Nashor adds the Baron Pit battlefield token to the board and enters there.
+You are at 7, you held one battlefield this turn, and you conquer the other. Is that the
+eighth point?
+
+**Derived answer. No: you draw a card instead.** The final point by conquer needs every
+battlefield scored this turn (§473.1.b.1), and the Pit is one of them. A **hold** at 7 still
+wins: hold points are not gated (§473.1.a.1).
+
+**Why.** The Baron Pit is "a domainless battlefield token" (§187.9). No rule says outright that
+a battlefield token is a battlefield, but the other battlefield token is written to be scored:
+the Brush reads "When you score here" (§187.8), and scoring is something a player does to a
+battlefield, by conquering or holding it (§471.1, §471.2). So the Pit is a battlefield that can
+be scored, and "every Battlefield" counts it. The practical upshot against Baron: hold your two
+battlefields and win by holding, not by conquering.
