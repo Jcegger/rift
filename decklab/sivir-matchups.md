@@ -641,3 +641,61 @@ out of a showdown to base on her turn.
 
 **Reading: v2 slightly better**: the Heron answer and the Rampage cut fit, but Graves is the card her
 removal is best against. **How sure:** low-medium (10 results).
+
+### Ornn, Fire Below the Mountain (B) — Aggro · Gear
+
+**Evidence:** 36 posted lists (with a 12th of 25 and an 88th of 755 among them). **What he plays:** about
+20 gear (Poro Snax, Sterak's Gage, Seal of Focus, Guardian Angel, Brutalizer, Sprite Fountain, Mask of
+Foresight, Cloth Armor), the legend adding Power for gear; small units that pay off gear (Patched Porobot,
+Pit Crew, Clockwork Keeper, Aspiring Engineer, Scuttle Crab), Ornn, Blacksmith (5) and Forge God (+1 per
+gear); **Defy 83%**, Charm 67%. No Discipline, no Zhonya's.
+
+**What decides it:** his units are small until the gear lands on them; Graves's blast catches them early,
+Punch First catches the equipped ones. Your sideboard's Offer and Ravenbloom Prefect are at their best
+against him. Beast Below on a Sprite token removes it.
+
+**Reading: v2 slightly better.** **How sure:** low.
+
+### Lillia, Bashful Bloom (B) — Tempo · Go-wide
+
+**Evidence:** 45 posted lists, low placings. **What she plays:** **3-Might Temporary Sprite tokens**
+everywhere (the legend, Lillia, Fae Fawn, Sprite Fountain ×2.9, Sprite Burst ×2.9), Ravenbloom Student,
+Lonely Poro; Discipline and Defy (98%), Charm, Stupefy, Smoke and Mirrors, Mask of Foresight, Smoke Screen,
+Thousand-Tailed Watcher 60%, and **Unchecked Power 73%** (7 Energy: exhaust her units, then 12 damage to
+**every** unit at battlefields).
+
+**What decides it:** her board is 3-Might tokens: **Graves's blast is a clean sweep**, and Beast Below or
+Rebuke on a Sprite removes it for good. **Unchecked Power** wipes every unit at battlefields, yours
+included: keep a body in base before turn 7 (Beast Below's return-to-hand helps rebuild after it).
+
+**Reading: v2 better.** **How sure:** low (posted lists only).
+
+### Orianna, Lady of Clockwork (B) — Midrange · Gear
+
+**Evidence:** 111 posted lists, **very low placings**: popular, unproven. **What she plays:** the legend
+turns a gear into a unit (Might equal to its cost); **The Ball** ×2.8 (Deploy, Ganking; on play or move,
+draw or deal 2 to your units there), Orianna, Exquisite and Mechanical Marvel; Defy 94%, Discipline 85%,
+Stupefy, Zhonya's 58%, Watcher 60%, **Helm of Suppression** 42% (your spells cost more), Back Off, Charm.
+
+**What decides it:** few real units; her threats are gear turned into units, which your Offer (sideboard)
+kills and your bounce returns. Defy, Discipline and Zhonya's blunt Rampage. Helm of Suppression taxes your
+Power-paid tricks.
+
+**Reading: about the same.** **How sure:** very low.
+
+### Leona, Radiant Dawn (B) — Midrange · Fights
+
+**Evidence:** 32 posted lists. **What she plays:** stuns, and payoffs for them: Leona, Determined (stuns
+on attack), Zenith Blade, Back Off, Kennen, Keeper of Balance, Solari Shieldbearer, Ki Burst, Vi,
+Peacekeeper, Riven, Broken Blade; **Leona, Zealot 84% (stunned enemy units at her battlefield are −8
+Might, to a minimum of 1)**, Solari Chief (kills a stunned unit), Vex, Mocking; Defy 81%, Call to Glory
+81%, Discipline 59%, Zhonya's 56%.
+
+**What decides it:**
+1. **Stuns normally don't stop Graves's blast** (it's ability damage) **but Zealot does**: a stunned Graves
+   at her battlefield is 1 Might, so his blast deals 1. Away from Zealot, a stunned Graves still blasts.
+2. The same −8 makes a stunned Beast Below a 1-Might body, and Solari Chief kills anything stunned.
+3. Calm protection in most lists: Rampage is weak; v2's cut is cheap.
+
+**Reading: about the same.** Graves is strong against her stuns except exactly where her best card
+stands. **How sure:** low.
