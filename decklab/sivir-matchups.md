@@ -504,8 +504,8 @@ Graves are wrong here: a sweep is the worst play against her, so Graves is a 5-E
 not attack into her board.
 
 **Reading: about the same in game 1; v2 better after sideboarding.** Game 1, Graves offsets what Beast
-and the Rampage cut gain. Games 2 and 3, side both Graves out (for the third Rampage is wrong too: take
-Tornado and Rebuke-type cards), and v2's main is better shaped than v1's. **How sure:** medium-low
+and the Rampage cut gain. Games 2 and 3, side both Graves out, for the sideboard's Rebuke and Tornado (not
+its third Rampage, which pays her too), and v2's main is better shaped than v1's. **How sure:** medium-low
 (8 results; the Karthus arithmetic is certain, the rest is reading).
 
 **For the journal:** how often a kill handed her value; whether bouncing won.
