@@ -193,8 +193,12 @@ there's selection bias.") Claude's readings, reasoned, not tested:
    bounce (it chooses their unit); Defy cannot (an ability, not a spell).
 5. **An older set** (Spiritforged): perhaps never tried in a Radiance shell.
 
-**Rules question before trusting it:** with **no other friendly unit** to return, does the enemy
-bounce still happen? Not to be guessed: read the targeting rules (§355) first (CLAUDE.md).
+**Rules question, settled (Jay; checked in the verbatim rules):** with no other friendly unit, **no
+bounce at all**. "In order to put a spell or ability on the chain, valid choices must be made for all
+targets" (§355.8); the trigger targets both units, the same as Star-Crossed. A small cost here: a
+midrange deck nearly always has another unit by turns 5–7, and the text sets no location, so it can
+be one in your base (an Ezreal you want to replay). It fails only after a wiped board. Stays on the
+shortlist.
 
 **Shortlist for the five slots beside Sivir** (Jay decides): Rengar, Trophy Hunter ×2–3 · Graves ×1–2
 · Beast Below ×1, with Anivia, Primal as the alternative 7-drop.
@@ -208,7 +212,8 @@ deck. Graves is a sideboard question, after the main.
 
 - **28 Oct 2026:** Staunch corrected (he fights above his cost; the spec now says so). Why Beast Below is
   rare: five readings, the strongest that it is good only for decks with arrival-value units like this
-  one; a rules question on returning with no other friendly unit, open.
+  one; the rules question settled the same day: no
+  other friendly unit, no bounce (§355.8).
 - **28 Oct 2026:** stage 4, job 4: the rune board caps the top end at ~7 Energy (10+ runes on 7% of
   turn 5s), so Baron is out; Gold rises with a bigger top end (4.18 → 4.32). Shortlist: Rengar, Graves,
   Beast Below (Anivia the alternative).
