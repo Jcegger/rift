@@ -2,7 +2,7 @@
 title: Sivir v1 and v2 against the field — one matchup at a time
 subtitle: Battle Mistress (Body/Chaos). Each S-to-B legend read from its tournament lists and card text, with both versions played through. Readings, not results.
 started: 2026-10-28
-status: S tier done (Master Yi, Riven, Irelia, Kennen); A and B to come, one at a time
+status: S and A tiers done; B to come, one at a time
 ---
 
 How this works: one opponent per section, built from its **Radiance one-on-one tournament results**
@@ -389,3 +389,123 @@ answer to Heron or to her Vex; the Rampage it cuts was weak here.
 her stuns, which blunt most of your fights, don't stop Graves. **How sure:** low-medium (5 results).
 
 **For the journal:** Graves blasts that resolved through a stun; Heron turns; her Vex answered or not.
+
+---
+
+## Azir, Emperor of the Sands (A) — Tempo · Go-wide
+
+**Evidence:** 6 good finishes since 16 Oct, 4 of them Radiance one-on-one results (one event); best
+#38 of 755. Thin.
+
+**What he plays:** one unit and an army of tokens. The legend gives Sand Soldiers Weaponmaster and,
+after he plays an Equipment, makes another 2-Might Soldier.
+- *Units:* Azir, Sovereign (4; on attack, moves his tokens to that battlefield), Vi, Peacekeeper 50%,
+  Kennen, Keeper of Balance 33%. Everything else is **Sand Soldier tokens** (2): Guards! ×2.8 (Hidden),
+  **Arise! ×3** (6 Energy: a Soldier per Equipment, two ready), the legend.
+- *Equipment, about 17 pieces:* Doran's Shield, Brutalizer, Eye of the Herald, B.F. Sword (+3), Hand
+  Hammer, Soul Sword.
+- *Answers:* Defy ×3 and Discipline ×3 (100%), **Hidden Blade ×3** (kill a unit; you draw 2), Back Off
+  ×2.5 (Hidden stun), Deathgrip ×2, Battle Preparations, En Garde. No Zhonya's.
+
+**How he wins:** a slow start (2.2 units by turn 3), then a battlefield full of equipped Soldiers; Arise!
+can make four or five at once.
+
+**The interactions that decide it**
+1. **Graves against Soldiers:** bare ones are 2, equipped ones 3 to 5 (B.F. Sword makes 5). A 4-damage
+   blast kills most; with Punch First (9) it kills all of them. No Zhonya's here to save one.
+2. **Tokens that leave the board cease to exist** (§186.1): **Beast Below or Rebuke on a Soldier is
+   removal, not tempo**, and its equipment falls off.
+3. **Hidden Blade ×3** kills Graves or Beast, but you draw 2 each time: a fair trade for a 5- or 7-drop.
+4. **Defy and Discipline in every list**: Rampage is weak.
+5. **Press before the equipment lands** (the guide): he is the slowest A-tier deck on the board.
+
+**v1:** pressure early; Rampage blanked by Defy and Discipline; no sweeper for an Arise! turn.
+**v2:** Graves is the answer to Arise! (one blast, a battlefield of Soldiers); Beast Below bounces a
+token out of existence; the Rampage it cuts was weak here.
+
+**Reading: v2 is better placed.** His whole board is the kind Graves is built for, and his answers to
+Graves (Hidden Blade) pay you two cards. **How sure:** low-medium (4 Radiance results).
+
+**For the journal:** Arise! turns, and whether a blast answered them.
+
+---
+
+## Kai'Sa, Daughter of the Void (A) — Control · Spells
+
+**Evidence:** 15 Radiance results from 2 events, including **1st and 6th of 25** at the smaller one;
+best of 755 at the 25k was #83. One of the better-evidenced readings.
+
+**What she plays:** the legend adds Power for spells. **The most removal in the field**, all of it
+damage or shrink:
+- *Removal:* Hextech Ray ×2.5 (3), **Falling Star ×3** (3, twice), Bellows Breath ×1.9, Bilgewater Tracker
+  (1 to two units), Lost to the Sands 53% (4, or kill a gear), **Smoke Screen ×2** (−4, Reaction),
+  Stupefy ×3 (−1), **Thousand-Tailed Watcher ×2.8** (7; all your units −3 that turn).
+- *Bodies:* Watchful Sentry ×2.9 (1, draws on death), Plundering Poro (2), Lecturing Yordle (2), Tracker
+  (3), Noxus Hopeful (4), Kai'Sa, Survivor (4), **Brynhir Thundersong ×2.9** (5; you can't play cards that
+  turn), The Empyrean 80% (8).
+- *The big turn:* **Time Warp ×1.9** (10 Energy 4 Power: an extra turn). Temporal Breach ×3.
+- **No Defy, Discipline or Zhonya's.** Battlefields: Void Gate (+1 damage there), Rockfall Path (no units
+  played there), Frozen Fortress (1 damage to everything there each Beginning Phase).
+
+**How she wins:** kills or shrinks everything one card at a time, draws as she does, and closes with big
+bodies and an extra turn.
+
+**The interactions that decide it**
+1. **Her removal kills your bodies, and that is the plan working**: job 1's spec is "leaves value on
+   death" for exactly this deck. Ezreal has drawn, Fizz has recast, Innovator has made Gold.
+2. **Graves is fragile here**: 4 Might dies to Falling Star (6) or Hextech Ray plus a ping, often before
+   he attacks: a 2-Energy answer to your 5. Watcher's −3 turns his blast to 1 that turn.
+3. **Beast Below is robust**: 8 Might survives Ray, Falling Star and Lost to the Sands one at a time; it
+   bounces Watcher or Empyrean back to hand.
+4. **No Defy, Discipline or Zhonya's**: Rampage, Star-Crossed and Sabotage resolve, and Sabotage takes a
+   Time Warp or a Falling Star from her hand.
+5. **Brynhir** turns off your Reactions for a turn: Switcheroo and Star-Crossed wait.
+
+**v1:** more cheap value bodies than she has removal for; three clean Rampages; the grind the deck is
+built for.
+**v2:** Beast Below is the best threat in either list against her; Graves is the worst (a 5-drop she
+trades a 2-Energy spell for). One clean Rampage fewer; two fewer value bodies to run her out of answers.
+
+**Reading: about the same, perhaps v1 slightly.** Against a removal deck the side with more value
+threats wins the attrition; v1 has slightly more of them, v2 has one very good one (Beast) and one poor
+one here (Graves). **How sure:** medium (15 results, two events).
+
+**For the journal:** did she run out of removal before you ran out of bodies? Graves's life expectancy.
+
+---
+
+## LeBlanc, Deceiver (A) — Midrange · Go-wide
+
+**Evidence:** 8 Radiance results, one event; best #50 of 755.
+
+**What she plays:** a deck that wants its units to die. The legend, on a conquest or hold, makes a
+Temporary copy of a unit there (which dies at end of turn: another trigger).
+- *Deathknell bodies:* Honest Broker ×2.1 (Gold), Watchful Sentry ×1.9 (draw), Soaring Scout ×3 (ramp),
+  Black Rose Dignitary ×3 (ramp), LeBlanc, Fragmented (draw), Glasc Mixologist ×2.9 (replays a unit),
+  **Ruined Rex ×3** (6; on death, 4 damage to one of your units).
+- **Karthus, Eternal ×3 (88%)**: her Deathknell effects trigger twice.
+- *Making deaths:* Baited Hook ×3, Sacrifice ×3, Deathgrip, Mirror Image.
+- *Top end:* **Harnessed Dragon ×3** (8; kills one of your units on arrival), Rift Herald ×2.6 (7), Vi,
+  Peacekeeper ×2.8 (Ambush, stun), Thousand-Tailed Watcher ×1.6 (−3 to all yours).
+- *Answers:* Hidden Blade 63%, Kennen, Keeper of Balance 38%, Bellows 25%. No Defy or Discipline.
+
+**The interactions that decide it**
+1. **Every kill feeds her**, twice with Karthus: a Ruined Rex killed is 8 damage across your units; a
+   Broker is two Gold. **Graves sweeping her board, and Rampage, both pay her.**
+2. **Bouncing doesn't**: a unit returned to hand triggers no Deathknell. Rebuke, Star-Crossed, Evelynn's
+   pull and **Beast Below** are the right answers; the guide's plan is "hold; bounce, don't kill".
+3. **Harnessed Dragon and Rift Herald** are 7–8-Energy threats: Beast Below bounces one for your 7.
+4. **No Defy or Discipline**: your bounce resolves.
+
+**v1:** three Rampages that pay her, two Star-Crossed, one Rebuke, Evelynn: the right answers are a
+minority of the pool.
+**v2:** Beast Below adds the right kind of answer, and cutting a Rampage removes a wrong one. But two
+Graves are wrong here: a sweep is the worst play against her, so Graves is a 5-Energy body that should
+not attack into her board.
+
+**Reading: about the same in game 1; v2 better after sideboarding.** Game 1, Graves offsets what Beast
+and the Rampage cut gain. Games 2 and 3, side both Graves out (for the third Rampage is wrong too: take
+Tornado and Rebuke-type cards), and v2's main is better shaped than v1's. **How sure:** medium-low
+(8 results; the Karthus arithmetic is certain, the rest is reading).
+
+**For the journal:** how often a kill handed her value; whether bouncing won.
