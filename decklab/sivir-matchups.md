@@ -575,3 +575,69 @@ Unsung Hero, Kayle, Sett, Brawler, Rengar; Harnessed Dragon 41% and Rift Herald 
 
 **Reading: v2 better**: both its new cards get around Riposte, the card that shuts down most of v1's
 interaction. **How sure:** low-medium (49 lists, the Riposte rule is certain).
+
+### Sett, The Boss (B) — Midrange · Fights
+
+**Evidence:** 25 posted lists, low placings. **What he plays:** buffs everywhere (Pit Rookie ×2.8, Cithria,
+Showstopper ×2.9, Arena Bar, Pillaged Armory, Kinkou Monk), Sett, Kingpin (+1 per buffed friendly unit
+there), Call to Glory ×2.8 (free if he spends a buff), Punch First 84%, Rampage 56%, Sabotage 52%, Rengar
+52%, **Repulse 44%**, Hidden Blade 36%. **His legend saves a buffed unit that would die** (1 Power,
+exhausting the legend: once a turn). No Calm.
+
+**What decides it:** a board of small buffed units (+1 each) is still mostly inside Graves's 4; his legend
+saves one of them, and Repulse can counter a Rebuke or Star-Crossed on his key unit. Rampage is clean,
+apart from the one save.
+
+**Reading: v2 slightly better** (the sweeper against a wide buffed board). **How sure:** low.
+
+### Ambessa, Matriarch of War (B) — Aggro · Fights
+
+**Evidence:** 24 posted lists, low placings. **What she plays:** Empower: Legion Marauder ×3, Kayle,
+Solari Sunhawk, Noxian Emissary, **Ambessa, The Wolf** (Empowered: +3, and **can't be dealt damage unless
+she's in combat**); Guttural Roar (+4 to an Empowered unit), Rampage 92%, Punch First 83%, Vi, Peacekeeper
+79%, Public Execution 75% (kills one of your units with less Might than her chosen one), Tactical Retreat 58%
+(saves a unit), Hidden Blade 50%, Rengar 63%. No Calm.
+
+**What decides it:** small bodies, mostly inside Graves's range; Tactical Retreat saves one; **Public
+Execution kills Graves** (4 Might) cheaply. **Open rules question:** whether Ambessa, The Wolf, defending
+against Graves, counts as "in combat" when his attack trigger deals its damage; if not, his blast can't
+touch her. Not to be assumed; check the combat rules before relying on it.
+
+**Reading: about the same.** Graves's blast fits her board, but she has a cheap answer to Graves and a
+maybe-immune champion. Rampage is clean here, so v2's cut costs. **How sure:** low.
+
+### Jarvan IV, Exemplar of Demacia (B) — Aggro · Gear (two speeds)
+
+**Evidence:** 78 posted lists, low placings. **What he plays:** Deploy gear at battlefields (Pillaged
+Armory ×3, Concert Poster ×2.6 making 1-Might Recruits, Demacian Standard ×2.7, Portable Portal, Dockside
+Lock-Up), and the legend moves a unit to each one; small bodies (Trifarian Captain, Pit Rookie, Overloaded
+Traveler, Recruits) with Nidalee, Skystrike Squadron, Vi and Rengar above; Punch First 78%, Rampage 67%,
+Call to Glory, Hold 'Em, Hidden Blade 36%. No Calm.
+
+**What decides it:** the smallest board in the field: Recruits at 1, most else 2–3, so a Graves blast is
+often three or four kills. **Beast Below or Rebuke on a Recruit token removes it for good** (§186.1).
+Offer (sideboard) on his Deploy gear.
+
+**Reading: v2 better.** **How sure:** low (posted lists).
+
+### Akali, Rogue Assassin (B) — Control · Movement
+
+**Evidence:** 10 Radiance results, one event; best #29 of 755.
+
+**What she plays:** removal, protection, and Heron. **Falling Star ×2.7, Defy ×2.9, Discipline ×3,
+Zhonya's ×3, Astral Heron ×3** (all 100%), Shuriken Flip ×2.9 (2 damage, then move), Back Off (Hidden stun),
+Mischievous Marai 80% (2 damage when played), Not So Fast 70%, Block (Shield 3, Tank); Stellacorn Herder ×3,
+Akali, Deadly Weapon (pings on every move), Kai'Sa, Survivor, Blitzcrank. The legend pulls one of her units
+out of a showdown to base on her turn.
+
+**What decides it:**
+1. **Calm protection in every list** (Defy, Discipline, Zhonya's ×3): Rampage is at its weakest; v2's cut
+   is free here.
+2. **Heron ×3 in every list**: Rebuke and Beast Below are the answers; Not So Fast (70%) can counter Beast's
+   bounce.
+3. **Graves is fragile**: Falling Star (6), Shuriken Flip plus a ping, Marai's 2 all reach him; three
+   Zhonya's save her units from the blast one at a time.
+4. **Her legend escapes a fight on her turn**, so attacking into her pays less than defending.
+
+**Reading: v2 slightly better**: the Heron answer and the Rampage cut fit, but Graves is the card her
+removal is best against. **How sure:** low-medium (10 results).
