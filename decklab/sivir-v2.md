@@ -106,7 +106,7 @@ is the test a card must pass to earn a slot in stage 4.***
 
 | # | job | spec | v1 now | target |
 |---|---|---|---|---|
-| 1 | **Trash-and-recursion bodies**: take a battlefield, leave something behind | 3 Energy or less and 1 Power or less (cheap, and Matriarch can revive it); **leaves value whether it lives or dies** (a card, a Gold, a choice in the trash): the deck's defence against removal is replacing units, not saving them | Merchant 3, Ezreal 3, Fizz 3, Innovator 3, Matriarch 3, Tornado 2, Staunch 2 (19) | 17 |
+| 1 | **Trash-and-recursion bodies**: take a battlefield, leave something behind | 3 Energy or less and 1 Power or less (cheap, and Matriarch can revive it); **leaves value whether it lives or dies** (a card, a Gold, a choice in the trash), **or fights above its cost** (Staunch Survivor: 4 Might attacking or defending, for 2 Energy): the deck's defence against removal is replacing units, not saving them | Merchant 3, Ezreal 3, Fizz 3, Innovator 3, Matriarch 3, Tornado 2, Staunch 2 (19) | 17 |
 | 2 | **Gold-paid fight tricks**: win the fight with Power, where Defy can't reach, **or save the few units that must stay** | 2 Energy or less; paid in Power; usable in the fight (Action, Reaction or from face down); out of Defy's reach (2+ Power, or it chooses your own unit). **Plus 1–2 saves** for Vex, Matriarch and the top end: Star-Crossed first (it saves and answers at once), Repulse for a targeted spell; Defy can stop either, accepted | Punch First 3, Switcheroo 2, Edge of Night 2 (7) | 7 |
 | 3 | **Clear the battlefield you need**: break their hold, stop theirs (how the deck scores: hold one, take the other) | a **mix of kinds** (kill, bounce, stun, pull, strip) so there is an answer to every threat type; **half or more works through Zhonya's** (bounce, stun, pull, strip), since kills are blunted in the Calm decks at the top; Power-paid preferred (Defy-proof); spells Fizz can recast (3 Energy or less); **1–2 may be sweepers** | kill: Rampage 3 · strip: Sabotage 2 · bounce: Star-Crossed 2, Rebuke 1 · lock: Vex 2 · pull: Evelynn 1 (11) | 10 |
 | 4 | **Turn-5 threats that spend the spare Power**: outsize the board once Energy stops being tight | 5+ Energy or 6+ Might; out of Gust's range (4+ Might); **value when it lands**, since bounce is in nearly every top list; ideally a sink for spare Gold; **sweeping when it attacks or defends is preferred** (the field is small units, below) | Rengar, Trophy Hunter 2, Sivir, Mercenary (3) | 6 |
@@ -139,8 +139,11 @@ and "keep in mind what is within purple and orange… we may not have a true sav
 **What the specs show before stage 4:**
 - **Job 4's spec is strict** ("value when it lands"): Rengar's Ambush is surprise, not value, so
   he meets it half way. The job to search for.
-- **Staunch Survivor fails job 1's spec**: he leaves nothing behind (a sturdy body, not a value
-  body). With bodies 19 → 17, he is the first card in question.
+- ~~Staunch Survivor fails job 1's spec~~ **corrected** (Jay: "Staunch is really a 4 Might unit"): he
+  fights above his cost, 4 Might attacking or defending for 2 Energy, holding battlefields in a
+  field of small attackers, and he is the card the identity rule was written from (back in on
+  26 Oct). The spec now accepts "fights above its cost". Weak only outside a fight (2 Might: Gust,
+  3-damage removal). The bodies that go come out of the jobs 1–3 read, not a first guess.
 - **Job 3's mix is lopsided**: kill and bounce are 6 copies, lock 2, pull 1. Spreading the kinds
   points at more Rebuke or Vex, not more Rampage.
 
@@ -178,6 +181,21 @@ Gold a game, because expensive cards make the deck recycle more; Energy on turns
 cards. *Caveat: the model recycles whenever it needs Power; a player saving runes for a big turn
 does somewhat better, but the tension is structural.*
 
+**Why is Beast Below so rarely played?** (Jay: "it's possible we're uncovering something, because
+there's selection bias.") Claude's readings, reasoned, not tested:
+1. **Returning your own unit is a drawback for most decks**, an upside only when that unit does
+   something on arrival. Most units don't; this deck's do (Ezreal draws 2 again, Fizz recasts,
+   Matriarch revives again). Weak for nearly everyone, good for a deck shaped like this one: a
+   card that rewards an unusual shape rarely gets found by netdecking. The selection bias is real.
+2. **The 7-drop slot is crowded where Chaos is good**: Riven has Heron and Baron, Kennen has Rhasa.
+3. **It is tempo, not card advantage**: one bounce each is card-neutral, unless reason 1 applies.
+4. **Slow and readable**: a main-phase 7-drop, no Ambush or Hidden. Not So Fast can counter its
+   bounce (it chooses their unit); Defy cannot (an ability, not a spell).
+5. **An older set** (Spiritforged): perhaps never tried in a Radiance shell.
+
+**Rules question before trusting it:** with **no other friendly unit** to return, does the enemy
+bounce still happen? Not to be guessed: read the targeting rules (§355) first (CLAUDE.md).
+
 **Shortlist for the five slots beside Sivir** (Jay decides): Rengar, Trophy Hunter ×2–3 · Graves ×1–2
 · Beast Below ×1, with Anivia, Primal as the alternative 7-drop.
 
@@ -188,6 +206,9 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** Staunch corrected (he fights above his cost; the spec now says so). Why Beast Below is
+  rare: five readings, the strongest that it is good only for decks with arrival-value units like this
+  one; a rules question on returning with no other friendly unit, open.
 - **28 Oct 2026:** stage 4, job 4: the rune board caps the top end at ~7 Energy (10+ runes on 7% of
   turn 5s), so Baron is out; Gold rises with a bigger top end (4.18 → 4.32). Shortlist: Rengar, Graves,
   Beast Below (Anivia the alternative).
