@@ -163,7 +163,7 @@ legends whose top loop the reader calls Hidden:
 | legend | Hidden cards | what rewards being face down | so |
 |---|---|---|---|
 | Teemo, Swift Scout | 27 | his legend hides for 1 Energy instead of 1 Power; Guerilla Warfare returns Hidden cards from the trash | **Facedown**: the legend is why he runs so many |
-| Evelynn, Agony's Embrace | 18 | legend draws on every face-down play; Ember Monk, Gutter Guardian; Evelynn, In Control scores with a face-down card | **Facedown** |
+| Evelynn, Agony's Embrace | 18 | legend draws on every face-down play; Ember Monk, Gutter Guardian. (*Evelynn, In Control*, which scores with a face-down card, is in **0%** of her Radiance results; corrected in §5) | **Facedown** |
 | Vex, Gloomist | 12 | nothing for face down; her legend draws on holds | Hidden is free tricks protecting holds: **Holds**, not Facedown |
 | Sivir, Battle Mistress | 9 | nothing | hiding is where Gold goes: **Extra resources** |
 
@@ -309,13 +309,15 @@ The profile numbers are the representative list's (data/archetypes.json). *Borde
 | **Sivir, Battle Mistress** | Aggro | Extra resources | Cost 2.5, 19 cards at 2 or less: the *field's* Sivir is a fast combat curve. Gold is the payoff the reader cannot see. *Thin (1)*. **Aurora in 10 of 36 lists**: an Aurora row. **Jay's own deck** (Sivir Is Trying Her Best) plays longer, "outlasts them": a §4 row by hand, placed with Jay |
 | **Darius, Hand of Noxus** | Aggro | Fights | 27 units, interaction 4; Legion (the legend adds Energy on the second card). *Borderline*: cost 2.9 and 16 cheap cards could read midrange. *Thin (3)* |
 | **Jinx, Loose Cannon** | Aggro | Card flow | Legend draws only with one card or fewer in hand, so the deck empties its hand fast; Flame Chompers and Jinx, Rebel pay off discarding. *Thin (0 placed, 41 lists)* |
+| **Ornn, Fire Below the Mountain** | Aggro | Gear | *Added in §5:* the doc's sourced call (riftbound.gg: "a super fast-paced strategy" of cheap gear); cost 1.9, 19 gear; the legend adds Power for gear. 9 placed |
 | **Teemo, Swift Scout** | Aggro | Facedown | 25 cards at 2 or less, interaction 5: a swarm. *Borderline*: 26 Hidden or Reaction cards are why it measures tempo, and his Hidden cards win exchanges (Switcheroo, Tideturner). *Thin (2)* |
 
 **Moved out of aggro, to their own chunks:**
 - **Evelynn, Agony's Embrace → Tempo · Facedown.** Average 3.2 and only 8 cards at 2 or less:
   not a cheap curve. 21 reactive cards, played from face down on either turn.
-- **Ornn, Fire Below the Mountain → Midrange · Gear.** Only 15 units and 13 draw: it builds
-  an engine of 19 gear rather than rushing; the low average (1.9) is cheap gear.
+- ~~Ornn → Midrange · Gear~~ **reverted in §5 (28 Oct 2026): Aggro · Gear**, the doc's sourced call
+  (riftbound.gg, 30 Aug: "a super fast-paced strategy" of cheap gear; average cost 1.9). The
+  midrange reading was Claude's inference from 15 units and 13 draw.
 - **Annie, Dark Child → Control · No engine.** 19 interaction and 21 spells; the legend readies
   2 runes at the end of your turn, which is mana for answers on theirs. *Thin (0)*.
 
@@ -352,7 +354,7 @@ now pass; the shape decides instead.
 | **Evelynn, Agony's Embrace** | Facedown | From chunk 1: cost 3.2, 21 reactive, played from face down on either turn |
 | **Miss Fortune, Bounty Hunter** (clean) | Movement | Cost 2.3, 25 cheap; legend gives Ganking. *Thin (0)*. **67 of her 101 lists run Aurora**: a separate §4 row |
 | **Yasuo, Unforgiven** | Movement | Cost 2.2, 32 cheap, 18 reactive; legend moves a unit to or from base. *Thin (0)* |
-| **K'Sante, Pride of Nazumah** | Fights | Cost 2.4, 31 cheap; legend turns Shield into Assault, so defensive cards attack. *Thin (1)* |
+| **Azir, Emperor of the Sands** | Go-wide | *§5: drafted midrange, reverted to the doc's sourced call* (riftbound.gg, 8 Sep: "focuses on controlling its opponent's development and pace"); his 4 Radiance results run Defy, Discipline, Hidden Blade and Back Off in every list. Sand Soldiers made per Equipment are the board. 19 placed |
 | **Pyke, Bloodharbor Ripper** | Extra resources | Legend bounces your own unit for a Gold, so play effects repeat and Gold piles up. *Thin (1)* |
 | **Ziggs, Hexplosives Expert** | Gear | Legend makes Bomb gear at battlefields, killed on purpose and remade. *Borderline*: the Bombs are removal, which could read control. *Thin (2)* |
 
@@ -371,16 +373,17 @@ now pass; the shape decides instead.
 |---|---|---|
 | **Riven, The Exile** | Holds | **The chunk's biggest call.** Cost 2.9, 4 big (Astral Heron, Baron), 11 draw: a midrange shape. Her legend pays off battlefields **she controls** (units played there enter ready), which is why denying them is the plan against her (her matchup guide). The exhaust loop (Riven, Broken Blade, Innovator, Ki Burst) is the engine inside it. *Borderline family*: Movement, on that loop. 52 placed |
 | **Kennen, Heart of the Tempest** | Card flow | Legend empowers on every card played from elsewhere (Flow, Fizz, Matriarch) and turns it into Assault. Fill the trash, then one Rhasa turn: **Rhasa 100% (×3) and Last Rites 100% of his 26 Radiance results** (§5). Interaction 5: value, not answers. 62 placed |
-| **Azir, Emperor of the Sands** | Go-wide | 3 units and 16 Equipment: the legend's Sand Soldiers are the board, made per Equipment. Slow start (2.1 units by turn 3), strong late. Orb: "Token-Based Midrange". 19 placed |
 | **Ekko, Boy Who Shattered Time** | Card flow | Legend makes a unit cheap and kills it at end of turn: re-buying play effects, value the reader cannot see. 26 units, cost 3. 4 placed |
+| **K'Sante, Pride of Nazumah** | Fights | *§5: drafted tempo, reverted to the doc's sourced call* (the guide reads him as a holding legend; Shield works on both sides of a fight). Legend turns Shield into Assault. *Thin (1)* |
 | **Leona, Radiant Dawn** | Fights | Cost 3, 16 cheap: bigger bodies. Stuns into buffs. *Thin (2)* |
 | **Ivern, Green Father** | Holds | Legend makes a Brush on conquest or hold; tribes. Cost 3.1, 5 big. Jay: known as a hold deck. *Thin (2)* |
 | **Orianna, Lady of Clockwork** | Gear | 7 units, 18 gear, 15 draw: the legend turns a gear into a unit. An engine, not a rush. *Thin (2)* |
 | **Master Yi, Wuju Master** | Extra resources | Levels (XP) into +1 Might and units entering ready: grows into a late board. *Thin (4)* |
 | **Mel, Soul's Reflection** | Spells | Empower placed by what it does: Shock Blast and Applied Researchers get cheaper while something is Empowered. 22 spells, 13 draw. *Thin (1)* |
 
-**Aggro (1), back to chunk 1:** **Draven, Glorious Executioner · Fights.** 25 units, interaction
-6, legend draws for every combat won. Orb: "Aggressive Midrange". 6 placed.
+**Draven, Glorious Executioner · Midrange · Fights** (drafted aggro; §5 reverted it to the doc's sourced call:
+riftbound.gg, 14 Sep, "stayed true to its midrange play style", no early champion to race with).
+Legend draws for every combat won. 6 placed.
 
 **What this chunk sends back up:**
 - **Holds is now the largest home for control** (4 of 4) and takes Riven and Ivern in midrange.
@@ -420,7 +423,6 @@ of how he plays, *not* on his legend's text, and is marked so.
 | **Garen, Might of Demacia** | Go-wide | Legend draws 2 on a conquest with 4+ units there; 29 units, interaction 0. *Thin (0)* |
 | **Zed, Master of Shadows** | Go-wide | Shadow Clones, which Zed swaps places with (doc; a known reader miss). *Thin (0, 151 lists)* |
 
-Plus **Ornn, Fire Below the Mountain · Gear** from chunk 1.
 
 **Control (9)**
 
@@ -544,10 +546,51 @@ mean copies where it runs. "Not named" = the most-played cards the entry leaves 
 | **Irelia, Blade Dancer** | **0 one-on-one** | nothing new to check | the entry is Vendetta evidence throughout (Stellacorn Herder "98% of lists"). Forecast S on experts alone; say so in the rewrite |
 | **Akali, Rogue Assassin** | 10, 1 event | Deadly Weapon 100%, Herder 100%, Shuriken Flip 100%, Falling Star 100%, Heron 100% (×3), Back Off 100%, Kai'Sa, Survivor 90% | **Akali, Silent and Akali, Brash: 0%**, named as key and not played; **misses** Defy, Discipline, Zhonya's (×3), Blitzcrank, Long Sword (all 100%), Mischievous Marai 80%. Moved to Control above |
 
+
+### Entry scan, A and B tiers (28 Oct 2026)
+
+**Source precedence**, found by this pass: several entries carry a dated **Call** grounded in an
+expert source, and §3 placed some legends against them without reading them first. The rule
+now: **an expert-sourced call stands over Claude's inference from the profile, unless the
+Radiance tournament results contradict it.**
+
+| legend | doc's call (source) | §3 had | Radiance 1v1 | now |
+|---|---|---|---|---|
+| Ornn | aggro (riftbound.gg: "super fast-paced") | midrange | 1 | **Aggro**, the call |
+| Draven | midrange (riftbound.gg: "true to its midrange play style") | aggro | 0 | **Midrange**, the call |
+| K'Sante | midrange (the guide: a holding legend) | tempo | 1 | **Midrange**, the call |
+| Azir | tempo (riftbound.gg: "controlling … development and pace") | midrange | 4 | **Tempo**, the call |
+| Kai'Sa | midrange (Vendetta guide, Jul) | control | **15**: interaction 14, control-shaped | **Control**: the results contradict the call |
+| Evelynn | aggro (her lists then) | tempo | **6**: cost 3.2, 8 cheap | **Tempo**: the results contradict the call |
+| Master Yi, Wuju Bladesman | midrange (Jun: "develop hard, then hold") | control | 5, mixed | **Control**: "then hold" is control as §1 defines it (winning by holding); Jun's words are the reason |
+
+**Named cards the Radiance results do not play** (only where there are 5+ results; with one or
+two, an absence proves nothing):
+
+| legend | results | named, not played | most played, not named |
+|---|---|---|---|
+| Evelynn | 6 | **Evelynn, In Control 0%**, Evelynn, Consuming 17%, both named as payoffs | Edge of Night, Switcheroo, Star-Crossed, Evelynn, Entrancing, Pyke, Returned, Vex, Apathetic (all 100%) |
+| Rengar | 10 | **Rengar, Pouncing 0%** | Noxus Hopeful, First Mate, Pit Rookie, Irresistible Faefolk, Punch First, Rampage, Sabotage (all 100%) |
+| Kai'Sa | 15 | **Kai'Sa, Evolutionary 0%** | Kai'Sa, Survivor, Thousand-Tailed Watcher, Bilgewater Tracker, Plundering Poro, Temporal Breach (all 100%) |
+| Vex | 5 | (Steel Paws 40%, named only to say it is not a loop: fine) | Defy, Discipline, Bedeviling Stranger, Star-Crossed (100%), Rebuke, Boots of Swiftness (80%) |
+| LeBlanc | 8 | none of her own (the misses were matchup lines) | Thousand-Tailed Watcher, Honest Broker, Vi, Peacekeeper, Mirror Image (100%) |
+| Azir | 4 | none | Defy, Discipline, Hidden Blade, Brutalizer, B.F. Sword, Back Off (100%) |
+| Diana | 5 | **Diana, No Longer Human 0%** | Stupefy, Gust, Ride the Wind, Tideturner, Hwei, Brooding Painter (100%) |
+| Mordekaiser | 5 | **Mordekaiser, Twice Slain 0%, Baited Hook 0%**, Rift Herald 40% | Kai'Sa, Survivor, Realm of Death, Honest Broker, Vi, Peacekeeper (100%) |
+
+**No one-on-one Radiance results to check against:** Jayce, Draven, Sett, Leona, and every other
+legend not in the tables (Lucian, Fiora, Ambessa, Sivir, Pyke, Annie, Teemo, Rumble, Rek'Sai,
+Darius, Jax and the C tier). Their entries stay Vendetta evidence until results arrive; the
+rewrite says so per entry. **Every entry's header stats** (*measured … · N placed · …*) are
+hand-copied snapshots from 19–20 Oct and stale: the rewrite should not hand-copy them.
+
 ---
 
 ## Log
 
+- **28 Oct 2026:** entry scan, A and B tiers. Source precedence added (an expert-sourced Call stands over
+  Claude's profile inference unless Radiance results contradict it): Ornn aggro, Draven midrange,
+  K'Sante midrange, Azir tempo; Kai'Sa and Evelynn kept on their results. Named cards at 0% listed.
 - **28 Oct 2026:** entry scan, S tier and Akali: Kennen move reverted (the threshold again); Akali to
   Control on her Radiance answers; Irelia has no 1v1 Radiance results; 2v2 events found counted
   everywhere and excluded (lib/placing.mjs).
