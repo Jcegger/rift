@@ -72,7 +72,7 @@ date: 2026-10-28
 | **Gear (2)** | 2 Edge of Night |
 | **Battlefields** | Zaun Warrens · Sigil of the Storm · Sandswept Tomb |
 | **Runes** | 5 Body · 7 Chaos |
-| **Sideboard** | 2 Unyielding Spirit · 2 An Offer You Can't Refuse · 1 Rebuke · 1 Repulse · 1 Siren's Song · 1 Ravenbloom Prefect · **1 Rampage · 1 Tornado Warrior** |
+| **Sideboard** | 2 Unyielding Spirit · 2 An Offer You Can't Refuse · 1 Rebuke · 1 Repulse · 1 Ruin Runner · 1 Ravenbloom Prefect · **1 Rampage · 1 Tornado Warrior** |
 
 **From v1:** +2 Graves (from the sideboard), +1 Beast Below; −2 Tornado Warrior, −1 Rampage (both to the sideboard). The sideboard is a placeholder: v1's, with the two Graves (now main) swapped for the cards that left.
 
@@ -226,12 +226,12 @@ Everything in [v1's §8](sivir-trying-her-best.md), plus:
 | 2 An Offer You Can't Refuse | kill a gear (its controller gets a Gold) | gear: Riven's Blade and Zhonya's, Azir, Jayce, Ornn, Lucian, Kennen's Seal and Last Rites |
 | 1 Rebuke | a second Defy-proof bounce | Heron decks (Riven, Vex, Akali), and LeBlanc and Mordekaiser (bounce, don't kill) |
 | 1 Repulse | counter a spell or ability that chooses one of your units | anything that blanks Graves (Switcheroo, Charm, a bounce); Hidden Blade |
-| 1 Siren's Song | move an enemy unit that moved this turn | Riven's ready attackers, Irelia, LeBlanc |
+| 1 Ruin Runner | 6 Energy, 5 Might, can't be chosen by enemy spells or abilities | for a Graves where their answers choose: Kennen (Switcheroo), Diana (Eclipse, Smoke Screen), Kai'Sa (Falling Star, Hextech Ray) |
 | 1 Ravenbloom Prefect | banish himself to banish a gear they play | Azir, Jayce, Ornn |
 | 1 Rampage | the third copy | the decks with no Calm protection: Kennen, Diana, Rengar, Viktor |
 | 1 Tornado Warrior | a hide card, and the Matriarch line | when Graves is out (LeBlanc, Mordekaiser, Jayce) |
 
-**Graves comes out** against decks that want their units to die (LeBlanc, Mordekaiser) and decks with almost no units (Jayce).
+**Graves comes out** against decks that want their units to die (LeBlanc, Mordekaiser) and decks with almost no units (Jayce). **Ruin Runner replaces a Graves** where the opponent answers him with a spell that chooses (Kennen, Diana, Kai'Sa): it can't be chosen, so it also stands in for the Repulse that was there to protect him.
 
 ---
 
@@ -242,18 +242,18 @@ From the [matchups worksheet](../decklab/sivir-matchups.md), which reads each le
 | opponent | v2 vs v1 | role | what decides it | bring in | take out |
 |---|---|---|---|---|---|
 | **Riven** (S) | better | **press**; deny her battlefields | Graves on her small board (Blade lifts some out of 4: Punch First); Beast and Rebuke on Heron; Baron can't be chosen: hold at 7 | Rebuke, Repulse, 2 Offer | 2 Rampage, 1 Sabotage, 1 Star-Crossed |
-| **Kennen** (S) | **v1 slightly** | **press early** | no Defy, Discipline or Zhonya's, so Rampage is clean; Switcheroo in every list zeroes Graves; Rhasa shrugs off bounce | Rampage, Repulse, 2 Offer | 2 Sabotage, 1 Graves, 1 Edge of Night |
-| **Irelia** (S) | about the same | press; attack with two | the densest tricks in the field; Flash and Defiant Dance blunt Graves | Repulse, Siren's Song | 2 Rampage |
+| **Kennen** (S) | **v1 slightly** | **press early** | no Defy, Discipline or Zhonya's, so Rampage is clean; Switcheroo in every list zeroes Graves; Rhasa shrugs off bounce | Rampage, Ruin Runner, 2 Offer | 2 Sabotage, 1 Graves, 1 Edge of Night |
+| **Irelia** (S) | about the same | press; attack with two | the densest tricks in the field; Flash and Defiant Dance blunt Graves | Repulse | 1 Rampage |
 | **Master Yi** (S) | better | attack with two | Ruin Runner can't be chosen: Graves with Punch First; Beast or Rampage clears a lone defender; he has no bounce, so Vex sticks | Repulse (if Charm keeps moving Graves) | 1 Star-Crossed |
 | **Rengar** (A) | better | hold | 26 of 30 units at 4 or less; Ambush lands after Graves's trigger: defend with him | Rampage, Tornado | 2 Sabotage |
 | **Vex** (A) | better | remove their Vex first | stuns don't stop Graves's blast; Heron ×3: Beast and Rebuke | Rebuke, Repulse | 2 Rampage |
 | **Azir** (A) | better | **press** before the equipment lands | Graves answers Arise!; a bounced Soldier is gone | 2 Offer, Prefect | 2 Rampage, 1 Sabotage |
 | **Evelynn** (A) | about the same | press her hide spots | taking her battlefield trashes her face-down cards; Graves defends, doesn't attack her hide spots | Rampage | 1 Edge of Night |
-| **Kai'Sa** (A) | about the same | press; spread out | her removal kills Graves; Beast survives it; Rampage clean | 2 Unyielding Spirit, Rampage | 2 Graves, 1 Edge of Night |
-| **LeBlanc** (A) | same; better after siding | hold; **bounce, don't kill** | every kill feeds her Deathknells, twice with Karthus | Rebuke, Tornado, Siren's Song, Repulse | 2 Graves, 2 Rampage |
+| **Kai'Sa** (A) | about the same | press; spread out | her removal kills Graves; Beast and Ruin Runner survive it; Rampage clean | Ruin Runner, 1 Unyielding Spirit, Rampage | 2 Graves, 1 Edge of Night |
+| **LeBlanc** (A) | same; better after siding | hold; **bounce, don't kill** | every kill feeds her Deathknells, twice with Karthus | Rebuke, Tornado, Repulse | 2 Graves, 1 Rampage |
 | **Jayce** (A) | about the same | **press** | nothing on board for three turns; Beast on Elder Dragon; Sabotage on Palace or Aurora | 2 Offer, Prefect, Tornado | 2 Graves, 1 Rampage, 1 Star-Crossed |
 | **Akali** (B) | slightly better | press | Calm protection and Heron ×3; her removal is Graves's problem | Rebuke, 2 Unyielding Spirit | 2 Rampage, 1 Sabotage |
-| **Diana** (B) | **v1 slightly** | press | Eclipse, Smoke Screen, Flash, Switcheroo all answer Graves at fight speed; Rampage clean | Rampage, Repulse | 1 Graves, 1 Sabotage |
+| **Diana** (B) | **v1 slightly** | press | Eclipse, Smoke Screen, Flash, Switcheroo all answer Graves at fight speed; none can choose Ruin Runner; Rampage clean | Rampage, Ruin Runner | 1 Graves, 1 Sabotage |
 | **Mordekaiser** (B) | same; better after siding | hold; bounce his big ones | deaths fuel him | Rebuke, Tornado | 2 Graves |
 | **Viktor, Rek'Sai, Jarvan IV, Darius, Lillia, Rumble** (B) | **better** | hold | boards of tokens and 1–3 Might units: a blast is a 2- or 3-for-1; a bounced token is gone. Imperial Decree (Viktor, Rek'Sai): don't fight into it | Rampage | 1 Sabotage |
 | **Lucian** (B) | better | press | equipped units climb past 4: Punch First on Graves; Ruin Runner needs the 9-damage blast | 2 Offer | 2 Rampage |

@@ -301,6 +301,13 @@ deck. Graves is a sideboard question, after the main.
 - **28 Oct 2026:** Bullet Time set aside (Jay: "my fear is it would make me save my Gold"): an X spell pulls
   against an engine that spends Gold every turn; it does Graves's job at X 2–3; Defy counters it in the
   Calm decks it's for.
+- **28 Oct 2026:** Ruin Runner modelled for the second Graves (Jay: no Power, but the deck has plenty):
+  one answer fewer per S/A unit (11 → 10), Gold 4.40 → 4.30, 6+ runes on 83% of turn 4s; the goldfish
+  can't see its upside (no opponent removal). Kept 2 Graves main; Ruin Runner to the sideboard for
+  Siren's Song (the narrowest card there), in for a Graves against Kennen, Diana and Kai'Sa, whose
+  answers to him all choose. App deck updated (row backed up). Zelonius's post-Sacramento list (28 Oct)
+  puts Sivir around high C ("not particularly special"), Riven first; purple answering big units is his
+  running theme, which is the case for this card.
 - **28 Oct 2026:** v2 to Nexus Night; Beast Below's three test questions; second Beast for the second
   Rengar only if it earns it (`sivir-matchups.md` has the field reading).
 - **28 Oct 2026:** jobs 1–3: −1 Rampage; four body cuts measured, B (−2 Tornado) agreed tentatively;
