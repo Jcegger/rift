@@ -304,3 +304,88 @@ medium (10 results plus a major win; the Ambush timing against Graves is the unc
 
 **For the journal:** Graves defending against his attacks; Ambush units after the blast; whether
 turn 3 kept up with his board.
+
+---
+
+## Jayce, Defender of Tomorrow (A) — Control · Ramp *combo*
+
+**Evidence: no one-on-one Radiance results yet.** Read from 34 posted legal lists, **68% of them
+Aurora**: the Aurora build is the majority Jayce, and this reading covers both.
+
+**What he plays:** the legend readies gear (two when Empowered). Almost no units until late.
+- *Ramp:* Platewyrm Egg ×2.9 (Energy), Mobilize ×3, Catalyst of Aeons ×2.8, Acceleration Gate.
+- *Card flow:* Dredge Up, Garbage Grabber, Clairvoyance (7, draw 2), Promising Future.
+- *Pings and removal:* Bellows Breath ×2.8 (1 to up to three units, Repeat), Flurry of Blades ×2.2 (1 to
+  all units at battlefields), Stupefy, Deadly Flourish (3), Rocket Barrage (4 to a unit in a base, or kill
+  a gear).
+- *Top end:* **Elder Dragon ×2.9** (12 Energy; any damage it deals kills; on arrival it damages one enemy
+  unit at each location, so kills one per location), Jayce, Brilliant Inventor (6), Sprite Burst (two
+  3-Might Sprites), **Dazzling Aurora ×2.9** (a free unit off the top every turn).
+- *The alternative win:* **Gutter Palace ×1.9**: at the start of his turn, exactly 4 cards in hand and
+  exactly 4 units at battlefields, and he wins. Sabotage ×1.9. Forgotten Monument (no scoring there
+  until a player's third turn) in 65%.
+
+**How he wins:** survive three turns with nothing on the board, ramp, then Elder Dragon or Aurora's free
+units take over, or Gutter Palace ends it.
+
+**The interactions that decide it**
+1. **He has almost nothing on board for three turns** (0.8 units by turn 3): the guide's plan is press,
+   and every point you take early is one he can't get back.
+2. **Your Sabotage is at its best here**: his hand is ramp, Palace and Aurora, all non-unit cards.
+3. **Elder Dragon** kills one of your units at each location as it lands. **Beast Below bounces it**
+   back to hand: 12 Energy and 4 Power undone for your 7 and 2.
+4. **Gutter Palace needs 4 of his units at battlefields**: killing or bouncing one at the right time
+   stops it. A Graves blast that clears a battlefield of his Sprites does exactly that.
+5. **Graves has few targets**: his units are few and big, apart from Sprite Burst's 3-Might Sprites.
+
+**v1:** the faster start presses him harder in the window that matters (two more 3-drops); three
+Rampages have few targets.
+**v2:** Beast Below is the best answer to Elder Dragon in either list; Graves is mostly a 5-Might body
+here. Two fewer 3-drops cost pressure in exactly the turns he is weakest.
+
+**Reading: about the same, for different reasons.** v1 is better before turn 5 (pressure), v2 after it
+(Beast on Elder Dragon). Against his Aurora build, which plays free big units every turn, Beast Below
+matters more. **How sure:** low: no Radiance results, and two builds in one reading.
+
+**For the journal:** points scored by turn 4; Elder Dragon turns; did Sabotage hit Palace or Aurora?
+
+---
+
+## Vex, Gloomist (A) — Control · Holds
+
+**Evidence:** 5 Radiance results, one event; best #26 of 755.
+
+**What she plays:** the legend draws when she holds. A smaller Riven: Calm protection, Hidden tricks,
+Heron on top.
+- *Bodies, mostly small:* Bedeviling Stranger ×2.6 (2, Hidden), Evelynn, Entrancing 80%, Tideturner 60%,
+  Pyke, Returned 40%, **her own Vex, Apathetic** (100%, ×1.4), Blitzcrank 60% (5), Steel Paws 40% (0 Might,
+  Deflect; Empowered for 7 Energy it is 7), Sona, Janna, Tomb-Raider Barbara (40% each; Barbara kills a gear
+  if she has 7 runes: your Edge).
+- *Top end:* **Astral Heron ×3 in 80%**.
+- *Answers:* Defy ×2.8 and Discipline ×2.6 (100%), Switcheroo ×2.4 (100%, Hidden), **Back Off ×2 (100%;
+  Hidden stun)**, Star-Crossed 100%, Rebuke 80%, Zhonya's 60%, Not So Fast 60%, Gust 40%, Ki Burst 40%, Charm 40%.
+
+**How she wins:** holding with protected cheap units and drawing a card every hold, her Vex stopping
+what you play, Heron on top.
+
+**The interactions that decide it**
+1. **Stuns don't stop Graves's blast.** Back Off or Ki Burst on Graves stops his combat damage, which he
+   doesn't deal anyway; the blast is ability damage and still resolves. Switcheroo (in every list) does
+   zero it; Repulse counters the Switcheroo.
+2. **Her holders are small** (2- and 3-Might, plus a 4-Might Vex): a blast clears a battlefield she
+   holds, and taking it trashes her face-down tricks there (§323.6.a).
+3. **Heron ×3 in 80%**: Rebuke and Beast Below are your answers; Defy reaches neither, Not So Fast (60%)
+   can counter Beast's bounce. Beast can also bounce **her Vex** (Deflect taxes 1 Power).
+4. **Defy and Discipline in every list, Zhonya's in 60%**: Rampage is weak, as against Riven.
+5. **Her Vex stuns what you play**, Graves and Beast included; a stunned Graves can't move that turn, but
+   one played to defend still blasts.
+
+**v1:** grinding into her holds with tricks against tricks; Rampage mostly blanked; one Rebuke for three
+Herons.
+**v2:** Graves clears her small holders and keeps blasting through her stuns; Beast Below is a second
+answer to Heron or to her Vex; the Rampage it cuts was weak here.
+
+**Reading: v2 is better placed**, for the same reasons as against Riven, with one extra in its favour:
+her stuns, which blunt most of your fights, don't stop Graves. **How sure:** low-medium (5 results).
+
+**For the journal:** Graves blasts that resolved through a stun; Heron turns; her Vex answered or not.
