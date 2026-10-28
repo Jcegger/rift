@@ -19,9 +19,12 @@ From the archetype work (`decklab/archetype-taxonomy.md`) and the Radiance tourn
   Switcheroo, Rebuke or any unit. Hush, the counter for 2-Power spells, is in 1% of results.
 - **The soft spot: Zhonya's Hourglass** (Riven 93%, Akali 100%, Master Yi 100%, Vex 60%; 43% of
   those results). It turns a kill into a recall, so Rampage loses its kill and the legend does
-  not ready. *How much that costs is smaller than first said:* the engine model counts 0.37
-  kills a game under normal pressure (all from Rampage), so the legend's death-readying was
-  never much of the deck's Gold.
+  not ready. **Each Zhonya's saves one unit and is then gone** ("kill this instead"), so it
+  blunts one kill per copy, not every kill: Riven runs about three. *How much Gold that costs
+  is not measurable here:* the engine model is a goldfish with no opposing units and no combat,
+  and its "kills" counts only spells whose text kills (lib/sim.mjs), Rampage alone in this
+  deck. The real kills, units winning fights, are not simulated. (Corrected 28 Oct 2026: a
+  first draft read the model's 0.37 kills a game as the deck's kills.)
 - **Rampage is the weakest card against the Calm half**: Defy counters it, Discipline flips the
   trade as a Reaction, Zhonya's saves the unit.
 - **The turn 2–4 Energy squeeze**: 1.77 tricks a game crowded out (engine model, normal pressure).
@@ -54,7 +57,7 @@ targets. What the engine model shows (`scripts/rift try`, 5,000 games a scenario
 | Defy-counterable spells, expected | 3.1 | 2.6 |
 | copies that answer each top unit | 10 | **8** (Rampage counted as one) |
 | Fizz finds a spell | 75% | 77% |
-| kills a game | 0.37 | 0 |
+| kill *spells* a game (combat kills are not simulated) | 0.37 | 0 |
 | Gold made a game | 4.18 | *not measurable: see below* |
 
 **Step 2, only after step 1 is tested: Black Market Broker for a non-Hidden unit.** Not for
@@ -77,5 +80,7 @@ The deck changes only when the journal trips one of these (guide §13):
 
 ## Log
 
+- **28 Oct 2026:** corrected (Jay: "kills are at zero without Rampage?"): the model counts only kill
+  spells; combat kills are not simulated, so it says nothing about the legend's kill Gold.
 - **28 Oct 2026:** bench drafted. Version B step 1 measured; the sim's blind spot for the two
   Gold cards found and recorded.
