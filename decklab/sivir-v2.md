@@ -106,10 +106,28 @@ is the test a card must pass to earn a slot in stage 4.***
 
 | # | job | spec | v1 now | target |
 |---|---|---|---|---|
-| 1 | **Trash-and-recursion bodies**: take a battlefield, leave something behind | 3 Energy or less and 1 Power or less (cheap, and Matriarch can revive it); leaves value (a card, a Gold, a choice in the trash); survives pings (3 Might, or good with Edge) | Merchant 3, Ezreal 3, Fizz 3, Innovator 3, Matriarch 3, Tornado 2, Staunch 2 (19) | 17 |
-| 2 | **Gold-paid fight tricks**: win the fight with Power, where Defy can't reach | 2 Energy or less; paid in Power; usable in the fight (Action, Reaction or from face down); out of Defy's reach (2+ Power, or it chooses your own unit) | Punch First 3, Switcheroo 2, Edge of Night 2 (7) | 7 |
-| 3 | **Clear the battlefield you need**: break their hold, stop theirs (how the deck scores: hold one, take the other) | a **mix of kinds** (kill, bounce, stun, pull, strip) so there is an answer to every threat type; Power-paid preferred (Defy-proof); spells Fizz can recast (3 Energy or less) | kill: Rampage 3 · strip: Sabotage 2 · bounce: Star-Crossed 2, Rebuke 1 · lock: Vex 2 · pull: Evelynn 1 (11) | 10 |
+| 1 | **Trash-and-recursion bodies**: take a battlefield, leave something behind | 3 Energy or less and 1 Power or less (cheap, and Matriarch can revive it); **leaves value whether it lives or dies** (a card, a Gold, a choice in the trash): the deck's defence against removal is replacing units, not saving them | Merchant 3, Ezreal 3, Fizz 3, Innovator 3, Matriarch 3, Tornado 2, Staunch 2 (19) | 17 |
+| 2 | **Gold-paid fight tricks**: win the fight with Power, where Defy can't reach, **or save the few units that must stay** | 2 Energy or less; paid in Power; usable in the fight (Action, Reaction or from face down); out of Defy's reach (2+ Power, or it chooses your own unit). **Plus 1–2 saves** for Vex, Matriarch and the top end: Star-Crossed first (it saves and answers at once), Repulse for a targeted spell; Defy can stop either, accepted | Punch First 3, Switcheroo 2, Edge of Night 2 (7) | 7 |
+| 3 | **Clear the battlefield you need**: break their hold, stop theirs (how the deck scores: hold one, take the other) | a **mix of kinds** (kill, bounce, stun, pull, strip) so there is an answer to every threat type; **half or more works through Zhonya's** (bounce, stun, pull, strip), since kills are blunted in the Calm decks at the top; Power-paid preferred (Defy-proof); spells Fizz can recast (3 Energy or less) | kill: Rampage 3 · strip: Sabotage 2 · bounce: Star-Crossed 2, Rebuke 1 · lock: Vex 2 · pull: Evelynn 1 (11) | 10 |
 | 4 | **Turn-5 threats that spend the spare Power**: outsize the board once Energy stops being tight | 5+ Energy or 6+ Might; out of Gust's range (4+ Might); **value when it lands**, since bounce is in nearly every top list; ideally a sink for spare Gold | Rengar, Trophy Hunter 2, Sivir, Mercenary (3) | 6 |
+
+**Checked against the meta** (28 Oct 2026; Jay: "are those the best goals against the meta?",
+and "keep in mind what is within purple and orange… we may not have a true save-a-unit option"):
+- **Job 1:** the field's damage removal is bigger than pings: Falling Star (3, twice) in 100% of
+  Kai'Sa's and Akali's Radiance results, Hextech Ray 3, Thousand-Tailed Watcher −3 (100% of
+  Kai'Sa's and LeBlanc's). A 3-Might body survives none of it, so the spec asks for value on
+  arrival or death instead.
+- **Job 3:** Zhonya's is in Riven 93%, Akali 100%, Master Yi (Wuju Bladesman) 100%: half the pool
+  must not depend on a kill. Rampage stays for the other half of the field (Kennen, Kai'Sa,
+  Rengar and LeBlanc run no Zhonya's).
+- **Job 2:** most of the meta's removal is targeted, and every winning midrange list protects its
+  key unit (Riven: Defy, Discipline, Zhonya's; Fiora: Repulse, Riposte; Sett: Repulse). **Body and
+  Chaos have no Defy-proof save**: Star-Crossed (own unit to hand, theirs too), Repulse, Unyielding
+  Spirit (damage only), Abandon (spells only) are all Defy-able. So the deck replaces rather than
+  protects, and the 1–2 saves are only for the units whose job is to stay: Vex (which has Deflect),
+  Matriarch before she revives, the top end.
+- **No fifth job:** the wide decks a sweeper answers (Rek'Sai, Viktor, Azir, Lillia) are not at the
+  top of the Radiance results; Graves stays a sideboard question.
 
 **What the specs show before stage 4:**
 - **Job 4's spec is strict** ("value when it lands"): Rengar's Ambush is surprise, not value, so
@@ -126,6 +144,9 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** specs checked against the meta and the colours: job 1 asks for value on death, not
+  Might; job 3 half through Zhonya's; job 2 gains 1–2 saves (Star-Crossed first), none Defy-proof in
+  Body/Chaos, so the deck replaces rather than protects.
 - **28 Oct 2026:** the four jobs named for Sivir's engine, with a spec each (Jay: the labels were generic);
   v1's 40 sorted into them. First reads: job 4's spec is strict; Staunch fails job 1's; job 3 is lopsided.
 - **28 Oct 2026:** stage 3 agreed (Claude's calls, Jay deferred): four jobs, Sabotage in the pool;
