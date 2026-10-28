@@ -346,9 +346,7 @@ now pass; the shape decides instead.
 
 | legend | family | why |
 |---|---|---|
-| **Kennen, Heart of the Tempest** | Card flow | *Moved from midrange in the §5 re-measure (28 Oct 2026):* none of his 26 Radiance tournament lists measures midrange (21 tempo, 5 aggro); 24 cards at 2 or less, interaction 5, Assault the engine. The legend empowers on every card played from elsewhere (Flow, Fizz, Matriarch). 62 placed |
 | **Irelia, Blade Dancer** | Movement | Cost 2.6, 26 cheap, 21 reactive. Legend readies a unit you choose; ready, move, draw (Stellacorn Herder). 19 placed |
-| **Akali, Rogue Assassin** | Movement | Legend pulls a unit home from a showdown and readies it; Akali, Deadly Weapon deals damage on each move. Measures control only because those move-damage cards count as interaction (12). 32 placed |
 | **Diana, Scorn of the Moon** | Spells | Legend's Energy is spendable only in showdowns: the payoff is showdown spells. 22 spells. 8 placed |
 | **Lillia, Bashful Bloom** | Go-wide | Legend makes ready 3-Might Sprites, cheaper per Temporary unit: efficient bodies that act at once. 31 cheap. 8 placed |
 | **Evelynn, Agony's Embrace** | Facedown | From chunk 1: cost 3.2, 21 reactive, played from face down on either turn |
@@ -372,6 +370,7 @@ now pass; the shape decides instead.
 | legend | family | why |
 |---|---|---|
 | **Riven, The Exile** | Holds | **The chunk's biggest call.** Cost 2.9, 4 big (Astral Heron, Baron), 11 draw: a midrange shape. Her legend pays off battlefields **she controls** (units played there enter ready), which is why denying them is the plan against her (her matchup guide). The exhaust loop (Riven, Broken Blade, Innovator, Ki Burst) is the engine inside it. *Borderline family*: Movement, on that loop. 52 placed |
+| **Kennen, Heart of the Tempest** | Card flow | Legend empowers on every card played from elsewhere (Flow, Fizz, Matriarch) and turns it into Assault. Fill the trash, then one Rhasa turn: **Rhasa 100% (×3) and Last Rites 100% of his 26 Radiance results** (§5). Interaction 5: value, not answers. 62 placed |
 | **Azir, Emperor of the Sands** | Go-wide | 3 units and 16 Equipment: the legend's Sand Soldiers are the board, made per Equipment. Slow start (2.1 units by turn 3), strong late. Orb: "Token-Based Midrange". 19 placed |
 | **Ekko, Boy Who Shattered Time** | Card flow | Legend makes a unit cheap and kills it at end of turn: re-buying play effects, value the reader cannot see. 26 units, cost 3. 4 placed |
 | **Leona, Radiant Dawn** | Fights | Cost 3, 16 cheap: bigger bodies. Stuns into buffs. *Thin (2)* |
@@ -427,6 +426,7 @@ Plus **Ornn, Fire Below the Mountain · Gear** from chunk 1.
 
 | legend | family | why |
 |---|---|---|
+| **Akali, Rogue Assassin** | Movement | *Moved from tempo in §5 (28 Oct 2026):* real answers in every Radiance result (Falling Star, Shuriken Flip, Defy, Back Off) plus Zhonya's and Heron; the legend pulls units home to move again. 32 placed |
 | **Kai'Sa, Daughter of the Void** | Spells | Legend's Power is only for spells; interaction 12, removal into a spell top end. Orb: "Spell-Based Control". Measured ramp on 6 big spells. 31 placed |
 | **Viktor, Herald of the Arcane** | Go-wide | Legend makes Recruits; 24 spells, interaction 11. The tokens hold the board while removal works. riftbound.gg: "Control Viktor". 17 placed |
 | **Nasus, Curator of the Sands** | Ramp | Legend readies 2 runes on every 7+ cost play: big-spell ramp. Interaction 11, 17 reactive, 13 draw. 12 placed |
@@ -503,14 +503,25 @@ Evelynn 6, Master Yi (Wuju Bladesman) 5, Vex 5, Diana 5, Mordekaiser 5; Azir 4; 
 Irelia, S in the field forecast, has 1. **Most of it is one event** (the 25k): only Riven and
 Kai'Sa have two. One big room is still one room.
 
+**Excluded: team events.** "LDXP Sacramento – 2 v 2 Constructed" (6 lists) is the 2v2 mode, a
+pair's placing, not a deck's. The pipeline's filter missed the spaced spelling, so it had
+counted everywhere; fixed in lib/placing.mjs (`singles`, 28 Oct 2026). **Irelia's one Radiance
+result was that event: she has no one-on-one Radiance results yet.**
+
 **Re-measured on those results.** The profiles barely move (the 60-day "placed" pool was
 already mostly the 25k), so the §3 base stands on tournament evidence, with three exceptions:
-- **Kennen → Tempo** (was midrange): moved in chunk 2 above.
+- ~~Kennen → Tempo~~ **reverted the same day.** "21 of 26 measure tempo" is the Hidden-and-Reaction
+  threshold §1 set aside, not new evidence, and the doc's 19 Oct call had already said so. The
+  test that matters is whether his deck is still "fill the trash, one Rhasa turn": Rhasa is in
+  100% of his Radiance results (×3), Last Rites 100%. **Kennen stays Midrange · Card flow.**
 - **Vex: Control confirmed.** Interaction rises from 9 to 12 on Radiance results, crossing the
   rule's control line; the call had rested on judgment.
-- **Akali: flagged.** 7 of her 10 Radiance lists measure control (interaction 12, draw 13);
-  placed Tempo on the argument that her interaction is mostly damage-on-move. To check against
-  her cards in the entry scan.
+- **Akali → Control · Movement** (was tempo). The tempo call (doc, 20 Oct) rested on a Vendetta
+  guide ("plays more aggressively than the Blade Dancer") and on her interaction being Fury
+  removal for the board. Her Radiance results run real answers in every list: Falling Star 100%
+  (×2.7), Shuriken Flip 100% (×2.9), Defy 100%, Back Off 100%, Not So Fast 70%, Block 60%,
+  with Zhonya's Hourglass ×3 and Astral Heron ×3 on top, and 7 of 10 measure control. The
+  engine is still movement (Akali, Deadly Weapon 100%; the legend pulls units home).
 
 
 **Thin entries** (25), written or measured from under 3 good placings:
@@ -519,10 +530,27 @@ Jax, Grandmaster at Arms (2), Lee Sin, Blind Monk (1), K'Sante, Pride of Nazumah
 Then every entry is re-read against its current lists, and docs/archetypes.md is rewritten
 in the agreed structure: overarching archetype → family → legends and decks.
 
+
+### Entry scan, S tier and Akali (28 Oct 2026)
+
+Each entry's named cards checked against its Radiance one-on-one results: share of lists, and
+mean copies where it runs. "Not named" = the most-played cards the entry leaves out.
+
+| legend | evidence | what holds | what the entry gets wrong or misses |
+|---|---|---|---|
+| **Riven, The Exile** | 46 results, 2 events | plan and Engine line; Broken Blade 100%, Innovator 98%, Blade of the Exile 100% (×3), Defy and Discipline 100%; riftbound.gg's "hold oriented legend" is the Holds placement | **overstates** Ki Burst (33%) and Riven, Deserter (9%); **misses** Astral Heron 91% (×3) and Baron Nashor 80%, the top end; Bedeviling Stranger 96%, Tideturner 96%, Zhonya's 93%, Stellacorn Herder 89%, Blitzcrank 83%, Switcheroo 83%. Header stats are from 8 placed |
+| **Kennen, Heart of the Tempest** | 26, 1 event | the plan: Lightning Rush, Fizz, Nocturne, Storm of Shuriken, Rhasa, Last Rites all 100% | Tail-Cloaked Matriarch only 46%; **misses** Traveling Merchant, Seal of Discord and Trifarian Captain (all 100%, ×3), Ride the Wind 96%. All 26 lists are near-identical: one room's list |
+| **Master Yi, Wuju Bladesman** | 5, 1 event | the plan: Discipline, Punch First, Defy, Charm, Zhonya's, Tempered, Rengar, Trophy Hunter, Lonely Poro all 100% | **misses** First Mate, Pit Rookie, Ruin Runner, Onslaught, Rampage (all 100%), Sabotage 80%. Its "Call: midrange" conflicts with §3's agreed Control · Holds; the rewrite follows §3 and keeps Jun's "develop hard, then hold" as the reason it holds |
+| **Irelia, Blade Dancer** | **0 one-on-one** | nothing new to check | the entry is Vendetta evidence throughout (Stellacorn Herder "98% of lists"). Forecast S on experts alone; say so in the rewrite |
+| **Akali, Rogue Assassin** | 10, 1 event | Deadly Weapon 100%, Herder 100%, Shuriken Flip 100%, Falling Star 100%, Heron 100% (×3), Back Off 100%, Kai'Sa, Survivor 90% | **Akali, Silent and Akali, Brash: 0%**, named as key and not played; **misses** Defy, Discipline, Zhonya's (×3), Blitzcrank, Long Sword (all 100%), Mischievous Marai 80%. Moved to Control above |
+
 ---
 
 ## Log
 
+- **28 Oct 2026:** entry scan, S tier and Akali: Kennen move reverted (the threshold again); Akali to
+  Control on her Radiance answers; Irelia has no 1v1 Radiance results; 2v2 events found counted
+  everywhere and excluded (lib/placing.mjs).
 - **28 Oct 2026:** §5 started: evidence rule (Radiance tournament results first); re-measure moved
   Kennen to tempo, confirmed Vex control, flagged Akali.
 - **28 Oct 2026:** chunk 3 agreed as the base; §4 became the variance layer (Jay: legends run different
