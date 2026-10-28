@@ -2,7 +2,7 @@
 title: Archetype taxonomy — worksheet
 subtitle: Overarching archetypes, sub-archetypes, and where every legend and net deck sits. Built with Jay a section at a time; the result rewrites docs/archetypes.md.
 started: 2026-10-27
-status: §1–§3 agreed (§3 as the base) 28 Oct 2026; §4 (variance layer) drafted; §5 doc scan next
+status: §1–§3 agreed (§3 as the base); §4 drafted; §5 started 28 Oct 2026 (evidence rule, re-measure)
 ---
 
 How this works: like a deck worksheet ([README.md](README.md)), each section agreed before
@@ -346,6 +346,7 @@ now pass; the shape decides instead.
 
 | legend | family | why |
 |---|---|---|
+| **Kennen, Heart of the Tempest** | Card flow | *Moved from midrange in the §5 re-measure (28 Oct 2026):* none of his 26 Radiance tournament lists measures midrange (21 tempo, 5 aggro); 24 cards at 2 or less, interaction 5, Assault the engine. The legend empowers on every card played from elsewhere (Flow, Fizz, Matriarch). 62 placed |
 | **Irelia, Blade Dancer** | Movement | Cost 2.6, 26 cheap, 21 reactive. Legend readies a unit you choose; ready, move, draw (Stellacorn Herder). 19 placed |
 | **Akali, Rogue Assassin** | Movement | Legend pulls a unit home from a showdown and readies it; Akali, Deadly Weapon deals damage on each move. Measures control only because those move-damage cards count as interaction (12). 32 placed |
 | **Diana, Scorn of the Moon** | Spells | Legend's Energy is spendable only in showdowns: the payoff is showdown spells. 22 spells. 8 placed |
@@ -371,7 +372,6 @@ now pass; the shape decides instead.
 | legend | family | why |
 |---|---|---|
 | **Riven, The Exile** | Holds | **The chunk's biggest call.** Cost 2.9, 4 big (Astral Heron, Baron), 11 draw: a midrange shape. Her legend pays off battlefields **she controls** (units played there enter ready), which is why denying them is the plan against her (her matchup guide). The exhaust loop (Riven, Broken Blade, Innovator, Ki Burst) is the engine inside it. *Borderline family*: Movement, on that loop. 52 placed |
-| **Kennen, Heart of the Tempest** | Card flow | Legend empowers on every card played from elsewhere (Flow, Fizz, Matriarch) and turns it into Assault; Rhasa late. Interaction only 3: value, not answers. 62 placed |
 | **Azir, Emperor of the Sands** | Go-wide | 3 units and 16 Equipment: the legend's Sand Soldiers are the board, made per Equipment. Slow start (2.1 units by turn 3), strong late. Orb: "Token-Based Midrange". 19 placed |
 | **Ekko, Boy Who Shattered Time** | Card flow | Legend makes a unit cheap and kills it at end of turn: re-buying play effects, value the reader cannot see. 26 units, cost 3. 4 placed |
 | **Leona, Radiant Dawn** | Fights | Cost 3, 16 cheap: bigger bodies. Stuns into buffs. *Thin (2)* |
@@ -487,7 +487,31 @@ lists do not yet show goes here by hand, marked as judged.
 
 ---
 
-## 5. The doc scan — after §4
+## 5. The doc scan — started 28 Oct 2026
+
+**The evidence rule** (Jay: "making sure the lists are good, likely from tourney results when
+possible; we're starting to get some showdowns"). The §3 base used each legend's
+representative list over the 60-day window, which pools Vendetta with Radiance. The scan reads
+each legend on the best evidence it has, and says which:
+1. **Radiance-legal recorded results** (tour, a good finish, from 23 Oct 2026, Radiance's legal
+   date): the basis wherever there are 5 or more;
+2. then **claimed results**, then **posted lists**, labelled as such, never passed off as results.
+
+**Radiance tournament evidence, 28 Oct 2026** (good finishes; the LDXP Sacramento 25k's top 13
+are not in the data yet): Riven 46, Kennen 26, Kai'Sa 15, Rengar 10, Akali 10, LeBlanc 8,
+Evelynn 6, Master Yi (Wuju Bladesman) 5, Vex 5, Diana 5, Mordekaiser 5; Azir 4; everyone else 0–3.
+Irelia, S in the field forecast, has 1. **Most of it is one event** (the 25k): only Riven and
+Kai'Sa have two. One big room is still one room.
+
+**Re-measured on those results.** The profiles barely move (the 60-day "placed" pool was
+already mostly the 25k), so the §3 base stands on tournament evidence, with three exceptions:
+- **Kennen → Tempo** (was midrange): moved in chunk 2 above.
+- **Vex: Control confirmed.** Interaction rises from 9 to 12 on Radiance results, crossing the
+  rule's control line; the call had rested on judgment.
+- **Akali: flagged.** 7 of her 10 Radiance lists measure control (interaction 12, draw 13);
+  placed Tempo on the argument that her interaction is mostly damage-on-move. To check against
+  her cards in the entry scan.
+
 
 **Thin entries** (25), written or measured from under 3 good placings:
 Jax, Grandmaster at Arms (2), Lee Sin, Blind Monk (1), K'Sante, Pride of Nazumah (1), Sivir, Battle Mistress (1), Miss Fortune, Bounty Hunter (0), Volibear, Relentless Storm (0), Jarvan IV, Exemplar of Demacia (2), Garen, Might of Demacia (0), Yasuo, Unforgiven (0), Orianna, Lady of Clockwork (2), Ahri, Nine-Tailed Fox (0), Leona, Radiant Dawn (2), Ivern, Green Father (2), Shen, Eye of Twilight (2), Ziggs, Hexplosives Expert (2), Pyke, Bloodharbor Ripper (1), Jinx, Loose Cannon (0), Annie, Dark Child (0), Zed, Master of Shadows (0), Teemo, Swift Scout (2), Mel, Soul's Reflection (1), Rumble, Mechanized Menace (1), Seraphine, Starry-Eyed Songstress (2), Lux, Lady of Luminosity (0), Renata Glasc, Chem-Baroness (0).
@@ -499,6 +523,8 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **28 Oct 2026:** §5 started: evidence rule (Radiance tournament results first); re-measure moved
+  Kennen to tempo, confirmed Vex control, flagged Akali.
 - **28 Oct 2026:** chunk 3 agreed as the base; §4 became the variance layer (Jay: legends run different
   styles). Per-list profiling found five two-speed legends; Kha'Zix matches Jun's two lists.
 - **27 Oct 2026:** chunk 3 drafted (12 midrange, 9 control); "conquer or hold" triggers do not pick a
