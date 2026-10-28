@@ -298,6 +298,9 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** Bullet Time set aside (Jay: "my fear is it would make me save my Gold"): an X spell pulls
+  against an engine that spends Gold every turn; it does Graves's job at X 2–3; Defy counters it in the
+  Calm decks it's for.
 - **28 Oct 2026:** v2 to Nexus Night; Beast Below's three test questions; second Beast for the second
   Rengar only if it earns it (`sivir-matchups.md` has the field reading).
 - **28 Oct 2026:** jobs 1–3: −1 Rampage; four body cuts measured, B (−2 Tornado) agreed tentatively;

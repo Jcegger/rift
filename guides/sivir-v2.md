@@ -101,7 +101,7 @@ The [v2 worksheet](../decklab/sivir-v2.md) has every step; in short:
 - **Two bodies out, measured four ways**: cutting Tornado kept Matriarch's revives (0.93 a game against v1's 1.00; cutting a Matriarch dropped them to 0.64). The Tornado-into-Matriarch line measured about 0.01 revives a game.
 - **Rampage 3 → 2**: the LA winner runs exactly two; the Calm decks at the top blank it.
 
-**Tried and set aside:** Baron Nashor (the rune board), Anivia, Primal (Graves does the job cheaper), a third Rengar (five 5-drops would crowd turn 4), Black Market Broker and The Waters' Wage (the model couldn't see their Gold; Jay wasn't convinced).
+**Tried and set aside:** Baron Nashor (the rune board), Anivia, Primal (Graves does the job cheaper), a third Rengar (five 5-drops would crowd turn 4), Black Market Broker and The Waters' Wage (the model couldn't see their Gold; Jay wasn't convinced), **Bullet Time** (an X spell rewards banking Gold the engine wants spent every turn; at a realistic X of 2–3 it does Graves's job, and the Calm decks whose small boards it's for all run Defy, which counters it; 28 Oct). Revisit it only as a sideboard card against the non-Calm wide decks, if Graves is blanked again and again.
 
 ---
 
