@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-27",
+ "generatedAt": "2026-10-28",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
@@ -7,15 +7,33 @@
  "cutShort": null,
  "carriedFromPrevious": 37,
  "tags": {
+  "Guides": 6,
+  "News": 52,
   "Metagame": 23,
-  "News": 51,
-  "Guides": 5,
   "Legends": 24,
   "Events": 21,
   "Sets": 4,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Budget Riftbound Decks: Build with Bulk Cards & Play for $10!",
+   "dt": "2026-10-28",
+   "url": "https://riftbound.gg/budget-riftbound-decks-build-with-bulk-cards-play-for-10",
+   "tags": [
+    "Guides"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Europe Regional Championship 2026 Event Information",
+   "dt": "2026-10-28",
+   "url": "https://riftbound.gg/europe-regional-championship-2026-event-information",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
   {
    "title": "Best Decks for Every Legend for Early Radiance",
    "dt": "2026-10-26",
