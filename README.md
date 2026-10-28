@@ -316,9 +316,14 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `schema.sql` - the Supabase table and its policies.
 - `docs/fundamentals.md` - how the game works and what the field actually plays. The
   teaching layer over `docs/rules.md`'s reference layer.
-- `docs/archetypes.md` - what every legend's deck is trying to do, by colour pair: game plan,
-  engine, what it fears, and what each matchup turns on from your decks' side. Hand-written from
-  the measured profiles in `data/archetypes.json`; `check.mjs` requires a section per legend.
+- `docs/archetypes.md` - what every legend's deck is trying to do, on two axes since 28 Oct
+  2026: the overarching archetype (aggro, tempo, midrange, control; judged) and the family of
+  its engine (one of eleven, placed by payoffs), with a map, variants (two speeds, Aurora
+  builds), game plan, engine, what it fears, what the matchup turns on from Sivir's side, and
+  an Evidence line saying what each entry stands on. Colour pairs are an appendix. Hand-written;
+  the taxonomy and its reasoning are in `decklab/archetype-taxonomy.md`. Headings read
+  `### <legend> — <Archetype> · <Family>`, which the site, `scripts/rift`, `build-archetypes`
+  and the tests parse; `check.mjs` requires a section per legend.
 - `docs/deckbuilding.md` - how winning lists are actually built, measured from the placed
   lists: copies, core vs flex, how far winners stray from their consensus, how new cards get
   in (by role), and what the beginner guides get wrong. The basis for suggesting decks.

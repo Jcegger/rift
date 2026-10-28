@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-27",
+ "generatedAt": "2026-10-28",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -86,11 +86,18 @@
    "file": "docs/archetypes.md",
    "kicker": "Archetypes · every legend",
    "title": "Archetypes — What Each Legend Is Trying to Do",
-   "subtitle": "Riftbound, the 15 colour pairs and their legends — game plans, engines, what each fears, and how your decks meet them",
-   "date": "2026-10-19",
+   "subtitle": "Riftbound, every legend placed on two axes — the overarching archetype and the family of its engine — with game plans, engines, what each fears, how Sivir meets it, and what each entry stands on",
+   "date": "2026-10-28",
    "legend": null,
    "champion": null,
    "sections": [
+    "How to read this page",
+    "The map",
+    "Aggro — a cheap curve, many units, little interaction: close before they stabilize",
+    "Tempo — cheap and reactive: stay ahead by winning exchanges",
+    "Midrange — bigger bodies and value: trade into a better late board",
+    "Control — answers first, win late; in Riftbound, usually by holding",
+    "Colour pairs",
     "Body / Calm — protected threats",
     "Body / Chaos — isolate and punish",
     "Body / Fury — the curve",
@@ -108,7 +115,7 @@
     "Mind / Order — Deathknell and answers",
     "What would change this page"
    ],
-   "words": 9913
+   "words": 12207
   },
   {
    "slug": "deckbuilding",

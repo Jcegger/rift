@@ -2,7 +2,7 @@
 title: Archetype taxonomy — worksheet
 subtitle: Overarching archetypes, sub-archetypes, and where every legend and net deck sits. Built with Jay a section at a time; the result rewrites docs/archetypes.md.
 started: 2026-10-27
-status: §1–§3 agreed (§3 as the base); §4 drafted; §5 started 28 Oct 2026 (evidence rule, re-measure)
+status: done 28 Oct 2026 — docs/archetypes.md rewritten in the agreed shape; re-scan as Radiance results arrive
 ---
 
 How this works: like a deck worksheet ([README.md](README.md)), each section agreed before
@@ -588,7 +588,13 @@ hand-copied snapshots from 19–20 Oct and stale: the rewrite should not hand-co
 
 ---
 
-## 6. The rewrite of docs/archetypes.md — preview, for Jay
+## 6. The rewrite of docs/archetypes.md — done 28 Oct 2026
+
+*Jay agreed the preview ("seems to make sense"); the whole page was rewritten in this shape the
+same day. Every entry's hand-written body was kept; headings, the stale stats lines, the
+Kha'Zix/Riven/Rek'Sai matchup lines and the "your deck" marks were replaced, unplayed cards
+marked, and Evidence, Variants, From Sivir (17) and dated Call lines added. The parsers that
+read the heading (the site, scripts/rift, build-archetypes, infer.test) were updated with it.*
 
 ### The outline
 
@@ -662,6 +668,9 @@ plan (Rebuke for Heron, Downwell for Baron).
 
 ## Log
 
+- **28 Oct 2026:** docs/archetypes.md rewritten (§6). Open: the Sivir guide's Riven row and the pending
+  Riven plan; a check that flags a named card at 0% of a legend's results; the per-list two-speed
+  measure in the daily refresh.
 - **28 Oct 2026:** §6 rewrite preview: the outline and Riven rewritten, for Jay.
 - **28 Oct 2026:** entry scan, A and B tiers. Source precedence added (an expert-sourced Call stands over
   Claude's profile inference unless Radiance results contradict it): Ornn aggro, Draven midrange,

@@ -121,7 +121,8 @@ const main = async () => {
   // wins — it comes from guides and results — so a page shows a disagreement as one, never as a
   // second answer (Bladesman's cards read XP, from its champion; its plan is the lone defender).
   const md = await readFile(new URL("../docs/archetypes.md", import.meta.url), "utf8");
-  const heads = new Map([...md.matchAll(/^### (.+?) — (.+)$/gm)].map((m) => [m[1].trim(), m[2].replace(/\*.*$|·.*$/g, "").trim()]));
+  // "Midrange · Holds *combo*": the archetype, then the family; tags and marks in italics.
+  const heads = new Map([...md.matchAll(/^### (.+?) — (.+)$/gm)].map((m) => [m[1].trim(), m[2].replace(/\*.*$/g, "").replace(/·/g, " ").trim()]));
   for (const l of legends) {
     const subs = headingSubKeys(heads.get(l.name));
     if (l.inferred?.sub && subs.length) Object.assign(l.inferred, { headingSubs: subs, agrees: subs.includes(l.inferred.sub) });
