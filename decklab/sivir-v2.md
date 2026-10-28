@@ -2,7 +2,7 @@
 title: Sivir v2 — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. The same deck's identity, rebuilt on the job structure winning midrange decks share. Built with Jay a stage at a time.
 started: 2026-10-28
-status: stage 3 agreed; stage 4: job 4 agreed 28 Oct 2026 (Sivir, Rengar ×2, Graves ×2, Beast Below); jobs 1–3 next — v1 stays sleeved and in play
+status: stage 4 done 28 Oct 2026 (B, tentatively); the draft is in the app as "Sivir v2 (draft)"; stage 5 (test) next — v1 stays sleeved and in play
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
@@ -221,13 +221,63 @@ would make five, competing with the turn-4 Vex and Matriarch. The winners run th
 top end *is* Rengar. **Not too top heavy:** average about 3.0 (v1 2.77; with Baron 3.15), like Riven
 and Kennen, well under LeBlanc's 4.1; the model's cost was units by turn 5 4.9 → 4.6, cheap cards 14 → 12.
 
-## 4. Card by card — jobs 1–3 next
+## 4. Card by card — jobs 1–3, 28 Oct 2026
+
+**The budget** (stage 3): bodies 19 → 17 (−2), the pool 11 → 10 (−1), the top end 3 → 6 (+3, agreed).
+
+**Job 3, −1 Rampage (3 → 2).** The pool's mix already passes (8 of 11 don't need a kill), and the LA
+RQ winner runs exactly 2 Rampage beside 3 Sabotage. The main-phase kill stays. Star-Crossed ×2 also
+fills job 2's saves (it saves and answers at once), so Repulse stays in the sideboard.
+
+**Job 1, −2 bodies: four ways measured** (`scripts/rift try`, normal pressure, each with −1 Rampage,
++2 Graves, +1 Beast Below):
+
+| | Matriarch revives a game | tricks crowded out | units by turn 5 | Gold a game | cheap cards |
+|---|---|---|---|---|---|
+| v1 | 1.00 | 1.77 | 4.9 | 4.18 | 14 |
+| A: −Matriarch −Tornado | 0.64 | 1.81 | 4.6 | 4.41 | 14 |
+| **B: −2 Tornado** | **0.93** | 1.88 | 4.7 | 4.43 | 14 |
+| C: −Matriarch −Fizz | 0.65 | 1.73 | 4.7 | 4.29 | 14 |
+| D: −2 Staunch | 0.94 | 1.83 | 4.7 | 4.28 | 12 |
+
+**The combo, measured:** B (no Tornado) and D (two) keep 3 Matriarch and revive almost alike (0.93 and
+0.94), so in the model the Tornado-into-Matriarch line adds about 0.01 revives a game; revives track
+the Matriarch count. The model plays a fixed policy and does not plan the line, so it undercounts it,
+but not from 0.01 to much. Weighed against Jay's points (a free empower, a hide card, a playable
+3-Might body): the empower needs four conditions; Hidden drops 7 → 5 but two face-down slots still
+fill, and the guide ranks Tornado last to hide; from hand Tornado is the deck's only 3-drop with no
+effect of its own.
+
+**Agreed, tentatively: B, −2 Tornado Warrior** (Jay: "I like B, maybe… but I'm game"). What it costs:
+turn 3's two-3-drop play is a little rarer (11 three-drops → 9; units by turn 5 4.9 → 4.7), the
+watch item for stage 5; Hidden depth 5; the Tornado line.
+
+### The draft list (in the app as "Sivir v2 (draft)", 28 Oct 2026; v1 untouched)
+
+- **Units (26):** Traveling Merchant 3 · Evelynn, Entrancing 1 · Staunch Survivor 2 · Reckless
+  Innovator 3 · Fizz, Trickster 3 · Ezreal, Prodigy 3 · Tail-Cloaked Matriarch 3 · Vex, Apathetic 2 ·
+  Rengar, Trophy Hunter 2 · **Graves, Blasting Through 2** · **Beast Below 1** · *Sivir, Mercenary*
+- **Spells (12):** Punch First 3 · Rampage **2** · Sabotage 2 · Star-Crossed 2 · Switcheroo 2 · Rebuke 1
+- **Gear (2):** Edge of Night 2
+- **Runes, battlefields, legend:** as v1.
+- **Sideboard, a placeholder:** v1's, with its 2 Graves (now main; 4 would break the copy limit)
+  replaced by the two cards that left: Rampage 1 (a third for the decks with no Zhonya's) and Tornado
+  Warrior 1. The real sideboard is a later pass.
+- Every card owned; the app's deck checks pass.
+
+## 5. Test — next
+
+Every change measured the same way: v2 against v1 in `scripts/rift try` and `versus`, then at the
+table. Watch: turn 3 (two 3-drops), Beast Below's real value, Graves against the small-unit field.
+
 
 To find first: what top end Body and Chaos actually have, and whether any of it suits a Gold
 deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** jobs 1–3: −1 Rampage; four body cuts measured, B (−2 Tornado) agreed tentatively;
+  "Sivir v2 (draft)" written to the app (row backed up; v1 untouched).
 - **28 Oct 2026:** job 4 agreed: Sivir, Rengar ×2, Graves ×2, Beast Below.
 - **28 Oct 2026:** Beast Below kept despite Star-Crossed (the value lands first; Repulse saves it);
   Graves over Anivia (cheaper, defends, scales with Punch First). Top end: Rengar ×2–3, Graves ×2, Beast Below.
