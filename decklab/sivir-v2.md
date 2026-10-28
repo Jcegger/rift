@@ -200,8 +200,22 @@ midrange deck nearly always has another unit by turns 5–7, and the text sets n
 be one in your base (an Ezreal you want to replay). It fails only after a wiped board. Stays on the
 shortlist.
 
-**Shortlist for the five slots beside Sivir** (Jay decides): Rengar, Trophy Hunter ×2–3 · Graves ×1–2
-· Beast Below ×1, with Anivia, Primal as the alternative 7-drop.
+**Beast Below and Star-Crossed** (Jay: "a big unit can also get Star-Crossed, but might still be worth
+it"): it will be (Kennen 100%, Evelynn 100%, Vex 100%, Riven 89% of results). But its value has
+already happened by then; replaying it repeats the value; Repulse counters the Star-Crossed (it
+chooses Beast and no other friendly unit). The cost is tempo: 7 Energy against their 3 and 1 Power.
+Worth it, because of the arrival value: the spec doing its job.
+
+**Graves over Anivia** (Jay: "suspicious about Anivia vs Graves, which can be stronger with Punch
+First and is cheaper"): Graves is 5E 1P (castable 95% from turn 4) against 7E 2P (71% on turn 5);
+sweeps attacking **or defending**, against attacking only; scales with Punch First (his blast equals
+his Might: 9), against a fixed 3. Anivia's one edge: she also deals 8 combat damage, so she can clear
+small units and kill a big defender in one attack, which Graves can't (no combat damage). The deck
+wins by holding at 7, and Graves defending a hold is that plan. **Anivia off the shortlist**, a fallback
+only if Beast Below fails.
+
+**Shortlist for the five slots beside Sivir** (Jay decides): Rengar, Trophy Hunter ×2–3 · Graves ×2 ·
+Beast Below ×1.
 
 ## 4. Card by card — jobs 1–3 next
 
@@ -210,6 +224,8 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** Beast Below kept despite Star-Crossed (the value lands first; Repulse saves it);
+  Graves over Anivia (cheaper, defends, scales with Punch First). Top end: Rengar ×2–3, Graves ×2, Beast Below.
 - **28 Oct 2026:** Staunch corrected (he fights above his cost; the spec now says so). Why Beast Below is
   rare: five readings, the strongest that it is good only for decks with arrival-value units like this
   one; the rules question settled the same day: no
