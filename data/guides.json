@@ -33,6 +33,35 @@
    "words": 8146
   },
   {
+   "slug": "sivir-v2",
+   "file": "guides/sivir-v2.md",
+   "kicker": null,
+   "title": "Sivir v2 — Deck Guide",
+   "subtitle": "Riftbound, Radiance — the same Sivir rebuilt on the job structure winning midrange decks share, with a real top end. The game plan on one page, what changed from v1, how to sequence it, every card's job, and the field matchup by matchup",
+   "date": "2026-10-28",
+   "legend": "Battle Mistress",
+   "champion": "Sivir, Mercenary",
+   "sections": [
+    "Executive summary: the game plan",
+    "1. The list",
+    "2. How it got here",
+    "3. Sequencing — what's different from v1",
+    "4. The game, turn by turn",
+    "5. Card by card — the new cards, and what moved",
+    "6. Mulligans",
+    "7. Power and Energy, by the numbers",
+    "8. The rules this deck leans on",
+    "9. The sideboard",
+    "10. Matchups",
+    "11. Mistakes that lose games",
+    "12. Open questions for a judge",
+    "13. What to log, and what decides v1 against v2",
+    "Sources and method",
+    "What this guide does not claim"
+   ],
+   "words": 4497
+  },
+  {
    "slug": "fundamentals",
    "file": "docs/fundamentals.md",
    "kicker": "Reference · every deck",

@@ -27,6 +27,7 @@
 # /riftbound           update  notes/answers.md
 
 /riftbound/reading   update  guides/sivir-trying-her-best.md
+/riftbound/reading   update  guides/sivir-v2.md
 /riftbound/reading   update  docs/strategy.md
 /riftbound/reading   update  docs/fundamentals.md
 /riftbound/reading   update  docs/rules.md

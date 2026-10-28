@@ -270,6 +270,8 @@ watch item for stage 5; Hidden depth 5; the Tornado line.
 Every change measured the same way: v2 against v1 in `scripts/rift try` and `versus`, then at the
 table. Watch: turn 3 (two 3-drops), Beast Below's real value, Graves against the small-unit field.
 
+**The guide:** [guides/sivir-v2.md](../guides/sivir-v2.md) (28 Oct 2026), beside v1's.
+
 **Jay plays v2 at Nexus Night** (28 Oct 2026; the swap from v1 is moving Graves ×2 from the sideboard
 into the main and Tornado ×2 and a Rampage out, plus one Beast Below). Log every game under "Sivir v2
 (draft)". After about three nights the journal decides.
