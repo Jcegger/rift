@@ -97,6 +97,28 @@ has to be good at its job; there are no slots for "nice to have".
    mostly in how it was described. **v2's real change is small and specific: about 2 fewer
    bodies, and 3 more top-end threats.**
 
+### The four jobs, named for Sivir's engine, with a spec each (28 Oct 2026)
+
+*Jay: "we should be specific about each card… these are a bit generic vs the labels you gave
+to other decks." The winners' jobs are named for how that deck does it ("bodies that pay off
+when they die", "arriving where it hurts"); these are named for Gold and the trash. **The spec
+is the test a card must pass to earn a slot in stage 4.***
+
+| # | job | spec | v1 now | target |
+|---|---|---|---|---|
+| 1 | **Trash-and-recursion bodies**: take a battlefield, leave something behind | 3 Energy or less and 1 Power or less (cheap, and Matriarch can revive it); leaves value (a card, a Gold, a choice in the trash); survives pings (3 Might, or good with Edge) | Merchant 3, Ezreal 3, Fizz 3, Innovator 3, Matriarch 3, Tornado 2, Staunch 2 (19) | 17 |
+| 2 | **Gold-paid fight tricks**: win the fight with Power, where Defy can't reach | 2 Energy or less; paid in Power; usable in the fight (Action, Reaction or from face down); out of Defy's reach (2+ Power, or it chooses your own unit) | Punch First 3, Switcheroo 2, Edge of Night 2 (7) | 7 |
+| 3 | **Clear the battlefield you need**: break their hold, stop theirs (how the deck scores: hold one, take the other) | a **mix of kinds** (kill, bounce, stun, pull, strip) so there is an answer to every threat type; Power-paid preferred (Defy-proof); spells Fizz can recast (3 Energy or less) | kill: Rampage 3 · strip: Sabotage 2 · bounce: Star-Crossed 2, Rebuke 1 · lock: Vex 2 · pull: Evelynn 1 (11) | 10 |
+| 4 | **Turn-5 threats that spend the spare Power**: outsize the board once Energy stops being tight | 5+ Energy or 6+ Might; out of Gust's range (4+ Might); **value when it lands**, since bounce is in nearly every top list; ideally a sink for spare Gold | Rengar, Trophy Hunter 2, Sivir, Mercenary (3) | 6 |
+
+**What the specs show before stage 4:**
+- **Job 4's spec is strict** ("value when it lands"): Rengar's Ambush is surprise, not value, so
+  he meets it half way. The job to search for.
+- **Staunch Survivor fails job 1's spec**: he leaves nothing behind (a sturdy body, not a value
+  body). With bodies 19 → 17, he is the first card in question.
+- **Job 3's mix is lopsided**: kill and bounce are 6 copies, lock 2, pull 1. Spreading the kinds
+  points at more Rebuke or Vex, not more Rampage.
+
 ## 4. Card by card — next
 
 To find first: what top end Body and Chaos actually have, and whether any of it suits a Gold
@@ -104,6 +126,8 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** the four jobs named for Sivir's engine, with a spec each (Jay: the labels were generic);
+  v1's 40 sorted into them. First reads: job 4's spec is strict; Staunch fails job 1's; job 3 is lopsided.
 - **28 Oct 2026:** stage 3 agreed (Claude's calls, Jay deferred): four jobs, Sabotage in the pool;
   bodies 17, tricks 7, interaction 10, top end 6. Pooled, v1 already has ~11 answers: the real change
   is −2 bodies, +3 top end.
