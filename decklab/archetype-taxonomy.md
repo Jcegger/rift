@@ -2,7 +2,7 @@
 title: Archetype taxonomy — worksheet
 subtitle: Overarching archetypes, sub-archetypes, and where every legend and net deck sits. Built with Jay a section at a time; the result rewrites docs/archetypes.md.
 started: 2026-10-27
-status: §1, §2, §3 chunks 1–2 agreed 27 Oct 2026; chunk 3 (the last 21) drafted for Jay
+status: §1–§3 agreed (§3 as the base) 28 Oct 2026; §4 (variance layer) drafted; §5 doc scan next
 ---
 
 How this works: like a deck worksheet ([README.md](README.md)), each section agreed before
@@ -390,7 +390,11 @@ now pass; the shape decides instead.
 - **§4:** a Miss Fortune Aurora row (67 of 101 lists).
 
 
-### Chunk 3: midrange and control, the last 21 — drafted 27 Oct 2026, for Jay
+### Chunk 3: midrange and control, the last 21 — agreed as the base, 28 Oct 2026
+
+*Jay: "pretty good, but might not allow for the variance between decks, since some legends can
+run different styles; as a base, this feels pretty good." The map places legends; §4 is the
+layer where a legend gets a row per style.*
 
 Every legend not yet placed: those the measurement or the doc calls midrange, control or
 ramp. The seven measured *ramp* are placed by what they ramp into (§1).
@@ -437,7 +441,25 @@ Plus **Annie, Dark Child · No engine** from chunk 1.
 
 ---
 
-## 4. Legends with several decks — after §3
+## 4. Legends with several decks — the variance layer
+
+The §3 map places each **legend** by its representative list. A legend gets a row per
+style here when any of four things holds:
+
+1. **Its lists split into distinct decks** (lib/netdeck.mjs SPLIT_EDGE): Fiora and Kennen in
+   Vendetta today.
+2. **It has Aurora versions**, partitioned by policy: Jayce, Miss Fortune, Fiora, Volibear,
+   Sivir.
+3. **It is two-speed.** Run the profile rule on every clean list, not the representative one
+   (28 Oct 2026). On a single list the rule's *tempo* (a Hidden and Reaction count) and *ramp*
+   (a big-card count) swing on a card or two, and posted lists include casual brews, so most
+   "splits" are noise. The **aggro / midrange** axis runs on cost, curve and units and holds
+   up: **Kha'Zix** (aggro 49%, midrange 40%; matches Jun's two lists, which validates the
+   method), **Ambessa** (midrange 58%, aggro 40%), **Jarvan IV** (56 / 41), **Poppy** (62 /
+   32), **Sett** (71 / 28). Kai'Sa (ramp 55 / control 45) and Fiora (midrange 60 / ramp 40)
+   are the same deck on a threshold, not two styles.
+4. **A variant known from play**: Jay's Sivir, Jun's two Kha'Zix lists.
+
 
 A legend is shown as several net decks only where its own lists earn it
 (lib/netdeck.mjs SPLIT_EDGE, 27 Oct 2026). Today that is **none in Radiance**; in Vendetta,
@@ -453,7 +475,11 @@ lists do not yet show goes here by hand, marked as judged.
 |---|---|---|---|
 | **Sivir Is Trying Her Best** (Jay's) | **Midrange** | Extra resources | Measured with the field's own rule (build-archetypes `label`): cost 2.8, 14 cards at 2 or less, 25 units / 13 spells, 9 draw, interaction 6, so midrange. The field's Sivir (25 lists, cost 2.5, 19 cheap, 6 draw) reads aggro: a different deck, the Randyyy-style curve Jay rebuilt away from after 0-3 on 26 Oct ("early leads faded"). Its matchup plans press some opponents (Riven, Kennen): that is a role, not the archetype (strategy.md §2). Gold into cards is the payoff |
 | Sivir, Battle Mistress, Aurora | *to place* | Ramp, *Aurora* | 10 of 36 lists |
-| Kha'Zix, Voidreaver: Jun's Aggro and Midrange | *to place* | Movement | two known lists (in the app); the lists do not split yet |
+| Kha'Zix, Voidreaver: Jun's Aggro and Midrange | Aggro and Midrange | Movement | two known lists (in the app), and the field is two-speed too (rule 3) |
+| Ambessa, Matriarch of War: aggro and midrange builds | Aggro and Midrange | Fights | two-speed (rule 3) |
+| Jarvan IV, Exemplar of Demacia: aggro and midrange builds | Aggro and Midrange | Gear | two-speed (rule 3) |
+| Poppy, Keeper of the Hammer: aggro and midrange builds | Aggro and Midrange | Holds | two-speed (rule 3) |
+| Sett, The Boss: aggro and midrange builds | Aggro and Midrange | Fights | two-speed (rule 3) |
 | Miss Fortune, Bounty Hunter, Aurora | *to place* | Ramp, *Aurora* | 67 of 101 lists; Orb's "Midrange Ramp" |
 | Jayce, Defender of Tomorrow, Aurora | *to place* | Ramp, *Aurora* | 104 of 159 lists: the majority Jayce |
 | Fiora, Grand Duelist, Aurora | *to place* | Ramp, *Aurora* | 27 of 156 |
@@ -473,6 +499,8 @@ in the agreed structure: overarching archetype → family → legends and decks.
 
 ## Log
 
+- **28 Oct 2026:** chunk 3 agreed as the base; §4 became the variance layer (Jay: legends run different
+  styles). Per-list profiling found five two-speed legends; Kha'Zix matches Jun's two lists.
 - **27 Oct 2026:** chunk 3 drafted (12 midrange, 9 control); "conquer or hold" triggers do not pick a
   family; Jayce, Fiora and Volibear Aurora rows to §4.
 - **27 Oct 2026:** chunk 2 agreed; Riven Holds, Holds' definition sharpened to "controlling or holding".
