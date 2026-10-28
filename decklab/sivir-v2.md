@@ -2,7 +2,7 @@
 title: Sivir v2 — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. The same deck's identity, rebuilt on the job structure winning midrange decks share. Built with Jay a stage at a time.
 started: 2026-10-28
-status: stage 3 (jobs and targets) drafted for Jay — v1 stays sleeved and in play
+status: stage 3 agreed 28 Oct 2026; stage 4 (card by card) next — v1 stays sleeved and in play
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
@@ -30,7 +30,7 @@ legend for another Gold. **v2 adds a late game:** from turn 5, when Energy stops
 limit (guide §4), threats that outsize the board. Cheap in Energy on turns 1–4, the spending
 from turn 5: the identity rule, sharpened rather than broken.
 
-## 3. Jobs and targets — draft, for Jay
+## 3. Jobs and targets — agreed 28 Oct 2026
 
 **What the winners share** (28 Oct 2026; Riot's top decks and the LDXP Sacramento 25k):
 
@@ -65,15 +65,46 @@ an answer for the unit). Midrange's flexibility lives in the interaction pool be
 (several kinds of answer), not in having many jobs. **The cost:** with four jobs every card
 has to be good at its job; there are no slots for "nice to have".
 
-**Questions for Jay**
-1. Four jobs, or keep disruption (Sabotage) as its own fifth?
-2. The targets: does ~6 top end and ~18 bodies feel right, or should the board stay bigger?
+**Agreed** (Jay left both to Claude: "up to what you think would be the best choice", and
+"compare that to the data, mixed with your opinion… and the general benefits of Sivir"):
 
-## 4. Card by card — after stage 3
+1. **Four jobs: Sabotage goes in the interaction pool.** In every winning list that runs it
+   (Rengar 3, Sett 3) it is part of a 7–8-card answer suite, not its own plan.
+2. **The targets**, from the winners mapped onto these four jobs, bent for Sivir:
+
+| winner | bodies | fight tricks | interaction | top end |
+|---|---|---|---|---|
+| Rengar (1st, LA) | ~24 | ~5 | ~5 (+3 Faefolk pulls) | ~5 |
+| Sett (3rd, Utrecht) | ~20 | ~9 | ~7 | ~5 |
+| Riven (14th, 25k) | ~16 | ~8 | ~10 | ~5 (8 with Blitzcrank) |
+| Kennen (2nd, Singapore) | ~16 | ~5 | ~7 | ~6 |
+| **typical** | **16–20** | **~7** | **7–10** | **~5–6** |
+
+   **Sivir's bend:** her legend is modest (about one Gold a turn, another after an enemy death),
+   but the Gold is Power, so the jobs paid in Power (Punch First, Switcheroo, Rebuke: 2 Power
+   each) are where this deck is cheaper than anyone's: the top of the range for tricks and
+   interaction. Sivir, Mercenary is a guaranteed 4-drop that is 6 Might with Ganking after 2
+   Power: half a top-end card, not a late threat.
+
+| job | v1 today | **v2 target** |
+|---|---|---|
+| Bodies | ~19 | **17** |
+| Fight tricks | 7 (Punch First 3, Switcheroo 2, Edge of Night 2) | **7** |
+| Interaction pool | **~11 once pooled** (Rampage 3, Sabotage 2, Star-Crossed 2, Vex 2, Rebuke 1, Evelynn 1) | **10** |
+| Top end | 3 (Rengar 2, Sivir) | **6** (Sivir + 5) |
+
+   **What the table says:** pooled, v1 already has about 11 answers; the interaction problem was
+   mostly in how it was described. **v2's real change is small and specific: about 2 fewer
+   bodies, and 3 more top-end threats.**
+
+## 4. Card by card — next
 
 To find first: what top end Body and Chaos actually have, and whether any of it suits a Gold
 deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** stage 3 agreed (Claude's calls, Jay deferred): four jobs, Sabotage in the pool;
+  bodies 17, tricks 7, interaction 10, top end 6. Pooled, v1 already has ~11 answers: the real change
+  is −2 bodies, +3 top end.
 - **28 Oct 2026:** opened from the job analysis of six winning midrange lists; stage 3 drafted.
