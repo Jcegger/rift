@@ -2,7 +2,7 @@
 title: Sivir v2 — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. The same deck's identity, rebuilt on the job structure winning midrange decks share. Built with Jay a stage at a time.
 started: 2026-10-28
-status: stage 3 agreed 28 Oct 2026; stage 4 under way (job 4 read; Baron out on the rune board) — v1 stays sleeved and in play
+status: stage 3 agreed; stage 4: job 4 agreed 28 Oct 2026 (Sivir, Rengar ×2, Graves ×2, Beast Below); jobs 1–3 next — v1 stays sleeved and in play
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
@@ -214,8 +214,12 @@ small units and kill a big defender in one attack, which Graves can't (no combat
 wins by holding at 7, and Graves defending a hold is that plan. **Anivia off the shortlist**, a fallback
 only if Beast Below fails.
 
-**Shortlist for the five slots beside Sivir** (Jay decides): Rengar, Trophy Hunter ×2–3 · Graves ×2 ·
-Beast Below ×1.
+**Job 4, agreed** (Jay: "I'd probably lean on 2 Rengars"): **Sivir, Mercenary · Rengar, Trophy Hunter ×2 ·
+Graves, Blasting Through ×2 · Beast Below ×1** = 6, the stage-3 target. Two Rengars on the merits
+too: Graves shares the 5-Energy slot, so two of each is already four 5-drops, and a third Rengar
+would make five, competing with the turn-4 Vex and Matriarch. The winners run three because their
+top end *is* Rengar. **Not too top heavy:** average about 3.0 (v1 2.77; with Baron 3.15), like Riven
+and Kennen, well under LeBlanc's 4.1; the model's cost was units by turn 5 4.9 → 4.6, cheap cards 14 → 12.
 
 ## 4. Card by card — jobs 1–3 next
 
@@ -224,6 +228,7 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** job 4 agreed: Sivir, Rengar ×2, Graves ×2, Beast Below.
 - **28 Oct 2026:** Beast Below kept despite Star-Crossed (the value lands first; Repulse saves it);
   Graves over Anivia (cheaper, defends, scales with Punch First). Top end: Rengar ×2–3, Graves ×2, Beast Below.
 - **28 Oct 2026:** Staunch corrected (he fights above his cost; the spec now says so). Why Beast Below is
