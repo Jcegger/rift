@@ -218,3 +218,89 @@ sweeper, and a top end that shrugs off bounce. **How sure:** medium-low. Good nu
 
 **For the journal:** Rampage kills (clean?), Graves against Switcheroo, and Rhasa's turn: were you
 ahead by then?
+
+---
+
+## Evelynn, Agony's Embrace (A) — Tempo · Facedown
+
+**Evidence:** 6 Radiance results, one event (the 25k); best #21 of 755.
+
+**What she plays:** **your colours, and many of your cards.** The legend draws once a turn when she
+plays a card from face down (discarding one if it's not her turn).
+- *Hidden bodies:* Evelynn, Entrancing ×1.7, Pyke, Returned ×2.5 (Gold when your units die), Gutter
+  Guardian ×2.8, Momentary Companion ×2.6 (4), Bedeviling Stranger 50%, Ember Monk 50% (+2 on face-down
+  plays). *Open:* **her own Vex, Apathetic ×2.3**, K'Sante, Courageous 83% (4, Shield 2), Rengar, Trophy
+  Hunter 83%, Kinkou Initiate 50%, Fizz and Ezreal 33–50%, Baron 33%.
+- *Tricks and answers:* Switcheroo ×1.7, Star-Crossed ×1.7, Edge of Night ×1.7 (all 100%), Punch First
+  83%, Rampage 83%, Hold 'Em 83% (+3), Onslaught 67% (+6), Gust 50%, Offer 33%, Existential Dread 33%.
+  **No Defy, Discipline or Zhonya's.** Bandle Scouts' Academy (Gold for hiding) in every list.
+
+**How she wins:** hiding at every battlefield she holds and playing from face down on either turn,
+drawing as she does; your attacks into her battlefields meet whatever she flips.
+
+**The interactions that decide it**
+1. **Taking her battlefield trashes everything she hid there** (§323.6.a): the guide's "press her
+   hide spots". Every conquest of hers is card advantage for you.
+2. **Graves attacking is weak here; Graves defending is strong.** His blast only hits units present
+   when he attacks or defends, and he deals no combat damage: attack her hide spot, and she flips a
+   4-Might Momentary Companion or an Edge of Night (+2) after the blast, which Graves can't kill.
+   Defending, he blasts her attackers, and she can't reinforce from face down at *your* battlefield
+   (a hidden permanent must be played where it's hidden, §811.1.d.1).
+3. **Her Vex** stuns what you play while it's at a battlefield, and her Switcheroo, Star-Crossed and
+   Gust all chose; your Rebuke and **v2's Beast Below** can bounce her Vex (Deflect taxes 1 Power).
+4. **With no Defy, Discipline or Zhonya's, Rampage is clean removal** against her, and a kill readies
+   your legend.
+
+**v1:** a near-mirror with her Hidden plan on top. Three Rampages and the guide's pressure on her hide
+spots; two Tornados to hide behind your own holds.
+**v2:** Graves holds your battlefields well against her attacks but attacks poorly into hers; Beast
+Below bounces her Vex. One Rampage fewer, where Rampage is clean; two fewer 3-drops against a tempo
+deck.
+
+**Reading: about the same.** v2's gains (Beast on her Vex, Graves on defence) are offset by losses
+that matter here (a clean Rampage, early tempo), and Graves's best use is the less important half of
+this matchup. **How sure:** low-medium (6 results, one event).
+
+**For the journal:** Graves's attacks into her battlefields (did a flip beat them?); her Vex: answered?
+
+---
+
+## Rengar, Pridestalker (A) — Midrange · Fights
+
+**Evidence:** 10 Radiance results, one event; best #17 of 755. Also the **LA RQ winner** (Vendetta).
+
+**What he plays:** the legend gives a unit +1 Might whenever he plays a unit.
+- *Bodies, many and small:* Inferna ×3 (1, Ambush, Assault 2), Irresistible Faefolk ×3 (1; pulls one of
+  your units to where it moves), Pit Rookie ×2.9 (2), First Mate ×2.1 (3), Grim Apothecary ×2.5 (3,
+  Ambush), Kinkou Initiate ×2.8 (3), Nidalee, Cat Form ×2 (4, Ambush), Kai'Sa, Survivor ×3 (4), Noxus
+  Hopeful ×3 (4, cheap with Legion), Pyke, Dockside Butcher 60%.
+- *Top end:* Rengar, Trophy Hunter (6), Ferrous Forerunner 90% (6; leaves two 3-Might Mechs), Elnuk
+  Herd 70% (5), **Graves 40%**, Darius 30%, **Brynhir Thundersong 30%** (you can't play cards that turn).
+- *Tricks:* Punch First ×2.9, Thrill of the Hunt ×2.6 (Reaction: replays a unit to any battlefield),
+  Rampage ×2.1, Sabotage ×1.6. **No Defy, Discipline, Zhonya's, Star-Crossed or bounce.**
+
+**How he wins:** more bodies than you, growing as they land, arriving where it hurts (Ambush,
+Thrill of the Hunt), card draw on half his units.
+
+**The interactions that decide it**
+1. **A board of small units**: 26 of his 30 are 4 Might or less. Graves's blast is at its best here;
+   **Graves was already v1's sideboard plan against him.**
+2. **But Ambush arrives after the blast**: Inferna, Apothecary, Nidalee and Rengar can be played into
+   a fight as Reactions, and Graves can't kill what lands after his trigger. Defending, Graves blasts
+   his attackers; he can still Ambush more in where he has units.
+3. **Your Vex** stuns everything he plays while she's at a battlefield, and he has no bounce to remove
+   her: one of the best Vex matchups.
+4. **No Calm protection**: Rampage is clean against him, so v2's cut costs something.
+5. **Brynhir (30%)** shuts off your Reactions for a turn: a fight you planned to win with Switcheroo
+   or Star-Crossed fails that turn.
+
+**v1:** Vex and fights; game 1 without Graves, which arrives from the sideboard in games 2 and 3.
+**v2:** **Graves main for game 1**, the card you'd side in anyway; Beast Below bounces Forerunner or
+Rengar; Vex as before. One clean Rampage fewer; two fewer 3-drops against the fastest board in the
+field (16.1 Might by turn 4).
+
+**Reading: v2 is better placed.** It plays game 1 the way v1 plays games 2 and 3. **How sure:**
+medium (10 results plus a major win; the Ambush timing against Graves is the uncertainty).
+
+**For the journal:** Graves defending against his attacks; Ambush units after the blast; whether
+turn 3 kept up with his board.
