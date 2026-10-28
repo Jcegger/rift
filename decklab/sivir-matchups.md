@@ -699,3 +699,64 @@ Might, to a minimum of 1)**, Solari Chief (kills a stunned unit), Vex, Mocking; 
 
 **Reading: about the same.** Graves is strong against her stuns except exactly where her best card
 stands. **How sure:** low.
+
+### Draven, Glorious Executioner (B) — Midrange · Fights
+
+**Evidence:** 7 posted lists (one 1st of 8). **What he plays:** the legend draws for every combat he wins;
+Draven, Showboat (Might plus his points), Noxus Hopeful ×3, Spinning Axe ×3, Inferna, Overzealous Fan (kills
+itself on defence to send your attacker home), Kai'Sa, Survivor, his own Vex 57%; Rebuke 71%, Switcheroo
+71%, Falling Star 57%, Cleave, Blood Rush. No Calm.
+
+**What decides it:** small bodies for Graves; Rebuke, Switcheroo and Falling Star answer him; Rampage is
+clean. Overzealous Fan sends an attacking Graves home (whether his attack trigger has resolved first is a
+timing question for a judge).
+
+**Reading: v2 slightly better.** **How sure:** very low (seven lists).
+
+### Pyke, Bloodharbor Ripper (B) — Tempo · Extra resources
+
+**Evidence:** 26 posted lists, low placings. **What he plays:** the legend bounces his own unit for a Gold
+(arrival effects again); Fizz, Ezreal, Merchant, Matriarch, Bewitching Spirit (you discard), Treasure
+Hunter, Pyke, Dockside Butcher: **a value-on-arrival deck like yours**; Falling Star 88%, Star-Crossed 81%,
+**his own Vex 81%**, Switcheroo 62%, Piercing Light, Hard Bargain, The List (−2 to a named tag), Pack of
+Wonders; **Baron Nashor 50%**.
+
+**What decides it:** a mirror of engines. Falling Star and Piercing Light reach Graves; Baron (in half the
+lists) is unanswerable by either version, so hold at 7 once his Pit is down. Rampage is clean.
+
+**Reading: about the same.** **How sure:** very low.
+
+### Annie, Dark Child (B) — Control · No engine
+
+**Evidence:** 19 posted lists. **What she plays:** burn: Void Seeker (4, draws), Falling Star, Disintegrate
+(3), Incinerate (2), **Shakedown** (6 to your unit **unless you let her draw 2**: your choice), **Firestorm**
+(3 to all your units at a battlefield), **Tibbers** (8 Energy; 3 to every unit at battlefields), Annie, Fiery
+(+1 damage on all of it); Flash, Star-Crossed, Hard Bargain. The legend readies 2 runes at the end of her
+turn: mana for answers on yours.
+
+**What decides it:** her removal is damage, one card at a time and sometimes all at once (Firestorm,
+Tibbers). **Your bodies leaving value when they die** is the plan working (job 1's spec). Graves dies to two
+of her cards stacked; **Beast Below's 8 Might survives everything but a stack**, and against Shakedown you
+can simply take the 6. Rampage is clean against her few units.
+
+**Reading: about the same, perhaps v1 slightly**: in burn attrition, more cheap value bodies beat fewer
+bigger ones, Beast Below excepted. **How sure:** very low.
+
+### Diana, Scorn of the Moon (B) — Tempo · Spells
+
+**Evidence:** 5 Radiance results, one event; best #63 of 755.
+
+**What she plays:** the legend adds Energy usable only in showdowns, so her deck is fight-speed spells:
+Stupefy ×3, **Eclipse** (−4, no minimum) and Smoke Screen 60% (−4), **Gust ×2.2** and **Flash** (100%), Ride
+the Wind, Moonfall (moves one of your units), Switcheroo, Star-Crossed and Rebuke (80% each), Hard Bargain;
+Tideturner, Diana, Lunari, Hwei (5), Ravenbloom Student, Merchant, Fizz, **her own Vex 80%**. No Defy,
+Discipline or Zhonya's.
+
+**What decides it:**
+1. **The most answers to Graves's blast of any deck**: Eclipse or Smoke Screen in response shrinks it to
+   nothing; Flash pulls her units home; Switcheroo zeroes it; Rebuke and Star-Crossed bounce him.
+2. **Gust in every list** returns your 3-Might bodies; Graves (4) and Beast (8) are out of its range.
+3. **No Calm protection**: Rampage is clean, so v2's cut costs.
+
+**Reading: v1 slightly better**, the Kennen pattern: v2's changes aim at Calm decks, and this one answers
+a sweeper at fight speed and doesn't blank Rampage. **How sure:** low-medium (5 results).
