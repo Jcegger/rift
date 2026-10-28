@@ -24,6 +24,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 import { indexCatalog } from "../lib/decks.mjs";
 import { NEVER_PLAY } from "../lib/avoid.mjs";
+import { singles } from "../lib/placing.mjs";
 import { gradeFor, counted, consensus, recordRatio, recordTier, disagreement, groupOf, handedOver, resultsRatio, LETTERS, DISAGREE_TIERS, MIN_E, FORMAT_FROM } from "../lib/field.mjs";
 
 const RA = "https://riftatlas.com";
@@ -36,8 +37,7 @@ const REFETCH_DAYS = 3;      // events this recent are fetched again: standings 
 const MAX_FETCH = 60;        // new pages per run, so a first run or a busy weekend is spread out
 const GAP_RA = 3000, GAP_DOTGG = 2000;
 
-// One-on-one Constructed only: a 2v2 team event's placings are a pair's, not a deck's.
-const singles = (name, format) => (format == null || /^constructed$/i.test(format)) && !/\b(2v2|team|trios|sealed|draft|limited|pre-?rift)\b/i.test(name);
+// One-on-one Constructed only (lib/placing.mjs `singles`, shared with every good finish).
 
 const args = process.argv.slice(2);
 const offline = args.includes("--offline");
