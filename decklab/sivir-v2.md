@@ -254,10 +254,11 @@ watch item for stage 5; Hidden depth 5; the Tornado line.
 
 ### The draft list (in the app as "Sivir v2 (draft)", 28 Oct 2026; v1 untouched)
 
-- **Units (26):** Traveling Merchant 3 · Evelynn, Entrancing 1 · Staunch Survivor 2 · Reckless
+- **Units (25):** Traveling Merchant 3 · Evelynn, Entrancing 1 · Staunch Survivor 2 · Reckless
   Innovator 3 · Fizz, Trickster 3 · Ezreal, Prodigy 3 · Tail-Cloaked Matriarch 3 · Vex, Apathetic 2 ·
-  Rengar, Trophy Hunter 2 · **Graves, Blasting Through 2** · **Beast Below 1** · *Sivir, Mercenary*
-- **Spells (12):** Punch First 3 · Rampage **2** · Sabotage 2 · Star-Crossed 2 · Switcheroo 2 · Rebuke 1
+  Rengar, Trophy Hunter 2 · **Beast Below 1** · Tornado Warrior 1 · *Sivir, Mercenary*
+  (28 Oct, after the first game: Graves ×2 to the sideboard, Tornado and Rampage back; see the log)
+- **Spells (13):** Punch First 3 · Rampage **3** · Sabotage 2 · Star-Crossed 2 · Switcheroo 2 · Rebuke 1
 - **Gear (2):** Edge of Night 2
 - **Runes, battlefields, legend:** as v1.
 - **Sideboard, a placeholder:** v1's, with its 2 Graves (now main; 4 would break the copy limit)
@@ -298,6 +299,19 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** Graves ×2 to the sideboard; Tornado Warrior and the third Rampage back to the main
+  (Jay). The case for Graves in the main was overstated: Riven doesn't go wide (Blade of the Exile lifts
+  her bodies out of a 4-damage blast, and Switcheroo, Star-Crossed and Rebuke answer him), Kennen and
+  Irelia blunt him, Kai'Sa kills him first; only Master Yi and the wide B-tier decks are his. Measured
+  (`try`, normal pressure): rules pass; kills a game 0.21 → 0.35; an answer usable on their turn by t5
+  16% → 22%; Gold 4.40 → 4.31; answer copies per S/A unit 9 → 8 (Graves counted against their small
+  units); Master Yi's Ruin Runner answers 4 → 2; Defy-countered spells 2.6 → 3.0; two units by turn 3
+  96% → 95% (Tornado doesn't restore the curve). Against v1 the list is now −1 Tornado +1 Beast Below,
+  so the Nexus Night test is mostly Beast Below. Graves boards in against Master Yi and the wide decks.
+  Also measured, a second Beast Below in Rampage's place (Jay; 3 owned): Gold 4.43, no extra Defy
+  exposure, but kills 0.22, answers usable by t5 18%, answer copies per S/A unit 7 (versus may not count
+  Beast's bounce), 7E on 71% of turn 5s. Rampage taken: Beast Below hasn't been drawn yet, so the second
+  copy waits until the first earns it, as planned.
 - **28 Oct 2026:** first v2 game, against Kai'Sa: drew both Graves, and both died to her removal before
   blasting; Beast Below not drawn. As the matchups reading predicted (Falling Star or Ray answers him for
   2 Energy). Jay doesn't like Graves in the main; one game in his worst matchup isn't the watch item
