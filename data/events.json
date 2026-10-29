@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-28",
+ "generatedAt": "2026-10-29",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2473,
+  "events": 2474,
   "eventsWithDecks": 21,
-  "players": 64516,
+  "players": 64535,
   "playersWithDecks": 6585,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
@@ -33,14 +33,14 @@
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Europe": 66,
-   "unknown": 196,
-   "Asia": 95,
+   "Asia": 98,
+   "Europe": 67,
+   "unknown": 197,
    "North America": 7,
    "Oceania": 4
   },
   "registryEventsByRegion": {
-   "unknown": 2467,
+   "unknown": 2468,
    "Asia": 6
   },
   "unresolvedClaimEvents": [
@@ -142,6 +142,29 @@
   }
  },
  "events": [
+  {
+   "name": "Fast Cup Radiance #3",
+   "dt": "2026-10-27",
+   "players": 19,
+   "format": "Constructed",
+   "winner": "Woëgle",
+   "country": null,
+   "slug": "fast-cup-radiance-3",
+   "top": [
+    [
+     "OGS-019",
+     3
+    ],
+    [
+     "UNL-189",
+     2
+    ],
+    [
+     "VEN-155",
+     1
+    ]
+   ]
+  },
   {
    "name": "LDXP Sacramento - Radiance-Win-A-Case",
    "dt": "2026-10-25",
