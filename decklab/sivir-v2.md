@@ -299,6 +299,15 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **29 Oct 2026:** Jay's removal problem is tempo: "I wouldn't have a unit to play on a battlefield."
+  One spell → Tornado measured four ways (`try`): each adds ~0.2 units by turn 5 under heavy pressure
+  (1.8 → 2.0). −Rampage loses a third of the kills; −Switcheroo drops job 2 under target; −Rebuke costs
+  answers on their turn (23% → 13% by t5); −Sabotage was the structural pick, **rejected by Jay: it's
+  the one card that targets the removal itself** (strip it from their hand before it's cast), so it's part
+  of the answer to this problem, not a pool spare. A second Evelynn (Jay's only pull, and a body) has no
+  slot: **Edge of Night overperforming** (Jay). **List kept.** In play: Sabotage early against removal
+  hands; one unit a turn into removal-heavy hands, a body kept back. Watch: "stuck with no unit" games
+  in the journal; if they persist with that sequencing, the deck is short on bodies.
 - **29 Oct 2026:** third v2 game, won against Viktor: behind early, closed from 7 with Rengar + Punch
   First (11 Might) at Reaction speed; he'd lost track of Jay's 7. Jay kept a spare unit for Cull the
   Weak. Beast Below still not drawn (0 of 3 games). Jay: "feeling pretty good", wins tight. v2 so far
