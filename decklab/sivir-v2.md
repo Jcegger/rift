@@ -299,6 +299,30 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **29 Oct 2026:** **v2 shelved; Jay back on v1** (already sleeved). After the Graves swap v2 was v1 with
+  Beast Below for one Tornado; Beast sat in hand when drawn and the deck's problems were tempo and
+  Energy, which a 7-drop worsens. v2 stays in the app as the bench. v1's guide takes tonight's
+  sideboard lessons (Orianna row; Kai'Sa cuts Rebuke + Switcheroo, not bodies; Sabotage stays against
+  removal decks). **Jay's candidates for later** (none in the deck): Zed, Without a Sound (Chaos 5E;
+  the Fury Zed is off-colour); Bedeviling Stranger; Onslaught; The Good Stuff; Irresistible Faefolk.
+  Measured (`try` on v1, normal pressure): −2 Tornado for 2 Stranger, 2 Faefolk, or one of each, all
+  give units by turn 2/3 1.5/2.8 → 1.7/3.1, average cost 2.77 → 2.73, turn 5 unchanged; Faefolk costs
+  Hidden 7 → 5. The model can't see Stranger's bounce or Faefolk's pull.
+- **29 Oct 2026 (Nexus Night):** v2 W against Irelia, a turn-5 concession at 0–0. Jay bricked turn 1;
+  Irelia's player moved Irelia, Fervent to base and spent all five runes, so Rampage (Innovator)
+  killed her with no Defy possible. The lesson for every Calm deck: Rampage is blanked only while
+  they hold runes up; a tapped-out turn is the window. v2 so far 2–2.
+- **29 Oct 2026 (Nexus Night):** v2 L against Kai'Sa, turn 15. She conquered Zaun Warrens on turn 14
+  (6 → 7), Time Warped (12 runes) and scored the hold at the extra turn's start. Mistake (terminal, read
+  from the end log): on Jay's turn 13 she could reach 8 before he acted again; the defence was then (a
+  body at Zaun Warrens, or Sabotage on the Warp). **Kai'Sa at 6 with 10+ runes is one turn from winning.**
+  **Beast Below's first draw:** sat in hand ("couldn't find a good time"). Jay's board was 6 runes + a
+  Gold on turn 13, against its 7E 2P, and her units are mostly small (Poro, Yordle, Tracker), poor
+  bounce targets. Forgot to attach Edge of Night once (rewound). v2 so far 2–3.
+  Jay: Beast was castable, never the right play; "general energy usage issues", couldn't play Vex at a
+  good time on the last turn. End hand: Vex, Matriarch ×2, Beast (four 4+ Energy cards against ~6
+  runes). Vex at Zaun Warrens on turn 13 would have made the Poro fight rather than conquer. Watch:
+  Beast castable but sitting; if it keeps happening, v1's second Tornado back in.
 - **29 Oct 2026:** Jay's removal problem is tempo: "I wouldn't have a unit to play on a battlefield."
   One spell → Tornado measured four ways (`try`): each adds ~0.2 units by turn 5 under heavy pressure
   (1.8 → 2.0). −Rampage loses a third of the kills; −Switcheroo drops job 2 under target; −Rebuke costs

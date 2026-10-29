@@ -339,7 +339,7 @@ The engine model (`scripts/rift try`, with hiding and opponents that apply press
 ### Removal and denial
 - **Rampage ×3** (3 Energy; optional Body for +2). Your main phase only. Choose your unit and theirs; they damage each other by Might. A kill readies the legend.
 - **Star-Crossed ×2** (3 Energy, 1 Chaos; Reaction). Returns one of theirs and one of yours. Defy *can* counter it.
-- **Sabotage ×2** (1 Energy, 1 Body; your main phase). They reveal their hand; you pick a non-unit card and they recycle it. It strips the trick they were saving. Defy can counter it, and it's **the first card out** when you sideboard.
+- **Sabotage ×2** (1 Energy, 1 Body; your main phase). They reveal their hand; you pick a non-unit card and they recycle it. It strips the trick they were saving. Defy can counter it. **Against removal decks keep it in**: it's the one card that takes their removal before it's cast (Jay, 29 Oct: a Viktor game won on it, and it takes Kai'Sa's Time Warp). Against the Calm decks, whose Defy reaches it, it can still come out.
 
 ### Battlefields
 - **Zaun Warrens:** discard 1, then draw 1 on conquer, which feeds the trash. **Not against Kennen,** who runs it in 13 of 16 lists and uses the loot better.
@@ -464,7 +464,7 @@ From `scripts/rift versus <legend> --deck "trying her best"`: each legend's lega
 | **Kennen** (S) | 3.2 | **press early** | the trash engine; Rhasa (79%, 6 Might, cheap late); Star-Crossed 85%, Gust 77%; Switcheroo in most lists; their Offer and Salvage reach your Edge | 2 Offer, Prefect | 2 Sabotage, 1 Tornado |
 | **Irelia** (S) | 2.5 | press; attack with two | the slowest S deck on board (10.9 Might by turn 4); she wins fights with Reactions; Defy 98% **and** Not So Fast 80% hit your targeted spells | 1 Graves, Siren's Song | 2 Sabotage, 1 Rampage |
 | **Master Yi** (S) | 2.9 | **attack with two** | his +2 is for a lone defender; cheap tricks protect it; Charm 64%, Defy 75% | — (Sabotage stays: it strips his tricks) | — |
-| **Kai'Sa** (A) | 3.0 | press; spread out | Hextech Ray 98% (3), Falling Star 97% (6), Bellows Breath 88% (1); Thousand-Tailed Watcher (95%) shrinks your board; Void Gate adds 1; **at Rockfall Path hide a spell, not a unit**; Lost to the Sands (36%) reaches Edge | 2 Unyielding Spirit | 2 Tornado |
+| **Kai'Sa** (A) | 3.0 | press; spread out | Hextech Ray 98% (3), Falling Star 97% (6), Bellows Breath 88% (1); Thousand-Tailed Watcher (95%) shrinks your board; Void Gate adds 1; **at Rockfall Path hide a spell, not a unit**; Lost to the Sands (36%) reaches Edge | 2 Unyielding Spirit | 1 Rebuke, 1 Switcheroo (not bodies: running out of units is how this matchup is lost; 29 Oct) |
 | **Evelynn** (A) | 3.4 | press her hide spots | taking a battlefield trashes her face-down cards; Momentary Companion (73%) and other Hidden units; Star-Crossed 51%, Siren's Song 49% | — | — |
 | **Vex, Gloomist** (A) | 3.1 | remove their Vex first | their Vex (95%) and Back Off (94%) stun your units, hidden ones too; your hidden *spells and gear* still work; Deflect makes Rebuke on Vex cost 1 more Power; Defy 87% | Siren's Song | 1 Tornado |
 | **Rengar** (A) | **3.5** | **hold** | the fastest deck here (16.1 Might by turn 4); Rampage 93%; no counters; Noxus Hopeful in 98% | 2 Graves | 2 Sabotage |
@@ -473,9 +473,10 @@ From `scripts/rift versus <legend> --deck "trying her best"`: each legend's lega
 | **Jayce** (A) | 1.7 | **press** | almost nothing on board for three turns; Elder Dragon (50%, 10 Might) late; pings 1 at a time | 2 Offer, Prefect | 2 Tornado, 1 Star-Crossed |
 | **Ziggs** | 2.8 | be the beatdown; hold their Bomb battlefields | Bombs are gear tokens that die when you hold there; **Detonate (92%) kills your Edge**; Shimmering Swimmer 76% (2), Falling Star 52% | 2 Unyielding Spirit, Prefect | 2 Edge of Night, 1 Sabotage |
 | **Kha'Zix** | 3.3 | hold with two | his +2 is only against a lone enemy unit; Star-Crossed 100%, Rampage 87%, Vex 73%, Rengar 73% | — | — |
-| **Viktor** | 3.6 | hold | Hidden Blade 92%, Cull the Weak 87%; Recruit tokens go wide | 2 Graves | 2 Sabotage |
+| **Viktor** | 3.6 | hold | Hidden Blade 92%, Cull the Weak 87% (keep a spare body); Recruit tokens go wide | 2 Graves | 2 Tornado (Sabotage stays: it won the 29 Oct game) |
 | **Akali** | 2.7 | press | Shuriken Flip 96% (2), Akali's 1, Falling Star 78%; Defy 89% | 2 Unyielding Spirit | 2 Sabotage |
 | **Rek'Sai** | **4.2** | hold | the widest board; Cull the Weak 95%, Falling Star 90% | 2 Graves | 2 Sabotage |
+| **Orianna** | — | hold **at the Ball** | The Ball (2.8 copies) is a Deploy gear: holding its battlefield kills it however much Frigid Jewel (58% of lists) has pumped it; it stays a gear as a unit, so Offer kills it; Defy 94%, Discipline 85% | Prefect (banishes the Ball as it's played), 2 Offer | 1 Tornado, 2 Rampage |
 | **Mordekaiser** | 3.2 | hold; bounce his big ones | Realm of Death 91%, Mordekaiser kills any unit (76%), Hidden Blade 61%; 8-Might Mordekaiser | — | — |
 | **casual or unknown** | — | hold early, read their plan | ask what they do if nothing happens ([strategy.md §2](../docs/strategy.md#2-every-deck-is-solving-a-different-problem)) | — | — |
 
