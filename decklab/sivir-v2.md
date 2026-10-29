@@ -306,7 +306,11 @@ deck. Graves is a sideboard question, after the main.
   1.00 → 0.67; Gold 4.17 → 4.09. Two Zed (also −1 Tornado) measured too: units 4.7, revives 0.65, Gold
   4.04. Jay: "we PROBABLY want 2 Zed": **taken straight to 2** (−1 Matriarch, −1 Tornado), since a 1-of
   is drawn in about one game in four (Beast Below: once in four games) and the evidence would be slow.
-  Same card, so still one change. Per Zed game: did he conquer,
+  Same card, so still one change. **Then, for tonight's games (Jay: "I'd like to win"): v1 −1 Tornado +1
+  Zed, all 3 Matriarch kept.** Claude's own read against the field (low confidence): the top of the meta
+  is removal and bounce (Kai'Sa, Kennen; Riven's Star-Crossed 89%, Rebuke 87%), which recursion beats
+  and a 5-drop that must conquer before paying off loses to, so Matriarch's comeback value outweighs the
+  one game's 4-drop clog. Two Zed is the test list, not the win list. Per Zed game: did he conquer,
   how many swaps, what did the Clones do, what did the swaps' Gold buy.
 - **29 Oct 2026:** **v2 shelved; Jay back on v1** (already sleeved). After the Graves swap v2 was v1 with
   Beast Below for one Tornado; Beast sat in hand when drawn and the deck's problems were tempo and
