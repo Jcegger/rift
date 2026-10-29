@@ -298,6 +298,11 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **28 Oct 2026:** first v2 game, against Kai'Sa: drew both Graves, and both died to her removal before
+  blasting; Beast Below not drawn. As the matchups reading predicted (Falling Star or Ray answers him for
+  2 Energy). Jay doesn't like Graves in the main; one game in his worst matchup isn't the watch item
+  (Graves against the small-unit and Calm field), so the list stays frozen. Open: side out both Graves
+  against Kai'Sa, not one.
 - **28 Oct 2026:** Bullet Time set aside (Jay: "my fear is it would make me save my Gold"): an X spell pulls
   against an engine that spends Gold every turn; it does Graves's job at X 2–3; Defy counters it in the
   Calm decks it's for.
