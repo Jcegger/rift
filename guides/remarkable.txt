@@ -21,6 +21,7 @@
 /riftbound/table     once    guides/out/journal/match-night.pdf
 /riftbound/table     once    guides/out/journal/trouble-list.pdf
 /riftbound/table     once    guides/out/journal/review.pdf
+/riftbound/table     once    guides/out/journal/match-night.pdf name=match-night-29-oct
 
 /riftbound           once    guides/out/journal/questions.pdf
 # answers: re-enable with the first real batch of questions

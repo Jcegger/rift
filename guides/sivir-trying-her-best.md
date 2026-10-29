@@ -18,6 +18,40 @@ date: 2026-10-27
 
 ---
 
+## Nexus Night, 29 October: the Zed test
+
+*Saved in the app as* `Sivir + Zed (test)`. **One card and two battlefields differ from the list below.**
+
+**The list:** this guide's list with **−1 Tornado Warrior, +1 Zed, Without a Sound**. All 3 Matriarch stay.
+
+**Battlefields:** **Emperor's Dais · Hunters' Circle · Sigil of the Storm** (Zaun Warrens and Sandswept Tomb are out).
+
+| game | pick | why |
+|---|---|---|
+| **Game 1 (blind)** | **Hunters' Circle** | it rewards whoever controls it each turn, so who goes first matters least. **Against Riven, open Sigil instead**: her units played to her battlefields enter ready, and a discount there is what she wants |
+| **Going first** | **Emperor's Dais** | you conquer first: replay Ezreal or Fizz and leave a 2-Might Sand Soldier |
+| **Going second** | **Sigil of the Storm** | they conquer first and lose a rune for it; your conquest recycles into a Gold |
+
+**Hunters' Circle:** the first unit you play *to it* on your turn costs 1 less. Play Zed, Rengar, Vex or Matriarch straight onto it (§355.2.a).
+
+**Zed, Without a Sound** (5 Energy, 5 Might):
+- **Conquer first.** Nothing happens until he conquers: send him at an empty or weak battlefield.
+- **Clone on your hold, Zed at home.** When they attack it, **swap** (1 Energy + 1 Chaos, Action: works in a showdown). He arrives as a 5-Might defender, and the Clone goes home.
+- **Pay the swap's Chaos by recycling a rune while the legend is ready**, so the swap makes a Gold.
+- The swap isn't "playing": their Vex can't stun him, and Rockfall Path doesn't stop him.
+- **Falling Star deals 6.** Against Kai'Sa, don't send him in alone into open Power.
+
+**Tonight's reminders:**
+- **Kai'Sa at 6 points with 10+ runes is one turn from winning** (conquer + Time Warp). Stop the conquest on your turn.
+- **Orianna:** go **to** the Ball and hold there; it dies. Board in Prefect and both Offers.
+- **Calm decks:** Rampage when they're tapped out.
+- **Removal decks:** keep Sabotage in; one unit a turn, keep a body back.
+- **Rengar:** save him for the hold that matters.
+
+**Log every game** under `Sivir + Zed (test)`. **Each time Zed is drawn, note:** did he conquer? How many swaps? What did the Clones do? What did the swap Gold buy? **Each game, note:** which battlefield you picked, and whether you went first or second.
+
+---
+
 ## Executive summary: the game plan
 
 *Read this before every round. Everything after it is detail.*
