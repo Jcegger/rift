@@ -307,7 +307,15 @@ deck. Graves is a sideboard question, after the main.
   the Fury Zed is off-colour); Bedeviling Stranger; Onslaught; The Good Stuff; Irresistible Faefolk.
   Measured (`try` on v1, normal pressure): −2 Tornado for 2 Stranger, 2 Faefolk, or one of each, all
   give units by turn 2/3 1.5/2.8 → 1.7/3.1, average cost 2.77 → 2.73, turn 5 unchanged; Faefolk costs
-  Hidden 7 → 5. The model can't see Stranger's bounce or Faefolk's pull.
+  Hidden 7 → 5. The model can't see Stranger's bounce or Faefolk's pull. **"Sivir + Stranger (test)"**
+  (v1, −2 Tornado +2 Stranger) added to the app for testing first.
+  **Zed, Without a Sound, read properly** (Jay corrected Claude twice): his swap (1E + 1 Chaos, Action) is a
+  move outside every standard-move limit (§144: works in showdowns, doesn't exhaust, battlefield to
+  battlefield or home, isn't "playing" so Vex's stun and Rockfall Path don't apply): a repeatable surprise
+  defender. The Clone is a body (attacks at 4 with Assault, banishing a trash unit). **The Chaos is paid by
+  recycling a rune (§177), which triggers the legend's Gold**: a repeatable Gold sink, and a Power spend
+  for Sivir, Mercenary. Gated on Zed's first conquest; costs Energy (5 + 1 a swap) in an Energy-short
+  deck. Next in the queue after Stranger; the goldfish likely can't model the swap or Clones.
 - **29 Oct 2026 (Nexus Night):** v2 W against Irelia, a turn-5 concession at 0–0. Jay bricked turn 1;
   Irelia's player moved Irelia, Fervent to base and spent all five runes, so Rampage (Innovator)
   killed her with no Defy possible. The lesson for every Calm deck: Rampage is blanked only while
