@@ -304,7 +304,8 @@ deck. Graves is a sideboard question, after the main.
   Weak. Beast Below still not drawn (0 of 3 games). Jay: "feeling pretty good", wins tight. v2 so far
   1–2 (Kai'Sa L before the Graves swap; Orianna L, a misplay; Viktor W). Watch: Rengar closing games;
   if it keeps up, a third Rengar (the winners run 3) is the first follow-up after the list unfreezes.
-  A clutch Sabotage took one of Viktor's big cards from his hand. **Jay: "VERY dependent on Punch
+  The winning line: Jay held Rengar back for the one hold he needed, then Ambushed him in when Viktor
+  took his battlefield on the right. A clutch Sabotage took one of Viktor's big cards from his hand. **Jay: "VERY dependent on Punch
   First; a tough game if I don't find it."** It's at 3 already; Fizz recasts it from the trash (pay 2P),
   so spending the first copy early loads Fizz. Watch: losses where no Punch First was found; if they
   pile up, the answer is a second trick doing the same job, not a fourth copy.
