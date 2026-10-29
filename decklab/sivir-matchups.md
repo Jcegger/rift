@@ -681,6 +681,14 @@ Stupefy, Zhonya's 58%, Watcher 60%, **Helm of Suppression** 42% (your spells cos
 kills and your bounce returns. Defy, Discipline and Zhonya's blunt Rampage. Helm of Suppression taxes your
 Power-paid tricks.
 
+**The Ball (29 Oct 2026, after a loss):** **go to it, don't avoid it.** Deploy includes "When an
+opponent holds here, kill this" (§830.1.b), so holding its battlefield kills it however much gear has
+buffed it. It stays a gear while her legend makes it a unit (§178), so Offer (sideboard) kills it too.
+Board in both Offers after game 1, and spend them on the Ball, not
+her **Frigid Jewels** (44 of 76 Radiance lists, ×2.7; 2E gear, +2 Might to a unit this turn when she draws
+her second card, which the Ball's draw mode feeds). Three Jewels are +6 on her turns, but only that turn,
+and none of it saves the Ball from a hold.
+
 **Reading: about the same.** **How sure:** very low.
 
 ### Leona, Radiant Dawn (B) — Midrange · Fights

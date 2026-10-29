@@ -299,6 +299,18 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **29 Oct 2026:** third v2 game, won against Viktor: behind early, closed from 7 with Rengar + Punch
+  First (11 Might) at Reaction speed; he'd lost track of Jay's 7. Jay kept a spare unit for Cull the
+  Weak. Beast Below still not drawn (0 of 3 games). Jay: "feeling pretty good", wins tight. v2 so far
+  1–2 (Kai'Sa L before the Graves swap; Orianna L, a misplay; Viktor W). Watch: Rengar closing games;
+  if it keeps up, a third Rengar (the winners run 3) is the first follow-up after the list unfreezes.
+  A clutch Sabotage took one of Viktor's big cards from his hand. **Jay: "VERY dependent on Punch
+  First; a tough game if I don't find it."** It's at 3 already; Fizz recasts it from the trash (pay 2P),
+  so spending the first copy early loads Fizz. Watch: losses where no Punch First was found; if they
+  pile up, the answer is a second trick doing the same job, not a fourth copy.
+- **29 Oct 2026:** second v2 game (after the Graves swap), lost to Orianna: she kept buffing The Ball
+  with gear. Mistake (objective): Jay avoided the Ball's battlefield, but holding there kills it
+  (Deploy, §830.1.b). Not a list problem; the plan is now in `sivir-matchups.md`.
 - **28 Oct 2026:** Graves ×2 to the sideboard; Tornado Warrior and the third Rampage back to the main
   (Jay). The case for Graves in the main was overstated: Riven doesn't go wide (Blade of the Exile lifts
   her bodies out of a 4-damage blast, and Switcheroo, Star-Crossed and Rebuke answer him), Kennen and
