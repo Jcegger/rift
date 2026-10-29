@@ -299,6 +299,13 @@ deck. Graves is a sideboard question, after the main.
 
 ## Log
 
+- **29 Oct 2026:** Jay takes Zed to Nexus Night: **"Sivir + Zed (test)"** = v1 −1 Matriarch +1 Zed, Without
+  a Sound (in the app). Matriarch over Tornado because the Kai'Sa loss clogged on 4-drops, Tornado keeps
+  the early bodies, and the Clone's Assault banishes trash units Matriarch would revive. Measured (`try`,
+  normal pressure; blind to the swap, Clones and swap Gold): units by turn 5 4.9 → 4.8; Matriarch revives
+  1.00 → 0.67; Gold 4.17 → 4.09. Two Zed (also −1 Tornado) measured too: units 4.7, revives 0.65, Gold
+  4.04. Jay: "we PROBABLY want 2 Zed": the next test if the first earns it. Per Zed game: did he conquer,
+  how many swaps, what did the Clones do, what did the swaps' Gold buy.
 - **29 Oct 2026:** **v2 shelved; Jay back on v1** (already sleeved). After the Graves swap v2 was v1 with
   Beast Below for one Tornado; Beast sat in hand when drawn and the deck's problems were tempo and
   Energy, which a 7-drop worsens. v2 stays in the app as the bench. v1's guide takes tonight's
