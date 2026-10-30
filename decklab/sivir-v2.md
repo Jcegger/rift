@@ -297,8 +297,48 @@ comes in and Repulse stays ready for their Switcheroo.
 To find first: what top end Body and Chaos actually have, and whether any of it suits a Gold
 deck. Graves is a sideboard question, after the main.
 
+## Reopened: how it wins (29 Oct 2026, after Nexus Night)
+
+**Jay: "not having a solid finish is tough… if I don't have Punch First, it's hard to do too much."**
+
+**The diagnosis (Claude, moderate confidence):** the deck makes plenty of Power and has almost nothing
+that turns it into a won fight: Punch First 3, Switcheroo 2, Sivir's own condition. Without Punch First
+its units are 2–4 Might bodies that trade.
+
+**Every failed top end shared one flaw: it couldn't act the turn it landed.** Graves, Beast Below and Zed
+all had to survive an enemy turn first (units enter exhausted, §143.4), and the removal field took that
+window. What works acts at once: Rengar (Ambush), Hidden flips, and **Sivir with Accelerate**. That is the
+rule for any finisher.
+
+**Sivir is the finisher, played as a 4-drop body.** Jay: "I typically get one conquer out of her and then
+lose her." The line: hold her for the closing turn; Accelerate (1 Energy + 1 Chaos) so she enters ready;
+spend 2 Power that turn (the Accelerate Chaos counts) for 6 Might and Ganking; take or break the last
+battlefield before they can answer. Helpers already in the deck: **Ezreal** ("optional additional costs
+you pay cost 1 Energy or 1 Power less": Accelerate, Innovator's Accelerate, Rampage's +2), **Hunters'
+Circle** (play her onto it for 1 less, which pays the Accelerate).
+
+**Pulling weight, from Jay's memory (not the journal):** Sabotage, Rampage, Rengar, Innovator (kept alive),
+Punch First ("always"), Staunch (good on turn 1), Ezreal. Said earlier: Edge of Night overperforming,
+Evelynn liked, Vex liked but often removed. **Not mentioned:** Fizz, Matriarch, Traveling Merchant,
+Switcheroo, Star-Crossed, Rebuke, Tornado, Sivir. The proactive half named, the trash-and-recursion half
+not: quiet value, or room for a finisher. To check against logged games before any cut.
+
+**Next:** define the finishing lines; then look for Body/Chaos cards that act the turn they land
+(Accelerate, Ambush, Hidden) and turn Power into Might. Zed: Jay is "still open to him", but he needs a
+way to act on arrival. Dais: open, maybe a better battlefield exists. The app list stays as played
+until decided.
+
 ## Log
 
+- **29 Oct 2026 (Nexus Night, "Sivir + Zed (test)"):** 0–2 in matches (plus a bye), 0–4 in games.
+  **Kai'Sa 0–2**: closer than the score; wiped by removal; game 2 nearly won, then lost tempo late with no
+  finisher. **Kha'Zix 0–2**: game 1 lost to a Rampage. Turn order: second, first, first, first. Battlefields:
+  Emperor's Dais (ability unused), Hunters' Circle ("good"). **Zed drawn in both matches; never conquered:**
+  played to base, Falling Star'd (Kai'Sa) and Void Assault'd (Kha'Zix). Structural: units enter exhausted
+  (§143.4) and Zed has no Accelerate, and he can only conquer a battlefield you don't control, so he must
+  survive a full enemy turn before he does anything; against removal decks he is a 5-Energy target. By the
+  stop rule set before the night ("died before conquering"), Zed out. Jay also: **"having trouble keeping
+  Sivir safe and she doesn't feel super strong"**, and the late game lacks a finisher (the old top-end gap).
 - **29 Oct 2026:** Jay takes Zed to Nexus Night: **"Sivir + Zed (test)"** = v1 −1 Matriarch +1 Zed, Without
   a Sound (in the app). Matriarch over Tornado because the Kai'Sa loss clogged on 4-drops, Tornado keeps
   the early bodies, and the Clone's Assault banishes trash units Matriarch would revive. Measured (`try`,
