@@ -36,7 +36,7 @@ the better guide.
 
 | | R5 | this deck |
 |---|---|---|
-| **the close** | one Ganker: Sivir, played onto the conquered battlefield | many: Nocturne, Nilah, Miss Fortune, Jayce, Sivir, any unit standing on a Portable Portal, any unit Ride the Wind moves |
+| **the close** | one Ganker: Sivir, played onto the conquered battlefield | many: Nilah, Rengar (Ambush), Sivir, any unit standing on a Portable Portal, any unit Ride the Wind moves |
 | **what stops the close** (the audit's two: a spell on the Ganker at B, a defender added mid-fight) | protection: Abandon, Switcheroo, Star-Crossed, Gust | redundancy: answer one Ganker and the next one goes |
 | **their Vex** | stuns Sivir as she's played, so the close needs the walk-in or Vex gone | stuns only units *played* ("When an opponent plays a unit…"). An army already on the board isn't played that turn, so the two-fight turn ignores her |
 | **slots spent on** | interaction | readiers and Ganking bodies |
@@ -386,6 +386,55 @@ still best (every split 17.9–18.1). Written to the app (row backed up); 16 fro
 4. **Portal:** played after A was won? Killed? Did leaving A empty cost a game?
 5. **A lone big unit with no bounce in hand** (Switcheroo gone).
 6. **Per game:** opponent, went first or second, battlefield picked.
+
+## Final check (30 Oct 2026): no change
+
+Four agents with different goals (Jay: "check the change you made with nilah back against stage 1 goals…
+run agents, maybe with different goals"). Reports in the session scratchpad (`final-goals.md`,
+`final-close.md`, `final-games.md`, `final-opp.md`). **All four: no main-deck change.**
+
+- **Goals.** Every stage 3 job is met except readiers, 7 of 8 (On the Hunt went to the sideboard and the
+  count wasn't redone; a readier by turn 7 is 92%, against 95% at 8). Ways to B besides Sivir 9, holders
+  10, answers 7–8, cheap units 18. Against R5 (`try`): answer usable on their turn t5 44/67% vs 42/60%; two
+  units by turn 3 99/100% vs 97/99%; answers per 6+ unit 7.3 both; Might by turn 5 14.6 vs 15.3; Sivir
+  switched on 41% vs 49%. **Weakest: tier 4 (value and card flow)**; the goldfish's 0.0 extra cards doesn't
+  model The Good Stuff, Nidalee, Innovator's paid draw or Warrens. 16 copies and all three battlefields
+  differ from R5. In play both close mostly by holds; this deck has more ways to take B, R5 defends more
+  from face down (0.6 face-down cards by turn 4 vs 0.1).
+- **The close.** 12 distinct lines (9 need a card or battlefield, 3 need none); 3.8 card lines in hand by
+  turn 6, 4.1 by turn 7 (hypergeometric, draw-only). Resources don't bind by then; **their interaction
+  does.** Their Vex stuns every unit played that turn (Nilah, Sivir, Rengar's Ambush, First Mate's move);
+  what still closes against her: a Portal at a held A, Ride the Wind (not on her own unit), Faefolk's pull,
+  Rampage, Rebuke, Star-Crossed, either battlefield, the hold at 7. Nilah's Accelerate Body counts toward
+  Sivir's 2 Power (§135.2.e.5.a, §445.1; medium-high).
+- **Corrections to this worksheet:**
+  1. *Nilah "Ganks to B the same turn"* overstates it: a unit played ready to base walks to B with a normal
+     move (§144.4.a), so on the closing turn her value is a ready 4-Might body, and her Ganking pays when
+     she has held A since an earlier turn. Still better than Nocturne (cheaper, ready on the turn you need her).
+  2. *Rampage* is Defy-able (printed cost 3E, no Power; §206), main-phase only, and our unit takes damage
+     back. A weight, not a veto.
+  3. *Rengar* is a way to B on his own: Ambush puts him onto B as a 6-Might attacker without moving there
+     (§822.1.d; confirm against the Unleashed errata page, since `scripts/rift card` prints older wording).
+- **Replay** (same eight seeds; Recital on the play, Hillock on the draw, Warrens in G2 and G7): about 5
+  wins, 3 losses (D4 5/2/1, R5 6/2). **Windswept Hillock was the biggest change** (a free Portal for a
+  holding army: G5 Kennen won on turn 5, the best of all 24 replays; G4 a turn faster). **Amateur Recital
+  works for whoever holds it**: it sent their Vex home twice in G1, but in G3 Kai'Sa held it and sent our
+  holder home. Nilah was cast every time she arrived in time. The two-fight turn happened three times and
+  again never won; twice it left both battlefields to lone units. G2 (Rengar, on the draw) was lost by all
+  three decks, R5's three Ezreals included, so it doesn't argue for adding Ezreal.
+- **Opponent's view** (Kennen, Kai'Sa, Vex, Rengar, Diana, Akali, Ornn): the three most dangerous plans are
+  Kai'Sa's sweep plus Brynhir plus Time Warp, Vex's fortress, and Rengar's Ambush behind Sabotage. Each has
+  a counter-plan and a sideboard swap from the existing ten (`final-opp.md`).
+
+**Play notes** (from the replay and the opponent's view):
+1. **Never leave Amateur Recital empty**, or held by one small unit against Hextech Ray: whoever holds it
+   uses it.
+2. **Take the two-fight turn only when the battlefield you leave stays held.**
+3. **Against their Vex**, Rebuke her first (Defy can't counter it), then close with units already on the
+   board: a Portal at a held A, Faefolk played the turn before.
+4. **Against Kai'Sa**, nothing you can't afford to lose on her Rockfall Path: Temporal Breach there leaves
+   it banished for good (`docs/rules-rulings.md`; 73 of 83 Kai'Sa lists run both). Abandon or Star-Crossed
+   in response.
 
 ## Log
 

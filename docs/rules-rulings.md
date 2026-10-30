@@ -136,6 +136,34 @@ battlefield, from Warden's second line (Irelia's legend, Arise!, Guards!, Ride t
 Jayce's legend on gear, Akali's empowered ready, Pit Crew). The unit or gear still moves or is
 played where it legally can; only the ready is negated (§358.3.a's Flash example).
 
+## Temporal Breach on a unit at Rockfall Path leaves it banished
+
+**Date:** 2026-10-30
+**Source:** Derived in this repo from two FAQ answers, not a staff ruling. Seen at the table by Jay against Kai'Sa: "temporal breach… didn't let me add the unit back to the battlefield after banishing so then they stay banished." Ask a judge before relying on it at an event.
+**Rules:** §054.1, §054.2, §355.17.b, §358.5
+**Expires:** when Riot rules on it, or a Core Rules or FAQ update covers "banish, then play to the same location" against a play-location restriction
+
+**Question.** A unit is at Rockfall Path (`SFD-216`, *"Units can't be played here"*). Temporal
+Breach (`VEN-066`, 2E 1P, Hidden: *"Banish a unit, then its owner plays it to the same location,
+ignoring its cost"*) chooses it. What happens?
+
+**Derived answer. It is banished and stays banished.** The banish happens. The play is to Rockfall
+Path, which forbids it, so it fails to finalize and is undone (§355.17.b, §358.5), leaving the unit
+in banishment. One 2-Energy spell removes any unit on their Rockfall Path for good.
+
+**Why.** Two FAQ answers compose it. The Dragon Roost answer names Rockfall Path as *"a restriction on
+playing units to Rockfall Path"* and restates "can't" beats "can" (§054.1, §054.2). The Hostile
+Takeover answer is Temporal Breach itself failing its play: *"The unit will remain in Banishment … During
+the check legality step of finalization, the unit will be returned to banishment from the chain and all
+actions taken will be undone."* Same shape as Mageseeker Warden stranding a Thrill of the Hunt target
+(above).
+
+**Why it matters.** Kai'Sa runs both: 73 of her 83 lists since 23 Oct 2026 have Temporal Breach and
+Rockfall Path (`data/decks.json`). Against her, a unit on her Rockfall Path is one Breach from gone,
+not bounced. Answers in Jay's Sivir decks: Abandon counters it (Reaction); Repulse (sideboard)
+counters a spell choosing one friendly unit at a battlefield; Star-Crossed in response returns the
+unit to hand first, so Breach loses its target.
+
 ## Switcheroo fizzles if the other unit leaves in response; a resolved swap stays
 
 **Date:** 2026-10-25
