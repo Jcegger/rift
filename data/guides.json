@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-29",
+ "generatedAt": "2026-10-30",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
