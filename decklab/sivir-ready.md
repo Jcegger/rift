@@ -225,6 +225,30 @@ see Kinkou's draw).
   playing to a battlefield, 122 lists), **Kraken Hunter** (3E 2P, 5 Might, Accelerate: a cheap
   act-on-arrival threat whose Power counts for Sivir; 4 lists), **Pit Rookie** (2E buff, 222 lists).
 
+### The fresh list, from the jobs (29 Oct 2026; Jay: "you don't have to base it off my own list"; Star-Crossed back)
+
+Jay is right on **Star-Crossed**: the most-played Chaos card (585 lists, 250 placed), and three jobs in
+one (a Reaction save, a bounce, an answer on their turn). Draft B's cut was wrong.
+
+Built job by job from the whole Body/Chaos pool. Where v1's cards survive (Punch First, Innovator,
+Ezreal, Fizz, Rampage, Sabotage, Switcheroo, Star-Crossed, Vex, Edge), it's because they're the
+best-evidenced cards in these colours for the job, not because v1 had them.
+
+**Fresh draft F2** (40):
+- **Closers (3):** Sivir · Rengar ×2
+- **Engine (7):** Punch First ×3 · On the Hunt ×2 · Stare Down ×1 · Ride the Wind ×1 (+ Fizz)
+- **Clearing (8):** Star-Crossed ×2 · Rampage ×2 · Sabotage ×2 · Vex ×2
+- **Protection (3):** Switcheroo ×2 · Repulse ×1
+- **Pressure (19):** Staunch ×2 · Traveling Merchant ×2 · Evelynn ×1 · Innovator ×3 · Ezreal ×3 · Fizz ×3 ·
+  Nidalee ×2 · First Mate ×1 · Edge of Night ×2
+
+Measured against v1 (normal pressure): average cost 2.77 → 2.55; cheap cards 14 → 17; two units by
+turn 3 95% → 91%; units by turn 5 4.9 → 3.9; cards drawn 3.3 → 2.6; Sivir's condition 52% → 56%; Gold
+4.17 → 4.53; kills 0.37 → 0.24 (Rampage 3 → 2); Defy-countered spells 3.0 → 3.9. F1 (3 Rengar, 2 First
+Mate, no Merchant): units by turn 5 3.6, draw 2.2. **Every version without Matriarch loses about one
+unit by turn 5 in the model**, which counts her revives; the model can't play the closing turn, so the
+plan's gain isn't in these numbers. Games decide it.
+
 ## Log
 
 - **29 Oct 2026:** opened. Direction agreed: Sivir as the finisher, Power spent on readying.
@@ -239,3 +263,5 @@ see Kinkou's draw).
 - **29 Oct 2026:** stage 4 first draft. Rules checked (Ride the Wind, On the Hunt timing, Ambush, Repulse,
   Deflect, Vex). Draft A (all recursion out) lost bodies and draw; draft B (2 Merchant back) measured.
   Flagged for Jay: Stare Down, Cataclysm, Kinkou Initiate, Challenge, Hold 'Em, Kraken Hunter, Pit Rookie.
+- **29 Oct 2026:** fresh draft F2 built from the jobs (Jay: not from his list); Star-Crossed restored
+  (Jay); F1/F2 measured.
