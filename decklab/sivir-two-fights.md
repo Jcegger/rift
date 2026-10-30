@@ -321,7 +321,7 @@ Abandon, Ambush, Faefolk's pull; one Switcheroo stays in the sideboard. 16 copie
 
 | | cards |
 |---|---|
-| units (23) | Sivir · Rengar ×2 · Vex ×2 · Staunch ×2 · Bedeviling Stranger ×2 · Irresistible Faefolk ×3 · Reckless Innovator ×3 · Fizz ×2 · Nidalee ×2 · First Mate ×2 · Nocturne ×2 |
+| units (23) | Sivir · Rengar ×2 · Vex ×2 · Staunch ×2 · Bedeviling Stranger ×2 · Irresistible Faefolk ×3 · Reckless Innovator ×3 · Fizz ×2 · Nidalee ×2 · First Mate ×2 · Nilah ×2 |
 | spells (14) | Ride the Wind ×3 · Punch First ×3 · Star-Crossed ×3 · Rebuke ×2 · Rampage · Abandon · Sabotage |
 | gear (3) | Portable Portal ×2 · The Good Stuff |
 | runes, battlefields | 6 Body / 6 Chaos · Windswept Hillock, Amateur Recital, Zaun Warrens (below) |
@@ -361,6 +361,22 @@ Abandon or Ride the Wind cost no Might; Fizz, Stranger or First Mate cost 0.6–
 "answer on their turn" moves (40 → 42–45%) are inside the shuffle's noise (Rampage isn't usable on their
 turn). Not taken: one copy already matches R5, and every cut removes a card with a job. First in if a lone
 big unit wins a logged game (watch item 5), for Sabotage or Abandon.
+
+**−2 Nocturne +2 Nilah, Joyful Ascetic** (30 Oct; Jay: "really hard to trigger her ability… idk if playing
+it for 4 energy and a power is 'efficient'"). Nocturne's ability (FAQ errata: "As you look at or reveal me
+from the top of your deck, you may banish me. If you do, you may play me for [A]"; not a trigger) needs an
+effect that looks at or reveals the top of the deck. In this list only Abandon's Predict does (×1, one card),
+and in the whole Body/Chaos pool only Scryer's Bloom, Raving Witness, Twisted Fate and Wild Claw add more.
+So here he's a 4E 1P 4-Might Ganker; his 102 lists / 30 placed come from decks that look at the top.
+**Nilah** is the same body cheaper: 3E 1P, 4 Might, Ganking, and **Accelerate** (1E + Body: enters ready).
+Played onto a battlefield we just conquered, she Ganks to B the same turn: Sivir's line without the 2-Power
+condition (their Vex still stuns her as she's played, like any unit played that turn). Nocturne needed a
+readier for that. Evidence for Nilah is thin (6 lists, none placed); it rests on card text. Other Gankers
+read: Miss Fortune, Captain (5E; readies another unit, too expensive for the slot), Brutal Hunter and Kinkou
+Lifeblade (Ganking only after a 2–3 Energy Empower), Jayce, Hammer in Hand (Ganking only when readied),
+Yasuo, Windrider (5E), Siren of the Shallows (1 Might). `try`: flat on the goldfish (it doesn't model the
+Accelerate-and-Gank line), answer on their turn t5 40 → 44% from the Energy saved. `scripts/sim`: runes 6/6
+still best (every split 17.9–18.1). Written to the app (row backed up); 16 from R5.
 
 **Watch items** (stage 6: a change only when a logged game trips one):
 1. **Which route closed?** Two fights, split, hold-then-conquer, or hold at 7. Did the Portal or Faefolk
