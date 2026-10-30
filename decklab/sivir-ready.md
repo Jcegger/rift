@@ -2,7 +2,7 @@
 title: Sivir, Ready and Gank — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. Jay's own Sivir, rebuilt around Sivir as the finisher. Built with Jay a stage at a time.
 started: 2026-10-29
-status: R5 locked 30 Oct 2026, after the matchup audit and three stress tests, and made the new v1 — the app's "Sivir is trying her best" is now R5 (Jay; guides/sivir-trying-her-best.md updated). Stage 6 (freeze and play). "Sivir Ready (draft)" in the app is still a copy of R5, to become the pure readying build. To get: Nidalee ×2
+status: R5 locked 30 Oct 2026, after the matchup audit and three stress tests, and made the new v1 — the app's "Sivir is trying her best" is now R5 (Jay; guides/sivir-trying-her-best.md updated). Stage 6 (freeze and play). "Sivir Ready (draft)" was removed from the app on 30 Oct 2026, with the other Sivir test decks (Jay: only the locked v1 stays); the pure readying build gets its own worksheet. To get: Nidalee ×2
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
@@ -796,6 +796,12 @@ deck was the old locked list before changing it).
 5. **Hands:** run dry against removal decks? (Then The Good Stuff or Kinkou.)
 6. **The walk-in against their Vex:** tried? Did Sivir survive the turn in base?
 7. **Per game:** opponent, went first or second, battlefield picked.
+8. **Ran out of gas late?** A loss with no units left to play around turns 7–9, against a removal deck
+   that went long. That's what the 27 Oct list's Matriarch ×3 covered (a free unit from the trash);
+   she's the first card back.
+9. **No answer to a lone big unit?** A loss where one 6+ Might unit sat on a battlefield with no
+   Switcheroo, Rampage or bounce in hand. Only Rengar is above 4 Might, so fights against size are won
+   with tricks. If it happens more than once, the fix is another answer, not a bigger body.
 
 ## Log
 
@@ -868,3 +874,9 @@ deck was the old locked list before changing it).
   (v1 21.3), Energy turns 1–4 17.5 (v1 18.3); the engine model and the nine audits favour R5. **"Sivir is
   trying her best" now holds R5** (row backed up; guide's header and list updated). Runes 6/6 (the sweep
   ties 5/7 and picks 6/6). Next: a pure readying build, as a separate deck, to test against it.
+- **30 Oct 2026:** two watch items added (Jay): running out of gas late (the recursion R5 gave up), and
+  no answer to a lone big unit (the top end is 4 Might except Rengar; Punch First is 3 of ~11 fight
+  tricks, and the real limit on the close is Power, not size).
+- **30 Oct 2026:** the app cleared to one Sivir deck (Jay): "Sivir v2 (draft)", "Sivir + Stranger (test)",
+  "Sivir + Zed (test)" and "Sivir Ready (draft)" removed (row backed up; no journal games referred to
+  them). Identity for the readying build agreed: "one army, two fights", in its own worksheet.

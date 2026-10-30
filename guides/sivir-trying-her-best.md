@@ -27,7 +27,7 @@ date: 2026-10-27
 
 ## Nexus Night, 29 October: the Zed test
 
-*Saved in the app as* `Sivir + Zed (test)`. **One card and two battlefields differ from the list below.**
+*Played 29 Oct (0–2 in matches); `Sivir + Zed (test)` was removed from the app on 30 Oct. Kept for the record; it was built on the 27 Oct list.* **One card and two battlefields differ from that list.**
 
 **The list:** this guide's list with **−1 Tornado Warrior, +1 Zed, Without a Sound**. All 3 Matriarch stay.
 
@@ -55,7 +55,7 @@ date: 2026-10-27
 - **Removal decks:** keep Sabotage in; one unit a turn, keep a body back.
 - **Rengar:** save him for the hold that matters.
 
-**Log every game** under `Sivir + Zed (test)`. **Each time Zed is drawn, note:** did he conquer? How many swaps? What did the Clones do? What did the swap Gold buy? **Each game, note:** which battlefield you picked, and whether you went first or second.
+**What was logged** (the night's results are in `decklab/sivir-v2.md`'s log). **Each time Zed is drawn, note:** did he conquer? How many swaps? What did the Clones do? What did the swap Gold buy? **Each game, note:** which battlefield you picked, and whether you went first or second.
 
 ---
 

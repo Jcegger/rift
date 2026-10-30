@@ -2,7 +2,7 @@
 title: Sivir v2 — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. The same deck's identity, rebuilt on the job structure winning midrange decks share. Built with Jay a stage at a time.
 started: 2026-10-28
-status: stage 4 done 28 Oct 2026 (B, tentatively); the draft is in the app as "Sivir v2 (draft)"; stage 5 (test) next — v1 stays sleeved and in play
+status: stage 4 done 28 Oct 2026 (B, tentatively); not taken further. "Sivir v2 (draft)" was removed from the app on 30 Oct 2026 (Jay: only the locked v1 stays); v1 is now R5 (sivir-ready.md)
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.

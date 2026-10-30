@@ -8,9 +8,9 @@ date: 2026-10-28
 **Legend:** Battle Mistress (Body/Chaos) · **Champion:** Sivir, Mercenary
 **Registered:** 40 main (Champion included) + 12 runes (5 Body / 7 Chaos) + 3 battlefields + 1 legend · **Sideboard:** 10 of 10
 **Shuffled library:** 39. The Champion starts in the Champion Zone and is playable from there (§103.3.a.1, §108.3.d)
-**Saved in the app as** `Sivir v2 (draft)` · **Archetype:** Midrange · Extra resources ([archetypes.md](../docs/archetypes.md))
+**No longer in the app:** `Sivir v2 (draft)` was removed on 30 Oct 2026 (Jay: only the locked v1 stays). The list is in §1 and the worksheet · **Archetype:** Midrange · Extra resources ([archetypes.md](../docs/archetypes.md))
 **Where it came from:** v1, *[Sivir Is Trying Her Best](sivir-trying-her-best.md)*, rebuilt in the [v2 worksheet](../decklab/sivir-v2.md) on 28 October from six winning midrange lists' shape: four jobs, each six-plus deep, and a real top end. **35 of the 40 cards are v1's.**
-**Record:** none yet. Log every game under `Sivir v2 (draft)`; after about three Nexus Nights the journal decides between v1 and v2
+**Record:** none. Not in play: v1 became R5 on 30 Oct 2026 ([sivir-ready.md](../decklab/sivir-ready.md))
 **Collection status:** everything owned, sideboard included
 **Status:** a draft, played to be tested. Nothing in it is tested at the table
 
