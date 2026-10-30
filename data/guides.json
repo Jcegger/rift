@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-29",
+ "generatedAt": "2026-10-30",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -31,7 +31,27 @@
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 8687
+   "words": 9085
+  },
+  {
+   "slug": "sivir-two-fights",
+   "file": "guides/sivir-two-fights.md",
+   "kicker": null,
+   "title": "Sivir, One Army Two Fights — Deck Guide",
+   "subtitle": "Riftbound, Radiance — Battle Mistress (Body/Chaos). Midrange to 6, then take the second battlefield from many angles. The list, how it wins, battlefield picks, the close, and every matchup in Jay's field.",
+   "date": "2026-10-30",
+   "legend": "Battle Mistress",
+   "champion": "Sivir, Mercenary",
+   "sections": [
+    "1. The list",
+    "2. How it wins",
+    "3. Battlefields",
+    "4. Mulligan and the first turns",
+    "5. The close",
+    "6. Matchups and sideboard",
+    "7. What to log, and what decides it"
+   ],
+   "words": 1793
   },
   {
    "slug": "sivir-v2",
@@ -60,7 +80,7 @@
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 4618
+   "words": 4629
   },
   {
    "slug": "fundamentals",
