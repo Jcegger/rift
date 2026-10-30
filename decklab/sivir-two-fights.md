@@ -321,11 +321,11 @@ Abandon, Ambush, Faefolk's pull; one Switcheroo stays in the sideboard. 16 copie
 
 | | cards |
 |---|---|
-| units (24) | Sivir · Rengar ×2 · Vex ×2 · Staunch ×2 · Bedeviling Stranger ×2 · Irresistible Faefolk ×3 · Reckless Innovator ×3 · Fizz ×3 · Nidalee ×2 · First Mate ×2 · Nocturne ×2 |
-| spells (14) | Ride the Wind ×3 · Punch First ×3 · Star-Crossed ×3 · Rebuke ×2 · Abandon · Sabotage |
+| units (23) | Sivir · Rengar ×2 · Vex ×2 · Staunch ×2 · Bedeviling Stranger ×2 · Irresistible Faefolk ×3 · Reckless Innovator ×3 · Fizz ×2 · Nidalee ×2 · First Mate ×2 · Nocturne ×2 |
+| spells (15) | Ride the Wind ×3 · Punch First ×3 · Star-Crossed ×3 · Rebuke ×2 · Rampage · Abandon · Sabotage |
 | gear (2) | Portable Portal ×2 · The Good Stuff |
 | runes, battlefields | 6 Body / 6 Chaos · Windswept Hillock, Amateur Recital, Zaun Warrens (below) |
-| sideboard (10) | Graves ×2 · Unyielding Spirit · An Offer You Can't Refuse · Rampage · Switcheroo · On the Hunt · Ravenbloom Prefect · Gust · Repulse |
+| sideboard (10) | Graves ×2 · Unyielding Spirit ×2 · An Offer You Can't Refuse · Switcheroo · On the Hunt · Ravenbloom Prefect · Gust · Repulse |
 
 (Correction: the units line in the chat summary of D5b was garbled; this table is the list.)
 
@@ -349,6 +349,18 @@ closing turn), Back-Alley Bar (+1 Might moving out; small), Firelights' Hideout,
 Legends (narrow). The going-first/going-second split is reasoning, not measured; the journal checks it.
 Recital's move chooses its target (stress test 2: moves that choose are blocked by Deflect and "can't be
 chosen"), so their Vex at B costs 1 more Power to send home.
+
+**−1 Fizz +1 Rampage** (30 Oct; Jay: "i just know rampage is good"); sideboard −Rampage +Unyielding Spirit
+(Akali, Kai'Sa, LeBlanc). `try`: answer copies per regular 6+ unit 6.4 → 7.3 (R5's level); every S/A legend's
+key units 7 → 8 answers; kills that ready the legend 0 → 0.21 a game; Might by turn 5 15.1 → 14.5. Its
+closing-turn job: kill B's defender in the main phase before the Gank; Fizz ×2 can recast it. Written to the
+app (row backed up); still 16 from R5.
+
+**A second Rampage, measured** (each cut to the sideboard): every cut gives 7.3 → 8.2 answer copies. Sabotage,
+Abandon or Ride the Wind cost no Might; Fizz, Stranger or First Mate cost 0.6–0.8 Might by turn 5. The
+"answer on their turn" moves (40 → 42–45%) are inside the shuffle's noise (Rampage isn't usable on their
+turn). Not taken: one copy already matches R5, and every cut removes a card with a job. First in if a lone
+big unit wins a logged game (watch item 5), for Sabotage or Abandon.
 
 **Watch items** (stage 6: a change only when a logged game trips one):
 1. **Which route closed?** Two fights, split, hold-then-conquer, or hold at 7. Did the Portal or Faefolk
