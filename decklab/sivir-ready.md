@@ -2,7 +2,7 @@
 title: Sivir, Ready and Gank — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. Jay's own Sivir, rebuilt around Sivir as the finisher. Built with Jay a stage at a time.
 started: 2026-10-29
-status: stage 1 agreed (direction); stage 2 drafted — the deck in play stays v1 until this one is built and tested
+status: stages 1–3 agreed 29 Oct 2026; stage 4 (card by card) next — the deck in play stays v1 until this one is built and tested
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
@@ -103,9 +103,67 @@ matchup; that goes to the sideboard. Built for the S and A tiers without falling
 battlefield lock is a holding card, so her role shrinks. **The risk:** raiding decks lose to big
 early blockers, which is why clearing the way is tier 2.
 
-**Still to agree in this stage:** the closing-turn plan for each S/A legend, sorted by what stops
-the closing turn (Defy and Calm; stuns and Reaction removal on attackers; pure removal and race),
-with a check that the B tier holds up.
+### The closing turn against each S/A legend (drafted 29 Oct 2026, to agree)
+
+From [sivir-matchups.md](sivir-matchups.md)'s card reads. "Stops it" is what they can do *during
+your closing turn*; everything else they must do on their own turn, before it.
+
+| legend | stops the closing turn | the plan | sure |
+|---|---|---|---|
+| **Master Yi** (S) | Defy, Discipline (+2 to a defender, Reaction); +2 to a lone defender; Ruin Runner can't be chosen | attack with two at one battlefield (no lone-defender bonus); Sivir Ganks to the other. On the Hunt and Punch First, not Rampage, into open Calm | medium |
+| **Riven** (S) | Defy, Discipline; **Star-Crossed 89%, Rebuke 87%** bounce Sivir mid-attack; **her Vex (37%) stuns what you play**, so Sivir can't move that turn | **her Vex first.** Make the first attack draw the bounce; Sivir is the second threat. Baron can't be chosen: win from 6 by conquering both, or hold at 7 | medium |
+| **Irelia** (S) | the densest tricks: Defy, Defiant Dance (−2), Flash (moves her units home), Twilight Shroud | close when she's tapped out (her tricks chase her own readying on her turn); Defy-proof readying only | low |
+| **Kennen** (S) | **Switcheroo 100%** (swaps Sivir's 6 with a small unit), Star-Crossed, Flash. No Calm | Rampage clears blockers cleanly; attack with two so one Switcheroo can't stop both | medium |
+| **Evelynn** (A) | her own Vex (×2.3), Switcheroo, Star-Crossed, Hidden flips at Reaction speed. No Calm | **raiding suits it**: taking her battlefield trashes her face-down cards (§323.6.a). Her Vex first | medium |
+| **Rengar** (A) | Ambush blockers (Inferna, Apothecary, Nidalee) when you attack into open runes; Punch First. No bounce or Calm | the fastest deck: hold early with Rengar's Ambush; close when he's tapped out. Watch Brynhir (you can't play cards that turn) | low |
+| **Jayce** (A) | pings (Bellows, Flurry); almost no blockers for three turns | **the pure race**: reach 6 before Elder Dragon or Gutter Palace | high |
+| **Vex** (A) | Defy, Discipline, **Back Off ×2 (Hidden stun on your attacker)**, her Vex, Star-Crossed, Rebuke, Switcheroo | **the hardest**: every answer at once. Sabotage her hand first (Defy-able, so when she's tapped), her Vex first, redundancy on the closing turn | low |
+| **Azir** (A) | Hidden Blade (kill a unit), Back Off (stun), Defy | **race early**: 2.2 units by turn 3; reach 6 before the equipment lands | medium |
+| **Kai'Sa** (A) | **Smoke Screen (−4, Reaction)** takes Sivir from 6 to 2 mid-fight; **Brynhir: you can't play cards that turn**. No Calm | do the closing turn in one go, with the first attack drawing Smoke Screen; never plan the close on a turn Brynhir landed | medium |
+| **LeBlanc** (A) | Vi, Peacekeeper (Ambush stun) | race: points before her death engine; bounce, don't kill | medium |
+
+**The local field (Jay, 29 Oct 2026, Nexus Night at Sip & Play):** he often plays **Vex, Rengar,
+LeBlanc and Diana**, and met Kai'Sa, Kha'Zix, Viktor, Orianna and Irelia this week. **Jayce is rare**
+(people avoid the Aurora deck). So weight the plan to Vex, Rengar, Diana and Kai'Sa: two of the
+"low" rows above, and a B-tier deck that plays like the hardest ones:
+
+| legend | stops the closing turn | the plan | sure |
+|---|---|---|---|
+| **Diana** (B, local) | her legend's Energy works only in showdowns, so **she answers in your fights**: Eclipse and Smoke Screen (−4), Flash, Switcheroo, Star-Crossed and Rebuke (80% each), **her own Vex 80%**. Gust can't reach Sivir (4+). No Calm | her Vex first; two threats, never one; Repulse for the shrink or bounce on Sivir. Rampage resolves (no Defy) | low |
+
+**What the table says about stage 3:**
+1. **One threat is not a closing turn.** Riven, Kennen, Kai'Sa, Vex and Master Yi each have one answer
+   that stops a single attacker; the closing turn needs **two threats**, so readying more than one
+   unit (On the Hunt, First Mate) matters.
+2. **Opposing Vex, Apathetic** (Riven 37%, Evelynn ×2.3, Vex 100%, Diana 80%) stuns Sivir as she's played. The deck needs an
+   answer to her before the closing turn (she has Deflect).
+3. **Protecting Sivir's attack:** Repulse ("counter an enemy spell or ability that chooses one friendly
+   unit") stops Star-Crossed, Rebuke, Switcheroo and Smoke Screen on her. A main-deck candidate, not
+   just sideboard.
+4. **Three decks are races** (Jayce, Azir, LeBlanc): early pressure (tier 3) wins those alone.
+
+**Still to agree:** this table; then the B-tier check.
+
+## 3. Jobs and targets — agreed 29 Oct 2026 (Jay: "open to a basic full rewrite")
+
+**The winners' shapes** (`data/archetypes.json`, placed lists, 60 days): Kennen 24 units / avg 2.8 /
+23 cheap / 3 interaction; Riven 19 / 2.9 / 24 / 8; Rengar 30 / 2.8 / 17 / 5; Kha'Zix 23 / 2.6 / 20 / 7.
+v1: 25 / 2.77 / **14** / **~11**: a grind shape. A raid wants more cheap pressure, less removal.
+
+| # | job | target | notes |
+|---|---|---|---|
+| 1 | **Closers**: threats that act the turn they land | **4** | Sivir (always available), then three of Rengar ×2, a third Rengar, Zed, settled in stage 4 |
+| 2 | **The closing-turn engine**: ready a second threat, or turn 2 Power into a won fight | **7** | Punch First, On the Hunt, Ride the Wind, **Fizz** (recasts any of the three from the trash for its Power alone: a second On the Hunt on the closing turn, and the 2 Power meets Sivir's condition) |
+| 3 | **Clearing the way**: the blocker, their Vex, the trick | **8** | **own Vex counts here**: her stun hits any unit they play while she's at a battlefield, so Ambush and ready-on-arrival blockers deal no combat damage that turn |
+| 4 | **Protection**: Sivir's attack through a bounce or shrink | **3** | Switcheroo, Repulse |
+| 5 | **Cheap pressure**: 3 Energy or less, acts on arrival, scores | **18** | Staunch, Innovator, Ezreal, First Mate (also readies), Evelynn, Edge |
+
+About 22 units, average cost ~2.6, ~20 cheap cards: inside the winners' range. Cards may fill two jobs
+(First Mate, Fizz, Edge) as long as each job reaches its count.
+
+**Out with the recursion half** (Jay: "not sold on it"): Tail-Cloaked Matriarch, Traveling Merchant,
+Tornado Warrior. **Zed's swap** is an Action, so once a removal spell is on the chain only Reactions
+answer (§rules timing table): it dodges combat, not spells.
 
 ## Log
 
@@ -114,3 +172,7 @@ with a check that the B tier holds up.
 - **29 Oct 2026:** plan agreed: raid, race to 6, win in one turn (Claude's call; Jay deferred). Goal
   tiers agreed: closing turn, clearing the way, early pressure, value. Defy checked: Ride the Wind is
   Defy-able, On the Hunt and Punch First are not.
+- **29 Oct 2026:** stage 2's matchup table drafted, the local field added (Vex, Rengar, LeBlanc, Diana;
+  Jayce rare). Stage 3 agreed: closers 4, engine 7, clearing 8, protection 3, cheap pressure 18. The
+  recursion half out; Fizz moves to the engine (recasts On the Hunt and Punch First); own Vex is a
+  clearing card in a raid.
