@@ -2,7 +2,7 @@
 title: Sivir, Ready and Gank — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. Jay's own Sivir, rebuilt around Sivir as the finisher. Built with Jay a stage at a time.
 started: 2026-10-29
-status: R5 locked 30 Oct 2026 as "Sivir Ready (draft)" in the app, after the matchup audit and three stress tests; stage 6 (freeze and play) from here, changes only when a logged game trips a watch item. To get: Nidalee ×2
+status: R5 locked 30 Oct 2026, after the matchup audit and three stress tests, and made the new v1 — the app's "Sivir is trying her best" is now R5 (Jay; guides/sivir-trying-her-best.md updated). Stage 6 (freeze and play). "Sivir Ready (draft)" in the app is still a copy of R5, to become the pure readying build. To get: Nidalee ×2
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
@@ -861,3 +861,10 @@ deck was the old locked list before changing it).
   Stare Down a sideboard note against Yi; no better fix than R5). Protection at B is the weak link,
   accepted. **R5 locked** (Jay: "then we can lock it in"): written to the app with the row backed up.
   Runes 6/6 confirmed by `scripts/sim`. Watch items set.
+- **30 Oct 2026:** Jay: R5 "feels a little bit like we're going back to what we were playing before"
+  — true (33 of 40 copies shared with the 27 Oct list; `deckbuilding.md` §3 puts two winning lists ~8
+  apart). The cards were v1's; the plan was new. Jay: lock it in as the new v1. Goldfish side by side
+  (`scripts/sim`, 20,000 games, on the play): R5 two units by turn 3 97% (v1 95%), Might by turn 5 20.0
+  (v1 21.3), Energy turns 1–4 17.5 (v1 18.3); the engine model and the nine audits favour R5. **"Sivir is
+  trying her best" now holds R5** (row backed up; guide's header and list updated). Runes 6/6 (the sweep
+  ties 5/7 and picks 6/6). Next: a pure readying build, as a separate deck, to test against it.

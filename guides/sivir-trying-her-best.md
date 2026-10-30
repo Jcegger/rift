@@ -6,13 +6,20 @@ date: 2026-10-27
 ---
 
 **Legend:** Battle Mistress (Body/Chaos) · **Champion:** Sivir, Mercenary
-**Registered:** 40 main (Champion included) + 12 runes (5 Body / 7 Chaos) + 3 battlefields + 1 legend · **Sideboard:** 10 of 10
+> **30 Oct 2026: the list changed.** The app's `Sivir is trying her best` is now **R5** from
+> [decklab/sivir-ready.md](../decklab/sivir-ready.md): midrange that holds one battlefield and closes
+> with Sivir (the board conquers one battlefield, Sivir is played onto it and Ganks to the other).
+> §1 below is the new list. **§3–§10 were written for the 27 Oct list** (Matriarch, Tornado): the
+> engine and rules notes still hold, but the closing plan, the matchup rows and the sideboard are now
+> the worksheet's ("The matchup audit", "R4 → R5", "Stress test 3 and the lock").
+
+**Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend · **Sideboard:** 10 of 10
 **Shuffled library:** 39. The Champion starts in the Champion Zone and is playable from there (§103.3.a.1, §108.3.d)
 **Saved in the app as** `Sivir is trying her best`
 **Where it came from:** "Body Chaos by Randyyy", 146th of 2165 at the LA Regional Qualifier (2 Oct), the one Sivir engine with a tournament record. About a dozen cards changed over 25–27 October, each from what Jay's games showed or from a rule that came out of them (§2). It shares Randyyy's engine and plays a different deck
 **Record:** 1–0 on RiftAtlas (a win against Kennen, 26 Oct). **Not yet in the app journal**, so `scripts/rift journal` doesn't show it
-**Collection status:** everything owned, sideboard included
-**Status:** locked on 27 October. Changes come from the journal, one at a time (§13)
+**Collection status:** all owned except Nidalee, Cat Form ×2
+**Status:** R5 locked on 30 October (the 27 Oct list was locked on 27 October). Changes come from the journal, one at a time: the watch items are in the worksheet's "Stress test 3 and the lock"
 
 **Companions.** [strategy.md](../docs/strategy.md) is how to think about any turn; this guide is how *this deck* thinks. [archetypes.md](../docs/archetypes.md) is what each opponent is doing.
 
@@ -106,12 +113,18 @@ date: 2026-10-27
 
 | | |
 |---|---|
-| **Units (24 + champion)** | 3 Traveling Merchant · 1 Evelynn, Entrancing · 2 Staunch Survivor · 3 Reckless Innovator · 3 Fizz, Trickster · 3 Ezreal, Prodigy · 2 Tornado Warrior · 3 Tail-Cloaked Matriarch · 2 Vex, Apathetic · 2 Rengar, Trophy Hunter · *Sivir, Mercenary* |
-| **Spells (13)** | 3 Punch First · 3 Rampage · 2 Sabotage · 2 Star-Crossed · 2 Switcheroo · 1 Rebuke |
+| **Units (22 + champion)** | 2 Traveling Merchant · 2 Tideturner · 1 Evelynn, Entrancing · 2 Staunch Survivor · 3 Reckless Innovator · 3 Fizz, Trickster · 3 Ezreal, Prodigy · 2 Nidalee, Cat Form · 2 Vex, Apathetic · 2 Rengar, Trophy Hunter · *Sivir, Mercenary* |
+| **Spells (15)** | 3 Punch First · 2 Rampage · 2 Sabotage · 2 Star-Crossed · 2 Switcheroo · 2 Rebuke · 1 Abandon · 1 Gust |
 | **Gear (2)** | 2 Edge of Night |
-| **Battlefields** | Zaun Warrens · Sigil of the Storm · Sandswept Tomb |
-| **Runes** | 5 Body · 7 Chaos |
-| **Sideboard** | 2 Graves, Blasting Through · 1 Ravenbloom Prefect · 2 An Offer You Can't Refuse · 1 Rebuke · 1 Repulse · 1 Siren's Song · 2 Unyielding Spirit |
+| **Battlefields** | Emperor's Dais · Hunters' Circle · Sigil of the Storm |
+| **Runes** | 6 Body · 6 Chaos (`scripts/sim`, 30 Oct: no split meaningfully better) |
+| **Sideboard** | 2 Graves, Blasting Through · 2 Unyielding Spirit · 2 An Offer You Can't Refuse · 1 Rampage · 1 Repulse · 1 On the Hunt · 1 Ravenbloom Prefect |
+| **To get** | 2 Nidalee, Cat Form |
+
+*The 27 Oct list, for the record:* 3 Merchant · 1 Evelynn · 2 Staunch · 3 Innovator · 3 Fizz · 3 Ezreal ·
+2 Tornado Warrior · 3 Tail-Cloaked Matriarch · 2 Vex · 2 Rengar · Sivir · 3 Punch First · 3 Rampage ·
+2 Sabotage · 2 Star-Crossed · 2 Switcheroo · 1 Rebuke · 2 Edge; 5 Body / 7 Chaos; Zaun Warrens, Sigil,
+Sandswept Tomb.
 
 **Shape.**
 - Average cost 2.77; 14 cards at 2 Energy or less; 2 at 5.
