@@ -26,17 +26,17 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 62,
-  "claimedEventsUnmatched": 55,
+  "claimedEvents": 63,
+  "claimedEventsUnmatched": 56,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
+   "Europe": 69,
    "Asia": 99,
-   "Europe": 68,
+   "unknown": 198,
    "Oceania": 5,
-   "unknown": 197,
    "North America": 7
   },
   "registryEventsByRegion": {
@@ -65,6 +65,7 @@
    "Harbin City Challenge",
    "Hartford RQ",
    "Hartord RQ",
+   "Herald of the Arcane Deck",
    "Los Angeles RQ",
    "Nanjing City Challenge",
    "Nanjing Regional",
