@@ -381,7 +381,7 @@ still best (every split 17.9–18.1). Written to the app (row backed up); 16 fro
 **Watch items** (stage 6: a change only when a logged game trips one):
 1. **Which route closed?** Two fights, split, hold-then-conquer, or hold at 7. Did the Portal or Faefolk
    take B?
-2. **Ran out of cards?** Turn and opponent; was The Good Stuff drawn, and how many times was it replayed?
+2. **Ran out of cards?** Turn and opponent; was The Good Stuff drawn, and how many times was it replayed? **If it trips:** +1 Ezreal, Prodigy for a Bedeviling Stranger (draw 2 discard 1, and his discount takes 1 Energy off Nilah's, Sivir's and Innovator's Accelerate; `try`: extra cards 0.0 → 0.7, answer on their turn t5 44 → 40%, still 15 from R5), or a second The Good Stuff. Fizz ×2 stays (Jay: "fizz is such a staple… game-saving recasts"; Fizz recasting Rampage is the second Rampage).
 3. **Turn 1 on the play:** a play, or stuck (Staunch behind Chaos runes)?
 4. **Portal:** played after A was won? Killed? Did leaving A empty cost a game?
 5. **A lone big unit with no bounce in hand** (Switcheroo gone).
