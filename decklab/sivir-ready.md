@@ -2,7 +2,7 @@
 title: Sivir, Ready and Gank — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. Jay's own Sivir, rebuilt around Sivir as the finisher. Built with Jay a stage at a time.
 started: 2026-10-29
-status: stages 1–3 agreed 29 Oct 2026; stage 4 draft B measured, flags open — the deck in play stays v1 until this one is built and tested
+status: stages 1–3 agreed 29 Oct 2026; stage 4 draft locked as "Sivir Ready (draft)" in the app for testing; tinkering continues — the deck in play stays v1 until this one is built and tested
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
@@ -249,6 +249,35 @@ Mate, no Merchant): units by turn 5 3.6, draw 2.2. **Every version without Matri
 unit by turn 5 in the model**, which counts her revives; the model can't play the closing turn, so the
 plan's gain isn't in these numbers. Games decide it.
 
+### Locked for testing: "Sivir Ready (draft)" in the app (29 Oct 2026)
+
+F2 with **Rebuke for Stare Down** (Jay: "suspicious of Stare Down, since they just play those units on
+the next turn". Right as removal; its case was the closing turn only. Rebuke is proven, 2 Power so
+Defy-proof, and works at Action speed on any turn). Stare Down stays flagged.
+
+- **Units (22):** Sivir · Rengar ×2 · Vex ×2 · Staunch ×2 · Traveling Merchant ×2 · Evelynn · Innovator ×3 ·
+  Ezreal ×3 · Fizz ×3 · Nidalee ×2 · First Mate ×1
+- **Spells (16):** Punch First ×3 · On the Hunt ×2 · Ride the Wind ×1 · Star-Crossed ×2 · Rampage ×2 ·
+  Sabotage ×2 · Rebuke ×1 · Switcheroo ×2 · Repulse ×1
+- **Gear (2):** Edge of Night ×2
+- **Runes** 5 Body / 7 Chaos (as v1; 6/6 is open: Body Power demand rose). **Battlefields:** Emperor's
+  Dais · Hunters' Circle · Sigil of the Storm.
+- **Sideboard:** Graves ×2 · Ravenbloom Prefect · Offer ×2 · Rampage · Rebuke · Siren's Song · Unyielding
+  Spirit ×2.
+- **To get:** Nidalee ×2 (owned 0). Everything else owned.
+
+**How the closing turn goes** (at 6 points; any order that fits): attack battlefield A from base;
+On the Hunt (main phase, after the fight) readies the board; Sivir, with 2 Power spent this turn,
+Ganks to B; units readied in base follow; Nidalee or Rengar Ambush in beside her. Ride the Wind moves
+any unit anywhere and readies it, mid-showdown too. Keep Repulse up for the bounce or shrink on Sivir;
+your Vex at a battlefield stuns their blockers.
+
+**Open for the next session:** more Ride the Wind (Jay: "maybe more Ride the Wind? idk"): it's the
+only readying card that also moves battlefield to battlefield and works mid-showdown, but it's
+Defy-able (1 Power); runes 6/6; a third Rengar or Zed; Kinkou Initiate vs Merchant; Stare Down and
+Cataclysm as flags. **Per game, note:** did the closing turn happen, what stopped it, and whether you
+had a unit to play.
+
 ## Log
 
 - **29 Oct 2026:** opened. Direction agreed: Sivir as the finisher, Power spent on readying.
@@ -265,3 +294,5 @@ plan's gain isn't in these numbers. Games decide it.
   Flagged for Jay: Stare Down, Cataclysm, Kinkou Initiate, Challenge, Hold 'Em, Kraken Hunter, Pit Rookie.
 - **29 Oct 2026:** fresh draft F2 built from the jobs (Jay: not from his list); Star-Crossed restored
   (Jay); F1/F2 measured.
+- **29 Oct 2026:** Rebuke for Stare Down (Jay). Locked into the app as "Sivir Ready (draft)" (row backed
+  up). Open: more Ride the Wind, runes 6/6, third Rengar or Zed.
