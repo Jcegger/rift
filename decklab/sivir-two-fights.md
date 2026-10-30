@@ -322,8 +322,8 @@ Abandon, Ambush, Faefolk's pull; one Switcheroo stays in the sideboard. 16 copie
 | | cards |
 |---|---|
 | units (23) | Sivir · Rengar ×2 · Vex ×2 · Staunch ×2 · Bedeviling Stranger ×2 · Irresistible Faefolk ×3 · Reckless Innovator ×3 · Fizz ×2 · Nidalee ×2 · First Mate ×2 · Nocturne ×2 |
-| spells (15) | Ride the Wind ×3 · Punch First ×3 · Star-Crossed ×3 · Rebuke ×2 · Rampage · Abandon · Sabotage |
-| gear (2) | Portable Portal ×2 · The Good Stuff |
+| spells (14) | Ride the Wind ×3 · Punch First ×3 · Star-Crossed ×3 · Rebuke ×2 · Rampage · Abandon · Sabotage |
+| gear (3) | Portable Portal ×2 · The Good Stuff |
 | runes, battlefields | 6 Body / 6 Chaos · Windswept Hillock, Amateur Recital, Zaun Warrens (below) |
 | sideboard (10) | Graves ×2 · Unyielding Spirit ×2 · An Offer You Can't Refuse · Switcheroo · On the Hunt · Ravenbloom Prefect · Gust · Repulse |
 
