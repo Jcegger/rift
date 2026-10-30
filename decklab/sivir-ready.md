@@ -2,7 +2,7 @@
 title: Sivir, Ready and Gank — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. Jay's own Sivir, rebuilt around Sivir as the finisher. Built with Jay a stage at a time.
 started: 2026-10-29
-status: stages 1–3 agreed 29 Oct 2026; stage 4 (card by card) next — the deck in play stays v1 until this one is built and tested
+status: stages 1–3 agreed 29 Oct 2026; stage 4 draft B measured, flags open — the deck in play stays v1 until this one is built and tested
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
@@ -165,6 +165,66 @@ About 22 units, average cost ~2.6, ~20 cheap cards: inside the winners' range. C
 Tornado Warrior. **Zed's swap** is an Action, so once a removal spell is on the chain only Reactions
 answer (§rules timing table): it dodges combat, not spells.
 
+## 4. Card by card — first draft, 29 Oct 2026 (to decide)
+
+**Rules checked for the plan** (`docs/rules.md`, `docs/rules-full.md`):
+- **Ride the Wind moves anywhere.** A card-effect move has only the limits its source names (§451.1),
+  so it takes a unit battlefield to battlefield, and works in a showdown (Action). Standard moves can't
+  (§144.1.c, §144.4).
+- **On the Hunt has no Action or Reaction**: your main phase, open state only. After the first combat
+  you are back in an open state, so: conquer A, On the Hunt, then move again. **Readied units at A can
+  only go home** unless they have Ganking (Sivir with 2 Power spent) or are moved by an effect; units
+  readied in base can move to B. Fizz recasting On the Hunt readies Fizz too (he's on the board when his
+  trigger resolves).
+- **Ambush** (Nidalee, Rengar): played as a Reaction to a battlefield where you have units (§822),
+  so with Sivir at B, Ambush adds a second threat there mid-showdown. **Rengar can also be played to a
+  battlefield with only enemy units.** The permission is rechecked at finalization (§822.3).
+- **Accelerate is a replacement, not a ready** (§805.6.a): nothing that watches "becomes ready" fires.
+- **Repulse** counters an enemy spell or ability that chooses one friendly unit and no other of yours:
+  their Smoke Screen, Eclipse, Rebuke, Star-Crossed and Switcheroo on Sivir. It is 1E 1P: Defy-able.
+- **Deflect** (their Vex) adds 1 Power per choice (§809); combat and effects that don't choose her ignore it.
+- **Your Vex's stun** hits every unit they play while she's at a battlefield, Hidden flips and Ambush
+  included: no combat damage that turn.
+
+**The draft, measured as a whole** (`try` from v1, normal pressure; the model can't play the closing
+turn, so it shows the costs more than the gain):
+
+| | v1 | draft A (all recursion out) | **draft B (2 Merchant back)** |
+|---|---|---|---|
+| units by turn 5 (normal · heavy) | 4.9 · 2.0 | 3.6 · 1.1 | **4.0 · 1.4** |
+| two units by turn 3 | 95% | 88% | **91%** |
+| extra cards drawn | 3.3 | 2.1 | **2.5** |
+| stuck on colour, turn 3 | 7% | 10% | **9%** |
+| Sivir's condition on, turns 4–8 | 52% | 57% | **55%** |
+| Gold a game | 4.17 | 4.59 | **4.42** |
+
+Draft A cut Merchant and lost both bodies and loot: the recursion half was partly doing the "have a
+unit to play" job. **Draft B** (v1 −3 Matriarch, −1 Merchant, −2 Tornado, −2 Star-Crossed; +2 On the
+Hunt, +1 Ride the Wind, +2 Nidalee, +2 First Mate, +1 Repulse; Repulse ↔ Star-Crossed with the sideboard):
+
+- **Closers (3):** Sivir · Rengar ×2
+- **Engine (6 + Fizz):** Punch First ×3 · On the Hunt ×2 · Ride the Wind ×1 · (Fizz ×3)
+- **Clearing (8):** Rampage ×3 · Sabotage ×2 · Vex ×2 · Rebuke ×1
+- **Protection (3):** Switcheroo ×2 · Repulse ×1
+- **Pressure (20):** Staunch ×2 · Innovator ×3 · Ezreal ×3 · Fizz ×3 · Nidalee ×2 · First Mate ×2 ·
+  Traveling Merchant ×2 · Evelynn ×1 · Edge ×2
+
+**Open in the draft:** runes (Body Power demand 12 → 19; 6/6 may fix the colour misses, `try` can't swap
+runes); a third Rengar or Zed for job 1 (one short of 4); Kinkou Initiate vs Merchant (the model doesn't
+see Kinkou's draw).
+
+**Flagged, not in the draft** (Jay: "just flag them"):
+- **Stare Down** (Body, 2E): choose a friendly unit and a battlefield; every enemy unit there with less
+  Might goes to base. It chooses only your unit, so Deflect, Zhonya's and "can't be chosen" don't apply:
+  a 6-Might Sivir (11 with Punch First) empties the second battlefield and conquers unopposed. Main phase;
+  Defy-able. 5 lists. **The strongest closing-turn find, unproven.**
+- **Cataclysm** (Body, 4E 1P): opponents can't play spells this turn; move a friendly unit to an occupied
+  enemy battlefield. Locks Diana, Kai'Sa and Kennen out of the closing turn; Defy-able when cast, so weak
+  into Calm. 18 lists, 2 placed.
+- **Kinkou Initiate** (draw), **Challenge** (2E 1P Action fight, 81 lists), **Hold 'Em** (+3, 1E after
+  playing to a battlefield, 122 lists), **Kraken Hunter** (3E 2P, 5 Might, Accelerate: a cheap
+  act-on-arrival threat whose Power counts for Sivir; 4 lists), **Pit Rookie** (2E buff, 222 lists).
+
 ## Log
 
 - **29 Oct 2026:** opened. Direction agreed: Sivir as the finisher, Power spent on readying.
@@ -176,3 +236,6 @@ answer (§rules timing table): it dodges combat, not spells.
   Jayce rare). Stage 3 agreed: closers 4, engine 7, clearing 8, protection 3, cheap pressure 18. The
   recursion half out; Fizz moves to the engine (recasts On the Hunt and Punch First); own Vex is a
   clearing card in a raid.
+- **29 Oct 2026:** stage 4 first draft. Rules checked (Ride the Wind, On the Hunt timing, Ambush, Repulse,
+  Deflect, Vex). Draft A (all recursion out) lost bodies and draw; draft B (2 Merchant back) measured.
+  Flagged for Jay: Stare Down, Cataclysm, Kinkou Initiate, Challenge, Hold 'Em, Kraken Hunter, Pit Rookie.
