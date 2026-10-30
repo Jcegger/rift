@@ -260,7 +260,8 @@ Defy-proof, and works at Action speed on any turn). Stare Down stays flagged.
 - **Spells (16):** Punch First ×3 · On the Hunt ×2 · Ride the Wind ×1 · Star-Crossed ×2 · Rampage ×2 ·
   Sabotage ×2 · Rebuke ×1 · Switcheroo ×2 · Repulse ×1
 - **Gear (2):** Edge of Night ×2
-- **Runes** 5 Body / 7 Chaos (as v1; 6/6 is open: Body Power demand rose). **Battlefields:** Emperor's
+- **Runes 6 Body / 6 Chaos** (changed from v1's 5/7 the same night: printed Power is Body 19, Chaos 20;
+  stuck on colour by turn 3, going first / second, 9% / 7% → 8% / 6%). **Battlefields:** Emperor's
   Dais · Hunters' Circle · Sigil of the Storm.
 - **Sideboard:** Graves ×2 · Ravenbloom Prefect · Offer ×2 · Rampage · Rebuke · Siren's Song · Unyielding
   Spirit ×2.
@@ -274,7 +275,7 @@ your Vex at a battlefield stuns their blockers.
 
 **Open for the next session:** more Ride the Wind (Jay: "maybe more Ride the Wind? idk"): it's the
 only readying card that also moves battlefield to battlefield and works mid-showdown, but it's
-Defy-able (1 Power); runes 6/6; a third Rengar or Zed; Kinkou Initiate vs Merchant; Stare Down and
+Defy-able (1 Power); a third Rengar or Zed; Kinkou Initiate vs Merchant; Stare Down and
 Cataclysm as flags. **Per game, note:** did the closing turn happen, what stopped it, and whether you
 had a unit to play.
 
@@ -296,3 +297,5 @@ had a unit to play.
   (Jay); F1/F2 measured.
 - **29 Oct 2026:** Rebuke for Stare Down (Jay). Locked into the app as "Sivir Ready (draft)" (row backed
   up). Open: more Ride the Wind, runes 6/6, third Rengar or Zed.
+- **29 Oct 2026:** runes 5/7 → 6/6 (Jay: "fix the rune split if it makes sense"): Power demand is even
+  (Body 19, Chaos 20); colour misses by turn 3 9%/7% → 8%/6%. App updated (row backed up).
