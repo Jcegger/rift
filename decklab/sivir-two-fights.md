@@ -324,7 +324,7 @@ Abandon, Ambush, Faefolk's pull; one Switcheroo stays in the sideboard. 16 copie
 | units (24) | Sivir · Rengar ×2 · Vex ×2 · Staunch ×2 · Bedeviling Stranger ×2 · Irresistible Faefolk ×3 · Reckless Innovator ×3 · Fizz ×3 · Nidalee ×2 · First Mate ×2 · Nocturne ×2 |
 | spells (14) | Ride the Wind ×3 · Punch First ×3 · Star-Crossed ×3 · Rebuke ×2 · Abandon · Sabotage |
 | gear (2) | Portable Portal ×2 · The Good Stuff |
-| runes, battlefields | 6 Body / 6 Chaos · Emperor's Dais, Hunters' Circle, Sigil of the Storm |
+| runes, battlefields | 6 Body / 6 Chaos · Windswept Hillock, Amateur Recital, Zaun Warrens (below) |
 | sideboard (10) | Graves ×2 · Unyielding Spirit · An Offer You Can't Refuse · Rampage · Switcheroo · On the Hunt · Ravenbloom Prefect · Gust · Repulse |
 
 (Correction: the units line in the chat summary of D5b was garbled; this table is the list.)
@@ -333,6 +333,22 @@ Abandon, Ambush, Faefolk's pull; one Switcheroo stays in the sideboard. 16 copie
 (18.3, turns 1–4), so no split is meaningfully better. Stuck on a Power colour on turn 1: 24% on the play
 (Staunch is the Body 2-drop). Two units by turn 3: 100%. Mulligan: keep all; keep Innovator, Vex, Rengar,
 First Mate, Faefolk first; bottom Punch First, Sabotage, Staunch first.
+
+**Battlefields** (Jay: "we probably need distinct battlefields… zaun warrens"; then "anything ultra
+specific that doesn't help the other person"). R5's three were Dais, Circle, Sigil. Every battlefield used
+in a decided game is retired for the match (§488.5), so each has a slot:
+
+| battlefield | why it's ours more than theirs | pick it |
+|---|---|---|
+| **Amateur Recital** | "When you hold here, you may move a unit at a battlefield to its base." The hold sends B's defender home at the start of our turn, so route 3 (hold A, conquer B) walks into an empty B: the way most hand-played games closed. Pays only the holder, and holding is our plan | **going first** (we reach it and hold it first) |
+| **Windswept Hillock** | "Units here have Ganking." A free Portal: an army holding it Ganks to B every turn. We're the Ganking deck | **going second**; game 1 against Kennen |
+| **Zaun Warrens** | loot on conquer; pitches the situational cards (Sabotage, Abandon, Ride the Wind into Defy) and digs for Portal and The Good Stuff. Jun's game-1 default | **game 1 (blind)**, except Kennen (87 Kennen lists run it) |
+
+Looked at and passed: Grove of the God-Willow (rewards whoever holds it), Seat of Power (pays only on the
+closing turn), Back-Alley Bar (+1 Might moving out; small), Firelights' Hideout, Veiled Temple, Hall of
+Legends (narrow). The going-first/going-second split is reasoning, not measured; the journal checks it.
+Recital's move chooses its target (stress test 2: moves that choose are blocked by Deflect and "can't be
+chosen"), so their Vex at B costs 1 more Power to send home.
 
 **Watch items** (stage 6: a change only when a logged game trips one):
 1. **Which route closed?** Two fights, split, hold-then-conquer, or hold at 7. Did the Portal or Faefolk
