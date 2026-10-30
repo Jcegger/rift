@@ -114,9 +114,9 @@ date: 2026-10-27
 | | |
 |---|---|
 | **Units (22 + champion)** | 2 Traveling Merchant · 2 Tideturner · 1 Evelynn, Entrancing · 2 Staunch Survivor · 3 Reckless Innovator · 3 Fizz, Trickster · 3 Ezreal, Prodigy · 2 Nidalee, Cat Form · 2 Vex, Apathetic · 2 Rengar, Trophy Hunter · *Sivir, Mercenary* |
-| **Spells (15)** | 3 Punch First · 2 Rampage · 2 Sabotage · 2 Star-Crossed · 2 Switcheroo · 2 Rebuke · 1 Abandon · 1 Gust |
-| **Gear (2)** | 2 Edge of Night |
-| **Battlefields** | Emperor's Dais · Hunters' Circle · Sigil of the Storm |
+| **Spells (16)** | 3 Punch First · 2 Rampage · 2 Sabotage · 2 Star-Crossed · 2 Switcheroo · 2 Rebuke · 2 Abandon · 1 Gust |
+| **Gear (1)** | 1 Edge of Night |
+| **Battlefields** | Hunters' Circle (game 1) · Emperor's Dais (going first) · Startipped Peak (going second) |
 | **Runes** | 6 Body · 6 Chaos (`scripts/sim`, 30 Oct: no split meaningfully better) |
 | **Sideboard** | 2 Graves, Blasting Through · 2 Unyielding Spirit · 2 An Offer You Can't Refuse · 1 Rampage · 1 Repulse · 1 On the Hunt · 1 Ravenbloom Prefect |
 | **To get** | 2 Nidalee, Cat Form |
@@ -389,6 +389,19 @@ The engine model (`scripts/rift try`, with hiding and opponents that apply press
 - **Sabotage ×2** (1 Energy, 1 Body; your main phase). They reveal their hand; you pick a non-unit card and they recycle it. It strips the trick they were saving. Defy can counter it. **Against removal decks keep it in**: it's the one card that takes their removal before it's cast (Jay, 29 Oct: a Viktor game won on it, and it takes Kai'Sa's Time Warp). Against the Calm decks, whose Defy reaches it, it can still come out.
 
 ### Battlefields
+
+**Current (30 Oct 2026; `decklab/sivir-ready.md`, "Audit with the sister deck's lessons"):** the deck
+runs short of Energy, not Power, so the battlefields pay Energy.
+- **Hunters' Circle, game 1 (blind):** the first unit or gear each player plays there on their turn costs
+  1 less. Sivir played onto it on the close costs 4, not 5.
+- **Emperor's Dais, going first:** you conquer first; replay Ezreal, Fizz or Tideturner and leave a
+  2-Might Sand Soldier.
+- **Startipped Peak, going second:** "When you hold here, you may channel 1 rune exhausted." A rune per
+  hold, for the holding deck; you always have runes left to channel because you recycle them.
+- **Sigil of the Storm is out:** its forced recycle adds no Power, and the Gold only comes when the
+  legend is ready, which she usually isn't. It taxed us as much as them.
+
+*The notes below are the 27 Oct list's, kept for the record.*
 - **Zaun Warrens:** discard 1, then draw 1 on conquer, which feeds the trash. **Not against Kennen,** who runs it in 13 of 16 lists and uses the loot better.
 - **Sigil of the Storm:** when you conquer here, you must recycle one of your runes.
   - **It probably pays you.** Your legend triggers on "when you recycle a rune", with no restriction, so a Sigil recycle while she's ready should give you a Gold.

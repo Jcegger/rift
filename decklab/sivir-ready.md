@@ -803,6 +803,47 @@ deck was the old locked list before changing it).
    Switcheroo, Rampage or bounce in hand. Only Rengar is above 4 Might, so fights against size are won
    with tricks. If it happens more than once, the fix is another answer, not a bigger body.
 
+## Audit with the sister deck's lessons (30 Oct 2026)
+
+Jay: "we added some additional ideas to audit, can you do the same with the other one". Two agents:
+a desk audit (battlefields, card draw, Defy-driven decisions) and eight hand-played games on the **same
+seeds and opponents** as the sister deck's (`decklab/sivir-two-fights.md`, stress test 2). Hand-played
+samples, every decision by one agent: not statistics.
+
+**The games:** about 6 wins, 2 lean losses (the sister deck: 5, 2, 1 open). No game was won by two
+conquests in one turn; holds closed most. Sivir's close happened in 4 games and made 7 in two of them;
+the walk-in against their Vex worked (G1). R5 defends a held battlefield better (units played onto a
+battlefield already held ignore their Vex's stun); the sister deck closed faster against light
+opponents. **Both ran dry in the same two games** (on the draw against Rengar and LeBlanc's Dragons):
+watch items 5 and 8. Dead in hand: Edge of Night (5 drawn, 1 used), Switcheroo (3 drawn, 0 cast),
+Abandon (3 drawn, 0 cast, and absent in the one game that needed it). Turn 1 on the play: 2 of 4.
+
+**Battlefields:** R5 is short of Energy, not Power (a rune pays Energy and is then recycled, §164.2), so
+Power-only battlefields don't pay the close. **Sigil of the Storm is a rune tax on whoever conquers it**:
+its forced recycle adds no Power (§417.4), and the Gold needs Battle Mistress ready, which she usually
+isn't (model: 8.2 recycles, 4.3 Gold a game). The guide's "your conquest recycles into a Gold" overstates
+it. **Proposed: Startipped Peak for Sigil** ("When you hold here, you may channel 1 rune exhausted": Energy
+for a holding deck; R5 always has runes left to channel, §315.3.b.1). Circle (game 1: Sivir onto it costs
+1 less) and Dais (going first) stay. Veiled Temple can ready a Gold made this turn (§415.4), but that's
+Power, not Energy. None of the sister deck's three used.
+
+**Card draw:** 8 copies that add a card (Innovator paid, Nidalee, Fizz, Dais), plus filtering (Ezreal,
+Merchant). Enough to reach 6, thin for a long game against removal. The Good Stuff measured as a cost to
+answers (39% → 34–35% on their turn by t5): the first card in if watch item 5 or 8 trips, not now.
+
+**Defy-driven decisions:** Ride the Wind's cut (R2) carried a "Defy-able" label, but its main reason
+holds without it: Sivir enters ready and Ganks herself, so R5's close doesn't need readying. Under Jay's
+rule the label comes off; the slot doesn't change. Rebuke over Stare Down and the Cataclysm flag stand on
+other grounds.
+
+**Proposed: −1 Edge of Night +1 Abandon** (games: protection is the weak link, and the one stopped close
+had no Abandon). `try`: answer on their turn t5 39 → 42% (play), attacks answered 12 → 14% (normal),
+Defy-countered spells 3.5 → 3.9 (a weight, not a veto). Still 16 copies from the sister deck.
+
+**Both locked** (Jay: "let's lock both in!"): written to the app (row backed up), guide §1 and its
+battlefield section updated. Picks: Hunters' Circle game 1, Emperor's Dais going first, Startipped Peak
+going second.
+
 ## Log
 
 - **29 Oct 2026:** opened. Direction agreed: Sivir as the finisher, Power spent on readying.
