@@ -307,6 +307,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   Enable per clone with `rmsync install-hook`.
 - `notes/answers.md` - answers to the numbered questions notebook on the reMarkable
   (`questions.pdf` from `scripts/build-journal`), batch by batch; synced as `answers`.
+- `notes/handover.md` - where the current deck work stands, for the next session: the live list,
+  the plan, what's open, how to change the deck safely, and the corrections not to repeat.
+  Hand-written; update it when the deck or the plan moves.
 - `scripts/build-journal` - renders the match journal's blank pages to PDFs in
   `guides/out/journal/`, sized 3:4 (fits a Kindle Scribe or a reMarkable 2), plus a between-games matchup card
   printed from the matchup table in the current deck's guide (`guides/sivir-trying-her-best.md`; the script's `MATCHUPS` names it). Fetches
