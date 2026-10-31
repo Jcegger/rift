@@ -12,7 +12,7 @@ date: 2026-10-27
 **Where it came from:** "Body Chaos by Randyyy", 146th of 2165 at the LA Regional Qualifier (2 Oct), the one Sivir engine with a tournament record. About a dozen cards changed over 25–27 October, each from what Jay's games showed or from a rule that came out of them (§2). It shares Randyyy's engine and plays a different deck
 **Record:** 1–0 on RiftAtlas (a win against Kennen, 26 Oct). **Not yet in the app journal**, so `scripts/rift journal` doesn't show it
 **Collection status:** everything owned, sideboard included
-**Status:** locked on 27 October. Changes come from the journal, one at a time (§13)
+**Status:** locked on 27 October; since 31 October 2026 the backup deck. The main deck is [Sivir — One Army, Two Fights](sivir-one-army.md)
 
 **Companions.** [strategy.md](../docs/strategy.md) is how to think about any turn; this guide is how *this deck* thinks. [archetypes.md](../docs/archetypes.md) is what each opponent is doing.
 

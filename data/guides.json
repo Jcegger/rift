@@ -4,6 +4,46 @@
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
   {
+   "slug": "sivir-one-army-sheet",
+   "file": "guides/sivir-one-army-sheet.md",
+   "kicker": null,
+   "title": "Sivir — One Army, Two Fights · the one-page plan",
+   "subtitle": "Keep at the table. The full guide is sivir-one-army.md",
+   "date": "2026-10-31",
+   "legend": null,
+   "champion": null,
+   "sections": [],
+   "words": 457
+  },
+  {
+   "slug": "sivir-one-army",
+   "file": "guides/sivir-one-army.md",
+   "kicker": null,
+   "title": "Sivir — One Army, Two Fights",
+   "subtitle": "Riftbound, Radiance — Jay's main deck. A raid deck that races to 6 and wins in one turn, with Sivir as the finisher it never has to draw. The plan on one page, the finishing turn, every card's job, battlefields, mulligans, sideboarding, and what changes against each kind of opponent",
+   "date": "2026-10-31",
+   "legend": "Battle Mistress",
+   "champion": "Sivir, Mercenary",
+   "sections": [
+    "Executive summary: the game plan",
+    "1. The list",
+    "2. How it got here",
+    "3. The game, turn by turn",
+    "4. The finishing turn",
+    "5. Card by card",
+    "6. Power and Energy",
+    "7. Battlefields and mulligans",
+    "8. Sideboarding",
+    "9. What changes against each kind of opponent",
+    "10. The rules this deck leans on",
+    "11. Mistakes that lose games",
+    "12. What to log",
+    "Sources and method",
+    "What this guide does not claim"
+   ],
+   "words": 4867
+  },
+  {
    "slug": "sivir-trying-her-best",
    "file": "guides/sivir-trying-her-best.md",
    "kicker": null,
@@ -31,7 +71,7 @@
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 8687
+   "words": 8694
   },
   {
    "slug": "sivir-v2",
@@ -60,7 +100,7 @@
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 4618
+   "words": 4623
   },
   {
    "slug": "fundamentals",

@@ -293,7 +293,7 @@ Ezreal ×3, Traveling Merchant ×2, Evelynn, Edge ×2, On the Hunt ×2, Switcher
 - **Expensive threats must act the turn they land. Cheap raid bodies may develop over turns**
   (Faefolk's job is the pull, from base). **Finishing-turn cards must add the action that turns the
   first conquest into the second.**
-- **Sivir from base is the second conquest.** Units enter at your base (§149); with Accelerate she
+- **Sivir from base is the second conquest.** Units enter at your base or a battlefield you control, exhausted unless Accelerate applies (§355.2.a, §143.4); with Accelerate she
   enters ready, having spent her own 2 Power (her 1 plus the Accelerate's Chaos, §166.2), so 6 Might
   and Ganking. Base → battlefield needs no Ganking (§144.4). So: the board attacks A, Faefolk pulls B's
   defender into A, Sivir walks into the empty B. Also able to make the second conquest: Nilah
@@ -308,14 +308,14 @@ Ezreal ×3, Traveling Merchant ×2, Evelynn, Edge ×2, On the Hunt ×2, Switcher
 | Abandon | Repulse | protection | Abandon needs 2 Energy held up, the resource the legend lacks; Repulse is paid in Power |
 | Sabotage | Rampage | clearing | a kill opens a battlefield this turn; a card out of their hand doesn't |
 | Bedeviling Stranger | Switcheroo | clearing → protection | Jay: "Switcheroo has won me games"; clearing was over target |
-| Bedeviling Stranger | Evelynn, Entrancing | 2-drop | Stranger is a hold-defence card (Hidden only at a battlefield you control; needs 4+ units); Evelynn's face-down pull does Faefolk's job on the finishing turn, and her floor is the same 2E, 2-Might body |
+| Bedeviling Stranger | Evelynn, Entrancing | 2-drop | Stranger is a hold-defence card (Hidden only at a battlefield you control; needs 4+ units); Evelynn's face-down pull opens the other battlefield in the holding line (she's always at a battlefield you control, so the pulled unit attacks you there; corrected 31 Oct by the guide's fact-check), and her floor is the same 2E, 2-Might body |
 | Vex, Apathetic | Switcheroo | protection | the one expensive threat that doesn't act on arrival; her stun needs her to sit at a battlefield |
 
 **The list, frozen for testing** (in the app; after the three later swaps below; rows backed up to
 `backups/state-pre-army-final-2026-10-31.json` and `backups/state-pre-army-gust-2026-10-31.json`):
-- **Units (22):** Sivir · Rengar ×2 · Nilah ×2 · Nidalee ×2 · Fizz ×2 · First Mate ×2 · Innovator ×3 ·
+- **Units (23):** Sivir · Rengar ×2 · Nilah ×2 · Nidalee ×2 · Fizz ×2 · First Mate ×2 · Innovator ×3 ·
   Ezreal ×2 · Vex · Staunch ×2 · Faefolk ×3 · Evelynn
-- **Spells (17):** Punch First ×3 · Ride the Wind ×3 · Star-Crossed ×2 · Rebuke ×2 · Rampage ×2 ·
+- **Spells (16):** Punch First ×3 · Ride the Wind ×3 · Star-Crossed ×2 · Rebuke ×2 · Rampage ×2 ·
   Switcheroo ×2 · Sabotage · Gust
 - **Gear (1):** Portable Portal
 - **Runes** 6 Body / 6 Chaos (still the best split; the final sweep: every split 17.4–17.7 Energy).
@@ -361,7 +361,7 @@ answered; Repulse is reliable there too (no Defy).
 | tricks crowded out by Energy | 1.44 | 1.52 |
 
 **Turn-1 play** (a 2-Energy unit; you see 5 cards by turn 1, about 7 when you mulligan for one): 6 such
-units, about 74% with a mulligan; 7 would be 77%, 8 would be 82%. **The field** (legal lists since 23 Oct):
+units: 58% without a mulligan, 71% with one (corrected from an estimated 74%); 7 would be 77%, 8 would be 82%. **The field** (legal lists since 23 Oct):
 top-16 lists run 6.7 units at 2 Energy or less (median 7) and essentially no 2-drop that costs Power;
 23 cards at 2 Energy or less in all, against this list's ~18.
 
@@ -411,8 +411,8 @@ All 71 legal battlefields read; use counted in the 2,364 legal lists since 23 Oc
 
 | when | battlefield | why |
 |---|---|---|
-| **Blind** | **Sigil of the Storm** ("when you conquer here, recycle one of your runes") | asymmetric for this legend: the recycle can make a Gold through Battle Mistress (if she's ready); for them it's a rune lost per conquest, which slows Baron and Astral Heron. The most-played Sivir battlefield: 22 of 38 Battle Mistress lists in the archive. Cost: you lose a rune too |
-| **Going first** | **Targon's Peak** ("when you conquer here, ready 2 runes at the end of this turn") | you usually conquer it first; 2 ready runes on their turn pay for Gust, Star-Crossed or Rebuke after tapping out. It does **not** speed their Baron or Heron (runes ready on their own turn anyway); its symmetric cost is Reaction Energy for them on your turn. 158 lists, 7 top-16 |
+| **Blind** | **Sigil of the Storm** ("when you conquer here, you must recycle one of your runes", errata) | asymmetric for this legend: the recycle can make a Gold through Battle Mistress (if she's ready); for them it's a rune lost per conquest, which slows Baron and Astral Heron. The most-played Sivir battlefield over the archive (22 of 38 Battle Mistress lists), though almost all pre-Radiance: none of the 5 since 23 Oct runs it. Cost: you lose a rune too |
+| **Going first** | **Targon's Peak** ("when you conquer here, ready up to 2 runes at the end of this turn", errata) | you usually conquer it first; 2 ready runes on their turn pay for Gust, or Rebuke in a showdown, after tapping out (not Star-Crossed: 3 Energy; corrected by the guide's fact-check). It does **not** speed their Baron or Heron (runes ready on their own turn anyway); its symmetric cost is Reaction Energy for them on your turn. 158 lists, 7 top-16 |
 | **On the draw** | **Forbidding Waste** ("a unit defending alone has −2 Might") | they move in first and hold with one unit; it pays the player hitting back. Two defenders: Faefolk or Evelynn pulls one, the other is alone. A lone 7-Might Heron defends as 5. 233 lists, 8 top-16 |
 
 **Out:** Amateur Recital (a hold trigger works for whoever holds, and in a raid that's usually them; it can
@@ -467,3 +467,9 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
 - **31 Oct 2026, battlefields:** all 71 read with Jay; Sigil of the Storm (blind), Targon's Peak (going
   first), Forbidding Waste (on the draw) replace Amateur Recital, Windswept Hillock and Zaun Warrens.
   Written to the app (row backed up). Locked.
+- **31 Oct 2026, guide:** `guides/sivir-one-army.md` and the one-page `guides/sivir-one-army-sheet.md` written and
+  fact-checked by an independent reviewer. Corrections it forced, here too: Baron can't be chosen, so nothing
+  bounces him; Targon's Peak's two runes don't pay for Star-Crossed (3 Energy); a hidden Switcheroo spends no Power
+  for Sivir (§811.1.b); Evelynn's pull always lands on a battlefield you control (the pulled unit attacks you
+  there), so it serves the holding line; Brynhir lands on Kai'Sa's turn and stops your Reactions then; Sigil's
+  22-of-38 is mostly pre-Radiance; turn-1 odds 59% / 72% on the 39-card library.

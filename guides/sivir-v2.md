@@ -12,7 +12,7 @@ date: 2026-10-28
 **Where it came from:** v1, *[Sivir Is Trying Her Best](sivir-trying-her-best.md)*, rebuilt in the [v2 worksheet](../decklab/sivir-v2.md) on 28 October from six winning midrange lists' shape: four jobs, each six-plus deep, and a real top end. **35 of the 40 cards are v1's.**
 **Record:** none yet. Log every game under `Sivir v2 (draft)`; after about three Nexus Nights the journal decides between v1 and v2
 **Collection status:** everything owned, sideboard included
-**Status:** a draft, played to be tested. Nothing in it is tested at the table
+**Status:** superseded on 31 October 2026 by [Sivir — One Army, Two Fights](sivir-one-army.md), Jay's main deck. Kept for the record
 
 **Companions.** [The v1 guide](sivir-trying-her-best.md) has the long version of the sequencing this deck shares (its §3). [The matchups worksheet](../decklab/sivir-matchups.md) reads every S-to-B legend against both versions. [strategy.md](../docs/strategy.md) is how to think about any turn.
 

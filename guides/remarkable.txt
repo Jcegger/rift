@@ -27,6 +27,8 @@
 # answers: re-enable with the first real batch of questions
 # /riftbound           update  notes/answers.md
 
+/riftbound/table     update  guides/sivir-one-army-sheet.md
+/riftbound/reading   update  guides/sivir-one-army.md
 /riftbound/reading   update  guides/sivir-trying-her-best.md
 /riftbound/reading   update  guides/sivir-v2.md
 /riftbound/reading   update  docs/strategy.md
