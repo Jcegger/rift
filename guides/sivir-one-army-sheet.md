@@ -1,6 +1,6 @@
 ---
 title: Sivir — One Army, Two Fights · the one-page plan
-subtitle: Keep at the table. The full guide is sivir-one-army.md
+subtitle: Keep at the table. The full guide is sivir-one-army.md. Being revised (31 Oct): the list now runs Nidalee ×3, Vex ×2, Gust ×2, no Nilah
 author: rift toolchain
 date: 2026-10-31
 ---

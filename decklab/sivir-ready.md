@@ -473,3 +473,13 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   for Sivir (§811.1.b); Evelynn's pull always lands on a battlefield you control (the pulled unit attacks you
   there), so it serves the holding line; Brynhir lands on Kai'Sa's turn and stops your Reactions then; Sigil's
   22-of-38 is mostly pre-Radiance; turn-1 odds 59% / 72% on the 39-card library.
+- **31 Oct 2026, the pros:** Jay asked two experienced players (Discord). Their read: the deck can't win early
+  fights (one Defiant Dance or Switcheroo loses the first combat), so play **midrange and win on interaction on
+  turns 3–4**; don't count on Sivir living, so carry top end; 8–9 two-drops that cost no Power; 2 Gust main (a
+  third bricks); 2 Vex; Ruin Runner sideboard only (vs Kai'Sa, heavy control). Locked in for now: −2 Nilah,
+  −Sabotage (to the sideboard), +Nidalee, +Gust, +Vex; sideboard +Sabotage +Gust, −Abandon −On the Hunt. Bench
+  against the previous list (normal): units by turn 5 4.0 → 4.1, answer ready on their turn by turn 5 34% → 37%
+  (play), attacks answered 13% → 14%, tricks crowded out 1.55 → 1.50. Row backed up. **Open, to iterate:** more
+  Power-free 2-drops (Tideturner, Pit Rookie, Bedeviling Stranger, Gust Monk; Staunch costs Power); Rengar to 3;
+  Challenge vs Rampage; Whirlwind against Baron (a rules check first: its text doesn't say "choose");
+  Hard Bargain; Onslaught. Nidalee ×3 to get. The guide and sheet still describe the earlier list and the raid framing.

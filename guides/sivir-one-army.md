@@ -12,7 +12,7 @@ date: 2026-10-31
 **Where it came from:** Jay's own rebuild of the [Ready and Gank worksheet](../decklab/sivir-ready.md)'s draft (30–31 October), audited and changed with Jay on 31 October (worksheet §5). It replaces [Sivir v2](sivir-v2.md) and [v1](sivir-trying-her-best.md) as the main deck
 **Record:** none yet. Log every game under the app's deck name
 **Collection status:** Nidalee, Cat Form ×2 still to get; everything else owned
-**Status:** frozen for testing. Nothing in it has been played at the table yet
+**Status:** being revised after advice from experienced players (31 October): the app's list now runs Nidalee ×3, Vex ×2, Gust ×2 and no Nilah or main-deck Sabotage, and the plan is moving from raiding early to midrange interaction on turns 3–4. This guide describes the earlier list until it's rewritten (worksheet log)
 
 **Companions.** [The one-page sheet](sivir-one-army-sheet.md) is this guide's front page on its own, to keep at the table. [strategy.md](../docs/strategy.md) is how to think about any turn. [The matchups worksheet](../decklab/sivir-matchups.md) reads every S-to-B legend's cards in detail; it was written for the older lists, so use its card reads, not its verdicts.
 
