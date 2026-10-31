@@ -318,8 +318,9 @@ Ezreal ×3, Traveling Merchant ×2, Evelynn, Edge ×2, On the Hunt ×2, Switcher
 - **Spells (17):** Punch First ×3 · Ride the Wind ×3 · Star-Crossed ×2 · Rebuke ×2 · Rampage ×2 ·
   Switcheroo ×2 · Sabotage · Gust
 - **Gear (1):** Portable Portal
-- **Runes** 6 Body / 6 Chaos (still the best split). **Battlefields:** Amateur Recital · Windswept
-  Hillock · Zaun Warrens.
+- **Runes** 6 Body / 6 Chaos (still the best split; the final sweep: every split 17.4–17.7 Energy).
+  **Battlefields:** Sigil of the Storm (blind) · Targon's Peak (going first) · Forbidding Waste (on the
+  draw); see "Battlefields, picked" below.
 - **Sideboard:** Graves ×2 · Ravenbloom Prefect (gear hate; Jay: needed) · Ruin Runner · On the Hunt ·
   Repulse · Star-Crossed · Unyielding Spirit ×2 · Abandon. **Ruin Runner** (can't be chosen by enemy
   spells and abilities) stays a nice-to-have: 6 Energy and doesn't act on arrival (Jay: "not define our
@@ -400,10 +401,27 @@ top-16 lists run 6.7 units at 2 Energy or less (median 7) and essentially no 2-d
   to 8. Win by holding. From the repo's own Baron Pit entry in `docs/rules-rulings.md`, not a staff
   ruling: ask a judge before relying on it at an event.
 
-**Battlefields:** in best-of-3 each player chooses their battlefield (§488.5); at a single-game event it's
-random (§487.5). All three are symmetric. **Amateur Recital is the strongest closing line when held**:
-at 6 the hold makes 7, its trigger sends B's defender to base, conquering B makes 8. Hillock gives
-their units Ganking too.
+**Battlefields:** in best-of-3 each player picks one, placed simultaneously; one used in a decided game
+is retired (§488.5); at a single-game event it's random (§487.5). Every battlefield is symmetric.
+(Superseded the same day: the audit's "lead with Amateur Recital" was wrong; see below.)
+
+### Battlefields, picked (31 Oct 2026, with Jay and the second reviewer)
+
+All 71 legal battlefields read; use counted in the 2,364 legal lists since 23 Oct (67 top-16 finishes).
+
+| when | battlefield | why |
+|---|---|---|
+| **Blind** | **Sigil of the Storm** ("when you conquer here, recycle one of your runes") | asymmetric for this legend: the recycle can make a Gold through Battle Mistress (if she's ready); for them it's a rune lost per conquest, which slows Baron and Astral Heron. The most-played Sivir battlefield: 22 of 38 Battle Mistress lists in the archive. Cost: you lose a rune too |
+| **Going first** | **Targon's Peak** ("when you conquer here, ready 2 runes at the end of this turn") | you usually conquer it first; 2 ready runes on their turn pay for Gust, Star-Crossed or Rebuke after tapping out. It does **not** speed their Baron or Heron (runes ready on their own turn anyway); its symmetric cost is Reaction Energy for them on your turn. 158 lists, 7 top-16 |
+| **On the draw** | **Forbidding Waste** ("a unit defending alone has −2 Might") | they move in first and hold with one unit; it pays the player hitting back. Two defenders: Faefolk or Evelynn pulls one, the other is alone. A lone 7-Might Heron defends as 5. 233 lists, 8 top-16 |
+
+**Out:** Amateur Recital (a hold trigger works for whoever holds, and in a raid that's usually them; it can
+send Sivir home), Windswept Hillock (Ganking for their defenders too), Zaun Warrens (fine; Sigil does more for
+this legend). **Rejected:** Firelights' Hideout (their conquest gives Baron or Heron Accelerate; 0 top-16),
+Rockfall Path (blocks your own Ambush and Evelynn), Hall of Legends and Treasure Hoard (Energy into Gold,
+backwards here), Forgotten Monument (slows the race). **Worth a test:** Mystic Vortex (Reactions cost 1
+more Power in showdowns there; taxes their mid-fight answers; 28 lists, none top-16). At events testing
+Riot's new setup (turn order before battlefields) there is no blind pick: choose by seat.
 
 **Play notes:** against an opposing Vex, Apathetic, Rebuke her before Sivir lands (2 Power plus 1 for
 Deflect meets Sivir's condition on its own, and is Defy-proof). Mulligan for a 2-drop plus a 3-drop;
@@ -446,3 +464,6 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
 - **31 Oct 2026, later:** three more swaps with Jay (−Portal +Ezreal, −Repulse +Sabotage, −Star-Crossed
   +Gust); Ravenbloom Prefect kept in the sideboard for gear hate, The Good Stuff out of it. The core
   recorded. Written to the app (row backed up). Frozen for testing.
+- **31 Oct 2026, battlefields:** all 71 read with Jay; Sigil of the Storm (blind), Targon's Peak (going
+  first), Forbidding Waste (on the draw) replace Amateur Recital, Windswept Hillock and Zaun Warrens.
+  Written to the app (row backed up). Locked.
