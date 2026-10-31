@@ -311,18 +311,42 @@ Ezreal ×3, Traveling Merchant ×2, Evelynn, Edge ×2, On the Hunt ×2, Switcher
 | Bedeviling Stranger | Evelynn, Entrancing | 2-drop | Stranger is a hold-defence card (Hidden only at a battlefield you control; needs 4+ units); Evelynn's face-down pull does Faefolk's job on the finishing turn, and her floor is the same 2E, 2-Might body |
 | Vex, Apathetic | Switcheroo | protection | the one expensive threat that doesn't act on arrival; her stun needs her to sit at a battlefield |
 
-**The list** (in the app, row backed up to `backups/state-pre-army-final-2026-10-31.json`):
-- **Units (21):** Sivir · Rengar ×2 · Nilah ×2 · Nidalee ×2 · Fizz ×2 · First Mate ×2 · Innovator ×3 ·
-  Ezreal · Vex · Staunch ×2 · Faefolk ×3 · Evelynn
-- **Spells (17):** Punch First ×3 · Ride the Wind ×3 · Star-Crossed ×3 · Rebuke ×2 · Rampage ×2 ·
-  Switcheroo ×2 · Repulse
-- **Gear (2):** Portable Portal ×2
+**The list, frozen for testing** (in the app; after the three later swaps below; rows backed up to
+`backups/state-pre-army-final-2026-10-31.json` and `backups/state-pre-army-gust-2026-10-31.json`):
+- **Units (22):** Sivir · Rengar ×2 · Nilah ×2 · Nidalee ×2 · Fizz ×2 · First Mate ×2 · Innovator ×3 ·
+  Ezreal ×2 · Vex · Staunch ×2 · Faefolk ×3 · Evelynn
+- **Spells (17):** Punch First ×3 · Ride the Wind ×3 · Star-Crossed ×2 · Rebuke ×2 · Rampage ×2 ·
+  Switcheroo ×2 · Sabotage · Gust
+- **Gear (1):** Portable Portal
 - **Runes** 6 Body / 6 Chaos (still the best split). **Battlefields:** Amateur Recital · Windswept
   Hillock · Zaun Warrens.
-- **Sideboard:** Graves ×2 · Ravenbloom Prefect · Ruin Runner · On the Hunt · Sabotage · Unyielding
-  Spirit ×2 · Abandon · The Good Stuff. **Repulse** comes in against Diana and Kai'Sa (a targeted shrink
-  on Sivir, no Defy). **Ruin Runner** (can't be chosen by enemy spells and abilities) stays a
-  nice-to-have: 6 Energy and doesn't act on arrival (Jay: "not define our strategy around it, yet").
+- **Sideboard:** Graves ×2 · Ravenbloom Prefect (gear hate; Jay: needed) · Ruin Runner · On the Hunt ·
+  Repulse · Star-Crossed · Unyielding Spirit ×2 · Abandon. **Ruin Runner** (can't be chosen by enemy
+  spells and abilities) stays a nice-to-have: 6 Energy and doesn't act on arrival (Jay: "not define our
+  strategy around it, yet").
+- **The core** (Jay agreed, 31 Oct; not cut without game evidence): Faefolk ×3 · Evelynn · Innovator ×3 ·
+  Fizz ×2 · Nilah ×2 · Rengar ×2 · Punch First ×3 · Ride the Wind ×3 · Sivir. Swaps come from the
+  replaceable jobs (readying: First Mate, Portal; clearing: Star-Crossed, Rebuke, Rampage, Gust;
+  protection: Switcheroo, Sabotage), like-for-like.
+
+**Three later swaps, same day** (Jay, from a second reviewer's proposals; Claude agreed on the first and
+third, called the second a fair trade):
+- **−1 Portable Portal, +1 Ezreal.** Portal was the first trim (it needs your unit at a battlefield;
+  Sivir-from-base doesn't). Ezreal's discount lands on Nilah's and Innovator's Accelerate and Rampage's +2.
+- **−1 Repulse, +1 Sabotage.** Sabotage protects the finishing turn *before* Sivir is exposed: a Defy
+  spent on it is a Defy gone for 1 Energy; resolved, it takes any non-unit card (Defy, Smoke Screen,
+  Eclipse, Zhonya's still in hand, since hiding is only on its controller's turn, §811). What it gives up:
+  cards already hidden on the board (Vex's Back Off) and answers drawn after it. The only main-deck save
+  for Sivir is now Star-Crossed, which ends the attack. (Rebuke for Sabotage was rejected: Rebuke is
+  Defy-proof, Action speed, and the answer to an opposing Vex.)
+- **−1 Star-Crossed, +1 Gust.** Energy is the bottleneck: tricks crowded out 1.68 → 1.55 (normal). Gust is
+  1E 0P, bounces a unit with 3 Might or less, free when Fizz recasts it. Costs: Sivir's condition 51% →
+  48% (Gust spends no Power); the bench's "answer ready" doesn't count size-limited answers, so its drop
+  (37% → 34% on the play) overstates the loss.
+
+**Sideboard plan:** against **Vex**, Repulse in for Sabotage (it can't reach her hidden Back Off).
+Against **removal-heavy decks** (Kai'Sa, Diana), Star-Crossed #3 back for Gust if Sivir keeps getting
+answered; Repulse is reliable there too (no Defy).
 
 **Measured against Jay's list as it was that morning** (`try`, normal pressure unless marked; not win rates):
 
@@ -419,3 +443,6 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   bench can't see The Good Stuff, Warrens, Nidalee or Innovator's draw; Merchant is net zero). Six
   like-for-like changes agreed with Jay: −The Good Stuff +Ezreal, −Abandon +Repulse, −Sabotage +Rampage,
   −2 Stranger +Switcheroo +Evelynn, −Vex +Switcheroo. Written to the app (row backed up). Section 5.
+- **31 Oct 2026, later:** three more swaps with Jay (−Portal +Ezreal, −Repulse +Sabotage, −Star-Crossed
+  +Gust); Ravenbloom Prefect kept in the sideboard for gear hate, The Good Stuff out of it. The core
+  recorded. Written to the app (row backed up). Frozen for testing.
