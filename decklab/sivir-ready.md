@@ -2,7 +2,7 @@
 title: Sivir, Ready and Gank — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. Jay's own Sivir, rebuilt around Sivir as the finisher. Built with Jay a stage at a time.
 started: 2026-10-29
-status: stages 1–3 agreed 29 Oct 2026; stage 4 draft locked as "Sivir Ready (draft)" in the app for testing; tinkering continues — the deck in play stays v1 until this one is built and tested
+status: stages 1–3 agreed 29 Oct 2026; Jay rebuilt the draft as "Sivir: One Army, Two Fights (draft)", now his main deck; audited and changed with Jay 31 Oct 2026 (section 5), frozen for testing
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
@@ -279,6 +279,121 @@ Defy-able (1 Power); a third Rengar or Zed; Kinkou Initiate vs Merchant; Stare D
 Cataclysm as flags. **Per game, note:** did the closing turn happen, what stopped it, and whether you
 had a unit to play.
 
+## 5. One Army, Two Fights: Jay's rebuild, audited 31 Oct 2026
+
+**Jay's rebuild** (30–31 Oct, in the app as "Sivir: One Army, Two Fights (draft)", now his **main**
+deck; v1 "Sivir is trying her best" changed too and is the backup). The new spine is
+**displacement plus Ganking**: Irresistible Faefolk ×3 ("when I move to a battlefield, you may move an
+enemy unit to that battlefield"), Bedeviling Stranger ×2, Nilah ×2 (Accelerate, Ganking), Portable
+Portal ×2, Ride the Wind 1 → 3, First Mate 1 → 2, Star-Crossed 2 → 3, The Good Stuff, Abandon, and
+the battlefields Amateur Recital, Windswept Hillock and Zaun Warrens. Out from the 29 Oct draft:
+Ezreal ×3, Traveling Merchant ×2, Evelynn, Edge ×2, On the Hunt ×2, Switcheroo ×2, Repulse.
+
+**The plan, restated** (unchanged from stage 2, sharpened by the audit):
+- **Expensive threats must act the turn they land. Cheap raid bodies may develop over turns**
+  (Faefolk's job is the pull, from base). **Finishing-turn cards must add the action that turns the
+  first conquest into the second.**
+- **Sivir from base is the second conquest.** Units enter at your base (§149); with Accelerate she
+  enters ready, having spent her own 2 Power (her 1 plus the Accelerate's Chaos, §166.2), so 6 Might
+  and Ganking. Base → battlefield needs no Ganking (§144.4). So: the board attacks A, Faefolk pulls B's
+  defender into A, Sivir walks into the empty B. Also able to make the second conquest: Nilah
+  (Accelerate, Ganking), Rengar (Ambush, even where only enemy units are), Ride the Wind ×3, Portal ×2,
+  First Mate ×2.
+
+### The changes (31 Oct 2026, with Jay), each like-for-like by job
+
+| out | in | job | why |
+|---|---|---|---|
+| The Good Stuff | Ezreal | value | Jay: hard to keep, and its return needs a hold; Ezreal draws on arrival and is a body |
+| Abandon | Repulse | protection | Abandon needs 2 Energy held up, the resource the legend lacks; Repulse is paid in Power |
+| Sabotage | Rampage | clearing | a kill opens a battlefield this turn; a card out of their hand doesn't |
+| Bedeviling Stranger | Switcheroo | clearing → protection | Jay: "Switcheroo has won me games"; clearing was over target |
+| Bedeviling Stranger | Evelynn, Entrancing | 2-drop | Stranger is a hold-defence card (Hidden only at a battlefield you control; needs 4+ units); Evelynn's face-down pull does Faefolk's job on the finishing turn, and her floor is the same 2E, 2-Might body |
+| Vex, Apathetic | Switcheroo | protection | the one expensive threat that doesn't act on arrival; her stun needs her to sit at a battlefield |
+
+**The list** (in the app, row backed up to `backups/state-pre-army-final-2026-10-31.json`):
+- **Units (21):** Sivir · Rengar ×2 · Nilah ×2 · Nidalee ×2 · Fizz ×2 · First Mate ×2 · Innovator ×3 ·
+  Ezreal · Vex · Staunch ×2 · Faefolk ×3 · Evelynn
+- **Spells (17):** Punch First ×3 · Ride the Wind ×3 · Star-Crossed ×3 · Rebuke ×2 · Rampage ×2 ·
+  Switcheroo ×2 · Repulse
+- **Gear (2):** Portable Portal ×2
+- **Runes** 6 Body / 6 Chaos (still the best split). **Battlefields:** Amateur Recital · Windswept
+  Hillock · Zaun Warrens.
+- **Sideboard:** Graves ×2 · Ravenbloom Prefect · Ruin Runner · On the Hunt · Sabotage · Unyielding
+  Spirit ×2 · Abandon · The Good Stuff. **Repulse** comes in against Diana and Kai'Sa (a targeted shrink
+  on Sivir, no Defy). **Ruin Runner** (can't be chosen by enemy spells and abilities) stays a
+  nice-to-have: 6 Energy and doesn't act on arrival (Jay: "not define our strategy around it, yet").
+
+**Measured against Jay's list as it was that morning** (`try`, normal pressure unless marked; not win rates):
+
+| | before | after |
+|---|---|---|
+| units by turn 2 / 3 (goldfish, on the play) | 1.7 / 3.1 | 1.6 / 2.9 |
+| units by turn 5 | 3.8 | 3.7 |
+| Sivir's condition on, turns 4–8 (quiet · normal · heavy) | 30% · 41% · 42% | 35% · 46% · 48% |
+| answer usable on their turn by turn 5 (goldfish, play · draw) | 44% · 67% | 43% · 67% |
+| attacks answered | 17% | 16% |
+| tricks crowded out by Energy | 1.44 | 1.52 |
+
+**Turn-1 play** (a 2-Energy unit; you see 5 cards by turn 1, about 7 when you mulligan for one): 6 such
+units, about 74% with a mulligan; 7 would be 77%, 8 would be 82%. **The field** (legal lists since 23 Oct):
+top-16 lists run 6.7 units at 2 Energy or less (median 7) and essentially no 2-drop that costs Power;
+23 cards at 2 Energy or less in all, against this list's ~18.
+
+### The audit (three independent reviewers: data analyst, player, rules judge)
+
+**Corrections to what Claude said earlier the same day:**
+- **"0.0 extra cards drawn" was a blind spot, not a fact.** The engine reads only "draw" on spells and
+  "when you play me" on units: it misses The Good Stuff (gear), Zaun Warrens (no battlefields), Nidalee
+  (no combat), and Innovator's "pay Chaos: draw 1". The current list drew more than reported, so the
+  first package over-corrected (it cut Innovator and First Mate, and Merchant adds **no net cards**:
+  discard 1, draw 1).
+- **The bench's blind spots favour cutting:** Abandon isn't counted as an answer by the engine,
+  Faefolk's and Evelynn's pulls aren't modelled, "can't be chosen" only in the field rows.
+- **Noise:** the points model swings about ±0.5 between seeds at 300 games; the engine (3000 games) is
+  stable to about ±0.03 units. Read sweeps of under 0.5 points as ties.
+- **Abandon is Defy-able** (2E 0P); an earlier claim that it wasn't was wrong.
+
+**Protection, three different jobs** (the deck has 3 copies; target 3):
+- **Switcheroo** swaps the Mights of two units at one battlefield: it **wins a fight** (undoes a −4
+  Smoke Screen, or trades Sivir's 6 against a small blocker). It does **not** stop a bounce or a kill.
+- **Repulse** counters an enemy spell or ability that chooses one friendly unit: the **only main-deck
+  answer to removal or a bounce on Sivir**. Defy-able, so cast it into Vex when she's tapped out.
+- **Star-Crossed** clears the way (bounces a blocker) and can save Sivir, **at the cost of the attack**.
+- Odds of holding a Switcheroo or Repulse by the finishing turn (about 10–11 cards seen): 59–63%
+  (2 copies: 44–48%; 4 copies: 70–74%).
+
+**Rules points** (all 10 claims checked, `docs/rules.md` → verbatim → FAQ):
+- **Ezreal's discount:** on Accelerate take off the **Energy**, not the rune. A Power cost reduced to 0
+  is not spent (§445.1.b), and Sivir's +2 and Ganking would switch off. It doesn't apply to Portal's pay
+  (a trigger cost, not an optional additional cost).
+- **Faefolk's pull** into a battlefield where you're attacking keeps you the attacker (§190.3.a.1,
+  §466.2.c.1); the emptied battlefield can then be conquered without a fight (§348.2.a.1). **Pulling
+  onto a battlefield you control makes them the attacker**, and they can conquer on your turn.
+- **Fizz recasts Rampage for nothing** (Fizz's errata ignores Energy; Rampage has no Power cost). Defy
+  can still counter the recast.
+- **Against Riven's Baron Nashor:** The Baron Pit makes three battlefields, so two conquests don't take 6
+  to 8. Win by holding. From the repo's own Baron Pit entry in `docs/rules-rulings.md`, not a staff
+  ruling: ask a judge before relying on it at an event.
+
+**Battlefields:** in best-of-3 each player chooses their battlefield (§488.5); at a single-game event it's
+random (§487.5). All three are symmetric. **Amateur Recital is the strongest closing line when held**:
+at 6 the hold makes 7, its trigger sends B's defender to base, conquering B makes 8. Hillock gives
+their units Ganking too.
+
+**Play notes:** against an opposing Vex, Apathetic, Rebuke her before Sivir lands (2 Power plus 1 for
+Deflect meets Sivir's condition on its own, and is Defy-proof). Mulligan for a 2-drop plus a 3-drop;
+ship Rengar-heavy and spell-heavy hands, since Sivir is always there.
+
+**Per game, note which of the four it was** (so one problem isn't solved with another's cards):
+1. couldn't reach 6 · 2. reached 6, couldn't open a battlefield · 3. opened one, didn't make the second
+conquest · 4. Sivir got answered. Also: a turn-1 play or not; when protection was drawn on the
+finishing turn, did it save the attack?
+
+**Open, for games to decide:** a second Repulse (or Abandon back) if Sivir gets bounced on the finishing
+turn; trim a Portal first if one sits in hand (it needs your unit at a battlefield already); Traveling
+Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboard against removal decks.
+
 ## Log
 
 - **29 Oct 2026:** opened. Direction agreed: Sivir as the finisher, Power spent on readying.
@@ -299,3 +414,8 @@ had a unit to play.
   up). Open: more Ride the Wind, runes 6/6, third Rengar or Zed.
 - **29 Oct 2026:** runes 5/7 → 6/6 (Jay: "fix the rune split if it makes sense"): Power demand is even
   (Body 19, Chaos 20); colour misses by turn 3 9%/7% → 8%/6%. App updated (row backed up).
+- **31 Oct 2026:** Jay's rebuild "Sivir: One Army, Two Fights (draft)" is the main deck. Audited by
+  three independent reviewers (data analyst, player, rules judge); Claude's draw numbers corrected (the
+  bench can't see The Good Stuff, Warrens, Nidalee or Innovator's draw; Merchant is net zero). Six
+  like-for-like changes agreed with Jay: −The Good Stuff +Ezreal, −Abandon +Repulse, −Sabotage +Rampage,
+  −2 Stranger +Switcheroo +Evelynn, −Vex +Switcheroo. Written to the app (row backed up). Section 5.
