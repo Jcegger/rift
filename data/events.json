@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-30",
+ "generatedAt": "2026-10-31",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -26,16 +26,16 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 63,
-  "claimedEventsUnmatched": 56,
+  "claimedEvents": 64,
+  "claimedEventsUnmatched": 57,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
+   "Asia": 103,
+   "unknown": 202,
    "Europe": 69,
-   "Asia": 99,
-   "unknown": 198,
    "Oceania": 5,
    "North America": 7
   },
@@ -78,6 +78,7 @@
    "S3 Shanghai City Challenge",
    "S4 Beijing City Challenge",
    "S4 Guangzhou City Challenge",
+   "S4 Nanjing City Challenge",
    "S4 Shanghai City Challenge",
    "S4 Tianjin City Challenge",
    "S4 Wuhan City Challenge",

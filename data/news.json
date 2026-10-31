@@ -1,13 +1,13 @@
 {
- "generatedAt": "2026-10-30",
+ "generatedAt": "2026-10-31",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 40,
+ "carriedFromPrevious": 41,
  "tags": {
-  "Guides": 6,
+  "Guides": 7,
   "News": 52,
   "Metagame": 23,
   "Legends": 24,
@@ -16,6 +16,15 @@
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Budget Riftbound Decks: Build with Bulk Cards & Play for $10! - Part 2",
+   "dt": "2026-10-31",
+   "url": "https://riftbound.gg/budget-riftbound-decks-build-with-bulk-cards-play-for-10-part-2",
+   "tags": [
+    "Guides"
+   ],
+   "author": "Den"
+  },
   {
    "title": "Budget Riftbound Decks: Build with Bulk Cards & Play for $10!",
    "dt": "2026-10-28",
