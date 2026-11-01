@@ -11,7 +11,7 @@ Where the work stands, for the next session. Read this, then `decklab/sivir-read
   - **Units:** Sivir · Faefolk ×3 · Evelynn · Staunch ×2 · Bedeviling Stranger ×2 · Innovator ×3 · Ezreal ×2 ·
     Fizz ×2 · Nidalee ×3 · Vex ×2 · Rengar ×2
   - **Spells:** Punch First ×3 · Ride the Wind ×3 · Gust ×2 · Rebuke ×2 · Star-Crossed ×2 · Rampage ×2 · Switcheroo ×2
-  - **Gear:** Portable Portal
+  - **Gear:** The Good Stuff (replaced Portable Portal, 1 Nov)
   - **Runes:** 6 Body / 6 Chaos
   - **Battlefields:** Sigil of the Storm (blind) · Targon's Peak (going first) · Forbidding Waste (on the draw)
   - **Sideboard:** Ravenbloom Prefect (gear hate; Jay: must stay) · Graves ×2 · Ruin Runner · Gust · Repulse ·
@@ -53,10 +53,7 @@ Jay's calls, so don't re-propose these without journal evidence:
 
 ## Open, to iterate (in this order, Jay's call on each)
 
-0. **Portal's slot (in progress, 1 Nov).** Portal is on-plan (Ganking from A to B) but a 1-of seen about one game in
-   four, and in 3 of 116 top lists. Lead candidate: **The Good Stuff** (draw 3; returns to hand when you hold here,
-   which the trap does; 23 of 116 top lists; cut 31 Oct for needing a hold). Check its hold-return timing in the
-   rules first. Off-meta option: Bushwhack Trap (lets Evelynn and Stranger both hide at A; 0 top lists).
+0. ~~Portal's slot~~: done, The Good Stuff (1 Nov; worksheet log). Medium confidence; Rengar #3 is the fallback.
 1. ~~More two-drops~~: done (8 now, Stranger). 2. ~~Rengar to 3~~: parked, see above.
 3. **Challenge vs Rampage** (Challenge: 2E 1P, Action, so it works in showdowns; Rampage: 3E, main phase only).
 4. **Whirlwind against Baron:** "each player may return a unit". Its text doesn't say "choose", so Baron's "can't

@@ -499,3 +499,16 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   to "options at that battlefield"; no ruling)? Written to the app (row backed up,
   `backups/state-pre-army-stranger-2026-11-01.json`). Kept on purpose, Jay's calls: Staunch, Switcheroo, Punch First
   ×3. **Next:** Portal's slot (The Good Stuff: its hold-return suits the trap; Bushwhack Trap off-meta).
+- **1 Nov 2026, the last slot:** −1 Portable Portal, +1 The Good Stuff (Jay). Portal fits the plan (Ganking from A
+  to B) but as a single copy it shows up in about one game in four, and it's in 3 of 116 top-25% Body/Chaos lists.
+  The Good Stuff's 31 Oct cut reverses the same way Stranger's did: its "when you hold here, return this to its
+  owner's hand" is a hold effect that fires when you score A in your Beginning Phase (§315.2.b, §383.4.d), so the
+  trap replays it for another draw 3 every turn A holds. It dies only if they hold A (Deploy, §830.1.b). Why draw:
+  by about 11 cards seen, a puller (4 copies) is there ~75% of the time and Stranger (2) ~49%. The trap buys turns,
+  and The Good Stuff turns them into cards. Bench against Portal (normal): answer usable on their turn by turn 5
+  41% → 38% (play), tricks crowded out 1.46 → 1.52, Mercenary on 45% → 47%; it can't see the draw. Also benched:
+  Rengar #3 (answer by turn 5 35%, crowded out 1.55) and Seal of Discord (Power, but the bottleneck is Energy).
+  Runes: Power demand Chaos 19 / Body 13; 5/7 moves turn-3 colour misses 7% → 6% (play), under the 3-point bar,
+  so 6/6 stays. Sideboard: Graves now fits the trap ("when I attack or defend": defending needs no readying).
+  Written to the app (row backed up, `backups/state-pre-army-goodstuff-2026-11-01.json`). Confidence: medium. The
+  case is reasoning, not measurement; if games keep ending in "Sivir got answered", try Rengar #3.
