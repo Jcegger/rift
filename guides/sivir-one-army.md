@@ -45,7 +45,7 @@ date: 2026-11-01
 3. **Their Vex, Apathetic dies before Sivir is played.** She stuns any unit you play while she's at a battlefield, wherever you play it, and a stunned Sivir can't walk to B.
 4. **Hold Faefolk back.** It's a 1-Might unit whose job is one move on the closing turn. Keep one in base.
 
-**What to bring:** Sigil of the Storm when the pick is blind · Targon's Peak going first · Forbidding Waste on the draw (§7).
+**What to bring:** game 1, **Sigil of the Storm** · after you lose a game (you'll choose to go first), **Amateur Recital** · after you win one (they choose, and usually go first), **Forbidding Waste** (§8).
 
 ---
 
@@ -73,7 +73,7 @@ date: 2026-11-01
 | | Star-Crossed ×2 | 3E 1P | Reaction: return one of your units and one of theirs |
 | **Gear** | The Good Stuff | 3E 1P | Deploy: discard 1, draw 3. **When you hold here, return it to hand** |
 | **Runes** | 6 Body · 6 Chaos | | §6 |
-| **Battlefields** | Sigil of the Storm · Targon's Peak · Forbidding Waste | | §7 |
+| **Battlefields** | Sigil of the Storm · Amateur Recital · Forbidding Waste | | §8 |
 
 **Sideboard (10):** Graves, Blasting Through ×2 · Ravenbloom Prefect · Ruin Runner · Gust · Repulse · Sabotage · Unyielding Spirit ×2 · Star-Crossed.
 
@@ -212,13 +212,22 @@ Stranger is there about half the time; the backup (win the fight at A) comes up 
 
 ## 8. Battlefields, mulligans, sideboarding
 
-**Battlefields.** In a best-of-3 each player picks one of their three, placed at once; one used in a decided game is retired (§488.5). Random at a single-game event (§487.5).
+**Battlefields.** In a best-of-3 each player picks one of their three, placed at once; one used in a decided game is retired (§488.5). Random at a single-game event (§487.5). **Battlefields are revealed before turn order** (Core Rules §113 before §115): game 1 is blind, and in games 2–3 the loser of the previous game chooses the seat *after* seeing both (TR §407.4). So pick by the last result, not by the seat:
 
 | when | battlefield | why |
 |---|---|---|
-| **Blind** | **Sigil of the Storm**: "When you conquer here, you must recycle one of your runes." | for you the recycle can make a Gold; for them a lost rune per conquest, which slows Baron and Astral Heron |
-| **Going first** | **Targon's Peak**: "When you conquer here, ready up to 2 runes at the end of this turn." | two ready runes on their turn pay for Gust or an Ambush defence of A |
-| **On the draw** | **Forbidding Waste**: "While a unit here is defending alone, it has −2 Might." | their lone B defender is weaker, and a pulled defender loses it anyway; make it your B, not your A |
+| **Game 1 (blind)** | **Sigil of the Storm**: "When you conquer here, you must recycle one of your runes." | it doesn't reward holding, so it can't feed whoever sits on it. For you a recycle can make a Gold; for them a lost rune per conquest, which slows Baron and Astral Heron |
+| **After you lose a game** (you choose, so go first) | **Amateur Recital**: "When you hold here, you may move a unit at a battlefield to its base." | **the trap's engine**, below |
+| **After you win a game** (they choose, and going first wins more, so expect the draw) | **Forbidding Waste**: "While a unit here is defending alone, it has −2 Might." | no hold reward to hand them; it punishes their lone early holder. Hold it with two and the −2 never touches you |
+
+**Amateur Recital, the engine.** Going first, your turn-2 move reaches a battlefield before theirs (unless they Accelerate a unit on turn 1: going second they have 3 runes). Make Recital your A. From your turn-3 hold, every turn:
+- the hold scores, and its trigger (your Beginning Phase, before you draw) **sends their lone defender at B to its base** (§383.4.d.2.b);
+- B goes uncontrolled once the trigger resolves and **any face-down card they had there is trashed** (§323.5, §323.6.a);
+- in your main phase, walk a ready unit into B and conquer it. **Two points a turn.** From 6 it wins: hold → 7, conquer B → 8 (§473.1.b.1; Riot's FAQ gives this exact line).
+- **Two defenders at B:** Recital sends one home, Faefolk pulls the other into the trap.
+- **It chooses**, so Baron and "can't be chosen" units are immune, Deflect taxes it, and they can respond: a Reaction unit or a face-down card played at B keeps it occupied.
+- **It's symmetric.** If they hold Recital, *their* hold sends your lone holder home and trashes your face-down card. Hold it with two, keep a face-down card there to flip in response, and **if they ever take it, retaking it comes first.**
+- **Evidence:** none for it. 15 vouched lists since Radiance, no top-quarter finish; no guide recommends it; Ultimate Guard's go-first example is Targon's Peak, the safe alternative. It's here because a deck built to keep one battlefield is the deck its downside doesn't hurt. Log whether you claimed it and how often it fired.
 
 **Mulligans** (set aside up to 2; they go to the bottom):
 - **Want two two-drops and a 3-drop.** Keep Stranger, Faefolk, Staunch, Evelynn, Switcheroo, Nidalee.

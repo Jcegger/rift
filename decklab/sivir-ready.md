@@ -520,3 +520,16 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   LeBlanc; worst: Diana, Vex Gloomist, Akali, Irelia, Riven, Ziggs); outside sources (Ultimate Guard ranks Stranger
   Radiance's #1 card; no posted Battle Mistress list since 23 Oct runs Stranger or Faefolk, none vouched). Vex,
   Apathetic stuns units played anywhere, not only at her battlefield (corrected).
+- **1 Nov 2026, battlefields for the trap:** all 71 reread. **Amateur Recital replaces Targon's Peak** for going first
+  (Jay: "if you feel relatively confident, lock it in"); Sigil (game 1) and Forbidding Waste kept. Grove of the God-Willow
+  was dropped for blind: a hold reward works for whoever holds, and the hold-and-build decks (Vex Gloomist, Kai'Sa, Riven,
+  Yi) are the likeliest to sit on it. **Rules check:** battlefields are revealed before turn order (CR §113 before §115;
+  TR §407.4: the previous game's loser picks the seat after seeing both), so "going first" means the game after Jay loses
+  one. Recital's hold trigger fires in the Beginning Phase (§383.4.d.2.b), chooses (Baron immune, Deflect taxes it), can
+  move any unit at any battlefield; their emptied B goes uncontrolled at once and their face-down card there is trashed
+  (§323.5, §323.6.a), so hold + walk-in conquer is two points a turn and wins from 6 (§473.1.b.1, Riot FAQ). Risks:
+  symmetric (their hold bounces your lone holder and trashes your face-down card), a turn-1 Accelerate from the second
+  player can arrive first. **Evidence against:** 15 vouched lists since 23 Oct with 0 top-25% (base 24%); 11 of 325 Riot
+  Top Decks lists; 0 of 43 riftbound.gg early-Radiance lists; Ultimate Guard's go-first example is Targon's Peak (26% top,
+  base). Chosen because the trap is built to keep its battlefield, which is the downside Recital has for other decks.
+  Confidence: medium. Written to the app (row backed up, `backups/state-pre-army-recital-2026-11-01.json`).

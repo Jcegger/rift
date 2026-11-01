@@ -13,7 +13,7 @@ Where the work stands, for the next session. Read this, then `decklab/sivir-read
   - **Spells:** Punch First ×3 · Ride the Wind ×3 · Gust ×2 · Rebuke ×2 · Star-Crossed ×2 · Rampage ×2 · Switcheroo ×2
   - **Gear:** The Good Stuff (replaced Portable Portal, 1 Nov)
   - **Runes:** 6 Body / 6 Chaos
-  - **Battlefields:** Sigil of the Storm (blind) · Targon's Peak (going first) · Forbidding Waste (on the draw)
+  - **Battlefields:** Sigil of the Storm (game 1) · Amateur Recital (after a loss: Jay picks the seat, goes first; replaced Targon's Peak 1 Nov) · Forbidding Waste (after a win)
   - **Sideboard:** Ravenbloom Prefect (gear hate; Jay: must stay) · Graves ×2 · Ruin Runner · Gust · Repulse ·
     Sabotage · Unyielding Spirit ×2 · Star-Crossed
 - **To get:** Nidalee, Cat Form ×3 (owned 0).

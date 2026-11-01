@@ -31,7 +31,7 @@ date: 2026-11-01
 
 **Watch out.** Ezreal on Sivir: take the **Energy**, not the rune. Never make **Rockfall Path** your A. The Good Stuff only on a turn you don't need Energy up.
 
-**Battlefields.** Blind: **Sigil of the Storm** · Going first: **Targon's Peak** · On the draw: **Forbidding Waste** (make it B, not A).
+**Battlefields** (picked before the seat): game 1 **Sigil of the Storm** · after a loss (go first) **Amateur Recital**: make it A; each hold sends their lone B defender home, walk in, two points a turn; if they take it, retake it first · after a win **Forbidding Waste** (hold it with two).
 
 **Mulligan.** Want two two-drops and a 3-drop. Send back Rengar, Rampage, Star-Crossed, The Good Stuff first.
 
