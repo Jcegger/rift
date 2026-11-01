@@ -533,3 +533,10 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   Top Decks lists; 0 of 43 riftbound.gg early-Radiance lists; Ultimate Guard's go-first example is Targon's Peak (26% top,
   base). Chosen because the trap is built to keep its battlefield, which is the downside Recital has for other decks.
   Confidence: medium. Written to the app (row backed up, `backups/state-pre-army-recital-2026-11-01.json`).
+- **1 Nov 2026, correction (from the guide's fact-check):** "When one or more enemy units die, ready me" is **Battle
+  Mistress's** text, not Sivir, Mercenary's (the two cards' text was merged in a printout). A kill readies the legend
+  for another Gold; it never readies Sivir. The First Mate entry above leaned on "Sivir's own ready on enemy deaths";
+  the cut still stands on its other grounds (Ride the Wind ×3 moves and readies at Action speed, and First Mate + Sivir
+  costs 8 Energy on the closing turn, where the trap needs no second Sivir fight). Also corrected in the guide: Kai'Sa
+  Smoke Screen 97% (not 90%), Rengar's Thrill of the Hunt conquers an emptied B, Rengar's errata text, Diana's
+  showdown-only Energy is her legend's extra point, and the §8 sideboard table now derives from §9's.

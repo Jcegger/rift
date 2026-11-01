@@ -42,7 +42,7 @@ date: 2026-11-01
 
 1. **From 5 points, check every turn whether either player can reach 8 before the other acts again** ([strategy.md §0](../docs/strategy.md)). A hold at 7 wins and is never gated (§473.1.a.1).
 2. **A is the whole game.** Spend cards to keep it; lose it and you lose the face-down card there and The Good Stuff with it (§323.6.a, §830.1.b).
-3. **Their Vex, Apathetic dies before Sivir is played.** She stuns any unit you play while she's at a battlefield, wherever you play it, and a stunned Sivir can't walk to B.
+3. **Their Vex, Apathetic is gone before Sivir is played.** She stuns any unit you play while she's at a battlefield, wherever you play it, and a stunned Sivir can't walk to B.
 4. **Hold Faefolk back.** It's a 1-Might unit whose job is one move on the closing turn. Keep one in base.
 
 **What to bring:** game 1, **Sigil of the Storm** · after you lose a game (you'll choose to go first), **Amateur Recital** · after you win one (they choose, and usually go first), **Forbidding Waste** (§8).
@@ -53,7 +53,7 @@ date: 2026-11-01
 
 | | card | cost | job |
 |---|---|---|---|
-| **Champion** | Sivir, Mercenary | 4E 1P | the closer. 4 Might; **once you've spent 2 Power this turn, +2 Might and Ganking.** With Accelerate (1 Energy + 1 Chaos) she enters ready and her own Power plus the Accelerate's Chaos is that 2 Power (§166.2): 6 Might the turn she lands. Readies when an enemy unit dies |
+| **Champion** | Sivir, Mercenary | 4E 1P | the closer. 4 Might; **once you've spent 2 Power this turn, +2 Might and Ganking.** With Accelerate (1 Energy + 1 Chaos) she enters ready and her own Power plus the Accelerate's Chaos is that 2 Power (Power is spent by paying it to a cost, Accelerate's included: FAQ, Jhin): 6 Might the turn she lands. |
 | **2-drops** | Irresistible Faefolk ×3 | 2E | **the pull**: when it moves to a battlefield, you may move an enemy unit there |
 | | Bedeviling Stranger ×2 | 2E | Hidden. When played, choose a battlefield; if 4+ units are there (it counts itself), return an enemy unit there to hand |
 | | Evelynn, Entrancing | 2E | Hidden, Backline. From face down **on your turn**, pulls an enemy unit from elsewhere to her battlefield |
@@ -72,7 +72,7 @@ date: 2026-11-01
 | | Rampage ×2 | 3E | your unit and theirs deal their Mights to each other; pay 1 Body for +2 |
 | | Star-Crossed ×2 | 3E 1P | Reaction: return one of your units and one of theirs |
 | **Gear** | The Good Stuff | 3E 1P | Deploy: discard 1, draw 3. **When you hold here, return it to hand** |
-| **Runes** | 6 Body · 6 Chaos | | §6 |
+| **Runes** | 6 Body · 6 Chaos | | §7 |
 | **Battlefields** | Sigil of the Storm · Amateur Recital · Forbidding Waste | | §8 |
 
 **Sideboard (10):** Graves, Blasting Through ×2 · Ravenbloom Prefect · Ruin Runner · Gust · Repulse · Sabotage · Unyielding Spirit ×2 · Star-Crossed.
@@ -84,7 +84,7 @@ date: 2026-11-01
 ## 2. How it got here
 
 - **29 October:** after an 0–4 Nexus Night, the old Sivir was rebuilt as a raid deck: race to 6, win in one turn.
-- **30–31 October:** Jay's own rebuild around displacement (Faefolk, Ride the Wind); a three-reviewer audit; battlefields re-picked from all 71.
+- **30–31 October:** Jay's own rebuild around displacement (Faefolk, Ride the Wind); a three-reviewer audit; battlefields re-picked from all 71 legal ones.
 - **31 October, the pros:** two experienced players said the deck can't win early fights; **play midrange, win on interaction on turns 3–4, carry top end that doesn't need Sivir alive, 8–9 cheap two-drops.** Nidalee ×3, Vex ×2, Gust ×2 in; Nilah out.
 - **1 November, the trap:** −2 First Mate +2 Bedeviling Stranger, then −Portable Portal +The Good Stuff. Both cards had been cut on 31 October *for needing a held battlefield*; under the midrange plan that became the reason to play them. Staunch, Switcheroo and Punch First ×3 were tested for cuts and kept on purpose (worksheet log).
 
@@ -119,7 +119,7 @@ Checked step by step against the rules on 1 November (handbook → verbatim → 
 1. **Beginning Phase:** you hold A → **7** (§315.2.b.2). If The Good Stuff is at A, it returns to your hand now.
 2. **Faefolk walks base → A.** You control A, so nothing is contested and no fight starts (§190.3.a.1). Its trigger moves **B's defender** to A. The pull is a target, so Baron Nashor can't be pulled (§355.7, §757).
 3. **A fight starts at A at once.** Their pulled unit is the **attacker** (it arrived where they don't control), you're the defender (§466.2.c). There's no open window first: the cleanup stages a combat showdown and **they get focus first** (§323.12, §466.2.c.1.a).
-4. **When focus reaches you, flip Stranger** (free from face down, §811.1.b; it goes to A, §811.1.d.1). Your holder + Faefolk + their unit + Stranger = 4, counted when the effect resolves (§383.4.a.2), so you may return their unit. **Don't pass while you hold focus**: if both players pass in a row, damage happens.
+4. **When focus reaches you, flip Stranger** (free from face down, §811.1.b; it goes to A, §811.1.d.1). Your holder + Faefolk + their unit + Stranger = 4, counted when the effect resolves (§383.4.a.2; the condition is checked on resolution, §383.2.a.1), so you may return their unit. **Don't pass while you hold focus**: if both players pass in a row, damage happens.
 5. **No attacker, no damage.** You win the combat and keep A (§467.1, §468.5).
 6. **B is empty.** It went uncontrolled in the cleanup after the pull (§323.5), and **any face-down card they had at B was trashed** (§323.6.a).
 7. **Sivir:** play her from the Champion Zone with Accelerate: she enters ready at your base (§355.2.a, §805.6), 2 Power spent, 6 Might. **Walk base → B** (no Ganking needed, §144.4.a). You can only move once A's combat is over (§144.1.c).
@@ -157,34 +157,118 @@ They move into A. **Their units applied Contested, so they attack and get focus 
 | **they flood A** | Graves from the sideboard | he deals his Might to every enemy there when he defends; no readying needed |
 
 - **If no defender of yours survives, they conquer A**: your face-down card goes to the trash (§323.6.a) and The Good Stuff dies at their next hold (a conquest alone doesn't kill it, §830.1.b).
-- **Kills ready Sivir** if she's on the board ("When one or more enemy units die, ready me").
+- **Kills ready your legend** (Battle Mistress: "When one or more enemy units die, ready me"), so she can make another Gold.
 - **The trap works by doubt.** A face-down card at A could be Stranger, Switcheroo or Evelynn; the top Chaos decks all play the same package, so opponents know the threat but not the card. One reviewer called Stranger the best card in Radiance for exactly this ("how on earth is the opponent supposed to figure out how to attack?", Ultimate Guard, 20 October).
 
 **The counter-plan is to ignore A.** Control decks hold B and build. That's what Faefolk and Evelynn are for: **the trap comes to them.** Pull their B unit into A on your turn, fight it where your tricks are, and Sivir takes B.
 
 ---
 
-## 6. Card by card
+## 6. Card by card, with examples
 
-- **Sivir, Mercenary.** Always available. Her +2 and Ganking need 2 Power spent *this turn*: Accelerate does it on her own turn; otherwise Punch First, Rebuke or Switcheroo **from hand**. A card played from face down ignores its whole cost (§811.1.b), so a hidden Switcheroo spends no Power.
-- **Irresistible Faefolk.** Any move triggers it, including a walk from base. The pull is a target (Baron can't be chosen) and can come from their base too. Never your only holder late.
-- **Bedeviling Stranger.** From face down it's played to its own battlefield and its choices are pinned there (§811.1.d.1, §811.1.d.3). It counts itself. From hand (2 Energy, your main phase) it can choose any battlefield: against wide decks, bounce one of four-plus units at their battlefield. **Judge question, open:** whether a face-down Stranger may choose its own battlefield as "an option at that battlefield" (§811.1.d.3) has no ruling. It's clearly the card's intent; ask a judge before an event.
-- **Evelynn, Entrancing.** Hide her at A; on your turn she pulls an enemy unit from a different location to A, where it attacks you. **She and Stranger can't both be face down at A.** She's the backup puller.
-- **Staunch Survivor.** 4 Might whenever it fights: the holder that wins 1-on-1s.
-- **Reckless Innovator.** Accelerate, then a Gold or a paid draw every time it exhausts. Gold pays your hides.
-- **Nidalee, Cat Form.** The Ambush defender: a 4-Might Reaction into A, and a card when she wins.
-- **Ezreal, Prodigy.** Card flow on a body; his discount covers Accelerate (take the Energy on Sivir) and Rampage's +2.
-- **Fizz, Trickster.** Recasts Ride the Wind, Gust, Rampage, Rebuke or Star-Crossed from the trash for its Power alone.
-- **Vex, Apathetic.** Stuns **every** unit they play while she's at a battlefield, anywhere. Their Ambush and ready-on-arrival blockers can't fight that turn.
-- **Rengar, Trophy Hunter.** 6 Might by Ambush; can also land where only enemy units are, so he's a second conquest at B.
-- **Punch First.** +5 for 1 Energy, Defy-proof, and 2 Power: turns on Sivir by itself. The deck's best card.
-- **Gust.** 1 Energy at Reaction speed: their 2- and 3-Might units, or their Stranger before it bounces.
-- **Ride the Wind.** Move and ready, battlefield to battlefield, even in a showdown (§451.1).
-- **Rebuke.** Defy-proof bounce, any size. **Your answer to their Vex.**
-- **Switcheroo.** Wins a fight; doesn't stop a bounce or a kill. From face down at A, both targets must be at A (§811.1.d.2).
-- **Rampage.** The only kill. Clean against decks without Defy (Rengar, Kennen, Evelynn); weak into Calm.
-- **Star-Crossed.** Bounces one of theirs and one of yours: clears a blocker, or saves Sivir at the cost of her attack.
-- **The Good Stuff.** Draw 3 (discard 1) at A; back to hand every time A holds. Dies only when *they* hold A. Expect An Offer You Can't Refuse, Detonate and Acceptable Losses against it.
+Each card: what it says, its job in the trap, how to use it, and one worked example. The examples use real cards from the field; counts like "90%" are the share of that legend's legal lists since 23 October that run the card.
+
+### The closer
+
+**Sivir, Mercenary** (Champion · 4E 1P · 4 Might). *Accelerate. If you've spent at least 2 Power this turn, +2 Might and Ganking.*
+- **Job:** walks into the empty battlefield for the last point. Never drawn, never discarded: she waits in the Champion Zone.
+- **Use:** always with Accelerate on the closing turn (5 Energy, 2 Power: her own plus the Accelerate's Chaos), so she enters ready at 6 Might. Off the closing turn, she can also be a 4-Might holder at A. ("When one or more enemy units die, ready me" is your **legend's** text, not hers: a kill readies Battle Mistress for another Gold.)
+- **Example (vs Kai'Sa, holding Recital, on 6):** hold → 7; Recital sends Kai'Sa's lone unit at B home. Sivir with Accelerate, walk into B. Kai'Sa answers with Smoke Screen (−4, so 2 Might) and then Hextech Ray (3 damage). Without help Sivir dies; with Unyielding Spirit cast in response to the Ray (it prevents all spell damage this turn) she survives at 2 Might, B's showdown closes, conquer → 8.
+
+### Pull them in
+
+**Irresistible Faefolk** ×3 (2E · 1 Might). *When I move to a battlefield, you may move an enemy unit to that battlefield.*
+- **Job:** empties B on the closing turn by dragging its defender into A, where your tricks are.
+- **Use:** any move triggers it, including an ordinary walk from base, so it can wait at base. The pull chooses, so Baron and "can't be chosen" units are immune. Keep one in base from turn 4.
+- **Example (vs Rengar):** you hold A with Staunch and a face-down Stranger; Rengar holds B with one Pit Rookie. On your turn Faefolk walks into A and pulls the Rookie in. A fight starts at A, Rengar attacking with the Rookie, and he has focus first: he plays Thrill of the Hunt (2E 1P) to banish the Rookie and replay it at B. B had gone uncontrolled after the pull, so the replayed Rookie **conquers B and scores him a point on your turn** (§323.5, §348.2.a.1). **The lesson:** against Rengar (Thrill in 94% of lists), pull when he can't pay 2 Energy and 1 Power, or when his point doesn't matter.
+
+**Evelynn, Entrancing** (Hidden · 2E · 2 Might · Backline). *When you play me from face down on your turn, you may move an enemy unit at a different location to my battlefield.*
+- **Job:** the backup puller. Hidden at A, she's a pull you don't have to draw on the closing turn.
+- **Use:** she can't share A's face-down slot with Stranger. Hide her when you have no Stranger, or at A while Stranger is still in hand. From face down **on your turn only**.
+- **Example (vs Master Yi, Wuju Bladesman):** Yi holds B with one unit defending alone (+2 from his legend). Flip Evelynn at A on your turn: Yi's unit is pulled to A and attacks your two holders. It's no longer defending alone, so it loses the +2, and B is empty for Sivir.
+
+### Punish them at A
+
+**Bedeviling Stranger** ×2 (Hidden · 2E · 2 Might). *When you play me, choose a battlefield. If there are 4 or more units there, you may return an enemy unit there to its owner's hand.*
+- **Job:** a free, Reaction-speed bounce with no size limit, at the battlefield you hold.
+- **Use:** from face down it's played to A and counts itself (§383.4.a.2). It needs 4 units: two attackers into one holder works, a 1-on-1 doesn't. From hand (2 Energy, main phase) it can choose any battlefield: against a wide board at B, bounce one of their four.
+- **Judge question:** whether a face-down Stranger may choose its own battlefield (§811.1.d.3) has no ruling. It's the card's clear intent; ask before an event.
+- **Example (vs Mordekaiser):** he attacks A with two units, one a 6-Might threat, into your Staunch. Flip Stranger: Staunch + Stranger + his two = 4. Return the big one to his hand. Staunch (4 Might defending) handles a smaller one left behind, and bouncing rather than killing gives his deaths engine nothing.
+
+**Switcheroo** ×2 (Hidden · 2E 2P · Action). *Swap the Mights of two units at the same battlefield this turn.*
+- **Job:** wins the 1-on-1 fight Stranger can't touch.
+- **Use:** hide it at A for 1-on-1 fights. From face down both targets must be at A (§811.1.d.2), and it costs nothing, so it spends no Power toward Sivir. From hand it's 2 Power, which turns Sivir on by itself.
+- **Example (vs Riven):** Riven attacks A with a 7-Might Astral Heron into your lone Faefolk (1 Might). Flip Switcheroo: Heron is 1, Faefolk is 7 for the turn. Faefolk wins and the Heron dies (a 1-Might unit taking 7). She has Defy in 93% of lists, but Switcheroo's 2 Power puts it out of Defy's reach (§206).
+
+**Punch First** ×3 (1E 2P · Action). *Give a unit +5 Might this turn.*
+- **Job:** the cheapest way to win any fight, Defy-proof, and 2 Power that turns Sivir on.
+- **Use:** in A's showdown on their attack, or on the closing turn if Stranger isn't there. Cast it after they've spent their Reaction, not before.
+- **Example (vs Diana):** Diana attacks A and casts Smoke Screen (−4) on your Nidalee. You answer with Punch First (+5): Nidalee is 5 and wins. Diana's legend gives her an extra Energy she can spend only in showdowns, so she always has something for your fights: making her spend it on your terms is the whole matchup.
+
+**Nidalee, Cat Form** ×3 (3E 1P · 4 Might · Ambush). *When I win a combat, draw 1.*
+- **Job:** the Ambush defender. A 4-Might Reaction into A when they attack, and a card when she survives.
+- **Use:** only "to a battlefield where you have units" (§822), so keep a holder at A. **Their Vex, Apathetic stuns her as she lands** (no combat damage that turn).
+- **Example (vs LeBlanc):** LeBlanc attacks A with a 3-Might unit into your Faefolk. Ambush Nidalee into A: 4 + 1 against 3, she wins and draws.
+
+**Rengar, Trophy Hunter** ×2 (5E 1P · 6 Might · Ambush). *Ambush. I can Ambush to a battlefield where there are enemy units, even if you don't have units there.* (errata; §822.1.d)
+- **Job:** the big Ambush, and a second closer: he can land straight onto B.
+- **Use:** on their turn into A; on yours onto B if Sivir is answered.
+- **Example (vs Riven):** Riven holds B with two units. Faefolk pulls one into A; the other stays at B, and Sivir is answered. In your main phase, play Rengar straight to B (his Ambush reaches a battlefield with enemy units). Arriving there applies Contested (§190.3.a.1), so a fight starts at B with his 6 Might as the attacker.
+
+**Vex, Apathetic** ×2 (4E · 4 Might · Deflect). *When an opponent plays a unit while I'm at a battlefield, Stun it. They can't move it this turn.*
+- **Job:** shuts off their Ambush and ready-on-arrival units everywhere, while she's at any battlefield.
+- **Use:** put her at A. Deflect taxes their answers to her by one Power.
+- **Example (vs Rengar):** with Vex at A, Rengar's Ambush units arrive stunned and deal no combat damage that turn. His whole defensive plan (Ambush blockers when you attack) stops working.
+
+**Rampage** ×2 (3E · Body optional). *Choose a friendly unit and an enemy unit. If you paid the Body, +2 Might to yours. They deal damage equal to their Mights to each other.*
+- **Job:** the deck's only kill. Clears B's blocker before Sivir, or a holder of theirs.
+- **Use:** main phase only. Clean against decks with no Calm (Rengar, Kennen, Evelynn); out against Defy decks and decks that want their units to die (LeBlanc, Mordekaiser). A kill readies your legend for another Gold.
+- **Example (vs Evelynn):** her 3-Might unit holds B. Rampage with Nidalee (4, +2 with Body = 6): it dies, Nidalee survives, and B is empty.
+
+### Clear the way
+
+**Gust** ×2 (1E · Reaction). *Return a unit at a battlefield with 3 Might or less to its owner's hand.*
+- **Job:** the cheapest answer: their 2–3-Might attacker, **or their Stranger before its bounce resolves** (it misses, §811.1.d.3.a).
+- **Example (vs Riven, who runs Stranger in 85% of lists):** she flips her Stranger at her battlefield to bounce your attacker. Gust her Stranger (2 Might) in response: a face-down permanent's play effect reads its battlefield off the source, so with Stranger gone it misses (§811.1.d.3.a).
+
+**Rebuke** ×2 (2E 2P · Action). *Return a unit at a battlefield to its owner's hand.*
+- **Job:** any size, Defy-proof. **Your answer to their Vex, Apathetic.**
+- **Example (vs Vex Gloomist):** on the closing turn, before you play Sivir, Rebuke her Vex. Her Deflect makes it 3 Power, which alone turns Sivir's +2 and Ganking on for the turn, and Sivir isn't stunned when she lands.
+
+**Star-Crossed** ×2 (3E 1P · Reaction). *Return a friendly unit and an enemy unit to their owners' hands.*
+- **Job:** a bounce at Reaction speed, or saving one of yours from removal at the cost of its place.
+- **Example (vs Seraphine):** she casts Hidden Blade on your Sivir in B's showdown. Star-Crossed in response, returning Sivir to your hand and one of her units to hers: the Blade has no target, and Sivir is back in your hand to play again next turn. No conquest this turn, but no Sivir lost.
+
+### Close at B
+
+**Ride the Wind** ×3 (2E 1P · Action). *Move a friendly unit and ready it.*
+- **Job:** a second unit into B, or a holder out of trouble, from any battlefield to any battlefield, even mid-showdown (§451.1).
+- **Example (vs Kennen, no Defy in 10%+ of his lists):** Kennen Star-Crosseds Sivir as she walks into B. In B's showdown, Ride the Wind your Staunch from A to B (a card's move needs no Ganking, and it's readied too): the showdown closes with your unit there, conquer. **Check A first:** if Staunch was your last unit there, A goes uncontrolled and your face-down card there is trashed (§323.5, §323.6.a).
+
+**Fizz, Trickster** ×2 (3E 1P · 3 Might). *When you play me, you may play a spell from your trash with Energy cost 3 or less, ignoring its Energy cost. Then recycle it. You must still pay its Power cost.*
+- **Job:** a second Ride the Wind, Gust, Rampage or Rebuke from the trash, plus a body.
+- **Example:** a Rampage in your trash: play Fizz, recast Rampage for nothing (it has no Power cost) on B's blocker.
+
+### Hold A
+
+**Staunch Survivor** ×2 (2E 1P · 2 Might). *Assault 2, Shield 2: +2 Might while I'm an attacker or defender.*
+- **Job:** the holder that wins 1-on-1s: 4 Might whenever it fights.
+- **Example (vs Kha'Zix):** he attacks A with a lone 3-Might unit. Staunch defends at 4 and wins without a card spent.
+
+### Cards and Gold
+
+**The Good Stuff** (Gear · 3E 1P · Deploy). *When you play this, discard 1, then draw 3. When you hold here, return this to its owner's hand.*
+- **Job:** the trap's card engine. Deployed at A, it comes back every turn A holds.
+- **Use:** on a turn you don't need Energy up. It dies only when *they* hold A. Expect An Offer You Can't Refuse (Kennen 54%) and Detonate (Ziggs 89%).
+- **Example:** turn 5, A safe: deploy it, discard a Rampage, draw 3. Turn 6: the hold returns it to hand; replay it for 3 more. Two plays: 6 cards drawn for 2 discarded, and the card itself comes back.
+
+**Reckless Innovator** ×3 (3E · 3 Might · Accelerate). *When I become exhausted, choose one: play a Gold gear token exhausted, or pay Chaos to draw 1.*
+- **Job:** Gold (which pays your hides) or cards, every time it exhausts.
+- **Example:** Accelerate it, walk it into A (it exhausts): take a Gold. Next turn that Gold, readied, pays to hide Stranger without recycling a rune.
+
+**Ezreal, Prodigy** ×2 (3E 1P · 3 Might). *When you play me, discard 1, then draw 2. Optional additional costs you pay cost 1 Energy or 1 rune less.*
+- **Job:** card flow on a body; discounts Accelerate and Rampage's Body.
+- **Use:** on Sivir's Accelerate take the **Energy** off, not the rune: a Power cost reduced to 0 isn't spent (§445.1.b), and she'd lose her +2 and Ganking.
 
 ---
 
@@ -193,7 +277,7 @@ They move into A. **Their units applied Contested, so they attack and get focus 
 - **Energy is the bottleneck.** Hold up Gust and Ambush on their turn; play The Good Stuff on turns you don't need to.
 - **Power is cheap here.** The legend makes a Gold whenever you recycle a rune (if she's ready), and Gold pays Power of any colour, including the cost of hiding (riftbound.gg's Radiance write-up makes the same point about this legend).
 - **A rune can do both in one turn:** exhaust for Energy, then recycle for Power (`docs/rules.md`, the rune formula).
-- **Runes 6/6.** Power demand is Chaos 19, Body 13; a 5/7 split moves turn-3 colour misses only from 7% to 6% on the play, under the 3-point bar for changing.
+- **Runes 6/6.** Power demand is Chaos 19, Body 13; turn-3 colour misses run 6–7% on the play and 4–5% on the draw at 6/6, and a 5/7 split measured within a point of that: under the 3-point bar for changing.
 
 **How often you'll have a piece** (39-card library; about 11 cards seen by the closing turn):
 
@@ -212,7 +296,7 @@ Stranger is there about half the time; the backup (win the fight at A) comes up 
 
 ## 8. Battlefields, mulligans, sideboarding
 
-**Battlefields.** In a best-of-3 each player picks one of their three, placed at once; one used in a decided game is retired (§488.5). Random at a single-game event (§487.5). **Battlefields are revealed before turn order** (Core Rules §113 before §115): game 1 is blind, and in games 2–3 the loser of the previous game chooses the seat *after* seeing both (TR §407.4). So pick by the last result, not by the seat:
+**Battlefields.** In a best-of-3 each player picks one of their three, placed at once; one used in a decided game is retired (§488.5). Random at a single-game event (§487.5). **Battlefields are placed before turn order is chosen** (§488.5, then the start-of-game choice, §115): game 1 is blind, and in games 2–3 the loser of the previous game chooses the seat (TR §407.4) *after* seeing both (RiftJudge ruling: "The loser chooses turn order after battlefields are revealed"). So pick by the last result, not by the seat:
 
 | when | battlefield | why |
 |---|---|---|
@@ -236,17 +320,20 @@ Stranger is there about half the time; the backup (win the fight at A) comes up 
 
 **Sideboarding** (untested; from the card reads in §9):
 
-| in | out | against | why |
-|---|---|---|---|
-| **Repulse** | Rampage or The Good Stuff | **Diana, LeBlanc, Riven, Kennen, Mordekaiser, Irelia, Evelynn** | counters a spell aimed at one of your units: Sivir in B, or your holder |
-| **Graves ×2** | Rebuke, Ride the Wind | **Rengar, Seraphine, wide decks** | defends A against a flood: his Might to every enemy there |
-| **Sabotage** | Rampage | **Vex Gloomist, Kai'Sa, Seraphine** | takes Back Off, Switcheroo or Time Warp out of their hand before they hide or cast it |
-| **Unyielding Spirit ×2** | Stranger, The Good Stuff | **Ziggs, Kai'Sa, Akali** | prevents all spell and ability damage this turn (Bombs, pings, Frozen Fortress) |
-| **Ruin Runner** | Rampage | **Diana, Riven, Akali** | a holder they can't Gust, Moonfall, Star-Crossed or bounce |
-| **Ravenbloom Prefect** | Rampage | **Orianna, Ziggs, Jayce** | banishes a gear they play |
-| **Gust #3, Star-Crossed #3** | Rampage, The Good Stuff | **Diana, Irelia** | more cheap Reactions against many small bodies |
+| in | against | why |
+|---|---|---|
+| **Repulse** | LeBlanc, Kai'Sa, Vex Gloomist, Diana, Riven, Evelynn, Seraphine, Kennen, Mordekaiser, Irelia | counters a spell aimed at one of your units: Sivir in B, or your holder |
+| **Unyielding Spirit ×2** | Kai'Sa, Ziggs, Orianna, Akali | prevents all spell and ability damage this turn (Bombs, pings, Hextech Ray on Sivir, Frozen Fortress) |
+| **Graves ×2** | Rengar, Seraphine, Master Yi | defends A against a flood: his Might to every enemy there when he defends |
+| **Sabotage** | Kai'Sa, Vex Gloomist, Kennen | takes Back Off, Switcheroo or Time Warp out of their hand before they hide or cast it |
+| **Ruin Runner** | Diana, Riven | a holder they can't Gust, Moonfall, Star-Crossed or bounce |
+| **Ravenbloom Prefect** | Ziggs, Orianna | banishes a gear they play |
+| **Gust #3** | Diana, Irelia | a third cheap Reaction against many small bodies |
+| **Star-Crossed #3** | Mordekaiser | a third Reaction bounce against big units |
 
-**Rampage comes out against Calm** (Riven, Vex, Akali, Irelia, K'Sante, Yi run Defy in most lists) and against decks whose units want to die (LeBlanc, Mordekaiser).
+What comes out depends on the matchup: §9's table has the exact ins and outs.
+
+**Rampage comes out against Calm** (Riven, Vex, Akali, Irelia, Yi; K'Sante runs Defy too, but his answers are thin, so keep it unless it gets countered) and against decks whose units want to die (LeBlanc, Mordekaiser).
 
 ---
 
@@ -258,7 +345,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 |---|---|---|---|---|---|
 | **Rengar** (local; best) | 63 (31) | the widest deck; walks into A; no Gust, Star-Crossed, Defy or Not So Fast in 10%+ of lists. Thrill of the Hunt 94%; **his Faefolk 90% pulls your holders**; Brynhir 22% | keep two at A; your Vex stuns his Ambush units; Rampage is clean | Graves ×2 | Rebuke, Ride the Wind |
 | **LeBlanc** (local) | 57 (20) | wide and attacks; fears bounce, but Deathgrip and Sacrifice (89% each) make it miss; Hidden Blade 84% | bait Deathgrip and Sacrifice before the Stranger turn; bounce, don't kill | Repulse | Rampage |
-| **Kai'Sa** (local) | 93 (37) | won't attack A; kills holders from range; Frozen Fortress 89% kills Faefolk; Rockfall Path 90%; Brynhir 95%. **Nothing at Action speed kills a 6-Might Sivir** | keep Faefolk in base; never make Rockfall your A; the close is clean | Unyielding Spirit ×2, Sabotage | Stranger ×2, Rampage |
+| **Kai'Sa** (local) | 93 (37) | won't attack A; kills holders from range; Frozen Fortress 89% kills Faefolk; Rockfall Path 90%; Brynhir 95%. **Smoke Screen (−4, 97%) then Hextech Ray (3) kills a 6-Might Sivir**; no single card does | keep Faefolk in base; never make Rockfall your A; close with Unyielding Spirit or Repulse held | Unyielding Spirit ×2, Sabotage, Repulse | Stranger ×2, Rampage ×2 |
 | **Vex, Gloomist** (local; bad) | 79 (22) | holds, won't walk into A; **her Vex 96% stuns Sivir**; Back Off 91%; Defy, Discipline | Rebuke her Vex first; race to hold at 7 | Sabotage, Repulse | Rampage ×2 |
 | **Diana** (local; worst) | 41 (12) | answers in every fight: **Gust 100% on Stranger, Moonfall 100% on Sivir**; Vex 83%; Hard Bargain 76% | make her spend first; Gust her 2–3-Might bodies | Repulse, Gust, Ruin Runner | Stranger ×2, The Good Stuff |
 | **Riven** | 197 (94) | **Baron 54%** (can't be pulled or bounced; the Pit is a third battlefield); her Stranger 85%; Blitzcrank 71%; Defy 93% | win by holding at 7; two holders at A; Rebuke the first Heron | Repulse, Ruin Runner | Rampage ×2 |
@@ -278,7 +365,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 
 | | matchups | why |
 |---|---|---|
-| **Best** | **Rengar**, **Mordekaiser**, **K'Sante**, **Kai'Sa** (for the close), **LeBlanc** | they walk into A, or can't stop Sivir in B; few Reaction answers to a bounce |
+| **Best** | **Rengar**, **Mordekaiser**, **K'Sante**, **Kai'Sa** (the trap idles, but her answers to Sivir take two cards), **LeBlanc** | they walk into A, or need two cards to stop Sivir in B; few Reaction answers to a bounce |
 | **Even** | Evelynn, Seraphine, Orianna, Master Yi (Bladesman) | |
 | **Worst** | **Diana**, **Vex Gloomist**, **Akali**, **Irelia**, **Riven**, **Ziggs** | Reaction answers to every piece, a Vex that stuns Sivir, or Baron |
 
@@ -295,15 +382,15 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 
 **Kai'Sa** (93 / 37). **Good for the closing turn.**
 - She doesn't walk into A; she kills your holders from range (Hextech Ray, Falling Star, Bellows Breath), and **Frozen Fortress** (89%) deals 1 to each unit there each Beginning Phase, killing a Faefolk.
-- **Nothing she plays at Action speed kills a 6-Might Sivir** (Hextech Ray is 3, or 4 with Void Gate), and she has no Gust, Star-Crossed or Vex in 10%+ of lists. Keep Faefolk in base; **never make Rockfall Path (90%) your A**; Brynhir (95%) turns the trap off for a turn.
-- Unyielding Spirit ×2 and Sabotage in.
+- **No single card she can play in B's showdown on your turn kills a 6-Might Sivir, but two do:** Smoke Screen (Reaction, −4, in 97% of lists) takes her to 2, then Hextech Ray (3 damage, 100%) kills her. Close with **Unyielding Spirit** (prevents all spell damage that turn) or **Repulse** (counters the first spell aimed at her) in hand. She has no Gust, Star-Crossed or Vex in 10%+ of lists. Keep Faefolk in base; **never make Rockfall Path (90%) your A**; Brynhir (95%) turns the trap off for a turn.
+- Unyielding Spirit ×2, Sabotage and Repulse in.
 
 **Vex, Gloomist** (79 / 22). **Worst-two.**
 - She holds and builds; she won't walk into A. **Her Vex, Apathetic (96%) stuns Sivir the turn you play her.** Back Off (91%), Defy, Discipline, her own Switcheroo and Stranger.
 - **Plan:** Rebuke her Vex first (3 Power with Deflect, so it also turns Sivir on); or play Sivir a turn early. This is a race to hold at 7, not a trap game. Sabotage and Repulse in; Rampage out.
 
 **Diana** (41 / 12). **Worst.**
-- Her Energy works only in showdowns, so she answers in every fight: **Gust (100%) on Stranger, Moonfall (100%) pulls Sivir out of B**, Vex (83%), Hard Bargain (76%) counters Switcheroo, Star-Crossed, Eclipse, Smoke Screen.
+- Her legend's extra Energy works only in showdowns, so she always has an answer in your fights: **Gust (100%) on Stranger, Moonfall (100%) pulls Sivir out of B**, Vex (83%), Hard Bargain (76%) counters Switcheroo unless you pay 2 Energy, Star-Crossed, Eclipse, Smoke Screen.
 - **Plan:** make her spend first; Gust her 2–3-Might bodies; Repulse for Sivir; Ruin Runner as a holder she can't touch.
 
 ### Cards in the field that answer the trap

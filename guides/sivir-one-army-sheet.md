@@ -20,7 +20,7 @@ date: 2026-11-01
 
 1. From 5 points, every turn: can either player reach 8 before the other acts again?
 2. A is the whole game. Losing it trashes your face-down card and kills The Good Stuff at their hold.
-3. **Their Vex, Apathetic dies before Sivir** (she stuns any unit you play, anywhere). Rebuke her: 3 Power with Deflect turns Sivir on.
+3. **Their Vex, Apathetic is gone before Sivir** (she stuns any unit you play, anywhere). Rebuke her on the closing turn: 3 Power with Deflect turns Sivir on.
 4. Keep a Faefolk in base from turn 4.
 
 **Face-down.** One per battlefield you hold; hide on your turn (pay with Gold); free with Reaction from the next turn, theirs too. **Stranger needs 4 units, itself included: not for 1-on-1s.** Evelynn and Stranger can't both sit at A.
@@ -39,9 +39,9 @@ date: 2026-11-01
 |---|---|
 | **Rengar** (best) | keep two at A (his Faefolk pulls); your Vex stuns his Ambush; Graves in |
 | **LeBlanc** | bait Deathgrip / Sacrifice before Stranger; Repulse in, Rampage out |
-| **Kai'Sa** | she won't attack A; nothing at Action speed kills a 6-Might Sivir; not Rockfall as A; Unyielding Spirit ×2 + Sabotage in |
+| **Kai'Sa** | she won't attack A; Smoke Screen + Hextech Ray kills Sivir, so close with Unyielding Spirit or Repulse in hand; not Rockfall as A; Unyielding Spirit ×2, Sabotage, Repulse in |
 | **Vex Gloomist** (bad) | Rebuke her Vex first; race to hold at 7; Sabotage + Repulse in, Rampage out |
-| **Diana** (worst) | Gust on Stranger, Moonfall on Sivir: make her spend first; Repulse + Ruin Runner in |
+| **Diana** (worst) | Gust on Stranger, Moonfall on Sivir: make her spend first; Repulse, Gust, Ruin Runner in |
 | **Riven** | Baron: win by holding at 7; two holders vs Blitzcrank; Rampage out |
 | **Kennen / Evelynn** | Rampage is clean; take Evelynn's battlefield to trash her face-down cards |
 | **Ziggs / Akali** | Unyielding Spirit ×2 in |
