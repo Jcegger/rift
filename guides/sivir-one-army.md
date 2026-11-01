@@ -32,10 +32,10 @@ date: 2026-11-01
 | job | cards |
 |---|---|
 | **Pull them in** | Faefolk ×3 · Evelynn (face down) |
-| **Punish them at A** | Bedeviling Stranger ×2 · Switcheroo ×2 · Punch First ×3 · Nidalee ×3 and Rengar ×2 (Ambush) · Vex ×2 |
-| **Hold A** | Staunch ×2 and the other two-drops (8 two-drop units in all) |
+| **Punish them at A** | Bedeviling Stranger ×2 · Switcheroo ×2 · Edge of Night ×2 · Tideturner ×2 · Punch First ×3 · Nidalee ×3 and Rengar ×2 (Ambush) · Vex ×2 |
+| **Hold A** | the two-drops (8 two-drop units, all Power-free) · Edge of Night ×2 (face down: +2 Might for good) |
 | **Clear the way** | Rampage ×2 · Rebuke ×2 · Gust ×2 · Star-Crossed ×2 |
-| **Close at B** | Sivir · Ride the Wind ×3 · Fizz ×2 |
+| **Close at B** | Sivir · Ride the Wind ×3 |
 | **Cards** | The Good Stuff (returns to hand each time A holds) · Ezreal ×2 · Innovator ×3 · Nidalee |
 
 **Four rules for every game.**
@@ -57,11 +57,10 @@ date: 2026-11-01
 | **2-drops** | Irresistible Faefolk ×3 | 2E | **the pull**: when it moves to a battlefield, you may move an enemy unit there |
 | | Bedeviling Stranger ×2 | 2E | Hidden. When played, choose a battlefield; if 4+ units are there (it counts itself), return an enemy unit there to hand |
 | | Evelynn, Entrancing | 2E | Hidden, Backline. From face down **on your turn**, pulls an enemy unit from elsewhere to her battlefield |
-| | Staunch Survivor ×2 | 2E 1P | Assault 2, Shield 2: 4 Might whenever it fights. The best holder |
+| | Tideturner ×2 | 2E | Hidden. When played, may swap places with a unit you control at another location (errata: from face down it can reach off its battlefield) |
 | **3-drops** | Reckless Innovator ×3 | 3E | Accelerate; each time it exhausts, a Gold, or pay 1 Chaos to draw |
 | | Nidalee, Cat Form ×3 | 3E 1P | 4 Might, **Ambush**; draws when she wins a combat |
 | | Ezreal, Prodigy ×2 | 3E 1P | discard 1, draw 2; your optional additional costs cost 1 less |
-| | Fizz, Trickster ×2 | 3E 1P | replays a spell of 3 Energy or less from your trash, ignoring its Energy |
 | **4+** | Vex, Apathetic ×2 | 4E | Deflect; **stuns any unit they play while she's at a battlefield** (it can't move that turn) |
 | | Rengar, Trophy Hunter ×2 | 5E 1P | 6 Might, **Ambush**, and can be played where only enemy units are |
 | **Spells** | Punch First ×3 | 1E 2P | +5 Might this turn; Action |
@@ -72,12 +71,13 @@ date: 2026-11-01
 | | Rampage ×2 | 3E | your unit and theirs deal their Mights to each other; pay 1 Body for +2 |
 | | Star-Crossed ×2 | 3E 1P | Reaction: return one of your units and one of theirs |
 | **Gear** | The Good Stuff | 3E 1P | Deploy: discard 1, draw 3. **When you hold here, return it to hand** |
+| | Edge of Night ×2 | 3E | Hidden equipment, +2 Might. From face down it attaches to a unit you control there; Equip: 1 Chaos |
 | **Runes** | 6 Body · 6 Chaos | | §7 |
 | **Battlefields** | Sigil of the Storm · Amateur Recital · Forbidding Waste | | §8 |
 
 **Sideboard (10):** Ruin Runner ×2 · Graves, Blasting Through ×2 · Ravenbloom Prefect · Acceptable Losses · An Offer You Can't Refuse · Sabotage · Unyielding Spirit ×2.
 
-**Shape:** 23 units, 16 spells, 1 gear. Post-Radiance midrange averages 21.6 / 13.5 / 4.9 (1,101 legal lists since 23 October; top-quarter finishes 22.2 / 13.0 / 4.8). **8 two-drop units**, 6 of them Power-free; the field's midrange average is 6.8.
+**Shape:** 21 units, 16 spells, 3 gear. Post-Radiance midrange averages 21.6 / 13.5 / 4.9 (1,101 legal lists since 23 October; top-quarter finishes 22.2 / 13.0 / 4.8). **8 two-drop units**, all Power-free; the field's midrange average is 6.8.
 
 ---
 
@@ -86,7 +86,7 @@ date: 2026-11-01
 - **29 October:** after an 0–4 Nexus Night, the old Sivir was rebuilt as a raid deck: race to 6, win in one turn.
 - **30–31 October:** Jay's own rebuild around displacement (Faefolk, Ride the Wind); a three-reviewer audit; battlefields re-picked from all 71 legal ones.
 - **31 October, the pros:** two experienced players said the deck can't win early fights; **play midrange, win on interaction on turns 3–4, carry top end that doesn't need Sivir alive, 8–9 cheap two-drops.** Nidalee ×3, Vex ×2, Gust ×2 in; Nilah out.
-- **1 November, the trap:** −2 First Mate +2 Bedeviling Stranger, then −Portable Portal +The Good Stuff. Both cards had been cut on 31 October *for needing a held battlefield*; under the midrange plan that became the reason to play them. Staunch, Switcheroo and Punch First ×3 were tested for cuts and kept on purpose (worksheet log).
+- **1 November, the trap:** −2 First Mate +2 Bedeviling Stranger, then −Portable Portal +The Good Stuff, and later −2 Fizz −2 Staunch +2 Edge of Night +2 Tideturner (two experienced players: Fizz left the deck "with its foot in two camps", and Staunch wasn't a good two-drop). Both cards had been cut on 31 October *for needing a held battlefield*; under the midrange plan that became the reason to play them. Staunch, Switcheroo and Punch First ×3 were tested for cuts and kept on purpose (worksheet log).
 
 ---
 
@@ -94,7 +94,7 @@ date: 2026-11-01
 
 ### Turns 1–2: claim A
 
-- **A two-drop, walked into a battlefield.** Faefolk, Stranger and Evelynn cost no Power; Staunch is the best holder but costs a rune's Power. **On the play you have 2 runes:** Staunch means a rune short on turn 2.
+- **A two-drop, walked into a battlefield.** Faefolk, Stranger, Tideturner and Evelynn all cost no Power, so turn 2 is never a rune short.
 - **Which battlefield is A?** The one you can keep. Prefer the one they'd have to walk the furthest units into, and never Rockfall Path ("units can't be played here": it kills Ambush and Stranger). Forbidding Waste punishes a lone *defender*, so it's a better B than A.
 - **Faefolk isn't your holder.** If it's your only two-drop, play it, but its real job is the closing turn. Keep at least one back in base from turn 4 on.
 
@@ -131,7 +131,7 @@ Checked step by step against the rules on 1 November (handbook → verbatim → 
 
 **At 5 holding A:** hold → 6, conquer the empty B → 7, and the next start-of-turn hold wins.
 
-**Other second conquests** if Sivir is answered: Rengar by Ambush (even where only enemy units are), Ride the Wind (moves and readies, even in a showdown), Fizz recasting Ride the Wind.
+**Other second conquests** if Sivir is answered: Rengar by Ambush (even where only enemy units are), Ride the Wind (moves and readies, even in a showdown).
 
 **What breaks it** (have an answer before you start):
 - **Their Vex, Apathetic** at any battlefield: Sivir and any Faefolk played that turn are stunned and can't move. **Rebuke her first** (her Deflect makes it 3 Power, which turns on Sivir's condition by itself).
@@ -153,7 +153,7 @@ They move into A. **Their units applied Contested, so they attack and get focus 
 |---|---|---|
 | **2+ units, or 2-on-1 against your holders** | flip **Stranger**, return the biggest attacker | 4+ units counting Stranger; no Might limit; free |
 | **1-on-1** | flip **Switcheroo** (swap their big Might with your small one), or **Gust** a 3-Might attacker | Stranger only makes 3 units here and does nothing |
-| **one big attacker** | **Nidalee or Rengar by Ambush** into A, then Punch First if needed | Ambush plays them as a Reaction to a battlefield where you have units (§822) |
+| **one big attacker** | **Nidalee or Rengar by Ambush** into A, or flip **Edge of Night** (+2 Might for good) or **Tideturner** (swap a bigger unit in), then Punch First if needed | Ambush plays them as a Reaction to a battlefield where you have units (§822) |
 | **they flood A** | Graves from the sideboard | he deals his Might to every enemy there when he defends; no readying needed |
 
 - **If no defender of yours survives, they conquer A**: your face-down card goes to the trash (§323.6.a) and The Good Stuff dies at their next hold (a conquest alone doesn't kill it, §830.1.b).
@@ -180,7 +180,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 **Irresistible Faefolk** ×3 (2E · 1 Might). *When I move to a battlefield, you may move an enemy unit to that battlefield.*
 - **Job:** empties B on the closing turn by dragging its defender into A, where your tricks are.
 - **Use:** any move triggers it, including an ordinary walk from base, so it can wait at base. The pull chooses, so Baron and "can't be chosen" units are immune. Keep one in base from turn 4.
-- **Example (vs Rengar):** you hold A with Staunch and a face-down Stranger; Rengar holds B with one Pit Rookie. On your turn Faefolk walks into A and pulls the Rookie in. A fight starts at A, Rengar attacking with the Rookie, and he has focus first: he plays Thrill of the Hunt (2E 1P) to banish the Rookie and replay it at B. B had gone uncontrolled after the pull, so the replayed Rookie **conquers B and scores him a point on your turn** (§323.5, §348.2.a.1). **The lesson:** against Rengar (Thrill in 94% of lists), pull when he can't pay 2 Energy and 1 Power, or when his point doesn't matter.
+- **Example (vs Rengar):** you hold A with Tideturner and a face-down Stranger; Rengar holds B with one Pit Rookie. On your turn Faefolk walks into A and pulls the Rookie in. A fight starts at A, Rengar attacking with the Rookie, and he has focus first: he plays Thrill of the Hunt (2E 1P) to banish the Rookie and replay it at B. B had gone uncontrolled after the pull, so the replayed Rookie **conquers B and scores him a point on your turn** (§323.5, §348.2.a.1). **The lesson:** against Rengar (Thrill in 94% of lists), pull when he can't pay 2 Energy and 1 Power, or when his point doesn't matter.
 
 **Evelynn, Entrancing** (Hidden · 2E · 2 Might · Backline). *When you play me from face down on your turn, you may move an enemy unit at a different location to my battlefield.*
 - **Job:** the backup puller. Hidden at A, she's a pull you don't have to draw on the closing turn.
@@ -193,7 +193,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 - **Job:** a free, Reaction-speed bounce with no size limit, at the battlefield you hold.
 - **Use:** from face down it's played to A and counts itself (§383.4.a.2). It needs 4 units: two attackers into one holder works, a 1-on-1 doesn't. From hand (2 Energy, main phase) it can choose any battlefield: against a wide board at B, bounce one of their four.
 - **Judge question:** whether a face-down Stranger may choose its own battlefield (§811.1.d.3) has no ruling. It's the card's clear intent; ask before an event.
-- **Example (vs Mordekaiser):** he attacks A with two units, one a 6-Might threat, into your Staunch. Flip Stranger: Staunch + Stranger + his two = 4. Return the big one to his hand. Staunch (4 Might defending) handles a smaller one left behind, and bouncing rather than killing gives his deaths engine nothing.
+- **Example (vs Mordekaiser):** he attacks A with two units, one a 6-Might threat, into your Nidalee. Flip Stranger: Nidalee + Stranger + his two = 4. Return the big one to his hand. Nidalee (4 Might) handles a smaller one left behind, and bouncing rather than killing gives his deaths engine nothing.
 
 **Switcheroo** ×2 (Hidden · 2E 2P · Action). *Swap the Mights of two units at the same battlefield this turn.*
 - **Job:** wins the 1-on-1 fight Stranger can't touch.
@@ -243,17 +243,18 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 **Ride the Wind** ×3 (2E 1P · Action). *Move a friendly unit and ready it.*
 - **Job:** a second unit into B, or a holder out of trouble, from any battlefield to any battlefield, even mid-showdown (§451.1).
-- **Example (vs Kennen, no Defy in 10%+ of his lists):** Kennen Star-Crosseds Sivir as she walks into B. In B's showdown, Ride the Wind your Staunch from A to B (a card's move needs no Ganking, and it's readied too): the showdown closes with your unit there, conquer. **Check A first:** if Staunch was your last unit there, A goes uncontrolled and your face-down card there is trashed (§323.5, §323.6.a).
-
-**Fizz, Trickster** ×2 (3E 1P · 3 Might). *When you play me, you may play a spell from your trash with Energy cost 3 or less, ignoring its Energy cost. Then recycle it. You must still pay its Power cost.*
-- **Job:** a second Ride the Wind, Gust, Rampage or Rebuke from the trash, plus a body.
-- **Example:** a Rampage in your trash: play Fizz, recast Rampage for nothing (it has no Power cost) on B's blocker.
+- **Example (vs Kennen, no Defy in 10%+ of his lists):** Kennen Star-Crosseds Sivir as she walks into B. In B's showdown, Ride the Wind your Nidalee from A to B (a card's move needs no Ganking, and it's readied too): the showdown closes with your unit there, conquer. **Check A first:** if Nidalee was your last unit there, A goes uncontrolled and your face-down card there is trashed (§323.5, §323.6.a).
 
 ### Hold A
 
-**Staunch Survivor** ×2 (2E 1P · 2 Might). *Assault 2, Shield 2: +2 Might while I'm an attacker or defender.*
-- **Job:** the holder that wins 1-on-1s: 4 Might whenever it fights.
-- **Example (vs Kha'Zix):** he attacks A with a lone 3-Might unit. Staunch defends at 4 and wins without a card spent.
+**Tideturner** ×2 (Hidden · 2E · 2 Might · Chaos). *When you play me, you may choose a unit you control at another location. Move me to its location and it to my original location.* (errata)
+- **Job:** a Power-free two-drop that works on their turn. From face down at A it swaps a bigger unit of yours into the fight for free; the errata lets it reach off its own battlefield (§811.1.d.3's Tideturner example).
+- **Example (vs Kha'Zix):** he attacks A with a 4-Might unit into your Faefolk. Flip Tideturner at A and swap with Rengar at your base: Rengar (6) is now defending A, Tideturner sits at base. From hand it's a plain 2-Might holder.
+
+**Edge of Night** ×2 (Hidden gear · 3E · Chaos). *+2 Might equipment. When you play this from face down, attach it to a unit you control here. Equip: 1 Chaos.*
+- **Job:** a face-down card that wins the fight at A **and stays**: +2 Might while attached (§137.3.a), not just for the turn like Switcheroo.
+- **Use:** flip it in A's showdown onto the defender that needs it. From hand it's 3 Energy plus 1 Chaos to equip, so prefer it face down. It's gear: their Offer, Detonate and Acceptable Losses can kill it.
+- **Example (vs Riven):** she attacks A with a 5-Might unit into your Nidalee (4). Flip Edge onto Nidalee: 6 against 5, Nidalee wins, draws a card, and keeps the +2 for the next attack.
 
 ### Cards and Gold
 
@@ -316,6 +317,8 @@ Stranger is there about half the time; the backup (win the fight at A) comes up 
 | **After you lose a game** (you choose, so go first) | **Amateur Recital**: "When you hold here, you may move a unit at a battlefield to its base." | **the trap's engine**, below |
 | **After you win a game** (they choose, and going first wins more, so expect the draw) | **Forbidding Waste**: "While a unit here is defending alone, it has −2 Might." | no hold reward to hand them; it punishes their lone early holder. Hold it with two and the −2 never touches you |
 
+**Rechecked after the Edge of Night / Tideturner swap (1 Nov):** all three stay. With 9 face-down cards for one slot at A, **Bandle Tree** ("You may hide an additional card here") is the first battlefield to try if the slot keeps clogging, but its only sensible place is Recital's, and Recital is worth more.
+
 **Amateur Recital, the engine.** Going first, your turn-2 move reaches a battlefield before theirs (unless they Accelerate a unit on turn 1: going second they have 3 runes). Make Recital your A. From your turn-3 hold, every turn:
 - the hold scores, and its trigger (your Beginning Phase, before you draw) **sends their lone defender at B to its base** (§383.4.d.2.b);
 - B goes uncontrolled once the trigger resolves and **any face-down card they had there is trashed** (§323.5, §323.6.a);
@@ -326,7 +329,7 @@ Stranger is there about half the time; the backup (win the fight at A) comes up 
 - **Evidence:** none for it. 15 vouched lists since Radiance, no top-quarter finish; no guide recommends it; Ultimate Guard's go-first example is Targon's Peak, the safe alternative. It's here because a deck built to keep one battlefield is the deck its downside doesn't hurt. Log whether you claimed it and how often it fired.
 
 **Mulligans** (set aside up to 2; they go to the bottom):
-- **Want two two-drops and a 3-drop.** Keep Stranger, Faefolk, Staunch, Evelynn, Switcheroo, Nidalee.
+- **Want two two-drops and a 3-drop.** Keep Stranger, Faefolk, Tideturner, Evelynn, Switcheroo, Edge, Nidalee.
 - **Send back first:** Rengar, Rampage, Star-Crossed and The Good Stuff in a hand with no two-drop.
 - **Turn-1 two-drop:** 8 in the library, so 70% keeping your first 5 cards and 83% when you mulligan for one.
 

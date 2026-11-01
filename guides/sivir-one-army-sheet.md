@@ -14,7 +14,7 @@ date: 2026-11-01
 3. When focus reaches you, flip **Stranger** (your units + Faefolk + theirs + Stranger = 4) and bounce it. **Don't pass with focus before you flip.** No Stranger? Win the fight (Punch First, Switcheroo): if any defender survives, their unit goes to *their base*, so B stays empty.
 4. **Sivir** with Accelerate: enters ready, 6 Might. Once A's fight is over, walk base → empty B → **8**.
 
-**On their turn, they attack A:** 2+ attackers → **Stranger** · 1-on-1 → **Switcheroo** or **Gust** · one big attacker → **Nidalee / Rengar by Ambush** · a flood → **Graves** (sideboard).
+**On their turn, they attack A:** 2+ attackers → **Stranger** · 1-on-1 → **Switcheroo**, **Edge of Night** (+2 for good) or **Gust** · one big attacker → **Nidalee / Rengar by Ambush**, or **Tideturner** swaps a big unit in · a flood → **Graves** (sideboard).
 
 **Four rules.**
 
@@ -23,7 +23,7 @@ date: 2026-11-01
 3. **Their Vex, Apathetic is gone before Sivir** (she stuns any unit you play, anywhere). Rebuke her on the closing turn: 3 Power with Deflect turns Sivir on.
 4. Keep a Faefolk in base from turn 4.
 
-**Face-down.** One per battlefield you hold; hide on your turn (pay with Gold); free with Reaction from the next turn, theirs too. **Stranger needs 4 units, itself included: not for 1-on-1s.** Evelynn and Stranger can't both sit at A.
+**Face-down.** One per battlefield you hold; hide on your turn (pay with Gold); free with Reaction from the next turn, theirs too. **Stranger needs 4 units, itself included: not for 1-on-1s.** Only one card fits at A: choose by the fight you expect (Stranger, Switcheroo, Edge, Tideturner, Evelynn).
 
 **Breaks the close:** their Vex · Gust or Star-Crossed on Stranger · Not So Fast · Moonfall / Hidden Blade / Rebuke on Sivir in B · **Baron** (can't be pulled or bounced; with the Pit out, **win by holding at 7**).
 

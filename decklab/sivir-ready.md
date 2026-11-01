@@ -553,3 +553,13 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   the A holder nothing can choose. Row backed up (`backups/state-pre-army-counters-2026-11-01.json`). Spell-stopping:
   with Repulse gone the sideboard has no counter; Hard Bargain (2E, counter unless they pay 2, Repeat) is the
   candidate if Jay wants one later.
+- **1 Nov 2026, one camp:** −2 Fizz −2 Staunch +2 Edge of Night +2 Tideturner (Jay's list; two experienced players:
+  Fizz put the deck's "foot in two camps", Staunch wasn't loved as a two-drop). Ruin Runner stays sideboard ×2 (bench:
+  Tideturner ×2 beat Ruin Runner + Tideturner on every line). I first overreached with a 9-card rebuild (Ride the Wind
+  wrongly sorted as raid-only: it's an Action, so it reinforces A in their showdowns); Jay pulled it back to the cards
+  named. Bench vs the list before (normal, play/draw): answer usable on their turn by turn 5 37/58% → 43/61%, tricks
+  crowded out 1.51 → 1.35, units by turn 5 4.1 → 3.6; colour misses t3 6%/3%, Power demand Chaos 17 / Body 11, 6/6
+  stays. Edge from face down attaches +2 Might for good (§137.3.a). Considered and not taken: Evelynn, In Control (a
+  point per hold with a face-down card at A; the bonus idea for later), Hard Bargain main (narrow), Baron Nashor (10E
+  with no cheat, and his Pit gates our own 8th-point conquest). Battlefields rechecked, unchanged; Bandle Tree noted.
+  Row backed up (`backups/state-pre-army-edge-2026-11-01.json`).

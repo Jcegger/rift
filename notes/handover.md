@@ -9,10 +9,10 @@ Where the work stands, for the next session. Read this, then `decklab/sivir-read
 - **No backup deck:** the v1 deck was deleted from the app on 1 Nov (row backed up, `backups/state-pre-rename-2026-11-01.json`);
   its guide `guides/sivir-trying-her-best.md` is kept as "Sivir v1 (retired)". `guides/sivir-v2.md` is superseded.
 - **Current list** (after the pros' swaps, `cb1653c`, and −2 First Mate +2 Bedeviling Stranger, 1 Nov):
-  - **Units:** Sivir · Faefolk ×3 · Evelynn · Staunch ×2 · Bedeviling Stranger ×2 · Innovator ×3 · Ezreal ×2 ·
-    Fizz ×2 · Nidalee ×3 · Vex ×2 · Rengar ×2
+  - **Units (21):** Sivir · Faefolk ×3 · Evelynn · Bedeviling Stranger ×2 · Tideturner ×2 · Innovator ×3 · Ezreal ×2 ·
+    Nidalee ×3 · Vex ×2 · Rengar ×2
   - **Spells:** Punch First ×3 · Ride the Wind ×3 · Gust ×2 · Rebuke ×2 · Star-Crossed ×2 · Rampage ×2 · Switcheroo ×2
-  - **Gear:** The Good Stuff (replaced Portable Portal, 1 Nov)
+  - **Gear:** The Good Stuff (replaced Portable Portal, 1 Nov) · Edge of Night ×2 (1 Nov, for Fizz)
   - **Runes:** 6 Body / 6 Chaos
   - **Battlefields:** Sigil of the Storm (game 1) · Amateur Recital (after a loss: Jay picks the seat, goes first; replaced Targon's Peak 1 Nov) · Forbidding Waste (after a win)
   - **Sideboard (1 Nov):** Ruin Runner ×2 · Graves ×2 · Ravenbloom Prefect (Jay: must stay) · Acceptable Losses ·

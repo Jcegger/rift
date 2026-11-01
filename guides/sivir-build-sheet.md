@@ -27,7 +27,6 @@ date: 2026-11-01
 | ▢ ▢ ▢ | **Nidalee, Cat Form** | UNL-114 | arriving Tue 3 Nov (from someone at Sip & Play); proxy till then |
 | ▢ ▢ | **Rengar, Trophy Hunter** | UNL-120 |  |
 | ▢ ▢ | **Rampage** | VEN-083 |  |
-| ▢ ▢ | **Staunch Survivor** | RAD-088 |  |
 
 ### 3. Playset box 2 · Chaos
 
@@ -36,7 +35,8 @@ date: 2026-11-01
 | ▢ ▢ | **Gust** | OGN-169 |  |
 | ▢ ▢ | **Rebuke** | OGN-172 |  |
 | ▢ ▢ ▢ | **Ride the Wind** | OGN-173 |  |
-| ▢ ▢ | **Fizz, Trickster** | SFD-140 |  |
+| ▢ ▢ | **Tideturner** | OGN-199 |  |
+| ▢ ▢ | **Edge of Night** | SFD-139 |  |
 | ▢ | **Sivir, Mercenary** | SFD-143 |  |
 | ▢ ▢ | **Switcheroo** | SFD-145 |  |
 | ▢ ▢ | **Ezreal, Prodigy** | SFD-149 |  |
@@ -47,7 +47,7 @@ date: 2026-11-01
 | ▢ | **The Good Stuff** | RAD-106 |  |
 | ▢ ▢ | **Bedeviling Stranger** | RAD-107 |  |
 
-**Main deck check:** 15 Body + 25 Chaos = 40 cards (Sivir, Mercenary included; she starts in the Champion Zone).
+**Main deck check:** 13 Body + 27 Chaos = 40 cards (Sivir, Mercenary included; she starts in the Champion Zone).
 
 ### 4. Sideboard (10), from the same boxes
 
