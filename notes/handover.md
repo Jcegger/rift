@@ -4,9 +4,10 @@ Where the work stands, for the next session. Read this, then `decklab/sivir-read
 
 ## The deck
 
-- **Main deck:** `Sivir: One Army, Two Fights (draft)` in the app (Battle Mistress, Body/Chaos). Read it live with
-  `scripts/rift export "One Army"`; never trust a cached copy, since Jay edits in the app between sessions.
-- **Backup deck:** `Sivir is trying her best` (v1, guide `guides/sivir-trying-her-best.md`). `guides/sivir-v2.md` is superseded.
+- **Main deck:** `Sivir Is Trying Her Best` in the app (renamed from "One Army, Two Fights" on 1 Nov; Battle Mistress,
+  Body/Chaos). Read it live with `scripts/rift export "Trying Her Best"`; never trust a cached copy, since Jay edits in the app between sessions.
+- **No backup deck:** the v1 deck was deleted from the app on 1 Nov (row backed up, `backups/state-pre-rename-2026-11-01.json`);
+  its guide `guides/sivir-trying-her-best.md` is kept as "Sivir v1 (retired)". `guides/sivir-v2.md` is superseded.
 - **Current list** (after the pros' swaps, `cb1653c`, and −2 First Mate +2 Bedeviling Stranger, 1 Nov):
   - **Units:** Sivir · Faefolk ×3 · Evelynn · Staunch ×2 · Bedeviling Stranger ×2 · Innovator ×3 · Ezreal ×2 ·
     Fizz ×2 · Nidalee ×3 · Vex ×2 · Rengar ×2
@@ -70,7 +71,7 @@ Jay's calls, so don't re-propose these without journal evidence:
 Pull the row fresh, save it to `backups/state-pre-<what>-<date>.json` (gitignored), check the deck still matches
 the last read (stop if Jay changed it), change only that deck's `cards`/`sb`, POST the whole row back
 (`Prefer: resolution=merge-duplicates`, the app's own write in `index.html`), then `scripts/rift export` to
-confirm. Test any change first: `RIFT_STATE=<saved state> scripts/rift try --deck "One Army" "-N Card" "+N Card"`.
+confirm. Test any change first: `RIFT_STATE=<saved state> scripts/rift try --deck "Trying Her Best" "-N Card" "+N Card"`.
 Log every change in `decklab/sivir-ready.md`; commit and push once Jay confirms.
 
 ## Corrections to remember (each was said wrong at least once)

@@ -1,5 +1,5 @@
 ---
-title: Sivir Is Trying Her Best — Deck Guide
+title: Sivir v1 (retired) — Deck Guide
 subtitle: Riftbound, Radiance — Jay's own Sivir, built from Randyyy's LA list over 25–27 October. The game plan on one page, then how to sequence every turn, every card's job, the matchups and the rules it runs on
 author: rift toolchain
 date: 2026-10-27
@@ -8,11 +8,11 @@ date: 2026-10-27
 **Legend:** Battle Mistress (Body/Chaos) · **Champion:** Sivir, Mercenary
 **Registered:** 40 main (Champion included) + 12 runes (5 Body / 7 Chaos) + 3 battlefields + 1 legend · **Sideboard:** 10 of 10
 **Shuffled library:** 39. The Champion starts in the Champion Zone and is playable from there (§103.3.a.1, §108.3.d)
-**Saved in the app as** `Sivir is trying her best`
+**Saved in the app as:** deleted on 1 November 2026. The name *Sivir Is Trying Her Best* now belongs to the trap deck
 **Where it came from:** "Body Chaos by Randyyy", 146th of 2165 at the LA Regional Qualifier (2 Oct), the one Sivir engine with a tournament record. About a dozen cards changed over 25–27 October, each from what Jay's games showed or from a rule that came out of them (§2). It shares Randyyy's engine and plays a different deck
 **Record:** 1–0 on RiftAtlas (a win against Kennen, 26 Oct). **Not yet in the app journal**, so `scripts/rift journal` doesn't show it
 **Collection status:** everything owned, sideboard included
-**Status:** locked on 27 October; since 31 October 2026 the backup deck. The main deck is [Sivir — One Army, Two Fights](sivir-one-army.md)
+**Status:** retired 1 November 2026, kept for the record. Locked on 27 October, then the backup deck from 31 October. The main deck is [Sivir Is Trying Her Best — The Trap](sivir-one-army.md)
 
 **Companions.** [strategy.md](../docs/strategy.md) is how to think about any turn; this guide is how *this deck* thinks. [archetypes.md](../docs/archetypes.md) is what each opponent is doing.
 

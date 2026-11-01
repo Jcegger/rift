@@ -540,3 +540,7 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   costs 8 Energy on the closing turn, where the trap needs no second Sivir fight). Also corrected in the guide: Kai'Sa
   Smoke Screen 97% (not 90%), Rengar's Thrill of the Hunt conquers an emptied B, Rengar's errata text, Diana's
   showdown-only Energy is her legend's extra point, and the §8 sideboard table now derives from §9's.
+- **1 Nov 2026, renamed:** the app deck "Sivir: One Army, Two Fights (draft)" is now **"Sivir Is Trying Her Best"**
+  (Jay; capital "Is", a verb in title case). The old v1 deck of that name was deleted from the app (no journal entries
+  pointed at it; row backed up, `backups/state-pre-rename-2026-11-01.json`); its guide is kept as "Sivir v1 (retired)".
+  Read the deck with `scripts/rift export "Trying Her Best"`.

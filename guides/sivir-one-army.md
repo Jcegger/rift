@@ -1,6 +1,6 @@
 ---
-title: Sivir — The Trap
-subtitle: Riftbound, Radiance — Jay's main deck (saved as "One Army, Two Fights"). Hold one battlefield, make attacking it a mistake, pull their units into it, and let Sivir walk into the one they left empty. The plan on one page, the closing turn checked rule by rule, every card's job, the face-down game, battlefields, mulligans, sideboarding and every matchup that matters
+title: Sivir Is Trying Her Best — The Trap
+subtitle: Riftbound, Radiance — Jay's main deck. Hold one battlefield, make attacking it a mistake, pull their units into it, and let Sivir walk into the one they left empty. The plan on one page, the closing turn checked rule by rule, every card's job, the face-down game, battlefields, mulligans, sideboarding and every matchup that matters
 author: rift toolchain
 date: 2026-11-01
 ---
@@ -8,7 +8,7 @@ date: 2026-11-01
 **Legend:** Battle Mistress (Body/Chaos) · **Champion:** Sivir, Mercenary
 **Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend · **Sideboard:** 10 of 10
 **Shuffled library:** 39. The Champion starts in the Champion Zone and can be played from there (§103.3.a.1, §108.3.d)
-**Saved in the app as** `Sivir: One Army, Two Fights (draft)` · **Archetype:** midrange that holds (this guide); [archetypes.md](../docs/archetypes.md) still files the legend under Aggro · Extra resources
+**Saved in the app as** `Sivir Is Trying Her Best` (renamed from "One Army, Two Fights" on 1 November; the old v1 deck of that name was deleted) · **Archetype:** midrange that holds (this guide); [archetypes.md](../docs/archetypes.md) still files the legend under Aggro · Extra resources
 **Where it came from:** Jay's rebuild of the [Ready and Gank worksheet](../decklab/sivir-ready.md) (30–31 October), the experienced players' advice (31 October), and two swaps on 1 November that turned it into a trap deck (worksheet log)
 **Record:** none yet. Log every game under the app's deck name
 **Collection status:** Nidalee, Cat Form still to get; everything else owned

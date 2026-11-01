@@ -1,5 +1,5 @@
 ---
-title: Sivir — The Trap · the one-page plan
+title: Sivir Is Trying Her Best — The Trap · the one-page plan
 subtitle: Keep at the table. The full guide is sivir-one-army.md (1 Nov 2026)
 author: rift toolchain
 date: 2026-11-01
