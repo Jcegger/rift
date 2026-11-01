@@ -20,6 +20,8 @@ Where the work stands, for the next session. Read this, then `decklab/sivir-read
 - **To get:** Nidalee, Cat Form ×3 (owned 0): Jay gets them **Tuesday 3 Nov 2026** from someone at Sip & Play. Build sheet
   for sleeving: `guides/sivir-build-sheet.md` (on the reMarkable, /riftbound/table, `once`).
 
+**Locked 1 Nov 2026 (Jay), `91b2a7a`:** frozen for testing. Change it only from game results.
+
 ## The plan, as it now stands
 
 **Since 1 Nov: A is a trap.** Hold one battlefield, pull their units into it, punish them there. Closing turn: Faefolk
