@@ -75,7 +75,7 @@ date: 2026-11-01
 | **Runes** | 6 Body · 6 Chaos | | §7 |
 | **Battlefields** | Sigil of the Storm · Amateur Recital · Forbidding Waste | | §8 |
 
-**Sideboard (10):** Graves, Blasting Through ×2 · Ravenbloom Prefect · Ruin Runner · Gust · Repulse · Sabotage · Unyielding Spirit ×2 · Star-Crossed.
+**Sideboard (10):** Ruin Runner ×2 · Graves, Blasting Through ×2 · Ravenbloom Prefect · Acceptable Losses · An Offer You Can't Refuse · Sabotage · Unyielding Spirit ×2.
 
 **Shape:** 23 units, 16 spells, 1 gear. Post-Radiance midrange averages 21.6 / 13.5 / 4.9 (1,101 legal lists since 23 October; top-quarter finishes 22.2 / 13.0 / 4.8). **8 two-drop units**, 6 of them Power-free; the field's midrange average is 6.8.
 
@@ -272,6 +272,18 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 ---
 
+### The sideboard
+
+- **Ruin Runner ×2** (6E · Body). *I can't be chosen by enemy spells and abilities.* The A holder they can't Gust, Moonfall, Rebuke, Star-Crossed, Charm or Blitzcrank away. It doesn't need to act; it needs to stay. **Example (vs Diana):** with Ruin Runner at A, her Moonfall and Gust have nothing there to aim at.
+- **Graves ×2** (5E 1P · Body). *When I attack or defend, deal damage equal to my Might to all enemy units here.* Defending at A wipes a wide attack; defending needs no readying.
+- **Acceptable Losses** (1E · Chaos · Action). *Each player kills one of their gear.* You pick yours: cast it with no gear out, or with only a Gold, or right after your hold returns The Good Stuff to hand. **Example (vs Orianna):** her only gear out is The Ball; it dies, and you lose nothing.
+- **An Offer You Can't Refuse** (2E · Chaos · Action). *Kill a gear. Its controller plays a Gold.* You pick: Riven's Blade of the Exile (89% of her lists), The Ball, Gutter Palace.
+- **Ravenbloom Prefect** (3E · Chaos). *When an opponent plays a gear, you may banish me to banish it.* **Against Ziggs, use this, not the two spells:** a Bomb that dies deals 2 to your unit; a banished one doesn't die.
+- **Sabotage** (1E 1P · Body). *They reveal their hand; you recycle a non-unit card.* Takes Back Off, Switcheroo or Time Warp before it's hidden or cast.
+- **Unyielding Spirit ×2** (1E 1P · Body · Reaction). *Prevent all spell and ability damage this turn.* Saves Sivir from Kai'Sa's Hextech Ray; blanks Bombs and pings.
+
+---
+
 ## 7. Power, Energy and the odds
 
 - **Energy is the bottleneck.** Hold up Gust and Ambush on their turn; play The Good Stuff on turns you don't need to.
@@ -322,14 +334,13 @@ Stranger is there about half the time; the backup (win the fight at A) comes up 
 
 | in | against | why |
 |---|---|---|
-| **Repulse** | LeBlanc, Kai'Sa, Vex Gloomist, Diana, Riven, Evelynn, Seraphine, Kennen, Mordekaiser, Irelia | counters a spell aimed at one of your units: Sivir in B, or your holder |
+| **Ruin Runner ×2** | Vex Gloomist, Diana, Riven, Evelynn, Kennen, Mordekaiser, Akali, Irelia | a holder they can't Gust, Moonfall, Star-Crossed, Charm or bounce |
+| **Graves ×2** | Rengar, LeBlanc, Seraphine, Master Yi | defends A against a flood: his Might to every enemy there when he defends |
 | **Unyielding Spirit ×2** | Kai'Sa, Ziggs, Orianna, Akali | prevents all spell and ability damage this turn (Bombs, pings, Hextech Ray on Sivir, Frozen Fortress) |
-| **Graves ×2** | Rengar, Seraphine, Master Yi | defends A against a flood: his Might to every enemy there when he defends |
-| **Sabotage** | Kai'Sa, Vex Gloomist, Kennen | takes Back Off, Switcheroo or Time Warp out of their hand before they hide or cast it |
-| **Ruin Runner** | Diana, Riven | a holder they can't Gust, Moonfall, Star-Crossed or bounce |
-| **Ravenbloom Prefect** | Ziggs, Orianna | banishes a gear they play |
-| **Gust #3** | Diana, Irelia | a third cheap Reaction against many small bodies |
-| **Star-Crossed #3** | Mordekaiser | a third Reaction bounce against big units |
+| **An Offer You Can't Refuse** | Riven, Orianna, Jayce, Azir, Jarvan IV, Ornn | kills the gear you pick (they get a Gold) |
+| **Acceptable Losses** | Riven, Orianna, Jayce, Azir, Jarvan IV, Ornn | each player kills one of their gear: cast it when yours would be a Gold or nothing |
+| **Ravenbloom Prefect** | Ziggs, Orianna, Jayce, Azir, Jarvan IV, Ornn | banishes a gear as it is played (use it, not the spells, against Bombs) |
+| **Sabotage** | Kai'Sa, Vex Gloomist, Seraphine, Kennen | takes Back Off, Switcheroo or Time Warp out of their hand before they hide or cast it |
 
 What comes out depends on the matchup: §9's table has the exact ins and outs.
 
@@ -344,22 +355,23 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 | opponent | lists (vouched) | what matters | plan | in | out |
 |---|---|---|---|---|---|
 | **Rengar** (local; best) | 63 (31) | the widest deck; walks into A; no Gust, Star-Crossed, Defy or Not So Fast in 10%+ of lists. Thrill of the Hunt 94%; **his Faefolk 90% pulls your holders**; Brynhir 22% | keep two at A; your Vex stuns his Ambush units; Rampage is clean | Graves ×2 | Rebuke, Ride the Wind |
-| **LeBlanc** (local) | 57 (20) | wide and attacks; fears bounce, but Deathgrip and Sacrifice (89% each) make it miss; Hidden Blade 84% | bait Deathgrip and Sacrifice before the Stranger turn; bounce, don't kill | Repulse | Rampage |
-| **Kai'Sa** (local) | 93 (37) | won't attack A; kills holders from range; Frozen Fortress 89% kills Faefolk; Rockfall Path 90%; Brynhir 95%. **Smoke Screen (−4, 97%) then Hextech Ray (3) kills a 6-Might Sivir**; no single card does | keep Faefolk in base; never make Rockfall your A; close with Unyielding Spirit or Repulse held | Unyielding Spirit ×2, Sabotage, Repulse | Stranger ×2, Rampage ×2 |
-| **Vex, Gloomist** (local; bad) | 79 (22) | holds, won't walk into A; **her Vex 96% stuns Sivir**; Back Off 91%; Defy, Discipline | Rebuke her Vex first; race to hold at 7 | Sabotage, Repulse | Rampage ×2 |
-| **Diana** (local; worst) | 41 (12) | answers in every fight: **Gust 100% on Stranger, Moonfall 100% on Sivir**; Vex 83%; Hard Bargain 76% | make her spend first; Gust her 2–3-Might bodies | Repulse, Gust, Ruin Runner | Stranger ×2, The Good Stuff |
-| **Riven** | 197 (94) | **Baron 54%** (can't be pulled or bounced; the Pit is a third battlefield); her Stranger 85%; Blitzcrank 71%; Defy 93% | win by holding at 7; two holders at A; Rebuke the first Heron | Repulse, Ruin Runner | Rampage ×2 |
-| **Evelynn** | 175 (33) | Last Caress 41% puts her face-down card on any battlefield; Switcheroo, Star-Crossed, Vex | take her battlefield: it trashes her face-down cards; Rampage is clean | Repulse | The Good Stuff |
-| **Ziggs** | 108 (14) | Bombs deploy at A and hit your holders when they die; Detonate 89% kills The Good Stuff | keep holders healthy; race | Unyielding Spirit ×2, Prefect | The Good Stuff, Stranger, Rampage |
-| **Seraphine** | 107 (24) | a wide Raucous Anthem turn; Imperial Decree; Hidden Blade on Sivir | one bounce won't stop a wide swing | Graves ×2, Repulse | Rampage ×2, Ride the Wind |
-| **Orianna** | 106 (29) | few units; The Ball deals 2 to your units; Gravity Field taxes Sivir's walk | hold her Deploy battlefields | Prefect, Unyielding Spirit | Rampage ×2 |
-| **Kennen** | 102 (53) | Star-Crossed 92%, Switcheroo 88%, Gust 83%; An Offer You Can't Refuse 54% kills The Good Stuff | press before Rhasa gets cheap; Rampage is clean | Repulse, Sabotage | The Good Stuff, Stranger |
-| **Mordekaiser** | 99 (25) | walks into A with big units; deaths feed him | bounce, don't kill | Repulse, Star-Crossed | Rampage ×2 |
-| **Akali** | 75 (33) | Not So Fast and Blitzcrank 76% each; pings kill Faefolk; Defy 99% | hold Faefolk until the closing turn | Unyielding Spirit ×2 | Rampage ×2 |
+| **LeBlanc** (local) | 57 (20) | wide and attacks; fears bounce, but Deathgrip and Sacrifice (89% each) make it miss; Hidden Blade 84% | bait Deathgrip and Sacrifice before the Stranger turn; bounce, don't kill | Graves ×2 | Rampage ×2 |
+| **Kai'Sa** (local) | 93 (37) | won't attack A; kills holders from range; Frozen Fortress 89% kills Faefolk; Rockfall Path 90%; Brynhir 95%. **Smoke Screen (−4, 97%) then Hextech Ray (3) kills a 6-Might Sivir**; no single card does | keep Faefolk in base; never make Rockfall your A; close with Unyielding Spirit held | Unyielding Spirit ×2, Sabotage | Stranger ×2, Rampage |
+| **Vex, Gloomist** (local; bad) | 79 (22) | holds, won't walk into A; **her Vex 96% stuns Sivir**; Back Off 91%; Defy, Discipline | Rebuke her Vex first; race to hold at 7 | Sabotage, Ruin Runner | Rampage ×2 |
+| **Diana** (local; worst) | 41 (12) | answers in every fight: **Gust 100% on Stranger, Moonfall 100% on Sivir**; Vex 83%; Hard Bargain 76% | make her spend first; Gust her 2–3-Might bodies; Ruin Runner holds A against Gust and Moonfall | Ruin Runner ×2 | Stranger ×2 |
+| **Riven** | 197 (94) | **Baron 54%** (can't be pulled or bounced; the Pit is a third battlefield); her Stranger 85%; Blitzcrank 71%; Defy 93% | win by holding at 7; two holders at A; kill her Blade | An Offer You Can't Refuse, Acceptable Losses, Ruin Runner ×2 | Rampage ×2, Faefolk, Evelynn |
+| **Evelynn** | 175 (33) | Last Caress 41% puts her face-down card on any battlefield; Switcheroo, Star-Crossed, Vex | take her battlefield: it trashes her face-down cards; Rampage is clean | Ruin Runner | The Good Stuff |
+| **Ziggs** | 108 (14) | Bombs deploy at A and hit your holders when they die; Detonate 89% kills The Good Stuff | keep holders healthy; gear spells kill Bombs into damage, so Prefect banishes | Unyielding Spirit ×2, Prefect | The Good Stuff, Stranger, Rampage |
+| **Seraphine** | 107 (24) | a wide Raucous Anthem turn; Imperial Decree; Hidden Blade on Sivir | one bounce won't stop a wide swing | Graves ×2, Sabotage | Rampage ×2, Ride the Wind |
+| **Orianna** | 106 (29) | few units; The Ball deals 2 to your units; Gravity Field taxes Sivir's walk | hold her Deploy battlefields | An Offer You Can't Refuse, Acceptable Losses, Prefect, Unyielding Spirit | Rampage ×2, Stranger ×2 |
+| **Kennen** | 102 (53) | Star-Crossed 92%, Switcheroo 88%, Gust 83%; An Offer You Can't Refuse 54% kills The Good Stuff | press before Rhasa gets cheap; Rampage is clean | Sabotage, Ruin Runner | The Good Stuff, Stranger |
+| **Mordekaiser** | 99 (25) | walks into A with big units; deaths feed him | bounce, don't kill | Ruin Runner | Rampage |
+| **Akali** | 75 (33) | Not So Fast and Blitzcrank 76% each; pings kill Faefolk; Defy 99% | hold Faefolk until the closing turn | Unyielding Spirit ×2, Ruin Runner ×2 | Rampage ×2, Faefolk ×2 |
 | **K'Sante** | 70 (14) | Shield doesn't stop a bounce; thin answers; Defy 83% | Rampage is weak into Defy | — | — |
 | **Master Yi (Bladesman)** | 50 (18) | Ruin Runner 72% at B can't be pulled; Charm 90% moves your holder; Scuttle Crab 74% | Forbidding Waste against his lone defender; a pulled defender loses his +2 | Graves | Rampage |
-| **Irelia** | 38 (9) | Not So Fast and Charm 76%; Twilight Shroud; Vex 61%; Scuttle Crab 84% | close when she's tapped out | Repulse, Gust | Rampage ×2 |
-| **Jayce** | 30 (11) | about 4 units; the trap barely matters | race | — | — |
+| **Irelia** | 38 (9) | Not So Fast and Charm 76%; Twilight Shroud; Vex 61%; Scuttle Crab 84% | close when she's tapped out | Ruin Runner ×2 | Rampage ×2 |
+| **Jayce** | 30 (11) | about 4 units; the trap barely matters | race; kill Gutter Palace | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger ×2, Evelynn |
+| **Azir, Jarvan IV, Ornn** (gear decks) | 71, 59, 35 | five or more gear pieces in nearly every list (Azir: Brutalizer, Eye of the Herald, B.F. Sword, Doran's Shield) | kill the equipment that matters, not the first one | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger, Ride the Wind, The Good Stuff |
 
 ### The trap's best and worst
 
@@ -374,24 +386,24 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 **Rengar** (63 lists, 31 vouched; the widest deck here). **Best matchup.**
 - He attacks, so A fills up; Stranger fires. He runs no Gust, Star-Crossed, Defy or Not So Fast in 10%+ of lists.
 - **Watch:** Thrill of the Hunt (94%) saves a bounced unit or drops one into B against Sivir; **his own Faefolk (90%) pulls your holders out of A**, so keep two there; Brynhir (22%) stops you playing cards that turn.
-- Your Vex at a battlefield stuns every Ambush unit he plays. Rampage is clean (no Calm). Graves in.
+- Your Vex at a battlefield stuns every Ambush unit he plays. Rampage is clean (no Calm). Graves ×2 in.
 
 **LeBlanc** (57 / 20). **Good.**
 - Wide and attacks; bounce is what she fears. **But** Deathgrip and Sacrifice (89% each) kill her own target in response: the bounce misses and she gets her death triggers. Bait them before the Stranger turn.
-- Hidden Blade (84%) kills Sivir in B or a holder: Repulse in. Rampage out (deaths feed her).
+- Hidden Blade (84%) kills Sivir in B or a holder. Graves ×2 in against her wide attacks; Rampage out (deaths feed her).
 
 **Kai'Sa** (93 / 37). **Good for the closing turn.**
 - She doesn't walk into A; she kills your holders from range (Hextech Ray, Falling Star, Bellows Breath), and **Frozen Fortress** (89%) deals 1 to each unit there each Beginning Phase, killing a Faefolk.
-- **No single card she can play in B's showdown on your turn kills a 6-Might Sivir, but two do:** Smoke Screen (Reaction, −4, in 97% of lists) takes her to 2, then Hextech Ray (3 damage, 100%) kills her. Close with **Unyielding Spirit** (prevents all spell damage that turn) or **Repulse** (counters the first spell aimed at her) in hand. She has no Gust, Star-Crossed or Vex in 10%+ of lists. Keep Faefolk in base; **never make Rockfall Path (90%) your A**; Brynhir (95%) turns the trap off for a turn.
-- Unyielding Spirit ×2, Sabotage and Repulse in.
+- **No single card she can play in B's showdown on your turn kills a 6-Might Sivir, but two do:** Smoke Screen (Reaction, −4, in 97% of lists) takes her to 2, then Hextech Ray (3 damage, 100%) kills her. Close with **Unyielding Spirit** (prevents all spell damage that turn) in hand. She has no Gust, Star-Crossed or Vex in 10%+ of lists. Keep Faefolk in base; **never make Rockfall Path (90%) your A**; Brynhir (95%) turns the trap off for a turn.
+- Unyielding Spirit ×2 and Sabotage in.
 
 **Vex, Gloomist** (79 / 22). **Worst-two.**
 - She holds and builds; she won't walk into A. **Her Vex, Apathetic (96%) stuns Sivir the turn you play her.** Back Off (91%), Defy, Discipline, her own Switcheroo and Stranger.
-- **Plan:** Rebuke her Vex first (3 Power with Deflect, so it also turns Sivir on); or play Sivir a turn early. This is a race to hold at 7, not a trap game. Sabotage and Repulse in; Rampage out.
+- **Plan:** Rebuke her Vex first (3 Power with Deflect, so it also turns Sivir on); or play Sivir a turn early. This is a race to hold at 7, not a trap game. Sabotage and Ruin Runner in; Rampage out.
 
 **Diana** (41 / 12). **Worst.**
 - Her legend's extra Energy works only in showdowns, so she always has an answer in your fights: **Gust (100%) on Stranger, Moonfall (100%) pulls Sivir out of B**, Vex (83%), Hard Bargain (76%) counters Switcheroo unless you pay 2 Energy, Star-Crossed, Eclipse, Smoke Screen.
-- **Plan:** make her spend first; Gust her 2–3-Might bodies; Repulse for Sivir; Ruin Runner as a holder she can't touch.
+- **Plan:** make her spend first; Gust her 2–3-Might bodies; Ruin Runner ×2 as holders she can't touch.
 
 ### Cards in the field that answer the trap
 

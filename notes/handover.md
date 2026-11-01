@@ -15,8 +15,8 @@ Where the work stands, for the next session. Read this, then `decklab/sivir-read
   - **Gear:** The Good Stuff (replaced Portable Portal, 1 Nov)
   - **Runes:** 6 Body / 6 Chaos
   - **Battlefields:** Sigil of the Storm (game 1) · Amateur Recital (after a loss: Jay picks the seat, goes first; replaced Targon's Peak 1 Nov) · Forbidding Waste (after a win)
-  - **Sideboard:** Ravenbloom Prefect (gear hate; Jay: must stay) · Graves ×2 · Ruin Runner · Gust · Repulse ·
-    Sabotage · Unyielding Spirit ×2 · Star-Crossed
+  - **Sideboard (1 Nov):** Ruin Runner ×2 · Graves ×2 · Ravenbloom Prefect (Jay: must stay) · Acceptable Losses ·
+    An Offer You Can't Refuse · Sabotage · Unyielding Spirit ×2. Main deck: Jay said don't change it.
 - **To get:** Nidalee, Cat Form ×3 (owned 0): Jay gets them **Tuesday 3 Nov 2026** from someone at Sip & Play. Build sheet
   for sleeving: `guides/sivir-build-sheet.md` (on the reMarkable, /riftbound/table, `once`).
 

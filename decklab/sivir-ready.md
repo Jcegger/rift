@@ -544,3 +544,12 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   (Jay; capital "Is", a verb in title case). The old v1 deck of that name was deleted from the app (no journal entries
   pointed at it; row backed up, `backups/state-pre-rename-2026-11-01.json`); its guide is kept as "Sivir v1 (retired)".
   Read the deck with `scripts/rift export "Trying Her Best"`.
+- **1 Nov 2026, sideboard:** Jay: Acceptable Losses and more gear hate; keep Ruin Runner, two of them; keep Graves ×2;
+  cut Repulse. **Main deck unchanged** (Jay; a −2 Rampage +2 Hard Bargain swap was written and reverted the same
+  minute). Sideboard now: Ruin Runner ×2 · Graves ×2 · Ravenbloom Prefect · Acceptable Losses · An Offer You Can't
+  Refuse · Sabotage · Unyielding Spirit ×2 (out: Repulse, Gust, Star-Crossed). Why gear hate: Riven, the most-played
+  deck, runs Blade of the Exile in 175 of 197 lists and Zhonya's in 141; Orianna The Ball 100/106; Azir five equipment
+  pieces in ~70/71. Against Ziggs only Prefect (a Bomb that dies deals 2; a banished one doesn't die). Ruin Runner is
+  the A holder nothing can choose. Row backed up (`backups/state-pre-army-counters-2026-11-01.json`). Spell-stopping:
+  with Repulse gone the sideboard has no counter; Hard Bargain (2E, counter unless they pay 2, Repeat) is the
+  candidate if Jay wants one later.

@@ -38,13 +38,13 @@ date: 2026-11-01
 | against | adjust |
 |---|---|
 | **Rengar** (best) | keep two at A (his Faefolk pulls); your Vex stuns his Ambush; Graves in |
-| **LeBlanc** | bait Deathgrip / Sacrifice before Stranger; Repulse in, Rampage out |
-| **Kai'Sa** | she won't attack A; Smoke Screen + Hextech Ray kills Sivir, so close with Unyielding Spirit or Repulse in hand; not Rockfall as A; Unyielding Spirit ×2, Sabotage, Repulse in |
-| **Vex Gloomist** (bad) | Rebuke her Vex first; race to hold at 7; Sabotage + Repulse in, Rampage out |
-| **Diana** (worst) | Gust on Stranger, Moonfall on Sivir: make her spend first; Repulse, Gust, Ruin Runner in |
-| **Riven** | Baron: win by holding at 7; two holders vs Blitzcrank; Rampage out |
-| **Kennen / Evelynn** | Rampage is clean; take Evelynn's battlefield to trash her face-down cards |
+| **LeBlanc** | bait Deathgrip / Sacrifice before Stranger; Graves ×2 in, Rampage out |
+| **Kai'Sa** | she won't attack A; Smoke Screen + Hextech Ray kills Sivir, so close with Unyielding Spirit in hand; not Rockfall as A; Unyielding Spirit ×2 + Sabotage in |
+| **Vex Gloomist** (bad) | Rebuke her Vex first; race to hold at 7; Sabotage + Ruin Runner in, Rampage out |
+| **Diana** (worst) | Gust on Stranger, Moonfall on Sivir: make her spend first; Ruin Runner ×2 in, Stranger ×2 out |
+| **Riven** | Baron: win by holding at 7; two holders vs Blitzcrank; Offer + Acceptable Losses for her Blade, Ruin Runner ×2 in; Rampage out |
+| **Kennen / Evelynn** | Rampage is clean; Ruin Runner in; take Evelynn's battlefield to trash her face-down cards |
 | **Ziggs / Akali** | Unyielding Spirit ×2 in |
-| **Gear decks** | Ravenbloom Prefect in |
+| **Gear decks** (and Riven's Blade) | Offer, Acceptable Losses, Prefect in; **only Prefect against Ziggs's Bombs** |
 
 **Log each game:** couldn't reach 6 · couldn't open a battlefield · missed the second conquest · Sivir got answered · **did the trap fire?**

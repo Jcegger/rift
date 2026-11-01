@@ -4,23 +4,35 @@
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
   {
+   "slug": "sivir-build-sheet",
+   "file": "guides/sivir-build-sheet.md",
+   "kicker": null,
+   "title": "Sivir Is Trying Her Best · build sheet",
+   "subtitle": "Pull, sleeve, cross off. In the order your boxes are sorted (1 Nov 2026)",
+   "date": "2026-11-01",
+   "legend": null,
+   "champion": null,
+   "sections": [],
+   "words": 485
+  },
+  {
    "slug": "sivir-one-army-sheet",
    "file": "guides/sivir-one-army-sheet.md",
    "kicker": null,
-   "title": "Sivir — The Trap · the one-page plan",
+   "title": "Sivir Is Trying Her Best — The Trap · the one-page plan",
    "subtitle": "Keep at the table. The full guide is sivir-one-army.md (1 Nov 2026)",
    "date": "2026-11-01",
    "legend": null,
    "champion": null,
    "sections": [],
-   "words": 639
+   "words": 665
   },
   {
    "slug": "sivir-one-army",
    "file": "guides/sivir-one-army.md",
    "kicker": null,
-   "title": "Sivir — The Trap",
-   "subtitle": "Riftbound, Radiance — Jay's main deck (saved as \"One Army, Two Fights\"). Hold one battlefield, make attacking it a mistake, pull their units into it, and let Sivir walk into the one they left empty. The plan on one page, the closing turn checked rule by rule, every card's job, the face-down game, battlefields, mulligans, sideboarding and every matchup that matters",
+   "title": "Sivir Is Trying Her Best — The Trap",
+   "subtitle": "Riftbound, Radiance — Jay's main deck. Hold one battlefield, make attacking it a mistake, pull their units into it, and let Sivir walk into the one they left empty. The plan on one page, the closing turn checked rule by rule, every card's job, the face-down game, battlefields, mulligans, sideboarding and every matchup that matters",
    "date": "2026-11-01",
    "legend": "Battle Mistress",
    "champion": "Sivir, Mercenary",
@@ -41,13 +53,13 @@
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 8278
+   "words": 8698
   },
   {
    "slug": "sivir-trying-her-best",
    "file": "guides/sivir-trying-her-best.md",
    "kicker": null,
-   "title": "Sivir Is Trying Her Best — Deck Guide",
+   "title": "Sivir v1 (retired) — Deck Guide",
    "subtitle": "Riftbound, Radiance — Jay's own Sivir, built from Randyyy's LA list over 25–27 October. The game plan on one page, then how to sequence every turn, every card's job, the matchups and the rules it runs on",
    "date": "2026-10-27",
    "legend": "Battle Mistress",
@@ -71,7 +83,7 @@
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 8694
+   "words": 8717
   },
   {
    "slug": "sivir-v2",
@@ -100,7 +112,7 @@
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 4623
+   "words": 4627
   },
   {
    "slug": "fundamentals",

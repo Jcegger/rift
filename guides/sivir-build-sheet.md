@@ -57,19 +57,16 @@ date: 2026-11-01
 |---|---|---|---|
 | ▢ ▢ | **Unyielding Spirit** | OGN-145 |  |
 | ▢ | **Sabotage** | OGN-156 |  |
-| ▢ | **Ruin Runner** | SFD-105 |  |
-| ▢ | **Repulse** | UNL-106 |  |
+| ▢ ▢ | **Ruin Runner** | SFD-105 |  |
 | ▢ ▢ | **Graves, Blasting Through** | RAD-085 |  |
 
 **Chaos**
 
 | ✓ | card | set no. | notes |
 |---|---|---|---|
-| ▢ | **Gust** | OGN-169 |  |
-| ▢ | **Star-Crossed** | UNL-128 |  |
+| ▢ | **Acceptable Losses** | OGN-179 |  |
 | ▢ | **Ravenbloom Prefect** | VEN-102 |  |
-
-Gust and Star-Crossed: the sideboard copy is your third, still from the playset box.
+| ▢ | **An Offer You Can't Refuse** | RAD-101 |  |
 
 ### Notes
 
