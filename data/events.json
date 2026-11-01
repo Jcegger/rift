@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-31",
+ "generatedAt": "2026-11-01",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2474,
-  "eventsWithDecks": 21,
-  "players": 64535,
-  "playersWithDecks": 6585,
+  "events": 2476,
+  "eventsWithDecks": 22,
+  "players": 64930,
+  "playersWithDecks": 6857,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
    "Mardi - Championship #1",
@@ -26,21 +26,21 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 64,
-  "claimedEventsUnmatched": 57,
+  "claimedEvents": 66,
+  "claimedEventsUnmatched": 59,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Asia": 103,
-   "unknown": 202,
-   "Europe": 69,
+   "Asia": 104,
+   "Europe": 73,
+   "unknown": 204,
    "Oceania": 5,
    "North America": 7
   },
   "registryEventsByRegion": {
-   "unknown": 2468,
+   "unknown": 2470,
    "Asia": 6
   },
   "unresolvedClaimEvents": [
@@ -56,6 +56,7 @@
    "Atlanta CGS",
    "Azir, Emperor of the Sands: Barcelona Regional Qualifier",
    "Barcelona RQ",
+   "Black Cat Card Game X Cat Island Pilgrimage Joint Tournament",
    "CCS 25k Qualifier #5",
    "Changsha RQ",
    "Chengdu Regional",
@@ -74,6 +75,7 @@
    "Riftbound Showdown Series Germany",
    "Riftbound Showdown Series: Malmö",
    "Runes & Rift Open 25",
+   "S2 Nanning City Challenge",
    "S3 Guangzhou City Challenge",
    "S3 Shanghai City Challenge",
    "S4 Beijing City Challenge",
@@ -103,7 +105,8 @@
    "for the"
   ],
   "decksByEvent": {
-   "LDXP Sacramento - Riftbound Showdown 25k": 701,
+   "LDXP Sacramento - Riftbound Showdown 25k": 704,
+   "Convergence IV": 232,
    "CCS Riftbound $10,000 Tournament": 222,
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament": 198,
    "Friday $5,000 Riftbound: League of Legends TCG Tournament": 180,
@@ -144,6 +147,39 @@
   }
  },
  "events": [
+  {
+   "name": "Convergence IV",
+   "dt": "2026-10-31",
+   "players": 272,
+   "format": "Constructed",
+   "winner": "Wojciech Cetner",
+   "country": null,
+   "slug": "convergence-iv",
+   "top": []
+  },
+  {
+   "name": "CoolStuffCon Orlando 2026- Riftbound $5k",
+   "dt": "2026-10-30",
+   "players": 123,
+   "format": "Constructed",
+   "winner": "CTCG Relivia",
+   "country": "US",
+   "slug": "coolstuffcon-orlando-2026-riftbound-5k",
+   "top": [
+    [
+     "RAD-149",
+     23
+    ],
+    [
+     "VEN-155",
+     17
+    ],
+    [
+     "UNL-183",
+     7
+    ]
+   ]
+  },
   {
    "name": "Fast Cup Radiance #3",
    "dt": "2026-10-27",

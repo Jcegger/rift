@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-31",
+ "generatedAt": "2026-11-01",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -7,21 +7,21 @@
    "slug": "sivir-one-army-sheet",
    "file": "guides/sivir-one-army-sheet.md",
    "kicker": null,
-   "title": "Sivir — One Army, Two Fights · the one-page plan",
-   "subtitle": "Keep at the table. The full guide is sivir-one-army.md. Being revised (31 Oct): the list now runs Nidalee ×3, Vex ×2, Gust ×2, no Nilah",
-   "date": "2026-10-31",
+   "title": "Sivir — The Trap · the one-page plan",
+   "subtitle": "Keep at the table. The full guide is sivir-one-army.md (1 Nov 2026)",
+   "date": "2026-11-01",
    "legend": null,
    "champion": null,
    "sections": [],
-   "words": 457
+   "words": 639
   },
   {
    "slug": "sivir-one-army",
    "file": "guides/sivir-one-army.md",
    "kicker": null,
-   "title": "Sivir — One Army, Two Fights",
-   "subtitle": "Riftbound, Radiance — Jay's main deck. A raid deck that races to 6 and wins in one turn, with Sivir as the finisher it never has to draw. The plan on one page, the finishing turn, every card's job, battlefields, mulligans, sideboarding, and what changes against each kind of opponent",
-   "date": "2026-10-31",
+   "title": "Sivir — The Trap",
+   "subtitle": "Riftbound, Radiance — Jay's main deck (saved as \"One Army, Two Fights\"). Hold one battlefield, make attacking it a mistake, pull their units into it, and let Sivir walk into the one they left empty. The plan on one page, the closing turn checked rule by rule, every card's job, the face-down game, battlefields, mulligans, sideboarding and every matchup that matters",
+   "date": "2026-11-01",
    "legend": "Battle Mistress",
    "champion": "Sivir, Mercenary",
    "sections": [
@@ -29,19 +29,19 @@
     "1. The list",
     "2. How it got here",
     "3. The game, turn by turn",
-    "4. The finishing turn",
-    "5. Card by card",
-    "6. Power and Energy",
-    "7. Battlefields and mulligans",
-    "8. Sideboarding",
-    "9. What changes against each kind of opponent",
+    "4. The closing turn, rule by rule",
+    "5. The trap on their turn",
+    "6. Card by card, with examples",
+    "7. Power, Energy and the odds",
+    "8. Battlefields, mulligans, sideboarding",
+    "9. Matchups",
     "10. The rules this deck leans on",
     "11. Mistakes that lose games",
     "12. What to log",
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 4905
+   "words": 8278
   },
   {
    "slug": "sivir-trying-her-best",
