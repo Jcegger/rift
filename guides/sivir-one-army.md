@@ -245,6 +245,26 @@ Stranger is there about half the time; the backup (win the fight at A) comes up 
 
 From the legal lists played since 23 October (`scripts/rift meta <legend> --since 2026-10-23`, run 1 November; % = lists running at least one copy). **None of this is tested at a table.**
 
+| opponent | lists (vouched) | what matters | plan | in | out |
+|---|---|---|---|---|---|
+| **Rengar** (local; best) | 63 (31) | the widest deck; walks into A; no Gust, Star-Crossed, Defy or Not So Fast in 10%+ of lists. Thrill of the Hunt 94%; **his Faefolk 90% pulls your holders**; Brynhir 22% | keep two at A; your Vex stuns his Ambush units; Rampage is clean | Graves ×2 | Rebuke, Ride the Wind |
+| **LeBlanc** (local) | 57 (20) | wide and attacks; fears bounce, but Deathgrip and Sacrifice (89% each) make it miss; Hidden Blade 84% | bait Deathgrip and Sacrifice before the Stranger turn; bounce, don't kill | Repulse | Rampage |
+| **Kai'Sa** (local) | 93 (37) | won't attack A; kills holders from range; Frozen Fortress 89% kills Faefolk; Rockfall Path 90%; Brynhir 95%. **Nothing at Action speed kills a 6-Might Sivir** | keep Faefolk in base; never make Rockfall your A; the close is clean | Unyielding Spirit ×2, Sabotage | Stranger ×2, Rampage |
+| **Vex, Gloomist** (local; bad) | 79 (22) | holds, won't walk into A; **her Vex 96% stuns Sivir**; Back Off 91%; Defy, Discipline | Rebuke her Vex first; race to hold at 7 | Sabotage, Repulse | Rampage ×2 |
+| **Diana** (local; worst) | 41 (12) | answers in every fight: **Gust 100% on Stranger, Moonfall 100% on Sivir**; Vex 83%; Hard Bargain 76% | make her spend first; Gust her 2–3-Might bodies | Repulse, Gust, Ruin Runner | Stranger ×2, The Good Stuff |
+| **Riven** | 197 (94) | **Baron 54%** (can't be pulled or bounced; the Pit is a third battlefield); her Stranger 85%; Blitzcrank 71%; Defy 93% | win by holding at 7; two holders at A; Rebuke the first Heron | Repulse, Ruin Runner | Rampage ×2 |
+| **Evelynn** | 175 (33) | Last Caress 41% puts her face-down card on any battlefield; Switcheroo, Star-Crossed, Vex | take her battlefield: it trashes her face-down cards; Rampage is clean | Repulse | The Good Stuff |
+| **Ziggs** | 108 (14) | Bombs deploy at A and hit your holders when they die; Detonate 89% kills The Good Stuff | keep holders healthy; race | Unyielding Spirit ×2, Prefect | The Good Stuff, Stranger, Rampage |
+| **Seraphine** | 107 (24) | a wide Raucous Anthem turn; Imperial Decree; Hidden Blade on Sivir | one bounce won't stop a wide swing | Graves ×2, Repulse | Rampage ×2, Ride the Wind |
+| **Orianna** | 106 (29) | few units; The Ball deals 2 to your units; Gravity Field taxes Sivir's walk | hold her Deploy battlefields | Prefect, Unyielding Spirit | Rampage ×2 |
+| **Kennen** | 102 (53) | Star-Crossed 92%, Switcheroo 88%, Gust 83%; An Offer You Can't Refuse 54% kills The Good Stuff | press before Rhasa gets cheap; Rampage is clean | Repulse, Sabotage | The Good Stuff, Stranger |
+| **Mordekaiser** | 99 (25) | walks into A with big units; deaths feed him | bounce, don't kill | Repulse, Star-Crossed | Rampage ×2 |
+| **Akali** | 75 (33) | Not So Fast and Blitzcrank 76% each; pings kill Faefolk; Defy 99% | hold Faefolk until the closing turn | Unyielding Spirit ×2 | Rampage ×2 |
+| **K'Sante** | 70 (14) | Shield doesn't stop a bounce; thin answers; Defy 83% | Rampage is weak into Defy | — | — |
+| **Master Yi (Bladesman)** | 50 (18) | Ruin Runner 72% at B can't be pulled; Charm 90% moves your holder; Scuttle Crab 74% | Forbidding Waste against his lone defender; a pulled defender loses his +2 | Graves | Rampage |
+| **Irelia** | 38 (9) | Not So Fast and Charm 76%; Twilight Shroud; Vex 61%; Scuttle Crab 84% | close when she's tapped out | Repulse, Gust | Rampage ×2 |
+| **Jayce** | 30 (11) | about 4 units; the trap barely matters | race | — | — |
+
 ### The trap's best and worst
 
 | | matchups | why |
@@ -253,7 +273,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 | **Even** | Evelynn, Seraphine, Orianna, Master Yi (Bladesman) | |
 | **Worst** | **Diana**, **Vex Gloomist**, **Akali**, **Irelia**, **Riven**, **Ziggs** | Reaction answers to every piece, a Vex that stuns Sivir, or Baron |
 
-### The local room (Sip & Play)
+### The local room in detail (Sip & Play)
 
 **Rengar** (63 lists, 31 vouched; the widest deck here). **Best matchup.**
 - He attacks, so A fills up; Stranger fires. He runs no Gust, Star-Crossed, Defy or Not So Fast in 10%+ of lists.
@@ -276,23 +296,6 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 **Diana** (41 / 12). **Worst.**
 - Her Energy works only in showdowns, so she answers in every fight: **Gust (100%) on Stranger, Moonfall (100%) pulls Sivir out of B**, Vex (83%), Hard Bargain (76%) counters Switcheroo, Star-Crossed, Eclipse, Smoke Screen.
 - **Plan:** make her spend first; Gust her 2–3-Might bodies; Repulse for Sivir; Ruin Runner as a holder she can't touch.
-
-### The rest of the field
-
-| legend | lists (vouched) | what matters | plan |
-|---|---|---|---|
-| **Riven** | 197 (94) | **Baron 54%**: can't be pulled or bounced, and the Pit is a third battlefield. Her own Stranger 85%, Blitzcrank 71% pulls your holder, Defy 93% | win by holding at 7; two holders at A; Rebuke the first Astral Heron; Rampage out, Repulse and Ruin Runner in |
-| **Evelynn** | 175 (33) | Last Caress (41%) puts a face-down card onto any battlefield; Switcheroo, Star-Crossed, Vex | take her battlefield: it trashes her face-down cards; Rampage is clean |
-| **Ziggs** | 108 (14) | Bombs deploy at A and hit your holders when they die; Detonate kills The Good Stuff | Unyielding Spirit ×2 and Prefect in |
-| **Seraphine** | 107 (24) | a wide Raucous Anthem turn; Imperial Decree; Hidden Blade on Sivir | Graves in; one bounce won't stop a wide swing |
-| **Orianna** | 106 (29) | few units; The Ball deals 2 to your units; Gravity Field taxes Sivir's walk | hold her Deploy battlefields; Prefect in |
-| **Kennen** | 102 (53) | Star-Crossed 92%, Switcheroo 88%, Gust 83%; An Offer You Can't Refuse kills The Good Stuff | press before Rhasa gets cheap; Rampage is clean; Repulse in |
-| **Mordekaiser** | 99 (25) | attacks into A with big units; deaths feed him | bounce, don't kill; Rampage out |
-| **Akali** | 75 (33) | Not So Fast and Blitzcrank (76% each); pings kill Faefolk; Defy 99% | Unyielding Spirit and Ruin Runner in; Rampage out |
-| **K'Sante** | 70 (14) | Shield doesn't stop a bounce; thin answers | Rampage out (Defy) |
-| **Master Yi (Bladesman)** | 50 (18) | Ruin Runner (72%) at B can't be pulled; Charm moves your holder; Scuttle Crab reads face-down cards | Forbidding Waste against his lone defender; a pulled defender loses his +2 |
-| **Irelia** | 38 (9) | Not So Fast, Charm, Twilight Shroud, Vex, Scuttle Crab | Repulse and Gust in; Rampage out |
-| **Jayce** | 30 (11) | about 4 units; the trap barely matters | race |
 
 ### Cards in the field that answer the trap
 

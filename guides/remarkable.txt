@@ -16,7 +16,7 @@
 @pull     notes/sheets
 @css      guides/eink.css
 @prebuild scripts/build-journal
-@watch    docs/match-journal.md scripts/build-journal guides/sivir-trying-her-best.md
+@watch    docs/match-journal.md scripts/build-journal guides/sivir-one-army.md
 
 /riftbound/table     once    guides/out/journal/match-night.pdf
 /riftbound/table     once    guides/out/journal/trouble-list.pdf
