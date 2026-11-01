@@ -483,3 +483,19 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   Power-free 2-drops (Tideturner, Pit Rookie, Bedeviling Stranger, Gust Monk; Staunch costs Power); Rengar to 3;
   Challenge vs Rampage; Whirlwind against Baron (a rules check first: its text doesn't say "choose");
   Hard Bargain; Onslaught. Nidalee ×3 to get. The guide and sheet still describe the earlier list and the raid framing.
+- **1 Nov 2026, the trap:** −2 First Mate, +2 Bedeviling Stranger (Jay). First Mate's readying is covered by
+  Sivir's own ready on enemy deaths, Ride the Wind ×3 (moves *and* readies, Action speed) and Portal; with Sivir
+  it costs 8 Energy on the closing turn. Stranger, cut 31 Oct as "a hold-defence card", is exactly that, and the
+  midrange plan wants it: free from face down at Reaction speed, no Might limit, and it counts itself (play effects
+  go on the chain after the unit enters, §383.4.a.2). **The plan it reveals: A is a trap.** Hold A, pull their units
+  into it, punish them there: Faefolk walks into A and pulls B's defender in, which crowds A to 4 even with one
+  holder; Stranger flips and bounces it; B is empty and Sivir takes it. On their turn the same trap defends (Stranger,
+  Switcheroo, Ambush Nidalee/Rengar, Vex's stun, Staunch). Job counts: engine 10 → 8 (target 7); 8 two-drop units, 6
+  Power-free; a new job, **defending a hold**, for the midrange plan. Field: Stranger is in 76 of 116 top-25%
+  Body/Chaos lists since 23 Oct (First Mate 18). Bench (normal): cheap cards 19 → 21, units by turn 2/3 1.6/2.9 →
+  1.7/3.1, answer usable on their turn by turn 5 37% → 41% (play), colour misses t3 5% → 6%; it can't see the bounce.
+  Risks: dead in 1-on-1 fights; Evelynn and Stranger compete for A's one facedown slot (§811.1.b); each hide recycles
+  a rune. **Judge question:** from face down, can Stranger "choose a battlefield" as its own (§811.1.d.3 pins choices
+  to "options at that battlefield"; no ruling)? Written to the app (row backed up,
+  `backups/state-pre-army-stranger-2026-11-01.json`). Kept on purpose, Jay's calls: Staunch, Switcheroo, Punch First
+  ×3. **Next:** Portal's slot (The Good Stuff: its hold-return suits the trap; Bushwhack Trap off-meta).

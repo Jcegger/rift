@@ -7,9 +7,9 @@ Where the work stands, for the next session. Read this, then `decklab/sivir-read
 - **Main deck:** `Sivir: One Army, Two Fights (draft)` in the app (Battle Mistress, Body/Chaos). Read it live with
   `scripts/rift export "One Army"`; never trust a cached copy, since Jay edits in the app between sessions.
 - **Backup deck:** `Sivir is trying her best` (v1, guide `guides/sivir-trying-her-best.md`). `guides/sivir-v2.md` is superseded.
-- **Current list** (after the pros' swaps, commit `cb1653c`):
-  - **Units:** Sivir · Faefolk ×3 · Evelynn · Staunch ×2 · Innovator ×3 · Ezreal ×2 · Fizz ×2 · Nidalee ×3 ·
-    First Mate ×2 · Vex ×2 · Rengar ×2
+- **Current list** (after the pros' swaps, `cb1653c`, and −2 First Mate +2 Bedeviling Stranger, 1 Nov):
+  - **Units:** Sivir · Faefolk ×3 · Evelynn · Staunch ×2 · Bedeviling Stranger ×2 · Innovator ×3 · Ezreal ×2 ·
+    Fizz ×2 · Nidalee ×3 · Vex ×2 · Rengar ×2
   - **Spells:** Punch First ×3 · Ride the Wind ×3 · Gust ×2 · Rebuke ×2 · Star-Crossed ×2 · Rampage ×2 · Switcheroo ×2
   - **Gear:** Portable Portal
   - **Runes:** 6 Body / 6 Chaos
@@ -20,6 +20,11 @@ Where the work stands, for the next session. Read this, then `decklab/sivir-read
 
 ## The plan, as it now stands
 
+**Since 1 Nov: A is a trap.** Hold one battlefield, pull their units into it, punish them there. Closing turn: Faefolk
+walks into A and pulls B's defender in (A now has 4 units even with one holder), a face-down Stranger bounces it,
+and Sivir walks into the empty B. On their turn the same trap defends: Stranger, Switcheroo, Ambush, Vex, Staunch. A
+hold at 7 also wins. Judge later swaps by this. Full reasoning: the worksheet's 1 Nov log entry.
+
 - **Win:** reach 6, then conquer both battlefields in one turn. Sivir (Champion Zone, Accelerate) enters ready
   with her own 2 Power spent: 6 Might and Ganking. Faefolk pulls B's defender into A; Sivir takes the empty B.
 - **Since the pros (31 Oct):** don't try to win early fights. Play **midrange and win on interaction on turns
@@ -28,11 +33,31 @@ Where the work stands, for the next session. Read this, then `decklab/sivir-read
 - **Jay's goal:** 2-1 at Nexus Night (Sip & Play), playing Sivir and doing something interesting. Never an Aurora deck;
   no Calm, no Kennen; cost and ownership are never arguments.
 
+## Decided 1 Nov 2026: what stays, and what changed
+
+Jay's calls, so don't re-propose these without journal evidence:
+- **Staunch stays.** Tideturner's "free" Hidden play costs a recycled rune, the same as Staunch's Power, and
+  the facedown slot is already contested (Switcheroo ×2, Evelynn; one per battlefield, §811.1.b).
+  Staunch is the turn-2 defender against the local aggro decks.
+- **Switcheroo stays** ("it would really help against the big units"). It's an answer the bench can't see:
+  the bench counts only Rebuke and Star-Crossed.
+- **Punch First stays at 3** ("the best card in the deck"). So Rengar #3 has no slot.
+- **The field (1,101 legal midrange lists since 23 Oct):** 21.6 units / 13.5 spells / 4.9 gear, and about 7
+  two-drop units, almost none costing Power (top-25% finishes: 22.2 / 13.0 / 4.8). This list is 23 / 16 / 1
+  with 6 two-drops: close to the norm. The pros' 8–9 is the high end (Rengar, Kennen, Zed, Mordekaiser).
+- **First Mate → Bedeviling Stranger** (later the same day; see the trap plan above). Tideturner lost out because
+  Ambush (Nidalee ×3, Rengar ×2) already does its job of bringing a unit into a fight.
+- **If game results call for a change:** "lost the early board" points to Tideturner (it's in 97% of Irelia
+  lists, 79% of Riven); the slot would not come from Staunch, Switcheroo or Punch First (the engine job is
+  now 8 against a target of 7). The 1-gear count against the field's ~5 is unexamined.
+
 ## Open, to iterate (in this order, Jay's call on each)
 
-1. **More two-drops that cost no Power** (pros: 8–9; now 4: Faefolk ×3, Evelynn). Candidates: Tideturner, Pit
-   Rookie, Bedeviling Stranger, Gust Monk. Staunch (costs Power) is the obvious swap-out.
-2. **Rengar to 3** (top end).
+0. **Portal's slot (in progress, 1 Nov).** Portal is on-plan (Ganking from A to B) but a 1-of seen about one game in
+   four, and in 3 of 116 top lists. Lead candidate: **The Good Stuff** (draw 3; returns to hand when you hold here,
+   which the trap does; 23 of 116 top lists; cut 31 Oct for needing a hold). Check its hold-return timing in the
+   rules first. Off-meta option: Bushwhack Trap (lets Evelynn and Stranger both hide at A; 0 top lists).
+1. ~~More two-drops~~: done (8 now, Stranger). 2. ~~Rengar to 3~~: parked, see above.
 3. **Challenge vs Rampage** (Challenge: 2E 1P, Action, so it works in showdowns; Rampage: 3E, main phase only).
 4. **Whirlwind against Baron:** "each player may return a unit". Its text doesn't say "choose", so Baron's "can't
    be chosen" may not stop it. **Rules check first** (CLAUDE.md order), and the opponent returns first.
