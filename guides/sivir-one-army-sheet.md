@@ -1,41 +1,50 @@
 ---
-title: Sivir — One Army, Two Fights · the one-page plan
-subtitle: Keep at the table. The full guide is sivir-one-army.md. Being revised (31 Oct): the list now runs Nidalee ×3, Vex ×2, Gust ×2, no Nilah
+title: Sivir — The Trap · the one-page plan
+subtitle: Keep at the table. The full guide is sivir-one-army.md (1 Nov 2026)
 author: rift toolchain
-date: 2026-10-31
+date: 2026-11-01
 ---
 
-**The plan.** Raid: conquer, score, don't defend. **Reach 6, then conquer both battlefields in one turn** (7, then 8).
+**The plan.** Hold one battlefield (**A**) and make attacking it a mistake. Pull their units into A. Sivir walks into the battlefield they left empty (**B**). A hold at 7 wins on its own.
 
-**The finishing turn.** Board attacks **A**; **Faefolk** moves in and pulls **B**'s defender into A. **Sivir** from the Champion Zone with Accelerate: enters ready, 2 Power spent, **6 Might + Ganking**. Base → empty B: conquer. *Holding A at 6?* The hold makes 7; conquer B for 8 (Evelynn hidden at A can pull B's defender into A, where it attacks you). *At 7 with a hold:* you win.
+**The closing turn** (start on 6, holding A, Faefolk in base):
 
-**Backups for the second conquest:** Nilah (Accelerate + Ganking) · Rengar (Ambush, even where only enemies are) · Ride the Wind · First Mate · Portal.
+1. Hold A → **7** (The Good Stuff returns to hand).
+2. **Faefolk** walks base → A and pulls B's defender into A. A fight starts at once: **they attack, with focus first.**
+3. When focus reaches you, flip **Stranger** (your units + Faefolk + theirs + Stranger = 4) and bounce it. **Don't pass with focus before you flip.** No Stranger? Win the fight (Punch First, Switcheroo): if any defender survives, their unit goes to *their base*, so B stays empty.
+4. **Sivir** with Accelerate: enters ready, 6 Might. Once A's fight is over, walk base → empty B → **8**.
 
-**Three rules.**
+**On their turn, they attack A:** 2+ attackers → **Stranger** · 1-on-1 → **Switcheroo** or **Gust** · one big attacker → **Nidalee / Rengar by Ambush** · a flood → **Graves** (sideboard).
+
+**Four rules.**
 
 1. From 5 points, every turn: can either player reach 8 before the other acts again?
-2. Don't spend the finishing turn to reach 6. Keep Sivir's Energy, a pull and a protection card.
-3. Two threats, never one.
+2. A is the whole game. Losing it trashes your face-down card and kills The Good Stuff at their hold.
+3. **Their Vex, Apathetic dies before Sivir** (she stuns any unit you play, anywhere). Rebuke her: 3 Power with Deflect turns Sivir on.
+4. Keep a Faefolk in base from turn 4.
 
-**Against Defy (Calm decks).** Safe: Punch First, Rebuke, Switcheroo, every unit. Counterable: Ride the Wind, Gust, Sabotage, Rampage, Star-Crossed. **Sabotage first** to draw out the Defy, or close with units and 2-Power spells.
+**Face-down.** One per battlefield you hold; hide on your turn (pay with Gold); free with Reaction from the next turn, theirs too. **Stranger needs 4 units, itself included: not for 1-on-1s.** Evelynn and Stranger can't both sit at A.
 
-**Protection, three jobs.** Sabotage strips their answer **before** you commit · Switcheroo **wins the fight** (not a bounce; from face down it spends no Power for Sivir) · Star-Crossed **saves** Sivir but ends her attack.
+**Breaks the close:** their Vex · Gust or Star-Crossed on Stranger · Not So Fast · Moonfall / Hidden Blade / Rebuke on Sivir in B · **Baron** (can't be pulled or bounced; with the Pit out, **win by holding at 7**).
 
-**Watch out.** Ezreal's discount on Sivir: take the **Energy**, not the rune. Never pull an enemy onto **your own** battlefield (they become the attacker). Opposing Vex, Apathetic: **Rebuke her before Sivir.**
+**Against Defy.** Safe: Punch First, Rebuke, Switcheroo, every unit. Counterable: Ride the Wind, Gust, Rampage, Star-Crossed.
 
-**Battlefields.** Blind: **Sigil of the Storm** · Going first: **Targon's Peak** · On the draw: **Forbidding Waste**.
+**Watch out.** Ezreal on Sivir: take the **Energy**, not the rune. Never make **Rockfall Path** your A. The Good Stuff only on a turn you don't need Energy up.
 
-**Mulligan.** Keep most hands; Sivir is always there. Want a 2-drop and a 3-drop. Send back Sabotage, Punch First, Switcheroo first.
+**Battlefields.** Blind: **Sigil of the Storm** · Going first: **Targon's Peak** · On the draw: **Forbidding Waste** (make it B, not A).
+
+**Mulligan.** Want two two-drops and a 3-drop. Send back Rengar, Rampage, Star-Crossed, The Good Stuff first.
 
 | against | adjust |
 |---|---|
-| **Aggro** (Kha'Zix, Rek'Sai, Darius) | keep up on board; two units per fight; Graves vs go-wide |
-| **Tempo** (Diana, Evelynn, Irelia) | they answer in your fights: Switcheroo a shrink; raid Evelynn's battlefield; Repulse in vs Diana |
-| **Riven** | Sigil slows her runes; Vex punishes her ready units; vs Baron, win by holding |
-| **Rengar / Kennen** | close when they're tapped out; attack with two |
-| **Kai'Sa** | finish in one go; Sabotage first; Repulse (for Gust) + Star-Crossed #3 (for Vex) in; no Reactions on a Brynhir turn |
-| **Vex (Gloomist)** | Rebuke her Vex first; Repulse in for Sabotage |
+| **Rengar** (best) | keep two at A (his Faefolk pulls); your Vex stuns his Ambush; Graves in |
+| **LeBlanc** | bait Deathgrip / Sacrifice before Stranger; Repulse in, Rampage out |
+| **Kai'Sa** | she won't attack A; nothing at Action speed kills a 6-Might Sivir; not Rockfall as A; Unyielding Spirit ×2 + Sabotage in |
+| **Vex Gloomist** (bad) | Rebuke her Vex first; race to hold at 7; Sabotage + Repulse in, Rampage out |
+| **Diana** (worst) | Gust on Stranger, Moonfall on Sivir: make her spend first; Repulse + Ruin Runner in |
+| **Riven** | Baron: win by holding at 7; two holders vs Blitzcrank; Rampage out |
+| **Kennen / Evelynn** | Rampage is clean; take Evelynn's battlefield to trash her face-down cards |
+| **Ziggs / Akali** | Unyielding Spirit ×2 in |
 | **Gear decks** | Ravenbloom Prefect in |
-| **Big units** | race; bounce Heron, don't fight it; Forbidding Waste −2; **Baron can't be chosen**: win by holding |
 
-**Log each game:** couldn't reach 6 · couldn't open a battlefield · missed the second conquest · Sivir got answered.
+**Log each game:** couldn't reach 6 · couldn't open a battlefield · missed the second conquest · Sivir got answered · **did the trap fire?**

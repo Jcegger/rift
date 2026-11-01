@@ -60,9 +60,11 @@ Jay's calls, so don't re-propose these without journal evidence:
    be chosen" may not stop it. **Rules check first** (CLAUDE.md order), and the opponent returns first.
 5. Hard Bargain (Energy held up, like Abandon); Onslaught (Jay likes it; 4E 0P fails the Energy test).
 6. "Sea monkey / empowered guy," a 3-drop that's also a 2-drop: card unknown; ask Jay.
-7. **Rewrite `guides/sivir-one-army.md` and the sheet** once the list settles. Both are flagged as describing the
-   pre-pros list and the old raid framing. `scripts/build-journal`'s matchup card still reads the v1 guide
-   (`MATCHUPS` in that script).
+7. ~~Rewrite the guide and sheet~~: done 1 Nov ("Sivir — The Trap"), with a rules check of every step, a matchup
+   read of 17 legends and outside sources (in the guide). Still open: `scripts/build-journal`'s matchup card reads
+   the v1 guide (`MATCHUPS` in that script).
+8. **Judge questions before an event:** can a face-down Stranger choose its own battlefield (§811.1.d.3, no ruling)?
+   Does a Baron Pit gate the 8th-point conquest (the repo's own reading)?
 
 ## How to change the deck (it's a live app)
 
@@ -79,6 +81,9 @@ Log every change in `decklab/sivir-ready.md`; commit and push once Jay confirms.
 - **Evelynn's pull lands on a battlefield you control**, so the pulled unit becomes the attacker there. She serves
   the holding line (hold A → 7, pull B's defender into A, Sivir takes B), not the raid line.
 - **Targon's Peak's two runes** can't pay a 3-Energy spell (Star-Crossed).
+- **The pull starts a fight at once, and they have focus first** (§323.12, §466.2.c.1.a): flip Stranger when focus
+  reaches you. Without Stranger, a surviving defender sends their unit to *their base* (§468.1.a.2), so B stays empty.
+- **Vex, Apathetic stuns any unit the opponent plays while she's at a battlefield**, anywhere, not only at hers.
 - **Units enter at your base or a battlefield you control, exhausted** unless Accelerate (§355.2.a, §143.4), not "§149" (that's gear).
 - **Ezreal's discount on Sivir:** take the Energy, not the rune, or her 2 Power isn't spent (§445.1.b).
 - **The test bench is blind to** The Good Stuff, battlefields, combat draws (Nidalee), Innovator's paid draw,

@@ -512,3 +512,11 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   so 6/6 stays. Sideboard: Graves now fits the trap ("when I attack or defend": defending needs no readying).
   Written to the app (row backed up, `backups/state-pre-army-goodstuff-2026-11-01.json`). Confidence: medium. The
   case is reasoning, not measurement; if games keep ending in "Sivir got answered", try Rengar #3.
+- **1 Nov 2026, the guide:** `guides/sivir-one-army.md` and the sheet rewritten as "Sivir — The Trap", after three
+  research passes: a rules check of every step of the closing turn and the defence (corrections: the pull starts a
+  combat at A with **their focus first**, so there's no window before it; without Stranger a surviving defender sends
+  their unit to *their base*, so B stays empty either way; Baron can't be pulled or bounced, both cards choose); a
+  matchup read of 17 legends from legal lists since 23 Oct (best: Rengar, Mordekaiser, K'Sante, Kai'Sa for the close,
+  LeBlanc; worst: Diana, Vex Gloomist, Akali, Irelia, Riven, Ziggs); outside sources (Ultimate Guard ranks Stranger
+  Radiance's #1 card; no posted Battle Mistress list since 23 Oct runs Stranger or Faefolk, none vouched). Vex,
+  Apathetic stuns units played anywhere, not only at her battlefield (corrected).
