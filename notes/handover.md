@@ -61,8 +61,7 @@ Jay's calls, so don't re-propose these without journal evidence:
 5. Hard Bargain (Energy held up, like Abandon); Onslaught (Jay likes it; 4E 0P fails the Energy test).
 6. "Sea monkey / empowered guy," a 3-drop that's also a 2-drop: card unknown; ask Jay.
 7. ~~Rewrite the guide and sheet~~: done 1 Nov ("Sivir — The Trap"), with a rules check of every step, a matchup
-   read of 17 legends and outside sources (in the guide). Still open: `scripts/build-journal`'s matchup card reads
-   the v1 guide (`MATCHUPS` in that script).
+   read of 17 legends and outside sources (in the guide). The journal's matchup card now reads its §9 table too.
 8. **Judge questions before an event:** can a face-down Stranger choose its own battlefield (§811.1.d.3, no ruling)?
    Does a Baron Pit gate the 8th-point conquest (the repo's own reading)?
 
