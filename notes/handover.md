@@ -17,7 +17,8 @@ Where the work stands, for the next session. Read this, then `decklab/sivir-read
   - **Battlefields:** Sigil of the Storm (game 1) · Amateur Recital (after a loss: Jay picks the seat, goes first; replaced Targon's Peak 1 Nov) · Forbidding Waste (after a win)
   - **Sideboard:** Ravenbloom Prefect (gear hate; Jay: must stay) · Graves ×2 · Ruin Runner · Gust · Repulse ·
     Sabotage · Unyielding Spirit ×2 · Star-Crossed
-- **To get:** Nidalee, Cat Form ×3 (owned 0).
+- **To get:** Nidalee, Cat Form ×3 (owned 0): Jay gets them **Tuesday 3 Nov 2026** from someone at Sip & Play. Build sheet
+  for sleeving: `guides/sivir-build-sheet.md` (on the reMarkable, /riftbound/table, `once`).
 
 ## The plan, as it now stands
 
