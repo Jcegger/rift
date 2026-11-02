@@ -47,6 +47,7 @@ date: 2026-11-02
 | **Riven** | Baron: win by holding at 7; two holders vs Blitzcrank; Offer + Acceptable Losses for her Blade, Ruin Runner ×2 in; Rampage out |
 | **Kennen / Evelynn** | Rampage is clean; Ruin Runner in; take Evelynn's battlefield to trash her face-down cards |
 | **Ziggs / Akali** | Unyielding Spirit ×2 in |
+| **Lillia** | Unchecked Power wipes battlefields: one hold, two at A, rest in hand; ignore Sprites; Ruin Runner in |
 | **Gear decks** (and Riven's Blade) | Offer, Acceptable Losses, Prefect in; **only Prefect against Ziggs's Bombs** |
 
 **Log each game:** ran out of cards? (turn, and was Innovator alive?) · couldn't reach 6 · couldn't open a battlefield · missed the second conquest · Sivir got answered · **did the trap fire?**

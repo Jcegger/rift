@@ -395,6 +395,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 | **K'Sante** | 70 (14) | Shield doesn't stop a bounce; thin answers; Defy 83% | Rampage is weak into Defy | — | — |
 | **Master Yi (Bladesman)** | 50 (18) | Ruin Runner 72% at B can't be pulled; Charm 90% moves your holder; Scuttle Crab 74% | Forbidding Waste against his lone defender; a pulled defender loses his +2 | Graves | Rampage |
 | **Irelia** | 38 (9) | Not So Fast and Charm 76%; Twilight Shroud; Vex 61%; Scuttle Crab 84% | close when she's tapped out | Ruin Runner ×2 | Rampage ×2 |
+| **Lillia** | 61 (28) | **Unchecked Power (40/61): 12 to everything at battlefields**; Defy 58/61, Discipline; Charm 58/61 moves your holder; Temporary 3-Might Sprites die on their own | **one hold, two units at A, the rest in hand**; don't spend removal on Sprites; close with units and 2-Power spells (Defy can't touch them); go for both battlefields only when it wins that turn | Ruin Runner | Rampage |
 | **Jayce** | 30 (11) | about 4 units; the trap barely matters | race; kill Gutter Palace | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger ×2, Evelynn |
 | **Azir, Jarvan IV, Ornn** (gear decks) | 71, 59, 35 | five or more gear pieces in nearly every list (Azir: Brutalizer, Eye of the Herald, B.F. Sword, Doran's Shield) | kill the equipment that matters, not the first one | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger, Ride the Wind, Edge of Night |
 
