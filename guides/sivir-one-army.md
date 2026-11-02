@@ -489,6 +489,8 @@ Each game, which of the four it was, so one problem isn't fixed with another's c
 3. opened one but didn't make the second conquest
 4. Sivir got answered
 
+**Card draw first (the thing to watch):** did you ever have a turn with no useful card to play (an empty hand, or only cards that didn't fit)? On what turn? Did Innovator survive? Two or three games like that, with Innovator alive, means bringing back The Good Stuff (you're holding well enough to feed it) or a third Ezreal.
+
 **And for the trap:** did it fire (a Stranger bounce, a pull into A, a hold at 7)? Was A ever lost, and to what? Which face-down card did you hide, and did it fit the fight? Review mistakes using [strategy.md §8](../docs/strategy.md)'s seven types.
 
 **Open, for games to decide:** The Good Stuff back if A holds easily (it draws 3 every hold); Rengar #3 if games keep ending "Sivir got answered"; Bushwhack Trap (a second face-down card at A) if Evelynn and Stranger keep fighting for the slot.

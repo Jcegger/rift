@@ -55,6 +55,8 @@ Jay's calls, so don't re-propose these without journal evidence:
   lists, 79% of Riven); the slot would not come from Staunch, Switcheroo or Punch First (the engine job is
   now 8 against a target of 7). The 1-gear count against the field's ~5 is unexamined.
 
+**Card draw is the thing to watch** (Jay, 2 Nov, after game 1): per game, note any turn with no useful card, on what turn, and whether Innovator survived. If it repeats with Innovator alive, bring back The Good Stuff (holds went fine in game 1) or a third Ezreal.
+
 ## Open, to iterate (in this order, Jay's call on each)
 
 0. ~~Portal's slot~~: done, The Good Stuff (1 Nov; worksheet log). Medium confidence; Rengar #3 is the fallback.

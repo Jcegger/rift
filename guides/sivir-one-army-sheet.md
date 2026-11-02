@@ -49,4 +49,4 @@ date: 2026-11-02
 | **Ziggs / Akali** | Unyielding Spirit ×2 in |
 | **Gear decks** (and Riven's Blade) | Offer, Acceptable Losses, Prefect in; **only Prefect against Ziggs's Bombs** |
 
-**Log each game:** couldn't reach 6 · couldn't open a battlefield · missed the second conquest · Sivir got answered · **did the trap fire?**
+**Log each game:** ran out of cards? (turn, and was Innovator alive?) · couldn't reach 6 · couldn't open a battlefield · missed the second conquest · Sivir got answered · **did the trap fire?**
