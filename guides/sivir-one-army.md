@@ -2,7 +2,7 @@
 title: Sivir Is Trying Her Best — The Trap
 subtitle: Riftbound, Radiance — Jay's main deck. Hold one battlefield, make attacking it a mistake, pull their units into it, and let Sivir walk into the one they left empty. The plan on one page, the closing turn checked rule by rule, every card's job, the face-down game, battlefields, mulligans, sideboarding and every matchup that matters
 author: rift toolchain
-date: 2026-11-01
+date: 2026-11-02
 ---
 
 **Legend:** Battle Mistress (Body/Chaos) · **Champion:** Sivir, Mercenary
@@ -88,7 +88,7 @@ date: 2026-11-01
 - **29 October:** after an 0–4 Nexus Night, the old Sivir was rebuilt as a raid deck: race to 6, win in one turn.
 - **30–31 October:** Jay's own rebuild around displacement (Faefolk, Ride the Wind); a three-reviewer audit; battlefields re-picked from all 71 legal ones.
 - **31 October, the pros:** two experienced players said the deck can't win early fights; **play midrange, win on interaction on turns 3–4, carry top end that doesn't need Sivir alive, 8–9 cheap two-drops.** Nidalee ×3, Vex ×2, Gust ×2 in; Nilah out.
-- **1 November, the trap:** −2 First Mate +2 Bedeviling Stranger, then −Portable Portal +The Good Stuff, then −2 Fizz −2 Staunch +2 Edge of Night +2 Tideturner (two experienced players: Fizz left the deck "with its foot in two camps", and Staunch wasn't a good two-drop), and last −1 Edge +1 Boots of Swiftness, −1 Switcheroo +1 Existential Dread, −The Good Stuff +Ember Monk (a reviewer doubted the deck holds well enough to feed The Good Stuff). Both cards had been cut on 31 October *for needing a held battlefield*; under the midrange plan that became the reason to play them. Staunch, Switcheroo and Punch First ×3 were tested for cuts and kept on purpose (worksheet log).
+- **1 November, the trap:** −2 First Mate +2 Bedeviling Stranger, then −Portable Portal +The Good Stuff, then −2 Fizz −2 Staunch +2 Edge of Night +2 Tideturner (two experienced players: Fizz left the deck "with its foot in two camps", and Staunch wasn't a good two-drop), and last −1 Edge +1 Boots of Swiftness, −1 Switcheroo +1 Existential Dread, −The Good Stuff +Ember Monk (a reviewer doubted the deck holds well enough to feed The Good Stuff). Both cards had been cut on 31 October *for needing a held battlefield*; under the midrange plan that became the reason to play them. Punch First ×3, Ride the Wind ×3 and Rampage were questioned and kept on purpose; Staunch, Fizz, The Good Stuff, one Edge and one Switcheroo went in the later rounds (worksheet log).
 
 ---
 
@@ -321,11 +321,11 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 | any two-drop unit | 8 | 83% | 95% |
 | a puller (Faefolk or Evelynn) | 4 | 56% | 75% |
 | Faefolk | 3 | 46% | 64% |
-| Stranger or Switcheroo | 4 | 56% | 75% |
 | Stranger | 2 | 33% | 49% |
-| Existential Dread or Switcheroo | 2 | 33% | 49% |
+| an answer to the pulled unit (Stranger, Existential Dread) | 3 | 46% | 64% |
+| any trap card in hand (Stranger, Dread, Switcheroo, Edge, Tideturner ×2) | 8 | 83% | 95% |
 
-Stranger is there about half the time; the backup (win the fight at A) comes up a lot.
+Stranger alone is there about half the time, but with Existential Dread you have an answer to the pulled unit about two games in three, and some trap card nearly every game.
 
 ---
 

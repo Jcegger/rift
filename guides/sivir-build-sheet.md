@@ -2,7 +2,7 @@
 title: Sivir Is Trying Her Best · build sheet
 subtitle: Pull, sleeve, cross off. In the order your boxes are sorted (1 Nov 2026)
 author: rift toolchain
-date: 2026-11-01
+date: 2026-11-02
 ---
 
 **What goes in the box:** 40 main (Sivir included) · 10 sideboard · 1 legend · 3 battlefields · 12 runes = **66 cards**. Nidalee, Cat Form ×3 arrives **Tuesday 3 November**; everything else is owned.

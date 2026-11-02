@@ -2,7 +2,7 @@
 title: Sivir Is Trying Her Best — The Trap · the one-page plan
 subtitle: Keep at the table. The full guide is sivir-one-army.md (1 Nov 2026)
 author: rift toolchain
-date: 2026-11-01
+date: 2026-11-02
 ---
 
 **The plan.** Hold one battlefield (**A**) and make attacking it a mistake. Pull their units into A. Sivir walks into the battlefield they left empty (**B**). A hold at 7 wins on its own.
