@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-01",
+ "generatedAt": "2026-11-02",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -13,7 +13,7 @@
    "legend": null,
    "champion": null,
    "sections": [],
-   "words": 485
+   "words": 501
   },
   {
    "slug": "sivir-one-army-sheet",
@@ -25,7 +25,7 @@
    "legend": null,
    "champion": null,
    "sections": [],
-   "words": 687
+   "words": 707
   },
   {
    "slug": "sivir-one-army",
@@ -53,7 +53,7 @@
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 8919
+   "words": 9229
   },
   {
    "slug": "sivir-trying-her-best",

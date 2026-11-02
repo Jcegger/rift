@@ -32,16 +32,16 @@ date: 2026-11-01
 | job | cards |
 |---|---|
 | **Pull them in** | Faefolk ×3 · Evelynn (face down) |
-| **Punish them at A** | Bedeviling Stranger ×2 · Switcheroo ×2 · Edge of Night ×2 · Tideturner ×2 · Punch First ×3 · Nidalee ×3 and Rengar ×2 (Ambush) · Vex ×2 |
-| **Hold A** | the two-drops (8 two-drop units, all Power-free) · Edge of Night ×2 (face down: +2 Might for good) |
+| **Punish them at A** | Bedeviling Stranger ×2 · Existential Dread · Switcheroo · Edge of Night · Tideturner ×2 · Punch First ×3 · Nidalee ×3 and Rengar ×2 (Ambush) · Vex ×2 |
+| **Hold A** | the two-drops (8 two-drop units, all Power-free) · Ember Monk (+2 whenever you flip a face-down card) · Boots of Swiftness and Edge of Night (+2 Might for good) |
 | **Clear the way** | Rampage ×2 · Rebuke ×2 · Gust ×2 · Star-Crossed ×2 |
-| **Close at B** | Sivir · Ride the Wind ×3 |
-| **Cards** | The Good Stuff (returns to hand each time A holds) · Ezreal ×2 · Innovator ×3 · Nidalee |
+| **Close at B** | Sivir · Ride the Wind ×3 · Boots of Swiftness (Ganking: a holder walks A → B) |
+| **Cards** | Ezreal ×2 · Innovator ×3 · Nidalee |
 
 **Four rules for every game.**
 
 1. **From 5 points, check every turn whether either player can reach 8 before the other acts again** ([strategy.md §0](../docs/strategy.md)). A hold at 7 wins and is never gated (§473.1.a.1).
-2. **A is the whole game.** Spend cards to keep it; lose it and you lose the face-down card there and The Good Stuff with it (§323.6.a, §830.1.b).
+2. **A is the whole game.** Spend cards to keep it; lose it and you lose the face-down card there with it (§323.6.a).
 3. **Their Vex, Apathetic is gone before Sivir is played.** She stuns any unit you play while she's at a battlefield, wherever you play it, and a stunned Sivir can't walk to B.
 4. **Hold Faefolk back.** It's a 1-Might unit whose job is one move on the closing turn. Keep one in base.
 
@@ -61,23 +61,25 @@ date: 2026-11-01
 | **3-drops** | Reckless Innovator ×3 | 3E | Accelerate; each time it exhausts, a Gold, or pay 1 Chaos to draw |
 | | Nidalee, Cat Form ×3 | 3E 1P | 4 Might, **Ambush**; draws when she wins a combat |
 | | Ezreal, Prodigy ×2 | 3E 1P | discard 1, draw 2; your optional additional costs cost 1 less |
-| **4+** | Vex, Apathetic ×2 | 4E | Deflect; **stuns any unit they play while she's at a battlefield** (it can't move that turn) |
+| **4+** | Ember Monk | 4E | 4 Might; *"When you play a card from face down, give me +2 Might this turn"* |
+| | Vex, Apathetic ×2 | 4E | Deflect; **stuns any unit they play while she's at a battlefield** (it can't move that turn) |
 | | Rengar, Trophy Hunter ×2 | 5E 1P | 6 Might, **Ambush**, and can be played where only enemy units are |
 | **Spells** | Punch First ×3 | 1E 2P | +5 Might this turn; Action |
 | | Gust ×2 | 1E | return a unit at a battlefield with 3 Might or less; Reaction |
 | | Ride the Wind ×3 | 2E 1P | move a friendly unit and ready it, battlefield to battlefield; Action |
 | | Rebuke ×2 | 2E 2P | return a unit at a battlefield to hand; Action |
-| | Switcheroo ×2 | 2E 2P | Hidden, Action: swap the Mights of two units at one battlefield |
+| | Switcheroo | 2E 2P | Hidden, Action: swap the Mights of two units at one battlefield |
+| | Existential Dread | 1E 1P | Action: stun an attacking enemy unit; if it's already stunned, return it to hand. Repeat: 2 Energy (1 with Ezreal) |
 | | Rampage ×2 | 3E | your unit and theirs deal their Mights to each other; pay 1 Body for +2 |
 | | Star-Crossed ×2 | 3E 1P | Reaction: return one of your units and one of theirs |
-| **Gear** | The Good Stuff | 3E 1P | Deploy: discard 1, draw 3. **When you hold here, return it to hand** |
-| | Edge of Night ×2 | 3E | Hidden equipment, +2 Might. From face down it attaches to a unit you control there; Equip: 1 Chaos |
+| **Gear** | Boots of Swiftness | 3E | equipment: +2 Might and **Ganking**; Equip: 1 Chaos |
+| | Edge of Night | 3E | Hidden equipment, +2 Might. From face down it attaches to a unit you control there; Equip: 1 Chaos |
 | **Runes** | 6 Body · 6 Chaos | | §7 |
 | **Battlefields** | Sigil of the Storm · Amateur Recital · Forbidding Waste | | §8 |
 
 **Sideboard (10):** Ruin Runner ×2 · Graves, Blasting Through ×2 · Ravenbloom Prefect · Acceptable Losses · An Offer You Can't Refuse · Sabotage · Unyielding Spirit ×2.
 
-**Shape:** 21 units, 16 spells, 3 gear. Post-Radiance midrange averages 21.6 / 13.5 / 4.9 (1,101 legal lists since 23 October; top-quarter finishes 22.2 / 13.0 / 4.8). **8 two-drop units**, all Power-free; the field's midrange average is 6.8.
+**Shape:** 22 units, 16 spells, 2 gear. Post-Radiance midrange averages 21.6 / 13.5 / 4.9 (1,101 legal lists since 23 October; top-quarter finishes 22.2 / 13.0 / 4.8). **8 two-drop units**, all Power-free; the field's midrange average is 6.8.
 
 ---
 
@@ -86,7 +88,7 @@ date: 2026-11-01
 - **29 October:** after an 0–4 Nexus Night, the old Sivir was rebuilt as a raid deck: race to 6, win in one turn.
 - **30–31 October:** Jay's own rebuild around displacement (Faefolk, Ride the Wind); a three-reviewer audit; battlefields re-picked from all 71 legal ones.
 - **31 October, the pros:** two experienced players said the deck can't win early fights; **play midrange, win on interaction on turns 3–4, carry top end that doesn't need Sivir alive, 8–9 cheap two-drops.** Nidalee ×3, Vex ×2, Gust ×2 in; Nilah out.
-- **1 November, the trap:** −2 First Mate +2 Bedeviling Stranger, then −Portable Portal +The Good Stuff, and later −2 Fizz −2 Staunch +2 Edge of Night +2 Tideturner (two experienced players: Fizz left the deck "with its foot in two camps", and Staunch wasn't a good two-drop). Both cards had been cut on 31 October *for needing a held battlefield*; under the midrange plan that became the reason to play them. Staunch, Switcheroo and Punch First ×3 were tested for cuts and kept on purpose (worksheet log).
+- **1 November, the trap:** −2 First Mate +2 Bedeviling Stranger, then −Portable Portal +The Good Stuff, then −2 Fizz −2 Staunch +2 Edge of Night +2 Tideturner (two experienced players: Fizz left the deck "with its foot in two camps", and Staunch wasn't a good two-drop), and last −1 Edge +1 Boots of Swiftness, −1 Switcheroo +1 Existential Dread, −The Good Stuff +Ember Monk (a reviewer doubted the deck holds well enough to feed The Good Stuff). Both cards had been cut on 31 October *for needing a held battlefield*; under the midrange plan that became the reason to play them. Staunch, Switcheroo and Punch First ×3 were tested for cuts and kept on purpose (worksheet log).
 
 ---
 
@@ -104,7 +106,7 @@ date: 2026-11-01
 - **Pay the hide with Gold when you can.** The cost is one Power of any colour: a Gold token pays it, or a recycled rune, and recycling a rune triggers the legend's Gold.
 - **Keep Reaction answers up on their turn:** Gust (1 Energy) for their 2–3-Might attacker, Nidalee or Rengar by Ambush, Star-Crossed. This is where the pros said the game is won.
 - **Put Vex at a battlefield.** Every unit they play is stunned, wherever it lands, so their Ambush blockers and ready-on-arrival units can't fight that turn.
-- **The Good Stuff on a quiet turn.** Deploy it to A when you don't need Energy held up (usually turn 5+). From then on, each time A holds it comes back to your hand at the start of your turn (§383.4.d.2.b), ready to replay for another 3 cards.
+- **Ember Monk and Boots on a quiet turn.** Monk at A defends at 6 whenever you flip a face-down card. Equip Boots (1 Chaos) on a holder at A: +2 Might, and Ganking lets it walk from A to B on the closing turn.
 
 ### From 5 points: the terminal scan
 
@@ -116,7 +118,7 @@ Every turn, both players: can either reach 8 before the other acts again? **Thei
 
 Checked step by step against the rules on 1 November (handbook → verbatim → FAQ → rulings). **You start on 6, holding A, with Faefolk ready in base and ideally Stranger face down at A.**
 
-1. **Beginning Phase:** you hold A → **7** (§315.2.b.2). If The Good Stuff is at A, it returns to your hand now.
+1. **Beginning Phase:** you hold A → **7** (§315.2.b.2).
 2. **Faefolk walks base → A.** You control A, so nothing is contested and no fight starts (§190.3.a.1). Its trigger moves **B's defender** to A. The pull is a target, so Baron Nashor can't be pulled (§355.7, §757).
 3. **A fight starts at A at once.** Their pulled unit is the **attacker** (it arrived where they don't control), you're the defender (§466.2.c). There's no open window first: the cleanup stages a combat showdown and **they get focus first** (§323.12, §466.2.c.1.a).
 4. **When focus reaches you, flip Stranger** (free from face down, §811.1.b; it goes to A, §811.1.d.1). Your holder + Faefolk + their unit + Stranger = 4, counted when the effect resolves (§383.4.a.2; the condition is checked on resolution, §383.2.a.1), so you may return their unit. **Don't pass while you hold focus**: if both players pass in a row, damage happens.
@@ -125,7 +127,7 @@ Checked step by step against the rules on 1 November (handbook → verbatim → 
 7. **Sivir:** play her from the Champion Zone with Accelerate: she enters ready at your base (§355.2.a, §805.6), 2 Power spent, 6 Might. **Walk base → B** (no Ganking needed, §144.4.a). You can only move once A's combat is over (§144.1.c).
 8. **B's showdown** (you get focus first) closes with only your unit there: **conquer → 8** (§348.2.a.1). You scored A this turn by holding it, so the 8th point is open (§473.1.b.1).
 
-**Stranger is insurance, not the line.** If you have no Stranger, the fight at A happens. If **any defender of yours survives**, their attacker goes to *their base*, not back to B (§468.1.a.2), so B is still empty and Sivir still walks in. Punch First or a face-down Switcheroo wins that fight. The only real danger is their pulled unit winning A: then they conquer A on your turn and score a point.
+**Stranger is insurance, not the line.** No Stranger? **Existential Dread** stuns the pulled unit (it's an attacker), so it deals no damage. Neither? The fight at A happens. If **any defender of yours survives**, their attacker goes to *their base*, not back to B (§468.1.a.2), so B is still empty and Sivir still walks in. Punch First or a face-down Switcheroo wins that fight. The only real danger is their pulled unit winning A: then they conquer A on your turn and score a point.
 
 **At 6, holding nothing:** attack A with your board and move Faefolk in with the attack: its pull brings B's defender into A, and you stay the attacker there (§190.3.a.1, §466.2.c.1). Win the fight, conquer A → 7; then Sivir walks into the empty B → 8 (both battlefields scored this turn).
 
@@ -152,11 +154,11 @@ They move into A. **Their units applied Contested, so they attack and get focus 
 | their attack | your answer | why |
 |---|---|---|
 | **2+ units, or 2-on-1 against your holders** | flip **Stranger**, return the biggest attacker | 4+ units counting Stranger; no Might limit; free |
-| **1-on-1** | flip **Switcheroo** (swap their big Might with your small one), or **Gust** a 3-Might attacker | Stranger only makes 3 units here and does nothing |
-| **one big attacker** | **Nidalee or Rengar by Ambush** into A, or flip **Edge of Night** (+2 Might for good) or **Tideturner** (swap a bigger unit in), then Punch First if needed | Ambush plays them as a Reaction to a battlefield where you have units (§822) |
+| **1-on-1** | **Existential Dread** (stun it; Repeat to bounce), flip **Switcheroo**, or **Gust** a 3-Might attacker | Stranger only makes 3 units here and does nothing |
+| **one big attacker** | **Existential Dread**, **Nidalee or Rengar by Ambush** into A, or flip **Edge of Night** (+2 Might for good) or **Tideturner** (swap a bigger unit in); **Ember Monk** at A gets +2 on any flip; Punch First if needed | Ambush plays them as a Reaction to a battlefield where you have units (§822) |
 | **they flood A** | Graves from the sideboard | he deals his Might to every enemy there when he defends; no readying needed |
 
-- **If no defender of yours survives, they conquer A**: your face-down card goes to the trash (§323.6.a) and The Good Stuff dies at their next hold (a conquest alone doesn't kill it, §830.1.b).
+- **If no defender of yours survives, they conquer A**: your face-down card goes to the trash (§323.6.a). Equipment on the units there goes with them.
 - **Kills ready your legend** (Battle Mistress: "When one or more enemy units die, ready me"), so she can make another Gold.
 - **The trap works by doubt.** A face-down card at A could be Stranger, Switcheroo or Evelynn; the top Chaos decks all play the same package, so opponents know the threat but not the card. One reviewer called Stranger the best card in Radiance for exactly this ("how on earth is the opponent supposed to figure out how to attack?", Ultimate Guard, 20 October).
 
@@ -195,7 +197,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 - **Judge question:** whether a face-down Stranger may choose its own battlefield (§811.1.d.3) has no ruling. It's the card's clear intent; ask before an event.
 - **Example (vs Mordekaiser):** he attacks A with two units, one a 6-Might threat, into your Nidalee. Flip Stranger: Nidalee + Stranger + his two = 4. Return the big one to his hand. Nidalee (4 Might) handles a smaller one left behind, and bouncing rather than killing gives his deaths engine nothing.
 
-**Switcheroo** ×2 (Hidden · 2E 2P · Action). *Swap the Mights of two units at the same battlefield this turn.*
+**Switcheroo** (Hidden · 2E 2P · Action). *Swap the Mights of two units at the same battlefield this turn.*
 - **Job:** wins the 1-on-1 fight Stranger can't touch.
 - **Use:** hide it at A for 1-on-1 fights. From face down both targets must be at A (§811.1.d.2), and it costs nothing, so it spends no Power toward Sivir. From hand it's 2 Power, which turns Sivir on by itself.
 - **Example (vs Riven):** Riven attacks A with a 7-Might Astral Heron into your lone Faefolk (1 Might). Flip Switcheroo: Heron is 1, Faefolk is 7 for the turn. Faefolk wins and the Heron dies (a 1-Might unit taking 7). She has Defy in 93% of lists, but Switcheroo's 2 Power puts it out of Defy's reach (§206).
@@ -239,6 +241,16 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 - **Job:** a bounce at Reaction speed, or saving one of yours from removal at the cost of its place.
 - **Example (vs Seraphine):** she casts Hidden Blade on your Sivir in B's showdown. Star-Crossed in response, returning Sivir to your hand and one of her units to hers: the Blade has no target, and Sivir is back in your hand to play again next turn. No conquest this turn, but no Sivir lost.
 
+**Boots of Swiftness** (Gear · 3E · Chaos). *Equipment: +2 Might and Ganking. Equip: 1 Chaos.* (Ganking is printed in the bonus strip; our card data misses it.)
+- **Job:** makes a holder bigger for good **and** gives it Ganking, so on the closing turn it can walk from A to the emptied B: a second closer that doesn't need Sivir.
+- **Use:** equip on your turn to a holder at A. Keep a second unit at A when the booted one walks to B.
+- **Example (vs Vex Gloomist):** her Vex, Apathetic stuns Sivir the turn you play her, so Sivir can't move. Your booted Nidalee was already at A: Recital sends B's defender home, Nidalee walks A → B (Ganking) and conquers. Vex only stuns units played that turn.
+
+**Existential Dread** (1E 1P · Action · Chaos). *Stun an attacking enemy unit. If it's already stunned, return it to its owner's hand instead. Repeat: 2 Energy.*
+- **Job:** the cheapest answer to an attack, up by turn 3, held in hand (no face-down slot). Stunned, it deals no combat damage; with Repeat it's bounced.
+- **Use:** on their attack into A, or on **the unit Faefolk pulls into A on your closing turn** (it's an attacker there): stun it, and Stranger's 4-unit count doesn't matter. With Ezreal out, the Repeat costs 1 Energy. It has 1 Power, so Defy can counter it.
+- **Example (vs Rengar):** he attacks A with a 6-Might unit into your Tideturner. Dread stuns it: no damage, A stays yours. Pay the Repeat and it's back in his hand.
+
 ### Close at B
 
 **Ride the Wind** ×3 (2E 1P · Action). *Move a friendly unit and ready it.*
@@ -251,17 +263,16 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 - **Job:** a Power-free two-drop that works on their turn. From face down at A it swaps a bigger unit of yours into the fight for free; the errata lets it reach off its own battlefield (§811.1.d.3's Tideturner example).
 - **Example (vs Kha'Zix):** he attacks A with a 4-Might unit into your Faefolk. Flip Tideturner at A and swap with Rengar at your base: Rengar (6) is now defending A, Tideturner sits at base. From hand it's a plain 2-Might holder.
 
-**Edge of Night** ×2 (Hidden gear · 3E · Chaos). *+2 Might equipment. When you play this from face down, attach it to a unit you control here. Equip: 1 Chaos.*
+**Edge of Night** (Hidden gear · 3E · Chaos). *+2 Might equipment. When you play this from face down, attach it to a unit you control here. Equip: 1 Chaos.*
 - **Job:** a face-down card that wins the fight at A **and stays**: +2 Might while attached (§137.3.a), not just for the turn like Switcheroo.
 - **Use:** flip it in A's showdown onto the defender that needs it. From hand it's 3 Energy plus 1 Chaos to equip, so prefer it face down. It's gear: their Offer, Detonate and Acceptable Losses can kill it.
 - **Example (vs Riven):** she attacks A with a 5-Might unit into your Nidalee (4). Flip Edge onto Nidalee: 6 against 5, Nidalee wins, draws a card, and keeps the +2 for the next attack.
 
 ### Cards and Gold
 
-**The Good Stuff** (Gear · 3E 1P · Deploy). *When you play this, discard 1, then draw 3. When you hold here, return this to its owner's hand.*
-- **Job:** the trap's card engine. Deployed at A, it comes back every turn A holds.
-- **Use:** on a turn you don't need Energy up. It dies only when *they* hold A. Expect An Offer You Can't Refuse (Kennen 54%) and Detonate (Ziggs 89%).
-- **Example:** turn 5, A safe: deploy it, discard a Rampage, draw 3. Turn 6: the hold returns it to hand; replay it for 3 more. Two plays: 6 cards drawn for 2 discarded, and the card itself comes back.
+**Ember Monk** (4E · 4 Might · Chaos). *When you play a card from face down, give me +2 Might this turn.*
+- **Job:** the holder that rewards the trap: 4 Might, 6 in any fight where you flip Stranger, Tideturner, Switcheroo, Edge or Evelynn.
+- **Example (vs Kai'Sa):** Hextech Ray (3) doesn't kill him; with a flip in the same showdown he's 6.
 
 **Reckless Innovator** ×3 (3E · 3 Might · Accelerate). *When I become exhausted, choose one: play a Gold gear token exhausted, or pay Chaos to draw 1.*
 - **Job:** Gold (which pays your hides) or cards, every time it exhausts.
@@ -277,7 +288,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 - **Ruin Runner ×2** (6E · Body). *I can't be chosen by enemy spells and abilities.* The A holder they can't Gust, Moonfall, Rebuke, Star-Crossed, Charm or Blitzcrank away. It doesn't need to act; it needs to stay. **Example (vs Diana):** with Ruin Runner at A, her Moonfall and Gust have nothing there to aim at.
 - **Graves ×2** (5E 1P · Body). *When I attack or defend, deal damage equal to my Might to all enemy units here.* Defending at A wipes a wide attack; defending needs no readying.
-- **Acceptable Losses** (1E · Chaos · Action). *Each player kills one of their gear.* You pick yours: cast it with no gear out, or with only a Gold, or right after your hold returns The Good Stuff to hand. **Example (vs Orianna):** her only gear out is The Ball; it dies, and you lose nothing.
+- **Acceptable Losses** (1E · Chaos · Action). *Each player kills one of their gear.* You pick yours: cast it with no gear out, or with only a Gold, or before you equip Boots or Edge. **Example (vs Orianna):** her only gear out is The Ball; it dies, and you lose nothing.
 - **An Offer You Can't Refuse** (2E · Chaos · Action). *Kill a gear. Its controller plays a Gold.* You pick: Riven's Blade of the Exile (89% of her lists), The Ball, Gutter Palace.
 - **Ravenbloom Prefect** (3E · Chaos). *When an opponent plays a gear, you may banish me to banish it.* **Against Ziggs, use this, not the two spells:** a Bomb that dies deals 2 to your unit; a banished one doesn't die.
 - **Sabotage** (1E 1P · Body). *They reveal their hand; you recycle a non-unit card.* Takes Back Off, Switcheroo or Time Warp before it's hidden or cast.
@@ -287,7 +298,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 ## 7. Power, Energy and the odds
 
-- **Energy is the bottleneck.** Hold up Gust and Ambush on their turn; play The Good Stuff on turns you don't need to.
+- **Energy is the bottleneck.** Hold up Gust and Ambush on their turn; equip Boots and play Ember Monk on turns you don't need to.
 - **Power is cheap here.** The legend makes a Gold whenever you recycle a rune (if she's ready), and Gold pays Power of any colour, including the cost of hiding (riftbound.gg's Radiance write-up makes the same point about this legend).
 - **A rune can do both in one turn:** exhaust for Energy, then recycle for Power (`docs/rules.md`, the rune formula).
 - **Runes 6/6.** Power demand is Chaos 19, Body 13; turn-3 colour misses run 6–7% on the play and 4–5% on the draw at 6/6, and a 5/7 split measured within a point of that: under the 3-point bar for changing.
@@ -301,7 +312,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 | Faefolk | 3 | 46% | 64% |
 | Stranger or Switcheroo | 4 | 56% | 75% |
 | Stranger | 2 | 33% | 49% |
-| The Good Stuff | 1 | 18% | 28% |
+| Existential Dread or Switcheroo | 2 | 33% | 49% |
 
 Stranger is there about half the time; the backup (win the fight at A) comes up a lot.
 
@@ -317,7 +328,7 @@ Stranger is there about half the time; the backup (win the fight at A) comes up 
 | **After you lose a game** (you choose, so go first) | **Amateur Recital**: "When you hold here, you may move a unit at a battlefield to its base." | **the trap's engine**, below |
 | **After you win a game** (they choose, and going first wins more, so expect the draw) | **Forbidding Waste**: "While a unit here is defending alone, it has −2 Might." | no hold reward to hand them; it punishes their lone early holder. Hold it with two and the −2 never touches you |
 
-**Rechecked after the Edge of Night / Tideturner swap (1 Nov):** all three stay. With 9 face-down cards for one slot at A, **Bandle Tree** ("You may hide an additional card here") is the first battlefield to try if the slot keeps clogging, but its only sensible place is Recital's, and Recital is worth more.
+**Rechecked after the Edge of Night / Tideturner swap (1 Nov):** all three stay. With 7 face-down cards for one slot at A (Stranger ×2, Tideturner ×2, Switcheroo, Edge, Evelynn), and Boots adding Ganking from A to B, the three still fit. **Bandle Tree** ("You may hide an additional card here") is the first battlefield to try if the slot keeps clogging, but its only sensible place is Recital's, and Recital is worth more.
 
 **Amateur Recital, the engine.** Going first, your turn-2 move reaches a battlefield before theirs (unless they Accelerate a unit on turn 1: going second they have 3 runes). Make Recital your A. From your turn-3 hold, every turn:
 - the hold scores, and its trigger (your Beginning Phase, before you draw) **sends their lone defender at B to its base** (§383.4.d.2.b);
@@ -330,7 +341,7 @@ Stranger is there about half the time; the backup (win the fight at A) comes up 
 
 **Mulligans** (set aside up to 2; they go to the bottom):
 - **Want two two-drops and a 3-drop.** Keep Stranger, Faefolk, Tideturner, Evelynn, Switcheroo, Edge, Nidalee.
-- **Send back first:** Rengar, Rampage, Star-Crossed and The Good Stuff in a hand with no two-drop.
+- **Send back first:** Rengar, Rampage, Star-Crossed and Boots in a hand with no two-drop.
 - **Turn-1 two-drop:** 8 in the library, so 70% keeping your first 5 cards and 83% when you mulligan for one.
 
 **Sideboarding** (untested; from the card reads in §9):
@@ -363,18 +374,18 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 | **Vex, Gloomist** (local; bad) | 79 (22) | holds, won't walk into A; **her Vex 96% stuns Sivir**; Back Off 91%; Defy, Discipline | Rebuke her Vex first; race to hold at 7 | Sabotage, Ruin Runner | Rampage ×2 |
 | **Diana** (local; worst) | 41 (12) | answers in every fight: **Gust 100% on Stranger, Moonfall 100% on Sivir**; Vex 83%; Hard Bargain 76% | make her spend first; Gust her 2–3-Might bodies; Ruin Runner holds A against Gust and Moonfall | Ruin Runner ×2 | Stranger ×2 |
 | **Riven** | 197 (94) | **Baron 54%** (can't be pulled or bounced; the Pit is a third battlefield); her Stranger 85%; Blitzcrank 71%; Defy 93% | win by holding at 7; two holders at A; kill her Blade | An Offer You Can't Refuse, Acceptable Losses, Ruin Runner ×2 | Rampage ×2, Faefolk, Evelynn |
-| **Evelynn** | 175 (33) | Last Caress 41% puts her face-down card on any battlefield; Switcheroo, Star-Crossed, Vex | take her battlefield: it trashes her face-down cards; Rampage is clean | Ruin Runner | The Good Stuff |
-| **Ziggs** | 108 (14) | Bombs deploy at A and hit your holders when they die; Detonate 89% kills The Good Stuff | keep holders healthy; gear spells kill Bombs into damage, so Prefect banishes | Unyielding Spirit ×2, Prefect | The Good Stuff, Stranger, Rampage |
+| **Evelynn** | 175 (33) | Last Caress 41% puts her face-down card on any battlefield; Switcheroo, Star-Crossed, Vex | take her battlefield: it trashes her face-down cards; Rampage is clean | Ruin Runner | Edge of Night |
+| **Ziggs** | 108 (14) | Bombs deploy at A and hit your holders when they die; Detonate 89% kills your Boots and Edge | keep holders healthy; gear spells kill Bombs into damage, so Prefect banishes | Unyielding Spirit ×2, Prefect | Boots, Edge of Night, Rampage |
 | **Seraphine** | 107 (24) | a wide Raucous Anthem turn; Imperial Decree; Hidden Blade on Sivir | one bounce won't stop a wide swing | Graves ×2, Sabotage | Rampage ×2, Ride the Wind |
 | **Orianna** | 106 (29) | few units; The Ball deals 2 to your units; Gravity Field taxes Sivir's walk | hold her Deploy battlefields | An Offer You Can't Refuse, Acceptable Losses, Prefect, Unyielding Spirit | Rampage ×2, Stranger ×2 |
-| **Kennen** | 102 (53) | Star-Crossed 92%, Switcheroo 88%, Gust 83%; An Offer You Can't Refuse 54% kills The Good Stuff | press before Rhasa gets cheap; Rampage is clean | Sabotage, Ruin Runner | The Good Stuff, Stranger |
+| **Kennen** | 102 (53) | Star-Crossed 92%, Switcheroo 88%, Gust 83%; An Offer You Can't Refuse 54% kills your Boots or Edge | press before Rhasa gets cheap; Rampage is clean | Sabotage, Ruin Runner | Edge of Night, Stranger |
 | **Mordekaiser** | 99 (25) | walks into A with big units; deaths feed him | bounce, don't kill | Ruin Runner | Rampage |
 | **Akali** | 75 (33) | Not So Fast and Blitzcrank 76% each; pings kill Faefolk; Defy 99% | hold Faefolk until the closing turn | Unyielding Spirit ×2, Ruin Runner ×2 | Rampage ×2, Faefolk ×2 |
 | **K'Sante** | 70 (14) | Shield doesn't stop a bounce; thin answers; Defy 83% | Rampage is weak into Defy | — | — |
 | **Master Yi (Bladesman)** | 50 (18) | Ruin Runner 72% at B can't be pulled; Charm 90% moves your holder; Scuttle Crab 74% | Forbidding Waste against his lone defender; a pulled defender loses his +2 | Graves | Rampage |
 | **Irelia** | 38 (9) | Not So Fast and Charm 76%; Twilight Shroud; Vex 61%; Scuttle Crab 84% | close when she's tapped out | Ruin Runner ×2 | Rampage ×2 |
 | **Jayce** | 30 (11) | about 4 units; the trap barely matters | race; kill Gutter Palace | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger ×2, Evelynn |
-| **Azir, Jarvan IV, Ornn** (gear decks) | 71, 59, 35 | five or more gear pieces in nearly every list (Azir: Brutalizer, Eye of the Herald, B.F. Sword, Doran's Shield) | kill the equipment that matters, not the first one | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger, Ride the Wind, The Good Stuff |
+| **Azir, Jarvan IV, Ornn** (gear decks) | 71, 59, 35 | five or more gear pieces in nearly every list (Azir: Brutalizer, Eye of the Herald, B.F. Sword, Doran's Shield) | kill the equipment that matters, not the first one | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger, Ride the Wind, Edge of Night |
 
 ### The trap's best and worst
 
@@ -417,7 +428,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 - **Not So Fast** (counters Stranger's bounce and Faefolk's pull): Akali 76%, Irelia 76%, Riven 43%.
 - **Charm, Blitzcrank, their own Faefolk, Moonfall** (move your holder or Sivir): Yi 90%, Rengar 90%, Diana 100%, Riven 71%.
 - **Rockfall Path** ("units can't be played here"): Kai'Sa 90%. Don't make it your A.
-- **An Offer You Can't Refuse, Detonate, Acceptable Losses** (gear removal, for The Good Stuff): Kennen 54%, Ziggs 89%.
+- **An Offer You Can't Refuse, Detonate, Acceptable Losses** (gear removal, for your Boots and Edge): Kennen 54%, Ziggs 89%.
 
 ---
 
@@ -435,7 +446,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 | §348.2.a.1 | walking into an empty battlefield conquers it when the showdown closes |
 | §355.7, §757 | "move an enemy unit" and "return an enemy unit" choose it: Baron can't be pulled or bounced |
 | §383.4.a.2 | a play effect goes on the chain after the unit enters, so Stranger counts itself |
-| §383.4.d.2.b | The Good Stuff's "when you hold here" fires at your Beginning Phase hold |
+| §383.4.d.2.b | Recital's "when you hold here" fires at your Beginning Phase hold |
 | §467.1, §468.1.a.2 | no damage without both sides; a losing attacker that doesn't die goes to its base |
 | §473.1.a.1, §473.1.b.1 | a hold at 7 wins; a conquest for the 8th point needs every battlefield scored this turn |
 | §206 | Defy reads the printed cost: 2-Power spells are out of reach |
@@ -451,11 +462,11 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 - **Passing with focus in the fight at A** before you've flipped Stranger.
 - **Making Faefolk your only holder**, or playing every Faefolk early. Keep one in base.
 - **Hiding Stranger for a 1-on-1.** It needs 4 units; hide Switcheroo there.
-- **Losing A cheaply.** It takes your face-down card and The Good Stuff with it.
+- **Losing A cheaply.** It takes your face-down card with it.
 - **Choosing Rockfall Path as A.**
 - **Trying to conquer for the 8th point with a Baron Pit out.** Hold at 7 instead.
 - **Taking the rune off Sivir's Accelerate with Ezreal.** Take the Energy.
-- **Playing The Good Stuff on a turn you need Energy up** for their attack.
+- **Equipping or casting Ember Monk on a turn you need Energy up** for their attack.
 
 ---
 
@@ -469,7 +480,7 @@ Each game, which of the four it was, so one problem isn't fixed with another's c
 
 **And for the trap:** did it fire (a Stranger bounce, a pull into A, a hold at 7)? Was A ever lost, and to what? Which face-down card did you hide, and did it fit the fight? Review mistakes using [strategy.md §8](../docs/strategy.md)'s seven types.
 
-**Open, for games to decide:** Rengar #3 for The Good Stuff if games keep ending "Sivir got answered"; Tideturner if you keep losing the early board; Bushwhack Trap (a second face-down card at A) if Evelynn and Stranger keep fighting for the slot.
+**Open, for games to decide:** The Good Stuff back if A holds easily (it draws 3 every hold); Rengar #3 if games keep ending "Sivir got answered"; Bushwhack Trap (a second face-down card at A) if Evelynn and Stranger keep fighting for the slot.
 
 ---
 
@@ -478,12 +489,12 @@ Each game, which of the four it was, so one problem isn't fixed with another's c
 - **Card text:** `data/cards.json`, with errata (`scripts/rift card`).
 - **Rules:** every step of §4 and §5 checked on 1 November in the order `docs/rules.md` → `docs/rules-full.md` → `docs/rules-faq.md` → `docs/rules-rulings.md`.
 - **Field:** `scripts/rift meta` over the legal lists played since 23 October 2026 (2,520 lists; legality filter as in the app). Card reads from `decklab/sivir-matchups.md`, re-checked against card text.
-- **Numbers:** `scripts/rift try` (shape only; it can't see Stranger's bounce, the pulls or The Good Stuff's draw); the draw odds above are exact hypergeometric counts.
+- **Numbers:** `scripts/rift try` (shape only; it can't see Stranger's bounce, the pulls, Tideturner's swap, Ember Monk's trigger or Boots' Ganking); the draw odds above are exact hypergeometric counts.
 - **Outside sources:** Ultimate Guard, "Radiance: Top 10 Cards" (Skura, 20 Oct 2026; Bedeviling Stranger #1); riftbound.gg, "10 Most Buffed Legends with Radiance" (Den, 20 Oct; Battle Mistress's Gold paying for hidden cards); riftbound.gg Evelynn guide (14 Oct; hidden cards "help with holding a battlefield"); riftbound.gg Radiance Day 1 report (22 Oct; "to conquer is considered much easier than holding"). The only riftbound.gg Sivir guide (May 2026) is an Aurora deck and doesn't apply.
 
 ## What this guide does not claim
 
 - **No win rates and no precedent.** None of the 5 Battle Mistress lists posted since 23 October runs Stranger or Faefolk, and none has a vouched finish. This plan is untested by anyone.
-- **The test bench can't see the deck's main tricks** (the pull, the bounce, The Good Stuff's draw).
+- **The test bench can't see the deck's main tricks** (the pull, the bounce, Tideturner's swap, Monk's trigger).
 - **Two rules points are open:** whether a face-down Stranger may choose its own battlefield, and the Baron Pit's effect on the 8th point (the repo's reading). Ask a judge before relying on either at an event.
 - **Sideboard plans are from card reads, not games.**

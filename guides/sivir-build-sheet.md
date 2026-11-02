@@ -32,19 +32,21 @@ date: 2026-11-01
 
 | ✓ | card | set no. | notes |
 |---|---|---|---|
+| ▢ | **Ember Monk** | OGN-167 |  |
 | ▢ ▢ | **Gust** | OGN-169 |  |
 | ▢ ▢ | **Rebuke** | OGN-172 |  |
 | ▢ ▢ ▢ | **Ride the Wind** | OGN-173 |  |
 | ▢ ▢ | **Tideturner** | OGN-199 |  |
-| ▢ ▢ | **Edge of Night** | SFD-139 |  |
+| ▢ | **Boots of Swiftness** | SFD-133 |  |
+| ▢ | **Edge of Night** | SFD-139 |  |
 | ▢ | **Sivir, Mercenary** | SFD-143 |  |
-| ▢ ▢ | **Switcheroo** | SFD-145 |  |
+| ▢ | **Switcheroo** | SFD-145 |  |
 | ▢ ▢ | **Ezreal, Prodigy** | SFD-149 |  |
 | ▢ ▢ | **Star-Crossed** | UNL-128 |  |
+| ▢ | **Existential Dread** | UNL-134 |  |
 | ▢ | **Evelynn, Entrancing** | UNL-141 |  |
 | ▢ ▢ | **Vex, Apathetic** | UNL-150 |  |
 | ▢ ▢ ▢ | **Reckless Innovator** | RAD-105 |  |
-| ▢ | **The Good Stuff** | RAD-106 |  |
 | ▢ ▢ | **Bedeviling Stranger** | RAD-107 |  |
 
 **Main deck check:** 13 Body + 27 Chaos = 40 cards (Sivir, Mercenary included; she starts in the Champion Zone).

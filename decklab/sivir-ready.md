@@ -563,3 +563,12 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   point per hold with a face-down card at A; the bonus idea for later), Hard Bargain main (narrow), Baron Nashor (10E
   with no cheat, and his Pit gates our own 8th-point conquest). Battlefields rechecked, unchanged; Bandle Tree noted.
   Row backed up (`backups/state-pre-army-edge-2026-11-01.json`).
+- **1 Nov 2026, reviewer round 2 (Jay's picks):** −1 Edge of Night +1 Boots of Swiftness (+2 Might and **Ganking**;
+  the card image shows Ganking in the bonus strip, which `data/cards.json` drops: a builder bug, not fixed yet);
+  −1 Switcheroo +1 Existential Dread (1E stun on an attacker, Repeat bounces; held in hand, so no face-down slot);
+  −The Good Stuff +Ember Monk (the reviewer: "this deck should have trouble holding"; The Good Stuff only pays if A
+  holds, Monk helps it hold, +2 whenever a face-down card is played). Boots' Ganking gives a closer that dodges their
+  Vex, Apathetic (it stuns only units played that turn). Bench, the two spell swaps at full strength (−2/+2): answer
+  usable on their turn by turn 5 43/61% → 65/78%; Jay kept one Switcheroo. Rejected: Rampage up / Switcheroo down
+  (Rampage is your-turn), Teemo (1 Might after its fight), Yone (5-drop), Yasuo (combo cheese), Hard Bargain main.
+  Battlefields rechecked: unchanged. Row backed up (`backups/state-pre-army-boots-2026-11-01.json`).
