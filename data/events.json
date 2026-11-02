@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-11-01",
+ "generatedAt": "2026-11-02",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2476,
+  "events": 2478,
   "eventsWithDecks": 22,
-  "players": 64930,
+  "players": 65542,
   "playersWithDecks": 6857,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
@@ -33,14 +33,14 @@
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Asia": 104,
+   "Asia": 106,
+   "unknown": 207,
    "Europe": 73,
-   "unknown": 204,
    "Oceania": 5,
    "North America": 7
   },
   "registryEventsByRegion": {
-   "unknown": 2470,
+   "unknown": 2472,
    "Asia": 6
   },
   "unresolvedClaimEvents": [
@@ -148,6 +148,29 @@
  },
  "events": [
   {
+   "name": "World Series #2",
+   "dt": "2026-11-01",
+   "players": 56,
+   "format": "Constructed",
+   "winner": "Ender",
+   "country": null,
+   "slug": "world-series-2",
+   "top": [
+    [
+     "RAD-149",
+     9
+    ],
+    [
+     "OGN-247",
+     4
+    ],
+    [
+     "SFD-187",
+     4
+    ]
+   ]
+  },
+  {
    "name": "Convergence IV",
    "dt": "2026-10-31",
    "players": 272,
@@ -156,6 +179,29 @@
    "country": null,
    "slug": "convergence-iv",
    "top": []
+  },
+  {
+   "name": "CoolStuffCon Orlando 2026- Riftbound Showdown Series $25k",
+   "dt": "2026-10-31",
+   "players": 556,
+   "format": "Constructed",
+   "winner": "MERC Koopastar",
+   "country": "US",
+   "slug": "coolstuffcon-orlando-2026-riftbound-showdown-series-25k",
+   "top": [
+    [
+     "RAD-149",
+     88
+    ],
+    [
+     "VEN-155",
+     46
+    ],
+    [
+     "OGN-247",
+     30
+    ]
+   ]
   },
   {
    "name": "CoolStuffCon Orlando 2026- Riftbound $5k",
