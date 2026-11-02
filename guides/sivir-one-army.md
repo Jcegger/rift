@@ -162,6 +162,17 @@ They move into A. **Their units applied Contested, so they attack and get focus 
 - **Kills ready your legend** (Battle Mistress: "When one or more enemy units die, ready me"), so she can make another Gold.
 - **The trap works by doubt.** A face-down card at A could be Stranger, Switcheroo or Evelynn; the top Chaos decks all play the same package, so opponents know the threat but not the card. One reviewer called Stranger the best card in Radiance for exactly this ("how on earth is the opponent supposed to figure out how to attack?", Ultimate Guard, 20 October).
 
+### The kill zone: the trap on your turn (Jay, 1 Nov)
+
+You don't have to wait for them to attack A. **Bring their unit to it.**
+1. **Ember Monk straight into A**: units can be played to a battlefield you control (§355.2.a).
+2. **Faefolk walks into A and pulls one of their units in.** It arrives as the attacker; the fight starts at once and they have focus first (§466.2.c.1.a).
+3. **Flip your face-down card in that fight.** Monk gets +2 (6 Might), and the flip does its own job: Edge +2, Tideturner swaps Rengar in, Switcheroo swaps Mights, Stranger bounces.
+4. **Their unit dies.** The kill readies your legend for a Gold, and if it was B's only defender, B is empty for Sivir or a Booted holder.
+
+**Best target: their Vex, Apathetic**, the card that breaks your closing turn. Pull her in and kill her the turn *before* you close (her Deflect makes the pull cost 1 more Power).
+**Watch:** they act first in that fight (a Gust on Monk before he grows); their unit at A lets them Ambush more units in (§822.1.b), so count their open Energy; Monk's +2 is this turn only.
+
 **The counter-plan is to ignore A.** Control decks hold B and build. That's what Faefolk and Evelynn are for: **the trap comes to them.** Pull their B unit into A on your turn, fight it where your tricks are, and Sivir takes B.
 
 ---

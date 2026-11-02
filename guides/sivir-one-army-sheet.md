@@ -16,6 +16,8 @@ date: 2026-11-01
 
 **On their turn, they attack A:** 2+ attackers → **Stranger** · 1-on-1 → **Existential Dread** (stun; Repeat bounces), **Switcheroo**, **Edge of Night** (+2 for good) or **Gust** · one big attacker → **Nidalee / Rengar by Ambush**, or **Tideturner** swaps a big unit in · a flood → **Graves** (sideboard).
 
+**The kill zone (your turn):** Ember Monk into A · Faefolk pulls their unit (best: their **Vex**) into A · flip your face-down card (Monk +2) · it dies, legend readies. They act first; count their Energy for Ambush.
+
 **Four rules.**
 
 1. From 5 points, every turn: can either player reach 8 before the other acts again?
