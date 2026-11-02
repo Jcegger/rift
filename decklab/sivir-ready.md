@@ -572,3 +572,11 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   usable on their turn by turn 5 43/61% → 65/78%; Jay kept one Switcheroo. Rejected: Rampage up / Switcheroo down
   (Rampage is your-turn), Teemo (1 Might after its fight), Yone (5-drop), Yasuo (combo cheese), Hard Bargain main.
   Battlefields rechecked: unchanged. Row backed up (`backups/state-pre-army-boots-2026-11-01.json`).
+
+### Games (the locked trap list, 1 Nov 2026)
+
+| # | date | vs | seat | battlefields (mine / theirs) | result | how | failure type | trap | notes |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | 2 Nov | Pyke, Bloodharbor Ripper (Fury/Chaos: Darius Trifarian, Seal of Rage) | first | Sigil of the Storm / Void Gate | **W** (conceded turn 13) | held both battlefields: 5 → 7 at turn start; Faefolk pull on turn 11, a Pyke to the trash | — (win) | mostly pulling and holding; no face-down flip on their turn | Edge of Night on Vex. **Card draw felt short**: Innovator lost early, a timely Ezreal carried it. Opponent: "annoying with this vex". Online, not Nexus Night |
+
+**Watch from game 1:** card draw. One data point, but it's the reservation flagged when The Good Stuff went out.
