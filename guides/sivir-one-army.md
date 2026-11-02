@@ -250,6 +250,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 **Star-Crossed** ×2 (3E 1P · Reaction). *Return a friendly unit and an enemy unit to their owners' hands.*
 - **Job:** a bounce at Reaction speed, or saving one of yours from removal at the cost of its place.
+- **The rebuy (Jay, 2 Nov):** the friendly unit you return can be one you *want* back. Return Ezreal and replay him for another draw 2; return Innovator for another Accelerate trigger; return Faefolk for a second pull. Card draw and removal in one Reaction.
 - **Example (vs Seraphine):** she casts Hidden Blade on your Sivir in B's showdown. Star-Crossed in response, returning Sivir to your hand and one of her units to hers: the Blade has no target, and Sivir is back in your hand to play again next turn. No conquest this turn, but no Sivir lost.
 
 **Boots of Swiftness** (Gear · 3E · Chaos). *Equipment: +2 Might and Ganking. Equip: 1 Chaos.* (Ganking is printed in the bonus strip; our card data misses it.)

@@ -31,6 +31,8 @@ date: 2026-11-02
 
 **Against Defy.** Safe: Punch First, Rebuke, Switcheroo, every unit. Counterable: Ride the Wind, Gust, Rampage, Star-Crossed.
 
+**Star-Crossed rebuy:** return your own Ezreal (draw 2 again), Innovator or Faefolk with their unit.
+
 **Watch out.** Ezreal on Sivir: take the **Energy**, not the rune. Never make **Rockfall Path** your A. Equip Boots or play Ember Monk only on a turn you don't need Energy up. **Boots' Ganking:** a holder walks A → B, past their Vex.
 
 **Battlefields** (picked before the seat): game 1 **Sigil of the Storm** · after a loss (go first) **Amateur Recital**: make it A; each hold sends their lone B defender home, walk in, two points a turn; if they take it, retake it first · after a win **Forbidding Waste** (hold it with two).
