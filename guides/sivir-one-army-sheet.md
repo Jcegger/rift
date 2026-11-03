@@ -25,11 +25,11 @@ date: 2026-11-02
 3. **Their Vex, Apathetic is gone before Sivir** (she stuns any unit you play, anywhere). Rebuke her on the closing turn: 3 Power with Deflect turns Sivir on.
 4. Keep a Faefolk in base from turn 4.
 
-**Face-down.** One per battlefield you hold; hide on your turn (pay with Gold); free with Reaction from the next turn, theirs too. **Stranger needs 4 units, itself included: not for 1-on-1s.** Only one card fits at A: choose by the fight you expect (Stranger, Switcheroo, Edge, Tideturner, Evelynn); **Ember Monk** at A gets +2 on any flip.
+**Face-down.** One per battlefield you hold; hide on your turn (pay with Gold); free with Reaction from the next turn, theirs too. **Stranger needs 4 units, itself included: not for 1-on-1s. Face down it bounces only at its own battlefield (§811.1.d.3).** Only one card fits at A: choose by the fight you expect (Stranger, Switcheroo, Edge, Tideturner, Evelynn); **Ember Monk** at A gets +2 on any flip.
 
 **Breaks the close:** their Vex · Gust or Star-Crossed on Stranger · Not So Fast · Moonfall / Hidden Blade / Rebuke on Sivir in B · **Baron** (can't be pulled or bounced; with the Pit out, **win by holding at 7**).
 
-**Against Defy.** Safe: Punch First, Rebuke, Switcheroo, every unit. Counterable: Ride the Wind, Gust, Rampage, Star-Crossed.
+**Against Defy.** Safe: Punch First, Rebuke, Switcheroo, every unit. Counterable: Ride the Wind, Gust, Rampage, Star-Crossed, Existential Dread.
 
 **Star-Crossed rebuy:** return your own Ezreal (draw 2 again), Innovator or Faefolk with their unit.
 

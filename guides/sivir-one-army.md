@@ -103,7 +103,7 @@ date: 2026-11-02
 ### Turns 3–4: arm the trap, win on interaction
 
 - **Hide a card at A.** Stranger when their attacks will be 2-on-1 or wider; Switcheroo when fights will be 1-on-1 (Stranger needs 4 units, itself included). One face-down card per battlefield you control (§811.1.b), placed on your turn, playable from the **next turn on, theirs included**, at Reaction speed and for no cost.
-- **Pay the hide with Gold when you can.** The cost is one Power of any colour: a Gold token pays it, or a recycled rune, and recycling a rune triggers the legend's Gold.
+- **Pay the hide with Gold when you can.** The cost is one Power of any colour: a Gold token pays it, or a recycled rune, and recycling a rune triggers the legend's Gold. A new Gold enters exhausted, so it pays from next turn on.
 - **Keep Reaction answers up on their turn:** Gust (1 Energy) for their 2–3-Might attacker, Nidalee or Rengar by Ambush, Star-Crossed. This is where the pros said the game is won.
 - **Put Vex at a battlefield.** Every unit they play is stunned, wherever it lands, so their Ambush blockers and ready-on-arrival units can't fight that turn.
 - **Ember Monk and Boots on a quiet turn.** Monk at A defends at 6 whenever you flip a face-down card. Equip Boots (1 Chaos) on a holder at A: +2 Might, and Ganking lets it walk from A to B on the closing turn.
@@ -141,7 +141,7 @@ Checked step by step against the rules on 1 November (handbook → verbatim → 
 - **Answers to Sivir in B's showdown:** Rebuke, Hidden Blade, Moonfall, Star-Crossed, Siren's Song. Gust can't (she's 6).
 - **Baron Nashor** can't be pulled or bounced, and **the Baron Pit** is a third battlefield: a conquest for the 8th point would need it scored too (this repo's reading, not a staff ruling). **Against Baron, win by holding at 7.**
 
-**Sequencing against Defy** (counters a spell of 4 Energy or less and 1 Power or less, printed cost, §206): **safe:** Punch First, Rebuke, Switcheroo, every unit; **counterable:** Ride the Wind, Gust, Rampage, Star-Crossed. Against Calm, close with units and the 2-Power spells.
+**Sequencing against Defy** (counters a spell of 4 Energy or less and 1 Power or less, printed cost, §206): **safe:** Punch First, Rebuke, Switcheroo, every unit; **counterable:** Ride the Wind, Gust, Rampage, Star-Crossed, Existential Dread. Against Calm, close with units and the 2-Power spells.
 
 **Ezreal's discount on Sivir:** take the **Energy** off her Accelerate, not the rune. A Power cost reduced to 0 isn't spent (§445.1.b), and she'd lose her +2 and Ganking.
 
@@ -192,7 +192,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 **Irresistible Faefolk** ×3 (2E · 1 Might). *When I move to a battlefield, you may move an enemy unit to that battlefield.*
 - **Job:** empties B on the closing turn by dragging its defender into A, where your tricks are.
-- **Use:** any move triggers it, including an ordinary walk from base, so it can wait at base. The pull chooses, so Baron and "can't be chosen" units are immune. Keep one in base from turn 4.
+- **Use:** any move triggers it, including an ordinary walk from base, so it can wait at base. A card's move counts too: a face-down **Tideturner** at A swapping with a Faefolk in base moves Faefolk to A, which is a pull at Reaction speed, on their turn as well; so does **Ride the Wind**. The pull chooses, so Baron and "can't be chosen" units are immune. Keep one in base from turn 4.
 - **Example (vs Rengar):** you hold A with Tideturner and a face-down Stranger; Rengar holds B with one Pit Rookie. On your turn Faefolk walks into A and pulls the Rookie in. A fight starts at A, Rengar attacking with the Rookie, and he has focus first: he plays Thrill of the Hunt (2E 1P) to banish the Rookie and replay it at B. B had gone uncontrolled after the pull, so the replayed Rookie **conquers B and scores him a point on your turn** (§323.5, §348.2.a.1). **The lesson:** against Rengar (Thrill in 94% of lists), pull when he can't pay 2 Energy and 1 Power, or when his point doesn't matter.
 
 **Evelynn, Entrancing** (Hidden · 2E · 2 Might · Backline). *When you play me from face down on your turn, you may move an enemy unit at a different location to my battlefield.*
@@ -204,8 +204,9 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 **Bedeviling Stranger** ×2 (Hidden · 2E · 2 Might). *When you play me, choose a battlefield. If there are 4 or more units there, you may return an enemy unit there to its owner's hand.*
 - **Job:** a free, Reaction-speed bounce with no size limit, at the battlefield you hold.
-- **Use:** from face down it's played to A and counts itself (§383.4.a.2). It needs 4 units: two attackers into one holder works, a 1-on-1 doesn't. From hand (2 Energy, main phase) it can choose any battlefield: against a wide board at B, bounce one of their four.
-- **Judge question:** whether a face-down Stranger may choose its own battlefield (§811.1.d.3) has no ruling. It's the card's clear intent; ask before an event.
+- **Use:** from face down it's played to A and counts itself (§383.4.a.2). It needs 4 units: two attackers into one holder works, a 1-on-1 doesn't.
+- **Face down, it reaches only its own battlefield.** It is played to the battlefield where it was hidden (§811.1.d.1), and its play effect must choose its targets there (§811.1.d.3). The enemy unit it returns is a target (§355.12), and "choose a battlefield" doesn't rule out its own, so the Tideturner-style exception doesn't apply. A face-down Stranger at A can never bounce a unit at B. The trap doesn't need it to: the pulled unit is at A.
+- **From hand it reaches any battlefield,** but as a plain 2-Energy unit: main phase only, no bounce mid-fight. Played to base it doesn't count toward the 4, so the chosen battlefield needs 4 units without it; played to a battlefield you control it counts itself. Against a wide board at B, bounce one of their four.
 - **Example (vs Mordekaiser):** he attacks A with two units, one a 6-Might threat, into your Nidalee. Flip Stranger: Nidalee + Stranger + his two = 4. Return the big one to his hand. Nidalee (4 Might) handles a smaller one left behind, and bouncing rather than killing gives his deaths engine nothing.
 
 **Switcheroo** (Hidden · 2E 2P · Action). *Swap the Mights of two units at the same battlefield this turn.*
@@ -463,7 +464,8 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 | §467.1, §468.1.a.2 | no damage without both sides; a losing attacker that doesn't die goes to its base |
 | §473.1.a.1, §473.1.b.1 | a hold at 7 wins; a conquest for the 8th point needs every battlefield scored this turn |
 | §206 | Defy reads the printed cost: 2-Power spells are out of reach |
-| §811.1.b, §811.1.d | one face-down card per battlefield you control; played free from the next turn on with Reaction; its choices pinned to that battlefield (Tideturner-style exceptions only) |
+| §811.1.b, §811.1.d | one face-down card per battlefield you control; played free from the next turn on with Reaction; its choices pinned to that battlefield (Tideturner-style exceptions only): a face-down Stranger bounces only at its own battlefield |
+| §451.1, §466.2.c.3.a | a card's move has only the card's restrictions (Ride the Wind: any battlefield to any, mid-showdown too); a unit arriving mid-fight, by Ambush or a move, joins its side |
 | §822 | Ambush: played as a Reaction to a battlefield where you have units |
 | §830.1.b | Deploy gear goes to any battlefield; it dies when an opponent **holds** there (a conquest alone doesn't kill it) |
 
@@ -511,5 +513,5 @@ Each game, which of the four it was, so one problem isn't fixed with another's c
 
 - **No win rates and no precedent.** None of the 5 Battle Mistress lists posted since 23 October runs Stranger or Faefolk, and none has a vouched finish. This plan is untested by anyone.
 - **The test bench can't see the deck's main tricks** (the pull, the bounce, Tideturner's swap, Monk's trigger).
-- **Two rules points are open:** whether a face-down Stranger may choose its own battlefield, and the Baron Pit's effect on the 8th point (the repo's reading). Ask a judge before relying on either at an event.
+- **One rules point is open:** the Baron Pit's effect on the 8th point (the repo's reading). Ask a judge before relying on it at an event. (The Stranger question is settled by §811.1.d.3: face down, it bounces only at its own battlefield.)
 - **Sideboard plans are from card reads, not games.**

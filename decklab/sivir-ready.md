@@ -572,6 +572,17 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   usable on their turn by turn 5 43/61% → 65/78%; Jay kept one Switcheroo. Rejected: Rampage up / Switcheroo down
   (Rampage is your-turn), Teemo (1 Might after its fight), Yone (5-drop), Yasuo (combo cheese), Hard Bargain main.
   Battlefields rechecked: unchanged. Row backed up (`backups/state-pre-army-boots-2026-11-01.json`).
+- **3 Nov 2026, rules review of every card (no list change).** Prompted by Jay's Discord group: a face-down Stranger
+  bounces only at its own battlefield. They're right: §811.1.d.1 plays it there, §811.1.d.3 pins its play effect's
+  targets there, and the returned unit is a target (§355.12); "choose a battlefield" doesn't trigger the Tideturner
+  exception. That settles the 1 Nov judge question above. The trap is unaffected (the pulled unit is at A). From hand it
+  reaches any battlefield, but at main-phase speed, and in base it doesn't count toward the 4. Every other card's text
+  was read against the guide's claims; checked and holding: Rengar's and Tideturner's errata, Ride the Wind moving
+  battlefield to battlefield with no Ganking (§451.1), Ambush and pulled units joining a fight already under way
+  (§466.2.c.3.a), Rampage's Body still "paid" when Ezreal takes it to 0 (§445.1.b), Sivir returned by Star-Crossed
+  going to hand (§103.3.a.3). Fixed in the guide: Existential Dread added to the Defy-able list (1E 1P); a new Gold
+  enters exhausted; Faefolk's pull also fires on a card's move (a face-down Tideturner swapping it in from base is a
+  Reaction-speed pull).
 
 ### Games (the locked trap list, 1 Nov 2026)
 

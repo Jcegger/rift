@@ -73,8 +73,9 @@ going for both battlefields is right only when the terminal scan says it wins th
 
 ## Open items
 
-1. **Judge questions before an event:** can a face-down Stranger choose its own battlefield (§811.1.d.3; no ruling)?
-   Does a Baron Pit gate the 8th-point conquest (the repo's own reading)?
+1. **Judge question before an event:** does a Baron Pit gate the 8th-point conquest (the repo's own reading)? (The
+   Stranger question is settled, 3 Nov: face down it bounces only at its own battlefield, §811.1.d.3. From hand it
+   reaches any battlefield, but at main-phase speed.)
 2. **Card data drops equipment keywords:** `data/cards.json` misses a keyword printed in the bonus strip (Boots of
    Swiftness' Ganking, confirmed from the card image; Edge of Night's strip is flavour only). Fix the builder
    (`scripts/build-*.mjs`), never the JSON, and re-check the other 40 equipment.
@@ -110,6 +111,9 @@ row in the worksheet's games table.
 - **Baron Nashor can't be chosen:** nothing in the deck pulls, bounces or kills him. Win by holding at 7.
 - **A card played from face down ignores its whole cost** (§811.1.b). Hiding it costs one Power of any colour (Gold
   pays it).
+- **A face-down Stranger bounces only at its own battlefield** (§811.1.d.3; the unit it returns is a target). From hand
+  it can choose any battlefield, at main-phase speed, and in base it doesn't count toward the 4.
+- **Existential Dread is Defy-able** (1E 1P). Defy counters ≤4 Energy and ≤1 Power.
 - **Ezreal's discount on Sivir:** take the Energy, not the rune, or her 2 Power isn't spent (§445.1.b).
 - **The test bench is blind to** pulls, bounces, face-down swaps, Ember Monk's trigger, Boots' Ganking, battlefields
   and gear draw. Read it for shape, not verdicts.
