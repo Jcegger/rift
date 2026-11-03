@@ -356,11 +356,11 @@ device may replace paper at low OPL only at the head judge's discretion (TR §41
 | `match-night.pdf` — five blank match pages | during games: **only the current match's page** |
 | `trouble-list.pdf` | between games and at home |
 | `review.pdf` | at home |
-| `matchup-card.pdf` — the Kha'Zix pocket card | **between games only**, never during one |
+| `matchup-card.pdf` — the current deck's matchup card (Sivir) | **between games only**, never during one |
 
 **Building them:** `scripts/build-journal` writes all four to `guides/out/journal/`
-(`--pages N` for more match pages). **The matchup card is printed from the pocket-card
-table in the matchup guide (retired guide, in git history)**,
+(`--pages N` for more match pages). **The matchup card is printed from the first table in
+§9 of the current deck's guide (`guides/sivir-one-army.md`)**,
 so it carries advice. That is exactly why it stays closed during games. Rebuild it
 whenever that table changes. They are 6 × 8 in, the Scribe's 3:4, and print fine
 scaled to A4 or Letter.

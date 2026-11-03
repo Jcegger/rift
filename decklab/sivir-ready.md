@@ -2,7 +2,7 @@
 title: Sivir, Ready and Gank — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. Jay's own Sivir, rebuilt around Sivir as the finisher. Built with Jay a stage at a time.
 started: 2026-10-29
-status: R5 locked 30 Oct 2026, after the matchup audit and three stress tests, and made the new v1 — the app's "Sivir is trying her best" is now R5 (Jay; guides/sivir-trying-her-best.md updated). Stage 6 (freeze and play). "Sivir Ready (draft)" was removed from the app on 30 Oct 2026, with the other Sivir test decks (Jay: only the locked v1 stays); the pure readying build gets its own worksheet. To get: Nidalee ×2
+status: stages 1–3 agreed 29 Oct 2026; Jay rebuilt the draft as "Sivir: One Army, Two Fights (draft)", now his main deck; audited and changed with Jay 31 Oct 2026 (section 5), frozen for testing
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
@@ -279,570 +279,162 @@ Defy-able (1 Power); a third Rengar or Zed; Kinkou Initiate vs Merchant; Stare D
 Cataclysm as flags. **Per game, note:** did the closing turn happen, what stopped it, and whether you
 had a unit to play.
 
-## Unlocked: the closing turn's Energy (30 Oct 2026, Jay: "fine with a complete rework")
+## 5. One Army, Two Fights: Jay's rebuild, audited 31 Oct 2026
 
-**Energy is capped by runes on the board.** 2 channelled a turn (§315.3.b), 12 at most; going first,
-10 by turn 5 and 12 by turn 6, fewer for every rune recycled and not yet channelled back. Battle
-Mistress's Gold adds Power (`[A]`), never Energy. On the closing turn the same rune can pay Energy and
-then be recycled for Power (§164.2), so Power is not the limit; Energy is.
+**Jay's rebuild** (30–31 Oct, in the app as "Sivir: One Army, Two Fights (draft)", now his **main**
+deck; v1 "Sivir is trying her best" changed too and is the backup). The new spine is
+**displacement plus Ganking**: Irresistible Faefolk ×3 ("when I move to a battlefield, you may move an
+enemy unit to that battlefield"), Bedeviling Stranger ×2, Nilah ×2 (Accelerate, Ganking), Portable
+Portal ×2, Ride the Wind 1 → 3, First Mate 1 → 2, Star-Crossed 2 → 3, The Good Stuff, Abandon, and
+the battlefields Amateur Recital, Windswept Hillock and Zaun Warrens. Out from the 29 Oct draft:
+Ezreal ×3, Traveling Merchant ×2, Evelynn, Edge ×2, On the Hunt ×2, Switcheroo ×2, Repulse.
 
-| route (Sivir accelerated: 5E, her Chaos + the Accelerate Chaos) | Energy | notes |
+**The plan, restated** (unchanged from stage 2, sharpened by the audit):
+- **Expensive threats must act the turn they land. Cheap raid bodies may develop over turns**
+  (Faefolk's job is the pull, from base). **Finishing-turn cards must add the action that turns the
+  first conquest into the second.**
+- **Sivir from base is the second conquest.** Units enter at your base or a battlefield you control, exhausted unless Accelerate applies (§355.2.a, §143.4); with Accelerate she
+  enters ready, having spent her own 2 Power (her 1 plus the Accelerate's Chaos, §166.2), so 6 Might
+  and Ganking. Base → battlefield needs no Ganking (§144.4). So: the board attacks A, Faefolk pulls B's
+  defender into A, Sivir walks into the empty B. Also able to make the second conquest: Nilah
+  (Accelerate, Ganking), Rengar (Ambush, even where only enemy units are), Ride the Wind ×3, Portal ×2,
+  First Mate ×2.
+
+### The changes (31 Oct 2026, with Jay), each like-for-like by job
+
+| out | in | job | why |
+|---|---|---|---|
+| The Good Stuff | Ezreal | value | Jay: hard to keep, and its return needs a hold; Ezreal draws on arrival and is a body |
+| Abandon | Repulse | protection | Abandon needs 2 Energy held up, the resource the legend lacks; Repulse is paid in Power |
+| Sabotage | Rampage | clearing | a kill opens a battlefield this turn; a card out of their hand doesn't |
+| Bedeviling Stranger | Switcheroo | clearing → protection | Jay: "Switcheroo has won me games"; clearing was over target |
+| Bedeviling Stranger | Evelynn, Entrancing | 2-drop | Stranger is a hold-defence card (Hidden only at a battlefield you control; needs 4+ units); Evelynn's face-down pull opens the other battlefield in the holding line (she's always at a battlefield you control, so the pulled unit attacks you there; corrected 31 Oct by the guide's fact-check), and her floor is the same 2E, 2-Might body |
+| Vex, Apathetic | Switcheroo | protection | the one expensive threat that doesn't act on arrival; her stun needs her to sit at a battlefield |
+
+**The list, frozen for testing** (in the app; after the three later swaps below; rows backed up to
+`backups/state-pre-army-final-2026-10-31.json` and `backups/state-pre-army-gust-2026-10-31.json`):
+- **Units (23):** Sivir · Rengar ×2 · Nilah ×2 · Nidalee ×2 · Fizz ×2 · First Mate ×2 · Innovator ×3 ·
+  Ezreal ×2 · Vex · Staunch ×2 · Faefolk ×3 · Evelynn
+- **Spells (16):** Punch First ×3 · Ride the Wind ×3 · Star-Crossed ×2 · Rebuke ×2 · Rampage ×2 ·
+  Switcheroo ×2 · Sabotage · Gust
+- **Gear (1):** Portable Portal
+- **Runes** 6 Body / 6 Chaos (still the best split; the final sweep: every split 17.4–17.7 Energy).
+  **Battlefields:** Sigil of the Storm (blind) · Targon's Peak (going first) · Forbidding Waste (on the
+  draw); see "Battlefields, picked" below.
+- **Sideboard:** Graves ×2 · Ravenbloom Prefect (gear hate; Jay: needed) · Ruin Runner · On the Hunt ·
+  Repulse · Star-Crossed · Unyielding Spirit ×2 · Abandon. **Ruin Runner** (can't be chosen by enemy
+  spells and abilities) stays a nice-to-have: 6 Energy and doesn't act on arrival (Jay: "not define our
+  strategy around it, yet").
+- **The core** (Jay agreed, 31 Oct; not cut without game evidence): Faefolk ×3 · Evelynn · Innovator ×3 ·
+  Fizz ×2 · Nilah ×2 · Rengar ×2 · Punch First ×3 · Ride the Wind ×3 · Sivir. Swaps come from the
+  replaceable jobs (readying: First Mate, Portal; clearing: Star-Crossed, Rebuke, Rampage, Gust;
+  protection: Switcheroo, Sabotage), like-for-like.
+
+**Three later swaps, same day** (Jay, from a second reviewer's proposals; Claude agreed on the first and
+third, called the second a fair trade):
+- **−1 Portable Portal, +1 Ezreal.** Portal was the first trim (it needs your unit at a battlefield;
+  Sivir-from-base doesn't). Ezreal's discount lands on Nilah's and Innovator's Accelerate and Rampage's +2.
+- **−1 Repulse, +1 Sabotage.** Sabotage protects the finishing turn *before* Sivir is exposed: a Defy
+  spent on it is a Defy gone for 1 Energy; resolved, it takes any non-unit card (Defy, Smoke Screen,
+  Eclipse, Zhonya's still in hand, since hiding is only on its controller's turn, §811). What it gives up:
+  cards already hidden on the board (Vex's Back Off) and answers drawn after it. The only main-deck save
+  for Sivir is now Star-Crossed, which ends the attack. (Rebuke for Sabotage was rejected: Rebuke is
+  Defy-proof, Action speed, and the answer to an opposing Vex.)
+- **−1 Star-Crossed, +1 Gust.** Energy is the bottleneck: tricks crowded out 1.68 → 1.55 (normal). Gust is
+  1E 0P, bounces a unit with 3 Might or less, free when Fizz recasts it. Costs: Sivir's condition 51% →
+  48% (Gust spends no Power); the bench's "answer ready" doesn't count size-limited answers, so its drop
+  (37% → 34% on the play) overstates the loss.
+
+**Sideboard plan:** against **Vex**, Repulse in for Sabotage (it can't reach her hidden Back Off).
+Against **removal-heavy decks** (Kai'Sa, Diana), Star-Crossed #3 back for Gust if Sivir keeps getting
+answered; Repulse is reliable there too (no Defy).
+
+**Measured against Jay's list as it was that morning** (`try`, normal pressure unless marked; not win rates):
+
+| | before | after |
 |---|---|---|
-| + Punch First | 6 | a won fight, not a second threat; Defy-proof |
-| + On the Hunt | 6 | readies everything that already attacked; Defy-proof |
-| + Ride the Wind | 7 | moves and readies one unit, mid-showdown too; Defy-able |
-| + Nidalee (Ambush) | 8 | a second threat beside Sivir |
-| + First Mate | 8 | readies one unit |
-| + Rengar (Ambush) | **10** | the whole turn's runes, with nothing else cast |
+| units by turn 2 / 3 (goldfish, on the play) | 1.7 / 3.1 | 1.6 / 2.9 |
+| units by turn 5 | 3.8 | 3.7 |
+| Sivir's condition on, turns 4–8 (quiet · normal · heavy) | 30% · 41% · 42% | 35% · 46% · 48% |
+| answer usable on their turn by turn 5 (goldfish, play · draw) | 44% · 67% | 43% · 67% |
+| attacks answered | 17% | 16% |
+| tricks crowded out by Energy | 1.44 | 1.52 |
 
-Hunters' Circle (first unit there costs 1 less) and Ezreal (Accelerate 1 Energy less) take 1 off a
-route. **Read:** the cheap routes are the closing turn; Rengar is a threat on a different turn (or
-the hold at 7), not a closing-turn piece. Cheap closing cards in the locked list: Punch First 3, On the
-Hunt 2, Ride the Wind 1, Nidalee 2, First Mate 1 = **9**. Seen by turn 7 (draw-only, 11 of 40): one
-96%, **two 79%**. At 12: 99% / 92%. At 14: 100% / 96%. The plan asks for two threats.
+**Turn-1 play** (a 2-Energy unit; you see 5 cards by turn 1, about 7 when you mulligan for one): 6 such
+units: 58% without a mulligan, 71% with one (corrected from an estimated 74%); 7 would be 77%, 8 would be 82%. **The field** (legal lists since 23 Oct):
+top-16 lists run 6.7 units at 2 Energy or less (median 7) and essentially no 2-drop that costs Power;
+23 cards at 2 Energy or less in all, against this list's ~18.
 
-**Sivir's own cost counts** toward "spent at least `[A][A]` this turn" (Jay, 30 Oct 2026; the FAQ also
-counts a paid cost as spent, Jhin, `rules-faq.md`). So an accelerated Sivir switches herself on: her
-Chaos plus the Accelerate's Chaos. Nothing else that turn has to supply Power for her.
+### The audit (three independent reviewers: data analyst, player, rules judge)
 
-**She needs a battlefield to start from** (Jay). A unit is played only to your base or a battlefield
-you control (§806.3); a standard move exhausts it (§144), and battlefield → battlefield needs Ganking
-(§810). So from 6:
+**Corrections to what Claude said earlier the same day:**
+- **"0.0 extra cards drawn" was a blind spot, not a fact.** The engine reads only "draw" on spells and
+  "when you play me" on units: it misses The Good Stuff (gear), Zaun Warrens (no battlefields), Nidalee
+  (no combat), and Innovator's "pay Chaos: draw 1". The current list drew more than reported, so the
+  first package over-corrected (it cut Innovator and First Mate, and Merchant adds **no net cards**:
+  discard 1, draw 1).
+- **The bench's blind spots favour cutting:** Abandon isn't counted as an answer by the engine,
+  Faefolk's and Evelynn's pulls aren't modelled, "can't be chosen" only in the field rows.
+- **Noise:** the points model swings about ±0.5 between seeds at 300 games; the engine (3000 games) is
+  stable to about ±0.03 units. Read sweeps of under 0.5 points as ties.
+- **Abandon is Defy-able** (2E 0P); an earlier claim that it wasn't was wrong.
 
-| you start the closing turn | the line | needs |
+**Protection, three different jobs** (the deck has 3 copies; target 3):
+- **Switcheroo** swaps the Mights of two units at one battlefield: it **wins a fight** (undoes a −4
+  Smoke Screen, or trades Sivir's 6 against a small blocker). It does **not** stop a bounce or a kill.
+- **Repulse** counters an enemy spell or ability that chooses one friendly unit: the **only main-deck
+  answer to removal or a bounce on Sivir**. Defy-able, so cast it into Vex when she's tapped out.
+- **Star-Crossed** clears the way (bounces a blocker) and can save Sivir, **at the cost of the attack**.
+- Odds of holding a Switcheroo or Repulse by the finishing turn (about 10–11 cards seen): 59–63%
+  (2 copies: 44–48%; 4 copies: 70–74%).
+
+**Rules points** (all 10 claims checked, `docs/rules.md` → verbatim → FAQ):
+- **Ezreal's discount:** on Accelerate take off the **Energy**, not the rune. A Power cost reduced to 0
+  is not spent (§445.1.b), and Sivir's +2 and Ganking would switch off. It doesn't apply to Portal's pay
+  (a trigger cost, not an optional additional cost).
+- **Faefolk's pull** into a battlefield where you're attacking keeps you the attacker (§190.3.a.1,
+  §466.2.c.1); the emptied battlefield can then be conquered without a fight (§348.2.a.1). **Pulling
+  onto a battlefield you control makes them the attacker**, and they can conquer on your turn.
+- **Fizz recasts Rampage for nothing** (Fizz's errata ignores Energy; Rampage has no Power cost). Defy
+  can still counter the recast.
+- **Against Riven's Baron Nashor:** The Baron Pit makes three battlefields, so two conquests don't take 6
+  to 8. Win by holding. From the repo's own Baron Pit entry in `docs/rules-rulings.md`, not a staff
+  ruling: ask a judge before relying on it at an event.
+
+**Battlefields:** in best-of-3 each player picks one, placed simultaneously; one used in a decided game
+is retired (§488.5); at a single-game event it's random (§487.5). Every battlefield is symmetric.
+(Superseded the same day: the audit's "lead with Amateur Recital" was wrong; see below.)
+
+### Battlefields, picked (31 Oct 2026, with Jay and the second reviewer)
+
+All 71 legal battlefields read; use counted in the 2,364 legal lists since 23 Oct (67 top-16 finishes).
+
+| when | battlefield | why |
 |---|---|---|
-| **holding A** | the hold scores A (7); Sivir accelerated onto A, Ganks to B and conquers: 8, the gate open because A scored | **Sivir alone, 5 Energy** (4 with Hunters' Circle or Ezreal) |
-| holding nothing, a board that can take A | the board conquers A (7); **then** Sivir accelerated onto A, now yours, Ganks to B, conquers: 8 (Jay) | Sivir + one won fight; 5 Energy, 4 if A is your Hunters' Circle (played to base instead she gets no discount) |
-| holding nothing, one attacker | Sivir conquers A from base; On the Hunt readies her; she Ganks to B | Sivir + On the Hunt, 6 Energy |
-
-**The closing turn is one conquest by the board, plus Sivir.** A hold makes it free (the battlefield
-is already yours); otherwise the board wins the first fight that turn and Sivir launches from it
-(Jay's line). So the cheap closing pieces have two jobs: **win that first fight** (Punch First,
-Rampage) or **keep Sivir's attack alive** (protection). On the Hunt is the fallback when Sivir is
-the only attacker.
-
-## Stage 2 revised: midrange, the road to 6 (agreed 30 Oct 2026)
-
-Jay: "midrange aggro, sliding in and out, and holding one if it fits… still technically midrange."
-This replaces "raid, don't hold" (an aggro plan) with `docs/strategy.md` §2's role flip.
-
-**Why holding comes back.** At most 2 points a turn (each battlefield scores once a turn, §472), and
-lethal is 6 plus scoring both, or a hold at 7 (the terminal table). Trading a battlefield back and
-forth scores 1 each and nobody pulls ahead. You pull ahead only by a **hold** (it survives their turn),
-a **double turn** (both battlefields in one turn), or a **denial** (they fail to retake). Pure raiding
-gave up the cheapest of the three.
-
-**The legend prefers it** (moderate, card text, not measured): Battle Mistress readies when enemy units
-die, and each ready is a Gold (Power) on the next recycle. Trades kill units; raids that dodge fights
-don't. The Power pays Sivir's condition, Punch First and On the Hunt.
-
-**The road to 6:**
-1. **Early:** cheap units take the first point, usually their open battlefield.
-2. **Middle:** win trades and **hold one when it fits**: a holder their removal can't take cheaply,
-   backed by Rengar's Ambush or your Vex's stun on whatever they play to retake. A denial counts too.
-3. **At 6:** the closing turn (costed above): Sivir plus a cheap piece, both battlefields scored.
-
-**Two layers of cards:** a middle layer of sturdier 4–5 Energy cards that win trades and hold (Rengar,
-Vex); a cheap layer, 3 Energy or less, for the early turns and the closing turn.
-
-**Role by matchup:**
-
-| matchup | role |
-|---|---|
-| Jayce, Azir, LeBlanc | push: race before their late game |
-| Kai'Sa, Vex, Diana, Kennen | hold cheaply, close in one go; no big target for their answers |
-| Rengar | defend first, then hold; take it back when he's tapped out |
-| Riven, Master Yi, Irelia | close on the turn they tap out of Defy and tricks |
-
-**The legend, honestly:** experts B (two graders, "thin"); 36 lists since Radiance, 10 Aurora; no 1v1
-Radiance results. Unproven, not shown weak. The field's Battle Mistress lists are aggro, so this is
-off-meta within an off-meta legend, and no one else's results stand in for ours.
-
-## Stage 4 revisited: fight-winners and protection (30 Oct 2026)
-
-Every legal Body/Chaos unit, spell and gear read (305 cards; evidence: one-on-one lists since 23 Oct
-2026, Aurora lists left out, placings by `lib/placing.mjs`), plus an independent read by a second agent
-given the plan but not Claude's picks. Its finds were checked against the verbatim rules here.
-
-**Rules that shape the jobs:**
-- **Face-down cards are pinned to their battlefield** (§811.1.d.2–3): a hidden Switcheroo, Edge or
-  Teemo at A can't touch Sivir's fight at B. Her protection has to come from hand.
-- **Repulse can't stop their Vex's stun**: the trigger names the played unit, it doesn't choose it.
-  Nothing in the pool does, so **their Vex must be gone before the closing turn** (Rebuke, Star-Crossed
-  or Rampage, each 1 Power more for her Deflect).
-- **Defy reads printed cost** (§206).
-- **Signatures are the champion's only, 3 in all** (§103.3.d): **Last Caress** (Evelynn's) and
-  **Bullet Time** (Miss Fortune's) are out, though both read well. On the Hunt is Sivir's.
-
-**Fight-winners, ranked** (win the closing turn's first fight, or the one at B):
-
-| card | cost | evidence (lists / placed) | read |
-|---|---|---|---|
-| Punch First | 1E 2P, Action | 422 / 34 | +5; Defy-proof. In |
-| **Gust** | 1E, Reaction | **410 / 78** | returns a ≤3-Might unit at a battlefield: their small blocker or an Ambush arrival mid-fight; saves your own on their turn. Defy-able; can't reach Vex. **New** |
-| Rampage | 3E (+Body for +2) | 340 / 31 | a fight before combat; their Deflect applies. In |
-| Switcheroo | 2E 2P, Action | 473 / 92 | from hand, Defy-proof; doubles as protection against a shrink on Sivir. In |
-| Hold 'Em | 3E, or 1E once you've played a unit to a battlefield this turn | 119 / 6 | after Sivir lands on A, a 1-Energy +3 for her fight at B. Sideboard candidate |
-| Challenge, Stare Down | 2E 1P · 2E | 76 / 2 · 5 / 0 | thin; Stare Down stays flagged |
-
-**Protection, ranked** (Sivir's attack through the answer):
-
-| card | cost | evidence | read |
-|---|---|---|---|
-| Repulse | 1E 1P, Reaction | 77 / 5 | counters Star-Crossed, Rebuke, Switcheroo, Smoke Screen, Eclipse, Back Off on her. In |
-| **Abandon** | 2E, Reaction | 72 / 10 | counters **any** spell, Defy and their Discipline included; returns it to their hand, so it buys the turn, not the card. Defy-able. **New** |
-| Switcheroo | 2E 2P | 473 / 92 | swaps back a shrink. In |
-| Cataclysm | 4E 1P | 17 / 0 | no enemy spells all turn, and its move is the first attack: Sivir + Cataclysm is 9 Energy. Thin and heavy; Defy-able as cast. Flag |
-| Hard Bargain | 2E, Reaction | 166 / 22 | a tax, weak when they've held runes up for exactly that turn |
-| Petricite Monument | 2E gear | 4 / 0 | Deflect on your units: a tax, not a stop |
-
-**Draft R2** (measured with `try` from the locked list, normal pressure):
-**−First Mate, −Ride the Wind, −1 Sabotage; +2 Gust, +1 Abandon.**
-
-- **Units (21):** Sivir · Rengar ×2 · Vex ×2 · Staunch ×2 · Traveling Merchant ×2 · Evelynn ·
-  Innovator ×3 · Ezreal ×3 · Fizz ×3 · Nidalee ×2
-- **Spells (17):** Punch First ×3 · On the Hunt ×2 · Gust ×2 · Star-Crossed ×2 · Rampage ×2 ·
-  Switcheroo ×2 · Sabotage ×1 · Rebuke ×1 · Repulse ×1 · Abandon ×1
-- **Gear (2):** Edge of Night ×2. Runes, battlefields and sideboard unchanged.
-
-| measure | locked | R2 |
-|---|---|---|
-| units by turn 5 (normal · heavy) | 3.8 · 1.2 | 3.7 · 1.1 |
-| two units by turn 3 | 92% | 92% |
-| an answer usable on their turn, t5 (play) | 24% | 29% |
-| attacks answered (normal) | 8% | 11% |
-| Defy-countered spells, expected (popularity) | 3.5 | 3.9 |
-
-Tried first: −First Mate −Merchant −Sabotage (units by turn 5 3.8 → 3.4). Rejected: the board has to
-win the first fight, so cut a spell, not a body.
-
-**Jobs, counted:** fight-winners Punch First 3 · Gust 2 · Rampage 2 · Switcheroo 2 (+ Edge 2);
-protection Repulse 1 · Abandon 1 · Switcheroo 2 = 4; closing pieces at 3 Energy or less 13 (Punch
-First, Gust, On the Hunt, Switcheroo, Nidalee, Rampage); clearing 10 counting own Vex.
-
-**Decision records:**
-- **+2 Gust.** Fixes: a cheap Reaction fight-winner, and removes Nidalee-sized Ambush blockers. Evidence:
-  the best-placed cheap Chaos card in the pool. Sure: moderate. Reverse if: their blockers on the
-  closing turn are mostly 4+ Might in logged games.
-- **+1 Abandon.** Fixes: protection beyond spells that choose Sivir (Defy, Discipline). Evidence: 72 / 10.
-  Sure: low to moderate. Reverse if: it's Defied or the spell is simply recast in logged games.
-- **−First Mate, −Ride the Wind.** The closing turn no longer needs readying: the board's conquest
-  or a hold gives Sivir her battlefield. On the Hunt stays as the one fallback. Sure: moderate. Reverse
-  if: logged closing turns fail for want of a second attacker.
-- **−1 Sabotage.** The cheapest cut that keeps bodies. Sure: low (Jay rated it). Reverse if: Jay prefers
-  Sabotage to the second Gust. **Reversed the same day (R3, below).**
-
-**Draft R3, current** (Jay: "both can get Defy'd, and Sabotage can also get rid of game breaking cards
-like Time Warp, Zhonya's… although there's some luck involved"): **Sabotage stays at 2; Gust 1.**
-**−First Mate, −Ride the Wind; +1 Gust, +1 Abandon.** Sabotage has a closing-turn job Gust lacks:
-cast first on that turn (1 Energy), it shows their whole hand and recycles the answer that would stop
-Sivir. If they Defy it, their Defy is spent before she lands. Either way the terminal scan gets an
-answer, not a guess. Gust only handles a ≤3-Might blocker, once the fight is on. Measured (normal):
-units by turn 5 3.8 → 3.6; an answer on their turn t5 24% → 28%; attacks answered 8% → 10%; Defy
-exposure 3.5 → 3.9. Not in the app: Jay wants this build deliberate before it's locked.
-
-## The engine, card by card (30 Oct 2026)
-
-Jay: "make sure you know about the different interactions available within each card… I want to make
-sure everything fits the engine." Card text from `data/cards.json`; the v1 guide
-(`guides/sivir-trying-her-best.md` §3, §5) for how the engine was played.
-
-### What the engine runs on (model, normal pressure, 6,000 games, 8 turns)
-
-| | locked Ready | R3 | v1 |
-|---|---|---|---|
-| Power from recycled runes, a game | 9.15 | 8.87 | 8.08 |
-| Power from Gold | 4.89 | 4.85 | 4.47 |
-| Gold left unspent at the end | 0.82 | 0.83 | 0.83 |
-| Energy spent, turns 1–8 | 33.2 | 32.1 | 38.1 |
-
-**Read:** Gold never idles, in any version. **Most Power is paid by recycling runes**, and every
-recycle is a rune off next turn's board, which is why Ready spends ~5 less Energy than v1 over
-eight turns. So v1's rule ("a card with no Power leaves Gold idle") doesn't carry over: there's no
-idle Gold to waste. In Ready the currency is **runes**, and a card's real price is its Energy plus
-the runes recycled for its Power. **Cards that make Power without recycling** (Gold from Innovator and
-kills, Seal of Discord) are worth more here than they were in v1. Model only: it plays a fixed
-policy and can't play the closing turn.
-
-### The links
-
-1. **Recycle → Gold.** Each recycle while Battle Mistress is ready makes a Gold (exhausted: next turn's
-   Power). **An enemy death readies her**, so: recycle, kill, recycle. Sigil's conquer recycle probably
-   counts (open judge question, v1 guide §12).
-2. **Fizz recasts** a spell of 3 Energy or less from the trash, Energy free, Power paid, then recycles it
-   (§3.6). In R3: Punch First, On the Hunt, Sabotage, Rebuke, Switcheroo, Rampage, Star-Crossed, **Gust
-   (free: no Power)**. Not Abandon or Repulse in practice: his trigger resolves on your main phase,
-   where they rarely have a target. Fizz on the closing turn: 3 Energy for a body **and** a Punch First
-   (+5), or a second On the Hunt, or a Sabotage.
-3. **Filling the trash for Fizz:** Ezreal (discard 1, draw 2), Merchant (discard 1, draw 1 when he
-   moves). Discard a spell when Fizz is coming.
-4. **Ezreal's discount** ("optional additional costs… 1 Energy or 1 Power less"): Sivir's and Innovator's
-   Accelerate, Rampage's Body. **On Sivir take the Energy, not the Power**: the Power discount drops her
-   to 1 Power spent and switches her off.
-5. **Own-unit bounce, replayed for value:** Star-Crossed, Gust and Emperor's Dais return Ezreal or Fizz
-   to hand; the replay draws again or recasts again. Fizz → Star-Crossed → Fizz is the repo's strongest
-   found loop (`rift loops`).
-6. **Moving triggers:** Innovator (when exhausted: Gold, or a Chaos to draw), Merchant (loot).
-   **On the Hunt readies them, so a second move triggers them again.**
-7. **Hidden** (Switcheroo, Edge, Evelynn): hide for 1 Power at a battlefield you hold, play later free,
-   Power included, but **pinned to that battlefield** (§811.1.d.2–3). It needs a hold.
-8. **Hunters' Circle:** the first unit you play there on your turn costs 1 less: Sivir accelerated is 4.
-
-### Every card in R3
-
-| card | cost | gives the engine | links | road to 6 |
-|---|---|---|---|---|
-| **Sivir, Mercenary** | 4E 1P +Accelerate 1E 1 Chaos | 2 Power spent by herself: 6 Might, Ganking | Ezreal (Energy), Hunters' Circle, any battlefield you control | the close |
-| Staunch Survivor ×2 | 2E 1P | turn-1 body that makes the first Gold | Edge → 6 in fights | early; holder |
-| Traveling Merchant ×2 | 2E | loot on each move: trash for Fizz | On the Hunt → loots twice | early |
-| Evelynn, Entrancing ×1 | 2E, Hidden | from face down on your turn: pulls an enemy unit from another location to hers | hide at A; pull B's lone holder; **B opens for Sivir** | middle / close |
-| Reckless Innovator ×3 | 3E, Accelerate | **Gold or a draw each time he exhausts** (moves, attacks) | On the Hunt → second trigger | early; engine |
-| Ezreal, Prodigy ×3 | 3E 1P | discard 1, draw 2; trash for Fizz | discount (link 4); own-bounce replays | early; engine |
-| Fizz, Trickster ×3 | 3E 1P | a spell again from the trash | link 2; own-bounce replays | engine; close |
-| Nidalee, Cat Form ×2 | 3E 1P, Ambush | a Reaction-speed 4-Might body; draws on a won fight | beside Sivir at B mid-showdown; or defends a hold | middle; close |
-| Vex, Apathetic ×2 | 4E, Deflect | stuns every unit they play while she's at a battlefield; their Ambush and Hidden blockers deal no damage | kills in her fights ready the legend | middle (holds) |
-| Rengar, Trophy Hunter ×2 | 5E 1P, Ambush | 6 Might at Reaction speed; can drop into a battlefield with only enemy units | Hunters' Circle −1 | middle (defends the hold) |
-| Punch First ×3 | 1E 2P, Action | +5; Defy-proof | Fizz; Sivir's Power | close (first fight) |
-| On the Hunt ×2 | 1E 2P (signature) | ready your units | Fizz (readies Fizz too); Innovator, Merchant re-trigger | close (fallback) |
-| Gust ×1 | 1E, Reaction | bounce ≤3 Might at a battlefield | **Fizz recasts it free**; bounce your own Ezreal or Fizz to replay | close; protection of small units |
-| Star-Crossed ×2 | 3E 1P, Reaction | one of theirs and one of yours to hand | own-bounce replays; Fizz loop; removes their Vex (+1 for Deflect) | clearing |
-| Rampage ×2 | 3E (+Body: +2) | a fight before combat; **a kill readies the legend** | Ezreal pays the Body; Fizz | clearing |
-| Switcheroo ×2 | 2E 2P, Hidden, Action | swap two Mights; free from face down | Fizz; pinned when hidden | fight-winner; protection from hand |
-| Sabotage ×2 | 1E 1P | see their hand, recycle a non-unit | **Fizz recasts it on the closing turn** | close (first cast) |
-| Rebuke ×1 | 2E 2P, Action | bounce any unit at a battlefield; Defy-proof | Fizz; their Vex (3 Power with Deflect) | clearing |
-| Repulse ×1 | 1E 1P, Reaction | counter a spell or ability choosing only that unit | none | protection |
-| Abandon ×1 | 2E, Reaction | counter any spell (back to hand); Predict | **none** | protection |
-| Edge of Night ×2 | 3E, Hidden gear | +2 from face down, free; recalled if the unit dies; re-equip for a Chaos | Staunch → 6; Gold pays the equip | holder; fight-winner at a held battlefield |
-
-**Battlefields:** Emperor's Dais (conquer: 1 Energy, return a unit there to hand for a 2-Might Sand
-Soldier: replay Ezreal or Fizz) · Hunters' Circle (Sivir for 4) · Sigil of the Storm (conquer: recycle a
-rune: a Gold if the legend is ready).
-
-### What the map says
-
-- **Abandon is the one card with no links**: no Fizz, no trash, no Power, no kill. It earns its slot on
-  protection alone. Repulse is the same but costs a Power (a rune) for a narrower counter.
-- **Gust fits better than it looked**: Fizz recasts it free, and bouncing your own Ezreal or Fizz is
-  value, not just a save. Under v1's rule it failed; under Ready's real economy (runes) it's the cheapest
-  fight-winner in total cost.
-- **On the Hunt is more than the fallback**: with Innovator or Merchant out, it's a second Gold or loot.
-- **Onslaught** (4E, +6, Flow 4: play it again from the trash for 4 Energy, then banished): 8 Energy for
-  two +6s, and Fizz can't recast it (4 Energy is over his 3). In a deck whose limit is Energy, Punch
-  First's 1 Energy for +5 does the same job.
-- **Seal of Discord** (0E 1P gear; exhaust: add a Chaos, as a Reaction): ~1 Power a turn **without
-  recycling a rune**, so the board keeps its runes and the deck keeps its Energy. It answers the one
-  weakness the model shows (33 Energy against v1's 38). 117 lists, 28 placed. **The model doesn't see it**
-  (it doesn't model gear that adds Power), so it can't be measured here; a gear, so Offer and Detonate
-  reach it. **Out** (Jay, 30 Oct: "we generate power so I don't think it's worth taking up a slot").
-
-## Midrange: what the research says, applied (30 Oct 2026)
-
-Jay: "get even more general deckbuilding tips, esp around midrange if that's a thing." It is. Sources:
-the repo's own (`docs/deckbuilding.md`, measured from placed lists; Jun's midrange Kha'Zix notes,
-`docs/jun.md`; `docs/fundamentals.md` §9) and outside: Feldman, [What's in a Midrange?](https://articles.starcitygames.com/articles/deep-analysis-whats-in-a-midrange/)
-(SCG, 2007); Thompson, [Anatomy of a Midrange Deck](https://articles.starcitygames.com/articles/anatomy-of-a-midrange-deck/)
-(SCG, 2015); Flores, [Eight Core Principles of "Who's the Beatdown?"](https://articles.starcitygames.com/articles/eight-core-principles-of-whos-the-beatdown/)
-(SCG, 2012); WotC, [How to Build Midrange](https://magic.wizards.com/en/articles/archive/how-build/how-build-midrange-2017-02-07)
-(2017); [Riftbound France, deckbuilding](https://riftboundfrance.fr/en/guides/deckbuilding). Magic writing,
-so principles only; none of it gives ratios, and the Riftbound guides' counts are for first decks
-(the repo's measurements are for winning ones). **Other Battle Mistress lists can't teach us much**:
-3 without Aurora since Radiance, none placed (`data/decks.json`).
-
-**The principles, and what each says about this list:**
-
-1. **Every threat should change a stalled mid-game board** (Thompson's test: drawn into a stall, does
-   it swing the game?). Passes: Sivir (always available), Rengar, Vex, Fizz (body plus a spell back).
-   Nidalee half-passes. The 2–3 Energy bodies don't, and aren't meant to: they're the early points.
-2. **Cards should do more than one job; narrow cards are the failure mode** (Thompson, Feldman: dead
-   cards in popular matchups; duplicates of a narrow answer get worse). Multi-job here: Fizz, Ezreal,
-   Nidalee, Rengar, Vex, Star-Crossed, Gust, Switcheroo, Sabotage, Punch First. **Single-job: Repulse
-   and Abandon** (protection only; blank against decks that win with units and few spells). This
-   matches stage 2's own rule: nothing in the main deck that's only good in some matchups.
-3. **Self-replacing interaction is Riftbound's engine** (`fundamentals.md` §9: Discipline, Stupefy, Hidden
-   Blade each answer *and* draw; "a deck with no self-replacing interaction runs out first"). Body/Chaos
-   has almost none printed, so this deck replaces cards through **Fizz recasts, own-unit bounces of
-   Ezreal and Fizz, Nidalee's draw, Innovator's draw and Merchant's loot**. Those are what keep a
-   midrange deck from running out, which is why they stay.
-4. **"When two decks have the same end game, the faster one is favoured"** (Flores). Jun says the same in
-   Riftbound terms: **reach 6 first, but still hold the cards for the last turn**. Sivir in the Champion
-   Zone means the finisher can never be drawn out; the cheap closing piece is what to keep back.
-5. **Against control and combo, attack; against aggro, block** (Feldman), decided per matchup and per
-   game (Flores). That is stage 2's role table.
-6. **Early Power is expensive** (Jun: a Power spent on turn 2 costs about five Energy over a seven-turn
-   game). The model agrees (runes are the currency). Develop units first; Power tricks from the midgame.
-7. **Test by matchup: how many of each card do you want to draw, and which are dead where?**
-   (Thompson.) Not done yet for this list.
-
-**Shape against winners** (`deckbuilding.md` §5: placed lists average 18.7 units, cost 2.87, 21.9 cards at
-2 Energy or less): R3 is 20 units, cost about 2.5, 18 cheap. Slightly lower and more unit-heavy;
-inside the range.
-
-## The matchup audit (30 Oct 2026)
-
-Nine agents, one per matchup: the local five (Vex, Rengar, LeBlanc, Diana, Kai'Sa) and the S tier (Riven,
-Kennen, Irelia, Master Yi). Each rated every R3 card live, situational or dead from `rift versus`,
-card text and the rules. A tenth agent consolidated them, and Claude checked the load-bearing rules
-claims against the verbatim rules and FAQ. **No games are logged in any of these matchups**: every rating
-is card text and list shares.
-
-**The grid** (L / S / D; local five first):
-
-| card | Vex | Ren | LeB | Dia | Kai | Riv | Ken | Ire | Yi | verdict |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Sivir | S | L | L | L | L | L | L | L | L | core |
-| Rengar ×2 | S | L | L | L | L | L | L | L | L | core |
-| Vex ×2 | L | L | L | L | L | L | L | L | L | core |
-| Staunch ×2 | L | L | L | S | L | L | L | L | L | core |
-| Merchant ×2 | S | S | S | S | S | S | S | S | S | question |
-| Evelynn | S | S | S | S | S | S | S | S | S | question |
-| Innovator ×3 | L | L | L | L | L | L | L | L | L | core |
-| Ezreal ×3 | L | L | L | L | L | L | L | L | L | core |
-| Fizz ×3 | L | L | L | L | L | L | L | L | L | core |
-| Nidalee ×2 | S | L | L | S | L | L | L | L | L | keep |
-| Punch First ×3 | L | L | L | L | L | L | L | L | L | core |
-| On the Hunt ×2 | S | S | S | S | S | S | S | L | S | question |
-| Gust | L | L | L | L | L | L | L | S | S | keep |
-| Star-Crossed ×2 | L | L | L | L | L | S | L | S | S | core |
-| Rampage ×2 | L | L | S | L | L | D | L | S | S | keep |
-| Switcheroo ×2 | L | S | D | L | L | L | L | S | L | keep |
-| Sabotage ×2 | L | S | L | L | L | S | L | S | L | keep |
-| Rebuke | L | L | L | L | S | L | L | L | L | core, add a 2nd |
-| Repulse | S | S | L | L | L | L | L | S | S | question |
-| Abandon | L | S | S | L | L | L | L | S | L | keep, add a 2nd |
-| Edge of Night ×2 | S | L | S | S | S | L | S | L | L | question |
-
-**What it found** (rules checked by Claude):
-- **What stops the close, across the field:** a single-target spell on Sivir at B (8 of 9 matchups) and
-  **a defender added mid-fight** (8 of 9): their face-down **Tideturner** at B can swap in a unit from
-  anywhere (FAQ errata: "a unit you control at another location"; `data/cards.json` still has the
-  pre-errata text), Ambush, Rengar's Thrill of the Hunt, and **their Ride the Wind** (Kennen 84%, Diana,
-  Irelia), which only Abandon counters.
-- **Their face-down cards at B do act on Sivir.** B is theirs. The pinning rule only stops *ours* at A
-  from helping.
-- **Gust or Star-Crossed in response to a face-down unit's play effect** makes it miss (its unit left
-  the board; §811.1.d.3.a): that answers Tideturner and Bedeviling Stranger.
-- **Against their Vex:** her stun fires only while she's at a battlefield. **The walk-in close**: Sivir
-  played to base on an earlier turn takes the stun when it doesn't matter. On the close, the board takes
-  A and she walks base → B (no Ganking needed), and any 2-Power spell switches her on. No unit is
-  played, so their Vex never triggers. Wrong against Kai'Sa (Falling Star 98% kills a 4-Might Sivir at base).
-- **Unyielding Spirit doesn't stop Rampage or Challenge** (FAQ: damage a card tells a unit to deal is
-  the unit's). It does stop LeBlanc's Rex deathknell and Kai'Sa's damage spells.
-- **No answer in the 50 cards:** Baron (switch to holding at 7), Ruin Runner (only Punch First on
-  Sivir out-sizes it), Rockfall Path (play Sivir onto the other battlefield).
-
-**The close, by matchup:** hold at 7 against Rengar (his Ambush and Thrill refill B), and against
-Riven once Baron lands. Against Vex, Diana and Irelia, remove their Vex first or walk Sivir in from base.
-Against LeBlanc, bounce Rex before the close. Elsewhere, the board conquers A and Sivir Ganks.
-
-**Repulse vs Abandon:** Abandon covers more of the close in 7 of 9 (pumps, Ride the Wind, Thrill, Defy).
-Repulse is better only against LeBlanc (the Rex trigger is an ability) and splits Riven (Stranger).
-**Abandon 2 main, Repulse 1 in the sideboard.**
-
-**Option A** (the consolidator's recommendation): R3 **−1 Edge of Night, +1 Rebuke · −1 Repulse, +1
-Abandon**. **Option B** (the rework): A, plus **−Evelynn, −1 Merchant, −1 On the Hunt; +2 Tideturner,
-+1 Gust**. B's extra cuts rest on "situational" (narrow, not bad), and Tideturner on how it hurt us,
-not on any read of it in our hands.
-
-| measure (normal pressure) | locked | A | B |
-|---|---|---|---|
-| two units by turn 3 | 92% | 91% | 93% |
-| Might by turn 5 | 14.3 | 13.7 | 13.9 |
-| an answer usable on their turn, t5 | 24% | 37% | 40% |
-| attacks answered | 8% | 13% | 15% |
-| Defy-countered spells, expected | 3.5 | 3.9 | 4.3 |
-
-**Sideboard (10):** Graves ×2 · Unyielding Spirit ×2 · An Offer You Can't Refuse ×2 · Repulse ·
-Rampage · Edge of Night · Ravenbloom Prefect (Siren's Song out: no audit brought it in). Per-matchup swaps:
-the consolidated file (below).
-
-**Staples** (`fundamentals.md` §9): Punch First, Sabotage, Rampage, Rengar, Star-Crossed, Switcheroo,
-Gust, Vex, Fizz and Merchant are in. **Flagged as underrated for this deck:** Tideturner (396 lists / 83
-placed; a holding trick that swaps Rengar in from base) and Ride the Wind (four of the local five run no
-Defy). Irresistible Faefolk is flagged too (thin): "Evelynn without the hold". First Mate, Pit Rookie,
-Kinkou, Master Yi Tempered, Mobilize, Flash and Boots are out, each with what would change it.
-
-**Corrections to this worksheet's matchup tables** (they supersede the rows above):
-- **LeBlanc:** the stopper is Sacrifice (93%) or Deathgrip (86%) on Ruined Rex (93%) with Karthus
-  (94%), 8 damage to Sivir, plus Hidden Blade (85%) at B. Not Vi: her stun is on her attack only.
-- **Kennen:** Switcheroo 87%, not 100%. Add Ride the Wind 84%, Rhasa 84% (6 against 6) and
-  Tideturner 50%. Flash isn't a stopper: it gives up the battlefield.
-- **Diana:** Star-Crossed 91%, Rebuke 57%, Switcheroo 66% (not "80% each"). Add Hard Bargain 77%,
-  Moonfall 95% and Tideturner 91%. Gust *can* reach Sivir once she's shrunk.
-- **Riven:** Star-Crossed 75%, Rebuke 64%, Baron 51% (not 80%). Add Tideturner 79% and Bedeviling
-  Stranger 81%.
-- **Irelia:** Flash isn't a stopper. Add their Vex 60%, Discipline 98%, En Garde 68%, Not So Fast 78%.
-- **Master Yi:** Bladesman-only lists (78). No legal Aurora lists since 16 Oct. Ruin Runner 68%; the
-  lone-defender +2 takes Gust out of range.
-- **Kai'Sa:** no Defy at all. Rockfall Path is in 84% of their registered battlefields (own count).
-  Falling Star 98%; Time Warp 88%.
-
-Full working: the nine reports and `CONSOLIDATED.md` (grid reasoning, stoppers ranked, contradictions
-resolved, per-matchup sideboard swaps), in the session scratchpad. They aren't in the repo.
-
-## R4 → R5: by feel, then stress-tested (30 Oct 2026)
-
-**R4** (Claude's pick by feel; Jay: "go by feel here"): three straight swaps on R3, each a card for a
-better card doing the same job: Repulse → Abandon (protection), one On the Hunt → a second Rebuke (it
-switches Sivir on, Fizz recasts it, it clears), Evelynn → Tideturner (a hidden 2-drop that *defends* the
-hold instead of attacking from it). Edge ×2 kept on Jay's real-game evidence.
-
-**The stress test** (Jay: "really tension test it… my biggest concern now is not enough 2 drops for turn 1"):
-- **Turn 1 on the play is the real gap.** Going second, the extra rune makes the 3-drops castable:
-  about 99% to have a play. Going first, R4's five 2-drop units give a turn-1 play about 64% of the
-  time even after a two-card mulligan (approximate odds); seven give about 77%. Jay went first in three
-  of four games on 29 Oct, and bricked turn 1 against Irelia.
-- **The second Abandon** has no engine links, and holding 2 Energy up for it competes with
-  development in a deck whose limit is Energy. The audits counted what it covers, not what it costs.
-- **On the Hunt** was S in 8 of 9 matchups, the weakest card left in the grid.
-
-**R5:** R4 **−1 Abandon, −1 On the Hunt; +1 Tideturner, +1 Evelynn**. Seven 2-drop units.
-
-| measure (normal pressure) | locked | R4 | **R5** |
-|---|---|---|---|
-| two units by turn 3 (on the play) | 92% | 93% | **97%** |
-| units by turn 5 | 3.8 | 3.7 | **4.2** |
-| Might by turn 5 | 14.3 | 13.9 | **15.3** |
-| an answer usable on their turn, t5 | 24% | 38% | **39%** |
-| attacks answered | 8% | 13% | 12% |
-| Defy-countered spells, expected | 3.5 | 3.9 | **3.5** |
-
-**R5, 40:** Sivir · Rengar ×2 · Vex ×2 · Staunch ×2 · Traveling Merchant ×2 · Tideturner ×2 · Evelynn ·
-Innovator ×3 · Ezreal ×3 · Fizz ×3 · Nidalee ×2 (23 units) · Punch First ×3 · Star-Crossed ×2 ·
-Rampage ×2 · Switcheroo ×2 · Sabotage ×2 · Rebuke ×2 · Abandon · Gust (15 spells) · Edge of Night ×2.
-**Sideboard:** Graves ×2 · Unyielding Spirit ×2 · Offer ×2 · Rampage · Repulse · On the Hunt · Ravenbloom
-Prefect.
-
-**What R5 gives up, honestly:**
-- **No On the Hunt main.** If removal wipes the board, Sivir alone takes one battlefield a turn, not
-  two (the Kai'Sa loss on 29 Oct was a wiped board). It's in the sideboard for that matchup.
-- **Protection is 3** (Abandon, Switcheroo ×2) plus Sabotage cast first, against stage 3's target of 4.
-- **Tideturner in our hands is untested.** Its case is how it hurt us (5 of 9 audits) and its pool
-  evidence (396 lists, 83 placed).
-
-**The Tideturner route, checked and corrected** (Jay: "check with that play bonus"). It doesn't work as
-first written. Tideturner swaps with "a unit you control at another location", and locations are only
-bases and battlefields (§198.1). The Champion Zone is a separate zone (§108.3), so Sivir can't be
-swapped out of it. The route only exists once Sivir is already in base, and then the plain walk-in
-(the board takes A, she walks base → B) does the same without Tideturner. **Tideturner's real job is
-defensive:** hidden at a held battlefield, it swaps Rengar (or a Sivir already in base) into their
-attack at Reaction speed. (Whether "they can't move it this turn" from their Vex stops Tideturner's own
-swap stays a judge question; it no longer matters to the close.)
-
-### Stress test 2 (30 Oct 2026)
-
-R5 against the locked list, normal pressure unless marked:
-
-| check | locked | R5 | read |
-|---|---|---|---|
-| printed Power, Body / Chaos | 19 / 20 | 14 / 17 | **Chaos-leaning again**, the same 55% as v1, which ran 5/7 runes. 6/6 was set when demand was even |
-| stuck on colour, turn 3 (play · draw) | 8% · 6% | 7% · 4% | fine at 6/6 so far; **5/7 is worth measuring** (`scripts/sim` runs a rune sweep, but only on a saved deck) |
-| Power paid from runes, a game | 9.2 | 8.2 | fewer recycles, so a bigger board and more Energy |
-| Gold made | 4.6 | 4.3 | fewer recycles, fewer Gold; Gold still never idles |
-| Fizz finds a spell | 74% | 72% | 15 spells is enough |
-| an answer usable on their turn, t5 (draw) | 44% | **59%** | |
-| "Mercenary on" (2 Power spent, turns 4–8) | 57% | 49% | **a stale measure**: it counts Power spent apart from her, but her own cost switches her on |
-| Hidden cards | 7 (4 spells/gear) | 7 | Tideturner ×2, Evelynn, Switcheroo ×2, Edge ×2 compete for at most two slots, and only behind a hold |
-
-**Risks it leaves:**
-- **Tideturner and Evelynn are 2-Might Gust bait** where Gust is common (Diana 98%, Kennen 82%,
-  Riven 54%). From hand, they're just bodies.
-- **Protection is 3.**
-- **Tideturner in our hands is untested.**
-
-**Owned:** Tideturner 3, Abandon 4, Gust 7, Rebuke 4. Still to get: Nidalee ×2.
-
-### Stress test 3 and the lock (30 Oct 2026)
-
-**The whole pool, against the gaps the audits left** (Jay: "look at any gaps we have again across the
-whole suite of cards"):
-- **Void Assault** (Body/Chaos, move yours then theirs; Jun's "best card in the game") is **Kha'Zix's
-  signature**: illegal here, like Last Caress and Bullet Time.
-- **Can't-be-chosen units:** only **Stare Down** clears Ruin Runner (it chooses your unit and a
-  battlefield, not theirs). Thin (5 lists) and Jay was wary of it. A sideboard note against Master Yi,
-  who isn't local. Nothing answers Baron: hold at 7.
-- **Defenders added mid-fight:** Cannon Barrage (11 lists, none placed) is thinner than Abandon, Gust and
-  Star-Crossed.
-- **Card flow:** The Good Stuff (202 / 25) and Kinkou Initiate (192 / 18) if hands run dry.
-- **No gap a card fixes better than R5 already does.**
-
-**Draw odds for the close** (39-card library, draw only):
-
-| piece | by turn 5 | by turn 7 |
-|---|---|---|
-| two cheap closing pieces (14 cards) | 92% | 97% |
-| a fight-winner for the first fight | 90% | 95% |
-| an answer to their Vex (Rebuke, Star-Crossed, Rampage) | 82% | 88% |
-| **protection at B (Abandon, Switcheroo ×2)** | **56%** | **64%** |
-| Sabotage to cast first | 41% | 49% |
-
-Protection is the weak link, as it was this morning. With Sabotage counted it's about 80% by turn 7, and
-Fizz recasts Sabotage and Switcheroo. More would mean taking back the second Abandon, which went for the
-2-drops. **Accepted, and handled in play:** close when they're tapped out, Sabotage first, and keep
-Sivir's window short (a held battlefield, or the walk-in).
-
-**Runes:** `scripts/sim` on the saved list: **6/6 confirmed**, no split meaningfully better (Energy turns
-1–4: 5/7 and 6/6 both 17.5). On the play: no play on turns 1–2 in 0% of games, two units by turn 3 97%.
-Mulligan: keep all; bottom Punch First, Sabotage and Switcheroo first.
-
-**Locked: R5**, written to the app as "Sivir Ready (draft)" (row backed up first; the write checked the
-deck was the old locked list before changing it).
-
-**Watch items** (stage 6: a change only when a logged game trips one):
-1. **Did the closing turn happen?** If not, what stopped it: a spell on Sivir, a defender added at B,
-   their Vex, or no first conquest?
-2. **Tideturner:** did it defend a hold (swapping Rengar in), or sit as a 2-drop? Was it Gusted?
-3. **Turn 1 on the play:** a play, or a brick?
-4. **Protection:** was Sivir's attack answered while Abandon or Switcheroo was in hand, or not drawn?
-5. **Hands:** run dry against removal decks? (Then The Good Stuff or Kinkou.)
-6. **The walk-in against their Vex:** tried? Did Sivir survive the turn in base?
-7. **Per game:** opponent, went first or second, battlefield picked.
-8. **Ran out of gas late?** A loss with no units left to play around turns 7–9, against a removal deck
-   that went long. That's what the 27 Oct list's Matriarch ×3 covered (a free unit from the trash);
-   she's the first card back.
-9. **No answer to a lone big unit?** A loss where one 6+ Might unit sat on a battlefield with no
-   Switcheroo, Rampage or bounce in hand. Only Rengar is above 4 Might, so fights against size are won
-   with tricks. If it happens more than once, the fix is another answer, not a bigger body.
-
-## Audit with the sister deck's lessons (30 Oct 2026)
-
-Jay: "we added some additional ideas to audit, can you do the same with the other one". Two agents:
-a desk audit (battlefields, card draw, Defy-driven decisions) and eight hand-played games on the **same
-seeds and opponents** as the sister deck's (`decklab/sivir-two-fights.md`, stress test 2). Hand-played
-samples, every decision by one agent: not statistics.
-
-**The games:** about 6 wins, 2 lean losses (the sister deck: 5, 2, 1 open). No game was won by two
-conquests in one turn; holds closed most. Sivir's close happened in 4 games and made 7 in two of them;
-the walk-in against their Vex worked (G1). R5 defends a held battlefield better (units played onto a
-battlefield already held ignore their Vex's stun); the sister deck closed faster against light
-opponents. **Both ran dry in the same two games** (on the draw against Rengar and LeBlanc's Dragons):
-watch items 5 and 8. Dead in hand: Edge of Night (5 drawn, 1 used), Switcheroo (3 drawn, 0 cast),
-Abandon (3 drawn, 0 cast, and absent in the one game that needed it). Turn 1 on the play: 2 of 4.
-
-**Battlefields:** R5 is short of Energy, not Power (a rune pays Energy and is then recycled, §164.2), so
-Power-only battlefields don't pay the close. **Sigil of the Storm is a rune tax on whoever conquers it**:
-its forced recycle adds no Power (§417.4), and the Gold needs Battle Mistress ready, which she usually
-isn't (model: 8.2 recycles, 4.3 Gold a game). The guide's "your conquest recycles into a Gold" overstates
-it. **Proposed: Startipped Peak for Sigil** ("When you hold here, you may channel 1 rune exhausted": Energy
-for a holding deck; R5 always has runes left to channel, §315.3.b.1). Circle (game 1: Sivir onto it costs
-1 less) and Dais (going first) stay. Veiled Temple can ready a Gold made this turn (§415.4), but that's
-Power, not Energy. None of the sister deck's three used.
-
-**Card draw:** 8 copies that add a card (Innovator paid, Nidalee, Fizz, Dais), plus filtering (Ezreal,
-Merchant). Enough to reach 6, thin for a long game against removal. The Good Stuff measured as a cost to
-answers (39% → 34–35% on their turn by t5): the first card in if watch item 5 or 8 trips, not now.
-
-**Defy-driven decisions:** Ride the Wind's cut (R2) carried a "Defy-able" label, but its main reason
-holds without it: Sivir enters ready and Ganks herself, so R5's close doesn't need readying. Under Jay's
-rule the label comes off; the slot doesn't change. Rebuke over Stare Down and the Cataclysm flag stand on
-other grounds.
-
-**Proposed: −1 Edge of Night +1 Abandon** (games: protection is the weak link, and the one stopped close
-had no Abandon). `try`: answer on their turn t5 39 → 42% (play), attacks answered 12 → 14% (normal),
-Defy-countered spells 3.5 → 3.9 (a weight, not a veto). Still 16 copies from the sister deck.
-
-**Both locked** (Jay: "let's lock both in!"): written to the app (row backed up), guide §1 and its
-battlefield section updated. Picks: Hunters' Circle game 1, Emperor's Dais going first, Startipped Peak
-going second.
+| **Blind** | **Sigil of the Storm** ("when you conquer here, you must recycle one of your runes", errata) | asymmetric for this legend: the recycle can make a Gold through Battle Mistress (if she's ready); for them it's a rune lost per conquest, which slows Baron and Astral Heron. The most-played Sivir battlefield over the archive (22 of 38 Battle Mistress lists), though almost all pre-Radiance: none of the 5 since 23 Oct runs it. Cost: you lose a rune too |
+| **Going first** | **Targon's Peak** ("when you conquer here, ready up to 2 runes at the end of this turn", errata) | you usually conquer it first; 2 ready runes on their turn pay for Gust, or Rebuke in a showdown, after tapping out (not Star-Crossed: 3 Energy; corrected by the guide's fact-check). It does **not** speed their Baron or Heron (runes ready on their own turn anyway); its symmetric cost is Reaction Energy for them on your turn. 158 lists, 7 top-16 |
+| **On the draw** | **Forbidding Waste** ("a unit defending alone has −2 Might") | they move in first and hold with one unit; it pays the player hitting back. Two defenders: Faefolk or Evelynn pulls one, the other is alone. A lone 7-Might Heron defends as 5. 233 lists, 8 top-16 |
+
+**Out:** Amateur Recital (a hold trigger works for whoever holds, and in a raid that's usually them; it can
+send Sivir home), Windswept Hillock (Ganking for their defenders too), Zaun Warrens (fine; Sigil does more for
+this legend). **Rejected:** Firelights' Hideout (their conquest gives Baron or Heron Accelerate; 0 top-16),
+Rockfall Path (blocks your own Ambush and Evelynn), Hall of Legends and Treasure Hoard (Energy into Gold,
+backwards here), Forgotten Monument (slows the race). **Worth a test:** Mystic Vortex (Reactions cost 1
+more Power in showdowns there; taxes their mid-fight answers; 28 lists, none top-16). At events testing
+Riot's new setup (turn order before battlefields) there is no blind pick: choose by seat.
+
+**Play notes:** against an opposing Vex, Apathetic, Rebuke her before Sivir lands (2 Power plus 1 for
+Deflect meets Sivir's condition on its own, and is Defy-proof). Mulligan for a 2-drop plus a 3-drop;
+ship Rengar-heavy and spell-heavy hands, since Sivir is always there.
+
+**Per game, note which of the four it was** (so one problem isn't solved with another's cards):
+1. couldn't reach 6 · 2. reached 6, couldn't open a battlefield · 3. opened one, didn't make the second
+conquest · 4. Sivir got answered. Also: a turn-1 play or not; when protection was drawn on the
+finishing turn, did it save the attack?
+
+**Open, for games to decide:** a second Repulse (or Abandon back) if Sivir gets bounced on the finishing
+turn; trim a Portal first if one sits in hand (it needs your unit at a battlefield already); Traveling
+Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboard against removal decks.
 
 ## Log
 
@@ -864,60 +456,128 @@ going second.
   up). Open: more Ride the Wind, runes 6/6, third Rengar or Zed.
 - **29 Oct 2026:** runes 5/7 → 6/6 (Jay: "fix the rune split if it makes sense"): Power demand is even
   (Body 19, Chaos 20); colour misses by turn 3 9%/7% → 8%/6%. App updated (row backed up).
-- **30 Oct 2026:** unlocked for a deeper look (Jay). First pass, plan first: the odds of having *seen*
-  each closing-turn piece by turn 7 (draw-only, 11 cards from 40; an upper bound, since cards get
-  spent earlier): a readier or Ambush threat 94%; On the Hunt 48%; any of Switcheroo/Repulse 63%,
-  Repulse 28%; clearing 96%.
-- **30 Oct 2026:** closing-turn Energy costed: Sivir accelerated is 5, so + Punch First or On the Hunt 6,
-  + Nidalee 8, + Rengar 10 (Jay: "possible but def tricky"; Rengar is mid to mid-late). Open rules
-  question: does Sivir's own Chaos count toward her 2 Power?
-- **30 Oct 2026:** stage 2 revised and agreed: midrange with a role flip (Jay: "midrange aggro, sliding
-  in and out, and holding one if it fits"), replacing "raid, don't hold". The road to 6 in three
-  phases; two layers of cards; roles by matchup. Stage 3's jobs to be redone from it.
-- **30 Oct 2026:** Jay: Sivir's own cost counts toward her 2 Power, and she needs a battlefield to
-  play to for the Gank. Checked (§806.3, §144, §810): holding a battlefield at 6 makes Sivir alone a
-  5-Energy closing turn. Protection 3 → 4 (Claude's call; Jay deferred).
-- **30 Oct 2026:** Jay's line: conquer A with the board first, then play Sivir onto A and Gank to B.
-  The closing turn is one won fight plus Sivir; the hold only makes that fight free.
-- **30 Oct 2026:** stage 4 revisited for fight-winners and protection: all 305 legal Body/Chaos cards
-  read, plus an independent agent read (its Last Caress and Bullet Time lines are illegal signatures;
-  its rules finds checked: face-down pinning, Vex's stun, printed-cost Defy). Draft R2: −First Mate,
-  −Ride the Wind, −1 Sabotage; +2 Gust, +1 Abandon. Not yet in the app.
-- **30 Oct 2026:** R3 replaces R2 (Jay on Sabotage): Sabotage stays 2, Gust 1. Sabotage's closing-turn
-  job: cast first, see the hand, strip the answer or draw out the Defy. The app stays on the locked
-  list until the build is deliberate (Jay).
-- **30 Oct 2026:** the engine mapped card by card (Jay: every interaction, everything fits the engine).
-  Model: Gold never idles; Power is mostly recycled runes (~9 a game), so Ready spends ~5 less Energy
-  than v1 over eight turns. v1's "paid in Power" rule doesn't carry; runes are the currency. Abandon has
-  no engine links; Gust has several; Seal of Discord flagged (Power without recycling; not modelled).
-- **30 Oct 2026:** Seal of Discord out (Jay: the deck generates Power). Midrange research recorded
-  (repo docs, Jun, four Magic articles, one Riftbound guide). It flags Repulse and Abandon as the list's
-  only single-job cards. Next: the dead-card audit by matchup.
-- **30 Oct 2026:** the matchup audit: nine agents, one per matchup, plus a consolidator (Jay: "open to
-  a complete rework"; staples given an extra look). Rules claims checked against the FAQ (Tideturner
-  errata, Unyielding Spirit). Option A (R3 −Edge +Rebuke, −Repulse +Abandon) and Option B (A −Evelynn
-  −Merchant −On the Hunt +2 Tideturner +Gust) measured; corrections to the matchup rows recorded.
-  Decisions open for Jay.
-- **30 Oct 2026:** R4 by feel (Jay agreed with all of it), then stress-tested on Jay's turn-1 concern:
-  R5 = R4 −1 Abandon −1 On the Hunt +1 Tideturner +1 Evelynn. Seven 2-drops; better than R4 on every
-  measure. Not yet in the app.
-- **30 Oct 2026:** the Tideturner close corrected: Sivir in the Champion Zone isn't at a location
-  (§198.1, §108.3), so it can't swap her out; its job is defensive. Stress test 2: Power demand leans
-  Chaos (14/17), so 5/7 runes is worth a sweep once R5 is saved; "Mercenary on" is a stale measure.
-- **30 Oct 2026:** stress test 3: the whole pool against the gaps (Void Assault is Kha'Zix's signature;
-  Stare Down a sideboard note against Yi; no better fix than R5). Protection at B is the weak link,
-  accepted. **R5 locked** (Jay: "then we can lock it in"): written to the app with the row backed up.
-  Runes 6/6 confirmed by `scripts/sim`. Watch items set.
-- **30 Oct 2026:** Jay: R5 "feels a little bit like we're going back to what we were playing before"
-  — true (33 of 40 copies shared with the 27 Oct list; `deckbuilding.md` §3 puts two winning lists ~8
-  apart). The cards were v1's; the plan was new. Jay: lock it in as the new v1. Goldfish side by side
-  (`scripts/sim`, 20,000 games, on the play): R5 two units by turn 3 97% (v1 95%), Might by turn 5 20.0
-  (v1 21.3), Energy turns 1–4 17.5 (v1 18.3); the engine model and the nine audits favour R5. **"Sivir is
-  trying her best" now holds R5** (row backed up; guide's header and list updated). Runes 6/6 (the sweep
-  ties 5/7 and picks 6/6). Next: a pure readying build, as a separate deck, to test against it.
-- **30 Oct 2026:** two watch items added (Jay): running out of gas late (the recursion R5 gave up), and
-  no answer to a lone big unit (the top end is 4 Might except Rengar; Punch First is 3 of ~11 fight
-  tricks, and the real limit on the close is Power, not size).
-- **30 Oct 2026:** the app cleared to one Sivir deck (Jay): "Sivir v2 (draft)", "Sivir + Stranger (test)",
-  "Sivir + Zed (test)" and "Sivir Ready (draft)" removed (row backed up; no journal games referred to
-  them). Identity for the readying build agreed: "one army, two fights", in its own worksheet.
+- **31 Oct 2026:** Jay's rebuild "Sivir: One Army, Two Fights (draft)" is the main deck. Audited by
+  three independent reviewers (data analyst, player, rules judge); Claude's draw numbers corrected (the
+  bench can't see The Good Stuff, Warrens, Nidalee or Innovator's draw; Merchant is net zero). Six
+  like-for-like changes agreed with Jay: −The Good Stuff +Ezreal, −Abandon +Repulse, −Sabotage +Rampage,
+  −2 Stranger +Switcheroo +Evelynn, −Vex +Switcheroo. Written to the app (row backed up). Section 5.
+- **31 Oct 2026, later:** three more swaps with Jay (−Portal +Ezreal, −Repulse +Sabotage, −Star-Crossed
+  +Gust); Ravenbloom Prefect kept in the sideboard for gear hate, The Good Stuff out of it. The core
+  recorded. Written to the app (row backed up). Frozen for testing.
+- **31 Oct 2026, battlefields:** all 71 read with Jay; Sigil of the Storm (blind), Targon's Peak (going
+  first), Forbidding Waste (on the draw) replace Amateur Recital, Windswept Hillock and Zaun Warrens.
+  Written to the app (row backed up). Locked.
+- **31 Oct 2026, guide:** `guides/sivir-one-army.md` and the one-page `guides/sivir-one-army-sheet.md` written and
+  fact-checked by an independent reviewer. Corrections it forced, here too: Baron can't be chosen, so nothing
+  bounces him; Targon's Peak's two runes don't pay for Star-Crossed (3 Energy); a hidden Switcheroo spends no Power
+  for Sivir (§811.1.b); Evelynn's pull always lands on a battlefield you control (the pulled unit attacks you
+  there), so it serves the holding line; Brynhir lands on Kai'Sa's turn and stops your Reactions then; Sigil's
+  22-of-38 is mostly pre-Radiance; turn-1 odds 59% / 72% on the 39-card library.
+- **31 Oct 2026, the pros:** Jay asked two experienced players (Discord). Their read: the deck can't win early
+  fights (one Defiant Dance or Switcheroo loses the first combat), so play **midrange and win on interaction on
+  turns 3–4**; don't count on Sivir living, so carry top end; 8–9 two-drops that cost no Power; 2 Gust main (a
+  third bricks); 2 Vex; Ruin Runner sideboard only (vs Kai'Sa, heavy control). Locked in for now: −2 Nilah,
+  −Sabotage (to the sideboard), +Nidalee, +Gust, +Vex; sideboard +Sabotage +Gust, −Abandon −On the Hunt. Bench
+  against the previous list (normal): units by turn 5 4.0 → 4.1, answer ready on their turn by turn 5 34% → 37%
+  (play), attacks answered 13% → 14%, tricks crowded out 1.55 → 1.50. Row backed up. **Open, to iterate:** more
+  Power-free 2-drops (Tideturner, Pit Rookie, Bedeviling Stranger, Gust Monk; Staunch costs Power); Rengar to 3;
+  Challenge vs Rampage; Whirlwind against Baron (a rules check first: its text doesn't say "choose");
+  Hard Bargain; Onslaught. Nidalee ×3 to get. The guide and sheet still describe the earlier list and the raid framing.
+- **1 Nov 2026, the trap:** −2 First Mate, +2 Bedeviling Stranger (Jay). First Mate's readying is covered by
+  Sivir's own ready on enemy deaths, Ride the Wind ×3 (moves *and* readies, Action speed) and Portal; with Sivir
+  it costs 8 Energy on the closing turn. Stranger, cut 31 Oct as "a hold-defence card", is exactly that, and the
+  midrange plan wants it: free from face down at Reaction speed, no Might limit, and it counts itself (play effects
+  go on the chain after the unit enters, §383.4.a.2). **The plan it reveals: A is a trap.** Hold A, pull their units
+  into it, punish them there: Faefolk walks into A and pulls B's defender in, which crowds A to 4 even with one
+  holder; Stranger flips and bounces it; B is empty and Sivir takes it. On their turn the same trap defends (Stranger,
+  Switcheroo, Ambush Nidalee/Rengar, Vex's stun, Staunch). Job counts: engine 10 → 8 (target 7); 8 two-drop units, 6
+  Power-free; a new job, **defending a hold**, for the midrange plan. Field: Stranger is in 76 of 116 top-25%
+  Body/Chaos lists since 23 Oct (First Mate 18). Bench (normal): cheap cards 19 → 21, units by turn 2/3 1.6/2.9 →
+  1.7/3.1, answer usable on their turn by turn 5 37% → 41% (play), colour misses t3 5% → 6%; it can't see the bounce.
+  Risks: dead in 1-on-1 fights; Evelynn and Stranger compete for A's one facedown slot (§811.1.b); each hide recycles
+  a rune. **Judge question:** from face down, can Stranger "choose a battlefield" as its own (§811.1.d.3 pins choices
+  to "options at that battlefield"; no ruling)? Written to the app (row backed up,
+  `backups/state-pre-army-stranger-2026-11-01.json`). Kept on purpose, Jay's calls: Staunch, Switcheroo, Punch First
+  ×3. **Next:** Portal's slot (The Good Stuff: its hold-return suits the trap; Bushwhack Trap off-meta).
+- **1 Nov 2026, the last slot:** −1 Portable Portal, +1 The Good Stuff (Jay). Portal fits the plan (Ganking from A
+  to B) but as a single copy it shows up in about one game in four, and it's in 3 of 116 top-25% Body/Chaos lists.
+  The Good Stuff's 31 Oct cut reverses the same way Stranger's did: its "when you hold here, return this to its
+  owner's hand" is a hold effect that fires when you score A in your Beginning Phase (§315.2.b, §383.4.d), so the
+  trap replays it for another draw 3 every turn A holds. It dies only if they hold A (Deploy, §830.1.b). Why draw:
+  by about 11 cards seen, a puller (4 copies) is there ~75% of the time and Stranger (2) ~49%. The trap buys turns,
+  and The Good Stuff turns them into cards. Bench against Portal (normal): answer usable on their turn by turn 5
+  41% → 38% (play), tricks crowded out 1.46 → 1.52, Mercenary on 45% → 47%; it can't see the draw. Also benched:
+  Rengar #3 (answer by turn 5 35%, crowded out 1.55) and Seal of Discord (Power, but the bottleneck is Energy).
+  Runes: Power demand Chaos 19 / Body 13; 5/7 moves turn-3 colour misses 7% → 6% (play), under the 3-point bar,
+  so 6/6 stays. Sideboard: Graves now fits the trap ("when I attack or defend": defending needs no readying).
+  Written to the app (row backed up, `backups/state-pre-army-goodstuff-2026-11-01.json`). Confidence: medium. The
+  case is reasoning, not measurement; if games keep ending in "Sivir got answered", try Rengar #3.
+- **1 Nov 2026, the guide:** `guides/sivir-one-army.md` and the sheet rewritten as "Sivir — The Trap", after three
+  research passes: a rules check of every step of the closing turn and the defence (corrections: the pull starts a
+  combat at A with **their focus first**, so there's no window before it; without Stranger a surviving defender sends
+  their unit to *their base*, so B stays empty either way; Baron can't be pulled or bounced, both cards choose); a
+  matchup read of 17 legends from legal lists since 23 Oct (best: Rengar, Mordekaiser, K'Sante, Kai'Sa for the close,
+  LeBlanc; worst: Diana, Vex Gloomist, Akali, Irelia, Riven, Ziggs); outside sources (Ultimate Guard ranks Stranger
+  Radiance's #1 card; no posted Battle Mistress list since 23 Oct runs Stranger or Faefolk, none vouched). Vex,
+  Apathetic stuns units played anywhere, not only at her battlefield (corrected).
+- **1 Nov 2026, battlefields for the trap:** all 71 reread. **Amateur Recital replaces Targon's Peak** for going first
+  (Jay: "if you feel relatively confident, lock it in"); Sigil (game 1) and Forbidding Waste kept. Grove of the God-Willow
+  was dropped for blind: a hold reward works for whoever holds, and the hold-and-build decks (Vex Gloomist, Kai'Sa, Riven,
+  Yi) are the likeliest to sit on it. **Rules check:** battlefields are revealed before turn order (CR §113 before §115;
+  TR §407.4: the previous game's loser picks the seat after seeing both), so "going first" means the game after Jay loses
+  one. Recital's hold trigger fires in the Beginning Phase (§383.4.d.2.b), chooses (Baron immune, Deflect taxes it), can
+  move any unit at any battlefield; their emptied B goes uncontrolled at once and their face-down card there is trashed
+  (§323.5, §323.6.a), so hold + walk-in conquer is two points a turn and wins from 6 (§473.1.b.1, Riot FAQ). Risks:
+  symmetric (their hold bounces your lone holder and trashes your face-down card), a turn-1 Accelerate from the second
+  player can arrive first. **Evidence against:** 15 vouched lists since 23 Oct with 0 top-25% (base 24%); 11 of 325 Riot
+  Top Decks lists; 0 of 43 riftbound.gg early-Radiance lists; Ultimate Guard's go-first example is Targon's Peak (26% top,
+  base). Chosen because the trap is built to keep its battlefield, which is the downside Recital has for other decks.
+  Confidence: medium. Written to the app (row backed up, `backups/state-pre-army-recital-2026-11-01.json`).
+- **1 Nov 2026, correction (from the guide's fact-check):** "When one or more enemy units die, ready me" is **Battle
+  Mistress's** text, not Sivir, Mercenary's (the two cards' text was merged in a printout). A kill readies the legend
+  for another Gold; it never readies Sivir. The First Mate entry above leaned on "Sivir's own ready on enemy deaths";
+  the cut still stands on its other grounds (Ride the Wind ×3 moves and readies at Action speed, and First Mate + Sivir
+  costs 8 Energy on the closing turn, where the trap needs no second Sivir fight). Also corrected in the guide: Kai'Sa
+  Smoke Screen 97% (not 90%), Rengar's Thrill of the Hunt conquers an emptied B, Rengar's errata text, Diana's
+  showdown-only Energy is her legend's extra point, and the §8 sideboard table now derives from §9's.
+- **1 Nov 2026, renamed:** the app deck "Sivir: One Army, Two Fights (draft)" is now **"Sivir Is Trying Her Best"**
+  (Jay; capital "Is", a verb in title case). The old v1 deck of that name was deleted from the app (no journal entries
+  pointed at it; row backed up, `backups/state-pre-rename-2026-11-01.json`); its guide is kept as "Sivir v1 (retired)".
+  Read the deck with `scripts/rift export "Trying Her Best"`.
+- **1 Nov 2026, sideboard:** Jay: Acceptable Losses and more gear hate; keep Ruin Runner, two of them; keep Graves ×2;
+  cut Repulse. **Main deck unchanged** (Jay; a −2 Rampage +2 Hard Bargain swap was written and reverted the same
+  minute). Sideboard now: Ruin Runner ×2 · Graves ×2 · Ravenbloom Prefect · Acceptable Losses · An Offer You Can't
+  Refuse · Sabotage · Unyielding Spirit ×2 (out: Repulse, Gust, Star-Crossed). Why gear hate: Riven, the most-played
+  deck, runs Blade of the Exile in 175 of 197 lists and Zhonya's in 141; Orianna The Ball 100/106; Azir five equipment
+  pieces in ~70/71. Against Ziggs only Prefect (a Bomb that dies deals 2; a banished one doesn't die). Ruin Runner is
+  the A holder nothing can choose. Row backed up (`backups/state-pre-army-counters-2026-11-01.json`). Spell-stopping:
+  with Repulse gone the sideboard has no counter; Hard Bargain (2E, counter unless they pay 2, Repeat) is the
+  candidate if Jay wants one later.
+- **1 Nov 2026, one camp:** −2 Fizz −2 Staunch +2 Edge of Night +2 Tideturner (Jay's list; two experienced players:
+  Fizz put the deck's "foot in two camps", Staunch wasn't loved as a two-drop). Ruin Runner stays sideboard ×2 (bench:
+  Tideturner ×2 beat Ruin Runner + Tideturner on every line). I first overreached with a 9-card rebuild (Ride the Wind
+  wrongly sorted as raid-only: it's an Action, so it reinforces A in their showdowns); Jay pulled it back to the cards
+  named. Bench vs the list before (normal, play/draw): answer usable on their turn by turn 5 37/58% → 43/61%, tricks
+  crowded out 1.51 → 1.35, units by turn 5 4.1 → 3.6; colour misses t3 6%/3%, Power demand Chaos 17 / Body 11, 6/6
+  stays. Edge from face down attaches +2 Might for good (§137.3.a). Considered and not taken: Evelynn, In Control (a
+  point per hold with a face-down card at A; the bonus idea for later), Hard Bargain main (narrow), Baron Nashor (10E
+  with no cheat, and his Pit gates our own 8th-point conquest). Battlefields rechecked, unchanged; Bandle Tree noted.
+  Row backed up (`backups/state-pre-army-edge-2026-11-01.json`).
+- **1 Nov 2026, reviewer round 2 (Jay's picks):** −1 Edge of Night +1 Boots of Swiftness (+2 Might and **Ganking**;
+  the card image shows Ganking in the bonus strip, which `data/cards.json` drops: a builder bug, not fixed yet);
+  −1 Switcheroo +1 Existential Dread (1E stun on an attacker, Repeat bounces; held in hand, so no face-down slot);
+  −The Good Stuff +Ember Monk (the reviewer: "this deck should have trouble holding"; The Good Stuff only pays if A
+  holds, Monk helps it hold, +2 whenever a face-down card is played). Boots' Ganking gives a closer that dodges their
+  Vex, Apathetic (it stuns only units played that turn). Bench, the two spell swaps at full strength (−2/+2): answer
+  usable on their turn by turn 5 43/61% → 65/78%; Jay kept one Switcheroo. Rejected: Rampage up / Switcheroo down
+  (Rampage is your-turn), Teemo (1 Might after its fight), Yone (5-drop), Yasuo (combo cheese), Hard Bargain main.
+  Battlefields rechecked: unchanged. Row backed up (`backups/state-pre-army-boots-2026-11-01.json`).
+
+### Games (the locked trap list, 1 Nov 2026)
+
+| # | date | vs | seat | battlefields (mine / theirs) | result | how | failure type | trap | notes |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | 2 Nov | Pyke, Bloodharbor Ripper (Fury/Chaos: Darius Trifarian, Seal of Rage) | first | Sigil of the Storm / Void Gate | **W** (conceded turn 13) | held both battlefields: 5 → 7 at turn start; Faefolk pull on turn 11, a Pyke to the trash | — (win) | mostly pulling and holding; no face-down flip on their turn | Edge of Night on Vex. **Card draw felt short**: Innovator lost early, a timely Ezreal carried it. Opponent: "annoying with this vex". Online, not Nexus Night |
+| 2 | 2 Nov | Lillia, Bashful Bloom (Calm/Mind; Defy 58/61, Discipline, Charm, Unchecked Power 40/61) | unknown | unknown | **L** 7–8 | went for both battlefields: "got greedy with Rengar + swifties" (Boots) | objective + conversion (strategy.md §8) | — | Jay: "too aggressive with resources". Lesson: the trap wins with **one** hold; go for both only when the terminal scan says it wins this turn. Against a board wipe, two units at A, the rest in hand |
+
+**Watch:** card draw (game 1), units by turn 3 and Power use (Jay, 2 Nov: the list runs 26 printed Power against the field's ~19), and over-extending past one hold (game 2).

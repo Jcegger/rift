@@ -1,25 +1,18 @@
 ---
-title: Sivir Is Trying Her Best — Deck Guide
+title: Sivir v1 (retired) — Deck Guide
 subtitle: Riftbound, Radiance — Jay's own Sivir, built from Randyyy's LA list over 25–27 October. The game plan on one page, then how to sequence every turn, every card's job, the matchups and the rules it runs on
 author: rift toolchain
 date: 2026-10-27
 ---
 
 **Legend:** Battle Mistress (Body/Chaos) · **Champion:** Sivir, Mercenary
-> **30 Oct 2026: the list changed.** The app's `Sivir is trying her best` is now **R5** from
-> [decklab/sivir-ready.md](../decklab/sivir-ready.md): midrange that holds one battlefield and closes
-> with Sivir (the board conquers one battlefield, Sivir is played onto it and Ganks to the other).
-> §1 below is the new list. **§3–§10 were written for the 27 Oct list** (Matriarch, Tornado): the
-> engine and rules notes still hold, but the closing plan, the matchup rows and the sideboard are now
-> the worksheet's ("The matchup audit", "R4 → R5", "Stress test 3 and the lock").
-
-**Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend · **Sideboard:** 10 of 10
+**Registered:** 40 main (Champion included) + 12 runes (5 Body / 7 Chaos) + 3 battlefields + 1 legend · **Sideboard:** 10 of 10
 **Shuffled library:** 39. The Champion starts in the Champion Zone and is playable from there (§103.3.a.1, §108.3.d)
-**Saved in the app as** `Sivir is trying her best`
+**Saved in the app as:** deleted on 1 November 2026. The name *Sivir Is Trying Her Best* now belongs to the trap deck
 **Where it came from:** "Body Chaos by Randyyy", 146th of 2165 at the LA Regional Qualifier (2 Oct), the one Sivir engine with a tournament record. About a dozen cards changed over 25–27 October, each from what Jay's games showed or from a rule that came out of them (§2). It shares Randyyy's engine and plays a different deck
 **Record:** 1–0 on RiftAtlas (a win against Kennen, 26 Oct). **Not yet in the app journal**, so `scripts/rift journal` doesn't show it
-**Collection status:** all owned except Nidalee, Cat Form ×2
-**Status:** R5 locked on 30 October (the 27 Oct list was locked on 27 October). Changes come from the journal, one at a time: the watch items are in the worksheet's "Stress test 3 and the lock"
+**Collection status:** everything owned, sideboard included
+**Status:** retired 1 November 2026, kept for the record. Locked on 27 October, then the backup deck from 31 October. The main deck is [Sivir Is Trying Her Best — The Trap](sivir-one-army.md)
 
 **Companions.** [strategy.md](../docs/strategy.md) is how to think about any turn; this guide is how *this deck* thinks. [archetypes.md](../docs/archetypes.md) is what each opponent is doing.
 
@@ -27,7 +20,7 @@ date: 2026-10-27
 
 ## Nexus Night, 29 October: the Zed test
 
-*Played 29 Oct (0–2 in matches); `Sivir + Zed (test)` was removed from the app on 30 Oct. Kept for the record; it was built on the 27 Oct list.* **One card and two battlefields differ from that list.**
+*Saved in the app as* `Sivir + Zed (test)`. **One card and two battlefields differ from the list below.**
 
 **The list:** this guide's list with **−1 Tornado Warrior, +1 Zed, Without a Sound**. All 3 Matriarch stay.
 
@@ -55,7 +48,7 @@ date: 2026-10-27
 - **Removal decks:** keep Sabotage in; one unit a turn, keep a body back.
 - **Rengar:** save him for the hold that matters.
 
-**What was logged** (the night's results are in `decklab/sivir-v2.md`'s log). **Each time Zed is drawn, note:** did he conquer? How many swaps? What did the Clones do? What did the swap Gold buy? **Each game, note:** which battlefield you picked, and whether you went first or second.
+**Log every game** under `Sivir + Zed (test)`. **Each time Zed is drawn, note:** did he conquer? How many swaps? What did the Clones do? What did the swap Gold buy? **Each game, note:** which battlefield you picked, and whether you went first or second.
 
 ---
 
@@ -113,18 +106,12 @@ date: 2026-10-27
 
 | | |
 |---|---|
-| **Units (22 + champion)** | 2 Traveling Merchant · 2 Tideturner · 1 Evelynn, Entrancing · 2 Staunch Survivor · 3 Reckless Innovator · 3 Fizz, Trickster · 3 Ezreal, Prodigy · 2 Nidalee, Cat Form · 2 Vex, Apathetic · 2 Rengar, Trophy Hunter · *Sivir, Mercenary* |
-| **Spells (16)** | 3 Punch First · 2 Rampage · 2 Sabotage · 2 Star-Crossed · 2 Switcheroo · 2 Rebuke · 2 Abandon · 1 Gust |
-| **Gear (1)** | 1 Edge of Night |
-| **Battlefields** | Hunters' Circle (game 1) · Emperor's Dais (going first) · Startipped Peak (going second) |
-| **Runes** | 6 Body · 6 Chaos (`scripts/sim`, 30 Oct: no split meaningfully better) |
-| **Sideboard** | 2 Graves, Blasting Through · 2 Unyielding Spirit · 2 An Offer You Can't Refuse · 1 Rampage · 1 Repulse · 1 On the Hunt · 1 Ravenbloom Prefect |
-| **To get** | 2 Nidalee, Cat Form |
-
-*The 27 Oct list, for the record:* 3 Merchant · 1 Evelynn · 2 Staunch · 3 Innovator · 3 Fizz · 3 Ezreal ·
-2 Tornado Warrior · 3 Tail-Cloaked Matriarch · 2 Vex · 2 Rengar · Sivir · 3 Punch First · 3 Rampage ·
-2 Sabotage · 2 Star-Crossed · 2 Switcheroo · 1 Rebuke · 2 Edge; 5 Body / 7 Chaos; Zaun Warrens, Sigil,
-Sandswept Tomb.
+| **Units (24 + champion)** | 3 Traveling Merchant · 1 Evelynn, Entrancing · 2 Staunch Survivor · 3 Reckless Innovator · 3 Fizz, Trickster · 3 Ezreal, Prodigy · 2 Tornado Warrior · 3 Tail-Cloaked Matriarch · 2 Vex, Apathetic · 2 Rengar, Trophy Hunter · *Sivir, Mercenary* |
+| **Spells (13)** | 3 Punch First · 3 Rampage · 2 Sabotage · 2 Star-Crossed · 2 Switcheroo · 1 Rebuke |
+| **Gear (2)** | 2 Edge of Night |
+| **Battlefields** | Zaun Warrens · Sigil of the Storm · Sandswept Tomb |
+| **Runes** | 5 Body · 7 Chaos |
+| **Sideboard** | 2 Graves, Blasting Through · 1 Ravenbloom Prefect · 2 An Offer You Can't Refuse · 1 Rebuke · 1 Repulse · 1 Siren's Song · 2 Unyielding Spirit |
 
 **Shape.**
 - Average cost 2.77; 14 cards at 2 Energy or less; 2 at 5.
@@ -389,19 +376,6 @@ The engine model (`scripts/rift try`, with hiding and opponents that apply press
 - **Sabotage ×2** (1 Energy, 1 Body; your main phase). They reveal their hand; you pick a non-unit card and they recycle it. It strips the trick they were saving. Defy can counter it. **Against removal decks keep it in**: it's the one card that takes their removal before it's cast (Jay, 29 Oct: a Viktor game won on it, and it takes Kai'Sa's Time Warp). Against the Calm decks, whose Defy reaches it, it can still come out.
 
 ### Battlefields
-
-**Current (30 Oct 2026; `decklab/sivir-ready.md`, "Audit with the sister deck's lessons"):** the deck
-runs short of Energy, not Power, so the battlefields pay Energy.
-- **Hunters' Circle, game 1 (blind):** the first unit or gear each player plays there on their turn costs
-  1 less. Sivir played onto it on the close costs 4, not 5.
-- **Emperor's Dais, going first:** you conquer first; replay Ezreal, Fizz or Tideturner and leave a
-  2-Might Sand Soldier.
-- **Startipped Peak, going second:** "When you hold here, you may channel 1 rune exhausted." A rune per
-  hold, for the holding deck; you always have runes left to channel because you recycle them.
-- **Sigil of the Storm is out:** its forced recycle adds no Power, and the Gold only comes when the
-  legend is ready, which she usually isn't. It taxed us as much as them.
-
-*The notes below are the 27 Oct list's, kept for the record.*
 - **Zaun Warrens:** discard 1, then draw 1 on conquer, which feeds the trash. **Not against Kennen,** who runs it in 13 of 16 lists and uses the loot better.
 - **Sigil of the Storm:** when you conquer here, you must recycle one of your runes.
   - **It probably pays you.** Your legend triggers on "when you recycle a rune", with no restriction, so a Sigil recycle while she's ready should give you a Gold.

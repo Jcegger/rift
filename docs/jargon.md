@@ -38,6 +38,7 @@ Do not promote one without a sighting.
 | **showdown** | the window where both players act at a battlefield | §342; it opens when a battlefield becomes Contested | ultimateguard, riftmana, Mobalytics |
 | **board presence** | units on the table | units at battlefields and in base | ultimateguard; animealley |
 | **8th point / final point** | the winning point, with its special rule | §473.1.b.1 | riftboundguide/rarecandy beginner guides |
+| **fatal** / **getting close to fatal** | the turn you can win, or the turns just before it: Jay's word for lethal | a legal line to 8 this turn; strategy.md §0's terminal scan, run every turn from 5 points | Jay (31 Oct 2026: "not to worry about holds … until getting close to fatal") |
 
 ## 3. Resources
 

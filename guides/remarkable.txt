@@ -16,19 +16,22 @@
 @pull     notes/sheets
 @css      guides/eink.css
 @prebuild scripts/build-journal
-@watch    docs/match-journal.md scripts/build-journal guides/sivir-trying-her-best.md
+@watch    docs/match-journal.md scripts/build-journal guides/sivir-one-army.md
 
 /riftbound/table     once    guides/out/journal/match-night.pdf
 /riftbound/table     once    guides/out/journal/trouble-list.pdf
 /riftbound/table     once    guides/out/journal/review.pdf
+/riftbound/table     update  guides/out/journal/matchup-card.pdf
+/riftbound/table     update  guides/sivir-build-sheet.md
 /riftbound/table     once    guides/out/journal/match-night.pdf name=match-night-29-oct
 
 /riftbound           once    guides/out/journal/questions.pdf
 # answers: re-enable with the first real batch of questions
 # /riftbound           update  notes/answers.md
 
+/riftbound/table     update  guides/sivir-one-army-sheet.md
+/riftbound/reading   update  guides/sivir-one-army.md
 /riftbound/reading   update  guides/sivir-trying-her-best.md
-/riftbound/reading   update  guides/sivir-two-fights.md
 /riftbound/reading   update  guides/sivir-v2.md
 /riftbound/reading   update  docs/strategy.md
 /riftbound/reading   update  docs/fundamentals.md

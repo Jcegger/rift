@@ -7,7 +7,9 @@ date: 2026-10-30
 
 **Legend:** Battle Mistress (Body/Chaos) · **Champion:** Sivir, Mercenary
 **Registered:** 40 main (Champion included) + 12 runes (6 Body / 6 Chaos) + 3 battlefields + 1 legend · **Sideboard:** 10 of 10
-**Saved in the app as** `Sivir: One Army, Two Fights (draft)` · **Worksheet:** [decklab/sivir-two-fights.md](../decklab/sivir-two-fights.md)
+> **Superseded.** Written 30 Oct 2026 in a session that was not pushed until 3 Nov. The same draft became the trap list, [Sivir Is Trying Her Best — The Trap](sivir-one-army.md), now Jay's main deck. Kept for the record; its Nilah, Rampage and battlefield reasoning is not in the trap list.
+
+**Was saved in the app as** `Sivir: One Army, Two Fights (draft)` · **Worksheet:** [decklab/sivir-two-fights.md](../decklab/sivir-two-fights.md)
 **Sister deck:** [Sivir Is Trying Her Best](sivir-trying-her-best.md) (R5). 16 cards and all three battlefields differ.
 **Record:** none yet. Log every game under the deck's name: opponent, first or second, battlefield, **which route won**.
 **Collection status:** all owned except Nidalee, Cat Form ×2

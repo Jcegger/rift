@@ -2,7 +2,7 @@
 title: Sivir, One Army Two Fights — deckbuilding worksheet
 subtitle: Battle Mistress (Body/Chaos), Radiance. The readying build: midrange that races to 6, then wins with two fights in one turn from many angles. Built with Jay a stage at a time.
 started: 2026-10-30
-status: two stress tests done; in the app as "Sivir: One Army, Two Fights (draft)" 30 Oct 2026 (D5b + The Good Stuff), stage 6 (play it). To get: Nidalee ×2. Tested against R5 ("Sivir is trying her best", sivir-ready.md) when built
+status: superseded. Built 30 Oct 2026 in an unpushed session; the same draft became the trap list on the remote (sivir-ready.md "army" sections, guides/sivir-one-army.md). Kept for the record
 ---
 
 How this worksheet works: [README.md](README.md). Six stages, each agreed before the next.
