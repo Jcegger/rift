@@ -65,6 +65,13 @@ going for both battlefields is right only when the terminal scan says it wins th
   Jay owns 2) or The Good Stuff (draws 3 every hold; cut when a reviewer doubted the holds; game 1 held both).
 - **Power still tight after that:** one Rebuke, but it's the answer to their Vex (local Vex and Diana run her), so
   last.
+- **Parked: Star Spring** (3 Nov; the Faefolk research). *"The first time a player plays a non-token unit here each turn, they may
+  move another unit they control here to its base."* Faefolk walks in and pulls, an Ambush Nidalee or Rengar lands there, and
+  Faefolk goes home, safe, to pull again next turn: the opener players call the most toxic in the game. The pieces are in
+  the deck (Nidalee ×3, Rengar ×2). Against it: it costs a battlefield slot, and it serves whoever plays a unit there, Rengar
+  (10+ Ambush) above all. Test only if results call for a battlefield change.
+- **Faefolk's other uses** are in the guide's Faefolk entry: the early tempo play, Forbidding Waste, the hidden pull
+  (face-down Tideturner swaps a base Faefolk into A), reuse.
 - **Parked ideas Jay liked:** Evelynn, In Control (a point per hold with a face-down card at A, as a bonus, not the
   plan); Bandle Tree as a battlefield if the one face-down slot at A keeps clogging.
 - **Considered and rejected (don't re-propose without evidence):** Hard Bargain main (narrow), Baron Nashor (no way

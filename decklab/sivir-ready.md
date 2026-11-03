@@ -583,6 +583,11 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   going to hand (§103.3.a.3). Fixed in the guide: Existential Dread added to the Defy-able list (1E 1P); a new Gold
   enters exhausted; Faefolk's pull also fires on a card's move (a face-down Tideturner swapping it in from base is a
   Reaction-speed pull).
+- **3 Nov 2026, Faefolk research (no list change).** Field: in 79/88 Pridestalker and 29/31 Voidreaver lists since
+  23 Oct, nearly always ×3 (239 of 3,545 lists). Sources: Jun's notes (`docs/jun.md`), r/riftboundtcg threads,
+  riftboundfaq.com. Added to the guide: who attacks after a pull, the early tempo play, Forbidding Waste isolation, and the
+  **hidden pull** (Jay: "WILD"): a face-down Tideturner at A swaps a base Faefolk in, the swap is a move (§448.1), so the
+  pull fires at Reaction speed, Faefolk arrives ready, Monk gets +2. Star Spring parked in the handover.
 
 ### Games (the locked trap list, 1 Nov 2026)
 
