@@ -46,6 +46,7 @@ going for both battlefields is right only when the terminal scan says it wins th
 - **The kill zone (Jay):** on your turn, Ember Monk into A, Faefolk pulls their unit (best: their Vex) into A, flip a
   face-down card (Monk +2), it dies, the kill readies the legend for a Gold.
 - **Star-Crossed rebuy (Jay):** return your own Ezreal (draw 2 again), Innovator or Faefolk with their unit.
+- **By archetype (guide §9, agreed 3 Nov):** default slow, one hold; **race Baron decks (before he lands) and Ramp.**
 - **Never an Aurora deck; no Calm, no Kennen; cost and ownership are never arguments** (standing rules).
 
 ## What to watch (log per game)

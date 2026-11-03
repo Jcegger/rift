@@ -588,6 +588,9 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   riftboundfaq.com. Added to the guide: who attacks after a pull, the early tempo play, Forbidding Waste isolation, and the
   **hidden pull** (Jay: "WILD"): a face-down Tideturner at A swaps a base Faefolk in, the swap is a move (§448.1), so the
   pull fires at Reaction speed, Faefolk arrives ready, Monk gets +2. Star Spring parked in the handover.
+- **3 Nov 2026, rules by archetype (guide §9).** Drawn from the legend rows and strategy.md §2: default slow, one
+  hold. Jay's call: **race Baron decks and Ramp** (their late game beats ours). Baron: press before he lands, Rebuke the
+  first Heron (archetypes.md already said so); once he's out, hold at 7.
 
 ### Games (the locked trap list, 1 Nov 2026)
 

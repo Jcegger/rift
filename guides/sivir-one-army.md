@@ -384,6 +384,33 @@ What comes out depends on the matchup: §9's table has the exact ins and outs.
 
 ## 9. Matchups
 
+### General rules, by archetype (3 Nov 2026, agreed with Jay)
+
+**The default is slow: hold one battlefield, make them come to A.** Two exceptions race: **Baron decks** and **Ramp**, because their late game beats yours. Racing means going for the second battlefield sooner, still only when the terminal scan allows it. Archetypes and families are [archetypes.md](../docs/archetypes.md)'s map; the rules are drawn from the legend rows below and [strategy.md §2](../docs/strategy.md). **Not tested at a table.** The legend's own row overrides these.
+
+| archetype | e.g. | their plan vs the trap | your pace | rules |
+|---|---|---|---|---|
+| **Aggro** | Kha'Zix, Ambessa, Jarvan IV, Rek'Sai, Teemo | they walk into A early: **the trap gets fed** | **defend first, then hold** | mulligan hard for two-drops so A is armed by turn 3–4; Faefolk's early tempo play blunts their curve; Stranger and Dread on wide attacks; don't race them |
+| **Tempo** | Diana, Irelia, Lillia, Ziggs, Evelynn | answers at Reaction speed to every piece | **patient, one hold** | **make them spend first**: bait with a lesser threat before Stranger or Sivir; close with Defy-proof cards (units, 2-Power spells); both battlefields only when it wins that turn (game 2) |
+| **Midrange** | Rengar, LeBlanc, Mordekaiser, K'Sante, Riven | trade fights, often by attacking A | **let them come** | two units at A (their pulls and Charms); against decks that want deaths, **bounce, don't kill**; close when they tap out |
+| **Control** | Kai'Sa, Vex, Seraphine, Akali, Jayce | won't attack A: **the trap idles** | **push: race to hold at 7** | Faefolk and Evelynn bring the trap to them; kill their Vex before Sivir; Stranger often comes out; Sabotage in |
+
+| family | extra rule |
+|---|---|
+| **Fights** | the trap's best case. Punch First *after* their pump, never before. Rampage is clean without Calm |
+| **Movement** | they move your holders (Charm, Blitzcrank, their Faefolk): **keep two at A**, or the face-down card is trashed. Your Vex stuns their Ambush units |
+| **Gear** | gear removal in (Offer, Acceptable Losses, Prefect; **only Prefect against Ziggs's Bombs**); your Boots and Edge are targets: out |
+| **Go-wide** | Stranger's 4 units come easily; Graves ×2 in; one bounce won't stop a wide swing |
+| **Card flow** | press before the engine pays off (Kennen's Rhasa); Sabotage in |
+| **Spells** | sequence around Defy (Dread is counterable); Unyielding Spirit against burn on Sivir |
+| **Facedown** | **take their battlefield**: it trashes their face-down cards; Edge out |
+| **Holds** | they won't walk in, so pull from their hold; Ruin Runner as a holder they can't move |
+| **Ramp** | **race**: close before they get going (Fiora, Renekton, Volibear, Jayce) |
+| **Extra resources** | thin evidence: game 1 against Pyke was won by holding both |
+| **Baron in their list** (Riven 54%) | **race before he lands**: press her battlefields and Rebuke the first Astral Heron, before its discount pays for Baron (10E 3P). **Once he's out, win by holding at 7**: he can't be chosen, his units get +2, and the Pit is a third battlefield (the 8th-point conquest would need it scored; the repo's reading) |
+
+### By legend
+
 From the legal lists played since 23 October (`scripts/rift meta <legend> --since 2026-10-23`, run 1 November; % = lists running at least one copy). **None of this is tested at a table.**
 
 | opponent | lists (vouched) | what matters | plan | in | out |
@@ -393,7 +420,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 | **Kai'Sa** (local) | 93 (37) | won't attack A; kills holders from range; Frozen Fortress 89% kills Faefolk; Rockfall Path 90%; Brynhir 95%. **Smoke Screen (−4, 97%) then Hextech Ray (3) kills a 6-Might Sivir**; no single card does | keep Faefolk in base; never make Rockfall your A; close with Unyielding Spirit held | Unyielding Spirit ×2, Sabotage | Stranger ×2, Rampage |
 | **Vex, Gloomist** (local; bad) | 79 (22) | holds, won't walk into A; **her Vex 96% stuns Sivir**; Back Off 91%; Defy, Discipline | Rebuke her Vex first; race to hold at 7 | Sabotage, Ruin Runner | Rampage ×2 |
 | **Diana** (local; worst) | 41 (12) | answers in every fight: **Gust 100% on Stranger, Moonfall 100% on Sivir**; Vex 83%; Hard Bargain 76% | make her spend first; Gust her 2–3-Might bodies; Ruin Runner holds A against Gust and Moonfall | Ruin Runner ×2 | Stranger ×2 |
-| **Riven** | 197 (94) | **Baron 54%** (can't be pulled or bounced; the Pit is a third battlefield); her Stranger 85%; Blitzcrank 71%; Defy 93% | win by holding at 7; two holders at A; kill her Blade | An Offer You Can't Refuse, Acceptable Losses, Ruin Runner ×2 | Rampage ×2, Faefolk, Evelynn |
+| **Riven** | 197 (94) | **Baron 54%** (can't be pulled or bounced; the Pit is a third battlefield); her Stranger 85%; Blitzcrank 71%; Defy 93% | race before Baron (Rebuke the first Heron); once he's out, win by holding at 7; two holders at A; kill her Blade | An Offer You Can't Refuse, Acceptable Losses, Ruin Runner ×2 | Rampage ×2, Faefolk, Evelynn |
 | **Evelynn** | 175 (33) | Last Caress 41% puts her face-down card on any battlefield; Switcheroo, Star-Crossed, Vex | take her battlefield: it trashes her face-down cards; Rampage is clean | Ruin Runner | Edge of Night |
 | **Ziggs** | 108 (14) | Bombs deploy at A and hit your holders when they die; Detonate 89% kills your Boots and Edge | keep holders healthy; gear spells kill Bombs into damage, so Prefect banishes | Unyielding Spirit ×2, Prefect | Boots, Edge of Night, Rampage |
 | **Seraphine** | 107 (24) | a wide Raucous Anthem turn; Imperial Decree; Hidden Blade on Sivir | one bounce won't stop a wide swing | Graves ×2, Sabotage | Rampage ×2, Ride the Wind |
