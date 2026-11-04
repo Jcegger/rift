@@ -516,6 +516,10 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 - **Trying to conquer for the 8th point with a Baron Pit out.** Hold at 7 instead.
 - **Taking the rune off Sivir's Accelerate with Ezreal.** Take the Energy.
 - **Equipping or casting Ember Monk on a turn you need Energy up** for their attack.
+- **Spending too much Power early** (Jay, Nexus Night 3 Nov). Power usually means a recycled rune, so less Energy for the turns that win. Save it for the closing turn.
+- **Over-committing to a fight that doesn't matter** (Lillia, Evelynn, Draven game 2). One hold is enough; go for more only when the terminal scan says it wins this turn.
+- **Walking Faefolk into Forbidding Waste alone.** You end up defending. Walk it in with a real unit (§6).
+- **Drawing with Innovator early** (Jay, 3 Nov). Early, take the Gold; pay Chaos to draw later, once the hand runs low.
 
 ---
 

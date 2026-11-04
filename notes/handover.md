@@ -51,6 +51,10 @@ going for both battlefields is right only when the terminal scan says it wins th
 
 ## What to watch (log per game)
 
+**After Nexus Night, 3 Nov (2–1 in matches; games 5–4):** Jay's two takeaways: **don't spend too much Power early**, and
+**Innovator is better as Gold early, draw later.** Over-committing has cost three games (Lillia, Evelynn, Draven game 2).
+Jay is happy with the list; it stays locked.
+
 1. **Card draw (the big one):** any turn with no useful card, which turn, and whether Innovator survived.
 2. **Units by turn 3,** after a proper mulligan (≤1 unit in the opening 4 → send back two spells).
 3. **Power use:** the list prints 26 Power against the field's ~19 (20 cards cost Power, against ~15), and every
