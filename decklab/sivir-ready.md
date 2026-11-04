@@ -591,6 +591,25 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
 - **3 Nov 2026, rules by archetype (guide §9).** Drawn from the legend rows and strategy.md §2: default slow, one
   hold. Jay's call: **race Baron decks and Ramp** (their late game beats ours). Baron: press before he lands, Rebuke the
   first Heron (archetypes.md already said so); once he's out, hold at 7.
+- **4 Nov 2026, plan audit after Nexus Night (no list change).** Prompted by a player at the table ("doing too many
+  things; hiding and holds are difficult"). Every card in the live list sorted by the plan's steps: pull 4, punish at A
+  16, hold A 7, close at B 3, cards and Gold 5, and 6 that looked like a second plan (Ride the Wind ×3, Rampage ×2,
+  Boots). Jay kept all six:
+  - **Ride the Wind** fits the one-hold plan as a **hit-and-run** (Jay): send a unit from base into B (a card move,
+    readied), conquer, then walk it back to base (a standard move, battlefield → base, §144.4) or to A with Ganking.
+    You lose control of B in the cleanup (§323.5), but the point is banked and nothing is left exposed there. Send it
+    from base, not from A's last unit (§323.5, §323.6.a).
+  - **Boots and Edge** both stay: Edge is the face-down surprise, Boots is the +2 on your turn with optional
+    Ganking. Jay is slightly sceptical of Boots. **Log whether its Ganking gets used** or only the +2.
+  - **Rampage** stays: the list's only kill. Rules checked: its damage carries into a combat that turn and counts
+    toward lethal (§467.2.c.4), and all units heal in the combat cleanup (§468.1.a.1) or at end of turn (§317.2).
+    Its Body +2 lasts the turn. Main phase only, so Rampage first, then fight; fight with a *different* unit unless
+    yours has Might to spare.
+  - The table's comment reads as a question of **play load, not card count**: hide, hold up Reactions or develop,
+    every turn, from the same Energy and Power. Open: a one-line turn priority on the sheet.
+  - Also from this session: `decklab/sivir-pool-audit.md`, a pass over all 293 legal Body/Chaos cards (options only,
+    nothing tested). Hidden count (7) judged fine: A's one slot is the limit, not the number. **Log a Hidden card
+    stuck in hand because A's slot was taken.**
 
 ### Games (the locked trap list, 1 Nov 2026)
 
