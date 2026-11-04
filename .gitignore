@@ -10,3 +10,4 @@ docs/*.pdf
 
 # One-off collection exports (Piltover Archive migration). Personal data, not source.
 collection-*.csv
+__pycache__/
