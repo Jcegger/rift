@@ -26,16 +26,16 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 72,
-  "claimedEventsUnmatched": 64,
+  "claimedEvents": 75,
+  "claimedEventsUnmatched": 67,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
+   "unknown": 223,
+   "Asia": 119,
    "Europe": 75,
-   "unknown": 222,
-   "Asia": 113,
    "Oceania": 5,
    "North America": 7
   },
@@ -79,6 +79,7 @@
    "S2 Nanning City Challenge",
    "S3 Guangzhou City Challenge",
    "S3 Shanghai City Challenge",
+   "S3 Shenyang City Challenge",
    "S4 Beijing City Challenge",
    "S4 Guangzhou City Challenge",
    "S4 Nanjing City Challenge",
@@ -88,7 +89,9 @@
    "S4 Wuhan Regional Open",
    "S5 Beijing City Challenge",
    "S5 Fuzhou City Challenge",
+   "S5 Guangzhou City Challenge",
    "S5 Shanghai City Challenge",
+   "S5 Suzhou City Challenge",
    "S5 Xi'an City Challenge",
    "Shenyang RO",
    "Shenyang Regional Open",
