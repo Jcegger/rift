@@ -68,7 +68,7 @@ Jay is happy with the list; it stays locked.
 - **Card draw or Power keeps biting:** −1 Ride the Wind (the cheapest cut on the bench), +1 **Kinkou Initiate**
   (0 Power, a body, usually draws; Jay owns 5). Alternatives in the same slot: Ezreal #3 (best draw on the bench,
   Jay owns 2) or The Good Stuff (draws 3 every hold; cut when a reviewer doubted the holds; game 1 held both).
-- **Power still tight after that:** one Rebuke, but it's the answer to their Vex (local Vex and Diana run her), so
+- **Power still tight after that:** one Rebuke (it won Ekko game 1 on 3 Nov, so the bar to cut it is higher now), but it's the answer to their Vex (local Vex and Diana run her), so
   last.
 - **Parked: Star Spring** (3 Nov; the Faefolk research). *"The first time a player plays a non-token unit here each turn, they may
   move another unit they control here to its base."* Faefolk walks in and pulls, an Ambush Nidalee or Rengar lands there, and
