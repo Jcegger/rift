@@ -1,21 +1,66 @@
 {
- "generatedAt": "2026-11-05",
+ "generatedAt": "2026-11-10",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 49,
+ "carriedFromPrevious": 55,
  "tags": {
+  "News": 55,
+  "Events": 22,
+  "Metagame": 24,
   "Guides": 8,
-  "News": 52,
-  "Metagame": 23,
   "Legends": 24,
-  "Events": 21,
   "Sets": 4,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Riftbound Game Director Confirms Card Ban Update on Friday",
+   "dt": "2026-11-10",
+   "url": "https://riftbound.gg/riftbound-game-director-confirms-card-ban-update-on-friday",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
+  {
+   "title": "All 58 Overnumbered Foil Plated Legend Draft Pick from the European Regional Championship",
+   "dt": "2026-11-08",
+   "url": "https://riftbound.gg/all-58-overnumbered-foil-plated-legend-draft-pick-from-the-european-regional-championship",
+   "tags": [
+    "News"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Europe Regional Championship 2026: Decks, Metagame, Popularity, Win & Conversion Rates",
+   "dt": "2026-11-06",
+   "url": "https://riftbound.gg/europe-regional-championship",
+   "tags": [
+    "Events"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Riftbound Meta Tier List - Best Decks for Radiance - Week 2",
+   "dt": "2026-11-05",
+   "url": "https://riftbound.gg/riftbound-meta-tier-list-best-decks-for-radiance-week-2",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Riftbound World Showcase: Event Details, Format, and Prizes",
+   "dt": "2026-11-05",
+   "url": "https://riftbound.gg/riftbound-world-showcase-event-details-format-and-prizes",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
   {
    "title": "Budget Riftbound Decks: Build with Bulk Cards & Play for $10! - Part 3",
    "dt": "2026-11-03",
@@ -269,7 +314,7 @@
    "author": "Den"
   },
   {
-   "title": "Riven, The Exile Guide - Best Decks & Cards: Radiance Theorycraft",
+   "title": "Riven, The Exile Guide - Best Decks & Cards: Radiance Update",
    "dt": "2026-10-12",
    "url": "https://riftbound.gg/riven-the-exile-guide",
    "tags": [
@@ -584,7 +629,7 @@
    "author": "Den"
   },
   {
-   "title": "Jayce, Defender of Tomorrow - Best Decks & Synergies",
+   "title": "Jayce, Defender of Tomorrow - Best Decks & Cards: Radiance Update",
    "dt": "2026-08-19",
    "url": "https://riftbound.gg/jayce-defender-of-tomorrow-guide",
    "tags": [
@@ -1225,8 +1270,26 @@
  ],
  "riotSource": "playriftbound.com/en-us/news/ and its three category pages",
  "riotFailed": null,
- "riotCarried": 7,
+ "riotCarried": 8,
  "riot": [
+  {
+   "title": "Riftbound T1 Player Bundle and Worlds 2026 Drawing",
+   "dt": "2026-11-06",
+   "url": "https://playriftbound.com/en-us/news/announcements/product-drawing-faq",
+   "tags": [
+    "Announcements"
+   ],
+   "desc": "Get the details on the T1 2025 Worlds Champion Player Bundle and Worlds 2026 Edition drawing."
+  },
+  {
+   "title": "Riftbound World Showcase",
+   "dt": "2026-11-05",
+   "url": "https://playriftbound.com/en-us/news/organizedplay/riftbound-world-showcase",
+   "tags": [
+    "Organized Play"
+   ],
+   "desc": "We’re announcing the format and prizing for the Riftbound World Showcase."
+  },
   {
    "title": "All Eyes on RC Europe",
    "dt": "2026-10-27",
@@ -1289,15 +1352,6 @@
     "Announcements"
    ],
    "desc": "Bring the heat. Enter drawing for the Riftbound x K/DA Couture Collection starting October 27."
-  },
-  {
-   "title": "Riftbound x K/DA: Couture Collection Drawing FAQ",
-   "dt": "2026-10-21",
-   "url": "https://playriftbound.com/en-us/news/announcements/product-drawing-faq",
-   "tags": [
-    "Announcements"
-   ],
-   "desc": "Everything you need to know about the Riftbound x K/DA: Couture Collection drawings."
   },
   {
    "title": "Regional Championships: Competitive Integrity & Prizing",

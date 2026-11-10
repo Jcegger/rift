@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-11-05",
+ "generatedAt": "2026-11-10",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2478,
-  "eventsWithDecks": 22,
-  "players": 65542,
-  "playersWithDecks": 6857,
+  "events": 2486,
+  "eventsWithDecks": 24,
+  "players": 71375,
+  "playersWithDecks": 6903,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
    "Mardi - Championship #1",
@@ -26,21 +26,21 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 75,
-  "claimedEventsUnmatched": 67,
+  "claimedEvents": 76,
+  "claimedEventsUnmatched": 68,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Asia": 120,
-   "unknown": 223,
-   "Europe": 75,
+   "Europe": 78,
+   "Asia": 126,
+   "unknown": 229,
    "Oceania": 5,
    "North America": 7
   },
   "registryEventsByRegion": {
-   "unknown": 2472,
+   "unknown": 2480,
    "Asia": 6
   },
   "unresolvedClaimEvents": [
@@ -76,6 +76,7 @@
    "Riftbound Showdown Series Germany",
    "Riftbound Showdown Series: Malmö",
    "Runes & Rift Open 25",
+   "Runes & Rift Weekly",
    "S2 Nanning City Challenge",
    "S3 Guangzhou City Challenge",
    "S3 Shanghai City Challenge",
@@ -137,6 +138,7 @@
    "Riftbound Regional Qualifier - Los Angeles": 30,
    "Mardi - Championship #1": 29,
    "Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview)": 27,
+   "Chaotic Goods $2k Chaos Cup!": 26,
    "Riftbound $2,500 Cash Tournament @ Pro-Play Summit: Orlando": 21,
    "Riftbound Remote Showdown #3": 20,
    "WA RIFTBOUND CUP (Vendetta) 11 Oct - 9am AWST": 16,
@@ -149,12 +151,161 @@
    "Triple Win-A-Box | Vendetta Tournament": 8,
    "Riftbound Remote Showdown #4": 8,
    "LDXP Sacramento - 2 v 2 Constructed": 6,
+   "Nexus Night": 1,
    "THE SCRUB CUP 10/2/26 6 PM": 1,
    "Showdown Series Bristol by Organized Play Events": 1,
    "Riftbound Remote Showdown Pop Up Cup": 1
   }
  },
  "events": [
+  {
+   "name": "Radiance Standard Challenge Sunday 9:00am - Riftbound Regional Championship: Europe",
+   "dt": "2026-11-08",
+   "players": 1208,
+   "format": "Constructed",
+   "winner": "MICE Ramekiano",
+   "country": "US",
+   "slug": "radiance-standard-challenge-sunday-900am-riftbound-regional-championship-europe",
+   "top": [
+    [
+     "RAD-149",
+     239
+    ],
+    [
+     "OGN-247",
+     198
+    ],
+    [
+     "VEN-155",
+     136
+    ]
+   ]
+  },
+  {
+   "name": "Nation Clash Saturday 9:00am - Riftbound Regional Championship: Europe",
+   "dt": "2026-11-07",
+   "players": 1976,
+   "format": "Constructed",
+   "winner": "CTCG Collin K",
+   "country": "US",
+   "slug": "nation-clash-saturday-900am-riftbound-regional-championship-europe",
+   "top": [
+    [
+     "RAD-149",
+     488
+    ],
+    [
+     "OGN-247",
+     370
+    ],
+    [
+     "VEN-155",
+     242
+    ]
+   ]
+  },
+  {
+   "name": "Nexus Night",
+   "dt": "2026-11-06",
+   "players": 19,
+   "format": "Constructed",
+   "winner": "Matteo",
+   "country": null,
+   "slug": "nexus-night-4214",
+   "top": []
+  },
+  {
+   "name": "Radiance 2v2 Team Challenge Friday 11:00am - Riftbound Regional Championship: Europe",
+   "dt": "2026-11-06",
+   "players": 478,
+   "format": "Constructed",
+   "winner": "G1L Thoshy",
+   "country": "US",
+   "slug": "radiance-2v2-team-challenge-friday-1100am-riftbound-regional-championship-europe",
+   "top": [
+    [
+     "OGN-259",
+     171
+    ],
+    [
+     "SFD-185",
+     62
+    ],
+    [
+     "UNL-191",
+     33
+    ]
+   ]
+  },
+  {
+   "name": "Riftbound Regional Championship: Europe",
+   "dt": "2026-11-06",
+   "players": 309,
+   "format": "Constructed",
+   "winner": "DiamondHat",
+   "country": "US",
+   "slug": "riftbound-regional-championship-europe",
+   "top": [
+    [
+     "RAD-149",
+     124
+    ],
+    [
+     "OGN-247",
+     50
+    ],
+    [
+     "VEN-155",
+     44
+    ]
+   ]
+  },
+  {
+   "name": "Radiance Standard Challenge Friday 10:00am - Riftbound Regional Championship: Europe",
+   "dt": "2026-11-06",
+   "players": 1792,
+   "format": "Constructed",
+   "winner": "Tilted2211",
+   "country": "US",
+   "slug": "radiance-standard-challenge-friday-1000am-riftbound-regional-championship-europe",
+   "top": [
+    [
+     "RAD-149",
+     413
+    ],
+    [
+     "OGN-247",
+     350
+    ],
+    [
+     "VEN-155",
+     215
+    ]
+   ]
+  },
+  {
+   "name": "Fast Cup Radiance #4",
+   "dt": "2026-11-03",
+   "players": 24,
+   "format": "Constructed",
+   "winner": "Deynos",
+   "country": null,
+   "slug": "fast-cup-radiance-4",
+   "top": [
+    [
+     "RAD-149",
+     3
+    ],
+    [
+     "SFD-195",
+     2
+    ],
+    [
+     "UNL-201",
+     2
+    ]
+   ]
+  },
   {
    "name": "World Series #2",
    "dt": "2026-11-01",
@@ -210,6 +361,16 @@
      30
     ]
    ]
+  },
+  {
+   "name": "Chaotic Goods $2k Chaos Cup!",
+   "dt": "2026-10-31",
+   "players": 27,
+   "format": "Constructed",
+   "winner": "Seth Hogue",
+   "country": null,
+   "slug": "chaotic-goods-2k-chaos-cup",
+   "top": []
   },
   {
    "name": "CoolStuffCon Orlando 2026- Riftbound $5k",
