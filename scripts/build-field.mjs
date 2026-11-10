@@ -230,7 +230,7 @@ const main = async () => {
   for (const e of topdecks.events.filter((e) => e.published >= from && e.decks?.length)) {
     // Riot titles an RQ "Los Angeles' Top Decks"; riftbound.gg lists the same event as
     // "Riftbound Regional Qualifier - Los Angeles". Either one covers it.
-    const city = norm(e.title.replace(/'s? Top Decks$/i, ""));
+    const city = norm(e.city || e.title.replace(/'s? Top Decks$/i, ""));
     if (covered.has(norm(e.title)) || majors.some((m) => /regional qualifier/i.test(m.name) && norm(m.name).endsWith(city))) continue;
     covered.add(norm(e.title));
     const seenLeg = new Set();

@@ -1142,6 +1142,12 @@ if (!topdecks) {
   ok('Day 2 never exceeds Day 1, for any legend', F.every((e) => e.field.every((r) => r.d2 == null || r.d2 <= r.d1)));
   ok('field tables are a real field (1,000+ players on Day 1)', F.every((e) => e.day1 >= 1000),
      F.map((e) => `${e.slug.replace('-top-decks', '')} ${e.day1}`).join(', '));
+  // build-topdecks skips an article that does not read as real decks rather than ship it.
+  // An old one (RQ Bologna, Feb 2026, a layout of its own) can stay out; a skip inside the
+  // deck window is a results article the app is missing, and that has to be loud.
+  const recentSkips = (topdecks.skipped || []).filter((s) => !s.published || s.published >= new Date(Date.now() - 60 * 86400000).toISOString().slice(0, 10));
+  ok('no results article from the last 60 days was skipped as unreadable', !recentSkips.length,
+     recentSkips.map((s) => `${s.slug}: ${s.reason}`).join('; ') || `${(topdecks.skipped || []).length} older skipped`);
   ok('a Best-Of deck is #1 of its legend', D.filter((d) => d.legendRank).every((d) => d.legendRank[0] >= 1 && d.legendRank[0] <= d.legendRank[1]));
 }
 

@@ -56,6 +56,10 @@ on:
         description: 'Deck window in days'
         required: false
         default: '60'
+      backfill_since:
+        description: 'Re-walk the deck feed by domain back to this date (YYYY-MM-DD), to repair a committed hole'
+        required: false
+        default: ''
       simulate_failure:
         description: 'Comma-separated sources to force-fail (catalog,banned,events,decks,news,tiers,rules,errata,topdecks,field)'
         required: false
@@ -74,6 +78,7 @@ env:
   # through ${{ }} splicing.
   DAYS: ${{ github.event.inputs.days || '60' }}
   SIMULATE: ${{ github.event.inputs.simulate_failure || '' }}
+  BACKFILL_SINCE: ${{ github.event.inputs.backfill_since || '' }}
 
 jobs:
   refresh:
@@ -137,7 +142,7 @@ jobs:
         continue-on-error: true
         run: |
           case ",$SIMULATE," in *,decks,*) echo "simulated failure"; exit 1;; esac
-          node scripts/build-decks.mjs --days "$DAYS"
+          node scripts/build-decks.mjs --days "$DAYS" ${BACKFILL_SINCE:+--backfill-since "$BACKFILL_SINCE"}
 
       # A scrape of riftbound.gg's tier-list page, so more brittle than the others.
       # build-tiers.mjs exits non-zero and writes nothing if the parse comes up short,

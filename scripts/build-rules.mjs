@@ -56,6 +56,11 @@ const HUB = "https://playriftbound.com/en-us/rules-hub/";
 // The Rules Hub links the two PDFs and nothing else. The FAQs — which outrank the Core
 // Rules — live only under news, so a second index has to be read or they are invisible.
 const NEWS = "https://playriftbound.com/en-us/news/rules-and-releases/";
+// Riot files rules articles under more than one news category. The Radiance FAQ
+// ("radiance-rules-faq-and-clarifications") went out under organizedplay, not
+// rules-and-releases, and was never seen: the step stayed green and reported "unchanged"
+// while the current set's FAQ, which outranks the Core Rules, was missing.
+const OP = "https://playriftbound.com/en-us/news/organizedplay/";
 const UA = "rift.jayegger.com rules builder";
 
 /* ── the hub page: which PDFs are current, and how Riot dates them ───────── */
@@ -334,7 +339,7 @@ export const unescapeHtml = (h) => h
 
 async function discoverSupplements() {
   const found = new Map();
-  for (const idx of [NEWS, HUB]) {
+  for (const idx of [NEWS, OP, HUB]) {
     let html;
     try {
       const r = await fetch(idx, { headers: { "User-Agent": UA } });
@@ -351,7 +356,8 @@ async function discoverSupplements() {
       // rules content. The hub is a marketing page that happens to link the two PDFs,
       // and it also links things like a product-drawing FAQ — so from the hub, a bare
       // "faq" is not enough; it has to name rules, errata, patch notes or clarifications.
-      if (idx === HUB && !/rules|errata|clarification|patch-notes/.test(slug)) continue;
+      // Organized play is the same: it carries event FAQs alongside the rules ones.
+      if (idx !== NEWS && !/rules|errata|clarification|patch-notes/.test(slug)) continue;
       const path = m[0].replace(/\/$/, "");
       found.set(slug, {
         slug, kind: kindOf(slug),

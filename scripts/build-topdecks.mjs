@@ -207,7 +207,12 @@ const main = async () => {
   const toCode = nameIndex(cards);
 
   const index = JSON.stringify(nextData(await get(INDEX)));
-  const slugs = [...new Set(index.match(/\/news\/organizedplay\/[a-z0-9-]+-top-decks/g) || [])];
+  /* Riot titled every RQ "<City>'s Top Decks" (slug "<city>s-top-decks") until the first
+     Regional Championship, which went out on 5 Nov 2026 as "The Best Decks out of
+     Bologna" (slug "the-best-decks-out-of-bologna"). The old pattern skipped it and the
+     step stayed green. Match either wording, and anything else naming top/best decks;
+     an article that is not a results page parses no decks and is reported as such. */
+  const slugs = [...new Set(index.match(/\/news\/organizedplay\/[a-z0-9-]*(?:top|best)-decks[a-z0-9-]*/g) || [])];
   if (!slugs.length) throw new Error("no Top Decks articles linked from the index — the page changed shape");
 
   let prior = { events: [] };
@@ -215,6 +220,7 @@ const main = async () => {
   const events = new Map(prior.events.map((e) => [e.slug, e]));
 
   let fetched = 0, failed = [];
+  const skipped = [];
   for (const path of slugs) {
     const slug = path.split("/").pop();
     const url = `${BASE}/en-us${path}/`;
@@ -223,7 +229,10 @@ const main = async () => {
     try { data = nextData(await get(url)); }
     catch (e) { failed.push(`${slug}: ${e.message}`); continue; }
     const s = JSON.stringify(data);
-    const title = text(/"title": ?"([^"]*Top Decks[^"]*)"/.exec(s)?.[1]?.replace(/\\u2019/g, "'"));
+    const title = text(/"title": ?"([^"]*(?:Top|Best) Decks[^"]*)"/i.exec(s)?.[1]?.replace(/\\u2019/g, "'"));
+    // The event's city, read off either title wording, so nothing downstream has to know
+    // how Riot phrased this one: "Los Angeles' Top Decks", "The Best Decks out of Bologna".
+    const city = text(title).replace(/[’']s? Top Decks$/i, "").replace(/^The (?:Top|Best) Decks (?:out )?(?:of|from) /i, "").trim() || null;
     const published = /"publishDate": ?"(\d{4}-\d\d-\d\d)/.exec(s)?.[1] ?? null;
     const body = bodyOf(data);
     const decks = parseDecks(body);
@@ -233,10 +242,27 @@ const main = async () => {
       d.legendCode = toCode(d.legend);
       for (const k of ["main", "side"]) d[k] = d[k].map(([n, name]) => [n, name, toCode(name)]);
     }
+    /* Per-article gate. Riot's markup differs between articles (five layouts now), and a
+       half-read one still parses into valid JSON. The first article picked up under the
+       "Best Decks out of" wording — RQ Bologna, Feb 2026 — read as 320 of 356 legal
+       lists and a legend the catalog does not know, and would have shipped. So an
+       article that does not read as real decks is skipped and recorded in `skipped`,
+       never written; check.mjs fails on a *recent* skip, so a new layout is loud while
+       an old one stays out quietly. */
+    const legal = decks.filter((d) => d.main.reduce((a, r) => a + r[0], 0) === 39 &&
+      d.runes.reduce((a, r) => a + r[0], 0) === 12 && d.battlefields.length === 3 && d.champion).length;
+    const noLegend = decks.filter((d) => !d.legendCode).map((d) => d.legend);
+    if (legal < decks.length * 0.95 || noLegend.length) {
+      const reason = `${legal} of ${decks.length} lists legal${noLegend.length ? `; unknown legend ${[...new Set(noLegend)].join(", ")}` : ""}`;
+      skipped.push({ slug, url, title, published, reason });
+      events.delete(slug);
+      console.log(`${slug}: SKIPPED — ${reason}`);
+      continue;
+    }
     const inArticle = new Set(decks.map((d) => d.legend));
     if (field) for (const r of field) r.legend = toLegend(r.name, inArticle);
     events.set(slug, {
-      slug, url, title, published,
+      slug, url, title, city, published,
       summary: text(/"description": ?\{"type": ?"html", ?"body": ?"([^"]*)"/.exec(s)?.[1]?.replace(/\\u2019/g, "'")),
       day1: field ? field.reduce((a, r) => a + r.d1, 0) : null,
       day2: field && field.every((r) => r.d2 != null) ? field.reduce((a, r) => a + r.d2, 0) : null,
@@ -257,6 +283,7 @@ const main = async () => {
     source: INDEX,
     note: "Riot's Top Decks articles. `overall` and `legendRank` are Riot's; `day1`/`day2` are sums of Riot's field table, not announced attendance. `published` is the article date, not the event date.",
     failed: failed.length ? failed : undefined,
+    skipped,
     unresolved: [...unresolved].sort(),
     events: list,
   };

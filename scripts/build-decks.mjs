@@ -38,6 +38,12 @@ const arg = (name, fallback) => {
   return i > -1 && process.argv[i + 1] ? Number(process.argv[i + 1]) : fallback;
 };
 
+const argStr = (name) => {
+  const i = process.argv.indexOf(`--${name}`);
+  const v = i > -1 ? process.argv[i + 1] : null;
+  return v && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : null;
+};
+
 const FILTERS = (tournament) => ({
   hascrd: [], nothascrd: [], youtube: 0, smartsrch: "", format: "", date: "",
   color: [], collection: 0, topset: "", at: 0, is_tournament: tournament ? 1 : "",
@@ -419,6 +425,59 @@ const main = async () => {
   const { decks: tour, stats: tourStats } = await getAll(FILTERS(true), max);
   console.log(`${tour.length} (${tourStats.pages} pages, stopped on ${tourStats.stopped})`);
 
+  /* ── closing the gap after a run that was not committed ───────────────────────
+     A crawl reaches back only ~2.5 days (the ~780-row cap, below getAll), and the file
+     only grows by carrying what was *committed*. From 5 to 10 Nov 2026 an unrelated
+     check failed every run, so every crawl was thrown away, and the first green run
+     reached back only to 8 Nov: 5-7 Nov — the Regional Championship weekend — was lost,
+     28 + 0 + 19 decks against ~250 a normal day.
+
+     So when a crawl stops on its cap before reaching the newest committed deck, the gap
+     is walked again one domain at a time. Every list has two domains, so six domain
+     filters cover every list, and each sees about a third of the feed, which reaches
+     ~3x further back under the same cap. A normal run reaches the frontier and makes no
+     extra request. `--backfill-since YYYY-MM-DD` forces it to a date, for repairing a
+     hole that is already committed. */
+  const priorFile = await readFile(new URL("../data/decks.json", import.meta.url), "utf8").then(JSON.parse).catch(() => null);
+  const frontier = argStr("backfill-since") ||
+    (priorFile?.decks || []).map((d) => d.dt).filter(Boolean).sort().pop() || null;
+  const oldestOf = (rows) => rows.map(deckDate).filter(Boolean).sort()[0] || null;
+  const short = (rows, st) => st.stopped === "max reached" && frontier && oldestOf(rows) > frontier;
+  const backfill = { since: frontier, forced: !!argStr("backfill-since"), ran: false, domains: {} };
+  if (frontier && (backfill.forced || short(pub, pubStats) || short(tour, tourStats))) {
+    backfill.ran = true;
+    const target = Date.parse(frontier + "T00:00:00Z") / 1000;
+    const pubSlugs = new Set(pub.map((d) => d.slug)), tourSet = new Set(tour.map((d) => d.slug));
+    console.log(`crawl stopped short of ${frontier}${backfill.forced ? " (forced)" : ""}; walking it again by domain`);
+    // Slower than the main crawl on purpose: the first run of this, at the main crawl's
+    // 400ms, drew 429s from the shared host one domain in. A backfill that fails keeps
+    // what it had and leaves the normal crawl standing; it never fails the build.
+    let halted = null;
+    for (const dom of ["body", "calm", "chaos", "fury", "mind", "order"]) {
+      if (halted) { backfill.domains[dom] = { skipped: halted }; continue; }
+      let pages = 0, added = 0, oldest = null, stopped = "page cap";
+      await sleep(8000);
+      for (let page = 1; page <= 80; page++) {
+        let batch;
+        try { batch = await getPage(page, { ...FILTERS(false), color: [dom] }); }
+        catch (e) { stopped = halted = `halted: ${e.message}`; break; }
+        await sleep(1600);
+        pages++;
+        if (!batch.length) { stopped = "empty page"; break; }
+        for (const d of batch) {
+          if (d.is_tournament === "1" || d.is_tournament === 1) {
+            if (!tourSet.has(d.slug)) { tourSet.add(d.slug); tour.push(d); added++; }
+          } else if (!pubSlugs.has(d.slug)) { pubSlugs.add(d.slug); pub.push(d); added++; }
+        }
+        oldest = Math.min(...batch.map((d) => Number(d.date) || Infinity));
+        if (oldest < target) { stopped = "reached frontier"; break; }
+      }
+      const reached = Number.isFinite(oldest) ? new Date(oldest * 1000).toISOString().slice(0, 10) : null;
+      backfill.domains[dom] = { pages, added, reached, stopped };
+      console.log(`  ${dom.padEnd(6)} ${String(pages).padStart(2)} pages, +${added}, back to ${reached} (${stopped})`);
+    }
+  }
+
   // The window is measured from the freshest deck seen, not from today, so a quiet
   // week does not silently empty the file.
   const newest = [...pub, ...tour].map(deckDate).filter(Boolean).sort().pop();
@@ -592,6 +651,7 @@ const main = async () => {
     crawl: {
       public: pubStats, tournament: tourStats,
       carried: carried.length, fetchedRows: decks.length,
+      backfill,
     },
     decks: merged,
     hidden,

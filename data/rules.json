@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-19",
+ "generatedAt": "2026-11-10",
  "source": "https://playriftbound.com/en-us/rules-hub/",
  "docs": {
   "core": {
@@ -1606,6 +1606,14 @@
    "published": "2026-07-23",
    "chars": 3945,
    "sha": "3cfa4aff7ea1"
+  },
+  {
+   "slug": "radiance-rules-faq-and-clarifications",
+   "kind": "faq",
+   "url": "https://playriftbound.com/en-us/news/organizedplay/radiance-rules-faq-and-clarifications",
+   "published": "2026-10-26",
+   "chars": 9048,
+   "sha": "53b2bd47b82c"
   },
   {
    "slug": "riftbound-origins-faq",

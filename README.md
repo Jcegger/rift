@@ -1125,7 +1125,14 @@ performance is separate work with its own measurement.
 RQ Los Angeles, the last RQ of 2026, had **3 of its 8 Top 8 lists** there and not the
 winner's (Rengar). riftdecks.com and Mobalytics carry full standings but sit behind
 Cloudflare and refuse a script. Riot's own "X's Top Decks" article is the primary
-record anyway, so `scripts/build-topdecks.mjs` reads that: every Top 8 list and the best
+record anyway, so `scripts/build-topdecks.mjs` reads that (found by slug: anything under
+`/news/organizedplay/` naming *top* or *best* decks — Riot has titled them both
+"Los Angeles' Top Decks" and "The Best Decks out of Bologna", and the second wording was
+skipped until Nov 2026; each event carries a `city` read from either wording, which is
+what the consumers join on; an article that does not read as real decks — under 95%
+legal lists, or a legend the catalog does not know — is skipped into `skipped` rather
+than shipped, and `check.mjs` fails if a skip is from the last 60 days, so a new layout
+is loud while RQ Bologna's, Feb 2026, stays out quietly): every Top 8 list and the best
 finisher on each legend, each with its **overall ranking** and its **rank among that
 legend's players** (`legendRank: [1, 92]`), as text.
 
@@ -1278,6 +1285,21 @@ paginated underneath it. The window still applies to the union, so rows age out 
 days rather than accruing forever. A 60-day archive now has to be assembled a day at a
 time; its depth is a function of how long this has run since the change, which `span`
 reports rather than papers over.
+
+**A run that is not committed is a hole, so the crawl closes it.** The file only grows by
+carrying what was committed. From 5 to 10 Nov 2026 an unrelated tier-list check failed
+every run, every crawl was discarded, and the first green run reached back only to 8 Nov:
+5–7 Nov, the Regional Championship weekend, held 47 decks against ~250 on a normal day.
+So when either crawl stops on its cap before reaching the newest committed deck, the gap
+is walked again **one domain at a time** (`color: [dom]`): every list has two domains, so
+six filters cover every list, each sees about a third of the feed, and each reaches ~3×
+further back under the same cap. It is paced slower than the main crawl (its first run at
+400ms drew 429s), and a backfill that fails stops and keeps what it had — it never fails
+the build. A normal run reaches the frontier and makes no extra request.
+`crawl.backfill` records what it did. To repair a hole that is already committed, run
+`build-decks.mjs --backfill-since YYYY-MM-DD`, or the workflow's `backfill_since` input.
+(`leader` filters nothing — every row's `leader` is empty — and `hascrd` works but needs
+every legend printing.)
 
 Three fields exist to keep the file honest about itself. `window` is *declared* —
 computed from the newest deck and the day count, which is why the file went on
@@ -1832,7 +1854,11 @@ Neither are the errata pages. They are news articles.
 
 So the builder reads the **Rules and Releases** index as well, which lists every FAQ,
 errata and patch-notes page, and discovers them by pattern so the next set's should
-appear on its own. Two details that cost a rewrite each. Dating from the index is wrong
+appear on its own. It reads the **Organized Play** index too, because the *next set's*
+did not: the Radiance FAQ (2026-10-26, claiming precedence) went out under
+`/news/organizedplay/`, and for two weeks the step stayed green reporting "unchanged"
+while the document outranking the Core Rules was missing. From the hub and Organized
+Play, a slug has to name rules, errata, clarifications or patch notes to count. Two details that cost a rewrite each. Dating from the index is wrong
 — its payload interleaves cards, and proximity matching handed the Unleashed FAQ the
 Vendetta FAQ's date — so each article is dated from its own page. And the thing actually
 compared between runs is a **hash of the extracted text**, not the date: a ruling edited

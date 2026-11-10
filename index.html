@@ -516,7 +516,7 @@ function latestField() {
   })).sort((a, b) => b.d1 - a.d1);
   return { ev, rows };
 }
-const eventName = (ev) => ev.title.replace(/[’']s? Top Decks$/i, "").replace(/’/g, "'");
+const eventName = (ev) => (ev.city || ev.title.replace(/[’']s? Top Decks$/i, "")).replace(/’/g, "'");
 function tierOf(legend) {
   const c = legendCard(legend);
   if (!c || !TIERS?.tiers) return null;
