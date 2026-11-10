@@ -983,12 +983,18 @@ if (!tiers) {
   const T = tiers.tiers;
   ok('every tier entry has a champion, a tier and a rank',
      Array.isArray(T) && T.length >= 20 &&
-     T.every((t) => t.champion && Number.isInteger(t.tier) && t.tier >= 1 && Number.isInteger(t.rank) && t.rank >= 1),
+     T.every((t) => t.champion && Number.isInteger(t.tier) && t.tier >= 0 && Number.isInteger(t.rank) && t.rank >= 1),
      `${T.length} legends`);
-  ok('tiers run 1..N with no gaps',
+  // Tier S arrived with Radiance (2026-11-06) and is stored as 0, so every numeric sort
+  // still puts it first; `label` is what gets printed. An S tier is optional, Tier 1 is not.
+  ok('every tier entry carries the label that matches its number (S is 0)',
+     T.every((t) => t.label === (t.tier === 0 ? 'S' : String(t.tier))),
+     T.filter((t) => t.label !== (t.tier === 0 ? 'S' : String(t.tier))).slice(0, 3).map((t) => `${t.champion} ${t.tier}/${t.label}`).join(', '));
+  ok('tiers run (S,) 1..N with no gaps',
      (() => { const ns = [...new Set(T.map((t) => t.tier))].sort((a, b) => a - b);
-              return ns[0] === 1 && ns.every((n, i) => n === i + 1); })(),
-     [...new Set(T.map((t) => t.tier))].sort((a, b) => a - b).join(','));
+              const from = ns[0] === 0 ? 1 : 0;
+              return ns[from] === 1 && ns.slice(from).every((n, i) => n === i + 1); })(),
+     [...new Set(T.map((t) => t.label))].join(','));
   ok('ranks within a tier are 1..k with no gaps',
      [...new Set(T.map((t) => t.tier))].every((tn) => {
        const rs = T.filter((t) => t.tier === tn).map((t) => t.rank).sort((a, b) => a - b);
@@ -996,6 +1002,12 @@ if (!tiers) {
      }));
   ok('tiers.json names the set and links the report',
      typeof tiers.set === 'string' && /^https:\/\/riftbound\.gg\//.test(tiers.report || ''),
+     `${tiers.set} — ${tiers.report}`);
+  // The report cited must be for the list's own set. From 5 to 10 Nov 2026 a Radiance
+  // list went out cited as "Vendetta week 4", because the builder took the highest week
+  // number across every set's reports.
+  ok('the cited report is for the set the list names',
+     typeof tiers.set === 'string' && (tiers.report || '').toLowerCase().includes(`-for-${tiers.set.toLowerCase()}-`),
      `${tiers.set} — ${tiers.report}`);
 
   // The join. Champions come from riftbound.gg named plainly; the app maps them to
@@ -1005,8 +1017,12 @@ if (!tiers) {
   const played = new Set(A.DECKS.map(A.archetypeName));
   ok('every joined tier lands on a played archetype', [...map.keys()].every((n) => played.has(n)),
      [...map.keys()].filter((n) => !played.has(n)).slice(0, 3).join(', ') || `${map.size} joined`);
-  ok('most of the tier list resolves to a played archetype', map.size >= 25,
-     `${map.size} of ${T.length} entries joined`);
+  // This was `map.size >= 25` against a list that ran ~49 legends. Radiance's first list
+  // has 21, every one of which joined, and the fixed count failed the refresh for five days
+  // (5-10 Nov 2026). The length floor is build-tiers' MIN_LEGENDS and the 'every tier entry'
+  // check above; what this one guards is the join, so it is now a share of the list.
+  ok('most of the tier list resolves to a played archetype', map.size >= Math.ceil(0.75 * T.length),
+     `${map.size} of ${T.length} entries joined (need ${Math.ceil(0.75 * T.length)})`);
 
   // Master Yi has two legends sitting in two different tiers, which is the whole case
   // the epithet parsed from each guide slug exists to separate. This used to assert that
@@ -1052,7 +1068,7 @@ if (!tiers) {
   ok('Next shows the deck table', panelStart > -1, 'panel present');
   const panelEnd = next.indexOf('WHAT TO BUY', panelStart);
   const seg = panelStart > -1 ? next.slice(panelStart, panelEnd > -1 ? panelEnd : panelStart + 9000) : '';
-  const rowTiers = [...seg.matchAll(/>Tier (\d)</g)].map((m) => Number(m[1]));
+  const rowTiers = [...seg.matchAll(/>Tier (S|\d)</g)].map((m) => (m[1] === 'S' ? 0 : Number(m[1])));
   ok('ranked by best deck, the table is best tier first (no budget, nothing buildable)',
      rowTiers.length > 1 && rowTiers.every((n, i) => !i || n >= rowTiers[i - 1]), rowTiers.join(','));
 

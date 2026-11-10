@@ -522,7 +522,7 @@ function tierOf(legend) {
   if (!c || !TIERS?.tiers) return null;
   const champ = IDX.championOf(c), epi = c.n.replace(/ - Starter$/, "");
   const hit = TIERS.tiers.find((t) => t.champion === champ && (!t.epithet || t.epithet.replace(/ - Starter$/, "") === epi));
-  return hit ? hit.tier : null;
+  return hit ? (hit.label ?? String(hit.tier)) : null;   // "S", "1", "2", …
 }
 
 /* ── routing ─────────────────────────────────────────────────────────────── */

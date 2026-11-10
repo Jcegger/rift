@@ -88,41 +88,67 @@ const main = async () => {
   html = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<style[\s\S]*?<\/style>/g, "");
   console.log(`${(html.length / 1024).toFixed(0)}kb`);
 
-  // Narrow to the tier list itself: from the first "Tier 1" marker to the tier
-  // explanations that follow it. Everything above is nav and a table of contents that
-  // repeats the same phrases.
-  const start = html.search(/<strong>\s*Tier\s*1\s*<\/strong>/i);
-  if (start < 0) throw new Error("no 'Tier 1' marker — page structure changed");
+  // Narrow to the tier list itself. Since Radiance (2026-11-06) the page carries two
+  // lists under "<h2>Radiance Metagame</h2>" and "<h2>Vendetta Metagame</h2>" — the new
+  // set's, and the last set's kept "for your reference" — and the current list opens
+  // with an "S Tier" above Tier 1. The old anchor (first "Tier 1" marker) skipped the
+  // S tier entirely and shipped the list without its best deck. So anchor on the first
+  // "<Set> Metagame" heading, which also names the set, and fall back to the first tier
+  // marker when there is no such heading (the pre-Radiance shape).
+  const TIER_MARK = /<strong>\s*(?:Tier\s*(S|[0-9]+)|(S|[0-9]+)\s*Tier)\s*<\/strong>/i;
+  const head = /<h2[^>]*>\s*([A-Za-z][A-Za-z' ]*?)\s+Metagame\s*<\/h2>/i.exec(html);
+  let listSet = null, start;
+  if (head) { listSet = decode(head[1]); start = head.index + head[0].length; }
+  else {
+    start = html.search(TIER_MARK);
+    if (start < 0) throw new Error("no tier marker and no '<Set> Metagame' heading — page structure changed");
+  }
   const after = html.slice(start);
   const stop = after.search(/Tier\s+Explanations|<h2/i);
   const block = stop > 0 ? after.slice(0, stop) : after;
 
-  const token = /<strong>\s*Tier\s*([0-9]+)\s*<\/strong>|<figcaption class="wp-element-caption">([\s\S]*?)<\/figcaption>/gi;
+  // Tier S is stored as 0 so every numeric sort and comparison keeps working; `label`
+  // is what to print ("S", "1", "2", …).
+  const token = new RegExp(TIER_MARK.source + `|<figcaption class="wp-element-caption">([\\s\\S]*?)<\\/figcaption>`, "gi");
   const tiers = [];
-  let tier = null, rank = 0, m;
+  let tier = null, label = null, rank = 0, m;
   while ((m = token.exec(block))) {
-    if (m[1]) { tier = Number(m[1]); rank = 0; continue; }
+    const mark = m[1] || m[2];
+    if (mark) { label = mark.toUpperCase(); tier = label === "S" ? 0 : Number(label); rank = 0; continue; }
     if (tier == null) continue;
-    const cap = m[2];
+    const cap = m[3];
     const a = /<a href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/i.exec(cap);
     const champion = decode((a ? a[2] : cap).replace(/<[^>]+>/g, "").replace(/[\u{1F000}-\u{1FAFF}←-⇿☀-➿]/gu, ""));
     if (!champion) continue;
     const guide = a ? a[1] : null;
     const epithet = epithetFromMeta(guide, legendByCode) ?? epithetFromGuide(guide, champion);
-    tiers.push({ champion, tier, rank: ++rank, guide, epithet });
+    tiers.push({ champion, tier, label, rank: ++rank, guide, epithet });
   }
+
+  // Any other "<strong>…Tier…</strong>" in the block is a tier name this parse does not
+  // know (an "A Tier", a "Tier 1+"), and the legends under it would be filed in the tier
+  // above. Fail rather than guess.
+  const unknown = [...block.matchAll(/<strong>([^<]*\bTier\b[^<]*)<\/strong>/gi)]
+    .map((x) => x[1].trim()).filter((s) => !TIER_MARK.test(`<strong>${s}</strong>`));
+  if (unknown.length) throw new Error(`unrecognised tier marker(s): ${unknown.join(", ")}`);
+  if (!tiers.length || tiers[0].rank !== 1 || block.search(/<figcaption/i) < block.search(TIER_MARK))
+    throw new Error("legends appear before the first tier marker — page structure changed");
 
   if (tiers.length < MIN_LEGENDS) throw new Error(`only ${tiers.length} legends parsed (expected >= ${MIN_LEGENDS})`);
 
-  // The set the list is for, and the most recent weekly report, both from the report
-  // links on the page. Report slugs read
-  // "riftbound-meta-tier-list-best-decks-for-<set>-week-<n>-report".
-  let set = null, report = null, week = -1;
-  const REPORT = /href="(https:\/\/riftbound\.gg\/riftbound-meta-tier-list-best-decks-for-([a-z0-9-]+?)-week-(\d+)-report\/?)"/gi;
+  // The set the list is for, and that set's most recent weekly report. Report slugs have
+  // read "…-best-decks-for-<set>-week-<n>-report" and, since Radiance, "…-for-<set>-week-<n>"
+  // and "…-for-<set>-post-ban-metagame-week-<n>". Only reports for the list's own set
+  // count: taking the highest week across every set cited Vendetta week 4 for a Radiance
+  // list for five days.
+  let set = listSet, report = null, week = -1;
+  const REPORT = /href="(https:\/\/riftbound\.gg\/riftbound-meta-tier-list-best-decks-for-([a-z]+)-(?:[a-z0-9-]*?-)?week-(\d+)(?:-report)?\/?)"/gi;
   const scanReports = (src) => {
     for (const rm of src.matchAll(REPORT)) {
+      const rset = rm[2][0].toUpperCase() + rm[2].slice(1);
+      if (listSet && rset.toLowerCase() !== listSet.toLowerCase()) continue;
       const w = Number(rm[3]);
-      if (w > week) { week = w; report = rm[1]; set = rm[2].replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()); }
+      if (w > week) { week = w; report = rm[1]; set = rset; }
     }
   };
   scanReports(html);
@@ -150,7 +176,7 @@ const main = async () => {
     set: set || null,
     report: report || null,
     week: week >= 0 ? week : null,
-    note: "riftbound.gg's curated weekly tier list, scraped from the page HTML. Tier 1 is best. " +
+    note: "riftbound.gg's curated weekly tier list, scraped from the page HTML. Tier S (stored as 0) is best, then 1, 2, …; `label` is the printed name. " +
           "Ranks are within a tier. The app joins these to archetypes by champion; Master Yi has two legends and is split by the epithet in its guide slug.",
     tiers,
   };
@@ -162,7 +188,8 @@ const main = async () => {
               (set ? `, for ${set}${week >= 0 ? ` week ${week}` : ""}` : ""));
   for (const [k, n] of [...byTier].sort((a, b) => a[0] - b[0])) {
     const names = tiers.filter((t) => t.tier === k).map((t) => t.champion);
-    console.log(`  Tier ${k}: ${n.toString().padStart(2)}  ${names.slice(0, 8).join(", ")}${names.length > 8 ? ", …" : ""}`);
+    const lab = tiers.find((t) => t.tier === k).label;
+    console.log(`  Tier ${lab}: ${n.toString().padStart(2)}  ${names.slice(0, 8).join(", ")}${names.length > 8 ? ", …" : ""}`);
   }
   if (dupes.length) console.log(`\nchampions in two tiers (expected for Master Yi): ${[...new Set(dupes)].join(", ")}`);
   const noGuide = tiers.filter((t) => !t.guide).map((t) => t.champion);

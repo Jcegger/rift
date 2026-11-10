@@ -100,7 +100,7 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   most-played legends (`top`, up to six) — how `build-field.mjs` finds the new format's events.
 - `data/news.json` - riftbound.gg's posts (title, date, tag, link) and, under `riot`,
   Riot's own news from playriftbound.com with its one-line summaries.
-- `data/tiers.json` - riftbound.gg's weekly Tier 1-5 list, per Legend, scraped.
+- `data/tiers.json` - riftbound.gg's weekly tier list (S, then 1-N), per Legend, scraped.
 - `data/topdecks.json` - Riot's own RQ "Top Decks" articles: every Top 8 and Best-Of list,
   with finishes, and each event's Day 1 / Day 2 field by legend.
 - `data/history.json` - the daily archive: deck counts per legend, and tier lists.
@@ -896,9 +896,10 @@ fewest-cards first, `byPlanTarget` adds the bucket → non-redundant → compoun
 and on Next the ranked list is cheapest-first while the headline target equals the
 plan's first target.
 
-The tier list has its own block: `tiers.json` is well-formed and tiers and ranks run
-1..N with no gaps, the champion join lands only on played archetypes and resolves most
-of the list, Master Yi's played legend comes back at Tier 1, Meta renders the raw list
+The tier list has its own block: `tiers.json` is well-formed, tiers run (S,) 1..N and
+ranks 1..k with no gaps, each entry's `label` matches its number, the cited report is for
+the list's own set, the champion join lands only on played archetypes and resolves at
+least three quarters of the list, Master Yi's played legend comes back at Tier 1, Meta renders the raw list
 with its report link, and the Next panel's rows are ordered best-tier-first.
 
 Several of the assertions are about layout rather than correctness, because the first
@@ -1149,18 +1150,28 @@ row resolves to a legend ("Master Yi, WB", "Renata", "Kai'sa").
 The deck snapshot answers "what is being played" and the plan answers "what is the
 cheapest next step", but neither answers "which decks are actually good" — and this app
 refuses to invent a strength score for that. So it borrows one. riftbound.gg publishes a
-**curated Tier 1-5 list, per Legend, weekly**, and `data/tiers.json` is that list.
+**curated tier list (S, then 1-N), per Legend, weekly**, and `data/tiers.json` is that list.
 
 ```
 node scripts/build-tiers.mjs
 ```
 
 **It is a scrape**, and the most brittle input here — their tier list is a WordPress
-page with no API. The parse keys on two shapes in the markup: `<strong>Tier N</strong>`
-markers and `<figcaption class="wp-element-caption">` blocks, one per Legend in rank
-order. If the fetch fails or fewer than 20 legends come back, the script writes nothing
-and exits non-zero instead of shipping a half-read list. `check.mjs` asserts the shape
-and the join.
+page with no API. Since Radiance the page carries two lists, under `<h2>Radiance
+Metagame</h2>` and `<h2>Vendetta Metagame</h2>` (last set's, kept for reference); the
+parse reads the first, and that heading names the set. Inside it, it keys on
+`<strong>Tier N</strong>` / `<strong>S Tier</strong>` markers and `<figcaption
+class="wp-element-caption">` blocks, one per Legend in rank order. **Tier S is stored as
+`tier: 0`** so numeric sorts still put it first, with `label: "S"` for printing (`"1"`,
+`"2"`… otherwise). The cited report is the highest week *for that set* only. If the fetch
+fails, fewer than 20 legends come back, or a `<strong>` names a tier the parse does not
+know, the script writes nothing and exits non-zero instead of shipping a half-read list.
+`check.mjs` asserts the shape, the citation and the join.
+
+The S tier is the case that taught this: from 5 to 10 Nov 2026 the parse anchored on the
+first "Tier 1", skipped Riven in S Tier, and cited Vendetta week 4 for a Radiance list.
+Only an unrelated fixed count (`>= 25` joined, against a list that had shrunk to 21)
+stopped it shipping.
 
 Writing nothing is what makes this survivable. The daily job treats each source
 separately, so a redesign of their page costs the tier list and only the tier list:

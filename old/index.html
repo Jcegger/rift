@@ -2825,8 +2825,8 @@ function tierByArchetype(){
   return out;
 }
 
-const TIER_COLOUR = ['', 'var(--good)', 'var(--teal)', 'var(--maize)', 'var(--dimmer)', 'var(--dimmer)'];
-const tierBadge = (n) => `<b style="color:${TIER_COLOUR[n] || 'var(--dimmer)'}">Tier ${n}</b>`;
+const TIER_COLOUR = ['var(--good)', 'var(--good)', 'var(--teal)', 'var(--maize)', 'var(--dimmer)', 'var(--dimmer)'];
+const tierBadge = (n) => `<b style="color:${TIER_COLOUR[n] || 'var(--dimmer)'}">Tier ${n === 0 ? "S" : n}</b>`;
 
 function deckCardsToLocal(deck){
   const out = {};
@@ -4019,7 +4019,7 @@ function renderNext(){
       <span class="nm">${target && r.name === target.name
           ? '<b style="color:var(--good)">&#9656;</b> ' : '<span style="display:inline-block;width:0.9em"></span>'
         }${r.ownLegend ? '<b style="color:var(--good)" title="you own the legend">●</b> ' : ''}${
-        r.tier ? tierBadge(r.tier) : '<span class="code" title="not on the tier list">untiered</span>'}
+        r.tier != null ? tierBadge(r.tier) : '<span class="code" title="not on the tier list">untiered</span>'}
         <b style="color:var(--cream)">${esc(r.champion || r.name)}</b>${moveChip(r.name)}
         <span class="code">${r.champion ? `${esc(r.name)} · ` : ''}${r.shape}${
           r.bestPlace != null ? ` · best #${r.bestPlace}` : ''}${
@@ -4054,7 +4054,7 @@ function renderNext(){
     <div class="panel">
       <h2>BUILD NEXT</h2>
       ${target ? `<p class="note" data-target="${esc(target.name)}" style="font-size:14px;color:var(--ink)">
-        ${target.tier ? tierBadge(target.tier) + ' ' : ''}<b style="color:var(--cream)">${esc(target.champion || target.name)}</b>${
+        ${target.tier != null ? tierBadge(target.tier) + ' ' : ''}<b style="color:var(--cream)">${esc(target.champion || target.name)}</b>${
           target.champion ? ` <span class="code">${esc(target.name)}</span>` : ''} —
         ${target.buildable
           ? '<b style="color:var(--good)">ready to build now</b>, every card already in the collection.'
