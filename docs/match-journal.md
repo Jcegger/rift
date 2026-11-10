@@ -146,9 +146,12 @@ G1   1st  2nd
      opp [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]   [ ] [ ]
 G2   ... the same ...
 G3   ... the same ...
+C conquer    H hold    E other (card effect, burn-out)
+
+time   G __   on turn [   ]   +1 [   ]   +2 [   ]   +3 [   ]
 
 notes ─────────────────────────────────────────────────────────────────────
-   (nine ruled lines)
+   (seven ruled lines)
 
 next time I'll ____________________________________________________________
 ```
@@ -168,7 +171,16 @@ a running written record is what a judge reads to find where a discrepancy began
 
 **The labels are bare on purpose.** A printed page may carry field names but no advice,
 because advice is a note from outside the match (TR §416.4). The how-to lives here, not
-on the sheet.
+on the sheet. The one line under G3 says what the score letters mean: that is a label,
+like `me` and `opp`, and says nothing about how to play (added 10 Nov 2026; in practice
+the night is all **C** and **H**). The shorthand marks below stay off the page.
+
+**The time strip** is for a round that runs out mid-game (TR §408.2): the player on turn
+finishes it, then three more turns are played, announced as they happen (TR §502.4.b).
+Write the game number, then tick each box (or write `me`/`opp`) as the turn ends. At the
+end, **a lead of 2 or more points wins the game; anything less is a draw** (§408.2.b).
+If time runs out between games, no new game starts (§408.2.d), and the match goes to
+whoever has more game wins (§408.3.a). Learn that; it is not printed.
 
 **Everything else is what they showed you.** How players use a match pad is consistent
 across games: besides the running total, they write **what the opponent revealed**, and

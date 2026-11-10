@@ -13,7 +13,7 @@ Writes four files, kept separate on purpose:
     questions.pdf     numbered slots for questions to answer later -- never open during a game
 
 Sized 3:4 (6 x 8 in) for a Kindle Scribe; prints fine scaled to A4 or Letter. The pages
-carry field labels only -- no shorthand key, no advice -- because anything more is a note
+carry field labels only (the score letters' meaning counts as one) -- no shorthand key, no advice -- because anything more is a note
 from outside the match. Source of truth is docs/match-journal.md; guides/out/ is build
 output (gitignored). The matchup card is the exception: it carries advice, so it is
 printed from the matchup table in the current deck's guide (MATCHUPS below) and is never
@@ -130,9 +130,22 @@ def match_page(pdf):
                     p.text(x + bw / 2, y - 0.03, str(i + 1), size=5, bold=False, ha="center")
             y += bh
         y += 0.36
+    # The score letters' meaning: a label, like "me" and "opp", not advice (TR 416.2)
+    p.text(L, y - 0.12, "C conquer    H hold    E other (card effect, burn-out)", size=6.5, bold=False)
+    # Time (TR 408.2): the player on turn finishes it, then three more turns
+    y += 0.2
+    p.text(L, y + bh * 0.7, "time", size=7)
+    p.text(L + 0.45, y + bh * 0.7, "G", size=7, bold=False)
+    p.line(L + 0.58, L + 0.85, y + bh * 0.7 + 0.02)
+    x = L + 1.05
+    for lab in ("on turn", "+1", "+2", "+3"):
+        x += p.text(x, y + bh * 0.7, lab, size=6.5, bold=False) + 0.06
+        p.box(x, y, bw * 1.3, bh)
+        x += bw * 1.3 + 0.2
+    y += bh + 0.36
     p.section(y, "notes")
     y += 0.08
-    for _ in range(9):
+    for _ in range(7):
         y += 0.29
         p.line(L, R, y, lw=0.4, color=FAINT)
     y += 0.5
