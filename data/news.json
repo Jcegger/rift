@@ -5,7 +5,7 @@
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 55,
+ "carriedFromPrevious": 56,
  "tags": {
   "News": 55,
   "Events": 22,
@@ -1270,8 +1270,17 @@
  ],
  "riotSource": "playriftbound.com/en-us/news/ and its three category pages",
  "riotFailed": null,
- "riotCarried": 8,
+ "riotCarried": 9,
  "riot": [
+  {
+   "title": "Best Ofs for the European Championship",
+   "dt": "2026-11-11",
+   "url": "https://playriftbound.com/en-us/news/organizedplay/best-ofs-for-the-european-championship",
+   "tags": [
+    "Organized Play"
+   ],
+   "desc": "Here are the Best-Of decks coming out of Stuttgart."
+  },
   {
    "title": "Riftbound T1 Player Bundle and Worlds 2026 Drawing",
    "dt": "2026-11-06",
