@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-10",
+ "generatedAt": "2026-11-11",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -26,16 +26,16 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 76,
-  "claimedEventsUnmatched": 68,
+  "claimedEvents": 77,
+  "claimedEventsUnmatched": 69,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
+   "unknown": 233,
    "Europe": 80,
-   "Asia": 130,
-   "unknown": 232,
+   "Asia": 131,
    "Oceania": 5,
    "North America": 7
   },
@@ -111,6 +111,7 @@
    "Wuhan Regional Open",
    "Xi'an Regional",
    "a Box",
+   "box open",
    "for the"
   ],
   "decksByEvent": {
