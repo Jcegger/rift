@@ -7,6 +7,7 @@
 #   scripts/rift card body rune  # catalog lookup with owned/want/trade
 #   scripts/rift want | trade | sets | raw
 #   scripts/rift meta [legend] [--since DATE]          # what the legal field plays (no banned lists)
+#   scripts/rift bans ["Card" …] [--since DATE]        # what a ban takes: your decks, then every archetype
 #   scripts/rift ideas [legend]                        # net decks per legend (or the crowd's list), vs your deck
 #   scripts/rift rising [legend]                       # cards each legend's posted lists are taking up
 #   scripts/rift poll [legend]                         # the preseason model: every build ranked, and why

@@ -17,6 +17,8 @@
 //   node scripts/state.mjs meta            # archetype shares over sanctioned-legal lists
 //   node scripts/state.mjs meta diana      # one archetype: card play rates, best finishes
 //   node scripts/state.mjs meta leblanc --since 2026-09-15   # only lists played after a date
+//   node scripts/state.mjs bans "Card A" "Card B"   # what a ban takes: your decks, then every archetype
+//   node scripts/state.mjs bans                     # the same, for the announced bans in banned.json
 //   node scripts/state.mjs event 660038    # a store event from Riot's locator: standings + legends
 //   node scripts/state.mjs intake riven    # after scanning new cards: what landed, the kit checked, where to file it
 //
@@ -69,6 +71,7 @@ function printPoints(pb, pa, games) {
 }
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { fight } from "../lib/fight.mjs";
+import { avoidedIn } from "../lib/avoid.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
 
 const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
@@ -377,6 +380,162 @@ export function deckIsLegal(deck, BY, bannedNames, stdNames = null) {
   });
 }
 
+// An archived list's legend card and its archetype name ("Kennen, Heart of the Tempest").
+// Shared by meta and bans so the two name archetypes identically.
+function archetypeOf(cat) {
+  const { BY } = cat;
+  const legend = (d) => (d.lg && BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
+  // The champion is whichever of the legend's tags names a unit ("Kennen", not
+  // "Yordle"), and a Starter printing is the same archetype as the base legend.
+  const champs = new Set(cat.cards.filter((c) => c.t && c.t.includes("Unit") && c.n.includes(","))
+    .map((c) => c.n.slice(0, c.n.indexOf(","))));
+  const label = (d) => {
+    const l = legend(d);
+    let champ = l && (l.g || []).find((t) => champs.has(t));
+    // The Secret Garden promos are "Lillia - Bashful Bloom" with no tags at all, for the
+    // legend "Bashful Bloom"; fold them, as the app's archetypeName does.
+    let ln = (d.ln || "").replace(/ - Starter$/, "");
+    const dash = ln.indexOf(" - ");
+    if (dash > -1 && champs.has(ln.slice(0, dash))) { champ = ln.slice(0, dash); ln = ln.slice(dash + 3); }
+    if (!ln) return "Unidentified";
+    return champ && !ln.includes(champ) ? `${champ}, ${ln}` : ln;
+  };
+  return { legend, label };
+}
+
+/* ── bans: what a ban takes, from your decks and from the whole field ──────────
+   `bans "Card A" "Card B"` — or no names, for the announced bans banned.json carries
+   (`effective` set). The pool is meta's: legal lists, from the current format's legal
+   date unless --since says otherwise. Legality is judged WITHOUT the cards asked about,
+   so this reads the same before and after they are added to ANNOUNCED_BANS — otherwise
+   the lists it is meant to count would already be filtered out.
+
+   The field covers every archetype, Aurora decks included (Jay plays against them). The
+   replacements offered for Jay's own decks come only from that legend's lists that run
+   none of the cards and no never-play card (lib/avoid.mjs). Counts, never a forecast:
+   "lists left" is what remains of the archive, not a prediction of next week's field. */
+async function cmdBans(S, cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const sinceArg = opt("--since");
+  if (sinceArg != null && !/^\d{4}-\d{2}-\d{2}$/.test(sinceArg)) {
+    console.log('usage: bans ["Card name" …] [--since YYYY-MM-DD]'); return;
+  }
+  const words = args.filter((a, i) => !a.startsWith("--") && args[i - 1] !== "--since");
+  const banned = await readJson(url("banned.json")).catch(() => ({ constructed: [] }));
+  const field = await readJson(url("field.json")).catch(() => null);
+  const since = sinceArg || field?.legalFrom || null;
+
+  // Which cards. A name is matched exactly, else by substring, and must land on one card.
+  const allNames = [...new Set(cat.cards.map((c) => c.n))];
+  let targets = [];
+  if (!words.length) {
+    targets = (banned.constructed || []).filter((b) => b.effective).map((b) => b.name);
+    if (!targets.length) { console.log('no announced bans in data/banned.json — name the cards: bans "Card A" "Card B"'); return; }
+    console.log(`announced bans from data/banned.json: ${targets.join(", ")}`);
+  } else {
+    for (const w of words) {
+      const lw = w.toLowerCase();
+      const exact = allNames.find((n) => n.toLowerCase() === lw);
+      const hits = exact ? [exact] : allNames.filter((n) => n.toLowerCase().includes(lw));
+      if (hits.length !== 1) {
+        console.log(hits.length ? `"${w}" matches ${hits.length} cards — be more specific: ${hits.slice(0, 8).join(" · ")}` : `no card named like "${w}"`);
+        return;
+      }
+      targets.push(hits[0]);
+    }
+  }
+  const T = new Set(targets);
+  const byName = new Map();
+  for (const c of cat.cards) if (!byName.has(c.n)) byName.set(c.n, c);
+
+  // The pool: meta's, judged without the targets.
+  const snap = await readJson(url("decks.json"));
+  let evDate = new Map();
+  try { evDate = new Map((await readJson(url("events.json"))).events.map((e) => [e.name, e.dt])); } catch { /* posting dates */ }
+  const bn = new Set([...bannedNameSet(banned)].filter((n) => !T.has(n)));
+  const std = standardNameSet(banned, cat.cards);
+  const { legend, label } = archetypeOf(cat);
+  const playedOn = (d) => (d.tour && d.ev && evDate.get(d.ev)) || d.dt || null;
+  const pool = snap.decks.filter((d) => deckIsLegal(d, cat.BY, bn, std) && (!since || (playedOn(d) || "") >= since));
+  const namesOf = (cards) => {
+    const m = new Map();
+    for (const [k, q] of Object.entries(cards || {})) { const n = codeName(cat.BY, k) || k; m.set(n, (m.get(n) || 0) + q); }
+    return m;
+  };
+  const hitOf = (d) => { const m = namesOf(d.cards); return targets.filter((t) => m.has(t)).map((t) => [t, m.get(t)]); };
+  const pct = (x) => `${(100 * x).toFixed(x < 0.1 && x > 0 ? 1 : 0)}%`;
+
+  console.log(`\nBANS  ${targets.map((t) => `${t} (${byName.get(t)?.t || "?"})`).join(" · ")}`);
+  console.log(`pool: ${pool.length} legal lists${since ? ` played since ${since}` : ""} (meta's filter, judged without these cards)`);
+
+  // ── your decks ──
+  console.log(`\nYOUR DECKS`);
+  const decks = S.decks || [];
+  for (const deck of decks) {
+    const main = namesOf(deck.cards), side = namesOf(deck.sb);
+    const lose = targets.map((t) => [t, main.get(t) || 0, side.get(t) || 0]).filter(([, a, b]) => a || b);
+    if (!lose.length) { console.log(`  ${pad(deck.name, 52)} untouched`); continue; }
+    console.log(`  ${deck.name}`);
+    for (const [t, a, b] of lose) console.log(`    loses ${a ? `${a}× ${t}` : ""}${a && b ? " + " : ""}${b ? `${b}× ${t} (side)` : ""}`);
+    // What this legend's clean lists run that the deck does not, ranked by how many run it.
+    const lg = [...main.keys()].map((n) => byName.get(n)).find((c) => c?.t === "Legend");
+    if (!lg) { console.log(`    (no legend in the deck — no replacements to read)`); continue; }
+    const same = pool.filter((d) => legend(d)?.n?.replace(/ - Starter$/, "") === lg.n.replace(/ - Starter$/, ""));
+    const hitN = same.filter((d) => hitOf(d).length).length;
+    const auroraN = same.filter((d) => !hitOf(d).length && avoidedIn(namesOf(d.cards).keys()).length).length;
+    const clean = same.filter((d) => !hitOf(d).length && !avoidedIn(namesOf(d.cards).keys()).length);
+    const types = new Set(lose.map(([t]) => byName.get(t)?.t).filter(Boolean));
+    console.log(`    ${same.length ? label(same[0]) : lg.n}: ${same.length} lists in the pool · ${hitN} run ${targets.length > 1 ? "one of these" : "it"}` +
+      `${auroraN ? ` · ${auroraN} more are Aurora (never offered)` : ""} · ${clean.length} clean to read from`);
+    if (clean.length < 3) { console.log(`    too few clean lists to read replacements from${clean.length ? "" : " — none"}`); continue; }
+    const rate = new Map();
+    for (const d of clean) for (const [n, q] of namesOf(d.cards)) {
+      if (main.has(n)) continue;
+      const r = rate.get(n) || { lists: 0, copies: 0 }; r.lists++; r.copies += q; rate.set(n, r);
+    }
+    const ranked = [...rate].map(([n, r]) => ({ n, ...r, card: byName.get(n) }))
+      .filter((r) => r.card && r.card.t !== "Legend" && r.card.t !== "Rune" && !T.has(r.n))
+      .sort((a, b) => (types.has(b.card.t) - types.has(a.card.t)) || b.lists - a.lists).slice(0, 8);
+    if (!ranked.length) { console.log(`    the clean lists run nothing this deck does not already`); continue; }
+    console.log(`    the clean lists run, and this deck does not:`);
+    for (const r of ranked) console.log(`      ${pad(pct(r.lists / clean.length), 5)} ${pad(r.n, 34)} ${pad(r.card.t, 12)} avg ${(r.copies / r.lists).toFixed(1)} where run`);
+  }
+
+  // ── the field ──
+  const by = new Map();
+  for (const d of pool) {
+    const k = label(d);
+    const r = by.get(k) || { n: 0, hit: 0, copies: 0, tour: 0, tourHit: 0, aurora: 0, per: new Map() };
+    const h = hitOf(d);
+    r.n++; if (d.tour) r.tour++;
+    if (avoidedIn(namesOf(d.cards).keys()).length) r.aurora++;
+    if (h.length) {
+      r.hit++; if (d.tour) r.tourHit++;
+      for (const [t, q] of h) { r.copies += q; r.per.set(t, (r.per.get(t) || 0) + 1); }
+    }
+    by.set(k, r);
+  }
+  const hitLists = pool.filter((d) => hitOf(d).length).length;
+  console.log(`\nTHE FIELD  ${hitLists} of ${pool.length} lists (${pct(hitLists / (pool.length || 1))}) run at least one of these`);
+  for (const t of targets) {
+    const n = pool.filter((d) => namesOf(d.cards).has(t)).length;
+    console.log(`  ${pad(t, 34)} in ${n} lists (${pct(n / (pool.length || 1))})`);
+  }
+  const rows = [...by].filter(([, r]) => r.hit).sort((a, b) => b[1].hit - a[1].hit);
+  if (rows.length) {
+    console.log(`\n  ${pad("archetype", 40)} ${pad("lists", 6)} ${pad("share", 6)} ${pad("hit", 5)} ${pad("hit%", 5)} ${pad("vouched hit", 12)} ${pad("left", 5)} copies/hit list${targets.length > 1 ? " · which" : ""}`);
+    for (const [k, r] of rows) {
+      const which = targets.length > 1 ? " · " + [...r.per].map(([t, n]) => `${t} ${pct(n / r.hit)}`).join(", ") : "";
+      const thin = r.n < 5 ? " (thin)" : "";
+      console.log(`  ${pad(k.slice(0, 40), 40)} ${pad(r.n, 6)} ${pad(pct(r.n / pool.length), 6)} ${pad(r.hit, 5)} ${pad(pct(r.hit / r.n), 5)} ${pad(r.tour ? `${r.tourHit}/${r.tour}` : "—", 12)} ${pad(r.n - r.hit, 5)} ${(r.copies / r.hit).toFixed(1)}${which}${thin}${r.aurora ? ` · ${r.aurora} Aurora lists (opponent-only)` : ""}`);
+    }
+  }
+  const untouched = [...by].filter(([, r]) => !r.hit).sort((a, b) => b[1].n - a[1].n);
+  if (untouched.length) console.log(`\n  untouched (${untouched.length}): ${untouched.map(([k, r]) => `${k} ${r.n}`).join(" · ")}`);
+  if (words.length && targets.some((t) => !(banned.constructed || []).some((b) => b.name === t)))
+    console.log(`\nNEXT  once Riot announces: add each to ANNOUNCED_BANS in scripts/build-banned.mjs with its effective date, then node scripts/build-banned.mjs`);
+}
+
 async function cmdMeta(cat, args) {
   const all = args.includes("--all");
   const si = args.indexOf("--since");
@@ -396,22 +555,7 @@ async function cmdMeta(cat, args) {
   const stdNames = standardNameSet(banned, cat.cards);
   const { BY } = cat;
 
-  const legend = (d) => (d.lg && BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
-  // The champion is whichever of the legend's tags names a unit ("Kennen", not
-  // "Yordle"), and a Starter printing is the same archetype as the base legend.
-  const champs = new Set(cat.cards.filter((c) => c.t && c.t.includes("Unit") && c.n.includes(","))
-    .map((c) => c.n.slice(0, c.n.indexOf(","))));
-  const label = (d) => {
-    const l = legend(d);
-    let champ = l && (l.g || []).find((t) => champs.has(t));
-    // The Secret Garden promos are "Lillia - Bashful Bloom" with no tags at all, for the
-    // legend "Bashful Bloom"; fold them, as the app's archetypeName does.
-    let ln = (d.ln || "").replace(/ - Starter$/, "");
-    const dash = ln.indexOf(" - ");
-    if (dash > -1 && champs.has(ln.slice(0, dash))) { champ = ln.slice(0, dash); ln = ln.slice(dash + 3); }
-    if (!ln) return "Unidentified";
-    return champ && !ln.includes(champ) ? `${champ}, ${ln}` : ln;
-  };
+  const { legend, label } = archetypeOf(cat);
   // The date that means "when was this played": the event's, when upstream vouched for one.
   const playedOn = (d) => (d.tour && d.ev && evDate.get(d.ev)) || d.dt || null;
 
@@ -1568,6 +1712,7 @@ async function main() {
     versus: () => cmdVersus(S, cat, args),
     try: () => cmdTry(S, cat, args),
     loops: () => cmdLoops(S, cat, args),
+    bans: () => cmdBans(S, cat, args),
   };
   const fn = table[cmd];
   if (!fn) { console.error(`unknown command "${cmd}" — try: ${Object.keys(table).join(", ")}, fight, gaps`); process.exit(2); }

@@ -652,6 +652,17 @@ and the CLI.
 `--since YYYY-MM-DD` is the stricter cut, dating vouched lists by their *event* in
 `data/events.json` and the rest by posting date.
 
+**`scripts/rift bans "Card A" "Card B"` reads a ban before it lands** — or, with no names,
+the announced bans `banned.json` carries. It takes meta's pool (legal lists since the
+current format's legal date, or `--since`), judged *without* the named cards so it reads
+the same before and after they reach `ANNOUNCED_BANS`. Then two halves: each saved deck,
+what it loses and what that legend's clean lists run that it does not (clean = none of
+the named cards and no never-play card, `lib/avoid.mjs`); and **the whole field**, every
+archetype hit with its lists, share, hit rate, vouched hit and lists left, Aurora decks
+included and marked opponent-only, then every archetype untouched. Counts, never a
+forecast: "left" is what remains of the archive, not next week's field. Checked against
+September's bans: Stacked Deck in 23% of Kennen, 18% of Irelia, 22% of Diana.
+
 **Local events come from a different source.** `data/events.json` is riftbound.gg's
 registry, which carries a country at most, so a store's events never surface in it. Riot's
 store locator (`locator.riftbound.uvsgames.com`) reads a public, read-only API that has
