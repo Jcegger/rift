@@ -7,15 +7,33 @@
  "cutShort": null,
  "carriedFromPrevious": 57,
  "tags": {
-  "News": 55,
+  "News": 56,
+  "Guides": 9,
   "Events": 22,
   "Metagame": 24,
-  "Guides": 8,
   "Legends": 24,
   "Sets": 4,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "All Best-of Prizing Decks from the European Championship",
+   "dt": "2026-11-12",
+   "url": "https://riftbound.gg/all-best-of-prizing-decks-from-the-european-championship",
+   "tags": [
+    "News"
+   ],
+   "author": "Theo-74825"
+  },
+  {
+   "title": "Budget Riftbound Decks: Build with Bulk Cards & Play for $10! – Fan Favourites",
+   "dt": "2026-11-12",
+   "url": "https://riftbound.gg/budget-riftbound-decks-build-with-bulk-cards-play-for-10-fan-favourites",
+   "tags": [
+    "Guides"
+   ],
+   "author": "Den"
+  },
   {
    "title": "Riftbound Game Director Confirms Card Ban Update on Friday",
    "dt": "2026-11-10",

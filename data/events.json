@@ -26,16 +26,16 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 77,
-  "claimedEventsUnmatched": 69,
+  "claimedEvents": 79,
+  "claimedEventsUnmatched": 71,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Europe": 81,
-   "unknown": 236,
-   "Asia": 131,
+   "unknown": 240,
+   "Asia": 132,
+   "Europe": 82,
    "Oceania": 5,
    "North America": 7
   },
@@ -107,9 +107,11 @@
    "Top Shelf Masters Tournament",
    "Utrecht RQ",
    "Vancouver RQ",
+   "Vilemaw's Cup",
    "Wins Riftbound Showdown Series: Malmö",
    "Wuhan Regional Open",
    "Xi'an Regional",
+   "[RC Stuttgart",
    "a Box",
    "box open",
    "for the"
