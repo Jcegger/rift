@@ -111,6 +111,21 @@ other. Space requests, back off on 429, and do not fetch twice what you can comp
 
 ---
 
+## Muse (and other agents) use this data
+
+Jay's MCP connector (`jay-egger-site/functions/api/mcp.js`, live at jayegger.com/api/mcp) reads
+and writes this repo's data so he can ask Meta Muse about his decks and log games by voice at
+the store. It depends on:
+
+- **The Supabase row:** `decks[].{id,name,cards,sb}` and `journal[].{id,at,deck,opp,res}`.
+  `log_riftbound_match` appends to `journal` read-modify-write, like the page's `write()`.
+- **`data/tiers.json`, `data/news.json`, `data/cards.json`:** read from rift.jayegger.com.
+  Opponent names resolve against Legend cards (`t`, `v`, `g[0]`, `n`) the way `legendName()` does.
+
+Rename or reshape any of these and update `mcp.js` in the same session.
+
+---
+
 ## Keeping this file honest
 
 `check.mjs` asserts that every file in `docs/`, every builder in `scripts/`, and every
