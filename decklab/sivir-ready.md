@@ -611,6 +611,8 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
     nothing tested). Hidden count (7) judged fine: A's one slot is the limit, not the number. **Log a Hidden card
     stuck in hand because A's slot was taken.**
 
+- **13 Nov 2026, Radiance ban (sideboard only):** Riot banned Riven, Broken Blade · Zhonya's Hourglass · Stellacorn Herder · Nocturne · Rhasa · Brynhir · Dazzling Aurora · Baited Hook · Emperor's Dais · Star Spring, effective 23 Nov. **Nothing in this list; main deck unchanged.** The ban falls mostly on the worst matchups (Riven loses her champion, Akali and Irelia lose Stellacorn and Zhonya's) and takes Brynhir from Kai'Sa and Rengar. **−Acceptable Losses +Repulse** (Jay: "rock it"): the 1 Nov gear-hate case was Riven's Blade and Zhonya's; Zhonya's is banned and Riven shrinks, while Offer and Prefect still cover Orianna, Azir, Ziggs, Jarvan IV and Ornn. Repulse comes in against the hardest matchups left, Diana (Moonfall, Gust) and Vex (Back Off). Guide §6, §8 and §9 updated, plus a ban note on §9. Open: **a Viktor row** (157 lists, 99% untouched by the ban, Tier 3), and re-read every row once post-ban results exist. Row backed up (`backups/state-pre-ban-repulse-2026-11-13.json`).
+
 ### Games (the locked trap list, 1 Nov 2026)
 
 | # | date | vs | seat | battlefields (mine / theirs) | result | how | failure type | trap | notes |

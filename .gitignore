@@ -11,3 +11,6 @@ docs/*.pdf
 # One-off collection exports (Piltover Archive migration). Personal data, not source.
 collection-*.csv
 __pycache__/
+
+# Supabase row copies taken before a live write (notes/handover.md)
+backups/

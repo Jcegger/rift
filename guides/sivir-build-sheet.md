@@ -58,6 +58,7 @@ date: 2026-11-02
 | ✓ | card | set no. | notes |
 |---|---|---|---|
 | ▢ ▢ | **Unyielding Spirit** | OGN-145 |  |
+| ▢ | **Repulse** | UNL-106 |  |
 | ▢ | **Sabotage** | OGN-156 |  |
 | ▢ ▢ | **Ruin Runner** | SFD-105 |  |
 | ▢ ▢ | **Graves, Blasting Through** | RAD-085 |  |
@@ -66,7 +67,6 @@ date: 2026-11-02
 
 | ✓ | card | set no. | notes |
 |---|---|---|---|
-| ▢ | **Acceptable Losses** | OGN-179 |  |
 | ▢ | **Ravenbloom Prefect** | VEN-102 |  |
 | ▢ | **An Offer You Can't Refuse** | RAD-101 |  |
 
