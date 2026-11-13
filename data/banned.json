@@ -15,6 +15,18 @@
    "inCatalog": true
   },
   {
+   "key": "SFD|207",
+   "name": "Emperor's Dais",
+   "type": "Battlefield",
+   "code": "SFD-207/221",
+   "printings": [
+    "SFD-207"
+   ],
+   "inCatalog": true,
+   "effective": "2026-11-23",
+   "note": "announced 2026-11-13; no-risk conquers, like Reaver's Row"
+  },
+  {
    "key": "OGN|284",
    "name": "Obelisk of Power",
    "type": "Battlefield",
@@ -33,6 +45,18 @@
     "OGN-285"
    ],
    "inCatalog": true
+  },
+  {
+   "key": "UNL|215",
+   "name": "Star Spring",
+   "type": "Battlefield",
+   "code": "UNL-215/219",
+   "printings": [
+    "UNL-215"
+   ],
+   "inCatalog": true,
+   "effective": "2026-11-23",
+   "note": "announced 2026-11-13; no-risk conquers, like Reaver's Row"
   },
   {
    "key": "OGN|290",
@@ -55,6 +79,30 @@
    "inCatalog": true
   },
   {
+   "key": "OGN|242",
+   "name": "Baited Hook",
+   "type": "Gear",
+   "code": "OGN-242/298",
+   "printings": [
+    "OGN-242"
+   ],
+   "inCatalog": true,
+   "effective": "2026-11-23",
+   "note": "announced 2026-11-13; pre-emptive, checks Might not cost, risky with Legacy"
+  },
+  {
+   "key": "OGN|160",
+   "name": "Dazzling Aurora",
+   "type": "Gear",
+   "code": "OGN-160/298",
+   "printings": [
+    "OGN-160"
+   ],
+   "inCatalog": true,
+   "effective": "2026-11-23",
+   "note": "announced 2026-11-13; homogenises ramp into one deck, free repeated big threats"
+  },
+  {
    "key": "OGN|182",
    "name": "Scrapheap",
    "type": "Gear",
@@ -63,6 +111,18 @@
     "OGN-182"
    ],
    "inCatalog": true
+  },
+  {
+   "key": "OGN|77",
+   "name": "Zhonya's Hourglass",
+   "type": "Gear",
+   "code": "OGN-077/298",
+   "printings": [
+    "OGN-077"
+   ],
+   "inCatalog": true,
+   "effective": "2026-11-23",
+   "note": "announced 2026-11-13; hidden protection, and the Astral Heron combination"
   },
   {
    "key": "SFD|122",
@@ -96,6 +156,18 @@
    "inCatalog": true
   },
   {
+   "key": "OGN|26",
+   "name": "Brynhir Thundersong",
+   "type": "Unit",
+   "code": "OGN-026/298",
+   "printings": [
+    "OGN-026"
+   ],
+   "inCatalog": true,
+   "effective": "2026-11-23",
+   "note": "announced 2026-11-13; locks the opponent out of a turn, Kai'Sa removal with blink"
+  },
+  {
    "key": "SFD|20",
    "name": "Draven, Vanquisher",
    "type": "Unit",
@@ -117,6 +189,42 @@
    "inCatalog": true
   },
   {
+   "key": "OGN|194",
+   "name": "Nocturne, Horrifying",
+   "type": "Unit",
+   "code": "OGN-194/298",
+   "printings": [
+    "OGN-194"
+   ],
+   "inCatalog": true,
+   "effective": "2026-11-23",
+   "note": "announced 2026-11-13; free off a reveal, Kennen's high rolls"
+  },
+  {
+   "key": "OGN|195",
+   "name": "Rhasa the Sunderer",
+   "type": "Unit",
+   "code": "OGN-195/298",
+   "printings": [
+    "OGN-195"
+   ],
+   "inCatalog": true,
+   "effective": "2026-11-23",
+   "note": "announced 2026-11-13; 0-energy trash payoff, recursive, Kennen"
+  },
+  {
+   "key": "RAD|43",
+   "name": "Riven, Broken Blade",
+   "type": "Unit",
+   "code": "RAD-043/167",
+   "printings": [
+    "RAD-043"
+   ],
+   "inCatalog": true,
+   "effective": "2026-11-23",
+   "note": "announced 2026-11-13; Riven was 43% of RC Europe, ~60% vs the field; no-risk turn-two conquer"
+  },
+  {
    "key": "OGN|177",
    "name": "Stealthy Pursuer",
    "type": "Unit",
@@ -126,6 +234,18 @@
     "OGN-177-P"
    ],
    "inCatalog": true
+  },
+  {
+   "key": "SFD|48",
+   "name": "Stellacorn Herder",
+   "type": "Unit",
+   "code": "SFD-048/221",
+   "printings": [
+    "SFD-048"
+   ],
+   "inCatalog": true,
+   "effective": "2026-11-23",
+   "note": "announced 2026-11-13; unlimited payoff for movement, shores up Calm too well"
   }
  ],
  "byFormat": {
