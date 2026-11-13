@@ -5,7 +5,7 @@
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 58,
+ "carriedFromPrevious": 61,
  "tags": {
   "News": 56,
   "Guides": 9,
@@ -1288,8 +1288,17 @@
  ],
  "riotSource": "playriftbound.com/en-us/news/ and its three category pages",
  "riotFailed": null,
- "riotCarried": 9,
+ "riotCarried": 10,
  "riot": [
+  {
+   "title": "Radiance Ban List Updates (Effective November 23, 2026)",
+   "dt": "2026-11-13",
+   "url": "https://playriftbound.com/en-us/news/announcements/radiance-ban-list-updates-effective-november-23-2026",
+   "tags": [
+    "Announcements"
+   ],
+   "desc": "We’re announcing the latest cards added to the Standard and Constructed 2v2 ban list."
+  },
   {
    "title": "Best Ofs for the European Championship",
    "dt": "2026-11-11",
