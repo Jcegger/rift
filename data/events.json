@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-12",
+ "generatedAt": "2026-11-13",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -26,14 +26,14 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 79,
-  "claimedEventsUnmatched": 71,
+  "claimedEvents": 80,
+  "claimedEventsUnmatched": 72,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "unknown": 240,
+   "unknown": 242,
    "Asia": 132,
    "Europe": 82,
    "Oceania": 5,
@@ -47,6 +47,7 @@
    "*BREAK IF MUST",
    "... Always",
    "10K Showdown - Auckland Card Show",
+   "28P Online",
    "36P Tournament",
    "47P tournament",
    "60P Tournament",
