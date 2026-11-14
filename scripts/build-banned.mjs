@@ -170,11 +170,19 @@ const main = async () => {
 
   // Fold in the announced-but-not-yet-flagged bans, and notice when upstream has
   // caught up so the hand-maintained list cannot quietly rot.
-  const flagged = new Set(constructed.map((b) => b.key));
+  // Upstream can flag a ban before it bites (the Radiance list was flagged by 2026-11-14, nine
+  // days early), and taking that flag at face value made every builder treat the cards as
+  // banned already. Until its date, an announced ban keeps its `effective` even when flagged.
+  const flagged = new Map(constructed.map((b) => [b.key, b]));
+  const today = new Date().toISOString().slice(0, 10);
   const nowRedundant = [];
   for (const b of ANNOUNCED_BANS) {
     const k = baseKey(keyOf(b.code));
-    if (flagged.has(k)) { nowRedundant.push(b.name); continue; }
+    if (flagged.has(k)) {
+      if (b.effective > today) Object.assign(flagged.get(k), { effective: b.effective, note: b.note });
+      else nowRedundant.push(b.name);
+      continue;
+    }
     const hit = known.get(k);
     constructed.push({
       key: k,
