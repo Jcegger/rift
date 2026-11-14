@@ -7,15 +7,33 @@
  "cutShort": null,
  "carriedFromPrevious": 62,
  "tags": {
-  "News": 58,
+  "Metagame": 25,
+  "News": 59,
   "Guides": 9,
   "Events": 22,
-  "Metagame": 24,
   "Legends": 24,
   "Sets": 4,
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Radiance Post-Ban Metagame Decks: Early Possibilities",
+   "dt": "2026-11-14",
+   "url": "https://riftbound.gg/radiance-post-ban-metagame-decks",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Sona, Harmonius DJ Promo Revealed for Convergence Fest",
+   "dt": "2026-11-14",
+   "url": "https://riftbound.gg/sona-harmonius-dj-promo-revealed-for-convergence-fest",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
   {
    "title": "The Best of Lux $148,888.88 Offer: Buying a Card or Making a Statement?",
    "dt": "2026-11-14",
