@@ -2333,7 +2333,9 @@ function loadBans(payload){
   BANNED = new Map();
   // Cached legality is keyed off this list, so it cannot outlive a reload of it.
   forgetDeckCaches();
+  const today = new Date().toISOString().slice(0, 10);
   const add = (entry, format) => {
+    if (entry.effective && entry.effective > today) return;   // announced, not live until then
     const hit = matchRow({ id: entry.code });
     const id = hit ? identityOf(hit.card) : entry.key;
     if (!id) return;

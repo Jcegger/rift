@@ -748,7 +748,11 @@ section('The preseason model');
     ok('only one-on-one events are read', !team.length, team.slice(0, 2).join('; ') || `${FD.events.length} events`);
     const prize = FD.events.filter((e) => e.kind === 'preview' && ![...(e.meta || []), ...e.standings].some((s) => s.legend && FD.legends.find((l) => l.legend === s.legend)?.isNew)).map((e) => e.name);
     ok('a preview event is one the new legends played', !prize.length, prize.slice(0, 2).join('; ') || `${FD.events.filter((e) => e.kind === 'preview').length} previews`);
-    ok('Aurora builds are flagged opponent-only in the field', FD.legends.some((x) => x.legend.startsWith('Jayce') && x.flags.includes('Aurora builds: opponent only')));
+    // The flag follows the lists (build-field.mjs, 30%+ running a never-play card that is still legal), not a
+    // fixed legend: Jayce's lists can drop Aurora, and from its ban date (2026-11-23) no legend should carry it.
+    const auroraOff = FD.legends.filter((x) => ((x.aurora || 0) >= 0.3) !== x.flags.includes('Aurora builds: opponent only')).map((x) => `${x.legend} ${Math.round((x.aurora || 0) * 100)}%`);
+    ok('Aurora builds are flagged opponent-only in the field, wherever the lists run it', !auroraOff.length,
+       auroraOff.join(', ') || FD.legends.filter((x) => (x.aurora || 0) >= 0.3).map((x) => `${x.legend.split(',')[0]} ${Math.round(x.aurora * 100)}%`).join(', ') || 'no legend runs Aurora in 30% of its lists');
   }
   if (!P) ok('preseason snapshot present', false, 'data/preseason.json missing — run build-preseason.mjs');
   else {
@@ -758,9 +762,12 @@ section('The preseason model');
     const ranks = P.builds.map((b) => b.rank).sort((a, b) => a - b);
     ok('ranks run 1..N with no gaps or ties', ranks.every((r, i) => r === i + 1));
     ok('every build has a range around its rank', P.builds.every((b) => b.rankRange[0] <= b.rank + 1 && b.rankRange[1] >= b.rank - 1 && b.top10 >= 0 && b.top10 <= 1));
-    // The Aurora rule (lib/avoid.mjs) has to reach the model, or the poll suggests one.
-    const jayce = P.builds.filter((b) => b.legend.startsWith('Jayce'));
-    ok('an Aurora build is flagged opponent-only', jayce.some((b) => b.aurora.includes('Dazzling Aurora')), jayce.map((b) => `${b.build || 'one deck'}: ${b.aurora.join(',') || 'none'}`).join(' · '));
+    // The Aurora rule (lib/avoid.mjs) has to reach the model, or the poll suggests one: every build that is
+    // mostly Aurora lists carries the flag. Whether such a build exists is up to the lists (Jayce's moved off
+    // Aurora ahead of its 2026-11-23 ban, and once the ban is live the model drops those lists entirely).
+    const auroraMiss = P.builds.filter((b) => ((b.auroraShare || 0) >= 0.5) !== (b.aurora.length > 0)).map((b) => `${b.legend.split(',')[0]} ${b.build || 'one deck'} ${Math.round((b.auroraShare || 0) * 100)}%`);
+    ok('every mostly-Aurora build is flagged opponent-only', !auroraMiss.length,
+       auroraMiss.join(' · ') || P.builds.filter((b) => b.aurora.length).map((b) => `${b.legend.split(',')[0]}: ${b.build || 'one deck'}`).join(' · ') || 'no build is mostly Aurora');
     ok('every judgment marker matched a build', !P.unmatchedMarkers.length, P.unmatchedMarkers.join('; ') || 'all matched');
     // Until the new format has results the poll is a prediction; say how much results weigh.
     const w = Math.max(...P.builds.map((b) => b.season.weight));

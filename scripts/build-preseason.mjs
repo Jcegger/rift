@@ -165,7 +165,7 @@ const main = async () => {
   const unmatched = [];
   for (const [name, L] of legends) {
     const lists = byLegend.get(name) || [];
-    const builds = lists.length ? buildsOf(name, lists, names, size) : [{ id: name, label: null, lists: [], signature: [], share: 1, aurora: [] }];
+    const builds = lists.length ? buildsOf(name, lists, names, size) : [{ id: name, label: null, lists: [], signature: [], share: 1, aurora: [], auroraShare: 0 }];
     const isLegend = (d) => legendOf(d) === name;
     const retLegend = add(oeRQ(name, "returning"), oeFull(isLegend, ["returning"]));
     const seasonRQ = oeRQ(name, "season");
@@ -199,7 +199,7 @@ const main = async () => {
   const vsRatio = (vs) => vs.reduce((t, v) => t + (best.get(v) ?? 1), 0) / vs.length;
   const out = run(vsRatio).map(({ c: { name, L, b, target, lastTarget, pp, retLegend, adj, use, season }, s }) => ({
     id: b.id, legend: name, build: b.label, signature: b.signature, share: r3(b.share), lists: b.lists.length,
-    set: L.c.split("-")[0], isNew: L.c.split("-")[0] === newest, noBestOf: NO_BEST_OF.has(L.c.split("-")[0]), aurora: b.aurora,
+    set: L.c.split("-")[0], isNew: L.c.split("-")[0] === newest, noBestOf: NO_BEST_OF.has(L.c.split("-")[0]), aurora: b.aurora, auroraShare: b.auroraShare,
     returning: { O: r3(retLegend.O), E: r3(retLegend.E), lastShare: r3(lastShare.get(name) || 0), lastTarget: r3(lastTarget), ratio: r3(Math.exp(s.retLog)), carry: r3(s.carry), buildAdj: r3(adj) },
     popularity: { share: r3(pp.share), pilots: r3(pp.pilots), posted: r3(posted.get(name) || 0), target: r3(target) },
     judgment: { points: r3(s.judgment.total), by: Object.fromEntries(Object.entries(s.judgment.by).map(([k, v]) => [k, r3(v)])),

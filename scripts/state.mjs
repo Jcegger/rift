@@ -137,7 +137,7 @@ export async function loadCatalog() {
     c.x = t; c.errata = true; errataApplied++; errataNames.add(c.n);
   }
   const BY = new Map(cards.map((c) => [c.c, c]));
-  const bannedNames = new Set((banned.constructed || []).map((b) => b.name));
+  const bannedNames = bannedNameSet(banned);
   return { cards, BY, idx: indexCatalog(cards, banned), sets: cat.sets || [], bannedNames, errataApplied,
            errataCards: errataNames.size, errataAt: errata.generatedAt };
 }
@@ -330,9 +330,12 @@ function cmdCard(S, cat, q, args) {
 
    Legal is not the same as post-ban: a pre-ban list that happened to run none of the
    banned cards passes. `--since DATE` is the stricter cut — vouched lists by their
-   EVENT's date (data/events.json), other lists by posting date. */
-export function bannedNameSet(banned) {
-  return new Set((banned.constructed || []).map((b) => b.name));
+   EVENT's date (data/events.json), other lists by posting date.
+
+   An announced ban (`effective` in the future) is not live yet: those cards stay legal until
+   that date, as in lib/decks.mjs. */
+export function bannedNameSet(banned, today = new Date().toISOString().slice(0, 10)) {
+  return new Set((banned.constructed || []).filter((b) => !b.effective || b.effective <= today).map((b) => b.name));
 }
 
 export function codeName(BY, code) {

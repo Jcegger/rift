@@ -281,11 +281,13 @@ const main = async () => {
   }
 
   // Aurora: how many of the legend's recent lists run a never-play card (lib/avoid.mjs). The
-  // field keeps them; the CLI marks them opponent-only.
+  // field keeps them; the CLI marks them opponent-only. Once a never-play card's ban takes effect
+  // (data/banned.json `effective`; Dazzling Aurora on 2026-11-23) nobody can bring it, so it stops counting.
   const auroraShare = new Map();
+  const avoidLive = new Set([...NEVER_PLAY].filter((x) => !idx.bannedNames.has(x)));
   for (const n of legends) {
     const ls = snap.decks.filter((d) => d.dt >= from && legendOfList(d) === n);
-    const hit = ls.filter((d) => Object.keys(d.cards).some((c) => NEVER_PLAY.has(cardOf(c)?.n))).length;
+    const hit = ls.filter((d) => Object.keys(d.cards).some((c) => avoidLive.has(cardOf(c)?.n))).length;
     if (ls.length) auroraShare.set(n, r3(hit / ls.length));
   }
 

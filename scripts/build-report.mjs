@@ -92,17 +92,18 @@ const main = async () => {
   // What Radiance gave older legends: each returning legend's public lists (data/decks.json,
   // riftbound.gg's feed) in two eras, legal lists only. Vendetta: posted up to VEN_END, before any
   // Radiance card existed. Radiance: posted from RAD_FROM with a Radiance card in them (every list
-  // from the legal date). Legal = no card on the current ban list: the last bans (Ekko, Recurrent;
-  // Stacked Deck) date from 18 Sep 2026, before both windows, so "legal now" is "legal when posted"
-  // for every list here, and it drops the old pre-ban decks re-dated into the window (1,107 on
-  // 22 Oct). Added: Radiance cards in ADD%+ of its Radiance lists (they start from zero by
+  // from the legal date). Legal = no card banned as of today: an announced ban counts from its
+  // `effective` date (the Radiance bans, Dazzling Aurora among them, from 2026-11-23), the same
+  // rule as lib/decks.mjs. Undated bans (Ekko, Recurrent; Stacked Deck, 18 Sep 2026) predate both
+  // windows, and the filter drops the old pre-ban decks re-dated into the window (1,107 on 22 Oct). Added: Radiance cards in ADD%+ of its Radiance lists (they start from zero by
   // definition). Removed: older cards in OUT_FROM%+ of its Vendetta lists that fell CUT points or
   // more. Main deck only. A legend needs MIN_LISTS lists in each era, or it's listed as thin.
   const [DECKS, CAT, BANS] = await Promise.all([read("data/decks.json"), read("data/cards.json"), read("data/banned.json")]);
   const catCards = CAT.cards || CAT;
   const byShort = new Map(catCards.map((c) => [c.c.split("/")[0], c]));
   const cardOf = (k) => byShort.get(String(k).split("/")[0]) || null;
-  const bannedNames = new Set((BANS.constructed || []).map((b) => b.name));
+  const today = new Date().toISOString().slice(0, 10);
+  const bannedNames = new Set((BANS.constructed || []).filter((b) => !b.effective || b.effective <= today).map((b) => b.name));
   // New to the set: every printing of the name is from it. Radiance reprints older cards (Sett,
   // Kingpin from Origins; Yone, Blademaster from Spiritforged), and a reprint is not a new card —
   // it neither makes a list a Radiance list nor counts as "added" (Jay caught Yone, 22 Oct 2026).
