@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-11-13",
+ "generatedAt": "2026-11-14",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2486,
-  "eventsWithDecks": 24,
-  "players": 71381,
-  "playersWithDecks": 6903,
+  "events": 2488,
+  "eventsWithDecks": 26,
+  "players": 71397,
+  "playersWithDecks": 6919,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
    "Mardi - Championship #1",
@@ -26,21 +26,21 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 80,
+  "claimedEvents": 81,
   "claimedEventsUnmatched": 72,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Asia": 133,
+   "unknown": 246,
+   "Europe": 83,
+   "Asia": 136,
    "Oceania": 6,
-   "unknown": 242,
-   "Europe": 82,
    "North America": 7
   },
   "registryEventsByRegion": {
-   "unknown": 2480,
+   "unknown": 2482,
    "Asia": 6
   },
   "unresolvedClaimEvents": [
@@ -155,6 +155,8 @@
    "Triple Win-A-Box | Vendetta Tournament": 8,
    "Riftbound Remote Showdown #4": 8,
    "LDXP Sacramento - 2 v 2 Constructed": 6,
+   "CCS $50,000 Riftbound Invitational Last Chance Qualifier #5": 1,
+   "CCS $50,000 Riftbound Invitational Last Chance Qualifier #1": 1,
    "Nexus Night": 1,
    "THE SCRUB CUP 10/2/26 6 PM": 1,
    "Showdown Series Bristol by Organized Play Events": 1,
@@ -162,6 +164,26 @@
   }
  },
  "events": [
+  {
+   "name": "CCS $50,000 Riftbound Invitational Last Chance Qualifier #5",
+   "dt": "2026-11-13",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Dani",
+   "country": null,
+   "slug": "ccs-50000-riftbound-invitational-last-chance-qualifier-5",
+   "top": []
+  },
+  {
+   "name": "CCS $50,000 Riftbound Invitational Last Chance Qualifier #1",
+   "dt": "2026-11-13",
+   "players": 8,
+   "format": "Constructed",
+   "winner": "Larry Chapman ",
+   "country": null,
+   "slug": "ccs-50000-riftbound-invitational-last-chance-qualifier-1",
+   "top": []
+  },
   {
    "name": "Radiance Standard Challenge Sunday 9:00am - Riftbound Regional Championship: Europe",
    "dt": "2026-11-08",

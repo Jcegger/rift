@@ -1,13 +1,13 @@
 {
- "generatedAt": "2026-11-13",
+ "generatedAt": "2026-11-14",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 61,
+ "carriedFromPrevious": 62,
  "tags": {
-  "News": 56,
+  "News": 58,
   "Guides": 9,
   "Events": 22,
   "Metagame": 24,
@@ -16,6 +16,24 @@
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "The Best of Lux $148,888.88 Offer: Buying a Card or Making a Statement?",
+   "dt": "2026-11-14",
+   "url": "https://riftbound.gg/the-best-of-lux-148888-88-offer-buying-a-card-or-making-a-statement",
+   "tags": [
+    "News"
+   ],
+   "author": "Den"
+  },
+  {
+   "title": "Riftbound Ban List Updates – November 23, 2026",
+   "dt": "2026-11-13",
+   "url": "https://riftbound.gg/riftbound-ban-list-updates-november-23-2026",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
   {
    "title": "All Best-of Prizing Decks from the European Championship",
    "dt": "2026-11-12",
