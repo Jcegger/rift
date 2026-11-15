@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-11-14",
+ "generatedAt": "2026-11-15",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2488,
+  "events": 2504,
   "eventsWithDecks": 26,
-  "players": 71397,
+  "players": 73796,
   "playersWithDecks": 6919,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
@@ -26,21 +26,21 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 81,
-  "claimedEventsUnmatched": 72,
+  "claimedEvents": 82,
+  "claimedEventsUnmatched": 73,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Asia": 137,
-   "unknown": 246,
-   "Europe": 83,
+   "unknown": 248,
+   "Asia": 141,
+   "Europe": 84,
    "Oceania": 6,
    "North America": 7
   },
   "registryEventsByRegion": {
-   "unknown": 2482,
+   "unknown": 2498,
    "Asia": 6
   },
   "unresolvedClaimEvents": [
@@ -76,6 +76,7 @@
    "Riftbound Showdown Series $25k - CoolStuffCon Orlando 2026",
    "Riftbound Showdown Series Germany",
    "Riftbound Showdown Series: Malmö",
+   "Runes & Rift Open 12",
    "Runes & Rift Open 25",
    "Runes & Rift Weekly",
    "S2 Nanning City Challenge",
@@ -208,6 +209,75 @@
    ]
   },
   {
+   "name": "Guangzhou City Challenge 2026-11-08 - 214971 (China)",
+   "dt": "2026-11-08",
+   "players": 152,
+   "format": "Constructed",
+   "winner": "lbw",
+   "country": "CN",
+   "slug": "guangzhou-city-challenge-2026-11-08-214971-china",
+   "top": [
+    [
+     "RAD-149",
+     31
+    ],
+    [
+     "OGN-247",
+     13
+    ],
+    [
+     "VEN-155",
+     12
+    ]
+   ]
+  },
+  {
+   "name": "Wuhan City Challenge 2026-11-08 - 214499 (China)",
+   "dt": "2026-11-08",
+   "players": 135,
+   "format": "Constructed",
+   "winner": "No.Sensai",
+   "country": "CN",
+   "slug": "wuhan-city-challenge-2026-11-08-214499-china",
+   "top": [
+    [
+     "RAD-149",
+     20
+    ],
+    [
+     "OGN-247",
+     14
+    ],
+    [
+     "OGS-019",
+     9
+    ]
+   ]
+  },
+  {
+   "name": "Beijing City Challenge 2026-11-08 - 214953 (China)",
+   "dt": "2026-11-08",
+   "players": 138,
+   "format": "Constructed",
+   "winner": "泽萱.流浪巫妖",
+   "country": "CN",
+   "slug": "beijing-city-challenge-2026-11-08-214953-china",
+   "top": [
+    [
+     "RAD-149",
+     29
+    ],
+    [
+     "OGN-247",
+     20
+    ],
+    [
+     "VEN-155",
+     14
+    ]
+   ]
+  },
+  {
    "name": "Nation Clash Saturday 9:00am - Riftbound Regional Championship: Europe",
    "dt": "2026-11-07",
    "players": 1976,
@@ -227,6 +297,121 @@
     [
      "VEN-155",
      242
+    ]
+   ]
+  },
+  {
+   "name": "Foshan City Challenge 2026-11-07 - 214429 (China)",
+   "dt": "2026-11-07",
+   "players": 76,
+   "format": "Constructed",
+   "winner": "NGNL·咕嘎雨辰",
+   "country": "CN",
+   "slug": "foshan-city-challenge-2026-11-07-214429-china",
+   "top": [
+    [
+     "RAD-149",
+     14
+    ],
+    [
+     "VEN-155",
+     9
+    ],
+    [
+     "OGN-247",
+     7
+    ]
+   ]
+  },
+  {
+   "name": "Shanghai City Challenge 2026-11-07 - 214656 (China)",
+   "dt": "2026-11-07",
+   "players": 242,
+   "format": "Constructed",
+   "winner": "好人会有好报吗",
+   "country": "CN",
+   "slug": "shanghai-city-challenge-2026-11-07-214656-china",
+   "top": [
+    [
+     "RAD-149",
+     31
+    ],
+    [
+     "OGN-247",
+     19
+    ],
+    [
+     "RAD-153",
+     10
+    ]
+   ]
+  },
+  {
+   "name": "Hangzhou City Challenge 2026-11-07 - 214398 (China)",
+   "dt": "2026-11-07",
+   "players": 152,
+   "format": "Constructed",
+   "winner": "梦之星.河道蟹🐦‍🔥",
+   "country": "CN",
+   "slug": "hangzhou-city-challenge-2026-11-07-214398-china",
+   "top": [
+    [
+     "RAD-149",
+     27
+    ],
+    [
+     "OGN-247",
+     13
+    ],
+    [
+     "VEN-155",
+     11
+    ]
+   ]
+  },
+  {
+   "name": "Chengdu City Challenge 2026-11-07 - 214914 (China)",
+   "dt": "2026-11-07",
+   "players": 134,
+   "format": "Constructed",
+   "winner": "TDF.忘了@Anakin",
+   "country": "CN",
+   "slug": "chengdu-city-challenge-2026-11-07-214914-china",
+   "top": [
+    [
+     "OGS-019",
+     18
+    ],
+    [
+     "VEN-155",
+     16
+    ],
+    [
+     "RAD-149",
+     16
+    ]
+   ]
+  },
+  {
+   "name": "Tianjin City Challenge 2026-11-07 - 215017 (China)",
+   "dt": "2026-11-07",
+   "players": 90,
+   "format": "Constructed",
+   "winner": "神奥空间.极手感.JINX希尔",
+   "country": "CN",
+   "slug": "tianjin-city-challenge-2026-11-07-215017-china",
+   "top": [
+    [
+     "RAD-149",
+     19
+    ],
+    [
+     "OGS-019",
+     10
+    ],
+    [
+     "VEN-155",
+     9
     ]
    ]
   },
@@ -356,6 +541,75 @@
    ]
   },
   {
+   "name": "Guangzhou City Challenge 2026-11-01 - 210471 (China)",
+   "dt": "2026-11-01",
+   "players": 191,
+   "format": "Constructed",
+   "winner": "YYP",
+   "country": "CN",
+   "slug": "guangzhou-city-challenge-2026-11-01-210471-china",
+   "top": [
+    [
+     "RAD-149",
+     24
+    ],
+    [
+     "VEN-155",
+     17
+    ],
+    [
+     "OGN-247",
+     10
+    ]
+   ]
+  },
+  {
+   "name": "Shanghai City Challenge 2026-11-01 - 210491 (China)",
+   "dt": "2026-11-01",
+   "players": 259,
+   "format": "Constructed",
+   "winner": "真是PCQ！",
+   "country": "CN",
+   "slug": "shanghai-city-challenge-2026-11-01-210491-china",
+   "top": [
+    [
+     "RAD-149",
+     36
+    ],
+    [
+     "VEN-155",
+     16
+    ],
+    [
+     "OGN-247",
+     11
+    ]
+   ]
+  },
+  {
+   "name": "Xi'an City Challenge 2026-11-01 - 211331 (China)",
+   "dt": "2026-11-01",
+   "players": 78,
+   "format": "Constructed",
+   "winner": "TUB.Whisper",
+   "country": "CN",
+   "slug": "xian-city-challenge-2026-11-01-211331-china",
+   "top": [
+    [
+     "VEN-155",
+     8
+    ],
+    [
+     "RAD-149",
+     8
+    ],
+    [
+     "OGN-247",
+     6
+    ]
+   ]
+  },
+  {
    "name": "Convergence IV",
    "dt": "2026-10-31",
    "players": 272,
@@ -397,6 +651,121 @@
    "country": null,
    "slug": "chaotic-goods-2k-chaos-cup",
    "top": []
+  },
+  {
+   "name": "Fuzhou City Challenge 2026-10-31 - 210476 (China)",
+   "dt": "2026-10-31",
+   "players": 118,
+   "format": "Constructed",
+   "winner": "福州橙逯 · 初醒",
+   "country": "CN",
+   "slug": "fuzhou-city-challenge-2026-10-31-210476-china",
+   "top": [
+    [
+     "RAD-149",
+     17
+    ],
+    [
+     "UNL-193",
+     9
+    ],
+    [
+     "SFD-187",
+     9
+    ]
+   ]
+  },
+  {
+   "name": "Suzhou City Challenge 2026-10-31 - 211020 (China)",
+   "dt": "2026-10-31",
+   "players": 162,
+   "format": "Constructed",
+   "winner": "GREY-海岛",
+   "country": "CN",
+   "slug": "suzhou-city-challenge-2026-10-31-211020-china",
+   "top": [
+    [
+     "RAD-149",
+     19
+    ],
+    [
+     "OGN-247",
+     14
+    ],
+    [
+     "OGS-019",
+     11
+    ]
+   ]
+  },
+  {
+   "name": "Shenzhen City Challenge 2026-10-31 - 210686 (China)",
+   "dt": "2026-10-31",
+   "players": 193,
+   "format": "Constructed",
+   "winner": "DWT-演员",
+   "country": "CN",
+   "slug": "shenzhen-city-challenge-2026-10-31-210686-china",
+   "top": [
+    [
+     "RAD-149",
+     20
+    ],
+    [
+     "OGN-247",
+     17
+    ],
+    [
+     "SFD-187",
+     11
+    ]
+   ]
+  },
+  {
+   "name": "Beijing City Challenge 2026-10-31 - 210487 (China)",
+   "dt": "2026-10-31",
+   "players": 152,
+   "format": "Constructed",
+   "winner": "向神迈进的人",
+   "country": "CN",
+   "slug": "beijing-city-challenge-2026-10-31-210487-china",
+   "top": [
+    [
+     "RAD-149",
+     26
+    ],
+    [
+     "OGN-247",
+     15
+    ],
+    [
+     "VEN-155",
+     12
+    ]
+   ]
+  },
+  {
+   "name": "Shenyang City Challenge 2026-10-31 - 210575 (China)",
+   "dt": "2026-10-31",
+   "players": 127,
+   "format": "Constructed",
+   "winner": "CCB.春",
+   "country": "CN",
+   "slug": "shenyang-city-challenge-2026-10-31-210575-china",
+   "top": [
+    [
+     "RAD-149",
+     14
+    ],
+    [
+     "OGN-247",
+     12
+    ],
+    [
+     "VEN-155",
+     11
+    ]
+   ]
   },
   {
    "name": "CoolStuffCon Orlando 2026- Riftbound $5k",
