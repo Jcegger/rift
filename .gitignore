@@ -14,3 +14,6 @@ __pycache__/
 
 # Supabase row copies taken before a live write (notes/handover.md)
 backups/
+
+# Clip Studio source files: large, and the commission covers personal use (art/README.md)
+art/*.clip
