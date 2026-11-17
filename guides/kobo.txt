@@ -4,14 +4,23 @@
 # Kobo and puts each collection on the device as a Kobo collection, over Wi-Fi.
 # (egger-theater: plans/kobo-komga.md "Docs".)
 #
-#   <collection>   <source>   [title="..."]
+#   <collection>   <source>   [title="..."]   [write]
 #
 # The title is what the Kobo shows; lines keep their order inside a collection.
-# source  <path>.md    built at the Kobo's page size with guides/eink-kobo.css
-#         journal:card the matchup card, laid out for the Kobo (scripts/build-journal --kobo)
-#
-# Read-only reference. The sheets you write on stay on the reMarkable (remarkable.txt).
+# Two routes to the Kobo, both over Wi-Fi:
+#   Google Drive  every sheet as a PDF named "<collection> - <title>.pdf" in the Drive folder
+#                 "Rakuten Kobo" (the Kobo downloads it on Sync, anywhere). The Action uploads it
+#                 when the GitHub secret RCLONE_CONF is set. Reference sheets are replaced when they
+#                 change; `write` sheets only go up if missing, so a copy you wrote on is never replaced.
+#   Komga         reference sheets also as Kobo books in the collection, via the Plex server (at home).
+# source  <path>.md          built at the Kobo's page size with guides/eink-kobo.css
+#         journal:<sheet>    from scripts/build-journal --kobo: card (matchup card), match-night,
+#                            trouble-list, review
+# write   a sheet you write on with the stylus: PDF only (Kobo saves pen ink inside a PDF).
 
-"Nexus Night"  guides/sivir-one-army-sheet.md  title="1 Table sheet · Sivir"
-"Nexus Night"  journal:card                    title="2 Matchup card · Sivir"
-"Nexus Night"  guides/sivir-build-sheet.md     title="3 Build sheet · Sivir"
+"Nexus Night"  journal:match-night             title="Match sheets"            write
+"Nexus Night"  journal:trouble-list            title="Trouble list"            write
+"Nexus Night"  journal:review                  title="Review"                  write
+"Nexus Night"  guides/sivir-one-army-sheet.md  title="Table sheet (Sivir)"
+"Nexus Night"  journal:card                    title="Matchup card (Sivir)"
+"Nexus Night"  guides/sivir-build-sheet.md     title="Build sheet (Sivir)"

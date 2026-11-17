@@ -46,8 +46,10 @@ def entries():
         parts = shlex.split(line)
         if len(parts) < 2:
             sys.exit(f"kobo.txt:{n}: expected '<collection> <source> [title=...]'")
-        opts = dict(p.split("=", 1) for p in parts[2:])
-        out.append({"collection": parts[0], "source": parts[1], "title": opts.get("title"), "line": n})
+        opts = dict(p.split("=", 1) for p in parts[2:] if "=" in p)
+        write = "write" in parts[2:]
+        out.append({"collection": parts[0], "source": parts[1], "title": opts.get("title"),
+                    "write": write, "line": n})
     return out
 
 
@@ -106,24 +108,30 @@ def build_md(src, dest):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    for old in [*OUT.glob("*.pdf"), *OUT.glob("*.kepub.epub")]:
+    for old in [*OUT.glob("*.pdf"), *OUT.glob("*.kepub.epub"), *(OUT / "drive").glob("*")]:
         old.unlink()
+    (OUT / "drive").mkdir(exist_ok=True)
     items = []
-    card = None
+    journal_built = False
     for e in entries():
         src = e["source"]
         title = e["title"] or pathlib.Path(src).stem.replace("-", " ")
         dest = OUT / f"{slug(e['collection'])}--{slug(title)}.pdf"
-        if src == "journal:card":
+        if src.startswith("journal:"):
             journal = ROOT / "scripts" / "build-journal"
-            m = re.search(r'^MATCHUPS = ROOT((?: / "[^"]+")+)', journal.read_text(), re.M)
-            deck = ROOT.joinpath(*re.findall(r'"([^"]+)"', m.group(1))) if m else None
-            inputs = [journal] + ([deck] if deck and deck.exists() else [])
-            if card is None:
-                subprocess.run([sys.executable, str(ROOT / "scripts" / "build-journal"), "--kobo"],
-                               check=True, stdout=subprocess.DEVNULL)
-                card = OUT / "matchup-card.pdf"
-            card.replace(dest)
+            inputs = [journal]
+            if src == "journal:card":
+                m = re.search(r'^MATCHUPS = ROOT((?: / "[^"]+")+)', journal.read_text(), re.M)
+                deck = ROOT.joinpath(*re.findall(r'"([^"]+)"', m.group(1))) if m else None
+                inputs += [deck] if deck and deck.exists() else []
+            if not journal_built:
+                # One run builds every --kobo sheet: matchup-card, match-night, trouble-list, review.
+                subprocess.run([sys.executable, str(journal), "--kobo"], check=True, stdout=subprocess.DEVNULL)
+                journal_built = True
+            built = OUT / ("matchup-card.pdf" if src == "journal:card" else f"{src.split(':', 1)[1]}.pdf")
+            if not built.exists():
+                sys.exit(f"kobo.txt:{e['line']}: build-journal --kobo made no {built.name}")
+            built.replace(dest)
         elif src.endswith(".md"):
             inputs = [ROOT / src, CSS, ROOT / "guides" / "eink.css", pathlib.Path(__file__)]
             build_md(ROOT / src, dest)
@@ -131,12 +139,21 @@ def main():
             sys.exit(f"kobo.txt:{e['line']}: don't know how to build {src}")
         item = {"collection": e["collection"], "title": title, "file": dest.name,
                 "version": version(inputs)}
-        kepub = dest.with_suffix(".kepub.epub")
-        if to_kepub(dest, title, kepub):
-            item["kepub"] = kepub.name
+        drive = f"{e['collection']} - {title}.pdf"
+        shutil.copyfile(dest, OUT / "drive" / drive)
+        item["drive"] = drive
+        if e["write"]:
+            item["write"] = True  # stays a PDF: the Kobo saves pen ink inside it
+        else:
+            kepub = dest.with_suffix(".kepub.epub")
+            if to_kepub(dest, title, kepub):
+                item["kepub"] = kepub.name
         items.append(item)
-        print(f"built {dest.relative_to(ROOT)}" + (" + .kepub.epub" if "kepub" in item else " (no KCC: PDF only)"))
+        print(f"built {dest.relative_to(ROOT)}" + (" (write-on)" if e["write"] else " + .kepub.epub" if "kepub" in item else " (no KCC: PDF only)"))
     (OUT / "manifest.json").write_text(json.dumps({"items": items}, indent=1) + "\n")
+    # For the Drive upload: reference sheets are replaced when they change, write-on sheets never.
+    (OUT / "drive-reference.txt").write_text("".join(i["drive"] + "\n" for i in items if not i.get("write")))
+    (OUT / "drive-write.txt").write_text("".join(i["drive"] + "\n" for i in items if i.get("write")))
 
 
 if __name__ == "__main__":

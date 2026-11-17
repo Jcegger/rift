@@ -50,12 +50,38 @@ jobs:
           python scripts/build-kobo
           test "$(ls guides/out/kobo/*.kepub.epub | wc -l)" -eq "$(ls guides/out/kobo/*.pdf | wc -l)"
 
+      # Google Drive → the Kobo's own Drive link (folder "Rakuten Kobo"), which it downloads on
+      # Sync from anywhere. Needs the RCLONE_CONF secret (an rclone config with a [gdrive] remote).
+      # Reference sheets go up only when their version changed since the last publish; write-on
+      # sheets only when missing, so a copy with ink on it is never replaced.
+      - name: Upload to Google Drive
+        env:
+          RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+        run: |
+          if [ -z "$RCLONE_CONF" ]; then echo "no RCLONE_CONF secret: skipping Drive"; exit 0; fi
+          curl -fsSLO https://downloads.rclone.org/rclone-current-linux-amd64.zip
+          unzip -q rclone-current-linux-amd64.zip && sudo install -m 755 rclone-*-linux-amd64/rclone /usr/local/bin/rclone
+          mkdir -p ~/.config/rclone && printf '%s\n' "$RCLONE_CONF" > ~/.config/rclone/rclone.conf
+          cd guides/out/kobo
+          curl -fsSL https://raw.githubusercontent.com/${{ github.repository }}/kobo-sheets/manifest.json -o previous.json || echo '{"items":[]}' > previous.json
+          python3 - <<'EOF' > changed.txt
+          import json
+          old = {i.get("drive") or i["file"]: i["version"] for i in json.load(open("previous.json"))["items"]}
+          for i in json.load(open("manifest.json"))["items"]:
+              if not i.get("write") and old.get(i["drive"]) != i["version"]:
+                  print(i["drive"])
+          EOF
+          echo "reference sheets that changed:"; cat changed.txt
+          if [ -s changed.txt ]; then rclone copy drive "gdrive:Rakuten Kobo" --files-from changed.txt -v; fi
+          rclone copy drive "gdrive:Rakuten Kobo" --files-from drive-write.txt --ignore-existing -v
+          rm -f previous.json changed.txt
+
       - name: Publish to kobo-sheets
         run: |
           cd guides/out/kobo
           git init -q -b kobo-sheets
           git config user.name "kobo-sheets bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add manifest.json ./*.pdf ./*.kepub.epub
+          git add manifest.json ./*.pdf ./*.kepub.epub drive-reference.txt drive-write.txt
           git commit -q -m "Kobo sheets from ${GITHUB_SHA::7}"
           git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" kobo-sheets
