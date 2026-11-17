@@ -1,14 +1,15 @@
 # Builds the Kobo sheets (guides/kobo.txt, scripts/build-kobo) and publishes them on the
-# `kobo-sheets` branch: the PDFs, the Kobo books KCC makes from them, and manifest.json. The Plex server polls that branch,
-# converts what changed and syncs it to the Kobo Libra Colour over Wi-Fi, so editing a
-# guide here is all it takes (egger-theater: plans/kobo-komga.md, "Docs").
+# `kobo-sheets` branch: the PDFs, the Kobo books KCC makes from them, and manifest.json.
+# The Plex server polls that branch, downloads what changed and syncs it to the Kobo
+# Libra Colour over Wi-Fi, so editing a guide here is all it takes
+# (egger-theater: plans/kobo-komga.md, "Docs").
 #
 # The branch holds one commit, replaced on each run: it's a drop box, not history.
 name: kobo sheets
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths:
       - guides/kobo.txt
       - guides/*.md
