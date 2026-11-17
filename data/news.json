@@ -1,14 +1,14 @@
 {
- "generatedAt": "2026-11-16",
+ "generatedAt": "2026-11-17",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 62,
+ "carriedFromPrevious": 64,
  "tags": {
+  "News": 60,
   "Metagame": 25,
-  "News": 59,
   "Guides": 9,
   "Events": 22,
   "Legends": 24,
@@ -16,6 +16,15 @@
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Packed Amphitheater Convergence Fest Ionic Spark Promo",
+   "dt": "2026-11-16",
+   "url": "https://riftbound.gg/packed-amphitheater-convergence-fest-ionic-spark-promo",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
   {
    "title": "Radiance Post-Ban Metagame Decks: Early Possibilities",
    "dt": "2026-11-14",
@@ -26,7 +35,7 @@
    "author": "Den"
   },
   {
-   "title": "Sona, Harmonius DJ Promo Revealed for Convergence Fest",
+   "title": "Sona, Harmonius Convergence Fest DJ Promo",
    "dt": "2026-11-14",
    "url": "https://riftbound.gg/sona-harmonius-dj-promo-revealed-for-convergence-fest",
    "tags": [

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-16",
+ "generatedAt": "2026-11-17",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -26,16 +26,16 @@
    "Friday $5,000 Riftbound: League of Legends TCG Tournament",
    "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
   ],
-  "claimedEvents": 82,
-  "claimedEventsUnmatched": 73,
+  "claimedEvents": 83,
+  "claimedEventsUnmatched": 74,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Europe": 86,
+   "unknown": 249,
+   "Europe": 87,
    "Asia": 145,
-   "unknown": 248,
    "Oceania": 6,
    "North America": 7
   },
@@ -68,6 +68,7 @@
    "Hartford RQ",
    "Hartord RQ",
    "Herald of the Arcane Deck",
+   "I'm gonna hold to",
    "Los Angeles RQ",
    "Nanjing City Challenge",
    "Nanjing Regional",
