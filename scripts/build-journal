@@ -12,7 +12,8 @@ Writes four files, kept separate on purpose:
     matchup-card.pdf  the deck's matchup table -- between games only, like the trouble list
     questions.pdf     numbered slots for questions to answer later -- never open during a game
 
-`--kobo` builds the matchup card alone at the Kobo Libra Colour's size, into guides/out/kobo/.
+`--kobo` builds the matchup card and the write-on sheets at the Kobo Libra Colour's size
+(4.2 x 5.6 in, same physical text and boxes; a match takes two pages), into guides/out/kobo/.
 Sized 3:4 (6 x 8 in) for a Kindle Scribe; prints fine scaled to A4 or Letter. The pages
 carry field labels only (the score letters' meaning counts as one) -- no shorthand key, no advice -- because anything more is a note
 from outside the match. Source of truth is docs/match-journal.md; guides/out/ is build
@@ -166,6 +167,16 @@ def trouble_page(pdf):
     p.done()
 
 
+REVIEW_LINES = [
+    "mistakes that repeated", "", "by type  t   s   o   c   i   p   r    ·  marks  h   n   f", "“next time I'll” I kept",
+    "“next time I'll” I broke", "flags I still can't answer", "",
+    "worst matchup → plan", "top trouble card → answer",
+    "sideboard cards that earned it", "battlefield to lead with",
+    "card I kept wanting", "card that did nothing", "mulligans I'd change",
+    "one change to my play", "one question for Jun, or one test",
+]
+
+
 def review_page(pdf):
     p = Page(pdf)
     p.text(L, 0.45, "REVIEW — TEN MATCHES", size=10)
@@ -174,16 +185,87 @@ def review_page(pdf):
     bottom = p.table(1.38, [("vs", 1.5), ("match", 0.55), ("games", 0.55), ("why", None)], [[""]] * 6, 0.26)
     y = bottom + 0.32
     p.fields(y, [("game 1", 0.25), ("games 2–3", 0.25), ("going 1st", 0.25), ("going 2nd", 0.25)])
-    lines = [
-        "mistakes that repeated", "", "by type  t   s   o   c   i   p   r    ·  marks  h   n   f", "“next time I'll” I kept",
-        "“next time I'll” I broke", "flags I still can't answer", "",
-        "worst matchup → plan", "top trouble card → answer",
-        "sideboard cards that earned it", "battlefield to lead with",
-        "card I kept wanting", "card that did nothing", "mulligans I'd change",
-        "one change to my play", "one question for Jun, or one test",
-    ]
+    lines = REVIEW_LINES
     for label in lines:
         y += 0.28
+        p.fields(y, [(label, 1.0)])
+    p.done()
+
+
+# ---- Kobo Libra Colour versions of the sheets you write on (--kobo). Same fields and rules as
+# the pages above, on a 4.2 x 5.6 in screen: text and boxes keep their physical size, so a
+# match takes two pages (scores and time, then notes) and the review flows onto a second page.
+
+def match_page_kobo(pdf):
+    p = Page(pdf)
+    p.fields(0.40, [("date", 0.3), ("vs", 0.7)])
+    y = 0.85
+    x0 = L + 0.42
+    bw = (R - x0 - 0.08) / 10      # 8 to win, then 2 spares
+    bh = 0.27
+    for g in ("G1", "G2", "G3"):
+        p.text(L, y, g, size=9)
+        p.text(x0, y, "1st   2nd", size=8, bold=False)
+        y += 0.2
+        for who in ("me", "opp"):
+            p.text(L, y + bh * 0.7, who, size=7)
+            for i in range(10):
+                x = x0 + i * bw + (0.08 if i >= 8 else 0)
+                p.box(x, y, bw, bh, lw=0.6 if i < 8 else 0.35)
+                if who == "me":
+                    p.text(x + bw / 2, y - 0.03, str(i + 1), size=5, bold=False, ha="center")
+            y += bh
+        y += 0.30
+    p.text(L, y - 0.1, "C conquer    H hold    E other (card effect, burn-out)", size=6.5, bold=False)
+    y += 0.15
+    p.text(L, y + bh * 0.7, "time", size=7)
+    p.text(L + 0.42, y + bh * 0.7, "G", size=7, bold=False)
+    p.line(L + 0.55, L + 0.78, y + bh * 0.7 + 0.02)
+    x = L + 0.9
+    for lab in ("on turn", "+1", "+2", "+3"):
+        x += p.text(x, y + bh * 0.7, lab, size=6.5, bold=False) + 0.05
+        p.box(x, y, 0.33, bh)
+        x += 0.33 + 0.12
+    y += bh + 0.45
+    p.fields(y, [("next time I'll", 1.0)])
+    p.fields(y + 0.32, [("", 1.0)])
+    p.done()
+    q = Page(pdf)
+    q.fields(0.40, [("notes  vs", 1.0)])
+    y = 0.75
+    while y + 0.3 < H - 0.35:
+        y += 0.3
+        q.line(L, R, y, lw=0.4, color=FAINT)
+    q.done()
+
+
+def trouble_page_kobo(pdf):
+    p = Page(pdf)
+    p.text(L, 0.45, "TROUBLE LIST", size=10)
+    cols = [("card", 0.72), ("legend", 0.55), ("marks", 0.42),
+            ("does to me", None), ("answer", 0.72), ("worked?", 0.45)]
+    rows = int((H - 0.35 - 0.82) / 0.36)
+    p.table(0.75, cols, [[""]] * rows, 0.36)
+    p.done()
+
+
+def review_pages_kobo(pdf):
+    p = Page(pdf)
+    p.text(L, 0.45, "REVIEW — TEN MATCHES", size=10)
+    p.fields(0.78, [("matches", 0.4), ("lists v", 0.6)])
+    p.fields(1.08, [("deck", 1.0)])
+    p.fields(1.38, [("record: matches", 0.55), ("games", 0.45)])
+    bottom = p.table(1.68, [("vs", 1.1), ("match", 0.5), ("games", 0.5), ("why", None)], [[""]] * 6, 0.26)
+    y = bottom + 0.32
+    p.fields(y, [("game 1", 0.5), ("games 2–3", 0.5)])
+    y += 0.3
+    p.fields(y, [("going 1st", 0.5), ("going 2nd", 0.5)])
+    for label in REVIEW_LINES:
+        if y + 0.3 > H - 0.35:
+            p.done()
+            p = Page(pdf)
+            y = 0.25
+        y += 0.3
         p.fields(y, [(label, 1.0)])
     p.done()
 
@@ -274,15 +356,18 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--pages", type=int, default=5, help="match pages in match-night.pdf")
     ap.add_argument("--kobo", action="store_true",
-                    help="matchup card only, sized for the Kobo Libra Colour, in guides/out/kobo/")
+                    help="sized for the Kobo Libra Colour, into guides/out/kobo/: the matchup card and the "
+                         "sheets you write on (match night, trouble list, review)")
     args = ap.parse_args()
     global W, H, L, R, OUT
     if args.kobo:
-        # Only the read-only card: the sheets you write on stay on the reMarkable.
         W, H, L, R = KOBO["W"], KOBO["H"], KOBO["L"], KOBO["R"]
         OUT = ROOT / "guides" / "out" / "kobo"
         OUT.mkdir(parents=True, exist_ok=True)
         build("matchup-card.pdf", card_pages, 1)
+        build("match-night.pdf", match_page_kobo, args.pages)
+        build("trouble-list.pdf", trouble_page_kobo, 3)
+        build("review.pdf", review_pages_kobo, 3)
         return
     OUT.mkdir(parents=True, exist_ok=True)
     build("match-night.pdf", match_page, args.pages)
