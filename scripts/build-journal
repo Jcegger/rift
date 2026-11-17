@@ -12,6 +12,7 @@ Writes four files, kept separate on purpose:
     matchup-card.pdf  the deck's matchup table -- between games only, like the trouble list
     questions.pdf     numbered slots for questions to answer later -- never open during a game
 
+`--kobo` builds the matchup card alone at the Kobo Libra Colour's size, into guides/out/kobo/.
 Sized 3:4 (6 x 8 in) for a Kindle Scribe; prints fine scaled to A4 or Letter. The pages
 carry field labels only (the score letters' meaning counts as one) -- no shorthand key, no advice -- because anything more is a note
 from outside the match. Source of truth is docs/match-journal.md; guides/out/ is build
@@ -35,6 +36,9 @@ OUT = ROOT / "guides" / "out" / "journal"
 
 W, H = 6.0, 8.0      # page, inches
 L, R = 0.35, 5.65    # left and right margins
+# --kobo: the Kobo Libra Colour's screen (1264 x 1680 at 300 ppi), same 3:4 shape. Text stays the
+# same physical size, so blocks flow onto more pages instead of shrinking to 70%.
+KOBO = dict(W=1264 / 300, H=1680 / 300, L=0.22, R=1264 / 300 - 0.22)
 INK, FAINT = "#000000", "#9a9a9a"
 
 
@@ -206,7 +210,7 @@ def card_rows():
 def card_pages(pdf):
     """Opponent blocks, flowed down the page and onto the next as needed."""
     head, rows = card_rows()
-    wrap = textwrap.TextWrapper(width=80)
+    wrap = textwrap.TextWrapper(width=round(80 * (R - L - 0.8) / 4.1))  # ~80 chars on the 6 in page
     labels = [(k, k) for k in head[1:]]
     p, y = None, 0.0
 
@@ -263,13 +267,23 @@ def build(name, draw, count):
     with PdfPages(OUT / name) as pdf:
         for _ in range(count):
             draw(pdf)
-    print(f"built guides/out/journal/{name}")
+    print(f"built {(OUT / name).relative_to(ROOT)}")
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--pages", type=int, default=5, help="match pages in match-night.pdf")
+    ap.add_argument("--kobo", action="store_true",
+                    help="matchup card only, sized for the Kobo Libra Colour, in guides/out/kobo/")
     args = ap.parse_args()
+    global W, H, L, R, OUT
+    if args.kobo:
+        # Only the read-only card: the sheets you write on stay on the reMarkable.
+        W, H, L, R = KOBO["W"], KOBO["H"], KOBO["L"], KOBO["R"]
+        OUT = ROOT / "guides" / "out" / "kobo"
+        OUT.mkdir(parents=True, exist_ok=True)
+        build("matchup-card.pdf", card_pages, 1)
+        return
     OUT.mkdir(parents=True, exist_ok=True)
     build("match-night.pdf", match_page, args.pages)
     build("trouble-list.pdf", trouble_page, 3)

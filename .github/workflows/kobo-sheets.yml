@@ -1,0 +1,60 @@
+# Builds the Kobo sheets (guides/kobo.txt, scripts/build-kobo) and publishes them on the
+# `kobo-sheets` branch: the PDFs, the Kobo books KCC makes from them, and manifest.json. The Plex server polls that branch,
+# converts what changed and syncs it to the Kobo Libra Colour over Wi-Fi, so editing a
+# guide here is all it takes (egger-theater: plans/kobo-komga.md, "Docs").
+#
+# The branch holds one commit, replaced on each run: it's a drop box, not history.
+name: kobo sheets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - guides/kobo.txt
+      - guides/*.md
+      - guides/*.css
+      - scripts/build-kobo
+      - scripts/build-journal
+      - .github/workflows/kobo-sheets.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kobo-sheets
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # KCC from its git tag: the published Docker images fail at startup (no PySide6).
+      - name: Tools (pandoc, weasyprint, matplotlib, KCC)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq pandoc weasyprint fonts-dejavu p7zip-full libegl1 libxkbcommon0
+          pip install --quiet matplotlib "kindlecomicconverter @ git+https://github.com/ciromattia/kcc@v13.0.1"
+
+      - name: Build
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          python scripts/build-kobo
+          test "$(ls guides/out/kobo/*.kepub.epub | wc -l)" -eq "$(ls guides/out/kobo/*.pdf | wc -l)"
+
+      - name: Publish to kobo-sheets
+        run: |
+          cd guides/out/kobo
+          git init -q -b kobo-sheets
+          git config user.name "kobo-sheets bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manifest.json ./*.pdf ./*.kepub.epub
+          git commit -q -m "Kobo sheets from ${GITHUB_SHA::7}"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" kobo-sheets

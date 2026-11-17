@@ -1,0 +1,23 @@
+/* The e-ink stylesheet (eink.css) on the Kobo Libra Colour's screen: 107 x 142 mm, the same
+   3:4 shape as the reMarkable's, so a page fills it. Text keeps its physical size and the
+   pages run longer. No handwriting margin: writing stays on the reMarkable. */
+@import url("eink.css");
+
+@page {
+  size: 107mm 142mm;
+  margin: 6mm 6mm 9mm 6mm;
+}
+
+/* Tables are the point of the table sheets: let them use the full width and wrap tighter. */
+table { width: 100%; font-size: 8.5pt; }
+th, td { padding: 0.6mm 1mm !important; }
+
+/* The title block: one line or two, not half the first page. */
+h1.title { font-size: 12.5pt !important; line-height: 1.2; }
+p.subtitle { font-size: 8pt; }
+p.author, p.date { display: none; }
+header#title-block-header { margin-bottom: 3mm !important; padding-bottom: 1.5mm !important; border-bottom-width: 1pt !important; }
+html, body { font-size: 8.8pt !important; }
+h2 { font-size: 10.5pt; margin: 3mm 0 1mm; }
+h3 { font-size: 9.5pt; margin: 2.5mm 0 1mm; }
+p, li { margin-top: 0.8mm; margin-bottom: 0.8mm; }

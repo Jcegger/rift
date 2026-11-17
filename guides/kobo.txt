@@ -1,0 +1,17 @@
+# What goes on the Kobo Libra Colour. Built by scripts/build-kobo (locally, and by the
+# kobo-sheets GitHub Action on every push that touches a source), published on the
+# `kobo-sheets` branch. The Plex server fetches that branch, converts the PDFs for the
+# Kobo and puts each collection on the device as a Kobo collection, over Wi-Fi.
+# (egger-theater: plans/kobo-komga.md "Docs".)
+#
+#   <collection>   <source>   [title="..."]
+#
+# The title is what the Kobo shows; lines keep their order inside a collection.
+# source  <path>.md    built at the Kobo's page size with guides/eink-kobo.css
+#         journal:card the matchup card, laid out for the Kobo (scripts/build-journal --kobo)
+#
+# Read-only reference. The sheets you write on stay on the reMarkable (remarkable.txt).
+
+"Nexus Night"  guides/sivir-one-army-sheet.md  title="1 Table sheet · Sivir"
+"Nexus Night"  journal:card                    title="2 Matchup card · Sivir"
+"Nexus Night"  guides/sivir-build-sheet.md     title="3 Build sheet · Sivir"

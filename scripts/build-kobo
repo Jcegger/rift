@@ -1,0 +1,143 @@
+#!/usr/bin/env python3
+"""Builds what goes on the Kobo Libra Colour (guides/kobo.txt) into guides/out/kobo/.
+
+    scripts/build-kobo            build the PDFs and guides/out/kobo/manifest.json
+
+Each PDF is sized for the Kobo's screen (107 x 142 mm), then converted by KCC into a fixed-layout
+Kobo book (.kepub.epub, 1264 x 1680 grayscale pages), the only format Komga's Kobo sync sends.
+KCC: `kcc-c2e` on PATH (the Action pip-installs it from its git tag), else the Docker image
+KCC_IMAGE (default kcc-egger:13.0.1, egger-theater server/kcc/Dockerfile); with neither, PDFs only.
+The manifest lists collection, title,
+file and a version (a hash of the sources, not the PDF, whose bytes change on every build) in
+kobo.txt order; the Plex server reads it from the `kobo-sheets` branch
+(published by .github/workflows/kobo-sheets.yml), converts what changed, and syncs each
+collection to the Kobo over Wi-Fi. Needs pandoc, weasyprint and matplotlib.
+"""
+import hashlib
+import os
+import tempfile
+import json
+import pathlib
+import re
+import shlex
+import shutil
+import subprocess
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+LIST = ROOT / "guides" / "kobo.txt"
+OUT = ROOT / "guides" / "out" / "kobo"
+CSS = ROOT / "guides" / "eink-kobo.css"
+
+
+def tool(name):
+    found = shutil.which(name) or str(pathlib.Path.home() / "anaconda3" / "bin" / name)
+    if not pathlib.Path(found).exists():
+        sys.exit(f"build-kobo: {name} not found (PATH, ~/anaconda3/bin)")
+    return found
+
+
+def entries():
+    out = []
+    for n, raw in enumerate(LIST.read_text().splitlines(), 1):
+        line = raw.split("#", 1)[0].strip()
+        if not line:
+            continue
+        parts = shlex.split(line)
+        if len(parts) < 2:
+            sys.exit(f"kobo.txt:{n}: expected '<collection> <source> [title=...]'")
+        opts = dict(p.split("=", 1) for p in parts[2:])
+        out.append({"collection": parts[0], "source": parts[1], "title": opts.get("title"), "line": n})
+    return out
+
+
+def version(paths):
+    """Hash of what a sheet is built from, so an unchanged sheet keeps its version."""
+    h = hashlib.sha256()
+    for p in paths:
+        h.update(p.relative_to(ROOT).as_posix().encode() + b"\0" + p.read_bytes() + b"\0")
+    return h.hexdigest()[:16]
+
+
+KCC_ARGS = ["-p", "KoLC", "-f", "EPUB", "-c", "0"]  # Libra Colour; Kobo + EPUB = KEPUB; no cropping
+
+
+def kcc_cmd(workdir):
+    if shutil.which("kcc-c2e"):
+        return ["kcc-c2e"]
+    image = os.environ.get("KCC_IMAGE", "kcc-egger:13.0.1")
+    if shutil.which("docker") and subprocess.run(["docker", "image", "inspect", image],
+                                                 capture_output=True).returncode == 0:
+        return ["docker", "run", "--rm", "--user", f"{os.getuid()}:{os.getgid()}",
+                "-v", f"{workdir}:{workdir}", image]
+    return None
+
+
+def to_kepub(pdf, title, dest):
+    with tempfile.TemporaryDirectory(dir=OUT) as tmp:
+        cmd = kcc_cmd(tmp)
+        if not cmd:
+            return False
+        src = pathlib.Path(tmp) / "in.pdf"
+        shutil.copyfile(pdf, src)
+        r = subprocess.run(cmd + KCC_ARGS + ["-t", title, "-o", f"{tmp}/", str(src)],
+                           capture_output=True, text=True)
+        made = list(pathlib.Path(tmp).glob("*.kepub.epub"))
+        if r.returncode != 0 or not made:
+            sys.exit(f"build-kobo: KCC failed on {pdf.name}: {(r.stdout + r.stderr).strip()[-400:]}")
+        made[0].replace(dest)
+    return True
+
+
+def slug(s):
+    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+
+def build_md(src, dest):
+    html = dest.with_suffix(".html")
+    subprocess.run([tool("pandoc"), str(src), "-f", "markdown+lists_without_preceding_blankline",
+                    "-t", "html5", "--standalone", "--css", f"file://{CSS}", "-o", str(html)], check=True)
+    try:
+        subprocess.run([tool("weasyprint"), "--base-url", f"{src.parent}/", str(html), str(dest)],
+                       check=True, capture_output=True, text=True)
+    finally:
+        html.unlink(missing_ok=True)
+
+
+def main():
+    OUT.mkdir(parents=True, exist_ok=True)
+    for old in [*OUT.glob("*.pdf"), *OUT.glob("*.kepub.epub")]:
+        old.unlink()
+    items = []
+    card = None
+    for e in entries():
+        src = e["source"]
+        title = e["title"] or pathlib.Path(src).stem.replace("-", " ")
+        dest = OUT / f"{slug(e['collection'])}--{slug(title)}.pdf"
+        if src == "journal:card":
+            journal = ROOT / "scripts" / "build-journal"
+            m = re.search(r'^MATCHUPS = ROOT((?: / "[^"]+")+)', journal.read_text(), re.M)
+            deck = ROOT.joinpath(*re.findall(r'"([^"]+)"', m.group(1))) if m else None
+            inputs = [journal] + ([deck] if deck and deck.exists() else [])
+            if card is None:
+                subprocess.run([sys.executable, str(ROOT / "scripts" / "build-journal"), "--kobo"],
+                               check=True, stdout=subprocess.DEVNULL)
+                card = OUT / "matchup-card.pdf"
+            card.replace(dest)
+        elif src.endswith(".md"):
+            inputs = [ROOT / src, CSS, ROOT / "guides" / "eink.css", pathlib.Path(__file__)]
+            build_md(ROOT / src, dest)
+        else:
+            sys.exit(f"kobo.txt:{e['line']}: don't know how to build {src}")
+        item = {"collection": e["collection"], "title": title, "file": dest.name,
+                "version": version(inputs)}
+        kepub = dest.with_suffix(".kepub.epub")
+        if to_kepub(dest, title, kepub):
+            item["kepub"] = kepub.name
+        items.append(item)
+        print(f"built {dest.relative_to(ROOT)}" + (" + .kepub.epub" if "kepub" in item else " (no KCC: PDF only)"))
+    (OUT / "manifest.json").write_text(json.dumps({"items": items}, indent=1) + "\n")
+
+
+if __name__ == "__main__":
+    main()

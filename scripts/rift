@@ -18,6 +18,8 @@
 #   scripts/rift loops --deck "<name>" [--bridges]     # interactions and loops, read from card text
 #   scripts/rift fight --attack "<units>" --defend "<units>" [--down …] [--their …]   # one combat, best play both sides
 #   scripts/rift intake [champion]                     # after adding cards on Piltover: what landed, where to file it
+#   scripts/rift kobo                                  # the Kobo's Nexus Night sheets: published, on the server, on the device
+#   scripts/rift journal [deck]                        # the app's journal, plus games read off the reMarkable's match sheets
 #
 # See scripts/state.mjs for the full command list and data sources.
 

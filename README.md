@@ -310,6 +310,16 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `notes/handover.md` - where the current deck work stands, for the next session: the live list,
   the plan, what's open, how to change the deck safely, and the corrections not to repeat.
   Hand-written; update it when the deck or the plan moves.
+- `scripts/build-kobo` - builds what goes on the Kobo Libra Colour (`guides/kobo.txt`: the table
+  sheet, the matchup card via `build-journal --kobo`, the build sheet) at the Kobo's page size
+  (`guides/eink-kobo.css`, 107 × 142 mm) into `guides/out/kobo/` with a `manifest.json` (versions are
+  hashes of the sources, so an unchanged sheet isn't re-sent). `.github/workflows/kobo-sheets.yml`
+  runs it on every push that touches a source and publishes the result on the `kobo-sheets` branch;
+  the Plex server polls that branch and syncs each collection to the Kobo over Wi-Fi as a Kobo
+  collection ("Nexus Night"). Read-only reference: the sheets you write on stay on the reMarkable.
+  `scripts/rift kobo` shows each stage (published, on the server, on the device);
+  `scripts/rift journal` also lists games the server read off the reMarkable's match sheets
+  (Supabase rows `kobo` and `table-inbox`; egger-theater `plans/kobo-komga.md`).
 - `scripts/build-journal` - renders the match journal's blank pages to PDFs in
   `guides/out/journal/`, sized 3:4 (fits a Kindle Scribe or a reMarkable 2), plus a between-games matchup card
   printed from the matchup table in the current deck's guide (`guides/sivir-one-army.md` §9, the first table there; the script's `MATCHUPS` and `CARD_HEADING` name it). Fetches

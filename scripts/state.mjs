@@ -112,6 +112,19 @@ export async function loadState() {
   return rows[0].data;
 }
 
+// Other rows in the same table, written by the Plex server (egger-theater plans/kobo-komga.md):
+// "kobo" is the Kobo's status, "table-inbox" the games read off the reMarkable's match sheets.
+// Missing row → null, so the commands still work before the server has written anything.
+export async function loadRow(id) {
+  const r = await fetch(
+    `${SUPA_URL}/rest/v1/${SUPA_TABLE}?id=eq.${encodeURIComponent(id)}&select=data,updated_at`,
+    { headers: { apikey: SUPA_KEY, Authorization: `Bearer ${SUPA_KEY}` } },
+  );
+  if (!r.ok) throw new Error(`Supabase ${r.status} ${r.statusText}`);
+  const rows = await r.json();
+  return rows.length && rows[0].data ? { ...rows[0].data, rowUpdated: rows[0].updated_at } : null;
+}
+
 export async function loadCatalog() {
   const cat = await readJson(url("cards.json"));
   let extras = { cards: [] };
@@ -835,10 +848,25 @@ function cmdSets(S, cat, q) {
 }
 
 // The one-tap match journal the app (app/) writes: S.journal, [{at, deck, opp, res}].
-// Per deck, the record against each opponent, then the last ten games.
-function cmdJournal(S, args) {
+// Per deck, the record against each opponent, then the last ten games. Then the games read off
+// the reMarkable's match sheets (the "table-inbox" row) that the app's journal doesn't have yet.
+async function cmdJournal(S, args) {
   const games = S.journal || [];
-  if (!games.length) { console.log("no games logged yet (log them on the Decks page of app/)"); return; }
+  let inbox = null;
+  try { inbox = await loadRow("table-inbox"); } catch { /* offline or no row: the app's journal alone */ }
+  const fromSheets = (inbox?.entries || []).filter((e) =>
+    !games.some((g) => g.at.slice(0, 10) === e.at.slice(0, 10) && g.opp.toLowerCase().startsWith((e.opp || "").toLowerCase().split(",")[0])));
+  const printSheets = () => {
+    if (!fromSheets.length) return;
+    console.log(`\nFROM THE MATCH SHEETS  (read off the reMarkable, not in the app's journal yet)`);
+    for (const e of fromSheets) {
+      const score = (e.games || []).map((g) => `${g.me}-${g.opp}`).join(" ");
+      console.log(`    ${e.at.slice(0, 10)} ${e.res || "?"} ${pad(e.opp || "(opponent unread)", 28)} ${score}${e.unsure ? "  (check: " + e.unsure + ")" : ""}`);
+      if (e.next) console.log(`        next time: ${e.next}`);
+    }
+    console.log(`    source: ${inbox.source || "match-night"} · read ${String(inbox.rowUpdated || "").slice(0, 16).replace("T", " ")}`);
+  };
+  if (!games.length) { console.log("no games logged yet (log them on the Decks page of app/)"); printSheets(); return; }
   const decks = findDecks(S, args.join(" ").trim());
   const name = new Map((S.decks || []).map((d) => [d.id, d.name]));
   const ids = new Set(decks.map((d) => d.id));
@@ -851,6 +879,40 @@ function cmdJournal(S, args) {
     for (const [opp, r] of journalRecord(gs)) console.log(`    ${pad(opp, 34)} ${r.w}-${r.l}${r.d ? `-${r.d}` : ""}`);
     console.log("    last games: " + gs.slice(-10).map((g) => `${g.at.slice(0, 10)} ${g.res} ${g.opp.split(",")[0]}`).join(" · "));
   }
+  printSheets();
+}
+
+/* ── kobo: what the Kobo Libra Colour has, from the server's "kobo" row ─────── */
+// The sheets travel rift (guides/kobo.txt) → GitHub (kobo-sheets branch) → Plex server
+// (Komga) → Kobo over Wi-Fi. This reads each stage, so a stuck one shows.
+async function cmdKobo() {
+  const K = await loadRow("kobo");
+  let published = null;
+  try {
+    const r = await fetch("https://raw.githubusercontent.com/Jcegger/rift/kobo-sheets/manifest.json");
+    if (r.ok) published = await r.json();
+  } catch { /* offline */ }
+  const pub = new Map((published?.items || []).map((i) => [i.file, i]));
+  if (!K) {
+    console.log("no word from the server yet (the \"kobo\" row is missing: egger-theater plans/kobo-komga.md)");
+    if (published) for (const i of published.items) console.log(`  published  ${pad(i.collection, 14)} ${i.title}`);
+    else console.log("nothing published yet either (the kobo-sheets branch is built by .github/workflows/kobo-sheets.yml)");
+    return;
+  }
+  const when = (t) => (t ? String(t).slice(0, 16).replace("T", " ") : "never");
+  console.log(`KOBO  server checked ${when(K.checkedAt)} · Kobo last synced ${when(K.lastKoboSync)}`);
+  for (const [name, items] of Object.entries(K.collections || {})) {
+    console.log(`\n  ${name.toUpperCase()}`);
+    for (const i of items) {
+      const p = pub.get(i.file);
+      const state = p && p.version !== i.version ? "update on its way" : i.onKobo ? "on the Kobo" : "waiting for the Kobo to sync";
+      const read = i.progress != null ? `  read ${Math.round(i.progress * 100)}%` : "";
+      console.log(`    ${pad(i.title, 30)} ${pad(state, 28)}${read}`);
+    }
+  }
+  const missing = [...pub.values()].filter((p) => !Object.values(K.collections || {}).flat().some((i) => i.file === p.file));
+  for (const p of missing) console.log(`    ${pad(p.title, 30)} new; the server picks it up within 10 minutes`);
+  if (K.errors?.length) { console.log("\n  PROBLEMS"); for (const e of K.errors) console.log(`    ${e}`); }
 }
 
 /* ── ideas: the Radiance-era consensus per legend (data/ideas.json) ─────────── */
@@ -1684,6 +1746,7 @@ async function main() {
   if (cmd === "rising") return cmdRising(args);
   if (cmd === "poll") return cmdPoll(args);
   if (cmd === "field") return cmdField(args);
+  if (cmd === "kobo") return cmdKobo();
   const cat = await loadCatalog();
   if (cmd === "ideas") return cmdIdeas(cat, args);
   // meta reads only the archive and the catalog, so it works offline and never
