@@ -5,7 +5,7 @@
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 64,
+ "carriedFromPrevious": 66,
  "tags": {
   "News": 60,
   "Metagame": 25,
@@ -1333,8 +1333,17 @@
  ],
  "riotSource": "playriftbound.com/en-us/news/ and its three category pages",
  "riotFailed": null,
- "riotCarried": 11,
+ "riotCarried": 12,
  "riot": [
+  {
+   "title": "Convergence Fest Side Events and The Encore Details!",
+   "dt": "2026-11-17",
+   "url": "http://teamfighttactics.leagueoflegends.com/en-us/news/community/convergence-fest-side-events-and-the-encore-details",
+   "tags": [
+    "Announcements"
+   ],
+   "desc": "Take a peek at the weekend’s prismatically radiant lineup."
+  },
   {
    "title": "Celebrate Convergence Fest at Your Local Game Store!",
    "dt": "2026-11-16",
