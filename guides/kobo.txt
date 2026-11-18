@@ -7,11 +7,7 @@
 #   <collection>   <source>   [title="..."]   [write]
 #
 # The title is what the Kobo shows; lines keep their order inside a collection.
-# Two routes to the Kobo, both over Wi-Fi:
-#   Google Drive  every sheet as a PDF named "<collection> - <title>.pdf" in the Drive folder
-#                 "Rakuten Kobo" (the Kobo downloads it on Sync, anywhere). The Action uploads it
-#                 when the GitHub secret RCLONE_CONF is set. Reference sheets are replaced when they
-#                 change; `write` sheets only go up if missing, so a copy you wrote on is never replaced.
+# Two routes to the Kobo, both over Wi-Fi (Google Drive retired 2026-11-17):
 #   Cloudflare R2 every sheet into the bucket kobo-inbox, which the Kobo's own sync script copies into
 #                 /mnt/onboard/Sheets on every Wi-Fi connect (kobo repo). Needs the secret R2_RCLONE_CONF.
 #                 Write-on sheets once; reference sheets under a dated name each time they change.
