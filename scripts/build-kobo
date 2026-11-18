@@ -53,6 +53,21 @@ def entries():
     return out
 
 
+def set_info(pdf, title, author):
+    """The Kobo lists a PDF by its own Title and Author: Author = the collection, so the Authors view
+    groups each collection's sheets ("Nexus Night"). Kobo collections would need KoboReader.sqlite edits."""
+    try:
+        from pypdf import PdfReader, PdfWriter
+    except ImportError:
+        sys.exit("build-kobo: needs pypdf (pip install pypdf)")
+    w = PdfWriter(clone_from=PdfReader(pdf))
+    w.add_metadata({"/Title": title, "/Author": author, "/Creator": "rift build-kobo"})
+    tmp = pdf.with_suffix(".tmp.pdf")
+    with open(tmp, "wb") as f:
+        w.write(f)
+    tmp.replace(pdf)
+
+
 def version(paths):
     """Hash of what a sheet is built from, so an unchanged sheet keeps its version."""
     h = hashlib.sha256()
@@ -133,12 +148,13 @@ def main():
                 sys.exit(f"kobo.txt:{e['line']}: build-journal --kobo made no {built.name}")
             built.replace(dest)
         elif src.endswith(".md"):
-            inputs = [ROOT / src, CSS, ROOT / "guides" / "eink.css", pathlib.Path(__file__).resolve()]
+            inputs = [ROOT / src, CSS, ROOT / "guides" / "eink.css"]
             build_md(ROOT / src, dest)
         else:
             sys.exit(f"kobo.txt:{e['line']}: don't know how to build {src}")
+        set_info(dest, title, e["collection"])
         item = {"collection": e["collection"], "title": title, "file": dest.name,
-                "version": version(inputs)}
+                "version": version(inputs + [pathlib.Path(__file__).resolve()])}
         drive = f"{e['collection']} - {title}.pdf"
         shutil.copyfile(dest, OUT / "drive" / drive)
         item["drive"] = drive

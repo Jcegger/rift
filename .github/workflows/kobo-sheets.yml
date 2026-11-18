@@ -37,11 +37,11 @@ jobs:
           python-version: "3.12"
 
       # KCC from its git tag: the published Docker images fail at startup (no PySide6).
-      - name: Tools (pandoc, weasyprint, matplotlib, KCC)
+      - name: Tools (pandoc, weasyprint, matplotlib, pypdf, KCC)
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq pandoc weasyprint fonts-dejavu p7zip-full libegl1 libxkbcommon0
-          pip install --quiet matplotlib "kindlecomicconverter @ git+https://github.com/ciromattia/kcc@v13.0.1"
+          pip install --quiet matplotlib "pypdf==5.1.0" "kindlecomicconverter @ git+https://github.com/ciromattia/kcc@v13.0.1"
 
       - name: Build
         env:
@@ -112,7 +112,10 @@ jobs:
               old = seen.get(i["drive"], {})
               if old.get("version") == i["version"] and old.get("name") in names:
                   continue
-              name = i["drive"][:-4] + f" {today}.pdf"
+              # a new name every version: the Kobo never replaces a file it has
+              name, n = i["drive"][:-4] + f" {today}.pdf", 2
+              while name in names or name == old.get("name"):
+                  name = i["drive"][:-4] + f" {today} ({n}).pdf"; n += 1
               if old.get("name") in names and old["name"] != name:
                   rc("deletefile", f"{B}/{old['name']}"); print("removed old:", old["name"])
               rc("copyto", src, f"{B}/{name}", "-v"); print("up (reference):", name)
