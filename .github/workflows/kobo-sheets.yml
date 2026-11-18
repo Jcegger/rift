@@ -48,7 +48,8 @@ jobs:
           QT_QPA_PLATFORM: offscreen
         run: |
           python scripts/build-kobo
-          test "$(ls guides/out/kobo/*.kepub.epub | wc -l)" -eq "$(ls guides/out/kobo/*.pdf | wc -l)"
+          # every reference sheet got its Kobo book (write-on sheets stay PDF only)
+          python3 -c "import json,sys; m=json.load(open('guides/out/kobo/manifest.json'))['items']; bad=[i['title'] for i in m if not i.get('write') and not i.get('kepub')]; sys.exit('no kepub: '+', '.join(bad) if bad else 0)"
 
       # Google Drive → the Kobo's own Drive link (folder "Rakuten Kobo"), which it downloads on
       # Sync from anywhere. Needs the RCLONE_CONF secret (an rclone config with a [gdrive] remote).
@@ -75,6 +76,53 @@ jobs:
           if [ -s changed.txt ]; then rclone copy drive "gdrive:Rakuten Kobo" --files-from changed.txt -v; fi
           rclone copy drive "gdrive:Rakuten Kobo" --files-from drive-write.txt --ignore-existing -v
           rm -f previous.json changed.txt
+
+      # Cloudflare R2 → the Kobo's own sync (kobo repo: device/kit/usr/local/jay/sync.sh), which on
+      # every Wi-Fi connect copies new PDFs from kobo-inbox into /mnt/onboard/Sheets and never replaces
+      # a file it already has (so ink is safe). Needs the R2_RCLONE_CONF secret: an rclone config with
+      # an [r2] remote whose token can read and write kobo-inbox (kobo repo .secrets/, set by Jay).
+      # Write-on sheets go up once under their plain name. Reference sheets go up under a dated name
+      # each time their version changes ("Nexus Night - Table sheet (Sivir) 2026-11-17.pdf"), with
+      # the older dated copy removed from the inbox; versions.json in the bucket remembers what's there.
+      - name: Upload to R2 (kobo-inbox)
+        env:
+          R2_RCLONE_CONF: ${{ secrets.R2_RCLONE_CONF }}
+        run: |
+          if [ -z "$R2_RCLONE_CONF" ]; then echo "no R2_RCLONE_CONF secret: skipping R2"; exit 0; fi
+          command -v rclone >/dev/null || {
+            curl -fsSLO https://downloads.rclone.org/rclone-current-linux-amd64.zip
+            unzip -q rclone-current-linux-amd64.zip && sudo install -m 755 rclone-*-linux-amd64/rclone /usr/local/bin/rclone; }
+          export RCLONE_CONFIG=$RUNNER_TEMP/r2.conf
+          printf '%s\n' "$R2_RCLONE_CONF" > "$RCLONE_CONFIG"
+          cd guides/out/kobo
+          python3 - <<'EOF'
+          import datetime, json, os, subprocess
+          B = "r2:kobo-inbox"
+          def rc(*a, **k):
+              return subprocess.run(["rclone", *a], check=True, text=True, **k)
+          names = set(rc("lsf", B, "--files-only", capture_output=True).stdout.split("\n")) - {""}
+          seen = json.loads(rc("cat", f"{B}/versions.json", capture_output=True).stdout) if "versions.json" in names else {}
+          today = datetime.date.today().isoformat()
+          for i in json.load(open("manifest.json"))["items"]:
+              src = os.path.join("drive", i["drive"])
+              if i.get("write"):
+                  if i["drive"] not in names:
+                      rc("copyto", src, f"{B}/{i['drive']}", "-v"); print("up (write-on):", i["drive"])
+                  continue
+              old = seen.get(i["drive"], {})
+              if old.get("version") == i["version"] and old.get("name") in names:
+                  continue
+              name = i["drive"][:-4] + f" {today}.pdf"
+              if old.get("name") in names and old["name"] != name:
+                  rc("deletefile", f"{B}/{old['name']}"); print("removed old:", old["name"])
+              rc("copyto", src, f"{B}/{name}", "-v"); print("up (reference):", name)
+              seen[i["drive"]] = {"version": i["version"], "name": name}
+          with open("versions.json", "w") as f:
+              json.dump(seen, f, indent=1)
+          rc("copyto", "versions.json", f"{B}/versions.json")
+          os.remove("versions.json")
+          EOF
+          rm -f "$RCLONE_CONFIG"
 
       - name: Publish to kobo-sheets
         run: |

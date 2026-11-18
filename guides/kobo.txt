@@ -12,6 +12,9 @@
 #                 "Rakuten Kobo" (the Kobo downloads it on Sync, anywhere). The Action uploads it
 #                 when the GitHub secret RCLONE_CONF is set. Reference sheets are replaced when they
 #                 change; `write` sheets only go up if missing, so a copy you wrote on is never replaced.
+#   Cloudflare R2 every sheet into the bucket kobo-inbox, which the Kobo's own sync script copies into
+#                 /mnt/onboard/Sheets on every Wi-Fi connect (kobo repo). Needs the secret R2_RCLONE_CONF.
+#                 Write-on sheets once; reference sheets under a dated name each time they change.
 #   Komga         reference sheets also as Kobo books in the collection, via the Plex server (at home).
 # source  <path>.md          built at the Kobo's page size with guides/eink-kobo.css
 #         journal:<sheet>    from scripts/build-journal --kobo: card (matchup card), match-night,

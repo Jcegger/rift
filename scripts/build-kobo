@@ -133,7 +133,7 @@ def main():
                 sys.exit(f"kobo.txt:{e['line']}: build-journal --kobo made no {built.name}")
             built.replace(dest)
         elif src.endswith(".md"):
-            inputs = [ROOT / src, CSS, ROOT / "guides" / "eink.css", pathlib.Path(__file__)]
+            inputs = [ROOT / src, CSS, ROOT / "guides" / "eink.css", pathlib.Path(__file__).resolve()]
             build_md(ROOT / src, dest)
         else:
             sys.exit(f"kobo.txt:{e['line']}: don't know how to build {src}")
