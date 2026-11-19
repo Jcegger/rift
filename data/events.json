@@ -3,10 +3,10 @@
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2506,
-  "eventsWithDecks": 53,
-  "players": 73909,
-  "playersWithDecks": 13771,
+  "events": 2507,
+  "eventsWithDecks": 54,
+  "players": 73926,
+  "playersWithDecks": 13788,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
    "Mardi - Championship #1",
@@ -33,14 +33,14 @@
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Asia": 148,
+   "Asia": 149,
    "unknown": 250,
    "Europe": 90,
    "Oceania": 7,
    "North America": 7
   },
   "registryEventsByRegion": {
-   "unknown": 2483,
+   "unknown": 2484,
    "Asia": 23
   },
   "unresolvedClaimEvents": [
@@ -171,6 +171,7 @@
    "Monday Clash #1": 17,
    "Fast Cup Radiance #4": 17,
    "WA RIFTBOUND CUP (Vendetta) 11 Oct - 9am AWST": 16,
+   "Wednesday Clash #1": 15,
    "League Cup #4 — Cycle 3": 15,
    "Fast Cup Radiance #2": 14,
    "Fast Cup Radiance #3": 14,
@@ -194,6 +195,29 @@
   }
  },
  "events": [
+  {
+   "name": "Wednesday Clash #1",
+   "dt": "2026-11-18",
+   "players": 17,
+   "format": "Constructed",
+   "winner": "Deynos",
+   "country": null,
+   "slug": "wednesday-clash-1",
+   "top": [
+    [
+     "OGN-269",
+     2
+    ],
+    [
+     "SFD-195",
+     2
+    ],
+    [
+     "UNL-197",
+     1
+    ]
+   ]
+  },
   {
    "name": "Monday Clash #1",
    "dt": "2026-11-16",
