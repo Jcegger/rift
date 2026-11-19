@@ -1,13 +1,13 @@
 {
- "generatedAt": "2026-11-17",
+ "generatedAt": "2026-11-19",
  "source": "api.dotgg.gg/cgfw/getposts, filtered to riftbound.gg",
  "note": "Titles only; the endpoint carries no body text. Champion matching is done in the app so the name fold is not duplicated.",
  "pagesRead": 8,
  "postsSeen": 1600,
  "cutShort": null,
- "carriedFromPrevious": 66,
+ "carriedFromPrevious": 68,
  "tags": {
-  "News": 60,
+  "News": 61,
   "Metagame": 25,
   "Guides": 9,
   "Events": 22,
@@ -16,6 +16,15 @@
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Grand Theft Auto VI Wiki, Tools & Guides - GrandTheft.gg",
+   "dt": "2026-11-18",
+   "url": "https://riftbound.gg/grand-theft-auto-6",
+   "tags": [
+    "News"
+   ],
+   "author": "Riftbound.gg"
+  },
   {
    "title": "Packed Amphitheater Convergence Fest Ionic Spark Promo",
    "dt": "2026-11-16",
