@@ -27,6 +27,16 @@ this repo is published at rift.jayegger.com.
   artist's stamp. **Measure the lid's flat top before ordering**: 113 × 87 is the box's
   outside size, and a raised rim, logo or rounded corners would make the printable area smaller.
 
+## Discord avatars
+
+`avatar/` — 1024 × 1024 PNG crops of the face and ribbon (source x 760–2910, y 180–2330),
+downsampled in linear light so the screentone keeps its tone. No contrast or linework edits;
+the artist's stamp is outside the crop.
+
+- `sivir-avatar-{strawberry,mono}-face.png` — the background beyond her head fades to a soft
+  blur, so the face reads at Discord's ~40 px chat size. Head, ribbon and hair are untouched.
+- `sivir-avatar-{strawberry,mono}-face-clean.png` — crop only (strawberry adds a pink duotone).
+
 ## Accessory box — in progress (Jay, from 16 Nov 2026)
 
 The plan: a **Gamegenic Token Keep** (113 × 87 × 36 mm outside, 94 × 68 × 28 mm inside, per
