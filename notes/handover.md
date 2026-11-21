@@ -1,4 +1,10 @@
-# Deck brief: Sivir Is Trying Her Best (as of 3 November 2026)
+# Deck brief: Sivir Is Trying Her Best (as of 3 November 2026; checked 21 November)
+
+**21 Nov audit, read first.** (1) The 23 Nov bans gut the top three archetypes (Riven, Kai'Sa, Kennen; 43% of the
+field runs a banned card); this list is untouched, but every matchup note below predates them. (2) From 28 Oct to 21
+Nov the tools didn't see Switcheroo as an answer (Riot reworded it), so answer numbers from that window are low:
+"an answer usable on their turn by t3" is 22% on the play and 26% on the draw, not 5% and 11%. (3) The sims now count Innovator's Gold. (4) Rengar can't
+Ambush onto an emptied B (corrected below).
 
 Where the work stands, for the next session. Read this first, then the games table and the last log entries at the
 end of `decklab/sivir-ready.md`. The guide (`guides/sivir-one-army.md`) is current and is the full reference.
@@ -41,7 +47,9 @@ going for both battlefields is right only when the terminal scan says it wins th
 - **Closing turn (start on 6 holding A):** the hold makes 7 → Faefolk walks into A and pulls B's defender in (it
   attacks; they have focus first) → a face-down Stranger bounces it or Existential Dread stuns it → Sivir with
   Accelerate walks into the empty B → 8. Backups: a holder wearing Boots walks A → B (Ganking; their Vex only stuns
-  units played that turn), Rengar by Ambush onto B, Ride the Wind.
+  units played that turn), Ride the Wind. **Not Rengar** (corrected 21 Nov): his Ambush reaches a battlefield
+  with your units or with enemy units, and the emptied B has neither, so he can only come down at base, exhausted
+  (§355.2.a, §822.1.b, §822.1.d, §822.3). He's a B option only while their unit is still there.
 - **Recital (after a loss):** every hold sends their lone B defender home; walk in and conquer: two points a turn.
 - **The kill zone (Jay):** on your turn, Ember Monk into A, Faefolk pulls their unit (best: their Vex) into A, flip a
   face-down card (Monk +2), it dies, the kill readies the legend for a Gold.
@@ -70,7 +78,8 @@ Jay is happy with the list; it stays locked.
   Jay owns 2) or The Good Stuff (draws 3 every hold; cut when a reviewer doubted the holds; game 1 held both).
 - **Power still tight after that:** one Rebuke (it won Ekko game 1 on 3 Nov, so the bar to cut it is higher now), but it's the answer to their Vex (local Vex and Diana run her), so
   last.
-- **Parked: Star Spring** (3 Nov; the Faefolk research). *"The first time a player plays a non-token unit here each turn, they may
+- **Dead: Star Spring is banned from 23 Nov 2026** (in the ban list with Emperor's Dais). Kept for the record.
+  Was parked (3 Nov; the Faefolk research). *"The first time a player plays a non-token unit here each turn, they may
   move another unit they control here to its base."* Faefolk walks in and pulls, an Ambush Nidalee or Rengar lands there, and
   Faefolk goes home, safe, to pull again next turn: the opener players call the most toxic in the game. The pieces are in
   the deck (Nidalee ×3, Rengar ×2). Against it: it costs a battlefield slot, and it serves whoever plays a unit there, Rengar

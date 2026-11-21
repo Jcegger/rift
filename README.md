@@ -1704,6 +1704,14 @@ itself, and nothing that needs an opponent:
   candidates the same way (`--qty N` swaps N copies; `;` separates candidates whose names
   have commas), each scored tier by tier when the deck has goal tiers.
 
+**Keywords the sims do not read** (as of 21 Nov 2026; `docs/rules.md` Keywords has each rule):
+Deploy, Level and Hunt (XP), Flow (recasting from the trash), Predict and Vision, Weaponmaster,
+Quick-Draw, Legion, Repeat, Deflect's tax, Tank and Backline outside the fight calculator, and every
+`[Level N][>]` / `[Legion][>]` line. A deck that leans on one of these reads low (or high) by that
+much; say so when quoting its numbers. Read and modelled: Accelerate, Hidden, Ambush, Temporary,
+Empower/Empowered, Equip and gear strips, Ganking (own, Mercenary, Empowered), Assault, Shield, Tank
+and Backline in fights, Stun, Disarm, Show Off (Gutter Guardian), Burn, Reaction/Action timing.
+
 **The rune split** is tested, not assumed: every split from 3/9 to 9/3 on the same
 shuffles. A different split is suggested only when it improves Energy by 0.2 or stuck
 hands by 3 points without being meaningfully worse on the other, and the smallest such

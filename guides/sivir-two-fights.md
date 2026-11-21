@@ -100,7 +100,7 @@ the other acts again?).
 | **Ride the Wind** a unit from A to B, ready | 2E 1P | Defy; their Vex's "can't move" on her own unit |
 | **Nilah with Accelerate** (4E + Body), ready that turn | Nilah | **their Vex stuns anything played that turn** |
 | **Sivir with Accelerate**, 2 Power spent turns on her Ganking | Sivir (always in the Champion Zone) | their Vex; a spell on her at B |
-| **Rengar Ambushes onto B** | 5E 1P, 6 Might | their Vex |
+| **Rengar Ambushes onto B** (only while their unit is there: an empty B is no Ambush target, §822.3) | 5E 1P, 6 Might | their Vex |
 | **Clear B first:** Rebuke (Defy can't touch it), Rampage, Star-Crossed | the spell | Rampage and Star-Crossed are Defy-able |
 
 **Play notes:**
