@@ -18,7 +18,8 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 
 1. **2026-11-23, Radiance bans take effect:** the field report's numbers shift on their own, and `build-banned.mjs` will
    report the `ANNOUNCED_BANS` entries as redundant: delete them, then check the next day's refresh is green.
-2. **Card data drops equipment keywords:** `data/cards.json` misses keywords printed in the bonus strip (Boots of
-   Swiftness' Ganking). Fix the builder (`scripts/build-*.mjs`) and re-check the other 40 equipment.
+2. **Gear bonus strips (done 2026-11-21):** `data/cards.json` now carries each gear's strip as `xb` (34 gear; it was
+   dropped whole, not only keywords). The app shows and searches it; the sim reads only a `[Ganking]` strip. Still to
+   do in the sim: the other strips (Trinity Force's hold point, Shield/Tank/Assault, conquer triggers).
 3. **Judge question before an event:** does a Baron Pit gate the 8th-point conquest?
 4. Log each new game in the app's journal and the worksheet's games table (`decklab/sivir-ready.md`).

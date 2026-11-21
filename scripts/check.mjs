@@ -170,6 +170,23 @@ section('The dash naming');
      merged.every((c) => (A.BY[c.c].t) === (cat.cards.find((x) => x.n === A.gameName(c)) || {}).t));
 }
 
+/* ══ gear bonus strips ═══════════════════════════════════════════════════ */
+// The strip under an equipment's text is what the attached unit gets. Riot serves it as a
+// second field the builder once dropped, so Boots of Swiftness read as a plain +2 Might.
+section('Gear bonus strips');
+{
+  const by = (n) => cat.cards.find((c) => c.n === n && !c.v) || {};
+  ok("Boots of Swiftness grant [Ganking]", /^\[Ganking\]/.test(by('Boots of Swiftness').xb || ''), by('Boots of Swiftness').xb);
+  ok('Trinity Force grants its hold point', /When I hold, score 1 point/.test(by('Trinity Force').xb || ''));
+  const strips = cat.cards.filter((c) => c.xb);
+  ok('only gear carry a strip', strips.every((c) => c.t === 'Gear'),
+     strips.filter((c) => c.t !== 'Gear').map((c) => c.n).join(', '));
+  ok('a strip never repeats the card text', strips.every((c) => !(c.x || '').includes(c.xb)));
+  // 33 tagged Equipment carried one on 21 Nov 2026; far fewer means the field moved again.
+  const eq = cat.cards.filter((c) => !c.v && (c.g || []).includes('Equipment'));
+  ok('most equipment carry a strip', eq.filter((c) => c.xb).length >= 30, `${eq.filter((c) => c.xb).length} of ${eq.length}`);
+}
+
 /* ══ legend identity ═════════════════════════════════════════════════════ */
 section('Legend identity');
 {

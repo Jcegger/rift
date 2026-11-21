@@ -1509,6 +1509,12 @@ Two things it handles that matter for the completion math:
   only, never promos, tokens or runes (those stay in `data/extras.json`). The
   denominator is copied from Riot's own codes (`OGS-001/024`, not `/24`). Fills are
   listed in the report and drop out on their own once Riot serves the card.
+- **Gear bonus strips, `xb`.** The strip under an equipment's text is what the
+  attached unit gets (Boots of Swiftness: `[Ganking]`; Trinity Force: "When I hold,
+  score 1 point"). Riot serves it as `effect` beside the card's `text`; it is kept
+  out of `x`, which every reader takes as the card's own text. Gear only (the one
+  other `effect` in the feed is junk). The app shows it in the card view and
+  searches it; the sim reads only a `[Ganking]` strip so far.
 - **Lettered runes and tokens.** `R01a` and `T02a` are runes and tokens, not base
   cards; before 19 Oct the alt-art Radiance runes inflated RAD's base count to 173.
 

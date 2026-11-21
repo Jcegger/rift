@@ -195,6 +195,7 @@ const main = async () => {
   };
 
   const corrected = [];
+  const skippedStrips = [];
   const cards = raw
     .map((c) => {
       const setId = c.set?.value?.id ?? null;
@@ -238,6 +239,17 @@ const main = async () => {
       // nonsense high price can never win a minimum, so it is left in rather than
       // second-guessed with a threshold.
       if (fin && fin.cost > 0) card.mp = Math.round(fin.cost * 100) / 100;
+      // Gear's bonus strip, `xb`: what the attached unit gets (Boots of Swiftness: [Ganking],
+      // Trinity Force: "When I hold, score 1 point"). Riot serves it as `effect` beside the
+      // card's own `text`, and `x` above kept only the text, so 35 strips were dropped until
+      // Nov 2026. It stays out of `x` because every reader takes `x` as the card's own text
+      // ("I" there is the gear, here the unit). Gear only: the one non-gear `effect` in the
+      // feed (Shadows of the Past) is the junk string "1".
+      const strip = plain(c.effect?.richText?.body);
+      if (strip && card.x !== strip) {
+        if (card.t === "Gear") card.xb = strip;
+        else skippedStrips.push(`${card.c} ${card.n} (${card.t}): ${strip}`);
+      }
       // drop empty keys so the committed JSON stays small
       for (const k of Object.keys(card)) {
         const v = card[k];
@@ -326,6 +338,8 @@ const main = async () => {
     console.log(`\nfilled ${filled.length} printings Riot does not serve yet, from dotgg, by set:`, bySet);
     for (const c of filled) console.log(`  ${c.c} ${c.n}`);
   }
+  console.log(`\n${cards.filter((c) => c.xb).length} gear carry a bonus strip (xb)`);
+  for (const l of skippedStrips) console.log(`  skipped, not gear: ${l}`);
   console.log("\nby variant: ", tally((c) => c.v || "base"));
   console.log("by type:    ", tally((c) => c.t));
   console.log("by rarity:  ", tally((c) => c.r));

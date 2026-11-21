@@ -456,6 +456,7 @@ function showCard(code) {
     <button class="pm" data-cnt="${field}" data-d="-1" aria-label="One fewer ${label}" ${h[field] ? "" : "disabled"}>−</button>
     <span class="num" style="width:28px;text-align:center">${h[field]}</span>
     <button class="pm" data-cnt="${field}" data-d="1" aria-label="One more ${label}">+</button></div>`;
+  const glyphs = (t) => esc((t || "").replace(/:rb_energy_(\d+):/g, "[$1]").replace(/:rb_rune_(\w+):/g, "[$1]").replace(/:rb_might:/g, " Might").replace(/:rb_exhaust:/g, "[Exhaust]"));
   const d = $("#dlg");
   d.innerHTML = `<div class="dlg">
     ${c.i ? `<img src="${esc(img(c, 480))}" alt="${esc(c.n)}" loading="lazy">` : ""}
@@ -463,7 +464,8 @@ function showCard(code) {
       <div class="dots">${dots(c.d)}<span class="lbl">${esc(c.t || "")}${c.e != null ? ` · ${esc(costOf(c))}` : ""}${c.m != null ? ` · ${c.m} Might` : ""}</span></div>
       <h2>${esc(c.t === "Legend" ? IDX.legendName(c) : c.n)}</h2>
       <div class="tiny dim num">${esc(c.c)}${c.r ? ` · ${esc(c.r)}` : ""}${c.v ? ` · ${esc(VLABEL[c.v] || c.v)}` : ""}${c.fo ? " · foil only" : ""}</div>
-      <div>${esc((c.x || "").replace(/:rb_energy_(\d+):/g, "[$1]").replace(/:rb_rune_(\w+):/g, "[$1]").replace(/:rb_might:/g, " Might").replace(/:rb_exhaust:/g, "[Exhaust]"))}</div>
+      <div>${glyphs(c.x)}</div>
+      ${c.xb ? `<div><span class="lbl">Attached unit gets${c.mb ? ` +${c.mb} Might and` : ""}</span> ${glyphs(c.xb)}</div>` : ""}
       ${c.errata ? `<div class="tiny dim">Current wording (errata); the printed card differs.</div>` : ""}
       <div class="small dim">This printing: ${h.n} normal · ${h.f} foil${prints.length > 1 ? ` · ${own} across all ${prints.length} printings` : ""} · ${priced ? `from ${money(priced.mp)}` : "no market price"}</div>
       ${tags.length ? `<div class="tiny dim">Tags: ${esc(tags.join(", "))}</div>` : ""}
@@ -825,7 +827,7 @@ function viewEdit(id) {
     if (!t && L) return `<p class="note">Search by name, tag or rules text. Only cards inside ${esc([...ident].join(" / "))} are shown.</p>`;
     let pool = IDX.cards.filter((c) => !c.v && c.t !== "Token" && (c.t !== "Legend" || !L || t));
     if (!L) pool = pool.filter((c) => c.t === "Legend");
-    if (t) pool = pool.filter((c) => `${c.n} ${IDX.legendName(c) || ""} ${(c.g || []).join(" ")} ${c.x || ""}`.toLowerCase().includes(t));
+    if (t) pool = pool.filter((c) => `${c.n} ${IDX.legendName(c) || ""} ${(c.g || []).join(" ")} ${c.x || ""} ${c.xb || ""}`.toLowerCase().includes(t));
     if (L) pool = pool.filter((c) => c.t === "Legend" || (c.d || []).every((d) => d === "Colorless" || ident.has(d)));
     pool.sort((a, b) => (a.n.toLowerCase().startsWith(t) ? 0 : 1) - (b.n.toLowerCase().startsWith(t) ? 0 : 1) || a.n.localeCompare(b.n));
     pool = pool.slice(0, 30);
@@ -1796,7 +1798,7 @@ function cfMatch(c) {
   if (CF.show === "spare" && (!q || !CTX.spare.has(IDX.identity(c)))) return false;
   if (CF.show === "deck" && (c.v || !CTX.short.has(IDX.identity(c)))) return false;
   if (CF.q) {
-    const hay = `${c.n} ${c.c} ${IDX.legendName(c) || ""} ${(c.g || []).join(" ")} ${(c.a || []).join(" ")} ${c.t} ${c.r} ${c.x || ""}`.toLowerCase();
+    const hay = `${c.n} ${c.c} ${IDX.legendName(c) || ""} ${(c.g || []).join(" ")} ${(c.a || []).join(" ")} ${c.t} ${c.r} ${c.x || ""} ${c.xb || ""}`.toLowerCase();
     if (!hay.includes(CF.q.toLowerCase())) return false;
   }
   return true;
