@@ -36,5 +36,6 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 4. **Sim gaps still open** (README, "Keywords the sims do not read"): Trinity Force's hold point and other conquer/hold
    strips, Level/Hunt, Weaponmaster, Quick-Draw, Legion. `scripts/rift fight` can't take gear yet, and its comma split
    breaks champion names ("Rengar, Trophy Hunter").
-5. **Judge question before an event:** does a Baron Pit gate the 8th-point conquest? (The Radiance FAQ doesn't say.)
+5. **Baron Pit settled (21 Nov):** it gates the eighth-point conquest. A battlefield token is a battlefield
+   (§185.2.d), and community judges agree (rules-rulings.md). No Riot staff ruling yet, but it isn't open anymore.
 6. Log each new game in the app's journal and the worksheet's games table (`decklab/sivir-ready.md`).

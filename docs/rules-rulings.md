@@ -189,8 +189,8 @@ instruction have to read anything off the departed unit? A swap reads both Might
 ## The Baron Pit is a battlefield: once it is on the board, the final point by conquer needs all three
 
 **Date:** 2026-10-28
-**Source:** Derived in this repo, not a staff ruling. Ask a judge before relying on it at an event. It matters against Riven, The Exile, whose tournament lists run Baron Nashor (80% of her Radiance results, 28 Oct 2026).
-**Rules:** §187.8, §187.9, §471.1, §471.2, §473.1.a.1, §473.1.b.1
+**Source:** Derived in this repo from §185.2.d (added 21 Nov 2026), and the same answer from community judges ([RiftJudge 10117](https://app.riftjudge.com/questions/10117), [RiftJudge 11487](https://app.riftjudge.com/rulings/11487/if-my-opponent-is-at-7-and-he-plays-baron-nashor-do-the-points-received-from-bar), [riftboundfaq.com](https://www.riftboundfaq.com/cards/baron-nashor)). Still no Riot staff ruling. It matters against Riven, The Exile, whose tournament lists run Baron Nashor (80% of her Radiance results, 28 Oct 2026).
+**Rules:** §185.2.d, §187.8, §187.9, §471.1, §471.2, §473.1.a.1, §473.1.b.1
 **Expires:** when Riot rules on it, or a Core Rules or FAQ update says how battlefield tokens count for the Final Point
 
 **Question.** Baron Nashor adds the Baron Pit battlefield token to the board and enters there.
@@ -201,8 +201,10 @@ eighth point?
 battlefield scored this turn (§473.1.b.1), and the Pit is one of them. A **hold** at 7 still
 wins: hold points are not gated (§473.1.a.1).
 
-**Why.** The Baron Pit is "a domainless battlefield token" (§187.9). No rule says outright that
-a battlefield token is a battlefield, but the other battlefield token is written to be scored:
+**Why.** The Baron Pit is "a domainless battlefield token" (§187.9), and a token **is** its type:
+*"Tokens have a type. They follow all rules for their type unless otherwise specified. Example: A token
+unit is a unit."* (§185.2.d). So the Pit is a Battlefield, and §473.1.b.1's "Scored every Battlefield
+this turn" counts it. (Until 21 Nov this entry said no rule stated that; §185.2.d does.) Also, the other battlefield token is written to be scored:
 the Brush reads "When you score here" (§187.8), and scoring is something a player does to a
 battlefield, by conquering or holding it (§471.1, §471.2). So the Pit is a battlefield that can
 be scored, and "every Battlefield" counts it. The practical upshot against Baron: hold your two

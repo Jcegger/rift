@@ -115,16 +115,19 @@ From `scripts/rift meta --since 2026-10-23`: 8,008 legal lists since Radiance be
 
 ## 8. What I'm least sure of (check these first)
 
-1. **The Baron Pit and the eighth point.** In this repo's reading, once the Pit exists, the final
-   conquer needs all three battlefields scored (rules-rulings.md, derived, not a staff ruling). The
-   Radiance FAQ rules on Baron's entry (he enters ready at the Pit even with Riven) but not on this.
-   Still a judge question.
+1. **The Baron Pit and the eighth point: settled after research (21 Nov).** Once the Pit exists, a winning
+   conquer at 7 needs all three battlefields scored that turn. A token "follow[s] all rules for [its] type"
+   (§185.2.d), so the Pit is a battlefield, and community judges (RiftJudge, riftboundfaq.com) rule the same.
+   Against Baron, win by holding. No Riot staff ruling yet.
 2. **Who attacks after a pull.** When Faefolk pulls their unit into A (your battlefield), *their* unit
    is the one arriving somewhere its controller doesn't control, so they apply Contested: their unit is
    the **attacker**, and they get focus first (§190.3.a.1, §466.2.c). Your A units defend, so Shield
    counts for them. (Forbidding Waste punishes a unit defending *alone*, so there it hurts a lone
    defender of yours, not theirs.) I first wrote this backwards while drafting the note, so it's
-   worth confirming that it's how it plays at the table.
+   worth confirming that it's how it plays at the table. Checked again 21 Nov: §466.2.c.1 says "The Attacker
+   is the player whose unit(s) applied the Contested status", and §190.3.a.1 has the moved unit apply it
+   when "that Unit's controller does not already control that battlefield". Your Faefolk moving into your own
+   A applies nothing; their pulled unit does. Settled.
 3. **Gold timing.** I read Gold as usable on the turn it's made only if it was made ready. Battle
    Mistress's Gold enters exhausted, so it pays from your next turn.
 4. **The simulator is not the game.** It plays against nobody: it measures consistency, not who wins.
