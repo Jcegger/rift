@@ -83,7 +83,8 @@ env:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # A green run took 17–20 minutes by Nov 2026, the unit tests included.
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v7
         with:
@@ -314,22 +315,6 @@ jobs:
       - name: Verify
         run: node scripts/check.mjs
 
-      # The unit tests measure the models against the live lists, so the field moving can
-      # turn one red without anything being broken. Report, never block: fresh data still
-      # lands, and the run summary says which test drifted. (They ran nowhere until 27 Oct
-      # 2026, and two had gone red unnoticed.)
-      - name: Unit tests (report only)
-        continue-on-error: true
-        run: |
-          set -o pipefail
-          node --test lib/*.test.mjs scripts/*.test.mjs 2>&1 | tee /tmp/tests.log | tail -5
-          fails=$(grep -c '^not ok' /tmp/tests.log || true)
-          if [ "$fails" != "0" ]; then
-            echo "::warning title=Unit tests drifted::$fails test file(s) failing; see the step log"
-            { echo; echo "**Unit tests:** $fails file(s) failing:"; grep '^not ok' /tmp/tests.log | sed 's/^/- /'; } >> "$GITHUB_STEP_SUMMARY"
-            exit 1
-          fi
-
       - name: Commit if anything changed
         env:
           FAILED_SOURCES: ${{ steps.sources.outputs.failed }}
@@ -431,13 +416,34 @@ jobs:
           echo "::warning title=Field report not sent::Couldn't push to jayegger-site after 3 tries; the site keeps its last copy."
           exit 1
 
+      # The unit tests measure the models against the live lists, so the field moving can
+      # turn one red without anything being broken. Report, never block: fresh data still
+      # lands, and the run summary says which test drifted. (They ran nowhere until 27 Oct
+      # 2026, and two had gone red unnoticed.) They run after the commit and the site push,
+      # deliberately: they take several minutes, and from 20 Nov 2026 they pushed the job
+      # past its time limit three runs running, so a report-only step cancelled the
+      # whole refresh before anything was committed.
+      - name: Unit tests (report only)
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node --test lib/*.test.mjs scripts/*.test.mjs 2>&1 | tee /tmp/tests.log | tail -5
+          fails=$(grep -c '^not ok' /tmp/tests.log || true)
+          if [ "$fails" != "0" ]; then
+            echo "::warning title=Unit tests drifted::$fails test file(s) failing; see the step log"
+            { echo; echo "**Unit tests:** $fails file(s) failing:"; grep '^not ok' /tmp/tests.log | sed 's/^/- /'; } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
       # After the commit, deliberately: whatever did refresh should reach the site even
       # on the day we notice that something else has been rotting for three weeks.
       - name: Fail if any source is past its shelf life
         run: node scripts/check.mjs --max-age
 
+      # cancelled() too: a run killed by the time limit commits nothing, and until 21 Nov 2026
+      # it also skipped this step, so three dead runs raised no issue.
       - name: Open or update the tracking issue
-        if: failure()
+        if: failure() || cancelled()
         uses: actions/github-script@v9
         with:
           script: |
