@@ -4,7 +4,9 @@
 field runs a banned card); this list is untouched, but every matchup note below predates them. (2) From 28 Oct to 21
 Nov the tools didn't see Switcheroo as an answer (Riot reworded it), so answer numbers from that window are low:
 "an answer usable on their turn by t3" is 22% on the play and 26% on the draw, not 5% and 11%. (3) The sims now count Innovator's Gold. (4) Rengar can't
-Ambush onto an emptied B (corrected below).
+Ambush onto an emptied B (corrected below). (5) **Post-ban read: `decklab/sivir-postban.md`** (forecast, 21 Nov): hold the list; watch
+Defy decks (10 of your spells are Defy-able) and gear decks rising; two candidates with triggers, decided after the
+first post-ban weekend.
 
 Where the work stands, for the next session. Read this first, then the games table and the last log entries at the
 end of `decklab/sivir-ready.md`. The guide (`guides/sivir-one-army.md`) is current and is the full reference.
