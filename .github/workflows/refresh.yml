@@ -433,8 +433,11 @@ jobs:
       - name: Unit tests (report only)
         continue-on-error: true
         run: |
-          set -o pipefail
-          node --test lib/*.test.mjs scripts/*.test.mjs 2>&1 | tee /tmp/tests.log | tail -5
+          # TAP, so each failing file is one top-level "not ok" line. Node's default reporter
+          # prints "✖" instead, and with pipefail the step exited before writing the summary:
+          # until 21 Nov 2026 a red test showed as a green step that named nothing.
+          node --test --test-reporter=tap lib/*.test.mjs scripts/*.test.mjs > /tmp/tests.log 2>&1 || true
+          tail -5 /tmp/tests.log
           fails=$(grep -c '^not ok' /tmp/tests.log || true)
           if [ "$fails" != "0" ]; then
             echo "::warning title=Unit tests drifted::$fails test file(s) failing; see the step log"

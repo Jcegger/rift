@@ -29,8 +29,10 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 2. **2026-11-23, Radiance bans take effect:** the field report's numbers shift on their own, and `build-banned.mjs` will
    report the `ANNOUNCED_BANS` entries as redundant: delete them, then check the next day's refresh is green and
    finishes inside 40 minutes. Then re-read the field (`scripts/rift meta --since 2026-11-23`) before any matchup advice.
-3. **`lib/engines.test.mjs` Riven read is red** (report-only): it applies the announced bans early and drops 99% of
-   Riven lists (Broken Blade). After the 23rd the expected answer itself moves; re-derive it from the guides then.
+3. **Two report-only tests are red on drifted data:** `lib/infer.test.mjs` (Kha'Zix's top two no longer include
+   isolation; red in CI) and `lib/engines.test.mjs` (Riven reads no exhaust engine, because it applies the announced
+   bans early and drops 99% of Riven lists for Broken Blade; red locally). Re-derive both expectations after the 23rd.
+   Until 21 Nov the CI step couldn't name a failing file (it now uses TAP), so watch the run summary.
 4. **Sim gaps still open** (README, "Keywords the sims do not read"): Trinity Force's hold point and other conquer/hold
    strips, Level/Hunt, Weaponmaster, Quick-Draw, Legion. `scripts/rift fight` can't take gear yet, and its comma split
    breaks champion names ("Rengar, Trophy Hunter").
