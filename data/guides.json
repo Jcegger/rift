@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-20",
+ "generatedAt": "2026-11-21",
  "source": "guides/*.md in this repo",
  "note": "Manifest only. The app fetches the .md body on demand; the .md is the source of truth.",
  "guides": [
@@ -103,7 +103,7 @@
     "6. Matchups and sideboard",
     "7. What to log, and what decides it"
    ],
-   "words": 1845
+   "words": 1859
   },
   {
    "slug": "sivir-v2",
