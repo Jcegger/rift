@@ -17,10 +17,11 @@ itself from Riot; this half does not, so when they part company the build says s
 
 - **[rules-faq.md](rules-faq.md)** is Riot's per-set rules FAQs. A FAQ **outranks the
   Core Rules only until a newer Core Rules Document is published** — the Vendetta FAQ
-  (2026-08-14) says so in as many words — and the 2026-10-09 Core Rules is newer, so it
-  now wins wherever they differ. It codified most of that FAQ anyway (ignored vs negated,
-  mandatory requirements, Kayle). A Radiance FAQ is promised for after release; when it
-  lands it outranks this again. None of the
+  (2026-08-14) says so in as many words. The 2026-10-09 Core Rules beat that one, and
+  codified most of it anyway (ignored vs negated, mandatory requirements, Kayle). **The
+  Radiance FAQ (2026-10-26) is newer than the Core Rules, so it outranks them now**,
+  wherever they differ, until the next Core Rules Document. Its rulings are summarised in
+  [The Radiance FAQ](#the-radiance-faq-2026-10-26) below. None of the
   FAQs are linked from Riot's Rules Hub, so check it before relying on anything below.
   Earlier FAQs are weaker: the Unleashed one declares itself obsolete at the next rules
   update (which has since happened), and Riot's Origins one carries a "may no longer
@@ -1075,7 +1076,7 @@ A list of the rulings most likely to be got wrong, each verified against the tex
 
 ## Errata
 
-Riot errata cards rather than reprinting them, and the errata is binding. Four rounds so
+Riot errata cards rather than reprinting them, and the errata is binding. Five rounds so
 far. The overwhelming majority are one change made over and over: **rewriting "pay X. If
 you do, Y" into "pay X to Y"**, which converts a two-step instruction into a proper
 *cost within instructions* (§740.4.a) — the difference is whether the effect checks that
@@ -1098,13 +1099,60 @@ effect intervenes (§205).
 - **Vendetta**, 2026-07-23. Mostly the pay-to-do rewrite (**Draven,
   Vanquisher**; **Diana, Lunari**; **Emperor's Dais**), plus **Astral Heron** and
   **Gangplank, Naval** gaining the missing "**this turn**" duration.
+- **Radiance**, 2026-10-09 — four cards. **Elnuk Herd** recycles itself only "if I was
+  played from face down"; **Last Caress**'s unit may be played "even from face down" to any
+  battlefield; **Forbidden Technique** banishes itself after the trash recast; **Neeko,
+  Blending In** spells out "different means none match names" for her extra legends.
 
 Current text always wins over the printed card, and these summaries are not a
 substitute for the pages — read them when a specific card matters:
 [Origins](https://playriftbound.com/en-us/news/rules-and-releases/riftbound-origins-card-errata/) ·
 [Spiritforged](https://playriftbound.com/en-us/news/rules-and-releases/riftbound-spiritforged-errata/) ·
 [Unleashed](https://playriftbound.com/en-us/news/rules-and-releases/unleashed-errata-updates/) ·
-[Vendetta](https://playriftbound.com/en-us/news/announcements/vendetta-errata-updates/)
+[Vendetta](https://playriftbound.com/en-us/news/announcements/vendetta-errata-updates/) ·
+[Radiance](https://playriftbound.com/en-us/news/announcements/radiance-errata-updates)
+
+---
+
+## The Radiance FAQ (2026-10-26)
+
+Riot's rulings for Radiance. It **outranks the 2026-10-09 Core Rules** wherever they differ,
+until the next Core Rules Document. Verbatim in [rules-faq.md](rules-faq.md); the gist, by
+what it decides:
+
+- **Paying costs.** Energy and Power are paid **before** other non-standard costs (§357.1,
+  §357.2). So Atakhan's optional "kill a unit" cost can't feed Mordekaiser, Iron Revenant's
+  banish-to-pay Power: the unit isn't in the trash yet while the Power is being paid. A "play
+  me for [cost]" is an **alternate cost** replacing the base cost (§356.1.a), so a Meticulous
+  Restorationist recast for [Y] *can* be paid with Mordekaiser's Power (which only pays for
+  units).
+- **Replacement effects on entering.** Baron Nashor's "I enter there" (the Baron Pit) is a
+  replacement applied as he enters, after the cost is set, so Hunters' Circle's discount
+  still applies when he's played there with no Pit on the board (§355.2). With Riven, The
+  Exile, Baron played to a battlefield you control **enters ready at the Pit**: both
+  replacements apply, in either order. (It does not settle how the Pit counts for the
+  eighth point; that is still [rules-rulings.md](rules-rulings.md)'s derived answer.)
+- **Standard Move with a cost** (Gravity Field). You can't begin a Standard Move you can't
+  complete or pay for; if its cost can't be paid, the move and everything done for it are
+  undone, the exhaust included. A cost to *move a unit there* is paid by whoever performs
+  the move (§412.2): Charm moving their unit makes **you** the mover, so they pay nothing;
+  Angler Wyrm tells **them** to move, so they pay or the unit stays. A player told to move
+  "a unit" must pick one that can actually move (Hunker Down can't dodge it); with none, the
+  instruction is negated.
+- **Trigger timing.** A cost that isn't the first part of a trigger's effect is paid on
+  resolution, not finalization (§383.3.b): Riven, Broken Blade's buff is spent as her
+  trigger resolves. On a Standard Move, **exhaust triggers go on the chain before move
+  triggers**, because exhausting is the move's cost (§203).
+- **Durations.** "Until your next Ending Phase" (Runeblade Anvil) ends as that phase
+  *begins*. Killed on your own turn, the card is playable until your next turn's Ending
+  Phase starts, not in this turn's Ending Phase.
+- **Referenced actions** count only the original game object (§359.3.e.14.c). Mobilize
+  with Seraphic Wyvern and one rune left doesn't draw; Catalyst of Aeons with two runes left
+  still channels both, but doesn't draw.
+- **Control.** A stolen Ekko, Revolutionary can use his own banish-and-replay ability, and
+  you control him when he comes back (§378, §191.2). An opponent's Kharox playing your Neeko,
+  Blending In adds legends from *their* deckbuilding picks, and only if their deck holds a
+  Neeko.
 
 ---
 

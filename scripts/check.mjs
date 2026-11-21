@@ -3316,6 +3316,14 @@ section('The rules');
        `${faqCount} in the file, ${supp.filter((d) => d.kind === 'faq').length} stamped`);
     ok('docs/rules.md points readers at the FAQ that outranks it',
        /rules-faq\.md/.test(book), 'the handbook must link rules-faq.md');
+    // Linking the file is not enough: the Radiance FAQ (2026-10-26) sat in rules-faq.md for a
+    // month while the handbook still called it "promised". A FAQ newer than the Core Rules
+    // outranks them, so the handbook must name it by its date.
+    const coreDate = rules.docs?.core?.updated || '';
+    const outranking = supp.filter((d) => d.kind === 'faq' && d.published > coreDate);
+    ok('the handbook names every FAQ newer than the Core Rules',
+       outranking.every((d) => book.includes(d.published)),
+       outranking.map((d) => `${d.slug} ${d.published}${book.includes(d.published) ? '' : ' (missing)'}`).join(', ') || 'none newer');
 
     /* Errata. Riot's card feed serves printed text, so the catalog is wrong about 52
        cards and says so with complete confidence. build-errata.mjs resolves each entry
