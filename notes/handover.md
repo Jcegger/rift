@@ -1,4 +1,4 @@
-# Handover: Sivir Is Trying Her Best (as of 3 November 2026)
+# Deck brief: Sivir Is Trying Her Best (as of 3 November 2026)
 
 Where the work stands, for the next session. Read this first, then the games table and the last log entries at the
 end of `decklab/sivir-ready.md`. The guide (`guides/sivir-one-army.md`) is current and is the full reference.
@@ -96,10 +96,7 @@ Jay is happy with the list; it stays locked.
 
 ## How to change the deck (it's a live app)
 
-Pull the row fresh, save it to `backups/state-pre-<what>-<date>.json` (gitignored), check the deck still matches the
-last read (stop if Jay changed it), change only that deck's `cards`/`sb`, POST the whole row back
-(`Prefer: resolution=merge-duplicates`, the app's own write in `index.html`), then `scripts/rift export` to confirm.
-Bench first: `scripts/rift try --deck "Trying Her Best" "-N Card" "+N Card"`. Then update, in the same go: the guide
+The write itself (bench, back up, merge, write back, confirm) is the `deck-write` skill. Then update, in the same go: the guide
 (§1 list, §6 card entries, §8/§9 tables), `guides/sivir-one-army-sheet.md`, `guides/sivir-build-sheet.md` (regenerate
 from the live deck and verify it matches), `node scripts/build-guides.mjs`, `scripts/build-journal`, `scripts/check.mjs`,
 commit and push, then `rmsync push`. Log every change in `decklab/sivir-ready.md`.
