@@ -5,7 +5,7 @@ freeze). **Sivir Is Trying Her Best stays live as the benchmark**: this list has
 before it replaces anything. Nothing goes into the app until Jay approves (`deck-write`). Decide after the first
 post-ban weekend (about 29–30 Nov).
 
-**Stage now: jobs, revised 21 Nov (no Gold job), waiting on Jay.**
+**Stage now: cards. Draft B, waiting on Jay (21 Nov). Sideboard still to do.** Jobs approved 21 Nov (5 second-move cards; if Sivir is answered, fall back on the board of proven Evelynn units).
 
 ## 1. Identity (picked by Jay, 21 Nov)
 
@@ -46,7 +46,7 @@ Sivir has no record (45 lists ever, 2 placings). The same 39-card pool is played
 - **Sivir's own 22 Radiance lists:** what other Sivir players run, no results. Marked **crowd**.
 - **Theory:** a card no result backs, picked for the engine.
 
-## 3. Jobs (for Jay to approve before any card is picked)
+## 3. Jobs (approved by Jay, 21 Nov)
 
 40 cards counting Sivir in the Champion Zone. Counts are a starting point.
 
@@ -92,10 +92,62 @@ if they win their job here.
 3. **The trap plan as a fallback:** Faefolk, Stranger and the hold-A plan are not in the jobs. If Sivir is answered,
    the deck falls back on a board of proven Evelynn units rather than the trap.
 
-## 4. Next
+## 5. Draft B (the list to review)
 
-1. Jay approves or changes the jobs and counts.
-2. Cards: fill each job, each pick labelled proven, crowd or theory.
+40 cards: Sivir in the Champion Zone plus 39. Evidence: **P** proven (in most of the 23 top-quarter Evelynn lists),
+**C** crowd (other Sivir players), **K** kept from Trying Her Best.
+
+| job | cards |
+|---|---|
+| Champion (2) | Sivir, Mercenary ×1 Champion Zone + ×1 deck |
+| Second move (5) | On the Hunt ×3 (C; Sivir's signature, 3 is the cap; 2 Power, Defy-proof) · Ride the Wind ×2 (C, K) |
+| Win the fight (5) | Punch First ×3 (P, K) · Switcheroo ×2 (P, K) |
+| Removal and answers (7) | Rampage ×2 (P, K) · Star-Crossed ×2 (P, K) · Rebuke ×2 (K; 2 Power, Defy-proof, answers on their turn) · Gust ×1 (P, K) |
+| Board and disruption (14) | Pyke, Returned ×3 (P) · Gutter Guardian ×2 (P) · Vex, Apathetic ×2 (P, K) · Rengar, Trophy Hunter ×2 (P, K) · Bedeviling Stranger ×2 (P, K) · Evelynn, Entrancing ×1 (P, K) · Traveling Merchant ×2 (C; cheap body, loots when it moves) |
+| Cards in hand (5) | Reckless Innovator ×3 (K; draw or Gold) · Ezreal, Prodigy ×2 (K) |
+| Gear (2) | Edge of Night ×2 (P) |
+| Battlefields | Bandle Scouts' Academy (P; hiding makes Gold) · Sigil of the Storm (C, K; conquer → recycle → Gold) · Packed Amphitheater (P; Sivir +1) |
+| Runes | 6 Body / 6 Chaos for now. Printed Power is now Chaos 22, Body 14, and stuck on colour at t3 on the play went 4% → 6%: test 5 Body / 7 Chaos |
+
+**Out of the old list:** Irresistible Faefolk ×3, Tideturner ×2, Nidalee ×3, Ember Monk, Existential Dread, one
+Gust, one Ride the Wind, Boots of Swiftness, Amateur Recital, Forbidding Waste.
+
+**Honest note:** 26 of the 39 are cards the old list already plays. Starting from scratch landed close to it,
+because most of its spells and disruption are also in the proven Evelynn lists. That confirms those cards
+independently, but this isn't a radically different deck. What changes is the close (the double conquest instead
+of the trap), the Faefolk/Nidalee/Tideturner package (Pyke, Gutter Guardian, Traveling Merchant and On the Hunt
+replace it), and the battlefields.
+
+## 6. Bench (`scripts/rift try` against Trying Her Best, 21 Nov)
+
+20,000 goldfish games, 5,000 engine games a scenario. Quiet / normal / heavy opponent. Card text and counts only:
+none of this is a win rate.
+
+| measure | Trying Her Best | Draft B |
+|---|---|---|
+| Mercenary on (turns 4–8, 2+ Power spent) | 26 / 34 / 38% | **37 / 43 / 46%** |
+| Gold a game | 3.5 / 4.1 / 3.75 | 4.1 / 4.5 / 4.2 |
+| Defy-countered spells expected (field) | 4.6 | **3.2** |
+| An answer usable on their turn, t3 / t5 (play) | 22 / 65% | 29 / 57% |
+| Same, on the draw | 26 / 77% | 31 / 70% |
+| Two units by turn 3 (play / draw) | 98 / 99% | 90 / 98% |
+| Might by turn 5 (normal) | 14.9 | 13.1 |
+| Cheap cards (≤2 Energy) | 20 | 18 |
+
+**Read:** Sivir switches on about 10 points more often and Defy has a third fewer targets. The price is a slightly
+slower start on the play and a little less to do on their turn by t5. The bench can't see Sivir's +2 Might,
+Ganking moves or the double conquest, so Might understates the draft and the close isn't measured at all.
+
+**Rejected on the way:**
+- **Void Assault** is Kha'Zix's signature card (§103.3.d), so it's illegal under Battle Mistress.
+- **Draft A** (Hold 'Em ×2 for Rebuke, Kinkou Initiate, Boots kept): Mercenary on 36 / 39 / 38%, but two units by
+  t3 on the play fell to 85% and answers on their turn by t5 to 39%. Hold 'Em costs no Power, so it doesn't help
+  switch Sivir on.
+
+## 7. Next
+
+1. Jay reviews Draft B (§5).
+2. Sideboard (10), aimed at the post-ban field: gear answers, Charm, Kai'Sa's removal.
 3. Test it against Trying Her Best with `scripts/rift try` (same settings), and `scripts/rift versus` for the
    projected top archetypes. The bench can't see Ganking moves or the double conquest; name that gap, don't guess.
 4. After the first post-ban weekend: re-read the field and decide with Jay.
