@@ -5,7 +5,7 @@ freeze). **Sivir Is Trying Her Best stays live as the benchmark**: this list has
 before it replaces anything. Nothing goes into the app until Jay approves (`deck-write`). Decide after the first
 post-ban weekend (about 29–30 Nov).
 
-**Stage now: jobs (waiting on Jay).**
+**Stage now: jobs, revised 21 Nov (no Gold job), waiting on Jay.**
 
 ## 1. Identity (picked by Jay, 21 Nov)
 
@@ -27,7 +27,7 @@ turns spent Power into a 6-Might ganker.
 - **The double conquest:** conquer A, ready her (On the Hunt; or move her with Ride the Wind or Void Assault, which
   don't need Ganking), conquer B. Both battlefields are scored, so the eighth-point gate is met. From 6 points
   that's 6 → 7 → 8, with no hold needed.
-- **Extra Gold sources** in the pool: Bandle Scouts' Academy (hide a card here → Gold), Reckless Innovator,
+- **Other Gold sources** in the pool (not a job; see §3): Bandle Scouts' Academy (hide a card here → Gold), Reckless Innovator,
   Treasure Hunter, Pyke, Returned (an enemy dies → Gold), The Waters' Wage (from face down on your turn: three
   *ready* Gold), Black Market Broker (each face-down play → Gold), Sigil of the Storm (conquer → recycle → the
   legend's Gold).
@@ -53,14 +53,29 @@ Sivir has no record (45 lists ever, 2 placings). The same 39-card pool is played
 | # | job | slots | candidates (evidence) |
 |---|---|---|---|
 | 1 | **The champion** | 2 | Sivir, Mercenary: Champion Zone + 1 in the deck, so losing her once isn't the game (crowd avg 1.3) |
-| 2 | **Gold makers** (fuel for Sivir and the Power spells) | 7–8 | Pyke, Returned (proven, 23/23, avg 2.7) · Reckless Innovator (proven in Kha'Zix 4/4; Evelynn 9/23) · Treasure Hunter (crowd 7/22; Miss Fortune) · The Waters' Wage (Evelynn 130/505 overall; theory for the 3-ready-Gold turn) · Black Market Broker (theory) |
-| 3 | **The second move** (ready her or move her a second time) | 4–5 | On the Hunt (crowd 7/22; 2 Power, so Defy can't counter it, and it switches her on) · Ride the Wind (crowd 10/22; 1 Power, Defy-able) · Void Assault (proven in Kha'Zix 4/4 at 3 copies; moves an enemy unit too) |
-| 4 | **Win the fight** (Power sinks that turn combat) | 5–6 | Punch First (proven 19/23; 2 Power, not Defy-able) · Hold 'Em (proven 22/23; 0 Power) · Switcheroo (proven 18/23; 2 Power) |
-| 5 | **Removal that kills** (a kill readies the legend: another Gold) | 4–5 | Rampage (proven 20/23) · Star-Crossed (proven 20/23; a bounce, so no ready) · Gust (14/23; bounce, ≤3 Might) |
-| 6 | **Board and disruption** | 8–10 | Vex, Apathetic (proven 22/23) · Rengar, Trophy Hunter (proven 21/23) · Gutter Guardian (proven 21/23; its Show Off adds Power, which counts for Sivir) · Evelynn, Entrancing (proven 23/23; the pull from face down) · Bedeviling Stranger (15/23) |
-| 7 | **Cards in hand** | 3–4 | Ezreal, Prodigy · Traveling Merchant (crowd 10/22; draws when it moves) · The Good Stuff · Kinkou Initiate |
-| 8 | **Gear** | 2–4 | Edge of Night (proven 21/23; Hidden) · Boots of Swiftness (13/23; Ganking for a second unit) |
+| 2 | **The second move** (ready her or move her a second time) | 5–6 | On the Hunt (crowd 7/22; 2 Power, so Defy can't counter it, and it switches her on) · Ride the Wind (crowd 10/22; 1 Power, Defy-able) · Void Assault (proven in Kha'Zix 4/4 at 3 copies; moves an enemy unit too) |
+| 3 | **Win the fight** (Power sinks that turn combat) | 6–7 | Punch First (proven 19/23; 2 Power, not Defy-able) · Hold 'Em (proven 22/23; 0 Power) · Switcheroo (proven 18/23; 2 Power) |
+| 4 | **Removal that kills** (a kill readies the legend: another Gold) | 4–5 | Rampage (proven 20/23) · Star-Crossed (proven 20/23; a bounce, so no ready) · Gust (14/23; bounce, ≤3 Might) |
+| 5 | **Board and disruption** | 9–11 | Pyke, Returned (proven 23/23, avg 2.7; also Gold when an enemy dies) · Vex, Apathetic (proven 22/23) · Rengar, Trophy Hunter (proven 21/23) · Gutter Guardian (proven 21/23; its Show Off adds Power, which counts for Sivir) · Evelynn, Entrancing (proven 23/23; the pull from face down) · Bedeviling Stranger (15/23) |
+| 6 | **Cards in hand** | 4–5 | Reckless Innovator (Kha'Zix 4/4; draw or Gold) · Ezreal, Prodigy · Traveling Merchant (crowd 10/22; draws when it moves) · The Good Stuff · Kinkou Initiate |
+| 7 | **Gear** | 2–4 | Edge of Night (proven 21/23; Hidden) · Boots of Swiftness (13/23; Ganking for a second unit) |
 | — | **Battlefields** (3) | 3 | Bandle Scouts' Academy (proven 23/23; hiding makes Gold) · Sigil of the Storm (crowd 20/45; conquer → recycle → Gold) · Packed Amphitheater (14/23; Sivir +1) |
+
+### No Gold job (Jay's call, 21 Nov)
+
+The legend already turns recycled Power into Gold, so a separate Gold job mostly piles up Gold. The bench agrees.
+Trying Her Best with −3 Reckless Innovator, +3 Kinkou Initiate (`scripts/rift try`; quiet / normal / heavy
+opponent):
+
+- **Gold a game barely drops:** 3.51 → 3.12, 4.12 → 3.85, 3.75 → 3.76.
+- **"Mercenary on" (2+ Power spent, turns 4–8) doesn't move:** 26%, 34%, 38% → 37%.
+
+What holds Sivir back is **having 2 Power of useful things to spend each turn**, not Gold. Paying with Gold isn't a
+recycle, so it doesn't trigger the legend either. So "makes Gold" is only a tiebreaker: Pyke, Bandle Scouts' Academy
+and maybe Innovator keep it because they earn their slot anyway. The Waters' Wage, Black Market Broker and Treasure
+Hunter are out. The freed slots go to things that spend Power usefully (Punch First, Switcheroo, On the Hunt) and to
+card draw. The draft is judged on raising "Mercenary on" against the benchmark. Caveat: these numbers come from the
+old list's cards, so re-measure on the draft.
 
 ### What's deliberately out
 
