@@ -13,13 +13,26 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
   Gold early, draw later.
 - Rules, play advice and deck writes go through the `rules-question`, `play-advice` and `deck-write` skills
   (2026-11-21); `scripts/check.mjs` reads the rules lookup order from the `rules-question` skill.
+- rift now commits and pushes finished work once `scripts/check.mjs` passes (Jay, 21 Nov; dotclaude 2a93368).
+- **21 Nov audit done** (commits from 9ed5076 on): gear strips (`xb`), keywords read as the card has them
+  (`keywordOf`), gear on units (`withGear`), Tank/Backline in fights, Riot's "Mights" rewording (Switcheroo had been
+  invisible to the tools since 28 Oct), Reckless Innovator's Gold in both sims, readers tested against real cards
+  (`READERS`), the handbook's Radiance FAQ section, Rengar's Ambush corrected in the deck brief. The refresh had been
+  cancelled by its time limit three runs running (20–21 Nov): tests now run after the commit, the limit is 40 minutes,
+  and a cancel opens the tracking issue. A hand-started run then lost its data to a push race (I pushed mid-run), so
+  the data commit now rebases and retries.
 
 ## Next
 
-1. **2026-11-23, Radiance bans take effect:** the field report's numbers shift on their own, and `build-banned.mjs` will
-   report the `ANNOUNCED_BANS` entries as redundant: delete them, then check the next day's refresh is green.
-2. **Gear bonus strips (done 2026-11-21):** `data/cards.json` now carries each gear's strip as `xb` (34 gear; it was
-   dropped whole, not only keywords). The app shows and searches it; the sim reads only a `[Ganking]` strip. Still to
-   do in the sim: the other strips (Trinity Force's hold point, Shield/Tank/Assault, conquer triggers).
-3. **Judge question before an event:** does a Baron Pit gate the 8th-point conquest?
-4. Log each new game in the app's journal and the worksheet's games table (`decklab/sivir-ready.md`).
+1. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook
+   or memory.
+2. **2026-11-23, Radiance bans take effect:** the field report's numbers shift on their own, and `build-banned.mjs` will
+   report the `ANNOUNCED_BANS` entries as redundant: delete them, then check the next day's refresh is green and
+   finishes inside 40 minutes. Then re-read the field (`scripts/rift meta --since 2026-11-23`) before any matchup advice.
+3. **`lib/engines.test.mjs` Riven read is red** (report-only): it applies the announced bans early and drops 99% of
+   Riven lists (Broken Blade). After the 23rd the expected answer itself moves; re-derive it from the guides then.
+4. **Sim gaps still open** (README, "Keywords the sims do not read"): Trinity Force's hold point and other conquer/hold
+   strips, Level/Hunt, Weaponmaster, Quick-Draw, Legion. `scripts/rift fight` can't take gear yet, and its comma split
+   breaks champion names ("Rengar, Trophy Hunter").
+5. **Judge question before an event:** does a Baron Pit gate the 8th-point conquest? (The Radiance FAQ doesn't say.)
+6. Log each new game in the app's journal and the worksheet's games table (`decklab/sivir-ready.md`).

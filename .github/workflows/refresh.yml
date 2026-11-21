@@ -383,8 +383,15 @@ jobs:
             summary="${summary} · kept ${FAILED_SOURCES//,/, }"
           fi
           git commit -m "chore(data): ${summary}"
-          git push
-          echo "Committed: ${summary}"
+          # A push to master while this ran (21 Nov 2026: two code commits mid-run) rejects a
+          # plain push and loses the day's data. Its files are this job's alone, so rebase
+          # onto whatever landed and try again.
+          for attempt in 1 2 3; do
+            if git push; then echo "Committed: ${summary}"; exit 0; fi
+            git pull --rebase
+          done
+          echo "::error title=Data not pushed::Couldn't push the data commit after 3 tries."
+          exit 1
 
       # jayegger.com's Riftbound Radiance field report reads a copy of data/report.json
       # (src/_data/radianceReport.json there). Send it when it changed, as "rift bot",
