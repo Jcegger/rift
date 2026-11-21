@@ -3506,7 +3506,7 @@ section('The documentation');
                            : `${files.length} documented`);
   }
 
-  /* The lookup order is the single most load-bearing sentence in CLAUDE.md, because
+  /* The lookup order is the single most load-bearing sentence in the rules-question skill, because
      getting it wrong is what produced the wrong answers it exists to prevent. Assert
      the four files appear, and appear in that order — a reshuffle that puts the
      verbatim first would read as fine and quietly restore the old failure. */
@@ -3514,9 +3514,10 @@ section('The documentation');
   /* Anchored to the numbered list, not to first mention anywhere in the file: rules.md
      is named in the prose above it, so an indexOf over the whole document reads as
      correctly ordered no matter how the list itself is shuffled. */
-  const listed4 = [...claude.matchAll(/^\d+\. \*\*`(docs\/[a-z-]+\.md)`\*\*/gm)].map((m) => m[1]);
+  const rulesSkill = readDoc('.claude/skills/rules-question/SKILL.md');
+  const listed4 = [...rulesSkill.matchAll(/^\d+\. \*\*`(docs\/[a-z-]+\.md)`\*\*/gm)].map((m) => m[1]);
   const inOrder = listed4.length === ORDER.length && ORDER.every((f, i) => listed4[i] === f);
-  ok('CLAUDE.md states the rules lookup order, in order',
+  ok('the rules-question skill states the rules lookup order, in order',
      inOrder,
      inOrder ? 'handbook → verbatim → FAQ → rulings'
              : listed4.length ? `list reads: ${listed4.join(' → ')}` : 'no numbered lookup list found');

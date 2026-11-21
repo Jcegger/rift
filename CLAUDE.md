@@ -1,134 +1,52 @@
 # CLAUDE.md
 
-Operating notes for this repo. [README.md](README.md) explains how everything *works*;
-this file is the short list of things that have actually gone wrong, and what to do
-instead. When the two disagree, README.md is right and this file has a bug.
+Operating notes for this repo: things that have gone wrong, and what to do instead.
+[README.md](README.md) explains how everything works; where the two disagree, README.md is right.
 
----
+- **Check:** `~/anaconda3/lib/python3.8/site-packages/playwright/driver/node scripts/check.mjs`
+  (node is not on PATH here; takes about 2 to 3 minutes; passes on `all checks pass`).
 
-## Answering a rules question
+Any rules claim, even one made mid-task, goes through the `rules-question` skill.
 
-**Read `docs/rules.md` first. Every time.** It is the hand-written handbook, and it is
-the index to everything else. Grepping the verbatim rules as a first move is how this
-repo has produced its confident wrong answers — twice, both times from rules the
-handbook already cited.
+## State and decks
 
-The order is **handbook → verbatim → FAQ → rulings**:
-
-1. **`docs/rules.md`** — which rules are involved, and how they compose.
-2. **`docs/rules-full.md`** — Riot's exact wording. Quote it when the claim is load bearing.
-3. **`docs/rules-faq.md`** — the current FAQ **outranks the Core Rules** where they differ.
-4. **`docs/rules-rulings.md`** — rulings from Riot staff on things the published rules
-   leave ambiguous. **These cannot be derived.** No amount of careful reading finds them.
-
-**Grep alone will not find the rule.** The rules are written in the rules' vocabulary;
-questions arrive in players'. §359.3.e.12 decides what happens when a permanent is
-bounced in response to its own trigger and contains none of the words *bounce*, *return
-to hand* or *leaves the board*. Search the handbook by concept before the verbatim by
-keyword. **`docs/jargon.md`** translates players' words into the concept: "chase the queen"
-means repeated removal on the deck's protected champion unit, and asking Jay what it meant
-was the wrong move.
-
-**The answer is usually a composition, and no single rule states it.** Hidden pinning a
-target to a battlefield (§811.1.d.3) plus off-board reads returning null (§359.3.e.12)
-was a ruling neither rule contained, until Riot wrote it in as §811.1.d.3.a. When you derive one of these and it matters, record
-it in `docs/rules-rulings.md` with its four fields — `check.mjs` enforces them.
-
-**Never state a rules claim from inference about what a rule *must* mean.** Read what it
-says. A wrong premise silently invalidates every piece of advice built on it.
-
----
-
-## Giving play advice
-
-**Read `docs/strategy.md` before advising on a line, a matchup plan or a game review.**
-It is how this repo chooses between two legal plays. **Run its terminal scan first:**
-can either player reach 8 before the other acts again? A hold at 7 wins, because hold
-points are not gated (§473.1.a.1). Only after that does future-position reasoning apply.
-Review mistakes using its seven types, so the match journal's tallies stay comparable.
-
----
-
-## What lives where
-
-**The collection, decks, wants and settings are not in git.** They live in a Supabase
-row the app mirrors to, read by `scripts/state.mjs` (`scripts/rift`). Adding or changing
-a deck is a **live write to a running app** — read the row, back it up, merge, write
-back the whole blob. Never assume a cached copy is current; the user edits between
-sessions.
-
-**Decks exist to feed advice.** The Decks tab is an input surface for `scripts/rift`,
-not a deckbuilder. Any deck-side change has to reach the CLI in the same commit, or the
-next answer is built on data that silently went missing.
-
-**`data/*.json` is generated.** Never hand-edit it. Fix the builder and re-run.
-`docs/rules.md`, `docs/rules-rulings.md`, `guides/*.md`, `README.md` and this file are
-hand-written and do not rebuild themselves.
-
----
+- The collection, decks, wants and settings are not in git: they live in one Supabase row
+  the app mirrors to, read by `scripts/rift`. Jay edits between sessions, so read it fresh.
+  Changing one is a live write to a running app (`deck-write` skill).
+- Decks exist to feed advice. The Decks tab is an input surface for `scripts/rift`, not a
+  deckbuilder: a deck-side change to the app reaches the CLI in the same commit.
 
 ## The data pipeline
 
-**`check.mjs` is the gate, and it is meant to block.** The daily refresh commits nothing
-if it fails — stale data that works beats fresh data that lies. When it goes red, the
-question is *what changed upstream*, not *how do I get past this*. Loosen an assertion
-only when the world genuinely changed shape, and say in the commit what the replacement
-invariant is.
-
-**Upstream changes shape silently and often** — three separate breakages in one week in
-September 2026. A feed can return `200 OK`, well-formed, the right row count, and mean
-something entirely different: an endpoint that quietly became paginated, a card name
-split into `name` + `subtitle`, a page that stopped linking the report it used to.
-Assert the *meaning*, not the status code. The same goes for what players upload: 12
-identical lists of 39 Spiderlings at a Radiance preview were players hiding their decks,
-and read as a deck they made Yasuo a top legend for a day (`isPlaceholder`, 22 Oct 2026).
-
-**A single failing source keeps its last-good file and the run stays green.** So read the
-summary line — `Sources rebuilt: N of 10` — on successful runs too. A source that quietly
-fails every day is a failure waiting for its shelf life to expire.
-
-**Be polite to upstream.** Several builders share one host and will rate-limit each
-other. Space requests, back off on 429, and do not fetch twice what you can compute once.
-
----
+- `data/*.json` is generated. Fix the builder and re-run it; README lists the hand-written files.
+- `check.mjs` is the gate, and it is meant to block: the daily refresh commits nothing if it
+  fails, because stale data that works beats fresh data that lies. When it goes red, find what
+  changed upstream. Loosen an assertion only when the world changed shape, and name the
+  replacement invariant in the commit.
+- Upstream changes shape silently while still returning `200 OK` and the right row count
+  (an endpoint turned paginated, a card name split into `name` + `subtitle`, 12 identical
+  39-Spiderling lists that were players hiding decks). Assert the meaning.
+- A single failing source keeps its last-good file and the run stays green, so read
+  `Sources rebuilt: N of 10` on green runs too.
 
 ## Standing rules
 
 - **Never invent a number.** No made-up field sizes, no zero standing in for unknown, no
-  estimated player counts. Unknown is printed as unknown. This is the repo's whole point.
-- **Cost is never the axis.** Do not recommend a deck, list or card because it is cheap
-  or already owned, and do not argue against one on what is still to get. Decide on
-  matchups, results and card quality.
-- **Distinguish a record from a claim.** `tour`/`ev`/`pl`/`ec` mean upstream vouched for
-  it. `cp`/`ce`/`cm` are the deck author's own title claim. When ranking archetypes,
-  union both — filtering on `tour` alone hides every RQ result.
-- **Never suggest an Aurora deck.** Any list running Dazzling Aurora is out for Jay — no
-  brew, build, swap or "consider" names one (`lib/avoid.mjs`). It stays in everything about
-  the *field*: matchups, gauntlets, meta tables and scouting must still cover Aurora Jayce,
-  Sivir or whoever is on it, because Jay plays against them.
-- **Correct yourself plainly and move on.** State the correction, fix it, continue. No
-  ruminating.
+  estimated player counts. Unknown is printed as unknown.
+- **Cost is never the axis.** Recommend or reject a deck, list or card on matchups, results and
+  card quality, never on price or what Jay already owns.
+- **Distinguish a record from a claim.** `tour`/`ev`/`pl`/`ec` mean upstream vouched for it;
+  `cp`/`ce`/`cm` are the deck author's own title claim. When ranking archetypes, union both:
+  `tour` alone hides every RQ result.
+- **Never suggest an Aurora deck.** Lists running Dazzling Aurora are out for Jay's own play:
+  no brew, build, swap or "consider" option names one (`lib/avoid.mjs`). They stay in everything about the field (matchups, gauntlets, meta tables,
+  scouting), because Jay plays against them.
+- **Correct yourself plainly and move on.** State the correction, fix it, continue.
 
----
+## Muse reads this data
 
-## Muse (and other agents) use this data
-
-Jay's MCP connector (`jay-egger-site/functions/api/mcp.js`, live at jayegger.com/api/mcp) reads
-and writes this repo's data so he can ask Meta Muse about his decks and log games by voice at
-the store. It depends on:
-
-- **The Supabase row:** `decks[].{id,name,cards,sb}` and `journal[].{id,at,deck,opp,res}`.
-  `log_riftbound_match` appends to `journal` read-modify-write, like the page's `write()`.
-- **`data/tiers.json`, `data/news.json`, `data/cards.json`:** read from rift.jayegger.com.
-  Opponent names resolve against Legend cards (`t`, `v`, `g[0]`, `n`) the way `legendName()` does.
-
+Jay's MCP connector (`~/projects/jayegger-site/functions/api/mcp.js`, live at
+jayegger.com/api/mcp) lets Meta Muse read his decks and log games by voice. It depends on the
+Supabase row's `decks[].{id,name,cards,sb}` and `journal[].{id,at,deck,opp,res}`, and on
+`data/tiers.json`, `data/news.json` and `data/cards.json` (Legend fields `t`, `v`, `g[0]`, `n`).
 Rename or reshape any of these and update `mcp.js` in the same session.
-
----
-
-## Keeping this file honest
-
-`check.mjs` asserts that every file in `docs/`, every builder in `scripts/`, and every
-file in `data/` is named in README.md, and that the rules lookup order above still
-appears here in order. Add a doc or a builder without documenting it and the build
-fails. That is deliberate: this file is only useful while it is true.
