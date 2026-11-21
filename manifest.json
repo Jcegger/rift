@@ -1,0 +1,52 @@
+{
+ "items": [
+  {
+   "collection": "Nexus Night",
+   "title": "Match sheets",
+   "file": "nexus-night--match-sheets.pdf",
+   "version": "142b5b00a161d24b",
+   "drive": "Nexus Night - Match sheets.pdf",
+   "write": true
+  },
+  {
+   "collection": "Nexus Night",
+   "title": "Trouble list",
+   "file": "nexus-night--trouble-list.pdf",
+   "version": "142b5b00a161d24b",
+   "drive": "Nexus Night - Trouble list.pdf",
+   "write": true
+  },
+  {
+   "collection": "Nexus Night",
+   "title": "Review",
+   "file": "nexus-night--review.pdf",
+   "version": "142b5b00a161d24b",
+   "drive": "Nexus Night - Review.pdf",
+   "write": true
+  },
+  {
+   "collection": "Nexus Night",
+   "title": "Table sheet (Sivir)",
+   "file": "nexus-night--table-sheet-sivir.pdf",
+   "version": "7a393e9ffb2f6b9d",
+   "drive": "Nexus Night - Table sheet (Sivir).pdf",
+   "kepub": "nexus-night--table-sheet-sivir.kepub.epub"
+  },
+  {
+   "collection": "Nexus Night",
+   "title": "Matchup card (Sivir)",
+   "file": "nexus-night--matchup-card-sivir.pdf",
+   "version": "0d99f1c7d21c53c6",
+   "drive": "Nexus Night - Matchup card (Sivir).pdf",
+   "kepub": "nexus-night--matchup-card-sivir.kepub.epub"
+  },
+  {
+   "collection": "Nexus Night",
+   "title": "Build sheet (Sivir)",
+   "file": "nexus-night--build-sheet-sivir.pdf",
+   "version": "b1f7179dd492cc0e",
+   "drive": "Nexus Night - Build sheet (Sivir).pdf",
+   "kepub": "nexus-night--build-sheet-sivir.kepub.epub"
+  }
+ ]
+}
