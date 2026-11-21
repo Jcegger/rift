@@ -24,6 +24,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 
 ## Next
 
+0. **Sivir: decide −3 Ride the Wind +3 On the Hunt with Jay** (bench 21 Nov in `decklab/sivir-new.md`'s shelved
+   note). Draft B is shelved. New `deck-build` skill (reads `docs/deckbuilding.md` first) is required for deck work.
+
 1. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook
    or memory.
 2. **2026-11-23, Radiance bans take effect:** the field report's numbers shift on their own, and `build-banned.mjs` will

@@ -5,6 +5,16 @@ freeze). **Sivir Is Trying Her Best stays live as the benchmark**: this list has
 before it replaces anything. Nothing goes into the app until Jay approves (`deck-write`). Decide after the first
 post-ban weekend (about 29–30 Nov).
 
+> **Shelved (21 Nov 2026).** Draft B breaks the measured rules in `docs/deckbuilding.md`, which I hadn't read
+> when building it: two champion units (93% of good finishes run one), ~20 changes from the anchor (winners change
+> 6–9; past 16 is a new deck), Bedeviling Stranger kept after cutting the Faefolk that gets it to 4 units, and
+> "proven" Evelynn cards that are proven partly by Evelynn's legend (it draws on each face-down play). It was also
+> judged on "Mercenary on", the measure it was built to win. **The live question is one role swap in Trying Her
+> Best: −3 Ride the Wind +3 On the Hunt** (signatures run 3 or 0). On the bench that swap gets most of Draft B's gain:
+> Mercenary on 26/34/38 → 34/41/44%, Defy targets 4.6 → 3.2, two units by t3 on the play 98 → 94%, answers on their
+> turn unchanged. What the bench can't see: no Ride the Wind left for their showdowns (it's an Action; On the Hunt isn't).
+> Kept below for the reasoning and the rules work. Future deck work goes through the `deck-build` skill.
+
 **Stage now: cards. Draft B, waiting on Jay (21 Nov). Sideboard still to do.** Jobs approved 21 Nov (5 second-move cards; if Sivir is answered, fall back on the board of proven Evelynn units).
 
 ## 1. Identity (picked by Jay, 21 Nov)

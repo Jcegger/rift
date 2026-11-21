@@ -3547,6 +3547,15 @@ section('The documentation');
      inOrder ? 'handbook → verbatim → FAQ → rulings'
              : listed4.length ? `list reads: ${listed4.join(' → ')}` : 'no numbered lookup list found');
 
+  /* deck-build exists because a from-scratch list broke the measured rules nobody had read
+     (21 Nov 2026). Its first read must stay docs/deckbuilding.md, and CLAUDE.md must route
+     deck proposals to it. */
+  const buildSkill = readDoc('.claude/skills/deck-build/SKILL.md');
+  const firstRead = (buildSkill.match(/^\d+\. \*\*`(docs\/[a-z-]+\.md)`\*\*/m) || [])[1];
+  ok('the deck-build skill reads docs/deckbuilding.md first, and CLAUDE.md routes to it',
+     firstRead === 'docs/deckbuilding.md' && /deck-build/.test(claude),
+     firstRead ? `first read: ${firstRead}` : 'no numbered read list found');
+
   // The two claims in CLAUDE.md that are cheap to state and expensive to have wrong.
   ok('CLAUDE.md still warns that personal state is not in git',
      /not in git/i.test(claude) && /supabase/i.test(claude),

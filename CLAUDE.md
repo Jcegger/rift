@@ -7,6 +7,7 @@ Operating notes for this repo: things that have gone wrong, and what to do inste
   (node is not on PATH here; takes about 2 to 3 minutes; passes on `all checks pass`).
 
 Any rules claim, even one made mid-task, goes through the `rules-question` skill.
+Any deck, list or card-swap proposal goes through the `deck-build` skill.
 
 ## State and decks
 
