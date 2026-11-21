@@ -209,3 +209,35 @@ the Brush reads "When you score here" (§187.8), and scoring is something a play
 battlefield, by conquering or holding it (§471.1, §471.2). So the Pit is a battlefield that can
 be scored, and "every Battlefield" counts it. The practical upshot against Baron: hold your two
 battlefields and win by holding, not by conquering.
+
+## Sivir, Mercenary's double conquest: spell moves, "spent" Power, and the Final Point
+
+**Date:** 2026-11-21
+**Source:** Derived in this repo from the Core Rules and the FAQ's Jhin answer; no Riot staff ruling or community ruling read. Asked while building a new Sivir (Battle Mistress) deck.
+**Rules:** §144.4, §451.1, §810.1.c, §810.1.c.3, §135.2.e.5.b, §445.1, §811.1.b, §805.1, §471.1, §473.1.b.1
+**Expires:** when Riot rules on any of the three points, or a rules update changes how effect moves or "spent" resources work
+
+**Questions.** (1) Can a spell move (Ride the Wind: "Move a friendly unit and ready it"; Void
+Assault) take a unit from one battlefield to another without Ganking? (2) Does Sivir's "If you've
+spent at least [A][A] this turn" count Power from a Gold token, and Power paid to hide a card?
+(3) Sivir conquers A, On the Hunt readies her, she ganks to B and conquers it: does that win from 6 or 7?
+
+**Derived answers.**
+
+1. **Yes.** Ganking only adds a destination to the *Standard Move* (§810.1.c, §810.1.c.3: "only new
+   options for the Standard Move"); the base ↔ battlefield limit is §144.4's, which is the Standard
+   Move's. An effect move is a different action, and *"The source of the Move will provide details on
+   any restrictions on legality for Destination"* (§451.1). Ride the Wind names none, so any
+   battlefield is a legal destination.
+2. **Yes to both.** Gold adds [A], which *"can be spent to pay a Power cost of any Domain"*
+   (§135.2.e.5.b). Paying a cost removes it from the pool (§445.1), and the FAQ's Jhin answer treats
+   resources paid for a card as spent even if the card is later countered. Hiding is "pay [A]"
+   (§811.1.b), so it counts too. So does Accelerate's [1][Chaos] (§805.1): **Sivir played with
+   Accelerate has spent 2 Power on her own** (1 for her cost, 1 for Accelerate), so she enters ready
+   with +2 Might and Ganking.
+3. **Yes.** Conquering A scores it (§471.1); at 7 the conquest of B needs every battlefield scored
+   this turn (§473.1.b.1), and A was. From 6 that's 6 → 7 → 8. (With a Baron Pit on the board, it
+   needs the Pit too.)
+
+**Weakest link:** point 1 rests on reading §451.1 as the only limit on effect moves. Ask a judge
+before an event depends on it.
