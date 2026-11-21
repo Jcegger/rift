@@ -22,6 +22,7 @@ ok("Noxian Drummer's on-move token is not counted on play", toks("Noxian Drummer
 ok("Viktor, Innovator's opponent's-turn token is not counted", toks("Viktor, Innovator").units.length === 0);
 const k = (n) => classify(card(n));
 ok("Defy is interaction", k("Defy").role === "interaction");
+ok("Reckless Innovator's real text reads as Gold on exhaust (line break after \"choose one —\")", engineOf(card("Reckless Innovator")).exhaustGold);
 ok("Gust (bounce) is interaction", k("Gust").role === "interaction");
 ok("Falling Star (removal) is interaction", k("Falling Star").role === "interaction");
 ok("Meditation is proactive, draws 2 with a unit, 1 without", k("Meditation").role === "proactive" && k("Meditation").draws === 2 && k("Meditation").drawsAlone === 1 && !k("Meditation").needsUnit);
