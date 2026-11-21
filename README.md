@@ -1514,7 +1514,7 @@ Two things it handles that matter for the completion math:
   score 1 point"). Riot serves it as `effect` beside the card's `text`; it is kept
   out of `x`, which every reader takes as the card's own text. Gear only (the one
   other `effect` in the feed is junk). The app shows it in the card view and
-  searches it; the sim reads only a `[Ganking]` strip so far.
+  searches it; the sim and the fight calculator read it on the unit wearing the gear.
 - **Lettered runes and tokens.** `R01a` and `T02a` are runes and tokens, not base
   cards; before 19 Oct the alt-art Radiance runes inflated RAD's base count to 173.
 
@@ -1652,8 +1652,15 @@ itself, and nothing that needs an opponent:
 - **Tokens made on play** count as units (Recruits, Sprites, Mechs, Sand Soldiers;
   `[Temporary]` ones die next turn). Tokens from other triggers (Deathknell, on move, on
   an opponent's turn) are left out rather than guessed.
-- **Gold** pays one Power of any domain. **Equipment** adds its Might bonus once a unit is
-  on the board.
+- **Gold** pays one Power of any domain. **Equipment** goes on a unit once one is on the
+  board, and the unit is then read as one card with the gear's Might bonus and its strip
+  (`withGear` in `lib/versus.mjs`): Boots of Swiftness give it Ganking, Cloth Armor Shield 2.
+- **Keywords are read as the card has them** (`keywordOf` in `lib/versus.mjs`): always on (its
+  own line, or an unconditional "I have [X]."), conditional (While/If, `[Level N][>]`,
+  `[Empowered][>]`, Jayce's choose-one), or granted to other units (Gem Jammer, Breakneck Mech).
+  Only always-on keywords count, plus the conditions the sim tracks: Sivir, Mercenary's two Power
+  and an empowered unit's `[Empowered][>]` line. Before 21 Nov 2026 any `[Ganking]` in the text
+  counted, so 14 conditional and 3 granted cards read as permanent gankers.
 - **Legend abilities that make a unit** ("1 Energy, exhaust: play a Recruit", Viktor,
   Azir, Lillia) are used once a turn. Conditions after the cost are not checked, so those
   decks read as a ceiling.
