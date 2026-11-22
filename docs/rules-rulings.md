@@ -267,3 +267,19 @@ before an event depends on it.
 **Weakest link:** point 4's window: which of their cards can answer a lone unit in a non-combat showdown is
 read from `fight()` (bounce, kill, damage); Ambush units played into it are not modelled.
 
+## Turn solver premises (2): tokens are played; "can't play cards" includes face-down cards
+
+**Date:** 2026-11-22
+**Source:** Derived in this repo from the Core Rules, for `lib/turn.mjs`'s card-text executor; no Riot staff ruling read.
+**Rules:** §185.2.a, §811.1.c.1, §811.1.c.3
+**Expires:** when a Core Rules update changes how tokens or hidden cards are played
+
+1. **A token unit is played.** *"Tokens can be played by their owner if their card type is played, following all the
+   applicable steps for playing a card"* (§185.2.a). So "when an opponent plays a unit" (Vex, Apathetic) triggers on
+   a token unit too, and the solver stuns it.
+2. **"Opponents can't play cards this turn" (Brynhir Thundersong) stops their face-down cards.** Playing from hidden
+   is playing (§811.1.c.3). Hiding is not (§811.1.c.1), so it doesn't stop a hide.
+
+**Weakest link:** point 1 assumes "plays a unit" counts token units; tokens aren't cards (§185), but the trigger names
+a unit, not a card.
+

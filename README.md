@@ -74,8 +74,11 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   read, "no effect this turn" (with a reason: draw, later, theirTurn, reminder), or unread.
   `scripts/rift cards --coverage` prints the pool's coverage (weighted by played copies), what
   the solver lacks and the heaviest unread text; `rift cards "<name>"` shows one card. Its floor is
-  `model/cardtext-floor.json`. The turn solver moves onto it family by family (plan of 22 Nov
-  2026). Tests: `lib/cardtext.test.mjs`.
+  `model/cardtext-floor.json`. Since 22 Nov 2026 the turn solver runs it: its executor plays
+  on-play, spell, move, Deathknell, conquer, "when an opponent plays a unit" and activated
+  abilities, statics (Might, auras, keywords, cost discounts), tokens, damage, Might changes,
+  stuns, kills, bounces, moves, readies, [Add], locks; `engineReads` says what it plays, and
+  unknown conditions count as not met. Tests: `lib/cardtext.test.mjs`.
 - `lib/turn.mjs` - the turn solver (`scripts/rift close --score 6-5 --hold A --a "<your units at A>"
   --cz "Sivir, Mercenary" --hand "On the Hunt" --runes "4 Chaos, 3 Body" --their-b "…" [--their …]
   [--their-budget E/P] [--breakers "…"]`; run `close` alone for every option): can this board win
