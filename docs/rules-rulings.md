@@ -283,3 +283,22 @@ read from `fight()` (bounce, kill, damage); Ambush units played into it are not 
 **Weakest link:** point 1 assumes "plays a unit" counts token units; tokens aren't cards (§185), but the trigger names
 a unit, not a card.
 
+## Turn solver premises (3): face-down plays are free; open battlefields; Ambush; Zhonya's save
+
+**Date:** 2026-11-22
+**Source:** Derived in this repo from the Core Rules, for `lib/turn.mjs`; no Riot staff ruling read.
+**Rules:** §811.1.b, §811.1.d.1, §822.1.b, §822.1.d, §170.11.c, §190.3.a.1, §348.2.a, §467.2.c.5
+**Expires:** when a Core Rules update changes Hidden, Ambush, open battlefields or damage prevention
+
+1. **A face-down card plays free, at its battlefield.** Hidden: *"Beginning on the next turn, this gains [Reaction]
+   and you may play this, ignoring its base cost"* (§811.1.b); *"A hidden permanent must be played to that
+   battlefield"* (§811.1.d.1). The solver plays ours only if hidden on an earlier turn.
+2. **Ambush** is *"I may be played to a battlefield where you control Units"* with Reaction while played that way
+   (§822.1.b): a defender's Ambush unit can join a fight from hand, and so can an attacker's. Rengar, Trophy Hunter's
+   text widens it to battlefields with enemy units (§822.1.d).
+3. **An open battlefield** is *"unoccupied and uncontrolled"* (§170.11.c). A unit played there contests it
+   (§190.3.a.1) and its controller conquers when the showdown closes (§348.2.a): Sneaky Deckhand.
+4. **Prevention applies at assignment** (§467.2.c.5): lethal counts the prevented damage.
+5. **Zhonya's Hourglass is classified "no points change"**: its save recalls the unit, so the battlefield is left
+   just as if it had died. The card survives for later turns.
+
