@@ -15,6 +15,29 @@ post-ban weekend (about 29–30 Nov).
 > turn unchanged. What the bench can't see: no Ride the Wind left for their showdowns (it's an Action; On the Hunt isn't).
 > Kept below for the reasoning and the rules work. Future deck work goes through the `deck-build` skill.
 
+## Brew method, steps 1–3 (21 Nov, `docs/deckbuilding-theory.md` §2)
+
+**1. Field (top-down).** Results-led tiers (`rift field --tiers`): Riven, Kennen, Irelia, Master Yi (S); Kai'Sa,
+Vex, Rengar, LeBlanc, Jayce, Azir, Evelynn (A). Riven, Kennen, Kai'Sa and Irelia lose core cards on 23 Nov. The
+post-ban forecast (`decklab/sivir-postban.md`) has the field's questions: **Defy** (87–96% of Azir, Orianna, Ornn,
+Vex, Master Yi lists), **Charm** moving units (Yi 89%, Ornn 74%, Orianna 47%), Vex's stun on units *played*,
+Kai'Sa's damage spells, Rek'Sai's speed.
+
+**2. Gap (bottom-up).** Defy counters spells with 1 Power at most, and Battle Mistress turns Power into Gold, so
+**2-Power spells** are both what the field can't counter and what this legend pays for: Punch First, Switcheroo,
+Rebuke, On the Hunt. Vex's stun misses units already on the board, so readying and moving them (On the Hunt) dodges it.
+
+**3. Worth doing?**
+- **Tune Trying Her Best (+3 On the Hunt):** "the trap, plus a second close Defy can't counter and Vex can't stun."
+  Uses the gap in 3 changes. **Worth doing.**
+- **A new Mercenary-tempo concept:** what would it beat that the tuned list doesn't? Only Charm decks, which
+  break the trap. That's one named matchup group, against a ~⅓ lower placing rate for new decks and no Sivir
+  results at all. **Not worth doing now.** Revisit if Master Yi, Ornn or Orianna top the first post-ban results.
+
+**Win-rate check (proxy, low confidence).** RiftLite's community matrix (user-submitted matches, Radiance season,
+latest 7,000) has ~0 Sivir games. Evelynn, the same Body/Chaos card pool: 24% vs Kai'Sa (35 games), 32% vs Vex
+(33), 33% vs Rek'Sai (25), 61% vs Riven (31), 71% vs Mordekaiser (21). Small cells, and a different legend.
+
 **Stage now: cards. Draft B, waiting on Jay (21 Nov). Sideboard still to do.** Jobs approved 21 Nov (5 second-move cards; if Sivir is answered, fall back on the board of proven Evelynn units).
 
 ## 1. Identity (picked by Jay, 21 Nov)

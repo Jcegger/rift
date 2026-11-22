@@ -27,8 +27,10 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 0. **Sivir: decide −3 Ride the Wind +3 On the Hunt with Jay** (bench 21 Nov in `decklab/sivir-new.md`'s shelved
    note). Draft B is shelved. New `deck-build` skill (reads `docs/deckbuilding.md` first) is required for deck work.
    Deckbuilding research done 21 Nov: `docs/deckbuilding-theory.md` (principles, consistency table, brewing
-   method), `docs/deckbuilding-sources.md`, re-measured numbers (`scripts/measure-deckbuilding.mjs`). Next: redo
-   the Sivir options with the brewing method, a genuinely new concept allowed.
+   method), `docs/deckbuilding-sources.md`, re-measured numbers (`scripts/measure-deckbuilding.mjs`). Brew steps 1–3 done
+   (`decklab/sivir-new.md`): tune, don't brew. Win-rate source scouted: RiftLite's community matrix
+   (riftlite.com/community/matrix, user-submitted, parseable aria-labels, ~0 Sivir games); adding it to the pipeline
+   needs Jay's OK and a terms check.
 
 1. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook
    or memory.
