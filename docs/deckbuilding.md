@@ -18,6 +18,37 @@ not tell a good card from an on-theme one. The pros' lists already carry that ju
 What follows says how much of a list is settled, where players disagree, and how new cards
 get in.
 
+**Re-measured 21 Nov 2026 on Radiance (kept script: `scripts/measure-deckbuilding.mjs`).** 8,901 legal lists
+played since 23 Oct, 1,221 good finishes (one per finish), 265 recorded top 8s. The shape holds; the numbers below
+§1–5 are the older counts, kept for the record.
+
+| | 23 Oct (Vendetta and earlier) | 21 Nov (Radiance) |
+|---|---|---|
+| distinct cards per 40 | 18.4 | 18.9 |
+| 3-ofs / 2-ofs / 1-ofs | 45 / 27 / 28% | 41 / 28 / 30% |
+| exactly one champion unit / two+ | 93 / 7% | 93 / 7% |
+| signatures at 3 / none / between | 44 / 31 / 25% | **55 / 36 / 10%** |
+| core / mid / flex copies (legends with 15+) | 30.5 / 5.3 / 4.2 | 29.9 / 6.1 / 4.0 |
+| a good finish shares with its consensus (median) | 35 | 35; 4% are more than 16 off |
+| two good finishes of one legend differ by (median copies) | 8 | 7 |
+| top 8: units · avg cost · ≤2 Energy | 18.9 · 2.81 · 22.4 | 19.4 · 2.93 · 22.5 |
+| not a good finish: units · avg cost · ≤2 Energy | 18.9 · 2.94 · 20.4 | 19.0 · 2.94 · 22.0 |
+
+**New: how far a list can stray before it costs results.** Time split, so the consensus can't contain the lists it
+grades: each legend's consensus from good finishes before 4 Nov (19 legends with 10+), then every recorded list
+from 4 Nov on, by distance from it:
+
+| copies off the earlier consensus | lists | good finishes |
+|---|---|---|
+| 0–6 | 635 | 49% |
+| 7–12 | 304 | 50% |
+| 13–16 | 61 | 46% |
+| 17–40 | 70 | **31%** |
+
+Up to about 16 copies changed costs nothing measurable; past 16 (a new deck under the same legend) the good-finish
+rate falls by about a third. Only 70 lists, and uploads skew toward good runs (hence the ~50% base rate), so read it
+as direction, not size. Signatures are now even more all-or-nothing (10% between).
+
 ---
 
 ## 1. A 40 is about 18 cards
@@ -133,8 +164,8 @@ an unknown's — **as a tiebreak, not a verdict**; ten players is a small sample
 3. **Every change is a role swap with a reason**: out a card, in one doing the same job
    better. The reasons that hold up are a better card for the role (a new set's most of
    all), an answer to the field, or a research question answered "test".
-4. **Budget about 6–9 changes.** That is how far winners stray from each other. More than
-   about 16 is a new deck and should be called one.
+4. **Budget about 6–9 changes.** That is how far winners stray from each other. Up to ~16 showed no cost in
+   results (21 Nov); more than about 16 is a new deck, should be called one, and placed about a third less often.
 5. **One champion, and signatures at 3 or 0.**
 6. **For a new set, look for efficient role-players before engine payoffs**: the first wave
    of adoption is cards that do an existing job better.

@@ -340,6 +340,11 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `docs/deckbuilding.md` - how winning lists are actually built, measured from the placed
   lists: copies, core vs flex, how far winners stray from their consensus, how new cards get
   in (by role), and what the beginner guides get wrong. The basis for suggesting decks.
+  Re-measured 21 Nov 2026 by `scripts/measure-deckbuilding.mjs` (rerunnable).
+- `docs/deckbuilding-theory.md` - the principles behind a list (Riot, Riftbound writers, Magic,
+  Lorcana, Snap, Runeterra), each checked against our data; a 40-card consistency table; how to
+  brew a new concept. Sources and quotes in `docs/deckbuilding-sources.md`. Read through the
+  `deck-build` skill.
 - `docs/strategy.md` - how to choose between two legal lines: the lethal check, roles,
   reading the opponent, pressure, and reviewing a game. Distilled from Mateo Ferreira's
   *The Mathematics of Winning Positions* and applied to Kha'Zix. On the Guides shelf.

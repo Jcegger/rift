@@ -15,10 +15,19 @@ tried it. On 21 Nov 2026 a "from scratch" Sivir broke five of the doc's rules in
 
 1. **`docs/deckbuilding.md`**: its "What this means for building a deck" list is the rule
    set. The rest says where each rule comes from.
-2. **`docs/archetypes.md`**: what the legend's deck is for.
-3. **`docs/strategy.md`** §2–3: the problem the deck solves, and what its resources become.
-4. **Tools:** `scripts/rift ideas <legend>` (the net deck or crowd, and how far Jay's deck
+2. **`docs/deckbuilding-theory.md`**: the principles (with sources and data checks), the
+   consistency table, and the brewing method.
+3. **`docs/archetypes.md`**: what the legend's deck is for.
+4. **`docs/strategy.md`** §2–3: the problem the deck solves, and what its resources become.
+5. **Tools:** `scripts/rift ideas <legend>` (the net deck or crowd, and how far Jay's deck
    sits from it), `rift rising <legend>`, then `rift try` and `rift versus` for each change.
+
+## Tune or brew
+
+- **Tuning** an existing list: the measured rules in `docs/deckbuilding.md`, then the pre-flight.
+- **Brewing** a new concept: the method in `docs/deckbuilding-theory.md` §2 first (field, gap, "worth doing",
+  roles, anchor, jobs, front to back, test), then the pre-flight. A brew past 16 changes is a new deck, and
+  new decks place about a third less often, so its "worth doing" sentence carries the case.
 
 ## Pre-flight
 
@@ -29,8 +38,10 @@ the reason:
   Jay's own current deck) and says which.
 - **One champion unit**; **signatures at 3 or 0**, and only the legend's champion's
   (another legend's signature is illegal: §103.3.d).
-- **Change count** against the anchor, stated. Budget 6–9; past ~16 it is a new deck and is
-  called one.
+- **Change count** against the anchor, stated. Budget 6–9 when tuning; past ~16 it is a new
+  deck and is called one.
+- **Consistency:** each job's copy count read off the table in `docs/deckbuilding-theory.md`
+  against a stated target.
 - **Role swaps:** each change names the role, the card out, the card in, and the reason
   (better at the role, an answer to the field, or a research "test").
 - **Synergies intact:** every kept card's enabler is still in the list.
