@@ -3598,7 +3598,10 @@ section('Card text coverage');
   const { poolCoverage } = await import('../lib/cardtext.mjs');
   const { turnReads } = await import('../lib/turn.mjs');
   const floor = read('model/cardtext-floor.json');
-  const R = poolCoverage(cat.cards, snap.decks, standardNameSet(read('data/banned.json'), cat.cards), { engine: (c) => ({ ok: turnReads(c), why: [] }) });
+  // The catalog as it plays (errata applied, extras included): the same cards the solver reads.
+  const { loadCatalog } = await import('./state.mjs');
+  const played = (await loadCatalog()).cards;
+  const R = poolCoverage(played, snap.decks, standardNameSet(read('data/banned.json'), played), { engine: (c) => ({ ok: turnReads(c), why: [] }) });
   const comp = R.wCompiled / (R.w || 1), solv = R.wEngine / (R.w || 1);
   ok(`compiled card text covers at least ${Math.round(100 * floor.compiledCopies)}% of played copies`, R.cards > 500 && comp >= floor.compiledCopies,
      `${(100 * comp).toFixed(1)}% of played copies, ${R.compiled}/${R.cards} cards; heaviest unread: ${R.unread.slice(0, 3).map((u) => u.card).join(', ')}`);
