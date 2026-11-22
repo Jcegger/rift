@@ -316,3 +316,15 @@ Bounty Board closes worse. Its wins are almost all hold + one conquest (Graves a
 no Faefolk to empty a battlefield and fewer bodies to spare. Its Graves attacks do clear small defenders. Blind
 spots here are Pyke, Gutter Guardian, Fizz, Kinkou and Vex (about 40% of positions each). **Verdict:** it defends
 better (goldfish) and closes worse (solver). It stays a trade, and Trying Her Best stays the benchmark.
+
+
+### Re-run 22 Nov on the card-text engine (the solver now plays 83% of played copies; 400 games)
+
+| from 7 (after holds): a winning line | the list today | C1 | Bounty Board |
+|---|---|---|---|
+| 21 Nov engine (800 games) | 39% | 46% | 34% |
+| 22 Nov engine (400 games) | 39% | **52%** | 39% |
+
+From 6: today 9%, C1 8%, Bounty Board 1%. C1 still leans better; Bounty Board still closes worse from 6 and about the same from 7.
+About 200 unpaired positions per cell, so gaps under ~9 points are noise. The heaviest card the solver still can't
+read in your positions is Existential Dread (26% of positions: its "already stunned → return it instead").

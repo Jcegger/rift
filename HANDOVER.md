@@ -34,8 +34,14 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    and reads Graves, Pyke, Broker, Academy and Gutter Guardian. **The turn solver is built** (`lib/turn.mjs`:
    `rift close` for a typed-in position, `try --close` on model boards; results in both decklab docs): from 7 a
    winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
-   close the same; Bounty Board closes worse (34%, 2% from 6). Next for it: readers for Nidalee, Ezreal's loot,
-   Rengar's Ambush, Innovator and Vex's stun (each in about 40–50% of positions).
+   close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
+   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): 88% of played copies compile, and the
+   solver plays 83% (from 33%); floor gate in check.mjs (`model/cardtext-floor.json`, 86% / 81%). Left, by weight:
+   the unread tail (411 cards, ~12% of copies; heaviest Baron Nashor's Pit, Bomb tokens, Smoke and Mirrors),
+   unevaluated conditions (Level/XP, rune counts), [Level], gear statics at a battlefield (Portable Portal),
+   combat triggers beyond the blast (run before the fight on the strongest target, a heuristic), and their
+   unattached gear, which the match.mjs snapshot doesn't pass. Later: move lib/sim.mjs and lib/match.mjs onto
+   the same language, so the model boards `try --close` uses get as rich as the solver.
 
 1. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook
    or memory.

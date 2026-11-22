@@ -269,3 +269,15 @@ points is noise. About half the positions hold a card it can't read (Nidalee, Ez
   cards that broke a winning line, so that edge is untested here.
 - **What breaks your winning lines** most often (their list's cards added to their hand): Punch First, Star-Crossed,
   Rebuke, Switcheroo. Pump and bounce held up, not counters.
+
+
+### Re-run 22 Nov on the card-text engine (the solver now plays 83% of played copies; 400 games)
+
+| from 7 (after holds): a winning line | the list today | C1 | Bounty Board |
+|---|---|---|---|
+| 21 Nov engine (800 games) | 39% | 46% | 34% |
+| 22 Nov engine (400 games) | 39% | **52%** | 39% |
+
+From 6: today 9%, C1 8%, Bounty Board 1%. C1 still leans better; Bounty Board still closes worse from 6 and about the same from 7.
+About 200 unpaired positions per cell, so gaps under ~9 points are noise. The heaviest card the solver still can't
+read in your positions is Existential Dread (26% of positions: its "already stunned → return it instead").
