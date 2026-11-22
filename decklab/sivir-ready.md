@@ -613,6 +613,14 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
 
 - **13 Nov 2026, Radiance ban (sideboard only):** Riot banned Riven, Broken Blade · Zhonya's Hourglass · Stellacorn Herder · Nocturne · Rhasa · Brynhir · Dazzling Aurora · Baited Hook · Emperor's Dais · Star Spring, effective 23 Nov. **Nothing in this list; main deck unchanged.** The ban falls mostly on the worst matchups (Riven loses her champion, Akali and Irelia lose Stellacorn and Zhonya's) and takes Brynhir from Kai'Sa and Rengar. **−Acceptable Losses +Repulse** (Jay: "rock it"): the 1 Nov gear-hate case was Riven's Blade and Zhonya's; Zhonya's is banned and Riven shrinks, while Offer and Prefect still cover Orianna, Azir, Ziggs, Jarvan IV and Ornn. Repulse comes in against the hardest matchups left, Diana (Moonfall, Gust) and Vex (Back Off). Guide §6, §8 and §9 updated, plus a ban note on §9. Open: **a Viktor row** (157 lists, 99% untouched by the ban, Tier 3), and re-read every row once post-ban results exist. Row backed up (`backups/state-pre-ban-repulse-2026-11-13.json`).
 
+- **21 Nov 2026, −3 Ride the Wind +3 On the Hunt** (Jay: "set it all up"). One role swap (the second move), signatures
+  at 3 (winners run 3 or 0). Bench (`rift try`): Mercenary on 26/34/38 → 34/41/44% (quiet/normal/heavy); Defy-counterable
+  spells expected 4.6 → 3.2; two units by t3 on the play 98 → 94%; answers on their turn t3/t5 22/65 → 21/63% (play).
+  New close: Sivir conquers one battlefield, On the Hunt readies her, she ganks into the other (both scored: wins from
+  6). Lost: Ride the Wind's showdown speed (On the Hunt is main phase only). **Log:** did the double conquest come up;
+  did you miss a showdown Ride the Wind. Row backed up (`backups/state-pre-onthehunt-2026-11-21.json`). Comprehensive
+  tune plan: `decklab/sivir-tune.md`.
+
 ### Games (the locked trap list, 1 Nov 2026)
 
 | # | date | vs | seat | battlefields (mine / theirs) | result | how | failure type | trap | notes |

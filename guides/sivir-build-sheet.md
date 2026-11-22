@@ -35,7 +35,7 @@ date: 2026-11-02
 | ▢ | **Ember Monk** | OGN-167 |  |
 | ▢ ▢ | **Gust** | OGN-169 |  |
 | ▢ ▢ | **Rebuke** | OGN-172 |  |
-| ▢ ▢ ▢ | **Ride the Wind** | OGN-173 |  |
+| ▢ ▢ ▢ | **On the Hunt** | SFD-204 | Body/Chaos; in for Ride the Wind, 21 Nov |
 | ▢ ▢ | **Tideturner** | OGN-199 |  |
 | ▢ | **Boots of Swiftness** | SFD-133 |  |
 | ▢ | **Edge of Night** | SFD-139 |  |

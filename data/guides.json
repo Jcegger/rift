@@ -13,7 +13,7 @@
    "legend": null,
    "champion": null,
    "sections": [],
-   "words": 500
+   "words": 508
   },
   {
    "slug": "sivir-one-army-sheet",
@@ -25,7 +25,7 @@
    "legend": null,
    "champion": null,
    "sections": [],
-   "words": 853
+   "words": 897
   },
   {
    "slug": "sivir-one-army",
@@ -53,7 +53,7 @@
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 11040
+   "words": 11140
   },
   {
    "slug": "sivir-trying-her-best",
@@ -241,7 +241,7 @@
     "Net decks — what earns the name (23 Oct 2026)",
     "What the guides say, and where they part from the data"
    ],
-   "words": 4049
+   "words": 4435
   }
  ]
 }

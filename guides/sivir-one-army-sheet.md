@@ -29,7 +29,9 @@ date: 2026-11-02
 
 **Breaks the close:** their Vex · Gust or Star-Crossed on Stranger · Not So Fast · Moonfall / Hidden Blade / Rebuke on Sivir in B · **Baron** (can't be pulled or bounced; with the Pit out, **win by holding at 7**).
 
-**Against Defy.** Safe: Punch First, Rebuke, Switcheroo, every unit. Counterable: Ride the Wind, Gust, Rampage, Star-Crossed, Existential Dread.
+**Against Defy.** Safe: Punch First, Rebuke, Switcheroo, On the Hunt, every unit. Counterable: Gust, Rampage, Star-Crossed, Existential Dread.
+
+**On the Hunt (21 Nov):** your main phase only (not an Action). After Sivir conquers one battlefield, On the Hunt readies her (its 2 Power also switches her on: +2, Ganking) and she ganks into the other: both scored, so it wins from 6.
 
 **Star-Crossed rebuy:** return your own Ezreal (draw 2 again), Innovator or Faefolk with their unit.
 
