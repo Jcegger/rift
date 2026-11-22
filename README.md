@@ -68,6 +68,14 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   swap a unit in from base, whose defend trigger still fires). Simplified: each play resolves
   before the next. For the board states a matchup turns on, never a win rate. Tests:
   `lib/fight.test.mjs`.
+- `lib/cardtext.mjs` - card text → a small effect language (trigger, condition, effects with op,
+  target, amount, duration), for every card in the pool: one grammar built from parts, plus
+  hand-written entries in `lib/cardtext-overrides.mjs` for text it can't parse. Each sentence is
+  read, "no effect this turn" (with a reason: draw, later, theirTurn, reminder), or unread.
+  `scripts/rift cards --coverage` prints the pool's coverage (weighted by played copies), what
+  the solver lacks and the heaviest unread text; `rift cards "<name>"` shows one card. Its floor is
+  `model/cardtext-floor.json`. The turn solver moves onto it family by family (plan of 22 Nov
+  2026). Tests: `lib/cardtext.test.mjs`.
 - `lib/turn.mjs` - the turn solver (`scripts/rift close --score 6-5 --hold A --a "<your units at A>"
   --cz "Sivir, Mercenary" --hand "On the Hunt" --runes "4 Chaos, 3 Body" --their-b "…" [--their …]
   [--their-budget E/P] [--breakers "…"]`; run `close` alone for every option): can this board win
@@ -178,6 +186,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   rule numbers, verified or not (unverified counts half), source; an optional marker card
   applies it to one build; an optional `vs` names the legends it answers or fears. Not
   generated; `check.mjs` enforces every field.
+- `model/cardtext-floor.json` - the coverage floor for `lib/cardtext.mjs` (shares of played
+  copies compiled, and read by the turn solver). `check.mjs` fails below it; it only goes up,
+  except when a new set changes the pool. Hand-written.
 - `model/expert-predictions.json` - published Radiance predictions collected before release
   (22 Oct 2026): LotharHS's sheet, video tier lists (Zelonius × TheManLand, Riftbound Insider,
   Into the Rift, Riftlab, BigZig, Jutariko in German, tcg Jonm and Miguel Challenger in Spanish,

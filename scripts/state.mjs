@@ -93,7 +93,8 @@ function printClose(cb, ca, games) {
 }
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { fight } from "../lib/fight.mjs";
-import { solveTurn, breakers, closeReport } from "../lib/turn.mjs";
+import { solveTurn, breakers, closeReport, turnReads } from "../lib/turn.mjs";
+import { poolCoverage, compile, engineReads } from "../lib/cardtext.mjs";
 import { matchupLine } from "../lib/winrates.mjs";
 import { avoidedIn } from "../lib/avoid.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
@@ -1762,6 +1763,38 @@ function cmdClose(cat, args) {
   console.log(`  Rules: holds first; moves exhaust, A ↔ B needs Ganking; each combat by \`fight\` (their best answer with the hand you gave); the 8th point by conquest needs both scored. Only your turn: their next turn isn't searched.${r.capped ? " Search hit its node cap." : ""}`);
 }
 
+// ── cards: how much of the card pool the turn solver reads (lib/cardtext.mjs) ─────
+//   cards --coverage [--top N]   the legal pool: compiled, played by the engine, unread text, gaps
+//   cards "<name>"               one card: its sentences, their states, what the engine lacks
+async function cmdCards(cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const name = args.filter((a, i) => !a.startsWith("--") && !String(args[i - 1] || "").startsWith("--top")).join(" ").trim();
+  if (name && !args.includes("--coverage")) {
+    const c = cat.cards.find((x) => x.n.toLowerCase() === name.toLowerCase() && !x.v) || cat.cards.find((x) => x.n.toLowerCase().startsWith(name.toLowerCase()));
+    if (!c) { console.log(`cards: no card called "${name}"`); return; }
+    const k = compile(c), e = engineReads(c, k);
+    console.log(`${c.n}  (${c.t})  engine: ${e.ok ? "plays all of it" : `lacks ${e.why.join(", ")}`}`);
+    for (const s of k.sentences) console.log(`  ${s.state.padEnd(7)}${s.why ? ` (${s.why})` : ""}  ${s.text}`);
+    for (const a of k.abilities) console.log(`    → ${a.trigger}${a.cond ? ` [if ${a.cond}]` : ""}: ${(a.effects || []).map((x) => x.op + (x.n != null ? ` ${x.n}` : "") + (x.target ? ` @${x.target.who}/${x.target.side || ""}/${x.target.where || ""}` : "")).join(", ")}`);
+    for (const st of k.statics) console.log(`    → static ${st.op}${st.n != null ? ` ${st.n}` : ""}${st.cond ? ` [${typeof st.cond === "string" ? st.cond : JSON.stringify(st.cond)}]` : ""}`);
+    return;
+  }
+  const banned = await readJson(url("banned.json")).catch(() => ({}));
+  const snap = await readJson(url("decks.json"));
+  // Until lib/turn.mjs runs this language, "played" is its own reader (turnReads), not the language's ops.
+  const R = poolCoverage(cat.cards, snap.decks, standardNameSet(banned, cat.cards), { engine: (c) => ({ ok: turnReads(c), why: turnReads(c) ? [] : engineReads(c).why.length ? engineReads(c).why : ["the solver's own reader"] }) });
+  const pc = (a, b) => `${Math.round((100 * a) / (b || 1))}%`;
+  console.log(`CARD TEXT COVERAGE  ${R.cards} legal cards; weighted by copies in ${R.lists} lists since ${R.since}`);
+  console.log(`  compiled (every sentence read or classified)   ${R.compiled} cards (${pc(R.compiled, R.cards)}) · ${pc(R.wCompiled, R.w)} of played copies`);
+  console.log(`  played by the turn solver today                ${R.engine} cards (${pc(R.engine, R.cards)}) · ${pc(R.wEngine, R.w)} of played copies`);
+  console.log(`  sentences: ${R.sentences} · read ${R.states.read} · no effect this turn ${R.states.noTurn} (${Object.entries(R.why).map(([k, v]) => `${k} ${v}`).join(", ")}) · unread ${R.states.unread}`);
+  const top = Number(opt("--top") || 25);
+  console.log(`\n  WHAT THE ENGINE LACKS (cards · played copies)`);
+  for (const [k, v] of Object.entries(R.gaps).sort((a, b) => b[1].w - a[1].w).slice(0, top)) console.log(`    ${k.padEnd(28)}${String(v.cards).padStart(5)}  ${v.w}`);
+  console.log(`\n  UNREAD TEXT, heaviest first (lib/cardtext-overrides.mjs takes a hand-written entry)`);
+  for (const u of R.unread.slice(0, top)) console.log(`    ${String(u.w).padStart(5)}  ${u.card.padEnd(28).slice(0, 28)} ${u.text.slice(0, 110)}`);
+}
+
 // ── intake: new product into the collection ───────────────────────────────────
 // Cards get entered on Piltover Archive and reach the app on its next pull, which banks
 // every gained copy in the list of new copies to file (`newq`) until it is cleared. So "what's new" is already recorded, and this reads it: what landed, a Pre-Rift
@@ -1847,6 +1880,7 @@ async function main() {
   if (cmd === "event") return cmdEvent(args);
   if (cmd === "fight") return cmdFight(cat, args);
   if (cmd === "close") return cmdClose(cat, args);
+  if (cmd === "cards") return cmdCards(cat, args);
   if (cmd === "gaps") return cmdGaps(cat, args);
   const S = await loadState();
   const q = mk(S);

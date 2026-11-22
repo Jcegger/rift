@@ -3591,6 +3591,20 @@ section('The documentation');
      'the refresh commits nothing when this file fails');
 }
 
+section('Card text coverage');
+{
+  // lib/cardtext.mjs reads the legal pool's card text for the turn solver. The floor in
+  // model/cardtext-floor.json only goes up; a new set that the grammar can't read fails here.
+  const { poolCoverage } = await import('../lib/cardtext.mjs');
+  const { turnReads } = await import('../lib/turn.mjs');
+  const floor = read('model/cardtext-floor.json');
+  const R = poolCoverage(cat.cards, snap.decks, standardNameSet(read('data/banned.json'), cat.cards), { engine: (c) => ({ ok: turnReads(c), why: [] }) });
+  const comp = R.wCompiled / (R.w || 1), solv = R.wEngine / (R.w || 1);
+  ok(`compiled card text covers at least ${Math.round(100 * floor.compiledCopies)}% of played copies`, R.cards > 500 && comp >= floor.compiledCopies,
+     `${(100 * comp).toFixed(1)}% of played copies, ${R.compiled}/${R.cards} cards; heaviest unread: ${R.unread.slice(0, 3).map((u) => u.card).join(', ')}`);
+  ok(`the turn solver reads at least ${Math.round(100 * floor.solverCopies)}% of played copies`, solv >= floor.solverCopies, `${(100 * solv).toFixed(1)}%`);
+}
+
 /* ══ the site's script ═══════════════════════════════════════════════════ */
 // A function called from a page template but defined nowhere fails only when that page
 // renders — 20 Oct 2026: an edit dropped researchPanel and every idea page broke
