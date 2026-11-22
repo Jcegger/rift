@@ -31,8 +31,11 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    `deck-build` skill (`docs/deckbuilding-theory.md` added 21 Nov). **RiftLite win rates** are a daily source
    (`data/winrates.json`, online user-submitted games; `rift versus` prints the line); watch the first refresh with
    11 sources. **Testing is three layers** (README "Simulator"): the goldfish now prints "the bench can't see"
-   and reads Graves, Pyke, Broker, Academy and Gutter Guardian; **next build: the turn solver** (extend
-   `rift fight` to a closing turn across two battlefields) to test the double conquest and Graves attacks.
+   and reads Graves, Pyke, Broker, Academy and Gutter Guardian. **The turn solver is built** (`lib/turn.mjs`:
+   `rift close` for a typed-in position, `try --close` on model boards; results in both decklab docs): from 7 a
+   winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
+   close the same; Bounty Board closes worse (34%, 2% from 6). Next for it: readers for Nidalee, Ezreal's loot,
+   Rengar's Ambush, Innovator and Vex's stun (each in about 40–50% of positions).
 
 1. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook
    or memory.

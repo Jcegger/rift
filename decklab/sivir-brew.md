@@ -297,3 +297,22 @@ often, no card draw. **Still blind:** its own Graves attacks, conquests and poin
 Rakelstake, Kinkou Initiate's draw and Vex's stun. **Verdict:** stronger than the first bench said, a real
 defensive deck. It's still a trade rather than an upgrade, and the turn solver (next build) is what can test its
 Graves attacks.
+
+
+## Closing turns, 21 Nov (the turn solver)
+
+Command: `rift try --deck "Sivir Is Trying Her Best" <changes> --close --close-games 800`. A close rate on model
+boards, not a win rate: positions come from `lib/match.mjs` games, the solver sees their hand, and their next turn
+isn't searched. Positions aren't paired between lists (the games diverge), about 400 per row, so a gap under ~6
+points is noise. About half the positions hold a card it can't read (Nidalee, Ezreal, Rengar, Innovator, Vex).
+
+| from (after holds) | Trying Her Best | Bounty Board |
+|---|---|---|
+| 6: a winning line exists | 7% | **2%** |
+| 7: a winning line exists | 39% | **34%** |
+| double-conquest wins | 28 of 186 | 8 of 156 |
+
+Bounty Board closes worse. Its wins are almost all hold + one conquest (Graves and On the Hunt in the line); it has
+no Faefolk to empty a battlefield and fewer bodies to spare. Its Graves attacks do clear small defenders. Blind
+spots here are Pyke, Gutter Guardian, Fizz, Kinkou and Vex (about 40% of positions each). **Verdict:** it defends
+better (goldfish) and closes worse (solver). It stays a trade, and Trying Her Best stays the benchmark.

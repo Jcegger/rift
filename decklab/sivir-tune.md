@@ -244,3 +244,28 @@ Mercenary on 34/40/44 → 37/44/47%; answers on their turn t5 (play) 64 → 61%;
 verdict: C1 stays the first candidate. The bench still can't see Ember Monk's +2, Faefolk's pull, Nidalee's draw,
 Rengar, Vex's stun, On the Hunt, Sivir's own attacks or the battlefields, so the trap and the double conquest
 aren't in these numbers.
+
+
+## Closing turns, 21 Nov (the turn solver, `lib/turn.mjs`)
+
+Command: `rift try --deck "Sivir Is Trying Her Best" <changes> --close --close-games 800`. A close rate on model
+boards, not a win rate: positions come from `lib/match.mjs` games, the solver sees their hand, and their next turn
+isn't searched. Positions aren't paired between lists (the games diverge), about 400 per row, so a gap under ~6
+points is noise. About half the positions hold a card it can't read (Nidalee, Ezreal, Rengar, Innovator, Vex).
+
+| from (after holds) | the list today | C1 (−Ember Monk +Ezreal) | Ride the Wind back (−3 On the Hunt) |
+|---|---|---|---|
+| 6: a winning line exists | 7% | 9% | 6% |
+| 7: a winning line exists | 39% | **46%** | 40% |
+| 7: the greedy model actually won | 22% | 28% | 25% |
+| double-conquest wins (of all wins) | 28 of 186 | 41 of 218 | 26 of 202 |
+
+- **The model plays the close badly.** From 7, a winning line exists about 39% of the time and the model takes 22%.
+  At the table, check both battlefields and On the Hunt before settling for one conquest.
+- **C1 holds up and leans better** (+7 from 7, borderline on this sample): one more body to move. Ezreal's own loot
+  isn't read here, so it's the body, not the text.
+- **On the Hunt vs Ride the Wind is a wash on closing** (39 vs 40%). The swap stands on the other reason: Defy can't
+  counter On the Hunt (2 Power), and Ride the Wind is counterable. In these runs Defy never showed up among the
+  cards that broke a winning line, so that edge is untested here.
+- **What breaks your winning lines** most often (their list's cards added to their hand): Punch First, Star-Crossed,
+  Rebuke, Switcheroo. Pump and bounce held up, not counters.

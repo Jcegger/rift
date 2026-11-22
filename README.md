@@ -68,6 +68,17 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   swap a unit in from base, whose defend trigger still fires). Simplified: each play resolves
   before the next. For the board states a matchup turns on, never a win rate. Tests:
   `lib/fight.test.mjs`.
+- `lib/turn.mjs` - the turn solver (`scripts/rift close --score 6-5 --hold A --a "<your units at A>"
+  --cz "Sivir, Mercenary" --hand "On the Hunt" --runes "4 Chaos, 3 Body" --their-b "…" [--their …]
+  [--their-budget E/P] [--breakers "…"]`; run `close` alone for every option): can this board win
+  this turn? Searches the whole Main Phase across both battlefields: holds first, standard moves
+  (A ↔ B only with Ganking), unit plays with Accelerate, On the Hunt, Ride the Wind, main-phase
+  removal (their Defy may counter), Boots, Faefolk's pull, Sivir, Mercenary's two Power; each
+  combat by the fight calculator; the gated eighth point. Prints the best line, what breaks it,
+  and what it can't see. `try --close [--close-games N]` runs it on model boards: every turn of
+  ours from 6 points in `lib/match.mjs` games against the field, next to what the greedy model
+  did from the same spot (a close rate on model boards, not a win rate). Rules premises:
+  `docs/rules-rulings.md` "Turn solver premises". Tests: `lib/turn.test.mjs`.
 - `lib/match.mjs` - the points model: our deck plays whole games against real S/A lists, both
   sides on one plain policy, scored by the rules (Hold at the Beginning Phase, Conquer once per
   battlefield per turn, the gated eighth point, a win at 8 and ahead). Combat is the fight
@@ -1717,8 +1728,8 @@ itself, and nothing that needs an opponent:
 (curve, colours, Power, Gold, cards), never "does it win". A full two-player game AI was considered and rejected:
 its win rates would be only as good as its weakest card reader and its AI's play. Instead: (1) the goldfish, which
 prints **"the bench can't see: …"** on every `rift try` (`lib/decklab.mjs` `blindSpots`: cards whose rules text no
-reader covers, and always your own attacks, conquests and points); (2) a turn solver for "can this board win this
-turn" (`rift fight`, to be extended to a closing turn across two battlefields); (3) results: RiftLite's pooled
+reader covers, and always your own attacks, conquests and points); (2) the turn solver for "can this board win this
+turn" (`lib/turn.mjs`: `rift close` for a typed-in position, `try --close` on model boards; built 21 Nov 2026); (3) results: RiftLite's pooled
 matchup matrix (`data/winrates.json`), events, and Jay's journal. RiftLite's per-legend and per-deck pages are
 one-sided (only the logging pilot's games) and inflate win rates, so they aren't used.
 

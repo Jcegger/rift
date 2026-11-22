@@ -13,6 +13,7 @@
 //   node scripts/state.mjs versus kennen --deck "nexus night"   # head to head, card by card
 //   node scripts/state.mjs try --deck "nexus night" "-Edge of Night" "+Elnuk Herd"   # test a change
 //   node scripts/state.mjs loops --deck "nexus night"   # every interaction and loop, from card text
+//   node scripts/state.mjs close --score 6-5 --hold A --a "Stalwart Poro" --cz "Sivir, Mercenary" --runes "4 Chaos, 2 Body"   # can this board win this turn?
 //   node scripts/state.mjs fight --attack "Astral Heron" --defend "Staunch Survivor, Traveling Merchant" --down Switcheroo --their Discipline --their-budget 2/0
 //   node scripts/state.mjs meta            # archetype shares over sanctioned-legal lists
 //   node scripts/state.mjs meta diana      # one archetype: card play rates, best finishes
@@ -69,8 +70,30 @@ function printPoints(pb, pa, games) {
   for (const [label, key, f] of rows) { if (!key) continue; const b = f(pb[key]), a = f(pa[key]); console.log(`  ${label.padEnd(46)}${(b === a ? b : `${b} → ${a}`).padEnd(22)}`); }
   console.log("  Model games, both sides on one plain policy; card text beyond the reader's effects is not played, which favours unit-heavy decks. Points and how they're made, not win rates.");
 }
+// The turn solver's report: before → after when there's a change.
+function printClose(cb, ca, games) {
+  const pc = (x) => `${Math.round(100 * x)}%`, n2 = (x) => x.toFixed(2);
+  const two = (f) => (ca ? `${f(cb)} → ${f(ca)}` : f(cb));
+  console.log(`\n  CLOSE (lib/turn.mjs: the turn solver on every turn of ours from 6 points after holds, in ${games} model games against real S/A lists)`);
+  console.log(`  ${"from".padEnd(8)}${"positions".padEnd(16)}${"a winning line".padEnd(22)}${"the model won".padEnd(22)}${"points that turn: solver / model"}`);
+  for (let i = 0; i < 2; i++) {
+    const t = (r) => r.tiers[i];
+    const small = (r) => (t(r).n < 30 ? "*" : "");
+    console.log(`  ${String(t(cb).start).padEnd(8)}${two((r) => `${t(r).n}${small(r)}`).padEnd(16)}${two((r) => pc(t(r).win)).padEnd(22)}${two((r) => pc(t(r).policyWin)).padEnd(22)}${two((r) => `${n2(t(r).gained)} / ${n2(t(r).policyGained)}`)}`);
+  }
+  const list = (xs, n = 8, of = null) => xs.slice(0, n).map(([k, v]) => `${k} ${of ? pc(v / of) : v}`).join(", ") || "none";
+  for (const [label, r] of ca ? [["before", cb], ["after", ca]] : [["", cb]]) {
+    const head = label ? `  ${label}: ` : "  ";
+    console.log(`${head}winning lines ${r.wins}: ${list(r.kinds)}`);
+    console.log(`${head}your cards the winning lines use (moved, played, cast or equipped): ${list(r.cards, 12)}`);
+    console.log(`${head}what breaks a winning line (each card of their list added to their hand; ${r.breakChecked} lines checked): ${list(r.breakers, 8)}`);
+    console.log(`${head}the solver can't see (share of positions): ${list(r.blind, 10, r.positions)}${r.capped ? `; ${r.capped} searches hit the node cap` : ""}`);
+  }
+  console.log("  * under 30 positions. A close rate on model boards, not a win rate: the boards come from the greedy model's games, their hand is known to the solver, and their next turn isn't searched.");
+}
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { fight } from "../lib/fight.mjs";
+import { solveTurn, breakers, closeReport } from "../lib/turn.mjs";
 import { matchupLine } from "../lib/winrates.mjs";
 import { avoidedIn } from "../lib/avoid.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
@@ -1313,8 +1336,8 @@ async function cmdTry(S, cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   const since = opt("--since") || "2026-10-16";
   const games = Number(opt("--games") || 20000);
-  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games"]);
-  const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine" && a !== "--points");
+  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games", "--close-games"]);
+  const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine" && a !== "--points" && a !== "--close");
   // --policy "holdUp=3,dais,bandleTree,keepForEvelynn=false": how you play, for the engine report.
   const policy = {};
   for (const kv of (opt("--policy") || "").split(",").map((x) => x.trim()).filter(Boolean)) {
@@ -1322,7 +1345,7 @@ async function cmdTry(S, cat, args) {
   }
   const sweepCard = opt("--sweep"), sweepWith = (opt("--with") || "").split(/;/.test(opt("--with") || "") ? ";" : ",").map((x) => x.trim()).filter(Boolean);
   const decks = findDecks(S, opt("--deck") || "\u0000");
-  if (decks.length !== 1 || (!specs.length && !sweepCard)) {
+  if (decks.length !== 1 || (!specs.length && !sweepCard && !args.includes("--close"))) {
     console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine] [--points]');
     console.log('       try --deck "<one of your decks>" --sweep "Card in the deck" --with "Candidate A, Candidate B" (or "A; B" when a name has a comma) [--policy …]');
     if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
@@ -1431,6 +1454,12 @@ async function cmdTry(S, cat, args) {
     const pg = Number(opt("--points-games")) || 600, foes = foeLists(fieldDecks);
     pb = matchReport(before, cat, foes, { games: pg }); pa = matchReport(after, cat, foes, { games: pg });
     printPoints(pb, pa, pg);
+  }
+  // The turn solver on model boards (lib/turn.mjs): opt-in, like the points model.
+  if (args.includes("--close")) {
+    const cg = Number(opt("--close-games")) || 300, foes = foeLists(fieldDecks);
+    const cb = closeReport(before, cat, foes, { games: cg }), ca = specs.length ? closeReport(after, cat, foes, { games: cg }) : null;
+    printClose(cb, ca, cg);
   }
   // The deck's goal tiers, if its worksheet has a tiers file: the change read against the plan.
   const spec = await loadTiers(before.name);
@@ -1683,6 +1712,56 @@ function cmdFight(cat, args) {
   console.log(`  Rules: totals with Assault and Shield, lethal one unit at a time, attackers recalled if a defender stands; triggers on the chain take Reactions only; each play resolves before the next (simplified).`);
 }
 
+// ── close: can this board win this turn? (lib/turn.mjs) ─────────────────────────
+// A position typed in from a real game. Units are comma-separated names (a name twice is two
+// copies); "Name*" is exhausted. Battlefields: A and B; --hold names the ones you control at the
+// start of your turn (they score first). Runes: "4 Chaos, 2 Body", all ready.
+function cmdClose(cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const names = [...new Set(cat.cards.map((c) => c.n))];
+  const find = (q) => {
+    const l = q.trim().toLowerCase(); const ex = names.find((n) => n.toLowerCase() === l);
+    const pick = (n) => cat.cards.find((c) => c.n === n && !c.v) || cat.cards.find((c) => c.n === n);
+    if (ex) return pick(ex);
+    const pre = names.filter((n) => n.toLowerCase().startsWith(l));
+    if (pre.length !== 1) throw new Error(pre.length ? `"${q}" matches ${pre.slice(0, 5).join(", ")}` : `no card called "${q}"`);
+    return pick(pre[0]);
+  };
+  // A name with a comma in it ("Sivir, Mercenary"): split on ";" when the list has one, else re-join halves that only make a card together.
+  const items = (k) => { const parts = (opt(k) || "").split(/;/.test(opt(k) || "") ? ";" : ",").map((x) => x.trim()).filter(Boolean); const out = [];
+    for (let i = 0; i < parts.length; i++) { const two = i + 1 < parts.length ? `${parts[i]}, ${parts[i + 1]}` : null;
+      if (two && names.some((n) => n.toLowerCase() === two.replace(/\*$/, "").toLowerCase())) { out.push(two); i++; } else out.push(parts[i]); } return out; };
+  const list = (k) => items(k).map((x) => find(x.replace(/\*$/, "")));
+  let pos;
+  try {
+    const units = [];
+    const add = (k, side, at) => { for (const x of items(k)) units.push({ card: find(x.replace(/\*$/, "")), side, at, ready: !/\*$/.test(x) }); };
+    add("--a", 0, 0); add("--b", 0, 1); add("--base", 0, -1); add("--their-a", 1, 0); add("--their-b", 1, 1); add("--their-base", 1, -1);
+    const hold = (opt("--hold") || "").toUpperCase();
+    const ctrl = [0, 1].map((b) => (hold.includes("AB"[b]) ? 0 : units.some((u) => u.side === 1 && u.at === b) ? 1 : null));
+    const [us, them] = (opt("--score") || "0-0").split(/[-–/]/).map(Number);
+    const runes = (opt("--runes") || "").split(",").map((x) => x.trim()).filter(Boolean).flatMap((x) => { const m = /^(\d+)\s+(\w+)/.exec(x); return m ? Array(Number(m[1])).fill({ d: m[2][0].toUpperCase() + m[2].slice(1).toLowerCase(), ready: true }) : []; });
+    const [te, tp] = (opt("--their-budget") || "0/0").split("/").map(Number);
+    pos = { score: [us || 0, them || 0], ctrl, beginning: true, units, hand: list("--hand"), champ: opt("--cz") ? find(opt("--cz")) : null, gear: list("--gear"),
+      down: [[list("--down-a"), list("--their-down-a")], [list("--down-b"), list("--their-down-b")]], runes, gold: Number(opt("--gold") || 0),
+      their: { hand: list("--their"), budget: { e: te || 0, p: tp || 0 } } };
+    pos.breakWith = list("--breakers");
+  } catch (e) { console.log(`close: ${e.message}`); return; }
+  if (!pos.units.length && !pos.champ) {
+    console.log('usage: close --score 6-5 --hold A --a "<your units at A>" --b "…" --base "…" [--cz "Sivir, Mercenary"] [--hand "On the Hunt"] [--gear "Boots of Swiftness"]');
+    console.log('             --runes "4 Chaos, 3 Body" [--gold 1] [--down-a "<your face-down card>"] --their-a "…" --their-b "…" [--their-base "…"]');
+    console.log('             [--their-down-b "…"] [--their "<their hand>"] [--their-budget E/P] [--breakers "<cards to try in their hand>"]   (Name* = exhausted; ";" between names with commas)');
+    return;
+  }
+  const r = solveTurn(pos);
+  console.log(`CLOSE  from ${pos.score.join("–")}${pos.ctrl.some((x) => x === 0) ? `, holding ${[0, 1].filter((b) => pos.ctrl[b] === 0).map((b) => "AB"[b]).join(" and ")}` : ""}`);
+  console.log(`  → ${r.win ? `WIN (${r.kind})` : `no win this turn: best is ${r.score.join("–")}${r.drew ? `, ${r.drew} drawn at the 8th-point gate` : ""}`}`);
+  console.log(`  best line:\n    ${r.line.join("\n    ") || "nothing to do"}`);
+  if (r.win && pos.breakWith.length) { const br = breakers(pos, pos.breakWith); console.log(`  what breaks it (each added to their hand, paid from what they kept open): ${br.join(", ") || "none of these"}`); }
+  if (r.blind.length) console.log(`  the solver can't see: ${r.blind.join(", ")}`);
+  console.log(`  Rules: holds first; moves exhaust, A ↔ B needs Ganking; each combat by \`fight\` (their best answer with the hand you gave); the 8th point by conquest needs both scored. Only your turn: their next turn isn't searched.${r.capped ? " Search hit its node cap." : ""}`);
+}
+
 // ── intake: new product into the collection ───────────────────────────────────
 // Cards get entered on Piltover Archive and reach the app on its next pull, which banks
 // every gained copy in the list of new copies to file (`newq`) until it is cleared. So "what's new" is already recorded, and this reads it: what landed, a Pre-Rift
@@ -1767,6 +1846,7 @@ async function main() {
   if (cmd === "meta") return cmdMeta(cat, args);
   if (cmd === "event") return cmdEvent(args);
   if (cmd === "fight") return cmdFight(cat, args);
+  if (cmd === "close") return cmdClose(cat, args);
   if (cmd === "gaps") return cmdGaps(cat, args);
   const S = await loadState();
   const q = mk(S);

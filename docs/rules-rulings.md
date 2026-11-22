@@ -241,3 +241,29 @@ spent at least [A][A] this turn" count Power from a Gold token, and Power paid t
 
 **Weakest link:** point 1 rests on reading §451.1 as the only limit on effect moves. Ask a judge
 before an event depends on it.
+
+## Turn solver premises: combat membership, recalls, exhausted Gold, walk-ins
+
+**Date:** 2026-11-21
+**Source:** Derived in this repo from the Core Rules, for `lib/turn.mjs`; no Riot staff ruling read.
+**Rules:** §466.2.c.1, §466.2.c.3, §468.1.a.2, §348.2.a, §348.2.a.1, §144.2, §144.3, §415.4, §323.5
+**Expires:** when a Core Rules update changes combat designations, recalls, exhaust costs or non-combat showdowns
+
+1. **Every unit at the battlefield fights.** *"Units at the Contested Battlefield controlled by the Attacker or
+   Defender gain the Attacker or Defender designation now"* (§466.2.c.3). The attacker is *"the player whose
+   unit(s) applied the Contested status"* (§466.2.c.1): so when Irresistible Faefolk pulls their unit into a
+   battlefield we control, **they** are the attacker there and we defend with everything at it.
+2. **Losing attackers go back to base**: *"Recall Attackers present at the Battlefield if Defenders are still
+   present"* (§468.1.a.2). They stay exhausted (the move's cost, §144.2); On the Hunt can ready them again.
+3. **Several units moving together is one move** (§144.3), so they fight as one attack.
+4. **An empty battlefield is conquered when its showdown closes** with only our units there (§348.2.a, a Conquer
+   if not yet scored this turn, §348.2.a.1). Their Reactions can still answer the unit before it closes.
+5. **Gold that enters exhausted adds nothing this turn.** Gold's ability costs exhausting it, and *"When
+   Exhausting is listed as a Cost, then the Action must be able to be completed for the cost to be paid"*
+   (§415.4). So Battle Mistress's and Pyke's Gold, played exhausted, are next turn's Power.
+6. **Leaving a battlefield empty gives it up** (§323.5): Sivir ganking A → B leaves A uncontrolled, but A's
+   conquest this turn still counts as scored for the eighth point (the Mercenary ruling, point 3).
+
+**Weakest link:** point 4's window: which of their cards can answer a lone unit in a non-combat showdown is
+read from `fight()` (bounce, kill, damage); Ambush units played into it are not modelled.
+
