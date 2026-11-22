@@ -103,6 +103,9 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `data/tiers.json` - riftbound.gg's weekly tier list (S, then 1-N), per Legend, scraped.
 - `data/topdecks.json` - Riot's own RQ "Top Decks" articles: every Top 8 and Best-Of list,
   with finishes, and each event's Day 1 / Day 2 field by legend.
+- `data/winrates.json` - legend-vs-legend win rates from RiftLite's community matchup matrix
+  (Radiance season, latest 7,000 matches): **online games its users log** (TCGA, RiftAtlas), not
+  paper events, each pairing with its game count. `rift versus` prints the pairing's line.
 - `data/history.json` - the daily archive: deck counts per legend, and tier lists.
 - `data/guides.json` - the manifest of the dossiers in `guides/`. Not their text.
 - `data/archetypes.json` - each legend's measured profile: representative list, mix, curve,
@@ -192,6 +195,7 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   news index pages.
 - `scripts/build-tiers.mjs` - scrapes the meta tier list off riftbound.gg's page.
 - `scripts/build-topdecks.mjs` - parses Riot's RQ Top Decks articles.
+- `scripts/build-winrates.mjs` - reads RiftLite's matchup matrix page (one request a day).
 - `scripts/build-history.mjs` - appends today's row to the archive. Fetches nothing.
 - `scripts/build-guides.mjs` - regenerates the guide manifest. Fetches nothing.
 - `scripts/build-synergy.mjs` - counts which cards are played together. Fetches nothing.

@@ -71,6 +71,7 @@ function printPoints(pb, pa, games) {
 }
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { fight } from "../lib/fight.mjs";
+import { matchupLine } from "../lib/winrates.mjs";
 import { avoidedIn } from "../lib/avoid.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
 
@@ -1227,7 +1228,15 @@ async function cmdVersus(S, cat, args) {
   const named = (rows) => rows.map((h) => `${h.card.n} ${pct(h.share).trim()}`).join(" · ");
 
   console.log(`VERSUS  ${deck.name}\n  against ${champ ? champ + ", " : ""}${legend?.n || lists[0].ln} · ${lists.length} legal lists since ${since}${event ? ` at "${event}"` : ""} · ${vouched.length} with a recorded placing${best ? ` (best ${best.pl} of ${best.ec}, ${best.ev})` : ""}`);
-  console.log(`  their cards shown when in ${pct(min).trim()}+ of lists (interaction from ${pct(min / 2).trim()}). Card by card; nothing here is a win rate.\n`);
+  console.log(`  their cards shown when in ${pct(min).trim()}+ of lists (interaction from ${pct(min / 2).trim()}). Card by card; nothing here is a win rate.`);
+  {
+    // The one win rate: RiftLite's online, user-submitted games (data/winrates.json), legend vs legend.
+    const champOf = (c) => (c?.g || []).find((t) => cat.cards.some((x) => x.n.startsWith(`${t}, `)));
+    const ourLegend = Object.keys(deck.cards || {}).map((k) => cat.BY.get(k)).find((c) => c?.t === "Legend");
+    let W = null;
+    try { W = await readJson(url("winrates.json")); } catch { /* reported in the line */ }
+    console.log(`  ${matchupLine(W, champOf(ourLegend) || ourLegend?.n || "?", champ || legend?.n || "?")}\n`);
+  }
 
   // Speed: the goldfish on the play, ours against the average of theirs.
   const gold = (list, games) => {

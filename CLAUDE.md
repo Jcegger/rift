@@ -28,7 +28,7 @@ Any deck, list or card-swap proposal goes through the `deck-build` skill.
   (an endpoint turned paginated, a card name split into `name` + `subtitle`, 12 identical
   39-Spiderling lists that were players hiding decks). Assert the meaning.
 - A single failing source keeps its last-good file and the run stays green, so read
-  `Sources rebuilt: N of 10` on green runs too.
+  `Sources rebuilt: N of 11` on green runs too.
 
 ## Standing rules
 

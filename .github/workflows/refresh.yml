@@ -165,6 +165,16 @@ jobs:
           case ",$SIMULATE," in *,topdecks,*) echo "simulated failure"; exit 1;; esac
           node scripts/build-topdecks.mjs
 
+      # RiftLite's community matchup matrix: online games its users log (TCGA, RiftAtlas),
+      # not paper events. One ~20MB page a day from its own host; build-winrates.mjs
+      # writes nothing if the parse comes up short, so a page change costs this file alone.
+      - name: Rebuild the win rates
+        id: winrates
+        continue-on-error: true
+        run: |
+          case ",$SIMULATE," in *,winrates,*) echo "simulated failure"; exit 1;; esac
+          node scripts/build-winrates.mjs
+
       # Cheap on every day but four a year. It reads Riot's Rules Hub page — one small
       # request — and only downloads the two PDFs (57MB) when the date printed there has
       # actually moved, so the steady state is a no-op that exits 0. Placed after the
@@ -273,6 +283,7 @@ jobs:
             [rules]='${{ steps.rules.outcome }}'
             [errata]='${{ steps.errata.outcome }}'
             [topdecks]='${{ steps.topdecks.outcome }}'
+            [winrates]='${{ steps.winrates.outcome }}'
             [field]='${{ steps.field.outcome }}'
           )
           failed=""; ok_count=0
@@ -280,7 +291,7 @@ jobs:
             echo "| source | result | file |"
             echo "|---|---|---|"
           } >> "$GITHUB_STEP_SUMMARY"
-          for s in catalog banned events decks news tiers rules errata topdecks field; do
+          for s in catalog banned events decks news tiers rules errata topdecks winrates field; do
             case "$s" in
               catalog) f=data/cards.json;; banned) f=data/banned.json;;
               events)  f=data/events.json;; decks) f=data/decks.json;;
@@ -288,6 +299,7 @@ jobs:
               rules)   f=data/rules.json;;
               errata)  f=data/errata.json;;
               topdecks) f=data/topdecks.json;;
+              winrates) f=data/winrates.json;;
               field)   f=data/field.json;;
             esac
             at=$(node -e 'process.stdout.write(String(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).generatedAt||"?"))' "$f" 2>/dev/null || echo '?')
@@ -302,7 +314,7 @@ jobs:
           done
           echo "failed=$failed"     >> "$GITHUB_OUTPUT"
           echo "ok_count=$ok_count" >> "$GITHUB_OUTPUT"
-          echo "Sources rebuilt: $ok_count of 10${failed:+ (failed: $failed)}"
+          echo "Sources rebuilt: $ok_count of 11${failed:+ (failed: $failed)}"
 
       # Nothing changed and nothing can be salvaged. Reporting that as a green run is
       # the exact failure mode this whole file is trying to close.
@@ -464,7 +476,7 @@ jobs:
               `The daily data refresh failed.`,
               ``,
               `- **Sources that did not rebuild:** ${failed}`,
-              `- **Sources rebuilt:** ${{ steps.sources.outputs.ok_count || 0 }} of 10`,
+              `- **Sources rebuilt:** ${{ steps.sources.outputs.ok_count || 0 }} of 11`,
               `- **Run:** ${run}`,
               ``,
               `A single failing source does not reach here — it keeps its last-good file and the`,

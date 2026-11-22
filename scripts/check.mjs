@@ -1125,6 +1125,32 @@ if (!tiers) {
   ok('dataAge tracks the tier list', A.dataAge().some((a) => a.key === 'tiers'));
 }
 
+/* ══ Win rates (RiftLite) ═══════════════════════════════════════════════════
+   data/winrates.json is parsed from aria-labels on RiftLite's matrix page. A half-parse
+   is still valid JSON, so assert meaning: each pairing's two sides add up to 100%, the
+   legends are champions the catalog knows, the season is Radiance, and it's fresh.     */
+section('Win rates (RiftLite)');
+let winrates = null;
+try { winrates = read('data/winrates.json'); } catch { /* reported below */ }
+if (!winrates) {
+  ok('win rates present', false, 'data/winrates.json missing — run build-winrates.mjs');
+} else {
+  const P = winrates.pairs || [];
+  const key = new Map(P.map((p) => [`${p.a}\u0000${p.b}`, p]));
+  const mirrored = P.filter((p) => key.has(`${p.b}\u0000${p.a}`));
+  const off = mirrored.filter((p) => Math.abs(p.wr + key.get(`${p.b}\u0000${p.a}`).wr - 100) > 1.5);
+  ok('300+ pairings parsed', P.length >= 300, `${P.length}`);
+  ok("each pairing's two sides add up to 100%", mirrored.length >= P.length * 0.95 && off.length === 0,
+     `${mirrored.length} mirrored, ${off.length} off: ${off.slice(0, 2).map((p) => `${p.a} v ${p.b}`).join(', ')}`);
+  ok('win rates are 0–100 and every count is positive', P.every((p) => p.wr >= 0 && p.wr <= 100 && p.n > 0));
+  const champs = new Set(read('data/cards.json').cards.filter((c) => c.t === 'Unit' && c.n.includes(', ')).map((c) => c.n.split(', ')[0]));
+  const unknown = [...new Set(P.map((p) => p.a))].filter((n) => !champs.has(n.split(', ')[0]));
+  ok('every legend is a champion the catalog knows', !unknown.length, unknown.join(', ') || `${new Set(P.map((p) => p.a)).size} legends`);
+  ok('the matrix is the Radiance season', /radiance/i.test(winrates.filters?.season || ''), winrates.filters?.season || 'no season');
+  const age = (Date.now() - Date.parse(winrates.generatedAt)) / 86400000;
+  ok('win rates rebuilt in the last 10 days', age <= 10, `${winrates.generatedAt}`);
+}
+
 /* ══ Riot's Top Decks ═══════════════════════════════════════════════════════
    data/topdecks.json is parsed from Riot's own RQ articles, whose markup differs
    from one article to the next (four layouts so far). A parse that half-works still
