@@ -30,7 +30,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    loses on answers). Decide after the first post-ban weekend (29–30 Nov) and games. Deck work goes through the
    `deck-build` skill (`docs/deckbuilding-theory.md` added 21 Nov). **RiftLite win rates** are a daily source
    (`data/winrates.json`, online user-submitted games; `rift versus` prints the line); watch the first refresh with
-   11 sources.
+   11 sources. **Testing is three layers** (README "Simulator"): the goldfish now prints "the bench can't see"
+   and reads Graves, Pyke, Broker, Academy and Gutter Guardian; **next build: the turn solver** (extend
+   `rift fight` to a closing turn across two battlefields) to test the double conquest and Graves attacks.
 
 1. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook
    or memory.

@@ -1713,6 +1713,20 @@ itself, and nothing that needs an opponent:
   candidates the same way (`--qty N` swaps N copies; `;` separates candidates whose names
   have commas), each scored tier by tier when the deck has goal tiers.
 
+**What the bench is, and its three-layer place (decided 21 Nov 2026).** The goldfish answers "does the list run"
+(curve, colours, Power, Gold, cards), never "does it win". A full two-player game AI was considered and rejected:
+its win rates would be only as good as its weakest card reader and its AI's play. Instead: (1) the goldfish, which
+prints **"the bench can't see: …"** on every `rift try` (`lib/decklab.mjs` `blindSpots`: cards whose rules text no
+reader covers, and always your own attacks, conquests and points); (2) a turn solver for "can this board win this
+turn" (`rift fight`, to be extended to a closing turn across two battlefields); (3) results: RiftLite's pooled
+matchup matrix (`data/winrates.json`), events, and Jay's journal. RiftLite's per-legend and per-deck pages are
+one-sided (only the logging pilot's games) and inflate win rates, so they aren't used.
+
+**Unit and battlefield readers added 21 Nov 2026:** Graves-style sweepers (kill and answer an attack when they
+defend, assuming the attackers are at or under his Might), Pyke, Returned's Gold on enemy deaths, Black Market
+Broker's Gold on face-down plays, Bandle Scouts' Academy's Gold on a hide (assumed to land there half the time),
+and Gutter Guardian's Show Off Power (spent first; counts toward "Mercenary on").
+
 **Keywords the sims do not read** (as of 21 Nov 2026; `docs/rules.md` Keywords has each rule):
 Deploy, Level and Hunt (XP), Flow (recasting from the trash), Predict and Vision, Weaponmaster,
 Quick-Draw, Legion, Repeat, Deflect's tax, Tank and Backline outside the fight calculator, and every

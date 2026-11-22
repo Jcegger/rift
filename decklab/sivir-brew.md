@@ -274,3 +274,26 @@ Test it with about 10 games before keeping or scrapping it; the bench above can'
   their turn), and the brew was read on the benchmark's measures too, where it's worse.
 - **Breaks the doc's shape:** ≤2 Energy count 13 against winners' ~22. That's inherited from the anchor (8 at ≤2),
   and named rather than fixed.
+
+## Re-benched 21 Nov, after the simulator fixes
+
+The first bench couldn't see Graves, Pyke's Gold, Academy, Broker or Gutter Guardian's Power. `lib/sim.mjs` reads
+them now (README "Simulator"). Same command, normal / heavy opponent:
+
+| | benchmark | brew, first bench | brew, re-benched |
+|---|---|---|---|
+| their attacks answered | 23% / 9% | — | **49% / 28%** (Graves defending) |
+| kills a game | 0.31 / 0.53 | 1.04 / 1.50 | **2.88 / 3.20** |
+| Gold made a game (normal) | 4.38 | 3.70 | **4.68** |
+| Mercenary on (normal / heavy) | 40% / 44% | 34% / 34% | 34% / 34% |
+| two units by t3 (play) | 95% | 88% | 88% |
+| answer on their turn t5 (play) | 64% | 22% | 22% |
+| extra cards drawn | 1.5 | 0.0 | 0.0 |
+
+**What moved:** on defence the brew now beats the benchmark clearly, and it makes more Gold. **The assumption
+behind that:** every attack Graves defends against is units at or under his 4 Might. Against a 6-Might attacker
+he still deals 4, but the bench counts a kill. **What didn't move:** a slower start, Sivir switched on less
+often, no card draw. **Still blind:** its own Graves attacks, conquests and points, plus Packed Amphitheater,
+Rakelstake, Kinkou Initiate's draw and Vex's stun. **Verdict:** stronger than the first bench said, a real
+defensive deck. It's still a trade rather than an upgrade, and the turn solver (next build) is what can test its
+Graves attacks.

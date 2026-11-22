@@ -236,3 +236,11 @@ double conquest", 21 Nov, derived, no staff ruling):
 9. **The field:** after the bans, run `scripts/rift meta --since 2026-11-23` and `rift field`, and check whether Defy decks reach about 40% and gear decks reach the top 5.
 
 *Logistics, not an argument:* Piltover shows 2 On the Hunt owned against 3 in the list. Proxy the third until it's in.
+
+## Re-benched 21 Nov, after the simulator fixes
+
+C1 (−1 Ember Monk +1 Ezreal), same command, quiet / normal / heavy opponent: cards drawn 1.3/1.5/1.4 → 2.0/2.3/2.1;
+Mercenary on 34/40/44 → 37/44/47%; answers on their turn t5 (play) 64 → 61%; Gold 4.38 → 4.57 (normal). Same
+verdict: C1 stays the first candidate. The bench still can't see Ember Monk's +2, Faefolk's pull, Nidalee's draw,
+Rengar, Vex's stun, On the Hunt, Sivir's own attacks or the battlefields, so the trap and the double conquest
+aren't in these numbers.

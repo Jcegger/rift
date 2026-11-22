@@ -49,7 +49,7 @@ import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, SB_MAX } from "../lib/decks.mjs";
 import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive, unreadSentences } from "../lib/versus.mjs";
-import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf } from "../lib/decklab.mjs";
+import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf, blindSpots } from "../lib/decklab.mjs";
 import { matchReport } from "../lib/match.mjs";
 
 // The S/A field's lists as opponents for lib/match.mjs, in a fixed shuffled order, so a before
@@ -1378,6 +1378,10 @@ async function cmdTry(S, cat, args) {
 
   console.log(`TRY  ${before.name}\n  ${changes.map((c) => `${c.qty > 0 ? "+" : ""}${c.qty} ${c.name}${c.side === "sb" ? " (sideboard)" : ""}`).join(" · ")}`);
   console.log(`  rules: before ${chB.length ? "FAIL " + chB.join(", ") : "all pass"} · after ${chA.length ? "FAIL " + chA.join(", ") : "all pass"}`);
+  {
+    const bl = [...new Set([...blindSpots(before.cards, cat.BY), ...blindSpots(after.cards, cat.BY)])];
+    console.log(`  the bench can't see: ${bl.length ? bl.join(", ") : "every card's text is read"}; and never your own attacks, conquests or points`);
+  }
   console.log(`  answers the goldfish tracks (any size, usable on their turn): ${keys.join(", ") || "none"}`);
   console.log(`  field: ${fieldDecks.length} S/A legends, ${fieldDecks.reduce((a, f) => a + f.n, 0)} lists since ${since} (${fieldDecks.reduce((a, f) => a + f.placed, 0)} placed)\n`);
 
