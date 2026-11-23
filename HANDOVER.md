@@ -35,14 +35,17 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    `rift close` for a typed-in position, `try --close` on model boards; results in both decklab docs): from 7 a
    winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
    close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
-   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): 89% of played copies compile, and the
-   solver plays 84% (23 Nov, from 88% / 83%); floor gate in check.mjs (`model/cardtext-floor.json`, 87% / 82%). Read on
-   23 Nov (turn tests 20-24): The Waters' Wage (ready Gold from face down; a `gold` op), Smoke and Mirrors (`swapTwo`),
-   Elder Dragon (`anyDamageKills`, fights included), Karthus (Deathknell twice), Siphoning Strike and Tomb-Raider
-   Barbara (`runeCount`); Amateur Demolitionist's Bomb and Rift Herald's free unit filed as "later" with the exception
-   each misses in its comment. A new op needs both ENGINE_OPS (cardtext) and RUN_OPS (turn), or it compiles and never
-   runs; a spell's follow-on sentence doesn't join the ability before it, so overrides fold it (`kind: "folded"`).
-   Left, heaviest first: Baron Nashor (the Baron Pit is a third battlefield; the solver has A and B), Jayce, Man of
+   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): 90.5% of played copies compile, and the
+   solver plays 84.8% (23 Nov, from 88% / 83%); floor gate in check.mjs (`model/cardtext-floor.json`, 88% / 83%).
+   **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed no-effect with a true reason; never file a
+   points effect that way to move the number. Read on 23 Nov (turn tests 20-26): The Waters' Wage (`gold`), Smoke and
+   Mirrors (`swapTwo`), Elder Dragon (`anyDamageKills`, fights too), Karthus (Deathknell twice), Siphoning Strike and
+   Tomb-Raider Barbara (`runeCount`), scoring as a points effect (`score`: it had been filed no-effect; Ahri, Alluring),
+   tags in targets and auras (Bubble Bot, Rumble), unknown triggers read as `unmodeled` (or no-effect when the effect
+   is only a draw), stun/XP/Bomb grammar. A new op needs ENGINE_OPS (cardtext) and RUN_OPS (turn); a spell's
+   follow-on sentence doesn't join the ability before it, so overrides fold it (`kind: "folded"`). To find the next
+   batch: dump `poolCoverage(...).unread` and peel triggers/conditions as `parseSentence` does, to see which half fails.
+   ~410 unread sentences remain, mostly one-offs. Left, heaviest first: Baron Nashor (the Baron Pit is a third battlefield; the solver has A and B), Jayce, Man of
    Progress (free gear from hand), Rek'Sai, Breacher, Kayle, Justified (Empower cap plus a counted Might static),
    Acceptable Losses, Mirror Image; then unevaluated conditions (Level/XP), [Level], gear statics at a battlefield,
    combat triggers beyond the blast, and their unattached gear, which the match.mjs snapshot doesn't pass. Later: move lib/sim.mjs and lib/match.mjs onto
