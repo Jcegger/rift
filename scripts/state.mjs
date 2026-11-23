@@ -49,7 +49,7 @@ import { readFile } from "node:fs/promises";
 import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, SB_MAX } from "../lib/decks.mjs";
 import { pathToFileURL } from "node:url";
-import { versus, weigh, effectsOf, looksInteractive, unreadSentences } from "../lib/versus.mjs";
+import { versus, weigh, effectsOf, looksInteractive, unreadSentences, withGear } from "../lib/versus.mjs";
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf, blindSpots } from "../lib/decklab.mjs";
 import { matchReport } from "../lib/match.mjs";
 
@@ -1676,38 +1676,69 @@ async function cmdLoops(S, cat, args) {
   }
 }
 
-// ── fight: one combat at one battlefield, both sides playing their best line ────
-// lib/fight.mjs. You defend (the usual question for a hold deck); --you-attack flips it.
-// Names are comma-separated, exact or a unique prefix. Budgets are Energy/Power you can
-// still pay on that turn: "3/1". Face-down cards are free.
-function cmdFight(cat, args) {
-  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+// ── names on the command line (fight, close) ─────────────────────────────────
+// A name is exact or a unique prefix; the unvarianted printing wins.
+function cardFinder(cat) {
   const names = [...new Set(cat.cards.map((c) => c.n))];
+  const pick = (n) => cat.cards.find((c) => c.n === n && !c.v) || cat.cards.find((c) => c.n === n);
   const find = (q) => {
     const l = q.trim().toLowerCase(); const ex = names.find((n) => n.toLowerCase() === l);
-    if (ex) return cat.cards.find((c) => c.n === ex && !c.v) || cat.cards.find((c) => c.n === ex);
+    if (ex) return pick(ex);
     const pre = names.filter((n) => n.toLowerCase().startsWith(l));
     if (pre.length !== 1) throw new Error(pre.length ? `"${q}" matches ${pre.slice(0, 5).join(", ")}` : `no card called "${q}"`);
-    return cat.cards.find((c) => c.n === pre[0] && !c.v) || cat.cards.find((c) => c.n === pre[0]);
+    return pick(pre[0]);
   };
-  const list = (k) => (opt(k) || "").split(",").map((x) => x.trim()).filter(Boolean).map(find);
+  return { names, find };
+}
+
+// A list of names. A name can hold a comma ("Sivir, Mercenary"): split on ";" when the list has one, else on ","
+// and re-join two halves that only make a card together. Each item keeps any "*" or "+ gear" suffix for the caller.
+function nameItems(raw, names) {
+  const s = raw || "";
+  const parts = s.split(/;/.test(s) ? ";" : ",").map((x) => x.trim()).filter(Boolean); const out = [];
+  const base = (x) => x.split("+")[0].replace(/\*$/, "").trim().toLowerCase();
+  for (let i = 0; i < parts.length; i++) {
+    const two = i + 1 < parts.length ? `${parts[i]}, ${parts[i + 1]}` : null;
+    if (two && !names.some((n) => n.toLowerCase() === base(parts[i])) && names.some((n) => n.toLowerCase() === base(two))) { out.push(two); i++; }
+    else out.push(parts[i]);
+  }
+  return out;
+}
+
+// ── fight: one combat at one battlefield, both sides playing their best line ────
+// lib/fight.mjs. You defend (the usual question for a hold deck); --you-attack flips it.
+// Names are comma-separated, exact or a unique prefix (";" between names that hold a comma). A unit wears
+// gear with "+": "Rengar, Trophy Hunter + Long Sword" (withGear, as lib/turn.mjs sees it). Budgets are
+// Energy/Power you can still pay on that turn: "3/1". Face-down cards are free.
+function cmdFight(cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const { names, find } = cardFinder(cat);
+  const list = (k) => nameItems(opt(k), names).map(find);
+  const unitsOf = (k) => nameItems(opt(k), names).map((x) => {
+    const [u, ...gs] = x.split("+").map((y) => y.trim()).filter(Boolean);
+    const gear = gs.map(find);
+    for (const g of gear) if (!/Gear/.test(g.t || "")) throw new Error(`"${g.n}" is a ${g.t || "card"}, not gear`);
+    return withGear(find(u), gear);
+  });
   const budget = (k) => { const [e, p] = (opt(k) || "0/0").split("/").map(Number); return { e: e || 0, p: p || 0 }; };
   let them, you;
   try {
-    them = { units: list("--attack"), hand: list("--their"), budget: budget("--their-budget") };
-    you = { units: list("--defend"), hand: list("--hand"), faceDown: list("--down"), base: list("--base"), budget: budget("--budget") };
+    them = { units: unitsOf("--attack"), hand: list("--their"), budget: budget("--their-budget") };
+    you = { units: unitsOf("--defend"), hand: list("--hand"), faceDown: list("--down"), base: unitsOf("--base"), budget: budget("--budget") };
   } catch (e) { console.log(`fight: ${e.message}`); return; }
   if (!them.units.length || !you.units.length) {
     console.log('usage: fight --attack "<their units>" --defend "<your units>" [--down "<your face-down cards>"] [--hand "<your hand>"] [--budget E/P]');
     console.log('             [--base "<your units elsewhere>"] [--their "<their hand>"] [--their-budget E/P] [--you-attack]');
+    console.log('       a unit wears gear with "+": "Rengar, Trophy Hunter + Long Sword"; ";" between names that hold a comma');
     return;
   }
+  const named = (c) => c.n + (c.gear?.length ? ` (${c.gear.join(", ")})` : "");
   const youAttack = args.includes("--you-attack");
   const r = youAttack ? fight({ units: you.units, hand: you.hand, budget: you.budget }, { units: them.units, hand: them.hand, budget: them.budget })
     : fight(them, you);
   const word = youAttack ? { hold: "THEY HOLD", conquer: "YOU CONQUER", trade: "TRADE (both wiped; the battlefield is left uncontrolled)" }
     : { hold: "YOU HOLD", conquer: "THEY CONQUER", trade: "TRADE (both wiped; the battlefield is left uncontrolled)" };
-  console.log(`FIGHT  ${(youAttack ? you : them).units.map((c) => c.n).join(" + ")} attack ${(youAttack ? them : you).units.map((c) => c.n).join(" + ")}`);
+  console.log(`FIGHT  ${(youAttack ? you : them).units.map(named).join(" + ")} attack ${(youAttack ? them : you).units.map(named).join(" + ")}`);
   console.log(`  → ${word[r.outcome]}`);
   console.log(`  best line, both sides: ${r.line.length ? r.line.join(" · ") : "nobody needs to play anything"}`);
   console.log(`  Rules: totals with Assault and Shield, lethal one unit at a time, attackers recalled if a defender stands; triggers on the chain take Reactions only; each play resolves before the next (simplified).`);
@@ -1719,19 +1750,8 @@ function cmdFight(cat, args) {
 // start of your turn (they score first). Runes: "4 Chaos, 2 Body", all ready.
 function cmdClose(cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
-  const names = [...new Set(cat.cards.map((c) => c.n))];
-  const find = (q) => {
-    const l = q.trim().toLowerCase(); const ex = names.find((n) => n.toLowerCase() === l);
-    const pick = (n) => cat.cards.find((c) => c.n === n && !c.v) || cat.cards.find((c) => c.n === n);
-    if (ex) return pick(ex);
-    const pre = names.filter((n) => n.toLowerCase().startsWith(l));
-    if (pre.length !== 1) throw new Error(pre.length ? `"${q}" matches ${pre.slice(0, 5).join(", ")}` : `no card called "${q}"`);
-    return pick(pre[0]);
-  };
-  // A name with a comma in it ("Sivir, Mercenary"): split on ";" when the list has one, else re-join halves that only make a card together.
-  const items = (k) => { const parts = (opt(k) || "").split(/;/.test(opt(k) || "") ? ";" : ",").map((x) => x.trim()).filter(Boolean); const out = [];
-    for (let i = 0; i < parts.length; i++) { const two = i + 1 < parts.length ? `${parts[i]}, ${parts[i + 1]}` : null;
-      if (two && names.some((n) => n.toLowerCase() === two.replace(/\*$/, "").toLowerCase())) { out.push(two); i++; } else out.push(parts[i]); } return out; };
+  const { names, find } = cardFinder(cat);
+  const items = (k) => nameItems(opt(k), names);
   const list = (k) => items(k).map((x) => find(x.replace(/\*$/, "")));
   let pos;
   try {

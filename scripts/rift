@@ -16,7 +16,7 @@
 #   scripts/rift versus <legend> --deck "<name>"       # head to head, card by card, vs that legend's lists
 #   scripts/rift try --deck "<name>" "-Card" "+Card"   # test one change: rules, shape, goldfish, field
 #   scripts/rift loops --deck "<name>" [--bridges]     # interactions and loops, read from card text
-#   scripts/rift fight --attack "<units>" --defend "<units>" [--down …] [--their …]   # one combat, best play both sides
+#   scripts/rift fight --attack "<units>" --defend "<units>" [--down …] [--their …]   # one combat, best play both sides ("Unit + Gear"; ";" between names with commas)
 #   scripts/rift intake [champion]                     # after adding cards on Piltover: what landed, where to file it
 #   scripts/rift kobo                                  # the Kobo's Nexus Night sheets: published, on the server, on the device
 #   scripts/rift journal [deck]                        # the app's journal, plus games read off the reMarkable's match sheets

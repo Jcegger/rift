@@ -60,7 +60,7 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   flags a loop the rules break (a revived unit arrives face up). `--bridges` reads the legal
   pool for cards that would link into the deck. Tests: `lib/interactions.test.mjs`.
 - `lib/fight.mjs` - the fight calculator (`scripts/rift fight --attack "<their units>" --defend
-  "<yours>" [--down …] [--hand …] [--budget E/P] [--base …] [--their …] [--their-budget E/P]`):
+  "<yours>" [--down …] [--hand …] [--budget E/P] [--base …] [--their …] [--their-budget E/P]`; a unit wears gear with "+", and ";" separates names that hold a comma):
   one combat at one battlefield played out by the rules, both sides choosing their best line.
   Totals with Assault and Shield, lethal one unit at a time, attackers recalled while a
   defender stands; Graves-style triggers on the chain take Reactions only, then the showdown
