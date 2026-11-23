@@ -2,7 +2,7 @@
 
 Where the last session stopped. Rewrite it at the end of a session; git is the log. The deck brief (live list, plan,
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
-`jayegger-site/HANDOVER.md`.
+`~/projects/dotclaude/HUB.md`.
 
 **Updated:** 2026-11-23
 
