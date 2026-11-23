@@ -7,8 +7,8 @@
  "cutShort": null,
  "carriedFromPrevious": 73,
  "tags": {
+  "Metagame": 26,
   "News": 61,
-  "Metagame": 25,
   "Guides": 9,
   "Events": 22,
   "Legends": 24,
@@ -16,6 +16,15 @@
   "Rules": 2
  },
  "posts": [
+  {
+   "title": "Radiance Post-Ban Meta Tier List Prediction & New Decklists to Try",
+   "dt": "2026-11-23",
+   "url": "https://riftbound.gg/radiance-post-ban-prediction-tier-list",
+   "tags": [
+    "Metagame"
+   ],
+   "author": "Den"
+  },
   {
    "title": "Grand Theft Auto VI Wiki, Tools & Guides - GrandTheft.gg",
    "dt": "2026-11-18",
@@ -1342,8 +1351,17 @@
  ],
  "riotSource": "playriftbound.com/en-us/news/ and its three category pages",
  "riotFailed": null,
- "riotCarried": 12,
+ "riotCarried": 13,
  "riot": [
+  {
+   "title": "Regional Championship NA Rules Update",
+   "dt": "2026-11-23",
+   "url": "https://playriftbound.com/en-us/news/organizedplay/regional-championship-na-rules-update",
+   "tags": [
+    "Organized Play"
+   ],
+   "desc": "Small update on competitive rules for the NA Regional Championship."
+  },
   {
    "title": "Convergence Fest Side Events and The Encore Details!",
    "dt": "2026-11-17",

@@ -3,10 +3,10 @@
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
-  "events": 2518,
-  "eventsWithDecks": 65,
-  "players": 75257,
-  "playersWithDecks": 15119,
+  "events": 2521,
+  "eventsWithDecks": 68,
+  "players": 75349,
+  "playersWithDecks": 15211,
   "unresolvedDeckEvents": [
    "Runes & Rift Open 19",
    "Mardi - Championship #1",
@@ -24,15 +24,15 @@
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Asia": 147,
+   "Asia": 148,
    "unknown": 238,
    "Europe": 84,
    "North America": 8,
    "Oceania": 7
   },
   "registryEventsByRegion": {
-   "Asia": 34,
-   "unknown": 2484
+   "unknown": 2487,
+   "Asia": 34
   },
   "unresolvedClaimEvents": [
    "*BREAK IF MUST",
@@ -152,9 +152,11 @@
    "Nightcup League Cup #1 — Cycle 1": 47,
    "Riftbound Online Series Season 4 Week 1": 46,
    "Shanghai City Challenge (China)": 45,
+   "Open the Vault - Riftbound $5k": 42,
    "Chengdu Tournament 2026-11-15 - 214074 (China)": 38,
    "World Series #2": 38,
    "Mardi - championship #2": 35,
+   "MFG's Riftbound $2k": 31,
    "Riftbound Regional Qualifier - Los Angeles": 30,
    "Mardi - Championship #1": 29,
    "Haven Online Challenger Series #5 - October 11th 2026 (Radiance Preview)": 27,
@@ -168,6 +170,7 @@
    "League Cup #4 — Cycle 3": 15,
    "Fast Cup Radiance #2": 14,
    "Fast Cup Radiance #3": 14,
+   "Open the Vault - KDA Bundle Flight 1": 13,
    "LDXP Sacramento - Radiance-Win-A-Case": 13,
    "Card Cosmos Denver Riftbound $1K Tourney": 12,
    "Club9 Riftbound Clash #3": 9,
@@ -184,6 +187,36 @@
   }
  },
  "events": [
+  {
+   "name": "Open the Vault - KDA Bundle Flight 1",
+   "dt": "2026-11-22",
+   "players": 13,
+   "format": "Constructed",
+   "winner": "James Sifuentes ",
+   "country": null,
+   "slug": "open-the-vault-kda-bundle-flight-1",
+   "top": []
+  },
+  {
+   "name": "MFG's Riftbound $2k",
+   "dt": "2026-11-22",
+   "players": 37,
+   "format": "Constructed",
+   "winner": "Michael Chapman",
+   "country": null,
+   "slug": "mfgs-riftbound-2k",
+   "top": []
+  },
+  {
+   "name": "Open the Vault - Riftbound $5k",
+   "dt": "2026-11-21",
+   "players": 42,
+   "format": "Constructed",
+   "winner": "Zefran Castillo",
+   "country": null,
+   "slug": "open-the-vault-riftbound-5k",
+   "top": []
+  },
   {
    "name": "China Tournament 2026-11-20 - 222466",
    "dt": "2026-11-20",
