@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-22",
+ "generatedAt": "2026-11-23",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -15,28 +15,19 @@
    "Mardi - championship #2",
    "Riftbound Regional Qualifier - Barcelona",
    "League Cup #2 - Cycle 1",
-   "Triple Win-A-Box | Vendetta Tournament",
-   "Riftbound Online Tournament",
-   "Riftbound Remote Showdown Pop Up Cup",
-   "Riftbound Remote Showdown #2",
-   "Riftbound Remote Showdown #3",
-   "Riftbound Remote Showdown #4",
-   "CCS Riftbound $10,000 Tournament",
-   "CCS Riftbound Sunday $1000",
-   "Friday $5,000 Riftbound: League of Legends TCG Tournament",
-   "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament"
+   "Triple Win-A-Box | Vendetta Tournament"
   ],
-  "claimedEvents": 84,
-  "claimedEventsUnmatched": 75,
+  "claimedEvents": 80,
+  "claimedEventsUnmatched": 71,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Europe": 91,
-   "Asia": 152,
+   "Asia": 147,
+   "unknown": 238,
+   "Europe": 84,
    "North America": 8,
-   "unknown": 251,
    "Oceania": 7
   },
   "registryEventsByRegion": {
@@ -48,14 +39,9 @@
    "... Always",
    "10K Showdown - Auckland Card Show",
    "28P Online",
-   "36P Tournament",
-   "47P tournament",
-   "60P Tournament",
-   "60P tournament",
    "64P France",
    "A-Case @ Nexus",
    "Atlanta CGS",
-   "Azir, Emperor of the Sands: Barcelona Regional Qualifier",
    "Barcelona RQ",
    "Black Cat Card Game X Cat Island Pilgrimage Joint Tournament",
    "CCS 25k Qualifier #5",
@@ -68,6 +54,7 @@
    "Hartford RQ",
    "Hartord RQ",
    "Herald of the Arcane Deck",
+   "Houston Regional Qualifer)",
    "I'm gonna hold to",
    "Jinx, Jinx Rebel (",
    "Los Angeles RQ",
@@ -123,9 +110,6 @@
   "decksByEvent": {
    "LDXP Sacramento - Riftbound Showdown 25k": 704,
    "Convergence IV": 232,
-   "CCS Riftbound $10,000 Tournament": 222,
-   "Saturday $10,000 Riftbound: Leage of Legends TCG Tournament": 198,
-   "Friday $5,000 Riftbound: League of Legends TCG Tournament": 180,
    "CCS $25,000 Riftbound Invitational Qualifier #6": 177,
    "Riftbound Regional Qualifier - Singapore": 77,
    "CCS $50,000 Riftbound Invitational Event + LCQs": 70,
@@ -145,7 +129,6 @@
    "Xi'an City Challenge 2026-11-01 - 211331 (China)": 64,
    "Hangzhou City Challenge 2026-11-07 - 214398 (China)": 64,
    "Wuhan City Challenge 2026-11-08 - 214499 (China)": 64,
-   "CCS Riftbound Sunday $1000": 64,
    "China Tournament 2026-11-20 - 222466": 63,
    "Shanghai City Challenge 2026-11-15 - 218842 (China)": 63,
    "Tianjin City Challenge 2026-11-07 - 215017 (China)": 63,
@@ -178,7 +161,6 @@
    "Chaotic Goods $2k Chaos Cup!": 26,
    "Riftbound $2,500 Cash Tournament @ Pro-Play Summit: Orlando": 21,
    "CoolStuffCon Orlando 2026- Riftbound Showdown Series $25k": 20,
-   "Riftbound Remote Showdown #3": 20,
    "Monday Clash #1": 17,
    "Fast Cup Radiance #4": 17,
    "WA RIFTBOUND CUP (Vendetta) 11 Oct - 9am AWST": 16,
@@ -186,14 +168,11 @@
    "League Cup #4 — Cycle 3": 15,
    "Fast Cup Radiance #2": 14,
    "Fast Cup Radiance #3": 14,
-   "Riftbound Remote Showdown #2": 14,
    "LDXP Sacramento - Radiance-Win-A-Case": 13,
-   "Riftbound Online Tournament": 13,
    "Card Cosmos Denver Riftbound $1K Tourney": 12,
    "Club9 Riftbound Clash #3": 9,
    "Runes & Rift Open 19": 8,
    "Triple Win-A-Box | Vendetta Tournament": 8,
-   "Riftbound Remote Showdown #4": 8,
    "LDXP Sacramento - 2 v 2 Constructed": 6,
    "Radiance Standard Challenge Friday 10:00am - Riftbound Regional Championship: Europe": 3,
    "FINALE RIFT TOUR PGW": 1,
@@ -201,8 +180,7 @@
    "CCS $50,000 Riftbound Invitational Last Chance Qualifier #1": 1,
    "Nexus Night": 1,
    "THE SCRUB CUP 10/2/26 6 PM": 1,
-   "Showdown Series Bristol by Organized Play Events": 1,
-   "Riftbound Remote Showdown Pop Up Cup": 1
+   "Showdown Series Bristol by Organized Play Events": 1
   }
  },
  "events": [

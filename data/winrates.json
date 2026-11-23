@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-22",
+ "generatedAt": "2026-11-23",
  "source": "https://www.riftlite.com/community/matrix",
  "note": "RiftLite community matchup matrix: online matches (TCGA, RiftAtlas) logged by RiftLite users, not paper events. wr = row legend's win % vs the column legend over n games (pooled, either side's log). Small n is noise.",
  "filters": {
@@ -10,171 +10,171 @@
  "legends": [
   {
    "legend": "Vex",
-   "games": 646
+   "games": 680
   },
   {
    "legend": "Kai'Sa",
-   "games": 636
-  },
-  {
-   "legend": "Riven",
-   "games": 600
+   "games": 635
   },
   {
    "legend": "Mordekaiser",
-   "games": 597
+   "games": 601
+  },
+  {
+   "legend": "Riven",
+   "games": 589
   },
   {
    "legend": "Evelynn",
-   "games": 540
+   "games": 544
   },
   {
    "legend": "Ezreal",
-   "games": 505
+   "games": 508
   },
   {
    "legend": "Rek'Sai",
-   "games": 485
+   "games": 478
   },
   {
    "legend": "Sett",
-   "games": 483
+   "games": 478
   },
   {
-   "legend": "Nasus",
+   "legend": "Ornn",
    "games": 449
   },
   {
+   "legend": "Nasus",
+   "games": 448
+  },
+  {
    "legend": "Viktor",
-   "games": 442
+   "games": 439
   },
   {
    "legend": "Master Yi, Wuju Bladesman",
    "games": 436
   },
   {
-   "legend": "Ornn",
-   "games": 435
-  },
-  {
-   "legend": "Kennen",
-   "games": 426
-  },
-  {
    "legend": "Orianna",
-   "games": 426
+   "games": 413
   },
   {
    "legend": "Rengar",
-   "games": 398
+   "games": 407
+  },
+  {
+   "legend": "Kennen",
+   "games": 406
   },
   {
    "legend": "Lillia",
-   "games": 368
+   "games": 370
   },
   {
    "legend": "Diana",
-   "games": 354
+   "games": 364
   },
   {
    "legend": "Irelia",
-   "games": 322
+   "games": 335
   },
   {
    "legend": "Pyke",
-   "games": 315
+   "games": 316
   },
   {
    "legend": "Volibear",
-   "games": 292
-  },
-  {
-   "legend": "Ekko",
-   "games": 265
+   "games": 295
   },
   {
    "legend": "Draven",
-   "games": 262
-  },
-  {
-   "legend": "LeBlanc",
-   "games": 256
+   "games": 271
   },
   {
    "legend": "Fiora",
-   "games": 245
+   "games": 247
+  },
+  {
+   "legend": "LeBlanc",
+   "games": 246
+  },
+  {
+   "legend": "Ekko",
+   "games": 244
   },
   {
    "legend": "Kha'Zix",
-   "games": 220
+   "games": 222
   },
   {
    "legend": "Azir",
-   "games": 191
+   "games": 195
   },
   {
    "legend": "Jayce",
-   "games": 154
+   "games": 152
   },
   {
    "legend": "Akali",
-   "games": 145
+   "games": 147
   },
   {
    "legend": "Mel",
    "games": 118
   },
   {
-   "legend": "Shen",
-   "games": 105
+   "legend": "Jarvan IV",
+   "games": 93
   },
   {
-   "legend": "Jarvan IV",
-   "games": 97
+   "legend": "Seraphine",
+   "games": 92
+  },
+  {
+   "legend": "Shen",
+   "games": 92
   },
   {
    "legend": "Master Yi, Wuju Master",
    "games": 91
   },
   {
-   "legend": "Seraphine",
-   "games": 89
-  },
-  {
-   "legend": "Ziggs",
-   "games": 87
+   "legend": "Lucian",
+   "games": 85
   },
   {
    "legend": "K'Sante",
-   "games": 83
+   "games": 84
   },
   {
-   "legend": "Lucian",
+   "legend": "Ziggs",
    "games": 81
   },
   {
-   "legend": "Teemo",
-   "games": 74
+   "legend": "Zed",
+   "games": 76
   },
   {
-   "legend": "Zed",
-   "games": 74
+   "legend": "Teemo",
+   "games": 75
+  },
+  {
+   "legend": "Lee Sin",
+   "games": 73
   },
   {
    "legend": "Ivern",
    "games": 70
   },
   {
-   "legend": "Lee Sin",
-   "games": 70
-  },
-  {
    "legend": "Jax",
-   "games": 68
+   "games": 66
   },
   {
    "legend": "Annie",
-   "games": 55
+   "games": 54
   },
   {
    "legend": "Leona",
@@ -182,15 +182,15 @@
   },
   {
    "legend": "Jhin",
-   "games": 42
+   "games": 43
   },
   {
    "legend": "Ahri",
-   "games": 40
+   "games": 42
   },
   {
    "legend": "Ambessa",
-   "games": 39
+   "games": 42
   },
   {
    "legend": "Rumble",
@@ -210,23 +210,19 @@
   },
   {
    "legend": "Lux",
-   "games": 32
+   "games": 31
+  },
+  {
+   "legend": "Yasuo",
+   "games": 30
   },
   {
    "legend": "Miss Fortune",
    "games": 29
   },
   {
-   "legend": "Yasuo",
-   "games": 29
-  },
-  {
    "legend": "Jinx",
    "games": 27
-  },
-  {
-   "legend": "Renata Glasc",
-   "games": 24
   },
   {
    "legend": "Renekton",
@@ -235,6 +231,10 @@
   {
    "legend": "Sivir",
    "games": 21
+  },
+  {
+   "legend": "Renata Glasc",
+   "games": 20
   },
   {
    "legend": "Garen",
@@ -251,6 +251,12 @@
    "b": "Akali",
    "wr": 50,
    "n": 2
+  },
+  {
+   "a": "Ahri",
+   "b": "Ambessa",
+   "wr": 100,
+   "n": 1
   },
   {
    "a": "Ahri",
@@ -322,7 +328,7 @@
    "a": "Ahri",
    "b": "Mordekaiser",
    "wr": 50,
-   "n": 4
+   "n": 5
   },
   {
    "a": "Ahri",
@@ -388,7 +394,7 @@
    "a": "Akali",
    "b": "Diana",
    "wr": 25,
-   "n": 4
+   "n": 5
   },
   {
    "a": "Akali",
@@ -562,7 +568,7 @@
    "a": "Akali",
    "b": "Sivir",
    "wr": 100,
-   "n": 1
+   "n": 2
   },
   {
    "a": "Akali",
@@ -602,6 +608,12 @@
   },
   {
    "a": "Ambessa",
+   "b": "Ahri",
+   "wr": 0,
+   "n": 1
+  },
+  {
+   "a": "Ambessa",
    "b": "Darius",
    "wr": 0,
    "n": 1
@@ -698,6 +710,12 @@
   },
   {
    "a": "Ambessa",
+   "b": "Mel",
+   "wr": 100,
+   "n": 1
+  },
+  {
+   "a": "Ambessa",
    "b": "Mordekaiser",
    "wr": 50,
    "n": 5
@@ -724,6 +742,12 @@
    "a": "Ambessa",
    "b": "Teemo",
    "wr": 0,
+   "n": 1
+  },
+  {
+   "a": "Ambessa",
+   "b": "Vex",
+   "wr": 100,
    "n": 1
   },
   {
@@ -760,7 +784,7 @@
    "a": "Annie",
    "b": "Diana",
    "wr": 0,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Annie",
@@ -777,8 +801,8 @@
   {
    "a": "Annie",
    "b": "Evelynn",
-   "wr": 25,
-   "n": 4
+   "wr": 0,
+   "n": 3
   },
   {
    "a": "Annie",
@@ -801,8 +825,8 @@
   {
    "a": "Annie",
    "b": "Kai'Sa",
-   "wr": 25,
-   "n": 5
+   "wr": 33.3,
+   "n": 4
   },
   {
    "a": "Annie",
@@ -856,7 +880,7 @@
    "a": "Annie",
    "b": "Nasus",
    "wr": 33.3,
-   "n": 7
+   "n": 6
   },
   {
    "a": "Annie",
@@ -875,6 +899,12 @@
    "b": "Rek'Sai",
    "wr": 50,
    "n": 2
+  },
+  {
+   "a": "Annie",
+   "b": "Riven",
+   "wr": 0,
+   "n": 1
   },
   {
    "a": "Annie",
@@ -915,8 +945,8 @@
   {
    "a": "Azir",
    "b": "Diana",
-   "wr": 60,
-   "n": 6
+   "wr": 50,
+   "n": 7
   },
   {
    "a": "Azir",
@@ -927,8 +957,8 @@
   {
    "a": "Azir",
    "b": "Evelynn",
-   "wr": 55.6,
-   "n": 10
+   "wr": 60,
+   "n": 11
   },
   {
    "a": "Azir",
@@ -975,8 +1005,8 @@
   {
    "a": "Azir",
    "b": "Kai'Sa",
-   "wr": 40,
-   "n": 7
+   "wr": 28.6,
+   "n": 9
   },
   {
    "a": "Azir",
@@ -988,7 +1018,7 @@
    "a": "Azir",
    "b": "Kha'Zix",
    "wr": 100,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Azir",
@@ -1053,8 +1083,8 @@
   {
    "a": "Azir",
    "b": "Rek'Sai",
-   "wr": 57.1,
-   "n": 7
+   "wr": 50,
+   "n": 6
   },
   {
    "a": "Azir",
@@ -1065,7 +1095,7 @@
   {
    "a": "Azir",
    "b": "Riven",
-   "wr": 41.7,
+   "wr": 45.5,
    "n": 12
   },
   {
@@ -1095,8 +1125,8 @@
   {
    "a": "Azir",
    "b": "Viktor",
-   "wr": 75,
-   "n": 10
+   "wr": 77.8,
+   "n": 11
   },
   {
    "a": "Azir",
@@ -1113,8 +1143,8 @@
   {
    "a": "Azir",
    "b": "Ziggs",
-   "wr": 66.7,
-   "n": 3
+   "wr": 50,
+   "n": 2
   },
   {
    "a": "Darius",
@@ -1234,7 +1264,7 @@
    "a": "Diana",
    "b": "Akali",
    "wr": 75,
-   "n": 4
+   "n": 5
   },
   {
    "a": "Diana",
@@ -1246,13 +1276,13 @@
    "a": "Diana",
    "b": "Annie",
    "wr": 100,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Diana",
    "b": "Azir",
-   "wr": 40,
-   "n": 6
+   "wr": 50,
+   "n": 7
   },
   {
    "a": "Diana",
@@ -1269,8 +1299,8 @@
   {
    "a": "Diana",
    "b": "Evelynn",
-   "wr": 53.3,
-   "n": 17
+   "wr": 56.3,
+   "n": 19
   },
   {
    "a": "Diana",
@@ -1287,8 +1317,8 @@
   {
    "a": "Diana",
    "b": "Irelia",
-   "wr": 70,
-   "n": 10
+   "wr": 63.6,
+   "n": 11
   },
   {
    "a": "Diana",
@@ -1299,14 +1329,14 @@
   {
    "a": "Diana",
    "b": "Jarvan IV",
-   "wr": 100,
-   "n": 1
+   "wr": 50,
+   "n": 2
   },
   {
    "a": "Diana",
    "b": "Jax",
    "wr": 100,
-   "n": 4
+   "n": 3
   },
   {
    "a": "Diana",
@@ -1323,14 +1353,14 @@
   {
    "a": "Diana",
    "b": "Kai'Sa",
-   "wr": 33.3,
+   "wr": 40,
    "n": 16
   },
   {
    "a": "Diana",
    "b": "Kennen",
-   "wr": 50,
-   "n": 16
+   "wr": 46.2,
+   "n": 17
   },
   {
    "a": "Diana",
@@ -1389,8 +1419,8 @@
   {
    "a": "Diana",
    "b": "Nasus",
-   "wr": 41.7,
-   "n": 14
+   "wr": 46.2,
+   "n": 15
   },
   {
    "a": "Diana",
@@ -1420,7 +1450,7 @@
    "a": "Diana",
    "b": "Rek'Sai",
    "wr": 50,
-   "n": 15
+   "n": 17
   },
   {
    "a": "Diana",
@@ -1449,8 +1479,8 @@
   {
    "a": "Diana",
    "b": "Sett",
-   "wr": 43.8,
-   "n": 18
+   "wr": 40,
+   "n": 17
   },
   {
    "a": "Diana",
@@ -1473,8 +1503,8 @@
   {
    "a": "Diana",
    "b": "Vex",
-   "wr": 60,
-   "n": 23
+   "wr": 59.1,
+   "n": 26
   },
   {
    "a": "Diana",
@@ -1485,8 +1515,8 @@
   {
    "a": "Diana",
    "b": "Viktor",
-   "wr": 61.5,
-   "n": 14
+   "wr": 66.7,
+   "n": 13
   },
   {
    "a": "Diana",
@@ -1504,7 +1534,7 @@
    "a": "Diana",
    "b": "Ziggs",
    "wr": 0,
-   "n": 2
+   "n": 1
   },
   {
    "a": "Draven",
@@ -1545,14 +1575,14 @@
   {
    "a": "Draven",
    "b": "Ekko",
-   "wr": 66.7,
-   "n": 6
+   "wr": 71.4,
+   "n": 7
   },
   {
    "a": "Draven",
    "b": "Evelynn",
-   "wr": 70,
-   "n": 11
+   "wr": 72.7,
+   "n": 12
   },
   {
    "a": "Draven",
@@ -1594,7 +1624,7 @@
    "a": "Draven",
    "b": "Jayce",
    "wr": 0,
-   "n": 2
+   "n": 1
   },
   {
    "a": "Draven",
@@ -1617,8 +1647,8 @@
   {
    "a": "Draven",
    "b": "Kai'Sa",
-   "wr": 46.2,
-   "n": 14
+   "wr": 46.7,
+   "n": 16
   },
   {
    "a": "Draven",
@@ -1659,8 +1689,8 @@
   {
    "a": "Draven",
    "b": "Master Yi, Wuju Bladesman",
-   "wr": 55.6,
-   "n": 12
+   "wr": 60,
+   "n": 13
   },
   {
    "a": "Draven",
@@ -1677,8 +1707,8 @@
   {
    "a": "Draven",
    "b": "Mordekaiser",
-   "wr": 72.7,
-   "n": 14
+   "wr": 75,
+   "n": 15
   },
   {
    "a": "Draven",
@@ -1690,7 +1720,7 @@
    "a": "Draven",
    "b": "Orianna",
    "wr": 60,
-   "n": 7
+   "n": 6
   },
   {
    "a": "Draven",
@@ -1702,7 +1732,7 @@
    "a": "Draven",
    "b": "Pyke",
    "wr": 100,
-   "n": 3
+   "n": 4
   },
   {
    "a": "Draven",
@@ -1720,7 +1750,7 @@
    "a": "Draven",
    "b": "Rengar",
    "wr": 64.3,
-   "n": 17
+   "n": 18
   },
   {
    "a": "Draven",
@@ -1737,8 +1767,8 @@
   {
    "a": "Draven",
    "b": "Seraphine",
-   "wr": 50,
-   "n": 2
+   "wr": 66.7,
+   "n": 3
   },
   {
    "a": "Draven",
@@ -1768,7 +1798,7 @@
    "a": "Draven",
    "b": "Vex",
    "wr": 100,
-   "n": 8
+   "n": 9
   },
   {
    "a": "Draven",
@@ -1787,6 +1817,12 @@
    "b": "Volibear",
    "wr": 75,
    "n": 8
+  },
+  {
+   "a": "Draven",
+   "b": "Zed",
+   "wr": 100,
+   "n": 1
   },
   {
    "a": "Draven",
@@ -1827,14 +1863,14 @@
   {
    "a": "Ekko",
    "b": "Draven",
-   "wr": 33.3,
-   "n": 6
+   "wr": 28.6,
+   "n": 7
   },
   {
    "a": "Ekko",
    "b": "Evelynn",
-   "wr": 33.3,
-   "n": 11
+   "wr": 28.6,
+   "n": 9
   },
   {
    "a": "Ekko",
@@ -1845,14 +1881,14 @@
   {
    "a": "Ekko",
    "b": "Fiora",
-   "wr": 33.3,
-   "n": 6
+   "wr": 20,
+   "n": 5
   },
   {
    "a": "Ekko",
    "b": "Irelia",
-   "wr": 16.7,
-   "n": 7
+   "wr": 14.3,
+   "n": 8
   },
   {
    "a": "Ekko",
@@ -1876,7 +1912,7 @@
    "a": "Ekko",
    "b": "Jayce",
    "wr": 100,
-   "n": 4
+   "n": 3
   },
   {
    "a": "Ekko",
@@ -1893,26 +1929,26 @@
   {
    "a": "Ekko",
    "b": "Kai'Sa",
-   "wr": 14.3,
-   "n": 11
+   "wr": 16.7,
+   "n": 10
   },
   {
    "a": "Ekko",
    "b": "Kennen",
-   "wr": 50,
-   "n": 6
+   "wr": 66.7,
+   "n": 5
   },
   {
    "a": "Ekko",
    "b": "Kha'Zix",
-   "wr": 33.3,
-   "n": 6
+   "wr": 50,
+   "n": 4
   },
   {
    "a": "Ekko",
    "b": "LeBlanc",
-   "wr": 33.3,
-   "n": 8
+   "wr": 25,
+   "n": 6
   },
   {
    "a": "Ekko",
@@ -1929,14 +1965,14 @@
   {
    "a": "Ekko",
    "b": "Lillia",
-   "wr": 21.4,
-   "n": 14
+   "wr": 30,
+   "n": 10
   },
   {
    "a": "Ekko",
    "b": "Lucian",
    "wr": 0,
-   "n": 3
+   "n": 2
   },
   {
    "a": "Ekko",
@@ -1947,8 +1983,8 @@
   {
    "a": "Ekko",
    "b": "Master Yi, Wuju Bladesman",
-   "wr": 23.5,
-   "n": 19
+   "wr": 25,
+   "n": 18
   },
   {
    "a": "Ekko",
@@ -1965,32 +2001,32 @@
   {
    "a": "Ekko",
    "b": "Miss Fortune",
-   "wr": 0,
-   "n": 1
+   "wr": 50,
+   "n": 2
   },
   {
    "a": "Ekko",
    "b": "Mordekaiser",
-   "wr": 54.5,
-   "n": 12
+   "wr": 50,
+   "n": 11
   },
   {
    "a": "Ekko",
    "b": "Nasus",
-   "wr": 25,
-   "n": 4
+   "wr": 0,
+   "n": 2
   },
   {
    "a": "Ekko",
    "b": "Orianna",
-   "wr": 9.1,
-   "n": 13
+   "wr": 0,
+   "n": 10
   },
   {
    "a": "Ekko",
    "b": "Ornn",
-   "wr": 20,
-   "n": 6
+   "wr": 16.7,
+   "n": 7
   },
   {
    "a": "Ekko",
@@ -2013,8 +2049,8 @@
   {
    "a": "Ekko",
    "b": "Riven",
-   "wr": 44.4,
-   "n": 10
+   "wr": 50,
+   "n": 9
   },
   {
    "a": "Ekko",
@@ -2025,8 +2061,8 @@
   {
    "a": "Ekko",
    "b": "Sett",
-   "wr": 57.1,
-   "n": 8
+   "wr": 66.7,
+   "n": 7
   },
   {
    "a": "Ekko",
@@ -2043,8 +2079,8 @@
   {
    "a": "Ekko",
    "b": "Vex",
-   "wr": 35.7,
-   "n": 15
+   "wr": 43.8,
+   "n": 17
   },
   {
    "a": "Ekko",
@@ -2056,7 +2092,7 @@
    "a": "Ekko",
    "b": "Viktor",
    "wr": 50,
-   "n": 8
+   "n": 6
   },
   {
    "a": "Ekko",
@@ -2067,12 +2103,6 @@
   {
    "a": "Ekko",
    "b": "Yasuo",
-   "wr": 100,
-   "n": 1
-  },
-  {
-   "a": "Ekko",
-   "b": "Zed",
    "wr": 100,
    "n": 1
   },
@@ -2097,50 +2127,50 @@
   {
    "a": "Evelynn",
    "b": "Annie",
-   "wr": 75,
-   "n": 4
+   "wr": 100,
+   "n": 3
   },
   {
    "a": "Evelynn",
    "b": "Azir",
-   "wr": 44.4,
-   "n": 10
+   "wr": 40,
+   "n": 11
   },
   {
    "a": "Evelynn",
    "b": "Diana",
-   "wr": 46.7,
-   "n": 17
+   "wr": 43.8,
+   "n": 19
   },
   {
    "a": "Evelynn",
    "b": "Draven",
-   "wr": 30,
-   "n": 11
+   "wr": 27.3,
+   "n": 12
   },
   {
    "a": "Evelynn",
    "b": "Ekko",
-   "wr": 66.7,
-   "n": 11
+   "wr": 71.4,
+   "n": 9
   },
   {
    "a": "Evelynn",
    "b": "Ezreal",
-   "wr": 53.8,
-   "n": 16
-  },
-  {
-   "a": "Evelynn",
-   "b": "Fiora",
    "wr": 50,
    "n": 17
   },
   {
    "a": "Evelynn",
+   "b": "Fiora",
+   "wr": 50,
+   "n": 15
+  },
+  {
+   "a": "Evelynn",
    "b": "Irelia",
-   "wr": 15.4,
-   "n": 14
+   "wr": 14.3,
+   "n": 15
   },
   {
    "a": "Evelynn",
@@ -2158,7 +2188,7 @@
    "a": "Evelynn",
    "b": "Jax",
    "wr": 100,
-   "n": 2
+   "n": 1
   },
   {
    "a": "Evelynn",
@@ -2175,13 +2205,13 @@
   {
    "a": "Evelynn",
    "b": "Kai'Sa",
-   "wr": 28,
-   "n": 31
+   "wr": 26.9,
+   "n": 33
   },
   {
    "a": "Evelynn",
    "b": "Kennen",
-   "wr": 53.3,
+   "wr": 66.7,
    "n": 16
   },
   {
@@ -2205,20 +2235,20 @@
   {
    "a": "Evelynn",
    "b": "Lillia",
-   "wr": 20,
-   "n": 18
+   "wr": 17.6,
+   "n": 19
   },
   {
    "a": "Evelynn",
    "b": "Lucian",
    "wr": 100,
-   "n": 1
+   "n": 3
   },
   {
    "a": "Evelynn",
    "b": "Master Yi, Wuju Bladesman",
-   "wr": 64.3,
-   "n": 17
+   "wr": 69.2,
+   "n": 16
   },
   {
    "a": "Evelynn",
@@ -2241,20 +2271,20 @@
   {
    "a": "Evelynn",
    "b": "Mordekaiser",
-   "wr": 76.5,
-   "n": 21
+   "wr": 80,
+   "n": 24
   },
   {
    "a": "Evelynn",
    "b": "Nasus",
-   "wr": 50,
-   "n": 23
+   "wr": 52.6,
+   "n": 24
   },
   {
    "a": "Evelynn",
    "b": "Orianna",
-   "wr": 45.5,
-   "n": 14
+   "wr": 50,
+   "n": 13
   },
   {
    "a": "Evelynn",
@@ -2278,7 +2308,7 @@
    "a": "Evelynn",
    "b": "Rek'Sai",
    "wr": 33.3,
-   "n": 25
+   "n": 24
   },
   {
    "a": "Evelynn",
@@ -2301,8 +2331,8 @@
   {
    "a": "Evelynn",
    "b": "Riven",
-   "wr": 66.7,
-   "n": 24
+   "wr": 68.4,
+   "n": 22
   },
   {
    "a": "Evelynn",
@@ -2319,8 +2349,8 @@
   {
    "a": "Evelynn",
    "b": "Sett",
-   "wr": 62.5,
-   "n": 17
+   "wr": 60,
+   "n": 16
   },
   {
    "a": "Evelynn",
@@ -2343,8 +2373,8 @@
   {
    "a": "Evelynn",
    "b": "Vex",
-   "wr": 31.6,
-   "n": 30
+   "wr": 30,
+   "n": 31
   },
   {
    "a": "Evelynn",
@@ -2355,7 +2385,7 @@
   {
    "a": "Evelynn",
    "b": "Viktor",
-   "wr": 33.3,
+   "wr": 29.4,
    "n": 19
   },
   {
@@ -2427,20 +2457,20 @@
   {
    "a": "Ezreal",
    "b": "Evelynn",
-   "wr": 46.2,
-   "n": 16
+   "wr": 50,
+   "n": 17
   },
   {
    "a": "Ezreal",
    "b": "Fiora",
-   "wr": 60,
-   "n": 15
+   "wr": 62.5,
+   "n": 16
   },
   {
    "a": "Ezreal",
    "b": "Irelia",
-   "wr": 7.1,
-   "n": 14
+   "wr": 6.7,
+   "n": 15
   },
   {
    "a": "Ezreal",
@@ -2458,7 +2488,7 @@
    "a": "Ezreal",
    "b": "Jax",
    "wr": 25,
-   "n": 5
+   "n": 4
   },
   {
    "a": "Ezreal",
@@ -2481,14 +2511,14 @@
   {
    "a": "Ezreal",
    "b": "Kai'Sa",
-   "wr": 31.3,
+   "wr": 37.5,
    "n": 19
   },
   {
    "a": "Ezreal",
    "b": "Kennen",
-   "wr": 53.3,
-   "n": 15
+   "wr": 53.8,
+   "n": 13
   },
   {
    "a": "Ezreal",
@@ -2511,8 +2541,8 @@
   {
    "a": "Ezreal",
    "b": "Lucian",
-   "wr": 33.3,
-   "n": 3
+   "wr": 50,
+   "n": 4
   },
   {
    "a": "Ezreal",
@@ -2578,7 +2608,7 @@
    "a": "Ezreal",
    "b": "Rek'Sai",
    "wr": 26.3,
-   "n": 20
+   "n": 19
   },
   {
    "a": "Ezreal",
@@ -2595,14 +2625,14 @@
   {
    "a": "Ezreal",
    "b": "Rengar",
-   "wr": 31.8,
-   "n": 23
+   "wr": 34.8,
+   "n": 24
   },
   {
    "a": "Ezreal",
    "b": "Riven",
-   "wr": 22.7,
-   "n": 23
+   "wr": 23.8,
+   "n": 22
   },
   {
    "a": "Ezreal",
@@ -2637,8 +2667,8 @@
   {
    "a": "Ezreal",
    "b": "Vex",
-   "wr": 42.9,
-   "n": 28
+   "wr": 45.2,
+   "n": 31
   },
   {
    "a": "Ezreal",
@@ -2715,20 +2745,20 @@
   {
    "a": "Fiora",
    "b": "Ekko",
-   "wr": 66.7,
-   "n": 6
+   "wr": 80,
+   "n": 5
   },
   {
    "a": "Fiora",
    "b": "Evelynn",
    "wr": 50,
-   "n": 17
+   "n": 15
   },
   {
    "a": "Fiora",
    "b": "Ezreal",
-   "wr": 40,
-   "n": 15
+   "wr": 37.5,
+   "n": 16
   },
   {
    "a": "Fiora",
@@ -2823,8 +2853,8 @@
   {
    "a": "Fiora",
    "b": "Ornn",
-   "wr": 55.6,
-   "n": 10
+   "wr": 50,
+   "n": 11
   },
   {
    "a": "Fiora",
@@ -2847,14 +2877,14 @@
   {
    "a": "Fiora",
    "b": "Rengar",
-   "wr": 28.6,
-   "n": 8
+   "wr": 25,
+   "n": 9
   },
   {
    "a": "Fiora",
    "b": "Riven",
-   "wr": 50,
-   "n": 9
+   "wr": 44.4,
+   "n": 10
   },
   {
    "a": "Fiora",
@@ -2865,8 +2895,8 @@
   {
    "a": "Fiora",
    "b": "Sett",
-   "wr": 33.3,
-   "n": 7
+   "wr": 40,
+   "n": 6
   },
   {
    "a": "Fiora",
@@ -2883,14 +2913,14 @@
   {
    "a": "Fiora",
    "b": "Vex",
-   "wr": 40,
-   "n": 11
+   "wr": 36.4,
+   "n": 12
   },
   {
    "a": "Fiora",
    "b": "Viktor",
-   "wr": 12.5,
-   "n": 10
+   "wr": 11.1,
+   "n": 11
   },
   {
    "a": "Fiora",
@@ -2979,8 +3009,8 @@
   {
    "a": "Irelia",
    "b": "Diana",
-   "wr": 30,
-   "n": 10
+   "wr": 36.4,
+   "n": 11
   },
   {
    "a": "Irelia",
@@ -2991,20 +3021,20 @@
   {
    "a": "Irelia",
    "b": "Ekko",
-   "wr": 83.3,
-   "n": 7
+   "wr": 85.7,
+   "n": 8
   },
   {
    "a": "Irelia",
    "b": "Evelynn",
-   "wr": 84.6,
-   "n": 14
+   "wr": 85.7,
+   "n": 15
   },
   {
    "a": "Irelia",
    "b": "Ezreal",
-   "wr": 92.9,
-   "n": 14
+   "wr": 93.3,
+   "n": 15
   },
   {
    "a": "Irelia",
@@ -3051,8 +3081,8 @@
   {
    "a": "Irelia",
    "b": "K'Sante",
-   "wr": 33.3,
-   "n": 4
+   "wr": 50,
+   "n": 5
   },
   {
    "a": "Irelia",
@@ -3070,7 +3100,7 @@
    "a": "Irelia",
    "b": "Kha'Zix",
    "wr": 42.9,
-   "n": 7
+   "n": 8
   },
   {
    "a": "Irelia",
@@ -3129,8 +3159,8 @@
   {
    "a": "Irelia",
    "b": "Nasus",
-   "wr": 63.6,
-   "n": 13
+   "wr": 60,
+   "n": 12
   },
   {
    "a": "Irelia",
@@ -3141,8 +3171,14 @@
   {
    "a": "Irelia",
    "b": "Ornn",
-   "wr": 66.7,
-   "n": 9
+   "wr": 70,
+   "n": 10
+  },
+  {
+   "a": "Irelia",
+   "b": "Poppy",
+   "wr": 0,
+   "n": 1
   },
   {
    "a": "Irelia",
@@ -3159,14 +3195,14 @@
   {
    "a": "Irelia",
    "b": "Rengar",
-   "wr": 62.5,
-   "n": 9
+   "wr": 66.7,
+   "n": 10
   },
   {
    "a": "Irelia",
    "b": "Riven",
-   "wr": 28.6,
-   "n": 8
+   "wr": 33.3,
+   "n": 7
   },
   {
    "a": "Irelia",
@@ -3189,20 +3225,20 @@
   {
    "a": "Irelia",
    "b": "Vex",
-   "wr": 30.8,
-   "n": 14
+   "wr": 28.6,
+   "n": 18
   },
   {
    "a": "Irelia",
    "b": "Viktor",
-   "wr": 75,
-   "n": 8
+   "wr": 77.8,
+   "n": 9
   },
   {
    "a": "Irelia",
    "b": "Volibear",
-   "wr": 50,
-   "n": 8
+   "wr": 55.6,
+   "n": 9
   },
   {
    "a": "Irelia",
@@ -3280,7 +3316,7 @@
    "a": "Ivern",
    "b": "Kai'Sa",
    "wr": 0,
-   "n": 3
+   "n": 2
   },
   {
    "a": "Ivern",
@@ -3334,7 +3370,7 @@
    "a": "Ivern",
    "b": "Riven",
    "wr": 0,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Ivern",
@@ -3375,8 +3411,8 @@
   {
    "a": "Jarvan IV",
    "b": "Diana",
-   "wr": 0,
-   "n": 1
+   "wr": 50,
+   "n": 2
   },
   {
    "a": "Jarvan IV",
@@ -3454,7 +3490,7 @@
    "a": "Jarvan IV",
    "b": "LeBlanc",
    "wr": 0,
-   "n": 3
+   "n": 2
   },
   {
    "a": "Jarvan IV",
@@ -3483,8 +3519,8 @@
   {
    "a": "Jarvan IV",
    "b": "Nasus",
-   "wr": 57.1,
-   "n": 8
+   "wr": 66.7,
+   "n": 7
   },
   {
    "a": "Jarvan IV",
@@ -3495,7 +3531,7 @@
   {
    "a": "Jarvan IV",
    "b": "Pyke",
-   "wr": 0,
+   "wr": 100,
    "n": 2
   },
   {
@@ -3519,8 +3555,8 @@
   {
    "a": "Jarvan IV",
    "b": "Riven",
-   "wr": 20,
-   "n": 7
+   "wr": 25,
+   "n": 6
   },
   {
    "a": "Jarvan IV",
@@ -3554,12 +3590,6 @@
   },
   {
    "a": "Jarvan IV",
-   "b": "Volibear",
-   "wr": 100,
-   "n": 2
-  },
-  {
-   "a": "Jarvan IV",
    "b": "Yasuo",
    "wr": 100,
    "n": 1
@@ -3580,7 +3610,7 @@
    "a": "Jax",
    "b": "Diana",
    "wr": 0,
-   "n": 4
+   "n": 3
   },
   {
    "a": "Jax",
@@ -3598,13 +3628,13 @@
    "a": "Jax",
    "b": "Evelynn",
    "wr": 0,
-   "n": 2
+   "n": 1
   },
   {
    "a": "Jax",
    "b": "Ezreal",
    "wr": 75,
-   "n": 5
+   "n": 4
   },
   {
    "a": "Jax",
@@ -3652,7 +3682,7 @@
    "a": "Jax",
    "b": "Lillia",
    "wr": 0,
-   "n": 3
+   "n": 4
   },
   {
    "a": "Jax",
@@ -3766,13 +3796,13 @@
    "a": "Jayce",
    "b": "Draven",
    "wr": 100,
-   "n": 2
+   "n": 1
   },
   {
    "a": "Jayce",
    "b": "Ekko",
    "wr": 0,
-   "n": 4
+   "n": 3
   },
   {
    "a": "Jayce",
@@ -3849,8 +3879,8 @@
   {
    "a": "Jayce",
    "b": "Lillia",
-   "wr": 33.3,
-   "n": 3
+   "wr": 25,
+   "n": 4
   },
   {
    "a": "Jayce",
@@ -3885,8 +3915,8 @@
   {
    "a": "Jayce",
    "b": "Mordekaiser",
-   "wr": 16.7,
-   "n": 9
+   "wr": 20,
+   "n": 8
   },
   {
    "a": "Jayce",
@@ -4018,7 +4048,7 @@
    "a": "Jhin",
    "b": "Kai'Sa",
    "wr": 0,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Jhin",
@@ -4299,8 +4329,8 @@
   {
    "a": "K'Sante",
    "b": "Irelia",
-   "wr": 66.7,
-   "n": 4
+   "wr": 50,
+   "n": 5
   },
   {
    "a": "K'Sante",
@@ -4371,7 +4401,7 @@
   {
    "a": "K'Sante",
    "b": "Orianna",
-   "wr": 33.3,
+   "wr": 50,
    "n": 4
   },
   {
@@ -4406,9 +4436,15 @@
   },
   {
    "a": "K'Sante",
+   "b": "Seraphine",
+   "wr": 0,
+   "n": 1
+  },
+  {
+   "a": "K'Sante",
    "b": "Sett",
    "wr": 0,
-   "n": 4
+   "n": 3
   },
   {
    "a": "K'Sante",
@@ -4473,43 +4509,43 @@
   {
    "a": "Kai'Sa",
    "b": "Annie",
-   "wr": 75,
-   "n": 5
+   "wr": 66.7,
+   "n": 4
   },
   {
    "a": "Kai'Sa",
    "b": "Azir",
-   "wr": 60,
-   "n": 7
+   "wr": 71.4,
+   "n": 9
   },
   {
    "a": "Kai'Sa",
    "b": "Diana",
-   "wr": 66.7,
+   "wr": 60,
    "n": 16
   },
   {
    "a": "Kai'Sa",
    "b": "Draven",
-   "wr": 53.8,
-   "n": 14
+   "wr": 53.3,
+   "n": 16
   },
   {
    "a": "Kai'Sa",
    "b": "Ekko",
-   "wr": 85.7,
-   "n": 11
+   "wr": 83.3,
+   "n": 10
   },
   {
    "a": "Kai'Sa",
    "b": "Evelynn",
-   "wr": 72,
-   "n": 31
+   "wr": 73.1,
+   "n": 33
   },
   {
    "a": "Kai'Sa",
    "b": "Ezreal",
-   "wr": 68.8,
+   "wr": 62.5,
    "n": 19
   },
   {
@@ -4528,7 +4564,7 @@
    "a": "Kai'Sa",
    "b": "Ivern",
    "wr": 100,
-   "n": 3
+   "n": 2
   },
   {
    "a": "Kai'Sa",
@@ -4552,7 +4588,7 @@
    "a": "Kai'Sa",
    "b": "Jhin",
    "wr": 100,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Kai'Sa",
@@ -4569,8 +4605,8 @@
   {
    "a": "Kai'Sa",
    "b": "Kennen",
-   "wr": 66.7,
-   "n": 30
+   "wr": 65,
+   "n": 26
   },
   {
    "a": "Kai'Sa",
@@ -4599,14 +4635,14 @@
   {
    "a": "Kai'Sa",
    "b": "Lillia",
-   "wr": 18.2,
-   "n": 12
+   "wr": 15.4,
+   "n": 14
   },
   {
    "a": "Kai'Sa",
    "b": "Lucian",
-   "wr": 71.4,
-   "n": 8
+   "wr": 70,
+   "n": 12
   },
   {
    "a": "Kai'Sa",
@@ -4617,8 +4653,8 @@
   {
    "a": "Kai'Sa",
    "b": "Master Yi, Wuju Bladesman",
-   "wr": 76.5,
-   "n": 21
+   "wr": 81.3,
+   "n": 20
   },
   {
    "a": "Kai'Sa",
@@ -4641,25 +4677,25 @@
   {
    "a": "Kai'Sa",
    "b": "Mordekaiser",
-   "wr": 55.6,
-   "n": 22
+   "wr": 52.9,
+   "n": 20
   },
   {
    "a": "Kai'Sa",
    "b": "Nasus",
-   "wr": 44.4,
+   "wr": 42.3,
    "n": 34
   },
   {
    "a": "Kai'Sa",
    "b": "Orianna",
-   "wr": 50,
-   "n": 32
+   "wr": 48.3,
+   "n": 31
   },
   {
    "a": "Kai'Sa",
    "b": "Ornn",
-   "wr": 23.5,
+   "wr": 29.4,
    "n": 19
   },
   {
@@ -4671,20 +4707,20 @@
   {
    "a": "Kai'Sa",
    "b": "Pyke",
-   "wr": 84.6,
-   "n": 15
+   "wr": 83.3,
+   "n": 14
   },
   {
    "a": "Kai'Sa",
    "b": "Rek'Sai",
-   "wr": 39.3,
-   "n": 30
+   "wr": 40.7,
+   "n": 29
   },
   {
    "a": "Kai'Sa",
    "b": "Renata Glasc",
    "wr": 100,
-   "n": 1
+   "n": 2
   },
   {
    "a": "Kai'Sa",
@@ -4695,14 +4731,14 @@
   {
    "a": "Kai'Sa",
    "b": "Rengar",
-   "wr": 83.3,
-   "n": 25
+   "wr": 82.6,
+   "n": 24
   },
   {
    "a": "Kai'Sa",
    "b": "Riven",
    "wr": 54.3,
-   "n": 62
+   "n": 60
   },
   {
    "a": "Kai'Sa",
@@ -4719,25 +4755,25 @@
   {
    "a": "Kai'Sa",
    "b": "Sett",
-   "wr": 36.8,
+   "wr": 42.1,
    "n": 20
   },
   {
    "a": "Kai'Sa",
    "b": "Shen",
-   "wr": 80,
-   "n": 5
+   "wr": 75,
+   "n": 4
   },
   {
    "a": "Kai'Sa",
    "b": "Teemo",
-   "wr": 50,
-   "n": 2
+   "wr": 66.7,
+   "n": 3
   },
   {
    "a": "Kai'Sa",
    "b": "Vex",
-   "wr": 41.4,
+   "wr": 43.3,
    "n": 36
   },
   {
@@ -4756,7 +4792,7 @@
    "a": "Kai'Sa",
    "b": "Yasuo",
    "wr": 100,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Kai'Sa",
@@ -4797,8 +4833,8 @@
   {
    "a": "Kennen",
    "b": "Diana",
-   "wr": 50,
-   "n": 16
+   "wr": 53.8,
+   "n": 17
   },
   {
    "a": "Kennen",
@@ -4809,20 +4845,20 @@
   {
    "a": "Kennen",
    "b": "Ekko",
-   "wr": 50,
-   "n": 6
+   "wr": 33.3,
+   "n": 5
   },
   {
    "a": "Kennen",
    "b": "Evelynn",
-   "wr": 46.7,
+   "wr": 33.3,
    "n": 16
   },
   {
    "a": "Kennen",
    "b": "Ezreal",
-   "wr": 46.7,
-   "n": 15
+   "wr": 46.2,
+   "n": 13
   },
   {
    "a": "Kennen",
@@ -4875,8 +4911,8 @@
   {
    "a": "Kennen",
    "b": "Kai'Sa",
-   "wr": 33.3,
-   "n": 30
+   "wr": 35,
+   "n": 26
   },
   {
    "a": "Kennen",
@@ -4887,8 +4923,8 @@
   {
    "a": "Kennen",
    "b": "LeBlanc",
-   "wr": 25,
-   "n": 9
+   "wr": 28.6,
+   "n": 8
   },
   {
    "a": "Kennen",
@@ -4923,8 +4959,8 @@
   {
    "a": "Kennen",
    "b": "Master Yi, Wuju Bladesman",
-   "wr": 66.7,
-   "n": 11
+   "wr": 50,
+   "n": 9
   },
   {
    "a": "Kennen",
@@ -4935,14 +4971,14 @@
   {
    "a": "Kennen",
    "b": "Mel",
-   "wr": 60,
-   "n": 5
+   "wr": 75,
+   "n": 4
   },
   {
    "a": "Kennen",
    "b": "Miss Fortune",
    "wr": 100,
-   "n": 5
+   "n": 4
   },
   {
    "a": "Kennen",
@@ -4959,8 +4995,8 @@
   {
    "a": "Kennen",
    "b": "Orianna",
-   "wr": 22.2,
-   "n": 9
+   "wr": 14.3,
+   "n": 7
   },
   {
    "a": "Kennen",
@@ -4977,14 +5013,14 @@
   {
    "a": "Kennen",
    "b": "Rek'Sai",
-   "wr": 24,
-   "n": 27
+   "wr": 14.3,
+   "n": 23
   },
   {
    "a": "Kennen",
    "b": "Rengar",
-   "wr": 30,
-   "n": 10
+   "wr": 33.3,
+   "n": 9
   },
   {
    "a": "Kennen",
@@ -4996,7 +5032,7 @@
    "a": "Kennen",
    "b": "Sett",
    "wr": 23.1,
-   "n": 16
+   "n": 17
   },
   {
    "a": "Kennen",
@@ -5013,8 +5049,8 @@
   {
    "a": "Kennen",
    "b": "Vex",
-   "wr": 73.3,
-   "n": 17
+   "wr": 75,
+   "n": 14
   },
   {
    "a": "Kennen",
@@ -5026,13 +5062,13 @@
    "a": "Kennen",
    "b": "Viktor",
    "wr": 42.9,
-   "n": 24
+   "n": 23
   },
   {
    "a": "Kennen",
    "b": "Volibear",
-   "wr": 54.5,
-   "n": 12
+   "wr": 50,
+   "n": 13
   },
   {
    "a": "Kha'Zix",
@@ -5062,7 +5098,7 @@
    "a": "Kha'Zix",
    "b": "Azir",
    "wr": 0,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Kha'Zix",
@@ -5079,8 +5115,8 @@
   {
    "a": "Kha'Zix",
    "b": "Ekko",
-   "wr": 66.7,
-   "n": 6
+   "wr": 50,
+   "n": 4
   },
   {
    "a": "Kha'Zix",
@@ -5104,7 +5140,7 @@
    "a": "Kha'Zix",
    "b": "Irelia",
    "wr": 57.1,
-   "n": 7
+   "n": 8
   },
   {
    "a": "Kha'Zix",
@@ -5134,7 +5170,7 @@
    "a": "Kha'Zix",
    "b": "LeBlanc",
    "wr": 100,
-   "n": 4
+   "n": 3
   },
   {
    "a": "Kha'Zix",
@@ -5211,8 +5247,8 @@
   {
    "a": "Kha'Zix",
    "b": "Pyke",
-   "wr": 66.7,
-   "n": 4
+   "wr": 75,
+   "n": 5
   },
   {
    "a": "Kha'Zix",
@@ -5223,8 +5259,8 @@
   {
    "a": "Kha'Zix",
    "b": "Rengar",
-   "wr": 50,
-   "n": 10
+   "wr": 54.5,
+   "n": 11
   },
   {
    "a": "Kha'Zix",
@@ -5277,8 +5313,8 @@
   {
    "a": "Kha'Zix",
    "b": "Volibear",
-   "wr": 12.5,
-   "n": 9
+   "wr": 22.2,
+   "n": 10
   },
   {
    "a": "Kha'Zix",
@@ -5343,8 +5379,8 @@
   {
    "a": "LeBlanc",
    "b": "Ekko",
-   "wr": 66.7,
-   "n": 8
+   "wr": 75,
+   "n": 6
   },
   {
    "a": "LeBlanc",
@@ -5374,7 +5410,7 @@
    "a": "LeBlanc",
    "b": "Jarvan IV",
    "wr": 100,
-   "n": 3
+   "n": 2
   },
   {
    "a": "LeBlanc",
@@ -5415,14 +5451,14 @@
   {
    "a": "LeBlanc",
    "b": "Kennen",
-   "wr": 75,
-   "n": 9
+   "wr": 71.4,
+   "n": 8
   },
   {
    "a": "LeBlanc",
    "b": "Kha'Zix",
    "wr": 0,
-   "n": 4
+   "n": 3
   },
   {
    "a": "LeBlanc",
@@ -5517,8 +5553,8 @@
   {
    "a": "LeBlanc",
    "b": "Pyke",
-   "wr": 71.4,
-   "n": 7
+   "wr": 83.3,
+   "n": 6
   },
   {
    "a": "LeBlanc",
@@ -5528,15 +5564,9 @@
   },
   {
    "a": "LeBlanc",
-   "b": "Renata Glasc",
-   "wr": 100,
-   "n": 3
-  },
-  {
-   "a": "LeBlanc",
    "b": "Rengar",
-   "wr": 60,
-   "n": 11
+   "wr": 66.7,
+   "n": 10
   },
   {
    "a": "LeBlanc",
@@ -5549,6 +5579,12 @@
    "b": "Rumble",
    "wr": 50,
    "n": 2
+  },
+  {
+   "a": "LeBlanc",
+   "b": "Seraphine",
+   "wr": 0,
+   "n": 1
   },
   {
    "a": "LeBlanc",
@@ -5566,7 +5602,7 @@
    "a": "LeBlanc",
    "b": "Vex",
    "wr": 0,
-   "n": 8
+   "n": 9
   },
   {
    "a": "LeBlanc",
@@ -5578,7 +5614,7 @@
    "a": "LeBlanc",
    "b": "Volibear",
    "wr": 60,
-   "n": 6
+   "n": 5
   },
   {
    "a": "LeBlanc",
@@ -5590,7 +5626,7 @@
    "a": "LeBlanc",
    "b": "Ziggs",
    "wr": 100,
-   "n": 5
+   "n": 4
   },
   {
    "a": "Lee Sin",
@@ -5732,6 +5768,12 @@
   },
   {
    "a": "Lee Sin",
+   "b": "Riven",
+   "wr": 100,
+   "n": 1
+  },
+  {
+   "a": "Lee Sin",
    "b": "Seraphine",
    "wr": 50,
    "n": 2
@@ -5759,6 +5801,12 @@
    "b": "Viktor",
    "wr": 50,
    "n": 3
+  },
+  {
+   "a": "Lee Sin",
+   "b": "Volibear",
+   "wr": 100,
+   "n": 2
   },
   {
    "a": "Leona",
@@ -5979,14 +6027,14 @@
   {
    "a": "Lillia",
    "b": "Ekko",
-   "wr": 78.6,
-   "n": 14
+   "wr": 70,
+   "n": 10
   },
   {
    "a": "Lillia",
    "b": "Evelynn",
-   "wr": 80,
-   "n": 18
+   "wr": 82.4,
+   "n": 19
   },
   {
    "a": "Lillia",
@@ -6022,13 +6070,13 @@
    "a": "Lillia",
    "b": "Jax",
    "wr": 100,
-   "n": 3
+   "n": 4
   },
   {
    "a": "Lillia",
    "b": "Jayce",
-   "wr": 66.7,
-   "n": 3
+   "wr": 75,
+   "n": 4
   },
   {
    "a": "Lillia",
@@ -6045,8 +6093,8 @@
   {
    "a": "Lillia",
    "b": "Kai'Sa",
-   "wr": 81.8,
-   "n": 12
+   "wr": 84.6,
+   "n": 14
   },
   {
    "a": "Lillia",
@@ -6106,7 +6154,7 @@
    "a": "Lillia",
    "b": "Mel",
    "wr": 28.6,
-   "n": 9
+   "n": 8
   },
   {
    "a": "Lillia",
@@ -6117,8 +6165,8 @@
   {
    "a": "Lillia",
    "b": "Mordekaiser",
-   "wr": 84.6,
-   "n": 15
+   "wr": 86.7,
+   "n": 17
   },
   {
    "a": "Lillia",
@@ -6136,7 +6184,7 @@
    "a": "Lillia",
    "b": "Ornn",
    "wr": 69.2,
-   "n": 13
+   "n": 14
   },
   {
    "a": "Lillia",
@@ -6183,14 +6231,8 @@
   {
    "a": "Lillia",
    "b": "Sett",
-   "wr": 46.2,
-   "n": 13
-  },
-  {
-   "a": "Lillia",
-   "b": "Shen",
-   "wr": 50,
-   "n": 5
+   "wr": 42.9,
+   "n": 14
   },
   {
    "a": "Lillia",
@@ -6201,8 +6243,8 @@
   {
    "a": "Lillia",
    "b": "Vex",
-   "wr": 55.6,
-   "n": 19
+   "wr": 59.1,
+   "n": 23
   },
   {
    "a": "Lillia",
@@ -6232,7 +6274,7 @@
    "a": "Lillia",
    "b": "Ziggs",
    "wr": 100,
-   "n": 6
+   "n": 5
   },
   {
    "a": "Lucian",
@@ -6274,19 +6316,19 @@
    "a": "Lucian",
    "b": "Ekko",
    "wr": 100,
-   "n": 3
+   "n": 2
   },
   {
    "a": "Lucian",
    "b": "Evelynn",
    "wr": 0,
-   "n": 1
+   "n": 3
   },
   {
    "a": "Lucian",
    "b": "Ezreal",
-   "wr": 66.7,
-   "n": 3
+   "wr": 50,
+   "n": 4
   },
   {
    "a": "Lucian",
@@ -6321,8 +6363,8 @@
   {
    "a": "Lucian",
    "b": "Kai'Sa",
-   "wr": 28.6,
-   "n": 8
+   "wr": 30,
+   "n": 12
   },
   {
    "a": "Lucian",
@@ -6347,12 +6389,6 @@
    "b": "Lillia",
    "wr": 100,
    "n": 1
-  },
-  {
-   "a": "Lucian",
-   "b": "Master Yi, Wuju Bladesman",
-   "wr": 0,
-   "n": 2
   },
   {
    "a": "Lucian",
@@ -6393,8 +6429,8 @@
   {
    "a": "Lucian",
    "b": "Rek'Sai",
-   "wr": 25,
-   "n": 4
+   "wr": 40,
+   "n": 5
   },
   {
    "a": "Lucian",
@@ -6435,8 +6471,8 @@
   {
    "a": "Lucian",
    "b": "Volibear",
-   "wr": 50,
-   "n": 2
+   "wr": 100,
+   "n": 1
   },
   {
    "a": "Lux",
@@ -6514,12 +6550,6 @@
    "a": "Lux",
    "b": "Mordekaiser",
    "wr": 100,
-   "n": 1
-  },
-  {
-   "a": "Lux",
-   "b": "Orianna",
-   "wr": 0,
    "n": 1
   },
   {
@@ -6597,20 +6627,20 @@
   {
    "a": "Master Yi, Wuju Bladesman",
    "b": "Draven",
-   "wr": 44.4,
-   "n": 12
+   "wr": 40,
+   "n": 13
   },
   {
    "a": "Master Yi, Wuju Bladesman",
    "b": "Ekko",
-   "wr": 76.5,
-   "n": 19
+   "wr": 75,
+   "n": 18
   },
   {
    "a": "Master Yi, Wuju Bladesman",
    "b": "Evelynn",
-   "wr": 35.7,
-   "n": 17
+   "wr": 30.8,
+   "n": 16
   },
   {
    "a": "Master Yi, Wuju Bladesman",
@@ -6669,14 +6699,14 @@
   {
    "a": "Master Yi, Wuju Bladesman",
    "b": "Kai'Sa",
-   "wr": 23.5,
-   "n": 21
+   "wr": 18.8,
+   "n": 20
   },
   {
    "a": "Master Yi, Wuju Bladesman",
    "b": "Kennen",
-   "wr": 33.3,
-   "n": 11
+   "wr": 50,
+   "n": 9
   },
   {
    "a": "Master Yi, Wuju Bladesman",
@@ -6704,12 +6734,6 @@
   },
   {
    "a": "Master Yi, Wuju Bladesman",
-   "b": "Lucian",
-   "wr": 100,
-   "n": 2
-  },
-  {
-   "a": "Master Yi, Wuju Bladesman",
    "b": "Master Yi, Wuju Master",
    "wr": 50,
    "n": 2
@@ -6723,8 +6747,8 @@
   {
    "a": "Master Yi, Wuju Bladesman",
    "b": "Mordekaiser",
-   "wr": 50,
-   "n": 21
+   "wr": 52.9,
+   "n": 22
   },
   {
    "a": "Master Yi, Wuju Bladesman",
@@ -6735,8 +6759,8 @@
   {
    "a": "Master Yi, Wuju Bladesman",
    "b": "Orianna",
-   "wr": 50,
-   "n": 14
+   "wr": 53.8,
+   "n": 15
   },
   {
    "a": "Master Yi, Wuju Bladesman",
@@ -6801,8 +6825,8 @@
   {
    "a": "Master Yi, Wuju Bladesman",
    "b": "Vex",
-   "wr": 33.3,
-   "n": 35
+   "wr": 30.8,
+   "n": 37
   },
   {
    "a": "Master Yi, Wuju Bladesman",
@@ -6825,8 +6849,14 @@
   {
    "a": "Master Yi, Wuju Bladesman",
    "b": "Zed",
+   "wr": 66.7,
+   "n": 3
+  },
+  {
+   "a": "Master Yi, Wuju Bladesman",
+   "b": "Ziggs",
    "wr": 100,
-   "n": 2
+   "n": 1
   },
   {
    "a": "Master Yi, Wuju Master",
@@ -6951,8 +6981,8 @@
   {
    "a": "Master Yi, Wuju Master",
    "b": "Mordekaiser",
-   "wr": 0,
-   "n": 4
+   "wr": 25,
+   "n": 5
   },
   {
    "a": "Master Yi, Wuju Master",
@@ -6999,8 +7029,8 @@
   {
    "a": "Master Yi, Wuju Master",
    "b": "Shen",
-   "wr": 50,
-   "n": 2
+   "wr": 100,
+   "n": 1
   },
   {
    "a": "Master Yi, Wuju Master",
@@ -7024,6 +7054,12 @@
    "a": "Master Yi, Wuju Master",
    "b": "Zed",
    "wr": 100,
+   "n": 1
+  },
+  {
+   "a": "Mel",
+   "b": "Ambessa",
+   "wr": 0,
    "n": 1
   },
   {
@@ -7095,8 +7131,8 @@
   {
    "a": "Mel",
    "b": "Kennen",
-   "wr": 40,
-   "n": 5
+   "wr": 25,
+   "n": 4
   },
   {
    "a": "Mel",
@@ -7126,7 +7162,7 @@
    "a": "Mel",
    "b": "Lillia",
    "wr": 71.4,
-   "n": 9
+   "n": 8
   },
   {
    "a": "Mel",
@@ -7209,8 +7245,8 @@
   {
    "a": "Mel",
    "b": "Vex",
-   "wr": 50,
-   "n": 4
+   "wr": 40,
+   "n": 5
   },
   {
    "a": "Mel",
@@ -7245,8 +7281,8 @@
   {
    "a": "Miss Fortune",
    "b": "Ekko",
-   "wr": 100,
-   "n": 1
+   "wr": 50,
+   "n": 2
   },
   {
    "a": "Miss Fortune",
@@ -7282,7 +7318,7 @@
    "a": "Miss Fortune",
    "b": "Kennen",
    "wr": 0,
-   "n": 5
+   "n": 4
   },
   {
    "a": "Miss Fortune",
@@ -7348,7 +7384,7 @@
    "a": "Mordekaiser",
    "b": "Ahri",
    "wr": 50,
-   "n": 4
+   "n": 5
   },
   {
    "a": "Mordekaiser",
@@ -7389,20 +7425,20 @@
   {
    "a": "Mordekaiser",
    "b": "Draven",
-   "wr": 27.3,
-   "n": 14
+   "wr": 25,
+   "n": 15
   },
   {
    "a": "Mordekaiser",
    "b": "Ekko",
-   "wr": 45.5,
-   "n": 12
+   "wr": 50,
+   "n": 11
   },
   {
    "a": "Mordekaiser",
    "b": "Evelynn",
-   "wr": 23.5,
-   "n": 21
+   "wr": 20,
+   "n": 24
   },
   {
    "a": "Mordekaiser",
@@ -7443,8 +7479,8 @@
   {
    "a": "Mordekaiser",
    "b": "Jayce",
-   "wr": 83.3,
-   "n": 9
+   "wr": 80,
+   "n": 8
   },
   {
    "a": "Mordekaiser",
@@ -7461,8 +7497,8 @@
   {
    "a": "Mordekaiser",
    "b": "Kai'Sa",
-   "wr": 44.4,
-   "n": 22
+   "wr": 47.1,
+   "n": 20
   },
   {
    "a": "Mordekaiser",
@@ -7491,8 +7527,8 @@
   {
    "a": "Mordekaiser",
    "b": "Lillia",
-   "wr": 15.4,
-   "n": 15
+   "wr": 13.3,
+   "n": 17
   },
   {
    "a": "Mordekaiser",
@@ -7509,14 +7545,14 @@
   {
    "a": "Mordekaiser",
    "b": "Master Yi, Wuju Bladesman",
-   "wr": 50,
-   "n": 21
+   "wr": 47.1,
+   "n": 22
   },
   {
    "a": "Mordekaiser",
    "b": "Master Yi, Wuju Master",
-   "wr": 100,
-   "n": 4
+   "wr": 75,
+   "n": 5
   },
   {
    "a": "Mordekaiser",
@@ -7534,19 +7570,19 @@
    "a": "Mordekaiser",
    "b": "Nasus",
    "wr": 61.5,
-   "n": 17
+   "n": 18
   },
   {
    "a": "Mordekaiser",
    "b": "Orianna",
    "wr": 53.8,
-   "n": 33
+   "n": 32
   },
   {
    "a": "Mordekaiser",
    "b": "Ornn",
    "wr": 47.4,
-   "n": 25
+   "n": 26
   },
   {
    "a": "Mordekaiser",
@@ -7587,8 +7623,8 @@
   {
    "a": "Mordekaiser",
    "b": "Riven",
-   "wr": 38.9,
-   "n": 27
+   "wr": 42.1,
+   "n": 28
   },
   {
    "a": "Mordekaiser",
@@ -7605,8 +7641,8 @@
   {
    "a": "Mordekaiser",
    "b": "Shen",
-   "wr": 84.6,
-   "n": 16
+   "wr": 81.8,
+   "n": 14
   },
   {
    "a": "Mordekaiser",
@@ -7618,7 +7654,7 @@
    "a": "Mordekaiser",
    "b": "Vex",
    "wr": 35.1,
-   "n": 40
+   "n": 39
   },
   {
    "a": "Mordekaiser",
@@ -7635,8 +7671,8 @@
   {
    "a": "Mordekaiser",
    "b": "Volibear",
-   "wr": 57.1,
-   "n": 21
+   "wr": 59.1,
+   "n": 22
   },
   {
    "a": "Mordekaiser",
@@ -7654,7 +7690,7 @@
    "a": "Mordekaiser",
    "b": "Ziggs",
    "wr": 50,
-   "n": 6
+   "n": 5
   },
   {
    "a": "Nasus",
@@ -7672,7 +7708,7 @@
    "a": "Nasus",
    "b": "Annie",
    "wr": 66.7,
-   "n": 7
+   "n": 6
   },
   {
    "a": "Nasus",
@@ -7689,8 +7725,8 @@
   {
    "a": "Nasus",
    "b": "Diana",
-   "wr": 58.3,
-   "n": 14
+   "wr": 53.8,
+   "n": 15
   },
   {
    "a": "Nasus",
@@ -7701,14 +7737,14 @@
   {
    "a": "Nasus",
    "b": "Ekko",
-   "wr": 75,
-   "n": 4
+   "wr": 100,
+   "n": 2
   },
   {
    "a": "Nasus",
    "b": "Evelynn",
-   "wr": 50,
-   "n": 23
+   "wr": 47.4,
+   "n": 24
   },
   {
    "a": "Nasus",
@@ -7725,8 +7761,8 @@
   {
    "a": "Nasus",
    "b": "Irelia",
-   "wr": 36.4,
-   "n": 13
+   "wr": 40,
+   "n": 12
   },
   {
    "a": "Nasus",
@@ -7737,8 +7773,8 @@
   {
    "a": "Nasus",
    "b": "Jarvan IV",
-   "wr": 42.9,
-   "n": 8
+   "wr": 33.3,
+   "n": 7
   },
   {
    "a": "Nasus",
@@ -7767,7 +7803,7 @@
   {
    "a": "Nasus",
    "b": "Kai'Sa",
-   "wr": 55.6,
+   "wr": 57.7,
    "n": 34
   },
   {
@@ -7828,7 +7864,7 @@
    "a": "Nasus",
    "b": "Mordekaiser",
    "wr": 38.5,
-   "n": 17
+   "n": 18
   },
   {
    "a": "Nasus",
@@ -7839,8 +7875,8 @@
   {
    "a": "Nasus",
    "b": "Ornn",
-   "wr": 58.3,
-   "n": 13
+   "wr": 61.5,
+   "n": 14
   },
   {
    "a": "Nasus",
@@ -7863,14 +7899,14 @@
   {
    "a": "Nasus",
    "b": "Rengar",
-   "wr": 72.7,
-   "n": 15
+   "wr": 66.7,
+   "n": 16
   },
   {
    "a": "Nasus",
    "b": "Riven",
-   "wr": 63.2,
-   "n": 23
+   "wr": 66.7,
+   "n": 22
   },
   {
    "a": "Nasus",
@@ -7911,8 +7947,8 @@
   {
    "a": "Nasus",
    "b": "Vex",
-   "wr": 37.5,
-   "n": 27
+   "wr": 36,
+   "n": 28
   },
   {
    "a": "Nasus",
@@ -7923,8 +7959,8 @@
   {
    "a": "Nasus",
    "b": "Viktor",
-   "wr": 14.3,
-   "n": 8
+   "wr": 0,
+   "n": 7
   },
   {
    "a": "Nasus",
@@ -7978,19 +8014,19 @@
    "a": "Orianna",
    "b": "Draven",
    "wr": 40,
-   "n": 7
+   "n": 6
   },
   {
    "a": "Orianna",
    "b": "Ekko",
-   "wr": 90.9,
-   "n": 13
+   "wr": 100,
+   "n": 10
   },
   {
    "a": "Orianna",
    "b": "Evelynn",
-   "wr": 54.5,
-   "n": 14
+   "wr": 50,
+   "n": 13
   },
   {
    "a": "Orianna",
@@ -8037,20 +8073,20 @@
   {
    "a": "Orianna",
    "b": "K'Sante",
-   "wr": 66.7,
+   "wr": 50,
    "n": 4
   },
   {
    "a": "Orianna",
    "b": "Kai'Sa",
-   "wr": 50,
-   "n": 32
+   "wr": 51.7,
+   "n": 31
   },
   {
    "a": "Orianna",
    "b": "Kennen",
-   "wr": 77.8,
-   "n": 9
+   "wr": 85.7,
+   "n": 7
   },
   {
    "a": "Orianna",
@@ -8090,15 +8126,9 @@
   },
   {
    "a": "Orianna",
-   "b": "Lux",
-   "wr": 100,
-   "n": 1
-  },
-  {
-   "a": "Orianna",
    "b": "Master Yi, Wuju Bladesman",
-   "wr": 50,
-   "n": 14
+   "wr": 46.2,
+   "n": 15
   },
   {
    "a": "Orianna",
@@ -8116,7 +8146,7 @@
    "a": "Orianna",
    "b": "Mordekaiser",
    "wr": 46.2,
-   "n": 33
+   "n": 32
   },
   {
    "a": "Orianna",
@@ -8127,8 +8157,8 @@
   {
    "a": "Orianna",
    "b": "Ornn",
-   "wr": 30,
-   "n": 12
+   "wr": 36.4,
+   "n": 13
   },
   {
    "a": "Orianna",
@@ -8139,8 +8169,8 @@
   {
    "a": "Orianna",
    "b": "Pyke",
-   "wr": 56.3,
-   "n": 17
+   "wr": 53.3,
+   "n": 16
   },
   {
    "a": "Orianna",
@@ -8163,8 +8193,8 @@
   {
    "a": "Orianna",
    "b": "Riven",
-   "wr": 35,
-   "n": 43
+   "wr": 33.3,
+   "n": 42
   },
   {
    "a": "Orianna",
@@ -8187,14 +8217,14 @@
   {
    "a": "Orianna",
    "b": "Shen",
-   "wr": 33.3,
-   "n": 4
+   "wr": 0,
+   "n": 3
   },
   {
    "a": "Orianna",
    "b": "Sivir",
    "wr": 100,
-   "n": 2
+   "n": 1
   },
   {
    "a": "Orianna",
@@ -8205,8 +8235,8 @@
   {
    "a": "Orianna",
    "b": "Vex",
-   "wr": 35.7,
-   "n": 18
+   "wr": 38.5,
+   "n": 17
   },
   {
    "a": "Orianna",
@@ -8277,8 +8307,8 @@
   {
    "a": "Ornn",
    "b": "Ekko",
-   "wr": 80,
-   "n": 6
+   "wr": 83.3,
+   "n": 7
   },
   {
    "a": "Ornn",
@@ -8295,14 +8325,14 @@
   {
    "a": "Ornn",
    "b": "Fiora",
-   "wr": 44.4,
-   "n": 10
+   "wr": 50,
+   "n": 11
   },
   {
    "a": "Ornn",
    "b": "Irelia",
-   "wr": 33.3,
-   "n": 9
+   "wr": 30,
+   "n": 10
   },
   {
    "a": "Ornn",
@@ -8337,7 +8367,7 @@
   {
    "a": "Ornn",
    "b": "Kai'Sa",
-   "wr": 76.5,
+   "wr": 70.6,
    "n": 19
   },
   {
@@ -8374,7 +8404,7 @@
    "a": "Ornn",
    "b": "Lillia",
    "wr": 30.8,
-   "n": 13
+   "n": 14
   },
   {
    "a": "Ornn",
@@ -8410,19 +8440,19 @@
    "a": "Ornn",
    "b": "Mordekaiser",
    "wr": 52.6,
-   "n": 25
+   "n": 26
   },
   {
    "a": "Ornn",
    "b": "Nasus",
-   "wr": 41.7,
-   "n": 13
+   "wr": 38.5,
+   "n": 14
   },
   {
    "a": "Ornn",
    "b": "Orianna",
-   "wr": 70,
-   "n": 12
+   "wr": 63.6,
+   "n": 13
   },
   {
    "a": "Ornn",
@@ -8439,7 +8469,7 @@
   {
    "a": "Ornn",
    "b": "Rek'Sai",
-   "wr": 58.8,
+   "wr": 55.6,
    "n": 18
   },
   {
@@ -8457,8 +8487,8 @@
   {
    "a": "Ornn",
    "b": "Rengar",
-   "wr": 12.5,
-   "n": 16
+   "wr": 10.5,
+   "n": 19
   },
   {
    "a": "Ornn",
@@ -8505,14 +8535,14 @@
   {
    "a": "Ornn",
    "b": "Vex",
-   "wr": 56.5,
-   "n": 24
+   "wr": 53.8,
+   "n": 27
   },
   {
    "a": "Ornn",
    "b": "Viktor",
-   "wr": 41.2,
-   "n": 18
+   "wr": 44.4,
+   "n": 19
   },
   {
    "a": "Ornn",
@@ -8564,6 +8594,12 @@
   },
   {
    "a": "Poppy",
+   "b": "Irelia",
+   "wr": 100,
+   "n": 1
+  },
+  {
+   "a": "Poppy",
    "b": "Jax",
    "wr": 100,
    "n": 1
@@ -8641,12 +8677,6 @@
    "n": 1
   },
   {
-   "a": "Poppy",
-   "b": "Viktor",
-   "wr": 0,
-   "n": 1
-  },
-  {
    "a": "Pyke",
    "b": "Akali",
    "wr": 57.1,
@@ -8686,7 +8716,7 @@
    "a": "Pyke",
    "b": "Draven",
    "wr": 0,
-   "n": 3
+   "n": 4
   },
   {
    "a": "Pyke",
@@ -8727,7 +8757,7 @@
   {
    "a": "Pyke",
    "b": "Jarvan IV",
-   "wr": 100,
+   "wr": 0,
    "n": 2
   },
   {
@@ -8751,8 +8781,8 @@
   {
    "a": "Pyke",
    "b": "Kai'Sa",
-   "wr": 15.4,
-   "n": 15
+   "wr": 16.7,
+   "n": 14
   },
   {
    "a": "Pyke",
@@ -8763,14 +8793,14 @@
   {
    "a": "Pyke",
    "b": "Kha'Zix",
-   "wr": 33.3,
-   "n": 4
+   "wr": 25,
+   "n": 5
   },
   {
    "a": "Pyke",
    "b": "LeBlanc",
-   "wr": 28.6,
-   "n": 7
+   "wr": 16.7,
+   "n": 6
   },
   {
    "a": "Pyke",
@@ -8817,8 +8847,8 @@
   {
    "a": "Pyke",
    "b": "Orianna",
-   "wr": 43.8,
-   "n": 17
+   "wr": 46.7,
+   "n": 16
   },
   {
    "a": "Pyke",
@@ -8841,14 +8871,14 @@
   {
    "a": "Pyke",
    "b": "Rengar",
-   "wr": 50,
-   "n": 10
+   "wr": 54.5,
+   "n": 11
   },
   {
    "a": "Pyke",
    "b": "Riven",
-   "wr": 40,
-   "n": 15
+   "wr": 42.9,
+   "n": 14
   },
   {
    "a": "Pyke",
@@ -8889,8 +8919,8 @@
   {
    "a": "Pyke",
    "b": "Vex",
-   "wr": 26.7,
-   "n": 15
+   "wr": 31.3,
+   "n": 16
   },
   {
    "a": "Pyke",
@@ -8920,7 +8950,7 @@
    "a": "Pyke",
    "b": "Zed",
    "wr": 0,
-   "n": 3
+   "n": 4
   },
   {
    "a": "Rek'Sai",
@@ -8937,8 +8967,8 @@
   {
    "a": "Rek'Sai",
    "b": "Azir",
-   "wr": 42.9,
-   "n": 7
+   "wr": 50,
+   "n": 6
   },
   {
    "a": "Rek'Sai",
@@ -8950,7 +8980,7 @@
    "a": "Rek'Sai",
    "b": "Diana",
    "wr": 50,
-   "n": 15
+   "n": 17
   },
   {
    "a": "Rek'Sai",
@@ -8968,13 +8998,13 @@
    "a": "Rek'Sai",
    "b": "Evelynn",
    "wr": 66.7,
-   "n": 25
+   "n": 24
   },
   {
    "a": "Rek'Sai",
    "b": "Ezreal",
    "wr": 73.7,
-   "n": 20
+   "n": 19
   },
   {
    "a": "Rek'Sai",
@@ -9033,14 +9063,14 @@
   {
    "a": "Rek'Sai",
    "b": "Kai'Sa",
-   "wr": 60.7,
-   "n": 30
+   "wr": 59.3,
+   "n": 29
   },
   {
    "a": "Rek'Sai",
    "b": "Kennen",
-   "wr": 76,
-   "n": 27
+   "wr": 85.7,
+   "n": 23
   },
   {
    "a": "Rek'Sai",
@@ -9075,8 +9105,8 @@
   {
    "a": "Rek'Sai",
    "b": "Lucian",
-   "wr": 75,
-   "n": 4
+   "wr": 60,
+   "n": 5
   },
   {
    "a": "Rek'Sai",
@@ -9129,7 +9159,7 @@
   {
    "a": "Rek'Sai",
    "b": "Ornn",
-   "wr": 41.2,
+   "wr": 44.4,
    "n": 18
   },
   {
@@ -9141,8 +9171,8 @@
   {
    "a": "Rek'Sai",
    "b": "Renata Glasc",
-   "wr": 50,
-   "n": 2
+   "wr": 0,
+   "n": 1
   },
   {
    "a": "Rek'Sai",
@@ -9159,8 +9189,8 @@
   {
    "a": "Rek'Sai",
    "b": "Riven",
-   "wr": 71.4,
-   "n": 23
+   "wr": 73.7,
+   "n": 21
   },
   {
    "a": "Rek'Sai",
@@ -9177,8 +9207,8 @@
   {
    "a": "Rek'Sai",
    "b": "Sett",
-   "wr": 33.3,
-   "n": 23
+   "wr": 30,
+   "n": 22
   },
   {
    "a": "Rek'Sai",
@@ -9201,8 +9231,8 @@
   {
    "a": "Rek'Sai",
    "b": "Vex",
-   "wr": 87.5,
-   "n": 17
+   "wr": 82.4,
+   "n": 19
   },
   {
    "a": "Rek'Sai",
@@ -9274,13 +9304,7 @@
    "a": "Renata Glasc",
    "b": "Kai'Sa",
    "wr": 0,
-   "n": 1
-  },
-  {
-   "a": "Renata Glasc",
-   "b": "LeBlanc",
-   "wr": 0,
-   "n": 3
+   "n": 2
   },
   {
    "a": "Renata Glasc",
@@ -9303,20 +9327,14 @@
   {
    "a": "Renata Glasc",
    "b": "Rek'Sai",
-   "wr": 50,
-   "n": 2
+   "wr": 100,
+   "n": 1
   },
   {
    "a": "Renata Glasc",
    "b": "Sett",
    "wr": 0,
    "n": 2
-  },
-  {
-   "a": "Renata Glasc",
-   "b": "Shen",
-   "wr": 0,
-   "n": 1
   },
   {
    "a": "Renata Glasc",
@@ -9460,7 +9478,7 @@
    "a": "Rengar",
    "b": "Draven",
    "wr": 35.7,
-   "n": 17
+   "n": 18
   },
   {
    "a": "Rengar",
@@ -9477,20 +9495,20 @@
   {
    "a": "Rengar",
    "b": "Ezreal",
-   "wr": 68.2,
-   "n": 23
+   "wr": 65.2,
+   "n": 24
   },
   {
    "a": "Rengar",
    "b": "Fiora",
-   "wr": 71.4,
-   "n": 8
+   "wr": 75,
+   "n": 9
   },
   {
    "a": "Rengar",
    "b": "Irelia",
-   "wr": 37.5,
-   "n": 9
+   "wr": 33.3,
+   "n": 10
   },
   {
    "a": "Rengar",
@@ -9525,26 +9543,26 @@
   {
    "a": "Rengar",
    "b": "Kai'Sa",
-   "wr": 16.7,
-   "n": 25
+   "wr": 17.4,
+   "n": 24
   },
   {
    "a": "Rengar",
    "b": "Kennen",
-   "wr": 70,
-   "n": 10
+   "wr": 66.7,
+   "n": 9
   },
   {
    "a": "Rengar",
    "b": "Kha'Zix",
-   "wr": 50,
-   "n": 10
+   "wr": 45.5,
+   "n": 11
   },
   {
    "a": "Rengar",
    "b": "LeBlanc",
-   "wr": 40,
-   "n": 11
+   "wr": 33.3,
+   "n": 10
   },
   {
    "a": "Rengar",
@@ -9591,8 +9609,8 @@
   {
    "a": "Rengar",
    "b": "Nasus",
-   "wr": 27.3,
-   "n": 15
+   "wr": 33.3,
+   "n": 16
   },
   {
    "a": "Rengar",
@@ -9603,14 +9621,14 @@
   {
    "a": "Rengar",
    "b": "Ornn",
-   "wr": 87.5,
-   "n": 16
+   "wr": 89.5,
+   "n": 19
   },
   {
    "a": "Rengar",
    "b": "Pyke",
-   "wr": 50,
-   "n": 10
+   "wr": 45.5,
+   "n": 11
   },
   {
    "a": "Rengar",
@@ -9621,8 +9639,8 @@
   {
    "a": "Rengar",
    "b": "Riven",
-   "wr": 76.2,
-   "n": 22
+   "wr": 84.2,
+   "n": 20
   },
   {
    "a": "Rengar",
@@ -9639,8 +9657,8 @@
   {
    "a": "Rengar",
    "b": "Sett",
-   "wr": 42.1,
-   "n": 19
+   "wr": 40,
+   "n": 20
   },
   {
    "a": "Rengar",
@@ -9657,8 +9675,8 @@
   {
    "a": "Rengar",
    "b": "Vex",
-   "wr": 32,
-   "n": 31
+   "wr": 32.1,
+   "n": 35
   },
   {
    "a": "Rengar",
@@ -9669,13 +9687,13 @@
   {
    "a": "Rengar",
    "b": "Viktor",
-   "wr": 61.5,
-   "n": 14
+   "wr": 58.3,
+   "n": 13
   },
   {
    "a": "Rengar",
    "b": "Volibear",
-   "wr": 42.9,
+   "wr": 28.6,
    "n": 8
   },
   {
@@ -9704,8 +9722,14 @@
   },
   {
    "a": "Riven",
+   "b": "Annie",
+   "wr": 100,
+   "n": 1
+  },
+  {
+   "a": "Riven",
    "b": "Azir",
-   "wr": 58.3,
+   "wr": 54.5,
    "n": 12
   },
   {
@@ -9723,44 +9747,44 @@
   {
    "a": "Riven",
    "b": "Ekko",
-   "wr": 55.6,
-   "n": 10
-  },
-  {
-   "a": "Riven",
-   "b": "Evelynn",
-   "wr": 33.3,
-   "n": 24
-  },
-  {
-   "a": "Riven",
-   "b": "Ezreal",
-   "wr": 77.3,
-   "n": 23
-  },
-  {
-   "a": "Riven",
-   "b": "Fiora",
    "wr": 50,
    "n": 9
   },
   {
    "a": "Riven",
+   "b": "Evelynn",
+   "wr": 31.6,
+   "n": 22
+  },
+  {
+   "a": "Riven",
+   "b": "Ezreal",
+   "wr": 76.2,
+   "n": 22
+  },
+  {
+   "a": "Riven",
+   "b": "Fiora",
+   "wr": 55.6,
+   "n": 10
+  },
+  {
+   "a": "Riven",
    "b": "Irelia",
-   "wr": 71.4,
-   "n": 8
+   "wr": 66.7,
+   "n": 7
   },
   {
    "a": "Riven",
    "b": "Ivern",
    "wr": 100,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Riven",
    "b": "Jarvan IV",
-   "wr": 80,
-   "n": 7
+   "wr": 75,
+   "n": 6
   },
   {
    "a": "Riven",
@@ -9790,7 +9814,7 @@
    "a": "Riven",
    "b": "Kai'Sa",
    "wr": 45.7,
-   "n": 62
+   "n": 60
   },
   {
    "a": "Riven",
@@ -9809,6 +9833,12 @@
    "b": "LeBlanc",
    "wr": 71.4,
    "n": 8
+  },
+  {
+   "a": "Riven",
+   "b": "Lee Sin",
+   "wr": 0,
+   "n": 1
   },
   {
    "a": "Riven",
@@ -9861,20 +9891,20 @@
   {
    "a": "Riven",
    "b": "Mordekaiser",
-   "wr": 61.1,
-   "n": 27
+   "wr": 57.9,
+   "n": 28
   },
   {
    "a": "Riven",
    "b": "Nasus",
-   "wr": 36.8,
-   "n": 23
+   "wr": 33.3,
+   "n": 22
   },
   {
    "a": "Riven",
    "b": "Orianna",
-   "wr": 65,
-   "n": 43
+   "wr": 66.7,
+   "n": 42
   },
   {
    "a": "Riven",
@@ -9891,14 +9921,14 @@
   {
    "a": "Riven",
    "b": "Pyke",
-   "wr": 60,
-   "n": 15
+   "wr": 57.1,
+   "n": 14
   },
   {
    "a": "Riven",
    "b": "Rek'Sai",
-   "wr": 28.6,
-   "n": 23
+   "wr": 26.3,
+   "n": 21
   },
   {
    "a": "Riven",
@@ -9909,14 +9939,14 @@
   {
    "a": "Riven",
    "b": "Rengar",
-   "wr": 23.8,
-   "n": 22
+   "wr": 15.8,
+   "n": 20
   },
   {
    "a": "Riven",
    "b": "Rumble",
    "wr": 100,
-   "n": 2
+   "n": 1
   },
   {
    "a": "Riven",
@@ -9927,14 +9957,14 @@
   {
    "a": "Riven",
    "b": "Sett",
-   "wr": 54.8,
-   "n": 35
+   "wr": 51.7,
+   "n": 33
   },
   {
    "a": "Riven",
    "b": "Shen",
-   "wr": 50,
-   "n": 2
+   "wr": 0,
+   "n": 1
   },
   {
    "a": "Riven",
@@ -9945,8 +9975,8 @@
   {
    "a": "Riven",
    "b": "Vex",
-   "wr": 25.9,
-   "n": 29
+   "wr": 27.6,
+   "n": 31
   },
   {
    "a": "Riven",
@@ -9976,7 +10006,7 @@
    "a": "Riven",
    "b": "Zed",
    "wr": 100,
-   "n": 6
+   "n": 7
   },
   {
    "a": "Riven",
@@ -10096,7 +10126,7 @@
    "a": "Rumble",
    "b": "Riven",
    "wr": 0,
-   "n": 2
+   "n": 1
   },
   {
    "a": "Rumble",
@@ -10114,7 +10144,7 @@
    "a": "Rumble",
    "b": "Viktor",
    "wr": 0,
-   "n": 1
+   "n": 2
   },
   {
    "a": "Rumble",
@@ -10155,8 +10185,8 @@
   {
    "a": "Seraphine",
    "b": "Draven",
-   "wr": 50,
-   "n": 2
+   "wr": 33.3,
+   "n": 3
   },
   {
    "a": "Seraphine",
@@ -10196,9 +10226,21 @@
   },
   {
    "a": "Seraphine",
+   "b": "K'Sante",
+   "wr": 100,
+   "n": 1
+  },
+  {
+   "a": "Seraphine",
    "b": "Kai'Sa",
    "wr": 37.5,
    "n": 8
+  },
+  {
+   "a": "Seraphine",
+   "b": "LeBlanc",
+   "wr": 100,
+   "n": 1
   },
   {
    "a": "Seraphine",
@@ -10347,8 +10389,8 @@
   {
    "a": "Sett",
    "b": "Diana",
-   "wr": 56.3,
-   "n": 18
+   "wr": 60,
+   "n": 17
   },
   {
    "a": "Sett",
@@ -10359,14 +10401,14 @@
   {
    "a": "Sett",
    "b": "Ekko",
-   "wr": 42.9,
-   "n": 8
+   "wr": 33.3,
+   "n": 7
   },
   {
    "a": "Sett",
    "b": "Evelynn",
-   "wr": 37.5,
-   "n": 17
+   "wr": 40,
+   "n": 16
   },
   {
    "a": "Sett",
@@ -10377,8 +10419,8 @@
   {
    "a": "Sett",
    "b": "Fiora",
-   "wr": 66.7,
-   "n": 7
+   "wr": 60,
+   "n": 6
   },
   {
    "a": "Sett",
@@ -10426,19 +10468,19 @@
    "a": "Sett",
    "b": "K'Sante",
    "wr": 100,
-   "n": 4
+   "n": 3
   },
   {
    "a": "Sett",
    "b": "Kai'Sa",
-   "wr": 63.2,
+   "wr": 57.9,
    "n": 20
   },
   {
    "a": "Sett",
    "b": "Kennen",
    "wr": 76.9,
-   "n": 16
+   "n": 17
   },
   {
    "a": "Sett",
@@ -10467,8 +10509,8 @@
   {
    "a": "Sett",
    "b": "Lillia",
-   "wr": 53.8,
-   "n": 13
+   "wr": 57.1,
+   "n": 14
   },
   {
    "a": "Sett",
@@ -10533,8 +10575,8 @@
   {
    "a": "Sett",
    "b": "Rek'Sai",
-   "wr": 66.7,
-   "n": 23
+   "wr": 70,
+   "n": 22
   },
   {
    "a": "Sett",
@@ -10545,14 +10587,14 @@
   {
    "a": "Sett",
    "b": "Rengar",
-   "wr": 57.9,
-   "n": 19
+   "wr": 60,
+   "n": 20
   },
   {
    "a": "Sett",
    "b": "Riven",
-   "wr": 45.2,
-   "n": 35
+   "wr": 48.3,
+   "n": 33
   },
   {
    "a": "Sett",
@@ -10576,7 +10618,7 @@
    "a": "Sett",
    "b": "Teemo",
    "wr": 0,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Sett",
@@ -10593,8 +10635,8 @@
   {
    "a": "Sett",
    "b": "Viktor",
-   "wr": 33.3,
-   "n": 11
+   "wr": 25,
+   "n": 10
   },
   {
    "a": "Sett",
@@ -10695,8 +10737,8 @@
   {
    "a": "Shen",
    "b": "Kai'Sa",
-   "wr": 20,
-   "n": 5
+   "wr": 25,
+   "n": 4
   },
   {
    "a": "Shen",
@@ -10724,12 +10766,6 @@
   },
   {
    "a": "Shen",
-   "b": "Lillia",
-   "wr": 50,
-   "n": 5
-  },
-  {
-   "a": "Shen",
    "b": "Master Yi, Wuju Bladesman",
    "wr": 25,
    "n": 4
@@ -10737,14 +10773,14 @@
   {
    "a": "Shen",
    "b": "Master Yi, Wuju Master",
-   "wr": 50,
-   "n": 2
+   "wr": 0,
+   "n": 1
   },
   {
    "a": "Shen",
    "b": "Mordekaiser",
-   "wr": 15.4,
-   "n": 16
+   "wr": 18.2,
+   "n": 14
   },
   {
    "a": "Shen",
@@ -10755,8 +10791,8 @@
   {
    "a": "Shen",
    "b": "Orianna",
-   "wr": 66.7,
-   "n": 4
+   "wr": 100,
+   "n": 3
   },
   {
    "a": "Shen",
@@ -10784,12 +10820,6 @@
   },
   {
    "a": "Shen",
-   "b": "Renata Glasc",
-   "wr": 100,
-   "n": 1
-  },
-  {
-   "a": "Shen",
    "b": "Rengar",
    "wr": 0,
    "n": 2
@@ -10797,8 +10827,8 @@
   {
    "a": "Shen",
    "b": "Riven",
-   "wr": 50,
-   "n": 2
+   "wr": 100,
+   "n": 1
   },
   {
    "a": "Shen",
@@ -10809,8 +10839,8 @@
   {
    "a": "Shen",
    "b": "Teemo",
-   "wr": 66.7,
-   "n": 3
+   "wr": 50,
+   "n": 2
   },
   {
    "a": "Shen",
@@ -10834,7 +10864,7 @@
    "a": "Sivir",
    "b": "Akali",
    "wr": 0,
-   "n": 1
+   "n": 2
   },
   {
    "a": "Sivir",
@@ -10870,7 +10900,7 @@
    "a": "Sivir",
    "b": "Orianna",
    "wr": 0,
-   "n": 2
+   "n": 1
   },
   {
    "a": "Sivir",
@@ -10995,8 +11025,8 @@
   {
    "a": "Teemo",
    "b": "Kai'Sa",
-   "wr": 50,
-   "n": 2
+   "wr": 33.3,
+   "n": 3
   },
   {
    "a": "Teemo",
@@ -11086,13 +11116,13 @@
    "a": "Teemo",
    "b": "Sett",
    "wr": 100,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Teemo",
    "b": "Shen",
-   "wr": 33.3,
-   "n": 3
+   "wr": 50,
+   "n": 2
   },
   {
    "a": "Teemo",
@@ -11132,6 +11162,12 @@
   },
   {
    "a": "Vex",
+   "b": "Ambessa",
+   "wr": 0,
+   "n": 1
+  },
+  {
+   "a": "Vex",
    "b": "Annie",
    "wr": 100,
    "n": 2
@@ -11151,44 +11187,44 @@
   {
    "a": "Vex",
    "b": "Diana",
-   "wr": 40,
-   "n": 23
+   "wr": 40.9,
+   "n": 26
   },
   {
    "a": "Vex",
    "b": "Draven",
    "wr": 0,
-   "n": 8
+   "n": 9
   },
   {
    "a": "Vex",
    "b": "Ekko",
-   "wr": 64.3,
-   "n": 15
+   "wr": 56.3,
+   "n": 17
   },
   {
    "a": "Vex",
    "b": "Evelynn",
-   "wr": 68.4,
-   "n": 30
+   "wr": 70,
+   "n": 31
   },
   {
    "a": "Vex",
    "b": "Ezreal",
-   "wr": 57.1,
-   "n": 28
+   "wr": 54.8,
+   "n": 31
   },
   {
    "a": "Vex",
    "b": "Fiora",
-   "wr": 60,
-   "n": 11
+   "wr": 63.6,
+   "n": 12
   },
   {
    "a": "Vex",
    "b": "Irelia",
-   "wr": 69.2,
-   "n": 14
+   "wr": 71.4,
+   "n": 18
   },
   {
    "a": "Vex",
@@ -11229,14 +11265,14 @@
   {
    "a": "Vex",
    "b": "Kai'Sa",
-   "wr": 58.6,
+   "wr": 56.7,
    "n": 36
   },
   {
    "a": "Vex",
    "b": "Kennen",
-   "wr": 26.7,
-   "n": 17
+   "wr": 25,
+   "n": 14
   },
   {
    "a": "Vex",
@@ -11248,7 +11284,7 @@
    "a": "Vex",
    "b": "LeBlanc",
    "wr": 100,
-   "n": 8
+   "n": 9
   },
   {
    "a": "Vex",
@@ -11259,8 +11295,8 @@
   {
    "a": "Vex",
    "b": "Lillia",
-   "wr": 44.4,
-   "n": 19
+   "wr": 40.9,
+   "n": 23
   },
   {
    "a": "Vex",
@@ -11277,8 +11313,8 @@
   {
    "a": "Vex",
    "b": "Master Yi, Wuju Bladesman",
-   "wr": 66.7,
-   "n": 35
+   "wr": 69.2,
+   "n": 37
   },
   {
    "a": "Vex",
@@ -11289,8 +11325,8 @@
   {
    "a": "Vex",
    "b": "Mel",
-   "wr": 50,
-   "n": 4
+   "wr": 60,
+   "n": 5
   },
   {
    "a": "Vex",
@@ -11302,25 +11338,25 @@
    "a": "Vex",
    "b": "Mordekaiser",
    "wr": 64.9,
-   "n": 40
+   "n": 39
   },
   {
    "a": "Vex",
    "b": "Nasus",
-   "wr": 62.5,
-   "n": 27
+   "wr": 64,
+   "n": 28
   },
   {
    "a": "Vex",
    "b": "Orianna",
-   "wr": 64.3,
-   "n": 18
+   "wr": 61.5,
+   "n": 17
   },
   {
    "a": "Vex",
    "b": "Ornn",
-   "wr": 43.5,
-   "n": 24
+   "wr": 46.2,
+   "n": 27
   },
   {
    "a": "Vex",
@@ -11331,14 +11367,14 @@
   {
    "a": "Vex",
    "b": "Pyke",
-   "wr": 73.3,
-   "n": 15
+   "wr": 68.8,
+   "n": 16
   },
   {
    "a": "Vex",
    "b": "Rek'Sai",
-   "wr": 12.5,
-   "n": 17
+   "wr": 17.6,
+   "n": 19
   },
   {
    "a": "Vex",
@@ -11355,14 +11391,14 @@
   {
    "a": "Vex",
    "b": "Rengar",
-   "wr": 68,
-   "n": 31
+   "wr": 67.9,
+   "n": 35
   },
   {
    "a": "Vex",
    "b": "Riven",
-   "wr": 74.1,
-   "n": 29
+   "wr": 72.4,
+   "n": 31
   },
   {
    "a": "Vex",
@@ -11409,14 +11445,14 @@
   {
    "a": "Vex",
    "b": "Viktor",
-   "wr": 51.7,
+   "wr": 55.2,
    "n": 31
   },
   {
    "a": "Vex",
    "b": "Volibear",
-   "wr": 70.6,
-   "n": 19
+   "wr": 72.2,
+   "n": 20
   },
   {
    "a": "Vex",
@@ -11427,8 +11463,8 @@
   {
    "a": "Vex",
    "b": "Zed",
-   "wr": 50,
-   "n": 3
+   "wr": 33.3,
+   "n": 4
   },
   {
    "a": "Vex",
@@ -11577,8 +11613,8 @@
   {
    "a": "Viktor",
    "b": "Azir",
-   "wr": 25,
-   "n": 10
+   "wr": 22.2,
+   "n": 11
   },
   {
    "a": "Viktor",
@@ -11589,8 +11625,8 @@
   {
    "a": "Viktor",
    "b": "Diana",
-   "wr": 38.5,
-   "n": 14
+   "wr": 33.3,
+   "n": 13
   },
   {
    "a": "Viktor",
@@ -11602,12 +11638,12 @@
    "a": "Viktor",
    "b": "Ekko",
    "wr": 50,
-   "n": 8
+   "n": 6
   },
   {
    "a": "Viktor",
    "b": "Evelynn",
-   "wr": 66.7,
+   "wr": 70.6,
    "n": 19
   },
   {
@@ -11619,14 +11655,14 @@
   {
    "a": "Viktor",
    "b": "Fiora",
-   "wr": 87.5,
-   "n": 10
+   "wr": 88.9,
+   "n": 11
   },
   {
    "a": "Viktor",
    "b": "Irelia",
-   "wr": 25,
-   "n": 8
+   "wr": 22.2,
+   "n": 9
   },
   {
    "a": "Viktor",
@@ -11680,7 +11716,7 @@
    "a": "Viktor",
    "b": "Kennen",
    "wr": 57.1,
-   "n": 24
+   "n": 23
   },
   {
    "a": "Viktor",
@@ -11757,8 +11793,8 @@
   {
    "a": "Viktor",
    "b": "Nasus",
-   "wr": 85.7,
-   "n": 8
+   "wr": 100,
+   "n": 7
   },
   {
    "a": "Viktor",
@@ -11769,14 +11805,8 @@
   {
    "a": "Viktor",
    "b": "Ornn",
-   "wr": 58.8,
-   "n": 18
-  },
-  {
-   "a": "Viktor",
-   "b": "Poppy",
-   "wr": 100,
-   "n": 1
+   "wr": 55.6,
+   "n": 19
   },
   {
    "a": "Viktor",
@@ -11805,8 +11835,8 @@
   {
    "a": "Viktor",
    "b": "Rengar",
-   "wr": 38.5,
-   "n": 14
+   "wr": 41.7,
+   "n": 13
   },
   {
    "a": "Viktor",
@@ -11818,7 +11848,7 @@
    "a": "Viktor",
    "b": "Rumble",
    "wr": 100,
-   "n": 1
+   "n": 2
   },
   {
    "a": "Viktor",
@@ -11829,8 +11859,8 @@
   {
    "a": "Viktor",
    "b": "Sett",
-   "wr": 66.7,
-   "n": 11
+   "wr": 75,
+   "n": 10
   },
   {
    "a": "Viktor",
@@ -11853,7 +11883,7 @@
   {
    "a": "Viktor",
    "b": "Vex",
-   "wr": 48.3,
+   "wr": 44.8,
    "n": 31
   },
   {
@@ -11949,20 +11979,14 @@
   {
    "a": "Volibear",
    "b": "Irelia",
-   "wr": 50,
-   "n": 8
+   "wr": 44.4,
+   "n": 9
   },
   {
    "a": "Volibear",
    "b": "Ivern",
    "wr": 60,
    "n": 6
-  },
-  {
-   "a": "Volibear",
-   "b": "Jarvan IV",
-   "wr": 0,
-   "n": 2
   },
   {
    "a": "Volibear",
@@ -11991,20 +12015,26 @@
   {
    "a": "Volibear",
    "b": "Kennen",
-   "wr": 45.5,
-   "n": 12
+   "wr": 50,
+   "n": 13
   },
   {
    "a": "Volibear",
    "b": "Kha'Zix",
-   "wr": 87.5,
-   "n": 9
+   "wr": 77.8,
+   "n": 10
   },
   {
    "a": "Volibear",
    "b": "LeBlanc",
    "wr": 40,
-   "n": 6
+   "n": 5
+  },
+  {
+   "a": "Volibear",
+   "b": "Lee Sin",
+   "wr": 0,
+   "n": 2
   },
   {
    "a": "Volibear",
@@ -12021,8 +12051,8 @@
   {
    "a": "Volibear",
    "b": "Lucian",
-   "wr": 50,
-   "n": 2
+   "wr": 0,
+   "n": 1
   },
   {
    "a": "Volibear",
@@ -12051,8 +12081,8 @@
   {
    "a": "Volibear",
    "b": "Mordekaiser",
-   "wr": 42.9,
-   "n": 21
+   "wr": 40.9,
+   "n": 22
   },
   {
    "a": "Volibear",
@@ -12099,7 +12129,7 @@
   {
    "a": "Volibear",
    "b": "Rengar",
-   "wr": 57.1,
+   "wr": 71.4,
    "n": 8
   },
   {
@@ -12141,8 +12171,8 @@
   {
    "a": "Volibear",
    "b": "Vex",
-   "wr": 29.4,
-   "n": 19
+   "wr": 27.8,
+   "n": 20
   },
   {
    "a": "Volibear",
@@ -12220,7 +12250,7 @@
    "a": "Yasuo",
    "b": "Kai'Sa",
    "wr": 0,
-   "n": 2
+   "n": 3
   },
   {
    "a": "Yasuo",
@@ -12308,7 +12338,7 @@
   },
   {
    "a": "Zed",
-   "b": "Ekko",
+   "b": "Draven",
    "wr": 0,
    "n": 1
   },
@@ -12381,8 +12411,8 @@
   {
    "a": "Zed",
    "b": "Master Yi, Wuju Bladesman",
-   "wr": 0,
-   "n": 2
+   "wr": 33.3,
+   "n": 3
   },
   {
    "a": "Zed",
@@ -12412,7 +12442,7 @@
    "a": "Zed",
    "b": "Pyke",
    "wr": 100,
-   "n": 3
+   "n": 4
   },
   {
    "a": "Zed",
@@ -12430,7 +12460,7 @@
    "a": "Zed",
    "b": "Riven",
    "wr": 0,
-   "n": 6
+   "n": 7
   },
   {
    "a": "Zed",
@@ -12447,8 +12477,8 @@
   {
    "a": "Zed",
    "b": "Vex",
-   "wr": 50,
-   "n": 3
+   "wr": 66.7,
+   "n": 4
   },
   {
    "a": "Zed",
@@ -12469,12 +12499,6 @@
    "n": 1
   },
   {
-   "a": "Zed",
-   "b": "Ziggs",
-   "wr": 0,
-   "n": 2
-  },
-  {
    "a": "Ziggs",
    "b": "Akali",
    "wr": 0,
@@ -12489,14 +12513,14 @@
   {
    "a": "Ziggs",
    "b": "Azir",
-   "wr": 33.3,
-   "n": 3
+   "wr": 50,
+   "n": 2
   },
   {
    "a": "Ziggs",
    "b": "Diana",
    "wr": 100,
-   "n": 2
+   "n": 1
   },
   {
    "a": "Ziggs",
@@ -12562,13 +12586,19 @@
    "a": "Ziggs",
    "b": "LeBlanc",
    "wr": 0,
-   "n": 5
+   "n": 4
   },
   {
    "a": "Ziggs",
    "b": "Lillia",
    "wr": 0,
-   "n": 6
+   "n": 5
+  },
+  {
+   "a": "Ziggs",
+   "b": "Master Yi, Wuju Bladesman",
+   "wr": 0,
+   "n": 1
   },
   {
    "a": "Ziggs",
@@ -12580,7 +12610,7 @@
    "a": "Ziggs",
    "b": "Mordekaiser",
    "wr": 50,
-   "n": 6
+   "n": 5
   },
   {
    "a": "Ziggs",
@@ -12658,12 +12688,6 @@
    "a": "Ziggs",
    "b": "Volibear",
    "wr": 0,
-   "n": 2
-  },
-  {
-   "a": "Ziggs",
-   "b": "Zed",
-   "wr": 100,
    "n": 2
   }
  ]
