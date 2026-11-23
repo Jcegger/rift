@@ -46,7 +46,7 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 1. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook
    or memory.
 2. **Radiance bans live since 2026-11-23 (done that day):** `ANNOUNCED_BANS` emptied (upstream flags all ten; 22 Constructed
-   bans, `banned.json` unchanged). **Next:** check the 24 Nov refresh is green and finishes inside 40 minutes. The post-ban
+   bans, `banned.json` unchanged). First refresh on the new code (manual, 23 Nov 20:09 UTC) was green in 9 minutes (data bf0a507, site b514fb5). GitHub fires the scheduled runs 4-10 hours late and sometimes skips one; if that starts to matter, start the refresh from a scheduled cloud agent and keep one GitHub cron as a backup. The post-ban
    field is 2 lists so far (`scripts/rift meta --since 2026-11-23`); no matchup advice from it until after 29-30 Nov.
 3. **Drifted tests settled (23 Nov):** `infer.test` passes again. `engines.test`: Pyke and Renekton read right now and are
    off KNOWN_MISSES; Riven (71 of 957 lists left legal) and Irelia (37 of 428) are on it as TEMPORARY. After 29-30 Nov,
