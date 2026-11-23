@@ -1733,8 +1733,11 @@ function cmdFight(cat, args) {
     return;
   }
   const named = (c) => c.n + (c.gear?.length ? ` (${c.gear.join(", ")})` : "");
+  // Elder Dragon on a side (in the fight or at its base): that side's damage kills any enemy unit it reaches.
+  const kills = (cs) => cs.some((c) => compile(c).statics.some((x) => x.op === "anyDamageKills"));
+  them.anyDamageKills = kills(them.units); you.anyDamageKills = kills([...you.units, ...you.base]);
   const youAttack = args.includes("--you-attack");
-  const r = youAttack ? fight({ units: you.units, hand: you.hand, budget: you.budget }, { units: them.units, hand: them.hand, budget: them.budget })
+  const r = youAttack ? fight({ units: you.units, hand: you.hand, budget: you.budget, anyDamageKills: you.anyDamageKills }, { units: them.units, hand: them.hand, budget: them.budget, anyDamageKills: them.anyDamageKills })
     : fight(them, you);
   const word = youAttack ? { hold: "THEY HOLD", conquer: "YOU CONQUER", trade: "TRADE (both wiped; the battlefield is left uncontrolled)" }
     : { hold: "YOU HOLD", conquer: "THEY CONQUER", trade: "TRADE (both wiped; the battlefield is left uncontrolled)" };
