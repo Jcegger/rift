@@ -35,29 +35,9 @@ const EXTRA_FORMAT_BANS = [
 // up, the builder says so and the entry should be deleted — it is a bridge, not a
 // second source of truth.
 const ANNOUNCED_BANS = [
-  // Radiance ban list, announced 2026-11-13 (playriftbound.com/en-us/news/announcements/
-  // radiance-ban-list-updates-effective-november-23-2026). Standard and 2v2 Constructed.
-  // Not in effect for the Korea / Traditional Chinese circuits until Radiance releases there.
-  { code: "RAD-043", name: "Riven, Broken Blade", type: "Unit", effective: "2026-11-23",
-    note: "announced 2026-11-13; Riven was 43% of RC Europe, ~60% vs the field; no-risk turn-two conquer" },
-  { code: "OGN-077", name: "Zhonya's Hourglass", type: "Gear", effective: "2026-11-23",
-    note: "announced 2026-11-13; hidden protection, and the Astral Heron combination" },
-  { code: "SFD-048", name: "Stellacorn Herder", type: "Unit", effective: "2026-11-23",
-    note: "announced 2026-11-13; unlimited payoff for movement, shores up Calm too well" },
-  { code: "OGN-194", name: "Nocturne, Horrifying", type: "Unit", effective: "2026-11-23",
-    note: "announced 2026-11-13; free off a reveal, Kennen's high rolls" },
-  { code: "OGN-195", name: "Rhasa the Sunderer", type: "Unit", effective: "2026-11-23",
-    note: "announced 2026-11-13; 0-energy trash payoff, recursive, Kennen" },
-  { code: "OGN-026", name: "Brynhir Thundersong", type: "Unit", effective: "2026-11-23",
-    note: "announced 2026-11-13; locks the opponent out of a turn, Kai'Sa removal with blink" },
-  { code: "OGN-160", name: "Dazzling Aurora", type: "Gear", effective: "2026-11-23",
-    note: "announced 2026-11-13; homogenises ramp into one deck, free repeated big threats" },
-  { code: "OGN-242", name: "Baited Hook", type: "Gear", effective: "2026-11-23",
-    note: "announced 2026-11-13; pre-emptive, checks Might not cost, risky with Legacy" },
-  { code: "SFD-207", name: "Emperor's Dais", type: "Battlefield", effective: "2026-11-23",
-    note: "announced 2026-11-13; no-risk conquers, like Reaver's Row" },
-  { code: "UNL-215", name: "Star Spring", type: "Battlefield", effective: "2026-11-23",
-    note: "announced 2026-11-13; no-risk conquers, like Reaver's Row" },
+  // Empty. The Radiance list (announced 2026-11-13, effective 2026-11-23) was dropped on the 23rd once
+  // upstream flagged all ten; its per-card reasons are in git history (before this commit).
+  // Entry shape: { code: "RAD-043", name: "Riven, Broken Blade", type: "Unit", effective: "YYYY-MM-DD", note: "..." }
 ];
 
 function normColl(seg) {

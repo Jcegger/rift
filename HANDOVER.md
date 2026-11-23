@@ -4,7 +4,7 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `jayegger-site/HANDOVER.md`.
 
-**Updated:** 2026-11-21
+**Updated:** 2026-11-23
 
 ## State
 
@@ -45,13 +45,12 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 
 1. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook
    or memory.
-2. **2026-11-23, Radiance bans take effect:** the field report's numbers shift on their own, and `build-banned.mjs` will
-   report the `ANNOUNCED_BANS` entries as redundant: delete them, then check the next day's refresh is green and
-   finishes inside 40 minutes. Then re-read the field (`scripts/rift meta --since 2026-11-23`) before any matchup advice.
-3. **Two report-only tests are red on drifted data:** `lib/infer.test.mjs` (Kha'Zix's top two no longer include
-   isolation; red in CI) and `lib/engines.test.mjs` (Riven reads no exhaust engine, because it applies the announced
-   bans early and drops 99% of Riven lists for Broken Blade; red locally). Re-derive both expectations after the 23rd.
-   Until 21 Nov the CI step couldn't name a failing file (it now uses TAP), so watch the run summary.
+2. **Radiance bans live since 2026-11-23 (done that day):** `ANNOUNCED_BANS` emptied (upstream flags all ten; 22 Constructed
+   bans, `banned.json` unchanged). **Next:** check the 24 Nov refresh is green and finishes inside 40 minutes. The post-ban
+   field is 2 lists so far (`scripts/rift meta --since 2026-11-23`); no matchup advice from it until after 29-30 Nov.
+3. **Drifted tests settled (23 Nov):** `infer.test` passes again. `engines.test`: Pyke and Renekton read right now and are
+   off KNOWN_MISSES; Riven (71 of 957 lists left legal) and Irelia (37 of 428) are on it as TEMPORARY. After 29-30 Nov,
+   re-read both entries in `docs/archetypes.md` from post-ban lists and take them off.
 4. **Sim gaps still open** (README, "Keywords the sims do not read"): Trinity Force's hold point and other conquer/hold
    strips, Level/Hunt, Weaponmaster, Quick-Draw, Legion. `scripts/rift fight` can't take gear yet, and its comma split
    breaks champion names ("Rengar, Trophy Hunter").
