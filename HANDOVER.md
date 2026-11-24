@@ -36,6 +36,15 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 
 ## Next
 
+0a. **Swap calibration: the deckbuilding test** (24 Nov evening).
+   - `rift calibrate --swaps --write` (9cc2831) asks whether the model ranks one-card swaps the way good finishes do.
+     Per legend with 80+ placed lists, a card's lift is its copies in good finishes minus the rest; the base is the
+     typical good finish; 8 swaps per legend, 240 games each.
+   - The first full run was cut short by the end of the session (Riven done). Re-run it, about 50 minutes, and read
+     the Swaps section it writes to docs/model-calibration.md.
+   - Swaps correlate (r's interval above 0): trust `search` for Sivir, and the from-scratch builder (`rift build`,
+     plan in Jay's 24 Nov plan, phase 2) can go ahead.
+   - They don't: trace the disagreeing swaps' games and fix the model there.
 0. **Make the model track real results.** Done 24 Nov:
    - Fiora's crash fixed (Sett 15% → 43%); solver errors are reported and gated.
    - Budget tested: 150 nodes stays (600 and 2000 are worse).
