@@ -29,7 +29,7 @@ In the app as **`Sivir Is Trying Her Best`** (Battle Mistress, Body/Chaos). Read
 - **Units (22):** Sivir (Champion Zone) · Irresistible Faefolk ×3 · Evelynn, Entrancing · Bedeviling Stranger ×2 ·
   Tideturner ×2 · Reckless Innovator ×3 · Ezreal, Prodigy ×2 · Nidalee, Cat Form ×3 · Ember Monk · Vex, Apathetic ×2 ·
   Rengar, Trophy Hunter ×2
-- **Spells (16):** Punch First ×3 · On the Hunt ×3 · Gust ×2 · Rebuke ×2 · Star-Crossed ×2 · Rampage ×2 · Switcheroo ·
+- **Spells (16):** Punch First ×3 · Ride the Wind ×3 · Gust ×2 · Rebuke ×2 · Star-Crossed ×2 · Rampage ×2 · Switcheroo ·
   Existential Dread
 - **Gear (2):** Boots of Swiftness (+2 Might and **Ganking**) · Edge of Night
 - **Runes:** 6 Body / 6 Chaos (checked after every change; colour misses t3 about 6% / 3%).
@@ -49,7 +49,7 @@ going for both battlefields is right only when the terminal scan says it wins th
 - **Closing turn (start on 6 holding A):** the hold makes 7 → Faefolk walks into A and pulls B's defender in (it
   attacks; they have focus first) → a face-down Stranger bounces it or Existential Dread stuns it → Sivir with
   Accelerate walks into the empty B → 8. Backups: a holder wearing Boots walks A → B (Ganking; their Vex only stuns
-  units played that turn), and **On the Hunt** (21 Nov: ready Sivir after one conquest, she ganks into the other; wins from 6). **Not Rengar** (corrected 21 Nov): his Ambush reaches a battlefield
+  units played that turn), Ride the Wind. **Not Rengar** (corrected 21 Nov): his Ambush reaches a battlefield
   with your units or with enemy units, and the emptied B has neither, so he can only come down at base, exhausted
   (§355.2.a, §822.1.b, §822.1.d, §822.3). He's a B option only while their unit is still there.
 - **Recital (after a loss):** every hold sends their lone B defender home; walk in and conquer: two points a turn.
@@ -75,7 +75,7 @@ Jay is happy with the list; it stays locked.
 
 ## Ready swaps, only if the logs call for them
 
-- **Card draw or Power keeps biting:** (Ride the Wind is out since 21 Nov) a cheap slot TBD from `decklab/sivir-tune.md`, +1 **Kinkou Initiate**
+- **Card draw or Power keeps biting:** −1 Ride the Wind (the cheapest cut on the bench), +1 **Kinkou Initiate**
   (0 Power, a body, usually draws; Jay owns 5). Alternatives in the same slot: Ezreal #3 (best draw on the bench,
   Jay owns 2) or The Good Stuff (draws 3 every hold; cut when a reviewer doubted the holds; game 1 held both).
 - **Power still tight after that:** one Rebuke (it won Ekko game 1 on 3 Nov, so the bar to cut it is higher now), but it's the answer to their Vex (local Vex and Diana run her), so
@@ -125,8 +125,8 @@ row in the worksheet's games table.
 - **The pull starts a fight at once, and they have focus first** (§323.12, §466.2.c.1.a). A surviving defender sends
   their unit to *their* base (§468.1.a.2), so B stays empty either way.
 - **Vex, Apathetic stuns any unit the opponent plays while she's at a battlefield**, anywhere.
-- **On the Hunt is not an Action** (in for Ride the Wind, 21 Nov): main phase only, never in a showdown. Ride the
-  Wind's mid-showdown reinforcement is gone from the deck.
+- **Ride the Wind is an Action, so it plays in their showdowns too:** it belongs in both camps (it reinforces A and
+  can make Stranger's count of 4). It can't answer a spell on the chain (that takes a Reaction).
 - **Battlefields are placed before turn order;** the previous game's loser picks the seat after seeing both.
 - **Baron Nashor can't be chosen:** nothing in the deck pulls, bounces or kills him. Win by holding at 7.
 - **A card played from face down ignores its whole cost** (§811.1.b). Hiding it costs one Power of any colour (Gold

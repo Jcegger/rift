@@ -24,8 +24,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 
 ## Next
 
-0. **Sivir (21 Nov):** −3 Ride the Wind +3 On the Hunt is **live** (row backed up; guides, sheets, brief updated;
-   reMarkable pushed). Two tracks for Jay to read: `decklab/sivir-tune.md` (hold; first candidate −1 Ember Monk
+0. **Sivir (24 Nov):** back to Jay's earlier list (−3 On the Hunt +3 Ride the Wind; sideboard −Repulse +Acceptable
+   Losses), **live** (row backed up; guide, sheets, brief and worksheet log updated; reMarkable pushed). Jay: changes
+   later, judged with the rebuilt system. (21 Nov the swap had gone the other way.) Two tracks for Jay to read: `decklab/sivir-tune.md` (hold; first candidate −1 Ember Monk
    +1 Ezreal) and `decklab/sivir-brew.md` ("Bounty Board": 3 Graves main, a kill engine; new deck, low confidence,
    loses on answers). Decide after the first post-ban weekend (29–30 Nov) and games. Deck work goes through the
    `deck-build` skill (`docs/deckbuilding-theory.md` added 21 Nov). **RiftLite win rates** are a daily source

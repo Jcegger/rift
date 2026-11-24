@@ -35,7 +35,7 @@ date: 2026-11-02
 | ▢ | **Ember Monk** | OGN-167 |  |
 | ▢ ▢ | **Gust** | OGN-169 |  |
 | ▢ ▢ | **Rebuke** | OGN-172 |  |
-| ▢ ▢ ▢ | **On the Hunt** | SFD-204 | Body/Chaos; in for Ride the Wind, 21 Nov |
+| ▢ ▢ ▢ | **Ride the Wind** | OGN-173 |  |
 | ▢ ▢ | **Tideturner** | OGN-199 |  |
 | ▢ | **Boots of Swiftness** | SFD-133 |  |
 | ▢ | **Edge of Night** | SFD-139 |  |
@@ -58,7 +58,6 @@ date: 2026-11-02
 | ✓ | card | set no. | notes |
 |---|---|---|---|
 | ▢ ▢ | **Unyielding Spirit** | OGN-145 |  |
-| ▢ | **Repulse** | UNL-106 |  |
 | ▢ | **Sabotage** | OGN-156 |  |
 | ▢ ▢ | **Ruin Runner** | SFD-105 |  |
 | ▢ ▢ | **Graves, Blasting Through** | RAD-085 |  |
@@ -67,6 +66,7 @@ date: 2026-11-02
 
 | ✓ | card | set no. | notes |
 |---|---|---|---|
+| ▢ | **Acceptable Losses** | OGN-179 |  |
 | ▢ | **Ravenbloom Prefect** | VEN-102 |  |
 | ▢ | **An Offer You Can't Refuse** | RAD-101 |  |
 

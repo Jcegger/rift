@@ -621,6 +621,14 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   did you miss a showdown Ride the Wind. Row backed up (`backups/state-pre-onthehunt-2026-11-21.json`). Comprehensive
   tune plan: `decklab/sivir-tune.md`.
 
+- **24 Nov 2026, back to the earlier list: −3 On the Hunt +3 Ride the Wind; sideboard −Repulse +Acceptable Losses**
+  (Jay: "make my old one the current sivir deck. we can work on changes later now that our system is better"). This undoes
+  the 21 Nov and 13 Nov swaps; the guide (§1, §6, §8, §9 rows), both sheets and the brief are back to those texts, with
+  the Radiance ban note on §9 kept. Bench (`rift try`, goldfish): two units by t3 on the play 95 → 99%, colour misses t3
+  5 → 4%, Energy turns 1–4 15.2 → 15.9; Defy-counterable spells expected 2.6 → 3.7. Changes are now to be judged with the
+  rebuilt system (the turn solver plays every card's text; model games run on it since 24 Nov). Row backed up
+  (`backups/state-pre-ridethewind-2026-11-24.json`).
+
 ### Games (the locked trap list, 1 Nov 2026)
 
 | # | date | vs | seat | battlefields (mine / theirs) | result | how | failure type | trap | notes |

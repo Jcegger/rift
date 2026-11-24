@@ -29,9 +29,7 @@ date: 2026-11-02
 
 **Breaks the close:** their Vex · Gust or Star-Crossed on Stranger · Not So Fast · Moonfall / Hidden Blade / Rebuke on Sivir in B · **Baron** (can't be pulled or bounced; with the Pit out, **win by holding at 7**).
 
-**Against Defy.** Safe: Punch First, Rebuke, Switcheroo, On the Hunt, every unit. Counterable: Gust, Rampage, Star-Crossed, Existential Dread.
-
-**On the Hunt (21 Nov):** your main phase only (not an Action). After Sivir conquers one battlefield, On the Hunt readies her (its 2 Power also switches her on: +2, Ganking) and she ganks into the other: both scored, so it wins from 6.
+**Against Defy.** Safe: Punch First, Rebuke, Switcheroo, every unit. Counterable: Ride the Wind, Gust, Rampage, Star-Crossed, Existential Dread.
 
 **Star-Crossed rebuy:** return your own Ezreal (draw 2 again), Innovator or Faefolk with their unit.
 
@@ -46,13 +44,13 @@ date: 2026-11-02
 | **Rengar** (best) | keep two at A (his Faefolk pulls); your Vex stuns his Ambush; Graves in |
 | **LeBlanc** | bait Deathgrip / Sacrifice before Stranger; Graves ×2 in, Rampage out |
 | **Kai'Sa** | she won't attack A; Smoke Screen + Hextech Ray kills Sivir, so close with Unyielding Spirit in hand; not Rockfall as A; Unyielding Spirit ×2 + Sabotage in |
-| **Vex Gloomist** (bad) | Rebuke her Vex first; race to hold at 7; Repulse + Sabotage + Ruin Runner in, Rampage ×2 + Stranger out |
-| **Diana** (worst) | Gust on Stranger, Moonfall on Sivir: make her spend first; Ruin Runner ×2 + Repulse in, Stranger ×2 + Rampage out |
-| **Riven** | race before Baron (Rebuke the first Heron); once he's out, win by holding at 7; two holders vs Blitzcrank; Offer for her Blade, Ruin Runner ×2 in; Rampage out |
+| **Vex Gloomist** (bad) | Rebuke her Vex first; race to hold at 7; Sabotage + Ruin Runner in, Rampage out |
+| **Diana** (worst) | Gust on Stranger, Moonfall on Sivir: make her spend first; Ruin Runner ×2 in, Stranger ×2 out |
+| **Riven** | race before Baron (Rebuke the first Heron); once he's out, win by holding at 7; two holders vs Blitzcrank; Offer + Acceptable Losses for her Blade, Ruin Runner ×2 in; Rampage out |
 | **Kennen / Evelynn** | Rampage is clean; Ruin Runner in; take Evelynn's battlefield to trash her face-down cards |
 | **Ziggs / Akali** | Unyielding Spirit ×2 in |
 | **Lillia** | Unchecked Power wipes battlefields: one hold, two at A, rest in hand; ignore Sprites; Ruin Runner in |
-| **Gear decks** (and Riven's Blade) | Offer, Prefect in; **only Prefect against Ziggs's Bombs** |
+| **Gear decks** (and Riven's Blade) | Offer, Acceptable Losses, Prefect in; **only Prefect against Ziggs's Bombs** |
 
 **By archetype.** Default slow: one hold, let them come to A. **Race Baron decks and Ramp.** Aggro: defend, then hold. Tempo: make them spend first. Control: they won't attack A, so pull and race to 7.
 

@@ -35,7 +35,7 @@ date: 2026-11-02
 | **Punish them at A** | Bedeviling Stranger ×2 · Existential Dread · Switcheroo · Edge of Night · Tideturner ×2 · Punch First ×3 · Nidalee ×3 and Rengar ×2 (Ambush) · Vex ×2 |
 | **Hold A** | the two-drops (8 two-drop units, all Power-free) · Ember Monk (+2 whenever you flip a face-down card) · Boots of Swiftness and Edge of Night (+2 Might for good) |
 | **Clear the way** | Rampage ×2 · Rebuke ×2 · Gust ×2 · Star-Crossed ×2 |
-| **Close at B** | Sivir · On the Hunt ×3 (ready her after one conquest; she ganks into the other) · Boots of Swiftness (Ganking: a holder walks A → B) |
+| **Close at B** | Sivir · Ride the Wind ×3 · Boots of Swiftness (Ganking: a holder walks A → B) |
 | **Cards** | Ezreal ×2 · Innovator ×3 · Nidalee |
 
 **Four rules for every game.**
@@ -66,7 +66,7 @@ date: 2026-11-02
 | | Rengar, Trophy Hunter ×2 | 5E 1P | 6 Might, **Ambush**, and can be played where only enemy units are |
 | **Spells** | Punch First ×3 | 1E 2P | +5 Might this turn; Action |
 | | Gust ×2 | 1E | return a unit at a battlefield with 3 Might or less; Reaction |
-| | On the Hunt ×3 | 1E 2P | ready your units; Sivir's signature; main phase only (not an Action); 2 Power, so Defy can't counter it |
+| | Ride the Wind ×3 | 2E 1P | move a friendly unit and ready it, battlefield to battlefield; Action |
 | | Rebuke ×2 | 2E 2P | return a unit at a battlefield to hand; Action |
 | | Switcheroo | 2E 2P | Hidden, Action: swap the Mights of two units at one battlefield |
 | | Existential Dread | 1E 1P | Action: stun an attacking enemy unit; if it's already stunned, return it to hand. Repeat: 2 Energy (1 with Ezreal) |
@@ -77,7 +77,7 @@ date: 2026-11-02
 | **Runes** | 6 Body · 6 Chaos | | §7 |
 | **Battlefields** | Sigil of the Storm · Amateur Recital · Forbidding Waste | | §8 |
 
-**Sideboard (10):** Ruin Runner ×2 · Graves, Blasting Through ×2 · Ravenbloom Prefect · An Offer You Can't Refuse · Repulse · Sabotage · Unyielding Spirit ×2.
+**Sideboard (10):** Ruin Runner ×2 · Graves, Blasting Through ×2 · Ravenbloom Prefect · Acceptable Losses · An Offer You Can't Refuse · Sabotage · Unyielding Spirit ×2.
 
 **Shape:** 22 units, 16 spells, 2 gear. Post-Radiance midrange averages 21.6 / 13.5 / 4.9 (1,101 legal lists since 23 October; top-quarter finishes 22.2 / 13.0 / 4.8). **8 two-drop units**, all Power-free; the field's midrange average is 6.8.
 
@@ -89,7 +89,6 @@ date: 2026-11-02
 - **30–31 October:** Jay's own rebuild around displacement (Faefolk, Ride the Wind); a three-reviewer audit; battlefields re-picked from all 71 legal ones.
 - **31 October, the pros:** two experienced players said the deck can't win early fights; **play midrange, win on interaction on turns 3–4, carry top end that doesn't need Sivir alive, 8–9 cheap two-drops.** Nidalee ×3, Vex ×2, Gust ×2 in; Nilah out.
 - **1 November, the trap:** −2 First Mate +2 Bedeviling Stranger, then −Portable Portal +The Good Stuff, then −2 Fizz −2 Staunch +2 Edge of Night +2 Tideturner (two experienced players: Fizz left the deck "with its foot in two camps", and Staunch wasn't a good two-drop), and last −1 Edge +1 Boots of Swiftness, −1 Switcheroo +1 Existential Dread, −The Good Stuff +Ember Monk (a reviewer doubted the deck holds well enough to feed The Good Stuff). Both cards had been cut on 31 October *for needing a held battlefield*; under the midrange plan that became the reason to play them. Punch First ×3, Ride the Wind ×3 and Rampage were questioned and kept on purpose; Staunch, Fizz, The Good Stuff, one Edge and one Switcheroo went in the later rounds (worksheet log).
-- **21 November:** −3 Ride the Wind +3 On the Hunt, Sivir's signature: the double conquest as a second close that Defy can't counter (worksheet log).
 
 ---
 
@@ -134,9 +133,7 @@ Checked step by step against the rules on 1 November (handbook → verbatim → 
 
 **At 5 holding A:** hold → 6, conquer the empty B → 7, and the next start-of-turn hold wins.
 
-**The double conquest (21 Nov):** Sivir conquers one battlefield, On the Hunt readies her (its 2 Power switches her on: +2 Might, Ganking), she ganks into the other and conquers it. Both are scored this turn, so the 8th point counts (§473.1.b.1): from 6 it wins with no hold. Main phase only: On the Hunt can't be cast in a showdown.
-
-**Other second conquests** if Sivir is answered: Rengar by Ambush (only where their units still are), a holder wearing Boots.
+**Other second conquests** if Sivir is answered: Rengar by Ambush (even where only enemy units are), Ride the Wind (moves and readies, even in a showdown).
 
 **What breaks it** (have an answer before you start):
 - **Their Vex, Apathetic** at any battlefield: Sivir and any Faefolk played that turn are stunned and can't move. **Rebuke her first** (her Deflect makes it 3 Power, which turns on Sivir's condition by itself).
@@ -144,7 +141,7 @@ Checked step by step against the rules on 1 November (handbook → verbatim → 
 - **Answers to Sivir in B's showdown:** Rebuke, Hidden Blade, Moonfall, Star-Crossed, Siren's Song. Gust can't (she's 6).
 - **Baron Nashor** can't be pulled or bounced, and **the Baron Pit** is a third battlefield: a conquest for the 8th point would need it scored too (this repo's reading, not a staff ruling). **Against Baron, win by holding at 7.**
 
-**Sequencing against Defy** (counters a spell of 4 Energy or less and 1 Power or less, printed cost, §206): **safe:** Punch First, Rebuke, Switcheroo, On the Hunt, every unit; **counterable:** Gust, Rampage, Star-Crossed, Existential Dread. Against Calm, close with units and the 2-Power spells.
+**Sequencing against Defy** (counters a spell of 4 Energy or less and 1 Power or less, printed cost, §206): **safe:** Punch First, Rebuke, Switcheroo, every unit; **counterable:** Ride the Wind, Gust, Rampage, Star-Crossed, Existential Dread. Against Calm, close with units and the 2-Power spells.
 
 **Ezreal's discount on Sivir:** take the **Energy** off her Accelerate, not the rune. A Power cost reduced to 0 isn't spent (§445.1.b), and she'd lose her +2 and Ganking.
 
@@ -195,7 +192,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 **Irresistible Faefolk** ×3 (2E · 1 Might). *When I move to a battlefield, you may move an enemy unit to that battlefield.*
 - **Job:** empties B on the closing turn by dragging its defender into A, where your tricks are.
-- **Use:** any move triggers it, including an ordinary walk from base, so it can wait at base. A card's move counts too: a face-down **Tideturner** at A swapping with a Faefolk in base moves Faefolk to A, which is a pull at Reaction speed, on their turn as well. The pull chooses, so Baron and "can't be chosen" units are immune. Keep one in base from turn 4.
+- **Use:** any move triggers it, including an ordinary walk from base, so it can wait at base. A card's move counts too: a face-down **Tideturner** at A swapping with a Faefolk in base moves Faefolk to A, which is a pull at Reaction speed, on their turn as well; so does **Ride the Wind**. The pull chooses, so Baron and "can't be chosen" units are immune. Keep one in base from turn 4.
 - **Example (vs Rengar):** you hold A with Tideturner and a face-down Stranger; Rengar holds B with one Pit Rookie. On your turn Faefolk walks into A and pulls the Rookie in. A fight starts at A, Rengar attacking with the Rookie, and he has focus first: he plays Thrill of the Hunt (2E 1P) to banish the Rookie and replay it at B. B had gone uncontrolled after the pull, so the replayed Rookie **conquers B and scores him a point on your turn** (§323.5, §348.2.a.1). **The lesson:** against Rengar (Thrill in 94% of lists), pull when he can't pay 2 Energy and 1 Power, or when his point doesn't matter.
 - **Who attacks depends on who controls the battlefield.** Faefolk walking into an *uncontrolled* battlefield contests it, so **you attack** and the unit you pull defends (§190.3.a.1, §466.2.c.1; [Riftbound FAQ](https://www.riftboundfaq.com/cards/irresistible-faefolk)). Walking into A, which you control, makes the pulled unit the attacker. Playing Faefolk straight to a battlefield doesn't trigger it: that's a zone change, not a move (§448.2). Removing Faefolk in response doesn't stop the pull: the trigger already knows where it moved.
 - **More ways to use it** (3 Nov 2026; Jun's notes, r/riftboundtcg, rules checked here):
@@ -275,10 +272,9 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 ### Close at B
 
-**On the Hunt** ×3 (1E 2P · Sivir's signature; in for Ride the Wind ×3 on 21 Nov). *Ready your units.*
-- **Job:** the double conquest. Sivir conquers one battlefield, On the Hunt readies her, she ganks into the other. Its 2 Power is Sivir's "spent 2 Power" by itself, and Gold pays it. Defy can't counter it (2 Power).
-- **Limits:** not an Action, so it's your main phase only: no showdown tricks (Ride the Wind's old job of reinforcing mid-showdown is gone). It readies everything, so a holder at A can also walk again.
-- **Bench (`rift try`, 21 Nov):** Mercenary on 26/34/38 → 34/41/44%; Defy-counterable spells 4.6 → 3.2; two units by t3 on the play 98 → 94%; answers on their turn unchanged.
+**Ride the Wind** ×3 (2E 1P · Action). *Move a friendly unit and ready it.*
+- **Job:** a second unit into B, or a holder out of trouble, from any battlefield to any battlefield, even mid-showdown (§451.1).
+- **Example (vs Kennen, no Defy in 10%+ of his lists):** Kennen Star-Crosseds Sivir as she walks into B. In B's showdown, Ride the Wind your Nidalee from A to B (a card's move needs no Ganking, and it's readied too): the showdown closes with your unit there, conquer. **Check A first:** if Nidalee was your last unit there, A goes uncontrolled and your face-down card there is trashed (§323.5, §323.6.a).
 
 ### Hold A
 
@@ -312,7 +308,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 - **Ruin Runner ×2** (6E · Body). *I can't be chosen by enemy spells and abilities.* The A holder they can't Gust, Moonfall, Rebuke, Star-Crossed, Charm or Blitzcrank away. It doesn't need to act; it needs to stay. **Example (vs Diana):** with Ruin Runner at A, her Moonfall and Gust have nothing there to aim at.
 - **Graves ×2** (5E 1P · Body). *When I attack or defend, deal damage equal to my Might to all enemy units here.* Defending at A wipes a wide attack; defending needs no readying.
-- **Repulse** (1E 1P · Body · Reaction). *Choose a friendly unit at a battlefield. Counter an enemy spell or ability that chooses it and no other friendly unit.* In for Acceptable Losses after the Radiance ban (13 Nov): the gear hate was there for Riven's Blade and Zhonya's, and Zhonya's is banned. **Example (vs Diana):** she Moonfalls Sivir out of B; Repulse on Sivir counters it. Also her Gust on Stranger, and Vex's Back Off on your attacker, which Sabotage can't reach once it's hidden.
+- **Acceptable Losses** (1E · Chaos · Action). *Each player kills one of their gear.* You pick yours: cast it with no gear out, or with only a Gold, or before you equip Boots or Edge. **Example (vs Orianna):** her only gear out is The Ball; it dies, and you lose nothing.
 - **An Offer You Can't Refuse** (2E · Chaos · Action). *Kill a gear. Its controller plays a Gold.* You pick: Riven's Blade of the Exile (89% of her lists), The Ball, Gutter Palace.
 - **Ravenbloom Prefect** (3E · Chaos). *When an opponent plays a gear, you may banish me to banish it.* **Against Ziggs, use this, not the two spells:** a Bomb that dies deals 2 to your unit; a banished one doesn't die.
 - **Sabotage** (1E 1P · Body). *They reveal their hand; you recycle a non-unit card.* Takes Back Off, Switcheroo or Time Warp before it's hidden or cast.
@@ -376,7 +372,7 @@ Stranger alone is there about half the time, but with Existential Dread you have
 | **Graves ×2** | Rengar, LeBlanc, Seraphine, Master Yi | defends A against a flood: his Might to every enemy there when he defends |
 | **Unyielding Spirit ×2** | Kai'Sa, Ziggs, Orianna, Akali | prevents all spell and ability damage this turn (Bombs, pings, Hextech Ray on Sivir, Frozen Fortress) |
 | **An Offer You Can't Refuse** | Riven, Orianna, Jayce, Azir, Jarvan IV, Ornn | kills the gear you pick (they get a Gold) |
-| **Repulse** | Diana, Vex Gloomist | counters the one spell that chooses your key unit: Moonfall or Gust in B, Back Off on your attacker |
+| **Acceptable Losses** | Riven, Orianna, Jayce, Azir, Jarvan IV, Ornn | each player kills one of their gear: cast it when yours would be a Gold or nothing |
 | **Ravenbloom Prefect** | Ziggs, Orianna, Jayce, Azir, Jarvan IV, Ornn | banishes a gear as it is played (use it, not the spells, against Bombs) |
 | **Sabotage** | Kai'Sa, Vex Gloomist, Seraphine, Kennen | takes Back Off, Switcheroo or Time Warp out of their hand before they hide or cast it |
 
@@ -405,7 +401,7 @@ What comes out depends on the matchup: §9's table has the exact ins and outs.
 |---|---|
 | **Fights** | the trap's best case. Punch First *after* their pump, never before. Rampage is clean without Calm |
 | **Movement** | they move your holders (Charm, Blitzcrank, their Faefolk): **keep two at A**, or the face-down card is trashed. Your Vex stuns their Ambush units |
-| **Gear** | gear removal in (Offer, Prefect; **only Prefect against Ziggs's Bombs**); your Boots and Edge are targets: out |
+| **Gear** | gear removal in (Offer, Acceptable Losses, Prefect; **only Prefect against Ziggs's Bombs**); your Boots and Edge are targets: out |
 | **Go-wide** | Stranger's 4 units come easily; Graves ×2 in; one bounce won't stop a wide swing |
 | **Card flow** | press before the engine pays off (Kennen's Rhasa); Sabotage in |
 | **Spells** | sequence around Defy (Dread is counterable); Unyielding Spirit against burn on Sivir |
@@ -421,16 +417,16 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 
 | opponent | lists (vouched) | what matters | plan | in | out |
 |---|---|---|---|---|---|
-| **Rengar** (local; best) | 63 (31) | the widest deck; walks into A; no Gust, Star-Crossed, Defy or Not So Fast in 10%+ of lists. Thrill of the Hunt 94%; **his Faefolk 90% pulls your holders**; Brynhir 22% | keep two at A; your Vex stuns his Ambush units; Rampage is clean | Graves ×2 | Rebuke |
+| **Rengar** (local; best) | 63 (31) | the widest deck; walks into A; no Gust, Star-Crossed, Defy or Not So Fast in 10%+ of lists. Thrill of the Hunt 94%; **his Faefolk 90% pulls your holders**; Brynhir 22% | keep two at A; your Vex stuns his Ambush units; Rampage is clean | Graves ×2 | Rebuke, Ride the Wind |
 | **LeBlanc** (local) | 57 (20) | wide and attacks; fears bounce, but Deathgrip and Sacrifice (89% each) make it miss; Hidden Blade 84% | bait Deathgrip and Sacrifice before the Stranger turn; bounce, don't kill | Graves ×2 | Rampage ×2 |
 | **Kai'Sa** (local) | 93 (37) | won't attack A; kills holders from range; Frozen Fortress 89% kills Faefolk; Rockfall Path 90%; Brynhir 95%. **Smoke Screen (−4, 97%) then Hextech Ray (3) kills a 6-Might Sivir**; no single card does | keep Faefolk in base; never make Rockfall your A; close with Unyielding Spirit held | Unyielding Spirit ×2, Sabotage | Stranger ×2, Rampage |
-| **Vex, Gloomist** (local; bad) | 79 (22) | holds, won't walk into A; **her Vex 96% stuns Sivir**; Back Off 91%; Defy, Discipline | Rebuke her Vex first; race to hold at 7 | Repulse, Sabotage, Ruin Runner | Rampage ×2, Stranger |
-| **Diana** (local; worst) | 41 (12) | answers in every fight: **Gust 100% on Stranger, Moonfall 100% on Sivir**; Vex 83%; Hard Bargain 76% | make her spend first; Gust her 2–3-Might bodies; Ruin Runner holds A against Gust and Moonfall; Repulse saves Sivir in B | Ruin Runner ×2, Repulse | Stranger ×2, Rampage |
-| **Riven** | 197 (94) | **Baron 54%** (can't be pulled or bounced; the Pit is a third battlefield); her Stranger 85%; Blitzcrank 71%; Defy 93% | race before Baron (Rebuke the first Heron); once he's out, win by holding at 7; two holders at A; kill her Blade | An Offer You Can't Refuse, Ruin Runner ×2 | Rampage ×2, Faefolk |
+| **Vex, Gloomist** (local; bad) | 79 (22) | holds, won't walk into A; **her Vex 96% stuns Sivir**; Back Off 91%; Defy, Discipline | Rebuke her Vex first; race to hold at 7 | Sabotage, Ruin Runner | Rampage ×2 |
+| **Diana** (local; worst) | 41 (12) | answers in every fight: **Gust 100% on Stranger, Moonfall 100% on Sivir**; Vex 83%; Hard Bargain 76% | make her spend first; Gust her 2–3-Might bodies; Ruin Runner holds A against Gust and Moonfall | Ruin Runner ×2 | Stranger ×2 |
+| **Riven** | 197 (94) | **Baron 54%** (can't be pulled or bounced; the Pit is a third battlefield); her Stranger 85%; Blitzcrank 71%; Defy 93% | race before Baron (Rebuke the first Heron); once he's out, win by holding at 7; two holders at A; kill her Blade | An Offer You Can't Refuse, Acceptable Losses, Ruin Runner ×2 | Rampage ×2, Faefolk, Evelynn |
 | **Evelynn** | 175 (33) | Last Caress 41% puts her face-down card on any battlefield; Switcheroo, Star-Crossed, Vex | take her battlefield: it trashes her face-down cards; Rampage is clean | Ruin Runner | Edge of Night |
 | **Ziggs** | 108 (14) | Bombs deploy at A and hit your holders when they die; Detonate 89% kills your Boots and Edge | keep holders healthy; gear spells kill Bombs into damage, so Prefect banishes | Unyielding Spirit ×2, Prefect | Boots, Edge of Night, Rampage |
-| **Seraphine** | 107 (24) | a wide Raucous Anthem turn; Imperial Decree; Hidden Blade on Sivir | one bounce won't stop a wide swing | Graves ×2, Sabotage | Rampage ×2 |
-| **Orianna** | 106 (29) | few units; The Ball deals 2 to your units; Gravity Field taxes Sivir's walk | hold her Deploy battlefields | An Offer You Can't Refuse, Prefect, Unyielding Spirit | Rampage, Stranger ×2 |
+| **Seraphine** | 107 (24) | a wide Raucous Anthem turn; Imperial Decree; Hidden Blade on Sivir | one bounce won't stop a wide swing | Graves ×2, Sabotage | Rampage ×2, Ride the Wind |
+| **Orianna** | 106 (29) | few units; The Ball deals 2 to your units; Gravity Field taxes Sivir's walk | hold her Deploy battlefields | An Offer You Can't Refuse, Acceptable Losses, Prefect, Unyielding Spirit | Rampage ×2, Stranger ×2 |
 | **Kennen** | 102 (53) | Star-Crossed 92%, Switcheroo 88%, Gust 83%; An Offer You Can't Refuse 54% kills your Boots or Edge | press before Rhasa gets cheap; Rampage is clean | Sabotage, Ruin Runner | Edge of Night, Stranger |
 | **Mordekaiser** | 99 (25) | walks into A with big units; deaths feed him | bounce, don't kill | Ruin Runner | Rampage |
 | **Akali** | 75 (33) | Not So Fast and Blitzcrank 76% each; pings kill Faefolk; Defy 99% | hold Faefolk until the closing turn | Unyielding Spirit ×2, Ruin Runner ×2 | Rampage ×2, Faefolk ×2 |
@@ -438,8 +434,8 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 | **Master Yi (Bladesman)** | 50 (18) | Ruin Runner 72% at B can't be pulled; Charm 90% moves your holder; Scuttle Crab 74% | Forbidding Waste against his lone defender; a pulled defender loses his +2 | Graves | Rampage |
 | **Irelia** | 38 (9) | Not So Fast and Charm 76%; Twilight Shroud; Vex 61%; Scuttle Crab 84% | close when she's tapped out | Ruin Runner ×2 | Rampage ×2 |
 | **Lillia** | 61 (28) | **Unchecked Power (40/61): 12 to everything at battlefields**; Defy 58/61, Discipline; Charm 58/61 moves your holder; Temporary 3-Might Sprites die on their own | **one hold, two units at A, the rest in hand**; don't spend removal on Sprites; close with units and 2-Power spells (Defy can't touch them); go for both battlefields only when it wins that turn | Ruin Runner | Rampage |
-| **Jayce** | 30 (11) | about 4 units; the trap barely matters | race; kill Gutter Palace | An Offer You Can't Refuse, Prefect | Stranger, Evelynn |
-| **Azir, Jarvan IV, Ornn** (gear decks) | 71, 59, 35 | five or more gear pieces in nearly every list (Azir: Brutalizer, Eye of the Herald, B.F. Sword, Doran's Shield) | kill the equipment that matters, not the first one | An Offer You Can't Refuse, Prefect | Edge of Night |
+| **Jayce** | 30 (11) | about 4 units; the trap barely matters | race; kill Gutter Palace | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger ×2, Evelynn |
+| **Azir, Jarvan IV, Ornn** (gear decks) | 71, 59, 35 | five or more gear pieces in nearly every list (Azir: Brutalizer, Eye of the Herald, B.F. Sword, Doran's Shield) | kill the equipment that matters, not the first one | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger, Ride the Wind, Edge of Night |
 
 ### The trap's best and worst
 
@@ -505,7 +501,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 | §473.1.a.1, §473.1.b.1 | a hold at 7 wins; a conquest for the 8th point needs every battlefield scored this turn |
 | §206 | Defy reads the printed cost: 2-Power spells are out of reach |
 | §811.1.b, §811.1.d | one face-down card per battlefield you control; played free from the next turn on with Reaction; its choices pinned to that battlefield (Tideturner-style exceptions only): a face-down Stranger bounces only at its own battlefield |
-| §451.1, §466.2.c.3.a | a card's move has only the card's restrictions (any battlefield to any, mid-showdown too); a unit arriving mid-fight, by Ambush or a move, joins its side |
+| §451.1, §466.2.c.3.a | a card's move has only the card's restrictions (Ride the Wind: any battlefield to any, mid-showdown too); a unit arriving mid-fight, by Ambush or a move, joins its side |
 | §822 | Ambush: played as a Reaction to a battlefield where you have units |
 | §830.1.b | Deploy gear goes to any battlefield; it dies when an opponent **holds** there (a conquest alone doesn't kill it) |
 
