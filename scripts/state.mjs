@@ -93,7 +93,7 @@ function printClose(cb, ca, games) {
 }
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { fight } from "../lib/fight.mjs";
-import { solveTurn, breakers, closeReport, turnReads } from "../lib/turn.mjs";
+import { solveTurn, breakers, closeReport, turnReads, BOMB } from "../lib/turn.mjs";
 import { poolCoverage, compile, engineReads } from "../lib/cardtext.mjs";
 import { matchupLine } from "../lib/winrates.mjs";
 import { avoidedIn } from "../lib/avoid.mjs";
@@ -1769,7 +1769,10 @@ function cmdClose(cat, args) {
     const [us, them] = (opt("--score") || "0-0").split(/[-–/]/).map(Number);
     const runes = (opt("--runes") || "").split(",").map((x) => x.trim()).filter(Boolean).flatMap((x) => { const m = /^(\d+)\s+(\w+)/.exec(x); return m ? Array(Number(m[1])).fill({ d: m[2][0].toUpperCase() + m[2].slice(1).toLowerCase(), ready: true }) : []; });
     const [te, tp] = (opt("--their-budget") || "0/0").split("/").map(Number);
-    pos = { score: [us || 0, them || 0], ctrl, beginning: true, units, hand: list("--hand"), champ: opt("--cz") ? find(opt("--cz")) : null, gear: list("--gear"),
+    // Gear at base (--gear) and at a battlefield (--gear-a/-b/-pit; "Bomb" is a Bomb token).
+    const gearIn = (k) => items(k).map((x) => (/^bombs?$/i.test(x.trim()) ? { ...BOMB } : find(x)));
+    const gearOn = [["--gear", -1], ["--gear-a", 0], ["--gear-b", 1], ["--gear-pit", 2]].flatMap(([k, at]) => gearIn(k).map((g) => [g, at]));
+    pos = { score: [us || 0, them || 0], ctrl, beginning: true, units, hand: list("--hand"), champ: opt("--cz") ? find(opt("--cz")) : null, gear: gearOn.map((x) => x[0]), gearAt: gearOn.map((x) => x[1]),
       down: [[list("--down-a"), list("--their-down-a")], [list("--down-b"), list("--their-down-b")], ...(pit ? [[[], []]] : [])], runes, gold: Number(opt("--gold") || 0),
       their: { hand: list("--their"), budget: { e: te || 0, p: tp || 0 } } };
     pos.breakWith = list("--breakers");
@@ -1779,6 +1782,7 @@ function cmdClose(cat, args) {
     console.log('             --runes "4 Chaos, 3 Body" [--gold 1] [--down-a "<your face-down card>"] --their-a "…" --their-b "…" [--their-base "…"]');
     console.log('             [--their-down-b "…"] [--their "<their hand>"] [--their-budget E/P] [--breakers "<cards to try in their hand>"]   (Name* = exhausted; ";" between names with commas)');
     console.log('             [--pit ["<your units at the Baron Pit>"]] [--their-pit "…"] [--hold P]   (the Baron Pit on the board: a third battlefield)');
+    console.log('             [--gear-a "…"] [--gear-b "…"] [--gear-pit "…"]   (your gear at a battlefield; "Bomb" is a Bomb token)');
     return;
   }
   const r = solveTurn(pos);
