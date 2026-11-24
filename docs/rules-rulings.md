@@ -376,3 +376,21 @@ a unit, not a card.
    last unit of its controller leaves loses its controller (§323.5).
 4. **Invert Timelines' new hands are unknown.** The solver can't see the 4 cards they draw, so it keeps their known hand
    (it never credits the spell with stripping their tricks); our 4 are unknown too, so our hand is simply gone.
+
+## Turn solver premises (6): additional costs, Equip costs, Weaponmaster, Assault that sums
+
+**Date:** 2026-11-24
+**Source:** Derived in this repo from the Core Rules, for `lib/turn.mjs` and `lib/versus.mjs` (feature 6); no Riot staff ruling read.
+**Rules:** §355.1.a, §356.2, §821.1.c.6, §807.2, §823.2, §820.1
+**Expires:** when a Core Rules update changes additional costs, Weaponmaster, Assault, Shield or Hunt
+
+1. **Optional additional costs are chosen as the card is played** (§355.1.a) and added to its cost (§356.2). The solver
+   tries each: spending buffs, discarding, returning a gear, killing units, paying any amount of Power, exhausting the
+   legend, and applies what the card says paying it buys (a lower cost, a free spell, a bigger effect).
+2. **Weaponmaster** attaches one of our Equipment for its Equip cost reduced by {A}, ignoring Equip's timing, and the unit
+   isn't chosen (§821.1.c.6; handbook "Weaponmaster"). Every Equip cost form is read now ("[Equip] [e1]{Fury}" and the
+   rest), not only "[Equip] {Rune}".
+3. **Assault, Shield and Hunt sum across sources**: *"the Assault Value of all granted Assault keywords is summed"*
+   (§807.2, its example: Petty Officer's [Assault] plus Cleave's [Assault 3] is Assault 4); Hunt likewise (§823.2). Until
+   24 Nov the shared reader took the largest instance.
+4. **A Repeat paid by discarding** (Square Up) or granted by Temporal Portal executes the effect again (§820.1).

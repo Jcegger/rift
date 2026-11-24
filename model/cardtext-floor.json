@@ -2,5 +2,5 @@
   "note": "Hand-written floor for lib/cardtext.mjs coverage (rift cards --coverage), as shares of played copies in the legal pool. scripts/check.mjs fails below it. Raise it as readers land; lower it only when the card pool changed (a new set), and say so in the commit.",
   "set": "2026-11-23",
   "compiledCopies": 0.99,
-  "solverCopies": 0.97
+  "solverCopies": 0.98
 }
