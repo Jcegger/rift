@@ -81,7 +81,7 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   unknown conditions count as not met. Tests: `lib/cardtext.test.mjs`.
 - `lib/turn.mjs` - the turn solver (`scripts/rift close --score 6-5 --hold A --a "<your units at A>"
   --cz "Sivir, Mercenary" --hand "On the Hunt" --runes "4 Chaos, 3 Body" --their-b "…" [--their …]
-  [--their-budget E/P] [--breakers "…"]`; run `close` alone for every option): can this board win
+  [--their-budget E/P] [--breakers "…"] [--pit ["…"]] [--hold P]`, the Baron Pit as a third battlefield; run `close` alone for every option): can this board win
   this turn? Searches the whole Main Phase across both battlefields: holds first, standard moves
   (A ↔ B only with Ganking), unit plays with Accelerate, On the Hunt, Ride the Wind, main-phase
   removal (their Defy may counter), Boots, Faefolk's pull, Sivir, Mercenary's two Power; each

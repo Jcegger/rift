@@ -1749,8 +1749,9 @@ function cmdFight(cat, args) {
 
 // ── close: can this board win this turn? (lib/turn.mjs) ─────────────────────────
 // A position typed in from a real game. Units are comma-separated names (a name twice is two
-// copies); "Name*" is exhausted. Battlefields: A and B; --hold names the ones you control at the
-// start of your turn (they score first). Runes: "4 Chaos, 2 Body", all ready.
+// copies); "Name*" is exhausted. Battlefields: A and B, and the Baron Pit when it's on the board (--pit, with or
+// without units; --hold P); --hold names the ones you control at the start of your turn (they score first).
+// Runes: "4 Chaos, 2 Body", all ready.
 function cmdClose(cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   const { names, find } = cardFinder(cat);
@@ -1762,12 +1763,14 @@ function cmdClose(cat, args) {
     const add = (k, side, at) => { for (const x of items(k)) units.push({ card: find(x.replace(/\*$/, "")), side, at, ready: !/\*$/.test(x) }); };
     add("--a", 0, 0); add("--b", 0, 1); add("--base", 0, -1); add("--their-a", 1, 0); add("--their-b", 1, 1); add("--their-base", 1, -1);
     const hold = (opt("--hold") || "").toUpperCase();
-    const ctrl = [0, 1].map((b) => (hold.includes("AB"[b]) ? 0 : units.some((u) => u.side === 1 && u.at === b) ? 1 : null));
+    const pit = args.includes("--pit") || args.includes("--their-pit") || hold.includes("P");
+    if (pit) { const v = opt("--pit"); if (v && !v.startsWith("--")) add("--pit", 0, 2); add("--their-pit", 1, 2); }
+    const ctrl = (pit ? [0, 1, 2] : [0, 1]).map((b) => (hold.includes("ABP"[b]) ? 0 : units.some((u) => u.side === 1 && u.at === b) ? 1 : null));
     const [us, them] = (opt("--score") || "0-0").split(/[-–/]/).map(Number);
     const runes = (opt("--runes") || "").split(",").map((x) => x.trim()).filter(Boolean).flatMap((x) => { const m = /^(\d+)\s+(\w+)/.exec(x); return m ? Array(Number(m[1])).fill({ d: m[2][0].toUpperCase() + m[2].slice(1).toLowerCase(), ready: true }) : []; });
     const [te, tp] = (opt("--their-budget") || "0/0").split("/").map(Number);
     pos = { score: [us || 0, them || 0], ctrl, beginning: true, units, hand: list("--hand"), champ: opt("--cz") ? find(opt("--cz")) : null, gear: list("--gear"),
-      down: [[list("--down-a"), list("--their-down-a")], [list("--down-b"), list("--their-down-b")]], runes, gold: Number(opt("--gold") || 0),
+      down: [[list("--down-a"), list("--their-down-a")], [list("--down-b"), list("--their-down-b")], ...(pit ? [[[], []]] : [])], runes, gold: Number(opt("--gold") || 0),
       their: { hand: list("--their"), budget: { e: te || 0, p: tp || 0 } } };
     pos.breakWith = list("--breakers");
   } catch (e) { console.log(`close: ${e.message}`); return; }
@@ -1775,15 +1778,16 @@ function cmdClose(cat, args) {
     console.log('usage: close --score 6-5 --hold A --a "<your units at A>" --b "…" --base "…" [--cz "Sivir, Mercenary"] [--hand "On the Hunt"] [--gear "Boots of Swiftness"]');
     console.log('             --runes "4 Chaos, 3 Body" [--gold 1] [--down-a "<your face-down card>"] --their-a "…" --their-b "…" [--their-base "…"]');
     console.log('             [--their-down-b "…"] [--their "<their hand>"] [--their-budget E/P] [--breakers "<cards to try in their hand>"]   (Name* = exhausted; ";" between names with commas)');
+    console.log('             [--pit ["<your units at the Baron Pit>"]] [--their-pit "…"] [--hold P]   (the Baron Pit on the board: a third battlefield)');
     return;
   }
   const r = solveTurn(pos);
-  console.log(`CLOSE  from ${pos.score.join("–")}${pos.ctrl.some((x) => x === 0) ? `, holding ${[0, 1].filter((b) => pos.ctrl[b] === 0).map((b) => "AB"[b]).join(" and ")}` : ""}`);
+  console.log(`CLOSE  from ${pos.score.join("–")}${pos.ctrl.some((x) => x === 0) ? `, holding ${pos.ctrl.map((_, b) => b).filter((b) => pos.ctrl[b] === 0).map((b) => ["A", "B", "the Pit"][b]).join(" and ")}` : ""}`);
   console.log(`  → ${r.win ? `WIN (${r.kind})` : `no win this turn: best is ${r.score.join("–")}${r.drew ? `, ${r.drew} drawn at the 8th-point gate` : ""}`}`);
   console.log(`  best line:\n    ${r.line.join("\n    ") || "nothing to do"}`);
   if (r.win && pos.breakWith.length) { const br = breakers(pos, pos.breakWith); console.log(`  what breaks it (each added to their hand, paid from what they kept open): ${br.join(", ") || "none of these"}`); }
   if (r.blind.length) console.log(`  the solver can't see: ${r.blind.join(", ")}`);
-  console.log(`  Rules: holds first; moves exhaust, A ↔ B needs Ganking; each combat by \`fight\` (their best answer with the hand you gave); the 8th point by conquest needs both scored. Only your turn: their next turn isn't searched.${r.capped ? " Search hit its node cap." : ""}`);
+  console.log(`  Rules: holds first; moves exhaust, A ↔ B needs Ganking; each combat by \`fight\` (their best answer with the hand you gave); the 8th point by conquest needs every battlefield scored (the Pit too, once it's on the board). Only your turn: their next turn isn't searched.${r.capped ? " Search hit its node cap." : ""}`);
 }
 
 // ── cards: how much of the card pool the turn solver reads (lib/cardtext.mjs) ─────

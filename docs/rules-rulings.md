@@ -210,6 +210,21 @@ battlefield, by conquering or holding it (§471.1, §471.2). So the Pit is a bat
 be scored, and "every Battlefield" counts it. The practical upshot against Baron: hold your two
 battlefields and win by holding, not by conquering.
 
+**Added 23 Nov 2026 (for the turn solver, `lib/turn.mjs` op `addPit`).** Two more steps, derived, no ruling read:
+
+1. **Baron conquers the Pit as he enters it.** He is played straight onto an open battlefield, so he
+   establishes Control there when the showdown closes (§348.2.a), and gaining Control of a Battlefield
+   not yet Scored this turn is a Conquer (§471.1, §468.5.d). It's the same premise as an open-battlefield
+   play (Sneaky Deckhand, "Turn solver premises" below). RiftJudge 11487, cited above, asks about "the points
+   received from" the Baron Pit, which assumes the same.
+2. **A conquest that draws at the gate still Scores the battlefield.** *"Scoring is a distinct process
+   from Gaining Points"* (§470.1). A Conquer is the Scoring (§471.1), and §473.1.b.1 swaps only the
+   point for a draw. So when you play Baron at 7, the Pit is Scored (you draw), and a conquest of your
+   other battlefield afterwards has every battlefield Scored and gains the eighth point. The FAQ says
+   the same in its own words ("only get the last point if you have already scored all of the other
+   battlefields this turn", rules-faq.md, "Final point"). **Order matters:** Baron first, then the
+   conquest. The other way round, the conquest draws, then the Pit's conquest draws too.
+
 ## Sivir, Mercenary's double conquest: spell moves, "spent" Power, and the Final Point
 
 **Date:** 2026-11-21
