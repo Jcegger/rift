@@ -360,3 +360,19 @@ a unit, not a card.
    Wildclaw's smaller units drop out of the opponent's spell and ability targets.
 4. **Repeat is paid as the spell is played** (an optional additional cost, §820.1) and executes the effect again
    (§820.3), so Syndra, Transcendent's granted Repeat is one play with a doubled effect, not a second spell.
+
+## Turn solver premises (5): the opponent's own choices
+
+**Date:** 2026-11-24
+**Source:** Derived in this repo from the Core Rules, for `lib/turn.mjs` (feature 5); no Riot staff ruling read.
+**Rules:** §115.1, §417.1, §323.5
+**Expires:** when a Core Rules update changes turn order, recycling or cleanup control
+
+1. **When a card makes the opponent choose, the solver takes the choice worst for us**, judged by our best continuation
+   from each option (a short search), not by a static score: with Whirlwind they return our only attacker, not the unit
+   that already scored.
+2. **"Starting with the next player"** is the opponent in a two-player game: turn order is a repeating queue (§115.1).
+3. **Recycled cards are gone for this turn**: recycling puts them on the bottom of the deck (§417.1). A battlefield whose
+   last unit of its controller leaves loses its controller (§323.5).
+4. **Invert Timelines' new hands are unknown.** The solver can't see the 4 cards they draw, so it keeps their known hand
+   (it never credits the spell with stripping their tricks); our 4 are unknown too, so our hand is simply gone.
