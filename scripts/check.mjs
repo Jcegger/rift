@@ -3591,6 +3591,15 @@ section('The documentation');
      'the refresh commits nothing when this file fails');
 }
 
+section('The goldfish');
+{
+  // lib/sim.mjs runs in the browser too, so its tests can't live under node --test's lib/ glob alone: run them here.
+  const { spawnSync } = await import('node:child_process');
+  const r = spawnSync(process.execPath, ['scripts/sim.test.mjs'], { encoding: 'utf8' });
+  const fails = (r.stdout || '').split('\n').filter((l) => /FAIL/.test(l));
+  ok('scripts/sim.test.mjs passes', r.status === 0, fails.slice(0, 3).join('; ') || (r.status ? (r.stderr || '').slice(0, 200) : ''));
+}
+
 section('Card text coverage');
 {
   // lib/cardtext.mjs reads the legal pool's card text for the turn solver. The floor in

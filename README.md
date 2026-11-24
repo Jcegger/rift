@@ -1553,7 +1553,8 @@ Two things it handles that matter for the completion math:
   score 1 point"). Riot serves it as `effect` beside the card's `text`; it is kept
   out of `x`, which every reader takes as the card's own text. Gear only (the one
   other `effect` in the feed is junk). The app shows it in the card view and
-  searches it; the sim and the fight calculator read it on the unit wearing the gear.
+  searches it; the fight calculator and the turn solver read it on the unit wearing the gear.
+  The goldfish (`lib/sim.mjs`) reads only its Might; `rift try` names a strip it skips (Trinity Force's hold point).
 - **Lettered runes and tokens.** `R01a` and `T02a` are runes and tokens, not base
   cards; before 19 Oct the alt-art Radiance runes inflated RAD's base count to 173.
 
@@ -1747,7 +1748,7 @@ itself, and nothing that needs an opponent:
 (curve, colours, Power, Gold, cards), never "does it win". A full two-player game AI was considered and rejected:
 its win rates would be only as good as its weakest card reader and its AI's play. Instead: (1) the goldfish, which
 prints **"the bench can't see: …"** on every `rift try` (`lib/decklab.mjs` `blindSpots`: cards whose rules text no
-reader covers, and always your own attacks, conquests and points); (2) the turn solver for "can this board win this
+reader covers, and cards with a keyword below it doesn't read, each named with the keyword (`benchMisses`), and always your own attacks, conquests and points); (2) the turn solver for "can this board win this
 turn" (`lib/turn.mjs`: `rift close` for a typed-in position, `try --close` on model boards; built 21 Nov 2026); (3) results: RiftLite's pooled
 matchup matrix (`data/winrates.json`), events, and Jay's journal. RiftLite's per-legend and per-deck pages are
 one-sided (only the logging pilot's games) and inflate win rates, so they aren't used.
