@@ -54,7 +54,9 @@ import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport
 import { matchReportPar, closeReportPar, matchRecordsPar } from "../lib/match-pool.mjs";
 import { halving } from "../lib/search.mjs";
 import { POLICY_SOLVE } from "../lib/match.mjs";
-import { calibrationSet, topLists, realRow, pearson, spearman, mae, modelTable, rInterval } from "../lib/calibrate.mjs";
+import { calibrationSet, topLists, realRow, pearson, spearman, mae, modelTable, rInterval, lifts, medoid, pickSwaps } from "../lib/calibrate.mjs";
+import { mainOf, changed } from "../lib/decks.mjs";
+import { isRecord, isGoodPlacing } from "../lib/placing.mjs";
 import { paired, wilson, twoRates } from "../lib/stats.mjs";
 
 // The S/A field's lists as opponents for lib/match.mjs, in a fixed shuffled order, so a before
@@ -1709,8 +1711,84 @@ async function cmdSearch(S, cat, args) {
 //   calibrate [--legends 12] [--reps 4] [--lists 3] [--since 2026-10-16] [--greedy] [--write]
 // Lists are not filtered by today's bans: RiftLite's window is mostly before the 23 Nov bans, so the model plays the
 // lists those games were played with. --write puts the result in docs/model-calibration.md.
+// ── calibrate --swaps: does the model rank one-card changes the way good finishes do? ───────────────────────────
+// For each legend with the most placed lists: its typical good finish (the medoid) is the base; each card's lift is its
+// mean copies in good-finish lists minus in the legend's other placed lists (lib/calibrate.mjs lifts); one-card swaps are
+// picked in lift order, toward winners and away (pickSwaps). The model's effect is the paired margin by turn 8 over the
+// same games against the S/A field, the swap keeping the base's card order (like). Real and model effects are then set
+// side by side: the deckbuilding question, where the legend table (plain calibrate) asks a different one.
+//   calibrate --swaps [--legends 8] [--min 80] [--k 4] [--games 240] [--since 2026-10-16] [--hidden] [--write]
+async function calibrateSwaps(cat, args, opt) {
+  const since = opt("--since") || "2026-10-16", N = Number(opt("--legends") || 8), MIN = Number(opt("--min") || 80), K = Number(opt("--k") || 4);
+  const G = Number(opt("--games") || 240), hiddenHands = args.includes("--hidden");
+  const snap = await readJson(url("decks.json"));
+  const card = (code) => cat.BY.get(code);
+  const legendOf = (d) => (d.lg && cat.BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
+  const by = {};
+  for (const d of snap.decks) {
+    if ((d.dt || "") < since || !isRecord(d)) continue;
+    const l = legendOf(d); if (!l) continue;
+    const m = mainOf(d.cards, card); if ([...m.values()].reduce((a, b) => a + b, 0) < 39) continue;
+    (by[`${(l.g || [])[0]}, ${l.n}`] ||= []).push({ d, m, good: isGoodPlacing(d) });
+  }
+  const legends = Object.entries(by).filter(([, v]) => v.length >= MIN && v.some((x) => x.good) && v.some((x) => !x.good)).sort((a, b) => b[1].length - a[1].length).slice(0, N);
+  const foes = foeLists(await fieldDecksFor(cat, since));
+  const t0 = Date.now();
+  console.log(`CALIBRATE --swaps  ${legends.length} legends with ${MIN}+ placed lists since ${since}; ${G} model games a swap against the S/A field (${foes.length} lists), ${hiddenHands ? "hidden" : "open"} hands`);
+  const rows = [];
+  for (const [L, xs] of legends) {
+    const goodXs = xs.filter((x) => x.good);
+    const base = goodXs[medoid(goodXs.map((x) => x.m), changed)].d;
+    const champ = String(L).split(", ")[0];
+    const keepOut = new Set([...mainOf(base.cards, card).keys()].filter((n) => n.startsWith(`${champ}, `)));
+    const Lf = lifts(xs.map((x) => x.m), xs.map((x) => x.good));
+    const swaps = [];
+    for (const sw of pickSwaps(mainOf(base.cards, card), Lf, { k: K + 2, keepOut })) {
+      if (swaps.filter((x) => x.dir === sw.dir).length >= K) continue;
+      try {
+        const deck = applyChanges({ cards: base.cards }, parseChanges([`-1 ${sw.out}`, `+1 ${sw.in}`], cat.cards), cat.cards, cat.BY);
+        const baseFails = new Set(deckChecks({ cards: base.cards }, cat.idx).filter((c) => c.ok === false).map((c) => c.label));   // pre-ban lists fail 'Nothing banned': only a rule the swap breaks counts
+        if (deckChecks(deck, cat.idx).some((c) => c.ok === false && !baseFails.has(c.label) && !/sideboard/i.test(c.label))) continue;
+        swaps.push({ ...sw, deck });
+      } catch { /* a name parseChanges can't place: skip it */ }
+    }
+    const play = (cards, like) => matchRecordsPar({ cards }, cat, foes, { games: G, hiddenHands, ...(like ? { like } : {}) });
+    const b = await play(base.cards);
+    const margin = (recs) => recs.map((g) => g.at8[0] - g.at8[1]);
+    for (const sw of swaps) {
+      const d = paired(margin(await play(sw.deck.cards, base.cards)), margin(b));
+      rows.push({ L, ...sw, model: d.mean, mlo: d.lo, mhi: d.hi });
+    }
+    console.log(`  ${L}: ${xs.length} placed lists (${goodXs.length} good finishes), ${swaps.length} swaps, ${Math.round((Date.now() - t0) / 1000)} s`);
+  }
+  const sg = (x) => (x == null ? "—" : `${x >= 0 ? "+" : ""}${x.toFixed(2)}`);
+  const lines = [];
+  const out = (x = "") => { console.log(x); lines.push(x); };
+  out(`\n| legend | swap | real lift (95%) | model margin (95%) |\n|---|---|---|---|`);
+  for (const r of rows) out(`| ${r.L} | −1 ${r.out} +1 ${r.in} | ${sg(r.real)} (${sg(r.lo)} to ${sg(r.hi)}) | ${sg(r.model)} (${sg(r.mlo)} to ${sg(r.mhi)}) |`);
+  const xs = rows.map((r) => r.model), ys = rows.map((r) => r.real), rr = pearson(xs, ys), ri = rInterval(rr, rows.length);
+  const clear = rows.filter((r) => r.lo > 0 || r.hi < 0), agree = clear.filter((r) => Math.sign(r.model) === Math.sign(r.real)).length;
+  const both = rows.filter((r) => (r.lo > 0 || r.hi < 0) && (r.mlo > 0 || r.mhi < 0)), bothAgree = both.filter((r) => Math.sign(r.model) === Math.sign(r.real)).length;
+  out(`\nAcross ${rows.length} swaps: Pearson r ${rr == null ? "unknown" : rr.toFixed(2)} (95%: ${ri.lo == null ? "?" : ri.lo.toFixed(2)} to ${ri.hi == null ? "?" : ri.hi.toFixed(2)}), Spearman ρ ${spearman(xs, ys)?.toFixed(2) ?? "unknown"}.`);
+  out(`Where the real lift's interval excludes 0 (${clear.length} swaps), the model has the same sign for ${agree}; where both intervals exclude 0 (${both.length}), ${bothAgree} agree.`);
+  for (const [L] of legends) { const rs = rows.filter((r) => r.L === L); const c = rs.filter((r) => r.lo > 0 || r.hi < 0); out(`- ${L}: same sign ${c.filter((r) => Math.sign(r.model) === Math.sign(r.real)).length} of ${c.length} clear swaps; r ${pearson(rs.map((r) => r.model), rs.map((r) => r.real))?.toFixed(2) ?? "unknown"} over ${rs.length}`); }
+  out(`\n${rows.length} swaps, ${(rows.length + legends.length) * G} model games, ${Math.round((Date.now() - t0) / 1000)} s.`);
+  if (args.includes("--write")) {
+    const f = new URL("../docs/model-calibration.md", import.meta.url), fs = await import("node:fs/promises");
+    let doc = await fs.readFile(f, "utf8").catch(() => "");
+    doc = doc.replace(/\n## Swaps[\s\S]*$/, "").trimEnd();
+    doc += `\n\n## Swaps (does the model rank one-card changes the way good finishes do?)\n\nRun ${new Date().toISOString().slice(0, 10)}: \`scripts/rift calibrate ${args.filter((a) => a !== "--write").join(" ")}\`. ` +
+      `Per legend, the base is its typical good finish (the medoid good-finish list since ${since}); a card's real lift is its mean copies in good finishes ` +
+      `(lib/placing.mjs: top quarter of 32+, or a top 8) minus in the legend's other placed lists, ±95% by bootstrap; a swap's real effect is lift(in) − lift(out). ` +
+      `Model: the paired margin by turn 8 over ${G} games against the S/A field, the swap keeping the base's card order.\n` + lines.join("\n") + "\n";
+    await fs.writeFile(f, doc);
+    console.log("\n  wrote the Swaps section of docs/model-calibration.md");
+  }
+}
+
 async function cmdCalibrate(S, cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  if (args.includes("--swaps")) return calibrateSwaps(cat, args, opt);
   const since = opt("--since") || "2026-10-16", N = Number(opt("--legends") || 12), reps = Number(opt("--reps") || 4), K = Number(opt("--lists") || 3);
   const policy = args.includes("--greedy") ? "greedy" : "solver", nodes = Number(opt("--nodes")) || null, hiddenHands = args.includes("--hidden");   // --nodes: the solver budget a Main Phase; --hidden: plan on a guess at their hand
   const W = await readJson(url("winrates.json")), snap = await readJson(url("decks.json"));
