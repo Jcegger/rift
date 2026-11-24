@@ -1702,7 +1702,7 @@ async function cmdSearch(S, cat, args) {
   if (errs) console.log(`\n  SOLVER ERRORS: ${errs} Main Phases skipped because the solver threw; the table is wrong until that's fixed`);
   console.log(`\n  ▸ still in: not shown worse than the leader, which is not the same as better than the deck as is (read "margin vs as is").`);
   console.log(`  Margin = our points minus theirs by turn 8 in model games against real S/A lists, the same games for every row. Sideboard changes don't play here.`);
-  console.log(`  How far model games track real matchups: docs/model-calibration.md. Then \`try --close\` and the deck-build skill on what's left. ${res.spent} games, ${Math.round((Date.now() - t0) / 1000)} s.`);
+  console.log(`  How far the model's swap rankings track good finishes (docs/model-calibration.md, Swaps, 24 Nov): r 0.31 (0.07 to 0.52) over 64 swaps in 8 legends, the same sign 30 of 48 times; weakest on Yordle's and Rengar's Reckless Innovator, Edge of Night, Ride the Wind and Nidalee swaps, which Sivir runs. Then \`try --close\` and the deck-build skill on what's left. ${res.spent} games, ${Math.round((Date.now() - t0) / 1000)} s.`);
 }
 
 // ── calibrate: model games against RiftLite's real win rates ─────────────────────────────────────────────────────

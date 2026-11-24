@@ -1789,6 +1789,20 @@ points, the right side of 50% for 9 of 20.** The model's legend win rates spread
 it's too extreme as well as noisy. **Model games aren't a verdict on a swap, or on a matchup, yet**; `try --points`,
 `try --close` and `search` rank changes inside the model.
 
+**Swaps: the deckbuilding test (`calibrate --swaps`, 24 Nov 2026).** The question here is whether the model ranks
+one-card changes inside a legend the way good finishes do, not whether it ranks legends.
+- **Method:** per legend with 80+ placed lists, a card's real lift is its mean copies in good finishes (lib/placing.mjs)
+  minus in the legend's other placed lists. The base is the legend's typical good finish (the medoid); 4 swaps toward
+  high-lift cards and 4 away, 240 paired games each (about 50 minutes for 8 legends).
+- **Result:** across 64 swaps, **r 0.31 (95%: 0.07 to 0.52)**, the first interval clear of 0. Where the real lift is
+  clear, the model has the same sign 30 of 48 times.
+- **By legend:**
+  - Agrees: Riven 8 of 8, Master Yi 5 of 6, Vex 6 of 7, Irelia 5 of 8.
+  - Disagrees: Yordle 1 of 6, Rengar 1 of 6. Their disputed swaps involve Reckless Innovator, Edge of Night, Ride the
+    Wind and Nidalee, which Sivir runs.
+- **Reading it:** the model's swap effects (±0.4) are smaller than their intervals at 240 games (±0.6), so a single
+  swap needs about 800+ games, and swaps on those Sivir-adjacent cards carry the least weight.
+
 What was tried, each on one data snapshot:
 - **Fiora, Victorious crashed the solver** (fixed): Sett 15% → 43%, r 0.17 → 0.29.
 - **A bigger search makes it worse:** 600 nodes r 0.27, 2000 nodes r 0.23 (60 min).

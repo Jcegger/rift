@@ -36,15 +36,19 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 
 ## Next
 
-0a. **Swap calibration: the deckbuilding test** (24 Nov evening).
-   - `rift calibrate --swaps --write` (9cc2831) asks whether the model ranks one-card swaps the way good finishes do.
-     Per legend with 80+ placed lists, a card's lift is its copies in good finishes minus the rest; the base is the
-     typical good finish; 8 swaps per legend, 240 games each.
-   - The first full run was cut short by the end of the session (Riven done). Re-run it, about 50 minutes, and read
-     the Swaps section it writes to docs/model-calibration.md.
-   - Swaps correlate (r's interval above 0): trust `search` for Sivir, and the from-scratch builder (`rift build`,
-     plan in Jay's 24 Nov plan, phase 2) can go ahead.
-   - They don't: trace the disagreeing swaps' games and fix the model there.
+0a. **Swap calibration: the deckbuilding test** (24 Nov evening; `rift calibrate --swaps --write`, 50 min).
+   - Asks whether the model ranks one-card swaps inside a legend the way good finishes do.
+   - **Result:** r 0.31 (95%: 0.07 to 0.52) over 64 swaps in 8 legends, the first clear-of-0 evidence that the model
+     helps deckbuilding. Same sign as the data 30 of 48 times.
+   - Agrees on Riven, Master Yi, Vex and Irelia; disagrees on Yordle and Rengar, whose disputed swaps involve Reckless
+     Innovator, Edge of Night, Ride the Wind and Nidalee, all in Sivir's list.
+   - Details: docs/model-calibration.md "Swaps", README "Swaps: the deckbuilding test".
+   - **Next:**
+     1. Trace the Yordle and Rengar swap games where model and data disagree (a `trace` hook in playMatch for both
+        sides), find what the model misreads on those cards, fix it with a test, and re-run `--swaps`. That's what
+        makes `search` trustworthy for Sivir.
+     2. Then the from-scratch builder (`rift build <legend>`, Jay's 24 Nov plan, phase 2), checked first on Riven, where
+        the model agrees 8 of 8.
 0. **Make the model track real results.** Done 24 Nov:
    - Fiora's crash fixed (Sett 15% → 43%); solver errors are reported and gated.
    - Budget tested: 150 nodes stays (600 and 2000 are worse).

@@ -111,3 +111,87 @@ Pairs with at least 30 RiftLite games (12; the row legend's win %):
 Pairs: the same side of 50% for 7 of 12; intervals overlap for 11 of 12.
 
 4560 model games (solver errors: 0), 962 s. RiftLite: Latest 7,000, Radiance season, generated 2026-11-24.
+
+## Swaps (does the model rank one-card changes the way good finishes do?)
+
+Run 2026-11-24: `scripts/rift calibrate --swaps`. Per legend, the base is its typical good finish (the medoid good-finish list since 2026-10-16); a card's real lift is its mean copies in good finishes (lib/placing.mjs: top quarter of 32+, or a top 8) minus in the legend's other placed lists, ±95% by bootstrap; a swap's real effect is lift(in) − lift(out). Model: the paired margin by turn 8 over 240 games against the S/A field, the swap keeping the base's card order.
+
+| legend | swap | real lift (95%) | model margin (95%) |
+|---|---|---|---|
+| Riven, The Exile | −1 Battle Preparations +1 Blitzcrank, Impassive | +0.23 (+0.08 to +0.37) | +0.27 (-0.33 to +0.88) |
+| Riven, The Exile | −1 Reckless Innovator +1 Blitzcrank, Impassive | +0.21 (+0.06 to +0.36) | +0.07 (-0.52 to +0.66) |
+| Riven, The Exile | −1 Star-Crossed +1 Blitzcrank, Impassive | +0.20 (+0.04 to +0.35) | +0.10 (-0.53 to +0.73) |
+| Riven, The Exile | −1 Baron Nashor +1 Blitzcrank, Impassive | +0.20 (+0.02 to +0.35) | +0.03 (-0.61 to +0.67) |
+| Riven, The Exile | −1 Blitzcrank, Impassive +1 Ki Burst | -0.28 (-0.44 to -0.13) | -0.41 (-1.03 to +0.21) |
+| Riven, The Exile | −1 Gust +1 Ki Burst | -0.26 (-0.44 to -0.07) | -0.02 (-0.65 to +0.60) |
+| Riven, The Exile | −1 Switcheroo +1 Ki Burst | -0.25 (-0.42 to -0.12) | -0.01 (-0.61 to +0.59) |
+| Riven, The Exile | −1 Astral Heron +1 Ki Burst | -0.24 (-0.42 to -0.05) | -0.05 (-0.63 to +0.53) |
+| Kai'Sa, Daughter of the Void | −1 Watchful Sentry +1 The Empyrean | +0.36 (-0.01 to +0.67) | -0.14 (-0.79 to +0.50) |
+| Kai'Sa, Daughter of the Void | −1 Smoke Screen +1 The Empyrean | +0.33 (+0.12 to +0.52) | -0.01 (-0.66 to +0.63) |
+| Kai'Sa, Daughter of the Void | −1 Plundering Poro +1 The Empyrean | +0.25 (-0.04 to +0.49) | -0.13 (-0.80 to +0.54) |
+| Kai'Sa, Daughter of the Void | −1 Noxus Hopeful +1 The Empyrean | +0.24 (-0.01 to +0.45) | -0.18 (-0.80 to +0.44) |
+| Kai'Sa, Daughter of the Void | −1 The Empyrean +1 Smoke Screen | -0.33 (-0.52 to -0.12) | -0.07 (-0.71 to +0.56) |
+| Kai'Sa, Daughter of the Void | −1 Brynhir Thundersong +1 Smoke Screen | -0.33 (-0.49 to -0.16) | -0.05 (-0.68 to +0.57) |
+| Kai'Sa, Daughter of the Void | −1 Bilgewater Tracker +1 Smoke Screen | -0.32 (-0.46 to -0.13) | -0.17 (-0.86 to +0.51) |
+| Kai'Sa, Daughter of the Void | −1 Temporal Breach +1 Smoke Screen | -0.30 (-0.46 to -0.12) | +0.32 (-0.34 to +0.97) |
+| Yordle, Heart of the Tempest | −1 Trifarian Captain +1 Edge of Night | +0.37 (+0.18 to +0.58) | +0.05 (-0.57 to +0.67) |
+| Yordle, Heart of the Tempest | −1 Nocturne, Horrifying +1 Edge of Night | +0.35 (+0.16 to +0.59) | -0.13 (-0.79 to +0.52) |
+| Yordle, Heart of the Tempest | −1 Reckless Innovator +1 Edge of Night | +0.33 (+0.10 to +0.55) | -0.12 (-0.72 to +0.48) |
+| Yordle, Heart of the Tempest | −1 Ride the Wind +1 Edge of Night | +0.31 (-0.00 to +0.57) | +0.15 (-0.54 to +0.84) |
+| Yordle, Heart of the Tempest | −1 Edge of Night +1 Reckless Innovator | -0.33 (-0.55 to -0.10) | +0.05 (-0.56 to +0.66) |
+| Yordle, Heart of the Tempest | −1 Tideturner +1 Reckless Innovator | -0.25 (-0.48 to -0.01) | +0.09 (-0.57 to +0.75) |
+| Yordle, Heart of the Tempest | −1 An Offer You Can't Refuse +1 Reckless Innovator | -0.22 (-0.46 to -0.02) | +0.40 (-0.22 to +1.02) |
+| Yordle, Heart of the Tempest | −1 Gust +1 Reckless Innovator | -0.20 (-0.45 to +0.04) | +0.10 (-0.50 to +0.69) |
+| Master Yi, Wuju Bladesman - Starter | −1 Sabotage +1 Pit Rookie | +0.51 (+0.19 to +0.87) | +0.33 (-0.31 to +0.97) |
+| Master Yi, Wuju Bladesman - Starter | −1 En Garde +1 Pit Rookie | +0.50 (+0.10 to +0.93) | +0.25 (-0.43 to +0.92) |
+| Master Yi, Wuju Bladesman - Starter | −1 Defy +1 Pit Rookie | +0.45 (+0.14 to +0.78) | +0.16 (-0.51 to +0.83) |
+| Master Yi, Wuju Bladesman - Starter | −1 Onslaught +1 Pit Rookie | +0.43 (+0.09 to +0.78) | -0.01 (-0.64 to +0.62) |
+| Master Yi, Wuju Bladesman - Starter | −1 Pit Rookie +1 Sabotage | -0.51 (-0.87 to -0.19) | -0.32 (-1.01 to +0.38) |
+| Master Yi, Wuju Bladesman - Starter | −1 Tomb-Raider Barbara +1 Sabotage | -0.33 (-0.68 to -0.03) | -0.20 (-0.89 to +0.48) |
+| Master Yi, Wuju Bladesman - Starter | −1 Scuttle Crab +1 Sabotage | -0.32 (-0.66 to +0.03) | -0.40 (-1.09 to +0.30) |
+| Master Yi, Wuju Bladesman - Starter | −1 Charm +1 Sabotage | -0.30 (-0.56 to +0.00) | -0.07 (-0.78 to +0.64) |
+| Vex, Gloomist | −1 Charm +1 Rebuke | +0.59 (+0.25 to +0.98) | -0.10 (-0.78 to +0.57) |
+| Vex, Gloomist | −1 Zhonya's Hourglass +1 Rebuke | +0.42 (+0.06 to +0.78) | +0.21 (-0.49 to +0.92) |
+| Vex, Gloomist | −1 Defy +1 Rebuke | +0.40 (+0.17 to +0.67) | +0.06 (-0.60 to +0.72) |
+| Vex, Gloomist | −1 Back Off +1 Rebuke | +0.37 (-0.06 to +0.83) | -0.10 (-0.81 to +0.61) |
+| Vex, Gloomist | −1 Boots of Swiftness +1 Mutated Mouser | -1.31 (-1.78 to -0.85) | -0.13 (-0.79 to +0.54) |
+| Vex, Gloomist | −1 Steel Paws +1 Mutated Mouser | -1.29 (-1.91 to -0.74) | -0.05 (-0.75 to +0.64) |
+| Vex, Gloomist | −1 Tornado Warrior +1 Mutated Mouser | -1.25 (-1.86 to -0.68) | -0.04 (-0.71 to +0.62) |
+| Vex, Gloomist | −1 Astral Heron +1 Mutated Mouser | -1.23 (-1.78 to -0.72) | -0.01 (-0.69 to +0.67) |
+| Rek'Sai, Void Burrower | −1 Imperial Decree +1 Vi, Peacekeeper | +0.46 (-0.03 to +0.98) | +0.26 (-0.31 to +0.83) |
+| Rek'Sai, Void Burrower | −1 Hunting Dog +1 Vi, Peacekeeper | +0.43 (-0.00 to +0.84) | +0.13 (-0.46 to +0.71) |
+| Rek'Sai, Void Burrower | −1 Noxus Hopeful +1 Vi, Peacekeeper | +0.31 (+0.04 to +0.59) | +0.04 (-0.52 to +0.60) |
+| Rek'Sai, Void Burrower | −1 Long Sword +1 Vi, Peacekeeper | +0.25 (-0.14 to +0.63) | +0.12 (-0.45 to +0.69) |
+| Rek'Sai, Void Burrower | −1 Concert Poster +1 Blood Rush | -0.84 (-1.55 to -0.08) | +0.05 (-0.45 to +0.56) |
+| Rek'Sai, Void Burrower | −1 Shimmering Swimmer +1 Blood Rush | -0.70 (-1.50 to +0.15) | -0.18 (-0.75 to +0.38) |
+| Rek'Sai, Void Burrower | −1 Bilgewater Tracker +1 Blood Rush | -0.60 (-1.33 to +0.06) | -0.01 (-0.59 to +0.56) |
+| Rek'Sai, Void Burrower | −1 Rengar, Pouncing +1 Blood Rush | -0.52 (-1.23 to +0.19) | -0.23 (-0.80 to +0.35) |
+| Rengar, Pridestalker | −1 Nidalee, Cat Form +1 Rampage | +0.37 (+0.06 to +0.69) | -0.17 (-0.74 to +0.39) |
+| Rengar, Pridestalker | −1 Sabotage +1 Rampage | +0.36 (-0.00 to +0.71) | +0.04 (-0.46 to +0.54) |
+| Rengar, Pridestalker | −1 Ferrous Forerunner +1 Rampage | +0.29 (+0.01 to +0.60) | -0.05 (-0.57 to +0.46) |
+| Rengar, Pridestalker | −1 Grim Apothecary +1 Rampage | +0.29 (-0.03 to +0.61) | +0.02 (-0.51 to +0.55) |
+| Rengar, Pridestalker | −1 Rampage +1 Darius, Trifarian | -0.42 (-0.71 to -0.12) | +0.12 (-0.44 to +0.69) |
+| Rengar, Pridestalker | −1 Noxus Hopeful +1 Darius, Trifarian | -0.37 (-0.63 to -0.09) | +0.10 (-0.44 to +0.63) |
+| Rengar, Pridestalker | −1 Pit Rookie +1 Darius, Trifarian | -0.32 (-0.54 to -0.03) | +0.03 (-0.55 to +0.61) |
+| Rengar, Pridestalker | −1 Inferna +1 Darius, Trifarian | -0.31 (-0.53 to -0.11) | -0.05 (-0.60 to +0.50) |
+| Irelia, Blade Dancer | −1 En Garde +1 Astral Heron | +1.33 (+0.58 to +1.97) | +0.23 (-0.46 to +0.91) |
+| Irelia, Blade Dancer | −1 Charm +1 Astral Heron | +1.13 (+0.32 to +1.76) | +0.15 (-0.47 to +0.77) |
+| Irelia, Blade Dancer | −1 Ride the Wind +1 Astral Heron | +1.06 (+0.36 to +1.63) | +0.06 (-0.64 to +0.76) |
+| Irelia, Blade Dancer | −1 Gust +1 Astral Heron | +1.05 (+0.40 to +1.65) | -0.13 (-0.79 to +0.53) |
+| Irelia, Blade Dancer | −1 Astral Heron +1 Battle Preparations | -1.49 (-2.18 to -0.70) | -0.32 (-1.00 to +0.37) |
+| Irelia, Blade Dancer | −1 Switcheroo +1 Battle Preparations | -1.08 (-1.64 to -0.43) | -0.07 (-0.75 to +0.61) |
+| Irelia, Blade Dancer | −1 Rebuke +1 Battle Preparations | -1.04 (-1.56 to -0.47) | +0.07 (-0.59 to +0.74) |
+| Irelia, Blade Dancer | −1 Zhonya's Hourglass +1 Battle Preparations | -0.97 (-1.61 to -0.31) | +0.10 (-0.57 to +0.76) |
+
+Across 64 swaps: Pearson r 0.31 (95%: 0.07 to 0.52), Spearman ρ 0.34.
+Where the real lift's interval excludes 0 (48 swaps), the model has the same sign for 30; where both intervals exclude 0 (0), 0 agree.
+- Riven, The Exile: same sign 8 of 8 clear swaps; r 0.70 over 8
+- Kai'Sa, Daughter of the Void: same sign 3 of 5 clear swaps; r -0.36 over 8
+- Yordle, Heart of the Tempest: same sign 1 of 6 clear swaps; r -0.51 over 8
+- Master Yi, Wuju Bladesman - Starter: same sign 5 of 6 clear swaps; r 0.89 over 8
+- Vex, Gloomist: same sign 6 of 7 clear swaps; r 0.34 over 8
+- Rek'Sai, Void Burrower: same sign 1 of 2 clear swaps; r 0.71 over 8
+- Rengar, Pridestalker: same sign 1 of 6 clear swaps; r -0.58 over 8
+- Irelia, Blade Dancer: same sign 5 of 8 clear swaps; r 0.51 over 8
+
+64 swaps, 17280 model games, 2945 s.

@@ -24,6 +24,14 @@ without Jay's yes.** When an item is built or dropped, move it to the end with t
   Until this improves, search and try numbers rank swaps inside the model; they aren't evidence a swap wins real
   games.
 
+## The deckbuilding test (24 Nov evening)
+`rift calibrate --swaps`: across 64 one-card swaps in 8 legends, the model's paired margin against the real lift
+(good-finish copies minus the rest) gives r 0.31 (95%: 0.07 to 0.52), with the same sign 30 of 48 times. This is the
+number that matters for building, and it's the first one clear of 0.
+- Per legend: Riven 8/8, Master Yi 5/6, Vex 6/7, Irelia 5/8 agree; Yordle 1/6 and Rengar 1/6 don't.
+- The two that don't are where the work goes next. Their disputed swaps involve Reckless Innovator, Edge of Night,
+  Ride the Wind and Nidalee, all in Sivir Is Trying Her Best.
+
 ## Candidates
 
 In the order the calibration suggests: first what makes the model wrong, then what makes it cheaper.
