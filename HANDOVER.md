@@ -35,11 +35,11 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    `rift close` for a typed-in position, `try --close` on model boards; results in both decklab docs): from 7 a
    winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
    close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
-   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **98.6% of played copies compile, and the
-   solver plays 97.0%** (23 Nov evening, from 90.5% / 84.8% that morning; 168 sentences unread); floor gate in check.mjs
+   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **98.9% of played copies compile, and the
+   solver plays 97.3%** (24 Nov, from 90.5% / 84.8% on 23 Nov morning; 111 sentences unread); floor gate in check.mjs
    (`model/cardtext-floor.json`, 98% / 97%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
    no-effect with a true reason; never file a points effect that way to move the number.
-   **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f, 8ee4a8e, c6bd360, 003a1b3, ca7ca48, 41d19bd; turn tests 27-92): multi-domain [C] Power paid with any of the card's domains
+   **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f, 8ee4a8e, c6bd360, 003a1b3, ca7ca48, 41d19bd, 28ee778; turn tests 27-100): multi-domain [C] Power paid with any of the card's domains
    (§135.2.e.6.c; Jay: two-domain Power is usually a signature spell); the ~200 heaviest
    one-offs (Vilemaw, Ekko, Zed, Demon Shade, Bone Skewer, Nami, Lacerate and more, or filed with reasons); ~20 triggers on
    existing hooks (hold, fights, plays, moves, deaths, stuns, ready), Imperial Decree, counted discounts, costs paid with
@@ -58,8 +58,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    pattern for the reader and the solver (a "kill/exhaust a friendly unit" cost would have run free).
    **Next, heaviest first** (`rift cards --coverage`): the solver-only gaps are now small (conditions 20 cards / 1,955,
    combat-only mostly; counted discounts from the trash 3 / 1,621; [Weaponmaster] 11 / 1,103; unmodeled triggers 22 / 942;
-   modal 2 / 744). **The bulk is unread text: 168 sentences, mostly one-offs under ~40 copies** (`rift cards --coverage --top 60`).
-   Left on purpose (batches 7-10): Dominus's granted ability, Hextech Disc, Profiteer, Azir, Ascendant's Equipment swap,
+   modal 2 / 744). **111 sentences unread**: ~55 one-offs under 18 copies each (one more pass), and the left-on-purpose list.
+   Left on purpose (batches 7-11): Kayn, Unleashed, Wallop's free cast, Royal Entourage, Ava Achiever, Transpositionist,
+   Dancing Grenade, Mystic Reversal, Glowstone, Dominus's granted ability, Hextech Disc, Profiteer, Azir, Ascendant's Equipment swap,
    Commander Ledros, Esteemed Hierophant, Caitlyn's damage order, Heartening Soul (legends aren't on the board), Heimerdinger, Inventor,
    Gangplank, Naval, Angler Wyrm, Rage Amplifier's Empowered +2, Stalking Wolf, Spirit of the Forge, Square Up, Unyielding Spirit, Alpha Wildclaw, Soraka's damage order, Invert Timelines, Brazen Buccaneer, Shady
    Spectacles, Lilting Lullaby's lock, Fallen Feline, Helm of Suppression and Vex, Cheerless (their spell costs in fights), Rebuttal, Svellsongur, Alpha Strike's
