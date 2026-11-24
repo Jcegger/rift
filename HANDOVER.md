@@ -4,7 +4,7 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `~/projects/dotclaude/HUB.md`.
 
-**Updated:** 2026-11-23 (evening)
+**Updated:** 2026-11-24
 
 ## State
 
@@ -36,8 +36,8 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
    close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
    pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **100% of played copies compile (all 963 legal cards), and
-   the solver plays 98.5%** (24 Nov, from 90.5% / 84.8% on 23 Nov morning); floor gate in check.mjs
-   (`model/cardtext-floor.json`, 99.5% / 98%; check.mjs prints the floor rounded, so "at least 100%"). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
+   the solver plays all 963 too** (24 Nov, from 90.5% / 84.8% on 23 Nov morning); floor gate in check.mjs
+   (`model/cardtext-floor.json`, 99.5% / 99.5%; check.mjs prints the floor rounded, so "at least 100%"). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
    no-effect with a true reason; never file a points effect that way to move the number.
    **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f, 8ee4a8e, c6bd360, 003a1b3, ca7ca48, 41d19bd, 28ee778, 47ceafa; turn tests 27-106): multi-domain [C] Power paid with any of the card's domains
    (§135.2.e.6.c; Jay: two-domain Power is usually a signature spell); the ~200 heaviest
@@ -64,9 +64,19 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    one-of-a-kind effects (3c078c7). Rules premises: rules-rulings.md "Fight solver premises" and "Turn solver premises
    (4)-(6)". Real bugs found on the way, all fixed: [Temporary] units used to hold; fight Deathknells ran at base; ambushers
    from hand vanished after the fight; "Your units have +N M" never applied; the state memo ignored a unit's card.
-   **What the solver still doesn't play** (49 cards, ~1.5% of played copies; `rift cards --coverage` lists them): conditions
-   it can't evaluate (19: in a showdown, excess damage, Tryndamere, Kai'Sa, Rebel), discounts that count the trash (Rhasa,
-   Shadowblade Lurker), rare unmodeled triggers (21), Hwei's and Minah's modes, The List's named tag, two unpaid costs.
+   **Polish done (24 Nov): the solver plays every legal card** (the last 49: conditions on excess damage, fighting alone,
+   big spells, XP gained, Beginning-Phase deaths, their rune count; triggers on discards, becoming Mighty, readying,
+   buffing, tokens, hiding, big plays, deaths, gear abilities, attaching, open conquests; the trash via `rift close
+   --trash`; The List via `--list-tag`; Kai'Sa's Reaction in fights; Atakhan's kill discount; Hwei's discard; Akshan
+   taking their Equipment). Turn tests 144-161. Rules: rules-rulings.md "Turn solver premises (7)". **Real bugs found
+   and fixed:** "When I conquer" never fired on a walk-in to an empty battlefield; "When you play a card from face down"
+   fired on every play (Evelynn, Consuming; Black Market Broker; Katarina); a [Temporary] death skipped its Deathknell;
+   Orianna, Exquisite and Sacred Protector never dealt combat damage (their "unless" was ignored); fights didn't use
+   Monster Harpoon's 4 or Sudden Storm's 4 against an attacker; "discard 1" was filed as a draw. Filed with reasons:
+   Karma, Channeler (draw: the revised text says Main Deck), Symbol of the Solari (noPoints), Viktor, Innovator (their
+   turn). Not tested by a closing turn: Atakhan, Rhasa, Shadowblade Lurker, Heimerdinger, Undying Loyalty, Lux,
+   Sanctum Conservator, Renekton, Pirate's Haven, Prize of Progress, Aphelios, Petal Pixie (each read by its hook).
+   `lib/engines.test.mjs` fails 2 (Renata Glasc's reader; legends 51 of 58): it fails the same without this work.
    Known simplifications (in code comments): hold triggers take their first result (Explosimian's Bombs land at A); a
    counter can't be countered; Rek'Sai, Breacher's Accelerate only from the Champion Zone; their Esteemed Hierophant counts
    as having 7 runes; model boards (`try --close`) don't pass the legend. The check took 1m12 to 1m55 on 24 Nov, but it

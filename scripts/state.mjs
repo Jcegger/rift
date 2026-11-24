@@ -1774,7 +1774,8 @@ function cmdClose(cat, args) {
     const gearOn = [["--gear", -1], ["--gear-a", 0], ["--gear-b", 1], ["--gear-pit", 2]].flatMap(([k, at]) => gearIn(k).map((g) => [g, at]));
     pos = { score: [us || 0, them || 0], ctrl, beginning: true, units, hand: list("--hand"), champ: opt("--cz") ? find(opt("--cz")) : null, gear: gearOn.map((x) => x[0]), gearAt: gearOn.map((x) => x[1]),
       down: [[list("--down-a"), list("--their-down-a")], [list("--down-b"), list("--their-down-b")], ...(pit ? [[[], []]] : [])], runes, gold: Number(opt("--gold") || 0),
-      their: { hand: list("--their"), budget: { e: te || 0, p: tp || 0 }, xp: Number(opt("--their-xp") || 0) }, xp: Number(opt("--xp") || 0),
+      their: { hand: list("--their"), budget: { e: te || 0, p: tp || 0 }, xp: Number(opt("--their-xp") || 0), runes: opt("--their-runes") != null ? Number(opt("--their-runes")) : null }, xp: Number(opt("--xp") || 0),
+      trash: opt("--trash") != null ? list("--trash") : null, listTag: opt("--list-tag") || null,
       legend: opt("--legend") ? { card: find(opt("--legend")), ready: !args.includes("--legend-exhausted") } : null };
     pos.breakWith = list("--breakers");
   } catch (e) { console.log(`close: ${e.message}`); return; }
@@ -1786,6 +1787,8 @@ function cmdClose(cat, args) {
     console.log('             [--gear-a "…"] [--gear-b "…"] [--gear-pit "…"]   (your gear at a battlefield; "Bomb" is a Bomb token)');
     console.log('             [--xp N] [--their-xp N]   (XP for [Level]; Hunt and "gain N XP" add to it this turn)');
     console.log('             [--legend "<your legend>"] [--legend-exhausted]   (its {T} abilities are played)');
+    console.log('             [--their-runes N] [--trash "<cards in your trash>"]   (unknown when left out: conditions on them aren\'t met)');
+    console.log('             [--list-tag Tag]   (the tag The List named on an earlier turn)');
     return;
   }
   const r = solveTurn(pos);

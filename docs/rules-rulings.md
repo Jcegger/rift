@@ -394,3 +394,23 @@ a unit, not a card.
    (§807.2, its example: Petty Officer's [Assault] plus Cleave's [Assault 3] is Assault 4); Hunt likewise (§823.2). Until
    24 Nov the shared reader took the largest instance.
 4. **A Repeat paid by discarding** (Square Up) or granted by Temporal Portal executes the effect again (§820.1).
+
+## Turn solver premises (7): walk-in conquests trigger, Temporary deaths are deaths, the Beginning Phase's rune count
+
+**Date:** 2026-11-24
+**Source:** Derived in this repo from the Core Rules and the handbook (`docs/rules.md`), for `lib/turn.mjs` (the polish of
+the last 49 cards); no Riot staff ruling read.
+**Rules:** §348.2.a, §348.2.a.1, §808, §808.1.d, §816.1.b–c, §315.2, §315.3.b, §428.2
+**Expires:** when a Core Rules update changes Conquer, Deathknell, Temporary or the Beginning and Channel Phases
+
+1. **Walking into an empty battlefield is a Conquer** (§348.2.a, §348.2.a.1; premise 4 of the first list), so "When I
+   conquer" triggers fire on it. Until 24 Nov the solver scored the point but skipped the triggers (Tryndamere, Yone and
+   every other conquer trigger only fired after a fight).
+2. **A [Temporary] unit's death at the start of the Beginning Phase is a death** (§816.1.b–c), so its Deathknell runs
+   (§808); so does a unit killed by Shard of Undoing. A banish is not a death (§428.2): no Deathknell, which is what
+   Smite's "banish it instead" buys.
+3. **"At the start of your Beginning Phase"** comes before the Channel Phase (§315.2, §315.3.b): the runes we had then
+   are this turn's less the two channelled. Oasis Raider and Forsaken Baccai compare that with the opponent's runes,
+   which the position has to give (`rift close --their-runes`); unknown is not met.
+4. **Discarding one card is our choice from hand**; after "draw 1" the drawn card (unknown to the solver) may be the one
+   discarded, so that option is always open.
