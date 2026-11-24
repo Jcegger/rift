@@ -84,7 +84,13 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    phase); Rek'Sai, Breacher's Accelerate works face down, from the trash and from the discard; Esteemed Hierophant reads
    their rune count (`--their-runes`; unknown is 7+) and now protects in the main phase too (until 24 Nov our main-phase
    damage spells killed it). Tests 176-178; rules-rulings.md "Turn solver premises (8)".
-   Known simplifications (in code comments): model boards (`try --close`) don't pass the legend. The check took 1m12 to 1m55 on 24 Nov, but it
+   **Legends (24 Nov, last):** model boards pass the legend (lib/match.mjs), and all 58 legends' text is read (from 12):
+   `fireLegend` runs its triggers, its statics feed `effCard`, "me" in its text is the legend, restricted Adds pay only
+   what they say, every printing and errata wording reads (a check.mjs gate now). Found on the way: units could only be
+   played to base (§355.2.a allows a battlefield we control). `rift cards --coverage` has a legends line; floor 99.5%.
+   Tests 179-196. Premises (9). `try --close` is about 20% slower than before (20 games: 37 s → 45 s), same results.
+   Known simplifications (in code comments): inside fights, Power isn't checked by domain (lib/fight.mjs budgets are
+   totals); Rogue Assassin's rescue fires only when our attack is held. The check took 1m12 to 1m55 on 24 Nov, but it
    never runs the solver: the slow sections are Layout, Deck options and Rendering.
    How a card is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` (or grammar in
    `lib/cardtext.mjs`; cardtext.test fails on a card named twice), an op in ENGINE_OPS and RUN_OPS + an applyOp case

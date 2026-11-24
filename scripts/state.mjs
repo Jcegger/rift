@@ -1824,6 +1824,8 @@ async function cmdCards(cat, args) {
   console.log(`CARD TEXT COVERAGE  ${R.cards} legal cards; weighted by copies in ${R.lists} lists since ${R.since}`);
   console.log(`  compiled (every sentence read or classified)   ${R.compiled} cards (${pc(R.compiled, R.cards)}) · ${pc(R.wCompiled, R.w)} of played copies`);
   console.log(`  played by the turn solver today                ${R.engine} cards (${pc(R.engine, R.cards)}) · ${pc(R.wEngine, R.w)} of played copies`);
+  const RL = poolCoverage(cat.cards, snap.decks, standardNameSet(banned, cat.cards), { types: /Legend/, engine: (c) => ({ ok: turnReads(c), why: turnReads(c) ? [] : engineReads(c).why }) });
+  console.log(`  legends played by the turn solver               ${RL.engine} of ${RL.cards} (${pc(RL.engine, RL.cards)}) · ${pc(RL.wEngine, RL.w)} of played legends`);
   console.log(`  sentences: ${R.sentences} · read ${R.states.read} · no effect this turn ${R.states.noTurn} (${Object.entries(R.why).map(([k, v]) => `${k} ${v}`).join(", ")}) · unread ${R.states.unread}`);
   const top = Number(opt("--top") || 25);
   console.log(`\n  WHAT THE ENGINE LACKS (cards · played copies)`);

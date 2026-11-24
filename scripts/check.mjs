@@ -3606,6 +3606,15 @@ section('Card text coverage');
   ok(`compiled card text covers at least ${Math.round(100 * floor.compiledCopies)}% of played copies`, R.cards > 500 && comp >= floor.compiledCopies,
      `${(100 * comp).toFixed(1)}% of played copies, ${R.compiled}/${R.cards} cards; heaviest unread: ${R.unread.slice(0, 3).map((u) => u.card).join(', ')}`);
   ok(`the turn solver reads at least ${Math.round(100 * floor.solverCopies)}% of played copies`, solv >= floor.solverCopies, `${(100 * solv).toFixed(1)}%`);
+  // Legends (since 24 Nov): the solver plays our legend (pos.legend; model boards pass it too).
+  const RL = poolCoverage(played, snap.decks, standardNameSet(read('data/banned.json'), played), { types: /Legend/, engine: (c) => ({ ok: turnReads(c), why: [] }) });
+  const leg = RL.wEngine / (RL.w || 1);
+  ok(`the turn solver reads at least ${Math.round(100 * floor.legendCopies)}% of played legends`, RL.cards > 40 && leg >= floor.legendCopies, `${(100 * leg).toFixed(1)}%, ${RL.engine}/${RL.cards} legends`);
+  // Every printing reads as its card's first printing does: a deck list names a printing, and an alt art or overnumber
+  // with other wording (a curly apostrophe, an older sentence) would otherwise go unread on model boards.
+  const first = new Map(); for (const c of played) if (!first.has(c.n) || (!c.v && first.get(c.n).v)) first.set(c.n, c);
+  const off = [...new Map(played.filter((c) => /Unit|Spell|Gear|Legend/.test(c.t || "") && !c.token).map((c) => [`${c.n}|${c.x}`, c])).values()].filter((c) => !turnReads(c) && turnReads(first.get(c.n)));
+  ok('every printing reads as its card\'s first printing does', !off.length, off.length ? off.slice(0, 5).map((c) => `${c.n} ${c.c}`).join(', ') : '');
 }
 
 /* ══ the site's script ═══════════════════════════════════════════════════ */

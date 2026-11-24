@@ -431,3 +431,24 @@ no Riot staff ruling read.
 3. **Esteemed Hierophant** prevents enemy spell and ability damage while its controller has 7+ runes, in the main phase
    as well as in fights. Their rune count comes from the position (`rift close --their-runes`); unknown is read as 7+.
 
+## Turn solver premises (9): legends, and where units are played
+
+**Date:** 2026-11-24
+**Source:** Derived in this repo from the Core Rules and the handbook (`docs/rules.md`), for `lib/turn.mjs` and `lib/match.mjs`;
+no Riot staff ruling read.
+**Rules:** §355.2.a, §135.2.e.2, §143.4.a, §805
+**Expires:** when a Core Rules update changes where units are played or how legends' abilities work
+
+1. **A unit is played to our base or to a battlefield we control** (§355.2.a). Until 24 Nov the solver played units to
+   base only. From a battlefield a unit needs Ganking to reach another one, so it only gains from a battlefield
+   when it enters ready there (The Exile, Accelerate) or its text reads where it was played.
+2. **Our legend is "me" in its own text.** Its {T} and "exhaust me" exhaust it (§135.2.e.2), it readies and is Empowered
+   like a unit, and its triggers ("when you conquer", "when you stun", "when you win a combat" …) are ours.
+3. **Restricted Adds pay only what they say**: Daughter of the Void's {A} only spells, Fire Below the Mountain's only gear
+   and gear abilities (Equip included), Iron Revenant's only units and gear, Butcher of the Sands' Energy only units and
+   unit abilities, Scorn of the Moon's Energy only inside a showdown.
+4. **On model boards the legend starts the Main Phase ready** (the Awaken Phase readied it), except a Gold legend whose
+   Gold the model already took this turn.
+5. **Errata'd and reprinted wordings read as one card**: the solver reads every printing's text (a curly apostrophe or a
+   doubled period is typography; errata wording gets its own entry).
+
