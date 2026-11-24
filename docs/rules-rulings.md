@@ -452,3 +452,20 @@ no Riot staff ruling read.
 5. **Errata'd and reprinted wordings read as one card**: the solver reads every printing's text (a curly apostrophe or a
    doubled period is typography; errata wording gets its own entry).
 
+## Turn solver premises (10): Power by domain in fights, Rogue Assassin's rescue, units in their hand
+
+**Date:** 2026-11-24
+**Source:** Derived in this repo from the Core Rules and the handbook (`docs/rules.md`), for `lib/fight.mjs` and `lib/turn.mjs`;
+no Riot staff ruling read.
+**Rules:** §135.2.e.6, §355.2.a, §813.1.c, §822.1.b
+**Expires:** when a Core Rules update changes rune Power, showdown timing or where units are played
+
+1. **A card's Power comes from its own domains** (§135.2.e.6; any of a multi-domain card's, any for a no-domain card),
+   inside fights as outside. Runes recycle for Power ready or not; Gold and added {A} pay any. Cost increases (taxes,
+   Vex, Cheerless) are {A}. An opponent typed in as `--their-budget E/P` has no domains, so only totals count for them.
+2. **Rogue Assassin's rescue** happens in the showdown, after attack triggers and before combat damage: the unit leaves
+   for base and, if she's Empowered, is readied, so it can attack again this turn. The solver tries the fight both ways.
+3. **A unit in their hand matters on our turn only if they can play it then**: [Ambush] into our fight (§822.1.b), or a
+   [Reaction] / [Action] unit into a showdown at a battlefield they control (§355.2.a, §813.1.c). Any other unit can't
+   be played on our turn, so its text can't change it.
+

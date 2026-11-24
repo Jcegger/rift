@@ -89,8 +89,12 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    what they say, every printing and errata wording reads (a check.mjs gate now). Found on the way: units could only be
    played to base (§355.2.a allows a battlefield we control). `rift cards --coverage` has a legends line; floor 99.5%.
    Tests 179-196. Premises (9). `try --close` is about 20% slower than before (20 games: 37 s → 45 s), same results.
-   Known simplifications (in code comments): inside fights, Power isn't checked by domain (lib/fight.mjs budgets are
-   totals); Rogue Assassin's rescue fires only when our attack is held. The check took 1m12 to 1m55 on 24 Nov, but it
+   **Last simplifications gone (24 Nov):** fights check Power by domain (budgets carry runes by domain; model boards give
+   theirs); Rogue Assassin's rescue is tried in every attack we make into their units, after attack triggers; units in
+   their hand that can't be played on our turn are no longer blind spots, and their [Reaction] / [Action] units join a
+   showdown where they control the battlefield (Shen, Kinkou). Tests 197-200; premises (10). On the Sivir deck (60
+   games) the close rates didn't move and "the solver can't see" is now none. Known blind spots left: four units with
+   play effects that can come in on our turn (Janna, Savior; Lord Broadmane; Grim Apothecary; Morgana, Vindictive). The check took 1m12 to 1m55 on 24 Nov, but it
    never runs the solver: the slow sections are Layout, Deck options and Rendering.
    How a card is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` (or grammar in
    `lib/cardtext.mjs`; cardtext.test fails on a card named twice), an op in ENGINE_OPS and RUN_OPS + an applyOp case
