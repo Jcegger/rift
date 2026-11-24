@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-23",
+ "generatedAt": "2026-11-24",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -17,16 +17,16 @@
    "League Cup #2 - Cycle 1",
    "Triple Win-A-Box | Vendetta Tournament"
   ],
-  "claimedEvents": 80,
-  "claimedEventsUnmatched": 71,
+  "claimedEvents": 79,
+  "claimedEventsUnmatched": 70,
   "claimedEventAliases": {
    "16k€ Grand Summoner Skirmish": "Summoner Skirmish",
    "Common Box Games Summoner Skirmish": "Summoner Skirmish"
   },
   "claimedDecksByRegion": {
-   "Europe": 85,
-   "Asia": 148,
-   "unknown": 238,
+   "Europe": 80,
+   "Asia": 140,
+   "unknown": 234,
    "North America": 8,
    "Oceania": 7
   },
@@ -40,7 +40,6 @@
    "10K Showdown - Auckland Card Show",
    "28P Online",
    "64P France",
-   "A-Case @ Nexus",
    "Atlanta CGS",
    "Barcelona RQ",
    "Black Cat Card Game X Cat Island Pilgrimage Joint Tournament",
