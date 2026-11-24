@@ -396,6 +396,8 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   onto what the rules call it, each term with its evidence. The bridge from a question in
   players' words to the concept to search the handbook for.
 - `docs/picking-a-deck.md` - how to drive the Next tab's Find my deck panel.
+- `docs/model-calibration.md` - how far the model games (`lib/match.mjs`) track real results: each legend's model win
+  rate beside RiftLite's, written by `scripts/rift calibrate` (see "Calibration" under Simulator).
 - `docs/match-journal.md` - a pen-and-paper template for logging games. A plan, not
   a finished thing, and nothing in the app reads it.
 - `guides/` - the deck dossiers, in Markdown. The source of truth for the Guides
@@ -1772,13 +1774,28 @@ games. Three dead cards (−3 Nidalee, Cat Form +3 Whiteflame Protector, off-dom
 
 **Calibration (`rift calibrate`, 24 Nov 2026).** `lib/calibrate.mjs` plays each of the top legends by RiftLite games
 (its best list: placed first, then newest) against the others' top 3 lists, both seats, and sets the model's win rate
-per legend beside RiftLite's pooled row over the same opponents (`--legends 12 --reps 4 --lists 3 [--greedy]
-[--write]`; about 6 minutes). Lists aren't filtered by today's bans, to match RiftLite's mostly pre-ban window.
-RiftLite's pairs top out near 50 games (±15 points), so the legend rows (200–350 games over the set, ±6) carry the
-comparison. The first run is in `docs/model-calibration.md`: **r 0.17 over 12 legends, mean error 13 points, the right
-side of 50% for 8 of 12.** Two engine legends sink it, Sett (model 15%, real 53%) and Ornn (17% vs 49%). Without them r
-is 0.53 and the error 8.8. The model also rates Vex, the most reactive deck, 9 points low (both sides see hands in fights).
-So model games aren't a verdict on a swap yet. `notes/builder-research.md` has what to fix and in what order.
+per legend beside RiftLite's pooled row over the same opponents.
+- Options: `--legends 12 --reps 4 --lists 3 [--nodes N] [--hidden] [--greedy] [--write]`.
+- Time: about 6 minutes for 12 legends, 14 for 20.
+- Lists aren't filtered by today's bans, to match RiftLite's mostly pre-ban window.
+- RiftLite's pairs top out near 50 games (±15 points), so the legend rows (200–350 games over the set, ±6) carry
+  the comparison.
+- r prints with its 95% interval: about ±0.5 at 12 legends, ±0.4 at 20.
+- Compare two runs only on the same `data/winrates.json`. A refresh that swapped one legend in the top 12 moved r from
+  0.29 to 0.10 with no model change.
+
+**Where it stands (24 Nov 2026, solver policy, 150 nodes, 20 legends): r 0.11 (95%: −0.35 to 0.52), mean error 14.2
+points, the right side of 50% for 9 of 20.** The model's legend win rates spread 16–81% against RiftLite's 31–68%, so
+it's too extreme as well as noisy. **Model games aren't a verdict on a swap, or on a matchup, yet**; `try --points`,
+`try --close` and `search` rank changes inside the model.
+
+What was tried, each on one data snapshot:
+- **Fiora, Victorious crashed the solver** (fixed): Sett 15% → 43%, r 0.17 → 0.29.
+- **A bigger search makes it worse:** 600 nodes r 0.27, 2000 nodes r 0.23 (60 min).
+- **Hidden hands** (`--hidden`; each side plans on a guessed hand, then plays against the real one): 20 legends, r 0.11 → 0.04 and error 14.2 → 13.8. Less
+  extreme (model spread 16–81% → 27–74%), but not clearly better, so it stays opt-in.
+
+The biggest misses are Volibear and Ekko (about 30 points high), and Ornn, Diana and Irelia (22–33 low). `notes/builder-research.md` has the next steps.
 
 **What the bench is, and its three-layer place (decided 21 Nov 2026).** The goldfish answers "does the list run"
 (curve, colours, Power, Gold, cards), never "does it win". A full two-player game AI was considered and rejected:

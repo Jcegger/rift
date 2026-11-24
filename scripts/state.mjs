@@ -54,7 +54,7 @@ import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport
 import { matchReportPar, closeReportPar, matchRecordsPar } from "../lib/match-pool.mjs";
 import { halving } from "../lib/search.mjs";
 import { POLICY_SOLVE } from "../lib/match.mjs";
-import { calibrationSet, topLists, realRow, pearson, spearman, mae, modelTable } from "../lib/calibrate.mjs";
+import { calibrationSet, topLists, realRow, pearson, spearman, mae, modelTable, rInterval } from "../lib/calibrate.mjs";
 import { paired, wilson, twoRates } from "../lib/stats.mjs";
 
 // The S/A field's lists as opponents for lib/match.mjs, in a fixed shuffled order, so a before
@@ -82,7 +82,7 @@ function printPoints(pb, pa, games, policy = "solver") {
   console.log(`  ${"won (8 points first; timeouts apart)".padEnd(46)}${wr(pb)} → ${wr(pa)}; win − loss after − before ${verdict(paired(pa.win, pb.win))}`);
   console.log(`  ${"timeouts (no one at 8 by turn 12)".padEnd(46)}${pb.timeouts} → ${pa.timeouts} of ${pb.games}`);
   for (const [lbl, r] of [["before", pb], ["after", pa]]) if (r.solveErrors?.some((n) => n)) console.log(`  SOLVER ERRORS (${lbl}): ${r.solveErrors[0]} of our Main Phases and ${r.solveErrors[1]} of theirs were skipped because the solver threw; these numbers are wrong until that's fixed`);
-  console.log("  How far model games track real results: docs/model-calibration.md (24 Nov: r 0.17 per legend; a ranking inside the model, not evidence a swap wins real games).");
+  console.log("  How far model games track real results: docs/model-calibration.md (24 Nov: r 0.11 over 20 legends, interval -0.35 to 0.52; a ranking inside the model, not evidence a swap wins real games).");
   console.log(policy === "greedy"
     ? "  Model games, both sides on the greedy policy (--greedy); card text beyond its readers is not played, which favours unit-heavy decks. Points and how they're made, not win rates."
     : "  Model games, both sides' Main Phases played by the turn solver (lib/turn.mjs, every card's text, a small search a turn); not comparable with the greedy numbers from before 24 Nov. Points and how they're made, not win rates.");
@@ -1743,7 +1743,8 @@ async function cmdCalibrate(S, cat, args) {
   const out = (x = "") => { console.log(x); lines.push(x); };
   out(`\n| legend | model win % (95%) | games | real win % (95%) | games |\n|---|---|---|---|---|`);
   for (const r of rows.sort((a, b) => b.real - a.real)) out(`| ${r.L} | ${pc(r.model)} (${pc(r.mlo)}–${pc(r.mhi)}) | ${r.mn}${r.mt ? ` +${r.mt} timeouts` : ""} | ${pc(r.real)} (${pc(r.rlo)}–${pc(r.rhi)}) | ${r.rn} |`);
-  out(`\nPer legend (${rows.length}): Pearson r ${f2(pearson(xs, ys))}, Spearman ρ ${f2(spearman(xs, ys))}, mean absolute error ${(100 * mae(xs, ys)).toFixed(1)} points, the same side of 50% for ${side} of ${rows.length}.`);
+  const rr = pearson(xs, ys), ri = rInterval(rr, rows.length);
+  out(`\nPer legend (${rows.length}): Pearson r ${f2(rr)} (95%: ${f2(ri.lo)} to ${f2(ri.hi)}), Spearman ρ ${f2(spearman(xs, ys))}, mean absolute error ${(100 * mae(xs, ys)).toFixed(1)} points, the same side of 50% for ${side} of ${rows.length}.`);
   out(`Spread: the model's legend win rates run ${pc(Math.min(...xs))}–${pc(Math.max(...xs))}; RiftLite's ${pc(Math.min(...ys))}–${pc(Math.max(...ys))}.`);
   if (pairs.length) {
     out(`\nPairs with at least 30 RiftLite games (${pairs.length}; the row legend's win %):\n\n| pair | model (95%) | games | real (95%) | games |\n|---|---|---|---|---|`);

@@ -36,12 +36,22 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 
 ## Next
 
-0. **Make the model track real results** (`notes/builder-research.md` item 0, then 1):
-   - Find why Sett and Ornn lose in model games: replay their games, find the missed line, fix it with a test, and
-     re-run `rift calibrate --write` (6 min).
-   - Then hidden hands in fights (Vex reads 9 low).
-   - Target: r above 0.6 with all 12 legends in, before a swap is judged on model games. Jay picks the order from
-     the research log.
+0. **Make the model track real results.** Done 24 Nov:
+   - Fiora's crash fixed (Sett 15% → 43%); solver errors are reported and gated.
+   - Budget tested: 150 nodes stays (600 and 2000 are worse).
+   - Hidden hands built (`--hidden`; less extreme but not clearly better over 20 legends, so it stays opt-in).
+   - r prints with its interval; 20-legend runs.
+
+   Where it stands: r 0.11 over 20 legends (−0.35 to 0.52), mean error 14 points, the model too extreme (16–81% vs
+   real 31–68%). Next, from `notes/builder-research.md`:
+   - The biggest misses: Ornn (16%, real 49), Diana (26%, real 53), Irelia (39%, real 61), Volibear (63%, real 35),
+     Ekko (66%, real 35). Add a `trace` hook in `playMatch` that logs
+     both sides' turns, and read their games against Nasus. Ornn's own turns look sensible; its units die on the
+     opponent's turn.
+   - Why the model is too extreme: snowballing in 12-turn games? Compare its win rates by game length.
+
+   Re-run `rift calibrate --legends 20` after each fix (14 min) on the same `data/winrates.json`. Target: r's interval
+   above 0. Until then, model numbers rank swaps inside the model only.
 1. **Sivir changes after the first post-ban weekend (29–30 Nov) and games.** Candidates are in
    `decklab/sivir-search.json` (sivir-tune.md C1, C1b, C3, C4, C5 plus a dead-card plant):
    `rift search --deck "Sivir Is Trying Her Best" --cands decklab/sivir-search.json --budget 6000`. Read it against

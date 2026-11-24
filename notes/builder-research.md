@@ -45,11 +45,27 @@ In the order the calibration suggests: first what makes the model wrong, then wh
      - Next step: play Ornn's top 3 lists against Nasus with a per-turn log of their turn too (a `trace` hook in
        playMatch for both sides).
 
-1. **Hidden hands in model fights.** Both sides see each other's hand when the fight calculator plays combat tricks
-   (lib/match.mjs header). Reactive decks get credit for tricks the opponent would have played around, and proactive
-   decks get punished for walking into them. Fix: sample the hand from the opponent's list for the fight search
-   (determinization). Cost: medium (fight.mjs plus match.mjs; a test that open-hand and sampled agree when the hand
-   is empty). Would change: matchups that turn on tricks. Check it against the calibration table's worst legends.
+1. **Hidden hands: built** (f4dce69, 24 Nov; opt-in, `--hidden`). Each side plans its Main Phase on a guess at the
+   other's hand (as many cards as they hold, drawn from their hand plus library), then plays that plan against the
+   real hand (`solveTurn({ follow })`).
+   - On the 24 Nov RiftLite data, 12 legends, 150 nodes, open → hidden: r 0.10 → 0.12, error 13.7 → 12.7, time 6 →
+     7.5 min.
+   - Closer to real: Ornn 17 → 30% (real 51), Diana 26 → 36% (52), Kai'Sa 66 → 59% (53), Ezreal 48 → 40% (31).
+   - Further away: Sett 48 → 35% (51), Riven 54 → 61% (44), Mordekaiser 62 → 68% (42).
+   - Vex unchanged at 45% (real 55), and Vex was the reason for building it.
+
+   Over 20 legends (24 Nov, same data): r 0.11 → 0.04, error 14.2 → 13.8, model spread 16–81% → 27–74% (real
+   31–68%). Less extreme but not clearly better, so it stays opt-in.
+
+   **The yardstick.** With 12 legends, r's 95% interval is about ±0.5 (r 0.29 means −0.34 to 0.74), and a RiftLite
+   refresh that swapped one legend (Rengar out, Diana in) moved r from 0.29 to 0.10 with no model change. So:
+   - Compare only on one data snapshot.
+   - `calibrate` prints r's interval (Fisher z).
+   - Use 20 legends.
+
+   **Search budget (24 Nov):** 150 nodes r 0.29, 600 r 0.27, 2000 r 0.23 (60 min). A stronger search amplifies the
+   model's leans, so 150 stays.
+
 2. **Variance reduction for search.** Pairing on deals isn't enough (see above). Options:
    - Common random numbers inside the solver: seed its tie-breaks per turn, not per game.
    - Antithetic seats: always play each deal from both seats and average the two.
