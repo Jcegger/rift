@@ -53,7 +53,8 @@ import { versus, weigh, effectsOf, looksInteractive, unreadSentences, withGear }
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf, blindSpots } from "../lib/decklab.mjs";
 import { matchReportPar, closeReportPar, matchRecordsPar } from "../lib/match-pool.mjs";
 import { halving } from "../lib/search.mjs";
-import { paired, wilson, twoRates } from "../lib/stats.mjs";   // every core; same numbers as matchReport/closeReport
+import { rlNameOf, topLists, realRow, pearson, spearman, mae, modelTable } from "../lib/calibrate.mjs";
+import { paired, wilson, twoRates } from "../lib/stats.mjs";
 
 // The S/A field's lists as opponents for lib/match.mjs, in a fixed shuffled order, so a before
 // and an after play the same opponents in the same order (paired games).
@@ -79,6 +80,7 @@ function printPoints(pb, pa, games, policy = "solver") {
     return n ? `${pc(w.p)} (${pc(w.lo)}–${pc(w.hi)})` : "—"; };
   console.log(`  ${"won (8 points first; timeouts apart)".padEnd(46)}${wr(pb)} → ${wr(pa)}; win − loss after − before ${verdict(paired(pa.win, pb.win))}`);
   console.log(`  ${"timeouts (no one at 8 by turn 12)".padEnd(46)}${pb.timeouts} → ${pa.timeouts} of ${pb.games}`);
+  console.log("  How far model games track real results: docs/model-calibration.md (24 Nov: r 0.17 per legend; a ranking inside the model, not evidence a swap wins real games).");
   console.log(policy === "greedy"
     ? "  Model games, both sides on the greedy policy (--greedy); card text beyond its readers is not played, which favours unit-heavy decks. Points and how they're made, not win rates."
     : "  Model games, both sides' Main Phases played by the turn solver (lib/turn.mjs, every card's text, a small search a turn); not comparable with the greedy numbers from before 24 Nov. Points and how they're made, not win rates.");
@@ -1697,6 +1699,68 @@ async function cmdSearch(S, cat, args) {
   console.log(`  How far model games track real matchups: docs/model-calibration.md. Then \`try --close\` and the deck-build skill on what's left. ${res.spent} games, ${Math.round((Date.now() - t0) / 1000)} s.`);
 }
 
+// ── calibrate: model games against RiftLite's real win rates ─────────────────────────────────────────────────────
+// lib/calibrate.mjs. Each of the top legends (by RiftLite games) plays its best list against the others' top lists,
+// both seats; the model's win rate per legend is set beside RiftLite's pooled row over the same opponents.
+//   calibrate [--legends 12] [--reps 4] [--lists 3] [--since 2026-10-16] [--greedy] [--write]
+// Lists are not filtered by today's bans: RiftLite's window is mostly before the 23 Nov bans, so the model plays the
+// lists those games were played with. --write puts the result in docs/model-calibration.md.
+async function cmdCalibrate(S, cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const since = opt("--since") || "2026-10-16", N = Number(opt("--legends") || 12), reps = Number(opt("--reps") || 4), K = Number(opt("--lists") || 3);
+  const policy = args.includes("--greedy") ? "greedy" : "solver";
+  const W = await readJson(url("winrates.json")), snap = await readJson(url("decks.json"));
+  const rlNames = new Set(W.legends.map((l) => l.legend));
+  const legendOf = (d) => (d.lg && cat.BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
+  const mainSize = (d) => Object.entries(d.cards || {}).reduce((a, [k, q]) => a + (/Legend|Rune|Battlefield/.test(cat.BY.get(k)?.t || "Rune") ? 0 : q), 0);
+  const by = {};
+  for (const d of snap.decks) { if ((d.dt || "") < since || mainSize(d) < 39) continue; const n = rlNameOf(legendOf(d), rlNames); if (n) (by[n] ||= []).push(d); }
+  const legends = W.legends.slice().sort((a, b) => b.games - a.games).map((l) => l.legend).filter((n) => by[n]?.length).slice(0, N);
+  const set = new Set(legends);
+  const t0 = Date.now();
+  console.log(`CALIBRATE  ${legends.length} legends (top by RiftLite games, with lists since ${since}): ${legends.join(", ")}`);
+  console.log(`  each plays its best list against the others' top ${K} lists, ${reps} rounds (both seats), ${policy} policy`);
+  const runs = [];
+  for (const L of legends) {
+    const me = topLists(by[L], 1)[0];
+    const foes = legends.filter((M) => M !== L).flatMap((M) => topLists(by[M], K).map((d) => ({ label: M, cards: d.cards })));
+    const recs = await matchRecordsPar({ cards: me.cards }, cat, foes, { games: foes.length * reps, policy });
+    runs.push({ me: L, recs });
+    process.stdout.write(`  ${L}: ${recs.length} games\n`);
+  }
+  const { leg, pair } = modelTable(runs);
+  const rows = legends.map((L) => { const m = leg[L] || { w: 0, l: 0, t: 0 }, iv = wilson(m.w, m.w + m.l), r = realRow(W, L, set);
+    return { L, model: iv.p, mlo: iv.lo, mhi: iv.hi, mn: m.w + m.l, mt: m.t, real: r.p, rlo: r.lo, rhi: r.hi, rn: r.n }; }).filter((r) => r.real != null && r.model != null);
+  const xs = rows.map((r) => r.model), ys = rows.map((r) => r.real);
+  const pc = (x) => (x == null ? "—" : `${Math.round(100 * x)}%`), f2 = (x) => (x == null ? "unknown" : x.toFixed(2));
+  const side = rows.filter((r) => (r.model - 0.5) * (r.real - 0.5) > 0).length;
+  const pairs = W.pairs.filter((p) => p.a < p.b && set.has(p.a) && set.has(p.b) && p.n >= 30).map((p) => {
+    const m = pair[`${p.a}|${p.b}`] || { w: 0, l: 0 }, mi = wilson(m.w, m.w + m.l), ri = wilson(Math.round((p.wr / 100) * p.n), p.n);
+    return { a: p.a, b: p.b, model: mi.p, mlo: mi.lo, mhi: mi.hi, mn: m.w + m.l, real: p.wr / 100, rlo: ri.lo, rhi: ri.hi, rn: p.n };
+  });
+  const lines = [];
+  const out = (x = "") => { console.log(x); lines.push(x); };
+  out(`\n| legend | model win % (95%) | games | real win % (95%) | games |\n|---|---|---|---|---|`);
+  for (const r of rows.sort((a, b) => b.real - a.real)) out(`| ${r.L} | ${pc(r.model)} (${pc(r.mlo)}–${pc(r.mhi)}) | ${r.mn}${r.mt ? ` +${r.mt} timeouts` : ""} | ${pc(r.real)} (${pc(r.rlo)}–${pc(r.rhi)}) | ${r.rn} |`);
+  out(`\nPer legend (${rows.length}): Pearson r ${f2(pearson(xs, ys))}, Spearman ρ ${f2(spearman(xs, ys))}, mean absolute error ${(100 * mae(xs, ys)).toFixed(1)} points, the same side of 50% for ${side} of ${rows.length}.`);
+  out(`Spread: the model's legend win rates run ${pc(Math.min(...xs))}–${pc(Math.max(...xs))}; RiftLite's ${pc(Math.min(...ys))}–${pc(Math.max(...ys))}.`);
+  if (pairs.length) {
+    out(`\nPairs with at least 30 RiftLite games (${pairs.length}; the row legend's win %):\n\n| pair | model (95%) | games | real (95%) | games |\n|---|---|---|---|---|`);
+    for (const p of pairs) out(`| ${p.a} vs ${p.b} | ${pc(p.model)} (${pc(p.mlo)}–${pc(p.mhi)}) | ${p.mn} | ${pc(p.real)} (${pc(p.rlo)}–${pc(p.rhi)}) | ${p.rn} |`);
+    const pm = pairs.filter((p) => p.model != null);
+    out(`\nPairs: the same side of 50% for ${pm.filter((p) => (p.model - 0.5) * (p.real - 0.5) > 0).length} of ${pm.length}; intervals overlap for ${pm.filter((p) => p.mlo <= p.rhi && p.rlo <= p.mhi).length} of ${pm.length}.`);
+  }
+  out(`\n${runs.reduce((a, r) => a + r.recs.length, 0)} model games, ${Math.round((Date.now() - t0) / 1000)} s. RiftLite: ${W.filters?.window || "?"}, ${W.filters?.season || "?"}, generated ${W.generatedAt}.`);
+  if (args.includes("--write")) {
+    const head = `# How far the model games track real results\n\nWritten by \`scripts/rift calibrate${args.length ? " " + args.filter((a) => a !== "--write").join(" ") : ""}\` on ${new Date().toISOString().slice(0, 10)} (lib/calibrate.mjs). ` +
+      `Real: RiftLite's community matrix (data/winrates.json: online games logged by its users, pooled). Model: lib/match.mjs games, ${policy} policy; ` +
+      `each legend's best list (placed first, then newest, since ${since}) against the other legends' top ${K} lists, ${reps} rounds, both seats. ` +
+      `Lists are not filtered by the 23 Nov bans, to match RiftLite's mostly pre-ban window. Timeouts count for neither side.\n`;
+    await (await import("node:fs/promises")).writeFile(new URL("../docs/model-calibration.md", import.meta.url), head + lines.join("\n") + "\n");
+    console.log("\n  wrote docs/model-calibration.md");
+  }
+}
+
 // ── loops: a deck's interactions and loops, derived from card text ─────────────
 // lib/interactions.mjs. Built blind (from the cards and the rules), so it finds loops nobody
 // listed; every one is for a rules check before anything is built on it. --bridges also reads
@@ -2013,6 +2077,7 @@ async function main() {
     versus: () => cmdVersus(S, cat, args),
     try: () => cmdTry(S, cat, args),
     search: () => cmdSearch(S, cat, args),
+    calibrate: () => cmdCalibrate(S, cat, args),
     loops: () => cmdLoops(S, cat, args),
     bans: () => cmdBans(S, cat, args),
   };

@@ -1561,8 +1561,8 @@ Two things it handles that matter for the completion math:
   score 1 point"). Riot serves it as `effect` beside the card's `text`; it is kept
   out of `x`, which every reader takes as the card's own text. Gear only (the one
   other `effect` in the feed is junk). The app shows it in the card view and
-  searches it; the fight calculator and the turn solver read it on the unit wearing the gear.
-  The goldfish (`lib/sim.mjs`) reads only its Might; `rift try` names a strip it skips (Trinity Force's hold point).
+  searches it; the points model reads it on the unit wearing the gear (`lib/versus.mjs` `withGear`,
+  in `lib/match.mjs`). The goldfish (`lib/sim.mjs`) reads only its Might: a hold point is board text, not consistency.
 - **Lettered runes and tokens.** `R01a` and `T02a` are runes and tokens, not base
   cards; before 19 Oct the alt-art Radiance runes inflated RAD's base count to 173.
 
@@ -1770,11 +1770,22 @@ games. Three dead cards (−3 Nidalee, Cat Form +3 Whiteflame Protector, off-dom
 120 games; six read −1.32 (−2.23 to −0.42). The one-card swaps in `decklab/sivir-tune.md` all read within ±0.3 at
 120. A one-card swap needs roughly 800+ games per candidate to show a 0.3 effect; `--budget` sets it.
 
+**Calibration (`rift calibrate`, 24 Nov 2026).** `lib/calibrate.mjs` plays each of the top legends by RiftLite games
+(its best list: placed first, then newest) against the others' top 3 lists, both seats, and sets the model's win rate
+per legend beside RiftLite's pooled row over the same opponents (`--legends 12 --reps 4 --lists 3 [--greedy]
+[--write]`; about 6 minutes). Lists aren't filtered by today's bans, to match RiftLite's mostly pre-ban window.
+RiftLite's pairs top out near 50 games (±15 points), so the legend rows (200–350 games over the set, ±6) carry the
+comparison. The first run is in `docs/model-calibration.md`: **r 0.17 over 12 legends, mean error 13 points, the right
+side of 50% for 8 of 12.** Two engine legends sink it, Sett (model 15%, real 53%) and Ornn (17% vs 49%). Without them r
+is 0.53 and the error 8.8. The model also rates Vex, the most reactive deck, 9 points low (both sides see hands in fights).
+So model games aren't a verdict on a swap yet. `notes/builder-research.md` has what to fix and in what order.
+
 **What the bench is, and its three-layer place (decided 21 Nov 2026).** The goldfish answers "does the list run"
 (curve, colours, Power, Gold, cards), never "does it win". A full two-player game AI was considered and rejected:
 its win rates would be only as good as its weakest card reader and its AI's play. Instead: (1) the goldfish, which
 prints **"the bench can't see: …"** on every `rift try` (`lib/decklab.mjs` `blindSpots`: cards whose rules text no
-reader covers, and cards with a keyword below it doesn't read, each named with the keyword (`benchMisses`), and always your own attacks, conquests and points); (2) the turn solver for "can this board win this
+reader covers, and cards whose Predict, Vision or Flow, or a Level, Legion or Repeat line that makes resources, it doesn't
+play, each named with the keyword (`benchMisses`), and always your own attacks, conquests and points); (2) the turn solver for "can this board win this
 turn" (`lib/turn.mjs`: `rift close` for a typed-in position, `try --close` on model boards; built 21 Nov 2026); (3) results: RiftLite's pooled
 matchup matrix (`data/winrates.json`), events, and Jay's journal. RiftLite's per-legend and per-deck pages are
 one-sided (only the logging pilot's games) and inflate win rates, so they aren't used.
@@ -1784,11 +1795,14 @@ defend, assuming the attackers are at or under his Might), Pyke, Returned's Gold
 Broker's Gold on face-down plays, Bandle Scouts' Academy's Gold on a hide (assumed to land there half the time),
 and Gutter Guardian's Show Off Power (spent first; counts toward "Mercenary on").
 
-**Keywords the sims do not read** (as of 21 Nov 2026; `docs/rules.md` Keywords has each rule):
-Deploy, Level and Hunt (XP), Flow (recasting from the trash), Predict and Vision, Weaponmaster,
-Quick-Draw, Legion, Repeat, Deflect's tax, Tank and Backline outside the fight calculator, and every
-`[Level N][>]` / `[Legion][>]` line. A deck that leans on one of these reads low (or high) by that
-much; say so when quoting its numbers. Read and modelled: Accelerate, Hidden, Ambush, Temporary,
+**Keywords the goldfish does not read** (24 Nov 2026; `docs/rules.md` Keywords has each rule). Only these change what it
+measures (cards seen, Energy, units on board), and `rift try` names each card that carries one (`benchMisses`):
+Predict and Vision (card selection), Flow (recasting from the trash), and a `[Level N][>]`, `[Legion][>]` or Repeat line
+that makes resources (draws, tokens, Gold, runes, cost cuts). The rest are board text, played by the points model and the
+turn solver, not by the goldfish: Hunt and XP gain, Level and Legion stats, Weaponmaster and Quick-Draw (the goldfish
+already attaches gear free), Deploy, Deflect's tax, a gear strip's hold point (Trinity Force), Tank and Backline.
+Before 24 Nov this list mixed the two. A deck that leans on a goldfish keyword reads low (or high) by that much; say so
+when quoting its numbers. Read and modelled: Accelerate, Hidden, Ambush, Temporary,
 Empower/Empowered, Equip and gear strips, Ganking (own, Mercenary, Empowered), Assault, Shield, Tank
 and Backline in fights, Stun, Disarm, Show Off (Gutter Guardian), Burn, Reaction/Action timing.
 
