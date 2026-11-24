@@ -60,18 +60,20 @@ function foeLists(fieldDecks) {
   const r = rng(5); for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
   return out;
 }
-function printPoints(pb, pa, games) {
+function printPoints(pb, pa, games, policy = "solver") {
   const n2 = (x) => (x == null ? "—" : x.toFixed(2)), pc = (x) => (x == null ? "—" : `${Math.round(100 * x)}%`);
   console.log(`\n  POINTS (lib/match.mjs: ${games} model games against real S/A lists, the same games before and after)`);
   const rows = [["our points by turn 8", "points8", n2], ["their points by turn 8", "theirPoints8", n2], ["  ours from holds / conquers", null],
     ["holds a game", "holds", n2], ["conquers a game", "conquers", n2], ["their holds stopped (taken, traded, cleared)", "stops", n2],
     ["Evelynn's points a game", "eve", n2], ["eighth point gated (drew instead)", "gated", n2], ["their holds a game", "theirHolds", n2],
-    ["our holds they stopped", "theirStops", n2], ["Mercenary on (turns 4+)", "merc", pc]];
+    ["our holds they stopped", "theirStops", n2], ...(policy === "greedy" ? [["Mercenary on (turns 4+)", "merc", pc]] : [])];
   for (const [label, key, f] of rows) { if (!key) continue; const b = f(pb[key]), a = f(pa[key]); console.log(`  ${label.padEnd(46)}${(b === a ? b : `${b} → ${a}`).padEnd(22)}`); }
-  console.log("  Model games, both sides on one plain policy; card text beyond the reader's effects is not played, which favours unit-heavy decks. Points and how they're made, not win rates.");
+  console.log(policy === "greedy"
+    ? "  Model games, both sides on the greedy policy (--greedy); card text beyond its readers is not played, which favours unit-heavy decks. Points and how they're made, not win rates."
+    : "  Model games, both sides' Main Phases played by the turn solver (lib/turn.mjs, every card's text, a small search a turn); not comparable with the greedy numbers from before 24 Nov. Points and how they're made, not win rates.");
 }
 // The turn solver's report: before → after when there's a change.
-function printClose(cb, ca, games) {
+function printClose(cb, ca, games, policy = "solver") {
   const pc = (x) => `${Math.round(100 * x)}%`, n2 = (x) => x.toFixed(2);
   const two = (f) => (ca ? `${f(cb)} → ${f(ca)}` : f(cb));
   console.log(`\n  CLOSE (lib/turn.mjs: the turn solver on every turn of ours from 6 points after holds, in ${games} model games against real S/A lists)`);
@@ -89,7 +91,7 @@ function printClose(cb, ca, games) {
     console.log(`${head}what breaks a winning line (each card of their list added to their hand; ${r.breakChecked} lines checked): ${list(r.breakers, 8)}`);
     console.log(`${head}the solver can't see (share of positions): ${list(r.blind, 10, r.positions)}${r.capped ? `; ${r.capped} searches hit the node cap` : ""}`);
   }
-  console.log("  * under 30 positions. A close rate on model boards, not a win rate: the boards come from the greedy model's games, their hand is known to the solver, and their next turn isn't searched.");
+  console.log(`  * under 30 positions. A close rate on model boards, not a win rate: the boards come from ${policy === "greedy" ? "the greedy model's games" : "model games played by the solver at a small budget"} ("the model" columns: what that play did), their hand is known to the solver, and their next turn isn't searched.`);
 }
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { fight } from "../lib/fight.mjs";
@@ -1338,7 +1340,9 @@ async function cmdTry(S, cat, args) {
   const since = opt("--since") || "2026-10-16";
   const games = Number(opt("--games") || 20000);
   const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games", "--close-games"]);
-  const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine" && a !== "--points" && a !== "--close");
+  const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine" && a !== "--points" && a !== "--close" && a !== "--greedy");
+  // Model games' policy: the turn solver (default since 24 Nov) or --greedy (the older plain policy, ~90x faster).
+  const mpolicy = args.includes("--greedy") ? "greedy" : "solver";
   // --policy "holdUp=3,dais,bandleTree,keepForEvelynn=false": how you play, for the engine report.
   const policy = {};
   for (const kv of (opt("--policy") || "").split(",").map((x) => x.trim()).filter(Boolean)) {
@@ -1347,7 +1351,7 @@ async function cmdTry(S, cat, args) {
   const sweepCard = opt("--sweep"), sweepWith = (opt("--with") || "").split(/;/.test(opt("--with") || "") ? ";" : ",").map((x) => x.trim()).filter(Boolean);
   const decks = findDecks(S, opt("--deck") || "\u0000");
   if (decks.length !== 1 || (!specs.length && !sweepCard && !args.includes("--close"))) {
-    console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine] [--points]');
+    console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine] [--points] [--close] [--greedy]   (--greedy: model games on the old plain policy, ~90x faster)');
     console.log('       try --deck "<one of your decks>" --sweep "Card in the deck" --with "Candidate A, Candidate B" (or "A; B" when a name has a comma) [--policy …]');
     if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
     return;
@@ -1404,7 +1408,8 @@ async function cmdTry(S, cat, args) {
   console.log(`  rules: before ${chB.length ? "FAIL " + chB.join(", ") : "all pass"} · after ${chA.length ? "FAIL " + chA.join(", ") : "all pass"}`);
   {
     const bl = [...new Set([...blindSpots(before.cards, cat.BY), ...blindSpots(after.cards, cat.BY)])];
-    console.log(`  the bench can't see: ${bl.length ? bl.join(", ") : "every card's text is read"}; and never your own attacks, conquests or points`);
+    const bd = [...new Set([...blindSpots(before.cards, cat.BY, "board"), ...blindSpots(after.cards, cat.BY, "board")])];
+    console.log(`  the bench can't see: ${bl.length ? bl.join(", ") : "none of the resource text"}; it measures consistency only, so ${bd.length} cards' board and combat text (and every attack, conquest and point) is the points model's (--points, --close)`);
   }
   console.log(`  answers the goldfish tracks (any size, usable on their turn): ${keys.join(", ") || "none"}`);
   console.log(`  field: ${fieldDecks.length} S/A legends, ${fieldDecks.reduce((a, f) => a + f.n, 0)} lists since ${since} (${fieldDecks.reduce((a, f) => a + f.placed, 0)} placed)\n`);
@@ -1452,15 +1457,15 @@ async function cmdTry(S, cat, args) {
   // decks (README, lib/match.mjs). Its goal-tier rows read "—" without it.
   let pb = null, pa = null;
   if (args.includes("--points")) {
-    const pg = Number(opt("--points-games")) || 600, foes = foeLists(fieldDecks);
-    pb = matchReport(before, cat, foes, { games: pg }); pa = matchReport(after, cat, foes, { games: pg });
-    printPoints(pb, pa, pg);
+    const pg = Number(opt("--points-games")) || (mpolicy === "greedy" ? 600 : 60), foes = foeLists(fieldDecks);
+    pb = matchReport(before, cat, foes, { games: pg, policy: mpolicy }); pa = matchReport(after, cat, foes, { games: pg, policy: mpolicy });
+    printPoints(pb, pa, pg, mpolicy);
   }
   // The turn solver on model boards (lib/turn.mjs): opt-in, like the points model.
   if (args.includes("--close")) {
-    const cg = Number(opt("--close-games")) || 300, foes = foeLists(fieldDecks);
-    const cb = closeReport(before, cat, foes, { games: cg }), ca = specs.length ? closeReport(after, cat, foes, { games: cg }) : null;
-    printClose(cb, ca, cg);
+    const cg = Number(opt("--close-games")) || (mpolicy === "greedy" ? 300 : 60), foes = foeLists(fieldDecks);
+    const cb = closeReport(before, cat, foes, { games: cg, policy: mpolicy }), ca = specs.length ? closeReport(after, cat, foes, { games: cg, policy: mpolicy }) : null;
+    printClose(cb, ca, cg, mpolicy);
   }
   // The deck's goal tiers, if its worksheet has a tiers file: the change read against the plan.
   const spec = await loadTiers(before.name);
@@ -1600,7 +1605,7 @@ async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, sinc
   const spec = await loadTiers(deck.name);
   const fieldDecks = await fieldDecksFor(cat, since);
   const base = engineReport(deck, cat, { games, policy, foes: foesOf(deck, cat, fieldDecks) });
-  const pgames = Math.max(300, Math.round(games / 10)), foes = foeLists(fieldDecks);
+  const pgames = 40, foes = foeLists(fieldDecks);   // solver-played model games (24 Nov): ~1 s each, so fewer
   const basePts = matchReport(deck, cat, foes, { games: pgames });
   const tierWord = (after, rep, pts) => {
     if (!spec) return "";

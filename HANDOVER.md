@@ -95,8 +95,14 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    showdown where they control the battlefield (Shen, Kinkou). Tests 197-200; premises (10). On the Sivir deck (60
    games) the close rates didn't move and "the solver can't see" is now none. The last four blind spots are read too
    (lib/fight.mjs `AMBUSH_PLAYS`: an ambusher's play effect as it arrives; Janna, Savior sends an attacker home, which
-   survives at base). Tests 201-203. Nothing in the pool is blind to the turn solver now. What still can't see the card
-   text: the goldfish bench and the points model (lib/sim.mjs, lib/match.mjs: "the bench can't see …" in `try`). The check took 1m12 to 1m55 on 24 Nov, but it
+   survives at base). Tests 201-203. Nothing in the pool is blind to the turn solver now. **Model games on the language (24 Nov, last):**
+   the turn solver plays each side's Main Phase in `lib/match.mjs` (`policy: "solver"`, default; `--greedy` for the old
+   policy); `try --points`/`--close` default to 60 games (~2 min for both on the Sivir deck). Sivir deck, 60 games:
+   points by turn 8 6.75 vs 5.58 (greedy: 7.35 vs 4.83); close from 7: 40% (greedy 45%). Not comparable with older
+   numbers. The goldfish reads draws, tokens and Gold through the language too (units' play draws were never read),
+   and "the bench can't see" lists only resource text it doesn't play (none on the Sivir deck); combat text is named as
+   the points model's. A solver crash fixed on the way: face-down gear without its metadata. Tests turn 204-205,
+   match.test's solver checks. The check took 1m12 to 1m55 on 24 Nov, but it
    never runs the solver: the slow sections are Layout, Deck options and Rendering.
    How a card is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` (or grammar in
    `lib/cardtext.mjs`; cardtext.test fails on a card named twice), an op in ENGINE_OPS and RUN_OPS + an applyOp case

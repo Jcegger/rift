@@ -87,11 +87,16 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   removal (their Defy may counter), Boots, Faefolk's pull, Sivir, Mercenary's two Power; each
   combat by the fight calculator; the gated eighth point. Prints the best line, what breaks it,
   and what it can't see. `try --close [--close-games N]` runs it on model boards: every turn of
-  ours from 6 points in `lib/match.mjs` games against the field, next to what the greedy model
-  did from the same spot (a close rate on model boards, not a win rate). Rules premises:
+  ours from 6 points in `lib/match.mjs` games against the field (60 by default), next to what the
+  model game's own play did from the same spot (a close rate on model boards, not a win rate). Rules premises:
   `docs/rules-rulings.md` "Turn solver premises". Tests: `lib/turn.test.mjs`.
-- `lib/match.mjs` - the points model: our deck plays whole games against real S/A lists, both
-  sides on one plain policy, scored by the rules (Hold at the Beginning Phase, Conquer once per
+- `lib/match.mjs` - the points model: our deck plays whole games against real S/A lists, scored
+  by the rules. **Since 24 Nov 2026 the turn solver plays each side's Main Phase** (`policy: "solver"`:
+  every card's and legend's text through `lib/cardtext.mjs`, a small search a turn, `develop` mode
+  valuing the board for later turns); the match keeps the Beginning Phase, Channel, Draw, sending
+  units out to defend and hiding. About 1 s a game, so `try --points` and `--close` run 60 games by
+  default; `--greedy` brings back the older plain policy (both sides, its own readers, ~90x faster,
+  300/600 games). The two policies' numbers aren't comparable. Under `--greedy`: (Hold at the Beginning Phase, Conquer once per
   battlefield per turn, the gated eighth point, a win at 8 and ahead). Combat is the fight
   calculator; removal that kills a battlefield's last defender stops the hold, a lost
   battlefield trashes its hidden card, counters (Defy, Not So Fast) answer removal, token
