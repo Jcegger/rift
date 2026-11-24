@@ -93,8 +93,10 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    theirs); Rogue Assassin's rescue is tried in every attack we make into their units, after attack triggers; units in
    their hand that can't be played on our turn are no longer blind spots, and their [Reaction] / [Action] units join a
    showdown where they control the battlefield (Shen, Kinkou). Tests 197-200; premises (10). On the Sivir deck (60
-   games) the close rates didn't move and "the solver can't see" is now none. Known blind spots left: four units with
-   play effects that can come in on our turn (Janna, Savior; Lord Broadmane; Grim Apothecary; Morgana, Vindictive). The check took 1m12 to 1m55 on 24 Nov, but it
+   games) the close rates didn't move and "the solver can't see" is now none. The last four blind spots are read too
+   (lib/fight.mjs `AMBUSH_PLAYS`: an ambusher's play effect as it arrives; Janna, Savior sends an attacker home, which
+   survives at base). Tests 201-203. Nothing in the pool is blind to the turn solver now. What still can't see the card
+   text: the goldfish bench and the points model (lib/sim.mjs, lib/match.mjs: "the bench can't see …" in `try`). The check took 1m12 to 1m55 on 24 Nov, but it
    never runs the solver: the slow sections are Layout, Deck options and Rendering.
    How a card is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` (or grammar in
    `lib/cardtext.mjs`; cardtext.test fails on a card named twice), an op in ENGINE_OPS and RUN_OPS + an applyOp case
