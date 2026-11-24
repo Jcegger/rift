@@ -35,8 +35,8 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    `rift close` for a typed-in position, `try --close` on model boards; results in both decklab docs): from 7 a
    winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
    close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
-   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **99.25% of played copies compile, and the
-   solver plays 97.6%** (24 Nov, from 90.5% / 84.8% on 23 Nov morning); floor gate in check.mjs
+   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **99.33% of played copies compile, and the
+   solver plays 97.7%** (24 Nov, from 90.5% / 84.8% on 23 Nov morning); floor gate in check.mjs
    (`model/cardtext-floor.json`, 99% / 97%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
    no-effect with a true reason; never file a points effect that way to move the number.
    **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f, 8ee4a8e, c6bd360, 003a1b3, ca7ca48, 41d19bd, 28ee778, 47ceafa; turn tests 27-106): multi-domain [C] Power paid with any of the card's domains
@@ -58,9 +58,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    pattern for the reader and the solver (a "kill/exhaust a friendly unit" cost would have run free).
    **Every one-off is settled. Jay (24 Nov): build the seven missing features, one at a time.** Done: *spells inside
    fights* (4989d56: a response window, so counters and takeovers answer spells in fights, ours and theirs; board cost
-   and targeting modifiers; rules-rulings.md "Fight solver premises"). Left, 42 cards (50 sentences), in this order:
-   - *Combat internals* (damage order, Tank, excess damage, joining a fight): Soraka, Wanderer and Caitlyn, Patrolling
-     (assigned last), Kayn, Unleashed, Dune Surfer, Sivir, Ambitious, Ava Achiever, Stalking Wolf.
+   and targeting modifiers; rules-rulings.md "Fight solver premises") and *combat internals* (fb5ceb5: Backline wording,
+   Kayn, Dune Surfer, excess damage for Sivir, Ambitious, Ava Achiever, Stalking Wolf; ambushers from hand now stay on the
+   board; cardtext.test fails on a card named twice in the overrides). Left, 35 cards, in this order:
    - *Legends on the board*: Heartening Soul, Royal Entourage, Bard, Mercurial, Profiteer.
    - *Gear Empowered status*: Rage Amplifier's +2, Hextech Disc, Glowstone, Helm of Suppression's larger tax.
    - *The opponent's own choices*: Angler Wyrm, Call to Battle, Whirlwind, Divine Judgment, Invert Timelines.
