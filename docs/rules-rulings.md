@@ -322,7 +322,7 @@ a unit, not a card.
 
 **Date:** 2026-11-23
 **Source:** Derived in this repo from the Core Rules, for `lib/turn.mjs` (card-text batches 4 and 5); no Riot staff ruling read.
-**Rules:** §728, §823.1.c.1, §823.2, §824.1.b.1, §824.1.d, §830.1.b.1, §740.2.a
+**Rules:** §728, §823.1.c.1, §823.2, §824.1.b.1, §824.1.d, §830.1.b.1, §740.2.a, §135.2.e.6, §135.2.e.6.c
 **Expires:** when a Core Rules update changes XP, Hunt, Level, Deploy or "alone"
 
 1. **XP gained this turn counts for Level this turn.** Level is *"functionally short for 'While you have [N] or more
@@ -336,3 +336,8 @@ a unit, not a card.
    including enemy occupied and open battlefields"* (§830.1.b.1). Bomb tokens (§187.12) are Deploy gear.
 4. **"Alone"** is no other friendly unit at the same location (§740.2.a). Units that die in the same combat weren't
    alone, so a Deathknell's "if I died alone" is taken before the dead are removed.
+5. **A multi-domain card's Power is paid with any of its domains.** Signature spells (two domains, Epic, a champion
+   tag) print the own-domain symbol `[C]` (§135.2.e.6), and *"A [C] shorthand on a card with multiple Domains is
+   processed as any power of that card's Domains"* (§135.2.e.6.c, example Defiant Dance). Until 23 Nov the solver paid
+   from the first listed domain only. Accelerate's `[C]` on a multi-domain unit is paid with any domain at all, per the
+   modern FAQs (docs/rules.md, symbols table, which notes it contradicts §135.2.e.6.c's Tibbers example; the FAQ wins).
