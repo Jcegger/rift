@@ -80,8 +80,11 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    Magma Wurm's "enter ready". And triggers run in place (holds, deaths, fire()) now keep their best result by a short
    look ahead, theirs worst for us; they used to keep the first (Explosimian's Bombs at A, Demacian Illuminators'
    buff on whichever unit came first; tests 174-175 fail under the old rule).
-   Known simplifications (in code comments): a counter can't be countered; Rek'Sai, Breacher's Accelerate only from the Champion Zone; their Esteemed Hierophant counts
-   as having 7 runes; model boards (`try --close`) don't pass the legend. The check took 1m12 to 1m55 on 24 Nov, but it
+   **The last three simplifications, gone (24 Nov):** a counter can be countered back once (fights and the main
+   phase); Rek'Sai, Breacher's Accelerate works face down, from the trash and from the discard; Esteemed Hierophant reads
+   their rune count (`--their-runes`; unknown is 7+) and now protects in the main phase too (until 24 Nov our main-phase
+   damage spells killed it). Tests 176-178; rules-rulings.md "Turn solver premises (8)".
+   Known simplifications (in code comments): model boards (`try --close`) don't pass the legend. The check took 1m12 to 1m55 on 24 Nov, but it
    never runs the solver: the slow sections are Layout, Deck options and Rendering.
    How a card is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` (or grammar in
    `lib/cardtext.mjs`; cardtext.test fails on a card named twice), an op in ENGINE_OPS and RUN_OPS + an applyOp case

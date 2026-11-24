@@ -414,3 +414,20 @@ the last 49 cards); no Riot staff ruling read.
    which the position has to give (`rift close --their-runes`); unknown is not met.
 4. **Discarding one card is our choice from hand**; after "draw 1" the drawn card (unknown to the solver) may be the one
    discarded, so that option is always open.
+
+## Turn solver premises (8): counters can be countered, Accelerate away from the hand, Hierophant's runes
+
+**Date:** 2026-11-24
+**Source:** Derived in this repo from the Core Rules and the handbook (`docs/rules.md`), for `lib/turn.mjs` and `lib/fight.mjs`;
+no Riot staff ruling read.
+**Rules:** §813.1.c, §355.9.a.2, §805, §805.6.a
+**Expires:** when a Core Rules update changes Reaction timing or Accelerate
+
+1. **A counter is a spell on the chain, so a Reaction can answer it** (§813.1.c): our Defy can counter their Abandon, and
+   then our spell resolves. The solver searches one answer back (a counter to that counter isn't searched).
+2. **Rek'Sai, Breacher's granted [Accelerate]** is the keyword's optional additional cost, [1][C], paid as the unit is
+   played (§805): face down, from the trash or from the discard, as well as from the Champion Zone. The unit enters ready
+   as a replacement, so nothing watching for a unit becoming ready fires (§805.6.a).
+3. **Esteemed Hierophant** prevents enemy spell and ability damage while its controller has 7+ runes, in the main phase
+   as well as in fights. Their rune count comes from the position (`rift close --their-runes`); unknown is read as 7+.
+
