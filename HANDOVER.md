@@ -36,10 +36,13 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
    close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
    pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **94.2% of played copies compile, and the
-   solver plays 88.1%** (23 Nov evening, from 90.5% / 84.8% that morning; 367 sentences unread); floor gate in check.mjs
-   (`model/cardtext-floor.json`, 94% / 88%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
+   solver plays 89.6%** (23 Nov evening, from 90.5% / 84.8% that morning; 367 sentences unread); floor gate in check.mjs
+   (`model/cardtext-floor.json`, 94% / 89%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
    no-effect with a true reason; never file a points effect that way to move the number.
-   **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae; turn tests 27-47): gear has a location and Bombs are
+   **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f; turn tests 27-51): follow-on sentences with their
+   own condition join the ability before them (Bedeviling Stranger's bounce from hand had never run); XP is this turn's
+   (Level, Hunt, "gain N XP": rules-rulings.md "Turn solver premises (4)"; `rift close --xp`); ~20 more conditions;
+   attack/defend triggers now run before the fight reads Might (their pumps were lost); gear has a location and Bombs are
    modelled (Minefield, Acceptable Losses, Jayce, Command: Attack, Detonation Amplifier, Ziggs, gear auras; Deploy to any
    battlefield, §830.1.b.1; `rift close --gear-b Bomb`); Baron Nashor's Pit is a third battlefield
    (battlefields come from the position; `rift close --pit`; a conquest that draws at the gate still Scores, so at 7
@@ -49,10 +52,12 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    no-effect with reasons. **A solver bug fixed:** fights took their units as printed cards, so -M on an enemy unit
    was lost at combat (now effCard, like ours; a cached fight maps survivors by position). `UNPAID_COST` is one
    pattern for the reader and the solver (a "kill/exhaust a friendly unit" cost would have run free).
-   **Next, heaviest first:** (a) combat
-   triggers beyond the blast (Dune Drake, Demacian Standard, Azir are compiled, not played) and combat statics
-   (Vilemaw, Ambessa); (b) hold triggers run in place on the first result (Explosimian's Bombs land at A); (c) unpaid activated costs (Escaped Grayback, Riven, Deserter; Gutter Palace's Discard 1);
-   (d) unread one-offs (`rift cards --coverage --top 60`): Ekko, Revolutionary, Zed's swap, Bone Skewer (the solver
+   **Next, heaviest first** (`rift cards --coverage`): unmodeled triggers (32 cards, 3,044: Grim Resolve, Lillia, Sett's
+   "played and conquer", Viktor, Riven's "becomes exhausted"); `holdHere` (2, 2,151); counted discounts (`costLess`
+   per, 8, 2,065); conditions still unknown (20, 1,955: combat-only ones, Mobilize, Catalyst, Forsaken Baccai);
+   whenTakesDamage (1,549); allyFights (1,389); unpaid activated costs (8: Escaped Grayback, Riven, Gutter Palace's
+   Discard 1; also "Spend N XP"); [Weaponmaster] (11). Hold triggers run in place on the first result (Explosimian's
+   Bombs land at A). (d) unread one-offs (`rift cards --coverage --top 60`): Ekko, Revolutionary, Zed's swap, Bone Skewer (the solver
    sees their hand, so it isn't no-effect), Flame Chompers (on discard), Demon Shade's conditional mode, The List's
    named tag; then [Level]/XP conditions, [Weaponmaster]. Open rules question: can an effect's play (a token) take
    Rek'Sai's Accelerate? To find a batch: `rift cards "<name>"`, then peel triggers/conditions as `parseSentence`
