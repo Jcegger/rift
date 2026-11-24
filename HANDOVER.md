@@ -35,11 +35,13 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    `rift close` for a typed-in position, `try --close` on model boards; results in both decklab docs): from 7 a
    winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
    close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
-   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **94.1% of played copies compile, and the
-   solver plays 87.3%** (23 Nov evening, from 90.5% / 84.8% that morning; 368 sentences unread); floor gate in check.mjs
-   (`model/cardtext-floor.json`, 94% / 87%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
+   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **94.2% of played copies compile, and the
+   solver plays 88.1%** (23 Nov evening, from 90.5% / 84.8% that morning; 367 sentences unread); floor gate in check.mjs
+   (`model/cardtext-floor.json`, 94% / 88%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
    no-effect with a true reason; never file a points effect that way to move the number.
-   **Done 23 Nov evening** (a993d82, 4291db6, 50589e5; turn tests 27-37): Baron Nashor's Pit is a third battlefield
+   **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae; turn tests 27-47): gear has a location and Bombs are
+   modelled (Minefield, Acceptable Losses, Jayce, Command: Attack, Detonation Amplifier, Ziggs, gear auras; Deploy to any
+   battlefield, §830.1.b.1; `rift close --gear-b Bomb`); Baron Nashor's Pit is a third battlefield
    (battlefields come from the position; `rift close --pit`; a conquest that draws at the gate still Scores, so at 7
    "Baron first, then conquer B" wins: rules-rulings.md, Baron entry), Confront, Last Caress, Mirror Image, Gutter
    Palace's alternate win, Kayle (Empowered as a count), Herald of Scales, Sky Splitter, Rek'Sai (Champion Zone only),
@@ -47,11 +49,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    no-effect with reasons. **A solver bug fixed:** fights took their units as printed cards, so -M on an enemy unit
    was lost at combat (now effCard, like ours; a cached fight maps survivors by position). `UNPAID_COST` is one
    pattern for the reader and the solver (a "kill/exhaust a friendly unit" cost would have run free).
-   **Next, heaviest first:** (a) **gear at battlefields and Bomb tokens**: gear has no location in the solver and
-   there's no Bomb card in the catalog; this unblocks Jayce (op freeGear), Acceptable Losses and Hexplosive Minefield
-   (killGear), Command: Attack (moveGear), Ziggs's gear statics, Detonation Amplifier's Deathknell-here; (b) combat
+   **Next, heaviest first:** (a) combat
    triggers beyond the blast (Dune Drake, Demacian Standard, Azir are compiled, not played) and combat statics
-   (Vilemaw, Ambessa); (c) unpaid activated costs (Escaped Grayback, Riven, Deserter; Gutter Palace's Discard 1);
+   (Vilemaw, Ambessa); (b) hold triggers run in place on the first result (Explosimian's Bombs land at A); (c) unpaid activated costs (Escaped Grayback, Riven, Deserter; Gutter Palace's Discard 1);
    (d) unread one-offs (`rift cards --coverage --top 60`): Ekko, Revolutionary, Zed's swap, Bone Skewer (the solver
    sees their hand, so it isn't no-effect), Flame Chompers (on discard), Demon Shade's conditional mode, The List's
    named tag; then [Level]/XP conditions, [Weaponmaster]. Open rules question: can an effect's play (a token) take
