@@ -35,11 +35,11 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    `rift close` for a typed-in position, `try --close` on model boards; results in both decklab docs): from 7 a
    winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
    close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
-   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **98.9% of played copies compile, and the
-   solver plays 97.3%** (24 Nov, from 90.5% / 84.8% on 23 Nov morning; 111 sentences unread); floor gate in check.mjs
-   (`model/cardtext-floor.json`, 98% / 97%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
+   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **99.0% of played copies compile, and the
+   solver plays 97.4%** (24 Nov, from 90.5% / 84.8% on 23 Nov morning); floor gate in check.mjs
+   (`model/cardtext-floor.json`, 99% / 97%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
    no-effect with a true reason; never file a points effect that way to move the number.
-   **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f, 8ee4a8e, c6bd360, 003a1b3, ca7ca48, 41d19bd, 28ee778; turn tests 27-100): multi-domain [C] Power paid with any of the card's domains
+   **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f, 8ee4a8e, c6bd360, 003a1b3, ca7ca48, 41d19bd, 28ee778, 47ceafa; turn tests 27-106): multi-domain [C] Power paid with any of the card's domains
    (§135.2.e.6.c; Jay: two-domain Power is usually a signature spell); the ~200 heaviest
    one-offs (Vilemaw, Ekko, Zed, Demon Shade, Bone Skewer, Nami, Lacerate and more, or filed with reasons); ~20 triggers on
    existing hooks (hold, fights, plays, moves, deaths, stuns, ready), Imperial Decree, counted discounts, costs paid with
@@ -56,21 +56,28 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    no-effect with reasons. **A solver bug fixed:** fights took their units as printed cards, so -M on an enemy unit
    was lost at combat (now effCard, like ours; a cached fight maps survivors by position). `UNPAID_COST` is one
    pattern for the reader and the solver (a "kill/exhaust a friendly unit" cost would have run free).
-   **Next, heaviest first** (`rift cards --coverage`): the solver-only gaps are now small (conditions 20 cards / 1,955,
-   combat-only mostly; counted discounts from the trash 3 / 1,621; [Weaponmaster] 11 / 1,103; unmodeled triggers 22 / 942;
-   modal 2 / 744). **111 sentences unread**: ~55 one-offs under 18 copies each (one more pass), and the left-on-purpose list.
-   Left on purpose (batches 7-11): Kayn, Unleashed, Wallop's free cast, Royal Entourage, Ava Achiever, Transpositionist,
-   Dancing Grenade, Mystic Reversal, Glowstone, Dominus's granted ability, Hextech Disc, Profiteer, Azir, Ascendant's Equipment swap,
-   Commander Ledros, Esteemed Hierophant, Caitlyn's damage order, Heartening Soul (legends aren't on the board), Heimerdinger, Inventor,
-   Gangplank, Naval, Angler Wyrm, Rage Amplifier's Empowered +2, Stalking Wolf, Spirit of the Forge, Square Up, Unyielding Spirit, Alpha Wildclaw, Soraka's damage order, Invert Timelines, Brazen Buccaneer, Shady
-   Spectacles, Lilting Lullaby's lock, Fallen Feline, Helm of Suppression and Vex, Cheerless (their spell costs in fights), Rebuttal, Svellsongur, Alpha Strike's
-   split, Chronobreak, Curtain Call, Hextech Gauntlets, Akshan, Relentless Pursuit, Friendship. Hold triggers run in place on the first result (Explosimian's Bombs land at A). (d) unread one-offs (`rift cards --coverage --top 60`): Ekko, Revolutionary, Zed's swap, Bone Skewer (the solver
-   sees their hand, so it isn't no-effect), Flame Chompers (on discard), Demon Shade's conditional mode, The List's
-   named tag; then [Level]/XP conditions, [Weaponmaster]. Open rules question: can an effect's play (a token) take
-   Rek'Sai's Accelerate? To find a batch: `rift cards "<name>"`, then peel triggers/conditions as `parseSentence`
-   does. A new op needs ENGINE_OPS (cardtext) and RUN_OPS + an applyOp case (turn); a spell's follow-on sentence is
-   folded into the one before (`kind: "folded"`). Later: move lib/sim.mjs and lib/match.mjs onto the same language,
-   so the model boards `try --close` uses get as rich as the solver.
+   **Every one-off is settled. What's unread is 54 cards (67 sentences), each waiting on a feature the solver lacks**
+   (Jay's call, 24 Nov: build them, or call 100% "read, filed, or listed with the missing feature"):
+   - *Their spells inside fights* (lib/fight.mjs reads their tricks with its own reader): Helm of Suppression, Vex,
+     Cheerless, Rebuttal, Mystic Reversal, Unyielding Spirit, Alpha Wildclaw, Lilting Lullaby's lock, Fallen Feline,
+     Esteemed Hierophant, Gangplank, Naval, Syndra, Transcendent, Decree of Focus.
+   - *Combat internals* (damage order, Tank, excess damage, joining a fight): Soraka, Wanderer and Caitlyn, Patrolling
+     (assigned last), Kayn, Unleashed, Dune Surfer, Sivir, Ambitious, Ava Achiever, Stalking Wolf.
+   - *Legends on the board*: Heartening Soul, Royal Entourage, Bard, Mercurial, Profiteer.
+   - *Gear Empowered status*: Rage Amplifier's +2, Hextech Disc, Glowstone.
+   - *The opponent's own choices*: Angler Wyrm, Call to Battle, Whirlwind, Divine Judgment, Invert Timelines.
+   - *Unusual costs*: Kraken Hunter, Wallop, Brazen Buccaneer, Spirit of the Forge, Commander Ledros, Square Up,
+     Chronobreak, Temporal Portal, Hextech Gauntlets, Irelia, Graceful.
+   - *Copies and one-of-a-kind effects*: Svellsongur, Shady Spectacles, Heimerdinger, Inventor, Dominus, Transpositionist,
+     Azir, Ascendant's Equipment swap, Akshan, Relentless Pursuit, Curtain Call, Alpha Strike's split, Dancing Grenade,
+     Stealthy Pursuer, Shard of Undoing.
+   Known simplifications (in code comments): hold and fight triggers run in place (a fight trigger now takes the target
+   that's best for its side; hold triggers still take the first, so Explosimian's Bombs land at A); Rek'Sai, Breacher's
+   Accelerate only from the Champion Zone; Lotus Trap and Ambessa's damage rules apply outside fights only.
+   How a batch is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` (or grammar in
+   `lib/cardtext.mjs`), a new op in ENGINE_OPS and RUN_OPS + an applyOp case (`lib/turn.mjs`), a closing-turn test with
+   its no-win twin, the floor raised. Later: move lib/sim.mjs and lib/match.mjs onto the same language, so the model
+   boards `try --close` uses get as rich as the solver.
 
 1. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook
    or memory.
