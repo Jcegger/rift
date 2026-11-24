@@ -74,11 +74,13 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    Orianna, Exquisite and Sacred Protector never dealt combat damage (their "unless" was ignored); fights didn't use
    Monster Harpoon's 4 or Sudden Storm's 4 against an attacker; "discard 1" was filed as a draw. Filed with reasons:
    Karma, Channeler (draw: the revised text says Main Deck), Symbol of the Solari (noPoints), Viktor, Innovator (their
-   turn). Not tested by a closing turn: Atakhan, Rhasa, Shadowblade Lurker, Heimerdinger, Undying Loyalty, Lux,
-   Sanctum Conservator, Renekton, Pirate's Haven, Prize of Progress, Aphelios, Petal Pixie (each read by its hook).
-   `lib/engines.test.mjs` fails 2 (Renata Glasc's reader; legends 51 of 58): it fails the same without this work.
-   Known simplifications (in code comments): hold triggers take their first result (Explosimian's Bombs land at A); a
-   counter can't be countered; Rek'Sai, Breacher's Accelerate only from the Champion Zone; their Esteemed Hierophant counts
+   turn). **Bug pass (24 Nov, later):** closing-turn tests for the 12 cards that had none (162-173) found three more:
+   Petal Pixie crashed the solver (her count recursed); "play a token here" was read as "to your base" (11 cards:
+   Noxian Drummer's Recruit never joined his fight); units played from the trash, the discard or for free ignored
+   Magma Wurm's "enter ready". And triggers run in place (holds, deaths, fire()) now keep their best result by a short
+   look ahead, theirs worst for us; they used to keep the first (Explosimian's Bombs at A, Demacian Illuminators'
+   buff on whichever unit came first; tests 174-175 fail under the old rule).
+   Known simplifications (in code comments): a counter can't be countered; Rek'Sai, Breacher's Accelerate only from the Champion Zone; their Esteemed Hierophant counts
    as having 7 runes; model boards (`try --close`) don't pass the legend. The check took 1m12 to 1m55 on 24 Nov, but it
    never runs the solver: the slow sections are Layout, Deck options and Rendering.
    How a card is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` (or grammar in
@@ -92,8 +94,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    bans, `banned.json` unchanged). First refresh on the new code (manual, 23 Nov 20:09 UTC) was green in 9 minutes (data bf0a507, site b514fb5). GitHub fires the scheduled runs 4-10 hours late and sometimes skips one; if that starts to matter, start the refresh from a scheduled cloud agent and keep one GitHub cron as a backup. The post-ban
    field is 2 lists so far (`scripts/rift meta --since 2026-11-23`); no matchup advice from it until after 29-30 Nov.
 3. **Drifted tests settled (23 Nov):** `infer.test` passes again. `engines.test`: Pyke and Renekton read right now and are
-   off KNOWN_MISSES; Riven (71 of 957 lists left legal) and Irelia (37 of 428) are on it as TEMPORARY. After 29-30 Nov,
-   re-read both entries in `docs/archetypes.md` from post-ban lists and take them off.
+   off KNOWN_MISSES; Riven (71 of 957 lists left legal) and Irelia (37 of 428) are on it as TEMPORARY, and since 24 Nov
+   Renata Glasc, Chem-Baroness (0 placed lists left legal; the 61 unplaced ones read as a gear loop). After 29-30 Nov,
+   re-read the three entries in `docs/archetypes.md` from post-ban lists and take them off.
 4. **Sim gaps still open** (README, "Keywords the sims do not read"): Trinity Force's hold point and other conquer/hold
    strips, Level/Hunt, Weaponmaster, Quick-Draw, Legion.
 5. **Baron Pit settled (21 Nov):** it gates the eighth-point conquest. A battlefield token is a battlefield
