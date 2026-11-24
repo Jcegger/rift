@@ -53,6 +53,7 @@ import { versus, weigh, effectsOf, looksInteractive, unreadSentences, withGear }
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf, blindSpots } from "../lib/decklab.mjs";
 import { matchReportPar, closeReportPar, matchRecordsPar } from "../lib/match-pool.mjs";
 import { halving } from "../lib/search.mjs";
+import { POLICY_SOLVE } from "../lib/match.mjs";
 import { calibrationSet, topLists, realRow, pearson, spearman, mae, modelTable } from "../lib/calibrate.mjs";
 import { paired, wilson, twoRates } from "../lib/stats.mjs";
 
@@ -1711,18 +1712,18 @@ async function cmdSearch(S, cat, args) {
 async function cmdCalibrate(S, cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   const since = opt("--since") || "2026-10-16", N = Number(opt("--legends") || 12), reps = Number(opt("--reps") || 4), K = Number(opt("--lists") || 3);
-  const policy = args.includes("--greedy") ? "greedy" : "solver";
+  const policy = args.includes("--greedy") ? "greedy" : "solver", nodes = Number(opt("--nodes")) || null;   // --nodes: the solver's search budget a Main Phase (POLICY_SOLVE.maxNodes)
   const W = await readJson(url("winrates.json")), snap = await readJson(url("decks.json"));
   const { legends, by } = calibrationSet(cat, snap.decks, W, { since, N });
   const set = new Set(legends);
   const t0 = Date.now();
   console.log(`CALIBRATE  ${legends.length} legends (top by RiftLite games, with lists since ${since}): ${legends.join(", ")}`);
-  console.log(`  each plays its best list against the others' top ${K} lists, ${reps} rounds (both seats), ${policy} policy`);
+  console.log(`  each plays its best list against the others' top ${K} lists, ${reps} rounds (both seats), ${policy} policy, ${nodes || POLICY_SOLVE.maxNodes} nodes a Main Phase`);
   const runs = [];
   for (const L of legends) {
     const me = topLists(by[L], 1)[0];
     const foes = legends.filter((M) => M !== L).flatMap((M) => topLists(by[M], K).map((d) => ({ label: M, cards: d.cards })));
-    const recs = await matchRecordsPar({ cards: me.cards }, cat, foes, { games: foes.length * reps, policy });
+    const recs = await matchRecordsPar({ cards: me.cards }, cat, foes, { games: foes.length * reps, policy, ...(nodes ? { solve: { ...POLICY_SOLVE, maxNodes: nodes } } : {}) });
     runs.push({ me: L, recs });
     process.stdout.write(`  ${L}: ${recs.length} games\n`);
   }

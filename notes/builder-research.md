@@ -28,13 +28,22 @@ without Jay's yes.** When an item is built or dropped, move it to the end with t
 
 In the order the calibration suggests: first what makes the model wrong, then what makes it cheaper.
 
-0. **Why Sett and Ornn lose in the model.** Both are engine legends whose plan is text the model may misplay:
-   - Sett: The Boss's buff-and-recall save, Call to Glory, Showstopper.
-   - Ornn: gear-only Power from the legend, Seal of Focus, Pit Crew, Sterak's Gage.
-
-   Next step: replay a few of their model games turn by turn (`rift close` on the positions), find the missed line,
-   and fix it in turn.mjs or match.mjs with a test. Re-run `rift calibrate --write` after each fix. The target: r
-   above 0.6 with Sett and Ornn in, before any swap is judged on model games.
+0. **Why Sett and Ornn lose in the model.**
+   - **Sett: found and fixed** (aa2198b, 24 Nov). Fiora, Victorious's Mighty keywords recursed until the solver threw,
+     and the match skipped the Main Phase: 11 times in 6 games. Sett 15% → 43% (real 53%); r 0.17 → 0.29, error
+     13.1 → 10.2. A check.mjs gate now fails on any solver error in a calibration legend's game.
+   - **Ornn: still 14% (real 49%), and not the search budget.**
+     - At 600 nodes Ornn is the same 14%, and r drops to 0.27 overall.
+     - Traced turn by turn (24 Nov), the solver's own turns are sensible: a 2-drop on turn 1, empty battlefields
+       conquered, Sterak's Gage attached for a 6-Might attack.
+     - Its small units then die defending on the opponent's turn.
+     - Suspects, to check in this order:
+       1. How the match plays our side on *their* turn: defending, Reactions. Ornn's Defy ×3 and Charm are held up in
+          reality.
+       2. Whether the best-placed list is representative: `topLists` picks one list; try the crowd list.
+       3. Twelve turns to 8 points favours fast decks; check how often Ornn games would have gone longer.
+     - Next step: play Ornn's top 3 lists against Nasus with a per-turn log of their turn too (a `trace` hook in
+       playMatch for both sides).
 
 1. **Hidden hands in model fights.** Both sides see each other's hand when the fight calculator plays combat tricks
    (lib/match.mjs header). Reactive decks get credit for tricks the opponent would have played around, and proactive
