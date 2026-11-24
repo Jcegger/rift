@@ -35,9 +35,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    `rift close` for a typed-in position, `try --close` on model boards; results in both decklab docs): from 7 a
    winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
    close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
-   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **99.70% of played copies compile, and the
-   solver plays 98.3%** (24 Nov, from 90.5% / 84.8% on 23 Nov morning); floor gate in check.mjs
-   (`model/cardtext-floor.json`, 99% / 98%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
+   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **100% of played copies compile (all 963 legal cards), and
+   the solver plays 98.5%** (24 Nov, from 90.5% / 84.8% on 23 Nov morning); floor gate in check.mjs
+   (`model/cardtext-floor.json`, 99.5% / 98%; check.mjs prints the floor rounded, so "at least 100%"). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
    no-effect with a true reason; never file a points effect that way to move the number.
    **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f, 8ee4a8e, c6bd360, 003a1b3, ca7ca48, 41d19bd, 28ee778, 47ceafa; turn tests 27-106): multi-domain [C] Power paid with any of the card's domains
    (§135.2.e.6.c; Jay: two-domain Power is usually a signature spell); the ~200 heaviest
@@ -56,29 +56,25 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    no-effect with reasons. **A solver bug fixed:** fights took their units as printed cards, so -M on an enemy unit
    was lost at combat (now effCard, like ours; a cached fight maps survivors by position). `UNPAID_COST` is one
    pattern for the reader and the solver (a "kill/exhaust a friendly unit" cost would have run free).
-   **Every one-off is settled. Jay (24 Nov): build the seven missing features, one at a time.** Done: *spells inside
-   fights* (4989d56: a response window, so counters and takeovers answer spells in fights, ours and theirs; board cost
-   and targeting modifiers; rules-rulings.md "Fight solver premises") and *combat internals* (fb5ceb5: Backline wording,
-   Kayn, Dune Surfer, excess damage for Sivir, Ambitious, Ava Achiever, Stalking Wolf; ambushers from hand now stay on the
-   board; cardtext.test fails on a card named twice in the overrides) and *legends on the board* (b7b7ac1: `pos.legend`,
-   `rift close --legend`; its activated abilities are played; legend triggers and statics not yet; model boards don't
-   pass the legend, since match.mjs already plays its Gold) and *gear Empowered* (e0a5fbb: gearMeta.empowered,
-   `pos.gearEmpowered`; also fixed "Your units have +N M", read as a tag nobody has) and *the opponent's choices*
-   (0aafcd2: theirPick, the option worst for us by a short search of our reply; rules-rulings.md premises (5)). The check's
-   run time went from ~1m12 to 1m55 on 24 Nov, but check.mjs never runs the solver, fights or model games: the slow
-   sections are Layout, Deck options and Rendering. Worth a look if it keeps growing. *Unusual costs* (afa4413: additional
-   costs as options; every Equip cost form, so 22 Equipment are equippable at last; [Weaponmaster]; Assault/Shield/Hunt sum
-   across sources, §807.2, which lib/versus.mjs keywordOf had wrong). Left, 13 cards, one feature:
-   - *Copies and one-of-a-kind effects*: Svellsongur, Shady Spectacles, Heimerdinger, Inventor, Dominus, Transpositionist,
-     Azir, Ascendant's Equipment swap, Akshan, Relentless Pursuit, Curtain Call, Alpha Strike's split, Dancing Grenade,
-     Stealthy Pursuer, Shard of Undoing.
-   Known simplifications (in code comments): hold and fight triggers run in place (a fight trigger now takes the target
-   that's best for its side; hold triggers still take the first, so Explosimian's Bombs land at A); Rek'Sai, Breacher's
-   Accelerate only from the Champion Zone; Lotus Trap and Ambessa's damage rules apply outside fights only.
-   How a batch is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` (or grammar in
-   `lib/cardtext.mjs`), a new op in ENGINE_OPS and RUN_OPS + an applyOp case (`lib/turn.mjs`), a closing-turn test with
-   its no-win twin, the floor raised. Later: move lib/sim.mjs and lib/match.mjs onto the same language, so the model
-   boards `try --close` uses get as rich as the solver.
+   **Goal reached (24 Nov): every sentence is read or filed no-effect with a reason.** The last 54 cards needed seven solver
+   features, all built and pushed: spells inside fights (4989d56: counters and takeovers answer spells in fights; board
+   cost and targeting modifiers), combat internals (fb5ceb5), our legend on the board (b7b7ac1: `pos.legend`, `rift
+   close --legend`), gear Empowered (e0a5fbb), the opponent's choices (0aafcd2: worst-for-us by a short search), unusual
+   costs (afa4413: additional costs as options, every Equip cost form, [Weaponmaster], Assault/Shield/Hunt sum), copies and
+   one-of-a-kind effects (3c078c7). Rules premises: rules-rulings.md "Fight solver premises" and "Turn solver premises
+   (4)-(6)". Real bugs found on the way, all fixed: [Temporary] units used to hold; fight Deathknells ran at base; ambushers
+   from hand vanished after the fight; "Your units have +N M" never applied; the state memo ignored a unit's card.
+   **What the solver still doesn't play** (49 cards, ~1.5% of played copies; `rift cards --coverage` lists them): conditions
+   it can't evaluate (19: in a showdown, excess damage, Tryndamere, Kai'Sa, Rebel), discounts that count the trash (Rhasa,
+   Shadowblade Lurker), rare unmodeled triggers (21), Hwei's and Minah's modes, The List's named tag, two unpaid costs.
+   Known simplifications (in code comments): hold triggers take their first result (Explosimian's Bombs land at A); a
+   counter can't be countered; Rek'Sai, Breacher's Accelerate only from the Champion Zone; their Esteemed Hierophant counts
+   as having 7 runes; model boards (`try --close`) don't pass the legend. The check took 1m12 to 1m55 on 24 Nov, but it
+   never runs the solver: the slow sections are Layout, Deck options and Rendering.
+   How a card is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` (or grammar in
+   `lib/cardtext.mjs`; cardtext.test fails on a card named twice), an op in ENGINE_OPS and RUN_OPS + an applyOp case
+   (`lib/turn.mjs`), a closing-turn test with its no-win twin. Later: move lib/sim.mjs and lib/match.mjs onto the same
+   language, so the model boards `try --close` uses get as rich as the solver.
 
 1. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook
    or memory.
