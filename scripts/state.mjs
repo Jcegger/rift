@@ -51,7 +51,7 @@ import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, dec
 import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive, unreadSentences, withGear } from "../lib/versus.mjs";
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf, blindSpots } from "../lib/decklab.mjs";
-import { matchReport } from "../lib/match.mjs";
+import { matchReportPar, closeReportPar } from "../lib/match-pool.mjs";   // every core; same numbers as matchReport/closeReport
 
 // The S/A field's lists as opponents for lib/match.mjs, in a fixed shuffled order, so a before
 // and an after play the same opponents in the same order (paired games).
@@ -95,7 +95,7 @@ function printClose(cb, ca, games, policy = "solver") {
 }
 import { graphOf, loopsOf, linksOf, hubsOf, bridgesOf, RESOURCES } from "../lib/interactions.mjs";
 import { fight } from "../lib/fight.mjs";
-import { solveTurn, breakers, closeReport, turnReads, BOMB } from "../lib/turn.mjs";
+import { solveTurn, breakers, turnReads, BOMB } from "../lib/turn.mjs";
 import { poolCoverage, compile, engineReads } from "../lib/cardtext.mjs";
 import { matchupLine } from "../lib/winrates.mjs";
 import { avoidedIn } from "../lib/avoid.mjs";
@@ -1458,13 +1458,13 @@ async function cmdTry(S, cat, args) {
   let pb = null, pa = null;
   if (args.includes("--points")) {
     const pg = Number(opt("--points-games")) || (mpolicy === "greedy" ? 600 : 60), foes = foeLists(fieldDecks);
-    pb = matchReport(before, cat, foes, { games: pg, policy: mpolicy }); pa = matchReport(after, cat, foes, { games: pg, policy: mpolicy });
+    [pb, pa] = await Promise.all([matchReportPar(before, cat, foes, { games: pg, policy: mpolicy }), matchReportPar(after, cat, foes, { games: pg, policy: mpolicy })]);
     printPoints(pb, pa, pg, mpolicy);
   }
   // The turn solver on model boards (lib/turn.mjs): opt-in, like the points model.
   if (args.includes("--close")) {
     const cg = Number(opt("--close-games")) || (mpolicy === "greedy" ? 300 : 60), foes = foeLists(fieldDecks);
-    const cb = closeReport(before, cat, foes, { games: cg, policy: mpolicy }), ca = specs.length ? closeReport(after, cat, foes, { games: cg, policy: mpolicy }) : null;
+    const [cb, ca] = await Promise.all([closeReportPar(before, cat, foes, { games: cg, policy: mpolicy }), specs.length ? closeReportPar(after, cat, foes, { games: cg, policy: mpolicy }) : null]);
     printClose(cb, ca, cg, mpolicy);
   }
   // The deck's goal tiers, if its worksheet has a tiers file: the change read against the plan.
@@ -1606,7 +1606,7 @@ async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, sinc
   const fieldDecks = await fieldDecksFor(cat, since);
   const base = engineReport(deck, cat, { games, policy, foes: foesOf(deck, cat, fieldDecks) });
   const pgames = 40, foes = foeLists(fieldDecks);   // solver-played model games (24 Nov): ~1 s each, so fewer
-  const basePts = matchReport(deck, cat, foes, { games: pgames });
+  const basePts = await matchReportPar(deck, cat, foes, { games: pgames });
   const tierWord = (after, rep, pts) => {
     if (!spec) return "";
     const tb = scoreTiers(spec, { shape: shapeOf(deck, cat.BY), field: fieldOf(deck, cat.BY, fieldDecks), engine: base.scenarios, points: basePts },
@@ -1626,7 +1626,7 @@ async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, sinc
     catch (e) { console.log(`  ${cand}: ${e.message}`); continue; }
     const rules = deckChecks(after, cat.idx).filter((x) => x.ok === false).map((x) => x.label);
     const rep = engineReport(after, cat, { games, policy, foes: foesOf(after, cat, fieldDecks) });
-    const pts = rep.pts = matchReport(after, cat, foes, { games: pgames });
+    const pts = rep.pts = await matchReportPar(after, cat, foes, { games: pgames });
     console.log(line(`${qty} ${parseChanges([`+${cand}`], cat.cards)[0].name}${rules.length ? " (rules: " + rules.join(", ") + ")" : ""}`, rep) + tierWord(after, rep, pts));
   }
   console.log(`  pts8 / thr8 = our and their points by turn 8 (lib/match.mjs, ${pgames} model games) · Energy = spent turns 1–4 (quiet) · 2u t2 = two units by turn 2 · u5 = units by turn 5 · ans = attacks answered · Eve pts = Evelynn's points by turn 8 (normal) · crowd = tricks crowded out by Energy (normal). Not win rates.`);
