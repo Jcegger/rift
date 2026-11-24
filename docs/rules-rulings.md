@@ -317,3 +317,22 @@ a unit, not a card.
 5. **Zhonya's Hourglass is classified "no points change"**: its save recalls the unit, so the battlefield is left
    just as if it had died. The card survives for later turns.
 
+
+## Turn solver premises (4): XP this turn turns Level on this turn; Hunt pays on every Conquer; Deploy goes anywhere
+
+**Date:** 2026-11-23
+**Source:** Derived in this repo from the Core Rules, for `lib/turn.mjs` (card-text batches 4 and 5); no Riot staff ruling read.
+**Rules:** §728, §823.1.c.1, §823.2, §824.1.b.1, §824.1.d, §830.1.b.1, §740.2.a
+**Expires:** when a Core Rules update changes XP, Hunt, Level, Deploy or "alone"
+
+1. **XP gained this turn counts for Level this turn.** Level is *"functionally short for 'While you have [N] or more
+   XP, this card gains [Text]'"* (§824.1.b.1), and it goes inactive *"as soon as the controlling player has less than
+   [N] XP"* (§824.1.d). XP is a player resource (§728). So "gain N XP" is not a next-turn resource: the solver adds it
+   to `s.xp` at once (until 23 Nov it was filed `later`, which was wrong).
+2. **Hunt pays on the Conquer, even one swapped for a draw at 7.** Hunt is *"When I Conquer or Hold, my controller
+   gains X XP"* (§823.1.c.1), summed across sources (§823.2). The Conquer happens whether or not its point is
+   replaced (see the Baron Pit entry: Scoring isn't Gaining Points).
+3. **Deploy gear goes to any battlefield.** *"Deploy grants permission for Gear to be played to any Battlefield,
+   including enemy occupied and open battlefields"* (§830.1.b.1). Bomb tokens (§187.12) are Deploy gear.
+4. **"Alone"** is no other friendly unit at the same location (§740.2.a). Units that die in the same combat weren't
+   alone, so a Deathknell's "if I died alone" is taken before the dead are removed.
