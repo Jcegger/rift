@@ -4,123 +4,42 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `~/projects/dotclaude/HUB.md`.
 
-**Updated:** 2026-11-24
+**Updated:** 2026-11-24 (end of session)
 
 ## State
 
-- Main deck: **Sivir Is Trying Her Best**, locked for testing since 1 Nov. Change it only from game results. Nexus Night
-  3 Nov went 2–1 in matches (games 5–4); Jay's takeaways: don't spend too much Power early, and Innovator is better as
-  Gold early, draw later.
-- Rules, play advice and deck writes go through the `rules-question`, `play-advice` and `deck-write` skills
-  (2026-11-21); `scripts/check.mjs` reads the rules lookup order from the `rules-question` skill.
-- rift now commits and pushes finished work once `scripts/check.mjs` passes (Jay, 21 Nov; dotclaude 2a93368).
-- **21 Nov audit done** (commits from 9ed5076 on): gear strips (`xb`), keywords read as the card has them
-  (`keywordOf`), gear on units (`withGear`), Tank/Backline in fights, Riot's "Mights" rewording (Switcheroo had been
-  invisible to the tools since 28 Oct), Reckless Innovator's Gold in both sims, readers tested against real cards
-  (`READERS`), the handbook's Radiance FAQ section, Rengar's Ambush corrected in the deck brief. The refresh had been
-  cancelled by its time limit three runs running (20–21 Nov): tests now run after the commit, the limit is 40 minutes,
-  and a cancel opens the tracking issue. A hand-started run then lost its data to a push race (I pushed mid-run), so
-  the data commit now rebases and retries.
+- Main deck: **Sivir Is Trying Her Best**, back to Jay's earlier list since 24 Nov (Ride the Wind ×3 main; Acceptable
+  Losses in the sideboard; 9eab02c, row backed up in `backups/state-pre-ridethewind-2026-11-24.json`). Guide, both
+  sheets, the brief and the worksheet log match it; reMarkable and Kobo have it. Jay: "we can work on changes later now
+  that our system is better."
+- **The turn solver reads every card and legend** (`lib/cardtext.mjs`, `lib/turn.mjs`, `lib/fight.mjs`): 963/963 legal
+  cards and 58/58 legends, every printing and errata wording (check.mjs gates all three). No known simplifications or
+  blind spots are left; the rules premises behind it are `docs/rules-rulings.md` "Turn solver premises" (1)–(10) and
+  "Fight solver premises". Commits 3c078c7 through e32f6b5 (24 Nov); turn tests up to 205.
+- **Model games are played by the solver** since e32f6b5 (`lib/match.mjs` `policy: "solver"`; `--greedy` for the old
+  policy). `try --points`/`--close` default to 60 games, about 2 minutes for both. Numbers from before 24 Nov aren't
+  comparable (Sivir deck: points by turn 8 6.75 vs 5.58; close from 7 40%).
+- How a card is done (if a new set lands): `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` or grammar
+  in `lib/cardtext.mjs`, an op in ENGINE_OPS and RUN_OPS + an applyOp case, a closing-turn test with its no-win twin.
+- Rules, play advice, deck proposals and deck writes go through the `rules-question`, `play-advice`, `deck-build` and
+  `deck-write` skills. rift commits and pushes finished work once `scripts/check.mjs` passes.
 
 ## Next
 
-0. **Sivir (24 Nov):** back to Jay's earlier list (−3 On the Hunt +3 Ride the Wind; sideboard −Repulse +Acceptable
-   Losses), **live** (row backed up; guide, sheets, brief and worksheet log updated; reMarkable pushed). Jay: changes
-   later, judged with the rebuilt system. (21 Nov the swap had gone the other way.) Two tracks for Jay to read: `decklab/sivir-tune.md` (hold; first candidate −1 Ember Monk
-   +1 Ezreal) and `decklab/sivir-brew.md` ("Bounty Board": 3 Graves main, a kill engine; new deck, low confidence,
-   loses on answers). Decide after the first post-ban weekend (29–30 Nov) and games. Deck work goes through the
-   `deck-build` skill (`docs/deckbuilding-theory.md` added 21 Nov). **RiftLite win rates** are a daily source
-   (`data/winrates.json`, online user-submitted games; `rift versus` prints the line); watch the first refresh with
-   11 sources. **Testing is three layers** (README "Simulator"): the goldfish now prints "the bench can't see"
-   and reads Graves, Pyke, Broker, Academy and Gutter Guardian. **The turn solver is built** (`lib/turn.mjs`:
-   `rift close` for a typed-in position, `try --close` on model boards; results in both decklab docs): from 7 a
-   winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
-   close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
-   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **100% of played copies compile (all 963 legal cards), and
-   the solver plays all 963 too** (24 Nov, from 90.5% / 84.8% on 23 Nov morning); floor gate in check.mjs
-   (`model/cardtext-floor.json`, 99.5% / 99.5%; check.mjs prints the floor rounded, so "at least 100%"). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
-   no-effect with a true reason; never file a points effect that way to move the number.
-   **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f, 8ee4a8e, c6bd360, 003a1b3, ca7ca48, 41d19bd, 28ee778, 47ceafa; turn tests 27-106): multi-domain [C] Power paid with any of the card's domains
-   (§135.2.e.6.c; Jay: two-domain Power is usually a signature spell); the ~200 heaviest
-   one-offs (Vilemaw, Ekko, Zed, Demon Shade, Bone Skewer, Nami, Lacerate and more, or filed with reasons); ~20 triggers on
-   existing hooks (hold, fights, plays, moves, deaths, stuns, ready), Imperial Decree, counted discounts, costs paid with
-   the board (kill this, kill/exhaust a friendly unit, discard 1, spend XP); follow-on sentences with their
-   own condition join the ability before them (Bedeviling Stranger's bounce from hand had never run); XP is this turn's
-   (Level, Hunt, "gain N XP": rules-rulings.md "Turn solver premises (4)"; `rift close --xp`); ~20 more conditions;
-   attack/defend triggers now run before the fight reads Might (their pumps were lost); gear has a location and Bombs are
-   modelled (Minefield, Acceptable Losses, Jayce, Command: Attack, Detonation Amplifier, Ziggs, gear auras; Deploy to any
-   battlefield, §830.1.b.1; `rift close --gear-b Bomb`); Baron Nashor's Pit is a third battlefield
-   (battlefields come from the position; `rift close --pit`; a conquest that draws at the gate still Scores, so at 7
-   "Baron first, then conquer B" wins: rules-rulings.md, Baron entry), Confront, Last Caress, Mirror Image, Gutter
-   Palace's alternate win, Kayle (Empowered as a count), Herald of Scales, Sky Splitter, Rek'Sai (Champion Zone only),
-   Sett's "Spend my buff", Dragon Form, High Note, Facebreaker, Akali, Ntofo Strikes and about 15 sentences filed
-   no-effect with reasons. **A solver bug fixed:** fights took their units as printed cards, so -M on an enemy unit
-   was lost at combat (now effCard, like ours; a cached fight maps survivors by position). `UNPAID_COST` is one
-   pattern for the reader and the solver (a "kill/exhaust a friendly unit" cost would have run free).
-   **Goal reached (24 Nov): every sentence is read or filed no-effect with a reason.** The last 54 cards needed seven solver
-   features, all built and pushed: spells inside fights (4989d56: counters and takeovers answer spells in fights; board
-   cost and targeting modifiers), combat internals (fb5ceb5), our legend on the board (b7b7ac1: `pos.legend`, `rift
-   close --legend`), gear Empowered (e0a5fbb), the opponent's choices (0aafcd2: worst-for-us by a short search), unusual
-   costs (afa4413: additional costs as options, every Equip cost form, [Weaponmaster], Assault/Shield/Hunt sum), copies and
-   one-of-a-kind effects (3c078c7). Rules premises: rules-rulings.md "Fight solver premises" and "Turn solver premises
-   (4)-(6)". Real bugs found on the way, all fixed: [Temporary] units used to hold; fight Deathknells ran at base; ambushers
-   from hand vanished after the fight; "Your units have +N M" never applied; the state memo ignored a unit's card.
-   **Polish done (24 Nov): the solver plays every legal card** (the last 49: conditions on excess damage, fighting alone,
-   big spells, XP gained, Beginning-Phase deaths, their rune count; triggers on discards, becoming Mighty, readying,
-   buffing, tokens, hiding, big plays, deaths, gear abilities, attaching, open conquests; the trash via `rift close
-   --trash`; The List via `--list-tag`; Kai'Sa's Reaction in fights; Atakhan's kill discount; Hwei's discard; Akshan
-   taking their Equipment). Turn tests 144-161. Rules: rules-rulings.md "Turn solver premises (7)". **Real bugs found
-   and fixed:** "When I conquer" never fired on a walk-in to an empty battlefield; "When you play a card from face down"
-   fired on every play (Evelynn, Consuming; Black Market Broker; Katarina); a [Temporary] death skipped its Deathknell;
-   Orianna, Exquisite and Sacred Protector never dealt combat damage (their "unless" was ignored); fights didn't use
-   Monster Harpoon's 4 or Sudden Storm's 4 against an attacker; "discard 1" was filed as a draw. Filed with reasons:
-   Karma, Channeler (draw: the revised text says Main Deck), Symbol of the Solari (noPoints), Viktor, Innovator (their
-   turn). **Bug pass (24 Nov, later):** closing-turn tests for the 12 cards that had none (162-173) found three more:
-   Petal Pixie crashed the solver (her count recursed); "play a token here" was read as "to your base" (11 cards:
-   Noxian Drummer's Recruit never joined his fight); units played from the trash, the discard or for free ignored
-   Magma Wurm's "enter ready". And triggers run in place (holds, deaths, fire()) now keep their best result by a short
-   look ahead, theirs worst for us; they used to keep the first (Explosimian's Bombs at A, Demacian Illuminators'
-   buff on whichever unit came first; tests 174-175 fail under the old rule).
-   **The last three simplifications, gone (24 Nov):** a counter can be countered back once (fights and the main
-   phase); Rek'Sai, Breacher's Accelerate works face down, from the trash and from the discard; Esteemed Hierophant reads
-   their rune count (`--their-runes`; unknown is 7+) and now protects in the main phase too (until 24 Nov our main-phase
-   damage spells killed it). Tests 176-178; rules-rulings.md "Turn solver premises (8)".
-   **Legends (24 Nov, last):** model boards pass the legend (lib/match.mjs), and all 58 legends' text is read (from 12):
-   `fireLegend` runs its triggers, its statics feed `effCard`, "me" in its text is the legend, restricted Adds pay only
-   what they say, every printing and errata wording reads (a check.mjs gate now). Found on the way: units could only be
-   played to base (§355.2.a allows a battlefield we control). `rift cards --coverage` has a legends line; floor 99.5%.
-   Tests 179-196. Premises (9). `try --close` is about 20% slower than before (20 games: 37 s → 45 s), same results.
-   **Last simplifications gone (24 Nov):** fights check Power by domain (budgets carry runes by domain; model boards give
-   theirs); Rogue Assassin's rescue is tried in every attack we make into their units, after attack triggers; units in
-   their hand that can't be played on our turn are no longer blind spots, and their [Reaction] / [Action] units join a
-   showdown where they control the battlefield (Shen, Kinkou). Tests 197-200; premises (10). On the Sivir deck (60
-   games) the close rates didn't move and "the solver can't see" is now none. The last four blind spots are read too
-   (lib/fight.mjs `AMBUSH_PLAYS`: an ambusher's play effect as it arrives; Janna, Savior sends an attacker home, which
-   survives at base). Tests 201-203. Nothing in the pool is blind to the turn solver now. **Model games on the language (24 Nov, last):**
-   the turn solver plays each side's Main Phase in `lib/match.mjs` (`policy: "solver"`, default; `--greedy` for the old
-   policy); `try --points`/`--close` default to 60 games (~2 min for both on the Sivir deck). Sivir deck, 60 games:
-   points by turn 8 6.75 vs 5.58 (greedy: 7.35 vs 4.83); close from 7: 40% (greedy 45%). Not comparable with older
-   numbers. The goldfish reads draws, tokens and Gold through the language too (units' play draws were never read),
-   and "the bench can't see" lists only resource text it doesn't play (none on the Sivir deck); combat text is named as
-   the points model's. A solver crash fixed on the way: face-down gear without its metadata. Tests turn 204-205,
-   match.test's solver checks. The check took 1m12 to 1m55 on 24 Nov, but it
-   never runs the solver: the slow sections are Layout, Deck options and Rendering.
-   How a card is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` (or grammar in
-   `lib/cardtext.mjs`; cardtext.test fails on a card named twice), an op in ENGINE_OPS and RUN_OPS + an applyOp case
-   (`lib/turn.mjs`), a closing-turn test with its no-win twin. Later: move lib/sim.mjs and lib/match.mjs onto the same
-   language, so the model boards `try --close` uses get as rich as the solver.
-
-1. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook
-   or memory.
-2. **Radiance bans live since 2026-11-23 (done that day):** `ANNOUNCED_BANS` emptied (upstream flags all ten; 22 Constructed
-   bans, `banned.json` unchanged). First refresh on the new code (manual, 23 Nov 20:09 UTC) was green in 9 minutes (data bf0a507, site b514fb5). GitHub fires the scheduled runs 4-10 hours late and sometimes skips one; if that starts to matter, start the refresh from a scheduled cloud agent and keep one GitHub cron as a backup. The post-ban
-   field is 2 lists so far (`scripts/rift meta --since 2026-11-23`); no matchup advice from it until after 29-30 Nov.
-3. **Drifted tests settled (23 Nov):** `infer.test` passes again. `engines.test`: Pyke and Renekton read right now and are
-   off KNOWN_MISSES; Riven (71 of 957 lists left legal) and Irelia (37 of 428) are on it as TEMPORARY, and since 24 Nov
-   Renata Glasc, Chem-Baroness (0 placed lists left legal; the 61 unplaced ones read as a gear loop). After 29-30 Nov,
-   re-read the three entries in `docs/archetypes.md` from post-ban lists and take them off.
-4. **Sim gaps still open** (README, "Keywords the sims do not read"): Trinity Force's hold point and other conquer/hold
-   strips, Level/Hunt, Weaponmaster, Quick-Draw, Legion.
-5. **Baron Pit settled (21 Nov):** it gates the eighth-point conquest. A battlefield token is a battlefield
-   (§185.2.d), and community judges agree (rules-rulings.md). No Riot staff ruling yet, but it isn't open anymore.
-6. Log each new game in the app's journal and the worksheet's games table (`decklab/sivir-ready.md`).
+1. **Sivir changes after the first post-ban weekend (29–30 Nov) and games.** Judge any swap with the rebuilt system:
+   `rift try --deck "Sivir Is Trying Her Best" "-N Card" "+N Card" --points --close`. Candidates on file:
+   `decklab/sivir-tune.md` (first: −1 Ember Monk +1 Ezreal) and `decklab/sivir-brew.md` (Bounty Board, low confidence);
+   their numbers predate the solver-played games, so re-run them. Deck work through the `deck-build` skill.
+2. **After 29–30 Nov:** re-read Riven, Irelia and Renata Glasc, Chem-Baroness in `docs/archetypes.md` from post-ban
+   lists and take them off `KNOWN_MISSES` (`lib/engines.test.mjs`, TEMPORARY). The post-ban field is thin until then
+   (`scripts/rift meta --since 2026-11-23`); no matchup advice from it yet. Guide §9 rows are pre-ban (its note says so).
+3. **Check on the devices:** the Kobo's new "Riftbound" reading collection and "Questions" sheet (kobo HANDOVER item 0);
+   the site's tweak bench now loads `lib/cardtext.mjs` in the browser (lib/sim.mjs imports it): open rift.jayegger.com's
+   bench once to confirm it still runs.
+4. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong; fold corrections into the handbook or
+   memory.
+5. **Goldfish gaps** (README, "Keywords the sims do not read"): the bench measures consistency only; Trinity Force's hold
+   point, Level/Hunt, Weaponmaster, Quick-Draw and Legion still aren't in it (the solver-played model games do read them).
+6. **Refresh timing:** GitHub fires the scheduled runs 4–10 hours late and sometimes skips one; if that starts to matter,
+   start the refresh from a scheduled cloud agent and keep one GitHub cron as a backup.
+7. Log each new game in the app's journal and the worksheet's games table (`decklab/sivir-ready.md`).
