@@ -3600,6 +3600,29 @@ section('The goldfish');
   ok('scripts/sim.test.mjs passes', r.status === 0, fails.slice(0, 3).join('; ') || (r.status ? (r.stderr || '').slice(0, 200) : ''));
 }
 
+section('Model games');
+{
+  // lib/match.mjs's solver policy catches a solver error and skips that Main Phase (solveErrors), so a crash reads as a
+  // deck that does nothing: Fiora, Victorious's Mighty keywords recursed and sank Sett to 15% in the first calibration
+  // (24 Nov). Each calibration legend's best list plays one game against Nasus's, and no Main Phase may throw.
+  const { calibrationSet, topLists } = await import('../lib/calibrate.mjs');
+  const { playerOf, playMatch } = await import('../lib/match.mjs');
+  const { rng } = await import('../lib/sim.mjs');
+  const { loadCatalog } = await import('./state.mjs');
+  const pcat = await loadCatalog();
+  const { legends, by } = calibrationSet(pcat, snap.decks, read('data/winrates.json'));
+  const foe = by.Nasus ? playerOf(topLists(by.Nasus, 1)[0].cards, pcat) : null;
+  const bad = [];
+  for (const L of legends) {
+    if (!foe) break;
+    const g = playMatch(playerOf(topLists(by[L], 1)[0].cards, pcat), foe, rng(11000), {});
+    const e = (g.st[0].solveErrors || 0) + (g.st[1].solveErrors || 0);
+    if (e) bad.push(`${L} ${e}`);
+  }
+  ok('model games play every calibration legend without a solver error', !!foe && legends.length >= 8 && !bad.length,
+     !foe ? 'no Nasus lists' : bad.length ? `Main Phases skipped: ${bad.join(', ')}` : `${legends.length} legends`);
+}
+
 section('Card text coverage');
 {
   // lib/cardtext.mjs reads the legal pool's card text for the turn solver. The floor in

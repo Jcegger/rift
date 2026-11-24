@@ -53,7 +53,7 @@ import { versus, weigh, effectsOf, looksInteractive, unreadSentences, withGear }
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf, blindSpots } from "../lib/decklab.mjs";
 import { matchReportPar, closeReportPar, matchRecordsPar } from "../lib/match-pool.mjs";
 import { halving } from "../lib/search.mjs";
-import { rlNameOf, topLists, realRow, pearson, spearman, mae, modelTable } from "../lib/calibrate.mjs";
+import { calibrationSet, topLists, realRow, pearson, spearman, mae, modelTable } from "../lib/calibrate.mjs";
 import { paired, wilson, twoRates } from "../lib/stats.mjs";
 
 // The S/A field's lists as opponents for lib/match.mjs, in a fixed shuffled order, so a before
@@ -80,6 +80,7 @@ function printPoints(pb, pa, games, policy = "solver") {
     return n ? `${pc(w.p)} (${pc(w.lo)}–${pc(w.hi)})` : "—"; };
   console.log(`  ${"won (8 points first; timeouts apart)".padEnd(46)}${wr(pb)} → ${wr(pa)}; win − loss after − before ${verdict(paired(pa.win, pb.win))}`);
   console.log(`  ${"timeouts (no one at 8 by turn 12)".padEnd(46)}${pb.timeouts} → ${pa.timeouts} of ${pb.games}`);
+  for (const [lbl, r] of [["before", pb], ["after", pa]]) if (r.solveErrors?.some((n) => n)) console.log(`  SOLVER ERRORS (${lbl}): ${r.solveErrors[0]} of our Main Phases and ${r.solveErrors[1]} of theirs were skipped because the solver threw; these numbers are wrong until that's fixed`);
   console.log("  How far model games track real results: docs/model-calibration.md (24 Nov: r 0.17 per legend; a ranking inside the model, not evidence a swap wins real games).");
   console.log(policy === "greedy"
     ? "  Model games, both sides on the greedy policy (--greedy); card text beyond its readers is not played, which favours unit-heavy decks. Points and how they're made, not win rates."
@@ -1694,6 +1695,8 @@ async function cmdSearch(S, cat, args) {
     console.log(`  ${(r.out ? "  " : "▸ ") + r.label.slice(0, 37).padEnd(38)}${String(r.games).padStart(6)}  ${iv(r.vsBase).padEnd(26)}${iv(r.points).padEnd(26)}${`${pc(r.won.p)} (${pc(r.won.lo)}–${pc(r.won.hi)})`.padEnd(16)}${pre}`);
     if (r.out) console.log(`      out ${r.out}`);
   }
+  const errs = [res.base, ...res.rows].reduce((a, r) => a + (r.solveErrors || 0), 0);
+  if (errs) console.log(`\n  SOLVER ERRORS: ${errs} Main Phases skipped because the solver threw; the table is wrong until that's fixed`);
   console.log(`\n  ▸ still in: not shown worse than the leader, which is not the same as better than the deck as is (read "margin vs as is").`);
   console.log(`  Margin = our points minus theirs by turn 8 in model games against real S/A lists, the same games for every row. Sideboard changes don't play here.`);
   console.log(`  How far model games track real matchups: docs/model-calibration.md. Then \`try --close\` and the deck-build skill on what's left. ${res.spent} games, ${Math.round((Date.now() - t0) / 1000)} s.`);
@@ -1710,12 +1713,7 @@ async function cmdCalibrate(S, cat, args) {
   const since = opt("--since") || "2026-10-16", N = Number(opt("--legends") || 12), reps = Number(opt("--reps") || 4), K = Number(opt("--lists") || 3);
   const policy = args.includes("--greedy") ? "greedy" : "solver";
   const W = await readJson(url("winrates.json")), snap = await readJson(url("decks.json"));
-  const rlNames = new Set(W.legends.map((l) => l.legend));
-  const legendOf = (d) => (d.lg && cat.BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
-  const mainSize = (d) => Object.entries(d.cards || {}).reduce((a, [k, q]) => a + (/Legend|Rune|Battlefield/.test(cat.BY.get(k)?.t || "Rune") ? 0 : q), 0);
-  const by = {};
-  for (const d of snap.decks) { if ((d.dt || "") < since || mainSize(d) < 39) continue; const n = rlNameOf(legendOf(d), rlNames); if (n) (by[n] ||= []).push(d); }
-  const legends = W.legends.slice().sort((a, b) => b.games - a.games).map((l) => l.legend).filter((n) => by[n]?.length).slice(0, N);
+  const { legends, by } = calibrationSet(cat, snap.decks, W, { since, N });
   const set = new Set(legends);
   const t0 = Date.now();
   console.log(`CALIBRATE  ${legends.length} legends (top by RiftLite games, with lists since ${since}): ${legends.join(", ")}`);
@@ -1729,6 +1727,8 @@ async function cmdCalibrate(S, cat, args) {
     process.stdout.write(`  ${L}: ${recs.length} games\n`);
   }
   const { leg, pair } = modelTable(runs);
+  const errs = runs.flatMap((r) => r.recs).reduce((a, g) => a + (g.solveErrors ? g.solveErrors[0] + g.solveErrors[1] : 0), 0);
+  if (errs) console.log(`  SOLVER ERRORS: ${errs} Main Phases skipped because the solver threw`);
   const rows = legends.map((L) => { const m = leg[L] || { w: 0, l: 0, t: 0 }, iv = wilson(m.w, m.w + m.l), r = realRow(W, L, set);
     return { L, model: iv.p, mlo: iv.lo, mhi: iv.hi, mn: m.w + m.l, mt: m.t, real: r.p, rlo: r.lo, rhi: r.hi, rn: r.n }; }).filter((r) => r.real != null && r.model != null);
   const xs = rows.map((r) => r.model), ys = rows.map((r) => r.real);
@@ -1750,7 +1750,7 @@ async function cmdCalibrate(S, cat, args) {
     const pm = pairs.filter((p) => p.model != null);
     out(`\nPairs: the same side of 50% for ${pm.filter((p) => (p.model - 0.5) * (p.real - 0.5) > 0).length} of ${pm.length}; intervals overlap for ${pm.filter((p) => p.mlo <= p.rhi && p.rlo <= p.mhi).length} of ${pm.length}.`);
   }
-  out(`\n${runs.reduce((a, r) => a + r.recs.length, 0)} model games, ${Math.round((Date.now() - t0) / 1000)} s. RiftLite: ${W.filters?.window || "?"}, ${W.filters?.season || "?"}, generated ${W.generatedAt}.`);
+  out(`\n${runs.reduce((a, r) => a + r.recs.length, 0)} model games (solver errors: ${errs}), ${Math.round((Date.now() - t0) / 1000)} s. RiftLite: ${W.filters?.window || "?"}, ${W.filters?.season || "?"}, generated ${W.generatedAt}.`);
   if (args.includes("--write")) {
     const head = `# How far the model games track real results\n\nWritten by \`scripts/rift calibrate${args.length ? " " + args.filter((a) => a !== "--write").join(" ") : ""}\` on ${new Date().toISOString().slice(0, 10)} (lib/calibrate.mjs). ` +
       `Real: RiftLite's community matrix (data/winrates.json: online games logged by its users, pooled). Model: lib/match.mjs games, ${policy} policy; ` +
