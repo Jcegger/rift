@@ -94,8 +94,16 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   by the rules. **Since 24 Nov 2026 the turn solver plays each side's Main Phase** (`policy: "solver"`:
   every card's and legend's text through `lib/cardtext.mjs`, a small search a turn, `develop` mode
   valuing the board for later turns); the match keeps the Beginning Phase, Channel, Draw, sending
-  units out to defend and hiding. About 1 s a game, so `try --points` and `--close` run 60 games by
-  default; `--greedy` brings back the older plain policy (both sides, its own readers, ~90x faster,
+  units out to defend and hiding. Games take 0.4 to 8 s each and run on a worker pool (`lib/match-pool.mjs`:
+  16 workers by default, `RIFT_WORKERS=N` to change, a queue so long games don't stall a slice); game i depends only
+  on its index (seed, foe, who goes first), so pooled and serial runs are the same games, and `try --points --close`
+  takes about a minute. 60 games by default. **Every before → after carries a 95% interval** (`lib/stats.mjs`):
+  points and margin by turn 8 and win − loss are paired over the same games; won is a Wilson interval with
+  timeouts (no one at 8 by turn 12) counted apart; close-from rates are a Newcombe gap between the two sets of
+  positions. "Within noise" means the interval crosses 0. At 60 games close-from-7 is about ±20 points, so a swap
+  needs `--points-games`/`--close-games` in the hundreds to show anything. A deck is built in a fixed card order
+  (`playerOf`), so a list is the same deck under every seed: before 24 Nov a null swap (`-1 X +1 X`) dealt every
+  game differently and moved close-from-6 from 15% to 3%; `--greedy` brings back the older plain policy (both sides, its own readers, ~90x faster,
   300/600 games). The two policies' numbers aren't comparable. Under `--greedy`: (Hold at the Beginning Phase, Conquer once per
   battlefield per turn, the gated eighth point, a win at 8 and ahead). Combat is the fight
   calculator; removal that kills a battlefield's last defender stops the hold, a lost

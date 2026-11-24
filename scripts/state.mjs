@@ -51,7 +51,8 @@ import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, dec
 import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive, unreadSentences, withGear } from "../lib/versus.mjs";
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf, blindSpots } from "../lib/decklab.mjs";
-import { matchReportPar, closeReportPar } from "../lib/match-pool.mjs";   // every core; same numbers as matchReport/closeReport
+import { matchReportPar, closeReportPar } from "../lib/match-pool.mjs";
+import { paired, wilson, twoRates } from "../lib/stats.mjs";   // every core; same numbers as matchReport/closeReport
 
 // The S/A field's lists as opponents for lib/match.mjs, in a fixed shuffled order, so a before
 // and an after play the same opponents in the same order (paired games).
@@ -68,6 +69,15 @@ function printPoints(pb, pa, games, policy = "solver") {
     ["Evelynn's points a game", "eve", n2], ["eighth point gated (drew instead)", "gated", n2], ["their holds a game", "theirHolds", n2],
     ["our holds they stopped", "theirStops", n2], ...(policy === "greedy" ? [["Mercenary on (turns 4+)", "merc", pc]] : [])];
   for (const [label, key, f] of rows) { if (!key) continue; const b = f(pb[key]), a = f(pa[key]); console.log(`  ${label.padEnd(46)}${(b === a ? b : `${b} → ${a}`).padEnd(22)}`); }
+  // Is the change bigger than the games' noise? Same games before and after, so per-game differences (paired).
+  const sg = (x) => `${x >= 0 ? "+" : ""}${x.toFixed(2)}`;
+  const verdict = (d) => (d.n ? `${sg(d.mean)} (95%: ${sg(d.lo)} to ${sg(d.hi)})${d.noise ? ", within noise" : ""}` : "—");
+  console.log(`  ${"after − before, our points by turn 8".padEnd(46)}${verdict(paired(pa.pts, pb.pts))}`);
+  console.log(`  ${"after − before, margin by turn 8".padEnd(46)}${verdict(paired(pa.diff, pb.diff))}`);
+  const wr = (r) => { const k = r.win.filter((x) => x === 1).length, n = r.win.filter((x) => x != null).length, w = wilson(k, n);
+    return n ? `${pc(w.p)} (${pc(w.lo)}–${pc(w.hi)})` : "—"; };
+  console.log(`  ${"won (8 points first; timeouts apart)".padEnd(46)}${wr(pb)} → ${wr(pa)}; win − loss after − before ${verdict(paired(pa.win, pb.win))}`);
+  console.log(`  ${"timeouts (no one at 8 by turn 12)".padEnd(46)}${pb.timeouts} → ${pa.timeouts} of ${pb.games}`);
   console.log(policy === "greedy"
     ? "  Model games, both sides on the greedy policy (--greedy); card text beyond its readers is not played, which favours unit-heavy decks. Points and how they're made, not win rates."
     : "  Model games, both sides' Main Phases played by the turn solver (lib/turn.mjs, every card's text, a small search a turn); not comparable with the greedy numbers from before 24 Nov. Points and how they're made, not win rates.");
@@ -82,6 +92,10 @@ function printClose(cb, ca, games, policy = "solver") {
     const t = (r) => r.tiers[i];
     const small = (r) => (t(r).n < 30 ? "*" : "");
     console.log(`  ${String(t(cb).start).padEnd(8)}${two((r) => `${t(r).n}${small(r)}`).padEnd(16)}${two((r) => pc(t(r).win)).padEnd(22)}${two((r) => pc(t(r).policyWin)).padEnd(22)}${two((r) => `${n2(t(r).gained)} / ${n2(t(r).policyGained)}`)}`);
+  }
+  if (ca) for (let i = 0; i < 2; i++) {
+    const t = (r) => r.tiers[i], k = (r) => Math.round(t(r).win * t(r).n), g = twoRates(k(cb), t(cb).n, k(ca), t(ca).n);
+    if (g.diff != null) console.log(`  from ${t(cb).start}: a winning line, after − before ${Math.round(100 * g.diff)} points (95%: ${Math.round(100 * g.lo)} to ${Math.round(100 * g.hi)})${g.noise ? ", within noise" : ""}`);
   }
   const list = (xs, n = 8, of = null) => xs.slice(0, n).map(([k, v]) => `${k} ${of ? pc(v / of) : v}`).join(", ") || "none";
   for (const [label, r] of ca ? [["before", cb], ["after", ca]] : [["", cb]]) {
