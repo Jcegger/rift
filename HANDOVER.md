@@ -35,8 +35,8 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    `rift close` for a typed-in position, `try --close` on model boards; results in both decklab docs): from 7 a
    winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
    close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
-   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **99.38% of played copies compile, and the
-   solver plays 97.7%** (24 Nov, from 90.5% / 84.8% on 23 Nov morning); floor gate in check.mjs
+   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **99.46% of played copies compile, and the
+   solver plays 97.8%** (24 Nov, from 90.5% / 84.8% on 23 Nov morning); floor gate in check.mjs
    (`model/cardtext-floor.json`, 99% / 97%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
    no-effect with a true reason; never file a points effect that way to move the number.
    **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f, 8ee4a8e, c6bd360, 003a1b3, ca7ca48, 41d19bd, 28ee778, 47ceafa; turn tests 27-106): multi-domain [C] Power paid with any of the card's domains
@@ -62,8 +62,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    Kayn, Dune Surfer, excess damage for Sivir, Ambitious, Ava Achiever, Stalking Wolf; ambushers from hand now stay on the
    board; cardtext.test fails on a card named twice in the overrides) and *legends on the board* (b7b7ac1: `pos.legend`,
    `rift close --legend`; its activated abilities are played; legend triggers and statics not yet; model boards don't
-   pass the legend, since match.mjs already plays its Gold). Left, 31 cards, in this order:
-   - *Gear Empowered status*: Rage Amplifier's +2, Hextech Disc, Glowstone, Helm of Suppression's larger tax.
+   pass the legend, since match.mjs already plays its Gold) and *gear Empowered* (e0a5fbb: gearMeta.empowered,
+   `pos.gearEmpowered`; also fixed "Your units have +N M", read as a tag nobody has). The check's run time crept from
+   ~1m12 to 1m32 over features 1-4: watch it. Left, 27 cards, in this order:
    - *The opponent's own choices*: Angler Wyrm, Call to Battle, Whirlwind, Divine Judgment, Invert Timelines.
    - *Unusual costs*: Kraken Hunter, Wallop, Brazen Buccaneer, Spirit of the Forge, Commander Ledros, Square Up,
      Chronobreak, Temporal Portal, Hextech Gauntlets, Irelia, Graceful.
