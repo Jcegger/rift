@@ -35,11 +35,12 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    `rift close` for a typed-in position, `try --close` on model boards; results in both decklab docs): from 7 a
    winning line exists 39% of the time vs the model's 22%; C1 leans better (46%); On the Hunt and Ride the Wind
    close the same; Bounty Board closes worse (34%, 2% from 6). **Since 22 Nov it reads card text for the whole
-   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **94.2% of played copies compile, and the
-   solver plays 92.6%** (23 Nov evening, from 90.5% / 84.8% that morning; 363 sentences unread); floor gate in check.mjs
-   (`model/cardtext-floor.json`, 94% / 92%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
+   pool** (`lib/cardtext.mjs`, an effect language; `rift cards --coverage`): **96.1% of played copies compile, and the
+   solver plays 94.6%** (23 Nov evening, from 90.5% / 84.8% that morning; 320 sentences unread); floor gate in check.mjs
+   (`model/cardtext-floor.json`, 96% / 94%). **Goal: 100%** (Jay, 23 Nov). Compiled 100% = every sentence read or filed
    no-effect with a true reason; never file a points effect that way to move the number.
-   **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f, 8ee4a8e; turn tests 27-61): ~20 triggers on
+   **Done 23 Nov evening** (a993d82, 4291db6, 50589e5, 223a9ae, c7f1b6f, 8ee4a8e, c6bd360; turn tests 27-67): the ~45 heaviest
+   one-offs (Vilemaw, Ekko, Zed, Demon Shade, Bone Skewer, Nami, Lacerate and more, or filed with reasons); ~20 triggers on
    existing hooks (hold, fights, plays, moves, deaths, stuns, ready), Imperial Decree, counted discounts, costs paid with
    the board (kill this, kill/exhaust a friendly unit, discard 1, spend XP); follow-on sentences with their
    own condition join the ability before them (Bedeviling Stranger's bounce from hand had never run); XP is this turn's
@@ -56,8 +57,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    pattern for the reader and the solver (a "kill/exhaust a friendly unit" cost would have run free).
    **Next, heaviest first** (`rift cards --coverage`): the solver-only gaps are now small (conditions 20 cards / 1,955,
    combat-only mostly; counted discounts from the trash 3 / 1,621; [Weaponmaster] 11 / 1,103; unmodeled triggers 22 / 942;
-   modal 2 / 744). **The bulk is unread text: 302 cards, 22,843 copies, mostly one-offs**, and that is what compiled
-   (94.2%) waits on. Hold triggers run in place on the first result (Explosimian's Bombs land at A). (d) unread one-offs (`rift cards --coverage --top 60`): Ekko, Revolutionary, Zed's swap, Bone Skewer (the solver
+   modal 2 / 744). **The bulk is unread text: 320 sentences, mostly one-offs** (`rift cards --coverage --top 60`). Left on purpose
+   from batch 7: Helm of Suppression and Vex, Cheerless (their spell costs in fights), Rebuttal, Svellsongur, Alpha Strike's
+   split, Chronobreak, Curtain Call, Hextech Gauntlets, Akshan, Relentless Pursuit, Friendship. Hold triggers run in place on the first result (Explosimian's Bombs land at A). (d) unread one-offs (`rift cards --coverage --top 60`): Ekko, Revolutionary, Zed's swap, Bone Skewer (the solver
    sees their hand, so it isn't no-effect), Flame Chompers (on discard), Demon Shade's conditional mode, The List's
    named tag; then [Level]/XP conditions, [Weaponmaster]. Open rules question: can an effect's play (a token) take
    Rek'Sai's Accelerate? To find a batch: `rift cards "<name>"`, then peel triggers/conditions as `parseSentence`
