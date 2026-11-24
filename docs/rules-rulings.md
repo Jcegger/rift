@@ -341,3 +341,22 @@ a unit, not a card.
    processed as any power of that card's Domains"* (§135.2.e.6.c, example Defiant Dance). Until 23 Nov the solver paid
    from the first listed domain only. Accelerate's `[C]` on a multi-domain unit is paid with any domain at all, per the
    modern FAQs (docs/rules.md, symbols table, which notes it contradicts §135.2.e.6.c's Tibbers example; the FAQ wins).
+
+## Fight solver premises: answering a spell, cost changes on face-down plays, Repeat
+
+**Date:** 2026-11-24
+**Source:** Derived in this repo from the Core Rules, for `lib/fight.mjs` (feature 1: spells inside fights); no Riot staff ruling read.
+**Rules:** §813.1.c.1, §355.9.a.2, §355.7, §356.1.b, §356.1.b.3, §356.3, §820.1, §820.3
+**Expires:** when a Core Rules update changes Reaction timing, targeting spells on the chain, cost increases or Repeat
+
+1. **A spell can be answered before it resolves.** Reaction is *"This can be played during Closed States on any
+   player's turn"* (§813.1.c.1), and "spell" means *"finalized objects on the Chain"* (§355.9.a.2). So a counter
+   (Defy, Lilting Lullaby) or a takeover (Rebuttal, Mystic Reversal) targets a spell the other side just played. The
+   fight solver now gives that answer window to every spell; it still doesn't let a counter itself be countered.
+2. **Cost increases apply to a face-down play.** Hidden plays "ignoring its base cost", which sets the base cost to zero
+   (§356.1.b), but *"cost increases applied in subsequent steps may raise the card's Total Cost above zero"*
+   (§356.1.b.3; increases are §356.3). So Helm of Suppression and Vex, Cheerless tax a face-down counter too.
+3. **"Can't be chosen"** means can't be targeted: when a card chooses objects they are targeted (§355.7). Alpha
+   Wildclaw's smaller units drop out of the opponent's spell and ability targets.
+4. **Repeat is paid as the spell is played** (an optional additional cost, §820.1) and executes the effect again
+   (§820.3), so Syndra, Transcendent's granted Repeat is one play with a doubled effect, not a second spell.
