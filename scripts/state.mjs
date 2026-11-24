@@ -51,7 +51,8 @@ import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, dec
 import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive, unreadSentences, withGear } from "../lib/versus.mjs";
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf, blindSpots } from "../lib/decklab.mjs";
-import { matchReportPar, closeReportPar } from "../lib/match-pool.mjs";
+import { matchReportPar, closeReportPar, matchRecordsPar } from "../lib/match-pool.mjs";
+import { halving } from "../lib/search.mjs";
 import { paired, wilson, twoRates } from "../lib/stats.mjs";   // every core; same numbers as matchReport/closeReport
 
 // The S/A field's lists as opponents for lib/match.mjs, in a fixed shuffled order, so a before
@@ -1371,7 +1372,7 @@ async function cmdTry(S, cat, args) {
     return;
   }
   const before = decks[0];
-  if (sweepCard) return trySweep(before, cat, sweepCard, sweepWith, policy, Number(opt("--games") || 3000), opt("--qty") ? Number(opt("--qty")) : null, since);
+  if (sweepCard) return trySweep(before, cat, sweepCard, sweepWith, policy, Number(opt("--games") || 3000), opt("--qty") ? Number(opt("--qty")) : null, since, Number(opt("--points-games")) || 60);
   let changes, after;
   try { changes = parseChanges(specs, cat.cards); after = applyChanges(before, changes, cat.cards, cat.BY); }
   catch (e) { console.log(`try: ${e.message}`); return; }
@@ -1472,13 +1473,13 @@ async function cmdTry(S, cat, args) {
   let pb = null, pa = null;
   if (args.includes("--points")) {
     const pg = Number(opt("--points-games")) || (mpolicy === "greedy" ? 600 : 60), foes = foeLists(fieldDecks);
-    [pb, pa] = await Promise.all([matchReportPar(before, cat, foes, { games: pg, policy: mpolicy }), matchReportPar(after, cat, foes, { games: pg, policy: mpolicy })]);
+    [pb, pa] = await Promise.all([matchReportPar(before, cat, foes, { games: pg, policy: mpolicy }), matchReportPar(after, cat, foes, { games: pg, policy: mpolicy, like: before.cards })]);
     printPoints(pb, pa, pg, mpolicy);
   }
   // The turn solver on model boards (lib/turn.mjs): opt-in, like the points model.
   if (args.includes("--close")) {
     const cg = Number(opt("--close-games")) || (mpolicy === "greedy" ? 300 : 60), foes = foeLists(fieldDecks);
-    const [cb, ca] = await Promise.all([closeReportPar(before, cat, foes, { games: cg, policy: mpolicy }), specs.length ? closeReportPar(after, cat, foes, { games: cg, policy: mpolicy }) : null]);
+    const [cb, ca] = await Promise.all([closeReportPar(before, cat, foes, { games: cg, policy: mpolicy }), specs.length ? closeReportPar(after, cat, foes, { games: cg, policy: mpolicy, like: before.cards }) : null]);
     printClose(cb, ca, cg, mpolicy);
   }
   // The deck's goal tiers, if its worksheet has a tiers file: the change read against the plan.
@@ -1611,7 +1612,7 @@ async function fieldDecksFor(cat, since) {
 }
 
 // One slot, many candidates: the same engine report for each, compact, against the deck as is.
-async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, since) {
+async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, since, pgames = 60) {
   const inDeck = Object.entries(deck.cards || {}).filter(([k]) => cat.BY.get(k)?.n.toLowerCase().startsWith(card.toLowerCase()));
   if (!inDeck.length) { console.log(`try --sweep: the main deck has no "${card}"`); return; }
   const name = cat.BY.get(inDeck[0][0]).n, have = inDeck.reduce((a, [, q]) => a + q, 0), qty = Math.min(qtyOpt || have, have);
@@ -1619,7 +1620,7 @@ async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, sinc
   const spec = await loadTiers(deck.name);
   const fieldDecks = await fieldDecksFor(cat, since);
   const base = engineReport(deck, cat, { games, policy, foes: foesOf(deck, cat, fieldDecks) });
-  const pgames = 40, foes = foeLists(fieldDecks);   // solver-played model games (24 Nov): ~1 s each, so fewer
+  const foes = foeLists(fieldDecks);   // --points-games (60): for intervals and many candidates use `rift search`
   const basePts = await matchReportPar(deck, cat, foes, { games: pgames });
   const tierWord = (after, rep, pts) => {
     if (!spec) return "";
@@ -1640,11 +1641,60 @@ async function trySweep(deck, cat, card, candidates, policy, games, qtyOpt, sinc
     catch (e) { console.log(`  ${cand}: ${e.message}`); continue; }
     const rules = deckChecks(after, cat.idx).filter((x) => x.ok === false).map((x) => x.label);
     const rep = engineReport(after, cat, { games, policy, foes: foesOf(after, cat, fieldDecks) });
-    const pts = rep.pts = await matchReportPar(after, cat, foes, { games: pgames });
+    const pts = rep.pts = await matchReportPar(after, cat, foes, { games: pgames, like: deck.cards });
     console.log(line(`${qty} ${parseChanges([`+${cand}`], cat.cards)[0].name}${rules.length ? " (rules: " + rules.join(", ") + ")" : ""}`, rep) + tierWord(after, rep, pts));
   }
   console.log(`  pts8 / thr8 = our and their points by turn 8 (lib/match.mjs, ${pgames} model games) · Energy = spent turns 1–4 (quiet) · 2u t2 = two units by turn 2 · u5 = units by turn 5 · ans = attacks answered · Eve pts = Evelynn's points by turn 8 (normal) · crowd = tricks crowded out by Energy (normal). Not win rates.`);
   if (spec) console.log(`  t0…t4, t* = the goal tiers (${spec.file}): measures better (+) or worse (−) past the noise, = for no change.`);
+}
+
+// ── search: many swaps, the same model games, games added while a swap is still in ──────────────────────────────
+// lib/search.mjs. Ranks candidate changes by margin at turn 8 against the S/A field (paired with the deck as it is), and
+// drops one only when it is clearly worse than the leader. Points model only: run `try --close` on what's left.
+//   search --deck "<name>" --cands decklab/<file>.json      [{ "label": "C1", "changes": ["-1 Ember Monk", "+1 Ezreal, Prodigy"] }, …]
+//   search --deck "<name>" --swap "-1 Ember Monk | +1 Ezreal, Prodigy" --swap "…"
+//   [--games 60] [--budget 2400] [--keep 3] [--greedy] [--since DATE]
+async function cmdSearch(S, cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const all = (k) => args.flatMap((a, i) => (args[i - 1] === k ? [a] : []));
+  const decks = findDecks(S, opt("--deck") || "\u0000");
+  let specs = all("--swap").map((s) => ({ label: s, changes: s.split("|").map((x) => x.trim()).filter(Boolean) }));
+  if (opt("--cands")) specs = specs.concat(JSON.parse(await readFile(new URL(`../${opt("--cands")}`, import.meta.url), "utf8")));
+  if (decks.length !== 1 || !specs.length) {
+    console.log('usage: search --deck "<one of your decks>" (--cands decklab/<file>.json | --swap "-1 A | +1 B" …) [--games 60] [--budget 2400] [--keep 3] [--greedy]');
+    if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
+    return;
+  }
+  const base = decks[0], since = opt("--since") || "2026-10-16", policy = args.includes("--greedy") ? "greedy" : "solver";
+  const games = Number(opt("--games") || (policy === "greedy" ? 400 : 60)), budget = Number(opt("--budget") || games * 40), keep = Number(opt("--keep") || 3);
+  const cands = [];
+  for (const sp of specs) {
+    try {
+      const ch = parseChanges(sp.changes, cat.cards), deck = applyChanges(base, ch, cat.cards, cat.BY);
+      const main = ch.filter((c) => c.side !== "sb");
+      cands.push({ label: sp.label, deck, changed: main.reduce((a, c) => a + Math.abs(c.qty), 0) / 2, side: ch.length - main.length,
+        rules: deckChecks(deck, cat.idx).filter((k) => k.ok === false).map((k) => k.label) });
+    } catch (e) { console.log(`  ${sp.label}: ${e.message}`); }
+  }
+  const foes = foeLists(await fieldDecksFor(cat, since));
+  const t0 = Date.now();
+  console.log(`SEARCH  ${base.name}: ${cands.length} candidates, ${games} model games each to start (${policy}), doubled while a candidate is still in; budget ${budget} games`);
+  const res = await halving({ base: { label: "as is", deck: base }, cands, games, budget, keep,
+    play: (deck, start, end) => matchRecordsPar(deck, cat, foes, { start, games: end, policy, like: base.cards }), log: (m) => console.log(`  ${m}`) });
+  const sg = (x) => `${x >= 0 ? "+" : ""}${x.toFixed(2)}`, pc = (x) => (x == null ? "—" : `${Math.round(100 * x)}%`);
+  const iv = (d) => (d.n ? `${sg(d.mean)} (${sg(d.lo)} to ${sg(d.hi)})` : "—");
+  console.log(`\n  ${"candidate".padEnd(40)}${"games".padStart(6)}  ${"margin vs as is (95%)".padEnd(26)}${"points vs as is (95%)".padEnd(26)}${"won (95%)".padEnd(16)}pre-flight`);
+  const b = res.base;
+  console.log(`  ${"as is".padEnd(40)}${String(b.games).padStart(6)}  ${"".padEnd(26)}${"".padEnd(26)}${`${pc(b.won.p)} (${pc(b.won.lo)}–${pc(b.won.hi)})`.padEnd(16)}`);
+  for (const r of res.rows) {
+    const c = cands.find((x) => x.label === r.label);
+    const pre = [`${c.changed} main change${c.changed === 1 ? "" : "s"}${c.side ? ` + ${c.side} sideboard` : ""}`, c.rules.length ? `rules: ${c.rules.join(", ")}` : "rules pass"].join(" · ");
+    console.log(`  ${(r.out ? "  " : "▸ ") + r.label.slice(0, 37).padEnd(38)}${String(r.games).padStart(6)}  ${iv(r.vsBase).padEnd(26)}${iv(r.points).padEnd(26)}${`${pc(r.won.p)} (${pc(r.won.lo)}–${pc(r.won.hi)})`.padEnd(16)}${pre}`);
+    if (r.out) console.log(`      out ${r.out}`);
+  }
+  console.log(`\n  ▸ still in: not shown worse than the leader, which is not the same as better than the deck as is (read "margin vs as is").`);
+  console.log(`  Margin = our points minus theirs by turn 8 in model games against real S/A lists, the same games for every row. Sideboard changes don't play here.`);
+  console.log(`  How far model games track real matchups: docs/model-calibration.md. Then \`try --close\` and the deck-build skill on what's left. ${res.spent} games, ${Math.round((Date.now() - t0) / 1000)} s.`);
 }
 
 // ── loops: a deck's interactions and loops, derived from card text ─────────────
@@ -1962,6 +2012,7 @@ async function main() {
     intake: () => cmdIntake(S, cat, args),
     versus: () => cmdVersus(S, cat, args),
     try: () => cmdTry(S, cat, args),
+    search: () => cmdSearch(S, cat, args),
     loops: () => cmdLoops(S, cat, args),
     bans: () => cmdBans(S, cat, args),
   };

@@ -1,0 +1,44 @@
+[
+  {
+    "label": "C1 -1 Ember Monk +1 Ezreal",
+    "changes": [
+      "-1 Ember Monk",
+      "+1 Ezreal, Prodigy"
+    ]
+  },
+  {
+    "label": "C1b -1 Ember Monk +1 Kinkou Initiate",
+    "changes": [
+      "-1 Ember Monk",
+      "+1 Kinkou Initiate"
+    ]
+  },
+  {
+    "label": "C3 -1 Existential Dread +1 Switcheroo",
+    "changes": [
+      "-1 Existential Dread",
+      "+1 Switcheroo"
+    ]
+  },
+  {
+    "label": "C4 -1 Rampage +1 Rebuke",
+    "changes": [
+      "-1 Rampage",
+      "+1 Rebuke"
+    ]
+  },
+  {
+    "label": "C5 -1 Star-Crossed +1 Switcheroo",
+    "changes": [
+      "-1 Star-Crossed",
+      "+1 Switcheroo"
+    ]
+  },
+  {
+    "label": "PLANT (dead cards, should lose): -3 Nidalee +3 Whiteflame Protector",
+    "changes": [
+      "-3 Nidalee, Cat Form",
+      "+3 Whiteflame Protector"
+    ]
+  }
+]

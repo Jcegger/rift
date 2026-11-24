@@ -1752,6 +1752,24 @@ itself, and nothing that needs an opponent:
   candidates the same way (`--qty N` swaps N copies; `;` separates candidates whose names
   have commas), each scored tier by tier when the deck has goal tiers.
 
+**Swap search (`rift search`, 24 Nov 2026).** Many candidate changes to one deck, ranked on the same model games:
+`rift search --deck "<name>" --cands decklab/<file>.json` (`[{ "label", "changes": ["-1 A", "+1 B"] }]`; or
+`--swap "-1 A | +1 B"`, repeatable), `--games 60 --budget 2400 --keep 3 [--greedy]`. `lib/search.mjs` plays every
+candidate and the deck as it is on games 0–59, then doubles the games for whatever is still in until `keep` remain,
+`maxRounds`, or the budget. A candidate leaves only when its paired 95% interval against the leader (which may be the
+deck as it is) is below 0, never for being in the bottom half by noise, so "still in" means "not shown worse". Each
+row prints margin and points vs the deck as it is (paired ± 95%), won (Wilson), and the pre-flight facts it can count
+(main changes, rules). Sideboard changes don't play. A changed list keeps the old list's card order with each added
+card in a removed card's place (`deckOrder`), so both decks are dealt the same cards at the same turns where they
+agree.
+
+**How much the model can see (measured 24 Nov 2026, solver policy, Sivir Is Trying Her Best, S/A field):** the
+deals pair exactly (only the shuffle draws on the seed), but one different card changes both solvers' lines, so the
+games barely correlate after it: per-game margin spread about ±4.5 points, a 95% interval of about ±0.8 at 120
+games. Three dead cards (−3 Nidalee, Cat Form +3 Whiteflame Protector, off-domain) read −0.68 (−1.51 to +0.16) at
+120 games; six read −1.32 (−2.23 to −0.42). The one-card swaps in `decklab/sivir-tune.md` all read within ±0.3 at
+120. A one-card swap needs roughly 800+ games per candidate to show a 0.3 effect; `--budget` sets it.
+
 **What the bench is, and its three-layer place (decided 21 Nov 2026).** The goldfish answers "does the list run"
 (curve, colours, Power, Gold, cards), never "does it win". A full two-player game AI was considered and rejected:
 its win rates would be only as good as its weakest card reader and its AI's play. Instead: (1) the goldfish, which
