@@ -14,7 +14,7 @@
 #   Komga         reference sheets also as Kobo books in the collection, via the Plex server (at home).
 # source  <path>.md          built at the Kobo's page size with guides/eink-kobo.css
 #         journal:<sheet>    from scripts/build-journal --kobo: card (matchup card), match-night,
-#                            trouble-list, review
+#                            trouble-list, review, questions
 # write   a sheet you write on with the stylus: PDF only (Kobo saves pen ink inside a PDF).
 
 "Nexus Night"  journal:match-night             title="Match sheets"            write
@@ -23,3 +23,10 @@
 "Nexus Night"  guides/sivir-one-army-sheet.md  title="Table sheet (Sivir)"
 "Nexus Night"  journal:card                    title="Matchup card (Sivir)"
 "Nexus Night"  guides/sivir-build-sheet.md     title="Build sheet (Sivir)"
+"Nexus Night"  journal:questions               title="Questions"               write
+# Reading (24 Nov, the same set the reMarkable gets: guides/remarkable.txt /riftbound/reading).
+"Riftbound"    guides/sivir-one-army.md         title="Sivir guide (The Trap)"
+"Riftbound"    docs/strategy.md                 title="Strategy"
+"Riftbound"    docs/fundamentals.md             title="Fundamentals"
+"Riftbound"    docs/rules.md                    title="Rules handbook"
+"Riftbound"    docs/jargon.md                   title="Jargon"

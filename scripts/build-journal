@@ -322,10 +322,13 @@ def card_pages(pdf):
     p.done()
 
 
-def questions_pages(pdf, pages=10, per_page=6):
+def questions_pages(pdf, slots=60):
     """A notebook for rules questions and "why did I lose that?" moments, written at home
     or between rounds, never during a game (TR §416.4). Slots are numbered across pages so
-    an answers sheet can refer to Q7."""
+    an answers sheet can refer to Q7. As many slots a page as fit (six on the reMarkable's
+    page, three on the Kobo's), 60 in all."""
+    per_page = int((H - 0.25 - 0.75) // 1.16)
+    pages = -(-slots // per_page)
     n = 0
     for _ in range(pages):
         p = Page(pdf)
@@ -357,7 +360,7 @@ def main():
     ap.add_argument("--pages", type=int, default=5, help="match pages in match-night.pdf")
     ap.add_argument("--kobo", action="store_true",
                     help="sized for the Kobo Libra Colour, into guides/out/kobo/: the matchup card and the "
-                         "sheets you write on (match night, trouble list, review)")
+                         "sheets you write on (match night, trouble list, review, questions)")
     args = ap.parse_args()
     global W, H, L, R, OUT
     if args.kobo:
@@ -368,6 +371,7 @@ def main():
         build("match-night.pdf", match_page_kobo, args.pages)
         build("trouble-list.pdf", trouble_page_kobo, 3)
         build("review.pdf", review_pages_kobo, 3)
+        build("questions.pdf", questions_pages, 1)   # the notebook for rules questions, as on the reMarkable
         return
     OUT.mkdir(parents=True, exist_ok=True)
     build("match-night.pdf", match_page, args.pages)
