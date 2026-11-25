@@ -67,6 +67,13 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
      `calibrate --legends 20`, then the narrow run, each on ede1589 (master, all misread fixes) and on 2bff612
      (`hidden-down`: master + fix 2). They decide fix 2 and give the new baseline. If the session ends first, re-run
      them.
+   - **Fix 10 (25 Nov, 1df95b7):** gear can be killed or returned mid-fight (Offer, Detonate, Factory Recall, …).
+   - **First results (20 legends, RiftLite data regenerated 25 Nov):**
+     - master ede1589: r 0.30 (−0.17 to 0.65), error 12.3, 11 of 20 on the right side of 50%;
+     - with fix 2: r 0.30 (−0.16 to 0.66), error 12.4, 12 of 20.
+     - Fix 2 is not worse here; the narrow runs decide.
+     - The old r 0.11 was on 24 Nov's data, so part of the change may be the data. To separate them, run the pre-fix
+       model (c2e7a80) on today's data, once the queue is done.
    - **The bar before `rift build`** is in `docs/model-calibration.md` (Jay, 25 Nov). Until it's met, keep fixing misreads;
      no swap advice from model numbers.
    - **riftjudge.com (checked 25 Nov):** a fan Q&A site; an AI writes the answers and community arbiters verify them.
