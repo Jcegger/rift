@@ -1855,6 +1855,42 @@ async function cmdTrace(cat, args) {
   console.log(`  "left the hand" counts a play, a hide or a discard; --verbose shows which.`);
 }
 
+// ── lifts: how good finishes build a legend (real data first; 25 Nov: model numbers rank inside the model only) ──────
+// Per card: mean copies in good-finish lists minus the legend's other placed lists (lib/calibrate.mjs lifts), with a
+// bootstrap interval. --deck "<one of your decks>" puts your copies beside each card. Only cards in 15%+ of the lists.
+//   lifts --legend <legend> [--since 2026-10-23] [--deck "<deck>"]
+async function cmdLifts(S, cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const want = (opt("--legend") || "").toLowerCase(), since = opt("--since") || "2026-10-23";
+  if (!want) { console.log('lifts --legend <legend> [--since 2026-10-23] [--deck "<deck>"]'); return; }
+  const snap = await readJson(url("decks.json"));
+  const card = (code) => cat.BY.get(code);
+  const legendOf = (d) => (d.lg && cat.BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
+  const by = {};
+  for (const d of snap.decks) {
+    if ((d.dt || "") < since || !isRecord(d)) continue;
+    const l = legendOf(d); if (!l) continue;
+    const name = `${(l.g || [])[0]}, ${l.n}`; if (!name.toLowerCase().includes(want)) continue;
+    const m = mainOf(d.cards, card); if ([...m.values()].reduce((a, b) => a + b, 0) < 39) continue;
+    (by[name] ||= []).push({ m, good: isGoodPlacing(d) });
+  }
+  const names = Object.keys(by);
+  if (names.length !== 1) { console.log(names.length ? `${names.length} legends match: ${names.join(" · ")}` : `no placed lists for "${want}" since ${since}`); return; }
+  const xs = by[names[0]], good = xs.filter((x) => x.good).length;
+  if (good < 5 || xs.length - good < 5) { console.log(`LIFTS  ${names[0]}: ${xs.length} placed lists since ${since}, ${good} good finishes. Too few to compare (5+ of each needed); try an earlier --since.`); return; }
+  const Lf = lifts(xs.map((x) => x.m), xs.map((x) => x.good));
+  let mine = null;
+  if (opt("--deck")) { const dk = (S.decks || []).find((d) => d.name.toLowerCase() === opt("--deck").toLowerCase()); if (!dk) { console.log(`no deck "${opt("--deck")}"`); return; } mine = mainOf(dk.cards, card); }
+  console.log(`LIFTS  ${names[0]}: ${xs.length} placed lists since ${since}, ${good} good finishes (lib/placing.mjs isGoodPlacing)`);
+  console.log(`  lift = copies in good finishes − copies in the other placed lists (95% bootstrap); share = lists running it${mine ? "; yours = your copies" : ""}\n`);
+  const sg = (x) => `${x >= 0 ? "+" : ""}${x.toFixed(2)}`;
+  for (const [n, x] of [...Lf].sort((a, b) => b[1].lift - a[1].lift)) {
+    const clear = x.lo > 0 ? "  more in winners" : x.hi < 0 ? "  fewer in winners" : "";
+    console.log(`  ${sg(x.lift).padStart(6)} (${sg(x.lo)} to ${sg(x.hi)})  ${String(Math.round(100 * x.share)).padStart(3)}%  ${mine ? `${String(mine.get(n) || 0).padStart(2)}  ` : ""}${n}${clear}`);
+  }
+  if (mine) { const off = [...mine.keys()].filter((n) => !Lf.has(n)); if (off.length) console.log(`\n  yours, in under 15% of placed lists: ${off.join(", ")}`); }
+}
+
 async function cmdCalibrate(S, cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   if (args.includes("--swaps")) return calibrateSwaps(cat, args, opt);
@@ -2273,6 +2309,7 @@ async function main() {
     try: () => cmdTry(S, cat, args),
     search: () => cmdSearch(S, cat, args),
     calibrate: () => cmdCalibrate(S, cat, args),
+    lifts: () => cmdLifts(S, cat, args),
     trace: () => cmdTrace(cat, args),
     loops: () => cmdLoops(S, cat, args),
     bans: () => cmdBans(S, cat, args),

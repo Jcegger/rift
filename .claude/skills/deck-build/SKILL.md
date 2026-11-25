@@ -21,6 +21,10 @@ tried it. On 21 Nov 2026 a "from scratch" Sivir broke five of the doc's rules in
 4. **`docs/strategy.md`** §2–3: the problem the deck solves, and what its resources become.
 5. **Tools:** `scripts/rift ideas <legend>` (the net deck or crowd, and how far Jay's deck
    sits from it), `rift rising <legend>`, then `rift try` and `rift versus` for each change.
+6. **Real data before model numbers** (25 Nov, `docs/model-calibration.md`): `rift lifts --legend <L> --deck "<deck>"`
+   shows which cards good finishes run more or less, with intervals. A swap's case starts there. `try` / `search`
+   numbers rank changes inside the model only (r about 0.3–0.4 against real results). Quote them as a mechanism check
+   ("closes a turn sooner", "never gets cast"), never as a win-rate verdict.
 
 ## Tune or brew
 

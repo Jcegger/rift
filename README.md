@@ -1779,6 +1779,12 @@ games. Three dead cards (−3 Nidalee, Cat Form +3 Whiteflame Protector, off-dom
 120 games; six read −1.32 (−2.23 to −0.42). The one-card swaps in `decklab/sivir-tune.md` all read within ±0.3 at
 120. A one-card swap needs roughly 800+ games per candidate to show a 0.3 effect; `--budget` sets it.
 
+**Lifts (`rift lifts --legend <L> [--since D] [--deck "<deck>"]`, 25 Nov 2026).** How good finishes build a legend:
+each card's copies in good-finish lists minus the legend's other placed lists (`lib/calibrate.mjs` lifts), with a
+bootstrap interval, for cards in 15%+ of the lists. With `--deck` it shows your copies beside each card. It needs 5+ good
+and 5+ other placed lists, and says so when there are fewer. Real data comes first for swaps; model numbers rank inside
+the model (`deck-build` skill).
+
 **Calibration (`rift calibrate`, 24 Nov 2026).** `lib/calibrate.mjs` plays each of the top legends by RiftLite games
 (its best list: placed first, then newest) against the others' top 3 lists, both seats, and sets the model's win rate
 per legend beside RiftLite's pooled row over the same opponents.
