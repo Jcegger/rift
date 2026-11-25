@@ -111,3 +111,14 @@ Each has a fight test.
   passes them in.
 - Irelia, Fervent's +1 when chosen by our own spell mid-fight.
 
+**Fix 12: Not So Fast counters only a spell that chooses one of our units.** Both the turn solver's `stops()` and the
+fight's counter step let it counter anything.
+
+**The stuck-card scan after fixes 3–11** (master, 40 games each):
+- Ornn won 5 of 40, Diana 19, Irelia 15.
+- No dead card is left on any of them. What stays in hand is reactive: Defy (Ornn 3 of 29, Irelia 4 of 32), Not So
+  Fast (Irelia 0 of 17), Retreat (Ornn 4 of 14), Helm of Suppression.
+- The pattern: **the model never holds runes for the opponent's turn**, so reactions are castable only with runes left
+  over. Irelia (model 36%, real 61%) and Ornn (15%, real 47%) are the reactive decks and the two biggest low misses.
+- This is play policy, not reading. It waits on Jay.
+
