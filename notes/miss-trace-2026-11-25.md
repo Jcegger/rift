@@ -50,8 +50,9 @@ same. Then the narrow run and `calibrate --legends 20`, as with fixes 1 and 2.
   Rampage's paid +2 isn't read in fights.
 - **Left for fights** (`fightblank3.mjs`, scratchpad, 83 spells the fight can't play, most of them draws or plays outside
   combat):
-  - **Siren's Song** (946 copies, "Move an enemy unit that moved this turn"): the text doesn't say where the unit goes,
-    so it needs a `rules-question` read first.
+  - **Siren's Song: fix 9, done.** Its player picks the destination as it's played (FAQ "Charm", rules-faq.md:1542–1548),
+    and the card names no limit (§451.1, as in the Ride the Wind ruling). Every attacker moved this turn, so the defender
+    sends one to base.
   - **Offer and gear removal mid-fight:** the fight bakes gear into each unit's card (`cardFor`), so there's nothing to
     remove.
   - **Thrill of the Hunt:** banish a friendly unit and play it to any battlefield, i.e. bring one into the fight.
