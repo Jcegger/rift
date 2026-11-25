@@ -4,7 +4,7 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `~/projects/dotclaude/HUB.md`.
 
-**Updated:** 2026-11-25 (master measured; fixes 14–15 (Mordekaiser, Irelia, Fervent); Ornn read as play policy)
+**Updated:** 2026-11-25 (model's job settled with Jay; real sources: RiftAtlas first; trash-class misreads fixed)
 
 ## State
 
@@ -36,59 +36,44 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 
 ## Next
 
-0a. **Model misreads and the calibration (25 Nov).** Detail: `notes/miss-trace-2026-11-25.md`; numbers:
-   `docs/model-calibration.md` "25 Nov runs"; the bar before `rift build` is in that doc's top section (Jay, 25 Nov).
-   - **On master:** fixes 1–13. Gear can be killed or bounced (Offer works); each side plans against guessed face-down
-     cards (fix 2, `--open-down` turns it off); spell follow-ons, rune readying, fight spells and keyword tricks, Decree,
-     Deathgrip, Ki Barrier, escapes, Riposte, Repulse, attack/defend triggers, Not So Fast's targets, Guardian Angel and
-     Brutalizer (fix 13, 50a0a34). Hold-up code merged as flags: `--hold-up W`, `--caution C`, `--no-defend-all`.
-   - **Results (20 legends, today's data):** r 0.30 with every fix; the pre-fix model (c2e7a80) scores 0.31, so 24 Nov's
-     0.11 → 0.30 is the data. Hold-up 0.5 and 1 aren't better (0.31, 0.26) and push Irelia down (39% → 32%, real 61%),
-     so the default stays 0. Narrow swap run: r −0.58 with fix 2 (0 of 7 same sign); bar item 2 is far off.
-   - **Done 25 Nov (second session):**
-     - Master measured: r 0.30, 12.2 error, Ornn still 16%, so fix 13 didn't move him.
-     - `--hidden --caution 0.5`: r 0.25, so it stays opt-in. It lifts Ornn to 29%, Diana to 35% and Irelia to 43%.
-     - Fixes 14 (Mordekaiser, Dominating's discard-to-kill) and 15 (Irelia, Fervent's +1 when chosen).
-     - The empowered states (Steel Paws, Kayle, Ambessa) and Sett's buff were already right.
-     - Thrill of the Hunt and Deathgrip from base are parked.
-     - Ornn's games read: no misread; it's play policy.
-     - `rift trace --full` and `--open-down` added.
-     - Detail is in the notes, "Still unread" and "Ornn's games read".
+0a. **What the model is for, and the real sources (25 Nov, late).** Detail: `docs/model-calibration.md` (top section and
+   "Real sources disagree"), `notes/miss-trace-2026-11-25.md`.
+   - **Decided with Jay:** the sim won't predict real win rates well enough to judge one-card swaps. Real data comes
+     first for list and swap verdicts (`rift lifts`, the `deck-build` skill). The model is for mechanisms: reading,
+     closing turns, speed, stuck cards, ranking inside the model. Its own bar is directional: r against RiftAtlas
+     tournaments with the interval above 0, no legend 20+ points off. Not met yet (r 0.20 this format, 0.35 all events).
+   - **Real sources:** RiftLite (online, its users' own decks) and RiftAtlas (tournaments, the model's population)
+     barely agree (r 0.04–0.19). RiftLite's decks aren't tournament lists: 2 of 83 Riven decks ran Broken Blade, against
+     91% of tournament lists. Tournament data is the main reference now.
+   - **Built today:**
+     - `data/matches.json` (every RiftLite match, growing daily) and `data/riftlite-decks.json`;
+     - `lib/realfit.mjs` (fitted post-ban column, bootstrap, noise ceiling);
+     - calibrate's `--real-since`, `--decks riftlite`, RiftAtlas column, `--save` / `--model-from` (saved column:
+       `docs/calibration-model.json`);
+     - `rift lifts`; `rift cards --suspects`.
+   - **Misreads fixed today:**
+     - 14 Mordekaiser, Dominating; 15 Irelia, Fervent;
+     - the trash class: Fizz, Trickster, Glasc Mixologist, Spectral Matron, Gust Monk, Aspiring Engineer, Guerilla
+       Warfare;
+     - "up to N" targets now reach their weakest units (Bilgewater Tracker).
+
+     Turn tests 208–215.
+   - **Measured and left opt-in:**
+     - `--hidden` lifts the reactive decks (Ornn 16 → 28%) but also Volibear and Mordekaiser;
+     - `--caution` adds little;
+     - `--equip` didn't help (branch `worktree-equip-flag`, unmerged).
    - **Next, in order:**
-     1. (Done: fixes 14–15 measured, r 0.30, inside the noise; docs/model-calibration.md.)
-     2. Ornn and the reactive decks as play policy, behind a flag and measured against the calibration.
-        - Done 25 Nov:
-          - `--hidden` alone does the lifting (Ornn 28%, Diana 33%, Irelia 44%), not caution, but r falls to 0.24
-            because Volibear and Mordekaiser rise too.
-          - `--equip` didn't help: Ornn already attaches about 86%. It stays on the unmerged branch
-            `worktree-equip-flag`.
-          - Detail: docs/model-calibration.md.
-        - Next: why hidden hands lift Volibear (68%, real 35) and Mordekaiser (61%, real 41). Read their games with
-          `rift trace --full`, open against hidden. The aim is a hidden-hands model that doesn't over-reward proactive
-          decks, which would let it become the default.
-     3. Reckless Innovator is still overrated (−Offer +Innovator: model +0.31, real −0.22): a policy lead, not a
-        misread (Main 4 isn't it).
-     4. Irelia's games with `rift trace --full`, as for Ornn: what she holds up (Defy, Not So Fast) and when.
-     5. After 2026-11-30: both calibrations again on post-ban data (bar item 3).
-   - **Tools:** `calibrate --swaps --only "<legend>;…" --card "<card>;…"` (narrow run), `rift trace --only <legend>
-     --out "<card>" --in "<card>" [--games 60] [--verbose N]`.
-   - **riftjudge.com:** the `rules-question` skill's last lookup step, verified answers only, as a lead (Jay, 25 Nov).
-0. **Make the model track real results.** Done 24 Nov:
-   - Fiora's crash fixed (Sett 15% → 43%); solver errors are reported and gated.
-   - Budget tested: 150 nodes stays (600 and 2000 are worse).
-   - Hidden hands built (`--hidden`; less extreme but not clearly better over 20 legends, so it stays opt-in).
-   - r prints with its interval; 20-legend runs.
+     1. After the 29–30 Nov weekend: rebuild `field.json`, then `calibrate --model-from docs/calibration-model.json`
+        against post-ban RiftAtlas events and the grown RiftLite archive. Rerun the model only after a code change.
+     2. A fresh model run with the trash fixes in (the saved column predates them): `calibrate --legends 20 --save
+        docs/calibration-model.json`.
+     3. Suspects left (`rift cards --suspects`): Kennen's Flow from trash, Kharox (their trash), Rumble and Immortal
+        Phoenix (play from the trash as an action).
+     4. Jay's pasted Sivir list (Battle Mistress, close to his own): parked at his word. It goes through `deck-build`
+        when he asks.
+     5. Parked: Thrill of the Hunt, Deathgrip from base; an Ornn / reactive-deck policy flag only with a trace showing a
+        clear, general mistake.
 
-   Where it stands (25 Nov): r 0.30 over 20 legends (−0.16 to 0.66), mean error 12.5 points, the model too extreme
-   (13–80% vs real 31–69%). Next, from `notes/builder-research.md`:
-   - The biggest misses: Ornn (16%, real 49), Diana (26%, real 53), Irelia (39%, real 61), Volibear (63%, real 35),
-     Ekko (66%, real 35). Add a `trace` hook in `playMatch` that logs
-     both sides' turns, and read their games against Nasus. Ornn's own turns look sensible; its units die on the
-     opponent's turn.
-   - Why the model is too extreme: snowballing in 12-turn games? Compare its win rates by game length.
-
-   Re-run `rift calibrate --legends 20` after each fix (14 min) on the same `data/winrates.json`. Target: r's interval
-   above 0. Until then, model numbers rank swaps inside the model only.
 1. **Sivir changes after the first post-ban weekend (29–30 Nov) and games.** Candidates are in
    `decklab/sivir-search.json` (sivir-tune.md C1, C1b, C3, C4, C5 plus a dead-card plant):
    `rift search --deck "Sivir Is Trying Her Best" --cands decklab/sivir-search.json --budget 6000`. Read it against

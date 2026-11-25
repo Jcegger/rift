@@ -12,15 +12,52 @@ Run 24 Nov 2026 with `scripts/rift calibrate --legends 20` (open hands) and `--l
 | open hands | 0.11 (−0.35 to 0.52) | 14.2 points | 9 of 20 | 16–81% |
 | hidden hands | 0.04 (−0.41 to 0.48) | 13.8 points | 9 of 20 | 27–74% |
 
-**The bar before building on the model (Jay, 25 Nov):** fixes to misreads go in whatever these numbers say; changes to
-how the model plays go in only if the calibrations don't get worse; `rift build`, swap searches and deck advice from
-model numbers wait until all three hold:
-1. `calibrate --legends 20`: the r interval's lower end above 0.
-2. Narrow swap run (`calibrate --swaps --only "Yordle;Rengar" …`, "Swaps" below): the same sign as the real result in at
-   least 5 of 7 clear swaps, and r positive.
-3. Both re-checked on post-ban data once there is enough of it (after 2026-11-30).
+**What the model is for (Jay, 25 Nov, replacing the earlier bar).** Simulating whole games won't predict real win rates
+closely enough to judge one-card swaps. Two reasons:
+- the model would have to play like people (bluffs, holding up answers, matchup lines);
+- the real numbers themselves are noisy and disagree with each other (below).
 
-RiftLite's spread is 31–68%. The model doesn't track real results yet, so its numbers rank changes inside the model and nothing more. The biggest misses are Volibear and Ekko (about 30 points high), and Ornn, Diana and Irelia (22–33 low). Earlier runs on the morning's data, and what each fix did, are in README "Calibration" and notes/builder-research.md.
+So the jobs are split:
+- **Real data first for list and swap verdicts:** `rift lifts --legend <L> --deck "<deck>"`, which cards good finishes
+  run more or less, with intervals (the `deck-build` skill).
+- **The model for mechanisms:** card reading, closing turns ("can I win this turn, and how"), speed (points by turn 8),
+  "this card never gets cast", and ranking changes inside the model. `try` / `search` numbers are quoted as mechanism
+  checks, never as win-rate verdicts.
+- **The model's own bar is directional:** r against tournament results (RiftAtlas) with its interval above 0, and no
+  legend off by more than 20 points. Not met yet (below).
+- **Misreads are fixed whatever the numbers do.** Play-policy changes need a trace that shows a clear, general mistake,
+  and a calibration that doesn't get worse.
+
+## Real sources disagree (25 Nov)
+
+The real side used to be RiftLite alone: online games logged by its users, on their own decks. Two findings changed that:
+- **RiftLite's decks aren't the tournament lists the model plays.** Before the 23 Nov bans, 91% of tournament Riven lists
+  ran Riven, Broken Blade; 2 of 83 RiftLite Riven decks did. Only 3–6% of RiftLite decks ran any card banned on 23 Nov,
+  against 43% of the tournament field. So RiftLite's Riven didn't drop after the ban (48% → 49%): its players weren't on
+  the banned card.
+- **The second source, RiftAtlas tournament results** (`data/field.json`: each legend's per-event match win rate, pilots
+  and rounds), is the same population as the model's lists. **It barely agrees with RiftLite.** r between the two is
+  0.04 over 14 legends this format, 0.19 over 17 with every event since 31 Jul. Lillia, for example, is 69% on RiftLite
+  and 43% at tournaments.
+
+One model run (open hands, fixes 1–15, `docs/calibration-model.json`, compared again with `--model-from`):
+
+| real side | legends | r (95%) | mean error | right side of 50% |
+|---|---|---|---|---|
+| RiftLite, latest 7,000 (pooled) | 20 | 0.33 (−0.13 to 0.68) | 13.3 | 11 of 20 |
+| RiftLite since 23 Nov (pooled, 1,921 matches) | 20 | 0.15 (−0.31 to 0.56) | 14.0 | 10 of 20 |
+| RiftLite since 23 Nov (fitted: Bradley–Terry, pre-ban prior) | 20 | 0.21 (0.02 to 0.33, bootstrap) | | |
+| RiftAtlas since 23 Oct (this format) | 14 | 0.20 (−0.37 to 0.66) | 12.1 | 9 of 14 |
+| RiftAtlas since 31 Jul (every event) | 17 | 0.35 (−0.16 to 0.71) | 12.3 | 12 of 17 |
+
+- **What the data could show.** The fitted post-ban RiftLite column has a noise ceiling of 0.92, so a perfect model could
+  score about that against it. RiftAtlas's legends spread about ±5.5 points with about ±3 of sampling noise: a ceiling
+  near 0.83. The model's 0.2–0.35 is its own limit, not the data's.
+- **Post-ban moves can't yet be told from noise.** The fit's τ hit its floor (0.10): at about 100 games a legend, no
+  legend's move across the bans is clearer than sampling noise. Volibear's pooled 39% → 28% fits as 37% (25–43).
+- **Growing:** `data/matches.json` keeps every RiftLite match past the page's window, about 650 a day. RiftAtlas has no
+  post-ban events until the 29–30 Nov weekend. The bar's post-ban check uses both from then on.
+- Thin RiftAtlas legends (under 100 pilot-rounds this format) are left out: Ornn, Ezreal, Sett, Pyke, Volibear, Fiora.
 
 ## 25 Nov runs (RiftLite data regenerated 25 Nov)
 
