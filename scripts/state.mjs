@@ -1808,10 +1808,10 @@ async function calibrateSwaps(cat, args, opt) {
 // The base and the swapped list play the same games (seed, opponent, seat) as calibrate; per swapped card: how often it's
 // drawn, when it's cast, and the margin at turn 8 when it's cast vs. drawn and never cast. --verbose N prints N games turn
 // by turn (both sides: score, cards that left the hand, the solver's line).
-//   trace --only <legend> --out "<card>" --in "<card>" [--games 60] [--verbose 0] [--since …] [--min 80]
+//   trace --only <legend> --out "<card>" --in "<card>" [--games 60] [--verbose 0] [--full] [--since …] [--min 80]
 async function cmdTrace(cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
-  const G = Number(opt("--games") || 60), V = Number(opt("--verbose") || 0), out = opt("--out"), inn = opt("--in");
+  const G = Number(opt("--games") || 60), V = Number(opt("--verbose") || 0), out = opt("--out"), inn = opt("--in"), FULL = args.includes("--full");   // --full: the solver's whole line (fights, deaths), not just the plays
   if (!opt("--only") || !out || !inn) { console.log('trace --only <legend> --out "<card>" --in "<card>" [--games 60] [--verbose N]'); return; }
   const { sets, foes } = await swapSets(cat, opt);
   if (sets.length !== 1) { console.log(sets.length ? `${sets.length} legends match: ${sets.map((x) => x.L).join(" · ")}` : "no legend matching that"); return; }
@@ -1823,14 +1823,14 @@ async function cmdTrace(cat, args) {
   for (const [k, { me, them }] of Object.entries(runs)) {
     res[k] = [];
     for (let i = 0; i < G; i++) {
-      const ev = [], g = matchGame(me, them, i, { trace: (e) => ev.push(e) });
+      const ev = [], g = matchGame(me, them, i, { trace: (e) => ev.push(e), hiddenDown: !args.includes("--open-down") });
       res[k].push({ g, ev });
       if (i < V) {
         console.log(`\n── ${k} game ${i} vs ${g.label} (${i % 2 ? "they" : "we"} go first): ${g.at8[0]}–${g.at8[1]} at turn 8, ${g.winner == null ? "timeout" : g.winner === 0 ? "we win" : "they win"} ──`);
         for (const e of ev) {
           console.log(`  T${e.myTurn} ${e.side ? "them" : "us  "} ${e.before.join("–")} → ${e.score.join("–")}  left hand: ${e.left.join(", ") || "—"}${e.champ ? `; champion ${e.champ}` : ""}`);
           if (e.side === 0) console.log(`         hand ${e.hand.join(", ")}; board ${e.units.join(", ") || "—"}; gear ${e.gear.join(", ") || "—"}`);
-          for (const l of e.line || []) console.log(`         · ${l}`);
+          for (const l of (FULL ? e.full : e.line) || []) console.log(`         · ${l}`);
         }
       }
     }
