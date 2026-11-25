@@ -45,6 +45,7 @@ same. Then the narrow run and `calibrate --legends 20`, as with fixes 1 and 2.
     longer share a state.
   - Deathgrip only sacrifices units in the fight, which never changes a combat total. Its real use, a unit from
     elsewhere, isn't modelled.
+- **Fix 7 (25 Nov):** Riposte and Repulse counter in fights (Riposte's +M goes on our strongest unit).
 - **Was "still blank", now done except as noted:** Retreat and Flash (pull a unit out before it dies), Sprite Call
   (a 3-Might unit mid-fight), Deathgrip, Imperial Decree, Ntofo Strikes's damage. Retreat explains its 0 of 14: the
   turn solver can cast it, but only on our own turn, where it has no use. Scan:
