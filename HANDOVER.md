@@ -4,7 +4,7 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `~/projects/dotclaude/HUB.md`.
 
-**Updated:** 2026-11-25 (misread fixes 1–13 on master; hold-up measured, stays opt-in)
+**Updated:** 2026-11-25 (master measured; fixes 14–15 (Mordekaiser, Irelia, Fervent); Ornn read as play policy)
 
 ## State
 
@@ -45,15 +45,24 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    - **Results (20 legends, today's data):** r 0.30 with every fix; the pre-fix model (c2e7a80) scores 0.31, so 24 Nov's
      0.11 → 0.30 is the data. Hold-up 0.5 and 1 aren't better (0.31, 0.26) and push Irelia down (39% → 32%, real 61%),
      so the default stays 0. Narrow swap run: r −0.58 with fix 2 (0 of 7 same sign); bar item 2 is far off.
+   - **Done 25 Nov (second session):**
+     - Master measured: r 0.30, 12.2 error, Ornn still 16%, so fix 13 didn't move him.
+     - `--hidden --caution 0.5`: r 0.25, so it stays opt-in. It lifts Ornn to 29%, Diana to 35% and Irelia to 43%.
+     - Fixes 14 (Mordekaiser, Dominating's discard-to-kill) and 15 (Irelia, Fervent's +1 when chosen).
+     - The empowered states (Steel Paws, Kayle, Ambessa) and Sett's buff were already right.
+     - Thrill of the Hunt and Deathgrip from base are parked.
+     - Ornn's games read: no misread; it's play policy.
+     - `rift trace --full` and `--open-down` added.
+     - Detail is in the notes, "Still unread" and "Ornn's games read".
    - **Next, in order:**
-     1. A 20-legend run on master as it is now (fix 13 came after the runs; Ornn was 13%, real 47%), then
-        `--hidden --caution 0.5` against it.
-     2. Remaining fight gaps: Thrill of the Hunt, Deathgrip from other sources, Mordekaiser's discard, empower/buff
-        states (`notes/miss-trace-2026-11-25.md` "still unread").
+     1. A 20-legend run with fixes 14–15 in (the first step after this push), as its own row.
+     2. Ornn and the reactive decks as play policy, behind a flag and measured against the calibration:
+        - attach Equipment before developing more units;
+        - hold runes for Defy when the hand has it;
+        - start from what `--caution` changes, since it's the one setting that lifts all three (Ornn, Diana, Irelia).
      3. Reckless Innovator is still overrated (−Offer +Innovator: model +0.31, real −0.22): a policy lead, not a
         misread (Main 4 isn't it).
-     4. Why reactive decks (Irelia, Ornn) lose: hold-up as built didn't help; read an Irelia game with `rift trace` and
-        see what a real player would hold up for (Defy, Not So Fast) and when.
+     4. Irelia's games with `rift trace --full`, as for Ornn: what she holds up (Defy, Not So Fast) and when.
      5. After 2026-11-30: both calibrations again on post-ban data (bar item 3).
    - **Tools:** `calibrate --swaps --only "<legend>;…" --card "<card>;…"` (narrow run), `rift trace --only <legend>
      --out "<card>" --in "<card>" [--games 60] [--verbose N]`.

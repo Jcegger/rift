@@ -105,11 +105,37 @@ with nothing targeting, Tank alone).
 
 Each has a fight test.
 
-**Still unread in fights:**
-- Mordekaiser, Dominating: discard 1 to kill. Needs the discard mapped back.
-- Steel Paws, Kayle and Ambessa empowered, and Sett's buffs: states the probe doesn't set. Check that the turn solver
-  passes them in.
-- Irelia, Fervent's +1 when chosen by our own spell mid-fight.
+**Still unread in fights** (second pass, 25 Nov, branch `worktree-fight-gaps`):
+- **Mordekaiser, Dominating: fix 14.** "When you play me or when I attack, you may discard 1 to kill a unit or gear"
+  was read as a draw, so neither solver ever killed with it (439 lists, mostly Mordekaiser). Discarding is now a cost
+  (`payDiscard` in `lib/turn.mjs`: our two cheapest cards are the choices; their hand isn't tracked, so they never pay
+  it). Turn test 208.
+- **Irelia, Fervent: fix 15.** "When you choose or ready me, +1 M" fired only on a ready. Now choosing her fires it
+  too: in the turn solver, and in the fight as the spell is played (so a counter doesn't undo it). 803 lists. Turn test
+  209 and a fight pair.
+- **Steel Paws, Kayle, Ambessa empowered, and Sett's buff: already right.** A probe (closing turns into growing walls)
+  shows each fights at its real Might: Steel Paws 0+7, Kayle 3+2 per Empower (×1 and ×3), Ambessa 4+3, Sett 4+1 →
+  spend the buff → 8. `effCard` reads the Empowered statics and passes them into the fight.
+- **Parked:** Thrill of the Hunt (342 lists, all Rengar, who already matches: 54% vs 54%) and Deathgrip on a unit
+  from base (about 1,000 lists). Both need the attacker's base passed into the fight and mapped back in both solvers.
+
+## Ornn's games read (25 Nov, `rift trace --full`)
+
+`rift trace --only Ornn --out "Ornn, Blacksmith" --in "Ornn, Blacksmith" --min 5 --legends 40 --games 6 --verbose 6
+--full` (`--full`, new: the whole solver line, with fights and deaths).
+- **No misread found.** His legend's {A} for gear only, Equip paid as a gear ability, and Quick-Draw (Sterak's Gage,
+  Cloth Armor attach as they're played) all read right.
+- **His board is small and gets attacked:** Scuttle Crab 0, Patched Porobot 2, Clockwork Keeper 2 against 4–8 Might
+  attackers. His own attacks fail 6 of 20; theirs 1 of 15.
+- **Equipment waits:** Guardian Angel played 10 times, attached 6. A Quick-Draw piece played onto an empty board stays
+  unattached until a paid Equip.
+- **Defy stays in hand all game** (the hold-up gap above).
+- **One odd turn** (game 2 vs Evelynn, T4): Porobot (2) attacks First Mate (3) and dies, then Charm pulls First Mate
+  home. Charm first, then walking in, scores 1. The same position rebuilt four ways (tokens, real cards, his full hand,
+  his gear) solves right every time, and `--open-down` plays the same line, so it's something else in the live
+  position (their open hand?). Not chased further.
+- **So Ornn looks like play policy:** when to equip, and holding up for Defy. `--hidden --caution 0.5` lifts him 16% →
+  29% (docs/model-calibration.md), the strongest lead so far.
 
 **Fix 12: Not So Fast counters only a spell that chooses one of our units.** Both the turn solver's `stops()` and the
 fight's counter step let it counter anything.
