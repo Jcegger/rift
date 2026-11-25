@@ -35,7 +35,17 @@ same. Then the narrow run and `calibrate --legends 20`, as with fixes 1 and 2.
   `lib/cardtext.mjs`, and `effectsOf` is blank for 94 fight-playable spells. Cleave, Block, Consult the Heavens and
   Blood Rush (7 spells in all) now play as a `kw` move. Block now holds where it lost, and Cleave conquers where it
   traded (fight tests).
-- **Still blank in fights, combat-relevant (next):** Retreat and Flash (pull a unit out before it dies), Sprite Call
+- **Fix 6 (25 Nov):**
+  - Imperial Decree, Deathgrip, Ki Barrier, Flash, Emperor's Divide and Retreat now play in fights.
+  - Escapes keep the unit: to base, or to hand for Retreat.
+  - **Model games never passed these cards to a fight.** Both callers filtered the hand with `trick()`, built on the old
+    reader's kinds, so fix 5's keyword tricks only worked in `rift fight`. Now `fightPlays()` (`lib/fight.mjs`) decides.
+  - `doFight` used to kill a unit sent home (Janna, Savior); now it goes to base.
+  - The fight memo key now carries Assault, Shield, Tank and prevented damage, so Block on one unit and on another no
+    longer share a state.
+  - Deathgrip only sacrifices units in the fight, which never changes a combat total. Its real use, a unit from
+    elsewhere, isn't modelled.
+- **Was "still blank", now done except as noted:** Retreat and Flash (pull a unit out before it dies), Sprite Call
   (a 3-Might unit mid-fight), Deathgrip, Imperial Decree, Ntofo Strikes's damage. Retreat explains its 0 of 14: the
   turn solver can cast it, but only on our own turn, where it has no use. Scan:
   `fightblank.mjs` (scratchpad; not kept): Reaction/Action spells where `effectsOf` is empty, by copies played.
