@@ -1775,7 +1775,7 @@ games. Three dead cards (−3 Nidalee, Cat Form +3 Whiteflame Protector, off-dom
 **Calibration (`rift calibrate`, 24 Nov 2026).** `lib/calibrate.mjs` plays each of the top legends by RiftLite games
 (its best list: placed first, then newest) against the others' top 3 lists, both seats, and sets the model's win rate
 per legend beside RiftLite's pooled row over the same opponents.
-- Options: `--legends 12 --reps 4 --lists 3 [--nodes N] [--hidden] [--greedy] [--write]`.
+- Options: `--legends 12 --reps 4 --lists 3 [--nodes N] [--hidden] [--open-down] [--greedy] [--write]`. `--open-down` lets each side see the other's face-down cards (the model before 25 Nov); by default they're guessed when planning and real in the fight.
 - Time: about 6 minutes for 12 legends, 14 for 20.
 - Lists aren't filtered by today's bans, to match RiftLite's mostly pre-ban window.
 - RiftLite's pairs top out near 50 games (±15 points), so the legend rows (200–350 games over the set, ±6) carry
