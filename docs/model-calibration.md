@@ -37,6 +37,7 @@ RiftLite's spread is 31–68%. The model doesn't track real results yet, so its 
 | 0c7a3d9 (master: fixes 1–13) | | 0.30 (−0.16 to 0.66) | 12.2 | 12 of 20 | 16–80% |
 | 0c7a3d9 | `--hidden --caution 0.5` | 0.25 (−0.22 to 0.62) | 11.7 | 10 of 20 | 29–75% |
 | fb50976 (+ fixes 14–15: Mordekaiser, Dominating; Irelia, Fervent) | | 0.30 (−0.17 to 0.65) | 12.4 | 11 of 20 | 16–80% |
+| 84f74a0 | `--hidden` | 0.24 (−0.23 to 0.61) | 12.3 | 9 of 20 | 28–75% |
 
 - **24 Nov's r 0.11 → 0.31 is the data, not the fixes:** the pre-fix model scores the same as the fixed one on today's
   data. Over 20 legends the fixes neither help nor hurt; they are misreads, so they stay (the bar above).
@@ -47,6 +48,14 @@ RiftLite's spread is 31–68%. The model doesn't track real results yet, so its 
 - **Fix 13 didn't move Ornn** (0c7a3d9: 16%, real 47%); master scores what 10e3ecf did.
 - **Fixes 14–15 are inside the noise** (fb50976): Mordekaiser 55% → 57% (real 41), Irelia 40% → 41% (real 61).
   They're misreads, so they stay (the bar).
+- **Hidden hands do the lifting, not caution** (84f74a0 `--hidden`): Ornn 28%, Diana 33%, Irelia 44%, about what
+  `--hidden --caution 0.5` gave (29, 35, 43). Volibear (68%) and Mordekaiser (61%) rise as well, so r falls to 0.24, and it
+  stays opt-in. With open hands each side plans around the other's real reactions, so the reactive decks' Defy and Not So
+  Fast never catch anyone. Hiding hands lifts them, but it also lifts the proactive decks that are already too high.
+- **`--equip W` (branch `worktree-equip-flag`, not merged): no gain.** It adds a value per Equipment attached in the
+  model games. On the same 20 Ornn games, Ornn already attaches about 86% of the time (Guardian Angel 24 of 28,
+  Brutalizer 42 of 46). With `--equip 0.5` he won 3 of 20 (5 without), margin at turn 8 −3.10 (−2.35). The earlier
+  "6 of 10" came from a 6-game sample.
 - **`--hidden --caution 0.5` stays opt-in**: r 0.30 → 0.25 and 12 → 10 on the right side, so it fails the bar, though
   the error (11.7) and the spread (29–75%, real 31–69%) are better. It moves every reactive deck the right way: Ornn
   16% → 29%, Diana 28% → 35%, Irelia 40% → 43% (real 47, 52, 61). Volibear (63% → 68%, real 35) and Mordekaiser

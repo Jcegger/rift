@@ -56,10 +56,16 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
      - Detail is in the notes, "Still unread" and "Ornn's games read".
    - **Next, in order:**
      1. (Done: fixes 14–15 measured, r 0.30, inside the noise; docs/model-calibration.md.)
-     2. Ornn and the reactive decks as play policy, behind a flag and measured against the calibration:
-        - attach Equipment before developing more units;
-        - hold runes for Defy when the hand has it;
-        - start from what `--caution` changes, since it's the one setting that lifts all three (Ornn, Diana, Irelia).
+     2. Ornn and the reactive decks as play policy, behind a flag and measured against the calibration.
+        - Done 25 Nov:
+          - `--hidden` alone does the lifting (Ornn 28%, Diana 33%, Irelia 44%), not caution, but r falls to 0.24
+            because Volibear and Mordekaiser rise too.
+          - `--equip` didn't help: Ornn already attaches about 86%. It stays on the unmerged branch
+            `worktree-equip-flag`.
+          - Detail: docs/model-calibration.md.
+        - Next: why hidden hands lift Volibear (68%, real 35) and Mordekaiser (61%, real 41). Read their games with
+          `rift trace --full`, open against hidden. The aim is a hidden-hands model that doesn't over-reward proactive
+          decks, which would let it become the default.
      3. Reckless Innovator is still overrated (−Offer +Innovator: model +0.31, real −0.22): a policy lead, not a
         misread (Main 4 isn't it).
      4. Irelia's games with `rift trace --full`, as for Ornn: what she holds up (Defy, Not So Fast) and when.
