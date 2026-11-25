@@ -21,7 +21,7 @@ says "it" or "they" without a condition:
 - **"It" follow-ons:** Last Stand and Shadow's Call ("Give it [Temporary]"), Hunker Down ("It can't move"), Twilight
   Shroud ("can't be chosen"), Ki Barrier ("Prevent the next 7").
 
-Fix (not started; waits on Jay's go): in `compile`, a Spell's trigger-less, condition-less follow-on sentence whose
+**Fixed 25 Nov (a624dbb, Jay's go).** Exactly these 10 spells' compiled form changed; tests 161j–m. Measurement queued after fixes 1 and 2. The fix as planned: in `compile`, a Spell's trigger-less, condition-less follow-on sentence whose
 effects use the chosen units (`who: "it"/"it2"`, or `fight`) joins the ability before it, as unit and gear sentences
 already do. One rule instead of 10 overrides. Tests: a closing turn won by Challenge, with its no-win twin; Rampage the
 same. Then the narrow run and `calibrate --legends 20`, as with fixes 1 and 2.
