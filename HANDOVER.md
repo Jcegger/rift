@@ -65,10 +65,12 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    - **Next, in order:**
      1. After the 29–30 Nov weekend: rebuild `field.json`, then `calibrate --model-from docs/calibration-model.json`
         against post-ban RiftAtlas events and the grown RiftLite archive. Rerun the model only after a code change.
-     2. A fresh model run with the trash fixes in (the saved column predates them): `calibrate --legends 20 --save
-        docs/calibration-model.json`.
-     3. Suspects left (`rift cards --suspects`): Kennen's Flow from trash, Kharox (their trash), Rumble and Immortal
-        Phoenix (play from the trash as an action).
+     2. (Done 25 Nov, late: a fresh model column with the trash fixes; every r unmoved, within noise. Immortal Phoenix
+        and Rumble, Hotheaded are read too, after it, tests 216–217. Fights now count which kills are our spells', by
+        §429.5.c. Today's rules premises went through `rules-question`: §383.4.b, §417.1/§429.1, §385.2, §383.3.b.)
+     3. Suspects left (`rift cards --suspects`, 51): Kennen's [Burn] and [Flow], Kharox (their trash, tracked only in
+        part). The rest read as intended. Phoenix's edge case, killing our own Phoenix with a spell (FAQ: it may
+        return), isn't modelled.
      4. Jay's pasted Sivir list (Battle Mistress, close to his own): parked at his word. It goes through `deck-build`
         when he asks.
      5. Parked: Thrill of the Hunt, Deathgrip from base; an Ornn / reactive-deck policy flag only with a trace showing a

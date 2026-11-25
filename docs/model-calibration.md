@@ -50,6 +50,12 @@ One model run (open hands, fixes 1–15, `docs/calibration-model.json`, compared
 | RiftAtlas since 23 Oct (this format) | 14 | 0.20 (−0.37 to 0.66) | 12.1 | 9 of 14 |
 | RiftAtlas since 31 Jul (every event) | 17 | 0.35 (−0.16 to 0.71) | 12.3 | 12 of 17 |
 
+The same five comparisons with the trash-class fixes in (Fizz, Glasc Mixologist, Spectral Matron, Gust Monk, Aspiring
+Engineer, Guerilla Warfare, "up to N" targets; a fresh `docs/calibration-model.json`). Immortal Phoenix and Rumble came
+after it. RiftLite whole window 0.31 (−0.16 to 0.66); since 23 Nov pooled 0.12, fitted 0.18 (−0.01 to 0.30); RiftAtlas
+this format 0.19 (−0.38 to 0.65), every event 0.33 (−0.17 to 0.70). All within noise of the table: misreads fixed, the
+numbers unmoved, as the bar expects.
+
 - **What the data could show.** The fitted post-ban RiftLite column has a noise ceiling of 0.92, so a perfect model could
   score about that against it. RiftAtlas's legends spread about ±5.5 points with about ±3 of sampling noise: a ceiling
   near 0.83. The model's 0.2–0.35 is its own limit, not the data's.
