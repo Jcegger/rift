@@ -4,7 +4,7 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `~/projects/dotclaude/HUB.md`.
 
-**Updated:** 2026-11-25 (swap trace: two model misreads found)
+**Updated:** 2026-11-25 (misread fixes 1–13 on master; hold-up measured, stays opt-in)
 
 ## State
 
@@ -36,67 +36,36 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 
 ## Next
 
-0a. **Swap disagreement: two misreads found, fixes planned (25 Nov).** Detail, numbers and the plan:
-   `notes/swap-trace-2026-11-25.md`.
-   - At 2000 games a swap, the Yordle/Rengar swaps of Reckless Innovator, Edge of Night, Ride the Wind and Nidalee
-     disagree with good finishes for real: r −0.76 over 9 swaps, the sign wrong in all 7 clear ones. The 24 Nov
-     table's r 0.31 over 64 swaps still stands (`docs/model-calibration.md` "Swaps").
-   - Causes: "Kill a gear" never finds a target, so An Offer You Can't Refuse is dead in model games; and each side sees
-     the other's face-down cards, so Edge of Night (and every [Hidden] card) never ambushes.
-   - New tools (c2e7a80): `calibrate --swaps --only "<legend>;…" --card "<card>;…"` (narrow re-run of the same
-     swaps; `--write` refuses on it), and `rift trace --only <legend> --out "<card>" --in "<card>" [--games 60]
-     [--verbose N]` (when a swapped card is drawn and leaves the hand; turn logs with the solver's lines).
-   - **Fix 1 done (25 Nov, 8051bd4, on master):** "kill a gear" finds targets (their Equipment, loose gear, Gold tokens).
-     16 cards were affected. Offer now leaves the hand in 15 of 24 draws (was 4). Tests 161c–f.
-   - **Fix 2 written, on branch `hidden-down` (a846638), not merged:** each side plans against guessed face-down cards
-     and replays the plan against the real ones (`--open-down` turns it off). Tests 161g–i. It is merged only if the
-     calibrations don't get worse (Decided).
-   - **Measuring (started 25 Nov, home PC, running from pinned copies of the code):** narrow run and
-     `calibrate --legends 20`, first at 8051bd4, then at a846638. Compare with r −0.76 (narrow) and r 0.11 (20 legends).
-     If a session ends before they finish, re-run them.
-   - **Fix 3 done (25 Nov, a624dbb, on master):** a spell's follow-on acts on its choice. 10 spells did nothing in model
-     games (Challenge, Rampage, …; `notes/miss-trace-2026-11-25.md`). Its narrow run and 20-legend run are queued after
-     fix 2's, at a624dbb (fixes 1 and 3; `hidden-down` predates it, so merge master into it if it stays).
-   - **Fixes 4 and 5 (25 Nov, master):** "ready up to 2 runes" now readies runes (eff6c25), and keyword tricks play in fights
-     (23b43f4; `lib/fight.mjs` read 94 fight spells as blank). The remaining blank fight spells are in
-     `notes/miss-trace-2026-11-25.md`.
-   - **Fixes 6–9 (25 Nov, master):** Decree, Deathgrip, Ki Barrier, escapes (Flash, Emperor's Divide, Retreat), Riposte,
-     Repulse, the fight spells and Siren's Song now play in fights. Model games also never passed any of these to a
-     fight (`trick()` filter; now `fightPlays()`). Detail and what's left: `notes/miss-trace-2026-11-25.md`.
-   - **Runs (one queue, home PC, restarted 25 Nov about 11:40, since the first queue measured pre-fix-4 code):**
-     `calibrate --legends 20`, then the narrow run, each on ede1589 (master, all misread fixes) and on 2bff612
-     (`hidden-down`: master + fix 2). They decide fix 2 and give the new baseline. If the session ends first, re-run
-     them.
-   - **Fix 10 (25 Nov, 1df95b7):** gear can be killed or returned mid-fight (Offer, Detonate, Factory Recall, …).
-   - **First results (20 legends, RiftLite data regenerated 25 Nov):**
-     - master ede1589: r 0.30 (−0.17 to 0.65), error 12.3, 11 of 20 on the right side of 50%;
-     - with fix 2: r 0.30 (−0.16 to 0.66), error 12.4, 12 of 20.
-     - Fix 2 is not worse here; the narrow runs decide.
-     - The old r 0.11 was on 24 Nov's data, so part of the change may be the data. To separate them, run the pre-fix
-       model (c2e7a80) on today's data, once the queue is done.
-   - **Narrow run, master ede1589:** r −0.77 (was −0.76); the same sign in 1 of 7 clear swaps (was 0). Rampage moved
-     −0.13 → +0.01 (real +0.37). Reckless Innovator is still overrated (−Offer +Innovator: model +0.31, real −0.22), so
-     its Gold economy is next. Edge of Night waits on fix 2's run.
-   - **Fixes 11–12 (master):** attack and defend triggers from unit text in fights (Vi, Dune Drake, Kha'Zix, Volibear,
-     Overzealous Fan); Not So Fast counters only spells that choose our units.
-   - **Branch `hold-up` (e93f746, Jay's go 25 Nov):** `holdUp W` (the solver values a reaction it can still pay for on
-     their turn) and `caution C` (hidden hands: open runes put a reaction in the guess, which is what lets a bluff
-     work). Both default to 0. Next: 20 legends at holdUp 0, 0.5 and 1, then the best one with `--hidden --caution
-     0.5`, plus c2e7a80 on today's data. Merge the best if it isn't worse.
-   - **The bar before `rift build`** is in `docs/model-calibration.md` (Jay, 25 Nov). Until it's met, keep fixing misreads;
-     no swap advice from model numbers.
-   - **riftjudge.com (checked 25 Nov):** a fan Q&A site; an AI writes the answers and community arbiters verify them.
-     It's current (rules of 2026-10-09), with no API and no reuse terms. Use it only as a lead in the `rules-question`
-     skill (verified answers only, never cited as a ruling); it adds nothing to the errata. Added as the skill's last
-     lookup step, for when sources 1–4 leave us unsure (Jay, 25 Nov).
+0a. **Model misreads and the calibration (25 Nov).** Detail: `notes/miss-trace-2026-11-25.md`; numbers:
+   `docs/model-calibration.md` "25 Nov runs"; the bar before `rift build` is in that doc's top section (Jay, 25 Nov).
+   - **On master:** fixes 1–13. Gear can be killed or bounced (Offer works); each side plans against guessed face-down
+     cards (fix 2, `--open-down` turns it off); spell follow-ons, rune readying, fight spells and keyword tricks, Decree,
+     Deathgrip, Ki Barrier, escapes, Riposte, Repulse, attack/defend triggers, Not So Fast's targets, Guardian Angel and
+     Brutalizer (fix 13, 50a0a34). Hold-up code merged as flags: `--hold-up W`, `--caution C`, `--no-defend-all`.
+   - **Results (20 legends, today's data):** r 0.30 with every fix; the pre-fix model (c2e7a80) scores 0.31, so 24 Nov's
+     0.11 → 0.30 is the data. Hold-up 0.5 and 1 aren't better (0.31, 0.26) and push Irelia down (39% → 32%, real 61%),
+     so the default stays 0. Narrow swap run: r −0.58 with fix 2 (0 of 7 same sign); bar item 2 is far off.
+   - **Next, in order:**
+     1. A 20-legend run on master as it is now (fix 13 came after the runs; Ornn was 13%, real 47%), then
+        `--hidden --caution 0.5` against it.
+     2. Remaining fight gaps: Thrill of the Hunt, Deathgrip from other sources, Mordekaiser's discard, empower/buff
+        states (`notes/miss-trace-2026-11-25.md` "still unread").
+     3. Reckless Innovator is still overrated (−Offer +Innovator: model +0.31, real −0.22): a policy lead, not a
+        misread (Main 4 isn't it).
+     4. Why reactive decks (Irelia, Ornn) lose: hold-up as built didn't help; read an Irelia game with `rift trace` and
+        see what a real player would hold up for (Defy, Not So Fast) and when.
+     5. After 2026-11-30: both calibrations again on post-ban data (bar item 3).
+   - **Tools:** `calibrate --swaps --only "<legend>;…" --card "<card>;…"` (narrow run), `rift trace --only <legend>
+     --out "<card>" --in "<card>" [--games 60] [--verbose N]`.
+   - **riftjudge.com:** the `rules-question` skill's last lookup step, verified answers only, as a lead (Jay, 25 Nov).
 0. **Make the model track real results.** Done 24 Nov:
    - Fiora's crash fixed (Sett 15% → 43%); solver errors are reported and gated.
    - Budget tested: 150 nodes stays (600 and 2000 are worse).
    - Hidden hands built (`--hidden`; less extreme but not clearly better over 20 legends, so it stays opt-in).
    - r prints with its interval; 20-legend runs.
 
-   Where it stands: r 0.11 over 20 legends (−0.35 to 0.52), mean error 14 points, the model too extreme (16–81% vs
-   real 31–68%). Next, from `notes/builder-research.md`:
+   Where it stands (25 Nov): r 0.30 over 20 legends (−0.16 to 0.66), mean error 12.5 points, the model too extreme
+   (13–80% vs real 31–69%). Next, from `notes/builder-research.md`:
    - The biggest misses: Ornn (16%, real 49), Diana (26%, real 53), Irelia (39%, real 61), Volibear (63%, real 35),
      Ekko (66%, real 35). Add a `trace` hook in `playMatch` that logs
      both sides' turns, and read their games against Nasus. Ornn's own turns look sensible; its units die on the
@@ -129,6 +98,8 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 
 - 2026-11-25: a swap result at 240 games is noise (±0.6 margin); confirm a disagreement at 2000 games with a narrow
   run before tracing it.
+- 2026-11-25: hold-up stays opt-in (default 0): over 20 legends it wasn't better and moved Irelia the wrong way.
+- 2026-11-25: fix 2 (face-down cards hidden) merged: not worse over 20 legends, narrow r −0.77 → −0.58.
 - 2026-11-25: the gear-target fix stays whatever it does to the numbers (a plain bug); hiding face-down cards stays
   only if the calibrations don't get worse.
 

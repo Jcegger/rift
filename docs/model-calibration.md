@@ -22,6 +22,30 @@ model numbers wait until all three hold:
 
 RiftLite's spread is 31–68%. The model doesn't track real results yet, so its numbers rank changes inside the model and nothing more. The biggest misses are Volibear and Ekko (about 30 points high), and Ornn, Diana and Irelia (22–33 low). Earlier runs on the morning's data, and what each fix did, are in README "Calibration" and notes/builder-research.md.
 
+## 25 Nov runs (RiftLite data regenerated 25 Nov)
+
+`calibrate --legends 20`, open hands, solver policy, 4560 games each:
+
+| commit | flags | r (95%) | mean error | right side | model spread |
+|---|---|---|---|---|---|
+| c2e7a80 (before the 25 Nov fixes) | | 0.31 (−0.16 to 0.66) | 12.1 | 11 of 20 | 15–82% |
+| ede1589 (fixes 1, 3–9) | | 0.30 (−0.17 to 0.65) | 12.3 | 11 of 20 | not recorded |
+| 2bff612 (+ fix 2, face-down cards hidden) | | 0.30 (−0.16 to 0.66) | 12.4 | 12 of 20 | not recorded |
+| 10e3ecf (hold-up branch: fixes 1–12) | | 0.30 (−0.16 to 0.66) | 12.5 | 12 of 20 | 13–80% |
+| 10e3ecf | `--hold-up 0.5` | 0.31 (−0.15 to 0.66) | 12.7 | 11 of 20 | 16–82% |
+| 10e3ecf | `--hold-up 1` | 0.26 (−0.21 to 0.63) | 12.7 | 11 of 20 | 18–79% |
+
+- **24 Nov's r 0.11 → 0.31 is the data, not the fixes:** the pre-fix model scores the same as the fixed one on today's
+  data. Over 20 legends the fixes neither help nor hurt; they are misreads, so they stay (the bar above).
+- **Hold-up stays off** (default `holdUp: 0`, `--hold-up W` to try it). It isn't better, and it moves Irelia the wrong
+  way (39% → 32%, real 61%) while Rengar climbs (55% → 69–72%, real 54%). Holding runes costs tempo the model's
+  opponents don't punish for it.
+- Ornn is still the biggest miss (13–18%, real 47%); fix 13 (Guardian Angel, Brutalizer, 50a0a34) came after these runs.
+
+Narrow swap run (`--swaps --only "Yordle;Rengar" --card "Reckless Innovator;Edge of Night;Ride the Wind;Nidalee, Cat
+Form" --games 2000`, 9 swaps, 7 clear): r −0.76 at c2e7a80 (0 of 7 same sign); −0.77 at ede1589 (1 of 7); −0.58 with
+fix 2 (0 of 7). Bar item 2 is far off.
+
 ## Open hands (the default)
 
 | legend | model win % (95%) | games | real win % (95%) | games |
