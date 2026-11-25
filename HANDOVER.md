@@ -60,9 +60,13 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    - **Fixes 4 and 5 (25 Nov, master):** "ready up to 2 runes" now readies runes (eff6c25), and keyword tricks play in fights
      (23b43f4; `lib/fight.mjs` read 94 fight spells as blank). The remaining blank fight spells are in
      `notes/miss-trace-2026-11-25.md`.
-   - **Runs (one queue, home PC, started 25 Nov about 10:05):** narrow run then 20 legends on a624dbb (baseline, fixes
-     1+3), then on 5856ff8 (`hidden-down` = fixes 1+2+3). They decide fix 2. They predate fixes 4–5, so the next
-     measurement is master after that. If the session ends first, re-run them.
+   - **Fixes 6–9 (25 Nov, master):** Decree, Deathgrip, Ki Barrier, escapes (Flash, Emperor's Divide, Retreat), Riposte,
+     Repulse, the fight spells and Siren's Song now play in fights. Model games also never passed any of these to a
+     fight (`trick()` filter; now `fightPlays()`). Detail and what's left: `notes/miss-trace-2026-11-25.md`.
+   - **Runs (one queue, home PC, restarted 25 Nov about 11:40, since the first queue measured pre-fix-4 code):**
+     `calibrate --legends 20`, then the narrow run, each on ede1589 (master, all misread fixes) and on 2bff612
+     (`hidden-down`: master + fix 2). They decide fix 2 and give the new baseline. If the session ends first, re-run
+     them.
    - **The bar before `rift build`** is in `docs/model-calibration.md` (Jay, 25 Nov). Until it's met, keep fixing misreads;
      no swap advice from model numbers.
    - **riftjudge.com (checked 25 Nov):** a fan Q&A site; an AI writes the answers and community arbiters verify them.
