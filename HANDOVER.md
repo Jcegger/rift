@@ -46,8 +46,23 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    - New tools (c2e7a80): `calibrate --swaps --only "<legend>;…" --card "<card>;…"` (narrow re-run of the same
      swaps; `--write` refuses on it), and `rift trace --only <legend> --out "<card>" --in "<card>" [--games 60]
      [--verbose N]` (when a swapped card is drawn and leaves the hand; turn logs with the solver's lines).
-   - **Next (waits on Jay's go):** fix 1 (gear targets), measure on the narrow run, then fix 2 (hidden face-down
-     cards), measure it and `calibrate --legends 20`. After that, `rift build <legend>` (from scratch), checked first on Riven.
+   - **Fix 1 done (25 Nov, 8051bd4, on master):** "kill a gear" finds targets (their Equipment, loose gear, Gold tokens).
+     16 cards were affected. Offer now leaves the hand in 15 of 24 draws (was 4). Tests 161c–f.
+   - **Fix 2 written, on branch `hidden-down` (a846638), not merged:** each side plans against guessed face-down cards
+     and replays the plan against the real ones (`--open-down` turns it off). Tests 161g–i. It is merged only if the
+     calibrations don't get worse (Decided).
+   - **Measuring (started 25 Nov, home PC, running from pinned copies of the code):** narrow run and
+     `calibrate --legends 20`, first at 8051bd4, then at a846638. Compare with r −0.76 (narrow) and r 0.11 (20 legends).
+     If a session ends before they finish, re-run them.
+   - **Fix 3 done (25 Nov, a624dbb, on master):** a spell's follow-on acts on its choice. 10 spells did nothing in model
+     games (Challenge, Rampage, …; `notes/miss-trace-2026-11-25.md`). Its narrow run and 20-legend run are queued after
+     fix 2's, at a624dbb (fixes 1 and 3; `hidden-down` predates it, so merge master into it if it stays).
+   - **The bar before `rift build`** is in `docs/model-calibration.md` (Jay, 25 Nov). Until it's met, keep fixing misreads;
+     no swap advice from model numbers.
+   - **riftjudge.com (checked 25 Nov):** a fan Q&A site; an AI writes the answers and community arbiters verify them.
+     It's current (rules of 2026-10-09), with no API and no reuse terms. Use it only as a lead in the `rules-question`
+     skill (verified answers only, never cited as a ruling); it adds nothing to the errata. Not yet added to the skill:
+     waits on Jay.
 0. **Make the model track real results.** Done 24 Nov:
    - Fiora's crash fixed (Sett 15% → 43%); solver errors are reported and gated.
    - Budget tested: 150 nodes stays (600 and 2000 are worse).
