@@ -4,7 +4,6 @@ Operating notes for this repo: things that have gone wrong, and what to do inste
 [README.md](README.md) explains how everything works; where the two disagree, README.md is right.
 
 - **Check:** `node scripts/check.mjs` (takes about 2 to 3 minutes; passes on `all checks pass`).
-  Where node isn't on PATH, use the Playwright copy: `~/anaconda3/lib/python3.8/site-packages/playwright/driver/node`.
 
 Any rules claim, even one made mid-task, goes through the `rules-question` skill.
 Any deck, list or card-swap proposal goes through the `deck-build` skill.
