@@ -55,7 +55,7 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
      - `rift trace --full` and `--open-down` added.
      - Detail is in the notes, "Still unread" and "Ornn's games read".
    - **Next, in order:**
-     1. A 20-legend run with fixes 14–15 in (the first step after this push), as its own row.
+     1. (Done: fixes 14–15 measured, r 0.30, inside the noise; docs/model-calibration.md.)
      2. Ornn and the reactive decks as play policy, behind a flag and measured against the calibration:
         - attach Equipment before developing more units;
         - hold runes for Defy when the hand has it;
