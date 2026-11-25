@@ -88,3 +88,26 @@ Ornn won 6 of 40 here. Its equipment is played every time it's drawn (Sterak's G
 Poro Snax: 88–100%), so its gap isn't dead cards. The 24 Nov note still applies: its units die on the opponent's turn.
 The next look is its games against Vex (`rift trace --only Ornn --min 5 --verbose N`, with a null swap of "Ornn,
 Blacksmith").
+
+## Batch E: unit combat text the fight didn't read (25 Nov)
+
+A probe scan (`combatprobe.mjs`, scratchpad): every unit in the 20 calibration legends' top-3 lists whose text has a
+combat cue, fought one on one against an equal body, attacking and defending, then compared with a copy of itself with
+no text. Fifty fought exactly like the copy. Most of those are right to (draws on conquer, Deathknell tokens, Deflect
+with nothing targeting, Tank alone).
+
+**Fix 11: the real misses now trigger.** An attack/defend `trig` on the fight's chain:
+- Vi, Peacekeeper: stun an enemy here.
+- Dune Drake: +2 (the enemy is taken as ready).
+- Kha'Zix: +2 against a lone enemy.
+- Volibear, Furious: 5 split, lethal first.
+- Overzealous Fan: kills itself to send home an attacker stronger than it.
+
+Each has a fight test.
+
+**Still unread in fights:**
+- Mordekaiser, Dominating: discard 1 to kill. Needs the discard mapped back.
+- Steel Paws, Kayle and Ambessa empowered, and Sett's buffs: states the probe doesn't set. Check that the turn solver
+  passes them in.
+- Irelia, Fervent's +1 when chosen by our own spell mid-fight.
+
