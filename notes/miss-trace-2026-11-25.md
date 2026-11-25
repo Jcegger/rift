@@ -26,6 +26,22 @@ effects use the chosen units (`who: "it"/"it2"`, or `fight`) joins the ability b
 already do. One rule instead of 10 overrides. Tests: a closing turn won by Challenge, with its no-win twin; Rampage the
 same. Then the narrow run and `calibrate --legends 20`, as with fixes 1 and 2.
 
+## Two more misreads from static scans (fixed 25 Nov)
+
+- **"Ready up to 2 runes" readied nothing** (Gentle Gemdragon, Battle Preparations): the general `ready <target>`
+  pattern read it as readying units of kind rune. Fixed by ordering the patterns (eff6c25). Found by scanning for
+  targets the solver can never choose (3 hits; the third, Riposte, is a reaction counter outside the turn solver).
+- **No fight ever played a keyword trick.** `lib/fight.mjs` reads cards with `effectsOf` (`lib/versus.mjs`), not
+  `lib/cardtext.mjs`, and `effectsOf` is blank for 94 fight-playable spells. Cleave, Block, Consult the Heavens and
+  Blood Rush (7 spells in all) now play as a `kw` move. Block now holds where it lost, and Cleave conquers where it
+  traded (fight tests).
+- **Still blank in fights, combat-relevant (next):** Retreat and Flash (pull a unit out before it dies), Sprite Call
+  (a 3-Might unit mid-fight), Deathgrip, Imperial Decree, Ntofo Strikes's damage. Retreat explains its 0 of 14: the
+  turn solver can cast it, but only on our own turn, where it has no use. Scan:
+  `fightblank.mjs` (scratchpad; not kept): Reaction/Action spells where `effectsOf` is empty, by copies played.
+- **Defy** (3 of 30): the model never holds runes up on purpose (`lib/match.mjs` header), so a counter is only
+  castable with runes left over. That's play policy, not reading; it waits on Jay.
+
 ## Stuck, but not clearly misreads (look again after the fix above)
 
 | legend | card | played / drawn | reading |
