@@ -4,7 +4,7 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `~/projects/dotclaude/HUB.md`.
 
-**Updated:** 2026-11-24 (builder session: pool, intervals, search, calibrate)
+**Updated:** 2026-11-25 (swap trace: two model misreads found)
 
 ## State
 
@@ -36,19 +36,18 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 
 ## Next
 
-0a. **Swap calibration: the deckbuilding test** (24 Nov evening; `rift calibrate --swaps --write`, 50 min).
-   - Asks whether the model ranks one-card swaps inside a legend the way good finishes do.
-   - **Result:** r 0.31 (95%: 0.07 to 0.52) over 64 swaps in 8 legends, the first clear-of-0 evidence that the model
-     helps deckbuilding. Same sign as the data 30 of 48 times.
-   - Agrees on Riven, Master Yi, Vex and Irelia; disagrees on Yordle and Rengar, whose disputed swaps involve Reckless
-     Innovator, Edge of Night, Ride the Wind and Nidalee, all in Sivir's list.
-   - Details: docs/model-calibration.md "Swaps", README "Swaps: the deckbuilding test".
-   - **Next:**
-     1. Trace the Yordle and Rengar swap games where model and data disagree (a `trace` hook in playMatch for both
-        sides), find what the model misreads on those cards, fix it with a test, and re-run `--swaps`. That's what
-        makes `search` trustworthy for Sivir.
-     2. Then the from-scratch builder (`rift build <legend>`, Jay's 24 Nov plan, phase 2), checked first on Riven, where
-        the model agrees 8 of 8.
+0a. **Swap disagreement: two misreads found, fixes planned (25 Nov).** Detail, numbers and the plan:
+   `notes/swap-trace-2026-11-25.md`.
+   - At 2000 games a swap, the Yordle/Rengar swaps of Reckless Innovator, Edge of Night, Ride the Wind and Nidalee
+     disagree with good finishes for real: r −0.76 over 9 swaps, the sign wrong in all 7 clear ones. The 24 Nov
+     table's r 0.31 over 64 swaps still stands (`docs/model-calibration.md` "Swaps").
+   - Causes: "Kill a gear" never finds a target, so An Offer You Can't Refuse is dead in model games; and each side sees
+     the other's face-down cards, so Edge of Night (and every [Hidden] card) never ambushes.
+   - New tools (c2e7a80): `calibrate --swaps --only "<legend>;…" --card "<card>;…"` (narrow re-run of the same
+     swaps; `--write` refuses on it), and `rift trace --only <legend> --out "<card>" --in "<card>" [--games 60]
+     [--verbose N]` (when a swapped card is drawn and leaves the hand; turn logs with the solver's lines).
+   - **Next (waits on Jay's go):** fix 1 (gear targets), measure on the narrow run, then fix 2 (hidden face-down
+     cards), measure it and `calibrate --legends 20`. After that, `rift build <legend>` (from scratch), checked first on Riven.
 0. **Make the model track real results.** Done 24 Nov:
    - Fiora's crash fixed (Sett 15% → 43%); solver errors are reported and gated.
    - Budget tested: 150 nodes stays (600 and 2000 are worse).
@@ -84,3 +83,15 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 6. **Refresh timing:** GitHub fires the scheduled runs 4–10 hours late and sometimes skips one; if that starts to matter,
    start the refresh from a scheduled cloud agent and keep one GitHub cron as a backup.
 7. Log each new game in the app's journal and the worksheet's games table (`decklab/sivir-ready.md`).
+
+## Decided
+
+- 2026-11-25: a swap result at 240 games is noise (±0.6 margin); confirm a disagreement at 2000 games with a narrow
+  run before tracing it.
+- 2026-11-25: the gear-target fix stays whatever it does to the numbers (a plain bug); hiding face-down cards stays
+  only if the calibrations don't get worse.
+
+## Rejected
+
+- 2026-11-25: blaming Reckless Innovator's reading. Its text is read right; it wins in the model because the cards it's
+  compared against are broken there.
