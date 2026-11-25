@@ -1717,7 +1717,7 @@ async function cmdSearch(S, cat, args) {
 // picked in lift order, toward winners and away (pickSwaps). The model's effect is the paired margin by turn 8 over the
 // same games against the S/A field, the swap keeping the base's card order (like). Real and model effects are then set
 // side by side: the deckbuilding question, where the legend table (plain calibrate) asks a different one.
-//   calibrate --swaps [--legends 8] [--min 80] [--k 4] [--games 240] [--since 2026-10-16] [--hidden] [--write]
+//   calibrate --swaps [--legends 8] [--min 80] [--k 4] [--games 240] [--since 2026-10-16] [--hidden] [--open-down] [--write]
 //     [--only "Yordle;Rengar"] [--card "Reckless Innovator;Nidalee, Cat Form"]   narrow re-run: those legends, swaps of those cards
 // The legends, bases and swaps `calibrate --swaps` plays; `rift trace` reads the same ones.
 async function swapSets(cat, opt) {
@@ -1760,14 +1760,14 @@ async function swapSets(cat, opt) {
 }
 
 async function calibrateSwaps(cat, args, opt) {
-  const G = Number(opt("--games") || 240), hiddenHands = args.includes("--hidden");
+  const G = Number(opt("--games") || 240), hiddenHands = args.includes("--hidden"), hiddenDown = !args.includes("--open-down");
   const { since, MIN, narrow, sets, foes } = await swapSets(cat, opt);
   const legends = sets.map((x) => [x.L]);
   const t0 = Date.now();
   console.log(`CALIBRATE --swaps  ${sets.length} legends with ${MIN}+ placed lists since ${since}; ${G} model games a swap against the S/A field (${foes.length} lists), ${hiddenHands ? "hidden" : "open"} hands`);
   const rows = [];
   for (const { L, xs, goodXs, base, swaps } of sets) {
-    const play = (cards, like) => matchRecordsPar({ cards }, cat, foes, { games: G, hiddenHands, ...(like ? { like } : {}) });
+    const play = (cards, like) => matchRecordsPar({ cards }, cat, foes, { games: G, hiddenHands, hiddenDown, ...(like ? { like } : {}) });
     const b = await play(base.cards);
     const margin = (recs) => recs.map((g) => g.at8[0] - g.at8[1]);
     for (const sw of swaps) {
@@ -1856,7 +1856,7 @@ async function cmdCalibrate(S, cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   if (args.includes("--swaps")) return calibrateSwaps(cat, args, opt);
   const since = opt("--since") || "2026-10-16", N = Number(opt("--legends") || 12), reps = Number(opt("--reps") || 4), K = Number(opt("--lists") || 3);
-  const policy = args.includes("--greedy") ? "greedy" : "solver", nodes = Number(opt("--nodes")) || null, hiddenHands = args.includes("--hidden");   // --nodes: the solver budget a Main Phase; --hidden: plan on a guess at their hand
+  const policy = args.includes("--greedy") ? "greedy" : "solver", nodes = Number(opt("--nodes")) || null, hiddenHands = args.includes("--hidden"), hiddenDown = !args.includes("--open-down");   // --open-down: each side sees the other's face-down cards (the model before 25 Nov); --nodes: the solver budget a Main Phase; --hidden: plan on a guess at their hand
   const W = await readJson(url("winrates.json")), snap = await readJson(url("decks.json"));
   const { legends, by } = calibrationSet(cat, snap.decks, W, { since, N });
   const set = new Set(legends);
@@ -1867,7 +1867,7 @@ async function cmdCalibrate(S, cat, args) {
   for (const L of legends) {
     const me = topLists(by[L], 1)[0];
     const foes = legends.filter((M) => M !== L).flatMap((M) => topLists(by[M], K).map((d) => ({ label: M, cards: d.cards })));
-    const recs = await matchRecordsPar({ cards: me.cards }, cat, foes, { games: foes.length * reps, policy, ...(nodes ? { solve: { ...POLICY_SOLVE, maxNodes: nodes } } : {}), hiddenHands });
+    const recs = await matchRecordsPar({ cards: me.cards }, cat, foes, { games: foes.length * reps, policy, ...(nodes ? { solve: { ...POLICY_SOLVE, maxNodes: nodes } } : {}), hiddenHands, hiddenDown });
     runs.push({ me: L, recs });
     process.stdout.write(`  ${L}: ${recs.length} games\n`);
   }
