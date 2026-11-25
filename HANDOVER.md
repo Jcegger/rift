@@ -57,12 +57,18 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    - **Fix 3 done (25 Nov, a624dbb, on master):** a spell's follow-on acts on its choice. 10 spells did nothing in model
      games (Challenge, Rampage, …; `notes/miss-trace-2026-11-25.md`). Its narrow run and 20-legend run are queued after
      fix 2's, at a624dbb (fixes 1 and 3; `hidden-down` predates it, so merge master into it if it stays).
+   - **Fixes 4 and 5 (25 Nov, master):** "ready up to 2 runes" now readies runes (eff6c25), and keyword tricks play in fights
+     (23b43f4; `lib/fight.mjs` read 94 fight spells as blank). The remaining blank fight spells are in
+     `notes/miss-trace-2026-11-25.md`.
+   - **Runs (one queue, home PC, started 25 Nov about 10:05):** narrow run then 20 legends on a624dbb (baseline, fixes
+     1+3), then on 5856ff8 (`hidden-down` = fixes 1+2+3). They decide fix 2. They predate fixes 4–5, so the next
+     measurement is master after that. If the session ends first, re-run them.
    - **The bar before `rift build`** is in `docs/model-calibration.md` (Jay, 25 Nov). Until it's met, keep fixing misreads;
      no swap advice from model numbers.
    - **riftjudge.com (checked 25 Nov):** a fan Q&A site; an AI writes the answers and community arbiters verify them.
      It's current (rules of 2026-10-09), with no API and no reuse terms. Use it only as a lead in the `rules-question`
-     skill (verified answers only, never cited as a ruling); it adds nothing to the errata. Not yet added to the skill:
-     waits on Jay.
+     skill (verified answers only, never cited as a ruling); it adds nothing to the errata. Added as the skill's last
+     lookup step, for when sources 1–4 leave us unsure (Jay, 25 Nov).
 0. **Make the model track real results.** Done 24 Nov:
    - Fiora's crash fixed (Sett 15% → 43%); solver errors are reported and gated.
    - Budget tested: 150 nodes stays (600 and 2000 are worse).
