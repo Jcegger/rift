@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-24",
+ "generatedAt": "2026-11-25",
  "source": "api.dotgg.gg/cgfw/gettournaments (riftbound.gg), paginated and accumulated",
  "note": "Player counts weight a deck's credibility. Coverage records how many events the deck snapshot actually has lists for, which is well short of all of them. Upstream's archive is North American and online only: claimedEvents counts events that decks name and this file has never heard of, and none of them have ever matched.",
  "coverage": {
@@ -25,8 +25,8 @@
   },
   "claimedDecksByRegion": {
    "Europe": 80,
-   "Asia": 141,
-   "unknown": 235,
+   "Asia": 136,
+   "unknown": 234,
    "North America": 8,
    "Oceania": 7
   },
