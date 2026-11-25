@@ -2170,6 +2170,15 @@ function cmdClose(cat, args) {
 async function cmdCards(cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   const name = args.filter((a, i) => !a.startsWith("--") && !String(args[i - 1] || "").startsWith("--top")).join(" ").trim();
+  if (args.includes("--suspects")) {
+    // Readings that do nothing this turn but name a board action (lib/cardtext.mjs noopSuspects), by played copies.
+    const snap = await readJson(url("decks.json")), copies = new Map();
+    for (const d of snap.decks) for (const [code, q] of Object.entries(d.cards || {})) { const k = cat.BY.get(code); if (k) copies.set(k.n, (copies.get(k.n) || 0) + q); }
+    const xs = (await import("../lib/cardtext.mjs")).noopSuspects(cat.cards, copies).filter((x) => x.copies > 0);
+    console.log(`SUSPECTS  ${xs.length} sentences on played cards read as doing nothing this turn, though they name a board action. Most are right; read each once.\n`);
+    for (const x of xs.slice(0, Number(opt("--top")) || 40)) console.log(`  ${String(x.copies).padStart(5)}  ${x.card} [${x.why}]  ${String(x.text).slice(0, 110)}`);
+    return;
+  }
   if (name && !args.includes("--coverage")) {
     const c = cat.cards.find((x) => x.n.toLowerCase() === name.toLowerCase() && !x.v) || cat.cards.find((x) => x.n.toLowerCase().startsWith(name.toLowerCase()));
     if (!c) { console.log(`cards: no card called "${name}"`); return; }

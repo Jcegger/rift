@@ -3647,6 +3647,12 @@ section('Card text coverage');
   const first = new Map(); for (const c of played) if (!first.has(c.n) || (!c.v && first.get(c.n).v)) first.set(c.n, c);
   const off = [...new Map(played.filter((c) => /Unit|Spell|Gear|Legend/.test(c.t || "") && !c.token).map((c) => [`${c.n}|${c.x}`, c])).values()].filter((c) => !turnReads(c) && turnReads(first.get(c.n)));
   ok('every printing reads as its card\'s first printing does', !off.length, off.length ? off.slice(0, 5).map((c) => `${c.n} ${c.c}`).join(', ') : '');
+  // Information, not a gate (25 Nov): readings that do nothing this turn but name a board action. Where misreads hide.
+  const { noopSuspects } = await import('../lib/cardtext.mjs');
+  const byCode = new Map(played.map((c) => [c.c, c])), copies = new Map();
+  for (const d of snap.decks) for (const [code, q] of Object.entries(d.cards || {})) { const k = byCode.get(code); if (k) copies.set(k.n, (copies.get(k.n) || 0) + q); }
+  const sus = noopSuspects(played, copies).filter((x) => x.copies > 0);
+  console.log(`  info ${sus.length} no-op readings name a board action (scripts/rift cards --suspects); most played: ${sus.slice(0, 3).map((x) => x.card).join(', ')}`);
 }
 
 /* ══ the site's script ═══════════════════════════════════════════════════ */

@@ -73,7 +73,10 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
   hand-written entries in `lib/cardtext-overrides.mjs` for text it can't parse. Each sentence is
   read, "no effect this turn" (with a reason: draw, later, theirTurn, reminder), or unread.
   `scripts/rift cards --coverage` prints the pool's coverage (weighted by played copies), what
-  the solver lacks and the heaviest unread text; `rift cards "<name>"` shows one card. Its floor is
+  the solver lacks and the heaviest unread text; `rift cards "<name>"` shows one card.
+  `rift cards --suspects` (25 Nov) lists the "no effect this turn" readings that still name a board action, by played
+  copies: where misreads hide (Mordekaiser, Dominating's kill was read as a draw; "from your trash" as unknown cards).
+  Most are right. `check.mjs` prints the count as information, not a gate. Its floor is
   `model/cardtext-floor.json`. Since 22 Nov 2026 the turn solver runs it: its executor plays
   on-play, spell, move, Deathknell, conquer, "when an opponent plays a unit" and activated
   abilities, statics (Might, auras, keywords, cost discounts), tokens, damage, Might changes,
