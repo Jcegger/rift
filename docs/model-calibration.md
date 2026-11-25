@@ -12,6 +12,14 @@ Run 24 Nov 2026 with `scripts/rift calibrate --legends 20` (open hands) and `--l
 | open hands | 0.11 (−0.35 to 0.52) | 14.2 points | 9 of 20 | 16–81% |
 | hidden hands | 0.04 (−0.41 to 0.48) | 13.8 points | 9 of 20 | 27–74% |
 
+**The bar before building on the model (Jay, 25 Nov):** fixes to misreads go in whatever these numbers say; changes to
+how the model plays go in only if the calibrations don't get worse; `rift build`, swap searches and deck advice from
+model numbers wait until all three hold:
+1. `calibrate --legends 20`: the r interval's lower end above 0.
+2. Narrow swap run (`calibrate --swaps --only "Yordle;Rengar" …`, "Swaps" below): the same sign as the real result in at
+   least 5 of 7 clear swaps, and r positive.
+3. Both re-checked on post-ban data once there is enough of it (after 2026-11-30).
+
 RiftLite's spread is 31–68%. The model doesn't track real results yet, so its numbers rank changes inside the model and nothing more. The biggest misses are Volibear and Ekko (about 30 points high), and Ornn, Diana and Irelia (22–33 low). Earlier runs on the morning's data, and what each fix did, are in README "Calibration" and notes/builder-research.md.
 
 ## Open hands (the default)
