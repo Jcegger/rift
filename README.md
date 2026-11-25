@@ -141,6 +141,13 @@ is archived read-only at `/old/`. Much of this README describes its engine, whic
 - `data/winrates.json` - legend-vs-legend win rates from RiftLite's community matchup matrix
   (Radiance season, latest 7,000 matches): **online games its users log** (TCGA, RiftAtlas), not
   paper events, each pairing with its game count. `rift versus` prints the pairing's line.
+- `data/matches.json` - RiftLite's per-match records, kept past the page's 7,000-match window (one per line: a short
+  key from the match id for repeats, day, both legends, the logger's result, format; no names). `build-winrates.mjs`
+  parses them from the same page and appends each day, and leaves them out if they don't pool to its labels within 3
+  points. `calibrate --real-since` reads them.
+- `data/riftlite-decks.json` - the complete decks those records carry (about 30% of them), by card name and keyed by
+  a short hash, so a list played many times is stored once; `data/matches.json`'s `dk` points here.
+  `calibrate --decks riftlite` plays them in place of tournament lists.
 - `data/history.json` - the daily archive: deck counts per legend, and tier lists.
 - `data/guides.json` - the manifest of the dossiers in `guides/`. Not their text.
 - `data/archetypes.json` - each legend's measured profile: representative list, mix, curve,
@@ -1781,6 +1788,15 @@ per legend beside RiftLite's pooled row over the same opponents.
 - RiftLite's pairs top out near 50 games (±15 points), so the legend rows (200–350 games over the set, ±6) carry
   the comparison.
 - r prints with its 95% interval: about ±0.5 at 12 legends, ±0.4 at 20.
+- `--real-since YYYY-MM-DD` (25 Nov): the real side from `data/matches.json` games on or after that day (the 23 Nov
+  bans), pooled as the labels are. `lib/realfit.mjs` fits the same games as Bradley–Terry with an earlier-games prior
+  (empirical-Bayes τ). It gives each legend's win rate against an equal mix of the set, which is what the model
+  measures, with bootstrap intervals, r's interval and the noise ceiling: the r a perfect model could reach on data
+  that noisy.
+- **RiftLite's decks aren't the tournament lists** (25 Nov). Before the bans, 91% of tournament Riven lists ran Riven,
+  Broken Blade, but 2 of 83 RiftLite Riven decks did. Only 3–6% of RiftLite decks ran any card banned on 23 Nov,
+  against 43% of the tournament field. So the model (tournament lists) and the real side (online players' own decks)
+  aren't playing the same decks.
 - Compare two runs only on the same `data/winrates.json`. A refresh that swapped one legend in the top 12 moved r from
   0.29 to 0.10 with no model change.
 

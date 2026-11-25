@@ -45,7 +45,8 @@
 // are exempt from that limit. This script reports all three, because a deck read
 // here without them looks legal when it is not.
 
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
+import { realAfter, rWithNoise } from "../lib/realfit.mjs";
 import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
 import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, SB_MAX } from "../lib/decks.mjs";
 import { pathToFileURL } from "node:url";
@@ -54,7 +55,7 @@ import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport
 import { matchReportPar, closeReportPar, matchRecordsPar } from "../lib/match-pool.mjs";
 import { halving } from "../lib/search.mjs";
 import { POLICY_SOLVE, matchPlayers, matchGame } from "../lib/match.mjs";
-import { calibrationSet, topLists, realRow, pearson, spearman, mae, modelTable, rInterval, lifts, medoid, pickSwaps } from "../lib/calibrate.mjs";
+import { calibrationSet, topLists, realRow, pairsSince, riftliteLists, riftatlasRows, pearson, spearman, mae, modelTable, rInterval, lifts, medoid, pickSwaps } from "../lib/calibrate.mjs";
 import { mainOf, changed } from "../lib/decks.mjs";
 import { isRecord, isGoodPlacing } from "../lib/placing.mjs";
 import { paired, wilson, twoRates } from "../lib/stats.mjs";
@@ -1860,21 +1861,44 @@ async function cmdCalibrate(S, cat, args) {
   const since = opt("--since") || "2026-10-16", N = Number(opt("--legends") || 12), reps = Number(opt("--reps") || 4), K = Number(opt("--lists") || 3);
   const policy = args.includes("--greedy") ? "greedy" : "solver", nodes = Number(opt("--nodes")) || null, hiddenHands = args.includes("--hidden"), hiddenDown = !args.includes("--open-down");   // --open-down: each side sees the other's face-down cards (the model before 25 Nov); --nodes: the solver budget a Main Phase; --hidden: plan on a guess at their hand
   const holdUp = Number(opt("--hold-up")) || 0, caution = Number(opt("--caution")) || 0, defendAll = !args.includes("--no-defend-all");   // see calibrate --swaps
-  const W = await readJson(url("winrates.json")), snap = await readJson(url("decks.json"));
-  const { legends, by } = calibrationSet(cat, snap.decks, W, { since, N });
+  let W = await readJson(url("winrates.json"));
+  const snap = await readJson(url("decks.json"));
+  const { legends, by } = calibrationSet(cat, snap.decks, W, { since, N });   // the set: the whole window's most-played
+  // --real-since D: the real side from the match records on or after D (the 23 Nov bans), not the whole window.
+  const realSince = opt("--real-since");
+  if (realSince) {
+    let A; try { A = (await readJson(url("matches.json"))).matches; } catch { console.log("no data/matches.json: run scripts/build-winrates.mjs"); return; }
+    const n = A.filter((m) => m.d >= realSince).length;
+    W = { ...W, matches: A, pairs: pairsSince(A, realSince), filters: { ...W.filters, window: `${n} matches since ${realSince} (data/matches.json)` } };
+  }
+  // --decks riftlite: each legend plays the decks RiftLite's players logged (data/riftlite-decks.json), not tournament lists.
+  if (opt("--decks") === "riftlite") {
+    let A, D; try { A = (await readJson(url("matches.json"))).matches; D = (await readJson(url("riftlite-decks.json"))).decks; } catch { console.log("no data/matches.json or data/riftlite-decks.json: run scripts/build-winrates.mjs"); return; }
+    const r = riftliteLists(cat, A, D, legends, { since: opt("--decks-since") || "", k: K });
+    const missing = legends.filter((L) => !r.lists[L]);
+    if (missing.length) console.log(`  no RiftLite decks for ${missing.join(", ")}: left out`);
+    if (Object.keys(r.misses).length) console.log(`  unmapped: ${JSON.stringify(r.misses)}`);
+    legends.splice(0, legends.length, ...legends.filter((L) => r.lists[L]));
+    for (const L of legends) by[L] = r.lists[L];
+  }
   const set = new Set(legends);
   const t0 = Date.now();
   console.log(`CALIBRATE  ${legends.length} legends (top by RiftLite games, with lists since ${since}): ${legends.join(", ")}`);
   console.log(`  each plays its best list against the others' top ${K} lists, ${reps} rounds (both seats), ${policy} policy, ${nodes || POLICY_SOLVE.maxNodes} nodes a Main Phase${hiddenHands ? ", hidden hands" : ", open hands"}${holdUp ? `, hold-up ${holdUp}` : ""}${caution ? `, caution ${caution}` : ""}${defendAll ? "" : ", no defend-all"}`);
   const runs = [];
-  for (const L of legends) {
+  // --model-from <file>: a saved model column (--save), compared again with today's real sides without replaying games.
+  const modelFrom = opt("--model-from");
+  let saved = null;
+  if (modelFrom) { saved = JSON.parse(await readFile(modelFrom, "utf8")); legends.splice(0, legends.length, ...saved.legends); console.log(`  model column from ${modelFrom} (${saved.at}, ${saved.flags})`); }
+  for (const L of saved ? [] : legends) {
     const me = topLists(by[L], 1)[0];
     const foes = legends.filter((M) => M !== L).flatMap((M) => topLists(by[M], K).map((d) => ({ label: M, cards: d.cards })));
     const recs = await matchRecordsPar({ cards: me.cards }, cat, foes, { games: foes.length * reps, policy, ...(nodes || holdUp ? { solve: { ...POLICY_SOLVE, ...(nodes ? { maxNodes: nodes } : {}), ...(holdUp ? { holdUp } : {}) } } : {}), hiddenHands, hiddenDown, caution, defendAll });
     runs.push({ me: L, recs });
     process.stdout.write(`  ${L}: ${recs.length} games\n`);
   }
-  const { leg, pair } = modelTable(runs);
+  const { leg, pair } = saved || modelTable(runs);
+  if (opt("--save")) { await writeFile(opt("--save"), JSON.stringify({ at: new Date().toISOString().slice(0, 10), flags: args.filter((a) => a.startsWith("--")).join(" "), legends, leg, pair })); console.log(`  model column saved to ${opt("--save")}`); }
   const errs = runs.flatMap((r) => r.recs).reduce((a, g) => a + (g.solveErrors ? g.solveErrors[0] + g.solveErrors[1] : 0), 0);
   if (errs) console.log(`  SOLVER ERRORS: ${errs} Main Phases skipped because the solver threw`);
   const rows = legends.map((L) => { const m = leg[L] || { w: 0, l: 0, t: 0 }, iv = wilson(m.w, m.w + m.l), r = realRow(W, L, set);
@@ -1898,6 +1922,28 @@ async function cmdCalibrate(S, cat, args) {
     for (const p of pairs) out(`| ${p.a} vs ${p.b} | ${pc(p.model)} (${pc(p.mlo)}–${pc(p.mhi)}) | ${p.mn} | ${pc(p.real)} (${pc(p.rlo)}–${pc(p.rhi)}) | ${p.rn} |`);
     const pm = pairs.filter((p) => p.model != null);
     out(`\nPairs: the same side of 50% for ${pm.filter((p) => (p.model - 0.5) * (p.real - 0.5) > 0).length} of ${pm.length}; intervals overlap for ${pm.filter((p) => p.mlo <= p.rhi && p.rlo <= p.mhi).length} of ${pm.length}.`);
+  }
+  // The other real sides (25 Nov): RiftAtlas tournaments (data/field.json), and with --real-since the fitted RiftLite
+  // column (lib/realfit.mjs). Each with its own r; RiftLite and RiftAtlas against each other too.
+  const modelP = new Map(legends.map((L) => { const m = leg[L] || { w: 0, l: 0 }; return [L, m.w + m.l ? m.w / (m.w + m.l) : null]; }).filter(([, p]) => p != null));
+  let F = null; try { F = await readJson(url("field.json")); } catch { /* reported below */ }
+  if (F) {
+    const ra = riftatlasRows(F, legends, { since: opt("--atlas-since") || undefined });
+    const ls = legends.filter((L) => ra.rows.has(L) && modelP.has(L));
+    out(`\nRiftAtlas tournaments (data/field.json, events since ${ra.since}; win rate against the whole field, weighted by pilots × rounds):\n\n| legend | model | RiftAtlas (95%) | pilot-rounds | RiftLite |\n|---|---|---|---|---|`);
+    for (const L of ls.slice().sort((a, b) => ra.rows.get(b).p - ra.rows.get(a).p)) { const x = ra.rows.get(L), rl = rows.find((r) => r.L === L); out(`| ${L} | ${pc(modelP.get(L))} | ${pc(x.p)} (${pc(x.lo)}–${pc(x.hi)}) | ${x.n} | ${rl ? pc(rl.real) : "—"} |`); }
+    if (ra.thin.length) out(`Left out (under 100 pilot-rounds): ${ra.thin.join(", ")}.`);
+    if (ls.length >= 3) {
+      const xa = ls.map((L) => modelP.get(L)), ya = ls.map((L) => ra.rows.get(L).p), ri2 = rInterval(pearson(xa, ya), ls.length);
+      const both = ls.filter((L) => rows.some((r) => r.L === L));
+      out(`Per legend (${ls.length}): model vs RiftAtlas r ${f2(pearson(xa, ya))} (95%: ${f2(ri2.lo)} to ${f2(ri2.hi)}), mean absolute error ${(100 * mae(xa, ya)).toFixed(1)} points, the same side of 50% for ${ls.filter((L) => (modelP.get(L) - 0.5) * (ra.rows.get(L).p - 0.5) > 0).length} of ${ls.length}. RiftLite vs RiftAtlas (${both.length}): r ${f2(pearson(both.map((L) => rows.find((r) => r.L === L).real), both.map((L) => ra.rows.get(L).p)))}.`);
+    }
+  } else out("\nRiftAtlas: no data/field.json.");
+  if (realSince && W.matches) {
+    const fit = realAfter(W.matches, legends, realSince), q = rWithNoise(modelP, fit, pearson);
+    out(`\nRiftLite since ${realSince}, fitted (lib/realfit.mjs: Bradley–Terry, earlier games as the prior, τ ${fit.tau.toFixed(2)}; ${fit.post} games inside the set): model r ${f2(q.r)} (bootstrap 95%: ${f2(q.lo)} to ${f2(q.hi)}); noise ceiling ${f2(q.ceiling)}, the r a perfect model could reach against data this noisy.`);
+    out(`| legend | model | fitted (95%) | before ${realSince} |\n|---|---|---|---|`);
+    for (const L of legends.filter((x) => fit.rows.has(x) && modelP.has(x))) { const x = fit.rows.get(L); out(`| ${L} | ${pc(modelP.get(L))} | ${pc(x.p)} (${pc(x.lo)}–${pc(x.hi)}) | ${pc(x.before)} |`); }
   }
   out(`\n${runs.reduce((a, r) => a + r.recs.length, 0)} model games (solver errors: ${errs}), ${Math.round((Date.now() - t0) / 1000)} s. RiftLite: ${W.filters?.window || "?"}, ${W.filters?.season || "?"}, generated ${W.generatedAt}.`);
   if (args.includes("--write")) {
