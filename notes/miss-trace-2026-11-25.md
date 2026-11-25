@@ -122,3 +122,12 @@ fight's counter step let it counter anything.
   over. Irelia (model 36%, real 61%) and Ornn (15%, real 47%) are the reactive decks and the two biggest low misses.
 - This is play policy, not reading. It waits on Jay.
 
+**Reckless Innovator, still overrated after fixes 1–12** (narrow run: −Offer +Innovator, model +0.31, real −0.22):
+- Its reading is right. The solver gives one Gold per exhaust, not the draw as well (checked).
+- But after the solver's Main Phase, `lib/match.mjs` "Main 4" sends every ready unit at base out to defend, which
+  exhausts it. So Innovator makes a Gold nearly every turn. That's legal, so it isn't a misread.
+- Two leads, both policy:
+  - the model may overvalue Gold;
+  - "Main 4" overrides what the solver chose to leave home. It's the greedy policy's step applied to the solver too,
+    and it could also undo a unit held back on purpose.
+

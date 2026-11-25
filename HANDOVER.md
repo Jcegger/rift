@@ -74,6 +74,15 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
      - Fix 2 is not worse here; the narrow runs decide.
      - The old r 0.11 was on 24 Nov's data, so part of the change may be the data. To separate them, run the pre-fix
        model (c2e7a80) on today's data, once the queue is done.
+   - **Narrow run, master ede1589:** r −0.77 (was −0.76); the same sign in 1 of 7 clear swaps (was 0). Rampage moved
+     −0.13 → +0.01 (real +0.37). Reckless Innovator is still overrated (−Offer +Innovator: model +0.31, real −0.22), so
+     its Gold economy is next. Edge of Night waits on fix 2's run.
+   - **Fixes 11–12 (master):** attack and defend triggers from unit text in fights (Vi, Dune Drake, Kha'Zix, Volibear,
+     Overzealous Fan); Not So Fast counters only spells that choose our units.
+   - **Branch `hold-up` (e93f746, Jay's go 25 Nov):** `holdUp W` (the solver values a reaction it can still pay for on
+     their turn) and `caution C` (hidden hands: open runes put a reaction in the guess, which is what lets a bluff
+     work). Both default to 0. Next: 20 legends at holdUp 0, 0.5 and 1, then the best one with `--hidden --caution
+     0.5`, plus c2e7a80 on today's data. Merge the best if it isn't worse.
    - **The bar before `rift build`** is in `docs/model-calibration.md` (Jay, 25 Nov). Until it's met, keep fixing misreads;
      no swap advice from model numbers.
    - **riftjudge.com (checked 25 Nov):** a fan Q&A site; an AI writes the answers and community arbiters verify them.
