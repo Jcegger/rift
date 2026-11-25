@@ -53,7 +53,7 @@ import { versus, weigh, effectsOf, looksInteractive, unreadSentences, withGear }
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf, blindSpots } from "../lib/decklab.mjs";
 import { matchReportPar, closeReportPar, matchRecordsPar } from "../lib/match-pool.mjs";
 import { halving } from "../lib/search.mjs";
-import { POLICY_SOLVE } from "../lib/match.mjs";
+import { POLICY_SOLVE, matchPlayers, matchGame } from "../lib/match.mjs";
 import { calibrationSet, topLists, realRow, pearson, spearman, mae, modelTable, rInterval, lifts, medoid, pickSwaps } from "../lib/calibrate.mjs";
 import { mainOf, changed } from "../lib/decks.mjs";
 import { isRecord, isGoodPlacing } from "../lib/placing.mjs";
@@ -1718,9 +1718,12 @@ async function cmdSearch(S, cat, args) {
 // same games against the S/A field, the swap keeping the base's card order (like). Real and model effects are then set
 // side by side: the deckbuilding question, where the legend table (plain calibrate) asks a different one.
 //   calibrate --swaps [--legends 8] [--min 80] [--k 4] [--games 240] [--since 2026-10-16] [--hidden] [--write]
-async function calibrateSwaps(cat, args, opt) {
+//     [--only "Yordle;Rengar"] [--card "Reckless Innovator;Nidalee, Cat Form"]   narrow re-run: those legends, swaps of those cards
+// The legends, bases and swaps `calibrate --swaps` plays; `rift trace` reads the same ones.
+async function swapSets(cat, opt) {
   const since = opt("--since") || "2026-10-16", N = Number(opt("--legends") || 8), MIN = Number(opt("--min") || 80), K = Number(opt("--k") || 4);
-  const G = Number(opt("--games") || 240), hiddenHands = args.includes("--hidden");
+  const list = (k) => (opt(k) ? opt(k).split(";").map((x) => x.trim().toLowerCase()).filter(Boolean) : null);
+  const only = list("--only"), cardsOnly = list("--card");
   const snap = await readJson(url("decks.json"));
   const card = (code) => cat.BY.get(code);
   const legendOf = (d) => (d.lg && cat.BY.get(d.lg)) || cat.cards.find((c) => c.t === "Legend" && c.n === d.ln) || null;
@@ -1731,12 +1734,10 @@ async function calibrateSwaps(cat, args, opt) {
     const m = mainOf(d.cards, card); if ([...m.values()].reduce((a, b) => a + b, 0) < 39) continue;
     (by[`${(l.g || [])[0]}, ${l.n}`] ||= []).push({ d, m, good: isGoodPlacing(d) });
   }
-  const legends = Object.entries(by).filter(([, v]) => v.length >= MIN && v.some((x) => x.good) && v.some((x) => !x.good)).sort((a, b) => b[1].length - a[1].length).slice(0, N);
+  const legends = Object.entries(by).filter(([, v]) => v.length >= MIN && v.some((x) => x.good) && v.some((x) => !x.good)).sort((a, b) => b[1].length - a[1].length)
+    .filter(([L]) => !only || only.some((o) => L.toLowerCase().includes(o))).slice(0, N);
   const foes = foeLists(await fieldDecksFor(cat, since));
-  const t0 = Date.now();
-  console.log(`CALIBRATE --swaps  ${legends.length} legends with ${MIN}+ placed lists since ${since}; ${G} model games a swap against the S/A field (${foes.length} lists), ${hiddenHands ? "hidden" : "open"} hands`);
-  const rows = [];
-  for (const [L, xs] of legends) {
+  const sets = legends.map(([L, xs]) => {
     const goodXs = xs.filter((x) => x.good);
     const base = goodXs[medoid(goodXs.map((x) => x.m), changed)].d;
     const champ = String(L).split(", ")[0];
@@ -1752,6 +1753,20 @@ async function calibrateSwaps(cat, args, opt) {
         swaps.push({ ...sw, deck });
       } catch { /* a name parseChanges can't place: skip it */ }
     }
+    if (cardsOnly) swaps.splice(0, swaps.length, ...swaps.filter((sw) => [sw.out, sw.in].some((x) => cardsOnly.includes(x.toLowerCase()))));   // the same swaps as the full run, narrowed
+    return { L, xs, goodXs, base, swaps };
+  });
+  return { since, MIN, narrow: !!(only || cardsOnly), sets, foes };
+}
+
+async function calibrateSwaps(cat, args, opt) {
+  const G = Number(opt("--games") || 240), hiddenHands = args.includes("--hidden");
+  const { since, MIN, narrow, sets, foes } = await swapSets(cat, opt);
+  const legends = sets.map((x) => [x.L]);
+  const t0 = Date.now();
+  console.log(`CALIBRATE --swaps  ${sets.length} legends with ${MIN}+ placed lists since ${since}; ${G} model games a swap against the S/A field (${foes.length} lists), ${hiddenHands ? "hidden" : "open"} hands`);
+  const rows = [];
+  for (const { L, xs, goodXs, base, swaps } of sets) {
     const play = (cards, like) => matchRecordsPar({ cards }, cat, foes, { games: G, hiddenHands, ...(like ? { like } : {}) });
     const b = await play(base.cards);
     const margin = (recs) => recs.map((g) => g.at8[0] - g.at8[1]);
@@ -1773,7 +1788,8 @@ async function calibrateSwaps(cat, args, opt) {
   out(`Where the real lift's interval excludes 0 (${clear.length} swaps), the model has the same sign for ${agree}; where both intervals exclude 0 (${both.length}), ${bothAgree} agree.`);
   for (const [L] of legends) { const rs = rows.filter((r) => r.L === L); const c = rs.filter((r) => r.lo > 0 || r.hi < 0); out(`- ${L}: same sign ${c.filter((r) => Math.sign(r.model) === Math.sign(r.real)).length} of ${c.length} clear swaps; r ${pearson(rs.map((r) => r.model), rs.map((r) => r.real))?.toFixed(2) ?? "unknown"} over ${rs.length}`); }
   out(`\n${rows.length} swaps, ${(rows.length + legends.length) * G} model games, ${Math.round((Date.now() - t0) / 1000)} s.`);
-  if (args.includes("--write")) {
+  if (args.includes("--write") && narrow) console.log("\n  not written: --only/--card is a narrow run; the doc keeps the full table");
+  else if (args.includes("--write")) {
     const f = new URL("../docs/model-calibration.md", import.meta.url), fs = await import("node:fs/promises");
     let doc = await fs.readFile(f, "utf8").catch(() => "");
     doc = doc.replace(/\n## Swaps[\s\S]*$/, "").trimEnd();
@@ -1784,6 +1800,56 @@ async function calibrateSwaps(cat, args, opt) {
     await fs.writeFile(f, doc);
     console.log("\n  wrote the Swaps section of docs/model-calibration.md");
   }
+}
+
+// ── trace: what a swapped card does in the model games (one calibrate --swaps swap, played serially) ──────────────
+// The base and the swapped list play the same games (seed, opponent, seat) as calibrate; per swapped card: how often it's
+// drawn, when it's cast, and the margin at turn 8 when it's cast vs. drawn and never cast. --verbose N prints N games turn
+// by turn (both sides: score, cards that left the hand, the solver's line).
+//   trace --only <legend> --out "<card>" --in "<card>" [--games 60] [--verbose 0] [--since …] [--min 80]
+async function cmdTrace(cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const G = Number(opt("--games") || 60), V = Number(opt("--verbose") || 0), out = opt("--out"), inn = opt("--in");
+  if (!opt("--only") || !out || !inn) { console.log('trace --only <legend> --out "<card>" --in "<card>" [--games 60] [--verbose N]'); return; }
+  const { sets, foes } = await swapSets(cat, opt);
+  if (sets.length !== 1) { console.log(sets.length ? `${sets.length} legends match: ${sets.map((x) => x.L).join(" · ")}` : "no legend matching that"); return; }
+  const { L, base } = sets[0];
+  const deck = applyChanges({ cards: base.cards }, parseChanges([`-1 ${out}`, `+1 ${inn}`], cat.cards), cat.cards, cat.BY);
+  const runs = { base: matchPlayers({ cards: base.cards }, cat, foes), swap: matchPlayers({ cards: deck.cards }, cat, foes, base.cards) };
+  console.log(`TRACE  ${L}: −1 ${out} +1 ${inn}, ${G} games each against the S/A field (${foes.length} lists), the same deals`);
+  const res = {}, nm = (x) => x.toLowerCase();
+  for (const [k, { me, them }] of Object.entries(runs)) {
+    res[k] = [];
+    for (let i = 0; i < G; i++) {
+      const ev = [], g = matchGame(me, them, i, { trace: (e) => ev.push(e) });
+      res[k].push({ g, ev });
+      if (i < V) {
+        console.log(`\n── ${k} game ${i} vs ${g.label} (${i % 2 ? "they" : "we"} go first): ${g.at8[0]}–${g.at8[1]} at turn 8, ${g.winner == null ? "timeout" : g.winner === 0 ? "we win" : "they win"} ──`);
+        for (const e of ev) {
+          console.log(`  T${e.myTurn} ${e.side ? "them" : "us  "} ${e.before.join("–")} → ${e.score.join("–")}  left hand: ${e.left.join(", ") || "—"}${e.champ ? `; champion ${e.champ}` : ""}`);
+          if (e.side === 0) console.log(`         hand ${e.hand.join(", ")}; board ${e.units.join(", ") || "—"}; gear ${e.gear.join(", ") || "—"}`);
+          for (const l of e.line || []) console.log(`         · ${l}`);
+        }
+      }
+    }
+  }
+  const sg = (x) => `${x >= 0 ? "+" : ""}${x.toFixed(2)}`;
+  const mean = (xs) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : NaN);
+  const d = paired(res.swap.map((r) => r.g.at8[0] - r.g.at8[1]), res.base.map((r) => r.g.at8[0] - r.g.at8[1]));
+  console.log(`\nMargin at turn 8: swap − base ${sg(d.mean)} (95%: ${sg(d.lo)} to ${sg(d.hi)}) over ${G} paired games.`);
+  for (const [k, c] of [["base", out], ["swap", inn]]) {
+    const rows = res[k].map(({ g, ev }) => {
+      const ours = ev.filter((e) => e.side === 0 && e.myTurn <= 8);
+      const drawn = ours.some((e) => e.hand.some((n) => nm(n) === nm(c)));
+      const cast = ours.find((e) => e.left.some((n) => nm(n) === nm(c)));
+      return { drawn, castT: cast ? cast.myTurn : null, m: g.at8[0] - g.at8[1] };
+    });
+    const dr = rows.filter((r) => r.drawn), ca = dr.filter((r) => r.castT != null), no = dr.filter((r) => r.castT == null);
+    const turns = {}; for (const r of ca) turns[r.castT] = (turns[r.castT] || 0) + 1;
+    console.log(`  ${c} (${k}): drawn by turn 8 in ${dr.length}/${G}; left the hand in ${ca.length} (turn ${Object.entries(turns).map(([t, n]) => `${t}:${n}`).join(" ") || "—"}), stuck in ${no.length}; ` +
+      `margin when it left ${ca.length ? sg(mean(ca.map((r) => r.m))) : "—"}, when stuck ${no.length ? sg(mean(no.map((r) => r.m))) : "—"}, not drawn ${sg(mean(rows.filter((r) => !r.drawn).map((r) => r.m)))}`);
+  }
+  console.log(`  "left the hand" counts a play, a hide or a discard; --verbose shows which.`);
 }
 
 async function cmdCalibrate(S, cat, args) {
@@ -2158,6 +2224,7 @@ async function main() {
     try: () => cmdTry(S, cat, args),
     search: () => cmdSearch(S, cat, args),
     calibrate: () => cmdCalibrate(S, cat, args),
+    trace: () => cmdTrace(cat, args),
     loops: () => cmdLoops(S, cat, args),
     bans: () => cmdBans(S, cat, args),
   };
