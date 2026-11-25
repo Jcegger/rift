@@ -61,8 +61,8 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
      no swap advice from model numbers.
    - **riftjudge.com (checked 25 Nov):** a fan Q&A site; an AI writes the answers and community arbiters verify them.
      It's current (rules of 2026-10-09), with no API and no reuse terms. Use it only as a lead in the `rules-question`
-     skill (verified answers only, never cited as a ruling); it adds nothing to the errata. Not yet added to the skill:
-     waits on Jay.
+     skill (verified answers only, never cited as a ruling); it adds nothing to the errata. Added as the skill's last
+     lookup step, for when sources 1–4 leave us unsure (Jay, 25 Nov).
 0. **Make the model track real results.** Done 24 Nov:
    - Fiora's crash fixed (Sett 15% → 43%); solver errors are reported and gated.
    - Budget tested: 150 nodes stays (600 and 2000 are worse).

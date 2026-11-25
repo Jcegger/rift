@@ -20,6 +20,9 @@ The order is handbook, then verbatim, then FAQ, then rulings
 3. **`docs/rules-faq.md`**: the FAQ outranks the Core Rules where they differ (`docs/rules.md` says until when).
 4. **`docs/rules-rulings.md`**: Riot staff rulings on what the published rules leave
    ambiguous. These cannot be derived; no careful reading finds them.
+5. **app.riftjudge.com**, only when 1–4 leave you unsure: a fan Q&A site whose answers an AI writes and players verify.
+   Read only answers marked verified, as a lead to the rule that settles the question; the answer then stands on 1–4
+   and cites them.
 
 ## Translate the question first
 
