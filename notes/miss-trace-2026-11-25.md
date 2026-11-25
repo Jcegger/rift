@@ -46,6 +46,16 @@ same. Then the narrow run and `calibrate --legends 20`, as with fixes 1 and 2.
   - Deathgrip only sacrifices units in the fight, which never changes a combat total. Its real use, a unit from
     elsewhere, isn't modelled.
 - **Fix 7 (25 Nov):** Riposte and Repulse counter in fights (Riposte's +M goes on our strongest unit).
+- **Fix 8 (25 Nov):** the fight spells (Challenge, Rampage, Gentlemen's Duel, Realm of Death, Clash of Giants) duel mid-fight.
+  Rampage's paid +2 isn't read in fights.
+- **Left for fights** (`fightblank3.mjs`, scratchpad, 83 spells the fight can't play, most of them draws or plays outside
+  combat):
+  - **Siren's Song** (946 copies, "Move an enemy unit that moved this turn"): the text doesn't say where the unit goes,
+    so it needs a `rules-question` read first.
+  - **Offer and gear removal mid-fight:** the fight bakes gear into each unit's card (`cardFor`), so there's nothing to
+    remove.
+  - **Thrill of the Hunt:** banish a friendly unit and play it to any battlefield, i.e. bring one into the fight.
+  - **Deathgrip from elsewhere.**
 - **Was "still blank", now done except as noted:** Retreat and Flash (pull a unit out before it dies), Sprite Call
   (a 3-Might unit mid-fight), Deathgrip, Imperial Decree, Ntofo Strikes's damage. Retreat explains its 0 of 14: the
   turn solver can cast it, but only on our own turn, where it has no use. Scan:
