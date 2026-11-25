@@ -53,8 +53,17 @@ same. Then the narrow run and `calibrate --legends 20`, as with fixes 1 and 2.
   - **Siren's Song: fix 9, done.** Its player picks the destination as it's played (FAQ "Charm", rules-faq.md:1542–1548),
     and the card names no limit (§451.1, as in the Ride the Wind ruling). Every attacker moved this turn, so the defender
     sends one to base.
-  - **Offer and gear removal mid-fight:** the fight bakes gear into each unit's card (`cardFor`), so there's nothing to
-    remove.
+  - **Gear removal mid-fight: fix 10, done.**
+    - `withGear` keeps the gear cards, so a fight's `killGear` takes the most valuable one off an enemy unit: its Might,
+      plus any Assault, Shield or Tank its text gave.
+    - Covers Offer, Detonate, Brittle Steel, Salvage, Factory Recall (to hand) and Lost to the Sands' mode.
+    - Mapped back in `doFight` and the turn solver: the gear goes to the trash or hand, and Offer's Gold goes to the
+      gear's controller.
+    - On a cached fight (turn solver), lost gear isn't mapped back (the card objects differ). Rare; noted.
+  - **Rampage's paid +2 in fights:** moot. Rampage has neither [Action] nor [Reaction], so it's never played in a fight;
+    the turn solver reads it in the Main Phase (test 161l).
+  - **Thrill of the Hunt, Deathgrip from elsewhere:** these need the side's units elsewhere passed into the fight and
+    mapped back. Model games don't pass them (`doFight` has no `base`), so they're left for now.
   - **Thrill of the Hunt:** banish a friendly unit and play it to any battlefield, i.e. bring one into the fight.
   - **Deathgrip from elsewhere.**
 - **Was "still blank", now done except as noted:** Retreat and Flash (pull a unit out before it dies), Sprite Call
