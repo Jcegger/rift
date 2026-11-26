@@ -61,15 +61,19 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    - **Measured and left opt-in:**
      - `--hidden` lifts the reactive decks (Ornn 16 → 28%) but also Volibear and Mordekaiser;
      - `--caution` adds little;
-     - `--equip` didn't help (branch `worktree-equip-flag`, unmerged).
+     - `--equip` didn't help: tried and dropped (25 Nov), the result in docs/model-calibration.md.
    - **Next, in order:**
      1. After the 29–30 Nov weekend: rebuild `field.json`, then `calibrate --model-from docs/calibration-model.json`
         against post-ban RiftAtlas events and the grown RiftLite archive. Rerun the model only after a code change.
      2. (Done 25 Nov, late: a fresh model column with the trash fixes; every r unmoved, within noise. Immortal Phoenix
         and Rumble, Hotheaded are read too, after it, tests 216–217. Fights now count which kills are our spells', by
         §429.5.c. Today's rules premises went through `rules-question`: §383.4.b, §417.1/§429.1, §385.2, §383.3.b.)
-     3. Suspects left (`rift cards --suspects`, 51): Kennen's [Burn] and [Flow], Kharox (their trash, tracked only in
-        part). The rest read as intended. Phoenix's edge case, killing our own Phoenix with a spell (FAQ: it may
+     3. (Done 25 Nov, late: **[Flow]**, 17 cards and about 10,000 played copies. The turn solver casts a spell from the
+        trash for its Flow cost and banishes it, test 218. Also **"…and draw it"** counts as a draw, so Lightning Rush,
+        in 100% of Kennen (Heart of the Tempest) lists, is cast at all; in 20 traced games, 34 casts, 16 of them by
+        Flow. Not yet: Flow inside a fight (the fight solver casts from hand only), and the opponent's Flow.)
+        Suspects left (`rift cards --suspects`, 51): Kennen's [Burn], and his conquer granting [Flow] to a trash spell
+        (doable now on top of Flow), Kharox (their trash, tracked only in part). The rest read as intended. Phoenix's edge case, killing our own Phoenix with a spell (FAQ: it may
         return), isn't modelled.
      4. Jay's pasted Sivir list (Battle Mistress, close to his own): parked at his word. It goes through `deck-build`
         when he asks.

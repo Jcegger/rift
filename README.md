@@ -1853,7 +1853,7 @@ and Gutter Guardian's Show Off Power (spent first; counts toward "Mercenary on")
 
 **Keywords the goldfish does not read** (24 Nov 2026; `docs/rules.md` Keywords has each rule). Only these change what it
 measures (cards seen, Energy, units on board), and `rift try` names each card that carries one (`benchMisses`):
-Predict and Vision (card selection), Flow (recasting from the trash), and a `[Level N][>]`, `[Legion][>]` or Repeat line
+Predict and Vision (card selection), Flow (recasting from the trash; the turn solver plays it since 25 Nov, the goldfish still doesn't), and a `[Level N][>]`, `[Legion][>]` or Repeat line
 that makes resources (draws, tokens, Gold, runes, cost cuts). The rest are board text, played by the points model and the
 turn solver, not by the goldfish: Hunt and XP gain, Level and Legion stats, Weaponmaster and Quick-Draw (the goldfish
 already attaches gear free), Deploy, Deflect's tax, a gear strip's hold point (Trinity Force), Tank and Backline.

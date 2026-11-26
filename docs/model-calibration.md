@@ -95,7 +95,7 @@ numbers unmoved, as the bar expects.
   `--hidden --caution 0.5` gave (29, 35, 43). Volibear (68%) and Mordekaiser (61%) rise as well, so r falls to 0.24, and it
   stays opt-in. With open hands each side plans around the other's real reactions, so the reactive decks' Defy and Not So
   Fast never catch anyone. Hiding hands lifts them, but it also lifts the proactive decks that are already too high.
-- **`--equip W` (branch `worktree-equip-flag`, not merged): no gain.** It adds a value per Equipment attached in the
+- **`--equip W` (tried and dropped 25 Nov; the code was never merged): no gain.** It adds a value per Equipment attached in the
   model games. On the same 20 Ornn games, Ornn already attaches about 86% of the time (Guardian Angel 24 of 28,
   Brutalizer 42 of 46). With `--equip 0.5` he won 3 of 20 (5 without), margin at turn 8 −3.10 (−2.35). The earlier
   "6 of 10" came from a 6-game sample.
