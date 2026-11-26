@@ -3647,6 +3647,11 @@ section('Card text coverage');
   const first = new Map(); for (const c of played) if (!first.has(c.n) || (!c.v && first.get(c.n).v)) first.set(c.n, c);
   const off = [...new Map(played.filter((c) => /Unit|Spell|Gear|Legend/.test(c.t || "") && !c.token).map((c) => [`${c.n}|${c.x}`, c])).values()].filter((c) => !turnReads(c) && turnReads(first.get(c.n)));
   ok('every printing reads as its card\'s first printing does', !off.length, off.length ? off.slice(0, 5).map((c) => `${c.n} ${c.c}`).join(', ') : '');
+  // One entry per card in the overrides (25 Nov): a second key in the object literal silently replaces the first, and a
+  // stale entry for Rumble, Hotheaded and Guerilla Warfare sat shadowed that way.
+  { const src = readFileSync(join(ROOT, 'lib/cardtext-overrides.mjs'), 'utf8'), keys = [...src.matchAll(/^  "([^"]+)": \{/gm)].map((m) => m[1]);
+    const dup = [...new Set(keys.filter((k, i) => keys.indexOf(k) !== i))];
+    ok('lib/cardtext-overrides.mjs names each card once', !dup.length, dup.join(', ')); }
   // Information, not a gate (25 Nov): readings that do nothing this turn but name a board action. Where misreads hide.
   const { noopSuspects } = await import('../lib/cardtext.mjs');
   const byCode = new Map(played.map((c) => [c.c, c])), copies = new Map();

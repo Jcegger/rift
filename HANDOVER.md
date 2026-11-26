@@ -72,8 +72,10 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
         trash for its Flow cost and banishes it, test 218. Also **"…and draw it"** counts as a draw, so Lightning Rush,
         in 100% of Kennen (Heart of the Tempest) lists, is cast at all; in 20 traced games, 34 casts, 16 of them by
         Flow. Not yet: Flow inside a fight (the fight solver casts from hand only), and the opponent's Flow.)
-        Suspects left (`rift cards --suspects`, 51): Kennen's [Burn], and his conquer granting [Flow] to a trash spell
-        (doable now on top of Flow), Kharox (their trash, tracked only in part). The rest read as intended. Phoenix's edge case, killing our own Phoenix with a spell (FAQ: it may
+        Kennen's conquer, granting [Flow] to a trash spell, is read too (test 219). `check.mjs` now fails on a card named
+        twice in `lib/cardtext-overrides.mjs`: a later key silently replaced an earlier one, and stale entries for Rumble
+        and Guerilla Warfare sat shadowed that way. Suspects left (`rift cards --suspects`): Kennen's [Burn] (mills our
+        own deck, whose order the solver doesn't know) and Kharox (their trash, tracked only in part). The rest read as intended. Phoenix's edge case, killing our own Phoenix with a spell (FAQ: it may
         return), isn't modelled.
      4. Jay's pasted Sivir list (Battle Mistress, close to his own): parked at his word. It goes through `deck-build`
         when he asks.
