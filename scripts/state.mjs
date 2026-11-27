@@ -48,7 +48,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { realAfter, rWithNoise } from "../lib/realfit.mjs";
 import { PRE_RIFT_KITS, PRE_RIFT_PROMO } from "../lib/kits.mjs";
-import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, SB_MAX } from "../lib/decks.mjs";
+import { indexCatalog, deckStats as libDeckStats, deckChecks, journalRecord, deckText, parseDeckText, SB_MAX } from "../lib/decks.mjs";
+import { basename } from "node:path";
 import { pathToFileURL } from "node:url";
 import { versus, weigh, effectsOf, looksInteractive, unreadSentences, withGear } from "../lib/versus.mjs";
 import { parseChanges, applyChanges, shapeOf, answerNames, fieldOf, engineReport, SCENARIOS, scoreTiers, foesOf, blindSpots } from "../lib/decklab.mjs";
@@ -147,6 +148,12 @@ const cost = (c) => {
 const pad = (s, n) => String(s).padEnd(n);
 
 export async function loadState() {
+  const S = await loadSavedState();
+  if (fileDecks.length) S.decks = [...(S.decks || []), ...fileDecks];
+  return S;
+}
+
+async function loadSavedState() {
   if (process.env.RIFT_STATE) {
     const raw = await readJson(process.env.RIFT_STATE);
     return Array.isArray(raw) ? raw[0].data : (raw.data || raw);
@@ -2278,13 +2285,38 @@ function cmdIntake(S, cat, args) {
   console.log("\n  Then Clear the list in the app (Collection → Import → New, to file), which also empties this one.");
 }
 
+// --file decklab/<name>.deck.txt: a draft in Piltover paste text (what `export` writes), played as
+// one more deck named "file:<name>" next to the saved ones. It lives in memory only: nothing is
+// written to the app. With no --deck, the command gets --deck "file:<name>", so
+// `try --file x.deck.txt "-A" "+B"` works as `try --deck` does.
+let fileDecks = [];
+async function takeFileArgs(args, cat) {
+  const out = [];
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] !== "--file") { out.push(args[i]); continue; }
+    const path = args[++i];
+    if (!path) throw new Error("--file needs a path");
+    const text = await readFile(path, "utf8");
+    const { cards, sb, unknown } = parseDeckText(text, cat.idx);
+    if (unknown.length) throw new Error(`${path}: can't read ${unknown.length} line(s): ${unknown.slice(0, 5).join(" · ")}`);
+    const name = "file:" + basename(path).replace(/(\.deck)?\.txt$/, "");
+    fileDecks.push({ id: name, name, cards, sb, file: path });
+  }
+  const cmd = process.argv[2];
+  if (fileDecks.length && ["deck", "decks", "export"].includes(cmd) && !out.length) out.push(fileDecks[0].name);
+  else if (fileDecks.length && !out.includes("--deck") && ["try", "search", "versus", "loops", "lifts", "identity"].includes(cmd))
+    out.push("--deck", fileDecks[0].name);
+  return out;
+}
+
 async function main() {
-  const [cmd = "summary", ...args] = process.argv.slice(2);
-  if (cmd === "rising") return cmdRising(args);
-  if (cmd === "poll") return cmdPoll(args);
-  if (cmd === "field") return cmdField(args);
+  const [cmd = "summary", ...rawArgs] = process.argv.slice(2);
+  if (cmd === "rising") return cmdRising(rawArgs);
+  if (cmd === "poll") return cmdPoll(rawArgs);
+  if (cmd === "field") return cmdField(rawArgs);
   if (cmd === "kobo") return cmdKobo();
   const cat = await loadCatalog();
+  const args = await takeFileArgs(rawArgs, cat);
   if (cmd === "ideas") return cmdIdeas(cat, args);
   // meta reads only the archive and the catalog, so it works offline and never
   // touches the live Supabase row.
