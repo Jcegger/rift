@@ -469,3 +469,32 @@ no Riot staff ruling read.
    [Reaction] / [Action] unit into a showdown at a battlefield they control (§355.2.a, §813.1.c). Any other unit can't
    be played on our turn, so its text can't change it.
 
+
+## Battle Mistress and Hidden: hide costs make Gold, one Gold per ready, Defy reads the printed cost
+
+**Date:** 2026-11-26
+**Source:** Derived in this repo from the Core Rules and the FAQ's Temporal Portal answer; no Riot staff ruling or community ruling read. Asked while choosing a direction for a from-scratch Sivir brew (`decklab/sivir-scratch.md`).
+**Rules:** §164.2.b, §164.2.b.1, §811.1.b, §811.1.c.1, §315.1.b, §415.4
+**Expires:** when Riot rules on what a hidden card's cost is, or a rules update changes how rune abilities or Hidden are paid
+
+**Questions.** (1) When a hide cost ([A]) is paid by recycling a rune, does it trigger Battle Mistress ("When you
+recycle a rune, you may exhaust me to play a Gold gear token exhausted")? (2) How many Golds can the legend make a turn?
+(3) Can Defy ("Counter a spell that costs no more than [E4] and no more than [A]") counter a spell played from face
+down, which was played "ignoring its base cost"?
+
+**Derived answers.**
+
+1. **Yes.** A rune makes Power only by its own ability, *"[Reaction][>] Recycle this: Add [C]."* (§164.2.b), so any
+   Power paid from a rune, a hide cost included, is a rune recycled. Hiding is *"you may pay [A] to hide this
+   facedown"* (§811.1.b), a cost like any other; it is not a play (§811.1.c.1), but the legend triggers on the recycle,
+   not on a play.
+2. **One per ready.** The legend exhausts to make the Gold, so she makes one, then waits to be readied: by the Awaken
+   Phase (§315.1.b) or by *"When one or more enemy units die, ready me."* So a turn cycle gives one Gold, plus one per
+   time enemy units die. If she's still ready on their turn, a Power paid then (a Reaction) makes it. The Gold enters
+   exhausted and is next turn's Power (§415.4; "Turn solver premises", point 5).
+3. **Defy reads the printed cost.** The FAQ (Temporal Portal): *"anything that asks for a card's cost finds its
+   printed cost as the answer."* Playing from face down ignores the base cost for paying, not for what the card
+   costs. So a hidden Switcheroo (2E 2P) can't be countered by Defy; a hidden 1-Power spell can.
+
+**Weakest link:** point 3 extends an FAQ answer about Repeat to Defy's cost check. Ask a judge before an event depends
+on it.
