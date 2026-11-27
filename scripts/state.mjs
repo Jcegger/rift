@@ -122,6 +122,9 @@ import { solveTurn, breakers, turnReads, BOMB } from "../lib/turn.mjs";
 import { poolCoverage, compile, engineReads } from "../lib/cardtext.mjs";
 import { matchupLine } from "../lib/winrates.mjs";
 import { avoidedIn } from "../lib/avoid.mjs";
+import { legendPool, MIN_SHARE } from "../lib/pool.mjs";
+import { checkList, readIdentity } from "../lib/identity.mjs";
+import { JOBS } from "../lib/jobs.mjs";
 import { buildDeck, playGame, rng, POLICIES } from "../lib/sim.mjs";
 
 const SUPA_URL = "https://gnujcqoyjovhqkquwapd.supabase.co";
@@ -2285,6 +2288,116 @@ function cmdIntake(S, cat, args) {
   console.log("\n  Then Clear the list in the app (Collection → Import → New, to file), which also empties this one.");
 }
 
+// pool: a legend's legal cards (its domains + Colorless, unbanned, Standard, its own signature only,
+// never Aurora), by job (lib/jobs.mjs), each with what the lists say (lib/pool.mjs). Candidates for
+// the deck-brew skill's "cards by job" step, not picks; the collection is never a sort key.
+//   pool <legend> [--job removal] [--since 2026-10-23] [--all]
+// Without --job: each job's top 8 by evidence (--all for every card).
+async function cmdPool(cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const flags = new Set(["--job", "--since"]);
+  const words = args.filter((a, i) => !a.startsWith("--") && !flags.has(args[i - 1])).join(" ").toLowerCase();
+  const job = opt("--job"), since = opt("--since") || "2026-10-23", all = args.includes("--all");
+  if (!words || (job && !JOBS[job])) {
+    console.log("usage: pool <legend> [--job <job>] [--since 2026-10-23] [--all]");
+    console.log("  jobs: " + Object.entries(JOBS).map(([k, v]) => `${k} (${v})`).join(" · "));
+    return;
+  }
+  const byName = new Map();
+  for (const c of cat.cards) if (c.t === "Legend" && !c.v && (cat.idx.legendName(c) || "").toLowerCase().includes(words) && !byName.has(cat.idx.legendName(c))) byName.set(cat.idx.legendName(c), c);
+  if (byName.size !== 1) { console.log(byName.size ? `${byName.size} legends match: ${[...byName.keys()].join(" · ")}` : `no legend matching "${words}"`); return; }
+  const [lname, legend] = [...byName][0];
+  const snap = await readJson(url("decks.json"));
+  const P = legendPool(cat, snap.decks, legend, { since });
+  const pct = (x) => (x == null ? "  —" : `${Math.round(100 * x)}%`.padStart(4));
+  console.log(`POOL  ${lname} (${(legend.d || []).join(" + ")} + Colorless): ${P.cards.length} legal cards · ${P.lists} posted lists since ${since}, ${P.good} good finishes`);
+  if (!P.good) console.log(`  no good finishes for ${lname} since ${since}, so nothing here can read "proven here"; an earlier --since may find some`);
+  if (P.twins.length) console.log(`  same domains: ${P.twins.map((t) => `${t.legend} (${t.lists} lists, ${t.good} good)`).join(" · ")}`);
+  console.log(`  CANDIDATES, NOT PICKS. Sorted by evidence: proven here (${Math.round(MIN_SHARE * 100)}%+ of this legend's good finishes) › crowd here › proven under another legend (named) › theory (card text only)`);
+  console.log(`  good = share of good finishes · posted = share of posted lists · cp = copies when run · ⟲ = usable on their turn\n`);
+  const row = (r) => `    ${pad(r.card.n, 30)} ${pad(`${r.card.t[0]} ${cost(r.card)}`, 9)} ${pct(r.good)} ${pct(r.posted)} ${r.copies ? r.copies.toFixed(1).padStart(4) : "   —"}  ${r.theirTurn ? "⟲" : " "} ${r.label === "proven under" ? `proven under ${r.under.legend.split(",")[0]} (${pct(r.under.good).trim()}${r.under.theirChampion ? ", its champion" : ""})` : r.label}${job ? "" : ""}  ${r.jobs.filter((j) => j !== job).join(", ")}`;
+  const head = `    ${pad("card", 30)} ${pad("cost", 9)} good posted  cp     evidence   other jobs`;
+  for (const [j, what] of Object.entries(JOBS)) {
+    if (job && j !== job) continue;
+    const rs = P.cards.filter((r) => r.jobs.includes(j));
+    if (!rs.length) continue;
+    const show = job || all ? rs : rs.slice(0, 8);
+    console.log(`  ${j.toUpperCase()}  ${what} · ${rs.length} cards${show.length < rs.length ? `, top ${show.length}` : ""}`);
+    console.log(head);
+    for (const r of show) console.log(row(r));
+    console.log("");
+  }
+  const none = P.cards.filter((r) => !r.jobs.length);
+  if (!job && none.length) console.log(`  NO JOB READ (${none.length}): ${none.slice(0, 20).map((r) => r.card.n).join(", ")}${none.length > 20 ? " …" : ""}`);
+}
+
+// identity: a list checked against its identity (lib/identity.mjs): the measured rules as code, copies
+// and odds per job against the identity's targets, key cards, enablers, and core/flex against the
+// legend's lists. The deck-brew skill's audit step and deck-netdeck's "read its identity" step.
+//   identity --deck "<deck>" | --file draft.deck.txt  [--id decklab/<brew>.md]  [--anchor "<deck>" | --anchor net]
+// --anchor net: the nearest playable net deck (data/ideas.json), as `ideas` picks it. Two --file
+// flags load two drafts; name the second as the anchor with --anchor "file:<name>".
+async function cmdIdentity(S, cat, args) {
+  const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
+  const decks = findDecks(S, opt("--deck") || "\u0000");
+  if (decks.length !== 1) {
+    console.log('usage: identity --deck "<deck>" | --file draft.deck.txt  [--id decklab/<brew>.md]  [--anchor "<deck>" | --anchor net]');
+    if (opt("--deck")) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
+    return;
+  }
+  const deck = decks[0], card = (code) => cat.BY.get(code);
+  const identity = opt("--id") ? readIdentity(await readFile(opt("--id"), "utf8")) : null;
+  if (opt("--id") && !identity) { console.log(`${opt("--id")}: no \`\`\`identity block`); return; }
+  const legend = Object.keys(deck.cards).map(card).find((c) => c?.t === "Legend");
+  const lname = legend ? cat.idx.legendName(legend) : null;
+  let anchor = null;
+  const a = opt("--anchor") || identity?.anchor || null;
+  if (a === "net") {
+    const I = await readJson(url("ideas.json"));
+    const mine = mainOf(deck.cards, card);
+    const near = ["now", "last"].flatMap((f) => (I.netdecks?.[lname]?.[f] || []).filter((g) => g.count && !g.avoid.length)
+      .map((g) => ({ f, g, main: new Map(g.count.main.map((r) => [r.name, r.copies])) })))
+      .map((x) => ({ ...x, off: changed(mine, x.main) })).sort((x, y) => x.off - y.off)[0];
+    if (near) anchor = { name: `the nearest ${I.formats[near.f].name} net deck (${near.g.status}, ${near.g.lists} lists)`, main: near.main };
+    else console.log(`  no playable net deck for ${lname}: no anchor`);
+  } else if (a) {
+    const ad = findDecks(S, a);
+    if (ad.length !== 1) { console.log(`--anchor "${a}" matches ${ad.length} decks: ${ad.map((d) => d.name).join(" · ") || "none"}`); return; }
+    anchor = { name: ad[0].name, main: mainOf(ad[0].cards, card) };
+  }
+  // The legend's posted lists this format, for core / mid / flex.
+  const snap = await readJson(url("decks.json"));
+  const lists = snap.decks.filter((d) => (d.dt || "") >= "2026-10-23" && d.lg && card(d.lg) && cat.idx.legendName(card(d.lg)) === lname).map((d) => mainOf(d.cards, card));
+  const R = checkList(deck, cat.idx, { identity, anchor, lists });
+
+  const mark = (ok) => (ok === true ? "ok  " : ok === false ? "FAIL" : ok === "new" ? "NEW " : ok === "later" ? "later" : "warn");
+  console.log(`IDENTITY  ${deck.name}${R.legend ? ` · ${R.legend}` : ""}${identity ? ` · against ${opt("--id")}` : " · no identity block (rules and synergies only)"}`);
+  if (identity) {
+    for (const [k, label] of [["plan", "plan"], ["winCondition", "wins by"], ["givesUp", "gives up"], ["worthDoing", "worth doing"], ["yardstick", "yardstick"]])
+      if (identity[k]) console.log(`  ${pad(label, 12)} ${identity[k]}`);
+    const open = (identity.gates || []).filter((g) => !g.confirmed);
+    if (open.length) console.log(`  gates not yet confirmed by Jay: ${open.map((g) => g.gate).join(", ")}`);
+  }
+  console.log(`\n  RULES (docs/deckbuilding.md, measured on good finishes)`);
+  for (const r of R.rules) console.log(`    ${mark(r.ok)} ${r.label}: ${r.val}`);
+  console.log(`\n  JOBS  copies · chance of one by the Nth card seen (no mulligan; docs/deckbuilding-theory.md table)${identity?.jobs ? " · target" : ""}`);
+  for (const j of R.jobs) console.log(`    ${j.ok === false ? "FAIL" : j.ok ? "ok  " : "    "} ${pad(j.job, 14)} ${String(j.copies).padStart(2)}  ${String(Math.round(100 * j.p)).padStart(3)}% by ${j.by}${j.target != null ? ` (target ${Math.round(100 * j.target)}%)` : ""}  ${j.cards.join(", ")}`);
+  console.log(`    interaction copies ${R.interaction} (Riot: 6+) · usable on their turn ${R.theirTurn}`);
+  if (R.jobless.length) console.log(`    ${"warn"} doing none of the identity's jobs (cut, or argue for it): ${R.jobless.join(", ")}`);
+  if (R.keys.length) { console.log(`\n  KEY CARDS`); for (const k of R.keys) console.log(`    ${k.copies ? "ok  " : "FAIL"} ${k.copies} ${k.name}`); }
+  console.log(`\n  ENABLERS  a card that names a resource nothing else in the list makes (lib/interactions.mjs, pattern-read: check the text)`);
+  if (!R.orphans.length) console.log(`    none found`);
+  for (const o of R.orphans) console.log(`    warn ${o.card} needs ${o.means}: "${o.why}"`);
+  if (R.shape) {
+    const fmt = (rs) => rs.map((r) => `${r.q} ${r.n} ${Math.round(100 * r.s)}%`).join(", ") || "—";
+    const cp = (rs) => rs.reduce((a, r) => a + r.q, 0);
+    console.log(`\n  CORE / FLEX  share of ${R.shape.lists} posted ${R.legend} lists since 2026-10-23 running each card (good finishes: core ~30, mid ~6, flex ~4 copies)`);
+    console.log(`    core 80%+  ${cp(R.shape.core)} copies: ${fmt(R.shape.core)}`);
+    console.log(`    mid        ${cp(R.shape.mid)} copies: ${fmt(R.shape.mid)}`);
+    console.log(`    flex <60%  ${cp(R.shape.flex)} copies: ${fmt(R.shape.flex)}`);
+  }
+}
+
 // --file decklab/<name>.deck.txt: a draft in Piltover paste text (what `export` writes), played as
 // one more deck named "file:<name>" next to the saved ones. It lives in memory only: nothing is
 // written to the app. With no --deck, the command gets --deck "file:<name>", so
@@ -2326,6 +2439,7 @@ async function main() {
   if (cmd === "close") return cmdClose(cat, args);
   if (cmd === "cards") return cmdCards(cat, args);
   if (cmd === "gaps") return cmdGaps(cat, args);
+  if (cmd === "pool") return cmdPool(cat, args);
   const S = await loadState();
   const q = mk(S);
   const table = {
@@ -2354,6 +2468,7 @@ async function main() {
     trace: () => cmdTrace(cat, args),
     loops: () => cmdLoops(S, cat, args),
     bans: () => cmdBans(S, cat, args),
+    identity: () => cmdIdentity(S, cat, args),
   };
   const fn = table[cmd];
   if (!fn) { console.error(`unknown command "${cmd}" — try: ${Object.keys(table).join(", ")}, fight, gaps`); process.exit(2); }
