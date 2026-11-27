@@ -28,10 +28,10 @@ Draft list: `decklab/sivir-scratch.deck.txt` (Piltover paste text; `rift <cmd> -
     "kill": { "cards": ["Rampage", "Challenge", "Marching Orders", "Flurry of Blades"], "by": 9, "target": 0.75 },
     "fight trick": { "cards": ["Punch First", "Switcheroo"], "by": 8, "target": 0.65 },
     "readier": { "cards": ["On the Hunt", "First Mate"], "by": 10, "target": 0.75 },
-    "second closer": { "cards": ["Rengar, Trophy Hunter"], "by": 10, "target": 0.4 },
+    "second closer": { "cards": ["Rengar, Trophy Hunter", "Nidalee, Cat Form"], "by": 10, "target": 0.4 },
     "fizz": { "cards": ["Fizz, Trickster"], "by": 9, "target": 0.5 },
-    "card flow": { "cards": ["Ezreal, Prodigy", "Traveling Merchant", "Yordle Explorer"], "by": 9, "target": 0.75 },
-    "answer": { "cards": ["Sabotage", "Rebuke", "Repulse", "Vex, Apathetic"], "by": 9, "target": 0.75 }
+    "card flow": { "cards": ["Ezreal, Prodigy", "Traveling Merchant", "Yordle Explorer", "Nidalee, Cat Form"], "by": 9, "target": 0.75 },
+    "answer": { "cards": ["Sabotage", "Rebuke", "Repulse", "Vex, Apathetic", "Gust"], "by": 9, "target": 0.75 }
   },
   "keyCards": ["Sivir, Mercenary", "On the Hunt", "Punch First", "Fizz, Trickster", "Rampage"],
   "gates": [
@@ -631,5 +631,61 @@ decklab/sivir-scratch-search.json`: 480 games each, margin vs draft v1 (95%).
 - **Model blind spot:** hold-up (keeping a trick for their turn) is modelled only in `calibrate --hold-up`, not in
   `try` or `search`. This deck's mid-game holds Gold-paid tricks for their combat, so the model undercounts it. That
   can't explain a 28-point gap alone, though; Trying Her Best runs reactions too.
+
+**The model's blind spot, measured (27 Nov).** `try --points --hold-up W` (new, 3a18803: both sides value a reaction
+kept for the other's turn), 240 games each:
+
+| won | hold-up off | 0.5 | 1 |
+|---|---|---|---|
+| draft v1 | 38% | 46% | 49% (43–56%) |
+| Trying Her Best | 66% | 71% | 70% (64–75%) |
+| gap | 28 | 25 | 21 |
+
+Hold-up explains about a quarter of the gap; the rest is the deck.
+
+### Draft v2 (27 Nov): `decklab/sivir-scratch-v2.deck.txt`
+
+**Changes from v1:** −2 First Mate, −1 Yordle Explorer, +3 Nidalee, Cat Form (4-Might Ambush bodies that hold and
+draw); −1 Repulse, −1 Marching Orders, +2 Gust (answers on their turn). Kills stay at Rampage ×3, Challenge and Flurry.
+
+**`rift identity` against the confirmed targets:**
+- **Misses two:**
+  - readiers: On the Hunt ×3 alone, 59% by card 10, against 75%;
+  - kills: 74% against 75%.
+- **Passes the rest:**
+  - answers: 81% (v1 74%);
+  - second closers: Rengar 2, Nidalee 3, 78%;
+  - card flow: 90%;
+  - early units: 78%; Fizz: 55%; tricks: 69%.
+- **Rules:** pass. 16 changes from the LA reference.
+- **Note:** the targets were briefly lowered so v2 would pass, then restored. Gate 5's targets stand, and the misses
+  are Jay's call.
+
+**v2 against v1 and Trying Her Best (model games, 240 each; closing 400):**
+
+| | v1 | **v2** | Trying Her Best |
+|---|---|---|---|
+| won, hold-up off | 38% | **46%** (40–53%) | 66% |
+| won, hold-up 1 | 49% | **54%** (48–61%) | 70% |
+| our / their holds a game (off) | 2.33 / 2.99 | **2.61 / 2.64** | 3.33 / 2.02 |
+| a winning line from 7 | 23% | **31%** | 32% |
+| from 6 | 5% | 1% | 5% |
+| winning lines: hold + conquest / double conquest | 32 / 10 | 46 / 3 | 59 / 9 |
+| Sivir in winning lines | 9 | **23** | 27 |
+
+**Goldfish, v2:**
+- Mercenary on: 54 / 56 / 57%;
+- Gold: 4.59 / 4.75 / 4.78;
+- kills: 0.65 / 1.16;
+- answers usable at t5: 45% (Gust isn't counted against big units);
+- two units by turn 3: 96% / 99%;
+- stuck on colour: 7% (Nidalee's Body Power), so the rune split needs a recheck.
+
+**Reading.**
+- v2 closes as well as Trying Her Best, and Sivir is back at the centre of the winning lines.
+- It still trails by 16–20 points in the model. The model ranks decks loosely (r about 0.3), so that isn't a verdict,
+  but it's the number to beat.
+- v2 closes by hold-plus-conquest more than by the double conquest (3 of 60), which is a drift from the lethal plan
+  in 2d.
 
 ## 9. Freeze and watch items
