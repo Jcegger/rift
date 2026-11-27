@@ -1782,6 +1782,26 @@ games. Three dead cards (−3 Nidalee, Cat Form +3 Whiteflame Protector, off-dom
 120 games; six read −1.32 (−2.23 to −0.42). The one-card swaps in `decklab/sivir-tune.md` all read within ±0.3 at
 120. A one-card swap needs roughly 800+ games per candidate to show a 0.3 effect; `--budget` sets it.
 
+**Building from scratch or from a net deck (26 Nov 2026).** Two skills hold the process: `deck-brew` (gated stages:
+field, identity, worth doing, tiers, jobs, cards, audit, test) and `deck-netdeck` (legend, list, its identity, flex
+only). A **gate** is Jay's confirmation in his own words, quoted in the worksheet's ```identity block
+(`decklab/_brew-template.md`). Three tools serve them:
+- **`--file decklab/<draft>.deck.txt`** on `try`, `search`, `versus`, `loops`, `lifts`, `identity`, `deck` and `export`:
+  a draft in Piltover paste text (`lib/decks.mjs` `parseDeckText`, the reverse of `deckText`), loaded in memory as
+  `file:<name>`. It plays the same games as the saved deck it was exported from. Nothing is written to the app.
+- **`rift pool <legend> [--job <job>] [--since D] [--all]`** (`lib/pool.mjs`): the legal pool (the legend's domains plus
+  Colorless, unbanned, Standard, its own signature only, never Aurora) by job (`lib/jobs.mjs`, read from compiled card
+  text). Sorted by evidence: proven here (15%+ of this legend's good finishes), crowd here (15%+ of its posted lists),
+  proven under another legend with the same domains (5+ good finishes; that legend's own champion is marked), theory.
+  Candidates, not picks; the collection never sorts it.
+- **`rift identity --deck|--file … [--id <worksheet>] [--anchor net|"<deck>"]`** (`lib/identity.mjs`): the pre-flight as
+  code (the legal checks, one copy across the champion's units, signatures 3 or 0, Aurora, the change count against the
+  anchor or the nearest net deck), copies and the exact chance of one by the Nth card per job against the identity's
+  targets, key cards, a card waiting on a resource only cards make (Gold, Empower, a discard, face down, a flip, a
+  ready, a rune recycle) that nothing else in the list makes, and core / mid / flex against the legend's posted lists.
+  It can't see conditions like "4 or more units here"; the skill's card-by-card gate covers those. Tests:
+  `lib/identity.test.mjs`.
+
 **Lifts (`rift lifts --legend <L> [--since D] [--deck "<deck>"]`, 25 Nov 2026).** How good finishes build a legend:
 each card's copies in good-finish lists minus the legend's other placed lists (`lib/calibrate.mjs` lifts), with a
 bootstrap interval, for cards in 15%+ of the lists. With `--deck` it shows your copies beside each card. It needs 5+ good

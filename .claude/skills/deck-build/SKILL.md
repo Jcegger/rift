@@ -26,12 +26,17 @@ tried it. On 21 Nov 2026 a "from scratch" Sivir broke five of the doc's rules in
    numbers rank changes inside the model only (r about 0.3–0.4 against real results). Quote them as a mechanism check
    ("closes a turn sooner", "never gets cast"), never as a win-rate verdict.
 
-## Tune or brew
+## Tune, brew or net deck
 
 - **Tuning** an existing list: the measured rules in `docs/deckbuilding.md`, then the pre-flight.
-- **Brewing** a new concept: the method in `docs/deckbuilding-theory.md` §2 first (field, gap, "worth doing",
-  roles, anchor, jobs, front to back, test), then the pre-flight. A brew past 16 changes is a new deck, and
-  new decks place about a third less often, so its "worth doing" sentence carries the case.
+- **Brewing** a new concept from scratch: the `deck-brew` skill (gated stages: field, identity, worth doing, tiers,
+  jobs, cards, audit). A brew past 16 changes is a new deck, and new decks place about a third less often, so its
+  "worth doing" sentence carries the case.
+- **Starting from a net deck**: the `deck-netdeck` skill (legend, list, its identity, flex only).
+- **Tools for any of them:** a draft lives in `decklab/<name>.deck.txt` and every command takes `--file` instead of
+  `--deck`, so nothing reaches the app before `deck-write`; `rift pool <legend> [--job <job>]` lists candidates by
+  job with their evidence; `rift identity` runs the pre-flight below as code (with `--id <worksheet>` against the
+  identity's jobs and targets).
 
 ## Pre-flight
 

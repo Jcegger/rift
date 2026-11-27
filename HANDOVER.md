@@ -4,7 +4,7 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `~/projects/dotclaude/HUB.md`.
 
-**Updated:** 2026-11-26 (Sivir candidates re-run as mechanism checks after the Flow fixes; C1 reversed)
+**Updated:** 2026-11-26 (Sivir candidates re-run, C1 reversed; from-scratch and net-deck building: two gated skills and three tools)
 
 ## State
 
@@ -39,6 +39,11 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 - How a card is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` or grammar in
   `lib/cardtext.mjs`, an op in ENGINE_OPS and RUN_OPS + an applyOp case, a closing-turn test with its no-win twin. The
   rules premise goes through `rules-question` before it's coded.
+- **Building a deck (26 Nov):** `deck-brew` (from scratch; gates: field, identity picked then restated, worth doing,
+  tiers and yardstick, jobs, the draft is the identity) and `deck-netdeck` (legend, list, its identity, flex only).
+  The worksheet is `decklab/_brew-template.md`, with a ```identity block. Tools: `--file <draft>.deck.txt` on every
+  deck command, `rift pool <legend> [--job]`, `rift identity [--id] [--anchor net]` (README "Building from scratch").
+  Not yet run with Jay: the first real brew is the test. `identity` can't see "4+ units here"-style conditions.
 - Rules, play advice, deck proposals and deck writes go through the `rules-question`, `play-advice`, `deck-build` and
   `deck-write` skills. rift commits and pushes finished work once `scripts/check.mjs` passes.
 

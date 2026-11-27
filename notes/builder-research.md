@@ -100,3 +100,11 @@ In the order the calibration suggests: first what makes the model wrong, then wh
 8. **More real data for calibration.** RiftLite's pairs top out around 50 games, so per-matchup truth is ±15 points.
    Options: a longer RiftLite window, paper event match results where pairings are published (`data/events`), and
    Jay's journal once it has 50+ games per deck. Data only, no code. Would change how sharp the calibration can be.
+
+## Built
+
+- **26 Nov 2026: from-scratch and net-deck building** (545a415, 90250f9). `--file` drafts, `rift pool` (cards by job,
+  evidence first), `rift identity` (the pre-flight as code, jobs against the identity's targets), and the `deck-brew` /
+  `deck-netdeck` skills. Next, if the first brew shows the need: read conditions like Bedeviling Stranger's "4 or more
+  units" in the enabler check, and a sideboard mode for `search` (item 5).
+
