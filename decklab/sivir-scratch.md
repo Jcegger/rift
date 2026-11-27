@@ -12,7 +12,7 @@ Draft list: `decklab/sivir-scratch.deck.txt` (Piltover paste text; `rift <cmd> -
   "legend": "Sivir, Battle Mistress",
   "mode": "brew",
   "anchor": "to choose at stage 6",
-  "field": [],
+  "field": ["Vex", "Kai'Sa", "Master Yi", "LeBlanc", "Diana", "Rengar", "Rek'Sai", "Azir", "Evelynn", "Mordekaiser"],
   "plan": "One sentence: what the deck does each game.",
   "early": "Turns 1–3: what the deck does, and what it must stop the opponent doing.",
   "mid": "Turns 4–6: how it builds its advantage, and what resource it spends.",
@@ -30,7 +30,7 @@ Draft list: `decklab/sivir-scratch.deck.txt` (Piltover paste text; `rift <cmd> -
   },
   "keyCards": ["the cards the plan can't run without"],
   "gates": [
-    { "gate": "1 field", "date": "", "confirmed": false, "jay": "" },
+    { "gate": "1 field", "date": "2026-11-26", "confirmed": true, "jay": "i do agree with these so far tho (Vex, Rengar, LeBlanc, Kai'Sa, Diana) · last week i played two master yis! · we want to be able to go against a broad meta, maybe do research on post-radiance ban meta · maybe we get more specific in the sideboard" },
     { "gate": "2a direction", "date": "", "confirmed": false, "jay": "" },
     { "gate": "2b early", "date": "", "confirmed": false, "jay": "" },
     { "gate": "2c mid", "date": "", "confirmed": false, "jay": "" },
@@ -47,7 +47,7 @@ Draft list: `decklab/sivir-scratch.deck.txt` (Piltover paste text; `rift <cmd> -
 Jobs `lib/jobs.mjs` reads from card text: early-unit, mid-unit, top-unit, removal, bounce, stun, counter, draw, move,
 pump, token, ramp, gear (`rift pool <legend>` lists them). Any other job name needs its `cards` listed.
 
-## 1. Field (proposed 26 Nov, waiting on gate 1)
+## 1. Field (gate 1 confirmed 26 Nov)
 
 Sources: Jay's Nexus Night regulars (memory, 29 Oct: Vex, Rengar, LeBlanc, Diana; Kai'Sa a weekly regular; Kha'Zix,
 Viktor, Orianna and Irelia some weeks), `rift journal` (Sivir 5–4: Pyke 1–0, Lillia 0–1, Evelynn 0–2, Ekko 2–0, Draven
@@ -64,7 +64,92 @@ are still too few, so these are pre-ban counts, shares of the legend's legal lis
 | *Evelynn, Agony's Embrace* (Body/Chaos) | A | our own card pool: Hidden Gold and face-down tricks | Hold 'Em 75% · Switcheroo 64% · Rampage 63% · Star-Crossed 62% · Edge of Night 65% | 0–2 against it in the journal |
 
 **Proposed five:** Vex, Rengar, LeBlanc, Kai'Sa, Diana (the regulars you named). Evelynn as the sixth, since it's 0–2.
+
+**Gate 1, Jay (26 Nov):** agreed with the five; added Master Yi ("last week i played two master yis!"); the main deck
+should handle a broad meta, with the sideboard getting specific.
+
+**So the field has two layers.**
+- **The main deck answers the broad field:** the six at the table (Vex, Kai'Sa, Master Yi, LeBlanc, Diana, Rengar) and
+  the post-ban risers (Rek'Sai, Azir, Evelynn, Mordekaiser).
+- **The sideboard takes specific matchups.** It's planned at stage 6, after the main deck.
+
+**What the main deck must survive, by kind of answer:**
+
+| kind | who | what it means for us |
+|---|---|---|
+| spell counters | Vex (Defy 80% ×2.7), Master Yi (Defy 71% ×2.8), Azir (Defy 99% ×2.8) | spells with 0–1 Power get countered; 2 Power can't be |
+| damage and kill removal | Kai'Sa (Ray, Stupefy, Falling Star), LeBlanc (Hidden Blade, Deathgrip), Rek'Sai (Cull the Weak, Falling Star), Mordekaiser (Hidden Blade, Realm of Death), Azir (Deathgrip 86%) | a single key unit dies; the plan can't hang on Sivir alone |
+| bounce | Diana (Gust, Star-Crossed, Moonfall), Vex (Back Off) | tempo undone; units we paid for come back to hand |
+| moving our units | Master Yi (Charm 53% ×2.6) | a holder pulled off its battlefield |
+| going wide | Rek'Sai (cheap 1–2 Might units, Undertitan), Azir (gear and Arise! tokens), Evelynn | many small bodies; one-for-one removal falls behind |
+| racing | Rengar, Rek'Sai | out-boarded by turn 3 |
+
+**Post-ban research (26 Nov):**
+- **Posted lists since 23 Nov** (`rift meta --since 2026-11-23`): 477 lists, none with a recorded finish yet. Evelynn
+  6.7%, Rek'Sai 5.5%, Kai'Sa 4.8%, Azir 4.6%, Viktor 4.2%, Mordekaiser 4.0%, Vex 3.6%. Riven and Kennen are down to about
+  1.5%, Rengar to 1.3%.
+- **RiftLite, 23–25 Nov:** 1,921 matches. Play share: Vex 6.4%, Evelynn 5.6%, Kai'Sa 4.7%, then Riven, Irelia, Nasus,
+  Mordekaiser. Win rates wait for `lib/realfit.mjs`: the raw result field splits 716 / 1,149 by seat, so it isn't the
+  simple "a won" it looks like.
+- **Outside sources:**
+  - [RiftMana](https://riftmana.com/meta-tier-list/): Azir and Vex in S; Rek'Sai, Kennen, Rengar, Master Yi and
+    Evelynn in A.
+  - [Riftdecks](https://riftdecks.com/legends?metagame_id=5&minimum_players=&date_range=all&top_percent=&relevance=&hide_banned=1&start_date=&end_date=): Rek'Sai first by share (11.3%).
+  - [Shonen TCG](https://www.shonentcg.com/blog/riftbound-radiance-post-ban-what-to-play): Kai'Sa first, Rek'Sai
+    second.
+  - [riftbound.gg](https://riftbound.gg/radiance-post-ban-prediction-tier-list/) forecasts Azir and Vex at the top.
+  - The bans took about 3 cards from a typical Kai'Sa list, and 6 from Riven and Kennen.
+
+  Agreed across them: Rek'Sai, Azir and Vex.
+- **Profiles of the risers** (`rift meta`, Radiance lists):
+  - **Rek'Sai:** Noxus Hopeful, Inferna, Carrion Dredger, Undertitan and Cull the Weak, each about ×3 in 94%+ of lists;
+    Falling Star 87%.
+  - **Azir:** gear in 99% (Brutalizer, Doran's Shield, Eye of the Herald, B.F. Sword); Defy, Discipline and Guards!
+    98%; Arise! 96%; Deathgrip 86%.
+  - **Mordekaiser:** Realm of Death 88%, Hidden Blade 64%, Carrion Dredger 73%, Mordekaiser, Dominating (9E) 66%.
 ## 2. Identity (the options, the pick, the restatement)
+
+### 2a. Direction: three options (proposed 26 Nov, waiting on Jay)
+
+The engine, in card text (rift card):
+- **Battle Mistress:** "When you recycle a rune, you may exhaust me to play a Gold gear token exhausted. When one or more
+  enemy units die, ready me."
+- **Sivir, Mercenary:** "[Accelerate] … If you've spent at least 2 Power this turn, I have +2 Might and [Ganking]."
+- **Gold:** "Kill this, exhaust: add 1 Power of any domain."
+
+Rules premise to re-check through `rules-question` once a direction is picked: paying Power from a rune is a recycle, so
+each Power payment can make a Gold. It was worked through on 21 Nov in `decklab/sivir-new.md` "The engine, in card
+text", and isn't re-checked yet this session.
+
+**A. Paid in Power (Mercenary tempo).**
+- **Engine:** spend Power every turn on 2-Power spells (Punch First, On the Hunt, Rebuke, Switcheroo). The Power
+  switches Sivir on (6 Might, Ganking) and pays back as Gold.
+- **Gap:** counters are everywhere. Defy, in Vex, Master Yi and Azir, can't counter a 2-Power spell.
+- **Early:** two cheap units. **Mid:** Sivir with Accelerate and a 2-Power trick each turn. **Lethal:** a double
+  conquest (conquer A, ready her with On the Hunt or move her, conquer B).
+- **Weak to:** removal on Sivir (Kai'Sa, LeBlanc, Rek'Sai), and wide boards.
+- **Note:** the closest of the three to Trying Her Best, so "worth doing" would be the hard gate.
+
+**B. Bounty Board (the kill engine).**
+- **Engine:** kill instead of bounce. Enemy deaths ready the legend (another Gold), Pyke, Returned makes Gold when an
+  enemy dies, and Graves, Blasting Through deals his Might to every enemy unit at his battlefield when he attacks or
+  defends.
+- **Gap:** going wide is up after the bans (Rek'Sai, Azir's tokens, LeBlanc, Evelynn), and one sweep beats many small
+  bodies.
+- **Early:** trade units, and kill their 1–2 drops. **Mid:** Graves and Rampage for kills; each kill makes Gold.
+- **Lethal:** a board they can't block, with Sivir switched on by the Gold.
+- **Weak to:** decks with few, big units (Kai'Sa's Watcher and Empyrean, Mordekaiser), and Vex's control.
+  Reasoning from `decklab/sivir-brew.md` (21 Nov), never tested.
+
+**C. Ambush (Hidden Gold).**
+- **Engine:** cards played face down (Hidden: Pyke, Gutter Guardian, Switcheroo, Edge of Night). Bandle Scouts' Academy
+  makes a Gold each time you hide a card there. Revealing a hidden card on their turn costs no Energy.
+- **Gap:** a hand they can't see. Their removal and counters have to guess, and the deck acts on their turn.
+- **Early:** hide one card and play one unit. **Mid:** Gold from hiding, ambushes in their combat.
+- **Lethal:** Sivir switched on from banked Gold, plus a hidden trick to win the deciding fight.
+- **Weak to:** racing (Rengar, Rek'Sai) before the hidden cards pay off.
+- **Note:** the most decisions of the three, and Evelynn's proven chassis (same domains). Whether Defy can counter a
+  revealed Hidden spell is a rules question to settle.
 ## 3. Worth doing, and roles
 ## 4. Goal tiers and yardstick
 ## 5. Jobs and counts
