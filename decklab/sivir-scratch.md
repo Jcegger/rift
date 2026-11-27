@@ -688,4 +688,39 @@ draw); −1 Repulse, −1 Marching Orders, +2 Gust (answers on their turn). Kill
 - v2 closes by hold-plus-conquest more than by the double conquest (3 of 60), which is a drift from the lethal plan
   in 2d.
 
+**Round 3 (27 Nov): v2 swaps, and the brew's ideas inside Trying Her Best.** Both use `rift search --hold-up 1`, 480
+games each. **Caveat:** the solver threw on 7 Main Phases in v2's games and 1 in Trying Her Best's. That only happens
+with hold-up on; the message isn't logged (`lib/match.mjs:383`), and it's in HANDOVER as a bug. It's too few to move
+these margins.
+
+| v2 (54% as is) | margin | won |
+|---|---|---|
+| R3 −3 Shadow Order Disciple +3 Reckless Innovator | +0.27 (−0.22 to +0.76) | 57% |
+| R2 −1 Gust −1 Flurry +2 Star-Crossed | +0.17 (−0.34 to +0.68) | 56% |
+| R4 −2 Staunch Survivor +2 Irresistible Faefolk | +0.11 (−0.36 to +0.58) | 54% |
+| control −3 Rampage +3 Whiteflame Protector | −0.00 (−0.48 to +0.48) | 53% |
+| R1 −2 Tideturner +2 First Mate | −0.07 (−0.56 to +0.42) | 53% |
+
+| Trying Her Best (70% as is) | margin | won |
+|---|---|---|
+| T3 −1 Existential Dread +1 Sabotage | −0.06 (−0.52 to +0.39) | 70% |
+| T4 −1 Rebuke +1 Rampage | −0.19 (−0.59 to +0.22) | 69% |
+| T2 −1 Ember Monk −1 Evelynn +2 Fizz | −0.25 (−0.71 to +0.21) | 68% |
+| T1 −3 Ride the Wind +3 On the Hunt | **−0.51 (−1.01 to −0.02)**, out | 64% |
+| control −3 Nidalee +3 Whiteflame Protector | **−0.78 (−1.45 to −0.10)**, out | 59% |
+
+**Reading.**
+- **No swap lifts v2 clear of noise.** Its best version in the model reaches about 57%, against Trying Her Best's 70%.
+- **v2's control didn't lose.** Taking out all three Rampage changed nothing, so the model doesn't see v2's kill engine
+  at all. Trying Her Best's control did lose. Either the kills matter less than the identity assumed, or the model is
+  blind to exactly what this deck does. Only real games can tell which.
+- **None of the brew's ideas improves Trying Her Best in the model.**
+  - Sabotage is neutral. It's still the one card real data favours: +1.53 copies in Sivir's good finishes.
+  - Fizz and Rampage lean slightly worse.
+  - On the Hunt for Ride the Wind is worse, with an interval below 0.
+
+**Against the yardstick (gate 4).** Tier 1 fails: the bench shows the brew closing about as well as Trying Her Best
+(v2: 31% from 7, against 32%) but winning fewer games (46–57% against 66–70%). By the rule set before any card was
+picked, the concept is **shelved as the main deck** unless real games say otherwise. Trying Her Best stays live.
+
 ## 9. Freeze and watch items

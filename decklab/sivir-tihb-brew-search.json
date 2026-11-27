@@ -1,0 +1,7 @@
+[
+  { "label": "T1 signature: -3 Ride the Wind +3 On the Hunt", "changes": ["-3 Ride the Wind", "+3 On the Hunt"] },
+  { "label": "T2 Fizz: -1 Ember Monk -1 Evelynn, Entrancing +2 Fizz, Trickster", "changes": ["-1 Ember Monk", "-1 Evelynn, Entrancing", "+2 Fizz, Trickster"] },
+  { "label": "T3 Sabotage: -1 Existential Dread +1 Sabotage", "changes": ["-1 Existential Dread", "+1 Sabotage"] },
+  { "label": "T4 a kill: -1 Rebuke +1 Rampage", "changes": ["-1 Rebuke", "+1 Rampage"] },
+  { "label": "PLANT (dead cards, should lose): -3 Nidalee, Cat Form +3 Whiteflame Protector", "changes": ["-3 Nidalee, Cat Form", "+3 Whiteflame Protector"] }
+]

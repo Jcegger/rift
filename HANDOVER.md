@@ -39,6 +39,11 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
 - How a card is done: `rift cards "<name>"`, an override in `lib/cardtext-overrides.mjs` or grammar in
   `lib/cardtext.mjs`, an op in ENGINE_OPS and RUN_OPS + an applyOp case, a closing-turn test with its no-win twin. The
   rules premise goes through `rules-question` before it's coded.
+- **Sivir from scratch (26–27 Nov), `decklab/sivir-scratch.md`:** the gates went through 2a–5 with Jay (a Body/Chaos
+  fight deck: 2-Power tricks, Fizz recasts, kills, Sivir's double conquest). Drafts v1 and v2 are in `decklab/`. In the
+  model, v2 wins 46–57% against Trying Her Best's 66–70%, so it's **shelved by gate 4's rule** unless real games say
+  otherwise. None of its ideas improved Trying Her Best in the model (Sabotage neutral; On the Hunt for Ride the Wind
+  worse). Gate 6 (Jay's card-by-card read) never happened.
 - **Building a deck (26 Nov):** `deck-brew` (from scratch; gates: field, identity picked then restated, worth doing,
   tiers and yardstick, jobs, the draft is the identity) and `deck-netdeck` (legend, list, its identity, flex only).
   The worksheet is `decklab/_brew-template.md`, with a ```identity block. Tools: `--file <draft>.deck.txt` on every
@@ -73,9 +78,12 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    - The Kobo's "Riftbound" reading collection and "Questions" sheet (kobo HANDOVER item 0).
    - Open rift.jayegger.com's tweak bench once: it loads `lib/cardtext.mjs` in the browser.
 6. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong.
-7. **Refresh timing:** GitHub fires scheduled runs 4–10 hours late and sometimes skips one. If that matters, start the
+7. **Bug: the solver throws with hold-up on.** `search --hold-up 1` skipped 7 Main Phases in Sivir v2's games and 1 in
+   Trying Her Best's (27 Nov). It never happened with hold-up off. `lib/match.mjs:383` swallows the error, so log
+   `err.message` and the card first, then fix it in `lib/turn.mjs` (likely `heldValue` or `counterOf`).
+8. **Refresh timing:** GitHub fires scheduled runs 4–10 hours late and sometimes skips one. If that matters, start the
    refresh from a scheduled cloud agent and keep one GitHub cron as a backup.
-8. Log each new game in the app's journal and the worksheet's games table (`decklab/sivir-ready.md`).
+9. Log each new game in the app's journal and the worksheet's games table (`decklab/sivir-ready.md`).
 
 ## Decided
 

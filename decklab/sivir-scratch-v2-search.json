@@ -1,0 +1,7 @@
+[
+  { "label": "R1 readier back: -2 Tideturner +2 First Mate", "changes": ["-2 Tideturner", "+2 First Mate"] },
+  { "label": "R2 any-size answers: -1 Gust -1 Flurry of Blades +2 Star-Crossed", "changes": ["-1 Gust", "-1 Flurry of Blades", "+2 Star-Crossed"] },
+  { "label": "R3 bigger bodies: -3 Shadow Order Disciple +3 Reckless Innovator", "changes": ["-3 Shadow Order Disciple", "+3 Reckless Innovator"] },
+  { "label": "R4 the pull: -2 Staunch Survivor +2 Irresistible Faefolk", "changes": ["-2 Staunch Survivor", "+2 Irresistible Faefolk"] },
+  { "label": "PLANT (dead cards, should lose): -3 Rampage +3 Whiteflame Protector", "changes": ["-3 Rampage", "+3 Whiteflame Protector"] }
+]
