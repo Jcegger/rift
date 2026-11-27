@@ -11,14 +11,14 @@ Draft list: `decklab/sivir-scratch.deck.txt` (Piltover paste text; `rift <cmd> -
 {
   "legend": "Sivir, Battle Mistress",
   "mode": "brew",
-  "anchor": "reference: the LA Regional Sivir list (#146/2165, 2 Oct); from scratch is fine, a new deck past 16 changes",
+  "anchor": "file:sivir-la",
   "field": ["Vex", "Kai'Sa", "Master Yi", "LeBlanc", "Diana", "Rengar", "Rek'Sai", "Azir", "Evelynn", "Mordekaiser"],
-  "plan": "One sentence: what the deck does each game.",
-  "early": "Turns 1–3: what the deck does, and what it must stop the opponent doing.",
-  "mid": "Turns 4–6: how it builds its advantage, and what resource it spends.",
-  "lethal": "The closing turn from 6–7 points: the exact line, on which turn, and what breaks it.",
-  "winCondition": "How a normal game ends, and on which turn.",
-  "givesUp": "What it is weak to, on purpose.",
+  "plan": "Body/Chaos fight deck: every Power buys a won fight, Fizz buys it twice, and Sivir turns the fights into a double conquest.",
+  "early": "Two cheap units by turn 3; kill their best early unit (Rampage or a won fight) to ready the legend; stop wide starts and an early Vex; fill the trash for Fizz.",
+  "mid": "Pick one fight a turn and win it: Sivir with Accelerate (or Rengar), Gold pays Punch First / Switcheroo in their combat, Fizz rebuys a trick; kill their Vex before a key unit.",
+  "lethal": "From 6: Sivir conquers A, On the Hunt readies her, she ganks to B and conquers (8). Broken by removal on Sivir, a Vex stun, or a blocker over 6 at B, so a second attacker matters.",
+  "winCondition": "A double conquest around turn 7–8 after winning the mid-game fights.",
+  "givesUp": "Decks that won't fight (Azir wide behind Defy, Mordekaiser late), an early Vex we can't kill, long value grinds (LeBlanc, Kai'Sa); the sideboard covers them.",
   "worthDoing": "What it does that the net deck or the benchmark doesn't, and which matchups that wins.",
   "roles": { "Riven": "beatdown | control" },
   "goalTiers": ["tier 0: …", "tier 1: …"],
@@ -32,10 +32,10 @@ Draft list: `decklab/sivir-scratch.deck.txt` (Piltover paste text; `rift <cmd> -
   "gates": [
     { "gate": "1 field", "date": "2026-11-26", "confirmed": true, "jay": "i do agree with these so far tho (Vex, Rengar, LeBlanc, Kai'Sa, Diana) · last week i played two master yis! · we want to be able to go against a broad meta, maybe do research on post-radiance ban meta · maybe we get more specific in the sideboard" },
     { "gate": "2a direction", "date": "2026-11-27", "confirmed": true, "jay": "yes, this feels good! (the Body/Chaos fight deck: every Power buys a won fight, Fizz buys it twice, Sivir turns the fights into a double conquest)" },
-    { "gate": "2b early", "date": "", "confirmed": false, "jay": "" },
-    { "gate": "2c mid", "date": "", "confirmed": false, "jay": "" },
-    { "gate": "2d lethal", "date": "", "confirmed": false, "jay": "" },
-    { "gate": "2e gives up", "date": "", "confirmed": false, "jay": "" },
+    { "gate": "2b early", "date": "2026-11-27", "confirmed": true, "jay": "these all seem good! just make sure you're considering any and all cards available to us, which you can take your time on" },
+    { "gate": "2c mid", "date": "2026-11-27", "confirmed": true, "jay": "these all seem good! just make sure you're considering any and all cards available to us, which you can take your time on" },
+    { "gate": "2d lethal", "date": "2026-11-27", "confirmed": true, "jay": "these all seem good! just make sure you're considering any and all cards available to us, which you can take your time on" },
+    { "gate": "2e gives up", "date": "2026-11-27", "confirmed": true, "jay": "these all seem good! just make sure you're considering any and all cards available to us, which you can take your time on" },
     { "gate": "3 worth doing", "date": "", "confirmed": false, "jay": "" },
     { "gate": "4 tiers and yardstick", "date": "", "confirmed": false, "jay": "" },
     { "gate": "5 jobs", "date": "", "confirmed": false, "jay": "" },
@@ -253,7 +253,7 @@ Challenge, Gust and Star-Crossed (0–1 Power).
   Rengar does nothing that turn. Kill Vex first (4 Might; Deflect costs an extra Power to target her), or develop
   before she lands.
 
-### 2b–2e. Early, mid, lethal, gives up (proposed 27 Nov, each its own gate)
+### 2b–2e. Early, mid, lethal, gives up (confirmed 27 Nov: "these all seem good!")
 
 **2b. Early (turns 1–3): trade evenly, kill their best early unit, and set up the trash for Fizz.**
 - **Two units by turn 3** from cheap bodies the colours' winners run (candidates: Shadow Order Disciple, Tideturner,
@@ -315,10 +315,67 @@ Challenge, Gust and Star-Crossed (0–1 Power).
      double conquest).
    - Everything else earns its slot at the card stage. Ride the Wind loses its job to On the Hunt, and the Faefolk
      trap is a holding plan where D races.
-## 3. Worth doing, and roles
-## 4. Goal tiers and yardstick
-## 5. Jobs and counts
+## 3. Worth doing, and roles (proposed 27 Nov, waiting on Jay)
+
+**Worth doing:** it kills and wins fights where Trying Her Best bounces and holds, so the legend's second line ("when
+enemy units die, ready me") fires and its Power-costed tricks come back as Gold. Unlike Evelynn's net deck, it spends
+Power on won fights and a double conquest, not hidden value. It should beat the decks that fight for the board (Rengar,
+Rek'Sai, LeBlanc, Evelynn, Diana), and stay even with the Defy decks, because its tricks cost 2 Power.
+
+**Roles** (who has to force the game):
+
+| deck | we are | why |
+|---|---|---|
+| Vex | beatdown | they're the control deck; every turn we give them, Vex stuns another unit |
+| Kai'Sa | beatdown | their 7–8 Might finishers win long games; close by turn 7 |
+| Master Yi | beatdown | Defy and Charm grind; make them use answers on our pace |
+| LeBlanc | beatdown | value and big late units; don't trade into their grind |
+| Diana | beatdown | tempo bounce; play cheap threats and fight before Hwei |
+| Azir | beatdown | wide and Defy, and it gets better late |
+| Mordekaiser | beatdown | 9-Energy finishers late |
+| Rengar | control early, then beatdown | kill their 2-drops, then our tricks win the mid-game fights |
+| Rek'Sai | control early, then beatdown | Flurry and kills against the 1-Might swarm, then race |
+| Evelynn | control | same pool; we kill their hidden units, they don't fight well into tricks paid by Gold |
+## 4. Goal tiers and yardstick (proposed 27 Nov, waiting on Jay)
+
+**Yardstick: 3–0 at a Nexus Night.** The concept dies if it loses 3 of its first 5 logged games against the field it's
+built for (gate 1's ten decks), or if the bench shows it closes no better than Trying Her Best and wins no more fights.
+
+**Goal tiers, worked back from it**, each against Trying Her Best on the same games:
+- **Tier 0, consistent (goldfish, `rift try --file`):** rules pass (`rift identity`); two units by turn 3 on 95%+ of
+  draws; Mercenary on (2+ Power spent, turns 4–8) above Trying Her Best's 38%; Gold a game at least as high.
+- **Tier 1, the plan works (model boards):** a winning line from 7 at least Trying Her Best's 32% (`--close`); search
+  margin not worse with its interval (`rift search --file`); every key card actually cast (`rift trace`).
+- **Tier 2, real games:** the journal, against the field. 3–0 nights are the goal; 3 losses in the first 5 kills it.
+## 5. Jobs and counts (proposed 27 Nov, waiting on Jay)
+
+Copies by job, with the chance of one by the Nth card seen (exact; `lib/identity.mjs`, the theory doc's table). Sivir
+starts in the Champion Zone, so she's always available and isn't counted as a draw.
+
+| job | copies | odds | candidates (`decklab/sivir-scratch-cards.md`) |
+|---|---|---|---|
+| early unit (2 Energy or less) | 9 | 86% by card 7 | Shadow Order Disciple, Tideturner, Traveling Merchant, Staunch Survivor, Pit Rookie, Sneaky Zeebles |
+| kill | 6 | 81% by card 9 | Rampage ×3; Challenge, Marching Orders, Flurry of Blades, Carnivorous Snapvine |
+| fight trick, 2 Power | 6 | 76% by card 8 | Punch First ×3, Switcheroo ×3 (Hold 'Em, Grim Resolve, Primal Strength the 0–1 Power ones) |
+| readier (the double conquest) | 5 | 78% by card 10 | On the Hunt ×3, First Mate ×2 (Ride the Wind, Portable Portal, Miss Fortune, Captain) |
+| second closer | 4 | 66% by card 9, plus Sivir always | Rengar ×2, Nidalee ×2 (Lucian, Here to Help) |
+| Fizz | 3 | 55% by card 9 | Fizz, Trickster |
+| card flow | 4–5 | 66–74% by card 9 | Ezreal ×2, Yordle Explorer, Reckless Innovator, Spoils of War |
+| disruption | 2 | | Vex, Apathetic |
+
+That's 39–40 with overlaps (Ezreal is a 3-drop that draws). **Fizz's fuel** is every spell of 3 Energy or less (Punch
+First, Switcheroo, Rampage, On the Hunt, Challenge): 12+ copies, so a target is usually in the trash by turn 4.
+
+**Open for the draft:**
+- Sabotage: it takes their Defy before a fight, has a +1.53 lift in Sivir's good finishes, and is a single strip,
+  not a lock. Does it fit Jay's taste?
+- Repulse to protect Sivir.
+- The battlefields: Hallowed Tomb, which brings Sivir back on a hold, and Hall of Legends, a legend ready on each
+  conquest, lead.
 ## 6. Cards by job (each labelled: proven here · crowd here · proven under X · theory)
+
+The full review of every legal card (295, plus 67 battlefields) is `decklab/sivir-scratch-cards.md`: 9 in, 42
+candidates, 244 out, each with its reason.
 ## 7. Audit (`rift identity` output, turns 1–4 on the play and on the draw)
 ## 8. Tests (each change, the same test)
 ## 9. Freeze and watch items

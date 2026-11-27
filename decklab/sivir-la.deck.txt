@@ -1,0 +1,35 @@
+# Reference: Sivir (Battle Mistress), Riftbound Regional Qualifier - Los Angeles, #146 of 2165, 2026-10-02 (data/decks.json)
+Legend:
+1 Sivir, Battle Mistress
+
+Champion:
+1 Sivir, Mercenary
+
+MainDeck:
+3 Shadow Order Disciple
+2 Tideturner
+3 Traveling Merchant
+3 Ezreal, Prodigy
+3 Fizz, Trickster
+1 Pyke, Returned
+3 Tornado Warrior
+3 Tail-Cloaked Matriarch
+1 Acceptable Losses
+1 Gust
+3 Punch First
+2 Sabotage
+1 Grim Resolve
+2 Switcheroo
+3 Rampage
+2 Star-Crossed
+2 Edge of Night
+1 Last Rites
+
+Battlefields:
+1 Sandswept Tomb
+1 Sigil of the Storm
+1 Zaun Warrens
+
+Runes:
+5 Body Rune
+7 Chaos Rune
