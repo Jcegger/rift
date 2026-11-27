@@ -1766,7 +1766,9 @@ itself, and nothing that needs an opponent:
 
 **Swap search (`rift search`, 24 Nov 2026).** Many candidate changes to one deck, ranked on the same model games:
 `rift search --deck "<name>" --cands decklab/<file>.json` (`[{ "label", "changes": ["-1 A", "+1 B"] }]`; or
-`--swap "-1 A | +1 B"`, repeatable), `--games 60 --budget 2400 --keep 3 [--greedy]`. `lib/search.mjs` plays every
+`--swap "-1 A | +1 B"`, repeatable), `--games 60 --budget 2400 --keep 3 [--greedy] [--hold-up W]`. `--hold-up W` (27 Nov; also on
+`try --points`, not on `--close`) lets both sides value a reaction kept for the other's turn, as `calibrate --hold-up` does; off
+by default, since it didn't improve calibration (0.5: r 0.31, 1: r 0.26, off: 0.30). `lib/search.mjs` plays every
 candidate and the deck as it is on games 0–59, then doubles the games for whatever is still in until `keep` remain,
 `maxRounds`, or the budget. A candidate leaves only when its paired 95% interval against the leader (which may be the
 deck as it is) is below 0, never for being in the bottom half by noise, so "still in" means "not shown worse". Each

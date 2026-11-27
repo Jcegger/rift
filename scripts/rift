@@ -15,7 +15,7 @@
 #   scripts/rift event <locator id>                    # a store event: standings + legends
 #   scripts/rift versus <legend> --deck "<name>"       # head to head, card by card, vs that legend's lists
 #   scripts/rift try --deck "<name>" "-Card" "+Card"   # test one change: rules, shape, goldfish, field
-#   scripts/rift search --deck "<name>" --cands decklab/<f>.json   # many swaps on the same model games, ranked with intervals
+#   scripts/rift search --deck "<name>" --cands decklab/<f>.json   # many swaps on the same model games, ranked with intervals [--hold-up 0.5]
 #   scripts/rift pool <legend> [--job removal]        # a legend's legal cards by job, with their evidence: candidates, not picks
 #   scripts/rift identity --deck "<name>" [--id decklab/<brew>.md] [--anchor net]   # the pre-flight as code, jobs vs targets
 #   … --file decklab/<draft>.deck.txt                 # in place of --deck on try, search, versus, loops, lifts, identity: a draft in paste text

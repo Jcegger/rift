@@ -1371,7 +1371,10 @@ async function cmdTry(S, cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   const since = opt("--since") || "2026-10-16";
   const games = Number(opt("--games") || 20000);
-  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games", "--close-games"]);
+  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games", "--close-games", "--hold-up"]);
+  // --hold-up W (model games only): what a reaction kept for their turn is worth to the solver, both sides (lib/turn.mjs
+  // heldValue; calibrate --hold-up). Points games only (not --close). Off by default; without it the options are exactly as before.
+  const holdUp = Number(opt("--hold-up")) || 0, hu = holdUp ? { solve: { ...POLICY_SOLVE, holdUp } } : {};
   const specs = args.filter((a, i) => !flags.has(a) && !flags.has(args[i - 1]) && a !== "--no-engine" && a !== "--points" && a !== "--close" && a !== "--greedy");
   // Model games' policy: the turn solver (default since 24 Nov) or --greedy (the older plain policy, ~90x faster).
   const mpolicy = args.includes("--greedy") ? "greedy" : "solver";
@@ -1383,7 +1386,7 @@ async function cmdTry(S, cat, args) {
   const sweepCard = opt("--sweep"), sweepWith = (opt("--with") || "").split(/;/.test(opt("--with") || "") ? ";" : ",").map((x) => x.trim()).filter(Boolean);
   const decks = findDecks(S, opt("--deck") || "\u0000");
   if (decks.length !== 1 || (!specs.length && !sweepCard && !args.includes("--close"))) {
-    console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine] [--points] [--close] [--greedy]   (--greedy: model games on the old plain policy, ~90x faster)');
+    console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine] [--points] [--close] [--hold-up 0.5] [--greedy]   (--greedy: model games on the old plain policy, ~90x faster)');
     console.log('       try --deck "<one of your decks>" --sweep "Card in the deck" --with "Candidate A, Candidate B" (or "A; B" when a name has a comma) [--policy …]');
     if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
     return;
@@ -1490,14 +1493,16 @@ async function cmdTry(S, cat, args) {
   let pb = null, pa = null;
   if (args.includes("--points")) {
     const pg = Number(opt("--points-games")) || (mpolicy === "greedy" ? 600 : 60), foes = foeLists(fieldDecks);
-    [pb, pa] = await Promise.all([matchReportPar(before, cat, foes, { games: pg, policy: mpolicy }), matchReportPar(after, cat, foes, { games: pg, policy: mpolicy, like: before.cards })]);
+    [pb, pa] = await Promise.all([matchReportPar(before, cat, foes, { games: pg, policy: mpolicy, ...hu }), matchReportPar(after, cat, foes, { games: pg, policy: mpolicy, like: before.cards, ...hu })]);
     printPoints(pb, pa, pg, mpolicy);
+    if (holdUp) console.log(`  hold-up ${holdUp}: both sides value a reaction kept for the other's turn (off by default)`);
   }
   // The turn solver on model boards (lib/turn.mjs): opt-in, like the points model.
   if (args.includes("--close")) {
     const cg = Number(opt("--close-games")) || (mpolicy === "greedy" ? 300 : 60), foes = foeLists(fieldDecks);
     const [cb, ca] = await Promise.all([closeReportPar(before, cat, foes, { games: cg, policy: mpolicy }), specs.length ? closeReportPar(after, cat, foes, { games: cg, policy: mpolicy, like: before.cards }) : null]);
     printClose(cb, ca, cg, mpolicy);
+    if (holdUp) console.log(`  hold-up isn't applied here: the closing search asks what wins this turn, and its boards come from closeGame's own games (lib/turn.mjs)`);
   }
   // The deck's goal tiers, if its worksheet has a tiers file: the change read against the plan.
   const spec = await loadTiers(before.name);
@@ -1678,12 +1683,13 @@ async function cmdSearch(S, cat, args) {
   let specs = all("--swap").map((s) => ({ label: s, changes: s.split("|").map((x) => x.trim()).filter(Boolean) }));
   if (opt("--cands")) specs = specs.concat(JSON.parse(await readFile(new URL(`../${opt("--cands")}`, import.meta.url), "utf8")));
   if (decks.length !== 1 || !specs.length) {
-    console.log('usage: search --deck "<one of your decks>" (--cands decklab/<file>.json | --swap "-1 A | +1 B" …) [--games 60] [--budget 2400] [--keep 3] [--greedy]');
+    console.log('usage: search --deck "<one of your decks>" (--cands decklab/<file>.json | --swap "-1 A | +1 B" …) [--games 60] [--budget 2400] [--keep 3] [--hold-up 0.5] [--greedy]');
     if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
     return;
   }
   const base = decks[0], since = opt("--since") || "2026-10-16", policy = args.includes("--greedy") ? "greedy" : "solver";
   const games = Number(opt("--games") || (policy === "greedy" ? 400 : 60)), budget = Number(opt("--budget") || games * 40), keep = Number(opt("--keep") || 3);
+  const holdUp = Number(opt("--hold-up")) || 0, hu = holdUp ? { solve: { ...POLICY_SOLVE, holdUp } } : {};   // as in try --hold-up
   const cands = [];
   for (const sp of specs) {
     try {
@@ -1695,9 +1701,9 @@ async function cmdSearch(S, cat, args) {
   }
   const foes = foeLists(await fieldDecksFor(cat, since));
   const t0 = Date.now();
-  console.log(`SEARCH  ${base.name}: ${cands.length} candidates, ${games} model games each to start (${policy}), doubled while a candidate is still in; budget ${budget} games`);
+  console.log(`SEARCH  ${base.name}: ${cands.length} candidates, ${games} model games each to start (${policy}), doubled while a candidate is still in; budget ${budget} games${holdUp ? `; hold-up ${holdUp}` : ""}`);
   const res = await halving({ base: { label: "as is", deck: base }, cands, games, budget, keep,
-    play: (deck, start, end) => matchRecordsPar(deck, cat, foes, { start, games: end, policy, like: base.cards }), log: (m) => console.log(`  ${m}`) });
+    play: (deck, start, end) => matchRecordsPar(deck, cat, foes, { start, games: end, policy, like: base.cards, ...hu }), log: (m) => console.log(`  ${m}`) });
   const sg = (x) => `${x >= 0 ? "+" : ""}${x.toFixed(2)}`, pc = (x) => (x == null ? "—" : `${Math.round(100 * x)}%`);
   const iv = (d) => (d.n ? `${sg(d.mean)} (${sg(d.lo)} to ${sg(d.hi)})` : "—");
   console.log(`\n  ${"candidate".padEnd(40)}${"games".padStart(6)}  ${"margin vs as is (95%)".padEnd(26)}${"points vs as is (95%)".padEnd(26)}${"won (95%)".padEnd(16)}pre-flight`);
