@@ -11,7 +11,7 @@ Draft list: `decklab/sivir-scratch.deck.txt` (Piltover paste text; `rift <cmd> -
 {
   "legend": "Sivir, Battle Mistress",
   "mode": "brew",
-  "anchor": "to choose at stage 6",
+  "anchor": "reference: the LA Regional Sivir list (#146/2165, 2 Oct); from scratch is fine, a new deck past 16 changes",
   "field": ["Vex", "Kai'Sa", "Master Yi", "LeBlanc", "Diana", "Rengar", "Rek'Sai", "Azir", "Evelynn", "Mordekaiser"],
   "plan": "One sentence: what the deck does each game.",
   "early": "Turns 1–3: what the deck does, and what it must stop the opponent doing.",
@@ -31,7 +31,7 @@ Draft list: `decklab/sivir-scratch.deck.txt` (Piltover paste text; `rift <cmd> -
   "keyCards": ["the cards the plan can't run without"],
   "gates": [
     { "gate": "1 field", "date": "2026-11-26", "confirmed": true, "jay": "i do agree with these so far tho (Vex, Rengar, LeBlanc, Kai'Sa, Diana) · last week i played two master yis! · we want to be able to go against a broad meta, maybe do research on post-radiance ban meta · maybe we get more specific in the sideboard" },
-    { "gate": "2a direction", "date": "", "confirmed": false, "jay": "" },
+    { "gate": "2a direction", "date": "2026-11-27", "confirmed": true, "jay": "yes, this feels good! (the Body/Chaos fight deck: every Power buys a won fight, Fizz buys it twice, Sivir turns the fights into a double conquest)" },
     { "gate": "2b early", "date": "", "confirmed": false, "jay": "" },
     { "gate": "2c mid", "date": "", "confirmed": false, "jay": "" },
     { "gate": "2d lethal", "date": "", "confirmed": false, "jay": "" },
@@ -229,6 +229,72 @@ fights into a double conquest."**
 - **Mid:** Sivir with Accelerate, or Rengar or Vex. Gold held for tricks in their combat; Fizz rebuys a used trick.
 - **Lethal:** win A, On the Hunt, win B.
 - **Gives up:** decks that won't fight (Azir going wide behind Defy). The sideboard covers them.
+
+### 2a confirmed (27 Nov)
+
+Jay: "yes, this feels good!" Then, before building:
+- **Timing:** "i would usually go on tuesday, but i have plans. i may go to a different one that week, but we can still
+  test more. i wanna get it done but we have some time".
+- **Anchor:** "we can focus on the regional list, but it's a new meta now so i'm fine truly from scratch. i also don't
+  HAVE TO use her signature spell". The LA Regional list is the reference. It's legal today card for card; its
+  battlefields are Sigil of the Storm, Zaun Warrens and Sandswept Tomb, runes 5 Body / 7 Chaos. On the Hunt isn't fixed.
+- **Defy:** "i think defy can be used during showdowns/combat (maybe) but i don't necassarily want to worry tooooooooo
+  much about it, i'll try to bait it. so somewhere between 1 and 2". So we kill mostly in combat and bait Defy when it
+  matters. Yes, Defy works in combat (`docs/rules-rulings.md`, 27 Nov).
+
+**Defy, by card:** it can't counter Punch First, Switcheroo, On the Hunt or Rebuke (2 Power). It can counter Rampage,
+Challenge, Gust and Star-Crossed (0–1 Power).
+
+**Two rules findings that shape 2b–2d** (`docs/rules-rulings.md`, 27 Nov):
+- **Fizz's recast happens when Fizz is played, in our Main Phase.** It's a pump before an attack, or On the Hunt after
+  a first conquest, never a trick in their combat.
+- **While their Vex, Apathetic is at a battlefield, every unit we play is stunned**, wherever it goes. Vex, Apathetic
+  is in 98% of Vex lists, 86% of Diana lists and 87% of good Evelynn finishes. Sivir with Accelerate or an ambushing
+  Rengar does nothing that turn. Kill Vex first (4 Might; Deflect costs an extra Power to target her), or develop
+  before she lands.
+
+### 2b–2e. Early, mid, lethal, gives up (proposed 27 Nov, each its own gate)
+
+**2b. Early (turns 1–3): trade evenly, kill their best early unit, and set up the trash for Fizz.**
+- **Two units by turn 3** from cheap bodies the colours' winners run (candidates: Shadow Order Disciple, Tideturner,
+  Traveling Merchant, Bedeviling Stranger; picked at stage 6).
+- **By turn 3–4, Rampage (or a fight we win) kills their best early unit.** It's a kill, so the legend readies for a
+  Gold. Rampage costs 0 Power, so Defy can counter it; bait with it, or fight in combat instead.
+- **What it must stop:** Rek'Sai's and Rengar's wide starts (out-boarded by turn 3), and **their Vex landing before we
+  develop**, since every unit we play after that is stunned.
+- **Why:** the deck wins mid-game fights, so it only needs to not fall behind early. And each early spell cast fills
+  the trash for Fizz.
+
+**2c. Mid (turns 4–6): pick one fight a turn and win it with Power.**
+- **Threats:** Sivir with Accelerate (she has spent 2 Power on her own, so she enters ready at 6 Might with Ganking),
+  or Rengar (6 Might, Ambush) when Sivir is answered.
+- **Tricks paid with Gold:** Punch First and Switcheroo in their combat, which Defy can't counter, without leaving
+  runes up on our turn.
+- **Fizz** on the turn it rebuys a Punch First for an attack.
+- **Kill their Vex before playing a key unit** (Deflect: an extra Power to target her).
+- **Why:** Power-costed tricks are cheap for this legend (each rune Power comes back as Gold), and a won fight is a kill
+  that readies her again.
+
+**2d. Lethal: the double conquest, with On the Hunt ×3.**
+- **From 6:** Sivir, switched on, conquers A (7). On the Hunt ("Ready your units", 2 Power) readies her; she ganks to B
+  and conquers it (8). The 7→8 conquest counts because A was scored this turn (`docs/rules-rulings.md`, 21 Nov).
+- **Why On the Hunt rather than none:**
+  - A unit moves by exhausting (§144), so without a readier each unit takes one battlefield a turn.
+  - On the Hunt is the only readier Defy can't counter (Ride the Wind is 1 Power), and it readies every unit, so a
+    second attacker joins.
+  - Fizz can recast it (1 Energy).
+  - Signatures run 3 or 0 in good finishes.
+- **Without it,** the close needs two units conquering two battlefields, or a hold plus a conquest: slower, and more
+  counterable.
+- **What breaks it:** removal on Sivir before she swings (Falling Star, Hidden Blade), a stun from Vex, or a blocker
+  bigger than 6 at B. So the second attacker (Rengar, Nidalee) matters.
+
+**2e. Gives up, on purpose.**
+- **Decks that won't fight:** Azir going wide behind Defy, and Mordekaiser's late game. Sideboard: Graves (hits every
+  enemy at his battlefield), more Defy-proof answers (Rebuke).
+- **An early Vex we can't kill:** sideboard more ways to kill a 4-Might Deflect unit.
+- **Long grinds** against LeBlanc and Kai'Sa's 7–8 Might finishers: we aim to close by turn 7–8 and don't try to
+  out-value them.
 
 ### 2a. My recommendation, with reasons (round 1, superseded) (26 Nov, Jay asked for help deciding; waiting on his words)
 

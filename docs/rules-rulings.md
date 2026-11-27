@@ -498,3 +498,35 @@ down, which was played "ignoring its base cost"?
 
 **Weakest link:** point 3 extends an FAQ answer about Repeat to Defy's cost check. Ask a judge before an event depends
 on it.
+
+## Fizz recasts in the Main Phase; Defy works in showdowns; Vex, Apathetic stuns every unit we play
+
+**Date:** 2026-11-27
+**Source:** Derived in this repo from the Core Rules, the FAQ's Flow answer and card text; no Riot staff ruling read. Asked while setting the identity of a from-scratch Sivir brew (`decklab/sivir-scratch.md`).
+**Rules:** §420.3, §420.3.a, §420.3.b, §420.1.a, §806.1.a, §813, §135.2.e.5.b
+**Expires:** when Riot rules on Fizz's play or Vex's trigger, or a Core Rules update changes Limited Play or Reaction
+
+**Questions.** (1) Can Defy be cast during a showdown (combat)? (2) Fizz, Trickster: "When you play me, you may play a
+spell from your trash with Energy cost no more than [3], ignoring its Energy cost. Recycle that spell after you play
+it. (You must still pay its Power cost.)" When, and how? (3) Vex, Apathetic: "When an opponent plays a unit while I'm
+at a battlefield, [Stun] it." Which of our units does it hit?
+
+**Derived answers.**
+
+1. **Yes.** Defy has [Reaction]: *"Everything Action grants, plus closed states"* (`docs/rules.md`, §813); Action
+   allows plays *"during showdowns, on anyone's turn"* (§806.1.a). So Defy can counter a spell cast in combat.
+2. **During Fizz's play effect, so on our turn when Fizz is played.** Fizz's effect makes a Limited Play (*"Game effects
+   may result in cards being Played as part of their resolution"*, §420.3; *"This treats Play as a Limited Action"*,
+   §420.3.a), with all steps of Play as normal except what Fizz changes (§420.3.b): the Energy cost is ignored, and the
+   Power cost is paid, which a Gold can pay in any domain (§135.2.e.5.b). Fizz is a plain unit, so the recast happens
+   when we play Fizz, in our Main Phase, never in their combat. That suits pumps before an attack (Punch First) and On
+   the Hunt after a first conquest. Switcheroo still needs two units at one battlefield. With no eligible spell in the
+   trash, nothing happens (§420.3.c). The FAQ's Flow answer says Fizz's "recycle that spell" works like Flow's banish:
+   it applies whenever the spell leaves the chain.
+3. **Every unit we play while their Vex is at a battlefield,** wherever ours goes: "while I'm at a battlefield" is Vex's
+   location. Stunned, it deals no combat damage this turn and can't be moved this turn. So Sivir with Accelerate, or
+   Rengar ambushing into a fight, does nothing the turn Vex sees it. Units already on the board aren't affected, and Vex
+   is 4 Might with [Deflect] (we pay an extra [A] to choose her with a spell).
+
+**Weakest link:** point 2 reads Fizz's play as a Limited Play that skips timing permissions (§420.3.a); a judge should
+confirm before an event depends on Fizz casting a non-Action spell.
