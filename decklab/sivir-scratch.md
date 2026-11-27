@@ -58,7 +58,7 @@ are still too few, so these are pre-ban counts, shares of the legend's legal lis
 |---|---|---|---|---|
 | **Vex, Gloomist** (Calm/Chaos) | A | reactive control: stops units and spells | Defy 80% ×2.7 (counters a spell ≤4 Energy, ≤1 Power) · Back Off 84% ×2.4 · Discipline 75% ×2.5 · Star-Crossed 68% · Switcheroo 66% · Vex, Apathetic 98% | our 0–1 Power spells get countered; units we play get stunned |
 | **Rengar, Pridestalker** (Body/Fury) | A | fast board, then Rengar (6 Might) | Thrill of the Hunt 90% ×2.6 · Punch First 80% ×3 · Rampage 76% ×2.2 · 2-drops at ×3 (Inferna, Pit Rookie, Faefolk) | out-board us early; wins fights with pumps |
-| **LeBlanc, Deceiver** (Mind/Order) | A | wide cheap units, sacrifice value, big top end | Mirror Image 96% ×2.5 · Sacrifice 82% · Hidden Blade 81% ×2.3 · Deathgrip 80% ×2.2 · Ruined Rex 84% · Vi 84% · Glasc 89% | grinds long games; kills our key unit |
+| **LeBlanc, Deceiver** (Mind/Order) | A | wide cheap units, sacrifice value, big top end | Mirror Image 96% ×2.5 · Sacrifice 82% · Hidden Blade 81% ×2.3 · Ruined Rex 84% · Vi 84% · Glasc 89% | grinds long games; kills our key unit |
 | **Kai'Sa, Daughter of the Void** (Fury/Mind) | A | spells and damage, then 7–8 Might finishers | Hextech Ray 93% ×2.8 · Stupefy 92% ×3 · Falling Star 86% ×2.9 · Smoke Screen 86% · Watcher 80% · The Empyrean 76% | damage kills Sivir before she swings; big late units |
 | **Diana, Scorn of the Moon** (Chaos/Mind) | B | tempo: bounce and move, then Hwei | Gust 98% · Stupefy 97% ×3 · Star-Crossed 97% · Moonfall 95% · Eclipse 87% · Hard Bargain 84% · Ride the Wind 97% | bounces our board back to hand, undoing tempo |
 | *Evelynn, Agony's Embrace* (Body/Chaos) | A | our own card pool: Hidden Gold and face-down tricks | Hold 'Em 75% · Switcheroo 64% · Rampage 63% · Star-Crossed 62% · Edge of Night 65% | 0–2 against it in the journal |
@@ -78,7 +78,7 @@ should handle a broad meta, with the sideboard getting specific.
 | kind | who | what it means for us |
 |---|---|---|
 | spell counters | Vex (Defy 80% ×2.7), Master Yi (Defy 71% ×2.8), Azir (Defy 99% ×2.8) | spells with 0–1 Power get countered; 2 Power can't be |
-| damage and kill removal | Kai'Sa (Ray, Stupefy, Falling Star), LeBlanc (Hidden Blade, Deathgrip), Rek'Sai (Cull the Weak, Falling Star), Mordekaiser (Hidden Blade, Realm of Death), Azir (Deathgrip 86%) | a single key unit dies; the plan can't hang on Sivir alone |
+| damage and kill removal | Kai'Sa (Hextech Ray ×2.8 and Falling Star ×2.9, about 5.7 a list; Stupefy's −1 finishes), LeBlanc (Hidden Blade 81%), Rek'Sai (Falling Star 87%; Cull the Weak is an edict, so we choose), Mordekaiser (Hidden Blade, Realm of Death) | a single key unit dies; the plan can't hang on Sivir alone. (Corrected 26 Nov: Deathgrip and Sacrifice kill their own unit, not ours. Azir has almost no removal and goes wide behind Defy.) |
 | bounce | Diana (Gust, Star-Crossed, Moonfall), Vex (Back Off) | tempo undone; units we paid for come back to hand |
 | moving our units | Master Yi (Charm 53% ×2.6) | a holder pulled off its battlefield |
 | going wide | Rek'Sai (cheap 1–2 Might units, Undertitan), Azir (gear and Arise! tokens), Evelynn | many small bodies; one-for-one removal falls behind |
@@ -105,7 +105,7 @@ should handle a broad meta, with the sideboard getting specific.
   - **Rek'Sai:** Noxus Hopeful, Inferna, Carrion Dredger, Undertitan and Cull the Weak, each about ×3 in 94%+ of lists;
     Falling Star 87%.
   - **Azir:** gear in 99% (Brutalizer, Doran's Shield, Eye of the Herald, B.F. Sword); Defy, Discipline and Guards!
-    98%; Arise! 96%; Deathgrip 86%.
+    98%; Arise! 96%. (Deathgrip 86% kills their own unit for a pump.)
   - **Mordekaiser:** Realm of Death 88%, Hidden Blade 64%, Carrion Dredger 73%, Mordekaiser, Dominating (9E) 66%.
 ## 2. Identity (the options, the pick, the restatement)
 
@@ -175,6 +175,26 @@ the direction worth building is one Evelynn can't copy.
   fight.
 - **From B:** the multiplier. Kills ready the legend for another Gold.
 - **Weak to:** removal on Sivir, so the must-have question below decides whether she's the only win condition.
+
+### 2a. My recommendation, with reasons (26 Nov, Jay asked for help deciding; waiting on his words)
+
+1. **Direction: D.**
+   - Plain A is nearly Trying Her Best, so it fails "worth doing".
+   - Plain B has no plan against Kai'Sa's or Mordekaiser's few big units.
+   - Plain C is Evelynn's deck.
+   - D is the shape where Battle Mistress pays and Evelynn's doesn't, and it differs from Trying Her Best by killing
+     instead of bouncing, and by closing with On the Hunt (2 Power, which Defy can't counter) instead of Ride the
+     Wind (1 Power).
+2. **Sivir is the best closer, not the only one.**
+   - She's 4 Might, 6 when switched on, and dies to Falling Star (Kai'Sa, Rek'Sai), Hextech Ray plus Stupefy
+     (Kai'Sa), Hidden Blade (LeBlanc, Mordekaiser) and Realm of Death (Mordekaiser).
+   - The second closer comes in at instant speed (Ambush): Rengar, Trophy Hunter (6 Might) or Nidalee, Cat Form.
+     Their Power costs keep the plan alive when Sivir is dead.
+3. **Keepers: a clean slate with two fixed points.**
+   - Fixed: Sivir, Mercenary ×1 and On the Hunt ×3 (the signature at 3; Defy-proof; readies every unit for the
+     double conquest).
+   - Everything else earns its slot at the card stage. Ride the Wind loses its job to On the Hunt, and the Faefolk
+     trap is a holding plan where D races.
 ## 3. Worth doing, and roles
 ## 4. Goal tiers and yardstick
 ## 5. Jobs and counts
