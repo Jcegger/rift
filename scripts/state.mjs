@@ -85,7 +85,7 @@ function printPoints(pb, pa, games, policy = "solver") {
     return n ? `${pc(w.p)} (${pc(w.lo)}–${pc(w.hi)})` : "—"; };
   console.log(`  ${"won (8 points first; timeouts apart)".padEnd(46)}${wr(pb)} → ${wr(pa)}; win − loss after − before ${verdict(paired(pa.win, pb.win))}`);
   console.log(`  ${"timeouts (no one at 8 by turn 12)".padEnd(46)}${pb.timeouts} → ${pa.timeouts} of ${pb.games}`);
-  for (const [lbl, r] of [["before", pb], ["after", pa]]) if (r.solveErrors?.some((n) => n)) console.log(`  SOLVER ERRORS (${lbl}): ${r.solveErrors[0]} of our Main Phases and ${r.solveErrors[1]} of theirs were skipped because the solver threw; these numbers are wrong until that's fixed`);
+  for (const [lbl, r] of [["before", pb], ["after", pa]]) if (r.solveErrors?.some((n) => n)) console.log(`  SOLVER ERRORS (${lbl}): ${r.solveErrors[0]} of our Main Phases and ${r.solveErrors[1]} of theirs were skipped because the solver threw; these numbers are wrong until that's fixed${r.solveErrorFirst ? `\n    first: ${r.solveErrorFirst}` : ""}`);
   console.log("  How far model games track real results: docs/model-calibration.md (24 Nov: r 0.11 over 20 legends, interval -0.35 to 0.52; a ranking inside the model, not evidence a swap wins real games).");
   console.log(policy === "greedy"
     ? "  Model games, both sides on the greedy policy (--greedy); card text beyond its readers is not played, which favours unit-heavy decks. Points and how they're made, not win rates."
@@ -1702,8 +1702,9 @@ async function cmdSearch(S, cat, args) {
   const foes = foeLists(await fieldDecksFor(cat, since));
   const t0 = Date.now();
   console.log(`SEARCH  ${base.name}: ${cands.length} candidates, ${games} model games each to start (${policy}), doubled while a candidate is still in; budget ${budget} games${holdUp ? `; hold-up ${holdUp}` : ""}`);
+  let firstErr = null;
   const res = await halving({ base: { label: "as is", deck: base }, cands, games, budget, keep,
-    play: (deck, start, end) => matchRecordsPar(deck, cat, foes, { start, games: end, policy, like: base.cards, ...hu }), log: (m) => console.log(`  ${m}`) });
+    play: async (deck, start, end) => { const recs = await matchRecordsPar(deck, cat, foes, { start, games: end, policy, like: base.cards, ...hu }); firstErr ??= recs.find((g) => g.solveErrorFirst)?.solveErrorFirst; return recs; }, log: (m) => console.log(`  ${m}`) });
   const sg = (x) => `${x >= 0 ? "+" : ""}${x.toFixed(2)}`, pc = (x) => (x == null ? "—" : `${Math.round(100 * x)}%`);
   const iv = (d) => (d.n ? `${sg(d.mean)} (${sg(d.lo)} to ${sg(d.hi)})` : "—");
   console.log(`\n  ${"candidate".padEnd(40)}${"games".padStart(6)}  ${"margin vs as is (95%)".padEnd(26)}${"points vs as is (95%)".padEnd(26)}${"won (95%)".padEnd(16)}pre-flight`);
@@ -1716,7 +1717,7 @@ async function cmdSearch(S, cat, args) {
     if (r.out) console.log(`      out ${r.out}`);
   }
   const errs = [res.base, ...res.rows].reduce((a, r) => a + (r.solveErrors || 0), 0);
-  if (errs) console.log(`\n  SOLVER ERRORS: ${errs} Main Phases skipped because the solver threw; the table is wrong until that's fixed`);
+  if (errs) console.log(`\n  SOLVER ERRORS: ${errs} Main Phases skipped because the solver threw; the table is wrong until that's fixed${firstErr ? `\n    first: ${firstErr}` : ""}`);
   console.log(`\n  ▸ still in: not shown worse than the leader, which is not the same as better than the deck as is (read "margin vs as is").`);
   console.log(`  Margin = our points minus theirs by turn 8 in model games against real S/A lists, the same games for every row. Sideboard changes don't play here.`);
   console.log(`  How far the model's swap rankings track good finishes (docs/model-calibration.md, Swaps, 24 Nov): r 0.31 (0.07 to 0.52) over 64 swaps in 8 legends, the same sign 30 of 48 times; weakest on Yordle's and Rengar's Reckless Innovator, Edge of Night, Ride the Wind and Nidalee swaps, which Sivir runs. Then \`try --close\` and the deck-build skill on what's left. ${res.spent} games, ${Math.round((Date.now() - t0) / 1000)} s.`);

@@ -3606,7 +3606,7 @@ section('Model games');
   // deck that does nothing: Fiora, Victorious's Mighty keywords recursed and sank Sett to 15% in the first calibration
   // (24 Nov). Each calibration legend's best list plays one game against Nasus's, and no Main Phase may throw.
   const { calibrationSet, topLists } = await import('../lib/calibrate.mjs');
-  const { playerOf, playMatch } = await import('../lib/match.mjs');
+  const { playerOf, playMatch, POLICY_SOLVE } = await import('../lib/match.mjs');
   const { rng } = await import('../lib/sim.mjs');
   const { loadCatalog } = await import('./state.mjs');
   const pcat = await loadCatalog();
@@ -3615,11 +3615,14 @@ section('Model games');
   const bad = [];
   for (const L of legends) {
     if (!foe) break;
-    const g = playMatch(playerOf(topLists(by[L], 1)[0].cards, pcat), foe, rng(11000), {});
-    const e = (g.st[0].solveErrors || 0) + (g.st[1].solveErrors || 0);
-    if (e) bad.push(`${L} ${e}`);
+    // Twice: as calibrated, and with hold-up on (27 Nov: Azir's Weaponmaster crashed only there; lib/turn.test.mjs 127c).
+    for (const [tag, opts] of [['', {}], [' (hold-up)', { solve: { ...POLICY_SOLVE, holdUp: 1 } }]]) {
+      const g = playMatch(playerOf(topLists(by[L], 1)[0].cards, pcat), foe, rng(11000), opts);
+      const e = (g.st[0].solveErrors || 0) + (g.st[1].solveErrors || 0);
+      if (e) bad.push(`${L}${tag} ${e}: ${g.st[0].solveErrorFirst || g.st[1].solveErrorFirst || ''}`);
+    }
   }
-  ok('model games play every calibration legend without a solver error', !!foe && legends.length >= 8 && !bad.length,
+  ok('model games play every calibration legend without a solver error, with hold-up off and on', !!foe && legends.length >= 8 && !bad.length,
      !foe ? 'no Nasus lists' : bad.length ? `Main Phases skipped: ${bad.join(', ')}` : `${legends.length} legends`);
 }
 
