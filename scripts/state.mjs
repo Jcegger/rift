@@ -63,6 +63,14 @@ import { paired, wilson, twoRates } from "../lib/stats.mjs";
 
 // The S/A field's lists as opponents for lib/match.mjs, in a fixed shuffled order, so a before
 // and an after play the same opponents in the same order (paired games).
+// --vs <legend words> (27 Nov; builder-research item 5): one matchup instead of the whole S/A field, for sideboard plans.
+// The field's entries whose legend label contains the words; null (and a message) when none does.
+function vsField(fieldDecks, want) {
+  if (!want) return fieldDecks;
+  const w = want.toLowerCase(), hit = fieldDecks.filter((f) => f.label.toLowerCase().includes(w));
+  if (!hit.length) { console.log(`--vs "${want}": no S/A legend matches (field: ${fieldDecks.map((f) => f.label).join(" · ")})`); return null; }
+  return hit;
+}
 function foeLists(fieldDecks) {
   const out = fieldDecks.flatMap((f) => f.lists.map((d) => ({ label: f.label.replace(/ \([SA]\)$/, "").split(",")[0], cards: d.cards })));
   const r = rng(5); for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
@@ -1371,7 +1379,7 @@ async function cmdTry(S, cat, args) {
   const opt = (k) => { const i = args.indexOf(k); return i > -1 ? args[i + 1] : null; };
   const since = opt("--since") || "2026-10-16";
   const games = Number(opt("--games") || 20000);
-  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games", "--close-games", "--hold-up"]);
+  const flags = new Set(["--since", "--deck", "--games", "--policy", "--sweep", "--with", "--qty", "--points-games", "--close-games", "--hold-up", "--vs"]);
   // --hold-up W (model games only): what a reaction kept for their turn is worth to the solver, both sides (lib/turn.mjs
   // heldValue; calibrate --hold-up). Points games only (not --close). Off by default; without it the options are exactly as before.
   const holdUp = Number(opt("--hold-up")) || 0, hu = holdUp ? { solve: { ...POLICY_SOLVE, holdUp } } : {};
@@ -1386,7 +1394,7 @@ async function cmdTry(S, cat, args) {
   const sweepCard = opt("--sweep"), sweepWith = (opt("--with") || "").split(/;/.test(opt("--with") || "") ? ";" : ",").map((x) => x.trim()).filter(Boolean);
   const decks = findDecks(S, opt("--deck") || "\u0000");
   if (decks.length !== 1 || (!specs.length && !sweepCard && !args.includes("--close"))) {
-    console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine] [--points] [--close] [--hold-up 0.5] [--greedy]   (--greedy: model games on the old plain policy, ~90x faster)');
+    console.log('usage: try --deck "<one of your decks>" "-Card" "+Card" ["-2 Card"] ["sb+Card"] [--policy "holdUp=3,dais"] [--no-engine] [--points] [--close] [--hold-up 0.5] [--vs "<legend>"] [--greedy]   (--greedy: model games on the old plain policy, ~90x faster)');
     console.log('       try --deck "<one of your decks>" --sweep "Card in the deck" --with "Candidate A, Candidate B" (or "A; B" when a name has a comma) [--policy …]');
     if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
     return;
@@ -1492,14 +1500,17 @@ async function cmdTry(S, cat, args) {
   // decks (README, lib/match.mjs). Its goal-tier rows read "—" without it.
   let pb = null, pa = null;
   if (args.includes("--points")) {
-    const pg = Number(opt("--points-games")) || (mpolicy === "greedy" ? 600 : 60), foes = foeLists(fieldDecks);
+    const vs = vsField(fieldDecks, opt("--vs")); if (!vs) return;
+    const pg = Number(opt("--points-games")) || (mpolicy === "greedy" ? 600 : 60), foes = foeLists(vs);
+    if (opt("--vs")) console.log(`\n  --vs: only ${vs.map((f) => `${f.label} (${f.lists.length} lists)`).join(" · ")}`);
     [pb, pa] = await Promise.all([matchReportPar(before, cat, foes, { games: pg, policy: mpolicy, ...hu }), matchReportPar(after, cat, foes, { games: pg, policy: mpolicy, like: before.cards, ...hu })]);
     printPoints(pb, pa, pg, mpolicy);
     if (holdUp) console.log(`  hold-up ${holdUp}: both sides value a reaction kept for the other's turn (off by default)`);
   }
   // The turn solver on model boards (lib/turn.mjs): opt-in, like the points model.
   if (args.includes("--close")) {
-    const cg = Number(opt("--close-games")) || (mpolicy === "greedy" ? 300 : 60), foes = foeLists(fieldDecks);
+    const vs = vsField(fieldDecks, opt("--vs")); if (!vs) return;
+    const cg = Number(opt("--close-games")) || (mpolicy === "greedy" ? 300 : 60), foes = foeLists(vs);
     const [cb, ca] = await Promise.all([closeReportPar(before, cat, foes, { games: cg, policy: mpolicy }), specs.length ? closeReportPar(after, cat, foes, { games: cg, policy: mpolicy, like: before.cards }) : null]);
     printClose(cb, ca, cg, mpolicy);
     if (holdUp) console.log(`  hold-up isn't applied here: the closing search asks what wins this turn, and its boards come from closeGame's own games (lib/turn.mjs)`);
@@ -1683,7 +1694,7 @@ async function cmdSearch(S, cat, args) {
   let specs = all("--swap").map((s) => ({ label: s, changes: s.split("|").map((x) => x.trim()).filter(Boolean) }));
   if (opt("--cands")) specs = specs.concat(JSON.parse(await readFile(new URL(`../${opt("--cands")}`, import.meta.url), "utf8")));
   if (decks.length !== 1 || !specs.length) {
-    console.log('usage: search --deck "<one of your decks>" (--cands decklab/<file>.json | --swap "-1 A | +1 B" …) [--games 60] [--budget 2400] [--keep 3] [--hold-up 0.5] [--greedy]');
+    console.log('usage: search --deck "<one of your decks>" (--cands decklab/<file>.json | --swap "-1 A | +1 B" …) [--games 60] [--budget 2400] [--keep 3] [--hold-up 0.5] [--vs "<legend>"] [--greedy]');
     if (opt("--deck") && decks.length !== 1) console.log(`  --deck matches ${decks.length} decks: ${decks.map((d) => d.name).join(" · ") || "none"}`);
     return;
   }
@@ -1699,9 +1710,10 @@ async function cmdSearch(S, cat, args) {
         rules: deckChecks(deck, cat.idx).filter((k) => k.ok === false).map((k) => k.label) });
     } catch (e) { console.log(`  ${sp.label}: ${e.message}`); }
   }
-  const foes = foeLists(await fieldDecksFor(cat, since));
+  const vs = vsField(await fieldDecksFor(cat, since), opt("--vs")); if (!vs) return;
+  const foes = foeLists(vs);
   const t0 = Date.now();
-  console.log(`SEARCH  ${base.name}: ${cands.length} candidates, ${games} model games each to start (${policy}), doubled while a candidate is still in; budget ${budget} games${holdUp ? `; hold-up ${holdUp}` : ""}`);
+  console.log(`SEARCH  ${base.name}: ${cands.length} candidates, ${games} model games each to start (${policy}), doubled while a candidate is still in; budget ${budget} games${holdUp ? `; hold-up ${holdUp}` : ""}${opt("--vs") ? `; only ${vs.map((f) => f.label).join(" · ")}` : ""}`);
   let firstErr = null;
   const res = await halving({ base: { label: "as is", deck: base }, cands, games, budget, keep,
     play: async (deck, start, end) => { const recs = await matchRecordsPar(deck, cat, foes, { start, games: end, policy, like: base.cards, ...hu }); firstErr ??= recs.find((g) => g.solveErrorFirst)?.solveErrorFirst; return recs; }, log: (m) => console.log(`  ${m}`) });

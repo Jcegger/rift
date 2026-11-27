@@ -1,0 +1,61 @@
+[
+  {
+    "label": "M1 Sabotage: -1 Existential Dread +1 Sabotage",
+    "changes": [
+      "-1 Existential Dread",
+      "+1 Sabotage"
+    ]
+  },
+  {
+    "label": "M2 Defy-proof trick: -1 Ride the Wind +1 Switcheroo",
+    "changes": [
+      "-1 Ride the Wind",
+      "+1 Switcheroo"
+    ]
+  },
+  {
+    "label": "M3 Challenge: -1 Ride the Wind +1 Challenge",
+    "changes": [
+      "-1 Ride the Wind",
+      "+1 Challenge"
+    ]
+  },
+  {
+    "label": "M4 Rebuke: -1 Gust +1 Rebuke",
+    "changes": [
+      "-1 Gust",
+      "+1 Rebuke"
+    ]
+  },
+  {
+    "label": "M5 Pyke: -1 Ember Monk +1 Pyke, Returned",
+    "changes": [
+      "-1 Ember Monk",
+      "+1 Pyke, Returned"
+    ]
+  },
+  {
+    "label": "M6 data package: -2 Ride the Wind -1 Existential Dread +1 Sabotage +1 Challenge +1 Switcheroo",
+    "changes": [
+      "-2 Ride the Wind",
+      "-1 Existential Dread",
+      "+1 Sabotage",
+      "+1 Challenge",
+      "+1 Switcheroo"
+    ]
+  },
+  {
+    "label": "M7 Repulse: -1 Existential Dread +1 Repulse",
+    "changes": [
+      "-1 Existential Dread",
+      "+1 Repulse"
+    ]
+  },
+  {
+    "label": "PLANT (dead cards, should lose): -3 Nidalee, Cat Form +3 Whiteflame Protector",
+    "changes": [
+      "-3 Nidalee, Cat Form",
+      "+3 Whiteflame Protector"
+    ]
+  }
+]

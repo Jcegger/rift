@@ -1,0 +1,61 @@
+[
+  {
+    "label": "Y1 Sabotage (sb): -1 Existential Dread +1 Sabotage",
+    "changes": [
+      "-1 Existential Dread",
+      "+1 Sabotage"
+    ]
+  },
+  {
+    "label": "Y2 Switcheroo: -1 Ride the Wind +1 Switcheroo",
+    "changes": [
+      "-1 Ride the Wind",
+      "+1 Switcheroo"
+    ]
+  },
+  {
+    "label": "Y3 Graves (sb): -1 Star-Crossed +1 Graves, Blasting Through",
+    "changes": [
+      "-1 Star-Crossed",
+      "+1 Graves, Blasting Through"
+    ]
+  },
+  {
+    "label": "Y4 Rebuke: -1 Gust +1 Rebuke",
+    "changes": [
+      "-1 Gust",
+      "+1 Rebuke"
+    ]
+  },
+  {
+    "label": "Y5 Ruin Runner: -1 Ember Monk +1 Ruin Runner",
+    "changes": [
+      "-1 Ember Monk",
+      "+1 Ruin Runner"
+    ]
+  },
+  {
+    "label": "Y6 data package: -2 Ride the Wind -1 Existential Dread +1 Sabotage +1 Challenge +1 Switcheroo",
+    "changes": [
+      "-2 Ride the Wind",
+      "-1 Existential Dread",
+      "+1 Sabotage",
+      "+1 Challenge",
+      "+1 Switcheroo"
+    ]
+  },
+  {
+    "label": "Y7 Repulse vs Charm: -1 Gust +1 Repulse",
+    "changes": [
+      "-1 Gust",
+      "+1 Repulse"
+    ]
+  },
+  {
+    "label": "PLANT (dead cards, should lose): -3 Nidalee, Cat Form +3 Whiteflame Protector",
+    "changes": [
+      "-3 Nidalee, Cat Form",
+      "+3 Whiteflame Protector"
+    ]
+  }
+]

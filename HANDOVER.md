@@ -4,7 +4,7 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `~/projects/dotclaude/HUB.md`.
 
-**Updated:** 2026-11-26 (Sivir candidates re-run, C1 reversed; from-scratch and net-deck building: two gated skills and three tools)
+**Updated:** 2026-11-27 (Sivir from-scratch brew shelved per its own gate; hold-up on try/search; solver crash fixed, 285233b)
 
 ## State
 
@@ -43,7 +43,8 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
   fight deck: 2-Power tricks, Fizz recasts, kills, Sivir's double conquest). Drafts v1 and v2 are in `decklab/`. In the
   model, v2 wins 46–57% against Trying Her Best's 66–70%, so it's **shelved by gate 4's rule** unless real games say
   otherwise. None of its ideas improved Trying Her Best in the model (Sabotage neutral; On the Hunt for Ride the Wind
-  worse). Gate 6 (Jay's card-by-card read) never happened.
+  worse). Gate 6 (Jay's card-by-card read) never happened. **Jay, 27 Nov: "fix the model and we can work off the my
+  existing deck, which we know isn't bad!"** Trying Her Best is the deck to improve.
 - **Building a deck (26 Nov):** `deck-brew` (from scratch; gates: field, identity picked then restated, worth doing,
   tiers and yardstick, jobs, the draft is the identity) and `deck-netdeck` (legend, list, its identity, flex only).
   The worksheet is `decklab/_brew-template.md`, with a ```identity block. Tools: `--file <draft>.deck.txt` on every
@@ -59,8 +60,10 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
      --save docs/calibration-model.json --real-since 2026-11-23` (15 min).
    - Then `calibrate --model-from docs/calibration-model.json` against the rebuilt `field.json` (post-ban RiftAtlas
      events, `--atlas-since 2026-11-23`) and the grown RiftLite archive. Record it in `docs/model-calibration.md`.
-2. **Sivir after that weekend:**
-   - `rift lifts --legend "battle mistress"`. Only 11 placed lists ever, so lifts may stay too thin; say so.
+2. **Sivir (Trying Her Best) after that weekend:**
+   - `rift lifts --legend "battle mistress"`. Only 11 placed lists ever, so lifts may stay too thin; say so. Sabotage is
+     first in line: +1.53 copies in Sivir's good finishes (interval above 0, since August), neutral in the model as a
+     swap for Existential Dread (27 Nov).
    - Done 26 Nov, ahead of it: the `decklab/sivir-search.json` candidates as mechanism checks (`decklab/sivir-tune.md`,
      "Re-run 26 Nov"). C1 (+Ezreal) reversed and now reads worse; C3 (Switcheroo for Dread) leans positive on
      answers only; C4 trades kills for answers. That section says what the lifts must show for each.
@@ -78,12 +81,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    - The Kobo's "Riftbound" reading collection and "Questions" sheet (kobo HANDOVER item 0).
    - Open rift.jayegger.com's tweak bench once: it loads `lib/cardtext.mjs` in the browser.
 6. **Jay reads `notes/how-claude-reads-riftbound.md`** and marks what's wrong.
-7. **Bug: the solver throws with hold-up on.** `search --hold-up 1` skipped 7 Main Phases in Sivir v2's games and 1 in
-   Trying Her Best's (27 Nov). It never happened with hold-up off. `lib/match.mjs:383` swallows the error, so log
-   `err.message` and the card first, then fix it in `lib/turn.mjs` (likely `heldValue` or `counterOf`).
-8. **Refresh timing:** GitHub fires scheduled runs 4–10 hours late and sometimes skips one. If that matters, start the
+7. **Refresh timing:** GitHub fires scheduled runs 4–10 hours late and sometimes skips one. If that matters, start the
    refresh from a scheduled cloud agent and keep one GitHub cron as a backup.
-9. Log each new game in the app's journal and the worksheet's games table (`decklab/sivir-ready.md`).
+8. Log each new game in the app's journal and the worksheet's games table (`decklab/sivir-ready.md`).
 
 ## Decided
 

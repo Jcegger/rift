@@ -723,4 +723,8 @@ these margins.
 (v2: 31% from 7, against 32%) but winning fewer games (46–57% against 66–70%). By the rule set before any card was
 picked, the concept is **shelved as the main deck** unless real games say otherwise. Trying Her Best stays live.
 
+**Re-run after the crash fix (285233b):** zero solver errors. v2 as is 54%, R3 57%, R2 56%, R4 54%, R1 53%, control
+53%, within 0.01 of the first run. The crash didn't change the result. Jay, 27 Nov: "fix the model and we can work off
+the my existing deck, which we know isn't bad!"
+
 ## 9. Freeze and watch items

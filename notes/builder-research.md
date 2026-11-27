@@ -107,4 +107,15 @@ In the order the calibration suggests: first what makes the model wrong, then wh
   evidence first), `rift identity` (the pre-flight as code, jobs against the identity's targets), and the `deck-brew` /
   `deck-netdeck` skills. Next, if the first brew shows the need: read conditions like Bedeviling Stranger's "4 or more
   units" in the enabler check, and a sideboard mode for `search` (item 5).
+- **27 Nov 2026: what the Sivir from-scratch brew taught the tools** (`decklab/sivir-scratch.md`).
+  - `try --points` and `search` take `--hold-up W` (3a18803). It closed about a quarter of v1's gap against Trying Her
+    Best (28 → 21 points).
+  - Solver errors keep their first message, and the check plays every calibration legend with hold-up on too
+    (285233b). The first message found a real crash: Weaponmaster's "kill a friendly unit" cost killed the
+    Equipment's own carrier.
+  - **The model can't see a kill engine.** v2's control (−3 Rampage +3 dead cards) didn't lose, while Trying Her Best's
+    did. A deck built around kills readying Battle Mistress is invisible to the margin. Worth a calibration look:
+    `calibrate --swaps` on Rampage in the legends that run it.
+  - The goldfish and the model disagreed. The goldfish showed the engine working (Mercenary on 54% against 38%, kills
+    ×3), while the model showed v1 losing on holds (38% against 66%). The goldfish has no opponent to hold against.
 
