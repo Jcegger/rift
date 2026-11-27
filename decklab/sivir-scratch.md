@@ -176,7 +176,61 @@ the direction worth building is one Evelynn can't copy.
 - **From B:** the multiplier. Kills ready the legend for another Gold.
 - **Weak to:** removal on Sivir, so the must-have question below decides whether she's the only win condition.
 
-### 2a. My recommendation, with reasons (26 Nov, Jay asked for help deciding; waiting on his words)
+### 2a, round 2. What is the Power for? (Jay, 27 Nov: "power every turn is nice but what are we using it for" · "it's ok if it's similar to evelynn and uses orange/purple fundamentals, i just want to be intentional!")
+
+**What Sivir's good finishes spent Power on.** `data/decks.json` holds 57 Sivir lists and 5 good finishes, all from
+30 Sep to 2 Oct, before the bans:
+- 2 Aurora ramp (out);
+- 2 hand attack (Sabotage, Mindsplitter: the style Jay finds mean);
+- 1 tempo (LA Regional #146/2165: Punch First ×3, Switcheroo ×2, Rampage ×3).
+
+Each spent Power on one thing that won.
+
+**The Body/Chaos fundamentals** (good finishes since 23 Oct: Evelynn 31, Kha'Zix 25). Cards in both cores:
+
+| card | Evelynn | Kha'Zix | job |
+|---|---|---|---|
+| Punch First (1E 2P) | 77% ×2.0 | 100% ×3.0 | win a fight (+5) |
+| Switcheroo (2E 2P, Hidden) | 74% ×1.5 | 100% ×1.2 | win a fight (swap Mights) |
+| Rampage (3E) | 81% ×2.0 | 96% ×1.4 | fight to kill |
+| Star-Crossed (3E 1P) | 77% ×1.4 | 100% ×1.5 | answer on their turn |
+| Vex, Apathetic (4E) | 87% ×2.3 | 92% ×2.0 | stuns what they play |
+| Rengar, Trophy Hunter (5E 1P) | 87% ×2.4 | 88% ×2.0 | 6-Might Ambush threat |
+| Fizz, Trickster (3E 1P) | 48% ×1.5 | 100% ×2.2 | recasts a spell from the trash |
+| Gust (1E) | 61% ×1.6 | 76% ×1.3 | cheap answer on their turn |
+
+Each legend adds its own package. Evelynn adds Hidden units (Pyke 90%, Gutter Guardian 84%, Evelynn, Entrancing 97%),
+Hold 'Em 87%, Edge of Night 84% and Bandle Scouts' Academy 94%. Kha'Zix adds movement (Faefolk ×3, Void Assault ×3,
+Traveling Merchant, Reckless Innovator) and Sabotage. **The fundamentals are a fight deck**, proven in these colours.
+
+**Where Battle Mistress tilts it.** These are what the Power is for:
+1. **The 2-Power tricks cost us less.**
+   - Power paid from a rune is a recycle, and the legend turns it into a Gold for later
+     (`docs/rules-rulings.md`, 26 Nov). A rune recycled for Power is normally next turn's loss
+     (`docs/rules.md`, Runes); here it comes back.
+   - **Tilt:** Punch First ×3 and Switcheroo ×2–3. Defy reads the printed 2 Power, so it can't counter either.
+2. **Fizz casts each trick twice.**
+   - Fizz, Trickster: "play a spell from your trash with Energy cost no more than [3], ignoring its Energy cost.
+     Recycle that spell after you play it. (You must still pay its Power cost.)" A used Punch First comes back for 2
+     Power, which Gold pays in any domain.
+   - **Tilt:** Fizz ×2–3.
+3. **Kills over bounces.**
+   - "When one or more enemy units die, ready me": a kill readies the legend for another Gold, and a bounce doesn't.
+   - **Tilt:** Rampage (and Pyke, Returned, Gold on a death) above Gust and Star-Crossed. One or two bounces stay for
+     what can't be killed.
+4. **Sivir is the payoff.** A turn with Punch First or Switcheroo has already spent 2 Power, so she has +2 Might and
+   Ganking. On the Hunt ×3 ("Ready your units", 2 Power) turns a won fight into a second conquest.
+5. **Left behind unless they win fights:** Evelynn's Hidden units and Kha'Zix's movement. Their legends paid for them;
+   ours doesn't.
+
+**Proposed identity: "Body/Chaos fight deck. Every Power buys a won fight, Fizz buys it twice, and Sivir turns the
+fights into a double conquest."**
+- **Early:** trade with cheap units, and Rampage their best one.
+- **Mid:** Sivir with Accelerate, or Rengar or Vex. Gold held for tricks in their combat; Fizz rebuys a used trick.
+- **Lethal:** win A, On the Hunt, win B.
+- **Gives up:** decks that won't fight (Azir going wide behind Defy). The sideboard covers them.
+
+### 2a. My recommendation, with reasons (round 1, superseded) (26 Nov, Jay asked for help deciding; waiting on his words)
 
 1. **Direction: D.**
    - Plain A is nearly Trying Her Best, so it fails "worth doing".
