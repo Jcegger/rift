@@ -4,7 +4,7 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `~/projects/dotclaude/HUB.md`.
 
-**Updated:** 2026-11-25 (wrap: the model's job settled; tournament data first; misreads through Flow fixed, up to 232c18f)
+**Updated:** 2026-11-26 (Sivir candidates re-run as mechanism checks after the Flow fixes; C1 reversed)
 
 ## State
 
@@ -51,7 +51,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
      events, `--atlas-since 2026-11-23`) and the grown RiftLite archive. Record it in `docs/model-calibration.md`.
 2. **Sivir after that weekend:**
    - `rift lifts --legend "battle mistress"`. Only 11 placed lists ever, so lifts may stay too thin; say so.
-   - Then the candidates in `decklab/sivir-search.json` as mechanism checks, not verdicts.
+   - Done 26 Nov, ahead of it: the `decklab/sivir-search.json` candidates as mechanism checks (`decklab/sivir-tune.md`,
+     "Re-run 26 Nov"). C1 (+Ezreal) reversed and now reads worse; C3 (Switcheroo for Dread) leans positive on
+     answers only; C4 trades kills for answers. That section says what the lifts must show for each.
    - Jay's pasted Battle Mistress list (close to his own; in this session's chat, 25 Nov) is parked at his word. It goes
      through `deck-build` when he asks.
 3. **After 29–30 Nov:** re-read Riven, Irelia and Renata Glasc, Chem-Baroness in `docs/archetypes.md` from post-ban

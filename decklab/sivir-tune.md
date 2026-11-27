@@ -281,3 +281,56 @@ points is noise. About half the positions hold a card it can't read (Nidalee, Ez
 From 6: today 9%, C1 8%, Bounty Board 1%. C1 still leans better; Bounty Board still closes worse from 6 and about the same from 7.
 About 200 unpaired positions per cell, so gaps under ~9 points are noise. The heaviest card the solver still can't
 read in your positions is Existential Dread (26% of positions: its "already stunned → return it instead").
+
+
+## Re-run 26 Nov, after the [Flow] and misread fixes (up to 232c18f)
+
+**Mechanism checks inside the model, not verdicts.** The model tracks real swap results at about r 0.31
+(`docs/model-calibration.md`, Swaps); for Sivir's own cards (Innovator, Edge of Night, Ride the Wind, Nidalee) it is
+weakest. The verdict waits for `rift lifts --legend "battle mistress"` after the 29–30 Nov weekend (HANDOVER item 2).
+List as of today: Ride the Wind ×3 main.
+
+**Search** (`rift search --cands decklab/sivir-search.json --games 120 --keep 3 --budget 8000`; stopped at keep 3
+after 1,560 games, 248 s). Margin = our points minus theirs by turn 8, paired with the list as is, 95% interval.
+
+| candidate | games | margin vs as is | won |
+|---|---|---|---|
+| as is | 240 | | 66% (60–72) |
+| C3 −1 Existential Dread +1 Switcheroo | 240 | +0.07 (−0.49 to +0.64) | 69% |
+| C4 −1 Rampage +1 Rebuke | 240 | −0.08 (−0.65 to +0.50) | 67% |
+| C5 −1 Star-Crossed +1 Switcheroo | 240 | −0.14 (−0.71 to +0.42) | 65% |
+| C1 −1 Ember Monk +1 Ezreal | 240 | **−0.63 (−1.21 to −0.05)** | 60% |
+| C1b −1 Ember Monk +1 Kinkou Initiate | 240 | **−0.76 (−1.34 to −0.18)** | 57% |
+| PLANT −3 Nidalee +3 Whiteflame (should lose) | 120 | −1.03 (−1.93 to −0.13) | 52% |
+
+The plant lost, so the run can see something. C5 plays as a main swap against the whole field here, and the sideboard
+holds no Switcheroo (S1 was never applied), so it says nothing about the Defy plan it was meant for.
+
+**Closing turns** (`try … --close --close-games 400`; a winning line from 7 points, unpaired, gaps under ~9 are noise;
+the solver now reads every position, against about half on 21–22 Nov):
+
+| | list as is | C1 | C3 | C4 |
+|---|---|---|---|---|
+| from 7: a winning line | 32% | 34% | 36% | 33% |
+| from 6: a winning line | 5% | 5% | 3% | 5% |
+
+**What each change does:**
+- **C1 reversed.** It was the first candidate on 21–22 Nov (closing from 7: 39 → 52%). Now it closes the same (32 →
+  34%) and loses margin. It still draws about 2 more cards a game (3.1 → 5.0, normal) and turns Mercenary on more
+  (38 → 44%). But more tricks are stranded for Energy (1.50 → 1.69; heavy 2.85 → 3.22), and answers on their turn at
+  t5 drop (59 → 55% on the play). The old closing edge was measured while half the positions held cards the solver
+  couldn't read; read in full, the extra draws don't turn into points. C1b (Kinkou) loses the same way, so the cost
+  is Ember Monk's absence, not Ezreal.
+- **C3 is the only one that leans positive**, and only on answers: an answer on their turn at t3 goes 22 → 33% (play)
+  and 27 → 36% (draw), answers free from face down 0.9 → 1.8, Defy-countered spells 3.6 → 3.3. The cost from
+  21 Nov stands: Switcheroo takes A's single face-down slot (Hidden 8 → 9).
+- **C4 trades kills for answers:** answers at t5 59 → 62%, Defy-countered 3.6 → 3.3, but kills a game halve (0.28 →
+  0.14; heavy 0.54 → 0.27), and kills are what ready the legend.
+
+**What the lifts must show** (after the 29–30 Nov weekend; 11 placed lists ever, so it may stay too thin, and then
+the list stays as it is):
+- C1: good finishes run Ezreal ×3 or Ember Monk ×0 with an interval above 0 would overturn this; otherwise C1 is off
+  the table.
+- C3: good finishes run more Switcheroo or fewer Existential Dread. Without that, a +0.07 inside the model isn't a
+  reason to change.
+- C4: Rebuke over Rampage in good finishes. Without it, keep Rampage for the kills.
