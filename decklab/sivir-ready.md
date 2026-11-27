@@ -635,6 +635,10 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   and against Master Yi alone +0.59 (+0.03 to +1.15). Details in `decklab/sivir-tune.md` (27 Nov). Row backed up
   (`backups/state-pre-switcheroo-2026-11-27.json`). The guide and sheets are updated after the next search round.
 
+- **27 Nov 2026, second step: −1 Ride the Wind +1 Switcheroo** (Jay: "hell yeah"). Now Ride the Wind ×1, Switcheroo ×3.
+  Round 2 (`search --hold-up 1`): the best change across the field, +0.27 (−0.14 to +0.68), 75% won against 73%; and
+  against Master Yi alone, +0.24 (−0.14 to +0.63), 74% against 72%. Real data still agrees. Row backed up
+  (`backups/state-pre-switcheroo2-2026-11-27.json`).
 ### Games (the locked trap list, 1 Nov 2026)
 
 | # | date | vs | seat | battlefields (mine / theirs) | result | how | failure type | trap | notes |

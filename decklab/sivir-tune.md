@@ -406,3 +406,25 @@ The journal is logged (0–2 against Yi).
 **Reading.** N1 leads again, in both runs, and real data agrees (fewer Ride the Wind in winners). It's the second step
 of the same swap. Nothing else from the review beats the cards it would replace.
 
+**Applied 27 Nov (Jay: "hell yeah"):** the second step, so Ride the Wind ×1 and Switcheroo ×3.
+
+**Sideboard pass** (`search --vs <legend> --hold-up 1`, 240 games each; the list as it was before the second step,
+with Ride the Wind ×2). Each card from the sideboard swapped in for a main-deck card:
+
+| matchup (model, as is) | best swap | margin |
+|---|---|---|
+| Azir 87% | Sabotage for Existential Dread | +0.06 (−0.41 to +0.53) |
+| Vex 80% | Ruin Runner ×2 for Star-Crossed ×2 | +0.01 (−0.56 to +0.58) |
+| Master Yi 72% | Graves ×2 for Rampage ×2 | +0.01 (−0.50 to +0.52) |
+| Evelynn 62% | Ravenbloom Prefect for Ember Monk | −0.14 (−0.76 to +0.48) |
+| Kai'Sa 56% | Sabotage for Existential Dread | −0.14 (−0.74 to +0.45); Unyielding Spirit ×2 for Gust ×2 −0.53 |
+
+Every control lost.
+
+**Reading.**
+- No sideboard swap beats the main deck in the model in any of the five.
+- The sideboard plan in the guide stays. Its reasons are card-text ones the model can't price: Charm-proof holders,
+  gear removal, damage prevention.
+- **The weak matchups are Kai'Sa (56%) and Evelynn (62%)**, and nothing in the sideboard fixes them in the model.
+  That's the next thing to work on.
+

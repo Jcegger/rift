@@ -35,12 +35,12 @@ date: 2026-11-02
 | ▢ | **Ember Monk** | OGN-167 |  |
 | ▢ ▢ | **Gust** | OGN-169 |  |
 | ▢ ▢ | **Rebuke** | OGN-172 |  |
-| ▢ ▢ ▢ | **Ride the Wind** | OGN-173 |  |
+| ▢ | **Ride the Wind** | OGN-173 |  |
 | ▢ ▢ | **Tideturner** | OGN-199 |  |
 | ▢ | **Boots of Swiftness** | SFD-133 |  |
 | ▢ | **Edge of Night** | SFD-139 |  |
 | ▢ | **Sivir, Mercenary** | SFD-143 |  |
-| ▢ | **Switcheroo** | SFD-145 |  |
+| ▢ ▢ ▢ | **Switcheroo** | SFD-145 |  |
 | ▢ ▢ | **Ezreal, Prodigy** | SFD-149 |  |
 | ▢ ▢ | **Star-Crossed** | UNL-128 |  |
 | ▢ | **Existential Dread** | UNL-134 |  |

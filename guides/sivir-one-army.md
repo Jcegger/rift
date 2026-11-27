@@ -32,10 +32,10 @@ date: 2026-11-02
 | job | cards |
 |---|---|
 | **Pull them in** | Faefolk ×3 · Evelynn (face down) |
-| **Punish them at A** | Bedeviling Stranger ×2 · Existential Dread · Switcheroo · Edge of Night · Tideturner ×2 · Punch First ×3 · Nidalee ×3 and Rengar ×2 (Ambush) · Vex ×2 |
+| **Punish them at A** | Bedeviling Stranger ×2 · Existential Dread · Switcheroo ×3 · Edge of Night · Tideturner ×2 · Punch First ×3 · Nidalee ×3 and Rengar ×2 (Ambush) · Vex ×2 |
 | **Hold A** | the two-drops (8 two-drop units, all Power-free) · Ember Monk (+2 whenever you flip a face-down card) · Boots of Swiftness and Edge of Night (+2 Might for good) |
 | **Clear the way** | Rampage ×2 · Rebuke ×2 · Gust ×2 · Star-Crossed ×2 |
-| **Close at B** | Sivir · Ride the Wind ×3 · Boots of Swiftness (Ganking: a holder walks A → B) |
+| **Close at B** | Sivir · Ride the Wind · Boots of Swiftness (Ganking: a holder walks A → B) |
 | **Cards** | Ezreal ×2 · Innovator ×3 · Nidalee |
 
 **Four rules for every game.**
@@ -66,9 +66,9 @@ date: 2026-11-02
 | | Rengar, Trophy Hunter ×2 | 5E 1P | 6 Might, **Ambush**, and can be played where only enemy units are |
 | **Spells** | Punch First ×3 | 1E 2P | +5 Might this turn; Action |
 | | Gust ×2 | 1E | return a unit at a battlefield with 3 Might or less; Reaction |
-| | Ride the Wind ×3 | 2E 1P | move a friendly unit and ready it, battlefield to battlefield; Action |
+| | Ride the Wind | 2E 1P | move a friendly unit and ready it, battlefield to battlefield; Action |
 | | Rebuke ×2 | 2E 2P | return a unit at a battlefield to hand; Action |
-| | Switcheroo | 2E 2P | Hidden, Action: swap the Mights of two units at one battlefield |
+| | Switcheroo ×3 | 2E 2P | Hidden, Action: swap the Mights of two units at one battlefield |
 | | Existential Dread | 1E 1P | Action: stun an attacking enemy unit; if it's already stunned, return it to hand. Repeat: 2 Energy (1 with Ezreal) |
 | | Rampage ×2 | 3E | your unit and theirs deal their Mights to each other; pay 1 Body for +2 |
 | | Star-Crossed ×2 | 3E 1P | Reaction: return one of your units and one of theirs |
@@ -89,6 +89,7 @@ date: 2026-11-02
 - **30–31 October:** Jay's own rebuild around displacement (Faefolk, Ride the Wind); a three-reviewer audit; battlefields re-picked from all 71 legal ones.
 - **31 October, the pros:** two experienced players said the deck can't win early fights; **play midrange, win on interaction on turns 3–4, carry top end that doesn't need Sivir alive, 8–9 cheap two-drops.** Nidalee ×3, Vex ×2, Gust ×2 in; Nilah out.
 - **1 November, the trap:** −2 First Mate +2 Bedeviling Stranger, then −Portable Portal +The Good Stuff, then −2 Fizz −2 Staunch +2 Edge of Night +2 Tideturner (two experienced players: Fizz left the deck "with its foot in two camps", and Staunch wasn't a good two-drop), and last −1 Edge +1 Boots of Swiftness, −1 Switcheroo +1 Existential Dread, −The Good Stuff +Ember Monk (a reviewer doubted the deck holds well enough to feed The Good Stuff). Both cards had been cut on 31 October *for needing a held battlefield*; under the midrange plan that became the reason to play them. Punch First ×3, Ride the Wind ×3 and Rampage were questioned and kept on purpose; Staunch, Fizz, The Good Stuff, one Edge and one Switcheroo went in the later rounds (worksheet log).
+- **27 November, after two Master Yi losses:** −2 Ride the Wind +2 Switcheroo, in two steps (real data: good Sivir finishes run fewer Ride the Wind, −1.27; the model with hold-up: the best swap across the field and against Yi; `decklab/sivir-tune.md`). Sideboard unchanged: no sideboard swap beat the main deck in any top matchup in the model.
 
 ---
 
@@ -215,7 +216,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 - **From hand it reaches any battlefield,** but as a plain 2-Energy unit: main phase only, no bounce mid-fight. Played to base it doesn't count toward the 4, so the chosen battlefield needs 4 units without it; played to a battlefield you control it counts itself. Against a wide board at B, bounce one of their four.
 - **Example (vs Mordekaiser):** he attacks A with two units, one a 6-Might threat, into your Nidalee. Flip Stranger: Nidalee + Stranger + his two = 4. Return the big one to his hand. Nidalee (4 Might) handles a smaller one left behind, and bouncing rather than killing gives his deaths engine nothing.
 
-**Switcheroo** (Hidden · 2E 2P · Action). *Swap the Mights of two units at the same battlefield this turn.*
+**Switcheroo** ×3 (Hidden · 2E 2P · Action; ×3 since 27 Nov, from Ride the Wind: Defy can't counter it, and good Sivir finishes run fewer Ride the Wind). *Swap the Mights of two units at the same battlefield this turn.*
 - **Job:** wins the 1-on-1 fight Stranger can't touch.
 - **Use:** hide it at A for 1-on-1 fights. From face down both targets must be at A (§811.1.d.2), and it costs nothing, so it spends no Power toward Sivir. From hand it's 2 Power, which turns Sivir on by itself.
 - **Example (vs Riven):** Riven attacks A with a 7-Might Astral Heron into your lone Faefolk (1 Might). Flip Switcheroo: Heron is 1, Faefolk is 7 for the turn. Faefolk wins and the Heron dies (a 1-Might unit taking 7). She has Defy in 93% of lists, but Switcheroo's 2 Power puts it out of Defy's reach (§206).
@@ -272,7 +273,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 ### Close at B
 
-**Ride the Wind** ×3 (2E 1P · Action). *Move a friendly unit and ready it.*
+**Ride the Wind** ×1 (2E 1P · Action; down from 3 on 27 Nov: Defy counters it, Switcheroo took two slots). *Move a friendly unit and ready it.*
 - **Job:** a second unit into B, or a holder out of trouble, from any battlefield to any battlefield, even mid-showdown (§451.1).
 - **Example (vs Kennen, no Defy in 10%+ of his lists):** Kennen Star-Crosseds Sivir as she walks into B. In B's showdown, Ride the Wind your Nidalee from A to B (a card's move needs no Ganking, and it's readied too): the showdown closes with your unit there, conquer. **Check A first:** if Nidalee was your last unit there, A goes uncontrolled and your face-down card there is trashed (§323.5, §323.6.a).
 
@@ -332,7 +333,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 | Faefolk | 3 | 46% | 64% |
 | Stranger | 2 | 33% | 49% |
 | an answer to the pulled unit (Stranger, Existential Dread) | 3 | 46% | 64% |
-| any trap card in hand (Stranger, Dread, Switcheroo, Edge, Tideturner ×2) | 8 | 83% | 95% |
+| any trap card in hand (Stranger, Dread, Switcheroo ×3, Edge, Tideturner ×2) | 10 | 89% | 98% |
 
 Stranger alone is there about half the time, but with Existential Dread you have an answer to the pulled unit about two games in three, and some trap card nearly every game.
 
@@ -348,7 +349,7 @@ Stranger alone is there about half the time, but with Existential Dread you have
 | **After you lose a game** (you choose, so go first) | **Amateur Recital**: "When you hold here, you may move a unit at a battlefield to its base." | **the trap's engine**, below |
 | **After you win a game** (they choose, and going first wins more, so expect the draw) | **Forbidding Waste**: "While a unit here is defending alone, it has −2 Might." | no hold reward to hand them; it punishes their lone early holder. Hold it with two and the −2 never touches you |
 
-**Rechecked after the Edge of Night / Tideturner swap (1 Nov):** all three stay. With 7 face-down cards for one slot at A (Stranger ×2, Tideturner ×2, Switcheroo, Edge, Evelynn), and Boots adding Ganking from A to B, the three still fit. **Bandle Tree** ("You may hide an additional card here") is the first battlefield to try if the slot keeps clogging, but its only sensible place is Recital's, and Recital is worth more.
+**Rechecked after the Edge of Night / Tideturner swap (1 Nov):** all three stay. With 7 face-down cards for one slot at A (Stranger ×2, Tideturner ×2, Switcheroo, Edge, Evelynn; 9 since 27 Nov, with Switcheroo ×3), and Boots adding Ganking from A to B, the three still fit. **Bandle Tree** ("You may hide an additional card here") is the first battlefield to try if the slot keeps clogging, but its only sensible place is Recital's, and Recital is worth more.
 
 **Amateur Recital, the engine.** Going first, your turn-2 move reaches a battlefield before theirs (unless they Accelerate a unit on turn 1: going second they have 3 runes). Make Recital your A. From your turn-3 hold, every turn:
 - the hold scores, and its trigger (your Beginning Phase, before you draw) **sends their lone defender at B to its base** (§383.4.d.2.b);
@@ -431,7 +432,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 | **Mordekaiser** | 99 (25) | walks into A with big units; deaths feed him | bounce, don't kill | Ruin Runner | Rampage |
 | **Akali** | 75 (33) | Not So Fast and Blitzcrank 76% each; pings kill Faefolk; Defy 99% | hold Faefolk until the closing turn | Unyielding Spirit ×2, Ruin Runner ×2 | Rampage ×2, Faefolk ×2 |
 | **K'Sante** | 70 (14) | Shield doesn't stop a bounce; thin answers; Defy 83% | Rampage is weak into Defy | — | — |
-| **Master Yi (Bladesman)** | 50 (18) | Ruin Runner 72% at B can't be pulled; Charm 90% moves your holder; Scuttle Crab 74% | Forbidding Waste against his lone defender; a pulled defender loses his +2 | Graves | Rampage |
+| **Master Yi (Bladesman)** | 50 (18) | Ruin Runner 72% at B can't be pulled; Charm 90% moves your holder, **and Charm on a unit in your base makes you attack his buffed lone defender** (§190.3.a.1, §466.2.c.1; 27 Nov); En Garde; Scuttle Crab 74% | Forbidding Waste against his lone defender; a pulled defender loses his +2; **keep two at A, don't park threats in base, play Rengar and Nidalee by Ambush**; bait Defy with Gust | Graves | Rampage |
 | **Irelia** | 38 (9) | Not So Fast and Charm 76%; Twilight Shroud; Vex 61%; Scuttle Crab 84% | close when she's tapped out | Ruin Runner ×2 | Rampage ×2 |
 | **Lillia** | 61 (28) | **Unchecked Power (40/61): 12 to everything at battlefields**; Defy 58/61, Discipline; Charm 58/61 moves your holder; Temporary 3-Might Sprites die on their own | **one hold, two units at A, the rest in hand**; don't spend removal on Sprites; close with units and 2-Power spells (Defy can't touch them); go for both battlefields only when it wins that turn | Ruin Runner | Rampage |
 | **Jayce** | 30 (11) | about 4 units; the trap barely matters | race; kill Gutter Palace | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger ×2, Evelynn |

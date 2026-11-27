@@ -31,6 +31,8 @@ date: 2026-11-02
 
 **Against Defy.** Safe: Punch First, Rebuke, Switcheroo, every unit. Counterable: Ride the Wind, Gust, Rampage, Star-Crossed, Existential Dread.
 
+**Against Charm** (Master Yi, Irelia, Lillia): **Charm on a unit in your base makes you attack** their battlefield, into a lone defender's +2 and En Garde. Keep two at A, don't park threats in base, and play Rengar and Nidalee by Ambush.
+
 **Star-Crossed rebuy:** return your own Ezreal (draw 2 again), Innovator or Faefolk with their unit.
 
 **Watch out.** Ezreal on Sivir: take the **Energy**, not the rune. Never make **Rockfall Path** your A. Equip Boots or play Ember Monk only on a turn you don't need Energy up. **Boots' Ganking:** a holder walks A → B, past their Vex.
@@ -42,6 +44,7 @@ date: 2026-11-02
 | against | adjust |
 |---|---|
 | **Rengar** (best) | keep two at A (his Faefolk pulls); your Vex stuns his Ambush; Graves in |
+| **Master Yi** | Charm 90%: two at A, nothing precious in base; his lone defender gets +2 and En Garde: fight at **Forbidding Waste** (−2), pull it out; bait Defy with Gust; Graves in, Rampage out |
 | **LeBlanc** | bait Deathgrip / Sacrifice before Stranger; Graves ×2 in, Rampage out |
 | **Kai'Sa** | she won't attack A; Smoke Screen + Hextech Ray kills Sivir, so close with Unyielding Spirit in hand; not Rockfall as A; Unyielding Spirit ×2 + Sabotage in |
 | **Vex Gloomist** (bad) | Rebuke her Vex first; race to hold at 7; Sabotage + Ruin Runner in, Rampage out |
