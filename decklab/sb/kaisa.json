@@ -1,0 +1,36 @@
+[
+  {
+    "label": "Unyielding Spirit for Gust: -2 Gust +2 Unyielding Spirit",
+    "changes": [
+      "-2 Gust",
+      "+2 Unyielding Spirit",
+      "sb+2 Gust",
+      "sb-2 Unyielding Spirit"
+    ]
+  },
+  {
+    "label": "Ruin Runner for Tideturner: -2 Tideturner +2 Ruin Runner",
+    "changes": [
+      "-2 Tideturner",
+      "+2 Ruin Runner",
+      "sb+2 Tideturner",
+      "sb-2 Ruin Runner"
+    ]
+  },
+  {
+    "label": "Sabotage for Dread: -1 Existential Dread +1 Sabotage",
+    "changes": [
+      "-1 Existential Dread",
+      "+1 Sabotage",
+      "sb+1 Existential Dread",
+      "sb-1 Sabotage"
+    ]
+  },
+  {
+    "label": "PLANT: -3 Nidalee, Cat Form +3 Whiteflame Protector",
+    "changes": [
+      "-3 Nidalee, Cat Form",
+      "+3 Whiteflame Protector"
+    ]
+  }
+]

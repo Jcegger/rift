@@ -1,0 +1,36 @@
+[
+  {
+    "label": "Ruin Runner for Star-Crossed: -2 Star-Crossed +2 Ruin Runner",
+    "changes": [
+      "-2 Star-Crossed",
+      "+2 Ruin Runner",
+      "sb+2 Star-Crossed",
+      "sb-2 Ruin Runner"
+    ]
+  },
+  {
+    "label": "Sabotage for Gust: -1 Gust +1 Sabotage",
+    "changes": [
+      "-1 Gust",
+      "+1 Sabotage",
+      "sb+1 Gust",
+      "sb-1 Sabotage"
+    ]
+  },
+  {
+    "label": "Graves for Rampage: -2 Rampage +2 Graves",
+    "changes": [
+      "-2 Rampage",
+      "+2 Graves, Blasting Through",
+      "sb+2 Rampage",
+      "sb-2 Graves, Blasting Through"
+    ]
+  },
+  {
+    "label": "PLANT: -3 Nidalee, Cat Form +3 Whiteflame Protector",
+    "changes": [
+      "-3 Nidalee, Cat Form",
+      "+3 Whiteflame Protector"
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "label": "Graves for Gust: -2 Gust +2 Graves",
+    "changes": [
+      "-2 Gust",
+      "+2 Graves, Blasting Through",
+      "sb+2 Gust",
+      "sb-2 Graves, Blasting Through"
+    ]
+  },
+  {
+    "label": "Ravenbloom Prefect for Ember Monk: -1 Ember Monk +1 Ravenbloom Prefect",
+    "changes": [
+      "-1 Ember Monk",
+      "+1 Ravenbloom Prefect",
+      "sb+1 Ember Monk",
+      "sb-1 Ravenbloom Prefect"
+    ]
+  },
+  {
+    "label": "Ruin Runner for Tideturner: -2 Tideturner +2 Ruin Runner",
+    "changes": [
+      "-2 Tideturner",
+      "+2 Ruin Runner",
+      "sb+2 Tideturner",
+      "sb-2 Ruin Runner"
+    ]
+  },
+  {
+    "label": "PLANT: -3 Nidalee, Cat Form +3 Whiteflame Protector",
+    "changes": [
+      "-3 Nidalee, Cat Form",
+      "+3 Whiteflame Protector"
+    ]
+  }
+]

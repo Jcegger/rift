@@ -1,0 +1,45 @@
+[
+  {
+    "label": "Graves for Rampage: -2 Rampage +2 Graves",
+    "changes": [
+      "-2 Rampage",
+      "+2 Graves, Blasting Through",
+      "sb+2 Rampage",
+      "sb-2 Graves, Blasting Through"
+    ]
+  },
+  {
+    "label": "Ruin Runner for Gust: -2 Gust +2 Ruin Runner",
+    "changes": [
+      "-2 Gust",
+      "+2 Ruin Runner",
+      "sb+2 Gust",
+      "sb-2 Ruin Runner"
+    ]
+  },
+  {
+    "label": "Sabotage for Dread: -1 Existential Dread +1 Sabotage",
+    "changes": [
+      "-1 Existential Dread",
+      "+1 Sabotage",
+      "sb+1 Existential Dread",
+      "sb-1 Sabotage"
+    ]
+  },
+  {
+    "label": "Unyielding Spirit for Star-Crossed: -1 Star-Crossed +1 Unyielding Spirit",
+    "changes": [
+      "-1 Star-Crossed",
+      "+1 Unyielding Spirit",
+      "sb+1 Star-Crossed",
+      "sb-1 Unyielding Spirit"
+    ]
+  },
+  {
+    "label": "PLANT: -3 Nidalee, Cat Form +3 Whiteflame Protector",
+    "changes": [
+      "-3 Nidalee, Cat Form",
+      "+3 Whiteflame Protector"
+    ]
+  }
+]

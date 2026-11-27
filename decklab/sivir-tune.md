@@ -387,3 +387,22 @@ The journal is logged (0–2 against Yi).
   model's Yi misplays Charm and En Garde, or it was the pilot and the night. That's worth a `rift trace` of a model Yi
   game before trusting the Yi numbers further.
 
+**Applied 27 Nov (Jay: "yep"):** −1 Ride the Wind, +1 Switcheroo. The list as is now wins 73% in the model (70% before).
+
+**Round 2, from the new list** (`search --hold-up 1`, whole field):
+
+| change | margin | won |
+|---|---|---|
+| N1 −1 Ride the Wind +1 Switcheroo (to 1 / 3) | **+0.27 (−0.14 to +0.68)** | 75% |
+| N6 −1 Tideturner +1 Staunch Survivor | −0.08 (−0.51 to +0.35) | 73% |
+| N5 −1 Ember Monk +1 Gutter Guardian | −0.12 (−0.49 to +0.25) | 72% |
+| N4 −1 Edge of Night +1 Hold 'Em | −0.30 (−0.72 to +0.12) | 71% (out) |
+| N3 −1 Boots of Swiftness +1 Treasure Trove | −0.13 (−0.66 to +0.41) | 72% (out) |
+| N2 −1 Existential Dread +1 Challenge | −0.27 (−0.86 to +0.33) | 70% (out) |
+| control | −0.71 (−1.68 to +0.27) | 64% (out) |
+
+**Master Yi only, the survivors:** N1 +0.24 (−0.14 to +0.63), 74% against 72%; N6 +0.05; N5 −0.10; the control lost.
+
+**Reading.** N1 leads again, in both runs, and real data agrees (fewer Ride the Wind in winners). It's the second step
+of the same swap. Nothing else from the review beats the cards it would replace.
+

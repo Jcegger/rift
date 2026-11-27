@@ -1,0 +1,9 @@
+[
+  { "label": "N1 one step further: -1 Ride the Wind +1 Switcheroo", "changes": ["-1 Ride the Wind", "+1 Switcheroo"] },
+  { "label": "N2 Challenge: -1 Existential Dread +1 Challenge", "changes": ["-1 Existential Dread", "+1 Challenge"] },
+  { "label": "N3 Treasure Trove: -1 Boots of Swiftness +1 Treasure Trove", "changes": ["-1 Boots of Swiftness", "+1 Treasure Trove"] },
+  { "label": "N4 Hold 'Em: -1 Edge of Night +1 Hold 'Em", "changes": ["-1 Edge of Night", "+1 Hold 'Em"] },
+  { "label": "N5 Gutter Guardian: -1 Ember Monk +1 Gutter Guardian", "changes": ["-1 Ember Monk", "+1 Gutter Guardian"] },
+  { "label": "N6 Staunch Survivor: -1 Tideturner +1 Staunch Survivor", "changes": ["-1 Tideturner", "+1 Staunch Survivor"] },
+  { "label": "PLANT (dead cards, should lose): -3 Nidalee, Cat Form +3 Whiteflame Protector", "changes": ["-3 Nidalee, Cat Form", "+3 Whiteflame Protector"] }
+]

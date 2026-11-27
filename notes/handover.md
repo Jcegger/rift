@@ -29,8 +29,8 @@ In the app as **`Sivir Is Trying Her Best`** (Battle Mistress, Body/Chaos). Read
 - **Units (22):** Sivir (Champion Zone) · Irresistible Faefolk ×3 · Evelynn, Entrancing · Bedeviling Stranger ×2 ·
   Tideturner ×2 · Reckless Innovator ×3 · Ezreal, Prodigy ×2 · Nidalee, Cat Form ×3 · Ember Monk · Vex, Apathetic ×2 ·
   Rengar, Trophy Hunter ×2
-- **Spells (16):** Punch First ×3 · Ride the Wind ×3 · Gust ×2 · Rebuke ×2 · Star-Crossed ×2 · Rampage ×2 · Switcheroo ·
-  Existential Dread
+- **Spells (16):** Punch First ×3 · Ride the Wind ×2 · Switcheroo ×2 · Gust ×2 · Rebuke ×2 · Star-Crossed ×2 · Rampage ×2 ·
+  Existential Dread (27 Nov: −1 Ride the Wind +1 Switcheroo; guide and sheets follow after the next search round)
 - **Gear (2):** Boots of Swiftness (+2 Might and **Ganking**) · Edge of Night
 - **Runes:** 6 Body / 6 Chaos (checked after every change; colour misses t3 about 6% / 3%).
 - **Battlefields (picked before the seat is known):** game 1 **Sigil of the Storm** · after a loss (Jay picks the seat,

@@ -629,6 +629,12 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   rebuilt system (the turn solver plays every card's text; model games run on it since 24 Nov). Row backed up
   (`backups/state-pre-ridethewind-2026-11-24.json`).
 
+- **27 Nov 2026, −1 Ride the Wind +1 Switcheroo** (Jay: "yep", after two Master Yi losses on 25 Nov). One role swap: a
+  Defy-proof trick for a Defy-counterable readier. Real data: good Sivir finishes run fewer Ride the Wind (−1.27,
+  interval below 0). Model (`search --hold-up 1`): the best of seven swaps across the field (+0.18, 73% won against 70%),
+  and against Master Yi alone +0.59 (+0.03 to +1.15). Details in `decklab/sivir-tune.md` (27 Nov). Row backed up
+  (`backups/state-pre-switcheroo-2026-11-27.json`). The guide and sheets are updated after the next search round.
+
 ### Games (the locked trap list, 1 Nov 2026)
 
 | # | date | vs | seat | battlefields (mine / theirs) | result | how | failure type | trap | notes |

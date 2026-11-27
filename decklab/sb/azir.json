@@ -1,0 +1,38 @@
+[
+  {
+    "label": "gear removal for Star-Crossed: -2 Star-Crossed +1 Acceptable Losses +1 An Offer You Can't Refuse",
+    "changes": [
+      "-2 Star-Crossed",
+      "+1 Acceptable Losses",
+      "+1 An Offer You Can't Refuse",
+      "sb+2 Star-Crossed",
+      "sb-1 Acceptable Losses",
+      "sb-1 An Offer You Can't Refuse"
+    ]
+  },
+  {
+    "label": "Graves for Gust: -2 Gust +2 Graves",
+    "changes": [
+      "-2 Gust",
+      "+2 Graves, Blasting Through",
+      "sb+2 Gust",
+      "sb-2 Graves, Blasting Through"
+    ]
+  },
+  {
+    "label": "Sabotage for Dread: -1 Existential Dread +1 Sabotage",
+    "changes": [
+      "-1 Existential Dread",
+      "+1 Sabotage",
+      "sb+1 Existential Dread",
+      "sb-1 Sabotage"
+    ]
+  },
+  {
+    "label": "PLANT: -3 Nidalee, Cat Form +3 Whiteflame Protector",
+    "changes": [
+      "-3 Nidalee, Cat Form",
+      "+3 Whiteflame Protector"
+    ]
+  }
+]
