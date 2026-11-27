@@ -530,3 +530,29 @@ at a battlefield, [Stun] it." Which of our units does it hit?
 
 **Weakest link:** point 2 reads Fizz's play as a Limited Play that skips timing permissions (§420.3.a); a judge should
 confirm before an event depends on Fizz casting a non-Action spell.
+
+## Charm on a unit in base makes its controller the attacker; Repulse can't protect a unit in base
+
+**Date:** 2026-11-27
+**Source:** Derived in this repo from the Core Rules and card text; no Riot staff ruling read. Asked while planning Sivir Is Trying Her Best against Master Yi (Jay: "it can make playing things to base dangerous").
+**Rules:** §190.3.a, §190.3.a.1, §466.2.c.1, §451.1
+**Expires:** when Riot rules on who attacks after an opponent's effect moves a unit, or a Core Rules update changes Contested
+
+**Questions.** (1) Their Charm ("Move an enemy unit.") moves our unit from our base to a battlefield they control.
+Is there a combat, and who attacks? (2) Can Repulse ("Choose a friendly unit at a battlefield. Counter an enemy spell
+or ability that chooses it and no other friendly unit.") stop that Charm?
+
+**Derived answers.**
+
+1. **A combat, and we attack.** An effect move goes wherever its source allows (§451.1); Charm names no limit. Our unit
+   arriving there applies Contested: *"Units moving to or being played to a battlefield apply Contested status if that
+   Battlefield is not already Contested and that Unit's controller does not already control that battlefield"*
+   (§190.3.a.1). *"The Attacker is the player whose unit(s) applied the Contested status to the Battlefield"*
+   (§466.2.c.1). So against Master Yi, Wuju Bladesman (*"While a friendly unit defends alone, it gets +2"*) our unit
+   attacks their lone, buffed defender on their turn, when En Garde is likely to be up too.
+2. **No, not while the unit is in base.** Repulse chooses *"a friendly unit at a battlefield"*, and a base isn't a
+   battlefield. It does protect a unit already at a battlefield from a Charm that chooses it and no other friendly unit.
+   A unit that *"can't be chosen by enemy spells and abilities"* (Ruin Runner) can't be Charmed anywhere.
+
+**Weakest link:** point 1 assumes Charm can move a base unit to any battlefield (§451.1, as in "Sivir, Mercenary's double
+conquest", 21 Nov). Ask a judge before an event depends on it.

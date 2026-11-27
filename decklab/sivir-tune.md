@@ -334,3 +334,56 @@ the list stays as it is):
 - C3: good finishes run more Switcheroo or fewer Existential Dread. Without that, a +0.07 inside the model isn't a
   reason to change.
 - C4: Rebuke over Rampage in good finishes. Without it, keep Rampage for the kills.
+
+
+## 27 Nov: tuning against Master Yi, and the field (after two Yi losses on 25 Nov)
+
+Jay, 25 Nov: lost twice to Master Yi (one was a very strong local, "Chicos"); "charm crushed me. en garde was tough."
+The journal is logged (0–2 against Yi).
+
+**Real data** (`rift lifts --since 2026-08-01`, 11 placed Sivir lists, 5 good finishes; thin):
+- good finishes run more **Sabotage +1.53 (+0.13 to +2.80)** and **Challenge +1.47 (+0.20 to +3.00)**;
+- and fewer **Ride the Wind −1.27 (−2.40 to −0.07)**. You run 3.
+
+**Master Yi, read off the cards:**
+- Defy (71%) counters 11 of your 13 spells. Punch First, Rebuke and Switcheroo (2 Power) are safe.
+- Their legend gives a lone defender +2, and En Garde gives +1, then +1 more if alone.
+- Master Yi, Unstoppable can't be chosen only at Level 16 (`rift versus` misreads it as always).
+- **Charm on a unit in base makes you the attacker** into their lone, buffed defender (§190.3.a.1, §466.2.c.1;
+  `docs/rules-rulings.md`, 27 Nov). Repulse can't protect a base unit, because it chooses "a friendly unit at a
+  battlefield". Ruin Runner can't be chosen anywhere.
+
+**Model, inside the model** (`rift search --hold-up 1`; the field is 11 S/A legends):
+
+| whole field (70% as is) | margin | won |
+|---|---|---|
+| −1 Ride the Wind +1 Switcheroo | +0.18 (−0.26 to +0.63) | 73% |
+| −2 Ride the Wind −1 Existential Dread +1 Sabotage +1 Challenge +1 Switcheroo | −0.05 (−0.54 to +0.45) | 71% |
+| −1 Existential Dread +1 Sabotage | −0.06 (−0.54 to +0.41) | 70% |
+| −1 Gust +1 Rebuke | −0.09 (−0.53 to +0.34) | 70% |
+| −1 Ember Monk +1 Pyke, Returned | −0.09 (−0.50 to +0.32) | 69% |
+| −1 Ride the Wind +1 Challenge | −0.11 (−0.53 to +0.32) | 70% |
+| −1 Existential Dread +1 Repulse | −0.18 (−0.65 to +0.28) | 68% |
+| control −3 Nidalee +3 Whiteflame Protector | −0.78 (−1.47 to −0.08) | 59% (out) |
+
+| Master Yi only, `--vs "master yi"` (69% as is) | margin | won |
+|---|---|---|
+| **−1 Ride the Wind +1 Switcheroo** | **+0.59 (+0.03 to +1.15)** | 74% |
+| the data package (as above) | +0.13 (−0.47 to +0.73) | 70% |
+| −1 Star-Crossed +1 Graves | +0.10 (−0.42 to +0.62) | 71% |
+| −1 Gust +1 Rebuke | −0.05 (−0.60 to +0.49) | 68% (out, round 2) |
+| −1 Gust +1 Repulse | −0.12 (−0.93 to +0.70) | 65% (out, round 1) |
+| −1 Existential Dread +1 Sabotage | −0.35 (−1.19 to +0.49) | 63% (out, round 1) |
+| −1 Ember Monk +1 Ruin Runner | −0.36 (−1.21 to +0.49) | 64% (out, round 1) |
+| control | −0.58 (−1.39 to +0.23) | 61% (out, round 1) |
+
+**Reading.**
+- **One change has all three kinds of evidence: −1 Ride the Wind, +1 Switcheroo.**
+  - Real data: winners run fewer Ride the Wind.
+  - Rules: Defy can't counter Switcheroo, and can counter Ride the Wind.
+  - The model: the best swap against the field, and clearly positive against Yi.
+- **Sabotage and Challenge** have real data behind them, but the model sees nothing. They stay sideboard or a later test.
+- **The model and the table disagree on Yi.** The model gives Trying Her Best 69% against Yi; Jay went 0–2. Either the
+  model's Yi misplays Charm and En Garde, or it was the pilot and the night. That's worth a `rift trace` of a model Yi
+  game before trusting the Yi numbers further.
+
