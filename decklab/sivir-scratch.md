@@ -148,8 +148,33 @@ text", and isn't re-checked yet this session.
 - **Early:** hide one card and play one unit. **Mid:** Gold from hiding, ambushes in their combat.
 - **Lethal:** Sivir switched on from banked Gold, plus a hidden trick to win the deciding fight.
 - **Weak to:** racing (Rengar, Rek'Sai) before the hidden cards pay off.
-- **Note:** the most decisions of the three, and Evelynn's proven chassis (same domains). Whether Defy can counter a
-  revealed Hidden spell is a rules question to settle.
+- **Note:** the most decisions of the three, and Evelynn's proven chassis (same domains). Defy reads a hidden spell's
+  printed cost, so a hidden 2-Power spell is safe (`docs/rules-rulings.md`, 26 Nov).
+
+### 2a. Does Evelynn do this better? (Jay's question, 26 Nov)
+
+Jay: "my only fear is evelynn just does that strategy better, but i could be wrong".
+
+- **Evelynn's legend (Agony's Embrace):** "Once each turn, when you play a card from face down, draw 1. Then, if it's
+  not your turn, discard 1." Hiding becomes **cards**.
+- **Battle Mistress** gives nothing for hiding as such. But a hide costs 1 Power, and Power from a rune is a recycle:
+  `docs/rules-rulings.md`, "Battle Mistress and Hidden" (26 Nov, derived). So **each hide is half of Sivir's switch**
+  ("Sivir, Mercenary's double conquest", 21 Nov: hide costs count as Power spent) and can make a Gold.
+- **Gold is limited, though:** one per ready of the legend, so one a turn plus one each time enemy units die.
+- **What holds Sivir back** (bench, 21 Nov, `sivir-new.md`) is having 2 Power of useful things to spend each turn,
+  not Gold.
+
+**Verdict.** For a pure Hidden deck, Jay is right: Evelynn draws a card per face-down play, has 529 lists and sits in
+A tier; under Sivir the same pile is a worse Evelynn. What Sivir does differently is spend: Evelynn turns hiding into
+cards, Sivir turns it into **tempo** (a 6-Might ganker every turn, and Gold for 2-Power spells Defy can't counter). So
+the direction worth building is one Evelynn can't copy.
+
+**D. Power every turn (the blend).**
+- **From A:** the goal. Switch Sivir on every turn and close with a double conquest.
+- **From C:** the fuel. Hidden cards are the cheapest useful Power spend, with a hidden 2-Power trick for the deciding
+  fight.
+- **From B:** the multiplier. Kills ready the legend for another Gold.
+- **Weak to:** removal on Sivir, so the must-have question below decides whether she's the only win condition.
 ## 3. Worth doing, and roles
 ## 4. Goal tiers and yardstick
 ## 5. Jobs and counts
