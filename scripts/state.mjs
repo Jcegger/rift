@@ -2373,7 +2373,7 @@ async function cmdIdentity(S, cat, args) {
   const mark = (ok) => (ok === true ? "ok  " : ok === false ? "FAIL" : ok === "new" ? "NEW " : ok === "later" ? "later" : "warn");
   console.log(`IDENTITY  ${deck.name}${R.legend ? ` · ${R.legend}` : ""}${identity ? ` · against ${opt("--id")}` : " · no identity block (rules and synergies only)"}`);
   if (identity) {
-    for (const [k, label] of [["plan", "plan"], ["winCondition", "wins by"], ["givesUp", "gives up"], ["worthDoing", "worth doing"], ["yardstick", "yardstick"]])
+    for (const [k, label] of [["plan", "plan"], ["early", "early (1–3)"], ["mid", "mid (4–6)"], ["lethal", "lethal"], ["winCondition", "wins by"], ["givesUp", "gives up"], ["worthDoing", "worth doing"], ["yardstick", "yardstick"]])
       if (identity[k]) console.log(`  ${pad(label, 12)} ${identity[k]}`);
     const open = (identity.gates || []).filter((g) => !g.confirmed);
     if (open.length) console.log(`  gates not yet confirmed by Jay: ${open.map((g) => g.gate).join(", ")}`);

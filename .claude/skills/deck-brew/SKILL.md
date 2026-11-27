@@ -25,10 +25,18 @@ core / flex) without looking.
 1. **Field, top-down.** `rift field --tiers`, `rift meta --since <format start>`, `rift field --for <legend>`. Write the
    top 5 decks to beat: their dominant units, removal, Defy, Charm and speed, each with its count.
    **Gate 1:** Jay confirms the top 5 we build against.
-2. **Identity.** Offer 2–3 identities. Each names its engine in card text (every rules premise goes through the
-   `rules-question` skill), the gap in the field it uses, and the legend line it pays off. **Gate 2a:** Jay picks one.
-   Then restate the pick as the `plan` (one sentence), the `winCondition` (how a normal game ends, on which turn) and
-   what it `givesUp`. **Gate 2b:** Jay confirms or corrects the restatement. Repeat 2b until his words and the block agree.
+2. **Identity, in stages: one gate each** (memory `identity-by-phase`). Ask Jay questions at every stage rather than
+   presenting a finished identity.
+   - **2a, direction:** 2–3 options. Each names its engine in card text (every rules premise goes through the
+     `rules-question` skill), the gap in the field it uses, and the legend line it pays off. Must-haves are decided
+     here, together. Jay picks one.
+   - **2b, early** (turns 1–3): what the deck does, and what it must stop.
+   - **2c, mid** (turns 4–6): how it builds its advantage, and what it spends.
+   - **2d, lethal:** the exact closing turn from 6–7 points, on which turn, and what breaks it.
+   - **2e, gives up:** what it is weak to, on purpose.
+
+   Write each phase to the block (`early`, `mid`, `lethal`, `givesUp`; `plan` and `winCondition` sum them up) and
+   quote Jay's words for each gate.
 3. **Worth doing, and roles.** The `worthDoing` sentence (what it does that the net deck and Jay's current list don't,
    and which matchups that wins), then beatdown or control against each of the top 5. With no honest sentence, the
    brew ends here: say so and offer `deck-netdeck` or tuning. **Gate 3.**
