@@ -347,7 +347,148 @@ built for (gate 1's ten decks), or if the bench shows it closes no better than T
 - **Tier 1, the plan works (model boards):** a winning line from 7 at least Trying Her Best's 32% (`--close`); search
   margin not worse with its interval (`rift search --file`); every key card actually cast (`rift trace`).
 - **Tier 2, real games:** the journal, against the field. 3–0 nights are the goal; 3 losses in the first 5 kills it.
+
+### Decisions, 27 Nov (Jay)
+
+- **Sabotage is in:** "sabotage is fair and good, don't worry about what i've said before. i'm talking more about
+  cheesy tricks".
+- **From scratch:** "let's truly start from scratch here". The LA list stays only as the reference that `rift
+  identity` counts changes against; past 16 we call it a new deck, and we expect to be.
+- **Battlefields:** "i like sigil". So Sigil of the Storm (conquer → recycle a rune → the legend's Gold), Hallowed Tomb
+  (brings Sivir back on a hold) and Hall of Legends (conquer → pay 1 to ready the legend → another Gold).
+- **Curve:** "i also think we need to think about energy curves here" and "as long as we're looking at curves, not
+  just averages … a certain amount of 2 drops (which can be a loose range), 3 drops, etc". Also: "units counts, pluss
+  like spells and gear (we'll likely be light on gear) counts. these can be flexible but we def need enough units haha".
+
+### Curve research (27 Nov)
+
+#### What the curve research found
+**How Energy grows** (`docs/rules.md`, §315.3.b, §487.7):
+- You channel 2 runes a turn, ready, so you have 2, 4, 6, 8, 10, then 12 runes (the cap) on turns 1–6. Going second,
+  you have 3 on turn 1.
+- Every Power paid from a rune recycles it, so the next turn has one fewer.
+- Energy isn't scarce; **cards are.** By turn 4 you've had 20 Energy but seen only about 8 cards. To spend it all, a
+  card has to average about 2.5 Energy, and **turn 1 needs a 2-drop.**
+
+**What wins in our colours** (good finishes since 23 Oct, average copies per list by Energy cost):
+
+| | units at 2 / 3 / 4 / 5 / 6+ | spells at 1 / 2 / 3 | avg cost | at 2 or less | Power a list |
+|---|---|---|---|---|---|
+| Kha'Zix, the fight deck (25) | 8.2 / 6.0 / 3.6 / 3.5 / 0.3 | 5.3 / 6.0 / 4.4 | 2.70 | 19.5 | 23.4 |
+| Evelynn, the hidden deck (31) | 2.8 / 10.2 / 5.6 / 3.9 / 1.1 | 3.6 / 2.3 / 5.4 | 3.18 | 9.5 | 16.0 |
+| Sivir, non-Aurora good finishes (3) | 3.3 / 8.7 / 3.0 / 0.3 / 1.3 | 8.3 / 4.7 / 5.3 | 2.51 | 20.3 | 26.0 |
+| every good finish (1,606) | 6.7 / 4.1 / 3.3 / 1.5 / 3.5 | 6.1 / 6.7 / 1.9 | 2.91 | 22.6 | 19.7 |
+
+`docs/deckbuilding.md` §5: winners run slightly cheaper decks with more 2-drops (top 8s average 2.81, with 22.4 cards at
+2 or less). Outside sources:
+- Riot's primer: "a large number (9+) of 2–4 cost units, enough that you can reliably draw one by your first or second
+  turn".
+- Mobalytics: play an X-cost unit once you have X runes, and use most of your runes each turn.
+- Shonen TCG (Rek'Sai): "at least nine 2-cost units" in the top lists.
+
+**What that means for this deck:** a fight deck in our colours looks like Kha'Zix's: about 2.7 average, about 19–20
+cards at 2 or less, and the most Power of any plan. That Power is what Battle Mistress pays back.
+
+#### The curve as counts per cost, not an average (Jay: "a certain amount of 2 drops … 3 drops, etc")
+Copies per Energy cost in good finishes since 23 Oct, as the median [10th–90th percentile range] across lists:
+
+| | 2E units | 3E units | 4E units | 5E units | 6E+ units | 1E spells | 2E spells | 3E spells | 4E+ spells | gear |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Kha'Zix (25), fight deck | 8 [8–9] | 5 [5–8] | 3 [3–5] | 4 [2–4] | 0 [0–1] | 5 [5–6] | 6 [5–7] | 4 [4–6] | 1 [0–1] | 3 [0–3] |
+| Rengar (82, since Aug), Body fight deck | 9 [9–10] | 12 [10–12] | 6 [5–6] | 2 [1–2] | 1 [1–4] | 5 [4–6] | 3 [2–3] | 2 [2–3] | 0 | 0 |
+| Evelynn (31), hidden deck | 3 [1–4] | 10 [3–15] | 5 [3–9] | 3 [1–5] | 0 [0–3] | 3 [2–6] | 2 [1–4] | 6 [4–7] | 0 [0–1] | 4 [1–7] |
+| every good finish (1,606) | 8 [3–9] | 3 [1–8] | 3 [1–6] | 1 [0–4] | 3 [0–8] | 5 [3–11] | 7 [3–9] | 1 [0–4] | 0 [0–4] | 5 [0–8] |
+
+The two fight decks agree on a tight 8–10 two-drops; Evelynn's hidden plan doesn't need them. 1-Energy units barely
+exist (0 in every group).
+
+**On-curve odds** (exact; the mulligan adds a little):
+- **A 2-drop on turn 1:** 8 copies → 69% by card 5 on the play, 76% by card 6 on the draw; 10 → 78% and 85%.
+- **A 3-drop by turn 2:** 6 → 71% by card 7; 8 → 82%.
+- **A 4-drop by turn 3:** 4 → 61% by card 8; 6 → 76%.
+- **A 5-drop by turn 4:** 3 → 55% by card 9; 5 → 74%.
+
+**Proposed slot targets (loose ranges):**
+
+| slot | target | fills it (candidates) |
+|---|---|---|
+| 2E units | **9–10** | early units: Shadow Order Disciple, Tideturner, Traveling Merchant, Staunch Survivor, Pit Rookie, Sneaky Zeebles |
+| 3E units | **5–7** | Fizz ×3, Ezreal ×2, First Mate, Reckless Innovator, Nidalee |
+| 4E units | **3–4** | Vex ×2 (plus Sivir in the Champion Zone, always available) |
+| 5E+ units | **2–3** | Rengar ×2, Carnivorous Snapvine |
+| 1E spells | **5–7** | Punch First ×3, On the Hunt (1E 2P), Sabotage, Flurry of Blades |
+| 2E spells | **4–6** | Switcheroo, Challenge, Rebuke |
+| 3E spells | **3–4** | Rampage ×3, Marching Orders |
+| 4E+ spells | **0–1** | |
+| gear | **0–2** | |
+
+That's about 21–23 units and 15–17 spells: the Kha'Zix shape, with Sivir's turn-3 Accelerate as the 4-drop that
+matters.
+
+**Is the curve worth tuning? Tested within each legend.** Across the 34 legends with 5+ good and 5+ other recorded
+finishes since August, I compared good finishes with the rest at every cost. The differences are all under a quarter of
+a card and inside their 95% intervals (2-drops +0.12 ± 0.20; 1E spells +0.18 ± 0.19; every other slot within ±0.10).
+So the curve comes with the plan, and its players converge on it; winners don't win by tweaking it, which matches
+`docs/deckbuilding.md` §5. **Use the plan's peer ranges (the fight decks), and don't fuss over ±1 in a slot.**
+
+**What the outside research says, the same logic by slot:**
+- [Riftbound Guide](https://riftboundguide.com/2026/05/12/how-to-build-a-riftbound-deck/): 8–10 units at 1–2 Energy,
+  6–8 at 3–4, 2–4 at 5+.
+- [Riot's primer](https://riftbound.leagueoflegends.com/en-us/news/rules-and-releases/deckbuilding-primer): 9+ units
+  at 2–4, "enough that you can reliably draw one by your first or second turn".
+- [Mobalytics](https://mobalytics.gg/riftbound/guides/deckbuilding-fundamentals): a good number of 2-drops, preferring
+  ones with no Power cost, since Power on turn 1 recycles a rune and costs turn 2. **Under Battle Mistress that recycle
+  also makes a Gold**, so a Power-cost 2-drop (Staunch Survivor) costs us less than it costs others.
+- **General TCG curve writing** (MTG aggro, scaled from 60 cards): most cards at 1–2, a handful at 3, almost nothing
+  above; an average above 2.5 means midrange
+  ([Draftsim](https://draftsim.com/mtg-aggro-deck/), [StarCityGames](https://articles.starcitygames.com/articles/building-good-aggro-decks/)).
+  Riftbound's runes grow 2 a turn, not 1, so the same logic shifts up about one Energy; that's why 2-drops are our
+  "1-drops".
+- **[Miracle Sivir](https://riftbound.cardsrealm.com/en-au/articles/riftbound-deck-tech-miracle-sivir)** (Jan 2026,
+  set 2, no list given, so it's dated): "Over half of this deck is cards you can play on the first few turns"; Gold
+  tokens are "the main resource", spent on Punch First; and Sivir, Mercenary is "a bit expensive", not for turns 2–3.
+  That last point is a test for us: **Sivir on turn 3 with Accelerate (costing 2 runes) against turn 4 without it.**
+  The goldfish and `--close` compare both.
+
+#### Units, spells and gear (Jay: "we def need enough units haha", "likely be light on gear")
+Copies of each card type in good finishes, as the median [10th–90th percentile range]:
+
+| | units | spells | gear |
+|---|---|---|---|
+| Kha'Zix (25), our colours' fight deck | 21 [20–23] | 16 [15–18] | 3 [0–3] |
+| Evelynn (31), hidden deck | 24 [21–28] | 12 [9–15] | 4 [1–7] |
+| Rengar (82, since Aug), all-unit fight deck | 30 [30–31] | 10 [9–10] | 0 |
+| Sivir non-Aurora good (3) | 14 [14–22] | 20 [15–20] | 6 [3–6] |
+| every good finish (1,606) | 20 [12–26] | 15 [10–22] | 5 [0–8] |
+
+Within each legend, good finishes and the rest are identical on all three (units 0.00 ± 0.29, spells 0.00 ± 0.31,
+gear 0.00 ± 0.21 over 34 legends). Again, the plan sets the split.
+
+**Proposed: units 21–23, spells 15–17, gear 0–2.** Why not fewer units:
+- every fight spell (Rampage, Challenge, Punch First, Switcheroo) needs a unit of ours on the battlefield to work;
+- the double conquest needs units to hold one battlefield while Sivir takes the other;
+- Rek'Sai's Cull the Weak makes us kill one of our units, and spare bodies protect Sivir;
+- Vex stuns what we play, so units already on the board are worth more.
+
+The 2-drops (9–10) alone keep the early board covered. Trying Her Best runs 22 units, for comparison. The draft is
+checked on the goldfish's "two units by turn 3" (Trying Her Best: 98% on the play) and "units by turn 5".
+
+#### The proposed curve, turn by turn (on the play)
+- **Turn 1 (2 runes):** a 2-drop unit. With 10 of them, about 78% have one by card 5, more after the mulligan.
+- **Turn 2 (4):** two 2-drops, or a 3-drop and a 1-Energy spell.
+- **Turn 3 (6): Sivir with Accelerate.** 4E + 1E = 5 Energy, and 2 Chaos Power from recycling two of the exhausted
+  runes. She enters ready at 6 Might with Ganking, and the first recycle makes a Gold. The cost: turn 4 has 6 runes,
+  not 8.
+- **Turn 4 (6–8):** Rengar (5E 1P) and a trick, or Fizz recasting Punch First, plus a 2–3 drop.
+- **Shape:** about 10 two-drop units, about 6 three-drops (Fizz, Ezreal…), about 3–4 four-drops (Vex, First Mate is
+  3), 2–3 at 5+ (Rengar), and about 14 spells, almost all at 1–3 Energy. Average about 2.6–2.7.
+- **Power by domain:** Sivir and Accelerate need Chaos; Punch First, Rampage's +2 and Sabotage need Body. The rune
+  split (LA ran 5 Body / 7 Chaos) is set at the draft from the Power counts, and checked with the goldfish's "stuck on
+  colour".
+
 ## 5. Jobs and counts (proposed 27 Nov, waiting on Jay)
+
+*Revised with the curve: the jobs fill the slot targets above (2-drop units 9–10, units 21–23, spells 15–17, gear 0–2).*
 
 Copies by job, with the chance of one by the Nth card seen (exact; `lib/identity.mjs`, the theory doc's table). Sivir
 starts in the Champion Zone, so she's always available and isn't counted as a draw.
