@@ -1,0 +1,33 @@
+# Sivir scratch brew, draft v1 (27 Nov 2026). decklab/sivir-scratch.md; card review decklab/sivir-scratch-cards.md
+Legend:
+1 Sivir, Battle Mistress
+Champion:
+1 Sivir, Mercenary
+MainDeck:
+3 Shadow Order Disciple
+3 Traveling Merchant
+2 Tideturner
+2 Staunch Survivor
+3 Fizz, Trickster
+2 Ezreal, Prodigy
+2 First Mate
+2 Vex, Apathetic
+1 Yordle Explorer
+2 Rengar, Trophy Hunter
+3 Punch First
+3 On the Hunt
+1 Sabotage
+1 Flurry of Blades
+1 Repulse
+2 Switcheroo
+1 Challenge
+1 Rebuke
+3 Rampage
+1 Marching Orders
+Battlefields:
+1 Sigil of the Storm
+1 Hallowed Tomb
+1 Hall of Legends
+Runes:
+6 Body Rune
+6 Chaos Rune

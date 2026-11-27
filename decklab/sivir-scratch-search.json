@@ -1,0 +1,8 @@
+[
+  { "label": "H1 bigger mid units: -2 First Mate -1 Yordle Explorer +3 Nidalee", "changes": ["-2 First Mate", "-1 Yordle Explorer", "+3 Nidalee, Cat Form"] },
+  { "label": "H2 answers on their turn: -1 Marching Orders -1 Challenge +2 Star-Crossed", "changes": ["-1 Marching Orders", "-1 Challenge", "+2 Star-Crossed"] },
+  { "label": "H3 fewer 2-Might bodies: -3 Shadow Order Disciple +3 Reckless Innovator", "changes": ["-3 Shadow Order Disciple", "+3 Reckless Innovator"] },
+  { "label": "H4 Gust for the cheap answer: -1 Repulse -1 Flurry of Blades +2 Gust", "changes": ["-1 Repulse", "-1 Flurry of Blades", "+2 Gust"] },
+  { "label": "H5 all of H1+H2", "changes": ["-2 First Mate", "-1 Yordle Explorer", "+3 Nidalee, Cat Form", "-1 Marching Orders", "-1 Challenge", "+2 Star-Crossed"] },
+  { "label": "PLANT (dead cards, should lose): -3 Rampage +3 Whiteflame Protector", "changes": ["-3 Rampage", "+3 Whiteflame Protector"] }
+]

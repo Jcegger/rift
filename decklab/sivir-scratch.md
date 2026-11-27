@@ -19,16 +19,21 @@ Draft list: `decklab/sivir-scratch.deck.txt` (Piltover paste text; `rift <cmd> -
   "lethal": "From 6: Sivir conquers A, On the Hunt readies her, she ganks to B and conquers (8). Broken by removal on Sivir, a Vex stun, or a blocker over 6 at B, so a second attacker matters.",
   "winCondition": "A double conquest around turn 7–8 after winning the mid-game fights.",
   "givesUp": "Decks that won't fight (Azir wide behind Defy, Mordekaiser late), an early Vex we can't kill, long value grinds (LeBlanc, Kai'Sa); the sideboard covers them.",
-  "worthDoing": "What it does that the net deck or the benchmark doesn't, and which matchups that wins.",
-  "roles": { "Riven": "beatdown | control" },
-  "goalTiers": ["tier 0: …", "tier 1: …"],
-  "yardstick": "The measure set before any card was picked, and the result that would kill the concept.",
+  "worthDoing": "Kills and wins fights where Trying Her Best bounces and holds, so the legend's second line fires and its 2-Power tricks come back as Gold; beats the board-fighting decks (Rengar, Rek'Sai, LeBlanc, Evelynn, Diana) and stays even with Defy decks.",
+  "roles": { "Vex": "beatdown", "Kai'Sa": "beatdown", "Master Yi": "beatdown", "LeBlanc": "beatdown", "Diana": "beatdown", "Azir": "beatdown", "Mordekaiser": "beatdown", "Rengar": "control early, then beatdown", "Rek'Sai": "control early, then beatdown", "Evelynn": "control" },
+  "goalTiers": ["tier 0 (goldfish): rules pass; two units by turn 3 on 95%+; Mercenary on above Trying Her Best's 38%; Gold a game at least as high", "tier 1 (model boards): a winning line from 7 at least Trying Her Best's 32%; margin not worse within its interval; key cards cast", "tier 2 (real games): 3–0 nights; 3 losses in the first 5 logged games against the field kills it"],
+  "yardstick": "3–0 at a Nexus Night. Dead if it loses 3 of its first 5 logged games against the field, or if the bench shows it closing and fighting no better than Trying Her Best.",
   "jobs": {
-    "early-unit": { "by": 7, "target": 0.85 },
-    "removal": { "by": 9, "target": 0.75 },
-    "closer": { "cards": ["named by hand when the job isn't one lib/jobs.mjs reads"], "by": 10, "target": 0.6 }
+    "early-unit": { "by": 5, "target": 0.75 },
+    "kill": { "cards": ["Rampage", "Challenge", "Marching Orders", "Flurry of Blades"], "by": 9, "target": 0.75 },
+    "fight trick": { "cards": ["Punch First", "Switcheroo"], "by": 8, "target": 0.65 },
+    "readier": { "cards": ["On the Hunt", "First Mate"], "by": 10, "target": 0.75 },
+    "second closer": { "cards": ["Rengar, Trophy Hunter"], "by": 10, "target": 0.4 },
+    "fizz": { "cards": ["Fizz, Trickster"], "by": 9, "target": 0.5 },
+    "card flow": { "cards": ["Ezreal, Prodigy", "Traveling Merchant", "Yordle Explorer"], "by": 9, "target": 0.75 },
+    "answer": { "cards": ["Sabotage", "Rebuke", "Repulse", "Vex, Apathetic"], "by": 9, "target": 0.75 }
   },
-  "keyCards": ["the cards the plan can't run without"],
+  "keyCards": ["Sivir, Mercenary", "On the Hunt", "Punch First", "Fizz, Trickster", "Rampage"],
   "gates": [
     { "gate": "1 field", "date": "2026-11-26", "confirmed": true, "jay": "i do agree with these so far tho (Vex, Rengar, LeBlanc, Kai'Sa, Diana) · last week i played two master yis! · we want to be able to go against a broad meta, maybe do research on post-radiance ban meta · maybe we get more specific in the sideboard" },
     { "gate": "2a direction", "date": "2026-11-27", "confirmed": true, "jay": "yes, this feels good! (the Body/Chaos fight deck: every Power buys a won fight, Fizz buys it twice, Sivir turns the fights into a double conquest)" },
@@ -36,9 +41,9 @@ Draft list: `decklab/sivir-scratch.deck.txt` (Piltover paste text; `rift <cmd> -
     { "gate": "2c mid", "date": "2026-11-27", "confirmed": true, "jay": "these all seem good! just make sure you're considering any and all cards available to us, which you can take your time on" },
     { "gate": "2d lethal", "date": "2026-11-27", "confirmed": true, "jay": "these all seem good! just make sure you're considering any and all cards available to us, which you can take your time on" },
     { "gate": "2e gives up", "date": "2026-11-27", "confirmed": true, "jay": "these all seem good! just make sure you're considering any and all cards available to us, which you can take your time on" },
-    { "gate": "3 worth doing", "date": "", "confirmed": false, "jay": "" },
-    { "gate": "4 tiers and yardstick", "date": "", "confirmed": false, "jay": "" },
-    { "gate": "5 jobs", "date": "", "confirmed": false, "jay": "" },
+    { "gate": "3 worth doing", "date": "2026-11-27", "confirmed": true, "jay": "ok cool, let's get to work. (after gates 3–5 were laid out: worth doing, the 3–0 yardstick, the slot counts and battlefields)" },
+    { "gate": "4 tiers and yardstick", "date": "2026-11-27", "confirmed": true, "jay": "ok cool, let's get to work. (after gates 3–5 were laid out: worth doing, the 3–0 yardstick, the slot counts and battlefields)" },
+    { "gate": "5 jobs", "date": "2026-11-27", "confirmed": true, "jay": "ok cool, let's get to work. (after gates 3–5 were laid out: worth doing, the 3–0 yardstick, the slot counts and battlefields)" },
     { "gate": "6 the draft is the identity", "date": "", "confirmed": false, "jay": "" }
   ]
 }
@@ -517,6 +522,114 @@ First, Switcheroo, Rampage, On the Hunt, Challenge): 12+ copies, so a target is 
 
 The full review of every legal card (295, plus 67 battlefields) is `decklab/sivir-scratch-cards.md`: 9 in, 42
 candidates, 244 out, each with its reason.
+
+### Draft v1 (27 Nov): `decklab/sivir-scratch.deck.txt`
+
+| slot (target) | cards | count |
+|---|---|---|
+| 2E units (9–10) | Shadow Order Disciple ×3, Traveling Merchant ×3, Tideturner ×2, Staunch Survivor ×2 | 10 |
+| 3E units (5–7) | Fizz, Trickster ×3, Ezreal, Prodigy ×2, First Mate ×2 | 7 |
+| 4E units (3–4) | Vex, Apathetic ×2, Yordle Explorer ×1, Sivir, Mercenary ×1 (Champion Zone) | 4 |
+| 5E+ units (2–3) | Rengar, Trophy Hunter ×2 | 2 |
+| 1E spells (5–7) | Punch First ×3, On the Hunt ×3, Sabotage, Flurry of Blades, Repulse | 9 |
+| 2E spells (4–6) | Switcheroo ×2, Challenge, Rebuke | 4 |
+| 3E spells (3–4) | Rampage ×3, Marching Orders | 4 |
+
+- **Totals:** 23 units, 17 spells, 0 gear.
+- **Battlefields:** Sigil of the Storm, Hallowed Tomb, Hall of Legends. **Runes:** 6 Body / 6 Chaos.
+- **Over range on purpose:** 1E spells at 9 against 5–7. On the Hunt and Repulse cost 1 Energy but are Power cards,
+  so they cost runes, not curve.
 ## 7. Audit (`rift identity` output, turns 1–4 on the play and on the draw)
-## 8. Tests (each change, the same test)
+
+**`rift identity` (27 Nov), against the LA reference:**
+- **Rules:** one champion copy ✓, On the Hunt at 3 ✓, no Aurora ✓. 17 changes from the LA list, so it's a new deck, as
+  intended.
+- **Jobs against their targets:**
+  - early units 10: 78% by card 5 ✓;
+  - kills 6: 81% by card 9 ✓;
+  - 2-Power tricks 5: 69% by card 8 ✓;
+  - readiers 5: 78% by card 10 ✓;
+  - Rengar 2: 44% by card 10 ✓;
+  - Fizz 3: 55% ✓;
+  - card flow 6: 81% ✓;
+  - answers 5 (Vex ×2, Sabotage, Rebuke, Repulse): 74% against 75%, a hair short.
+- **Jobless:** "Sivir, Mercenary" shows as jobless only because she starts in the Champion Zone and isn't drawn.
+- **Enablers:** none stranded. **Interaction:** 10 copies; usable on their turn 10.
+
+**Goldfish (`rift try`, 20,000 games; engine quiet / normal / heavy), against Trying Her Best:**
+
+| | draft v1 | Trying Her Best |
+|---|---|---|
+| Mercenary on (turns 4–8, 2+ Power spent) | **51 / 54 / 55%** | 30 / 38 / 42% |
+| kills a game (each readies the legend) | **0.82 / 1.42** (normal / heavy) | 0.28 / 0.54 |
+| Gold a game | 4.25 / 4.49 / 4.54 | 3.73 / 4.36 / 4.02 |
+| extra cards drawn | 3.9 / 3.8 / 3.2 | 2.7 / 3.1 / 2.9 |
+| two units by turn 3 (play / draw) | 95% / 98% | 98% / 99% |
+| units by turn 2 / 3 (play) | 1.9 / 3.3 | 1.8 / 3.0 |
+| Energy spent turns 1–4 (play / draw) | 15.5 / 17.2 | 15.8 / 18.2 |
+| stuck on colour, turn 3 (play / draw) | 5% / 5% | 5% / 3% |
+| an answer usable on their turn, t5 (play / draw) | **45% / 48%** | 59% / 73% |
+| tricks stuck for lack of Energy (normal / heavy) | **1.79 / 3.57** | 1.50 / 2.85 |
+| average cost · cards at 2E or less | 2.40 · 23 | 2.55 · 20 |
+
+**Rune split:** 6/6 keeps stuck-on-colour at 5% on the play and the draw; 5/7 and 7/5 both read 7%. So 6/6.
+
+**Tier 0:** passed on rules and two units by turn 3 (95%), and on Mercenary on (well above 38%) and Gold. **Watch:**
+fewer answers on their turn, and more tricks stranded for Energy. Both come from a cheap trick-heavy list whose
+Power payments shrink the runes.
+
+**Turns 1–4, a normal draw:**
+- **On the play:**
+  - **T1 (2 runes):** a 2-drop (Disciple, Merchant or Staunch Survivor; 78% have one). Staunch Survivor's Power
+    recycles a rune, so the legend makes a Gold for turn 2.
+  - **T2 (4):** two 2-drops, or Ezreal (3E 1P) and hold a rune.
+  - **T3 (6):** Sivir with Accelerate (5 Energy, 2 Chaos Power), ready at 6 Might with Ganking: attack. Hall of
+    Legends conquered → pay 1 to ready the legend → another Gold. Or Rampage their best unit plus a 3-drop.
+  - **T4 (6–8):** Rengar into their combat (Ambush), or Fizz rebuying Rampage or Punch First, with Gold holding up
+    Punch First on their turn.
+- **On the draw:** 3 runes on turn 1, so Ezreal turn 1 (3E 1P), or a 2-drop and a hide (Tideturner, Switcheroo). The
+  rest runs one Energy ahead.
+## 8. Tests
+
+**Model games, draft v1 against Trying Her Best (27 Nov).** `rift try --points --close`: 240 points games and 400
+closing games against the S/A field (11 legends, lists since 16 Oct, so pre-ban lists are included). Both decks play
+the same games. These rank inside the model (r about 0.3 for swaps); they aren't a verdict.
+
+| | draft v1 | Trying Her Best |
+|---|---|---|
+| won (8 first) | **38%** (33–45%) | **66%** (60–72%) |
+| our / their points by turn 8 | 5.93 / 6.53 | 7.06 / 5.18 |
+| our holds / their holds a game | 2.33 / 2.99 | 3.33 / 2.02 |
+| conquers a game | 3.66 | 3.78 |
+| a winning line from 7 · from 6 | 23% · 5% | 32% · 5% |
+| winning lines: hold + conquest / double conquest | 32 / 10 of 52 | 59 / 9 of 74 |
+| cards the winning lines use most | Fizz 18, Rengar 14, Staunch Survivor 13, Vex 11, Disciple 11, On the Hunt 10, Sivir 9 | Sivir 27, Nidalee 20, Rengar 17, Vex 16, Faefolk 16, Innovator 14 |
+
+**What it says.** Inside the model, draft v1 is clearly worse, by more than noise. The loss is in **holds**: one fewer
+of ours a game and one more of theirs. It conquers about as often. Sivir is in 9 winning lines against 27. Tier 1
+fails as built. That's not the kill condition (the yardstick is real games), but it's a red flag to diagnose before
+Jay reads the list. **Next:** find what restores holding. Candidates are bigger mid units (Nidalee 4 Might), answers on
+their turn (the goldfish already showed 45% against 59%), and fewer 2-Might bodies.
+
+**Diagnostic search (27 Nov).** `rift search --file decklab/sivir-scratch.deck.txt --cands
+decklab/sivir-scratch-search.json`: 480 games each, margin vs draft v1 (95%).
+
+| change | margin | won |
+|---|---|---|
+| draft v1 as is | | 40% (36–45%) |
+| H4: −1 Repulse −1 Flurry +2 Gust | +0.40 (−0.03 to +0.83) | 44% |
+| H5: H1 + H2 | +0.28 (−0.17 to +0.73) | 46% |
+| H1: −2 First Mate −1 Yordle Explorer +3 Nidalee | +0.26 (−0.18 to +0.71) | 45% |
+| H3: −3 Shadow Order Disciple +3 Reckless Innovator | +0.26 (−0.25 to +0.76) | 44% |
+| H2: −1 Marching Orders −1 Challenge +2 Star-Crossed | +0.20 (−0.22 to +0.62) | 43% |
+| control: −3 Rampage +3 Whiteflame Protector | −0.19 (−0.63 to +0.26) | 40% (out in round 3) |
+
+**Reading.**
+- Every fix leans the same way, toward bigger bodies and answers on their turn, and each wins back a few points.
+- None comes near Trying Her Best's 66%, so it isn't one bad card; it's structural.
+- The control barely moved, so the model reads Rampage as worth little.
+- **Model blind spot:** hold-up (keeping a trick for their turn) is modelled only in `calibrate --hold-up`, not in
+  `try` or `search`. This deck's mid-game holds Gold-paid tricks for their combat, so the model undercounts it. That
+  can't explain a 28-point gap alone, though; Trying Her Best runs reactions too.
+
 ## 9. Freeze and watch items
