@@ -26,11 +26,15 @@ end of `decklab/sivir-ready.md`. The guide (`guides/sivir-one-army.md`) is curre
 In the app as **`Sivir Is Trying Her Best`** (Battle Mistress, Body/Chaos). Read it live with
 `scripts/rift export "Trying Her Best"`; Jay edits in the app between sessions, so never trust a cached copy.
 
-- **Units (22):** Sivir (Champion Zone) · Irresistible Faefolk ×3 · Evelynn, Entrancing · Bedeviling Stranger ×2 ·
-  Tideturner ×2 · Reckless Innovator ×3 · Ezreal, Prodigy ×2 · Nidalee, Cat Form ×3 · Ember Monk · Vex, Apathetic ×2 ·
+- **Units (23):** Sivir (Champion Zone) · Irresistible Faefolk ×3 · Evelynn, Entrancing · Bedeviling Stranger ×2 ·
+  Tideturner ×2 · Reckless Innovator ×3 · Ezreal, Prodigy ×3 · Nidalee, Cat Form ×3 · Ember Monk · Vex, Apathetic ×2 ·
   Rengar, Trophy Hunter ×2
-- **Spells (16):** Punch First ×3 · Switcheroo ×3 · Ride the Wind · Gust ×2 · Rebuke ×2 · Star-Crossed ×2 · Rampage ×2 ·
-  Existential Dread (27 Nov: −2 Ride the Wind +2 Switcheroo, in two steps; guide and sheets follow after the sideboard pass)
+- **Spells (15):** Punch First ×3 · Switcheroo ×3 · Gust ×2 · Rebuke ×2 · Star-Crossed ×2 · Rampage ×2 ·
+  Existential Dread
+- **Frozen 27 Nov 2026 for testing** (−3 Ride the Wind: +2 Switcheroo, +1 Ezreal). Change only when a logged game trips a
+  watch item: Charm on a base unit (Yi, Irelia, Lillia); no readier when a double conquest was there; Kai'Sa killing
+  Sivir before she swings (then try Hallowed Tomb for Recital); Ezreal's discard costing a trap card. 5–10 logged games
+  before the next change; post-ban `rift lifts` after the 29–30 Nov weekend is the next real-data check.
 - **Gear (2):** Boots of Swiftness (+2 Might and **Ganking**) · Edge of Night
 - **Runes:** 6 Body / 6 Chaos (checked after every change; colour misses t3 about 6% / 3%).
 - **Battlefields (picked before the seat is known):** game 1 **Sigil of the Storm** · after a loss (Jay picks the seat,
@@ -49,7 +53,7 @@ going for both battlefields is right only when the terminal scan says it wins th
 - **Closing turn (start on 6 holding A):** the hold makes 7 → Faefolk walks into A and pulls B's defender in (it
   attacks; they have focus first) → a face-down Stranger bounces it or Existential Dread stuns it → Sivir with
   Accelerate walks into the empty B → 8. Backups: a holder wearing Boots walks A → B (Ganking; their Vex only stuns
-  units played that turn), Ride the Wind. **Not Rengar** (corrected 21 Nov): his Ambush reaches a battlefield
+  units played that turn). **Not Rengar** (corrected 21 Nov): his Ambush reaches a battlefield
   with your units or with enemy units, and the emptied B has neither, so he can only come down at base, exhausted
   (§355.2.a, §822.1.b, §822.1.d, §822.3). He's a B option only while their unit is still there.
 - **Recital (after a loss):** every hold sends their lone B defender home; walk in and conquer: two points a turn.
@@ -75,9 +79,8 @@ Jay is happy with the list; it stays locked.
 
 ## Ready swaps, only if the logs call for them
 
-- **Card draw or Power keeps biting:** −1 Ride the Wind (the cheapest cut on the bench), +1 **Kinkou Initiate**
-  (0 Power, a body, usually draws; Jay owns 5). Alternatives in the same slot: Ezreal #3 (best draw on the bench,
-  Jay owns 2) or The Good Stuff (draws 3 every hold; cut when a reviewer doubted the holds; game 1 held both).
+- **Card draw or Power keeps biting:** done 27 Nov (Ezreal #3 took the last Ride the Wind). Next in line: Kinkou
+  Initiate or The Good Stuff for an Existential Dread, through `rift search --hold-up 1` first.
 - **Power still tight after that:** one Rebuke (it won Ekko game 1 on 3 Nov, so the bar to cut it is higher now), but it's the answer to their Vex (local Vex and Diana run her), so
   last.
 - **Dead: Star Spring is banned from 23 Nov 2026** (in the ban list with Emperor's Dais). Kept for the record.

@@ -639,6 +639,12 @@ Merchant as an 8th 2-drop if turn 1 keeps missing; Ruin Runner from the sideboar
   Round 2 (`search --hold-up 1`): the best change across the field, +0.27 (−0.14 to +0.68), 75% won against 73%; and
   against Master Yi alone, +0.24 (−0.14 to +0.63), 74% against 72%. Real data still agrees. Row backed up
   (`backups/state-pre-switcheroo2-2026-11-27.json`).
+- **27 Nov 2026, third step: −1 Ride the Wind +1 Ezreal, Prodigy; then frozen** (Jay: "is this locked in???" / "are you
+  sure you need to run no more tests?"). On the deeper model (e65aa10: kills count; Forbidding Waste, Amateur Recital,
+  Hallowed Tomb as text), it led all four runs (whole field 73 → 75%, Yi 75 → 77, Kai'Sa 53 → 56, Evelynn 65 → 70).
+  Then 1,920 paired games: margin **+0.20 (+0.11 to +0.28)**, won 72 → 74%; closing from 7 31 → 33%, from 6 4 → 4%. Real
+  data: Ezreal +1.30, Ride the Wind −1.27. Row backed up (`backups/state-pre-ezreal3-2026-11-27.json`). The list is
+  **frozen for testing**; watch items in `notes/handover.md`.
 ### Games (the locked trap list, 1 Nov 2026)
 
 | # | date | vs | seat | battlefields (mine / theirs) | result | how | failure type | trap | notes |

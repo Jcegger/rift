@@ -4,13 +4,14 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `~/projects/dotclaude/HUB.md`.
 
-**Updated:** 2026-11-27 (Sivir from-scratch brew shelved per its own gate; hold-up on try/search; solver crash fixed, 285233b)
+**Updated:** 2026-11-27 (Trying Her Best tuned and frozen: −3 Ride the Wind, +2 Switcheroo, +1 Ezreal; model counts kills and plays Waste/Recital/Tomb, e65aa10)
 
 ## State
 
-- Main deck: **Sivir Is Trying Her Best**, back to Jay's earlier list since 24 Nov (Ride the Wind ×3 main; Acceptable
-  Losses in the sideboard; 9eab02c, row backed up in `backups/state-pre-ridethewind-2026-11-24.json`). Guide, both
-  sheets, the brief and the worksheet log match it; reMarkable and Kobo have it.
+- Main deck: **Sivir Is Trying Her Best**, **frozen 27 Nov for testing** after three steps (−3 Ride the Wind: +2
+  Switcheroo, +1 Ezreal; `decklab/sivir-tune.md` 27 Nov). Guide, both sheets and the brief match; on the reMarkable.
+  Watch items and the next real-data check are in `notes/handover.md`. Journal: 0–2 against Master Yi on 25 Nov
+  (Charm from base; ruling in `docs/rules-rulings.md`).
 - **What the model is for** (settled with Jay, 25 Nov; `docs/model-calibration.md` top section):
   - Simulating whole games won't predict real win rates well enough to judge one-card swaps.
   - **Real data comes first for list and swap verdicts:** `rift lifts --legend <L> --deck "<deck>"` (good finishes'

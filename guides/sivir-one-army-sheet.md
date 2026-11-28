@@ -29,7 +29,7 @@ date: 2026-11-02
 
 **Breaks the close:** their Vex · Gust or Star-Crossed on Stranger · Not So Fast · Moonfall / Hidden Blade / Rebuke on Sivir in B · **Baron** (can't be pulled or bounced; with the Pit out, **win by holding at 7**).
 
-**Against Defy.** Safe: Punch First, Rebuke, Switcheroo, every unit. Counterable: Ride the Wind, Gust, Rampage, Star-Crossed, Existential Dread.
+**Against Defy.** Safe: Punch First, Rebuke, Switcheroo, every unit. Counterable: Gust, Rampage, Star-Crossed, Existential Dread.
 
 **Against Charm** (Master Yi, Irelia, Lillia): **Charm on a unit in your base makes you attack** their battlefield, into a lone defender's +2 and En Garde. Keep two at A, don't park threats in base, and play Rengar and Nidalee by Ambush.
 
