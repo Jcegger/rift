@@ -464,3 +464,56 @@ Recital's):
 leans +2 points across the field, inside the noise. So the model sees no reason to change. Recital stays; the Tomb is an
 option to try at the table against removal decks.
 
+## Audit, 27–28 Nov (Jay: "ok now audit it forreaal")
+
+**The whole package against the 26 Nov list** (Ride the Wind ×3, Switcheroo ×1, Ezreal ×2 → 0 / 3 / 3), paired
+games, hold-up 1, on the corrected model (3570cc2):
+
+| | margin | won |
+|---|---|---|
+| whole field (1,920) | **+0.50 (+0.37 to +0.63)** | 69% → 75% |
+| Master Yi (960) | **+0.61 (+0.41 to +0.80)** | 69% → 76% |
+| Kai'Sa (960) | **+0.41 (+0.22 to +0.60)** | 47% → 54% |
+| Evelynn (960) | **+0.94 (+0.72 to +1.15)** | 61% → 71% |
+
+- The same runs before the bounce fix gave +0.48, +0.62, +0.43 and +0.92. Both lists run the same bounce cards, so
+  the bias cancelled out.
+- **Closing** (800, before the bounce fix): a winning line from 7 went 35% → 32%, and from 6 went 6% → 4%. Both are
+  within noise, and it's the expected cost of cutting the readiers. It's a watch item.
+- 0 solver errors.
+
+**Legality and ownership:** the rules pass (one champion copy, signatures 0, no Aurora). **Nidalee ×3 arrived**, the
+collection was updated 28 Nov, and the list has nothing left to get.
+
+**Independent reviews, all answered:**
+- **Rules** (agent): no disagreements. Applied:
+  - Defy and printed cost now cite §206 (Defy is the rule's own example);
+  - "they can't move it" for Vex;
+  - the FAQ's Charm answer;
+  - "rarely" for Forbidding Waste with two holders (§740.2.a).
+- **Table read** (copy-editor): 12 findings, all fixed in 0468dd9:
+  - counts (Ezreal ×3, the shape 23 / 15 / 2);
+  - the cut Ride the Wind entry;
+  - **outs added to every sheet sideboard row**;
+  - ban tags on Brynhir and Rhasa;
+  - Graves's "no combat damage";
+  - Vex's wording;
+  - dates.
+
+  Disagreed, with reason: Akali's "hold Faefolk" with Faefolk ×2 out isn't a contradiction (one Faefolk stays for
+  the close); the line is clearer now.
+- **Code** (agent): no wrong results in the main path. Fixed in 3570cc2:
+  - **a bounce scored as a kill** (their units in hand now count; test 222; calibration within noise, r 0.22);
+  - Recital now trashes face-down cards;
+  - "proven here" needs 5 good finishes;
+  - a `--vs` notice.
+
+  Logged, not fixed:
+  - a `--file` draft's named champion is ignored when it lists several of that champion's units (buildDeck takes the
+    cheapest); doesn't affect this deck;
+  - Forbidding Waste isn't played under `--greedy`.
+
+**Verdict:** the frozen list stands. Every matchup measured clears its noise against the 26 Nov list, on a model that
+was audited and calibrated twice. Its limits: the model tracks real results only moderately (legends r about 0.2,
+swaps about 0.4), so Jay's next 5–10 logged games are the real test, against the watch items in `notes/handover.md`.
+
