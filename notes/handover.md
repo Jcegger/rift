@@ -41,8 +41,8 @@ In the app as **`Sivir Is Trying Her Best`** (Battle Mistress, Body/Chaos). Read
   goes first) **Amateur Recital** · after a win (they pick, usually first) **Forbidding Waste**.
 - **Sideboard (10):** Ruin Runner ×2 · Graves ×2 · Ravenbloom Prefect (Jay: must stay) · Acceptable Losses ·
   An Offer You Can't Refuse · Sabotage · Unyielding Spirit ×2.
-- **Old decks:** v1 "Sivir is trying her best" was deleted from the app 1 Nov (its guide is kept as "Sivir v1
-  (retired)"); `guides/sivir-v2.md` is superseded.
+- **Old decks:** v1 "Sivir is trying her best" was deleted from the app 1 Nov. Its guide (`guides/sivir-trying-her-best.md`),
+  `guides/sivir-v2.md` and `guides/sivir-two-fights.md` were deleted 28 Nov (Jay); they're in git history.
 
 ## The plan: A is a trap
 

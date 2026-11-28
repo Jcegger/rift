@@ -9,7 +9,7 @@ The layer above the cards. [rules.md](rules.md) says what the rules are, [strate
 says how to choose a line, and the deck guides in `guides/` go deep on one deck. This page says
 **what every legend's deck is for**: how it wins, the engine it runs on, the cards that make it
 itself, what beats it, and what the matchup turns on from Sivir's side
-([Sivir Is Trying Her Best](../guides/sivir-trying-her-best.md)).
+([Sivir Is Trying Her Best](../guides/sivir-one-army.md)).
 
 ## How to read this page
 
@@ -118,7 +118,7 @@ The legend readies a unit after conquering with 3+ excess damage; Hextech Gauntl
   battlefield). Develop first, spells second ([Jun](jun.md)).
 - **Wins by:** a stream of won fights that pay XP, then conquests the walk-home keeps from being
   punished.
-- **From Sivir:** *hold with two.* His +2 is only against a lone enemy unit; Star-Crossed 100%, Rampage 87%, Vex 73%, Rengar 73%. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *hold with two.* His +2 is only against a lone enemy unit; Star-Crossed 100%, Rampage 87%, Vex 73%, Rengar 73%. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** movement — in to win the fight, out before the retake. Won fights pay the XP that
   buys the walk home; the list's payoffs (Shadow Order Disciple, Faefolk, Traveling Merchant) are
   for moving, and Jun's test for Void Assault is "does my own unit need to move this turn?"
@@ -173,7 +173,7 @@ The legend readies a unit after conquering with 3+ excess damage; Hextech Gauntl
   hand Accelerate; Undertitan gives the others +2 the turn it lands. Blood Rush and Cleave turn the
   wide board into attackers.
 - **Wins by:** more battlefields contested than the opponent can defend, then Undertitan.
-- **From Sivir:** *hold.* The widest board; Cull the Weak 95%, Falling Star 90%. Bring in 2 Graves; take out 2 Sabotage. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *hold.* The widest board; Cull the Weak 95%, Falling Star 90%. Bring in 2 Graves; take out 2 Sabotage. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** reveal — the top of the deck. Conquer, flip two, play one: the legend on conquest,
   Void Rush any time, Breacher's Accelerate so the flipped unit fights now, Undertitan's [Add] 2 as
   it is revealed. Every conquest is a gamble on the top two, which is why the deck is all cheap
@@ -204,7 +204,7 @@ The legend hides for [1] instead of [A] and returns Teemos to hand to re-hide; T
 
 ### Sivir, Battle Mistress — Aggro · Extra resources
 *Body / Chaos.* **Evidence:** **No one-on-one Radiance results yet** (28 Oct 2026): the plan below is Vendetta evidence and the cards' text.
-- **Variants:** Aurora in 10 of 36 lists. Jay's own deck, *Sivir Is Trying Her Best*, is a different deck: **Midrange · Extra resources** by the same measure (cost 2.8, 14 cheap, 9 draw), rebuilt away from this fast curve ([the guide](../guides/sivir-trying-her-best.md)).
+- **Variants:** Aurora in 10 of 36 lists. Jay's own deck, *Sivir Is Trying Her Best*, is a different deck: **Midrange · Extra resources** by the same measure (cost 2.8, 14 cheap, 9 draw), rebuilt away from this fast curve ([the guide](../guides/sivir-one-army.md)).
 - **Plan:** the legend makes Gold when you recycle a rune and readies when enemy units die; Sivir,
   Mercenary gets +2 Might and Ganking once you have spent two Power. A fast, combat-first deck.
 - **Engine:** none — a fast combat curve; Gold and Ganking are not patterns the reader knows.
@@ -221,7 +221,7 @@ The legend hides for [1] instead of [A] and returns Teemos to hand to re-hide; T
   it goes again. Stellacorn Herder (98% of lists) draws every time it moves; Irelia, Fervent grows
   whenever chosen or readied; Defiant Dance and En Garde win fights on the opponent's commit.
 - **Wins by:** out-acting the opponent: more moves, more fights, more cards drawn from them.
-- **From Sivir:** *press; attack with two.* The slowest S deck on board (10.9 Might by turn 4); she wins fights with Reactions; Defy 98% **and** Not So Fast 80% hit your targeted spells. Bring in 1 Graves, Siren's Song; take out 2 Sabotage, 1 Rampage. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *press; attack with two.* The slowest S deck on board (10.9 Might by turn 4); she wins fights with Reactions; Defy 98% **and** Not So Fast 80% hit your targeted spells. Bring in 1 Graves, Siren's Song; take out 2 Sabotage, 1 Rampage. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** ready → move → draw (Herder). Her idea page's Engines panel lists the Radiance
   cards that would feed it (Lulu, Whimsical is the one the experiment tries).
 - **Fears:** answers that do not choose (mass effects), and stuns that stop the readied unit acting.
@@ -258,7 +258,7 @@ The legend hides for [1] instead of [A] and returns Teemos to hand to re-hide; T
   there). Hexplosive Minefield kills your own Bombs on purpose and replaces them at end of turn;
   Detonate kills any gear and draws. Ziggs, Short-Fused gives friendly gear abilities 1 bonus damage.
 - **Against it:** the Bombs are gear — they die to gear removal, and to an opponent holding there.
-- **From Sivir:** *be the beatdown; hold their Bomb battlefields.* Bombs are gear tokens that die when you hold there; **Detonate (92%) kills your Edge**; Shimmering Swimmer 76% (2), Falling Star 52%. Bring in 2 Unyielding Spirit, Prefect; take out 2 Edge of Night, 1 Sabotage. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *be the beatdown; hold their Bomb battlefields.* Bombs are gear tokens that die when you hold there; **Detonate (92%) kills your Edge**; Shimmering Swimmer 76% (2), Falling Star 52%. Bring in 2 Unyielding Spirit, Prefect; take out 2 Edge of Night, 1 Sabotage. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** tokens (Bomb gear) — made at battlefields, killed on purpose and remade.
 - **Sources:** riftbound.gg guide (Radiance theorycraft, 14 Oct 2026): "tempo deck": Bombs clear the showdown; a "hold oriented" side build.
 
@@ -272,7 +272,7 @@ The legend hides for [1] instead of [A] and returns Teemos to hand to re-hide; T
   two**; Guards! is a Hidden one. Azir, Sovereign brings token units along when he attacks.
 - **Wins by:** the turn Arise! turns its gear into a board.
 - **Fears:** gear removal, and area damage into 2-Might soldiers.
-- **From Sivir:** *press before the equipment lands.* Hidden Blade 86%, Back Off 86%; Defy 93%. Bring in 2 Offer, Prefect; take out 2 Sabotage, 1 Star-Crossed. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *press before the equipment lands.* Hidden Blade 86%, Back Off 86%; Defy 93%. Bring in 2 Offer, Prefect; take out 2 Sabotage, 1 Star-Crossed. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** tokens from gear — Equipment makes Sand Soldiers, and Arise! makes one per Equipment.
 - **Call (20 Oct 2026):** tempo. The riftbound.gg guide (8 Sep 2026): Azir "focuses on controlling its opponent's development and pace", making units every turn against slow decks. This replaces the 20 Oct midrange call; the measured tempo was right.
 - **Call (28 Oct 2026):** Tempo · Go-wide: the 20 Oct call stands (riftbound.gg, "controlling its opponent's development and pace"); his Radiance results run Defy, Discipline, Hidden Blade and Back Off in every list.
@@ -306,7 +306,7 @@ The legend adds Energy only during showdowns; Diana, Lunari Predicts when a show
 - **Wins by:** hiding at every battlefield it controls and never playing into your open mana.
 - **Against it:** a facedown card can only act at its own battlefield (rules.md, Hidden). Taking
   the battlefield trashes what it hid there.
-- **From Sivir:** *press her hide spots.* Taking a battlefield trashes her face-down cards; Momentary Companion (73%) and other Hidden units; Star-Crossed 51%, Siren's Song 49%. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *press her hide spots.* Taking a battlefield trashes her face-down cards; Momentary Companion (73%) and other Hidden units; Star-Crossed 51%, Siren's Song 49%. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** facedown — the legend and Evelynn, Consuming pay off playing from face down, and nearly every card is Hidden.
 - **Sources:** riftbound.gg guide (Radiance theorycraft, 14 Oct 2026): no label; "pressure our opponent quickly", revealing Hidden cards on her own turn.
 - **Call (19 Oct 2026):** aggro, not tempo. Its 42 Radiance-era lists measure aggro (19 Radiance cards in the 40, 31 Hidden or Reaction), and the guide's plan is to "pressure our opponent quickly" — the Hidden cards are threats here, not answers.
@@ -334,7 +334,7 @@ The legend returns a friendly unit to hand for Gold (re-buy play effects); Pierc
 - **Also in nearly every Radiance result** (90%+, not named above): Noxus Hopeful, First Mate, Pit Rookie, Sabotage, Punch First, Irresistible Faefolk, Rampage, Ferrous Forerunner.
 - **Wins by:** fights the opponent cannot plan for, because the attackers are still in hand.
 - **Fears:** answers held for the moment Ambush units land; mass shrink.
-- **From Sivir:** *hold.* The fastest deck here (16.1 Might by turn 4); Rampage 93%; no counters; Noxus Hopeful in 98%. Bring in 2 Graves; take out 2 Sabotage. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *hold.* The fastest deck here (16.1 Might by turn 4); Rampage 93%; no counters; Noxus Hopeful in 98%. Bring in 2 Graves; take out 2 Sabotage. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** winning fights — the legend pumps a unit for every unit you play, and Ambush puts them into the fight.
 - **Sources:** riftbound.gg guide (Vendetta, 30 Aug 2026): "the top aggressive legend", "a very proactive game plan": win the early showdowns, then keep making threats, drawing off Kai'Sa, Survivor, Kinkou Initiate and Nidalee, Cat Form.
 - **Call (28 Oct 2026):** Midrange · Fights, replacing the taxonomy's first aggro call. The LA RQ winner (Prismaticism, 1,962 players, 30 Sep 2026) is a 30-body value deck: mostly 3- and 4-drops, draw on 8 of its units (Kai'Sa, Survivor; Kinkou Initiate; Nidalee, Cat Form), Noxus Hopeful, Darius and Ferrous Forerunner on top, and all 10 Radiance results measure midrange. This goes against the riftbound.gg guide's "the top aggressive legend" (Vendetta, 30 Aug) under source precedence, because the Radiance results contradict it; the guide's "very proactive game plan" still describes how it plays: a proactive midrange deck. The aggro reading had rested on its goldfish speed; fast with bodies is not the same as racing.
@@ -425,7 +425,7 @@ Mech synergies: Bubble Bot readies a Mech, Production Surge makes one, Forecaste
 - **Also in nearly every Radiance result** (90%+, not named above): Thousand-Tailed Watcher, Honest Broker, Vi, Peacekeeper, Mirror Image.
 - **Wins by:** trading every unit for more than it is worth.
 - **Fears:** answers that don't kill — bounce, Banish — so no Deathknell fires.
-- **From Sivir:** *hold; bounce, don't kill.* It wants its units to die; Hidden Blade 84% (kill any, from face down); Cull the Weak 35% (keep a spare small body); Ruined Rex (100%, 6), Rift Herald and Watcher (7). Bring in — (Graves is too small here). ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *hold; bounce, don't kill.* It wants its units to die; Hidden Blade 84% (kill any, from face down); Cull the Weak 35% (keep a spare small body); Ruined Rex (100%, 6), Rift Herald and Watcher (7). Bring in — (Graves is too small here). (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** deaths — Deathknell units and Karthus doubling them; the legend's Temporary copy dies and triggers again.
 - **Sources:** riftbound.gg guide (Unleashed, 3 Jul 2026): no single label, "value or tempo": built on Deathknell; a snowball build (Baited Hook) or a slower draw-and-answer one.
 
@@ -437,7 +437,7 @@ Mech synergies: Bubble Bot readies a Mech, Production Surge makes one, Forecaste
   of Death is removal that pumps your side.
 - **Also in nearly every Radiance result** (90%+, not named above): Kai'Sa, Survivor, Realm of Death, Honest Broker, Vi, Peacekeeper.
 - **Against it:** the trash is its mana — what it has banished is gone for good.
-- **From Sivir:** *hold; bounce his big ones.* Realm of Death 91%, Mordekaiser kills any unit (76%), Hidden Blade 61%; 8-Might Mordekaiser. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *hold; bounce his big ones.* Realm of Death 91%, Mordekaiser kills any unit (76%), Hidden Blade 61%; 8-Might Mordekaiser. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** deaths — every death puts fuel in the trash for the legend's Power.
 - **Sources:** riftbound.gg guide (Radiance theorycraft, 15 Oct 2026): no label; wins "through brute force", Baited Hook (*in none of the 5 Radiance results*) to cheat a champion out early.
 - **Call (20 Oct 2026):** ramp. This corrects the 20 Oct midrange call, which wrongly said the deck has no top end: its champions cost 7 and 9, Rift Herald 8 and Ferrous Forerunner 6. The riftbound.gg guide (15 Oct 2026) wins "through brute force", with the legend paying the Power and Baited Hook cheating Twice Slain out early. The sacrifices are how it gets there. Midrange would describe the fodder, but the plan is the big units.
@@ -467,7 +467,7 @@ Shadow Clone tokens; Zed, Without a Sound swaps places with a clone; the legend 
 - **Also in nearly every Radiance result** (90%+, not named above): Traveling Merchant, Nocturne, Horrifying, Seal of Discord, Trifarian Captain, Switcheroo, Star-Crossed, Gust, Ride the Wind.
 - **Wins by:** a long game of free value that turns into Assault on the attack.
 - **Fears:** early pressure before the trash fills; Rhasa and the Flow cards are its late game.
-- **From Sivir:** *press early.* The trash engine; Rhasa (79%, 6 Might, cheap late); Star-Crossed 85%, Gust 77%; Switcheroo in most lists; their Offer and Salvage reach your Edge. Bring in 2 Offer, Prefect; take out 2 Sabotage, 1 Tornado. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *press early.* The trash engine; Rhasa (79%, 6 Might, cheap late); Star-Crossed 85%, Gust 77%; Switcheroo in most lists; their Offer and Salvage reach your Edge. Bring in 2 Offer, Prefect; take out 2 Sabotage, 1 Tornado. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** plays from elsewhere — the legend converts each one into Assault; Flow, Fizz and Matriarch feed it.
 - **Sources:** riftbound.gg guide (Vendetta, 8 Aug 2026): the "Tempo-Miracle list" is the top build, with an "off-tempo approach" beside it. Post-ban (riftbound.gg, 7 Oct 2026): "combo deck": a Rhasa the Sunderer swing turn with Last Rites to bring it back, filling the trash until then.
 - **Call (19 Oct 2026):** midrange, not tempo. Since the ban the deck is the post-ban guide's: fill the trash, hold the scoreboard, one Rhasa the Sunderer turn — Rhasa is in 196 of 231 lists and 66 of the 74 since 10 Oct, Last Rites in 183 and 61. It does not race (tempo) and holds only 5 interaction (control).
@@ -506,7 +506,7 @@ Sacramento 25k; Club9 Clash #3), as of 28 Oct 2026 — the most of any legend.
   ready"); being kept off battlefields she controls, which is where the engine works.
 - **From Sivir:** press, and deny her battlefields. Rebuke the first Heron the turn after it
   lands, before it pays for Baron. Once the Baron Pit exists, the final point by conquer needs
-  all three battlefields (§473.1.b.1): win by holding at 7. ([Sivir guide](../guides/sivir-trying-her-best.md) §10, "Against Riven, in detail".)
+  all three battlefields (§473.1.b.1): win by holding at 7. (the retired v1 Sivir guide §10, "Against Riven, in detail"., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** exhaust — Riven, Broken Blade and Reckless Innovator pay off becoming exhausted;
   attacking, moving and Blade of the Exile's equip feed them.
 - **Sources:** riftbound.gg (Radiance theorycraft, 12 Oct 2026): "hold oriented legend".
@@ -579,7 +579,7 @@ XP from holds and Demacian Diplomat, spent to draw (the legend), buff (Enthralli
   plays the top card on the second).
 - **Also in nearly every Radiance result** (90%+, not named above): Defy, Discipline, Blitzcrank, Impassive, Zhonya's Hourglass, Long Sword.
 - **Wins by:** grinding: card advantage from moves, removal, untouchable threats.
-- **From Sivir:** *press.* Shuriken Flip 96% (2), Akali's 1, Falling Star 78%; Defy 89%. Bring in 2 Unyielding Spirit; take out 2 Sabotage. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *press.* Shuriken Flip 96% (2), Akali's 1, Falling Star 78%; Defy 89%. Bring in 2 Unyielding Spirit; take out 2 Sabotage. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** movement — Akali, Deadly Weapon and Akali, Silent (*in none of the 10 Radiance results*) pay off moving; the legend pulls units home to move again.
 - **Sources:** riftbound.gg guide (Vendetta, 14 Sep 2026): no label; "plays more aggressively than the Blade Dancer"; Astral Heron as the late-game anchor, Stellacorn Herder and Kai'Sa, Survivor for cards.
 - **Call (20 Oct 2026):** tempo. The riftbound.gg guide (14 Sep 2026), after Vendetta's big events, says Akali "plays more aggressively than the Blade Dancer", and Irelia is tempo here. The 12 interaction that measures control is the Fury removal she uses to fight for the board.
@@ -592,7 +592,7 @@ XP from holds and Demacian Diplomat, spent to draw (the legend), buff (Enthralli
 - **Plan:** the legend makes a Recruit for [1]; Viktor, Leader makes one whenever another non-Recruit
   unit of yours dies; **Imperial Decree: when any unit takes damage this turn, kill it**; Cull the
   Weak, Hidden Blade, Wages of Pain. It answers early and wins with tokens.
-- **From Sivir:** *hold.* Hidden Blade 92%, Cull the Weak 87%; Recruit tokens go wide. Bring in 2 Graves; take out 2 Sabotage. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *hold.* Hidden Blade 92%, Cull the Weak 87%; Recruit tokens go wide. Bring in 2 Graves; take out 2 Sabotage. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** tokens — Recruits from the legend and Viktor, Leader.
 
 **Control · Spells:** Kai'Sa, Daughter of the Void, Seraphine, Starry-Eyed Songstress, Jhin, Virtuoso, Lux, Lady of Luminosity.
@@ -606,7 +606,7 @@ XP from holds and Demacian Diplomat, spent to draw (the legend), buff (Enthralli
 - **Also in nearly every Radiance result** (90%+, not named above): Kai'Sa, Survivor, Thousand-Tailed Watcher, Bilgewater Tracker, Plundering Poro, Temporal Breach, Noxus Hopeful, Smoke Screen.
 - **Wins by:** removing the early board, then turns the opponent cannot answer.
 - **Fears:** being raced before the 7-drops (3.4 average cost).
-- **From Sivir:** *press; spread out.* Hextech Ray 98% (3), Falling Star 97% (6), Bellows Breath 88% (1); Thousand-Tailed Watcher (95%) shrinks your board; Void Gate adds 1; **at Rockfall Path hide a spell, not a unit**; Lost to the Sands (36%) reaches Edge. Bring in 2 Unyielding Spirit; take out 2 Tornado. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *press; spread out.* Hextech Ray 98% (3), Falling Star 97% (6), Bellows Breath 88% (1); Thousand-Tailed Watcher (95%) shrinks your board; Void Gate adds 1; **at Rockfall Path hide a spell, not a unit**; Lost to the Sands (36%) reaches Edge. Bring in 2 Unyielding Spirit; take out 2 Tornado. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** spells — the legend's Power is for spells; the list is removal into a spell top end.
 - **Call (20 Oct 2026):** midrange. The riftbound.gg guide (13 Jul 2026): "a midrange proactive play style, supported by spells for a third consecutive set", meaning strong units it tries to stick. The 13 interaction that measures control is those support spells.
 - **Call (28 Oct 2026):** Control · Spells, replacing the 20 Oct midrange call: her 15 Radiance results (2 events) carry 14 interaction and read control or ramp, never midrange. Orb: "Spell-Based Control".
@@ -653,7 +653,7 @@ The legend draws when you play a spell costing 5 or more, so the deck is 25 spel
   Sivir guide (retired guide, in git history) calls it "trick-dense combat-math midrange",
   the Rek'Sai guide (retired guide, in git history) "cheap wide aggro-tempo", Jun "develop
   hard, then hold"; the numbers say tempo (11 Reactions, cost 2.4), the card text midrange.
-- **From Sivir:** *attack with two.* His +2 is for a lone defender; cheap tricks protect it; Charm 64%, Defy 75%. Bring in — (Sabotage stays: it strips his tricks). ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *attack with two.* His +2 is for a lone defender; cheap tricks protect it; Charm 64%, Defy 75%. Bring in — (Sabotage stays: it strips his tricks). (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** none — tricks around one lone defender; the legend's +2 is a combat bonus, not a loop.
 - **Sources:** Jun (his Master Yi notes, [Jun's Notes](jun.md) §8);
   the Riven gauntlet (retired guide, in git history); riftbound.gg tier list (3 Oct 2026): Tier 1. The
@@ -668,7 +668,7 @@ The legend draws when you play a spell costing 5 or more, so the deck is 25 spel
   Warrior, Astral Heron) and the legend draws when you hold.
 - **Also in nearly every Radiance result** (90%+, not named above): Defy, Discipline, Bedeviling Stranger, Star-Crossed.
 - **Wins by:** making your development turn useless while it holds.
-- **From Sivir:** *remove their Vex first.* Their Vex (95%) and Back Off (94%) stun your units, hidden ones too; your hidden *spells and gear* still work; Deflect makes Rebuke on Vex cost 1 more Power; Defy 87%. Bring in Siren's Song; take out 1 Tornado. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *remove their Vex first.* Their Vex (95%) and Back Off (94%) stun your units, hidden ones too; your hidden *spells and gear* still work; Deflect makes Rebuke on Vex cost 1 more Power; Defy 87%. Bring in Siren's Song; take out 1 Tornado. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** none — Vex, Apathetic's stun lock and removal buy time; Steel Paws empowering itself is not a loop.
 - **Sources:** riftbound.gg guide (14 Sep 2026): "control play style", "hold oriented": take a battlefield early with Vex, Apathetic, deny the comeback with stuns and counters, Astral Heron late. Tier list (3 Oct): Tier 3, "hold oriented".
 - **Call (28 Oct 2026):** Control · Holds: her legend draws on holds, and her Radiance results cross the control line (interaction 12).
@@ -712,7 +712,7 @@ Shen, Kinkou is a Reaction Tank; Shen, Leader **scores a point when he holds wit
 - **Wins by:** surviving to the turn its gear takes over, or by Gutter Palace.
 - **Fears:** early pressure — it has nothing on the board for three turns (0.3 units by turn 3 in
   the goldfish).
-- **From Sivir:** *press.* Almost nothing on board for three turns; Elder Dragon (50%, 10 Might) late; pings 1 at a time. Bring in 2 Offer, Prefect; take out 2 Tornado, 1 Star-Crossed. ([Sivir guide](../guides/sivir-trying-her-best.md) §10; from the cards and online lists, not tested.)
+- **From Sivir:** *press.* Almost nothing on board for three turns; Elder Dragon (50%, 10 Might) late; pings 1 at a time. Bring in 2 Offer, Prefect; take out 2 Tornado, 1 Star-Crossed. (the retired v1 Sivir guide §10; from the cards and online lists, not tested., in git history; the live matchup plan is [sivir-one-army.md §9](../guides/sivir-one-army.md))
 - **Engine:** gear — ramp gear the legend readies, into the top end and Gutter Palace.
 - **Sources:** riftbound.gg guide (Vendetta, 14 Sep 2026): no label; "a ton of draw and ramp" and "a bit of early control": Elder Dragon early via Dazzling Aurora and Promising Future; Gutter Palace if it goes long.
 
