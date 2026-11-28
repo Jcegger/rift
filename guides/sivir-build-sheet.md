@@ -5,7 +5,7 @@ author: rift toolchain
 date: 2026-11-27
 ---
 
-**What goes in the box:** 40 main (Sivir included) · 10 sideboard · 1 legend · 3 battlefields · 12 runes = **66 cards**. **Nidalee, Cat Form ×3: the app shows 0 owned** (they were due 3 Nov from someone at Sip & Play): sleeve them if they came, proxy if not. Everything else is owned.
+**What goes in the box:** 40 main (Sivir included) · 10 sideboard · 1 legend · 3 battlefields · 12 runes = **66 cards**. Everything is owned (Nidalee ×3 arrived; collection updated 28 Nov).
 
 ### 1. Deck-pieces box (Woodhaven #1)
 
@@ -24,7 +24,7 @@ date: 2026-11-27
 |---|---|---|---|
 | ▢ ▢ ▢ | **Punch First** | SFD-097 |  |
 | ▢ ▢ ▢ | **Irresistible Faefolk** | UNL-112 |  |
-| ▢ ▢ ▢ | **Nidalee, Cat Form** | UNL-114 | app shows 0 owned: yours, or a proxy |
+| ▢ ▢ ▢ | **Nidalee, Cat Form** | UNL-114 |  |
 | ▢ ▢ | **Rengar, Trophy Hunter** | UNL-120 |  |
 | ▢ ▢ | **Rampage** | VEN-083 |  |
 

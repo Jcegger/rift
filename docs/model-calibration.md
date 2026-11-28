@@ -28,6 +28,14 @@ So the jobs are split:
 - **Misreads are fixed whatever the numbers do.** Play-policy changes need a trace that shows a clear, general mistake,
   and a calibration that doesn't get worse.
 
+## 28 Nov audit: a bounce isn't a kill
+
+The code review of 27 Nov's change found that −0.4 per enemy unit on the board, with nothing for their hand, scored a
+bounce the same as a kill (lib/turn.test.mjs 222: the unfixed model cast Gust where Hextech Ray kills). Their units in
+hand now count +0.3 each, so a bounce nets 0.1 and a kill 0.4. Same snapshot, default settings: legends vs RiftLite r
+0.22 (−0.25 to 0.60), error 14.1, right side 10/20; vs RiftAtlas 0.14 (−0.42 to 0.63). That's within noise of 0.21 (the
+original) and 0.23 (27 Nov), with 0 solver errors, so it stays. The swap test wasn't re-run for this fix.
+
 ## 27 Nov: kills count, and three battlefields played as text
 
 The trace: in 40 games of Sivir Is Trying Her Best against Master Yi, the model's Yi cast Charm on 25 of 245 turns, and

@@ -1496,6 +1496,7 @@ async function cmdTry(S, cat, args) {
     ra = engineReport(after, cat, { games: eg, policy, foes: foesOf(after, cat, fieldDecks) });
     printEngine(rb, ra, policy, eg);
   }
+  if (opt("--vs") && !args.includes("--points") && !args.includes("--close")) console.log(`\n  --vs applies only to --points and --close; the sections above use the whole field`);
   // The points model is opt-in: it plays whole games on a plain policy and is not fit to rank
   // decks (README, lib/match.mjs). Its goal-tier rows read "—" without it.
   let pb = null, pa = null;
