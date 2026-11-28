@@ -1,0 +1,108 @@
+{
+ "items": [
+  {
+   "collection": "Nexus Night",
+   "title": "Match sheets",
+   "file": "nexus-night--match-sheets.pdf",
+   "version": "85e9f92431002770",
+   "drive": "Nexus Night - Match sheets.pdf",
+   "write": true
+  },
+  {
+   "collection": "Nexus Night",
+   "title": "Trouble list",
+   "file": "nexus-night--trouble-list.pdf",
+   "version": "85e9f92431002770",
+   "drive": "Nexus Night - Trouble list.pdf",
+   "write": true
+  },
+  {
+   "collection": "Nexus Night",
+   "title": "Review",
+   "file": "nexus-night--review.pdf",
+   "version": "85e9f92431002770",
+   "drive": "Nexus Night - Review.pdf",
+   "write": true
+  },
+  {
+   "collection": "Nexus Night",
+   "title": "Table sheet (Sivir)",
+   "file": "nexus-night--table-sheet-sivir.pdf",
+   "version": "2eebeb9986093b3a",
+   "drive": "Nexus Night - Table sheet (Sivir).pdf",
+   "kepub": "nexus-night--table-sheet-sivir.kepub.epub"
+  },
+  {
+   "collection": "Nexus Night",
+   "title": "Matchup card (Sivir)",
+   "file": "nexus-night--matchup-card-sivir.pdf",
+   "version": "ee520017c493f96e",
+   "drive": "Nexus Night - Matchup card (Sivir).pdf",
+   "kepub": "nexus-night--matchup-card-sivir.kepub.epub"
+  },
+  {
+   "collection": "Nexus Night",
+   "title": "Build sheet (Sivir)",
+   "file": "nexus-night--build-sheet-sivir.pdf",
+   "version": "306c9fe8c9e1a015",
+   "drive": "Nexus Night - Build sheet (Sivir).pdf",
+   "kepub": "nexus-night--build-sheet-sivir.kepub.epub"
+  },
+  {
+   "collection": "Nexus Night",
+   "title": "Questions",
+   "file": "nexus-night--questions.pdf",
+   "version": "85e9f92431002770",
+   "drive": "Nexus Night - Questions.pdf",
+   "write": true
+  },
+  {
+   "collection": "Riftbound",
+   "title": "Sivir guide (The Trap)",
+   "file": "riftbound--sivir-guide-the-trap.pdf",
+   "version": "105ea7cf8a4d2ccc",
+   "drive": "Riftbound - Sivir guide (The Trap).pdf",
+   "kepub": "riftbound--sivir-guide-the-trap.kepub.epub"
+  },
+  {
+   "collection": "Riftbound",
+   "title": "Sivir matchups",
+   "file": "riftbound--sivir-matchups.pdf",
+   "version": "fd13b7ad19e514c7",
+   "drive": "Riftbound - Sivir matchups.pdf",
+   "kepub": "riftbound--sivir-matchups.kepub.epub"
+  },
+  {
+   "collection": "Riftbound",
+   "title": "Strategy",
+   "file": "riftbound--strategy.pdf",
+   "version": "a3ccef3d953a573a",
+   "drive": "Riftbound - Strategy.pdf",
+   "kepub": "riftbound--strategy.kepub.epub"
+  },
+  {
+   "collection": "Riftbound",
+   "title": "Fundamentals",
+   "file": "riftbound--fundamentals.pdf",
+   "version": "ae74e0e06f490aec",
+   "drive": "Riftbound - Fundamentals.pdf",
+   "kepub": "riftbound--fundamentals.kepub.epub"
+  },
+  {
+   "collection": "Riftbound",
+   "title": "Rules handbook",
+   "file": "riftbound--rules-handbook.pdf",
+   "version": "6730b60a8c34e16d",
+   "drive": "Riftbound - Rules handbook.pdf",
+   "kepub": "riftbound--rules-handbook.kepub.epub"
+  },
+  {
+   "collection": "Riftbound",
+   "title": "Jargon",
+   "file": "riftbound--jargon.pdf",
+   "version": "df9b994b5d6bf0b1",
+   "drive": "Riftbound - Jargon.pdf",
+   "kepub": "riftbound--jargon.kepub.epub"
+  }
+ ]
+}
