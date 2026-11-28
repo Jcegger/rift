@@ -4,14 +4,17 @@ Where the last session stopped. Rewrite it at the end of a session; git is the l
 what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross-project list is one line per thread in
 `~/projects/dotclaude/HUB.md`.
 
-**Updated:** 2026-11-27 (Trying Her Best tuned and frozen: −3 Ride the Wind, +2 Switcheroo, +1 Ezreal; model counts kills and plays Waste/Recital/Tomb, e65aa10)
+**Updated:** 2026-11-28 (frozen list audited and locked; bounce ≠ kill model fix 3570cc2; guides to coaching depth with 12 matchup chapters, e4ac839)
 
 ## State
 
-- Main deck: **Sivir Is Trying Her Best**, **frozen 27 Nov for testing** after three steps (−3 Ride the Wind: +2
-  Switcheroo, +1 Ezreal; `decklab/sivir-tune.md` 27 Nov). Guide, both sheets and the brief match; on the reMarkable.
-  Watch items and the next real-data check are in `notes/handover.md`. Journal: 0–2 against Master Yi on 25 Nov
-  (Charm from base; ruling in `docs/rules-rulings.md`).
+- Main deck: **Sivir Is Trying Her Best**, **locked 28 Nov** (−3 Ride the Wind: +2 Switcheroo, +1 Ezreal). Audited
+  27–28 Nov (`decklab/sivir-tune.md` "Audit, 27–28 Nov"): against the 26 Nov list it gains beyond noise on the field
+  (69→75%), Yi (69→76%), Kai'Sa (47→54%) and Evelynn (61→71%); closing from 7 dips 35→32%, within noise. Everything is
+  owned (Nidalee ×3 added 28 Nov). Watch items in `notes/handover.md`. Journal: 0–2 against Master Yi, logged 25 Nov.
+- **Guides (28 Nov):** `guides/sivir-one-army.md` (now with sequencing, six opening hands, §13 two annotated model games),
+  the new `guides/sivir-one-army-matchups.md` (12 chapters, counts from 29 Oct–28 Nov lists), both sheets. On the
+  reMarkable and the Kobo. The old v1, v2 and Two Fights guides were deleted (ae2897a; in git history).
 - **What the model is for** (settled with Jay, 25 Nov; `docs/model-calibration.md` top section):
   - Simulating whole games won't predict real win rates well enough to judge one-card swaps.
   - **Real data comes first for list and swap verdicts:** `rift lifts --legend <L> --deck "<deck>"` (good finishes'
@@ -65,9 +68,9 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
    - `rift lifts --legend "battle mistress"`. Only 11 placed lists ever, so lifts may stay too thin; say so. Sabotage is
      first in line: +1.53 copies in Sivir's good finishes (interval above 0, since August), neutral in the model as a
      swap for Existential Dread (27 Nov).
-   - Done 26 Nov, ahead of it: the `decklab/sivir-search.json` candidates as mechanism checks (`decklab/sivir-tune.md`,
-     "Re-run 26 Nov"). C1 (+Ezreal) reversed and now reads worse; C3 (Switcheroo for Dread) leans positive on
-     answers only; C4 trades kills for answers. That section says what the lifts must show for each.
+   - **Re-count the matchup file:** `rift meta <legend> --since 2026-11-23` for its 12 legends, then update the
+     percentages there and in the guide's §9 note (`notes/handover.md` has the line).
+   - No list changes before 5–10 logged games with the locked list (Jay, 28 Nov: "we'll just keep it locked in").
    - Jay's pasted Battle Mistress list (close to his own; in this session's chat, 25 Nov) is parked at his word. It goes
      through `deck-build` when he asks.
 3. **After 29–30 Nov:** re-read Riven, Irelia and Renata Glasc, Chem-Baroness in `docs/archetypes.md` from post-ban
@@ -99,10 +102,21 @@ what to watch, ready swaps, rules corrections) is `notes/handover.md`. The cross
   and Mordekaiser, which are already too high.
 - 2026-11-25: a swap result at 240 games is noise (±0.6 margin).
 
+- 2026-11-28: the list is locked; no more tinkering until real games (Jay). Why: every measured matchup gained beyond
+  noise, and the model's fit to real results is moderate.
+- 2026-11-28: valueOf counts their units in hand (+0.3 against −0.4 on board), so a bounce isn't scored as a kill
+  (test 222; calibration within noise, r 0.22).
+- 2026-11-28: against Master Yi and Kai'Sa, Forbidding Waste in game 1 (legends are visible before the pick, §111,
+  §488.5); Sigil after a win, Recital after a loss.
+
 ## Rejected
 
 - 2026-11-25: `--equip W` (a value per attached Equipment). Ornn already attaches about 86%; with it he won 3 of 20,
   without it 5.
 - 2026-11-25: chasing r with play-policy tweaks; none passed the bar.
+- 2026-11-28: ChatGPT's 1 Ride the Wind / 2 Switcheroo / 3 Ezreal. Untested (Jay stopped the run); its worry rested on
+  Hidden congestion, and Switcheroo can be cast face up. Real data leans against Ride the Wind (−1.27 per copy).
+- 2026-11-27: Hallowed Tomb for Amateur Recital. It tied in the model (73 vs 75% field, 55% both vs Kai'Sa); try it at the
+  table only if Kai'Sa keeps killing Sivir.
 - 2026-11-25: blaming Reckless Innovator's reading. Its text is read right; it wins in the model because the cards it's
   compared against are broken there.
