@@ -30,6 +30,7 @@
 
 /riftbound/table     update  guides/sivir-one-army-sheet.md
 /riftbound/reading   update  guides/sivir-one-army.md
+/riftbound/reading   update  guides/sivir-one-army-matchups.md
 /riftbound/reading   update  docs/strategy.md
 /riftbound/reading   update  docs/fundamentals.md
 /riftbound/reading   update  docs/rules.md

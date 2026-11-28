@@ -11,9 +11,9 @@ date: 2026-11-02
 **Saved in the app as** `Sivir Is Trying Her Best` (renamed from "One Army, Two Fights" on 1 November; the old v1 deck of that name was deleted) · **Archetype:** midrange that holds (this guide); [archetypes.md](../docs/archetypes.md) still files the legend under Aggro · Extra resources
 **Where it came from:** Jay's rebuild of the [Ready and Gank worksheet](../decklab/sivir-ready.md) (30–31 October), the experienced players' advice (31 October), and two swaps on 1 November that turned it into a trap deck (worksheet log)
 **Record:** none yet. Log every game under the app's deck name
-**Collection status:** Nidalee, Cat Form still to get; everything else owned
+**Collection status:** everything owned (Nidalee ×3 arrived; collection updated 28 Nov)
 
-**Companions.** [The one-page sheet](sivir-one-army-sheet.md) is this guide's front page, to keep at the table. [strategy.md](../docs/strategy.md) is how to think about any turn. [The matchups worksheet](../decklab/sivir-matchups.md) has card reads for every S-to-B legend (written for older lists: use the reads, not the verdicts). §9 below replaces its verdicts for this list.
+**Companions.** [The one-page sheet](sivir-one-army-sheet.md) is this guide's front page, to keep at the table. [The matchup chapters](sivir-one-army-matchups.md) take the twelve matchups that decide a Nexus Night one at a time (28 Nov). [strategy.md](../docs/strategy.md) is how to think about any turn. [The matchups worksheet](../decklab/sivir-matchups.md) has card reads for every S-to-B legend (written for older lists: use the reads, not the verdicts). §9 below replaces its verdicts for this list.
 
 ---
 
@@ -300,6 +300,35 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 - **Job:** card flow on a body; discounts Accelerate and Rampage's Body.
 - **Use:** on Sivir's Accelerate take the **Energy** off, not the rune: a Power cost reduced to 0 isn't spent (§445.1.b), and she'd lose her +2 and Ganking.
 
+### Sequencing: the choices that come up every game
+
+**What to hide at A** (one face-down card per battlefield you control):
+- **Stranger** when their attacks will be two-on-one or wider (Rengar, Kennen, Azir's tokens, Riven's ready units).
+- **Switcheroo** when fights will be one-on-one (Master Yi), and **always once Thousand-Tailed Watcher is live** (Kai'Sa and LeBlanc, from their turn 7): its −3 leaves your defender at 1, and a swap makes it 7.
+- **Tideturner** when a Faefolk is in base: the swap is a pull at Reaction speed (§6, Faefolk).
+- **Edge of Night** when the defender that wins this fight should keep winning the next one.
+- **Evelynn** when Stranger is in hand and you want a pull on your own turn.
+
+**Switcheroo face up.** When A's slot is taken, cast it from hand: 2 Energy and 2 Power, Action. That's 2 Power spent, so it turns Sivir's +2 and Ganking on by itself on the closing turn.
+
+**What Ezreal discards**, first to last:
+1. Boots once a holder is already booted;
+2. Star-Crossed against Defy (Master Yi, Riven, Irelia, Vex, Azir); keep one Gust as bait for their Defy;
+3. Rampage against Calm, or against LeBlanc;
+4. a second Rengar before turn 5.
+
+Never the last puller (Faefolk or Evelynn), and never Rebuke while their Vex, Apathetic is in their list.
+
+**What Faefolk pulls**, first to last:
+1. on the closing turn, B's only defender;
+2. their Vex, Apathetic (the kill zone, §5), the turn before you close;
+3. a lone defender Master Yi's legend is protecting;
+4. a unit at 3 Might or less that your holder beats.
+
+It can't choose Baron Nashor, Ruin Runner or anything else that can't be chosen.
+
+**Gold and Power.** A Gold pays any Power, a hide included. Spend Gold on hides and on Punch First, and recycle runes only when you'd lose the tempo otherwise: each recycled rune is a rune gone. On the closing turn, Sivir's own Power and Accelerate's Chaos are already the 2 Power her +2 needs.
+
 ---
 
 ### The sideboard
@@ -346,6 +375,8 @@ Stranger alone is there about half the time, but with Existential Dread you have
 | **After you lose a game** (you choose, so go first) | **Amateur Recital**: "When you hold here, you may move a unit at a battlefield to its base." | **the trap's engine**, below |
 | **After you win a game** (they choose, and going first wins more, so expect the draw) | **Forbidding Waste**: "While a unit here is defending alone, it has −2 Might." | no hold reward to hand them; it punishes their lone early holder. Hold it with two and the −2 rarely touches you (it does if one of the two dies or leaves mid-fight: alone is checked all the time, §740.2.a) |
 
+**By matchup (28 Nov):** you see their legend before you pick (§111, then §488.5). Against Master Yi and Kai'Sa, open with Forbidding Waste ([matchup file](sivir-one-army-matchups.md)); it's then retired if you win, so **Sigil comes after a win, Recital after a loss.**
+
 **Rechecked after the Edge of Night / Tideturner swap (1 Nov):** all three stay. With 7 face-down cards for one slot at A (Stranger ×2, Tideturner ×2, Switcheroo, Edge, Evelynn; 9 since 27 Nov, with Switcheroo ×3), and Boots adding Ganking from A to B, the three still fit. **Bandle Tree** ("You may hide an additional card here") is the first battlefield to try if the slot keeps clogging, but its only sensible place is Recital's, and Recital is worth more.
 
 **Amateur Recital, the engine.** Going first, your turn-2 move reaches a battlefield before theirs (unless they Accelerate a unit on turn 1: going second they have 3 runes). Make Recital your A. From your turn-3 hold, every turn:
@@ -361,6 +392,17 @@ Stranger alone is there about half the time, but with Existential Dread you have
 - **Want two two-drops and a 3-drop.** Keep Stranger, Faefolk, Tideturner, Evelynn, Switcheroo, Edge, Nidalee.
 - **Send back first:** Rengar, Rampage, Star-Crossed and Boots in a hand with no two-drop.
 - **Turn-1 two-drop:** 8 in the library, so 70% keeping your first 5 cards and 83% when you mulligan for one.
+
+**Six opening hands** (you draw 4, §116, and may set aside up to 2):
+
+| hand | call | why |
+|---|---|---|
+| Faefolk · Tideturner · Nidalee · Punch First | **keep** | turn 1 Tideturner to A, turn 2 Nidalee or a second unit, Faefolk waits in base. A model hand |
+| Rengar · Rampage · Star-Crossed · Faefolk | **send back Rengar and Rampage** | one two-drop and three cards you can't use early (Rengar 5E, Rampage and Star-Crossed 3E). Keep Star-Crossed only against a deck with no Defy |
+| Stranger · Evelynn · Switcheroo · Edge of Night | **send back Edge and Switcheroo** | four face-down cards for one slot at A. Stranger and Evelynn are your two two-drops: play one face up as a holder and hide the other |
+| Vex · Ember Monk · Gust · Boots | **send back Boots and Ember Monk** | no two-drop. Vex on turn 2 is good, but you need a turn-1 unit to hold A first |
+| Innovator · Ezreal · Stranger · Dread | **keep** | one two-drop, then two three-drops; Ezreal on turn 2 digs for the rest |
+| Faefolk · Ember Monk · Rebuke · Gust, **on the draw** | **keep** | three runes on turn 1: Faefolk to base with Gust up. Five on turn 2 for Monk at A. Rebuke waits for their Vex |
 
 **Sideboarding** (untested; from the card reads in §9):
 
@@ -410,6 +452,8 @@ What comes out depends on the matchup: §9's table has the exact ins and outs.
 | **Baron in their list** (Riven 54%) | **race before he lands**: press her battlefields and Rebuke the first Astral Heron, before its discount pays for Baron (10E 3P). **Once he's out, win by holding at 7**: he can't be chosen, his units get +2, and the Pit is a third battlefield (the 8th-point conquest would need it scored; the repo's reading) |
 
 ### By legend
+
+**The twelve that matter most have their own chapters in [the matchup file](sivir-one-army-matchups.md),** counted on 28 Nov from the lists of 29 Oct–28 Nov (banned cards out). Most numbers have moved since this table's 1 Nov counts, and the matchup file is current. For example, Master Yi's Charm is in 57% of lists now (90% here), Kai'Sa's Smoke Screen in 85% (97%), Frozen Fortress in 57% (89%) and Rockfall Path in 77% (90%); Riven's Baron in 41% (54%). The plans and sideboard lines are the same in both.
 
 From the legal lists played since 23 October (`scripts/rift meta <legend> --since 2026-10-23`, run 1 November; % = lists running at least one copy). **None of this is tested at a table.**
 
@@ -536,6 +580,45 @@ Each game, which of the four it was, so one problem isn't fixed with another's c
 **And for the trap:** did it fire (a Stranger bounce, a pull into A, a hold at 7)? Was A ever lost, and to what? Which face-down card did you hide, and did it fit the fight? Review mistakes using [strategy.md §8](../docs/strategy.md)'s seven types.
 
 **Open, for games to decide:** The Good Stuff back if A holds easily (it draws 3 every hold); Rengar #3 if games keep ending "Sivir got answered"; Bushwhack Trap (a second face-down card at A) if Evelynn and Stranger keep fighting for the slot.
+
+## 13. Two games, annotated
+
+Two model games with this list (27 Nov) against real lists, played by `lib/match.mjs` with hold-up on, chosen to teach rather than to flatter: one win, one loss. **These are model games, not real ones.** The model makes mistakes a player wouldn't, and the notes say where. "T3" is your third turn.
+
+### Game 1: against Master Yi, on the play (a win, 8–3)
+
+| turn | what happened | note |
+|---|---|---|
+| **T1** | Faefolk to base. Yi plays Scuttle Crab to base. | Faefolk in base is the right home: it walks later and pulls on arrival. |
+| **T2** | Reckless Innovator with Accelerate (ready). Faefolk walks into the empty A and **pulls the Crab out of Yi's base** into A. You're the attacker; the Crab dies (its Deathknell shows Yi your hand and face-down cards and gives him 1 XP), and the kill readies your legend. Innovator walks into the empty B. **2–0.** Edge of Night hidden at A. | The early tempo play from §6: Faefolk as delayed removal. Two battlefields on turn 2. |
+| **Yi T2** | Rengar, Trophy Hunter straight into B; 6 Might beats Innovator. **2–1.** | Rengar's errata in action: no unit of Yi's had to be at B. |
+| **T3** | Hold A → 3. Ezreal, **discarding a Nidalee**, then Edge flipped onto Faefolk on your own turn. | Two model mistakes. Against Yi, discard Star-Crossed (Defy) and keep Nidalee. And Edge flipped on your turn wastes the surprise: keep it face down for his attack. |
+| **Yi T3** | Master Yi, Tempered. | The XP clock starts. |
+| **T4** | Hold A → 4. Ezreal attacks Rengar at B; **Nidalee ambushes in beside him**, Rengar dies. Conquer B → **5**. | Ambush works on your own turn too, into a fight where you have units. (The model didn't give Rengar his legend's +2 here, alone at B; at 8 he'd have held. Bring Punch First for that fight.) |
+| **Yi T4** | Discipline; First Mate. | |
+| **T5** | Hold A and B → **7**. A second Ezreal, discarding Star-Crossed. | **The terminal scan:** at 7 holding both, you win at your next Beginning Phase unless he takes *both* battlefields this turn. |
+| **Yi T5** | Ruin Runner; **Sabotage** recycles your Punch First; Yi and First Mate attack A. Your Rebuke is countered by Not So Fast, Tideturner flips, and A falls. **7–3.** | Sabotage (2 of 9 post-ban Yi lists) and Not So Fast (3 of 9) are minority cards, but this is the case for hiding Switcheroo early: a face-down card is out of Sabotage's reach. |
+| **T6** | Hold B → **8. Win.** | He needed two conquests and had one. |
+
+**The lessons:** Faefolk pulls from his *base*, not just from B. Count the lone-defender +2 before you attack his battlefield. And at 7 with two battlefields, he must take both.
+
+### Game 2: against Kai'Sa, on the draw (a loss, 3–8)
+
+| turn | what happened | note |
+|---|---|---|
+| **T1** | Nothing played, with Stranger, Nidalee, Switcheroo, Boots and Star-Crossed in hand and three runes. | **Model mistake.** With no other two-drop, play Stranger face up as a 2-Might holder and take a battlefield. (Against Kai'Sa it's the card to mulligan away; once kept, use it.) |
+| **T2** | **Sivir with Accelerate from the Champion Zone**, into the empty A. **1–0.** | **The mistake that lost the game.** Sivir is the closer. Against Kai'Sa she's a 4-Might unit on the board for her removal. |
+| **Kai'Sa T3** | Darius, Trifarian; **Hextech Ray on Sivir**; Darius attacks A. You flip Stranger to defend (three units there, not four: no bounce), Sivir dies, and Kai'Sa conquers A. **1–1.** | Ray (93% of her lists) plus a 7-Might attacker: a face-down Stranger can't save an early Sivir. |
+| **T3** | Nothing played, with runes up. | **Model mistake.** Nidalee and a hide at least. |
+| **T4** | Nidalee; **Rampage kills Darius** at A. A is uncontrolled. | Rampage is clean against her (no Defy). |
+| **Kai'Sa T5** | Lecturing Yordle takes A, then **Kai'Sa, Survivor with Accelerate** takes B. **1–4.** | Two battlefields in one turn, both empty because you'd spent turns 1 and 3 on nothing. |
+| **T5** | Boots on Nidalee, Punch First, Nidalee (11) into B; Kai'Sa dies. Conquer B → **2**. | Boots plus Punch First is a strong turn, two turns too late. |
+| **Kai'Sa T6** | Bilgewater Tracker attacks B; **Lost to the Sands deals 4 to Nidalee**; nobody holds B. Two more Yordles. | Removal from range again, as the matchup chapter says. |
+| **T6** | Ezreal; Gust on a Yordle at A. | |
+| **Kai'Sa T7** | Yordles retake A and B. **2–7.** Thousand-Tailed Watcher and a Poro. | At 7 she holds two battlefields: you'd need both on your turn. |
+| **T7** | Ezreal and an ambushed Nidalee take A → **3**; Ember Monk. She holds B next turn → **8**. | |
+
+**The lessons:** against Kai'Sa, **develop every turn** (two blank turns gave her two empty battlefields), and **Sivir stays in the Champion Zone until the closing turn**, with Punch First or Unyielding Spirit behind her.
 
 ---
 

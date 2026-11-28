@@ -26,6 +26,7 @@
 "Nexus Night"  journal:questions               title="Questions"               write
 # Reading (24 Nov, the same set the reMarkable gets: guides/remarkable.txt /riftbound/reading).
 "Riftbound"    guides/sivir-one-army.md         title="Sivir guide (The Trap)"
+"Riftbound"    guides/sivir-one-army-matchups.md title="Sivir matchups"
 "Riftbound"    docs/strategy.md                 title="Strategy"
 "Riftbound"    docs/fundamentals.md             title="Fundamentals"
 "Riftbound"    docs/rules.md                    title="Rules handbook"

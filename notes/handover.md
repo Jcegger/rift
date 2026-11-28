@@ -34,7 +34,9 @@ In the app as **`Sivir Is Trying Her Best`** (Battle Mistress, Body/Chaos). Read
 - **Frozen 27 Nov 2026 for testing** (−3 Ride the Wind: +2 Switcheroo, +1 Ezreal). Change only when a logged game trips a
   watch item: Charm on a base unit (Yi, Irelia, Lillia); no readier when a double conquest was there; Kai'Sa killing
   Sivir before she swings (then try Hallowed Tomb for Recital); Ezreal's discard costing a trap card. 5–10 logged games
-  before the next change; post-ban `rift lifts` after the 29–30 Nov weekend is the next real-data check.
+  before the next change; post-ban `rift lifts` after the 29–30 Nov weekend is the next real-data check. Same weekend:
+  re-run `rift meta <legend> --since 2026-11-23` for the 12 legends in `guides/sivir-one-army-matchups.md` (written 28 Nov
+  from 29 Oct–28 Nov lists) and update the percentages there and in the guide's §9 note.
 - **Gear (2):** Boots of Swiftness (+2 Might and **Ganking**) · Edge of Night
 - **Runes:** 6 Body / 6 Chaos (checked after every change; colour misses t3 about 6% / 3%).
 - **Battlefields (picked before the seat is known):** game 1 **Sigil of the Storm** · after a loss (Jay picks the seat,

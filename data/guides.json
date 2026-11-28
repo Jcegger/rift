@@ -16,6 +16,32 @@
    "words": 477
   },
   {
+   "slug": "sivir-one-army-matchups",
+   "file": "guides/sivir-one-army-matchups.md",
+   "kicker": null,
+   "title": "Sivir Is Trying Her Best — Matchups",
+   "subtitle": "Riftbound, Radiance — the twelve matchups that decide a Nexus Night, one chapter each. Their plan, the cards that beat you, your mulligan, the first three turns on the play and on the draw, the battlefield, the sideboard, the turns that decide it, and the close",
+   "date": "2026-11-28",
+   "legend": null,
+   "champion": null,
+   "sections": [
+    "1. Master Yi, Wuju Bladesman",
+    "2. Kai'Sa, Daughter of the Void",
+    "3. Riven, The Exile",
+    "4. Kennen, Heart of the Tempest",
+    "5. Irelia, Blade Dancer",
+    "6. Vex, Gloomist",
+    "7. Rengar, Pridestalker",
+    "8. LeBlanc, Deceiver",
+    "9. Evelynn, Agony's Embrace",
+    "10. Jayce, Defender of Tomorrow",
+    "11. Azir, Emperor of the Sands",
+    "12. Diana, Scorn of the Moon",
+    "Sources and method"
+   ],
+   "words": 7385
+  },
+  {
    "slug": "sivir-one-army-sheet",
    "file": "guides/sivir-one-army-sheet.md",
    "kicker": null,
@@ -25,7 +51,7 @@
    "legend": null,
    "champion": null,
    "sections": [],
-   "words": 1005
+   "words": 1019
   },
   {
    "slug": "sivir-one-army",
@@ -50,10 +76,11 @@
     "10. The rules this deck leans on",
     "11. Mistakes that lose games",
     "12. What to log",
+    "13. Two games, annotated",
     "Sources and method",
     "What this guide does not claim"
    ],
-   "words": 11124
+   "words": 12746
   },
   {
    "slug": "fundamentals",

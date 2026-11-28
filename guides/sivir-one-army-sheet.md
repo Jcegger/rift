@@ -37,15 +37,15 @@ date: 2026-11-27
 
 **Watch out.** Ezreal on Sivir: take the **Energy**, not the rune. Never make **Rockfall Path** your A. Equip Boots or play Ember Monk only on a turn you don't need Energy up. **Boots' Ganking:** a holder walks A → B, past their Vex.
 
-**Battlefields** (picked before the seat): game 1 **Sigil of the Storm** · after a loss (go first) **Amateur Recital**: make it A; each hold sends their lone B defender home, walk in, two points a turn; if they take it, retake it first · after a win **Forbidding Waste** (hold it with two).
+**Battlefields** (picked before the seat): game 1 **Sigil of the Storm** · after a loss (go first) **Amateur Recital**: make it A; each hold sends their lone B defender home, walk in, two points a turn; if they take it, retake it first · after a win **Forbidding Waste** (hold it with two). **Against Yi and Kai'Sa:** Waste in game 1, then Sigil after a win.
 
 **Mulligan.** Want two two-drops and a 3-drop. Send back Rengar, Rampage, Star-Crossed, Boots first.
 
 | against | adjust |
 |---|---|
 | **Rengar** (best) | keep two at A (his Faefolk pulls); your Vex stuns his Ambush; Graves ×2 in, Rebuke + a Switcheroo out |
-| **Master Yi** | Charm 90%: two at A, nothing precious in base; his lone defender gets +2 and En Garde: fight at **Forbidding Waste** (−2), pull it out; bait Defy with Gust; Graves in, a Rampage out |
-| **LeBlanc** | bait Deathgrip / Sacrifice before Stranger; Graves ×2 in, Rampage out |
+| **Master Yi** | Charm 57%: two at A, nothing precious in base; his lone defender gets +2 and En Garde: fight at **Forbidding Waste** (−2), pull it out; bait Defy with Gust; Graves in, a Rampage out |
+| **LeBlanc** | bait Deathgrip / Sacrifice before Stranger; Graves ×2 in, Rampage ×2 out |
 | **Kai'Sa** | she won't attack A; Smoke Screen + Hextech Ray kills Sivir, so close with Unyielding Spirit in hand; not Rockfall as A; Unyielding Spirit ×2 + Sabotage in, Stranger ×2 + a Rampage out |
 | **Vex Gloomist** (bad) | Rebuke her Vex first; race to hold at 7; Sabotage + Ruin Runner in, Rampage ×2 out |
 | **Diana** (worst) | Gust on Stranger, Moonfall on Sivir: make her spend first; Ruin Runner ×2 in, Stranger ×2 out |
