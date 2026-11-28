@@ -428,3 +428,39 @@ Every control lost.
 - **The weak matchups are Kai'Sa (56%) and Evelynn (62%)**, and nothing in the sideboard fixes them in the model.
   That's the next thing to work on.
 
+## 27 Nov, on the deeper model (e65aa10: kills count; Forbidding Waste, Amateur Recital, Hallowed Tomb played as text)
+
+Calibration held (legends r 0.21 → 0.23, swaps 0.40 → 0.39; `docs/model-calibration.md`). The model's Master Yi now
+pushes units from our base into its lone defender, as Jay's opponents did: Trying Her Best won 27 of 40 traced Yi games,
+down from 29.
+
+**Battlefields, now testable** (480 games each, `try --points --hold-up 1`, same game indices; the slot is Amateur
+Recital's):
+
+| field | Amateur Recital (as is) | Hallowed Tomb |
+|---|---|---|
+| whole field | 73% (69–77%); holds 3.64 / theirs 1.53 | 75% (70–78%); holds 3.79 / theirs 1.67 |
+| Kai'Sa only | 55% (50–59%); holds 2.30 / theirs 1.64 | 55% (51–60%); holds 2.36 / theirs 1.66 |
+
+**The last slot** (`search --hold-up 1`; the whole field 480 games, matchups 240):
+
+| | whole field (73%) | Master Yi (75%) | Kai'Sa (53%) | Evelynn (65%) |
+|---|---|---|---|---|
+| −1 Ride the Wind +1 Ezreal, Prodigy | **+0.18**, 75% | **+0.13**, 77% | **+0.15**, 56% | **+0.41**, 70% |
+| −1 Ride the Wind +1 Sabotage | +0.05 | −0.01 | +0.09 | +0.07 |
+| −1 Existential Dread +1 Repulse | +0.03 | −0.10 | +0.01 | +0.13 |
+| −1 Boots of Swiftness +1 Edge of Night | +0.03 | +0.08 | −0.10 | +0.14 |
+| −1 Ride the Wind +1 Star-Crossed | −0.06 | +0.02 | −0.13 | +0.15 |
+| control | −0.65 (out) | −0.60 (out) | −0.84 (out) | −0.75 (out) |
+
+**Reading.**
+- **Ezreal #3 for the last Ride the Wind** leads all four runs. None clears its interval on its own, but it's the
+  only candidate that leads everywhere.
+- Real data leans the same way: Ezreal +1.30 in good Sivir finishes (−0.40 to +2.50), and Ride the Wind −1.27 (clear).
+- It's a card-flow swap for the last Defy-counterable readier. Closing at B still has Sivir's Ganking and Boots of
+  Swiftness.
+
+**Battlefields, read:** Hallowed Tomb equals Amateur Recital against Kai'Sa (55% each), where it should matter most, and
+leans +2 points across the field, inside the noise. So the model sees no reason to change. Recital stays; the Tomb is an
+option to try at the table against removal decks.
+
