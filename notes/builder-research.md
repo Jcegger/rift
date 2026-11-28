@@ -118,4 +118,9 @@ In the order the calibration suggests: first what makes the model wrong, then wh
     `calibrate --swaps` on Rampage in the legends that run it.
   - The goldfish and the model disagreed. The goldfish showed the engine working (Mercenary on 54% against 38%, kills
     ×3), while the model showed v1 losing on holds (38% against 66%). The goldfish has no opponent to hold against.
+- **27 Nov 2026, the model counts kills and plays three more battlefields** (`docs/model-calibration.md`, 27 Nov). Enemy
+  units count −0.4 in `valueOf` (a kill used to be worth only Might × 0.08). Forbidding Waste, Amateur Recital and
+  Hallowed Tomb are played as text. Calibration: legends r 0.21 → 0.23, swaps 0.40 → 0.39, swap signs 33 → 36 of 48.
+  Battlefields still played plain: everything but Bandle Tree, Bandle Scouts' Academy, Packed Amphitheater, Sigil of
+  the Storm, Zaun Warrens, Forbidding Waste, Amateur Recital and Hallowed Tomb.
 

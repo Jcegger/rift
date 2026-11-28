@@ -556,3 +556,24 @@ or ability that chooses it and no other friendly unit.") stop that Charm?
 
 **Weakest link:** point 1 assumes Charm can move a base unit to any battlefield (§451.1, as in "Sivir, Mercenary's double
 conquest", 21 Nov). Ask a judge before an event depends on it.
+
+## Hallowed Tomb returns a dead Sivir, Mercenary to the Champion Zone, where she can be played again
+
+**Date:** 2026-11-27
+**Source:** Derived in this repo from the Core Rules and the FAQ's Hallowed Tomb answer; no Riot staff ruling beyond the FAQ. Asked while tuning Sivir Is Trying Her Best against removal decks (Kai'Sa, LeBlanc).
+**Rules:** §103.3.a.3, §108.3.c, §108.3.c.1, §108.3.d
+**Expires:** when a Core Rules or FAQ update changes the Champion Zone or what counts as the Chosen Champion
+
+**Question.** Hallowed Tomb: "When you hold here, you may return your Chosen Champion from your trash to your Champion
+Zone if it is empty." After their removal kills Sivir, Mercenary (our Chosen Champion, one copy in the deck), does a
+hold at the Tomb bring her back, and can she be played again?
+
+**Derived answer.** Yes, on each hold at the Tomb while she's in the trash and the zone is empty.
+- *"A player's Chosen Champion is both the specific card chosen … and also any Champion Unit with the same name"*
+  (§103.3.a.3). The FAQ's Hallowed Tomb answer: *"the updated rules treat all copies of the card you designated as your
+  Chosen Champion as interchangeable."*
+- Returning to the zone works *"only … if there is not a card already in this zone"* (§108.3.c.1).
+- From there *"The Chosen Champion can be played from here as normal"* (§108.3.d).
+
+**Weakest link:** none in the reading; the model doesn't implement Hallowed Tomb (`lib/match.mjs` plays only five
+battlefields' text), so its value is untested.

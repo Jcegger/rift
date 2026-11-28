@@ -1,0 +1,8 @@
+[
+  { "label": "S1 Sabotage: -1 Ride the Wind +1 Sabotage", "changes": ["-1 Ride the Wind", "+1 Sabotage", "sb-1 Sabotage", "sb+1 Ride the Wind"] },
+  { "label": "S2 Ezreal #3: -1 Ride the Wind +1 Ezreal, Prodigy", "changes": ["-1 Ride the Wind", "+1 Ezreal, Prodigy"] },
+  { "label": "S3 Star-Crossed #3: -1 Ride the Wind +1 Star-Crossed", "changes": ["-1 Ride the Wind", "+1 Star-Crossed"] },
+  { "label": "S4 Repulse: -1 Existential Dread +1 Repulse", "changes": ["-1 Existential Dread", "+1 Repulse"] },
+  { "label": "S5 second Edge: -1 Boots of Swiftness +1 Edge of Night", "changes": ["-1 Boots of Swiftness", "+1 Edge of Night"] },
+  { "label": "PLANT (dead cards, should lose): -3 Nidalee, Cat Form +3 Whiteflame Protector", "changes": ["-3 Nidalee, Cat Form", "+3 Whiteflame Protector"] }
+]

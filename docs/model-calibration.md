@@ -28,6 +28,29 @@ So the jobs are split:
 - **Misreads are fixed whatever the numbers do.** Play-policy changes need a trace that shows a clear, general mistake,
   and a calibration that doesn't get worse.
 
+## 27 Nov: kills count, and three battlefields played as text
+
+The trace: in 40 games of Sivir Is Trying Her Best against Master Yi, the model's Yi cast Charm on 25 of 245 turns, and
+always pulled a unit off a battlefield. It never moved a unit from our base into its lone +2 defender, the play that
+beat Jay twice on 25 Nov. Two changes followed:
+- **A policy change:** `lib/turn.mjs` `valueOf` gave +0.1 and +0.3 per own unit but nothing per enemy unit gone, so a
+  kill was worth only its Might × 0.08. Enemy units now count −0.4 (test 220).
+- **Reading fixes:** Forbidding Waste (a lone defender −2, in solver fights, through new `pos.bfNames`), and Amateur
+  Recital and Hallowed Tomb (on a hold, in `lib/match.mjs`; tests 221 and the match tests).
+
+Calibration on one data snapshot (decks and winrates at f72d20f031), default settings, before and after:
+
+| | before | after |
+|---|---|---|
+| legends vs RiftLite (20) | r 0.21 (−0.26 to 0.60), error 14.0, right side 10/20 | **r 0.23** (−0.24 to 0.61), error 14.0, 10/20 |
+| legends vs RiftAtlas (14) | r 0.16 (−0.40 to 0.64), error 12.7 | r 0.15 (−0.41 to 0.63), error 12.8 |
+| swaps (64, `calibrate --swaps`) | r 0.40 (0.17 to 0.59), ρ 0.36 | **r 0.39** (0.16 to 0.58), ρ 0.37 |
+| swap signs agreeing (clear swaps) | 33 of 48 | **36 of 48** |
+| solver errors | 0 | 0 |
+
+Per legend, the swap test moved most where it was wrong: Kai'Sa −0.42 → −0.09, Rengar −0.24 → +0.15, Vex 0.20 → 0.30,
+Irelia 7/8 → 8/8. Nothing got worse beyond noise, so both changes stay (the 25 Nov rule).
+
 ## Real sources disagree (25 Nov)
 
 The real side used to be RiftLite alone: online games logged by its users, on their own decks. Two findings changed that:
