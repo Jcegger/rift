@@ -78,7 +78,7 @@ date: 2026-11-02
 
 **Sideboard (10):** Ruin Runner ×2 · Graves, Blasting Through ×2 · Ravenbloom Prefect · Acceptable Losses · An Offer You Can't Refuse · Sabotage · Unyielding Spirit ×2.
 
-**Shape:** 22 units, 16 spells, 2 gear. Post-Radiance midrange averages 21.6 / 13.5 / 4.9 (1,101 legal lists since 23 October; top-quarter finishes 22.2 / 13.0 / 4.8). **8 two-drop units**, all Power-free; the field's midrange average is 6.8.
+**Shape:** 23 units (Sivir included), 15 spells, 2 gear. Post-Radiance midrange averages 21.6 / 13.5 / 4.9 (1,101 legal lists since 23 October; top-quarter finishes 22.2 / 13.0 / 4.8). **8 two-drop units**, all Power-free; the field's midrange average is 6.8.
 
 ---
 
@@ -215,9 +215,9 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 - **From hand it reaches any battlefield,** but as a plain 2-Energy unit: main phase only, no bounce mid-fight. Played to base it doesn't count toward the 4, so the chosen battlefield needs 4 units without it; played to a battlefield you control it counts itself. Against a wide board at B, bounce one of their four.
 - **Example (vs Mordekaiser):** he attacks A with two units, one a 6-Might threat, into your Nidalee. Flip Stranger: Nidalee + Stranger + his two = 4. Return the big one to his hand. Nidalee (4 Might) handles a smaller one left behind, and bouncing rather than killing gives his deaths engine nothing.
 
-**Switcheroo** ×3 (Hidden · 2E 2P · Action; ×3 since 27 Nov, from Ride the Wind: Defy can't counter it, and good Sivir finishes run fewer Ride the Wind). *Swap the Mights of two units at the same battlefield this turn.*
+**Switcheroo** ×3 (Hidden · 2E 2P · Action; ×3 since 27 Nov). *Swap the Mights of two units at the same battlefield this turn.*
 - **Job:** wins the 1-on-1 fight Stranger can't touch.
-- **Use:** hide it at A for 1-on-1 fights. From face down both targets must be at A (§811.1.d.2), and it costs nothing, so it spends no Power toward Sivir. From hand it's 2 Power, which turns Sivir on by itself.
+- **Use:** hide it at A for 1-on-1 fights. From face down both targets must be at A (§811.1.d.2), and it costs nothing, so it spends no Power toward Sivir. Defy checks the printed cost (2 Power), so even a face-down flip can't be countered by it. From hand it's 2 Power, which turns Sivir on by itself.
 - **Example (vs Riven):** Riven attacks A with a 7-Might Astral Heron into your lone Faefolk (1 Might). Flip Switcheroo: Heron is 1, Faefolk is 7 for the turn. Faefolk wins and the Heron dies (a 1-Might unit taking 7). She has Defy in 93% of lists, but Switcheroo's 2 Power puts it out of Defy's reach (§206).
 
 **Punch First** ×3 (1E 2P · Action). *Give a unit +5 Might this turn.*
@@ -272,9 +272,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 
 ### Close at B
 
-**Ride the Wind** (cut 27 Nov 2026, from 3 in three steps: two went to Switcheroo, the last to Ezreal #3. Kept here for the record) (2E 1P · Action). *Move a friendly unit and ready it.*
-- **Job:** a second unit into B, or a holder out of trouble, from any battlefield to any battlefield, even mid-showdown (§451.1).
-- **Example (vs Kennen, no Defy in 10%+ of his lists):** Kennen Star-Crosseds Sivir as she walks into B. In B's showdown, Ride the Wind your Nidalee from A to B (a card's move needs no Ganking, and it's readied too): the showdown closes with your unit there, conquer. **Check A first:** if Nidalee was your last unit there, A goes uncontrolled and your face-down card there is trashed (§323.5, §323.6.a).
+*(Ride the Wind was cut on 27 Nov 2026: two copies became Switcheroo, the last Ezreal #3. Sivir's Ganking and Boots of Swiftness close at B now.)*
 
 ### Hold A
 
@@ -298,7 +296,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 - **Job:** Gold (which pays your hides) or cards, every time it exhausts.
 - **Example:** Accelerate it, walk it into A (it exhausts): take a Gold. Next turn that Gold, readied, pays to hide Stranger without recycling a rune.
 
-**Ezreal, Prodigy** ×2 (3E 1P · 3 Might). *When you play me, discard 1, then draw 2. Optional additional costs you pay cost 1 Energy or 1 rune less.*
+**Ezreal, Prodigy** ×3 (3E 1P · 3 Might). *When you play me, discard 1, then draw 2. Optional additional costs you pay cost 1 Energy or 1 rune less.*
 - **Job:** card flow on a body; discounts Accelerate and Rampage's Body.
 - **Use:** on Sivir's Accelerate take the **Energy** off, not the rune: a Power cost reduced to 0 isn't spent (§445.1.b), and she'd lose her +2 and Ganking.
 
@@ -307,7 +305,7 @@ Each card: what it says, its job in the trap, how to use it, and one worked exam
 ### The sideboard
 
 - **Ruin Runner ×2** (6E · Body). *I can't be chosen by enemy spells and abilities.* The A holder they can't Gust, Moonfall, Rebuke, Star-Crossed, Charm or Blitzcrank away. It doesn't need to act; it needs to stay. **Example (vs Diana):** with Ruin Runner at A, her Moonfall and Gust have nothing there to aim at.
-- **Graves ×2** (5E 1P · Body). *When I attack or defend, deal damage equal to my Might to all enemy units here.* Defending at A wipes a wide attack; defending needs no readying.
+- **Graves ×2** (5E 1P · Body). *When I attack or defend, deal damage equal to my Might to all enemy units here. I don't deal combat damage.* Defending at A wipes a wide attack (he deals no combat damage himself).
 - **Acceptable Losses** (1E · Chaos · Action). *Each player kills one of their gear.* You pick yours: cast it with no gear out, or with only a Gold, or before you equip Boots or Edge. **Example (vs Orianna):** her only gear out is The Ball; it dies, and you lose nothing.
 - **An Offer You Can't Refuse** (2E · Chaos · Action). *Kill a gear. Its controller plays a Gold.* You pick: Riven's Blade of the Exile (89% of her lists), The Ball, Gutter Palace.
 - **Ravenbloom Prefect** (3E · Chaos). *When an opponent plays a gear, you may banish me to banish it.* **Against Ziggs, use this, not the two spells:** a Bomb that dies deals 2 to your unit; a banished one doesn't die.
@@ -346,7 +344,7 @@ Stranger alone is there about half the time, but with Existential Dread you have
 |---|---|---|
 | **Game 1 (blind)** | **Sigil of the Storm**: "When you conquer here, you must recycle one of your runes." | it doesn't reward holding, so it can't feed whoever sits on it. For you a recycle can make a Gold; for them a lost rune per conquest, which slows Baron and Astral Heron |
 | **After you lose a game** (you choose, so go first) | **Amateur Recital**: "When you hold here, you may move a unit at a battlefield to its base." | **the trap's engine**, below |
-| **After you win a game** (they choose, and going first wins more, so expect the draw) | **Forbidding Waste**: "While a unit here is defending alone, it has −2 Might." | no hold reward to hand them; it punishes their lone early holder. Hold it with two and the −2 never touches you |
+| **After you win a game** (they choose, and going first wins more, so expect the draw) | **Forbidding Waste**: "While a unit here is defending alone, it has −2 Might." | no hold reward to hand them; it punishes their lone early holder. Hold it with two and the −2 rarely touches you (it does if one of the two dies or leaves mid-fight: alone is checked all the time, §740.2.a) |
 
 **Rechecked after the Edge of Night / Tideturner swap (1 Nov):** all three stay. With 7 face-down cards for one slot at A (Stranger ×2, Tideturner ×2, Switcheroo, Edge, Evelynn; 9 since 27 Nov, with Switcheroo ×3), and Boots adding Ganking from A to B, the three still fit. **Bandle Tree** ("You may hide an additional card here") is the first battlefield to try if the slot keeps clogging, but its only sensible place is Recital's, and Recital is worth more.
 
@@ -369,7 +367,7 @@ Stranger alone is there about half the time, but with Existential Dread you have
 | in | against | why |
 |---|---|---|
 | **Ruin Runner ×2** | Vex Gloomist, Diana, Riven, Evelynn, Kennen, Mordekaiser, Akali, Irelia | a holder they can't Gust, Moonfall, Star-Crossed, Charm or bounce |
-| **Graves ×2** | Rengar, LeBlanc, Seraphine, Master Yi | defends A against a flood: his Might to every enemy there when he defends |
+| **Graves ×2** | Rengar, LeBlanc, Seraphine, Master Yi | defends A against a flood: its Might to every enemy there when it defends (no combat damage of its own) |
 | **Unyielding Spirit ×2** | Kai'Sa, Ziggs, Orianna, Akali | prevents all spell and ability damage this turn (Bombs, pings, Hextech Ray on Sivir, Frozen Fortress) |
 | **An Offer You Can't Refuse** | Riven, Orianna, Jayce, Azir, Jarvan IV, Ornn | kills the gear you pick (they get a Gold) |
 | **Acceptable Losses** | Riven, Orianna, Jayce, Azir, Jarvan IV, Ornn | each player kills one of their gear: cast it when yours would be a Gold or nothing |
@@ -403,7 +401,7 @@ What comes out depends on the matchup: §9's table has the exact ins and outs.
 | **Movement** | they move your holders (Charm, Blitzcrank, their Faefolk): **keep two at A**, or the face-down card is trashed. Your Vex stuns their Ambush units |
 | **Gear** | gear removal in (Offer, Acceptable Losses, Prefect; **only Prefect against Ziggs's Bombs**); your Boots and Edge are targets: out |
 | **Go-wide** | Stranger's 4 units come easily; Graves ×2 in; one bounce won't stop a wide swing |
-| **Card flow** | press before the engine pays off (Kennen's Rhasa); Sabotage in |
+| **Card flow** | press before the engine pays off (Kennen's Rhasa (banned 23 Nov)); Sabotage in |
 | **Spells** | sequence around Defy (Dread is counterable); Unyielding Spirit against burn on Sivir |
 | **Facedown** | **take their battlefield**: it trashes their face-down cards; Edge out |
 | **Holds** | they won't walk in, so pull from their hold; Ruin Runner as a holder they can't move |
@@ -417,17 +415,17 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 
 | opponent | lists (vouched) | what matters | plan | in | out |
 |---|---|---|---|---|---|
-| **Rengar** (local; best) | 63 (31) | the widest deck; walks into A; no Gust, Star-Crossed, Defy or Not So Fast in 10%+ of lists. Thrill of the Hunt 94%; **his Faefolk 90% pulls your holders**; Brynhir 22% | keep two at A; your Vex stuns his Ambush units; Rampage is clean | Graves ×2 | Rebuke, a Switcheroo (27 Nov: Ride the Wind's old place) |
+| **Rengar** (local; best) | 63 (31) | the widest deck; walks into A; no Gust, Star-Crossed, Defy or Not So Fast in 10%+ of lists. Thrill of the Hunt 94%; **his Faefolk 90% pulls your holders**; Brynhir (banned 23 Nov) 22% | keep two at A; your Vex stuns his Ambush units; Rampage is clean | Graves ×2 | Rebuke, a Switcheroo |
 | **LeBlanc** (local) | 57 (20) | wide and attacks; fears bounce, but Deathgrip and Sacrifice (89% each) make it miss; Hidden Blade 84% | bait Deathgrip and Sacrifice before the Stranger turn; bounce, don't kill | Graves ×2 | Rampage ×2 |
-| **Kai'Sa** (local) | 93 (37) | won't attack A; kills holders from range; Frozen Fortress 89% kills Faefolk; Rockfall Path 90%; Brynhir 95%. **Smoke Screen (−4, 97%) then Hextech Ray (3) kills a 6-Might Sivir**; no single card does | keep Faefolk in base; never make Rockfall your A; close with Unyielding Spirit held | Unyielding Spirit ×2, Sabotage | Stranger ×2, Rampage |
+| **Kai'Sa** (local) | 93 (37) | won't attack A; kills holders from range; Frozen Fortress 89% kills Faefolk; Rockfall Path 90%; Brynhir (banned 23 Nov) 95%. **Smoke Screen (−4, 97%) then Hextech Ray (3) kills a 6-Might Sivir**; no single card does | keep Faefolk in base; never make Rockfall your A; close with Unyielding Spirit held | Unyielding Spirit ×2, Sabotage | Stranger ×2, Rampage |
 | **Vex, Gloomist** (local; bad) | 79 (22) | holds, won't walk into A; **her Vex 96% stuns Sivir**; Back Off 91%; Defy, Discipline | Rebuke her Vex first; race to hold at 7 | Sabotage, Ruin Runner | Rampage ×2 |
 | **Diana** (local; worst) | 41 (12) | answers in every fight: **Gust 100% on Stranger, Moonfall 100% on Sivir**; Vex 83%; Hard Bargain 76% | make her spend first; Gust her 2–3-Might bodies; Ruin Runner holds A against Gust and Moonfall | Ruin Runner ×2 | Stranger ×2 |
 | **Riven** | 197 (94) | **Baron 54%** (can't be pulled or bounced; the Pit is a third battlefield); her Stranger 85%; Blitzcrank 71%; Defy 93% | race before Baron (Rebuke the first Heron); once he's out, win by holding at 7; two holders at A; kill her Blade | An Offer You Can't Refuse, Acceptable Losses, Ruin Runner ×2 | Rampage ×2, Faefolk, Evelynn |
 | **Evelynn** | 175 (33) | Last Caress 41% puts her face-down card on any battlefield; Switcheroo, Star-Crossed, Vex | take her battlefield: it trashes her face-down cards; Rampage is clean | Ruin Runner | Edge of Night |
 | **Ziggs** | 108 (14) | Bombs deploy at A and hit your holders when they die; Detonate 89% kills your Boots and Edge | keep holders healthy; gear spells kill Bombs into damage, so Prefect banishes | Unyielding Spirit ×2, Prefect | Boots, Edge of Night, Rampage |
-| **Seraphine** | 107 (24) | a wide Raucous Anthem turn; Imperial Decree; Hidden Blade on Sivir | one bounce won't stop a wide swing | Graves ×2, Sabotage | Rampage ×2, a Switcheroo (27 Nov: Ride the Wind's old place) |
+| **Seraphine** | 107 (24) | a wide Raucous Anthem turn; Imperial Decree; Hidden Blade on Sivir | one bounce won't stop a wide swing | Graves ×2, Sabotage | Rampage ×2, a Switcheroo |
 | **Orianna** | 106 (29) | few units; The Ball deals 2 to your units; Gravity Field taxes Sivir's walk | hold her Deploy battlefields | An Offer You Can't Refuse, Acceptable Losses, Prefect, Unyielding Spirit | Rampage ×2, Stranger ×2 |
-| **Kennen** | 102 (53) | Star-Crossed 92%, Switcheroo 88%, Gust 83%; An Offer You Can't Refuse 54% kills your Boots or Edge | press before Rhasa gets cheap; Rampage is clean | Sabotage, Ruin Runner | Edge of Night, Stranger |
+| **Kennen** | 102 (53) | Star-Crossed 92%, Switcheroo 88%, Gust 83%; An Offer You Can't Refuse 54% kills your Boots or Edge | press before Rhasa (banned 23 Nov) gets cheap; Rampage is clean | Sabotage, Ruin Runner | Edge of Night, Stranger |
 | **Mordekaiser** | 99 (25) | walks into A with big units; deaths feed him | bounce, don't kill | Ruin Runner | Rampage |
 | **Akali** | 75 (33) | Not So Fast and Blitzcrank 76% each; pings kill Faefolk; Defy 99% | hold Faefolk until the closing turn | Unyielding Spirit ×2, Ruin Runner ×2 | Rampage ×2, Faefolk ×2 |
 | **K'Sante** | 70 (14) | Shield doesn't stop a bounce; thin answers; Defy 83% | Rampage is weak into Defy | — | — |
@@ -435,7 +433,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 | **Irelia** | 38 (9) | Not So Fast and Charm 76%; Twilight Shroud; Vex 61%; Scuttle Crab 84% | close when she's tapped out | Ruin Runner ×2 | Rampage ×2 |
 | **Lillia** | 61 (28) | **Unchecked Power (40/61): 12 to everything at battlefields**; Defy 58/61, Discipline; Charm 58/61 moves your holder; Temporary 3-Might Sprites die on their own | **one hold, two units at A, the rest in hand**; don't spend removal on Sprites; close with units and 2-Power spells (Defy can't touch them); go for both battlefields only when it wins that turn | Ruin Runner | Rampage |
 | **Jayce** | 30 (11) | about 4 units; the trap barely matters | race; kill Gutter Palace | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger ×2, Evelynn |
-| **Azir, Jarvan IV, Ornn** (gear decks) | 71, 59, 35 | five or more gear pieces in nearly every list (Azir: Brutalizer, Eye of the Herald, B.F. Sword, Doran's Shield) | kill the equipment that matters, not the first one | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger, a Switcheroo (27 Nov: Ride the Wind's old place), Edge of Night |
+| **Azir, Jarvan IV, Ornn** (gear decks) | 71, 59, 35 | five or more gear pieces in nearly every list (Azir: Brutalizer, Eye of the Herald, B.F. Sword, Doran's Shield) | kill the equipment that matters, not the first one | An Offer You Can't Refuse, Acceptable Losses, Prefect | Stranger, a Switcheroo, Edge of Night |
 
 ### The trap's best and worst
 
@@ -449,7 +447,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 
 **Rengar** (63 lists, 31 vouched; the widest deck here). **Best matchup.**
 - He attacks, so A fills up; Stranger fires. He runs no Gust, Star-Crossed, Defy or Not So Fast in 10%+ of lists.
-- **Watch:** Thrill of the Hunt (94%) saves a bounced unit or drops one into B against Sivir; **his own Faefolk (90%) pulls your holders out of A**, so keep two there; Brynhir (22%) stops you playing cards that turn.
+- **Watch:** Thrill of the Hunt (94%) saves a bounced unit or drops one into B against Sivir; **his own Faefolk (90%) pulls your holders out of A**, so keep two there; Brynhir (banned 23 Nov) (22%) stops you playing cards that turn.
 - Your Vex at a battlefield stuns every Ambush unit he plays. Rampage is clean (no Calm). Graves ×2 in.
 
 **LeBlanc** (57 / 20). **Good.**
@@ -458,7 +456,7 @@ From the legal lists played since 23 October (`scripts/rift meta <legend> --sinc
 
 **Kai'Sa** (93 / 37). **Good for the closing turn.**
 - She doesn't walk into A; she kills your holders from range (Hextech Ray, Falling Star, Bellows Breath), and **Frozen Fortress** (89%) deals 1 to each unit there each Beginning Phase, killing a Faefolk.
-- **No single card she can play in B's showdown on your turn kills a 6-Might Sivir, but two do:** Smoke Screen (Reaction, −4, in 97% of lists) takes her to 2, then Hextech Ray (3 damage, 100%) kills her. Close with **Unyielding Spirit** (prevents all spell damage that turn) in hand. She has no Gust, Star-Crossed or Vex in 10%+ of lists. Keep Faefolk in base; **never make Rockfall Path (90%) your A**; Brynhir (95%) turns the trap off for a turn.
+- **No single card she can play in B's showdown on your turn kills a 6-Might Sivir, but two do:** Smoke Screen (Reaction, −4, in 97% of lists) takes her to 2, then Hextech Ray (3 damage, 100%) kills her. Close with **Unyielding Spirit** (prevents all spell damage that turn) in hand. She has no Gust, Star-Crossed or Vex in 10%+ of lists. Keep Faefolk in base; **never make Rockfall Path (90%) your A**; Brynhir (banned 23 Nov) (95%) turns the trap off for a turn.
 - Unyielding Spirit ×2 and Sabotage in.
 
 **Vex, Gloomist** (79 / 22). **Worst-two.**

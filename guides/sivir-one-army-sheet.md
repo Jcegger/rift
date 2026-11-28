@@ -1,8 +1,8 @@
 ---
 title: Sivir Is Trying Her Best — The Trap · the one-page plan
-subtitle: Keep at the table. The full guide is sivir-one-army.md (1 Nov 2026)
+subtitle: Keep at the table. The full guide is sivir-one-army.md (list frozen 27 Nov 2026)
 author: rift toolchain
-date: 2026-11-02
+date: 2026-11-27
 ---
 
 **The plan.** Hold one battlefield (**A**) and make attacking it a mistake. Pull their units into A. Sivir walks into the battlefield they left empty (**B**). A hold at 7 wins on its own.
@@ -22,7 +22,7 @@ date: 2026-11-02
 
 1. From 5 points, every turn: can either player reach 8 before the other acts again?
 2. A is the whole game. Losing it trashes your face-down card there.
-3. **Their Vex, Apathetic is gone before Sivir** (she stuns any unit you play, anywhere). Rebuke her on the closing turn: 3 Power with Deflect turns Sivir on.
+3. **Their Vex, Apathetic is gone before Sivir** (while she's at a battlefield, every unit you play is stunned, wherever it goes). Rebuke her on the closing turn: 3 Power with Deflect turns Sivir on.
 4. Keep a Faefolk in base from turn 4.
 
 **Face-down.** One per battlefield you hold; hide on your turn (pay with Gold); free with Reaction from the next turn, theirs too. **Stranger needs 4 units, itself included: not for 1-on-1s. Face down it bounces only at its own battlefield (§811.1.d.3).** Only one card fits at A: choose by the fight you expect (Stranger, Switcheroo, Edge, Tideturner, Evelynn); **Ember Monk** at A gets +2 on any flip.
@@ -43,17 +43,17 @@ date: 2026-11-02
 
 | against | adjust |
 |---|---|
-| **Rengar** (best) | keep two at A (his Faefolk pulls); your Vex stuns his Ambush; Graves in |
-| **Master Yi** | Charm 90%: two at A, nothing precious in base; his lone defender gets +2 and En Garde: fight at **Forbidding Waste** (−2), pull it out; bait Defy with Gust; Graves in, Rampage out |
+| **Rengar** (best) | keep two at A (his Faefolk pulls); your Vex stuns his Ambush; Graves ×2 in, Rebuke + a Switcheroo out |
+| **Master Yi** | Charm 90%: two at A, nothing precious in base; his lone defender gets +2 and En Garde: fight at **Forbidding Waste** (−2), pull it out; bait Defy with Gust; Graves in, a Rampage out |
 | **LeBlanc** | bait Deathgrip / Sacrifice before Stranger; Graves ×2 in, Rampage out |
-| **Kai'Sa** | she won't attack A; Smoke Screen + Hextech Ray kills Sivir, so close with Unyielding Spirit in hand; not Rockfall as A; Unyielding Spirit ×2 + Sabotage in |
-| **Vex Gloomist** (bad) | Rebuke her Vex first; race to hold at 7; Sabotage + Ruin Runner in, Rampage out |
+| **Kai'Sa** | she won't attack A; Smoke Screen + Hextech Ray kills Sivir, so close with Unyielding Spirit in hand; not Rockfall as A; Unyielding Spirit ×2 + Sabotage in, Stranger ×2 + a Rampage out |
+| **Vex Gloomist** (bad) | Rebuke her Vex first; race to hold at 7; Sabotage + Ruin Runner in, Rampage ×2 out |
 | **Diana** (worst) | Gust on Stranger, Moonfall on Sivir: make her spend first; Ruin Runner ×2 in, Stranger ×2 out |
-| **Riven** | race before Baron (Rebuke the first Heron); once he's out, win by holding at 7; two holders vs Blitzcrank; Offer + Acceptable Losses for her Blade, Ruin Runner ×2 in; Rampage out |
-| **Kennen / Evelynn** | Rampage is clean; Ruin Runner in; take Evelynn's battlefield to trash her face-down cards |
-| **Ziggs / Akali** | Unyielding Spirit ×2 in |
-| **Lillia** | Unchecked Power wipes battlefields: one hold, two at A, rest in hand; ignore Sprites; Ruin Runner in |
-| **Gear decks** (and Riven's Blade) | Offer, Acceptable Losses, Prefect in; **only Prefect against Ziggs's Bombs** |
+| **Riven** | race before Baron (Rebuke the first Heron); once he's out, win by holding at 7; two holders vs Blitzcrank; Offer + Acceptable Losses for her Blade, Ruin Runner ×2 in; Rampage ×2, Faefolk, Evelynn out (post-ban: expect few Rivens) |
+| **Kennen / Evelynn** | Rampage is clean; Ruin Runner in; take Evelynn's battlefield to trash her face-down cards; Ruin Runner in, Edge of Night out (Kennen: Sabotage in too, a Stranger out) |
+| **Ziggs / Akali** | Unyielding Spirit ×2 in. Ziggs: + Prefect; out Boots, Edge, a Rampage. Akali: + Ruin Runner ×2; out Rampage ×2, Faefolk ×2 (the third Faefolk is the one you hold for the close) |
+| **Lillia** | Unchecked Power wipes battlefields: one hold, two at A, rest in hand; ignore Sprites; Ruin Runner in, a Rampage out |
+| **Gear decks** (and Riven's Blade) | Offer, Acceptable Losses, Prefect in; Stranger, a Switcheroo, Edge out; **only Prefect against Ziggs's Bombs** |
 
 **By archetype.** Default slow: one hold, let them come to A. **Race Baron decks and Ramp.** Aggro: defend, then hold. Tempo: make them spend first. Control: they won't attack A, so pull and race to 7.
 

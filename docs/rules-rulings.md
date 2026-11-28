@@ -492,12 +492,13 @@ down, which was played "ignoring its base cost"?
    Phase (§315.1.b) or by *"When one or more enemy units die, ready me."* So a turn cycle gives one Gold, plus one per
    time enemy units die. If she's still ready on their turn, a Power paid then (a Reaction) makes it. The Gold enters
    exhausted and is next turn's Power (§415.4; "Turn solver premises", point 5).
-3. **Defy reads the printed cost.** The FAQ (Temporal Portal): *"anything that asks for a card's cost finds its
-   printed cost as the answer."* Playing from face down ignores the base cost for paying, not for what the card
-   costs. So a hidden Switcheroo (2E 2P) can't be countered by Defy; a hidden 1-Power spell can.
+3. **Defy reads the printed cost.** The Core Rules settle it, with Defy as their own example: *"Effects that need to
+   determine a card or token's cost for any purpose always use its printed … cost, even if that cost is increased,
+   decreased, or ignored as the card is played. Example: Defy … only checks the printed or copied cost of its target"*
+   (§206; also §356.1.c, and the FAQ's Temporal Portal answer). So a hidden Switcheroo (2E 2P) can't be countered by
+   Defy; a hidden spell of 4 Energy or less and 1 Power or less can.
 
-**Weakest link:** point 3 extends an FAQ answer about Repeat to Defy's cost check. Ask a judge before an event depends
-on it.
+**Weakest link:** none left on point 3 (§206, added 27 Nov after the rules audit).
 
 ## Fizz recasts in the Main Phase; Defy works in showdowns; Vex, Apathetic stuns every unit we play
 
@@ -524,7 +525,8 @@ at a battlefield, [Stun] it." Which of our units does it hit?
    trash, nothing happens (§420.3.c). The FAQ's Flow answer says Fizz's "recycle that spell" works like Flow's banish:
    it applies whenever the spell leaves the chain.
 3. **Every unit we play while their Vex is at a battlefield,** wherever ours goes: "while I'm at a battlefield" is Vex's
-   location. Stunned, it deals no combat damage this turn and can't be moved this turn. So Sivir with Accelerate, or
+   location. Stunned, it deals no combat damage this turn (§424.1.b), and *"They can't move it this turn"*: its
+   controller can't, though another player's effect still could. So Sivir with Accelerate, or
    Rengar ambushing into a fight, does nothing the turn Vex sees it. Units already on the board aren't affected, and Vex
    is 4 Might with [Deflect] (we pay an extra [A] to choose her with a spell).
 
@@ -554,8 +556,9 @@ or ability that chooses it and no other friendly unit.") stop that Charm?
    battlefield. It does protect a unit already at a battlefield from a Charm that chooses it and no other friendly unit.
    A unit that *"can't be chosen by enemy spells and abilities"* (Ruin Runner) can't be Charmed anywhere.
 
-**Weakest link:** point 1 assumes Charm can move a base unit to any battlefield (§451.1, as in "Sivir, Mercenary's double
-conquest", 21 Nov). Ask a judge before an event depends on it.
+**Weakest link:** point 1 rests on Charm moving a base unit to any battlefield: §451.1 (*"The source of the Move will
+provide details on any restrictions on legality for Destination"*) and the FAQ's Charm answer (`docs/rules-faq.md`,
+the Charm entry), which treats Charm's move the same way as Showstopper's. Only residual doubt is left.
 
 ## Hallowed Tomb returns a dead Sivir, Mercenary to the Champion Zone, where she can be played again
 
